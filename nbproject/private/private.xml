@@ -4,7 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/xampp/htdocs/etrs/index.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/js/users.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/patient-data-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/patient-background-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/gender-select.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/yes-no-unknown-radios.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/number-textfield.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/patient-medications-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/date-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/new-patient-form.html</file>
             <file>file:/C:/xampp/htdocs/etrs/js/etrs.js</file>
         </group>
     </open-files>
