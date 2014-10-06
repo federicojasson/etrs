@@ -1,60 +1,145 @@
 (function() {
-	var module = angular.module('etrs', []);
+	var module = angular.module('etrs', ['patients']);
+	
+	module.controller('NonNegativeNumberInputController', function() {
+		this.text = '';
+		
+		this.get = function() {
+			return this.text;
+		};
+		
+		this.set = function(value) {
+			// TODO
+			this.text = value;
+		};
+	});
+	
+	module.controller('YesNoInputController', function() {
+		this.options = [
+			{ label: 'Se desconoce', value: null },
+			{ label: 'Sí', value: true },
+			{ label: 'No', value: false }
+		];
+		
+		this.selectedOption = this.options[0];
+		
+		this.get = function() {
+			return this.selectedOption.value;
+		};
+		
+		this.set = function(value) {
+			// TODO
+			for (var i = 0; i < this.options.length; i++) {
+				var option = this.options[i];
+				if (value === option.value)
+					this.selectedOption = option;
+			}
+		};
+	});
 	
 	// TODO: organize
 	
-	module.directive('patientBackgroundSection', function() {
+	/*module.directive('yesNoUnknownInput', function() {
 		var scope = {
-			controller: '='
+			model: '='
 		};
 		
 		var options = {
 			restrict: 'E',
+			scope: scope,
+			templateUrl: 'templates/yes-no-unknown-input.html'
+		};
+		
+		return options;
+	});
+	
+	module.directive('patientBackgroundSection', function() {
+		var scope = {
+			background: '='
+		};
+		
+		var options = {
+			restrict: 'E',
+			scope: scope,
 			templateUrl: 'templates/patient-background-section.html'
 		};
 		
 		return options;
 	});
 	
-	module.directive('radiosInput', function() {
+	module.directive('patientDataSection', function() {
 		var scope = {
-			model: '=',
-			name: '@',
-			values: '='
+			data: '='
 		};
 		
 		var options = {
 			restrict: 'E',
 			scope: scope,
-			templateUrl: 'templates/radios-input.html'
+			templateUrl: 'templates/patient-data-section.html'
 		};
 		
 		return options;
 	});
 	
-	module.directive('yesNoUnknownSection', function() {
+	module.directive('patientMedicationsSection', function() {
 		var scope = {
-			label: '@',
-			model: '=',
-			name: '@'
+			medications: '='
 		};
 		
 		var options = {
 			restrict: 'E',
 			scope: scope,
-			templateUrl: 'templates/yes-no-unknown-section.html'
+			templateUrl: 'templates/patient-medications-section.html'
 		};
 		
 		return options;
 	});
+	
+	
+	
+	
+	
+	module.controller('genderController', function() {
+		
+	});
+	
+	
 	
 	module.directive('newPatientForm', function() {
 		var controller = function() {
-			this.data = {}; // TODO: necessary?
-			this.model = {}; // TODO: debug
+			this.patient = {
+				background: {
+					dbt: null,
+					dyslipidemia: null,
+					ect: null,
+					heartDisease: null,
+					hiv: null,
+					htn: null,
+					psychiatricTreatment: null,
+					relativesWithAlzheimer: null
+				},
+				data: {
+					birthDate : null,
+					gender: null,
+					name: null,
+					yearsOfEducation: null
+				},
+				medications: {
+					antidepressants: null,
+					antidiabetics: null,
+					antihypertensives: null,
+					antiplateletsAnticoagulants: null,
+					antipsychotics: null,
+					benzodiazepines: null,
+					hypolipidemics: null,
+					levothyroxine: null,
+					melatonin: null
+				}
+			};
 			
 			this.isValidInput = function() {
-				console.log('Dato: ' + this.model);
+				console.log('controller.isValidInput');
+				console.log('Dato: ' + this.patient.data.gender);
 				
 				// TODO: validate input
 				return false;
@@ -75,76 +160,5 @@
 		};
 		
 		return options;
-	});
-	
-	/*module.directive("dateSection", function() {
-		return {
-			restrict: 'E',
-			scope: {
-				label: '@'
-			},
-			templateUrl: 'templates/date-section.html'
-		};
-	});
-	
-	module.directive("genderSelect", function() {
-		return {
-			restrict: 'E',
-			scope: {
-				name: '@'
-			},
-			templateUrl: 'templates/gender-select.html'
-		};
-	});
-	
-	module.directive("numberTextfield", function() {
-		return {
-			restrict: 'E',
-			scope: {
-				label: '@',
-				name: '@',
-				placeholder: '@'
-			},
-			templateUrl: 'templates/number-textfield.html'
-		};
-	});
-	
-	module.directive("yesNoUnknownRadios", function() {
-		return {
-			restrict: 'E',
-			scope: {
-				label: '@',
-				name: '@'
-			},
-			templateUrl: 'templates/yes-no-unknown-radios.html'
-		};
-	});
-	
-	module.directive("patientBackgroundSection", function() {
-		return {
-			restrict: 'E',
-			templateUrl: 'templates/patient-background-section.html'
-		};
-	});
-	
-	module.directive("patientDataSection", function() {
-		return {
-			restrict: 'E',
-			templateUrl: 'templates/patient-data-section.html'
-		};
-	});
-	
-	module.directive("patientMedicationsSection", function() {
-		return {
-			restrict: 'E',
-			templateUrl: 'templates/patient-medications-section.html'
-		};
-	});
-	
-	module.directive("newPatientForm", function() {
-		return {
-			restrict: 'E',
-			templateUrl: 'templates/new-patient-form.html'
-		};
 	});*/
 })();
