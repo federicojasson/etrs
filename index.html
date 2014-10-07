@@ -8,7 +8,7 @@
 		<title>ETRS - Eye tracker record system</title>
 	</head>
 	<body>
-		<div ng-controller="PatientController as patient">
+		<!--<div ng-controller="PatientController as patient">
 			<select
 				ng-change="patient.data.gender = genderInput.get()"
 				ng-controller="GenderInputController as genderInput"
@@ -34,6 +34,27 @@
 				type="text"
 			>
 			
+			<div ng-controller="DateInputController as dateInput" ng-init="dateInput.set(patient.data.birthDate)">
+				<input
+					ng-change="patient.data.birthDate = dateInput.get()"
+					ng-model="dateInput.day"
+					type="text"
+				>
+				
+				<select
+					ng-change="patient.data.birthDate = dateInput.get()"
+					ng-model="dateInput.month"
+					ng-options="month.label for month in dateInput.months"
+				>
+				</select>
+
+				<input
+					ng-change="patient.data.birthDate = dateInput.get()"
+					ng-model="dateInput.year"
+					type="text"
+				>
+			</div>
+			
 			<div ng-controller="YesNoInputController as yesNoInput" ng-init="yesNoInput.set(patient.data.test)">
 				<span ng-repeat="option in yesNoInput.options">
 					<input
@@ -43,19 +64,19 @@
 						type="radio"
 					> {{ option.label }}
 				</span>
-				
-				<!--<input ng-change="patient.data.test = yesNoInput.get()" ng-model="yesNoInput.selectedOption" type="radio"> 1
-				<input ng-change="patient.data.test = yesNoInput.get()" ng-model="yesNoInput.selectedOption" type="radio"> 2
-				<input ng-change="patient.data.test = yesNoInput.get()" ng-model="yesNoInput.selectedOption" type="radio"> 3-->
 			</div>
 			
 			<div>
-				Sexo: {{ patient.data.gender }}<br>
 				Nombre y apellido: {{ patient.data.name }}<br>
+				Sexo: {{ patient.data.gender }}<br>
+				Fecha de nacimiento: {{ patient.data.birthDate }}<br>
 				Años de educación: {{ patient.data.yearsOfEducation }}<br>
 				Test: {{ patient.data.test }}
 			</div>
-		</div>
+		</div>-->
+		
+		<new-patient-form>
+		</new-patient-form>
 		
 		<script src="vendors/angular/angular.min.js"></script>
 		<script src="resources/js/etrs.js"></script>

@@ -1,10 +1,115 @@
 (function() {
 	var module = angular.module('etrs', ['patients']);
 	
+	module.controller('DateInputController', function() {
+		this.months = [
+			{ label: 'Se desconoce', value: null },
+			{ label: 'Enero', value: 1 },
+			{ label: 'Febrero', value: 2 },
+			{ label: 'Marzo', value: 3 },
+			{ label: 'Abril', value: 4 },
+			{ label: 'Mayo', value: 5 },
+			{ label: 'Junio', value: 6 },
+			{ label: 'Julio', value: 7 },
+			{ label: 'Agosto', value: 8 },
+			{ label: 'Septiembre', value: 9 },
+			{ label: 'Octubre', value: 10 },
+			{ label: 'Noviembre', value: 11 },
+			{ label: 'Diciembre', value: 12 }
+		];
+		
+		this.day = null;
+		this.month = this.months[0];
+		this.year = null;
+		
+		this.onDayChange = function() {
+			// TODO
+			console.log('DateInputController.onDayChange');
+		};
+		
+		this.onYearChange = function() {
+			// TODO
+			console.log('DateInputController.onYearChange');
+		};
+	});
+	
+	module.controller('GenderInputController', function() {
+		this.genders = [
+			{ label: 'Se desconoce', value: null },
+			{ label: 'Femenino', value: 'F' },
+			{ label: 'Masculino', value: 'M' }
+		];
+		
+		this.gender = this.genders[0];
+	});
+	
+	module.controller('NonNegativeNumberInputController', function() {
+		this.number = null;
+		
+		this.onNumberChange = function() {
+			// TODO
+			console.log('NonNegativeNumberInputController.onNumberChange');
+		};
+	});
+	
+	module.controller('TextInputController', function() {
+		this.text = null;
+		
+		this.onTextChange = function() {
+			// TODO
+			console.log('TextInputController.onTextChange');
+		};
+	});
+	
+	/*module.controller('DateInputController', function() {
+		this.months = [
+			{ label: 'Se desconoce', value: null },
+			{ label: 'Enero', value: 1 },
+			{ label: 'Febrero', value: 2 },
+			{ label: 'Marzo', value: 3 },
+			{ label: 'Abril', value: 4 },
+			{ label: 'Mayo', value: 5 },
+			{ label: 'Junio', value: 6 },
+			{ label: 'Julio', value: 7 },
+			{ label: 'Agosto', value: 8 },
+			{ label: 'Septiembre', value: 9 },
+			{ label: 'Octubre', value: 10 },
+			{ label: 'Noviembre', value: 11 },
+			{ label: 'Diciembre', value: 12 }
+		];
+		
+		this.day = '';
+		this.month = this.months[0];
+		this.year = '';
+		
+		this.get = function() {
+			// TODO
+			return this.year + '-' + this.month.value + '-' + this.day;
+		}
+		
+		this.set = function(value) {
+			// TODO
+			var split = value.split('-');
+
+			this.year = +split[0];
+			
+			var monthValue = +split[1]; // TODO
+			
+			for (var i = 0; i < this.months.length; i++) {
+				var month = this.months[i];
+				if (monthValue === month.value)
+					this.month = month;
+			}
+			
+			this.day = +split[2];
+		}
+	});
+	
 	module.controller('NonNegativeNumberInputController', function() {
 		this.text = '';
 		
 		this.get = function() {
+			// TODO
 			return this.text;
 		};
 		
@@ -35,7 +140,7 @@
 					this.selectedOption = option;
 			}
 		};
-	});
+	});*/
 	
 	// TODO: organize
 	
