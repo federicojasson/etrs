@@ -61,6 +61,16 @@
 		};
 	});
 	
+	module.controller('YesNoInputController', function() {
+		this.options = [
+			{ label: 'Sí', value: true },
+			{ label: 'No', value: false },
+			{ label: 'Se desconoce', value: null }
+		];
+		
+		this.option = this.options[2];
+	});
+	
 	/*module.controller('DateInputController', function() {
 		this.months = [
 			{ label: 'Se desconoce', value: null },

@@ -1,0 +1,46 @@
+<select
+	ng-controller="GenderInputController as genderInput"
+	ng-init="form.patient.data.setGenderInput(genderInput)"
+	ng-model="genderInput.gender"
+	ng-options="gender.label for gender in genderInput.genders"
+>
+</select>
+
+<input
+	ng-change="nameInput.onTextChange()"
+	ng-controller="TextInputController as nameInput"
+	ng-init="form.patient.data.setNameInput(nameInput)"
+	ng-model="nameInput.text"
+	type="text"
+>
+
+<div
+	ng-controller="DateInputController as birthDateInput"
+	ng-init="form.patient.data.setBirthDateInput(birthDateInput)"
+>
+	<input
+		ng-change="birthDateInput.onDayChange()"
+		ng-model="birthDateInput.day"
+		type="text"
+	>
+
+	<select
+		ng-model="birthDateInput.month"
+		ng-options="month.label for month in birthDateInput.months"
+	>
+	</select>
+
+	<input
+		ng-change="birthDateInput.onYearChange()"
+		ng-model="birthDateInput.year"
+		type="text"
+	>
+</div>
+
+<input
+	ng-change="yearsOfEducationInput.onNumberChange()"
+	ng-controller="NonNegativeNumberInputController as yearsOfEducationInput"
+	ng-init="form.patient.data.setYearsOfEducationInput(yearsOfEducationInput)"
+	ng-model="yearsOfEducationInput.number"
+	type="text"
+>

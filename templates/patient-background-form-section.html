@@ -1,0 +1,87 @@
+<div ng-controller="YesNoInputController as dbtInput">
+	<span ng-repeat="option in dbtInput.options">
+		<input
+			ng-init="form.patient.background.setDbtInput(dbtInput)"
+			ng-model="dbtInput.option"
+			ng-value="option"
+			type="radio"
+		> {{ option.label }}
+	</span>
+</div>
+
+<div ng-controller="YesNoInputController as dyslipidemiaInput">
+	<span ng-repeat="option in dyslipidemiaInput.options">
+		<input
+			ng-init="form.patient.background.setDyslipidemiaInput(dyslipidemiaInput)"
+			ng-model="dyslipidemiaInput.option"
+			ng-value="option"
+			type="radio"
+		> {{ option.label }}
+	</span>
+</div>
+
+<div ng-controller="YesNoInputController as ectInput">
+	<span ng-repeat="option in ectInput.options">
+		<input
+			ng-init="form.patient.background.setEctInput(ectInput)"
+			ng-model="ectInput.option"
+			ng-value="option"
+			type="radio"
+		> {{ option.label }}
+	</span>
+</div>
+
+<div ng-controller="YesNoInputController as heartDiseaseInput">
+	<span ng-repeat="option in heartDiseaseInput.options">
+		<input
+			ng-init="form.patient.background.setHeartDiseaseInput(heartDiseaseInput)"
+			ng-model="heartDiseaseInput.option"
+			ng-value="option"
+			type="radio"
+		> {{ option.label }}
+	</span>
+</div>
+
+<div ng-controller="YesNoInputController as hivInput">
+	<span ng-repeat="option in hivInput.options">
+		<input
+			ng-init="form.patient.background.setHivInput(hivInput)"
+			ng-model="hivInput.option"
+			ng-value="option"
+			type="radio"
+		> {{ option.label }}
+	</span>
+</div>
+
+<div ng-controller="YesNoInputController as htnInput">
+	<span ng-repeat="option in htnInput.options">
+		<input
+			ng-init="form.patient.background.setHtnInput(htnInput)"
+			ng-model="htnInput.option"
+			ng-value="option"
+			type="radio"
+		> {{ option.label }}
+	</span>
+</div>
+
+<div ng-controller="YesNoInputController as psychiatricTreatmentInput">
+	<span ng-repeat="option in psychiatricTreatmentInput.options">
+		<input
+			ng-init="form.patient.background.setPsychiatricTreatmentInput(psychiatricTreatmentInput)"
+			ng-model="psychiatricTreatmentInput.option"
+			ng-value="option"
+			type="radio"
+		> {{ option.label }}
+	</span>
+</div>
+
+<div ng-controller="YesNoInputController as relativesWithAlzheimerInput">
+	<span ng-repeat="option in relativesWithAlzheimerInput.options">
+		<input
+			ng-init="form.patient.background.setRelativesWithAlzheimerInput(relativesWithAlzheimerInput)"
+			ng-model="relativesWithAlzheimerInput.option"
+			ng-value="option"
+			type="radio"
+		> {{ option.label }}
+	</span>
+</div>

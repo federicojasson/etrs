@@ -3,63 +3,36 @@
 	ng-submit="newPatientForm.onSubmit()"
 	novalidate
 >
-	<select
-		ng-controller="GenderInputController as genderInput"
-		ng-init="newPatientForm.setGenderInput(genderInput)"
-		ng-model="genderInput.gender"
-		ng-options="gender.label for gender in genderInput.genders"
-	>
-	</select>
+	<patient-data-form-section form="newPatientForm">
+	</patient-data-form-section>
 	
-	<input
-		ng-change="nameInput.onTextChange()"
-		ng-controller="TextInputController as nameInput"
-		ng-init="newPatientForm.setNameInput(nameInput)"
-		ng-model="nameInput.text"
-		type="text"
-	>
+	<patient-background-form-section form="newPatientForm">
+	</patient-background-form-section>
 	
-	<div
-		ng-controller="DateInputController as birthDateInput"
-		ng-init="newPatientForm.setBirthDateInput(birthDateInput)"
-	>
-		<input
-			ng-change="birthDateInput.onDayChange()"
-			ng-model="birthDateInput.day"
-			type="text"
-		>
-
-		<select
-			ng-model="birthDateInput.month"
-			ng-options="month.label for month in birthDateInput.months"
-		>
-		</select>
-
-		<input
-			ng-change="birthDateInput.onYearChange()"
-			ng-model="birthDateInput.year"
-			type="text"
-		>
-	</div>
-	
-	<input
-		ng-change="yearsOfEducationInput.onNumberChange()"
-		ng-controller="NonNegativeNumberInputController as yearsOfEducationInput"
-		ng-init="newPatientForm.setYearsOfEducationInput(yearsOfEducationInput)"
-		ng-model="yearsOfEducationInput.number"
-		type="text"
-	>
+	<patient-medications-form-section form="newPatientForm">
+	</patient-medications-form-section>
 	
 	<input type="submit">
 	
+	
 	<!-- TODO: debug -->
-	<div>Nombre y apellido: {{ newPatientForm.inputs.name.text }}</div>
-	<div>Sexo: {{ newPatientForm.inputs.gender.gender.label }}</div>
+	
+	<div>Nombre y apellido: {{ newPatientForm.patient.data.inputs.name.text }}</div>
+	<div>Sexo: {{ newPatientForm.patient.data.inputs.gender.gender.label }}</div>
 	<div>
 		Fecha de nacimiento:
-		{{ newPatientForm.inputs.birthDate.day }} de
-		{{ newPatientForm.inputs.birthDate.month.label }} de
-		{{ newPatientForm.inputs.birthDate.year }}
+		{{ newPatientForm.patient.data.inputs.birthDate.day }} de
+		{{ newPatientForm.patient.data.inputs.birthDate.month.label }} de
+		{{ newPatientForm.patient.data.inputs.birthDate.year }}
 	</div>
-	<div>Años de educación: {{ newPatientForm.inputs.yearsOfEducation.number }}</div>
+	<div>Años de educación: {{ newPatientForm.patient.data.inputs.yearsOfEducation.number }}</div>
+	
+	<div>DBT: {{ newPatientForm.patient.background.inputs.dbt.option.label }}</div>
+	<div>Dislipidemia {{ newPatientForm.patient.background.inputs.dyslipidemia.option.label }}</div>
+	<div>ECT: {{ newPatientForm.patient.background.inputs.ect.option.label }}</div>
+	<div>Cardiopatía: {{ newPatientForm.patient.background.inputs.heartDisease.option.label }}</div>
+	<div>HIV: {{ newPatientForm.patient.background.inputs.hiv.option.label }}</div>
+	<div>HTN: {{ newPatientForm.patient.background.inputs.htn.option.label }}</div>
+	<div>Tratamientos psiquiátricos: {{ newPatientForm.patient.background.inputs.psychiatricTreatment.option.label }}</div>
+	<div>Familiares con Alzheimer: {{ newPatientForm.patient.background.inputs.relativesWithAlzheimer.option.label }}</div>
 </form>
