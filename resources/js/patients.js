@@ -1,89 +1,6 @@
 (function() {
 	var module = angular.module('patients', []);
 	
-	/*module.controller('GenderInputController', function() {
-		this.options = [
-			{ label: 'Se desconoce', value: null },
-			{ label: 'Femenino', value: 'F' },
-			{ label: 'Masculino', value: 'M' }
-		];
-		
-		this.selectedOption = this.options[0];
-		
-		this.get = function() {
-			return this.selectedOption.value;
-		};
-		
-		this.set = function(value) {
-			// TODO
-			for (var i = 0; i < this.options.length; i++) {
-				var option = this.options[i];
-				if (value === option.value)
-					this.selectedOption = option;
-			}
-		};
-	});
-	
-	module.controller('NameInputController', function() {
-		this.text = '';
-		
-		this.get = function() {
-			return this.text; // TODO: filter
-		};
-		
-		this.set = function(value) {
-			// TODO
-			this.text = value;
-		};
-	});
-	
-	module.controller('YearsOfEducationInputController', function() {
-		this.text = '';
-		
-		this.get = function() {
-			return this.text;
-		};
-		
-		this.set = function(value) {
-			// TODO
-			this.text = value;
-		};
-	});
-	
-	module.controller('PatientController', function() {
-		// TODO
-		this.background = {
-			dbt: null,
-			dyslipidemia: null,
-			ect: null,
-			heartDisease: null,
-			hiv: null,
-			htn: null,
-			psychiatricTreatment: null,
-			relativesWithAlzheimer: null
-		};
-		
-		this.data = {
-			birthDate: '2014-10-06',
-			gender: 'M',
-			name: 'Prueba',
-			yearsOfEducation: 4,
-			test: null // TODO
-		};
-		
-		this.medications = {
-			antidepressants: null,
-			antidiabetics: null,
-			antihypertensives: null,
-			antiplateletsAnticoagulants: null,
-			antipsychotics: null,
-			benzodiazepines: null,
-			hypolipidemics: null,
-			levothyroxine: null,
-			melatonin: null
-		};
-	});*/
-	
 	module.controller('NewPatientFormController', function() {
 		this.patient = {
 			background: {
@@ -184,9 +101,19 @@
 			}
 		};
 		
+		this.section = 'data';
+		
+		this.isSectionShown = function(section) {
+			return this.section === section;
+		};
+		
 		this.onSubmit = function() {
 			// TODO
 			console.log('NewPatientFormController.onSubmit');
+		};
+		
+		this.showSection = function(section) {
+			this.section = section;
 		};
 	});
 	
@@ -236,6 +163,20 @@
 			restrict: 'E',
 			scope: scope,
 			templateUrl: 'templates/patient-medications-form-section.html'
+		};
+		
+		return options;
+	});
+	
+	module.directive('patientSummaryFormSection', function() {
+		var scope = {
+			form: '='
+		};
+		
+		var options = {
+			restrict: 'E',
+			scope: scope,
+			templateUrl: 'templates/patient-summary-form-section.html'
 		};
 		
 		return options;

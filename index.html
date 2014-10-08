@@ -4,82 +4,18 @@
 		<meta charset="UTF-8">
 		
 		<link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="resources/css/etrs.css" rel="stylesheet">
 		
 		<title>ETRS - Eye tracker record system</title>
 	</head>
 	<body>
-		<!--<div ng-controller="PatientController as patient">
-			<select
-				ng-change="patient.data.gender = genderInput.get()"
-				ng-controller="GenderInputController as genderInput"
-				ng-init="genderInput.set(patient.data.gender)"
-				ng-model="genderInput.selectedOption"
-				ng-options="option.label for option in genderInput.options"
-			>
-			</select>
-			
-			<input
-				ng-change="patient.data.name = nameInput.get()"
-				ng-controller="NameInputController as nameInput"
-				ng-init="nameInput.set(patient.data.name)"
-				ng-model="nameInput.text"
-				type="text"
-			>
-			
-			<input
-				ng-change="patient.data.yearsOfEducation = nonNegativeNumberInput.get()"
-				ng-controller="NonNegativeNumberInputController as nonNegativeNumberInput"
-				ng-init="nonNegativeNumberInput.set(patient.data.yearsOfEducation)"
-				ng-model="nonNegativeNumberInput.text"
-				type="text"
-			>
-			
-			<div ng-controller="DateInputController as dateInput" ng-init="dateInput.set(patient.data.birthDate)">
-				<input
-					ng-change="patient.data.birthDate = dateInput.get()"
-					ng-model="dateInput.day"
-					type="text"
-				>
-				
-				<select
-					ng-change="patient.data.birthDate = dateInput.get()"
-					ng-model="dateInput.month"
-					ng-options="month.label for month in dateInput.months"
-				>
-				</select>
-
-				<input
-					ng-change="patient.data.birthDate = dateInput.get()"
-					ng-model="dateInput.year"
-					type="text"
-				>
-			</div>
-			
-			<div ng-controller="YesNoInputController as yesNoInput" ng-init="yesNoInput.set(patient.data.test)">
-				<span ng-repeat="option in yesNoInput.options">
-					<input
-						ng-change="patient.data.test = yesNoInput.get()"
-						ng-model="yesNoInput.selectedOption"
-						ng-value="option"
-						type="radio"
-					> {{ option.label }}
-				</span>
-			</div>
-			
-			<div>
-				Nombre y apellido: {{ patient.data.name }}<br>
-				Sexo: {{ patient.data.gender }}<br>
-				Fecha de nacimiento: {{ patient.data.birthDate }}<br>
-				Años de educación: {{ patient.data.yearsOfEducation }}<br>
-				Test: {{ patient.data.test }}
-			</div>
-		</div>-->
-		
-		<new-patient-form>
-		</new-patient-form>
+		<div class="col-sm-8 col-sm-offset-2">
+			<new-patient-form></new-patient-form>
+		</div>
 		
 		<script src="vendors/angular/angular.min.js"></script>
 		<script src="resources/js/etrs.js"></script>
 		<script src="resources/js/patients.js"></script>
+		<script src="resources/js/utilities.js"></script>
 	</body>
 </html>

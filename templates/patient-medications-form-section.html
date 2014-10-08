@@ -1,98 +1,152 @@
-<div ng-controller="YesNoInputController as antidepressantsInput">
-	<span ng-repeat="option in antidepressantsInput.options">
-		<input
-			ng-init="form.patient.medications.setAntidepressantsInput(antidepressantsInput)"
-			ng-model="antidepressantsInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Antipsicóticos</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as antipsychoticsInput"
+		ng-init="form.patient.medications.setAntipsychoticsInput(antipsychoticsInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in antipsychoticsInput.options">
+			<input
+				ng-model="antipsychoticsInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>
 
-<div ng-controller="YesNoInputController as antidiabeticsInput">
-	<span ng-repeat="option in antidiabeticsInput.options">
-		<input
-			ng-init="form.patient.medications.setAntidiabeticsInput(antidiabeticsInput)"
-			ng-model="antidiabeticsInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Antidepresivos</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as antidepressantsInput"
+		ng-init="form.patient.medications.setAntidepressantsInput(antidepressantsInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in antidepressantsInput.options">
+			<input
+				ng-model="antidepressantsInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>
 
-<div ng-controller="YesNoInputController as antihypertensivesInput">
-	<span ng-repeat="option in antihypertensivesInput.options">
-		<input
-			ng-init="form.patient.medications.setAntihypertensivesInput(antihypertensivesInput)"
-			ng-model="antihypertensivesInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Benzodiacepinas</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as benzodiazepinesInput"
+		ng-init="form.patient.medications.setBenzodiazepinesInput(benzodiazepinesInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in benzodiazepinesInput.options">
+			<input
+				ng-model="benzodiazepinesInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>
 
-<div ng-controller="YesNoInputController as antiplateletsAnticoagulantsInput">
-	<span ng-repeat="option in antiplateletsAnticoagulantsInput.options">
-		<input
-			ng-init="form.patient.medications.setAntiplateletsAnticoagulantsInput(antiplateletsAnticoagulantsInput)"
-			ng-model="antiplateletsAnticoagulantsInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Melatonina</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as melatoninInput"
+		ng-init="form.patient.medications.setMelatoninInput(melatoninInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in melatoninInput.options">
+			<input
+				ng-model="melatoninInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>
 
-<div ng-controller="YesNoInputController as antipsychoticsInput">
-	<span ng-repeat="option in antipsychoticsInput.options">
-		<input
-			ng-init="form.patient.medications.setAntipsychoticsInput(antipsychoticsInput)"
-			ng-model="antipsychoticsInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Antihipertensivos</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as antihypertensivesInput"
+		ng-init="form.patient.medications.setAntihypertensivesInput(antihypertensivesInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in antihypertensivesInput.options">
+			<input
+				ng-model="antihypertensivesInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>
 
-<div ng-controller="YesNoInputController as benzodiazepinesInput">
-	<span ng-repeat="option in benzodiazepinesInput.options">
-		<input
-			ng-init="form.patient.medications.setBenzodiazepinesInput(benzodiazepinesInput)"
-			ng-model="benzodiazepinesInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Antiagregantes / Anticoagulantes</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as antiplateletsAnticoagulantsInput"
+		ng-init="form.patient.medications.setAntiplateletsAnticoagulantsInput(antiplateletsAnticoagulantsInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in antiplateletsAnticoagulantsInput.options">
+			<input
+				ng-model="antiplateletsAnticoagulantsInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>
 
-<div ng-controller="YesNoInputController as hypolipidemicsInput">
-	<span ng-repeat="option in hypolipidemicsInput.options">
-		<input
-			ng-init="form.patient.medications.setHypolipidemicsInput(hypolipidemicsInput)"
-			ng-model="hypolipidemicsInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Hipolipemiantes</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as hypolipidemicsInput"
+		ng-init="form.patient.medications.setHypolipidemicsInput(hypolipidemicsInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in hypolipidemicsInput.options">
+			<input
+				ng-model="hypolipidemicsInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>
 
-<div ng-controller="YesNoInputController as levothyroxineInput">
-	<span ng-repeat="option in levothyroxineInput.options">
-		<input
-			ng-init="form.patient.medications.setLevothyroxineInput(levothyroxineInput)"
-			ng-model="levothyroxineInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Normoglucemiantes</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as antidiabeticsInput"
+		ng-init="form.patient.medications.setAntidiabeticsInput(antidiabeticsInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in antidiabeticsInput.options">
+			<input
+				ng-model="antidiabeticsInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>
 
-<div ng-controller="YesNoInputController as melatoninInput">
-	<span ng-repeat="option in melatoninInput.options">
-		<input
-			ng-init="form.patient.medications.setMelatoninInput(melatoninInput)"
-			ng-model="melatoninInput.option"
-			ng-value="option"
-			type="radio"
-		> {{ option.label }}
-	</span>
+<div class="form-group">
+	<label class="col-sm-4 control-label">Levotiroxina</label>
+	<div
+		class="col-sm-8"
+		ng-controller="YesNoInputController as levothyroxineInput"
+		ng-init="form.patient.medications.setLevothyroxineInput(levothyroxineInput)"
+	>
+		<label class="radio-inline" ng-repeat="option in levothyroxineInput.options">
+			<input
+				ng-model="levothyroxineInput.option"
+				ng-value="option"
+				type="radio"
+			> {{ option.label }}
+		</label>
+	</div>
 </div>

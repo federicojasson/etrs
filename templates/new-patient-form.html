@@ -1,38 +1,85 @@
 <form
-	ng-controller="NewPatientFormController as newPatientForm"
-	ng-submit="newPatientForm.onSubmit()"
+	ng-controller="NewPatientFormController as form"
+	ng-submit="form.isSectionShown('summary') && form.onSubmit()"
 	novalidate
 >
-	<patient-data-form-section form="newPatientForm">
-	</patient-data-form-section>
-	
-	<patient-background-form-section form="newPatientForm">
-	</patient-background-form-section>
-	
-	<patient-medications-form-section form="newPatientForm">
-	</patient-medications-form-section>
-	
-	<input type="submit">
-	
-	
-	<!-- TODO: debug -->
-	
-	<div>Nombre y apellido: {{ newPatientForm.patient.data.inputs.name.text }}</div>
-	<div>Sexo: {{ newPatientForm.patient.data.inputs.gender.gender.label }}</div>
-	<div>
-		Fecha de nacimiento:
-		{{ newPatientForm.patient.data.inputs.birthDate.day }} de
-		{{ newPatientForm.patient.data.inputs.birthDate.month.label }} de
-		{{ newPatientForm.patient.data.inputs.birthDate.year }}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			 <span class="panel-title">Nuevo paciente</span>
+		</div>
+		
+		<div class="panel-body">
+			<div class="col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li ng-class="{ active: form.isSectionShown('data') }">
+						<a
+							href
+							ng-click="form.showSection('data')"
+						>Datos biográficos</a>
+					</li>
+
+					<li ng-class="{ active: form.isSectionShown('background') }">
+						<a
+							href
+							ng-click="form.showSection('background')"
+						>Antecedentes patológicos</a>
+					</li>
+
+					<li ng-class="{ active: form.isSectionShown('medications') }">
+						<a
+							href
+							ng-click="form.showSection('medications')"
+						>Medicación concomitante</a>
+					</li>
+
+					<!--<li ng-class="{ active: form.isSectionShown('summary') }">
+						<a
+							href
+							ng-click="form.showSection('summary')"
+						>Resumen</a>
+						<a>Resumen</a>
+					</li>-->
+				</ul>
+			</div>
+
+			<div class="col-sm-9 form-horizontal">
+				<patient-data-form-section
+					form="form"
+					ng-show="form.isSectionShown('data')"
+				></patient-data-form-section>
+
+				<patient-background-form-section
+					form="form"
+					ng-show="form.isSectionShown('background')"
+				></patient-background-form-section>
+
+				<patient-medications-form-section
+					form="form"
+					ng-show="form.isSectionShown('medications')"
+				></patient-medications-form-section>
+
+				<patient-summary-form-section
+					form="form"
+					ng-show="form.isSectionShown('summary')"
+				></patient-summary-form-section>
+			</div>
+		</div>
+
+		<div class="panel-footer">
+			<button
+				class="btn btn-default pull-right"
+				ng-click="form.showSection('summary')"
+				ng-hide="form.isSectionShown('summary')"
+				type="button"
+			>Continuar</button>
+			
+			<button
+				class="btn btn-danger pull-right"
+				ng-show="form.isSectionShown('summary')"
+				type="submit"
+			>Confirmar</button>
+			
+			<div class="clearfix"></div>
+		</div>
 	</div>
-	<div>Años de educación: {{ newPatientForm.patient.data.inputs.yearsOfEducation.number }}</div>
-	
-	<div>DBT: {{ newPatientForm.patient.background.inputs.dbt.option.label }}</div>
-	<div>Dislipidemia {{ newPatientForm.patient.background.inputs.dyslipidemia.option.label }}</div>
-	<div>ECT: {{ newPatientForm.patient.background.inputs.ect.option.label }}</div>
-	<div>Cardiopatía: {{ newPatientForm.patient.background.inputs.heartDisease.option.label }}</div>
-	<div>HIV: {{ newPatientForm.patient.background.inputs.hiv.option.label }}</div>
-	<div>HTN: {{ newPatientForm.patient.background.inputs.htn.option.label }}</div>
-	<div>Tratamientos psiquiátricos: {{ newPatientForm.patient.background.inputs.psychiatricTreatment.option.label }}</div>
-	<div>Familiares con Alzheimer: {{ newPatientForm.patient.background.inputs.relativesWithAlzheimer.option.label }}</div>
 </form>
