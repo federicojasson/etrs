@@ -1,152 +1,62 @@
-<div class="form-group">
-	<label class="col-sm-4 control-label">Antipsicóticos</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as antipsychoticsInput"
-		ng-init="form.patient.medications.setAntipsychoticsInput(antipsychoticsInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in antipsychoticsInput.options">
-			<input
-				ng-model="antipsychoticsInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Antipsicóticos">
+	<no-yes-input-section
+		model="form.patient.medications.antipsychotics"
+		name="antipsychotics"
+	></no-yes-input-section>
+</form-input-section>
 
-<div class="form-group">
-	<label class="col-sm-4 control-label">Antidepresivos</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as antidepressantsInput"
-		ng-init="form.patient.medications.setAntidepressantsInput(antidepressantsInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in antidepressantsInput.options">
-			<input
-				ng-model="antidepressantsInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Antidepresivos">
+	<no-yes-input-section
+		model="form.patient.medications.antidepressants"
+		name="antidepressants"
+	></no-yes-input-section>
+</form-input-section>
 
-<div class="form-group">
-	<label class="col-sm-4 control-label">Benzodiacepinas</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as benzodiazepinesInput"
-		ng-init="form.patient.medications.setBenzodiazepinesInput(benzodiazepinesInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in benzodiazepinesInput.options">
-			<input
-				ng-model="benzodiazepinesInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Benzodiacepinas">
+	<no-yes-input-section
+		model="form.patient.medications.benzodiazepines"
+		name="benzodiazepines"
+	></no-yes-input-section>
+</form-input-section>
 
-<div class="form-group">
-	<label class="col-sm-4 control-label">Melatonina</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as melatoninInput"
-		ng-init="form.patient.medications.setMelatoninInput(melatoninInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in melatoninInput.options">
-			<input
-				ng-model="melatoninInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Melatonina">
+	<no-yes-input-section
+		model="form.patient.medications.melatonin"
+		name="melatonin"
+	></no-yes-input-section>
+</form-input-section>
 
-<div class="form-group">
-	<label class="col-sm-4 control-label">Antihipertensivos</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as antihypertensivesInput"
-		ng-init="form.patient.medications.setAntihypertensivesInput(antihypertensivesInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in antihypertensivesInput.options">
-			<input
-				ng-model="antihypertensivesInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Antihipertensivos">
+	<no-yes-input-section
+		model="form.patient.medications.antihypertensives"
+		name="antihypertensives"
+	></no-yes-input-section>
+</form-input-section>
 
-<div class="form-group">
-	<label class="col-sm-4 control-label">Antiagregantes / Anticoagulantes</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as antiplateletsAnticoagulantsInput"
-		ng-init="form.patient.medications.setAntiplateletsAnticoagulantsInput(antiplateletsAnticoagulantsInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in antiplateletsAnticoagulantsInput.options">
-			<input
-				ng-model="antiplateletsAnticoagulantsInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Antiagregantes / Anticoagulantes">
+	<no-yes-input-section
+		model="form.patient.medications.antiplateletsAnticoagulants"
+		name="antiplatelets-anticoagulants"
+	></no-yes-input-section>
+</form-input-section>
 
-<div class="form-group">
-	<label class="col-sm-4 control-label">Hipolipemiantes</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as hypolipidemicsInput"
-		ng-init="form.patient.medications.setHypolipidemicsInput(hypolipidemicsInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in hypolipidemicsInput.options">
-			<input
-				ng-model="hypolipidemicsInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Hipolipemiantes">
+	<no-yes-input-section
+		model="form.patient.medications.hypolipidemics"
+		name="hypolipidemics"
+	></no-yes-input-section>
+</form-input-section>
 
-<div class="form-group">
-	<label class="col-sm-4 control-label">Normoglucemiantes</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as antidiabeticsInput"
-		ng-init="form.patient.medications.setAntidiabeticsInput(antidiabeticsInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in antidiabeticsInput.options">
-			<input
-				ng-model="antidiabeticsInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Normoglucemiantes">
+	<no-yes-input-section
+		model="form.patient.medications.antidiabetics"
+		name="antidiabetics"
+	></no-yes-input-section>
+</form-input-section>
 
-<div class="form-group">
-	<label class="col-sm-4 control-label">Levotiroxina</label>
-	<div
-		class="col-sm-8"
-		ng-controller="YesNoInputController as levothyroxineInput"
-		ng-init="form.patient.medications.setLevothyroxineInput(levothyroxineInput)"
-	>
-		<label class="radio-inline" ng-repeat="option in levothyroxineInput.options">
-			<input
-				ng-model="levothyroxineInput.option"
-				ng-value="option"
-				type="radio"
-			> {{ option.label }}
-		</label>
-	</div>
-</div>
+<form-input-section label="Levotiroxina">
+	<no-yes-input-section
+		model="form.patient.medications.levothyroxine"
+		name="levothyroxine"
+	></no-yes-input-section>
+</form-input-section>

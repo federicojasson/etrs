@@ -1,7 +1,259 @@
 (function() {
-	var module = angular.module('etrs', ['patients', 'utilities']);
+	var module = angular.module('etrs', ['filters', 'patients']);
+	module.controller('NoYesInputController', NoYesInputController);
+	module.directive('formInputSection', formInputSectionDirective);
+	module.directive('noYesInputSection', noYesInputSectionDirective);
 	
-	module.controller('DateInputController', ['specializedFilter', function(specializedFilter) {
+	/*
+	 * No/Yes input controller.
+	 * TODO
+	 */
+	function NoYesInputController() {
+		var controller = this;
+		
+		/*
+		 * TODO
+		 */
+		controller.values = [
+			true,
+			false,
+			''
+		];
+	};
+	
+	/*
+	 * Form input section directive.
+	 * TODO
+	 */
+	function formInputSectionDirective() {
+		var scope = {
+			label: '@'
+		};
+		
+		var options = {
+			restrict: 'E',
+			scope: scope,
+			templateUrl: 'templates/form-input-section.html',
+			transclude: true
+		};
+		
+		return options;
+	};
+	
+	/*
+	 * No/Yes input section directive.
+	 * TODO
+	 */
+	function noYesInputSectionDirective() {
+		var scope = {
+			model: '=',
+			name: '@'
+		};
+		
+		var options = {
+			restrict: 'E',
+			scope: scope,
+			templateUrl: 'templates/no-yes-input-section.html'
+		};
+		
+		return options;
+	};
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*module.controller('dayInputController', function() {
+		var controller = this;
+
+		controller.values = [
+			'',
+			1,
+			2
+		];
+	});
+	
+	module.directive('dayInput', function() {
+		var controller = function() {
+			var controller = this;
+			
+			controller.values = [
+				'',
+				1,
+				2
+			];
+		};
+		
+		var options = {
+			controller: controller,
+			controllerAs: 'input',
+			restrict:' A'
+		};
+		
+		return options;
+	});
+	
+	module.directive('genderInput', function() {
+		var controller = function() {
+			var controller = this;
+			
+			controller.values = [
+				'',
+				'F',
+				'M'
+			];
+		};
+		
+		var options = {
+			controller: controller,
+			controllerAs: 'input',
+			restrict: 'A'
+		};
+		
+		return options;
+	});
+	
+	module.directive('monthInput', function() {
+		var controller = function() {
+			var controller = this;
+			
+			controller.values = [
+				'',
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12
+			];
+		};
+		
+		var options = {
+			controller: controller,
+			controllerAs: 'input',
+			restrict: 'A'
+		};
+		
+		return options;
+	});
+	
+	module.directive('nameInput', ['stringParser', function(stringParser) {
+		var link = function(scope, element, attributes, ngModel) {
+			ngModel.$parsers.push(stringParser.getName);
+		};
+		
+		var options = {
+			link: link,
+			require: 'ngModel',
+			restrict: 'A'
+		};
+		
+		return options;
+	}]);
+	
+	module.directive('nonNegativeNumberInput', ['stringParser', function(stringParser) {
+		var link = function(scope, element, attributes, ngModel) {
+			ngModel.$parsers.push(stringParser.getNonNegativeNumber);
+		};
+		
+		var options = {
+			link: link,
+			require: 'ngModel',
+			restrict: 'A'
+		};
+		
+		return options;
+	}]);
+	
+	module.filter('gender', function() {
+		return function(value) {
+			switch (value) {
+				case 'F' : return 'Femenino';
+				case 'M' : return 'Masculino';
+				default : return 'Se desconoce';
+			}
+		};
+	});
+	
+	module.filter('month', function() {
+		return function(value) {
+			switch (value) {
+				case 1 : return 'Enero';
+				case 2 : return 'Febrero';
+				case 3 : return 'Marzo';
+				case 4 : return 'Abril';
+				case 5 : return 'Mayo';
+				case 6 : return 'Junio';
+				case 7 : return 'Julio';
+				case 8 : return 'Agosto';
+				case 9 : return 'Septiembre';
+				case 10 : return 'Octubre';
+				case 11 : return 'Noviembre';
+				case 12 : return 'Diciembre';
+				default : return 'Se desconoce';
+			}
+		};
+	});*/
+	
+	/*module.directive('nameInput', function() {
+		var link = function(scope, element, attributes, ngModel) {
+			function fromUser(text) {
+				console.log('fromUser');
+				return (text || '').toUpperCase();
+			}
+			
+			function toUser(text) {
+				console.log('toUser');
+				return (text || '').toLowerCase();
+			}
+			
+			ngModel.$parsers.push(fromUser);
+			ngModel.$formatters.push(toUser);
+		};
+		
+		var options = {
+			link: link,
+			require: 'ngModel',
+			restrict: 'A'
+		};
+		
+		return options;
+	});*/
+	
+	/*module.controller('GenderInputController', function() {
+		this.genders = [
+			{ label: 'Se desconoce', value: null },
+			{ label: 'Femenino', value: 'F' },
+			{ label: 'Masculino', value: 'M' }
+		];
+	});*/
+	
+	/*module.controller('NameInputController', ['stringParser', function(stringParser) {
+		this.filterName = function(name) {
+			return stringParser.getName(name);
+		};
+	}]);*/
+	
+	/*module.controller('DateInputController', ['specializedFilter', function(specializedFilter) {
 		// TODO: maybe use a more smart input controller (that detects month and year)
 		
 		this.months = [
@@ -67,5 +319,14 @@
 		];
 		
 		this.option = this.options[2];
-	});
+		
+		this.set = function(value) {
+			// TODO
+			for (var i = 0; i < options.length; i++)
+				if (value === options[i].value) {
+					this.option = options[i];
+					break;
+				}
+		};
+	});*/
 })();

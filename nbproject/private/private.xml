@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/etrs/index.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/resources/js/utilities.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/patient-summary-form-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/patient-basic-data-form-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/templates/patient-form.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/resources/js/patients.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/resources/js/etrs.js</file>
+        </group>
     </open-files>
 </project-private>

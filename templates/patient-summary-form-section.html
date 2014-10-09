@@ -1,22 +1,5 @@
-<p class="note-text">
+<p>
 	Por favor, verifique que la información ingresada sea correcta antes de continuar:
 </p>
 
-<div>Nombre y apellido: {{ form.patient.data.inputs.name.name }}</div>
-<div>Sexo: {{ form.patient.data.inputs.gender.gender.label }}</div>
-<div>
-	Fecha de nacimiento:
-	{{ form.patient.data.inputs.birthDate.day }} de
-	{{ form.patient.data.inputs.birthDate.month.label }} de
-	{{ form.patient.data.inputs.birthDate.year }}
-</div>
-<div>Años de educación: {{ form.patient.data.inputs.yearsOfEducation.number }}</div>
-
-<div>DBT: {{ form.patient.background.inputs.dbt.option.label }}</div>
-<div>Dislipidemia {{ form.patient.background.inputs.dyslipidemia.option.label }}</div>
-<div>ECT: {{ form.patient.background.inputs.ect.option.label }}</div>
-<div>Cardiopatía: {{ form.patient.background.inputs.heartDisease.option.label }}</div>
-<div>HIV: {{ form.patient.background.inputs.hiv.option.label }}</div>
-<div>HTN: {{ form.patient.background.inputs.htn.option.label }}</div>
-<div>Tratamientos psiquiátricos: {{ form.patient.background.inputs.psychiatricTreatment.option.label }}</div>
-<div>Familiares con Alzheimer: {{ form.patient.background.inputs.relativesWithAlzheimer.option.label }}</div>
+{{ 'M' | gender }}
