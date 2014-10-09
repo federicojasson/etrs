@@ -1,8 +1,95 @@
 (function() {
 	var module = angular.module('etrs', ['filters', 'patients']);
+	module.controller('DateInputController', DateInputController);
+	module.controller('GenderInputController', GenderInputController);
 	module.controller('NoYesInputController', NoYesInputController);
 	module.directive('formInputSection', formInputSectionDirective);
+	module.directive('nameInput', ['nameFilter', nameInputDirective]);
 	module.directive('noYesInputSection', noYesInputSectionDirective);
+	module.directive('nonNegativeNumber', ['nonNegativeNumberFilter', nonNegativeNumberDirective]);
+	
+	/*
+	 * Date input controller.
+	 * TODO
+	 */
+	function DateInputController() {
+		var controller = this;
+		
+		/*
+		 * TODO
+		 */
+		controller.currentMonth = '';
+		
+		/*
+		 * TODO
+		 */
+		controller.currentYear = '';
+		
+		/*
+		 * TODO
+		 */
+		controller.dayValues = [];
+		
+		/*
+		 * TODO
+		 */
+		controller.monthValues = [
+			'',
+			1,
+			2,
+			3,
+			4,
+			5,
+			6,
+			7,
+			8,
+			9,
+			10,
+			11,
+			12
+		];
+		
+		/*
+		 * TODO
+		 */
+		controller.onMonthChange = function(month) {
+			console.log('onMonthChange: ' + month);
+		};
+		
+		/*
+		 * TODO
+		 */
+		controller.onYearChange = function(year) {
+			console.log('onYearChange: ' + year);
+		};
+		
+		/*
+		 * TODO
+		 */
+		controller.updateDayValues = function() {
+			// TODO: update day values according to currentMonth and currentYear
+		};
+		
+		// Updates the day values
+		controller.updateDayValues();
+	};
+	
+	/*
+	 * Gender input controller.
+	 * TODO
+	 */
+	function GenderInputController() {
+		var controller = this;
+		
+		/*
+		 * TODO
+		 */
+		controller.values = [
+			'',
+			'F',
+			'M'
+		];
+	};
 	
 	/*
 	 * No/Yes input controller.
@@ -41,6 +128,24 @@
 	};
 	
 	/*
+	 * Name input directive.
+	 * TODO
+	 */
+	function nameInputDirective(nameFilter) {
+		var link = function(scope, element, attributes, ngModel) {
+			ngModel.$parsers.push(nameFilter);
+		};
+		
+		var options = {
+			link: link,
+			require: 'ngModel',
+			restrict: 'A'
+		};
+		
+		return options;
+	};
+	
+	/*
 	 * No/Yes input section directive.
 	 * TODO
 	 */
@@ -54,6 +159,24 @@
 			restrict: 'E',
 			scope: scope,
 			templateUrl: 'templates/no-yes-input-section.html'
+		};
+		
+		return options;
+	};
+	
+	/*
+	 * Non negative number directive.
+	 * TODO
+	 */
+	function nonNegativeNumberDirective(nonNegativeNumberFilter) {
+		var link = function(scope, element, attributes, ngModel) {
+			ngModel.$parsers.push(nonNegativeNumberFilter);
+		};
+		
+		var options = {
+			link: link,
+			require: 'ngModel',
+			restrict: 'A'
 		};
 		
 		return options;

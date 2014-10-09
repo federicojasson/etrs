@@ -1,17 +1,57 @@
 <form-input-section label="Nombre y apellido">
-	TODO
+	<input
+		class="form-control"
+		name-input
+		ng-model="form.patient.basicData.name"
+		type="text"
+	>
 </form-input-section>
 
 <form-input-section label="Sexo">
-	TODO
+	<select
+		class="form-control"
+		ng-controller="GenderInputController as input"
+		ng-model="form.patient.basicData.gender"
+		ng-options="(value | gender) for value in input.values"
+	></select>
 </form-input-section>
 
 <form-input-section label="Fecha de nacimiento">
-	TODO
+	<div
+		class="form-inline"
+		ng-controller="DateInputController as dateInput"
+	>
+		<select
+			class="form-control"
+			ng-model="form.patient.basicData.birthDate.day"
+			ng-options="(dayValue | day) for dayValue in dateInput.dayValues"
+		></select>
+
+		<select
+			class="form-control"
+			ng-change="dateInput.onMonthChange(form.patient.basicData.birthDate.month)"
+			ng-model="form.patient.basicData.birthDate.month"
+			ng-options="(monthValue | month) for monthValue in dateInput.monthValues"
+		></select>
+
+		<input
+			class="form-control text-center"
+			ng-change="dateInput.onYearChange(form.patient.basicData.birthDate.year)"
+			ng-model="form.patient.basicData.birthDate.year"
+			non-negative-number
+			placeholder="Año"
+			type="text"
+		>
+	</div>
 </form-input-section>
 
 <form-input-section label="Años de educación">
-	TODO
+	<input
+		class="form-control text-center"
+		ng-model="form.patient.basicData.yearsOfEducation"
+		non-negative-number
+		type="text"
+	>
 </form-input-section>
 
 <!--

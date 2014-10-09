@@ -27,43 +27,6 @@
 		/*
 		 * TODO
 		 */
-		controller.patient = {
-			background: {
-				dbt: '',
-				dyslipidemia: '',
-				ect: '',
-				heartDisease: '',
-				hiv: '',
-				htn: '',
-				psychiatricTreatment: '',
-				relativesWithAlzheimer: ''
-			},
-			basicData: {
-				birthDate: {
-					day: '',
-					month: '',
-					year: ''
-				},
-				gender: '',
-				name: '',
-				yearsOfEducation: ''
-			},
-			medications: {
-				antidepressants: '',
-				antidiabetics: '',
-				antihypertensives: '',
-				antiplateletsAnticoagulants: '',
-				antipsychotics: '',
-				benzodiazepines: '',
-				hypolipidemics: '',
-				levothyroxine: '',
-				melatonin: ''
-			}
-		};
-		
-		/*
-		 * TODO
-		 */
 		controller.isCurrentSection = function(section) {
 			return section === controller.currentSection;
 		};
@@ -95,9 +58,51 @@
 		/*
 		 * TODO
 		 */
+		controller.reset = function() {
+			controller.patient = {
+				background: {
+					dbt: '',
+					dyslipidemia: '',
+					ect: '',
+					heartDisease: '',
+					hiv: '',
+					htn: '',
+					psychiatricTreatment: '',
+					relativesWithAlzheimer: ''
+				},
+				basicData: {
+					birthDate: {
+						day: '',
+						month: '',
+						year: ''
+					},
+					gender: '',
+					name: '',
+					yearsOfEducation: ''
+				},
+				medications: {
+					antidepressants: '',
+					antidiabetics: '',
+					antihypertensives: '',
+					antiplateletsAnticoagulants: '',
+					antipsychotics: '',
+					benzodiazepines: '',
+					hypolipidemics: '',
+					levothyroxine: '',
+					melatonin: ''
+				}
+			};
+		};
+		
+		/*
+		 * TODO
+		 */
 		controller.showSection = function(section) {
 			controller.currentSection = section;
 		};
+		
+		// Resets the form
+		controller.reset();
 	};
 	
 	/*

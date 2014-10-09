@@ -1,9 +1,25 @@
 (function() {
 	var module = angular.module('filters', ['services']);
+	module.filter('day', dayFilter);
 	module.filter('gender', genderFilter);
 	module.filter('month', monthFilter);
 	module.filter('name', ['stringProcessor', nameFilter]);
 	module.filter('noYes', noYesFilter);
+	module.filter('nonNegativeNumber', ['stringProcessor', nonNegativeNumberFilter]);
+	
+	/*
+	 * Filter for day values.
+	 * Given a value, it returns a proper label.
+	 * Predefined values: [ 1-31 ].
+	 */
+	function dayFilter() {
+		return function(value) {
+			if (value >= 1 && value <= 31)
+				return value.toString();
+			
+			return 'Se desconoce';
+		};
+	};
 	
 	/*
 	 * Filter for gender values.
@@ -23,7 +39,7 @@
 	/*
 	 * Filter for month values.
 	 * Given a value, it returns a proper label.
-	 * Predefined values: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ].
+	 * Predefined values: [ 1-12 ].
 	 */
 	function monthFilter() {
 		return function(value) {
@@ -46,7 +62,7 @@
 	};
 	
 	/*
-	 * Name filter.
+	 * Filter for names.
 	 * Given a string, performs tasks so that the result is a valid name.
 	 */
 	function nameFilter(stringProcessor) {
@@ -75,6 +91,21 @@
 				case true : return 'Sí';
 				default : return 'Se desconoce';
 			}
+		};
+	};
+	
+	/*
+	 * Filter for non negative numbers.
+	 * Given a string, performs tasks so that the result is a non negative
+	 * number.
+	 */
+	function nonNegativeNumberFilter(stringProcessor) {
+		return function(string) {
+			var nonNegativeNumber = string;
+			
+			nonNegativeNumber = stringProcessor.removeNonNumberCharacters(nonNegativeNumber);
+			
+			return nonNegativeNumber;
 		};
 	};
 })();
