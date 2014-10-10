@@ -1,6 +1,11 @@
 (function() {
+	// Module
 	var module = angular.module('patients', []);
+	
+	// Controllers
 	module.controller('PatientFormController', PatientFormController);
+	
+	// Directives
 	module.directive('patientBackgroundFormSection', patientBackgroundFormSectionDirective);
 	module.directive('patientBasicDataFormSection', patientBasicDataFormSectionDirective);
 	module.directive('patientForm', patientFormDirective);
@@ -8,105 +13,111 @@
 	module.directive('patientSummaryFormSection', patientSummaryFormSectionDirective);
 	
 	/*
-	 * Patient form controller.
-	 * TODO
+	 * Controller: PatientFormController.
+	 * Manages the patient form. It allows to reset it or submit it, in order to
+	 * add a new patient or to edit an existing one. Also, handles the different
+	 * form sections.
 	 */
 	function PatientFormController() {
-		var controller = this;
+		/*
+		 * The form section that is currently being shown.
+		 * Sections:
+		 * 'patient-background'
+		 * 'patient-basic-data'
+		 * 'patient-medications'
+		 * 'patient-summary'
+		 * By default, the initial section is 'patient-basic-data'.
+		 */
+		this.currentSection = 'patient-basic-data';
 		
 		/*
-		 * TODO
+		 * Indicates whether the purpose of the form is to add a new patient or
+		 * edit an existing one. It is assumed that a new patient is to be
+		 * added, unless the function loadPatient is called with a defined ID.
 		 */
-		controller.currentSection = 'patient-basic-data';
+		this.isNewPatient = true;
 		
 		/*
-		 * TODO
+		 * The patient model bound to the form. All its fields are initialized
+		 * as empty.
 		 */
-		controller.isNewPatient = true;
-		
-		/*
-		 * TODO
-		 */
-		controller.isCurrentSection = function(section) {
-			return section === controller.currentSection;
-		};
-		
-		/*
-		 * TODO
-		 */
-		controller.loadPatientData = function(patientId) {
-			if (typeof patientId !== 'undefined') {
-				// A patient ID was specified
-				
-				// The form won't add a new patient to the system
-				controller.isNewPatient = false;
-
-				// TODO: load patientData from $http and set the model
+		this.patient = {
+			background: {
+				dbt: '',
+				dyslipidemia: '',
+				ect: '',
+				heartDisease: '',
+				hiv: '',
+				htn: '',
+				psychiatricTreatment: '',
+				relativesWithAlzheimer: ''
+			},
+			basicData: {
+				birthDate: {
+					day: '',
+					month: '',
+					year: ''
+				},
+				gender: '',
+				name: '',
+				yearsOfEducation: ''
+			},
+			medications: {
+				antidepressants: '',
+				antidiabetics: '',
+				antihypertensives: '',
+				antiplateletsAnticoagulants: '',
+				antipsychotics: '',
+				benzodiazepines: '',
+				hypolipidemics: '',
+				levothyroxine: '',
+				melatonin: ''
 			}
 		};
 		
 		/*
-		 * TODO
+		 * Determines whether a given section is currently being shown.
 		 */
-		controller.onSubmit = function() {
-			if (controller.isNewPatient)
+		this.isCurrentSection = function(section) {
+			return section === this.currentSection;
+		};
+		
+		/*
+		 * If the received patient ID is defined, loads the patient data and
+		 * updates the model accordingly.
+		 */
+		this.loadPatient = function(patientId) {
+			if (typeof patientId !== 'undefined') {
+				// A patient ID was specified
+				
+				// The form won't add a new patient to the system
+				this.isNewPatient = false;
+
+				// TODO: load patientData from $http and set the model
+				console.log('patientId: ' + patientId);
+			}
+		};
+		
+		/*
+		 * Shows a given section.
+		 */
+		this.showSection = function(section) {
+			this.currentSection = section;
+		};
+		
+		/*
+		 * Submits the form. The specific action depends on whether a new
+		 * patient is to be added.
+		 */
+		this.submit = function() {
+			if (this.isNewPatient)
 				;// TODO: read model and insert using $http
 			else
 				;// TODO: read model and update using $http
 		};
-		
-		/*
-		 * TODO
-		 */
-		controller.reset = function() {
-			controller.patient = {
-				background: {
-					dbt: '',
-					dyslipidemia: '',
-					ect: '',
-					heartDisease: '',
-					hiv: '',
-					htn: '',
-					psychiatricTreatment: '',
-					relativesWithAlzheimer: ''
-				},
-				basicData: {
-					birthDate: {
-						day: '',
-						month: '',
-						year: ''
-					},
-					gender: '',
-					name: '',
-					yearsOfEducation: ''
-				},
-				medications: {
-					antidepressants: '',
-					antidiabetics: '',
-					antihypertensives: '',
-					antiplateletsAnticoagulants: '',
-					antipsychotics: '',
-					benzodiazepines: '',
-					hypolipidemics: '',
-					levothyroxine: '',
-					melatonin: ''
-				}
-			};
-		};
-		
-		/*
-		 * TODO
-		 */
-		controller.showSection = function(section) {
-			controller.currentSection = section;
-		};
-		
-		// Resets the form
-		controller.reset();
 	};
 	
 	/*
-	 * Patient background form section directive.
 	 * TODO
 	 */
 	function patientBackgroundFormSectionDirective() {
@@ -117,14 +128,13 @@
 		var options = {
 			restrict: 'E',
 			scope: scope,
-			templateUrl: 'templates/patient-background-form-section.html'
+			templateUrl: 'internal/templates/components/patient-background-form-section.html'
 		};
 		
 		return options;
 	};
 	
 	/*
-	 * Patient basic data form section directive.
 	 * TODO
 	 */
 	function patientBasicDataFormSectionDirective() {
@@ -135,15 +145,16 @@
 		var options = {
 			restrict: 'E',
 			scope: scope,
-			templateUrl: 'templates/patient-basic-data-form-section.html'
+			templateUrl: 'internal/templates/components/patient-basic-data-form-section.html'
 		};
 		
 		return options;
 	};
 	
 	/*
-	 * Patient form directive.
-	 * TODO
+	 * Directive: patientForm.
+	 * Includes a patient form. If an ID is specified, submiting the form will
+	 * edit the corresponding patient; otherwise, a new patient will be added.
 	 */
 	function patientFormDirective() {
 		var scope = {
@@ -151,16 +162,17 @@
 		};
 		
 		var options = {
+			controller: 'PatientFormController',
+			controllerAs: 'form',
 			restrict: 'E',
 			scope: scope,
-			templateUrl: 'templates/patient-form.html'
+			templateUrl: 'internal/templates/components/patient-form.html'
 		};
 		
 		return options;
 	};
 	
 	/*
-	 * Patient medications form section directive.
 	 * TODO
 	 */
 	function patientMedicationsFormSectionDirective() {
@@ -171,14 +183,13 @@
 		var options = {
 			restrict: 'E',
 			scope: scope,
-			templateUrl: 'templates/patient-medications-form-section.html'
+			templateUrl: 'internal/templates/components/patient-medications-form-section.html'
 		};
 		
 		return options;
 	};
 	
 	/*
-	 * Patient summary form section directive.
 	 * TODO
 	 */
 	function patientSummaryFormSectionDirective() {
@@ -189,376 +200,9 @@
 		var options = {
 			restrict: 'E',
 			scope: scope,
-			templateUrl: 'templates/patient-summary-form-section.html'
+			templateUrl: 'internal/templates/components/patient-summary-form-section.html'
 		};
 		
 		return options;
 	};
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*module.directive('patientBackgroundFormSection', function() {
-		var scope = {
-			form: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-background-form-section.html'
-		};
-		
-		return options;
-	});
-	
-	module.directive('patientBasicDataFormSection', function() {
-		var scope = {
-			form: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-basic-data-form-section.html'
-		};
-		
-		return options;
-	});
-	
-	module.directive('patientForm', function() {
-		var controller = function() {
-			var controller = this;
-
-			controller.currentSection = 'patient-basic-data';
-
-			controller.isNewPatient = true;
-
-			controller.patient = {
-				background: {
-					dbt: '',
-					dyslipidemia: '',
-					ect: '',
-					heartDisease: '',
-					hiv: '',
-					htn: '',
-					psychiatricTreatment: '',
-					relativesWithAlzheimer: ''
-				},
-				basicData: {
-					birthDate: {
-						day: '',
-						month: '',
-						year: ''
-					},
-					gender: '',
-					name: '',
-					yearsOfEducation: ''
-				},
-				medications: {
-					antidepressants: '',
-					antidiabetics: '',
-					antihypertensives: '',
-					antiplateletsAnticoagulants: '',
-					antipsychotics: '',
-					benzodiazepines: '',
-					hypolipidemics: '',
-					levothyroxine: '',
-					melatonin: ''
-				}
-			};
-
-			controller.isCurrentSection = function(section) {
-				return section === controller.currentSection;
-			};
-
-			controller.loadPatientData = function(patientId) {
-				if (typeof patientId !== 'undefined') {
-					controller.isNewPatient = false;
-
-					// TODO: load patientData from $http
-					// and set the model
-
-					// TODO
-					console.log('PatientFormController.loadPatientData: ' + patientId);
-				}
-			};
-
-			controller.onSubmit = function() {
-				// TODO: read model and update or insert using $http
-
-				if (controller.isNewPatient) {
-					// TODO
-					console.log('PatientFormController.onSubmit - insert patient');
-				} else {
-					// TODO
-					console.log('PatientFormController.onSubmit - update patient');
-				}
-			};
-
-			controller.showSection = function(section) {
-				controller.currentSection = section;
-			};
-		};
-		
-		var scope = {
-			patientId: '@'
-		};
-		
-		var options = {
-			controller: controller,
-			controllerAs: 'form',
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-form.html'
-		};
-		
-		return options;
-	});
-	
-	module.directive('patientMedicationsFormSection', function() {
-		var scope = {
-			form: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-medications-form-section.html'
-		};
-		
-		return options;
-	});
-	
-	module.directive('patientSummaryFormSection', function() {
-		var scope = {
-			form: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-summary-form-section.html'
-		};
-		
-		return options;
-	});*/
-	
-	/*module.controller('PatientFormController', function() {
-		var controller = this;
-		
-		this.patient = {
-			background: {
-				inputs: {
-					dbt: null,
-					dyslipidemia: null,
-					ect: null,
-					heartDisease: null,
-					hiv: null,
-					htn: null,
-					psychiatricTreatment: null,
-					relativesWithAlzheimer: null
-				},
-				registerDbtInput: function(dbtInput) {
-					this.inputs.dbt = dbtInput;
-				},
-				registerDyslipidemiaInput: function(dyslipidemiaInput) {
-					this.inputs.dyslipidemia = dyslipidemiaInput;
-				},
-				registerEctInput: function(ectInput) {
-					this.inputs.ect = ectInput;
-				},
-				registerHeartDiseaseInput: function(heartDiseaseInput) {
-					this.inputs.heartDisease = heartDiseaseInput;
-				},
-				registerHivInput: function(hivInput) {
-					this.inputs.hiv = hivInput;
-				},
-				registerHtnInput: function(htnInput) {
-					this.inputs.htn = htnInput;
-				},
-				registerPsychiatricTreatmentInput: function(psychiatricTreatmentInput) {
-					this.inputs.psychiatricTreatment = psychiatricTreatmentInput;
-				},
-				registerRelativesWithAlzheimerInput: function(relativesWithAlzheimerInput) {
-					this.inputs.relativesWithAlzheimer = relativesWithAlzheimerInput;
-				}
-			},
-			data: {
-				inputs: {
-					birthDate: null,
-					gender: null,
-					name: null,
-					yearsOfEducation: null
-				},
-				registerBirthDateInput: function(birthDateInput) {
-					this.inputs.birthDate = birthDateInput;
-				},
-				registerGenderInput: function(genderInput) {
-					this.inputs.gender = genderInput;
-				},
-				registerNameInput: function(nameInput) {
-					this.inputs.name = nameInput;
-				},
-				registerYearsOfEducationInput: function(yearsOfEducationInput) {
-					this.inputs.yearsOfEducation = yearsOfEducationInput;
-				}
-			},
-			medications: {
-				inputs: {
-					antidepressants: null,
-					antidiabetics: null,
-					antihypertensives: null,
-					antiplateletsAnticoagulants: null,
-					antipsychotics: null,
-					benzodiazepines: null,
-					hypolipidemics: null,
-					levothyroxine: null,
-					melatonin: null
-				},
-				registerAntidepressantsInput: function(antidepressantsInput) {
-					this.inputs.antidepressants = antidepressantsInput;
-				},
-				registerAntidiabeticsInput: function(antidiabeticsInput) {
-					this.inputs.antidiabetics = antidiabeticsInput;
-				},
-				registerAntihypertensivesInput: function(antihypertensivesInput) {
-					this.inputs.antihypertensives = antihypertensivesInput;
-				},
-				registerAntiplateletsAnticoagulantsInput: function(antiplateletsAnticoagulantsInput) {
-					this.inputs.antiplateletsAnticoagulants = antiplateletsAnticoagulantsInput;
-				},
-				registerAntipsychoticsInput: function(antipsychoticsInput) {
-					this.inputs.antipsychotics = antipsychoticsInput;
-				},
-				registerBenzodiazepinesInput: function(benzodiazepinesInput) {
-					this.inputs.benzodiazepines = benzodiazepinesInput;
-				},
-				registerHypolipidemicsInput: function(hypolipidemicsInput) {
-					this.inputs.hypolipidemics = hypolipidemicsInput;
-				},
-				registerLevothyroxineInput: function(levothyroxineInput) {
-					this.inputs.levothyroxine = levothyroxineInput;
-				},
-				registerMelatoninInput: function(melatoninInput) {
-					if (! controller.isNewPatient)
-						melatoninInput.set(controller.patientObject.medications.melatonin); // TODO
-					
-					this.inputs.melatonin = melatoninInput;
-				}
-			}
-		};
-		
-		this.isNewPatient = true;
-		this.patientObject = null;
-		this.section = 'patient-data';
-		
-		this.initialize = function(patientObject) {
-			console.log(patientObject);
-			
-			patientObject = typeof patientObject !== 'undefined' ? patientObject : null;
-			
-			if (patientObject === null)
-				this.isNewPatient = true;
-			else {
-				this.isNewPatient = false;
-				
-				// TODO: clone patientObject?
-				this.patientObject = patientObject;
-			}
-		};
-		
-		this.isSectionShown = function(section) {
-			return this.section === section;
-		};
-		
-		this.onSubmit = function() {
-			// TODO
-			console.log('PatientFormController.onSubmit');
-		};
-		
-		this.showSection = function(section) {
-			this.section = section;
-		};
-	});
-	
-	module.directive('patientBackgroundFormSection', function() {
-		var scope = {
-			form: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-background-form-section.html'
-		};
-		
-		return options;
-	});
-	
-	module.directive('patientDataFormSection', function() {
-		var scope = {
-			form: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-data-form-section.html'
-		};
-		
-		return options;
-	});
-	
-	module.directive('patientForm', function() {
-		var scope = {
-			patientObject: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-form.html'
-		};
-		
-		return options;
-	});
-	
-	module.directive('patientMedicationsFormSection', function() {
-		var scope = {
-			form: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-medications-form-section.html'
-		};
-		
-		return options;
-	});
-	
-	module.directive('patientSummaryFormSection', function() {
-		var scope = {
-			form: '='
-		};
-		
-		var options = {
-			restrict: 'E',
-			scope: scope,
-			templateUrl: 'templates/patient-summary-form-section.html'
-		};
-		
-		return options;
-	});*/
 })();
-

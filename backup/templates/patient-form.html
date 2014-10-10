@@ -1,0 +1,78 @@
+<form
+	ng-controller="PatientFormController as form"
+	ng-init="form.loadPatientData(patientId)"
+	ng-submit="form.onSubmit()"
+	novalidate
+>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span class="panel-title">TITULO - TODO</span>
+		</div>
+
+		<div class="panel-body">
+			<div class="col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li ng-class="{ active: form.isCurrentSection('patient-basic-data') }">
+						<a
+							href
+							ng-click="form.showSection('patient-basic-data')"
+						>Datos biográficos</a>
+					</li>
+					
+					<li ng-class="{ active: form.isCurrentSection('patient-background') }">
+						<a
+							href
+							ng-click="form.showSection('patient-background')"
+						>Antecedentes patológicos</a>
+					</li>
+					
+					<li ng-class="{ active: form.isCurrentSection('patient-medications') }">
+						<a
+							href
+							ng-click="form.showSection('patient-medications')"
+						>Medicación concomitante</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="col-sm-9 form-horizontal">
+				<patient-basic-data-form-section
+					form="form"
+					ng-show="form.isCurrentSection('patient-basic-data')"
+				></patient-basic-data-form-section>
+
+				<patient-background-form-section
+					form="form"
+					ng-show="form.isCurrentSection('patient-background')"
+				></patient-background-form-section>
+
+				<patient-medications-form-section
+					form="form"
+					ng-show="form.isCurrentSection('patient-medications')"
+				></patient-medications-form-section>
+
+				<patient-summary-form-section
+					form="form"
+					ng-show="form.isCurrentSection('patient-summary')"
+				></patient-summary-form-section>
+			</div>
+		</div>
+
+		<div class="panel-footer">
+			<button
+				class="btn btn-default pull-right"
+				ng-click="form.showSection('patient-summary')"
+				ng-hide="form.isCurrentSection('patient-summary')"
+				type="button"
+			>Continuar</button>
+
+			<button
+				class="btn btn-danger pull-right"
+				ng-show="form.isCurrentSection('patient-summary')"
+				type="submit"
+			>Confirmar</button>
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</form>

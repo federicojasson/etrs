@@ -1,8 +1,5 @@
 (function() {
-	// Module
-	var module = angular.module('filters', ['utilities']);
-	
-	// Filters
+	var module = angular.module('filters', ['services']);
 	module.filter('day', dayFilter);
 	module.filter('gender', genderFilter);
 	module.filter('month', monthFilter);
@@ -11,9 +8,9 @@
 	module.filter('nonNegativeNumber', ['stringProcessor', nonNegativeNumberFilter]);
 	
 	/*
-	 * Filter: day.
-	 * Given a day value, it returns a proper label.
-	 * Day values: [ 1-31 ].
+	 * Filter for day values.
+	 * Given a value, it returns a proper label.
+	 * Predefined values: [ 1-31 ].
 	 */
 	function dayFilter() {
 		return function(value) {
@@ -25,9 +22,9 @@
 	};
 	
 	/*
-	 * Filter: gender.
-	 * Given a gender value, it returns a proper label.
-	 * Gender values: [ 'F', 'M' ].
+	 * Filter for gender values.
+	 * Given a value, it returns a proper label.
+	 * Predefined values: [ 'F', 'M' ].
 	 */
 	function genderFilter() {
 		return function(value) {
@@ -40,9 +37,9 @@
 	};
 	
 	/*
-	 * Filter: month.
-	 * Given a month value, it returns a proper label.
-	 * Month values: [ 1-12 ].
+	 * Filter for month values.
+	 * Given a value, it returns a proper label.
+	 * Predefined values: [ 1-12 ].
 	 */
 	function monthFilter() {
 		return function(value) {
@@ -65,8 +62,8 @@
 	};
 	
 	/*
-	 * Filter: name.
-	 * Given a string, performs operations so that the result is a valid name.
+	 * Filter for names.
+	 * Given a string, performs tasks so that the result is a valid name.
 	 */
 	function nameFilter(stringProcessor) {
 		return function(string) {
@@ -83,9 +80,9 @@
 	};
 	
 	/*
-	 * Filter: noYes.
-	 * Given a no/yes value, it returns a proper label.
-	 * No/Yes values: [ false, true ].
+	 * Filter for no/yes values.
+	 * Given a value, it returns a proper label.
+	 * Predefined values: [ false, true ].
 	 */
 	function noYesFilter() {
 		return function(value) {
@@ -98,8 +95,8 @@
 	};
 	
 	/*
-	 * Filter: nonNegativeNumber.
-	 * Given a string, performs operations so that the result is a non negative
+	 * Filter for non negative numbers.
+	 * Given a string, performs tasks so that the result is a non negative
 	 * number.
 	 */
 	function nonNegativeNumberFilter(stringProcessor) {
