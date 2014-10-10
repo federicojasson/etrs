@@ -1,11 +1,11 @@
 <form
-	ng-init="form.loadPatientData(patientId)"
+	ng-init="form.setPatient(patient)"
 	ng-submit="form.onSubmit()"
 	novalidate
 >
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<span class="panel-title">TITULO - TODO</span>
+			<span class="panel-title">{{ title }}</span>
 		</div>
 
 		<div class="panel-body">

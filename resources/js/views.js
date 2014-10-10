@@ -7,12 +7,12 @@
 	
 	/*
 	 * Controller: EditPatientViewController.
-	 * Holds the values received in the route.
+	 * Gets the patient ID received in the route and loads the patient data.
 	 */
 	function EditPatientViewController($routeParams) {
 		/*
-		 * The ID of the patient to be edited.
+		 * The patient to be edited.
 		 */
-		this.patientId = $routeParams.patientId;
+		this.patient = $routeParams.patientId; // TODO: load patient
 	};
 })();

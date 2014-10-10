@@ -1,2 +1,4 @@
-edit patient view (patientId: {{ view.patientId }})<br>
-<patient-form patient-id="{{ view.patientId }}"></patient-form>
+<patient-form
+	patient="{{ view.patient }}"
+	title="Modificar paciente: {{ view.patient.basicData.name }}"
+></patient-form>

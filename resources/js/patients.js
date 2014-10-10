@@ -32,48 +32,9 @@
 		
 		/*
 		 * Indicates whether the purpose of the form is to add a new patient or
-		 * edit an existing one. It is assumed that a new patient is to be
-		 * added, unless the function loadPatient is called with a defined ID.
+		 * to edit an existing one.
 		 */
-		this.isNewPatient = true;
-		
-		/*
-		 * The patient model bound to the form. All its fields are initialized
-		 * as empty.
-		 */
-		this.patient = {
-			background: {
-				dbt: '',
-				dyslipidemia: '',
-				ect: '',
-				heartDisease: '',
-				hiv: '',
-				htn: '',
-				psychiatricTreatment: '',
-				relativesWithAlzheimer: ''
-			},
-			basicData: {
-				birthDate: {
-					day: '',
-					month: '',
-					year: ''
-				},
-				gender: '',
-				name: '',
-				yearsOfEducation: ''
-			},
-			medications: {
-				antidepressants: '',
-				antidiabetics: '',
-				antihypertensives: '',
-				antiplateletsAnticoagulants: '',
-				antipsychotics: '',
-				benzodiazepines: '',
-				hypolipidemics: '',
-				levothyroxine: '',
-				melatonin: ''
-			}
-		};
+		this.isNewPatient;
 		
 		/*
 		 * Determines whether a given section is currently being shown.
@@ -83,18 +44,50 @@
 		};
 		
 		/*
-		 * If the received patient ID is defined, loads the patient data and
-		 * updates the model accordingly.
+		 * Depending on whether the received patient model is defined,
+		 * configures the form to edit a given patient or to add a new one.
 		 */
-		this.loadPatient = function(patientId) {
-			if (typeof patientId !== 'undefined') {
-				// A patient ID was specified
-				
-				// The form won't add a new patient to the system
+		this.setPatient = function(patient) {
+			if (typeof patient === 'undefined') {
+				// The purpose of the form is to add a new patient
+				this.isNewPatient = true;
+				this.patient = {
+					background: {
+						dbt: '',
+						dyslipidemia: '',
+						ect: '',
+						heartDisease: '',
+						hiv: '',
+						htn: '',
+						psychiatricTreatment: '',
+						relativesWithAlzheimer: ''
+					},
+					basicData: {
+						birthDate: {
+							day: '',
+							month: '',
+							year: ''
+						},
+						gender: '',
+						name: '',
+						yearsOfEducation: ''
+					},
+					medications: {
+						antidepressants: '',
+						antidiabetics: '',
+						antihypertensives: '',
+						antiplateletsAnticoagulants: '',
+						antipsychotics: '',
+						benzodiazepines: '',
+						hypolipidemics: '',
+						levothyroxine: '',
+						melatonin: ''
+					}
+				};
+			} else {
+				// The purpose of the form is to edit an existing patient
 				this.isNewPatient = false;
-
-				// TODO: load patientData from $http and set the model
-				console.log('patientId: ' + patientId);
+				this.patient = patient;
 			}
 		};
 		
@@ -118,7 +111,9 @@
 	};
 	
 	/*
-	 * TODO
+	 * Directive: patientBackgroundFormSection.
+	 * Includes a section that allows to edit the patient background on the
+	 * form.
 	 */
 	function patientBackgroundFormSectionDirective() {
 		var scope = {
@@ -135,7 +130,9 @@
 	};
 	
 	/*
-	 * TODO
+	 * Directive: patientBasicDataFormSection.
+	 * Includes a section that allows to edit the patient basic data on the
+	 * form.
 	 */
 	function patientBasicDataFormSectionDirective() {
 		var scope = {
@@ -153,12 +150,14 @@
 	
 	/*
 	 * Directive: patientForm.
-	 * Includes a patient form. If an ID is specified, submiting the form will
-	 * edit the corresponding patient; otherwise, a new patient will be added.
+	 * Includes a patient form. If a patient model is specified, submiting the
+	 * form will edit the corresponding patient; otherwise, a new patient will
+	 * be added.
 	 */
 	function patientFormDirective() {
 		var scope = {
-			patientId: '@'
+			patient: '@',
+			title: '@'
 		};
 		
 		var options = {
@@ -173,7 +172,9 @@
 	};
 	
 	/*
-	 * TODO
+	 * Directive: patientMedicationsFormSection.
+	 * Includes a section that allows to edit the patient medications on the
+	 * form.
 	 */
 	function patientMedicationsFormSectionDirective() {
 		var scope = {
@@ -190,7 +191,9 @@
 	};
 	
 	/*
-	 * TODO
+	 * Directive: patientSummaryFormSection.
+	 * Includes a section to show a summary of the patient data entered on the
+	 * form.
 	 */
 	function patientSummaryFormSectionDirective() {
 		var scope = {
