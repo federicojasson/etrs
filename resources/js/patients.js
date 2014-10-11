@@ -19,6 +19,8 @@
 	 * form sections.
 	 */
 	function PatientFormController() {
+		var controller = this;
+		
 		/*
 		 * The form section that is currently being shown.
 		 * Sections:
@@ -28,30 +30,35 @@
 		 * 'patient-summary'
 		 * By default, the initial section is 'patient-basic-data'.
 		 */
-		this.currentSection = 'patient-basic-data';
+		controller.currentSection = 'patient-basic-data';
 		
 		/*
 		 * Indicates whether the purpose of the form is to add a new patient or
 		 * to edit an existing one.
 		 */
-		this.isNewPatient;
+		controller.isNewPatient;
 		
 		/*
 		 * Determines whether a given section is currently being shown.
 		 */
-		this.isCurrentSection = function(section) {
-			return section === this.currentSection;
+		controller.isCurrentSection = function(section) {
+			return section === controller.currentSection;
 		};
+		
+		/*
+		 * The form patient model.
+		 */
+		controller.patient = {};
 		
 		/*
 		 * Depending on whether the received patient model is defined,
 		 * configures the form to edit a given patient or to add a new one.
 		 */
-		this.setPatient = function(patient) {
+		controller.setPatient = function(patient) {
 			if (typeof patient === 'undefined') {
 				// The purpose of the form is to add a new patient
-				this.isNewPatient = true;
-				this.patient = {
+				controller.isNewPatient = true;
+				controller.patient = {
 					background: {
 						dbt: '',
 						dyslipidemia: '',
@@ -86,24 +93,24 @@
 				};
 			} else {
 				// The purpose of the form is to edit an existing patient
-				this.isNewPatient = false;
-				this.patient = patient;
+				controller.isNewPatient = false;
+				controller.patient = patient;
 			}
 		};
 		
 		/*
 		 * Shows a given section.
 		 */
-		this.showSection = function(section) {
-			this.currentSection = section;
+		controller.showSection = function(section) {
+			controller.currentSection = section;
 		};
 		
 		/*
 		 * Submits the form. The specific action depends on whether a new
 		 * patient is to be added.
 		 */
-		this.submit = function() {
-			if (this.isNewPatient)
+		controller.submit = function() {
+			if (controller.isNewPatient)
 				;// TODO: read model and insert using $http
 			else
 				;// TODO: read model and update using $http
@@ -156,7 +163,7 @@
 	 */
 	function patientFormDirective() {
 		var scope = {
-			patient: '@',
+			patient: '=',
 			title: '@'
 		};
 		

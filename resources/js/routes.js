@@ -1,9 +1,9 @@
 (function() {
 	// Module
-	var module = angular.module('routes', ['ngRoute', 'views']);
+	var module = angular.module('routes', [ 'ngRoute', 'views' ]);
 	
 	// Configuration
-	module.config(['$routeProvider', config]);
+	module.config([ '$routeProvider', config ]);
 	
 	/*
 	 * Applies the route configurations.

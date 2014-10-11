@@ -1,4 +1,4 @@
 (function() {
 	// Module
-	var module = angular.module('etrs', ['filters', 'patients', 'routes', 'utilities']);
+	var module = angular.module('etrs', [ 'filters', 'patients', 'routes', 'utilities' ]);
 })();

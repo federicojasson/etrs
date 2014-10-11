@@ -1,6 +1,6 @@
 (function() {
 	// Module
-	var module = angular.module('utilities', ['filters']);
+	var module = angular.module('utilities', [ 'filters' ]);
 	
 	// Controllers
 	module.controller('DateInputController', DateInputController);
@@ -11,9 +11,9 @@
 	module.directive('dateInput', dateInputDirective);
 	module.directive('genderInput', genderInputDirective);
 	module.directive('inputFormSection', inputFormSectionDirective);
-	module.directive('nameInput', ['nameFilter', nameInputDirective]);
+	module.directive('nameInput', [ 'nameFilter', nameInputDirective ]);
 	module.directive('noYesInput', noYesInputDirective);
-	module.directive('nonNegativeNumberInput', ['nonNegativeNumberFilter', nonNegativeNumberInputDirective]);
+	module.directive('nonNegativeNumberInput', [ 'nonNegativeNumberFilter', nonNegativeNumberInputDirective ]);
 	
 	// Services
 	module.service('stringProcessor', stringProcessorService);
@@ -25,10 +25,12 @@
 	 * year values change.
 	 */
 	function DateInputController() {
+		var controller = this;
+		
 		/*
 		 * Day values.
 		 */
-		this.dayValues = [
+		controller.dayValues = [
 			'',
 			1,
 			2,
@@ -66,7 +68,7 @@
 		/*
 		 * Month values
 		 */
-		this.monthValues = [
+		controller.monthValues = [
 			'',
 			1,
 			2,
@@ -84,9 +86,9 @@
 		
 		/*
 		 * Updates the day values according to the month and year currently set.
-		 * This function is called when the month or the year changes.
+		 * This function is called when either of them changes.
 		 */
-		this.onModelChange = function(model) {
+		controller.onModelChange = function(model) {
 			// The amount of days
 			var count;
 			
@@ -112,15 +114,13 @@
 				}
 				case 2 : {
 					// February
-					var year = model.year;
-					
-					if (year === '') {
+					if (model.year === '') {
 						// Year unknown
 						count = 29;
 						break;
 					}
 					
-					if ((year % 4 === 0) && (year % 100 !== 0 || year % 400 === 0)) {
+					if ((model.year % 4 === 0) && (model.year % 100 !== 0 || model.year % 400 === 0)) {
 						// Leap year
 						count = 29;
 						break;
@@ -140,10 +140,10 @@
 				model.day = count;
 			
 			// Clears the dayValues array and fills it with the new values
-			this.dayValues.length = 0;
-			this.dayValues[0] = '';
+			controller.dayValues.length = 0;
+			controller.dayValues[0] = '';
 			for (var i = 1; i <= count; i++)
-				this.dayValues[i] = i;
+				controller.dayValues[i] = i;
 		};
 	};
 	
@@ -152,10 +152,12 @@
 	 * Manages the gender input. It offers the possible values.
 	 */
 	function GenderInputController() {
+		var controller = this;
+		
 		/*
 		 * Gender values.
 		 */
-		this.values = [
+		controller.values = [
 			'',
 			'F',
 			'M'
@@ -167,10 +169,12 @@
 	 * Manages the no/yes input. It offers the possible values.
 	 */
 	function NoYesInputController() {
+		var controller = this;
+		
 		/*
 		 * No/Yes values.
 		 */
-		this.values = [
+		controller.values = [
 			true,
 			false,
 			''
@@ -310,32 +314,34 @@
 	 * Offers functions to process strings.
 	 */
 	function stringProcessorService() {
+		var service = this;
+		
 		/*
 		 * Given a string, it replaces all its consecutive whitespaces by a
 		 * single one.
 		 */
-		this.removeMultipleWhitespaces = function(string) {
+		service.removeMultipleWhitespaces = function(string) {
 			return string.replace(/\s+/g, ' ');
 		};
 		
 		/*
 		 * Given a string, it removes all its non numeric characters.
 		 */
-		this.removeNonNumberCharacters = function(string) {
+		service.removeNonNumberCharacters = function(string) {
 			return string.replace(/[^0-9]/g, '');
 		};
 		
 		/*
 		 * Given a string, it converts its lowercase characters to uppercase.
 		 */
-		this.toUpperCase = function(string) {
+		service.toUpperCase = function(string) {
 			return string.toUpperCase();
 		};
 		
 		/*
 		 * Given a string, it trims it.
 		 */
-		this.trim = function(string) {
+		service.trim = function(string) {
 			if (String.prototype.trim)
 				// string.trim() is defined
 				return string.trim();

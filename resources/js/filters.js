@@ -1,14 +1,14 @@
 (function() {
 	// Module
-	var module = angular.module('filters', ['utilities']);
+	var module = angular.module('filters', [ 'utilities' ]);
 	
 	// Filters
 	module.filter('day', dayFilter);
 	module.filter('gender', genderFilter);
 	module.filter('month', monthFilter);
-	module.filter('name', ['stringProcessor', nameFilter]);
+	module.filter('name', [ 'stringProcessor', nameFilter ]);
 	module.filter('noYes', noYesFilter);
-	module.filter('nonNegativeNumber', ['stringProcessor', nonNegativeNumberFilter]);
+	module.filter('nonNegativeNumber', [ 'stringProcessor', nonNegativeNumberFilter ]);
 	
 	/*
 	 * Filter: day.
