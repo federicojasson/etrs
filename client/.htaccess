@@ -1,0 +1,9 @@
+RewriteEngine on
+
+# If the URL corresponds to an existing file or directory, it doesn't rewrite it
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Otherwise, AngularJS handles the request
+RewriteRule ^ index.html [L]

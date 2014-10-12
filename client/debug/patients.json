@@ -1,0 +1,34 @@
+{
+	"id": "1241",
+	"background": {
+		"dbt": "",
+		"dyslipidemia": "",
+		"ect": "",
+		"heartDisease": "",
+		"hiv": "",
+		"htn": "",
+		"psychiatricTreatment": "",
+		"relativesWithAlzheimer": ""
+	},
+	"basicData": {
+		"birthDate": {
+			"day": 25,
+			"month": 6,
+			"year": 1991
+		},
+		"gender": "M",
+		"name": "Federico Jasson",
+		"yearsOfEducation": 15
+	},
+	"medications": {
+		"antidepressants": "",
+		"antidiabetics": "",
+		"antihypertensives": "",
+		"antiplateletsAnticoagulants": "",
+		"antipsychotics": "",
+		"benzodiazepines": "",
+		"hypolipidemics": "",
+		"levothyroxine": "",
+		"melatonin": ""
+	}
+}
