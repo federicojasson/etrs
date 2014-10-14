@@ -21,16 +21,9 @@
 		 * onSuccess: called if the request succeeds.
 		 * onFailure: called if the request fails.
 		 */
-		service.sendPostRequest = function(url, parameters, callbacks) {
-			var actions = {
-				sendRequest: {
-					method: 'POST',
-					params: parameters
-				}
-			};
-			
-			// Sends the request
-			var reference = $resource(url, {}, actions).sendRequest();
+		service.sendPostRequest = function(url, data, callbacks) {
+			// Sends the POST request
+			var reference = $resource(url, {}, {}).save(data);
 			
 			// Configures the promise
 			reference.$promise.then(callbacks.onSuccess, callbacks.onFailure);
@@ -51,13 +44,13 @@
 		 * TODO
 		 */
 		service.getPatient = function(patientId, callbacks) {
-			var url = 'debug/patients.json';
+			var url = 'server/get-patient';
 			
-			var parameters = {
-				patiendId: patientId
+			var data = {
+				patientId: patientId
 			};
 			
-			return communicationFacility.sendPostRequest(url, parameters, callbacks);
+			return communicationFacility.sendPostRequest(url, data, callbacks);
 		};
 	};
 })();

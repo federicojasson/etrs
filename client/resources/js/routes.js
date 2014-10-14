@@ -3,14 +3,14 @@
 	var module = angular.module('routes', [ 'ngRoute', 'views' ]);
 	
 	// Configuration
-	module.config([ '$locationProvider', '$routeProvider', config ]);
+	module.config([ '$locationProvider', '$routeProvider', configuration ]);
 	
 	/*
 	 * Applies the route configurations.
 	 * Defines the actions to take according to the received route. This may be,
 	 * for example, load a controller or render a view.
 	 */
-	function config($locationProvider, $routeProvider) {
+	function configuration($locationProvider, $routeProvider) {
 		/*
 		 * Uses the HTML5 history API. This allows for use of regular URL path
 		 * and search segments, instead of their hashbang equivalents. If the
