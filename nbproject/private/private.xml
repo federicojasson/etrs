@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/server/db/etrs.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/db/etrs_triggers.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/db/etrs_cleanup.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/db/etrs_procedures.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/database/etrs.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/database/etrs_initialization.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/database/etrs_users.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/database/etrs_cleanup.sql</file>
         </group>
     </open-files>
 </project-private>

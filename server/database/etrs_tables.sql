@@ -1,0 +1,66 @@
+DELIMITER ; -- Sets the statement delimiter
+
+--
+-- Table: users.
+--
+-- This table stores information about the users of the system.
+--
+-- The users are identified by an ID. This is just a username.
+--
+-- Each user has a password. For security reasons, only a hash of the password
+-- is stored in here. The SHA-512 hash function must be used for this purpose.
+--
+-- Every user has a role that indicates what kind of actions can perform in the
+-- system. Each role corresponds to one database user.
+--
+-- Roles (and their corresponding 2-bytes values):
+-- - Doctor ('DR')
+-- - Operator ('OP')
+-- - Researcher ('RS')
+--
+CREATE TABLE IF NOT EXISTS users (
+	id VARCHAR(32), -- Maximum: 32 characters
+	password_hash BINARY(64) NOT NULL, -- SHA-512: 512 bits = 64 bytes
+	role BINARY(2) NOT NULL,
+	
+	PRIMARY KEY(id)
+) ENGINE = InnoDB;
+
+
+--
+-- Table: patients.
+--
+-- This table stores the patients IDs.
+--
+-- Each patient is identified with a random-generated UUID.
+--
+-- For the sake of persistence, the patient information is never directly
+-- deleted from the database by the user. Instead, a flag indicates whether that
+-- data must be taken into account.
+--
+CREATE TABLE IF NOT EXISTS patients (
+	id BINARY(16), -- UUID version 4: 128 bits = 16 bytes
+	is_erased BOOLEAN NOT NULL,
+	
+	PRIMARY KEY(id)
+) ENGINE = InnoDB;
+
+
+--
+-- Table: patients_basic_data.
+--
+-- This table stores the basic data of the patients.
+--
+-- TODO: completar
+--
+CREATE TABLE IF NOT EXISTS patients_basic_data (
+	patient_id BINARY(16),
+	
+	birth_date DATE,
+	gender BINARY(1),
+	name VARCHAR(128),
+	years_of_education TINYINT UNSIGNED,
+	
+	PRIMARY KEY(patient_id),
+	FOREIGN KEY(patient_id) REFERENCES patients(id)
+) ENGINE = InnoDB;
