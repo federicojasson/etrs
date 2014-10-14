@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/etrs/server/db/etrs.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/db/etrs_triggers.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/db/etrs_cleanup.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/db/etrs_procedures.sql</file>
+        </group>
     </open-files>
 </project-private>
