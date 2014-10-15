@@ -30,4 +30,8 @@ $app->container->singleton('database', function() {
     return new DatabaseManager();
 });
 
+$app->container->singleton('user', function() {
+    return new UserManager();
+});
+
 $app->add(new Slim\Middleware\ContentTypes());

@@ -1,7 +1,3 @@
 <?php
 
-class DatabaseManager {
-	
-	
-	
-}
+class DatabaseManager {}
