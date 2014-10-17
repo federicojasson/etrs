@@ -1,3 +1,6 @@
+// Uses strict mode in the whole script
+'use strict';
+
 (function() {
 	// Module
 	var module = angular.module('patients', []);
@@ -24,10 +27,10 @@
 		/*
 		 * The form section that is currently being shown.
 		 * Sections:
-		 * 'patient-background'
-		 * 'patient-basic-data'
-		 * 'patient-medications'
-		 * 'patient-summary'
+		 * - 'patient-background'.
+		 * - 'patient-basic-data'.
+		 * - 'patient-medications'.
+		 * - 'patient-summary'.
 		 * By default, the initial section is 'patient-basic-data'.
 		 */
 		controller.currentSection = 'patient-basic-data';

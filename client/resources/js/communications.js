@@ -1,3 +1,6 @@
+// Uses strict mode in the whole script
+'use strict';
+
 (function() {
 	// Module
 	var module = angular.module('communications', [ 'ngResource' ]);
@@ -18,8 +21,8 @@
 		 * Optionally, it allows the execution of callback functions to respond
 		 * to different events.
 		 * Callbacks:
-		 * onSuccess: called if the request succeeds.
-		 * onFailure: called if the request fails.
+		 * - onSuccess: called if the request succeeds.
+		 * - onFailure: called if the request fails.
 		 */
 		service.sendPostRequest = function(url, data, callbacks) {
 			// Sends the POST request
@@ -44,7 +47,7 @@
 		 * TODO
 		 */
 		service.getPatient = function(patientId, callbacks) {
-			var url = 'server/get-patient';
+			var url = 'server/doctor/get-patient';
 			
 			var data = {
 				patientId: patientId

@@ -1,17 +1,33 @@
 <?php
 
+// Initializes the framework
+
 require 'Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
 
-// TODO: set
 $app = new \Slim\Slim([
 	'mode' => 'debug'
-	//'mode' => 'release'
+	// 'mode' => 'release' TODO: set before release
 ]);
 
-require 'DatabaseManager.php';
+
+// Initializes the application
+require 'AuthenticationManager.php';
+require 'Dbms.php';
+require 'EtrsDatabase.php';
+require 'EtrsServerDatabase.php';
+require 'Session.php';
+require 'SessionMiddleware.php';
+require 'SessionStorageHandler.php';
+require 'DatabaseSessionStorageHandler.php';
+
+require 'test/TestSessionStorageHandler.php'; // TODO: remove before release
 
 require 'configurations.php';
-require 'services.php';
+require 'doctor_services.php';
 
+require 'test/test_services.php'; // TODO: remove before release
+
+
+// Serves the incoming request
 $app->run();

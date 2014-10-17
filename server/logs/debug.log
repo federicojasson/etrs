@@ -1,18 +1,49 @@
-get-patient called post: 
-get-patient called: 1241
-get-patient called post: 
-get-patient called: 1241
-get-patient called post: 
-get-patient called: 1241
-get-patient called post: 
-get-patient called: 1241
-get-patient called post: 
-get-patient called: 1241
-get-patient called post: 
-get-patient called: 1241
-get-patient called post: 
-get-patient called: 1241
-get-patient called: 1241
-get-patient called: 1241
-get-patient called: 1241
-get-patient called: 6e338612e99a471eaa5c1446f6340b20
+------------
+/doctor/get-patient
+patientId: 6e338612e99a471eaa5c1446f6340b20
+isUserLoggedIn: false
+------------
+exception 'ErrorException' with message 'Use of undefined constant onClose - assumed 'onClose'' in C:\xampp\htdocs\etrs\server\Session.php:47
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\Session.php(47): Slim\Slim::handleErrors(8, 'Use of undefine...', 'C:\xampp\htdocs...', 47, Array)
+#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
+#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
+#5 {main}
+/test/something
+exception 'ErrorException' with message 'Use of undefined constant onClose - assumed 'onClose'' in C:\xampp\htdocs\etrs\server\Session.php:47
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\Session.php(47): Slim\Slim::handleErrors(8, 'Use of undefine...', 'C:\xampp\htdocs...', 47, Array)
+#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
+#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
+#5 {main}
+exception 'ErrorException' with message 'Use of undefined constant onClose - assumed 'onClose'' in C:\xampp\htdocs\etrs\server\Session.php:49
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\Session.php(49): Slim\Slim::handleErrors(8, 'Use of undefine...', 'C:\xampp\htdocs...', 49, Array)
+#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
+#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
+#5 {main}
+exception 'ErrorException' with message 'Object of class DatabaseSessionStorageHandler could not be converted to string' in C:\xampp\htdocs\etrs\server\Session.php:45
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\Session.php(45): Slim\Slim::handleErrors(4096, 'Object of class...', 'C:\xampp\htdocs...', 45, Array)
+#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
+#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
+#5 {main}
+exception 'ErrorException' with message 'Object of class DatabaseSessionStorageHandler could not be converted to string' in C:\xampp\htdocs\etrs\server\Session.php:45
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\Session.php(45): Slim\Slim::handleErrors(4096, 'Object of class...', 'C:\xampp\htdocs...', 45, Array)
+#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
+#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
+#5 {main}
+/test/something
+/test/something
+/test/something
