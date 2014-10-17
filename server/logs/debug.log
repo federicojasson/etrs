@@ -1,49 +1,65 @@
-------------
-/doctor/get-patient
-patientId: 6e338612e99a471eaa5c1446f6340b20
-isUserLoggedIn: false
-------------
-exception 'ErrorException' with message 'Use of undefined constant onClose - assumed 'onClose'' in C:\xampp\htdocs\etrs\server\Session.php:47
+/test/something
+/test/something
+/test/something
+exception 'ErrorException' with message 'fopen(C:\xampp\htdocs\etrs\server\test/test/session.txt): failed to open stream: No such file or directory' in C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php:26
 Stack trace:
-#0 C:\xampp\htdocs\etrs\server\Session.php(47): Slim\Slim::handleErrors(8, 'Use of undefine...', 'C:\xampp\htdocs...', 47, Array)
-#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
-#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
-#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
-#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
-#5 {main}
-/test/something
-exception 'ErrorException' with message 'Use of undefined constant onClose - assumed 'onClose'' in C:\xampp\htdocs\etrs\server\Session.php:47
+#0 [internal function]: Slim\Slim::handleErrors(2, 'fopen(C:\xampp\...', 'C:\xampp\htdocs...', 26, Array)
+#1 C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php(26): fopen('C:\xampp\htdocs...', 'r+')
+#2 [internal function]: TestSessionStorageHandler->onOpen('C:\xampp\tmp', 'PHPSESSID')
+#3 C:\xampp\htdocs\etrs\server\Session.php(59): session_start()
+#4 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->start()
+#5 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#6 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#7 C:\xampp\htdocs\etrs\server\index.php(33): Slim\Slim->run()
+#8 {main}
+exception 'ErrorException' with message 'fopen(C:\xampp\htdocs\etrs\server\test/test/session.txt): failed to open stream: No such file or directory' in C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php:26
 Stack trace:
-#0 C:\xampp\htdocs\etrs\server\Session.php(47): Slim\Slim::handleErrors(8, 'Use of undefine...', 'C:\xampp\htdocs...', 47, Array)
-#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
-#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
-#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
-#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
-#5 {main}
-exception 'ErrorException' with message 'Use of undefined constant onClose - assumed 'onClose'' in C:\xampp\htdocs\etrs\server\Session.php:49
+#0 [internal function]: Slim\Slim::handleErrors(2, 'fopen(C:\xampp\...', 'C:\xampp\htdocs...', 26, Array)
+#1 C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php(26): fopen('C:\xampp\htdocs...', 'r+')
+#2 [internal function]: TestSessionStorageHandler->onOpen('C:\xampp\tmp', 'PHPSESSID')
+#3 C:\xampp\htdocs\etrs\server\Session.php(59): session_start()
+#4 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->start()
+#5 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#6 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#7 C:\xampp\htdocs\etrs\server\index.php(33): Slim\Slim->run()
+#8 {main}
+exception 'ErrorException' with message 'fopen(C:\xampp\htdocs\etrs\server\test/test/session.txt): failed to open stream: No such file or directory' in C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php:26
 Stack trace:
-#0 C:\xampp\htdocs\etrs\server\Session.php(49): Slim\Slim::handleErrors(8, 'Use of undefine...', 'C:\xampp\htdocs...', 49, Array)
-#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
-#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
-#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
-#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
-#5 {main}
-exception 'ErrorException' with message 'Object of class DatabaseSessionStorageHandler could not be converted to string' in C:\xampp\htdocs\etrs\server\Session.php:45
+#0 [internal function]: Slim\Slim::handleErrors(2, 'fopen(C:\xampp\...', 'C:\xampp\htdocs...', 26, Array)
+#1 C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php(26): fopen('C:\xampp\htdocs...', 'r+')
+#2 [internal function]: TestSessionStorageHandler->onOpen('C:\xampp\tmp', 'PHPSESSID')
+#3 C:\xampp\htdocs\etrs\server\Session.php(59): session_start()
+#4 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->start()
+#5 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#6 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#7 C:\xampp\htdocs\etrs\server\index.php(33): Slim\Slim->run()
+#8 {main}
+exception 'ErrorException' with message 'filesize() expects parameter 1 to be a valid path, resource given' in C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php:37
 Stack trace:
-#0 C:\xampp\htdocs\etrs\server\Session.php(45): Slim\Slim::handleErrors(4096, 'Object of class...', 'C:\xampp\htdocs...', 45, Array)
-#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
-#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
-#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
-#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
-#5 {main}
-exception 'ErrorException' with message 'Object of class DatabaseSessionStorageHandler could not be converted to string' in C:\xampp\htdocs\etrs\server\Session.php:45
+#0 [internal function]: Slim\Slim::handleErrors(2, 'filesize() expe...', 'C:\xampp\htdocs...', 37, Array)
+#1 C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php(37): filesize(Resource id #28)
+#2 [internal function]: TestSessionStorageHandler->onRead('j6fan14qfn69s1u...')
+#3 C:\xampp\htdocs\etrs\server\Session.php(59): session_start()
+#4 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->start()
+#5 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#6 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#7 C:\xampp\htdocs\etrs\server\index.php(33): Slim\Slim->run()
+#8 {main}
+exception 'ErrorException' with message 'fread(): Length parameter must be greater than 0' in C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php:37
 Stack trace:
-#0 C:\xampp\htdocs\etrs\server\Session.php(45): Slim\Slim::handleErrors(4096, 'Object of class...', 'C:\xampp\htdocs...', 45, Array)
-#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->setStorageHandler(Object(DatabaseSessionStorageHandler))
-#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
-#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
-#4 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
-#5 {main}
+#0 [internal function]: Slim\Slim::handleErrors(2, 'fread(): Length...', 'C:\xampp\htdocs...', 37, Array)
+#1 C:\xampp\htdocs\etrs\server\test\TestSessionStorageHandler.php(37): fread(Resource id #28, 0)
+#2 [internal function]: TestSessionStorageHandler->onRead('j6fan14qfn69s1u...')
+#3 C:\xampp\htdocs\etrs\server\Session.php(59): session_start()
+#4 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(37): Session->start()
+#5 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#6 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#7 C:\xampp\htdocs\etrs\server\index.php(33): Slim\Slim->run()
+#8 {main}
+/test/something
+/test/something
+/test/something<br>
+/test/something<br>
 /test/something
 /test/something
 /test/something
@@ -52,17 +68,24 @@ Stack trace:
 /test/something
 /test/something
 /test/something
-exception 'ErrorException' with message 'session_destroy(): Trying to destroy uninitialized session' in C:\xampp\htdocs\etrs\server\SessionMiddleware.php:34
+/test/something
+/test/something
+/test/something
+/test/something
+/test/something
+exception 'ErrorException' with message 'Use of undefined constant session - assumed 'session'' in C:\xampp\htdocs\etrs\server\test\test_services.php:10
 Stack trace:
-#0 [internal function]: Slim\Slim::handleErrors(2, 'session_destroy...', 'C:\xampp\htdocs...', 34, Array)
-#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(34): session_destroy()
-#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
-#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
-#4 C:\xampp\htdocs\etrs\server\index.php(33): Slim\Slim->run()
-#5 {main}
-/test/something
-/test/something
-/test/something
-/test/something
+#0 C:\xampp\htdocs\etrs\server\test\test_services.php(10): Slim\Slim::handleErrors(8, 'Use of undefine...', 'C:\xampp\htdocs...', 10, Array)
+#1 [internal function]: {closure}()
+#2 C:\xampp\htdocs\etrs\server\Slim\Route.php(462): call_user_func_array(Object(Closure), Array)
+#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1326): Slim\Route->dispatch()
+#4 C:\xampp\htdocs\etrs\server\Slim\Middleware\Flash.php(85): Slim\Slim->call()
+#5 C:\xampp\htdocs\etrs\server\Slim\Middleware\MethodOverride.php(92): Slim\Middleware\Flash->call()
+#6 C:\xampp\htdocs\etrs\server\Slim\Middleware\ContentTypes.php(81): Slim\Middleware\MethodOverride->call()
+#7 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(40): Slim\Middleware\ContentTypes->call()
+#8 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#9 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#10 C:\xampp\htdocs\etrs\server\index.php(33): Slim\Slim->run()
+#11 {main}
 /test/something
 /test/something

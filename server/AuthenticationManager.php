@@ -2,7 +2,7 @@
 
 /*
  * This class offers services to handle user authentication and other related
- * tasks, like log in and log out.
+ * tasks, like login and logout.
  */
 class AuthenticationManager {
 	

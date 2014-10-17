@@ -31,12 +31,12 @@ $app->configureMode('release', function() use ($app) {
 
 // Registers the constructor functions for the singletons
 
-$app->container->singleton('dbms', function() {
-    return new Dbms();
-});
-
 $app->container->singleton('etrsDatabase', function() {
     return new EtrsDatabase();
+});
+
+$app->container->singleton('etrsServerDatabase', function() {
+    return new EtrsServerDatabase();
 });
 
 $app->container->singleton('logInManager', function() use ($app) {
@@ -50,5 +50,5 @@ $app->container->singleton('session', function() {
 
 // Registers the middlewares
 $app->add(new Slim\Middleware\ContentTypes());
-//$app->add(new SessionMiddleware($app->session, new DatabaseSessionStorageHandler())); TODO: uncomment
-$app->add(new SessionMiddleware($app->session, new TestSessionStorageHandler()));
+$app->add(new SessionMiddleware($app->session, new DatabaseSessionStorageHandler($app->etrsServerDatabase)));
+//$app->add(new SessionMiddleware($app->session, new TestSessionStorageHandler())); TODO: remove

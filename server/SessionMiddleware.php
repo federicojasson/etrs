@@ -30,11 +30,11 @@ class SessionMiddleware extends \Slim\Middleware {
 	 * Performs the middleware tasks.
 	 */
 	public function call() {
-		// Starts the session
-		$this->session->start();
-		
 		// Registers the session storage handler
 		$this->session->setStorageHandler($this->sessionStorageHandler);
+		
+		// Starts the session
+		$this->session->start();
 		
 		// Calls the next middleware
 		$this->next->call();

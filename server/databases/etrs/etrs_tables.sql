@@ -20,6 +20,7 @@ DELIMITER ; -- Sets the statement delimiter
 --
 CREATE TABLE IF NOT EXISTS users (
 	id VARCHAR(32), -- Maximum: 32 characters
+	
 	password_hash BINARY(64) NOT NULL, -- SHA-512: 512 bits = 64 bytes
 	role BINARY(2) NOT NULL,
 	
@@ -40,6 +41,7 @@ CREATE TABLE IF NOT EXISTS users (
 --
 CREATE TABLE IF NOT EXISTS patients (
 	id BINARY(16), -- UUID version 4: 128 bits = 16 bytes
+	
 	is_erased BOOLEAN NOT NULL,
 	
 	PRIMARY KEY(id)

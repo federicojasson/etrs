@@ -13,7 +13,7 @@ $app = new \Slim\Slim([
 
 // Initializes the application
 require 'AuthenticationManager.php';
-require 'Dbms.php';
+require 'DbmsConnection.php';
 require 'EtrsDatabase.php';
 require 'EtrsServerDatabase.php';
 require 'Session.php';

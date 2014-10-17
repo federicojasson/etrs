@@ -7,6 +7,18 @@
 class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	
 	/*
+	 * TODO
+	 */
+	private $etrsServerDatabase;
+	
+	/*
+	 * TODO
+	 */
+	public function __construct($etrsServerDatabase) {
+		$this->etrsServerDatabase = $etrsServerDatabase;
+	}
+	
+	/*
 	 * Closes the connection with the DBMS.
 	 */
 	public function onClose() {
@@ -15,19 +27,28 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	}
 
 	/*
-	 * Deletes the session data from the database.
+	 * Removes the session data from the database.
 	 */
 	public function onDestroy($sessionId) {
-		// TODO
-		return true;
+		try {
+			$this->etrsServerDatabase->deleteSession($sessionId);
+			return true;
+		} catch (Exception $exception) {
+			return false;
+		}
 	}
 
 	/*
-	 * Deletes old session data from the database.
+	 * Removes old session data from the database.
 	 */
 	public function onGc($lifetime) {
-		// TODO
-		return true;
+		echo 'onGc<br>';
+		try {
+			$this->etrsServerDatabase->deleteExpiredSessions($lifetime);
+			return true;
+		} catch (Exception $exception) {
+			return false;
+		}
 	}
 
 	/*
@@ -39,19 +60,31 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	}
 
 	/*
-	 * Read the session data from the database.
+	 * Reads the session data from the database.
 	 */
 	public function onRead($sessionId) {
-		// TODO
-		return true;
+		try {
+			$sessionData = $this->etrsServerDatabase->getSessionData($sessionId);
+
+			if (! is_null($sessionData))
+				return $sessionData;
+			else
+				return '';
+		} catch (Exception $exception) {
+			return '';
+		}
 	}
 
 	/*
 	 * Writes the session data in the database.
 	 */
 	public function onWrite($sessionId, $data) {
-		// TODO
-		return true;
+		try {
+			$this->etrsServerDatabase->insertOrUpdateSession($sessionId, $data);
+			return true;
+		} catch (Exception $exception) {
+			return false;
+		}
 	}
 
 }
