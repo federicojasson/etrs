@@ -7,37 +7,37 @@ class TestSessionStorageHandler implements SessionStorageHandler {
 	private $file;
 	
 	public function onClose() {
-		return fclose($file);
+		return fclose($this->file);
 	}
 
 	public function onDestroy($sessionId) {
-		// TODO
 		return true;
 	}
 
 	public function onGc($lifetime) {
-		// TODO
 		return true;
 	}
 
 	public function onOpen($savePath, $sessionName) {
+		echo 'entre';
 		$file = fopen(__DIR__ . '/test/session.txt', 'r+');
 		
-		if ($file)
+		if ($file) {
+			$this->file = $file;
 			return true;
-		
-		$this->file = $file;
-		return $file;
+		} else
+			return false;
 	}
 
 	public function onRead($sessionId) {
-		// TODO
-		return true;
+		return fread($this->file, filesize($this->file));
 	}
 
 	public function onWrite($sessionId, $data) {
-		// TODO
-		return true;
+		if (fwrite($this->file, $data))
+			return true;
+		else
+			return false;
 	}
 
 }

@@ -47,3 +47,22 @@ Stack trace:
 /test/something
 /test/something
 /test/something
+/test/something
+/test/something
+/test/something
+/test/something
+/test/something
+exception 'ErrorException' with message 'session_destroy(): Trying to destroy uninitialized session' in C:\xampp\htdocs\etrs\server\SessionMiddleware.php:34
+Stack trace:
+#0 [internal function]: Slim\Slim::handleErrors(2, 'session_destroy...', 'C:\xampp\htdocs...', 34, Array)
+#1 C:\xampp\htdocs\etrs\server\SessionMiddleware.php(34): session_destroy()
+#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): SessionMiddleware->call()
+#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#4 C:\xampp\htdocs\etrs\server\index.php(33): Slim\Slim->run()
+#5 {main}
+/test/something
+/test/something
+/test/something
+/test/something
+/test/something
+/test/something
