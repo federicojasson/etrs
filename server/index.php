@@ -1,32 +1,34 @@
 <?php
 
-// Initializes the framework
-
 require 'Slim/Slim.php';
+require 'parameters.php';
+
+
 \Slim\Slim::registerAutoloader();
 
 $app = new \Slim\Slim([
-	'mode' => 'debug'
-	// 'mode' => 'release' TODO: set before release
+	//'mode' => OPERATION_MODE_RELEASE
+	'mode' => OPERATION_MODE_DEBUG
 ]);
 
 
-// Initializes the application
-require 'AuthenticationManager.php';
-require 'DbmsConnection.php';
-require 'EtrsDatabase.php';
-require 'EtrsServerDatabase.php';
-require 'Session.php';
-require 'SessionMiddleware.php';
-require 'SessionStorageHandler.php';
-require 'DatabaseSessionStorageHandler.php';
 
-require 'test/TestSessionStorageHandler.php'; // TODO: remove before release
+require 'classes/AuthenticationManager.php';
+require 'classes/AuthorizationMiddleware.php';
+require 'classes/BusinessDatabase.php';
+require 'classes/DbmsConnection.php';
+require 'classes/ServerDatabase.php';
+require 'classes/Session.php';
+require 'classes/SessionMiddleware.php';
+require 'classes/SessionStorageHandler.php';
+require 'classes/DatabaseSessionStorageHandler.php';
 
 require 'configurations.php';
-require 'doctor_services.php';
 
-require 'test/test_services.php'; // TODO: remove before release
+require 'services/anonymous_services.php';
+require 'services/doctor_services.php';
+require 'services/operator_services.php';
+require 'services/researcher_services.php';
 
 
 // Serves the incoming request

@@ -1,2 +1,40 @@
 
 Server API
+
+This file describes the server API. It describes the different services and the
+way they are invoked. For each, it indicates:
+
+- The path to invoke it (relative to the site domain).
+- The accepted HTTP method.
+- A brief description of what is it for.
+- The expected input data.
+- The output data if the operation succeeds.
+- The errors that may occur and its reasons.
+
+
+================================================================================
+Path:	/server/anonymous/log-in
+Method:	POST
+
+Description:	
+
+Input:	
+
+Output:	
+
+Errors:	
+
+================================================================================
+Path:	/server/anonymous/log-out
+Method:	POST
+
+Description:	
+
+Input:	
+
+Output:	
+
+Errors:	
+
+================================================================================
+

@@ -16,7 +16,3 @@ CREATE TABLE IF NOT EXISTS sessions (
 	INDEX(creation_datetime),
 	INDEX(last_access_datetime)
 ) ENGINE = InnoDB;
-
-GRANT SELECT
-ON TABLE etrs_server_database.sessions
-TO 'etrs_server_user'@'localhost';

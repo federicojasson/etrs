@@ -3,18 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/server/DbmsConnection.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/SessionMiddleware.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/databases/etrs_server/etrs_server_cleanup.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/databases/etrs_server/etrs_server_users.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/Session.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/databases/etrs_server/etrs_server_procedures.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/DatabaseSessionStorageHandler.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/test/TestSessionStorageHandler.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/databases/etrs_server/etrs_server_tables.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/test/test_services.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/configurations.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/EtrsServerDatabase.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/services/anonymous_services.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/parameters.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/resources/js/routes.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/Session.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/AuthorizationMiddleware.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/AuthenticationManager.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/databases/etrs_business/etrs_business_tables.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/api/api.txt</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/databases/etrs_users.sql</file>
         </group>
     </open-files>
 </project-private>

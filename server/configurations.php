@@ -1,11 +1,11 @@
 <?php
 
-// Gets the application instance
+// Gets the app
 $app = \Slim\Slim::getInstance();
 
 
 // Applies the debug mode configurations
-$app->configureMode('debug', function() use ($app) {
+$app->configureMode(OPERATION_MODE_DEBUG, function() use ($app) {
 	$configuration = [
 		// TODO: check configuration
 		'cookies.lifetime' => '2 minutes',
@@ -17,16 +17,16 @@ $app->configureMode('debug', function() use ($app) {
 	
 	$app->config($configuration);
 	
-	// Sets the session lifetime
-	ini_set('session.gc_maxlifetime', 60);
+	// Sets the session lifetime (in seconds)
+	ini_set(PHP_DIRECTIVE_SESSION_LIFETIME, 60);
 	
 	// Deactivates the automatic session garbage collection
-	ini_set('session.gc_probability', 0);
+	ini_set(PHP_DIRECTIVE_GC_PROBABILITY, 0);
 });
 
 
 // Applies the release mode configurations
-$app->configureMode('release', function() use ($app) {
+$app->configureMode(OPERATION_MODE_RELEASE, function() use ($app) {
 	$configuration = [
 		// TODO: define configuration
 	];
@@ -37,16 +37,16 @@ $app->configureMode('release', function() use ($app) {
 
 // Registers the constructor functions for the singletons
 
-$app->container->singleton('etrsDatabase', function() {
-    return new EtrsDatabase();
+$app->container->singleton('authenticationManager', function() use ($app) {
+    return new AuthenticationManager($app->session);
 });
 
-$app->container->singleton('etrsServerDatabase', function() {
-    return new EtrsServerDatabase();
+$app->container->singleton('businessDatabase', function() {
+    return new BusinessDatabase();
 });
 
-$app->container->singleton('logInManager', function() use ($app) {
-    return new LogInManager($app->session);
+$app->container->singleton('serverDatabase', function() {
+    return new ServerDatabase();
 });
 
 $app->container->singleton('session', function() {
@@ -56,5 +56,5 @@ $app->container->singleton('session', function() {
 
 // Registers the middlewares
 $app->add(new Slim\Middleware\ContentTypes());
-$app->add(new SessionMiddleware($app->session, new DatabaseSessionStorageHandler($app->etrsServerDatabase)));
-//$app->add(new SessionMiddleware($app->session, new TestSessionStorageHandler())); TODO: remove
+$app->add(new AuthorizationMiddleware());
+$app->add(new SessionMiddleware(new DatabaseSessionStorageHandler($app->serverDatabase)));

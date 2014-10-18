@@ -19,7 +19,7 @@ END; !|
 
 GRANT EXECUTE
 ON PROCEDURE etrs_server_database.delete_expired_sessions
-TO 'etrs_server_user'@'localhost';
+TO 'etrs_system'@'localhost';
 
 
 --
@@ -39,7 +39,7 @@ END; !|
 
 GRANT EXECUTE
 ON PROCEDURE etrs_server_database.delete_session
-TO 'etrs_server_user'@'localhost';
+TO 'etrs_system'@'localhost';
 
 
 --
@@ -77,4 +77,4 @@ END; !|
 
 GRANT EXECUTE
 ON PROCEDURE etrs_server_database.insert_or_update_session
-TO 'etrs_server_user'@'localhost';
+TO 'etrs_system'@'localhost';
