@@ -24,10 +24,10 @@ class Session {
 	 * If the entry doesn't exist, null is returned.
 	 */
 	public function get($key) {
-		if ($this->contains($key))
-			return $_SESSION[$key];
-		else
+		if (! $this->contains($key))
 			return null;
+		
+		return $_SESSION[$key];
 	}
 	
 	/*

@@ -16,6 +16,12 @@ $app->configureMode('debug', function() use ($app) {
 	];
 	
 	$app->config($configuration);
+	
+	// Sets the session lifetime
+	ini_set('session.gc_maxlifetime', 60);
+	
+	// Deactivates the automatic session garbage collection
+	ini_set('session.gc_probability', 0);
 });
 
 

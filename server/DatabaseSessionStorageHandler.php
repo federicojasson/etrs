@@ -22,7 +22,6 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * Closes the connection with the DBMS.
 	 */
 	public function onClose() {
-		// TODO
 		return true;
 	}
 
@@ -42,7 +41,6 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * Removes old session data from the database.
 	 */
 	public function onGc($lifetime) {
-		echo 'onGc<br>';
 		try {
 			$this->etrsServerDatabase->deleteExpiredSessions($lifetime);
 			return true;
@@ -55,7 +53,6 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * Opens a connection with the DBMS.
 	 */
 	public function onOpen($savePath, $sessionName) {
-		// TODO
 		return true;
 	}
 
@@ -63,13 +60,18 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * Reads the session data from the database.
 	 */
 	public function onRead($sessionId) {
+		// Calls the session garbage collector to ensure that the session isn't
+		// expired before getting its data
+		$lifetime = ini_get('session.gc_maxlifetime');
+		$this->onGc($lifetime);
+		
 		try {
 			$sessionData = $this->etrsServerDatabase->getSessionData($sessionId);
 
-			if (! is_null($sessionData))
-				return $sessionData;
-			else
+			if (is_null($sessionData))
 				return '';
+			
+			return $sessionData;
 		} catch (Exception $exception) {
 			return '';
 		}

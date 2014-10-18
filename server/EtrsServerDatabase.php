@@ -72,10 +72,10 @@ class EtrsServerDatabase {
 		
 		$rows = $this->dbmsConnection->executePreparedStatement($statement, $parameters);
 		
-		if (count($rows) > 0)
-			return $rows[0]['data'];
-		else
+		if (count($rows) == 0)
 			return null;
+		
+		return $rows[0]['data'];
 	}
 	
 	/*
