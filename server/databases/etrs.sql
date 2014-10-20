@@ -6,20 +6,18 @@ START TRANSACTION; -- Executes all the statements or rollbacks
 source etrs_users.sql
 
 -- Business database
-source etrs_business/etrs_business_initialization.sql
-source etrs_business/etrs_business_tables.sql
-source etrs_business/etrs_business_views.sql
-source etrs_business/etrs_business_procedures.sql
-source etrs_business/etrs_business_triggers.sql
+source etrs_business_database/initialization.sql
+source etrs_business_database/tables.sql
+source etrs_business_database/views.sql
+source etrs_business_database/procedures.sql
+source etrs_business_database/triggers.sql
+source etrs_business_database/debug_data.sql
 
 -- Server database
-source etrs_server/etrs_server_initialization.sql
-source etrs_server/etrs_server_tables.sql
-source etrs_server/etrs_server_views.sql
-source etrs_server/etrs_server_procedures.sql
-source etrs_server/etrs_server_triggers.sql
-
--- Debug data
-source etrs_debug_data.sql
+source etrs_server_database/initialization.sql
+source etrs_server_database/tables.sql
+source etrs_server_database/views.sql
+source etrs_server_database/procedures.sql
+source etrs_server_database/triggers.sql
 
 COMMIT; -- Commits the transaction

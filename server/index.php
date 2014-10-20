@@ -12,16 +12,11 @@ $app = new \Slim\Slim([
 ]);
 
 
+require 'classes/middleware/DatabaseMiddleware.php';
+require 'classes/middleware/SessionMiddleware.php';
 
-require 'classes/AuthenticationManager.php';
-require 'classes/AuthorizationMiddleware.php';
-require 'classes/BusinessDatabase.php';
-require 'classes/DbmsConnection.php';
-require 'classes/ServerDatabase.php';
-require 'classes/Session.php';
-require 'classes/SessionMiddleware.php';
-require 'classes/SessionStorageHandler.php';
-require 'classes/DatabaseSessionStorageHandler.php';
+require 'classes/Database.php';
+require 'classes/DatabaseConnection.php';
 
 require 'configurations.php';
 

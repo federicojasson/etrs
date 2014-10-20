@@ -3,15 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/server/services/anonymous_services.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/middleware/SessionMiddleware.php</file>
             <file>file:/C:/xampp/htdocs/etrs/server/parameters.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/resources/js/routes.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/classes/Session.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/classes/AuthorizationMiddleware.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/classes/AuthenticationManager.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/databases/etrs_business/etrs_business_tables.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/api/api.txt</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/databases/etrs_users.sql</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/services/doctor_services.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/services/anonymous_services.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/Database.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/index.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/backup/BusinessDatabase.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/services/researcher_services.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/backup/AuthorizationMiddleware.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/services/operator_services.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/DatabaseConnection.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/configurations.php</file>
         </group>
     </open-files>
 </project-private>
