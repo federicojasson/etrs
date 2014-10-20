@@ -1,10 +1,11 @@
 <?php
 
+// TODO: comments
+
 // Gets the app
 $app = \Slim\Slim::getInstance();
 
-
-// Applies the debug mode configurations
+// Applies the debug-mode configurations
 $app->configureMode(OPERATION_MODE_DEBUG, function() use ($app) {
 	$configuration = [
 		// TODO: check configuration
@@ -25,7 +26,7 @@ $app->configureMode(OPERATION_MODE_DEBUG, function() use ($app) {
 });
 
 
-// Applies the release mode configurations
+// Applies the release-mode configurations
 $app->configureMode(OPERATION_MODE_RELEASE, function() use ($app) {
 	$configuration = [
 		// TODO: define configuration
@@ -35,7 +36,19 @@ $app->configureMode(OPERATION_MODE_RELEASE, function() use ($app) {
 });
 
 
-// Registers the constructor functions for the singletons
+// Defines the singleton resources
+
+$app->container->singleton('businessDatabase', function() {
+	return new BusinessDatabase();
+});
+
+$app->container->singleton('routeManager', function() {
+	return new RouteManager();
+});
+
+$app->container->singleton('serverDatabase', function() {
+	return new ServerDatabase();
+});
 
 /*$app->container->singleton('authenticationManager', function() use ($app) {
     return new AuthenticationManager($app->businessDatabase, $app->session);
@@ -56,6 +69,7 @@ $app->container->singleton('session', function() {
 
 // Registers the middlewares
 $app->add(new Slim\Middleware\ContentTypes());
+$app->add(new RouteMiddleware());
 $app->add(new SessionMiddleware());
 $app->add(new DatabaseMiddleware());
 

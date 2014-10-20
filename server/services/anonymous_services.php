@@ -1,5 +1,7 @@
 <?php
 
+// TODO: comments
+
 // Gets the app
 $app = \Slim\Slim::getInstance();
 

@@ -1,5 +1,18 @@
 <?php
 
+// TODO: comments
+
+define('DATABASE_USER_ANONYMOUS', 'etrs_anonymous');
+define('DATABASE_USER_ANONYMOUS_PASSWORD', 'password');
+define('DATABASE_USER_DOCTOR', 'etrs_doctor');
+define('DATABASE_USER_DOCTOR_PASSWORD', 'password');
+define('DATABASE_USER_OPERATOR', 'etrs_operator');
+define('DATABASE_USER_OPERATOR_PASSWORD', 'password');
+define('DATABASE_USER_RESEARCHER', 'etrs_researcher');
+define('DATABASE_USER_RESEARCHER_PASSWORD', 'password');
+define('DATABASE_USER_SYSTEM', 'etrs_system');
+define('DATABASE_USER_SYSTEM_PASSWORD', 'password');
+
 define('DSN_BUSINESS_DATABASE', 'mysql:host=localhost;dbname=etrs_business_database;charset=utf8');
 define('DSN_SERVER_DATABASE', 'mysql:host=localhost;dbname=etrs_server_database;charset=utf8');
 

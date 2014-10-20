@@ -1,0 +1,8 @@
+exception 'ErrorException' with message 'Use of undefined constant DBMS_USER_SYSTEM - assumed 'DBMS_USER_SYSTEM'' in C:\xampp\htdocs\etrs\server\classes\middleware\DatabaseMiddleware.php:64
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\classes\middleware\DatabaseMiddleware.php(64): Slim\Slim::handleErrors(8, 'Use of undefine...', 'C:\xampp\htdocs...', 64, Array)
+#1 C:\xampp\htdocs\etrs\server\classes\middleware\DatabaseMiddleware.php(14): DatabaseMiddleware->connectServerDatabase()
+#2 C:\xampp\htdocs\etrs\server\Slim\Middleware\PrettyExceptions.php(67): DatabaseMiddleware->call()
+#3 C:\xampp\htdocs\etrs\server\Slim\Slim.php(1271): Slim\Middleware\PrettyExceptions->call()
+#4 C:\xampp\htdocs\etrs\server\index.php(34): Slim\Slim->run()
+#5 {main}
