@@ -18,5 +18,5 @@ CREATE TABLE IF NOT EXISTS sessions (
 ) ENGINE = InnoDB;
 
 GRANT SELECT
-ON etrs_server_database.sessions
+ON TABLE etrs_server_database.sessions
 TO 'etrs_system'@'localhost';

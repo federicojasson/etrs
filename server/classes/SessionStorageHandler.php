@@ -13,7 +13,7 @@ interface SessionStorageHandler {
 	
 	/*
 	 * Invoked when the session is destroyed or regenerated.
-	 * It receives the new session ID in case of regeneration.
+	 * It receives the new session ID for the regeneration case.
 	 * It returns whether the operation succeeded.
 	 */
 	public function onDestroy($sessionId);
@@ -36,7 +36,7 @@ interface SessionStorageHandler {
 	/*
 	 * Invoked when the session data needs to be read.
 	 * It receives the session ID.
-	 * It returns the session data serialized, or an empty string if there is no
+	 * It returns the serialized session data, or an empty string if there is no
 	 * data to read.
 	 */
 	public function onRead($sessionId);

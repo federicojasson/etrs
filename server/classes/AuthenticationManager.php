@@ -7,7 +7,7 @@
 class AuthenticationManager {
 	
 	/*
-	 * TODO
+	 * The business database where the users are registered.
 	 */
 	private $businessDatabase;
 	
@@ -18,7 +18,7 @@ class AuthenticationManager {
 	
 	/*
 	 * Creates an instance of this class.
-	 * It receives the session.
+	 * It receives the business database and the session.
 	 */
 	public function __construct($businessDatabase, $session) {
 		$this->businessDatabase = $businessDatabase;
@@ -26,17 +26,22 @@ class AuthenticationManager {
 	}
 	
 	/*
-	 * TODO
+	 * Authenticates a user.
+	 * It receives the user ID and the password.
 	 */
 	public function authenticateUser($id, $password) {
-		$authenticationData = $this->businessDatabase->getUserAuthenticationData($id);
+		// Gets the user's authentication data
+		$userDataObject = $this->businessDatabase->getUserAuthenticationData($id);
 		
-		if (is_null($authenticationData))
+		if (is_null($userDataObject))
+			// The user has not been found
 			return false;
 		
-		$passwordHash = hash_pbkdf2(PASSWORD_HASH_ALGORITHM, $password, $authenticationData->getSalt(), PASSWORD_KEY_STRETCHING_ITERATIONS, 0, true);
+		// Hashes the received password using the salt of the user
+		$passwordHash = hash_pbkdf2(PASSWORD_HASH_ALGORITHM, $password, $userDataObject->getSalt(), PASSWORD_KEY_STRETCHING_ITERATIONS, 0, true);
 		
-		return $passwordHash == $authenticationData->getPasswordHash();
+		// Compares the hash values and returns the outcome
+		return $passwordHash == $userDataObject->getPasswordHash();
 	}
 	
 	/*
@@ -56,9 +61,10 @@ class AuthenticationManager {
 	
 	/*
 	 * Logs in a user.
+	 * It receives the user data object.
 	 */
-	public function logInUser($user) {
-		$this->session->set(SESSION_KEY_LOGGED_IN_USER, $user);
+	public function logInUser($userDataObject) {
+		$this->session->set(SESSION_KEY_LOGGED_IN_USER, $userDataObject);
 	}
 	
 	/*

@@ -39,7 +39,7 @@ class Session {
 	}
 	
 	/*
-	 * Registers an storage handler to manage the data persistence process.
+	 * Sets an storage handler to manage the data persistence process.
 	 */
 	public function setStorageHandler($storageHandler) {
 		session_set_save_handler(

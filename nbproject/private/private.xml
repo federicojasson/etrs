@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/server/index.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/classes/middlewares/DatabaseMiddleware.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/classes/middlewares/SessionMiddleware.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/classes/middlewares/RouteMiddleware.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/classes/RouteManager.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/configurations.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/parameters.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/services/anonymous_services.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/data_objects/DataObject.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/data_objects/UserDataObject.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/data_objects/SessionDataObject.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/AuthenticationManager.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/classes/BusinessDatabase.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/api/api.txt</file>
         </group>
     </open-files>
 </project-private>

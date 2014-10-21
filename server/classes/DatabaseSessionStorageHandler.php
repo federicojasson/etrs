@@ -7,19 +7,20 @@
 class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	
 	/*
-	 * TODO
+	 * The server database where the session information is stored.
 	 */
 	private $serverDatabase;
 	
 	/*
-	 * TODO
+	 * Creates an instance of this class.
+	 * It receives the server database.
 	 */
 	public function __construct($serverDatabase) {
 		$this->serverDatabase = $serverDatabase;
 	}
 	
 	/*
-	 * Closes the connection with the DBMS.
+	 * It doesn't do anything.
 	 */
 	public function onClose() {
 		return true;
@@ -33,6 +34,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 			$this->serverDatabase->deleteSession($sessionId);
 			return true;
 		} catch (Exception $exception) {
+			// An error occurred
 			return false;
 		}
 	}
@@ -45,12 +47,13 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 			$this->serverDatabase->deleteExpiredSessions($lifetime);
 			return true;
 		} catch (Exception $exception) {
+			// An error occurred
 			return false;
 		}
 	}
 
 	/*
-	 * Opens a connection with the DBMS.
+	 * It doesn't do anything.
 	 */
 	public function onOpen($savePath, $sessionName) {
 		return true;
@@ -61,18 +64,20 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 */
 	public function onRead($sessionId) {
 		// Calls the session garbage collector to ensure that the session is not
-		// expired before getting its data
+		// expired before reading its data
 		$lifetime = ini_get(PHP_DIRECTIVE_SESSION_LIFETIME);
 		$this->onGc($lifetime);
 		
 		try {
-			$sessionData = $this->serverDatabase->getSessionData($sessionId);
+			$sessionDataObject = $this->serverDatabase->getSessionData($sessionId);
 
-			if (is_null($sessionData))
+			if (is_null($sessionDataObject))
+				// The session has not been found
 				return '';
 			
-			return $sessionData->getData();
+			return $sessionDataObject->getData();
 		} catch (Exception $exception) {
+			// An error occurred
 			return '';
 		}
 	}
@@ -85,6 +90,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 			$this->serverDatabase->insertOrUpdateSession($sessionId, $data);
 			return true;
 		} catch (Exception $exception) {
+			// An error occurred
 			return false;
 		}
 	}

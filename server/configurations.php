@@ -38,6 +38,10 @@ $app->configureMode(OPERATION_MODE_RELEASE, function() use ($app) {
 
 // Defines the singleton resources
 
+$app->container->singleton('authenticationManager', function() use ($app) {
+    return new AuthenticationManager($app->businessDatabase, $app->session);
+});
+
 $app->container->singleton('businessDatabase', function() {
 	return new BusinessDatabase();
 });
@@ -50,29 +54,14 @@ $app->container->singleton('serverDatabase', function() {
 	return new ServerDatabase();
 });
 
-/*$app->container->singleton('authenticationManager', function() use ($app) {
-    return new AuthenticationManager($app->businessDatabase, $app->session);
-});
-
-$app->container->singleton('businessDatabase', function() {
-    return new BusinessDatabase();
-});
-
-$app->container->singleton('serverDatabase', function() {
-    return new ServerDatabase();
-});
-
 $app->container->singleton('session', function() {
-    return new Session();
-});*/
+	return new Session();
+});
 
 
 // Registers the middlewares
 $app->add(new Slim\Middleware\ContentTypes());
 $app->add(new RouteMiddleware());
-$app->add(new SessionMiddleware());
-$app->add(new DatabaseMiddleware());
-
-/*
 $app->add(new AuthorizationMiddleware());
-$app->add(new SessionMiddleware(new DatabaseSessionStorageHandler($app->serverDatabase)));*/
+$app->add(new SessionMiddleware(new DatabaseSessionStorageHandler($app->serverDatabase)));
+$app->add(new DatabaseMiddleware());

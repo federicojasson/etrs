@@ -9,8 +9,35 @@ class DatabaseMiddleware extends \Slim\Middleware {
 	 * TODO
 	 */
 	public function call() {
-		// Connects to the databases
-		$this->connectBusinessDatabase();
+		// Gets the app
+		$app = $this->app;
+		
+		// Hooks some functionality before the dispatch
+		$app->hook('slim.before.dispatch', function() use ($app) {
+			// Gets the route manager
+			$routeManager = $app->routeManager;
+			
+			// Connects to the business database with a different user according
+			// to the route group
+			
+			$routeManager->addGroupAction(ROUTE_GROUP_ANONYMOUS, function() {
+				$this->connectBusinessDatabase(DATABASE_USER_ANONYMOUS, DATABASE_USER_ANONYMOUS_PASSWORD);
+			});
+			
+			$routeManager->addGroupAction(ROUTE_GROUP_DOCTOR, function() {
+				$this->connectBusinessDatabase(DATABASE_USER_DOCTOR, DATABASE_USER_DOCTOR_PASSWORD);
+			});
+			
+			$routeManager->addGroupAction(ROUTE_GROUP_OPERATOR, function() {
+				$this->connectBusinessDatabase(DATABASE_USER_OPERATOR, DATABASE_USER_OPERATOR_PASSWORD);
+			});
+			
+			$routeManager->addGroupAction(ROUTE_GROUP_RESEARCHER, function() {
+				$this->connectBusinessDatabase(DATABASE_USER_RESEARCHER, DATABASE_USER_RESEARCHER_PASSWORD);
+			});
+		});
+		
+		// Connects to the server database
 		$this->connectServerDatabase();
 		
 		// Calls the next middleware
@@ -20,37 +47,12 @@ class DatabaseMiddleware extends \Slim\Middleware {
 	/*
 	 * TODO
 	 */
-	private function connectBusinessDatabase() {
-		// Gets the app
-		$app = $this->app;
+	private function connectBusinessDatabase($user, $password) {
+		// Gets the database
+		$database = $this->app->businessDatabase;
 		
-		// Hooks some functionality before the dispatch
-		$app->hook('slim.before.dispatch', function() use ($app) {
-			// Gets the database
-			$database = $app->businessDatabase;
-			
-			// Gets the route manager
-			$routeManager = $app->routeManager;
-			
-			// Connects to the database with a different user according to the
-			// route group
-			
-			$routeManager->addGroupAction(ROUTE_GROUP_ANONYMOUS, function() use ($database) {
-				$database->connect(DSN_BUSINESS_DATABASE, DATABASE_USER_ANONYMOUS, DATABASE_USER_ANONYMOUS_PASSWORD);
-			});
-			
-			$routeManager->addGroupAction(ROUTE_GROUP_DOCTOR, function() use ($database) {
-				$database->connect(DSN_BUSINESS_DATABASE, DATABASE_USER_DOCTOR, DATABASE_USER_DOCTOR_PASSWORD);
-			});
-			
-			$routeManager->addGroupAction(ROUTE_GROUP_OPERATOR, function() use ($database) {
-				$database->connect(DSN_BUSINESS_DATABASE, DATABASE_USER_OPERATOR, DATABASE_USER_OPERATOR_PASSWORD);
-			});
-			
-			$routeManager->addGroupAction(ROUTE_GROUP_RESEARCHER, function() use ($database) {
-				$database->connect(DSN_BUSINESS_DATABASE, DATABASE_USER_RESEARCHER, DATABASE_USER_RESEARCHER_PASSWORD);
-			});
-		});
+		// Connects to the database
+		$database->connect(DSN_BUSINESS_DATABASE, $user, $password);
 	}
 	
 	/*

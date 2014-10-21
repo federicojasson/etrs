@@ -29,9 +29,9 @@ CREATE TABLE IF NOT EXISTS users (
 	PRIMARY KEY(id)
 ) ENGINE = InnoDB;
 
-GRANT SELECT
-ON etrs_business_database.users
-TO 'etrs_anonymous'@'localhost';
+GRANT SELECT ON TABLE etrs_business_database.users TO
+'etrs_anonymous'@'localhost',
+'etrs_doctor'@'localhost'; -- TODO: remove
 
 
 --
@@ -92,6 +92,11 @@ CREATE TABLE IF NOT EXISTS patients_backgrounds (
 	PRIMARY KEY(patient_id, edition_datetime),
 	FOREIGN KEY(patient_id) REFERENCES patients(id)
 ) ENGINE = InnoDB;
+
+-- TODO: ?
+GRANT SELECT
+ON TABLE etrs_business_database.patients_backgrounds
+TO 'etrs_doctor'@'localhost';
 
 
 --
