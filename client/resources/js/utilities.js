@@ -15,6 +15,7 @@
 	module.directive('genderInput', genderInputDirective);
 	module.directive('inputFormSection', inputFormSectionDirective);
 	module.directive('nameInput', [ 'nameFilter', nameInputDirective ]);
+	module.directive('navbar', navbarDirective);
 	module.directive('noYesInput', noYesInputDirective);
 	module.directive('nonNegativeNumberInput', [ 'nonNegativeNumberFilter', nonNegativeNumberInputDirective ]);
 	
@@ -262,6 +263,19 @@
 			link: link,
 			require: 'ngModel',
 			restrict: 'A'
+		};
+		
+		return options;
+	};
+	
+	/*
+	 * Directive: navbar.
+	 * TODO
+	 */
+	function navbarDirective() {
+		var options = {
+			restrict: 'E',
+			templateUrl: 'internal/templates/components/navbar.html'
 		};
 		
 		return options;

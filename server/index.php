@@ -14,6 +14,7 @@ $app = new \Slim\Slim([
 
 require 'classes/middlewares/AuthorizationMiddleware.php';
 require 'classes/middlewares/DatabaseMiddleware.php';
+require 'classes/middlewares/JsonMiddleware.php';
 require 'classes/middlewares/RouteMiddleware.php';
 require 'classes/middlewares/SessionMiddleware.php';
 

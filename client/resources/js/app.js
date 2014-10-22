@@ -3,5 +3,5 @@
 
 (function() {
 	// Module
-	angular.module('app', [ 'filters', 'patients', 'routes', 'utilities' ]);
+	angular.module('app', [ 'filters', 'patients', 'routes', 'user', 'utilities' ]);
 })();

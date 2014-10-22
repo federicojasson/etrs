@@ -16,8 +16,14 @@ define('DATABASE_USER_SYSTEM_PASSWORD', 'password');
 define('DSN_BUSINESS_DATABASE', 'mysql:host=localhost;dbname=etrs_business_database;charset=utf8');
 define('DSN_SERVER_DATABASE', 'mysql:host=localhost;dbname=etrs_server_database;charset=utf8');
 
+define('HTTP_CONTENT_TYPE_JSON', 'application/json');
+
+define('HTTP_HEADER_CONTENT_TYPE', 'Content-Type');
+
+define('HTTP_STATUS_BAD_REQUEST', 400);
 define('HTTP_STATUS_FORBIDDEN', 403);
 define('HTTP_STATUS_UNAUTHORIZED', 401);
+define('HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE', 415);
 
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');

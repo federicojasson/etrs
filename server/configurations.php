@@ -60,8 +60,8 @@ $app->container->singleton('session', function() {
 
 
 // Registers the middlewares
-$app->add(new Slim\Middleware\ContentTypes());
 $app->add(new RouteMiddleware());
 $app->add(new AuthorizationMiddleware());
 $app->add(new SessionMiddleware(new DatabaseSessionStorageHandler($app->serverDatabase)));
 $app->add(new DatabaseMiddleware());
+$app->add(new JsonMiddleware());

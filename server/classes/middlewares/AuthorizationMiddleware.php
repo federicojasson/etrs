@@ -56,7 +56,7 @@ class AuthorizationMiddleware extends \Slim\Middleware {
 		
 		if ($authenticationManager->getLoggedInUser()->getRole() !== $role) {
 			// The logged in user doesn't have the authorized role
-			$app->halt(HTTP_STATUS_UNAUTHORIZED);
+			$app->halt(HTTP_STATUS_FORBIDDEN);
 		}
 	}
 	
