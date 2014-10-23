@@ -1,3 +1,7 @@
+# Disables the listing of directories in the whole directory tree
+Options -Indexes
+
+# Enables the runtime rewriting engine
 RewriteEngine on
 
 # The root URL is mapped to the client application

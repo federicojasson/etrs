@@ -1,9 +1,8 @@
+# Enables the runtime rewriting engine
 RewriteEngine on
 
-# If the URL corresponds to an existing file or directory, it doesn't rewrite it
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
-
-# Otherwise, AngularJS handles the request
+# Rewrites all URLs so that AngularJS handles the request, except those that
+# corresponds to existing files or directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [L]

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<base href="/etrs/">
+		<meta charset="UTF-8">
+		
+		<link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="resources/css/style.css" rel="stylesheet">
+		
+		<title>ETRS - Eye tracker record system</title>
+	</head>
+	
+	<body>
+		<navbar></navbar>
+		
+		<div>
+			Views:<br>
+			<a href="#/">main</a><br>
+			<a href="#/edit-patient/6e338612e99a471eaa5c1446f6340b20">edit-patient 6e338612e99a471eaa5c1446f6340b20</a><br>
+			<a href="#/new-patient">new-patient</a><br>
+			<a href="#/patients">patients</a><br>
+			<a href="#/patient/6e338612e99a471eaa5c1446f6340b20">patient 6e338612e99a471eaa5c1446f6340b20</a><br>
+		</div>
+		
+		<div class="col-sm-8 col-sm-offset-2">
+			<div ng-view></div>
+		</div>
+		
+		<script src="vendors/angular/angular.min.js"></script>
+		<script src="vendors/angular/angular-resource.min.js"></script>
+		<script src="vendors/angular/angular-route.min.js"></script>
+		<script src="resources/js/app.js"></script>
+		<script src="resources/js/communications.js"></script>
+		<script src="resources/js/filters.js"></script>
+		<script src="resources/js/patients.js"></script>
+		<script src="resources/js/routes.js"></script>
+		<script src="resources/js/user.js"></script>
+		<script src="resources/js/utilities.js"></script>
+		<script src="resources/js/views.js"></script>
+	</body>
+</html>

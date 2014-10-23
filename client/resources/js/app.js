@@ -2,6 +2,6 @@
 'use strict';
 
 (function() {
-	// Module
-	angular.module('app', [ 'filters', 'patients', 'routes', 'user', 'utilities' ]);
+	// Creates the module
+	angular.module('app', [ 'components' ]);
 })();
