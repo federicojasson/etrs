@@ -3,23 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/components/navigation-bar.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/components/footer-section.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/client/resources/js/views.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/index.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/resources/js/app.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/client/resources/js/utilities.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/index-anonymous.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/resources/js/components.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/index-doctor.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/index-operator.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/client/index.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/index.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/components/view-section.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/index-researcher.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/index.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/resources/js/views.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/client/resources/js/routes.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/internal/src/configurations.php</file>
         </group>
     </open-files>
 </project-private>
