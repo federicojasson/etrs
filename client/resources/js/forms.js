@@ -3,10 +3,10 @@
 
 (function() {
 	// Module
-	var module = angular.module('forms', [ 'communications' ]);
+	var module = angular.module('forms', [ 'communications', 'users' ]);
 	
 	// Controllers
-	module.controller('LogInFormController', [ 'server', LogInFormController ]);
+	module.controller('LogInFormController', [ 'authenticationManager', 'server', LogInFormController ]);
 	
 	// Directives
 	module.directive('logInForm', logInFormDirective);
@@ -16,7 +16,7 @@
 	 * 
 	 * Offers functions related to the log in form.
 	 */
-	function LogInFormController(server) {
+	function LogInFormController(authenticationManager, server) {
 		var controller = this;
 		
 		/*
@@ -44,26 +44,33 @@
 			}
 			
 			// Gets the input data
+			var id = controller.model.id;
 			var password = controller.model.password;
-			var userId = controller.model.userId;
 			
-			// Defines the callbacks
-			var callbacks = {
-				onSuccess: function(output) {
-					console.log('success: ');
-					console.log(output);
-					// TODO: onSuccess
-				},
-				
-				onFailure: function(output) {
-					console.log('failure: ');
-					console.log(output);
-					// TODO: onFailure
+			/*
+			 * If the user was logged in, it refreshes the authentication state.
+			 */
+			var onSuccess = function(output) {
+				if (output.loggedIn) {
+					// The user was logged in
+					authenticationManager.refresh();
 				}
 			};
 			
+			/*
+			 * TODO: onFailure comments
+			 */
+			var onFailure = function(output) {
+				// TODO: onFailure
+			};
+			
+			var callbacks = {
+				onSuccess: onSuccess,
+				onFailure: onFailure
+			};
+			
 			// Sends a request to the server
-			server.anonymous.logIn(password, userId, callbacks);
+			server.anonymous.logIn(id, password, callbacks);
 		};
 	};
 	

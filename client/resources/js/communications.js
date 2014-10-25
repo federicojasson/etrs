@@ -19,8 +19,8 @@
 		
 		/*
 		 * Sends a POST request to a given URL.
-		 * Optionally, it allows to attach input data and execute callback
-		 * functions to respond to different events.
+		 * It allows to attach input data and execute callback functions to
+		 * respond to different events.
 		 * 
 		 * Callbacks:
 		 * - onSuccess: called if the request succeeds.
@@ -55,19 +55,41 @@
 		service.researcher = {};
 		
 		/*
+		 * Path: 'server/anonymous/get-authentication-state'.
+		 * 
+		 * Returns the user authentication state.
+		 */
+		service.anonymous.getAuthenticationState = function(callbacks) {
+			var url = 'server/anonymous/get-authentication-state';
+			
+			communicationHelper.sendPostRequest(url, {}, callbacks);
+		};
+		
+		/*
 		 * Path: 'server/anonymous/log-in'.
 		 * 
 		 * Logs in a user in the server.
 		 */
-		service.anonymous.logIn = function(password, userId, callbacks) {
+		service.anonymous.logIn = function(id, password, callbacks) {
 			var url = 'server/anonymous/log-in';
 			
 			var input = {
-				password: password,
-				userId: userId
+				id: id,
+				password: password
 			};
 			
 			communicationHelper.sendPostRequest(url, input, callbacks);
+		};
+		
+		/*
+		 * Path: 'server/anonymous/log-out'.
+		 * 
+		 * Logs out the user from the server.
+		 */
+		service.anonymous.logOut = function(callbacks) {
+			var url = 'server/anonymous/log-out';
+			
+			communicationHelper.sendPostRequest(url, {}, callbacks);
 		};
 	};
 })();

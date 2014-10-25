@@ -11,7 +11,7 @@
 	// Controllers
 	module.controller('HelpViewController', [ 'authenticationManager', HelpViewController ]);
 	module.controller('IndexViewController', [ 'authenticationManager', IndexViewController ]);
-	module.controller('LogInViewController', [ 'authenticationManager', '$location', LogInViewController ]);
+	module.controller('LogInViewController', [ '$location', '$scope', 'authenticationManager', LogInViewController ]);
 	
 	/*
 	 * Defines the view associated with each route.
@@ -59,14 +59,15 @@
 	/*
 	 * Controller: HelpViewController.
 	 * 
-	 * Determines the appropriate template to render the help view, according to
-	 * whether the user is logged in and, if she is, to her role.
+	 * Offers logic functions for the help view.
 	 */
 	function HelpViewController(authenticationManager) {
 		var controller = this;
 		
 		/*
 		 * Returns the template URL of the view.
+		 * The template URL depends on whether the user is logged in and on her
+		 * role.
 		 */
 		controller.getTemplateUrl = function() {
 			if (! authenticationManager.isUserLoggedIn()) {
@@ -87,19 +88,21 @@
 	/*
 	 * Controller: IndexViewController.
 	 * 
-	 * Determines the appropriate template to render the index view, according
-	 * to whether the user is logged in and, if she is, to her role.
+	 * Offers logic functions for the index view.
 	 */
 	function IndexViewController(authenticationManager) {
 		var controller = this;
 		
 		/*
 		 * Returns the template URL of the view.
+		 * The template URL depends on whether the user is logged in and on her
+		 * role.
 		 */
 		controller.getTemplateUrl = function() {
-			if (! authenticationManager.isUserLoggedIn())
+			if (! authenticationManager.isUserLoggedIn()) {
 				// The user is not logged in
 				return 'templates/views/index-view-anonymous.html';
+			}
 			
 			// The user is logged in, so the template URL depends on her role
 			switch (authenticationManager.getLoggedInUser().role) {
@@ -114,20 +117,28 @@
 	/*
 	 * Controller: LogInViewController.
 	 * 
-	 * Determines if the log in view can be rendered, according to whether the
-	 * user is logged in.
+	 * Offers logic functions for the log in view.
 	 */
-	function LogInViewController(authenticationManager, $location) {
+	function LogInViewController($location, $scope, authenticationManager) {
 		var controller = this;
 		
 		/*
-		 * Checks whether the user is already logged in and, if she is, it
-		 * redirects her to the root route.
+		 * Determines whether the view is ready to be rendered.
 		 */
-		controller.checkConditions = function() {
-			if (authenticationManager.isUserLoggedIn())
+		controller.isReady = function() {
+			return ! authenticationManager.isBeingRefreshed();
+		};
+		
+		/*
+		 * Registers a listener to execute when the authentication state
+		 * changes. If the user is already logged in, it redirects her to the
+		 * root route.
+		 */
+		$scope.$watch(authenticationManager.isUserLoggedIn, function(isUserLoggedIn) {
+			if (isUserLoggedIn) {
 				// The user is already logged in
 				$location.path('/');
-		};
+			}
+		});
 	};
 })();

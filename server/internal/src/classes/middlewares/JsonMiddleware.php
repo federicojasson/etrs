@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This object automatically decodes and encodes the application input and
+ * This middleware automatically decodes and encodes the application input and
  * output respectively, assuming that JSON format is used. It should be used
  * only if all data exchange is expected to be done through JSON.
  * Be aware that if the input data is not a valid JSON string, the middleware
@@ -19,8 +19,11 @@ class JsonMiddleware extends \Slim\Middleware {
 		// Hooks some functionality before the dispatch
 		$app->hook('slim.before.dispatch', [ $this, 'decodeInput' ]);
 		
-		// Hooks some functionality after the dispatch
-		$app->hook('slim.after.dispatch', [ $this, 'encodeOutput' ]);
+		// Replaces the response object with an extension that handles the JSON
+		// encoding
+		$app->container->singleton('response', function() {
+			return new JsonResponse();
+		});
 		
 		// Calls the next middleware
 		$this->next->call();
@@ -61,37 +64,6 @@ class JsonMiddleware extends \Slim\Middleware {
 		
 		// Updates the input with the decoded version
 		$environment['slim.input'] = $decodedInput;
-	}
-	
-	/*
-	 * Encodes the output as a JSON string.
-	 */
-	public function encodeOutput() {
-		// Gets the app
-		$app = $this->app;
-		
-		// Gets the environment
-		$environment = $app->environment();
-		
-		// Gets the response
-		$response = $app->response();
-		
-		if (! isset($environment['output'])) {
-			// There is no output
-			return;
-		}
-		
-		// Gets the output
-		$output = $environment['output'];
-		
-		// Encodes the output
-		$encodedOutput = json_encode($output); // TODO: deberia hacerse algo en caso de error? (el servidor es responsable del error)
-		
-		// Sets the response's content type
-		$response->headers->set(HTTP_HEADER_CONTENT_TYPE, HTTP_CONTENT_TYPE_JSON);
-		
-		// Sets the response's body with the encoded version
-		$response->setBody($encodedOutput);
 	}
 	
 }

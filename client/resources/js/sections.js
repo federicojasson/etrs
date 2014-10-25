@@ -16,8 +16,7 @@
 	/*
 	 * Controller: NavigationBarSectionController.
 	 * 
-	 * Offers functions to logically assist in the rendering of the navigation
-	 * bar section.
+	 * Offers logic functions for the navigation bar section.
 	 */
 	function NavigationBarSectionController(authenticationManager) {
 		var controller = this;
