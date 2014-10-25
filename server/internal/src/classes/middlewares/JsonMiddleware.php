@@ -43,33 +43,55 @@ class JsonMiddleware extends \Slim\Middleware {
 			$app->halt(HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE);
 		}
 		
-		// Attempts to decode the input
-		$input = json_decode($environment['slim.input'], true);
+		// Gets the input
+		$input = $environment['slim.input'];
 		
-		if ($input === null) {
+		if (strlen($input) === 0) {
+			// The input is empty
+			return;
+		}
+		
+		// Attempts to decode the input
+		$decodedInput = json_decode($input, true);
+		
+		if ($decodedInput === null) {
 			// The input could not be decoded
 			$app->halt(HTTP_STATUS_BAD_REQUEST);
 		}
 		
 		// Updates the input with the decoded version
-		$environment['slim.input'] = $input;
+		$environment['slim.input'] = $decodedInput;
 	}
 	
 	/*
 	 * Encodes the output as a JSON string.
 	 */
 	public function encodeOutput() {
+		// Gets the app
+		$app = $this->app;
+		
+		// Gets the environment
+		$environment = $app->environment();
+		
 		// Gets the response
-		$response = $this->app->response();
+		$response = $app->response();
+		
+		if (! isset($environment['output'])) {
+			// There is no output
+			return;
+		}
+		
+		// Gets the output
+		$output = $environment['output'];
+		
+		// Encodes the output
+		$encodedOutput = json_encode($output); // TODO: deberia hacerse algo en caso de error? (el servidor es responsable del error)
 		
 		// Sets the response's content type
 		$response->headers->set(HTTP_HEADER_CONTENT_TYPE, HTTP_CONTENT_TYPE_JSON);
 		
-		// Encodes the output
-		$output = json_encode($response->getBody()); // TODO: deberia hacerse algo en caso de error? (el servidor es responsable del error)
-		
-		// Updates the output with the encoded version
-		$response->setBody($output);
+		// Sets the response's body with the encoded version
+		$response->setBody($encodedOutput);
 	}
 	
 }

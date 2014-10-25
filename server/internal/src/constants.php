@@ -20,6 +20,9 @@ define('HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE', 415);
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
 
+// PHP directives
+define('PHP_DIRECTIVE_SESSION_IDLE_LIFETIME', 'session.gc_maxlifetime');
+
 // Route groups
 define('ROUTE_GROUP_ANONYMOUS', '/anonymous');
 define('ROUTE_GROUP_DOCTOR', '/doctor');
