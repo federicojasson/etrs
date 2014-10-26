@@ -7,12 +7,13 @@ $app = \Slim\Slim::getInstance();
 $app->group(ROUTE_GROUP_ANONYMOUS, function() use ($app) {
 	
 	$app->post('/get-authentication-state', function() use ($app) {
-		sleep(3);
+		sleep(1);
 		
 		$app->response->setBody([
 			'loggedIn' => false,
 			'user' => [
 				'firstNames' => 'Federico',
+				'gender' => 'M',
 				'id' => 1251,
 				'lastNames' => 'Jasson',
 				'role' => 'DR'
@@ -21,7 +22,7 @@ $app->group(ROUTE_GROUP_ANONYMOUS, function() use ($app) {
 	});
 	
 	$app->post('/log-in', function() use ($app) {
-		sleep(3);
+		sleep(1);
 		
 		$app->response->setBody([
 			'loggedIn' => false
@@ -29,7 +30,7 @@ $app->group(ROUTE_GROUP_ANONYMOUS, function() use ($app) {
 	});
 	
 	$app->post('/log-out', function() use ($app) {
-		sleep(3);
+		sleep(1);
 	});
 	
 });

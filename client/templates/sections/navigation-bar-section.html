@@ -1,16 +1,30 @@
 <nav class="navbar navbar-static-top navbar-inverse">
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#/">ETRS - Eye Tracker Record System</a>
-			</div>
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#/">ETRS</a>
+		</div>
 
-			<a
-				class="btn btn-default navbar-btn navbar-right"
-				href="#/log-in"
-				ng-show="section.showLogInButton()"
-				type="button"
-			>Iniciar sesión</a>
+		<div class="collapse navbar-collapse">
+			<span ng-if="section.includeLogInArea()">
+				<a
+					class="btn btn-default navbar-btn navbar-right"
+					href="#/log-in"
+				>Iniciar sesión</a>
+			</span>
+
+			<span ng-if="section.includeLogOutArea()">
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a ng-href="#/user/{{ section.getUser().id }}">
+							{{ section.getUser() | userHonorificName }}
+						</a>
+					</li>
+					<li>
+						<log-out-form></log-out-form>
+					</li>
+				</ul>
+			</span>
 		</div>
 	</div>
 </nav>

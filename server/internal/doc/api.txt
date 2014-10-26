@@ -58,6 +58,7 @@ Output
 		"loggedIn": true,
 		"user": {
 			"firstNames": ...,
+			"gender": ...,
 			"id": ...,
 			"lastNames": ...,
 			"role": ...

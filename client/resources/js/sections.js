@@ -22,10 +22,24 @@
 		var controller = this;
 		
 		/*
-		 * Determines whether the log in button should be displayed.
+		 * Returns the user to show in the navigation bar.
 		 */
-		controller.showLogInButton = function() {
+		controller.getUser = function() {
+			return authenticationManager.getLoggedInUser();
+		};
+		
+		/*
+		 * Determines whether the log in area should be included.
+		 */
+		controller.includeLogInArea = function() {
 			return ! authenticationManager.isUserLoggedIn();
+		};
+		
+		/*
+		 * Determines whether the log out area should be included.
+		 */
+		controller.includeLogOutArea = function() {
+			return authenticationManager.isUserLoggedIn();
 		};
 	};
 	

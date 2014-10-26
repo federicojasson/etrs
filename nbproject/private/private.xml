@@ -2,22 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/etrs/server/internal/src/services/test-services.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/index-view-doctor.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/resources/js/forms.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/index-view-anonymous.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/resources/css/style.css</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/help-view-doctor.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/help-view-anonymous.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/index.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/vendors/bootstrap/js/bootstrap.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/sections/view-section.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/help-view.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/log-in-view.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/internal/doc/api.txt</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/resources/js/users.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/resources/js/views.js</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

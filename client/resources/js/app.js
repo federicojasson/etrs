@@ -3,7 +3,7 @@
 
 (function() {
 	// Module
-	var module = angular.module('app', [ 'forms', 'sections', 'views' ]);
+	var module = angular.module('app', [ 'filters', 'forms', 'sections', 'views' ]);
 	
 	// Configuration
 	module.config([ '$locationProvider', configuration ]);
