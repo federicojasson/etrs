@@ -1,0 +1,8 @@
+/*
+	This file defines the site's general style.
+*/
+
+img.loading {
+	display: block;
+	margin: 64px auto;
+}

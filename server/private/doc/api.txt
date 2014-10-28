@@ -1,0 +1,202 @@
+
+Server API
+----------
+
+	This file summaries the server API. It describes the different services and
+	the way they are invoked. For each, it indicates:
+
+		- The path to invoke it (relative to the site domain).
+		- The accepted HTTP method.
+		- A brief description of what is it for.
+		- A detailed explanation of its usage.
+		- The expected input data.
+		- The output data if the operation succeeds.
+		- The errors that may occur and its reasons.
+	
+	It must be pointed out that both inputs and outputs should always be
+	expected in JSON format.
+
+
+================================================================================
+Path:	/server/user/get-authentication-state
+Method:	POST
+================================================================================
+
+Description
+-----------
+
+	Returns the user authentication state.
+
+
+Details
+-------
+
+	The service doesn't receive any input.
+	The output is the current authentication state, which contains an entry
+	(loggedIn) that indicates whether the user is logged in. In that case, the
+	user ID is included.
+
+
+Input
+-----
+	
+	None.
+
+
+Output
+------
+	
+	JSON structure, if the user is not logged in:
+	
+	{
+		"loggedIn": false
+	}
+	
+	JSON structure, if the user is logged in:
+	
+	{
+		"loggedIn": true,
+		"userId": ...
+	}
+
+
+Errors
+------
+	
+	TODO: service errors and update details
+
+
+================================================================================
+Path:	/server/user/get-user
+Method:	POST
+================================================================================
+
+Description
+-----------
+
+	Returns the user data.
+
+
+Details
+-------
+
+	The service receives the user ID.
+	The output is an entry (user) that contains the user information.
+
+
+Input
+-----
+	
+	JSON structure:
+	
+		{
+			"userId": ...
+		}
+
+
+Output
+------
+	
+	JSON structure:
+	
+	{
+		"user": {
+			"firstNames": ...,
+			"gender": ...,
+			"id": ...,
+			"lastNames": ...,
+			"role": ...
+		}
+	}
+
+
+Errors
+------
+	
+	TODO: service errors and update details
+
+
+================================================================================
+Path:	/server/user/log-in
+Method:	POST
+================================================================================
+
+Description
+-----------
+
+	Logs in a user in the server.
+
+
+Details
+-------
+
+	The service receives the user ID and its password.
+	The output contains an entry (loggedIn) that indicates whether the user was
+	successfully logged in.
+
+
+Input
+-----
+	
+	JSON structure:
+	
+		{
+			"userId": ...,
+			"userPassword": ...
+		}
+	
+	Conditions:
+	
+		- "userId" must be a non-empty string.
+		- "userPassword" must be a non-empty string.
+
+
+Output
+------
+	
+	JSON structure:
+	
+	{
+		"loggedIn": ...
+	}
+
+
+Errors
+------
+	
+	TODO: service errors and update details
+
+
+================================================================================
+Path:	/server/user/log-out
+Method:	POST
+================================================================================
+
+Description
+-----------
+
+	Logs out the user from the server.
+
+
+Details
+-------
+
+	The service doesn't receive any input and has no output.
+
+
+Input
+-----
+	
+	None.
+
+
+Output
+------
+	
+	None.
+
+
+Errors
+------
+	
+	TODO: service errors and update details
