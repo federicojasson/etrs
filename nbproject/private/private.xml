@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/server/internal/src/classes/controllers/TestUserGetAuthenticationStateController.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/internal/src/classes/controllers/TestUserLogInController.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/internal/src/classes/controllers/TestUserGetUserController.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/internal/doc/api.txt</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/internal/src/classes/controllers/TestUserLogOutController.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/sections/footer-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client_backup/client/resources/js/views.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/managers.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/views.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/sections.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/sections/navigation-bar-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/app.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/forms.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/sections/view-section.html</file>
         </group>
     </open-files>
 </project-private>

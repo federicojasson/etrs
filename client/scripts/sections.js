@@ -3,5 +3,5 @@
 
 (function() {
 	// Module
-	angular.module('sections', [ 'footer', 'navigationBar', 'view' ]);
+	angular.module('sections', []);
 })();
