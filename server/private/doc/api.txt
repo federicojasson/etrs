@@ -14,7 +14,9 @@ Server API
 		- The errors that may occur and its reasons.
 	
 	It must be pointed out that both inputs and outputs should always be
-	expected in JSON format.
+	expected in JSON format. Because of this, it goes without saying that the
+	order of the input (or output) has no relevance. Just to follow a
+	convention, the parameters are specified alphabetically in this document.
 
 
 ================================================================================
