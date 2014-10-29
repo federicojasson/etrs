@@ -4,15 +4,28 @@
 class TestUserGetUserController extends Controller {
 	
 	protected function executeLogic() {
-		$this->app->response->setBody([
-			'user' => [
+		sleep(1);
+		
+		$users = [
+			'federicojasson' => [
 				'firstNames' => 'Federico',
 				'gender' => 'M',
-				'id' => 1251,
+				'id' => 'federicojasson',
 				'lastNames' => 'Jasson',
 				'role' => 'DR'
 			]
-		]);
+		];
+		
+		$app = $this->app;
+		
+		$input = $app->request->getBody();
+		$userId = $input['userId'];
+		
+		if (! isset($users[$userId])) {
+			$app->halt(HTTP_STATUS_NOT_FOUND);
+		}
+		
+		$app->response->setBody(['user' => $users[$userId]]);
 	}
 	
 	protected function isInputValid() {

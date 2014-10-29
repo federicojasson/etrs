@@ -3,5 +3,5 @@
 
 (function() {
 	// Module
-	angular.module('communications', []);
+	angular.module('communications', [ 'ngResource' ]);
 })();

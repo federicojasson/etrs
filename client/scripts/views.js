@@ -3,7 +3,7 @@
 
 (function() {
 	// Module
-	var module = angular.module('views', [ 'ngRoute' ]);
+	var module = angular.module('views', [ 'managers', 'ngRoute' ]);
 	
 	// Configuration
 	module.config([ '$routeProvider', configuration ]);
@@ -51,6 +51,16 @@
 			controller: 'LogInViewController',
 			controllerAs: 'view',
 			templateUrl: 'templates/views/log-in-view.html'
+		});
+		
+		/*
+		 * Route: '/user/:userId'.
+		 * View: user.
+		 */
+		$routeProvider.when('/user/:userId', {
+			controller: 'UserViewController',
+			controllerAs: 'view',
+			templateUrl: 'templates/views/user-view.html'
 		});
 		
 		/*

@@ -3,5 +3,5 @@
 
 (function() {
 	// Module
-	angular.module('sections', []);
+	angular.module('sections', [ 'managers' ]);
 })();

@@ -74,7 +74,7 @@ Method:	POST
 Description
 -----------
 
-	Returns the user data.
+	Returns a user's data.
 
 
 Details

@@ -3,5 +3,5 @@
 
 (function() {
 	// Module
-	angular.module('forms', [ 'communications', 'managers' ]);
+	angular.module('filters', []);
 })();

@@ -4,9 +4,11 @@
 class TestUserGetAuthenticationStateController extends Controller {
 	
 	protected function executeLogic() {
+		sleep(1);
+		
 		$this->app->response->setBody([
 			'loggedIn' => true,
-			'userId' => 1251
+			'userId' => 'federicojasson'
 		]);
 	}
 	

@@ -4,6 +4,7 @@
 class TestUserLogOutController extends Controller {
 	
 	protected function executeLogic() {
+		sleep(1);
 	}
 	
 	protected function isInputValid() {
