@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/backup/server/databases/etrs_users.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/server/databases/etrs_business_database/initialization.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/server/databases/etrs_server_database/initialization.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/server/databases/etrs_business_database/tables.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/server/databases/etrs.sql</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/doc/api.txt</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Middlewares/SessionMiddleware.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/backup/server/classes/middlewares/SessionMiddleware.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/logs/debug.log</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Middlewares/JsonMiddleware.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Managers/SessionManager.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/configurations.php</file>
         </group>
     </open-files>
 </project-private>

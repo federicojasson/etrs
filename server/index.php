@@ -6,10 +6,10 @@
  */
 
 // Constants
-require 'private/src/constants.php';
+require 'private/scripts/constants.php';
 
 // Slim framework
-require 'private/src/vendors/Slim/Slim.php';
+require 'private/scripts/Slim/Slim.php';
 
 // Initializes the framework
 \Slim\Slim::registerAutoloader();
@@ -19,13 +19,13 @@ $app = new \Slim\Slim([
 ]);
 
 // Classes
-require 'private/src/classes.php';
+require 'private/scripts/classes.php';
 
 // Configurations
-require 'private/src/configurations.php';
+require 'private/scripts/configurations.php';
 
 // Services
-require 'private/src/services.php';
+require 'private/scripts/services.php';
 
 // Serves the incoming request
 $app->run();
