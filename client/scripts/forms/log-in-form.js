@@ -20,26 +20,26 @@
 		var controller = this;
 		
 		/*
-		 * The form data model.
+		 * Indicates which model values have not passed the validation.
 		 */
-		controller.model = {};
+		controller.errorFlags = {
+			userId: false,
+			userPassword: false
+		};
 		
 		/*
-		 * Determines whether the input data is valid.
+		 * The form data model.
 		 */
-		controller.isInputValid = function() {
-			// TODO: isInputValid
-			// a chequear: si se ingreso el ID y el password (length > 0)
-			// nada más para no dar indicios de usuarios o contraseñas válidas
-			return true;
+		controller.model = {
+			userId: null,
+			userPassword: null,
 		};
 		
 		/*
 		 * Submits the form.
 		 */
 		controller.submit = function() {
-			if (! controller.isInputValid()) {
-				// TODO: do something else to communicate the invalid input
+			if (! controller.validateInput()) {
 				// The input is invalid, so the form is not submitted
 				return;
 			}
@@ -72,6 +72,18 @@
 			
 			// Sends a request to the server
 			server.user.logIn(userId, userPassword, callbacks);
+		};
+		
+		/*
+		 * Validates the input, setting the error flags accordingly.
+		 * Returns whether the input data is valid.
+		 */
+		controller.validateInput = function() {
+			// TODO: validateInput
+			// a chequear: si se ingreso el ID y el password (length > 0)
+			// nada más para no dar indicios de usuarios o contraseñas válidas
+			// setear flags
+			return false;
 		};
 	};
 	

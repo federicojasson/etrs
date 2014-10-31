@@ -13,7 +13,7 @@ $app->configureMode(OPERATION_MODE_DEBUG, function() use ($app) {
 	$logPath = __DIR__ . '/../logs/debug.log';
 	$logWriter = new \Slim\LogWriter(fopen($logPath, 'a'));
 	
-	// Configures the framework
+	// Configures the frameworkT
 	$app->config([
 		'debug' => true,
 		'cookies.domain' => null,

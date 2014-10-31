@@ -4,7 +4,6 @@
  * This manager offers an interface to access the PHP session.
  */
 class SessionManager extends Manager {
-	// TODO
 	
 	/*
 	 * Removes an entry from the session data.

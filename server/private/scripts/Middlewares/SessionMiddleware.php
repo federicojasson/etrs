@@ -7,7 +7,7 @@
 class SessionMiddleware extends \Slim\Middleware {
 	
 	/*
-	 * The session storage handler.
+	 * The session storage handler to use.
 	 */
 	private $storageHandler;
 	

@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Middlewares/SessionMiddleware.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/backup/server/classes/middlewares/SessionMiddleware.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/logs/debug.log</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Middlewares/JsonMiddleware.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Managers/SessionManager.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/configurations.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/inputs/log-in-user-id.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/forms/log-in-form.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/utilities/input-adapter.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/backup/client/resources/js/filters.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/filters/log-in-user-id.js</file>
         </group>
     </open-files>
 </project-private>

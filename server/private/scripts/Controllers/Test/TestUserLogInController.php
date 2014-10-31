@@ -7,7 +7,7 @@ class TestUserLogInController extends Controller {
 		sleep(1);
 		
 		$this->app->response->setBody([
-			'loggedIn' => true,
+			'loggedIn' => false,
 		]);
 	}
 	

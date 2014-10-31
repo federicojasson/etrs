@@ -6,32 +6,47 @@
 	<fieldset>
 		<legend>Ingrese su nombre de usuario y contraseña</legend>
 		
-		<div class="form-group">
-			<label class="col-sm-5 control-label">Nombre de usuario</label>
-			<div class="col-sm-7">
-				<input
-					class="form-control"
-					ng-model="form.model.userId"
-					type="text"
-				>
-			</div>
+		<div
+			class="form-group"
+			ng-class="{
+				'has-error': form.errorFlags.userId,
+				'has-feedback': form.errorFlags.userId
+			}"
+		>
+			<input
+				class="form-control input-lg"
+				log-in-user-id
+				ng-model="form.model.userId"
+				placeholder="Nombre de usuario"
+				type="text"
+			>
+			<span
+				class="form-control-feedback glyphicon glyphicon-remove"
+				ng-if="form.errorFlags.userId"
+			></span>
 		</div>
-
-		<div class="form-group">
-			<label class="col-sm-5 control-label">Contraseña</label>
-			<div class="col-sm-7">
-				<input
-					class="form-control"
-					ng-model="form.model.userPassword"
-					type="password"
-				>
-			</div>
+		
+		<div
+			class="form-group"
+			ng-class="{
+				'has-error': form.errorFlags.userPassword,
+				'has-feedback': form.errorFlags.userPassword
+			}"
+		>
+			<input
+				class="form-control input-lg"
+				ng-model="form.model.userPassword"
+				placeholder="Contraseña"
+				type="password"
+			>
+			<span
+				class="form-control-feedback glyphicon glyphicon-remove"
+				ng-if="form.errorFlags.userPassword"
+			></span>
 		</div>
-
+		
 		<div class="form-group">
-			<div class="col-sm-7 col-sm-offset-5">
-				<button class="btn btn-default pull-right" type="submit">Iniciar sesión</button>
-			</div>
+			<button class="btn btn-default btn-lg pull-right" type="submit">Iniciar sesión</button>
 		</div>
 	</fieldset>
 </form>
