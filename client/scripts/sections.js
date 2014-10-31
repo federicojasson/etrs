@@ -3,5 +3,7 @@
 
 (function() {
 	// Module
-	angular.module('sections', [ 'managers' ]);
+	angular.module('sections', [
+		'managers'
+	]);
 })();

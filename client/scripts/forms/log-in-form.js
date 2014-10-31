@@ -6,7 +6,7 @@
 	var module = angular.module('forms');
 	
 	// Controllers
-	module.controller('LogInFormController', [ 'authenticationManager', 'server', LogInFormController ]);
+	module.controller('LogInFormController', [ '$location', 'authenticationManager', 'errorManager', 'server', LogInFormController ]);
 	
 	// Directives
 	module.directive('logInForm', logInFormDirective);
@@ -16,23 +16,47 @@
 	 * 
 	 * Offers functions related to the log in form.
 	 */
-	function LogInFormController(authenticationManager, server) {
+	function LogInFormController($location, authenticationManager, errorManager, server) {
 		var controller = this;
 		
 		/*
-		 * Indicates which model values have not passed the validation.
+		 * Indicates which model values have not passed the validation, using
+		 * flags. It also keeps the error messages that are being shown for each
+		 * model.
 		 */
-		controller.errorFlags = {
-			userId: false,
-			userPassword: false
+		controller.errors = {
+			userId: {
+				flag: false,
+				message: ''
+			},
+			userPassword: {
+				flag: false,
+				message: ''
+			}
 		};
 		
 		/*
 		 * The form data model.
 		 */
 		controller.model = {
-			userId: null,
-			userPassword: null,
+			userId: '',
+			userPassword: ''
+		};
+		
+		/*
+		 * Resets the errors.
+		 */
+		controller.resetErrors = function() {
+			controller.errors = {
+				userId: {
+					flag: false,
+					message: ''
+				},
+				userPassword: {
+					flag: false,
+					message: ''
+				}
+			};
 		};
 		
 		/*
@@ -51,18 +75,19 @@
 			/*
 			 * If the user was logged in, it refreshes the authentication state.
 			 */
-			var onSuccess = function(output) {
-				if (output.loggedIn) {
+			var onSuccess = function(response) {
+				if (response.loggedIn) {
 					// The user was logged in
 					authenticationManager.refresh();
 				}
 			};
 			
 			/*
-			 * TODO: onFailure comments
+			 * Reports the error to the error manager.
 			 */
-			var onFailure = function(output) {
-				// TODO: onFailure
+			var onFailure = function(response) {
+				// Reports the error
+				errorManager.reportError(response);
 			};
 			
 			var callbacks = {
@@ -75,15 +100,40 @@
 		};
 		
 		/*
-		 * Validates the input, setting the error flags accordingly.
+		 * Validates the input, setting the errors accordingly.
 		 * Returns whether the input data is valid.
 		 */
 		controller.validateInput = function() {
-			// TODO: validateInput
-			// a chequear: si se ingreso el ID y el password (length > 0)
-			// nada más para no dar indicios de usuarios o contraseñas válidas
-			// setear flags
-			return false;
+			var isInputValid = true;
+			
+			// Resets the errors
+			controller.resetErrors();
+			
+			// Gets the input data
+			var userId = controller.model.userId;
+			var userPassword = controller.model.userPassword;
+			
+			if (userId.length === 0) {
+				// The user ID es invalid
+				isInputValid = false;
+				
+				// Sets the corresponding error
+				var error = controller.errors.userId;
+				error.flag = true;
+				error.message = 'Ingrese un nombre de usuario';
+			}
+			
+			if (userPassword.length === 0) {
+				// The user password es invalid
+				isInputValid = false;
+				
+				// Sets the corresponding error
+				var error = controller.errors.userPassword;
+				error.flag = true;
+				error.message = 'Ingrese su contraseña';
+			}
+			
+			return isInputValid;
 		};
 	};
 	

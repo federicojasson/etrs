@@ -3,5 +3,8 @@
 
 (function() {
 	// Module
-	angular.module('inputs', [ 'filters', 'utilities' ]);
+	angular.module('inputs', [
+		'filters',
+		'utilities'
+	]);
 })();

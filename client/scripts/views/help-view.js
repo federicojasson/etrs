@@ -28,7 +28,7 @@
 			}
 			
 			// The user is logged in, so the template URL depends on her role
-			switch (authenticationManager.getLoggedInUser().role) {
+			switch (authenticationManager.loggedInUser.role) {
 				case 'DR' : return 'templates/views/help/doctor-help-view.html';
 				case 'OP' : return 'templates/views/help/operator-help-view.html';
 				case 'RS' : return 'templates/views/help/researcher-help-view.html';

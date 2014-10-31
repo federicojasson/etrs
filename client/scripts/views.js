@@ -3,7 +3,10 @@
 
 (function() {
 	// Module
-	var module = angular.module('views', [ 'managers', 'ngRoute' ]);
+	var module = angular.module('views', [
+		'managers',
+		'ngRoute'
+	]);
 	
 	// Configuration
 	module.config([ '$routeProvider', configuration ]);
@@ -31,6 +34,16 @@
 			controller: 'ContactViewController',
 			controllerAs: 'view',
 			templateUrl: 'templates/views/contact-view.html'
+		});
+		
+		/*
+		 * Route: '/error'.
+		 * View: error.
+		 */
+		$routeProvider.when('/error', {
+			controller: 'ErrorViewController',
+			controllerAs: 'view',
+			templateUrl: 'templates/views/error-view.html'
 		});
 		
 		/*

@@ -24,7 +24,7 @@
 		 */
 		controller.getUser = function() {
 			// The user to show in the navigation bar is the logged in one
-			return authenticationManager.getLoggedInUser();
+			return authenticationManager.loggedInUser;
 		};
 		
 		/*

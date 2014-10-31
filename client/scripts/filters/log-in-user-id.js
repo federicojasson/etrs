@@ -6,22 +6,25 @@
 	var module = angular.module('filters');
 	
 	// Filters
-	module.filter('logInUserId', logInUserIdFilter);
+	module.filter('logInUserId', [ 'stringProcessor', logInUserIdFilter ]);
 	
 	/*
 	 * Filter: logInUserId.
 	 * 
 	 * Processes a user ID entered when logging in.
 	 */
-	function logInUserIdFilter() {
+	function logInUserIdFilter(stringProcessor) {
 		var filter = this;
 		
 		/*
 		 * Applies the filter.
 		 */
-		filter.applyFilter = function(userId) {
-			// TODO: toUpperCase (wrong)
-			return userId.toUpperCase();
+		filter.applyFilter = function(string) {
+			var userId = string;
+			
+			userId = stringProcessor.trim(userId);
+			
+			return userId;
 		};
 		
 		// Returns the filter's application function

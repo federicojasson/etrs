@@ -3,5 +3,7 @@
 
 (function() {
 	// Module
-	angular.module('communications', [ 'ngResource' ]);
+	angular.module('communications', [
+		'ngResource'
+	]);
 })();

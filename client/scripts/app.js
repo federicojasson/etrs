@@ -3,7 +3,14 @@
 
 (function() {
 	// Module
-	var module = angular.module('app', [ 'filters', 'forms', 'inputs', 'sections', 'views' ]);
+	var module = angular.module('app', [
+		'filters',
+		'forms',
+		'inputs',
+		'sections',
+		'ui.bootstrap',
+		'views'
+	]);
 	
 	// Configuration
 	module.config([ '$locationProvider', configuration ]);

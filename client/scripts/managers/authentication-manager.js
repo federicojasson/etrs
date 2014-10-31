@@ -6,18 +6,18 @@
 	var module = angular.module('managers');
 	
 	// Services
-	module.service('authenticationManager', [ 'server', authenticationManagerService ]);
+	module.service('authenticationManager', [ 'errorManager', 'server', authenticationManagerService ]);
 	
 	/*
 	 * Service: authenticationManager.
 	 * 
 	 * Offers functions to manage the authentication state.
-	 * This service should be used whenever it is necessary to know if the user
-	 * is logged in and her information. Also, the refresh function must be
-	 * called when the user is logged in or logged out, to keep the client
-	 * application synchronized with its corresponding state in the server.
+	 * This service should be used whenever is necessary to know if the user is
+	 * logged in and her information. Also, the refresh function must be called
+	 * when the user is logged in or logged out, to keep the client application
+	 * synchronized with its corresponding state in the server.
 	 */
-	function authenticationManagerService(server) {
+	function authenticationManagerService(errorManager, server) {
 		var service = this;
 		
 		/*
@@ -31,14 +31,6 @@
 		 * If the user is not logged in, its value is null.
 		 */
 		service.loggedInUser = null;
-		
-		/*
-		 * Returns the logged in user.
-		 * If the user is not logged in, null is returned.
-		 */
-		service.getLoggedInUser = function() {
-			return service.loggedInUser;
-		};
 		
 		/*
 		 * Determines whether the user is logged in.
@@ -58,10 +50,10 @@
 			 * If the user is logged in, it updates its information.
 			 * Otherwise, it nullifies it.
 			 */
-			var onSuccess = function(output) {
-				if (output.loggedIn) {
+			var onSuccess = function(response) {
+				if (response.loggedIn) {
 					// The user is logged in
-					service.updateLoggedInUser(output.userId);
+					service.updateLoggedInUser(response.userId);
 				} else {
 					// The user is not logged in
 					service.loggedInUser = null;
@@ -72,10 +64,11 @@
 			};
 			
 			/*
-			 * TODO: onFailure comments
+			 * Reports the error to the error manager.
 			 */
-			var onFailure = function(output) {
-				// TODO: onFailure
+			var onFailure = function(response) {
+				// Reports the error
+				errorManager.reportError(response);
 				
 				// The refresh process is over
 				service.isRefreshing = false;
@@ -98,19 +91,20 @@
 			/*
 			 * Set the information about the logged in user.
 			 */
-			var onSuccess = function(output) {
+			var onSuccess = function(response) {
 				// Sets the logged in user
-				service.loggedInUser = output.user;
+				service.loggedInUser = response.user;
 				
 				// The refresh process is over
 				service.isRefreshing = false;
 			};
 			
 			/*
-			 * TODO: onFailure comments
+			 * Reports the error to the error manager.
 			 */
-			var onFailure = function(output) {
-				// TODO: onFailure
+			var onFailure = function(response) {
+				// Reports the error
+				errorManager.reportError(response);
 				
 				// The refresh process is over
 				service.isRefreshing = false;

@@ -1,5 +1,4 @@
 <form
-	class="form-horizontal"
 	ng-submit="form.submit()"
 	novalidate
 >
@@ -9,8 +8,7 @@
 		<div
 			class="form-group"
 			ng-class="{
-				'has-error': form.errorFlags.userId,
-				'has-feedback': form.errorFlags.userId
+				'has-error': form.errors.userId.flag
 			}"
 		>
 			<input
@@ -18,31 +16,28 @@
 				log-in-user-id
 				ng-model="form.model.userId"
 				placeholder="Nombre de usuario"
+				popover="{{ form.errors.userId.message }}"
+				popover-placement="left"
+				popover-trigger="focus"
 				type="text"
 			>
-			<span
-				class="form-control-feedback glyphicon glyphicon-remove"
-				ng-if="form.errorFlags.userId"
-			></span>
 		</div>
 		
 		<div
 			class="form-group"
 			ng-class="{
-				'has-error': form.errorFlags.userPassword,
-				'has-feedback': form.errorFlags.userPassword
+				'has-error': form.errors.userPassword.flag
 			}"
 		>
 			<input
 				class="form-control input-lg"
 				ng-model="form.model.userPassword"
 				placeholder="Contraseña"
+				popover="{{ form.errors.userPassword.message }}"
+				popover-placement="left"
+				popover-trigger="focus"
 				type="password"
 			>
-			<span
-				class="form-control-feedback glyphicon glyphicon-remove"
-				ng-if="form.errorFlags.userPassword"
-			></span>
 		</div>
 		
 		<div class="form-group">

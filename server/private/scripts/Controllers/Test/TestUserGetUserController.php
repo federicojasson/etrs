@@ -25,7 +25,9 @@ class TestUserGetUserController extends Controller {
 			$app->halt(HTTP_STATUS_NOT_FOUND);
 		}
 		
-		$app->response->setBody(['user' => $users[$userId]]);
+		$app->response->setBody([
+			'user' => $users[$userId]
+		]);
 	}
 	
 	protected function isInputValid() {

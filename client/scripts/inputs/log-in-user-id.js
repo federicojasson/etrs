@@ -14,7 +14,9 @@
 	 * Input to enter a user ID when logging in.
 	 */
 	function logInUserIdDirective(inputAdapter, logInUserIdFilter) {
-		var filters = [ logInUserIdFilter ];
+		var filters = [
+			logInUserIdFilter
+		];
 		
 		var options = {
 			link: inputAdapter(filters),

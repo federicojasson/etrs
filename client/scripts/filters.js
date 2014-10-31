@@ -3,5 +3,7 @@
 
 (function() {
 	// Module
-	angular.module('filters', []);
+	angular.module('filters', [
+		'utilities'
+	]);
 })();

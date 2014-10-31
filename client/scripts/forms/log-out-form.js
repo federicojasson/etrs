@@ -6,7 +6,7 @@
 	var module = angular.module('forms');
 	
 	// Controllers
-	module.controller('LogOutFormController', [ 'authenticationManager', 'server', LogOutFormController ]);
+	module.controller('LogOutFormController', [ 'authenticationManager', 'errorManager', 'server', LogOutFormController ]);
 	
 	// Directives
 	module.directive('logOutForm', logOutFormDirective);
@@ -16,7 +16,7 @@
 	 * 
 	 * Offers functions related to the log out form.
 	 */
-	function LogOutFormController(authenticationManager, server) {
+	function LogOutFormController(authenticationManager, errorManager, server) {
 		var controller = this;
 		
 		/*
@@ -31,10 +31,11 @@
 			};
 			
 			/*
-			 * TODO: onFailure comments
+			 * Reports the error to the error manager.
 			 */
-			var onFailure = function(output) {
-				// TODO: onFailure
+			var onFailure = function(response) {
+				// Reports the error
+				errorManager.reportError(response);
 			};
 			
 			var callbacks = {
