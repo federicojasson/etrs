@@ -9,7 +9,10 @@
 	]);
 	
 	// Configuration
-	module.config([ '$routeProvider', configuration ]);
+	module.config([
+		'$routeProvider',
+		configuration
+	]);
 	
 	/*
 	 * Defines the view associated with each route.
@@ -82,5 +85,5 @@
 		$routeProvider.otherwise({
 			redirectTo: '/'
 		});
-	};
+	}
 })();

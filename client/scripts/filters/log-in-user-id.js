@@ -6,7 +6,10 @@
 	var module = angular.module('filters');
 	
 	// Filters
-	module.filter('logInUserId', [ 'stringProcessor', logInUserIdFilter ]);
+	module.filter('logInUserId', [
+		'stringProcessor',
+		logInUserIdFilter
+	]);
 	
 	/*
 	 * Filter: logInUserId.
@@ -29,5 +32,5 @@
 		
 		// Returns the filter's application function
 		return filter.applyFilter;
-	};
+	}
 })();

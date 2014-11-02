@@ -6,7 +6,12 @@
 	var module = angular.module('managers');
 	
 	// Services
-	module.service('authenticationManager', [ 'errorManager', 'server', authenticationManagerService ]);
+	module.service('authenticationManager', [
+		'User',
+		'errorManager',
+		'server',
+		authenticationManagerService
+	]);
 	
 	/*
 	 * Service: authenticationManager.
@@ -17,20 +22,20 @@
 	 * when the user is logged in or logged out, to keep the client application
 	 * synchronized with its corresponding state in the server.
 	 */
-	function authenticationManagerService(errorManager, server) {
+	function authenticationManagerService(User, errorManager, server) {
 		var service = this;
 		
 		/*
 		 * Indicates whether a request was sent to the server to refresh the
 		 * authentication state.
 		 */
-		service.isRefreshing = false;
+		service.isRefreshing = false; // TODO: dudoso: usar metodo?
 		
 		/*
 		 * The logged in user.
 		 * If the user is not logged in, its value is null.
 		 */
-		service.loggedInUser = null;
+		service.loggedInUser = null; // TODO: dudoso: usar metodo?
 		
 		/*
 		 * Determines whether the user is logged in.
@@ -93,7 +98,7 @@
 			 */
 			var onSuccess = function(response) {
 				// Sets the logged in user
-				service.loggedInUser = response.user;
+				service.loggedInUser = User.createFromDataObject(response.user);
 				
 				// The refresh process is over
 				service.isRefreshing = false;
@@ -121,5 +126,5 @@
 		
 		// Gets the authentication state
 		service.refresh();
-	};
+	}
 })();

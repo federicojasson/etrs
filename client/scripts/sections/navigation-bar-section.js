@@ -6,7 +6,10 @@
 	var module = angular.module('sections');
 	
 	// Controllers
-	module.controller('NavigationBarSectionController', [ 'authenticationManager', NavigationBarSectionController ]);
+	module.controller('NavigationBarSectionController', [
+		'authenticationManager',
+		NavigationBarSectionController
+	]);
 	
 	// Directives
 	module.directive('navigationBarSection', navigationBarSectionDirective);
@@ -52,7 +55,7 @@
 			// Includes the area if the user is logged in
 			return authenticationManager.isUserLoggedIn();
 		};
-	};
+	}
 	
 	/*
 	 * Directive: navigationBarSection.
@@ -68,5 +71,5 @@
 		};
 		
 		return options;
-	};
+	}
 })();

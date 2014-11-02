@@ -6,7 +6,12 @@
 	var module = angular.module('forms');
 	
 	// Controllers
-	module.controller('LogOutFormController', [ 'authenticationManager', 'errorManager', 'server', LogOutFormController ]);
+	module.controller('LogOutFormController', [
+		'authenticationManager',
+		'errorManager',
+		'server',
+		LogOutFormController
+	]);
 	
 	// Directives
 	module.directive('logOutForm', logOutFormDirective);
@@ -46,7 +51,7 @@
 			// Sends a request to the server
 			server.user.logOut(callbacks);
 		};
-	};
+	}
 	
 	/*
 	 * Directive: logOutForm.
@@ -62,5 +67,5 @@
 		};
 		
 		return options;
-	};
+	}
 })();

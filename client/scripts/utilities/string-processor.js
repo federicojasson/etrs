@@ -29,5 +29,5 @@
 				return string.replace(/^\s+|\s+$/g, '');
 			}
 		};
-	};
+	}
 })();

@@ -44,5 +44,5 @@
 		
 		// Returns the generation function
 		return generateAdapter;
-	};
+	}
 })();

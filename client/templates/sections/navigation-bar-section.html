@@ -15,8 +15,8 @@
 			<div ng-if="section.includeUserArea()">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a ng-href="#/user/{{ section.getUser().id }}">
-							{{ section.getUser() | userHonorificName }}
+						<a ng-href="#/user/{{ section.getUser().getId() }}">
+							{{ section.getUser().getHonorificName() }}
 						</a>
 					</li>
 					<li>

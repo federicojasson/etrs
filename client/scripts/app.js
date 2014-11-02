@@ -4,7 +4,6 @@
 (function() {
 	// Module
 	var module = angular.module('app', [
-		'filters',
 		'forms',
 		'inputs',
 		'sections',
@@ -13,7 +12,10 @@
 	]);
 	
 	// Configuration
-	module.config([ '$locationProvider', configuration ]);
+	module.config([
+		'$locationProvider',
+		configuration
+	]);
 	
 	/*
 	 * Applies application-wide configurations.
@@ -26,5 +28,5 @@
 		 * fall back to using the hashbang URLs automatically.
 		 */
 		$locationProvider.html5Mode(true);
-	};
+	}
 })();

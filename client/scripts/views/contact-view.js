@@ -16,6 +16,6 @@
 	function ContactViewController() {
 		var controller = this;
 		
-		// TODO
-	};
+		// TODO: ContactViewController
+	}
 })();

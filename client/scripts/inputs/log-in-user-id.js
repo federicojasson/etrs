@@ -6,7 +6,11 @@
 	var module = angular.module('inputs');
 	
 	// Directives
-	module.directive('logInUserId', [ 'inputAdapter', 'logInUserIdFilter', logInUserIdDirective ]);
+	module.directive('logInUserId', [
+		'inputAdapter',
+		'logInUserIdFilter',
+		logInUserIdDirective
+	]);
 	
 	/*
 	 * Directive: logInUserId.
@@ -25,5 +29,5 @@
 		};
 		
 		return options;
-	};
+	}
 })();

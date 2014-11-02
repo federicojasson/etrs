@@ -6,7 +6,10 @@
 	var module = angular.module('communications');
 	
 	// Services
-	module.service('communicationHelper', [ '$resource', communicationHelperService ]);
+	module.service('communicationHelper', [
+		'$resource',
+		communicationHelperService
+	]);
 	
 	/*
 	 * Service: communicationHelper.
@@ -34,5 +37,5 @@
 			
 			return reference;
 		};
-	};
+	}
 })();

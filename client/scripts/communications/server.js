@@ -6,7 +6,10 @@
 	var module = angular.module('communications');
 	
 	// Services
-	module.service('server', [ 'communicationHelper', serverService ]);
+	module.service('server', [
+		'communicationHelper',
+		serverService
+	]);
 	
 	/*
 	 * Service: server.
@@ -75,5 +78,5 @@
 			var url = 'server/user/log-out';
 			communicationHelper.sendPostRequest(url, {}, callbacks);
 		};
-	};
+	}
 })();

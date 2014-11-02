@@ -6,7 +6,10 @@
 	var module = angular.module('views');
 	
 	// Controllers
-	module.controller('UserViewController', [ '$routeParams', UserViewController ]);
+	module.controller('UserViewController', [
+		'$routeParams',
+		UserViewController
+	]);
 	
 	/*
 	 * Controller: UserViewController.
@@ -16,6 +19,6 @@
 	function UserViewController($routeParams) {
 		var controller = this;
 		
-		// TODO
-	};
+		// TODO: UserViewController
+	}
 })();

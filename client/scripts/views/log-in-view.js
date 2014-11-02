@@ -6,7 +6,12 @@
 	var module = angular.module('views');
 	
 	// Controllers
-	module.controller('LogInViewController', [ '$location', '$scope', 'authenticationManager', LogInViewController ]);
+	module.controller('LogInViewController', [
+		'$location',
+		'$scope',
+		'authenticationManager',
+		LogInViewController
+	]);
 	
 	/*
 	 * Controller: LogInViewController.
@@ -34,5 +39,5 @@
 				$location.path('/');
 			}
 		});
-	};
+	}
 })();

@@ -6,7 +6,10 @@
 	var module = angular.module('views');
 	
 	// Controllers
-	module.controller('IndexViewController', [ 'authenticationManager', IndexViewController ]);
+	module.controller('IndexViewController', [
+		'authenticationManager',
+		IndexViewController
+	]);
 	
 	/*
 	 * Controller: IndexViewController.
@@ -34,7 +37,7 @@
 				case 'RS' : return 'templates/views/index/researcher-index-view.html';
 				default : return ''; // TODO: what to do in this case?
 			}
-		}
+		};
 		
 		/*
 		 * Determines whether the view is ready to be rendered.
@@ -42,5 +45,5 @@
 		controller.isReady = function() {
 			return ! authenticationManager.isRefreshing;
 		};
-	};
+	}
 })();

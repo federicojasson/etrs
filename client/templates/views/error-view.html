@@ -1,1 +1,12 @@
-error view
+<div ng-init="view.checkRedirection()"></div>
+
+<div ng-if="! view.isReady()">
+	<loading-section></loading-section>
+</div>
+
+<div ng-if="view.isReady()">
+	error view
+
+	Código: {{ view.getError().getStatusCode() }}<br>
+	Mensaje: {{ view.getError().getMessage() }}
+</div>

@@ -6,7 +6,12 @@
 	var module = angular.module('forms');
 	
 	// Controllers
-	module.controller('LogInFormController', [ '$location', 'authenticationManager', 'errorManager', 'server', LogInFormController ]);
+	module.controller('LogInFormController', [
+		'authenticationManager',
+		'errorManager',
+		'server',
+		LogInFormController
+	]);
 	
 	// Directives
 	module.directive('logInForm', logInFormDirective);
@@ -16,7 +21,7 @@
 	 * 
 	 * Offers functions related to the log in form.
 	 */
-	function LogInFormController($location, authenticationManager, errorManager, server) {
+	function LogInFormController(authenticationManager, errorManager, server) {
 		var controller = this;
 		
 		/*
@@ -135,7 +140,7 @@
 			
 			return isInputValid;
 		};
-	};
+	}
 	
 	/*
 	 * Directive: logInForm.
@@ -151,5 +156,5 @@
 		};
 		
 		return options;
-	};
+	}
 })();
