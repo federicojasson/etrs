@@ -19,44 +19,56 @@
 		 * Creates an error object from a server response.
 		 */
 		Error.createFromServerResponse = function(response) {
-			// Gets the error message and its HTTP status code
-			var message = response.data; // TODO: json decode?
-			var statusCode = response.status;
+			// Gets the error code and its HTTP status code
+			var code = response.data.errorCode;
+			var httpStatusCode = response.status;
 			
 			// Creates and returns the error object
-			return new Error(message, statusCode);
+			return new Error(code, httpStatusCode);
 		};
 		
 		/*
-		 * TODO: comments
+		 * The error code
 		 */
-		Error.prototype.message = null;
+		Error.prototype.code = null;
 		
 		/*
-		 * TODO: comments
+		 * The HTTP status code of the error.
 		 */
-		Error.prototype.statusCode = null;
+		Error.prototype.httpStatusCode = null;
 		
 		/*
 		 * Creates an instance of this class.
 		 */
-		function Error(message, statusCode) {
-			this.message = message;
-			this.statusCode = statusCode;
+		function Error(code, httpStatusCode) {
+			this.code = code;
+			this.httpStatusCode = httpStatusCode;
 		}
 		
 		/*
-		 * Returns the error message.
+		 * Returns the error code.
 		 */
-		Error.prototype.getMessage = function() {
-			return this.message;
+		Error.prototype.getCode = function() {
+			return this.code;
 		};
 		
 		/*
 		 * Returns the HTTP status code of the error.
 		 */
-		Error.prototype.getStatusCode = function() {
-			return this.statusCode;
+		Error.prototype.getHttpStatusCode = function() {
+			return this.httpStatusCode;
+		};
+		
+		/*
+		 * Returns the error message.
+		 */
+		Error.prototype.getMessage = function() {
+			return messages[this.code];
+		};
+		
+		var messages = {
+			// TODO: testing
+			ERROR_TESTING: 'Mensaje de prueba'
 		};
 		
 		// Returns the constructor function

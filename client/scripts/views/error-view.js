@@ -21,7 +21,7 @@
 		var controller = this;
 		
 		/*
-		 * TODO: comments
+		 * Indicates whether the redirection condition has been checked.
 		 */
 		controller.redirectionChecked = false;
 		

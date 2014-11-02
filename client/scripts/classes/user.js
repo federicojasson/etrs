@@ -31,27 +31,27 @@
 		};
 		
 		/*
-		 * TODO: comments
+		 * The user's first names.
 		 */
 		User.prototype.firstNames = null;
 		
 		/*
-		 * TODO: comments
+		 * The user's genre.
 		 */
 		User.prototype.gender = null;
 		
 		/*
-		 * TODO: comments
+		 * The user ID.
 		 */
 		User.prototype.id = null;
 		
 		/*
-		 * TODO: comments
+		 * The user's last names.
 		 */
 		User.prototype.lastNames = null;
 		
 		/*
-		 * TODO: comments
+		 * The user's role.
 		 */
 		User.prototype.role = null;
 		
@@ -91,22 +91,6 @@
 		 * Returns the user's honorific name.
 		 */
 		User.prototype.getHonorificName = function() {
-			// TODO: this should be defined here? (every time the function is called?, or outside once)
-			var honorificTitles = {
-				DR: {
-					F: 'Dra.',
-					M: 'Dr.'
-				},
-				OP: {
-					F: 'Sra.',
-					M: 'Sr.'
-				},
-				RS: {
-					F: 'Sra.',
-					M: 'Sr.'
-				}
-			};
-			
 			// Gets the honorific title according to the user's role and gender
 			var honorificTitle = honorificTitles[this.role][this.gender];
 			
@@ -133,6 +117,21 @@
 		 */
 		User.prototype.getRole = function() {
 			return this.role;
+		};
+		
+		var honorificTitles = {
+			DR: {
+				F: 'Dra.',
+				M: 'Dr.'
+			},
+			OP: {
+				F: 'Sra.',
+				M: 'Sr.'
+			},
+			RS: {
+				F: 'Sra.',
+				M: 'Sr.'
+			}
 		};
 		
 		// Returns the constructor function

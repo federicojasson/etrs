@@ -5,8 +5,7 @@
 </div>
 
 <div ng-if="view.isReady()">
-	error view
-
-	Código: {{ view.getError().getStatusCode() }}<br>
+	Error HTTP: {{ view.getError().getHttpStatusCode() }}<br>
+	Código: {{ view.getError().getCode() }}<br>
 	Mensaje: {{ view.getError().getMessage() }}
 </div>
