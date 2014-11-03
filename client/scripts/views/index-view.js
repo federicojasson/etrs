@@ -35,7 +35,7 @@
 				case 'DR' : return 'templates/views/index/doctor-index-view.html';
 				case 'OP' : return 'templates/views/index/operator-index-view.html';
 				case 'RS' : return 'templates/views/index/researcher-index-view.html';
-				default : return ''; // TODO: what to do in this case?
+				default : return '';
 			}
 		};
 		

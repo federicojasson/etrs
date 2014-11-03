@@ -15,12 +15,37 @@
 			<div ng-if="section.includeUserArea()">
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a ng-href="#/user/{{ section.getUser().getId() }}">
-							{{ section.getUser().getHonorificName() }}
-						</a>
+						<div class="btn-group navbar-btn" dropdown>
+							<a class="btn btn-default" href="#/tasks">
+								Tareas comunes
+							</a>
+							<button class="btn btn-default dropdown-toggle" type="button">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">Pacientes</li>
+								<li>
+									<a href="#">Ingresar un nuevo paciente</a>
+								</li>
+							</ul>
+						</div>
 					</li>
+					
 					<li>
-						<log-out-form></log-out-form>
+						<div class="btn-group navbar-btn" dropdown>
+							<a class="btn btn-primary" ng-href="#/user/{{ section.getUser().getId() }}">
+								{{ section.getUser().getHonorificName() }}
+							</a>
+							<button class="btn btn-primary dropdown-toggle" type="button">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li class="divider"></li>
+								<li>
+									<log-out-form></log-out-form>
+								</li>
+							</ul>
+						</div>
 					</li>
 				</ul>
 			</div>

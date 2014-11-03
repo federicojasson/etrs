@@ -3,6 +3,5 @@
 </div>
 
 <div ng-if="view.isReady()">
-	Error HTTP: {{ view.getError().getHttpStatusCode() }}<br>
-	Mensaje: {{ view.getError().getMessage() }}
+	<div ng-include="view.getTemplateUrl()"></div>
 </div>

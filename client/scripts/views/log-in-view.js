@@ -23,21 +23,21 @@
 		
 		/*
 		 * Determines whether the view is ready to be rendered.
+		 * If the user is already logged in, it redirects her to the index view.
 		 */
 		controller.isReady = function() {
-			return ! authenticationManager.isRefreshing;
-		};
-		
-		/*
-		 * Registers a listener to execute when the authentication state
-		 * changes. If the user is already logged in, it redirects her to the
-		 * root route.
-		 */
-		$scope.$watch(authenticationManager.isUserLoggedIn, function(isUserLoggedIn) {
-			if (isUserLoggedIn) {
+			if (authenticationManager.isRefreshing) {
+				// The authentication manager is refreshing its state
+				return false;
+			}
+			
+			if (authenticationManager.isUserLoggedIn()) {
 				// The user is already logged in
 				$location.path('/');
+				return false;
 			}
-		});
+			
+			return true;
+		};
 	}
 })();

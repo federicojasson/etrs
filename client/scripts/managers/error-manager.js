@@ -42,7 +42,7 @@
 			// Updates the current error
 			service.error = Error.createFromServerResponse(response);
 			
-			// Redirects the user to the error route
+			// Redirects the user to the error view
 			$location.path('/error');
 		};
 	}

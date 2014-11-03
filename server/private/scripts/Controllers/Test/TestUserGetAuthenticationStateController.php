@@ -4,7 +4,7 @@
 class TestUserGetAuthenticationStateController extends Controller {
 	
 	protected function executeLogic() {
-		sleep(1);
+		sleep(0);
 		
 		$this->app->response->setBody([
 			'loggedIn' => false,

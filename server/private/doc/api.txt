@@ -103,10 +103,12 @@ Output
 	
 	{
 		"user": {
-			"firstNames": ...,
 			"gender": ...,
 			"id": ...,
-			"lastNames": ...,
+			"name": {
+				"firstName": ...,
+				"lastName": ...
+			},
 			"role": ...
 		}
 	}

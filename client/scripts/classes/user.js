@@ -6,7 +6,10 @@
 	var module = angular.module('classes');
 	
 	// Factories
-	module.factory('User', UserFactory);
+	module.factory('User', [
+		'Name',
+		UserFactory
+	]);
 	
 	/*
 	 * Factory: User.
@@ -14,26 +17,20 @@
 	 * User class.
 	 * It represents a user.
 	 */
-	function UserFactory() {
+	function UserFactory(Name) {
 		/*
 		 * Creates a user object from a data object.
 		 */
 		User.createFromDataObject = function(dataObject) {
-			// Gets the error message and its HTTP status code
-			var firstNames = dataObject.firstNames;
+			// Gets the user data
 			var gender = dataObject.gender;
 			var id = dataObject.id;
-			var lastNames = dataObject.lastNames;
+			var name = Name.createFromDataObject(dataObject.name);
 			var role = dataObject.role;
 			
 			// Creates and returns the user object
-			return new User(firstNames, gender, id, lastNames, role);
+			return new User(gender, id, name, role);
 		};
-		
-		/*
-		 * The user's first names.
-		 */
-		User.prototype.firstNames = null;
 		
 		/*
 		 * The user's genre.
@@ -46,9 +43,9 @@
 		User.prototype.id = null;
 		
 		/*
-		 * The user's last names.
+		 * The user's name.
 		 */
-		User.prototype.lastNames = null;
+		User.prototype.name = null;
 		
 		/*
 		 * The user's role.
@@ -58,34 +55,12 @@
 		/*
 		 * Creates an instance of this class.
 		 */
-		function User(firstNames, gender, id, lastNames, role) {
-			this.firstNames = firstNames;
+		function User(gender, id, name, role) {
 			this.gender = gender;
 			this.id = id;
-			this.lastNames = lastNames;
+			this.name = name;
 			this.role = role;
 		}
-		
-		/*
-		 * Returns the user's first names.
-		 */
-		User.prototype.getFirstNames = function() {
-			return this.firstNames;
-		};
-		
-		/*
-		 * Returns the user's full name.
-		 */
-		User.prototype.getFullName = function() {
-			return this.firstNames + ' ' + this.lastNames;
-		};
-		
-		/*
-		 * Returns the user's genre.
-		 */
-		User.prototype.getGenre = function() {
-			return this.genre;
-		};
 		
 		/*
 		 * Returns the user's honorific name.
@@ -94,8 +69,8 @@
 			// Gets the honorific title according to the user's role and gender
 			var honorificTitle = honorificTitles[this.role][this.gender];
 			
-			// Prepends the honorific title to the user's last names
-			return honorificTitle + ' ' + this.lastNames;
+			// Gets and returns the honorific name
+			return this.name.getHonorificName(honorificTitle);
 		};
 		
 		/*
@@ -106,19 +81,8 @@
 		};
 		
 		/*
-		 * Returns the user's last names.
+		 * The predefined honorific titles.
 		 */
-		User.prototype.getLastNames = function() {
-			return this.lastNames;
-		};
-		
-		/*
-		 * Returns the user's role.
-		 */
-		User.prototype.getRole = function() {
-			return this.role;
-		};
-		
 		var honorificTitles = {
 			DR: {
 				F: 'Dra.',

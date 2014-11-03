@@ -28,7 +28,7 @@
 		};
 		
 		/*
-		 * The error code
+		 * The error code.
 		 */
 		Error.prototype.code = null;
 		
@@ -46,13 +46,6 @@
 		}
 		
 		/*
-		 * Returns the error code.
-		 */
-		Error.prototype.getCode = function() {
-			return this.code;
-		};
-		
-		/*
 		 * Returns the HTTP status code of the error.
 		 */
 		Error.prototype.getHttpStatusCode = function() {
@@ -66,6 +59,9 @@
 			return messages[this.code];
 		};
 		
+		/*
+		 * The predefined error messages.
+		 */
 		var messages = {
 			// TODO: testing
 			ERROR_TESTING: 'Mensaje de prueba'

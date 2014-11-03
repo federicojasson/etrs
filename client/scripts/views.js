@@ -70,6 +70,16 @@
 		});
 		
 		/*
+		 * Route: '/tasks'.
+		 * View: tasks.
+		 */
+		$routeProvider.when('/tasks', {
+			controller: 'TasksViewController',
+			controllerAs: 'view',
+			templateUrl: 'templates/views/tasks-view.html'
+		});
+		
+		/*
 		 * Route: '/user/:userId'.
 		 * View: user.
 		 */
@@ -80,7 +90,7 @@
 		});
 		
 		/*
-		 * Default action: redirect the user to the root route.
+		 * Default action: redirect the user to the index view.
 		 */
 		$routeProvider.otherwise({
 			redirectTo: '/'
