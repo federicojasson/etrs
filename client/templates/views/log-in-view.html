@@ -1,11 +1,7 @@
 <div ng-if="! view.isReady()">
-	<loading-section></loading-section>
+	<div loading-section></div>
 </div>
 
 <div ng-if="view.isReady()">
-	<div class="col-sm-6 col-sm-offset-3">
-		<div class="well">
-			<log-in-form></log-in-form>
-		</div>
-	</div>
+	<div class="col-sm-6 col-sm-offset-3 well" log-in-form></div>
 </div>

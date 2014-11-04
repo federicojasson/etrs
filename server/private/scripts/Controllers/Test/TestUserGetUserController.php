@@ -4,7 +4,7 @@
 class TestUserGetUserController extends Controller {
 	
 	protected function executeLogic() {
-		sleep(2);
+		sleep(1);
 		
 		$users = [
 			'federicojasson' => [

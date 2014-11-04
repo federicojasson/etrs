@@ -151,7 +151,7 @@
 		var options = {
 			controller: 'LogInFormController',
 			controllerAs: 'form',
-			restrict: 'E',
+			restrict: 'A',
 			templateUrl: 'templates/forms/log-in-form.html'
 		};
 		

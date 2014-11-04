@@ -66,7 +66,7 @@
 		var options = {
 			controller: 'NavigationBarSectionController',
 			controllerAs: 'section',
-			restrict: 'E',
+			restrict: 'A',
 			templateUrl: 'templates/sections/navigation-bar-section.html'
 		};
 		

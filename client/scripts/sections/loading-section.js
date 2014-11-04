@@ -15,7 +15,7 @@
 	 */
 	function loadingSectionDirective() {
 		var options = {
-			restrict: 'E',
+			restrict: 'A',
 			templateUrl: 'templates/sections/loading-section.html'
 		};
 		

@@ -15,7 +15,7 @@
 	 */
 	function footerSectionDirective() {
 		var options = {
-			restrict: 'E',
+			restrict: 'A',
 			templateUrl: 'templates/sections/footer-section.html'
 		};
 		

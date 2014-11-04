@@ -62,7 +62,7 @@
 		var options = {
 			controller: 'LogOutFormController',
 			controllerAs: 'form',
-			restrict: 'E',
+			restrict: 'A',
 			templateUrl: 'templates/forms/log-out-form.html'
 		};
 		

@@ -10,9 +10,11 @@
 		<title>ETRS - Eye Tracking Record System</title>
 	</head>
 	<body>
-		<navigation-bar-section></navigation-bar-section>
+		<nav class="navbar navbar-inverse navbar-static-top">
+			<div class="col-sm-8 col-sm-offset-2" navigation-bar-section></div>
+		</nav>
 		<div class="col-sm-8 col-sm-offset-2" ng-view></div>
-		<footer-section></footer-section>
+		<div class="col-sm-8 col-sm-offset-2" footer-section></div>
 		
 		<script src="vendors/angular/angular.min.js"></script>
 		<script src="vendors/angular/angular-resource.min.js"></script>
@@ -40,6 +42,7 @@
 		<script src="scripts/sections/footer-section.js"></script>
 		<script src="scripts/sections/loading-section.js"></script>
 		<script src="scripts/sections/navigation-bar-section.js"></script>
+		<script src="scripts/sections/tasks-menu-section.js"></script>
 		<script src="scripts/utilities.js"></script>
 		<script src="scripts/utilities/input-adapter.js"></script>
 		<script src="scripts/utilities/string-processor.js"></script>
