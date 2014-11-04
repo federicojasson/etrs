@@ -11,7 +11,7 @@ Server API
 		- A detailed explanation of its usage.
 		- The expected input data.
 		- The output data if the operation succeeds.
-		- The errors that may occur and its reasons.
+		- The errors that may occur and their reasons.
 	
 	It must be pointed out that both inputs and outputs should always be
 	expected in JSON format. Because of this, it goes without saying that the
@@ -36,7 +36,7 @@ Details
 	The service doesn't receive any input.
 	The output is the current authentication state, which contains an entry
 	(loggedIn) that indicates whether the user is logged in. In that case, the
-	user ID is included.
+	user's ID is included.
 
 
 Input
@@ -82,7 +82,7 @@ Description
 Details
 -------
 
-	The service receives the user ID.
+	The service receives the user's ID.
 	The output is an entry (user) that contains the user information.
 
 
@@ -134,7 +134,7 @@ Description
 Details
 -------
 
-	The service receives the user ID and its password.
+	The service receives the user's ID and password.
 	The output contains an entry (loggedIn) that indicates whether the user was
 	successfully logged in.
 

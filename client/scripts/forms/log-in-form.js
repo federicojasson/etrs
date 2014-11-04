@@ -119,7 +119,7 @@
 			var userPassword = controller.model.userPassword;
 			
 			if (userId.length === 0) {
-				// The user ID es invalid
+				// The user ID is invalid
 				isInputValid = false;
 				
 				// Sets the corresponding error

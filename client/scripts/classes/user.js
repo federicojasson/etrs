@@ -38,7 +38,7 @@
 		User.prototype.gender = null;
 		
 		/*
-		 * The user ID.
+		 * The user's ID.
 		 */
 		User.prototype.id = null;
 		
@@ -74,7 +74,7 @@
 		};
 		
 		/*
-		 * Returns the user ID.
+		 * Returns the user's ID.
 		 */
 		User.prototype.getId = function() {
 			return this.id;
