@@ -1,8 +1,0 @@
-<div ng-if="! view.isReady()">
-	<div loading-section></div>
-</div>
-
-<div ng-if="view.isReady()">
-	Error HTTP: {{ view.getError().getHttpStatusCode() }}<br>
-	Mensaje: {{ view.getError().getMessage() }}
-</div>
