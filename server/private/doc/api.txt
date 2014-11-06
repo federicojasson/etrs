@@ -17,6 +17,8 @@ Server API
 	expected in JSON format. Because of this, it goes without saying that the
 	order of the input (or output) has no relevance. Just to follow a
 	convention, the parameters are specified alphabetically in this document.
+	
+	TODO: indicar el formato de los errores
 
 
 ================================================================================

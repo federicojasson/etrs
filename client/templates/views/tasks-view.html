@@ -1,7 +1,3 @@
-<div ng-if="! view.isReady()">
-	<div loading-section></div>
-</div>
-
-<div ng-if="view.isReady()">
-	<div ng-include="view.getTemplateUrl()"></div>
-</div>
+<span main-layout>
+	<span ng-include="view.getTemplateUrl()"></span>
+</span>

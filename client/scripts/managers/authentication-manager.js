@@ -7,9 +7,7 @@
 	
 	// Services
 	module.service('authenticationManager', [
-		'User',
-		'errorManager',
-		'server',
+		'$q',
 		authenticationManagerService
 	]);
 	
@@ -17,114 +15,55 @@
 	 * Service: authenticationManager.
 	 * 
 	 * Offers functions to manage the authentication state.
+	 * 
 	 * This service should be used whenever is necessary to know if the user is
 	 * logged in and her information. Also, the refresh function must be called
 	 * when the user is logged in or logged out, to keep the client application
 	 * synchronized with its corresponding state in the server.
 	 */
-	function authenticationManagerService(User, errorManager, server) {
+	function authenticationManagerService($q) {
 		var service = this;
 		
 		/*
-		 * Indicates whether a request was sent to the server to refresh the
-		 * authentication state.
+		 * Returns the logged in user.
+		 * 
+		 * If the user is not logged in, null is returned.
 		 */
-		service.isRefreshing = false; // TODO: dudoso: usar metodo?
+		service.getLoggedInUser = function() {
+			return loggedInUser;
+		};
 		
 		/*
-		 * The logged in user.
-		 * If the user is not logged in, its value is null.
+		 * Returns this manager when it's ready. In other words, it returns a
+		 * promise.
 		 */
-		service.loggedInUser = null; // TODO: dudoso: usar metodo?
+		service.getWhenReady = function() {
+			return deferred.promise;
+		};
 		
 		/*
 		 * Determines whether the user is logged in.
 		 */
 		service.isUserLoggedIn = function() {
-			return service.loggedInUser !== null;
+			return loggedInUser !== null;
 		};
 		
 		/*
-		 * Refreshes the authentication state, sending a request to the server.
+		 * Refreshes the authentication state.
 		 */
-		service.refresh = function() {
-			// The refresh process begins
-			service.isRefreshing = true;
-			
-			/*
-			 * If the user is logged in, it updates its information.
-			 * Otherwise, it nullifies it.
-			 */
-			var onSuccess = function(response) {
-				if (response.loggedIn) {
-					// The user is logged in
-					service.updateLoggedInUser(response.userId);
-				} else {
-					// The user is not logged in
-					service.loggedInUser = null;
-					
-					// The refresh process is over
-					service.isRefreshing = false;
-				}
-			};
-			
-			/*
-			 * Reports the error to the error manager.
-			 */
-			var onFailure = function(response) {
-				// Reports the error
-				errorManager.reportError(response);
-				
-				// The refresh process is over
-				service.isRefreshing = false;
-			};
-			
-			var callbacks = {
-				onSuccess: onSuccess,
-				onFailure: onFailure
-			};
-			
-			// Sends a request to the server
-			server.user.getAuthenticationState(callbacks);
+		service.refreshAuthenticationState = function() {
+			// TODO
 		};
 		
 		/*
-		 * Updates the information about the logged in user, sending a request
-		 * to the server.
+		 * The deferred object used to refresh asynchronously the authentication
+		 * state.
 		 */
-		service.updateLoggedInUser = function(userId) {
-			/*
-			 * Set the information about the logged in user.
-			 */
-			var onSuccess = function(response) {
-				// Sets the logged in user
-				service.loggedInUser = User.createFromDataObject(response.user);
-				
-				// The refresh process is over
-				service.isRefreshing = false;
-			};
-			
-			/*
-			 * Reports the error to the error manager.
-			 */
-			var onFailure = function(response) {
-				// Reports the error
-				errorManager.reportError(response);
-				
-				// The refresh process is over
-				service.isRefreshing = false;
-			};
-
-			var callbacks = {
-				onSuccess: onSuccess,
-				onFailure: onFailure
-			};
-
-			// Sends a request to the server
-			server.user.getUser(userId, callbacks);
-		};
+		var deferred = $q.defer();
 		
-		// Gets the authentication state
-		service.refresh();
+		/*
+		 * The logged in user.
+		 */
+		var loggedInUser = null;
 	}
 })();

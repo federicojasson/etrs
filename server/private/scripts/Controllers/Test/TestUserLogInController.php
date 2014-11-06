@@ -8,7 +8,7 @@ class TestUserLogInController extends Controller {
 		
 		// TODO: testing
 		$this->app->halt(HTTP_STATUS_FORBIDDEN, [
-			'errorCode' => 'ERROR_TESTING',
+			'errorId' => 'ERROR_TESTING',
 		]);
 		
 		$this->app->response->setBody([

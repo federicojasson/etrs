@@ -1,0 +1,13 @@
+[
+	{
+		"role": "doctor"
+	},
+
+	{
+		"role": "operator"
+	},
+
+	{
+		"role": "researcher"
+	}
+]

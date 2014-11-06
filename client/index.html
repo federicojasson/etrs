@@ -10,49 +10,20 @@
 		<title>ETRS - Eye Tracking Record System</title>
 	</head>
 	<body>
-		<nav class="navbar navbar-inverse navbar-static-top">
-			<div class="col-sm-8 col-sm-offset-2" navigation-bar-section></div>
-		</nav>
-		<div class="col-sm-8 col-sm-offset-2" ng-view></div>
-		<div class="col-sm-8 col-sm-offset-2" footer-section></div>
+		<span ng-view></span>
 		
 		<script src="vendors/angular/angular.min.js"></script>
 		<script src="vendors/angular/angular-resource.min.js"></script>
 		<script src="vendors/angular/angular-route.min.js"></script>
 		<script src="vendors/ui-bootstrap/ui-bootstrap-tpls-0.11.2.min.js"></script>
 		<script src="scripts/app.js"></script>
-		<script src="scripts/classes.js"></script>
-		<script src="scripts/classes/error.js"></script>
-		<script src="scripts/classes/name.js"></script>
-		<script src="scripts/classes/user.js"></script>
-		<script src="scripts/communications.js"></script>
-		<script src="scripts/communications/communication-helper.js"></script>
-		<script src="scripts/communications/server.js"></script>
-		<script src="scripts/filters.js"></script>
-		<script src="scripts/filters/log-in-user-id.js"></script>
-		<script src="scripts/forms.js"></script>
-		<script src="scripts/forms/log-in-form.js"></script>
-		<script src="scripts/forms/log-out-form.js"></script>
-		<script src="scripts/inputs.js"></script>
-		<script src="scripts/inputs/log-in-user-id.js"></script>
+		<script src="scripts/helpers.js"></script>
+		<script src="scripts/helpers/communicator.js"></script>
+		<script src="scripts/helpers/server.js"></script>
+		<script src="scripts/layouts.js"></script>
+		<script src="scripts/layouts/main-layout.js"></script>
 		<script src="scripts/managers.js"></script>
 		<script src="scripts/managers/authentication-manager.js"></script>
-		<script src="scripts/managers/error-manager.js"></script>
-		<script src="scripts/sections.js"></script>
-		<script src="scripts/sections/footer-section.js"></script>
-		<script src="scripts/sections/loading-section.js"></script>
-		<script src="scripts/sections/navigation-bar-section.js"></script>
-		<script src="scripts/sections/tasks-menu-section.js"></script>
-		<script src="scripts/utilities.js"></script>
-		<script src="scripts/utilities/input-adapter.js"></script>
-		<script src="scripts/utilities/string-processor.js"></script>
 		<script src="scripts/views.js"></script>
-		<script src="scripts/views/contact-view.js"></script>
-		<script src="scripts/views/error-view.js"></script>
-		<script src="scripts/views/help-view.js"></script>
-		<script src="scripts/views/index-view.js"></script>
-		<script src="scripts/views/log-in-view.js"></script>
-		<script src="scripts/views/tasks-view.js"></script>
-		<script src="scripts/views/user-view.js"></script>
 	</body>
 </html>

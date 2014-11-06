@@ -1,0 +1,7 @@
+<span ng-if="! section.isReady()">
+	<div loading-section></div>
+</span>
+
+<span ng-if="section.isReady()">
+	<span ng-include="section.getTemplateUrl()"></span>
+</span>

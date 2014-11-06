@@ -1,0 +1,42 @@
+<div class="navbar-header">
+	<a class="navbar-brand" href="#/">ETRS</a>
+</div>
+
+<div class="collapse navbar-collapse">
+	<span ng-if="section.includeLogInArea()">
+		<a
+			class="btn btn-success navbar-btn navbar-right"
+			href="#/log-in"
+		>Iniciar sesión</a>
+	</span>
+
+	<span ng-if="section.includeUserArea()">
+		<ul class="nav navbar-nav navbar-right">
+			<li>
+				<div class="btn-group navbar-btn" dropdown>
+					<a class="btn btn-default" href="#/tasks">
+						Tareas comunes
+					</a>
+					<button class="btn btn-default dropdown-toggle" type="button">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" task-menu-section></ul>
+				</div>
+			</li>
+
+			<li>
+				<div class="btn-group navbar-btn" dropdown>
+					<a class="btn btn-primary" ng-href="#/user/{{ section.getUser().getId() }}">
+						{{ section.getUser().getHonorificName() }}
+					</a>
+					<button class="btn btn-primary dropdown-toggle" type="button">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li log-out-form></li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</span>
+</div>
