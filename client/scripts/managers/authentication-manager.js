@@ -8,6 +8,8 @@
 	// Services
 	module.service('authenticationManager', [
 		'$q',
+		'$timeout',
+		'server',
 		authenticationManagerService
 	]);
 	
@@ -17,11 +19,12 @@
 	 * Offers functions to manage the authentication state.
 	 * 
 	 * This service should be used whenever is necessary to know if the user is
-	 * logged in and her information. Also, the refresh function must be called
-	 * when the user is logged in or logged out, to keep the client application
-	 * synchronized with its corresponding state in the server.
+	 * logged in and her information. Also, the refreshAuthenticationState
+	 * function must be called when the user is logged in or logged out, to keep
+	 * the client application synchronized with its corresponding state in the
+	 * server.
 	 */
-	function authenticationManagerService($q) {
+	function authenticationManagerService($q, $timeout, server) {
 		var service = this;
 		
 		/*
@@ -34,10 +37,9 @@
 		};
 		
 		/*
-		 * Returns this manager when it's ready. In other words, it returns a
-		 * promise.
+		 * Returns the promise.
 		 */
-		service.getWhenReady = function() {
+		service.getPromise = function() {
 			return deferred.promise;
 		};
 		
@@ -52,11 +54,21 @@
 		 * Refreshes the authentication state.
 		 */
 		service.refreshAuthenticationState = function() {
-			// TODO
+			$timeout(function() {
+				// TODO
+				deferred.reject();
+			}, 2000);
+			
+			// Sends a request to the server
+			/*server.user.getAuthenticationState().then(function(response) {
+				// TODO
+			}, function(response) {
+				// TODO: reject promise
+			});*/
 		};
 		
 		/*
-		 * The deferred object used to refresh asynchronously the authentication
+		 * The deferred object used to asynchronously refresh the authentication
 		 * state.
 		 */
 		var deferred = $q.defer();

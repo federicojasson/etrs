@@ -19,6 +19,7 @@
 	// Run
 	module.run([
 		'authenticationManager',
+		'contentManager',
 		run
 	]);
 	
@@ -36,8 +37,12 @@
 	/*
 	 * Performs initialization tasks.
 	 */
-	function run(authenticationManager) {
+	function run(authenticationManager, contentManager) {
+		// Loads the application's content
+		contentManager.loadContent();
+		
 		// Refreshes the authentication state
 		authenticationManager.refreshAuthenticationState();
 	}
 })();
+

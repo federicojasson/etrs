@@ -1,13 +1,13 @@
-[
-	{
-		"role": "doctor"
-	},
-
-	{
-		"role": "operator"
-	},
-
-	{
-		"role": "researcher"
-	}
-]
+{
+	"doctor": [
+		
+	],
+	
+	"operator": [
+		
+	],
+	
+	"researcher": [
+		
+	]
+}

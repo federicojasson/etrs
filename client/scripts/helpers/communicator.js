@@ -32,6 +32,9 @@
 		 *		responseIsArray: ...,
 		 *		url: ...
 		 *	}
+		 *	
+		 * The input property is optional, for cases in which there is no need
+		 * to send input.
 		 * 
 		 * The function returns a promise to be resolved when the server
 		 * responds.
@@ -42,6 +45,9 @@
 			var method = request.method;
 			var responseIsArray = request.responseIsArray;
 			var url = request.url;
+			
+			// Initializes undefined optional parameters with default values
+			input = (typeof input === 'undefined')? {} : input;
 			
 			// Initializes the input objects (only one will be actually used)
 			var bodyInput = {};

@@ -4,100 +4,100 @@
 (function() {
 	// Module
 	var module = angular.module('views', [
-		'managers',
 		'ngRoute'
 	]);
 	
-	// Configuration
+	// Config
 	module.config([
 		'$routeProvider',
 		config
 	]);
 	
 	// Controllers
-	module.controller('ViewAccessController', [
+	module.controller('ViewController', [
 		'$location',
 		'$route',
 		'$scope',
 		'authenticationManager',
-		ViewAccessController
+		ViewController
 	]);
+	
+	// Directives
+	module.directive('view', viewDirective);
 	
 	/*
 	 * Defines the routing.
 	 */
 	function config($routeProvider) {
+		// Dependencies
 		var dependencies = {
-			'authenticationManager': ['authenticationManager', function(authenticationManager) {
-				return authenticationManager.getWhenReady();
-			}]
-		}
+			'authenticationManager': [
+				'authenticationManager',
+				function(authenticationManager) {
+					return authenticationManager.getPromise();
+				}
+			],
+			'contentManager': [
+				'contentManager',
+				function(contentManager) {
+					return contentManager.getPromise();
+				}
+			]
+		};
 		
 		// Route: /
 		$routeProvider.when('/', {
-			config: {
-				accessPolicy: 'ALL_USERS',
-				templateUrls: {
-					anonymous: 'templates/views/index-view/anonymous.html',
-					doctor: 'templates/views/index-view/doctor.html',
-					operator: 'templates/views/index-view/operator.html',
-					researcher: 'templates/views/index-view/researcher.html'
-				}
-			},
-			controller: 'ViewAccessController',
-			controllerAs: 'view',
+			accessPolicy: 'ALL_USERS',
 			resolve: dependencies,
-			templateUrl: 'templates/views/index-view.html'
+			templateUrls: {
+				anonymous: 'templates/views/index-view/anonymous.html',
+				doctor: 'templates/views/index-view/doctor.html',
+				operator: 'templates/views/index-view/operator.html',
+				researcher: 'templates/views/index-view/researcher.html'
+			}
 		});
 		
 		// Route: /contact
 		$routeProvider.when('/contact', {
+			accessPolicy: 'ALL_USERS',
 			resolve: dependencies,
 			templateUrl: 'templates/views/contact-view.html'
 		});
 		
+		// Route: /fatal-error
+		$routeProvider.when('/fatal-error', {
+			accessPolicy: 'ALL_USERS',
+			templateUrl: 'templates/views/fatal-error.html'
+		});
+		
 		// Route: /help
 		$routeProvider.when('/help', {
-			config: {
-				accessPolicy: 'ALL_USERS',
-				templateUrls: {
-					anonymous: 'templates/views/help-view/anonymous.html',
-					doctor: 'templates/views/help-view/doctor.html',
-					operator: 'templates/views/help-view/operator.html',
-					researcher: 'templates/views/help-view/researcher.html'
-				}
-			},
-			controller: 'ViewAccessController',
-			controllerAs: 'view',
+			accessPolicy: 'ALL_USERS',
 			resolve: dependencies,
-			templateUrl: 'templates/views/help-view.html'
+			templateUrls: {
+				anonymous: 'templates/views/help-view/anonymous.html',
+				doctor: 'templates/views/help-view/doctor.html',
+				operator: 'templates/views/help-view/operator.html',
+				researcher: 'templates/views/help-view/researcher.html'
+			}
 		});
 		
 		// Route: /log-in
 		$routeProvider.when('/log-in', {
-			config: {
-				accessPolicy: 'ONLY_NOT_LOGGED_IN_USERS',
-			},
-			controller: 'ViewAccessController',
-			controllerAs: 'view',
+			accessPolicy: 'ONLY_NOT_LOGGED_IN_USERS',
 			resolve: dependencies,
 			templateUrl: 'templates/views/log-in-view.html'
 		});
 		
 		// Route: /tasks
 		$routeProvider.when('/tasks', {
-			config: {
-				accessPolicy: 'ONLY_LOGGED_IN_USERS',
-				templateUrls: {
-					doctor: 'templates/views/tasks-view/doctor.html',
-					operator: 'templates/views/tasks-view/operator.html',
-					researcher: 'templates/views/tasks-view/researcher.html'
-				}
-			},
-			controller: 'ViewAccessController',
-			controllerAs: 'view',
+			accessPolicy: 'ONLY_LOGGED_IN_USERS',
 			resolve: dependencies,
-			templateUrl: 'templates/views/tasks-view.html'
+			templateUrls: {
+				doctor: 'templates/views/tasks-view/doctor.html',
+				operator: 'templates/views/tasks-view/operator.html',
+				researcher: 'templates/views/tasks-view/researcher.html'
+			}
 		});
 		
 		// There is no matching route: it redirects the user to the root route
@@ -107,15 +107,12 @@
 	}
 	
 	/*
-	 * Controller: ViewAccessController.
+	 * Controller: ViewController.
 	 * 
-	 * Offers functions to dynamically select a view's template, depending on
-	 * the user who is requesting it.
-	 * 
-	 * This controller was designed to bind a view with a template in cases in
-	 * which a more complex logic is necessary. The controller allows to specify
-	 * predefined access policies and, taking into account the requesting user,
-	 * resolves the view-template binding.
+	 * Offers functions to dynamically select the view for the current route.
+	 * The controller allows to specify predefined access policies and, taking
+	 * into account the requesting user and the state of the application,
+	 * resolves the route-view binding.
 	 * 
 	 * Predefined access policies:
 	 * 
@@ -123,45 +120,49 @@
 	 * - ONLY_LOGGED_IN_USERS: allows access only to logged in users.
 	 * - ONLY_NOT_LOGGED_IN_USERS: allows access only to not logged in users.
 	 * 
-	 * If access is forbidden, the controller redirects the user to an
-	 * appropriate route.
+	 * If access is forbidden or if a route dependency is rejected, the
+	 * controller redirects the user to an appropriate route.
 	 * 
-	 * When this controller is used, a config property must be added to the
-	 * $route object, with the following structure:
+	 * When this controller is used, custom properties must be added to the
+	 * $route object (through the $routeProvider object configuration):
 	 * 
-	 *	config: {
-	 *		accessPolicy: ...,
-	 *		templateUrls: {
-	 *			anonymous: ...,
-	 *			doctor: ...,
-	 *			operator: ...,
-	 *			researcher: ...
-	 *		}
-	 *	}
-	 *	
-	 *	Each property of templateUrls must be a string indicating the URL of the
-	 *	template to be rendered, according to the requesting user's role
-	 *	(or anonymous, if she is not logged in).
-	 *	
-	 *	The templateUrls property is unnecessary for the
-	 *	ONLY_NOT_LOGGED_IN_USERS policy. For the ONLY_LOGGED_IN_USERS access
-	 *	policy, the anonymous template URL is not necessary, since not logged in
-	 *	users are forbidden.
+	 * - accessPolicy: indicates the predefined access policy.
+	 * - templateUrls: an optional object containing the template URL for each
+	 *   user role (and anonymous, in case she is not logged in).
+	 * 
+	 * Be aware that the property templateUrl takes precedence over templateUrls
+	 * when deciding which view to load.
 	 */
-	function ViewAccessController($location, $route, $scope, authenticationManager) {
+	function ViewController($location, $route, $scope, authenticationManager) {
 		var controller = this;
 		
 		/*
 		 * Returns the URL of the template to be included in the view.
 		 */
 		controller.getTemplateUrl = function() {
-			if (routeIsChanging) {
-				// The route is changing
+			if (! isViewReady) {
+				// The view is not ready
+				return 'templates/views/loading-view.html';
+			}
+			
+			// Gets the current route
+			var currentRoute = $route.current;
+			
+			if (typeof currentRoute === 'undefined') {
+				// The route has not been resolved yet
 				return;
 			}
 			
+			// Gets the template URL
+			var templateUrl = currentRoute.templateUrl;
+			
+			if (typeof templateUrl !== 'undefined') {
+				// A template URL has been specified
+				return templateUrl;
+			}
+			
 			// Gets the template URLs
-			var templateUrls = $route.current.config.templateUrls;
+			var templateUrls = currentRoute.templateUrls;
 			
 			if (! authenticationManager.isUserLoggedIn()) {
 				// The user is not logged in
@@ -188,55 +189,80 @@
 		};
 		
 		/*
-		 * Indicates whether the route is changing.
-		 * 
-		 * It is necessary to monitor changes in the route because the
-		 * controller's logic depends on parameters of the $route service.
+		 * Indicates whether the view is ready to be rendered.
 		 */
-		var routeIsChanging = false;
+		var isViewReady = false;
 		
 		/*
-		 * Checks if the requesting user complies with the access policy. In
-		 * case she is not, it redirects her to the appropiate route.
+		 * Returns whether the user complies with the access policy. In case she
+		 * is not, it redirects her to the appropiate route.
 		 */
 		function checkAccessPolicyCompliance() {
 			// Gets the access policy
-			var accessPolicy = $route.current.config.accessPolicy;
+			var accessPolicy = $route.current.accessPolicy;
 			
 			// Takes the proper action according to the policy
 			switch (accessPolicy) {
 				case 'ALL_USERS': {
-					return;
+					return true;
 				}
 				
 				case 'ONLY_LOGGED_IN_USERS': {
 					if (! authenticationManager.isUserLoggedIn()) {
 						// The user is not logged in
 						$location.path('/log-in');
+						return false;
 					}
 
-					return;
+					return true;
 				}
 				
 				case 'ONLY_NOT_LOGGED_IN_USERS': {
 					if (authenticationManager.isUserLoggedIn()) {
 						// The user is logged in
 						$location.path('/');
+						return false;
 					}
 
-					return;
+					return true;
 				}
 			}
 		}
 		
-		// Listens for changes in the route
-		$scope.$on('$routeChangeStart', function () {
-			routeIsChanging = true;
-        });
-		
-		// Listens for changes in the authentication state
-		$scope.$watch(authenticationManager.isUserLoggedIn, function() {
-			checkAccessPolicyCompliance();
+		// Listens for errors in the route change
+		$scope.$on('$routeChangeError', function() {
+			// Fatal error: some essential resources could not be loaded
+			$location.path('/fatal-error');
 		});
+		
+		// Listens for changes in the route
+		$scope.$on('$routeChangeStart', function() {
+			isViewReady = false;
+		});
+		
+		// Listens for the completion of the route change
+		$scope.$on('$routeChangeSuccess', function() {
+			if (checkAccessPolicyCompliance()) {
+				// The access policy is met
+				isViewReady = true;
+			}
+		});
+	}
+	
+	/*
+	 * Directive: view.
+	 * 
+	 * Includes the view.
+	 */
+	function viewDirective() {
+		var options = {
+			controller: 'ViewController',
+			controllerAs: 'view',
+			restrict: 'A',
+			scope: {},
+			template: '<span ng-include="view.getTemplateUrl()"></span>'
+		};
+		
+		return options;
 	}
 })();

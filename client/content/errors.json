@@ -1,6 +1,5 @@
-[
-	{
-		"id": "ERROR_TESTING",
+{
+	"ERROR_TESTING": {
 		"message": "mensaje de prueba"
 	}
-]
+}
