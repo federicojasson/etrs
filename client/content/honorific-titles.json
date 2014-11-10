@@ -1,0 +1,16 @@
+{
+	"doctor": {
+		"F": "Dra.",
+		"M": "Dr."
+	},
+	
+	"operator": {
+		"F": "Sra.",
+		"M": "Sr."
+	},
+	
+	"researcher": {
+		"F": "Sra.",
+		"M": "Sr."
+	}
+}

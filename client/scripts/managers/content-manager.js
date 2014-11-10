@@ -34,6 +34,15 @@
 		};
 		
 		/*
+		 * Returns the honorific title of a certain kind of user.
+		 * 
+		 * It receives the user's gender and role.
+		 */
+		service.getHonorificTitle = function(userGender, userRole) {
+			return content.honorificTitles[userRole][userGender];
+		};
+		
+		/*
 		 * Returns the promise.
 		 */
 		service.getPromise = function() {
@@ -53,22 +62,20 @@
 		 * Loads the content.
 		 */
 		service.loadContent = function() {
-			// Loads the errors
-			loadErrors().then(function(response) {
-				// Stores the errors
-				content.errors = response;
-				
-				// Loads the tasks
-				return loadTasks();
-			}).then(function(response) {
-				// Stores the tasks
-				content.tasks = response;
-				
+			// Initializes the deferred object
+			deferred = $q.defer();
+			
+			// Loads the content
+			$q.all([
+				loadErrors(),
+				loadHonorificTitles(),
+				loadTasks()
+			]).then(function() {
 				// Resolves the deferred
 				deferred.resolve(service);
 			}, function() {
 				// Rejects the deferred
-				deferred.reject(); // TODO: set reason?
+				deferred.reject();
 			});
 		};
 		
@@ -77,13 +84,14 @@
 		 */
 		var content = {
 			errors: null,
+			honorificTitles: null,
 			tasks: null
 		};
 		
 		/*
 		 * The deferred object used to asynchronously load the content.
 		 */
-		var deferred = $q.defer();
+		var deferred = null;
 		
 		/*
 		 * Loads the errors and returns a promise.
@@ -92,10 +100,31 @@
 			var request = {
 				method: 'GET',
 				responseIsArray: false,
-				url: 'content/errors.json'
+				url: 'client/content/errors.json'
 			};
 			
-			return communicator.sendHttpRequest(request);
+			var promise = communicator.sendHttpRequest(request).then(function(response) {
+				content.errors = response;
+			});
+			
+			return promise;
+		}
+		
+		/*
+		 * Loads the honorific titles and returns a promise.
+		 */
+		function loadHonorificTitles() {
+			var request = {
+				method: 'GET',
+				responseIsArray: false,
+				url: 'client/content/honorific-titles.json'
+			};
+			
+			var promise = communicator.sendHttpRequest(request).then(function(response) {
+				content.honorificTitles = response;
+			});
+			
+			return promise;
 		}
 		
 		/*
@@ -105,10 +134,14 @@
 			var request = {
 				method: 'GET',
 				responseIsArray: false,
-				url: 'content/tasks.json'
+				url: 'client/content/tasks.json'
 			};
 			
-			return communicator.sendHttpRequest(request);
+			var promise = communicator.sendHttpRequest(request).then(function(response) {
+				content.tasks = response;
+			});
+			
+			return promise;
 		}
 	}
 })();

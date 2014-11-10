@@ -6,16 +6,9 @@
  */
 class JsonResponse extends \Slim\Http\Response {
 	
-    /**
-     * DEPRECATION WARNING! use `getBody` or `setBody` instead.
-     *
-     * Get and set body
-     * @param  string|null $body Content of HTTP response body
-     * @return string
-     */
-	
 	/*
 	 * Gets and sets the response's body.
+	 * 
 	 * The method redefines a deprecated version, and calls getBody or setBody
 	 * instead. This is necessary because the Slim framework still uses it.
 	 */
@@ -29,6 +22,7 @@ class JsonResponse extends \Slim\Http\Response {
 	
 	/*
 	 * Sets the response's body.
+	 * 
 	 * If an object or an array is received, it encodes it in JSON format.
 	 */
     public function setBody($output) {

@@ -36,7 +36,7 @@
 		 * The input property is optional, for cases in which there is no need
 		 * to send input.
 		 * 
-		 * The function returns a promise to be resolved when the server
+		 * The function returns a promise that gets resolved when the server
 		 * responds.
 		 */
 		service.sendHttpRequest = function(request) {

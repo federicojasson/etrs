@@ -2,6 +2,7 @@
 
 /*
  * This class encapsulates the logic of a server service.
+ * 
  * Subclasses must implement the service's logic. For security reasons, every
  * controller has to implement, also, a method to validate the input and another
  * one to check if the user is authorized to access to the service, even though
@@ -25,6 +26,7 @@ abstract class Controller {
 	
 	/*
 	 * Calls the controller.
+	 * 
 	 * Executes the controller's logic, but, before, it checks if the input is
 	 * valid and whether the user is authorized to execute this service.
 	 */

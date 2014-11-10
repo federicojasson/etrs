@@ -4,6 +4,7 @@
  * This middleware automatically decodes and encodes the application input and
  * output respectively, assuming that the JSON format is used. It should be used
  * only if all data exchange is expected to be done through JSON.
+ * 
  * Be aware that if the input data is not a valid JSON string, the middleware
  * will halt the execution and respond with an HTTP error.
  */
@@ -30,6 +31,7 @@ class JsonMiddleware extends \Slim\Middleware {
 	
 	/*
 	 * Attempts to decode the input, assuming it is a JSON string.
+	 * 
 	 * If the request's content type is not JSON or if it is, but the input
 	 * can't be decoded, it halts the execution and responds with an HTTP error.
 	 */

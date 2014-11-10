@@ -3,6 +3,7 @@
 /*
  * This class represents a manager of the application. Managers are singletons
  * that offer very specific functionalities.
+ * 
  * Subclasses must implement the manager's logic.
  */
 abstract class Manager {

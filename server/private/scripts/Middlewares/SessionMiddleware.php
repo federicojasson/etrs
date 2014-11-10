@@ -13,6 +13,7 @@ class SessionMiddleware extends \Slim\Middleware {
 	
 	/*
 	 * Creates an instance of this class.
+	 * 
 	 * It receives the session storage handler to use.
 	 */
 	public function __construct($storageHandler) {

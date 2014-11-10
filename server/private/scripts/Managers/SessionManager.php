@@ -21,6 +21,7 @@ class SessionManager extends Manager {
 	
 	/*
 	 * Returns the value of a certain entry in the session data.
+	 * 
 	 * If the entry doesn't exist, null is returned.
 	 */
 	public function get($key) {
@@ -34,6 +35,7 @@ class SessionManager extends Manager {
 	
 	/*
 	 * Sets the value of a certain entry in the session data.
+	 * 
 	 * If the entry already exists, its value is replaced.
 	 */
 	public function set($key, $value) {

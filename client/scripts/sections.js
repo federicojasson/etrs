@@ -3,8 +3,7 @@
 
 (function() {
 	// Module
-	angular.module('managers', [
-		'classes',
-		'helpers'
+	angular.module('sections', [
+		'managers'
 	]);
 })();

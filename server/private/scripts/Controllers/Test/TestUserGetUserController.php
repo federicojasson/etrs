@@ -4,7 +4,7 @@
 class TestUserGetUserController extends Controller {
 	
 	protected function executeLogic() {
-		sleep(1);
+		sleep(0);
 		
 		$users = [
 			'federicojasson' => [
@@ -14,7 +14,7 @@ class TestUserGetUserController extends Controller {
 					'firstName' => 'Federico',
 					'lastName' => 'Jasson'
 				],
-				'role' => 'DR'
+				'role' => 'doctor'
 			]
 		];
 		

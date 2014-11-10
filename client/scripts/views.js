@@ -4,6 +4,7 @@
 (function() {
 	// Module
 	var module = angular.module('views', [
+		'managers',
 		'ngRoute'
 	]);
 	
@@ -15,15 +16,21 @@
 	
 	// Controllers
 	module.controller('ViewController', [
-		'$location',
-		'$route',
-		'$scope',
-		'authenticationManager',
+		'views',
 		ViewController
 	]);
 	
 	// Directives
 	module.directive('view', viewDirective);
+	
+	// Services
+	module.service('views', [
+		'$location',
+		'$rootScope',
+		'$route',
+		'authenticationManager',
+		viewsService
+	]);
 	
 	/*
 	 * Defines the routing.
@@ -100,6 +107,13 @@
 			}
 		});
 		
+		// Route: /user/:userId
+		$routeProvider.when('/user/:userId', {
+			accessPolicy: 'ONLY_LOGGED_IN_USERS',
+			resolve: dependencies,
+			templateUrl: 'templates/views/user-view.html'
+		});
+		
 		// There is no matching route: it redirects the user to the root route
 		$routeProvider.otherwise({
 			redirectTo: '/'
@@ -109,10 +123,43 @@
 	/*
 	 * Controller: ViewController.
 	 * 
+	 * Offers logic functions for the view.
+	 */
+	function ViewController(views) {
+		var controller = this;
+		
+		/*
+		 * Returns the URL of the template to be included as the view.
+		 */
+		controller.getTemplateUrl = function() {
+			return views.getTemplateUrl();
+		};
+	}
+	
+	/*
+	 * Directive: view.
+	 * 
+	 * Includes the view.
+	 */
+	function viewDirective() {
+		var options = {
+			controller: 'ViewController',
+			controllerAs: 'view',
+			restrict: 'A',
+			scope: {},
+			template: '<span ng-include="view.getTemplateUrl()"></span>'
+		};
+		
+		return options;
+	}
+	
+	/*
+	 * Service: views.
+	 * 
 	 * Offers functions to dynamically select the view for the current route.
-	 * The controller allows to specify predefined access policies and, taking
-	 * into account the requesting user and the state of the application,
-	 * resolves the route-view binding.
+	 * The service allows to specify predefined access policies and, taking into
+	 * account the requesting user and the state of the application, resolves
+	 * the route-view binding.
 	 * 
 	 * Predefined access policies:
 	 * 
@@ -120,11 +167,11 @@
 	 * - ONLY_LOGGED_IN_USERS: allows access only to logged in users.
 	 * - ONLY_NOT_LOGGED_IN_USERS: allows access only to not logged in users.
 	 * 
-	 * If access is forbidden or if a route dependency is rejected, the
-	 * controller redirects the user to an appropriate route.
+	 * If access is forbidden or if a route dependency is rejected, the service
+	 * redirects the user to an appropriate route.
 	 * 
-	 * When this controller is used, custom properties must be added to the
-	 * $route object (through the $routeProvider object configuration):
+	 * For this service to work, custom properties must be added when
+	 * configuring the $routeProvider object:
 	 * 
 	 * - accessPolicy: indicates the predefined access policy.
 	 * - templateUrls: an optional object containing the template URL for each
@@ -133,13 +180,13 @@
 	 * Be aware that the property templateUrl takes precedence over templateUrls
 	 * when deciding which view to load.
 	 */
-	function ViewController($location, $route, $scope, authenticationManager) {
-		var controller = this;
+	function viewsService($location, $rootScope, $route, authenticationManager) {
+		var service = this;
 		
 		/*
-		 * Returns the URL of the template to be included in the view.
+		 * Returns the URL of the template to be included as the view.
 		 */
-		controller.getTemplateUrl = function() {
+		service.getTemplateUrl = function() {
 			if (! isViewReady) {
 				// The view is not ready
 				return 'templates/views/loading-view.html';
@@ -147,11 +194,6 @@
 			
 			// Gets the current route
 			var currentRoute = $route.current;
-			
-			if (typeof currentRoute === 'undefined') {
-				// The route has not been resolved yet
-				return;
-			}
 			
 			// Gets the template URL
 			var templateUrl = currentRoute.templateUrl;
@@ -170,22 +212,8 @@
 			}
 			
 			// The user is logged in: the template URL depends on her role
-			switch (authenticationManager.getLoggedInUser().getRole()) {
-				case 'DR' : {
-					// The user is a doctor
-					return templateUrls.doctor;
-				}
-				
-				case 'OP' : {
-					// The user is an operator
-					return templateUrls.operator;
-				}
-				
-				case 'RS' : {
-					// The user is a researcher
-					return templateUrls.researcher;
-				}
-			}
+			var userRole = authenticationManager.getLoggedInUser().getRole();
+			return templateUrls[userRole];
 		};
 		
 		/*
@@ -211,6 +239,7 @@
 					if (! authenticationManager.isUserLoggedIn()) {
 						// The user is not logged in
 						$location.path('/log-in');
+						
 						return false;
 					}
 
@@ -221,6 +250,7 @@
 					if (authenticationManager.isUserLoggedIn()) {
 						// The user is logged in
 						$location.path('/');
+						
 						return false;
 					}
 
@@ -230,39 +260,25 @@
 		}
 		
 		// Listens for errors in the route change
-		$scope.$on('$routeChangeError', function() {
+		$rootScope.$on('$routeChangeError', function() {
+			// TODO: use error manager?
+			// TODO: get server response?
+			
 			// Fatal error: some essential resources could not be loaded
 			$location.path('/fatal-error');
 		});
 		
 		// Listens for changes in the route
-		$scope.$on('$routeChangeStart', function() {
+		$rootScope.$on('$routeChangeStart', function() {
 			isViewReady = false;
 		});
 		
 		// Listens for the completion of the route change
-		$scope.$on('$routeChangeSuccess', function() {
+		$rootScope.$on('$routeChangeSuccess', function() {
 			if (checkAccessPolicyCompliance()) {
 				// The access policy is met
 				isViewReady = true;
 			}
 		});
-	}
-	
-	/*
-	 * Directive: view.
-	 * 
-	 * Includes the view.
-	 */
-	function viewDirective() {
-		var options = {
-			controller: 'ViewController',
-			controllerAs: 'view',
-			restrict: 'A',
-			scope: {},
-			template: '<span ng-include="view.getTemplateUrl()"></span>'
-		};
-		
-		return options;
 	}
 })();

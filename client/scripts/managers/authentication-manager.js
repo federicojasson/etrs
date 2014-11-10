@@ -8,7 +8,7 @@
 	// Services
 	module.service('authenticationManager', [
 		'$q',
-		'$timeout',
+		'User',
 		'server',
 		authenticationManagerService
 	]);
@@ -24,13 +24,11 @@
 	 * the client application synchronized with its corresponding state in the
 	 * server.
 	 */
-	function authenticationManagerService($q, $timeout, server) {
+	function authenticationManagerService($q, User, server) {
 		var service = this;
 		
 		/*
 		 * Returns the logged in user.
-		 * 
-		 * If the user is not logged in, null is returned.
 		 */
 		service.getLoggedInUser = function() {
 			return loggedInUser;
@@ -54,24 +52,43 @@
 		 * Refreshes the authentication state.
 		 */
 		service.refreshAuthenticationState = function() {
-			$timeout(function() {
-				// TODO
-				deferred.reject();
-			}, 2000);
+			// Initializes the deferred object
+			deferred = $q.defer();
 			
-			// Sends a request to the server
-			/*server.user.getAuthenticationState().then(function(response) {
-				// TODO
-			}, function(response) {
-				// TODO: reject promise
-			});*/
+			// Gets the authentication state
+			server.user.getAuthenticationState().then(function(response) {
+				if (response.loggedIn) {
+					// The user is logged in
+					
+					// Gets the user's data
+					server.user.getUser(response.userId).then(function(response) {
+						// Creates and sets the logged in user
+						loggedInUser = User.createFromDataObject(response.user);
+
+						// Resolves the deferred
+						deferred.resolve(service);
+					}, function() {
+						// Rejects the deferred
+						deferred.reject();
+					});
+				} else {
+					// The user is not logged in
+					loggedInUser = null;
+					
+					// Resolves the deferred
+					deferred.resolve(service);
+				}
+			}, function() {
+				// Rejects the deferred
+				deferred.reject();
+			});
 		};
 		
 		/*
 		 * The deferred object used to asynchronously refresh the authentication
 		 * state.
 		 */
-		var deferred = $q.defer();
+		var deferred = null;
 		
 		/*
 		 * The logged in user.
