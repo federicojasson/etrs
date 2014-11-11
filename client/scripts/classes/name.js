@@ -15,10 +15,10 @@
 	 */
 	function NameFactory() {
 		/*
-		 * Creates a name object from a data object.
+		 * Creates a name from a data object.
 		 */
 		Name.createFromDataObject = function(dataObject) {
-			// Gets the first and last names
+			// Initializes the name data
 			var firstName = dataObject.firstName;
 			var lastName = dataObject.lastName;
 			

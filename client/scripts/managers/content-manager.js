@@ -8,6 +8,7 @@
 	// Services
 	module.service('contentManager', [
 		'$q',
+		'TaskGroup',
 		'communicator',
 		contentManagerService
 	]);
@@ -21,7 +22,7 @@
 	 * The loadContent function must be called in order to fetch initially the
 	 * mentioned content.
 	 */
-	function contentManagerService($q, communicator) {
+	function contentManagerService($q, TaskGroup, communicator) {
 		var service = this;
 		
 		/*
@@ -50,12 +51,12 @@
 		};
 		
 		/*
-		 * Returns the tasks corresponding to a certain kind of user.
+		 * Returns the task groups corresponding to a certain kind of user.
 		 * 
 		 * It receives the user role.
 		 */
-		service.getTasks = function(userRole) {
-			return content.tasks[userRole];
+		service.getTaskGroups = function(userRole) {
+			return content.taskGroups[userRole];
 		};
 		
 		/*
@@ -85,7 +86,7 @@
 		var content = {
 			errors: null,
 			honorificTitles: null,
-			tasks: null
+			taskGroups: null
 		};
 		
 		/*
@@ -104,6 +105,7 @@
 			};
 			
 			var promise = communicator.sendHttpRequest(request).then(function(response) {
+				// TODO: how to handle this case?
 				content.errors = response;
 			});
 			
@@ -138,7 +140,19 @@
 			};
 			
 			var promise = communicator.sendHttpRequest(request).then(function(response) {
-				content.tasks = response;
+				// Initializes the task groups
+				var taskGroups = {};
+				
+				// For each response property (user role), it creates a property
+				for (var property in response) {
+					if (response.hasOwnProperty(property) && property.lastIndexOf('$', 0) !== 0) {
+						// It is not an Angular's property
+						taskGroups[property] = TaskGroup.createFromArray(response[property]);
+					}
+				}
+				
+				// Sets the task groups
+				content.taskGroups = taskGroups;
 			});
 			
 			return promise;

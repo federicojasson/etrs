@@ -1,0 +1,15 @@
+<span main-layout>
+	<span ng-controller="TasksViewController as view">
+		tasks view<br>
+		TODO: mejorar estilo<br>
+		
+		<div ng-repeat="taskGroup in view.getTaskGroups()">
+			{{ taskGroup.getTitle() }}<br>
+			<div ng-repeat="task in taskGroup.getTasks()">
+				{{ task.getTitle() }}<br>
+				{{ task.getDescription() }}<br>
+				Ir a la <a ng-href="#{{ task.getUrl() }}">tarea</a>
+			</div>
+		</div>
+	</span>
+</span>

@@ -22,7 +22,7 @@
 		 * Creates a user from a data object.
 		 */
 		User.createFromDataObject = function(dataObject) {
-			// Gets the user data
+			// Initializes the user data
 			var gender = dataObject.gender;
 			var id = dataObject.id;
 			var name = Name.createFromDataObject(dataObject.name);

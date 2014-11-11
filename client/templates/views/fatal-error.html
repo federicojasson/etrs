@@ -1,8 +1,12 @@
-<div class="full-center-container">
-	<div class="full-center">
-		<p class="error">
-			Se produjo un error y la aplicación no puede continuar<br>
-			Intente recargar la página o regrese más tarde.
-		</p>
+<span ng-controller="FatalErrorViewController as view">
+	<div class="full-center-container">
+		<div class="full-center">
+			<p class="error">
+				TODO: mejorar estilo<br>
+				{{ view.getOccurredError().getMessage() }}<br>
+				{{ view.getOccurredError().getDetails() }}<br>
+				Intente recargar la página o regrese más tarde.
+			</p>
+		</div>
 	</div>
-</div>
+</span>

@@ -1,6 +1,21 @@
 {
 	"doctor": [
-		
+		{
+			"tasks": [
+				{
+					"description": "TODO: descripción aquí",
+					"title": "Agregar nuevo paciente",
+					"url": "/new-patient"
+				},
+
+				{
+					"description": "TODO: descripción aquí",
+					"title": "Buscar paciente",
+					"url": "/search-patient"
+				}
+			],
+			"title": "Pacientes"
+		}
 	],
 	
 	"operator": [

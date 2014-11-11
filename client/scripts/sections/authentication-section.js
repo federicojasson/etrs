@@ -9,6 +9,7 @@
 	module.controller('AuthenticationSectionController', [
 		'$location',
 		'authenticationManager',
+		'contentManager',
 		AuthenticationSectionController
 	]);
 	
@@ -20,7 +21,7 @@
 	 * 
 	 * Offers logic functions for the authentication section.
 	 */
-	function AuthenticationSectionController($location, authenticationManager) {
+	function AuthenticationSectionController($location, authenticationManager, contentManager) {
 		var controller = this;
 		
 		/*
@@ -28,6 +29,17 @@
 		 */
 		controller.getLoggedInUser = function() {
 			return authenticationManager.getLoggedInUser();
+		};
+		
+		/*
+		 * Returns the user task groups.
+		 */
+		controller.getTaskGroups = function() {
+			// Gets the logged in user's role
+			var userRole = authenticationManager.getLoggedInUser().getRole();
+			
+			// Returns its task groups
+			return contentManager.getTaskGroups(userRole);
 		};
 		
 		/*

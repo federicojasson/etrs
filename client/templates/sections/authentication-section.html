@@ -4,14 +4,18 @@
 
 <span ng-if="section.includeLoggedInUserArea()">
 	<div class="btn-group navbar-btn" dropdown>
-		<button class="btn btn-default" ng-click="section.onClickTasksButton()" type="button">
-			Tareas comunes
+		<button class="btn btn-danger" ng-click="section.onClickTasksButton()" type="button">
+			Tareas
 		</button>
-		<button class="btn btn-default dropdown-toggle" type="button">
+		<button class="btn btn-danger dropdown-toggle" type="button">
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
-			<li><a href="#">Action</a></li>
+			<li class="dropdown-header" ng-repeat-start="taskGroup in section.getTaskGroups()">{{ taskGroup.getTitle() }}</li>
+			<li ng-repeat="task in taskGroup.getTasks()">
+				<a ng-href="#{{ task.getUrl() }}">{{ task.getTitle() }}</a>
+			</li>
+			<li ng-class="{ divider: ! $last }" ng-repeat-end></li>
 		</ul>
 	</div>
 

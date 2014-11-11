@@ -5,6 +5,7 @@
 	// Module
 	angular.module('managers', [
 		'classes',
-		'helpers'
+		'helpers',
+		'ngRoute'
 	]);
 })();
