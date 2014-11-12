@@ -26,6 +26,84 @@
 		var service = this;
 		
 		/*
+		 * The content.
+		 */
+		var content = {
+			errors: null,
+			honorificTitles: null,
+			taskGroups: null
+		};
+		
+		/*
+		 * The deferred object used to asynchronously load the content.
+		 */
+		var deferred = null;
+		
+		/*
+		 * Loads the errors and returns a promise.
+		 */
+		function loadErrors() {
+			var request = {
+				method: 'GET',
+				responseIsArray: false,
+				url: 'client/content/errors.json'
+			};
+			
+			var promise = communicator.sendHttpRequest(request).then(function(response) {
+				// TODO: how to handle this case? server error class?
+				content.errors = response;
+			});
+			
+			return promise;
+		}
+		
+		/*
+		 * Loads the honorific titles and returns a promise.
+		 */
+		function loadHonorificTitles() {
+			var request = {
+				method: 'GET',
+				responseIsArray: false,
+				url: 'client/content/honorific-titles.json'
+			};
+			
+			var promise = communicator.sendHttpRequest(request).then(function(response) {
+				content.honorificTitles = response;
+			});
+			
+			return promise;
+		}
+		
+		/*
+		 * Loads the tasks and returns a promise.
+		 */
+		function loadTasks() {
+			var request = {
+				method: 'GET',
+				responseIsArray: false,
+				url: 'client/content/tasks.json'
+			};
+			
+			var promise = communicator.sendHttpRequest(request).then(function(response) {
+				// Initializes the task groups
+				var taskGroups = {};
+				
+				// For each response property (user role), it creates a property
+				for (var property in response) {
+					if (response.hasOwnProperty(property) && property.lastIndexOf('$', 0) !== 0) {
+						// It is not an Angular's property
+						taskGroups[property] = TaskGroup.createFromArray(response[property]);
+					}
+				}
+				
+				// Sets the task groups
+				content.taskGroups = taskGroups;
+			});
+			
+			return promise;
+		}
+		
+		/*
 		 * Returns the information about an error.
 		 * 
 		 * It receives the error ID.
@@ -79,83 +157,5 @@
 				deferred.reject();
 			});
 		};
-		
-		/*
-		 * The content.
-		 */
-		var content = {
-			errors: null,
-			honorificTitles: null,
-			taskGroups: null
-		};
-		
-		/*
-		 * The deferred object used to asynchronously load the content.
-		 */
-		var deferred = null;
-		
-		/*
-		 * Loads the errors and returns a promise.
-		 */
-		function loadErrors() {
-			var request = {
-				method: 'GET',
-				responseIsArray: false,
-				url: 'client/content/errors.json'
-			};
-			
-			var promise = communicator.sendHttpRequest(request).then(function(response) {
-				// TODO: how to handle this case?
-				content.errors = response;
-			});
-			
-			return promise;
-		}
-		
-		/*
-		 * Loads the honorific titles and returns a promise.
-		 */
-		function loadHonorificTitles() {
-			var request = {
-				method: 'GET',
-				responseIsArray: false,
-				url: 'client/content/honorific-titles.json'
-			};
-			
-			var promise = communicator.sendHttpRequest(request).then(function(response) {
-				content.honorificTitles = response;
-			});
-			
-			return promise;
-		}
-		
-		/*
-		 * Loads the tasks and returns a promise.
-		 */
-		function loadTasks() {
-			var request = {
-				method: 'GET',
-				responseIsArray: false,
-				url: 'client/content/tasks.json'
-			};
-			
-			var promise = communicator.sendHttpRequest(request).then(function(response) {
-				// Initializes the task groups
-				var taskGroups = {};
-				
-				// For each response property (user role), it creates a property
-				for (var property in response) {
-					if (response.hasOwnProperty(property) && property.lastIndexOf('$', 0) !== 0) {
-						// It is not an Angular's property
-						taskGroups[property] = TaskGroup.createFromArray(response[property]);
-					}
-				}
-				
-				// Sets the task groups
-				content.taskGroups = taskGroups;
-			});
-			
-			return promise;
-		}
 	}
 })();

@@ -47,46 +47,13 @@
 		var service = this;
 		
 		/*
-		 * Returns the URL of the template to be included as the view.
-		 */
-		service.getTemplateUrl = function() {
-			if (! isViewReady) {
-				// The view is not ready
-				return 'templates/views/loading-view.html';
-			}
-			
-			// Gets the current route
-			var currentRoute = $route.current;
-			
-			// Gets the template URL
-			var templateUrl = currentRoute.templateUrl;
-			
-			if (typeof templateUrl !== 'undefined') {
-				// A template URL has been specified
-				return templateUrl;
-			}
-			
-			// Gets the template URLs
-			var templateUrls = currentRoute.templateUrls;
-			
-			if (! authenticationManager.isUserLoggedIn()) {
-				// The user is not logged in
-				return templateUrls.anonymous;
-			}
-			
-			// The user is logged in: the template URL depends on her role
-			var userRole = authenticationManager.getLoggedInUser().getRole();
-			return templateUrls[userRole];
-		};
-		
-		/*
 		 * Indicates whether the view is ready to be rendered.
 		 */
 		var isViewReady = false;
 		
 		/*
-		 * Returns whether the user complies with the access policy. In case she
-		 * is not, it redirects her to the appropiate route.
+		 * Determines whether the user complies with the access policy. In case
+		 * she is not, it redirects her to the appropiate route.
 		 */
 		function checkAccessPolicyCompliance() {
 			// Gets the access policy
@@ -121,6 +88,39 @@
 				}
 			}
 		}
+		
+		/*
+		 * Returns the URL of the template to be included as the view.
+		 */
+		service.getTemplateUrl = function() {
+			if (! isViewReady) {
+				// The view is not ready
+				return 'templates/views/loading-view.html';
+			}
+			
+			// Gets the current route
+			var currentRoute = $route.current;
+			
+			// Gets the template URL
+			var templateUrl = currentRoute.templateUrl;
+			
+			if (angular.isDefined(templateUrl)) {
+				// A template URL has been specified
+				return templateUrl;
+			}
+			
+			// Gets the template URLs
+			var templateUrls = currentRoute.templateUrls;
+			
+			if (! authenticationManager.isUserLoggedIn()) {
+				// The user is not logged in
+				return templateUrls.anonymous;
+			}
+			
+			// The user is logged in: the template URL depends on her role
+			var userRole = authenticationManager.getLoggedInUser().getRole();
+			return templateUrls[userRole];
+		};
 		
 		// Listens for errors in the route change
 		$rootScope.$on('$routeChangeError', function() {

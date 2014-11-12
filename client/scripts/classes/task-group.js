@@ -18,6 +18,14 @@
 	 */
 	function TaskGroupFactory(Task) {
 		/*
+		 * Creates an instance of this class.
+		 */
+		function TaskGroup(tasks, title) {
+			this.tasks = tasks;
+			this.title = title;
+		}
+		
+		/*
 		 * Creates a task group array from an array of data objects.
 		 */
 		TaskGroup.createFromArray = function(dataObjectsArray) {
@@ -56,14 +64,6 @@
 		TaskGroup.prototype.title = null;
 		
 		/*
-		 * Creates an instance of this class.
-		 */
-		function TaskGroup(tasks, title) {
-			this.tasks = tasks;
-			this.title = title;
-		}
-		
-		/*
 		 * Returns the task group tasks.
 		 */
 		TaskGroup.prototype.getTasks = function() {
@@ -77,7 +77,6 @@
 			return this.title;
 		};
 		
-		// Returns the constructor function
 		return TaskGroup;
 	}
 })();

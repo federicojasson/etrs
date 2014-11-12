@@ -15,6 +15,15 @@
 	 */
 	function TaskFactory() {
 		/*
+		 * Creates an instance of this class.
+		 */
+		function Task(description, title, url) {
+			this.description = description;
+			this.title = title;
+			this.url = url;
+		}
+		
+		/*
 		 * Creates a task array from an array of data objects.
 		 */
 		Task.createFromArray = function(dataObjectsArray) {
@@ -59,15 +68,6 @@
 		Task.prototype.url = null;
 		
 		/*
-		 * Creates an instance of this class.
-		 */
-		function Task(description, title, url) {
-			this.description = description;
-			this.title = title;
-			this.url = url;
-		}
-		
-		/*
 		 * Returns the task description.
 		 */
 		Task.prototype.getDescription = function() {
@@ -88,7 +88,6 @@
 			return this.url;
 		};
 		
-		// Returns the constructor function
 		return Task;
 	}
 })();

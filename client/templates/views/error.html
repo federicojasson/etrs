@@ -1,9 +1,10 @@
 <span main-layout>
 	<span ng-controller="ErrorViewController as view">
 			<p class="error">
-				TODO: mejorar estilo
+				TODO: mejorar estilo<br>
 				{{ view.getOccurredError().getMessage() }}<br>
-				{{ view.getOccurredError().getDetails() }}
+				Detalles<br>
+				<pre>{{ view.getOccurredError().getDetails() }}</pre>
 			</p>
 		</div>
 	</span>

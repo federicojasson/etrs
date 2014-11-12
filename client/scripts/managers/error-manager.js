@@ -28,6 +28,11 @@
 		var service = this;
 		
 		/*
+		 * The error that occurred.
+		 */
+		var occurredError = null;
+		
+		/*
 		 * Determines whether an error occurred.
 		 */
 		service.errorOccurred = function() {
@@ -66,10 +71,5 @@
 			// Redirects the user to the fatal error route
 			$location.path('/fatal-error');
 		};
-		
-		/*
-		 * The error that occurred.
-		 */
-		var occurredError = null;
 	}
 })();

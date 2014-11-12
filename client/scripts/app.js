@@ -4,6 +4,7 @@
 (function() {
 	// Module
 	var module = angular.module('app', [
+		'forms',
 		'layouts',
 		'managers',
 		'sections',

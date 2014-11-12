@@ -28,6 +28,17 @@
 		var service = this;
 		
 		/*
+		 * The deferred object used to asynchronously refresh the authentication
+		 * state.
+		 */
+		var deferred = null;
+		
+		/*
+		 * The logged in user.
+		 */
+		var loggedInUser = null;
+		
+		/*
 		 * Returns the logged in user.
 		 */
 		service.getLoggedInUser = function() {
@@ -83,16 +94,5 @@
 				deferred.reject();
 			});
 		};
-		
-		/*
-		 * The deferred object used to asynchronously refresh the authentication
-		 * state.
-		 */
-		var deferred = null;
-		
-		/*
-		 * The logged in user.
-		 */
-		var loggedInUser = null;
 	}
 })();

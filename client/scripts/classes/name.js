@@ -15,6 +15,14 @@
 	 */
 	function NameFactory() {
 		/*
+		 * Creates an instance of this class.
+		 */
+		function Name(firstName, lastName) {
+			this.firstName = firstName;
+			this.lastName = lastName;
+		}
+		
+		/*
 		 * Creates a name from a data object.
 		 */
 		Name.createFromDataObject = function(dataObject) {
@@ -35,14 +43,6 @@
 		 * The last name.
 		 */
 		Name.prototype.lastName = null;
-		
-		/*
-		 * Creates an instance of this class.
-		 */
-		function Name(firstName, lastName) {
-			this.firstName = firstName;
-			this.lastName = lastName;
-		}
 		
 		/*
 		 * Returns the first name.
@@ -75,7 +75,6 @@
 			return this.lastName;
 		};
 		
-		// Returns the constructor function
 		return Name;
 	}
 })();

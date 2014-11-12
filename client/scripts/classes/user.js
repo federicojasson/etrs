@@ -19,6 +19,16 @@
 	 */
 	function UserFactory(Name, contentManager) {
 		/*
+		 * Creates an instance of this class.
+		 */
+		function User(gender, id, name, role) {
+			this.gender = gender;
+			this.id = id;
+			this.name = name;
+			this.role = role;
+		}
+		
+		/*
 		 * Creates a user from a data object.
 		 */
 		User.createFromDataObject = function(dataObject) {
@@ -53,16 +63,6 @@
 		User.prototype.role = null;
 		
 		/*
-		 * Creates an instance of this class.
-		 */
-		function User(gender, id, name, role) {
-			this.gender = gender;
-			this.id = id;
-			this.name = name;
-			this.role = role;
-		}
-		
-		/*
 		 * Returns the user's honorific name.
 		 */
 		User.prototype.getHonorificName = function() {
@@ -87,7 +87,6 @@
 			return this.role;
 		};
 		
-		// Returns the constructor function
 		return User;
 	}
 })();

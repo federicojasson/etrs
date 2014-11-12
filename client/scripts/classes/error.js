@@ -18,6 +18,14 @@
 	 */
 	function ErrorFactory(contentManager) {
 		/*
+		 * Creates an instance of this class.
+		 */
+		function Error(details, message) {
+			this.details = details;
+			this.message = message;
+		}
+		
+		/*
 		 * Creates a fatal error.
 		 */
 		Error.createFatalError = function(details) {
@@ -33,11 +41,15 @@
 		 */
 		Error.createFromServerResponse = function(response) {
 			// Gets the error ID
-			response = response.data.errorId;
+			var errorId = response.data.errorId;
 			
 			// Initializes the error data
-			var details = 'Error ' + response.status;
-			var message = contentManager.getError().message;
+			// TODO: server error class?
+			var details =
+				'ID: ' + errorId + '\n' +
+				'Descripción: ' + contentManager.getError(errorId).description;
+			
+			var message = 'Error ' + response.status;
 			
 			// Creates and returns the error object
 			return new Error(details, message);
@@ -54,14 +66,6 @@
 		Error.prototype.message = null;
 		
 		/*
-		 * Creates an instance of this class.
-		 */
-		function Error(details, message) {
-			this.details = details;
-			this.message = message;
-		}
-		
-		/*
 		 * Returns the error details.
 		 */
 		Error.prototype.getDetails = function() {
@@ -75,7 +79,6 @@
 			return this.message;
 		};
 		
-		// Returns the constructor function
 		return Error;
 	}
 })();

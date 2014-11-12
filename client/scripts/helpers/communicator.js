@@ -47,7 +47,7 @@
 			var url = request.url;
 			
 			// Initializes undefined optional parameters with default values
-			input = (typeof input === 'undefined')? {} : input;
+			input = (angular.isDefined(input))? input : {};
 			
 			// Initializes the input objects (only one will be actually used)
 			var bodyInput = {};

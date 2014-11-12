@@ -7,7 +7,7 @@ class TestUserGetAuthenticationStateController extends Controller {
 		sleep(0);
 		
 		$this->app->response->setBody([
-			'loggedIn' => true,
+			'loggedIn' => false,
 			'userId' => 'federicojasson'
 		]);
 	}
