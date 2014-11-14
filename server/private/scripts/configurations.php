@@ -50,8 +50,8 @@ $app->configureMode(OPERATION_MODE_RELEASE, function() use ($app) {
 });
 
 // Adds the managers
-$container->singleton('controllers', function() {
-	return new ControllerManager();
+$container->singleton('services', function() {
+	return new ServiceManager();
 });
 $container->singleton('session', function() {
 	return new SessionManager();

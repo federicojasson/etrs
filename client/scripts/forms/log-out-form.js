@@ -31,7 +31,7 @@
 		 */
 		controller.submit = function() {
 			// Logs out the user
-			server.user.logOut().then(function(response) {
+			server.logOut().then(function(response) {
 				// Refreshes the authentication state
 				authenticationManager.refreshAuthenticationState();
 

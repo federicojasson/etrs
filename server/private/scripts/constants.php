@@ -2,6 +2,7 @@
 
 /*
  * This script defines application-wide constants.
+ * TODO: check if all are used
  */
 
 // HTTP content types
@@ -23,9 +24,3 @@ define('OPERATION_MODE_RELEASE', 'release');
 
 // PHP directives
 define('PHP_DIRECTIVE_SESSION_IDLE_LIFETIME', 'session.gc_maxlifetime');
-
-// Route groups
-define('ROUTE_GROUP_DOCTOR', '/doctor');
-define('ROUTE_GROUP_OPERATOR', '/operator');
-define('ROUTE_GROUP_RESEARCHER', '/researcher');
-define('ROUTE_GROUP_USER', '/user');

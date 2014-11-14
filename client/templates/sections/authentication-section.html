@@ -4,7 +4,7 @@
 
 <span ng-if="section.includeLoggedInUserArea()">
 	<div class="btn-group navbar-btn" dropdown>
-		<button class="btn btn-danger" ng-click="section.onClickTasksButton()" type="button">
+		<button class="btn btn-danger" ng-click="section.goToTasksRoute()" type="button">
 			Tareas
 		</button>
 		<button class="btn btn-danger dropdown-toggle" type="button">
@@ -20,7 +20,7 @@
 	</div>
 
 	<div class="btn-group navbar-btn" dropdown>
-		<button class="btn btn-primary" ng-click="section.onClickLoggedInUserButton()" type="button">
+		<button class="btn btn-primary" ng-click="section.goToLoggedInUserRoute()" type="button">
 			{{ section.getLoggedInUser().getHonorificName() }}
 		</button>
 		<button class="btn btn-primary dropdown-toggle" type="button">

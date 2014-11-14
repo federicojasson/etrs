@@ -9,6 +9,7 @@
 	module.controller('ErrorViewController', [
 		'$location',
 		'$scope',
+		'$window',
 		'errorManager',
 		ErrorViewController
 	]);
@@ -18,7 +19,7 @@
 	 * 
 	 * Offers logic functions for the error view.
 	 */
-	function ErrorViewController($location, $scope, errorManager) {
+	function ErrorViewController($location, $scope, $window, errorManager) {
 		var controller = this;
 		
 		/*

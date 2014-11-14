@@ -67,12 +67,12 @@
 			deferred = $q.defer();
 			
 			// Gets the authentication state
-			server.user.getAuthenticationState().then(function(response) {
+			server.getAuthenticationState().then(function(response) {
 				if (response.loggedIn) {
 					// The user is logged in
 					
 					// Gets the user's data
-					server.user.getUser(response.userId).then(function(response) {
+					server.getUser(response.userId).then(function(response) {
 						// Creates and sets the logged in user
 						loggedInUser = User.createFromDataObject(response.user);
 

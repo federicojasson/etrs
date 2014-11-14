@@ -1,16 +1,16 @@
 {
 	"doctor": {
-		"F": "Dra.",
-		"M": "Dr."
+		"female": "Dra.",
+		"male": "Dr."
 	},
 	
 	"operator": {
-		"F": "Sra.",
-		"M": "Sr."
+		"female": "Sra.",
+		"male": "Sr."
 	},
 	
 	"researcher": {
-		"F": "Sra.",
-		"M": "Sr."
+		"female": "Sra.",
+		"male": "Sr."
 	}
 }

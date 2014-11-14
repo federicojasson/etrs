@@ -55,6 +55,13 @@
 			}
 		});
 		
+		// Route: /about
+		$routeProvider.when('/about', {
+			accessPolicy: 'ALL_USERS',
+			resolve: dependencies,
+			templateUrl: 'templates/views/about-view.html'
+		});
+		
 		// Route: /contact
 		$routeProvider.when('/contact', {
 			accessPolicy: 'ALL_USERS',
@@ -66,13 +73,13 @@
 		$routeProvider.when('/error', {
 			accessPolicy: 'ALL_USERS',
 			resolve: dependencies,
-			templateUrl: 'templates/views/error.html'
+			templateUrl: 'templates/views/error-view.html'
 		});
 		
 		// Route: /fatal-error
 		$routeProvider.when('/fatal-error', {
 			accessPolicy: 'ALL_USERS',
-			templateUrl: 'templates/views/fatal-error.html'
+			templateUrl: 'templates/views/fatal-error-view.html'
 		});
 		
 		// Route: /help

@@ -19,13 +19,49 @@
 	 */
 	function UserFactory(Name, contentManager) {
 		/*
+		 * Parses a gender and returns an inner representation.
+		 * TODO: maybe use a service for this kind of jobs (gender also used with patients)
+		 */
+		function parseGender(gender) {
+			switch (gender) {
+				case 'F': {
+					return 'female';
+				}
+				
+				case 'M': {
+					return 'male';
+				}
+			}
+		}
+		
+		/*
+		 * Parses a user role and returns an inner representation.
+		 * TODO: maybe use a service for this kind of jobs
+		 */
+		function parseRole(role) {
+			switch (role) {
+				case 'DR': {
+					return 'doctor';
+				}
+				
+				case 'OP': {
+					return 'operator';
+				}
+				
+				case 'RS': {
+					return 'researcher';
+				}
+			}
+		}
+		
+		/*
 		 * Creates an instance of this class.
 		 */
 		function User(gender, id, name, role) {
-			this.gender = gender;
+			this.gender = parseGender(gender);
 			this.id = id;
 			this.name = name;
-			this.role = role;
+			this.role = parseRole(role);
 		}
 		
 		/*

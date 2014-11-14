@@ -43,6 +43,25 @@
 		};
 		
 		/*
+		 * Redirects the user to the logged in user route.
+		 */
+		controller.goToLoggedInUserRoute = function() {
+			// Gets the logged in user's ID
+			var userId = authenticationManager.getLoggedInUser().getId();
+			
+			// Redirects the user to the user route
+			$location.path('/user/' + userId);
+		};
+		
+		/*
+		 * Redirects the user to the tasks route.
+		 */
+		controller.goToTasksRoute = function() {
+			// Redirects the user to the tasks route
+			$location.path('/tasks');
+		};
+		
+		/*
 		 * Determines whether the log in area should be included.
 		 */
 		controller.includeLogInArea = function() {
@@ -56,25 +75,6 @@
 		controller.includeLoggedInUserArea = function() {
 			// Includes the area if the user is logged in
 			return authenticationManager.isUserLoggedIn();
-		};
-		
-		/*
-		 * Action executed when the user clicks on the logged in user button.
-		 */
-		controller.onClickLoggedInUserButton = function() {
-			// Gets the logged in user's ID
-			var userId = authenticationManager.getLoggedInUser().getId();
-			
-			// Redirects the user to the user route
-			$location.path('/user/' + userId);
-		};
-		
-		/*
-		 * Action executed when the user clicks on the tasks button.
-		 */
-		controller.onClickTasksButton = function() {
-			// Redirects the user to the tasks route
-			$location.path('/tasks');
 		};
 	}
 	

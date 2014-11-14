@@ -135,7 +135,7 @@
 		});
 		
 		// Listens for the completion of the route change
-		$rootScope.$on('$routeChangeSuccess', function() {
+		$rootScope.$on('$routeChangeSuccess', function(event, next, current) {
 			if (checkAccessPolicyCompliance()) {
 				// The access policy is met
 				isViewReady = true;

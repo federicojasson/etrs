@@ -6,22 +6,22 @@
 
 // Controllers
 require 'Controllers/Controller.php';
-require 'Controllers/User/UserGetAuthenticationStateController.php';
-require 'Controllers/User/UserGetUserController.php';
-require 'Controllers/User/UserLogInController.php';
-require 'Controllers/User/UserLogOutController.php';
+require 'Controllers/GetAuthenticationStateController.php';
+require 'Controllers/GetUserController.php';
+require 'Controllers/LogInController.php';
+require 'Controllers/LogOutController.php';
 // TODO: remove
-require 'Controllers/Test/TestUserGetAuthenticationStateController.php';
-require 'Controllers/Test/TestUserGetUserController.php';
-require 'Controllers/Test/TestUserLogInController.php';
-require 'Controllers/Test/TestUserLogOutController.php';
+require 'Controllers/TestGetAuthenticationStateController.php';
+require 'Controllers/TestGetUserController.php';
+require 'Controllers/TestLogInController.php';
+require 'Controllers/TestLogOutController.php';
 
 // Extensions
 require 'Extensions/JsonResponse.php';
 
 // Managers
 require 'Managers/Manager.php';
-require 'Managers/ControllerManager.php';
+require 'Managers/ServiceManager.php';
 require 'Managers/SessionManager.php';
 
 // Middlewares

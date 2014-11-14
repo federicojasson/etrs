@@ -130,7 +130,7 @@
 			var userPassword = userPasswordInputModel.getValue();
 			
 			// Logs in the user
-			server.user.logIn(userId, userPassword).then(function(response) {
+			server.logIn(userId, userPassword).then(function(response) {
 				if (response.loggedIn) {
 					// The user was logged in
 					

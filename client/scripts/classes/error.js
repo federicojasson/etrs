@@ -46,8 +46,8 @@
 			// Initializes the error data
 			// TODO: server error class?
 			var details =
-				'ID: ' + errorId + '\n' +
-				'Descripción: ' + contentManager.getError(errorId).description;
+				'ID: ' + errorId + '\n\n' +
+				'Descripción:\n' + contentManager.getError(errorId).description;
 			
 			var message = 'Error ' + response.status;
 			

@@ -2,10 +2,81 @@
 	This file defines the site's general style.
 */
 
-p.error {
+@font-face {
+    font-family: "Bebas Neue";
+    src: local("Bebas Neue"), local("BebasNeue"), url(../fonts/BebasNeue.otf);
+}
+
+@font-face {
+    font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 300;
+    src: local("Open Sans Light"), local("OpenSans-Light"), url(../fonts/OpenSans-Light.ttf);
+}
+
+@font-face {
+    font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 400;
+    src: local("Open Sans Normal"), local("OpenSans-Normal"), url(../fonts/OpenSans-Normal.ttf);
+}
+
+@font-face {
+    font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 700;
+    src: local("Open Sans Bold"), local("OpenSans-Bold"), url(../fonts/OpenSans-Bold.ttf);
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+	min-width: 1024px;
+	overflow-x: hidden;
+}
+
+div.error-header {
 	color: #aaaaaa;
-	letter-spacing: 1px;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
+	letter-spacing: 2px;
+	margin-bottom: 4px;
+}
+
+div.footer-bottom {
+	color: #666666;
+	font-size: 0.8em;
+	font-weight: 300;
+	margin-bottom: 48px;
+}
+
+a.footer-link {
+	color: #666666;
+}
+
+li.footer-link {
+	font-size: 0.9em;
+	font-weight: 300;
+	margin-bottom: 4px;
+}
+
+li.footer-link-header {
+	font-size: 0.92em;
+	font-weight: 700;
+	margin-bottom: 8px;
 	text-transform: uppercase;
+}
+
+a.footer-logo {
+	background-image: url(../images/footer-logo-sprite.png);
+	background-position: 0px -72px;
+	background-repeat: no-repeat;
+	display: block;
+	height: 72px;
+	width: 256px;
+}
+
+a.footer-logo:hover {
+	background-position: 0px 0px;
 }
 
 div.full-center {
@@ -21,15 +92,58 @@ div.full-center-container {
 	width: 100%;
 }
 
-img.loading {
+img.loading-image {
 	display: block;
 	margin: 0px auto 5% auto;
 	max-height: 256px;
 	max-width: 256px;
 }
 
-p.loading {
+p.loading-text {
 	color: #aaaaaa;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
 	letter-spacing: 2px;
-	text-transform: uppercase;
+}
+
+a.navbar-logo {
+	background-image: url(../images/navbar-logo-sprite.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	display: block;
+	height: 48px;
+	width: 80px;
+}
+
+a.navbar-logo:hover {
+	background-position: 0px -48px;
+}
+
+span.navbar-logo-text {
+	color: #666666;
+	display: inline-block;
+	float: left;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
+	line-height: 50px;
+	margin-left: 16px;
+	padding-top: 2px;
+}
+
+li.task-group-list-item {
+	margin-top: 48px;
+}
+
+a.task-link {
+	color: inherit;
+}
+
+li.task-list-item {
+	margin-top: 24px;
+	padding-left: 32px;
+}
+
+div.view-container {
+	margin-bottom: 48px;
+	min-height: 256px;
 }
