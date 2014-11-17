@@ -6,27 +6,38 @@
 
 // Controllers
 require 'Controllers/Controller.php';
+require 'Controllers/SecureController.php';
 require 'Controllers/GetAuthenticationStateController.php';
 require 'Controllers/GetUserController.php';
 require 'Controllers/LogInController.php';
 require 'Controllers/LogOutController.php';
-// TODO: remove
+// TODO: remove tests
 require 'Controllers/TestGetAuthenticationStateController.php';
 require 'Controllers/TestGetUserController.php';
 require 'Controllers/TestLogInController.php';
 require 'Controllers/TestLogOutController.php';
+
+// Databases
+require 'Databases/Database.php';
+require 'Databases/BusinessLogicDatabase.php';
+require 'Databases/WebServerDatabase.php';
 
 // Extensions
 require 'Extensions/JsonResponse.php';
 
 // Managers
 require 'Managers/Manager.php';
+require 'Managers/AuthenticationManager.php';
 require 'Managers/ServiceManager.php';
 require 'Managers/SessionManager.php';
 
 // Middlewares
-require 'Middlewares/JsonMiddleware.php';
 require 'Middlewares/SessionMiddleware.php';
+
+// Models
+require 'Models/Model.php';
+require 'Models/Name.php';
+require 'Models/User.php';
 
 // Session storage handlers
 require 'SessionStorageHandlers/SessionStorageHandler.php';

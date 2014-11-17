@@ -26,15 +26,15 @@
 		}
 		
 		/*
-		 * Creates a task group array from an array of data objects.
+		 * Creates a task group array from an array of data.
 		 */
-		TaskGroup.createFromArray = function(dataObjectsArray) {
+		TaskGroup.createFromDataArray = function(dataArray) {
 			// Initializes the task group array
 			var taskGroups = [];
 			
 			// Fills the task group array with task group objects
-			for (var i = 0; i < dataObjectsArray.length; i++) {
-				taskGroups[i] = TaskGroup.createFromDataObject(dataObjectsArray[i]);
+			for (var i = 0; i < dataArray.length; i++) {
+				taskGroups[i] = TaskGroup.createFromData(dataArray[i]);
 			}
 			
 			// Returns the task group array
@@ -42,12 +42,12 @@
 		};
 		
 		/*
-		 * Creates a task group from a data object.
+		 * Creates a task group using its data.
 		 */
-		TaskGroup.createFromDataObject = function(dataObject) {
+		TaskGroup.createFromData = function(data) {
 			// Initializes the task group data
-			var tasks = Task.createFromArray(dataObject.tasks);
-			var title = dataObject.title;
+			var tasks = Task.createFromDataArray(data.tasks);
+			var title = data.title;
 			
 			// Creates and returns the task group object
 			return new TaskGroup(tasks, title);

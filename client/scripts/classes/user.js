@@ -65,14 +65,14 @@
 		}
 		
 		/*
-		 * Creates a user from a data object.
+		 * Creates a user using its data.
 		 */
-		User.createFromDataObject = function(dataObject) {
+		User.createFromData = function(data) {
 			// Initializes the user data
-			var gender = dataObject.gender;
-			var id = dataObject.id;
-			var name = Name.createFromDataObject(dataObject.name);
-			var role = dataObject.role;
+			var gender = data.gender;
+			var id = data.id;
+			var name = Name.createFromData(data.name);
+			var role = data.role;
 			
 			// Creates and returns the user object
 			return new User(gender, id, name, role);

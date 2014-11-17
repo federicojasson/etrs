@@ -1,0 +1,13 @@
+{
+	"etrs_business_logic": {
+		"dsn": "mysql:host=localhost;dbname=etrs_business_logic;charset=utf8",
+		"username": "TODO",
+		"password": "password"
+	},
+	
+	"etrs_web_server": {
+		"dsn": "mysql:host=localhost;dbname=etrs_web_server;charset=utf8",
+		"username": "TODO",
+		"password": "password"
+	}
+}

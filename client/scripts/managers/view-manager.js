@@ -20,15 +20,9 @@
 	 * Service: viewManager.
 	 * 
 	 * Offers functions to dynamically select the view for the current route.
-	 * The service allows to specify predefined access policies and, taking into
-	 * account the requesting user and the state of the application, resolves
-	 * the route-view binding.
-	 * 
-	 * Predefined access policies:
-	 * 
-	 * - ALL_USERS: allows access to all users.
-	 * - ONLY_LOGGED_IN_USERS: allows access only to logged in users.
-	 * - ONLY_NOT_LOGGED_IN_USERS: allows access only to not logged in users.
+	 * The service allows to specify the user roles authorized to access a
+	 * certain route and, taking into account the requesting user and the state
+	 * of the application, resolves the route-view binding.
 	 * 
 	 * If access is forbidden or if a route dependency is rejected, the service
 	 * redirects the user to an appropriate route.
@@ -36,9 +30,13 @@
 	 * For this service to work, custom properties must be added when
 	 * configuring the $routeProvider object:
 	 * 
-	 * - accessPolicy: indicates the predefined access policy.
+	 * - authorizedUserRoles: an array indicating the user roles authorized to
+	 *   access the route.
 	 * - templateUrls: an optional object containing the template URL for each
-	 *   user role (and anonymous, in case she is not logged in).
+	 *   user role.
+	 * 
+	 * The special value 'anonymous' can be used to refer to not logged in users
+	 * when defining the rules.
 	 * 
 	 * Be aware that the property templateUrl takes precedence over templateUrls
 	 * when deciding which view to load.
@@ -52,41 +50,40 @@
 		var isViewReady = false;
 		
 		/*
-		 * Determines whether the user complies with the access policy. In case
-		 * she is not, it redirects her to the appropiate route.
+		 * Determines whether the user is authorized to access the current
+		 * route. In case she is not, it redirects her to the appropiate route.
 		 */
-		function checkAccessPolicyCompliance() {
-			// Gets the access policy
-			var accessPolicy = $route.current.accessPolicy;
+		function checkUserAuthorization() {
+			// Gets the authorized user roles
+			var authorizedUserRoles = $route.current.authorizedUserRoles;
 			
-			// Takes the proper action according to the policy
-			switch (accessPolicy) {
-				case 'ALL_USERS': {
-					return true;
-				}
-				
-				case 'ONLY_LOGGED_IN_USERS': {
-					if (! authenticationManager.isUserLoggedIn()) {
-						// The user is not logged in
-						$location.path('/log-in');
-						
-						return false;
-					}
-
-					return true;
-				}
-				
-				case 'ONLY_NOT_LOGGED_IN_USERS': {
-					if (authenticationManager.isUserLoggedIn()) {
-						// The user is logged in
-						$location.path('/');
-						
-						return false;
-					}
-
-					return true;
-				}
+			if (! angular.isDefined(authorizedUserRoles)) {
+				// No user role has been authorized for the current route
+				return false;
 			}
+			
+			if (! authenticationManager.isUserLoggedIn()) {
+				// The user is not logged in
+				var isAuthorized = authorizedUserRoles.indexOf('anonymous') > -1;
+				
+				if (! isAuthorized) {
+					// Redirects the user to the log in route
+					$location.path('/log-in');
+				}
+				
+				return isAuthorized;
+			}
+			
+			// The user is logged in: the decision depends on her role
+			var userRole = authenticationManager.getLoggedInUser().getRole();
+			var isAuthorized = authorizedUserRoles.indexOf(userRole) > -1;
+			
+			if (! isAuthorized) {
+				// Redirects the user to the root route
+				$location.path('/');
+			}
+			
+			return isAuthorized;
 		}
 		
 		/*
@@ -135,8 +132,8 @@
 		});
 		
 		// Listens for the completion of the route change
-		$rootScope.$on('$routeChangeSuccess', function(event, next, current) {
-			if (checkAccessPolicyCompliance()) {
+		$rootScope.$on('$routeChangeSuccess', function() {
+			if (checkUserAuthorization()) {
 				// The access policy is met
 				isViewReady = true;
 			}

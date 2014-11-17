@@ -3,7 +3,7 @@
 /*
  * TODO
  */
-class LogInController extends Controller {
+class LogInController extends SecureController {
 	
 	/*
 	 * TODO
@@ -16,13 +16,6 @@ class LogInController extends Controller {
 	 * TODO
 	 */
 	protected function isInputValid() {
-		// TODO
-	}
-	
-	/*
-	 * TODO
-	 */
-	protected function isUserAuthorized() {
 		// TODO
 	}
 	

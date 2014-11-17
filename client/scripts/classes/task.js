@@ -24,15 +24,15 @@
 		}
 		
 		/*
-		 * Creates a task array from an array of data objects.
+		 * Creates a task array from an array of data.
 		 */
-		Task.createFromArray = function(dataObjectsArray) {
+		Task.createFromDataArray = function(dataArray) {
 			// Initializes the task array
 			var tasks = [];
 			
 			// Fills the task array with task objects
-			for (var i = 0; i < dataObjectsArray.length; i++) {
-				tasks[i] = Task.createFromDataObject(dataObjectsArray[i]);
+			for (var i = 0; i < dataArray.length; i++) {
+				tasks[i] = Task.createFromData(dataArray[i]);
 			}
 			
 			// Returns the task array
@@ -40,13 +40,13 @@
 		};
 		
 		/*
-		 * Creates a task from a data object.
+		 * Creates a task using its data.
 		 */
-		Task.createFromDataObject = function(dataObject) {
+		Task.createFromData = function(data) {
 			// Initializes the task data
-			var description = dataObject.description;
-			var title = dataObject.title;
-			var url = dataObject.url;
+			var description = data.description;
+			var title = data.title;
+			var url = data.url;
 			
 			// Creates and returns the task object
 			return new Task(description, title, url);

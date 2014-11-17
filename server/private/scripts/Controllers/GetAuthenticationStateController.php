@@ -3,7 +3,7 @@
 /*
  * TODO
  */
-class GetAuthenticationStateController extends Controller {
+class GetAuthenticationStateController extends SecureController {
 	
 	/*
 	 * TODO
@@ -16,13 +16,6 @@ class GetAuthenticationStateController extends Controller {
 	 * TODO
 	 */
 	protected function isInputValid() {
-		// TODO
-	}
-	
-	/*
-	 * TODO
-	 */
-	protected function isUserAuthorized() {
 		// TODO
 	}
 	

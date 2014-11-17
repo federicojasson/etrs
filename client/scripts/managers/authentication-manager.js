@@ -74,7 +74,7 @@
 					// Gets the user's data
 					server.getUser(response.userId).then(function(response) {
 						// Creates and sets the logged in user
-						loggedInUser = User.createFromDataObject(response.user);
+						loggedInUser = User.createFromData(response.user);
 
 						// Resolves the deferred
 						deferred.resolve(service);

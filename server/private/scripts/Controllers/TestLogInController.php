@@ -1,7 +1,7 @@
 <?php
 
 // TODO: remove class
-class TestLogInController extends Controller {
+class TestLogInController extends SecureController {
 	
 	protected function executeLogic() {
 		sleep(1);
@@ -17,10 +17,6 @@ class TestLogInController extends Controller {
 	}
 	
 	protected function isInputValid() {
-		return true;
-	}
-	
-	protected function isUserAuthorized() {
 		return true;
 	}
 	

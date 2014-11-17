@@ -23,12 +23,12 @@
 		}
 		
 		/*
-		 * Creates a name from a data object.
+		 * Creates a name using its data.
 		 */
-		Name.createFromDataObject = function(dataObject) {
+		Name.createFromData = function(data) {
 			// Initializes the name data
-			var firstName = dataObject.firstName;
-			var lastName = dataObject.lastName;
+			var firstName = data.firstName;
+			var lastName = data.lastName;
 			
 			// Creates and returns the name object
 			return new Name(firstName, lastName);

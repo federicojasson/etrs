@@ -92,7 +92,7 @@
 				for (var property in response) {
 					if (response.hasOwnProperty(property) && property.lastIndexOf('$', 0) !== 0) {
 						// It is not an Angular's property
-						taskGroups[property] = TaskGroup.createFromArray(response[property]);
+						taskGroups[property] = TaskGroup.createFromDataArray(response[property]);
 					}
 				}
 				

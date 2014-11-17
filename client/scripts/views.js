@@ -45,7 +45,12 @@
 		
 		// Route: /
 		$routeProvider.when('/', {
-			accessPolicy: 'ALL_USERS',
+			authorizedUserRoles: [
+				'anonymous',
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			resolve: dependencies,
 			templateUrls: {
 				anonymous: 'templates/views/index-view/anonymous.html',
@@ -57,34 +62,59 @@
 		
 		// Route: /about
 		$routeProvider.when('/about', {
-			accessPolicy: 'ALL_USERS',
+			authorizedUserRoles: [
+				'anonymous',
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			resolve: dependencies,
 			templateUrl: 'templates/views/about-view.html'
 		});
 		
 		// Route: /contact
 		$routeProvider.when('/contact', {
-			accessPolicy: 'ALL_USERS',
+			authorizedUserRoles: [
+				'anonymous',
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			resolve: dependencies,
 			templateUrl: 'templates/views/contact-view.html'
 		});
 		
 		// Route: /error
 		$routeProvider.when('/error', {
-			accessPolicy: 'ALL_USERS',
+			authorizedUserRoles: [
+				'anonymous',
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			resolve: dependencies,
 			templateUrl: 'templates/views/error-view.html'
 		});
 		
 		// Route: /fatal-error
 		$routeProvider.when('/fatal-error', {
-			accessPolicy: 'ALL_USERS',
+			authorizedUserRoles: [
+				'anonymous',
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			templateUrl: 'templates/views/fatal-error-view.html'
 		});
 		
 		// Route: /help
 		$routeProvider.when('/help', {
-			accessPolicy: 'ALL_USERS',
+			authorizedUserRoles: [
+				'anonymous',
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			resolve: dependencies,
 			templateUrls: {
 				anonymous: 'templates/views/help-view/anonymous.html',
@@ -96,28 +126,52 @@
 		
 		// Route: /log-in
 		$routeProvider.when('/log-in', {
-			accessPolicy: 'ONLY_NOT_LOGGED_IN_USERS',
+			authorizedUserRoles: [
+				'anonymous'
+			],
 			resolve: dependencies,
 			templateUrl: 'templates/views/log-in-view.html'
 		});
 		
 		// Route: /privacy
 		$routeProvider.when('/privacy', {
-			accessPolicy: 'ALL_USERS',
+			authorizedUserRoles: [
+				'anonymous',
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			resolve: dependencies,
 			templateUrl: 'templates/views/privacy-view.html'
 		});
 		
+		// Route: /search-patient
+		$routeProvider.when('/search-patient', {
+			authorizedUserRoles: [
+				'doctor'
+			],
+			resolve: dependencies,
+			templateUrl: 'templates/views/search-patient-view.html'
+		});
+		
 		// Route: /tasks
 		$routeProvider.when('/tasks', {
-			accessPolicy: 'ONLY_LOGGED_IN_USERS',
+			authorizedUserRoles: [
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			resolve: dependencies,
 			templateUrl: 'templates/views/tasks-view.html'
 		});
 		
 		// Route: /user/:userId
 		$routeProvider.when('/user/:userId', {
-			accessPolicy: 'ONLY_LOGGED_IN_USERS',
+			authorizedUserRoles: [
+				'doctor',
+				'operator',
+				'researcher'
+			],
 			resolve: dependencies,
 			templateUrl: 'templates/views/user-view.html'
 		});

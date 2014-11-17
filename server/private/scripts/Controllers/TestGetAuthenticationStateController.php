@@ -1,22 +1,18 @@
 <?php
 
 // TODO: remove class
-class TestGetAuthenticationStateController extends Controller {
+class TestGetAuthenticationStateController extends SecureController {
 	
 	protected function executeLogic() {
 		sleep(0);
 		
 		$this->app->response->setBody([
-			'loggedIn' => false,
+			'loggedIn' => true,
 			'userId' => 'federicojasson'
 		]);
 	}
 	
 	protected function isInputValid() {
-		return true;
-	}
-	
-	protected function isUserAuthorized() {
 		return true;
 	}
 	
