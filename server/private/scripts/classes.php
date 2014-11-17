@@ -17,6 +17,11 @@ require 'Controllers/TestGetUserController.php';
 require 'Controllers/TestLogInController.php';
 require 'Controllers/TestLogOutController.php';
 
+// Data objects
+require 'DataObjects/DataObject.php';
+require 'DataObjects/Name.php';
+require 'DataObjects/User.php';
+
 // Databases
 require 'Databases/Database.php';
 require 'Databases/BusinessLogicDatabase.php';
@@ -33,11 +38,6 @@ require 'Managers/SessionManager.php';
 
 // Middlewares
 require 'Middlewares/SessionMiddleware.php';
-
-// Models
-require 'Models/Model.php';
-require 'Models/Name.php';
-require 'Models/User.php';
 
 // Session storage handlers
 require 'SessionStorageHandlers/SessionStorageHandler.php';

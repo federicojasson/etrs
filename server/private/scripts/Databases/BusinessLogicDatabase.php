@@ -17,8 +17,31 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO
 	 */
-	public function getUser($userId) {
-		// TODO
+	public function getUser($id) {
+		// Defines the statement
+		// TODO: query in XML file?
+		$statement = '
+			SELECT id, role, first_name, last_name, gender
+			FROM not_erased_users
+			WHERE id LIKE BINARY :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$rows = $this->executePreparedStatement($statement, $parameters);
+		
+		if (count($rows) === 0) {
+			// The query didn't return any value
+			return null;
+		}
+		
+		// Returns the query result
+		return $rows[0];
 	}
 	
 }

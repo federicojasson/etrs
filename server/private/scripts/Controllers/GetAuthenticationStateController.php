@@ -1,22 +1,26 @@
 <?php
 
 /*
- * TODO
+ * This controller is responsible for the following service:
+ * 
+ *	URL:	/server/get-authentication-state
+ *	Method:	POST
  */
 class GetAuthenticationStateController extends SecureController {
 	
 	/*
-	 * TODO
+	 * Executes the controller's logic.
 	 */
 	protected function executeLogic() {
 		// TODO
 	}
 	
 	/*
-	 * TODO
+	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO
+		// There is no input
+		return true;
 	}
 	
 }

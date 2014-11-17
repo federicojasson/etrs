@@ -26,7 +26,7 @@ class AuthenticationManager extends Manager {
 			$userData = $app->businessLogicDatabase->getUser($loggedInUserId);
 			
 			// Initializes the logged in user
-			$this->loggedInUser = User.createFromData($userData);
+			$this->loggedInUser = (new User())->fill($userData);
 		}
 		
 		return $this->loggedInUser;

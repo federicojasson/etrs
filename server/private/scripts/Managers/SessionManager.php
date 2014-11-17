@@ -21,15 +21,8 @@ class SessionManager extends Manager {
 	
 	/*
 	 * Returns the value of a certain entry in the session data.
-	 * 
-	 * If the entry doesn't exist, null is returned.
 	 */
 	public function get($key) {
-		if (! $this->contains($key)) {
-			// The entry doesn't exist
-			return null;
-		}
-		
 		return $_SESSION[$key];
 	}
 	
