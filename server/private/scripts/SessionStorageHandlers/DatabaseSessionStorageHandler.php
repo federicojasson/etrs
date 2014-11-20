@@ -7,42 +7,42 @@
 class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function onClose() {
 		// TODO
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function onDestroy($sessionId) {
 		// TODO
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function onGarbageCollection($idleLifetime) {
 		// TODO
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function onOpen($savePath, $sessionName) {
 		// TODO
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function onRead($sessionId) {
 		// TODO
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function onWrite($sessionId, $sessionData) {
 		// TODO

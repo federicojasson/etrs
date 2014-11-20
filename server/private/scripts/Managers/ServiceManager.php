@@ -15,7 +15,6 @@ class ServiceManager extends Manager {
 	 * responsible for handling the requests.
 	 */
 	public function define($url, $method, $controller) {
-		// Defines the service
 		$this->app->map($url, function() use ($controller) {
 			// Calls the controller to serve the request
 			$controller->call();

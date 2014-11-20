@@ -9,9 +9,17 @@ class WebServerDatabase extends Database {
 	 * Creates an instance of this class.
 	 */
 	public function __construct() {
-		// TODO: get dsn, user and password from config file
+		$app = \Slim\Slim::getInstance();
 		
-		parent::__construct('', '', '');
+		// Gets the database configuration
+		$databaseConfiguration = $app->configurations->getDatabaseConfigurations()['webServer'];
+		
+		// Gets the connection parameters
+		$dsn = $databaseConfiguration['dsn'];
+		$username = $databaseConfiguration['username'];
+		$password = $databaseConfiguration['password'];
+		
+		parent::__construct($dsn, $username, $password);
 	}
 	
 }

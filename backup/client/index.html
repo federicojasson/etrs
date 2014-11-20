@@ -5,37 +5,45 @@
 		<meta charset="UTF-8">
 		
 		<link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="resources/css/style.css" rel="stylesheet">
+		<link href="styles/style.css" rel="stylesheet">
 		
-		<title>ETRS - Eye tracker record system</title>
+		<title>ETRS - Eye Tracking Record System</title>
 	</head>
-	
 	<body>
-		<navbar></navbar>
-		
-		<div>
-			Views:<br>
-			<a href="#/">main</a><br>
-			<a href="#/edit-patient/6e338612e99a471eaa5c1446f6340b20">edit-patient 6e338612e99a471eaa5c1446f6340b20</a><br>
-			<a href="#/new-patient">new-patient</a><br>
-			<a href="#/patients">patients</a><br>
-			<a href="#/patient/6e338612e99a471eaa5c1446f6340b20">patient 6e338612e99a471eaa5c1446f6340b20</a><br>
-		</div>
-		
-		<div class="col-sm-8 col-sm-offset-2">
-			<div ng-view></div>
-		</div>
+		<span view></span>
 		
 		<script src="vendors/angular/angular.min.js"></script>
 		<script src="vendors/angular/angular-resource.min.js"></script>
 		<script src="vendors/angular/angular-route.min.js"></script>
-		<script src="resources/js/app.js"></script>
-		<script src="resources/js/communications.js"></script>
-		<script src="resources/js/filters.js"></script>
-		<script src="resources/js/patients.js"></script>
-		<script src="resources/js/routes.js"></script>
-		<script src="resources/js/user.js"></script>
-		<script src="resources/js/utilities.js"></script>
-		<script src="resources/js/views.js"></script>
+		<script src="vendors/ui-bootstrap/ui-bootstrap-tpls-0.11.2.min.js"></script>
+		<script src="scripts/app.js"></script>
+		<script src="scripts/classes.js"></script>
+		<script src="scripts/classes/error.js"></script>
+		<script src="scripts/classes/input-model.js"></script>
+		<script src="scripts/classes/name.js"></script>
+		<script src="scripts/classes/task.js"></script>
+		<script src="scripts/classes/task-group.js"></script>
+		<script src="scripts/classes/user.js"></script>
+		<script src="scripts/forms.js"></script>
+		<script src="scripts/forms/log-in-form.js"></script>
+		<script src="scripts/forms/log-out-form.js"></script>
+		<script src="scripts/forms/search-patient-form.js"></script>
+		<script src="scripts/helpers.js"></script>
+		<script src="scripts/helpers/communicator.js"></script>
+		<script src="scripts/helpers/server.js"></script>
+		<script src="scripts/layouts.js"></script>
+		<script src="scripts/layouts/main-layout.js"></script>
+		<script src="scripts/managers.js"></script>
+		<script src="scripts/managers/authentication-manager.js"></script>
+		<script src="scripts/managers/content-manager.js"></script>
+		<script src="scripts/managers/error-manager.js"></script>
+		<script src="scripts/managers/view-manager.js"></script>
+		<script src="scripts/sections.js"></script>
+		<script src="scripts/sections/authentication-section.js"></script>
+		<script src="scripts/views.js"></script>
+		<script src="scripts/views/error-view.js"></script>
+		<script src="scripts/views/fatal-error-view.js"></script>
+		<script src="scripts/views/tasks-view.js"></script>
+		<script src="scripts/views/user-view.js"></script>
 	</body>
 </html>

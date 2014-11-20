@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This middleware takes care of the initialization and configuration of the
+ * This middleware takes care of the initialization and configuration of the PHP
  * session.
  */
 class SessionMiddleware extends \Slim\Middleware {

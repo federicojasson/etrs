@@ -16,7 +16,7 @@ abstract class Manager {
 	/*
 	 * Creates an instance of this class.
 	 */
-	protected function __construct() {
+	public function __construct() {
 		$this->app = \Slim\Slim::getInstance();
 	}
 	

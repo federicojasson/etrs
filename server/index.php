@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This script includes all the necessary scripts and initializes the
+ * This script includes all the necessary resources and initializes the
  * application.
  */
 
@@ -10,12 +10,14 @@ require 'private/scripts/constants.php';
 
 // Slim framework
 require 'private/scripts/Slim/Slim.php';
+require 'private/scripts/Slim/Middleware.php';
+require 'private/scripts/Slim/Middleware/ContentTypes.php';
 
 // Initializes the framework
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim([
 	'mode' => OPERATION_MODE_DEBUG
-	//'mode' => OPERATION_MODE_RELEASE TODO: set before release
+	//'mode' => OPERATION_MODE_RELEASE
 ]);
 
 // Classes

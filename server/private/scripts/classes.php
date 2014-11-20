@@ -5,40 +5,31 @@
  */
 
 // Controllers
-require 'Controllers/Controller.php';
-require 'Controllers/SecureController.php';
-require 'Controllers/GetAuthenticationStateController.php';
-require 'Controllers/GetUserController.php';
-require 'Controllers/LogInController.php';
-require 'Controllers/LogOutController.php';
-// TODO: remove tests
-require 'Controllers/TestGetAuthenticationStateController.php';
-require 'Controllers/TestGetUserController.php';
-require 'Controllers/TestLogInController.php';
-require 'Controllers/TestLogOutController.php';
-
-// Data objects
-require 'DataObjects/DataObject.php';
-require 'DataObjects/Name.php';
-require 'DataObjects/User.php';
+require 'private/scripts/Controllers/Controller.php';
+require 'private/scripts/Controllers/SecureController.php';
+require 'private/scripts/Controllers/GetAuthenticationStateController.php';
+require 'private/scripts/Controllers/LogInController.php';
+require 'private/scripts/Controllers/LogOutController.php';
 
 // Databases
-require 'Databases/Database.php';
-require 'Databases/BusinessLogicDatabase.php';
-require 'Databases/WebServerDatabase.php';
+require 'private/scripts/Databases/Database.php';
+require 'private/scripts/Databases/BusinessLogicDatabase.php';
+require 'private/scripts/Databases/WebServerDatabase.php';
 
 // Extensions
-require 'Extensions/JsonResponse.php';
+require 'private/scripts/Extensions/JsonResponse.php';
 
 // Managers
-require 'Managers/Manager.php';
-require 'Managers/AuthenticationManager.php';
-require 'Managers/ServiceManager.php';
-require 'Managers/SessionManager.php';
+require 'private/scripts/Managers/Manager.php';
+require 'private/scripts/Managers/AuthenticationManager.php';
+require 'private/scripts/Managers/ConfigurationManager.php';
+require 'private/scripts/Managers/ServiceManager.php';
+require 'private/scripts/Managers/SessionManager.php';
+require 'private/scripts/Managers/ValidationManager.php';
 
 // Middlewares
-require 'Middlewares/SessionMiddleware.php';
+require 'private/scripts/Middlewares/SessionMiddleware.php';
 
 // Session storage handlers
-require 'SessionStorageHandlers/SessionStorageHandler.php';
-require 'SessionStorageHandlers/DatabaseSessionStorageHandler.php';
+require 'private/scripts/SessionStorageHandlers/SessionStorageHandler.php';
+require 'private/scripts/SessionStorageHandlers/DatabaseSessionStorageHandler.php';

@@ -1,40 +1,45 @@
 
 ================================================================================
-Server API
+About this document
 ================================================================================
 
-About this document
--------------------
+This file summaries the server API. It describes the different services and
+the way they are invoked. For each, it indicates:
 
-	This file summaries the server API. It describes the different services and
-	the way they are invoked. For each, it indicates:
-
-		- The URL to invoke it (relative to the site domain).
-		- The accepted HTTP method.
-		- The user roles authorized to request it.
-		- A brief description of what is it for.
-		- A detailed explanation of its usage.
-		- The expected input data.
-		- The output data if the operation succeeds.
-		- The specific errors that may occur and their reasons.
+- The URL to invoke it (relative to the site domain).
+- The accepted HTTP method.
+- The user roles authorized to request it.
+- A brief description of what is it for.
+- A detailed explanation of its usage.
+- The expected input data.
+- The output data if the operation succeeds.
+- The specific errors that may occur and their reasons.
 
 
-The 'anonymous' user role
--------------------------
-
-	The special user role 'anonymous' is used in this document to indicate that
-	a service can be invoked by not logged in users.
 
 
-Input and output formats
-------------------------
+================================================================================
+User roles
+================================================================================
 
-	TODO: esto será así?
-	It must be pointed out that both inputs and outputs should always be
-	expected in JSON format. Because of this, it goes without saying that the
-	order of the input (or output) has no relevance. Just to follow a
-	convention, the parameters are specified alphabetically in this document.
+A user role determines the privileges of a user in the system. Each user
+should have one and only one role.
+The system handles the following user roles:
 
+- Administrator.
+- Doctor.
+- Operator.
+- Researcher.
+
+Throughout this document, an special user role 'anonymous' is used to
+indicate that a service can be invoked by not logged in users.
+
+
+
+
+================================================================================
+Error handling
+================================================================================
 
 Error responses
 ---------------
@@ -46,15 +51,15 @@ Error responses
 	}
 
 	An error ID is a predefined identifier that indicates the cause of the
-	error. Client applications can receive this ID and show a custom message for
+	error. Client applications can receive this ID and show a custom message to
 	the user.
 
 
 Undefined services
 ------------------
 
-	If the client sends a request for an undefined service, the server responds
-	with the following error:
+	If the client sends a request for an undefined service, the server will
+	respond with the following error:
 
 	----------------------------------------------------------------------------
 		HTTP error:	404 Not Found
@@ -70,8 +75,8 @@ Undefined services
 Internal server errors
 ----------------------
 
-	If the server fails unexpectedly due to some internal problem, it responds
-	with the following error:
+	If the server fails unexpectedly due to some internal problem, it will
+	respond with the following error:
 
 	----------------------------------------------------------------------------
 		HTTP error:	500 Internal Server Error
@@ -80,11 +85,45 @@ Internal server errors
 	----------------------------------------------------------------------------
 
 
-Data types
-----------
 
-	- Username: a valid username must be a non-empty string, with a maximum of
-	  32 characters. It can contain the following characters: [0-9A-Z_a-z].
+
+================================================================================
+Data types
+================================================================================
+
+Email
+------
+
+	TODO
+
+
+Gender
+------
+
+	The valid values are:
+
+	- 'f': female.
+	- 'm': male.
+
+
+User role
+---------
+
+	The valid values are:
+	
+	- 'ad': administrator.
+	- 'dr': doctor.
+	- 'op': operator.
+	- 'rs': researcher.
+
+
+
+
+================================================================================
+Server API
+================================================================================
+
+The server API is described below.
 
 
 
@@ -94,13 +133,14 @@ URL:	/server/get-authentication-state
 Method:	POST
 ================================================================================
 
-Authorized user roles
----------------------
+Authorized users
+----------------
 
-	- anonymous
-	- doctor
-	- operator
-	- researcher
+	- Anonymous.
+	- Administrators.
+	- Doctors.
+	- Operators.
+	- Researchers.
 
 
 Description
@@ -115,9 +155,9 @@ Details
 	The service is used to obtain the user authentication state in the server
 	(i.e., whether the user is logged in or not).
 	It doesn't receive any input.
-	The output is the current authentication state, which contains an entry
-	(loggedIn) that indicates whether the user is logged in. In such a case, the
-	user's ID is included.
+	The output is the current authentication state, which contains an entry that
+	indicates whether the user is logged in. In such a case, the user's ID is
+	also included.
 
 
 Input
@@ -139,7 +179,11 @@ Output
 
 	{
 		"loggedIn": true,
-		"userId": ...
+		"user": {
+			"data": {
+				"id": ...
+			}
+		}
 	}
 
 
@@ -152,91 +196,14 @@ Specific errors
 
 
 ================================================================================
-URL:	/server/get-user
-Method:	POST
-================================================================================
-
-Authorized user roles
----------------------
-
-	- doctor
-	- operator
-	- researcher
-
-
-Description
------------
-
-	Returns a user's data.
-
-
-Details
--------
-
-	The service is used to obtain information about a user.
-	It receives the user's ID.
-	The output is an entry (user) that contains the user information.
-
-
-Input
------
-
-	JSON string:
-
-	{
-		"userId": ...
-	}
-
-	Conditions:
-	
-	- "userId" must be a valid username.
-
-
-Output
-------
-
-	JSON string:
-
-	{
-		"user": {
-			"gender": ...,
-			"id": ...,
-			"name": {
-				"firstName": ...,
-				"lastName": ...
-			},
-			"role": ...
-		}
-	}
-
-
-Specific errors
----------------
-
-	----------------------------------------------------------------------------
-		HTTP error:	403 Forbidden
-		Error ID:	UNAUTHORIZED_USER
-		Reason:		The user is not authorized to invoke this service.
-	----------------------------------------------------------------------------
-
-	----------------------------------------------------------------------------
-		HTTP error:	400 Bad Request
-		Error ID:	INVALID_INPUT
-		Reason:		The input didn't pass the validation.
-	----------------------------------------------------------------------------
-
-
-
-
-================================================================================
 URL:	/server/log-in
 Method:	POST
 ================================================================================
 
-Authorized user roles
----------------------
+Authorized users
+----------------
 
-	- anonymous
+	- Anonymous.
 
 
 Description
@@ -250,7 +217,7 @@ Details
 
 	The service allows a user to authenticate with the server.
 	It receives the user's ID and password.
-	The output contains an entry (loggedIn) that indicates whether the user was
+	The output contains an entry that indicates whether the user was
 	successfully logged in.
 
 
@@ -303,12 +270,13 @@ URL:	/server/log-out
 Method:	POST
 ================================================================================
 
-Authorized user roles
----------------------
+Authorized users
+----------------
 
-	- doctor
-	- operator
-	- researcher
+	- Administrators.
+	- Doctors.
+	- Operators.
+	- Researchers.
 
 
 Description

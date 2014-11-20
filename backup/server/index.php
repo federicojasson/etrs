@@ -1,45 +1,31 @@
 <?php
 
-// TODO: comments
+/*
+ * This script includes all the necessary scripts and initializes the
+ * application.
+ */
 
-require 'Slim/Slim.php';
-require 'parameters.php';
+// Constants
+require 'private/scripts/constants.php';
 
+// Slim framework
+require 'private/scripts/Slim/Slim.php';
+
+// Initializes the framework
 \Slim\Slim::registerAutoloader();
-
 $app = new \Slim\Slim([
-	//'mode' => OPERATION_MODE_RELEASE
 	'mode' => OPERATION_MODE_DEBUG
+	//'mode' => OPERATION_MODE_RELEASE TODO: set before release
 ]);
 
-require 'classes/middlewares/AuthorizationMiddleware.php';
-require 'classes/middlewares/DatabaseMiddleware.php';
-require 'classes/middlewares/JsonMiddleware.php';
-require 'classes/middlewares/RouteMiddleware.php';
-require 'classes/middlewares/SessionMiddleware.php';
+// Classes
+require 'private/scripts/classes.php';
 
-require 'classes/data_objects/DataObject.php';
-require 'classes/data_objects/SessionDataObject.php';
-require 'classes/data_objects/UserDataObject.php';
+// Configurations
+require 'private/scripts/configurations.php';
 
-require 'classes/Database.php';
-require 'classes/BusinessDatabase.php';
-require 'classes/ServerDatabase.php';
-
-require 'classes/AuthenticationManager.php';
-require 'classes/DatabaseConnection.php';
-require 'classes/RouteManager.php';
-require 'classes/Session.php';
-
-require 'classes/SessionStorageHandler.php';
-require 'classes/DatabaseSessionStorageHandler.php';
-
-require 'configurations.php';
-
-require 'services/anonymous_services.php';
-require 'services/doctor_services.php';
-require 'services/operator_services.php';
-require 'services/researcher_services.php';
+// Services
+require 'private/scripts/services.php';
 
 // Serves the incoming request
 $app->run();

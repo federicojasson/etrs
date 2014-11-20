@@ -19,9 +19,10 @@ abstract class Database {
 	/*
 	 * Creates an instance of this class.
 	 * 
-	 * It receives the DSN and the database user's name and password.
+	 * It receives the DSN and the username and password to connect with the
+	 * DBMS.
 	 */
-	protected function __construct($dsn, $username, $password) {
+	public function __construct($dsn, $username, $password) {
 		// Creates a PDO instance
 		$pdo = new PDO($dsn, $username, $password);
 		

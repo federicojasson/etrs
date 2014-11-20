@@ -22,7 +22,7 @@ abstract class SecureController extends Controller {
 	 * 
 	 * It receives the user roles authorized to request this service.
 	 */
-	protected function __construct($authorizedUserRoles) {
+	public function __construct($authorizedUserRoles) {
 		parent::__construct();
 		$this->authorizedUserRoles = $authorizedUserRoles;
 	}
@@ -34,16 +34,21 @@ abstract class SecureController extends Controller {
 	 * user roles authorized to invoke the service.
 	 */
 	protected function isUserAuthorized() {
-		$authenticator = $this->app->authenticator;
+		// TODO: tal vez crear un AuthorizationManager si hay distintos tipos de validacioens que hacer (por ejemplo, qué usuarios pueden modificar una entrada)
 		
-		if (! $authenticator.isUserLoggedIn()) {
+		$app = $this->app;
+		$authenticator = $app->authenticator;
+		$businessLogicDatabase = $app->businessLogicDatabase;
+		
+		if (! $authenticator->isUserLoggedIn()) {
 			// The user is not logged in
 			return in_array(USER_ROLE_ANONYMOUS, $this->authorizedUserRoles);
 		}
 
 		// The user is logged in: the decision depends on her role
-		$userRole = $authenticator.getLoggedInUser().getRole();
-		return in_array($userRole, $this->authorizedUserRoles);
+		$userId = $authenticator->getLoggedInUserId();
+		$userData = $businessLogicDatabase->getUserData($userId);
+		return in_array($userData['role'], $this->authorizedUserRoles);
 	}
 	
 }

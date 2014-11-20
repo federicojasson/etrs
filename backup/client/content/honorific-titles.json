@@ -1,0 +1,21 @@
+{
+	"administrator": {
+		"female": "Sra.",
+		"male": "Sr."
+	},
+	
+	"doctor": {
+		"female": "Dra.",
+		"male": "Dr."
+	},
+	
+	"operator": {
+		"female": "Sra.",
+		"male": "Sr."
+	},
+	
+	"researcher": {
+		"female": "Sra.",
+		"male": "Sr."
+	}
+}

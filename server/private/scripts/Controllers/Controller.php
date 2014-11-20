@@ -20,7 +20,7 @@ abstract class Controller {
 	/*
 	 * Creates an instance of this class.
 	 */
-	protected function __construct() {
+	public function __construct() {
 		$this->app = \Slim\Slim::getInstance();
 	}
 	
@@ -35,12 +35,16 @@ abstract class Controller {
 		
 		if (! $this->isUserAuthorized()) {
 			// The user is not authorized to execute this service
-			$app->halt(HTTP_STATUS_FORBIDDEN);
+			$app->halt(HTTP_STATUS_FORBIDDEN, [
+				'errorId' => 'UNAUTHORIZED_USER'
+			]);
 		}
 		
 		if (! $this->isInputValid()) {
 			// The input is invalid
-			$app->halt(HTTP_STATUS_BAD_REQUEST);
+			$app->halt(HTTP_STATUS_BAD_REQUEST, [
+				'errorId' => 'INVALID_INPUT'
+			]);
 		}
 		
 		// Executes the logic
