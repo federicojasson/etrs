@@ -32,7 +32,7 @@ class BusinessLogicDatabase extends Database {
 		$statement = '
 			SELECT *
 			FROM users_authentication_data
-			WHERE id LIKE BINARY :id
+			WHERE id = :id
 			LIMIT 1
 		';
 		
@@ -63,7 +63,7 @@ class BusinessLogicDatabase extends Database {
 		$statement = '
 			SELECT *
 			FROM users_data
-			WHERE id LIKE BINARY :id
+			WHERE id = :id
 			LIMIT 1
 		';
 		

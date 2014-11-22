@@ -1,0 +1,38 @@
+<span ng-if="section.includeLogInArea()">
+	<a class="btn btn-success navbar-btn" href="#/log-in">Iniciar sesión</a>
+</span>
+
+<span ng-if="section.includeLoggedInUserArea()">
+	<div class="btn-group navbar-btn" dropdown>
+		<button class="btn btn-danger" ng-click="section.goToTasksRoute()" type="button">
+			Tareas
+		</button>
+		<button class="btn btn-danger dropdown-toggle" type="button">
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			<li class="dropdown-header" ng-repeat-start="taskGroup in section.getTasks()">{{ taskGroup.title }}</li>
+			<li ng-repeat="task in taskGroup.tasks">
+				<a ng-href="#{{ task.url }}">{{ task.title }}</a>
+			</li>
+			<li ng-class="{ divider: ! $last }" ng-repeat-end></li>
+		</ul>
+	</div>
+	
+	<div class="btn-group navbar-btn" dropdown>
+		<button class="btn btn-primary" ng-click="section.goToLoggedInUserRoute()" type="button">
+			{{ section.getLoggedInUser().data | honorificName }}
+		</button>
+		<button class="btn btn-primary dropdown-toggle" type="button">
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu">
+			<li>
+				<a href="#/change-password">Cambiar contraseña</a>
+			</li>
+			<li ng-controller="LogOutFormController as form">
+				<a class="link" ng-click="form.submit()">Cerrar sesión</a>
+			</li>
+		</ul>
+	</div>
+</span>

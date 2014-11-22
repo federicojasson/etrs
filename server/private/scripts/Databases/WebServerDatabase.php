@@ -22,4 +22,34 @@ class WebServerDatabase extends Database {
 		parent::__construct($dsn, $username, $password);
 	}
 	
+	/*
+	 * TODO
+	 */
+	public function deleteExpiredSessions($idleLifetime) {
+		// TODO
+	}
+	
+	/*
+	 * Deletes a session.
+	 * 
+	 * It receives the session's ID.
+	 */
+	public function deleteSession($id) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM sessions
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
 }

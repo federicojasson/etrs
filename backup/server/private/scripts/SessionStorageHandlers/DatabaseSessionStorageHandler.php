@@ -10,7 +10,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * TODO
 	 */
 	public function onClose() {
-		// TODO
+		return true;
 	}
 	
 	/*
@@ -31,7 +31,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * TODO
 	 */
 	public function onOpen($savePath, $sessionName) {
-		// TODO
+		return true;
 	}
 	
 	/*

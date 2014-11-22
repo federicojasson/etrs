@@ -1,0 +1,53 @@
+<span main-layout>
+	<div class="row">
+		<div class="col-sm-3 col-sm-offset-1">
+			<div class="lock-image"></div>
+		</div>
+		<div class="col-sm-6 col-sm-offset-1 well">
+			<form ng-controller="LogInFormController as form" ng-submit="form.submit()" novalidate>
+				<fieldset>
+					<legend>Ingrese su nombre de usuario y contraseña</legend>
+
+					<div
+						alert
+						class="form-group"
+						close="form.closeInformativeAlert()"
+						ng-if="form.includeInformativeAlert()"
+						type="danger"
+					>
+						No fue posible autenticarse en el servidor.<br>
+						Intente reingresar su nombre de usuario y su contraseña.
+					</div>
+
+					<div class="form-group" ng-class="{ 'has-error': ! form.inputModels.userId.isValid }">
+						<input
+							class="form-control input-lg"
+							ng-model="form.inputModels.userId.value"
+							placeholder="Nombre de usuario"
+							popover="{{ form.inputModels.userId.message }}"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="text"
+						>
+					</div>
+
+					<div class="form-group" ng-class="{ 'has-error': ! form.inputModels.userPassword.isValid }">
+						<input
+							class="form-control input-lg"
+							ng-model="form.inputModels.userPassword.value"
+							placeholder="Contraseña"
+							popover="{{ form.inputModels.userPassword.message }}"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="password"
+						>
+					</div>
+
+					<div class="form-group">
+						<button class="btn btn-default btn-lg pull-right" type="submit">Iniciar sesión</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</span>

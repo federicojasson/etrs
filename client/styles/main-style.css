@@ -1,0 +1,129 @@
+@font-face {
+	font-family: "Bebas Neue";
+	src: local("Bebas Neue"), local("BebasNeue"), url(../fonts/BebasNeue.otf);
+}
+
+@font-face {
+	font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 300;
+	src: local("Open Sans Light"), local("OpenSans-Light"), url(../fonts/OpenSans-Light.ttf);
+}
+
+@font-face {
+	font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 400;
+	src: local("Open Sans Normal"), local("OpenSans-Normal"), url(../fonts/OpenSans-Normal.ttf);
+}
+
+@font-face {
+	font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 700;
+	src: local("Open Sans Bold"), local("OpenSans-Bold"), url(../fonts/OpenSans-Bold.ttf);
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+	min-width: 1024px;
+	overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #888888;
+	font-family: "Bebas Neue", sans-serif;
+}
+
+.full-center {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.full-center-container {
+	display: table;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+}
+
+.link {
+	cursor: pointer;
+}
+
+.loading-image {
+	background-image: url(../images/loading.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 30%;
+	margin: 0px auto 5% auto;
+	max-height: 256px;
+	max-width: 256px;
+	min-height: 64px;
+}
+
+.loading-text {
+	color: #aaaaaa;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
+	letter-spacing: 2px;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+	user-select: none;
+}
+
+.lock-image {
+	background-image: url(../images/lock.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
+}
+
+.navbar-logo-image {
+	background-image: url(../images/navbar-logo-sprite.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	display: block;
+	height: 48px;
+	width: 80px;
+}
+
+.navbar-logo-image:hover {
+	background-position: 0px -48px;
+}
+
+.navbar-logo-text {
+	color: #666666;
+	display: inline-block;
+	float: left;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
+	line-height: 50px;
+	margin-left: 16px;
+	padding-top: 2px;
+}
+
+.task-group-list-item {
+	margin-top: 48px;
+}
+
+.task-list-item {
+	margin-top: 24px;
+	padding-left: 32px;
+}
+
+.task-list-link {
+	color: inherit;
+}
+
+.view-container {
+	min-height: 256px;
+	padding-bottom: 24px;
+	padding-top: 24px;
+}

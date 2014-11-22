@@ -1,0 +1,2 @@
+- Ingresar datos de debug
+- Verificar consultas SQL manualmente (especialmente aquéllas con VARBINARY)

@@ -10,42 +10,73 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * TODO: comments
 	 */
 	public function onClose() {
-		// TODO
+		return true;
 	}
 	
 	/*
 	 * TODO: comments
 	 */
 	public function onDestroy($sessionId) {
-		// TODO
+		try {
+			// Deletes the session from the database
+			$this->app->webServerDatabase->deleteSession($sessionId);
+			
+			return true;
+		} catch (Exception $exception) {
+			return false;
+		}
 	}
 	
 	/*
 	 * TODO: comments
 	 */
 	public function onGarbageCollection($idleLifetime) {
-		// TODO
+		try {
+			// Deletes the expired sessions from the database
+			$this->app->webServerDatabase->deleteExpiredSessions($idleLifetime);
+			
+			return true;
+		} catch (Exception $exception) {
+			return false;
+		}
 	}
 	
 	/*
 	 * TODO: comments
 	 */
 	public function onOpen($savePath, $sessionName) {
-		// TODO
+		return true;
 	}
 	
 	/*
 	 * TODO: comments
 	 */
 	public function onRead($sessionId) {
-		// TODO
+		try {
+			// TODO: implement
+			$sessionData = $this->app->webServerDatabase->getSessionData($sessionId);
+			
+			if (is_null($sessionData)) {
+				return '';
+			}
+			
+			return $sessionData;
+		} catch (Exception $exception) {
+			return '';
+		}
 	}
 	
 	/*
 	 * TODO: comments
 	 */
 	public function onWrite($sessionId, $sessionData) {
-		// TODO
+		try {
+			// TODO: implement
+			$this->app->webServerDatabase->insertOrUpdateSession($sessionId, $sessionData);
+			return true;
+		} catch (Exception $exception) {
+			return false;
+		}
 	}
 	
 }

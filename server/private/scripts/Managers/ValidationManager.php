@@ -92,7 +92,10 @@ class ValidationManager extends Manager {
 		// Validates the elements recursively
 		$count = count($input);
 		for ($i = 0; $i < $count; $i++) {
-			if (! $this->hasValidJsonStructure($input[$i], $jsonStructure)) {
+			// Validates the element
+			$hasValidJsonStructure = $this->hasValidJsonStructure($input[$i], $jsonStructure);
+			
+			if (! $hasValidJsonStructure) {
 				// The element didn't pass the validation
 				return false;
 			}
@@ -120,7 +123,10 @@ class ValidationManager extends Manager {
 				return false;
 			}
 			
-			if (! $this->hasValidJsonStructure($input[$property], $propertyJsonStructure)) {
+			// Validates the property
+			$hasValidJsonStructure = $this->hasValidJsonStructure($input[$property], $propertyJsonStructure);
+			
+			if (! $hasValidJsonStructure) {
 				// The property didn't pass the validation
 				return false;
 			}

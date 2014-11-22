@@ -1,0 +1,26 @@
+<span main-layout>
+	<span ng-controller="TasksViewController as view">
+		<h1>Tareas</h1>
+		<p>
+			En esta sección puede encontrar un acceso rápido a las tareas que
+			puede realizar en el sistema.
+		</p>
+		
+		<ul class="list-unstyled">
+			<li class="task-group-list-item" ng-repeat="taskGroup in view.getTasks()">
+				<hr>
+				<h2>{{ taskGroup.title }}</h2>
+				<ul class="list-unstyled">
+					<li class="task-list-item" ng-repeat="task in taskGroup.tasks">
+						<h3>
+							<a class="task-list-link" ng-href="#{{ task.url }}">
+								{{ task.title }}
+							</a>
+						</h3>
+						<p>{{ task.description }}</p>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</span>
+</span>

@@ -44,7 +44,7 @@ define('SESSION_KEY_LOGGED_IN_USER_ID', 'logged-in-user-id');
 
 // User roles
 define('USER_ROLE_ADMINISTRATOR', 'ad');
-define('USER_ROLE_ANONYMOUS', '');
+define('USER_ROLE_ANONYMOUS', '__');
 define('USER_ROLE_DOCTOR', 'dr');
 define('USER_ROLE_OPERATOR', 'op');
 define('USER_ROLE_RESEARCHER', 'rs');
