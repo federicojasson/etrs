@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: managers
 	var module = angular.module('managers');
 	
-	// Services
+	// Service: viewManager
 	module.service('viewManager', [
 		'$location',
 		'$rootScope',

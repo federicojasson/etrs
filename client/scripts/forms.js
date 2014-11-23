@@ -2,8 +2,9 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: forms
 	angular.module('forms', [
+		'filters',
 		'helpers',
 		'managers',
 		'ngRoute'

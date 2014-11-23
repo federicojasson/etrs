@@ -2,8 +2,9 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: managers
 	angular.module('managers', [
-		'helpers'
+		'helpers',
+		'ngRoute'
 	]);
 })();

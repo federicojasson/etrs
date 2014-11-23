@@ -251,15 +251,15 @@ Specific errors
 ---------------
 
 	----------------------------------------------------------------------------
-		HTTP error:	403 Forbidden
-		Error ID:	UNAUTHORIZED_USER
-		Reason:		The user is not authorized to invoke this service.
-	----------------------------------------------------------------------------
-
-	----------------------------------------------------------------------------
 		HTTP error:	400 Bad Request
 		Error ID:	INVALID_INPUT
 		Reason:		The input didn't pass the validation.
+	----------------------------------------------------------------------------
+
+	----------------------------------------------------------------------------
+		HTTP error:	403 Forbidden
+		Error ID:	UNAUTHORIZED_USER
+		Reason:		The user is not authorized to invoke this service.
 	----------------------------------------------------------------------------
 
 

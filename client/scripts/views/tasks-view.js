@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: views
 	var module = angular.module('views');
 	
-	// Controllers
+	// Controller: TasksViewController
 	module.controller('TasksViewController', [
 		'authenticationManager',
 		'contentManager',

@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: sections
 	var module = angular.module('sections');
 	
-	// Controllers
+	// Controller: NavbarMenuSectionController
 	module.controller('NavbarMenuSectionController', [
 		'$location',
 		'authenticationManager',
@@ -13,7 +13,7 @@
 		NavbarMenuSectionController
 	]);
 	
-	// Directives
+	// Directive: navbarMenuSection
 	module.directive('navbarMenuSection', navbarMenuSectionDirective);
 	
 	/*
@@ -49,7 +49,6 @@
 			// Gets the logged in user's ID
 			var userId = authenticationManager.getLoggedInUser().data.id;
 			
-			// TODO: ruta no definida aun
 			// Redirects the user to the user route
 			$location.path('/user/' + userId);
 		};

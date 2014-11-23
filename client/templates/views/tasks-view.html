@@ -12,12 +12,10 @@
 				<h2>{{ taskGroup.title }}</h2>
 				<ul class="list-unstyled">
 					<li class="task-list-item" ng-repeat="task in taskGroup.tasks">
-						<h3>
-							<a class="task-list-link" ng-href="#{{ task.url }}">
-								{{ task.title }}
-							</a>
-						</h3>
-						<p>{{ task.description }}</p>
+						<a class="task-list-link" ng-href="#{{ task.url }}">
+							<h3>{{ task.title }}</h3>
+							<p class="presentation-text">{{ task.description }}</p>
+						</a>
 					</li>
 				</ul>
 			</li>

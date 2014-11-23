@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: helpers
 	var module = angular.module('helpers');
 	
-	// Services
+	// Service: server
 	module.service('server', [
 		'$q', // TODO: mocking
 		'$timeout', // TODO: mocking
@@ -26,47 +26,101 @@
 		// TODO: mocking
 		var loggedIn = true;
 		var userLoggedInId = 'doctor';
-		var users = {};
 		
-		users['administrator'] = {
-			data: {
-				firstNames: 'Agustina',
-				gender: 'f',
-				id: 'administrator',
-				lastNames: 'Fernández',
-				role: 'ad'
-			}
-		};
+		var users = [
+			{
+				data: {
+					firstNames: 'Agustina',
+					gender: 'f',
+					id: 'administrator',
+					lastNames: 'Fernández',
+					role: 'ad'
+				}
+			},
 
-		users['doctor'] = {
-			data: {
-				firstNames: 'Fernando',
-				gender: 'm',
-				id: 'doctor',
-				lastNames: 'Rodríguez',
-				role: 'dr'
-			}
-		};
+			{
+				data: {
+					firstNames: 'Fernando',
+					gender: 'm',
+					id: 'doctor',
+					lastNames: 'Rodríguez',
+					role: 'dr'
+				}
+			},
 
-		users['operator'] = {
-			data: {
-				firstNames: 'Romina',
-				gender: 'f',
-				id: 'operator',
-				lastNames: 'Sánchez',
-				role: 'op'
-			}
-		};
+			{
+				data: {
+					firstNames: 'Romina',
+					gender: 'f',
+					id: 'operator',
+					lastNames: 'Sánchez',
+					role: 'op'
+				}
+			},
 
-		users['researcher'] = {
-			data: {
-				firstNames: 'Gerardo',
-				gender: 'm',
-				id: 'researcher',
-				lastNames: 'Díaz',
-				role: 'rs'
+			{
+				data: {
+					firstNames: 'Gerardo',
+					gender: 'm',
+					id: 'researcher',
+					lastNames: 'Díaz',
+					role: 'rs'
+				}
 			}
-		};
+		];
+		
+		var patients = [
+			{
+				data: {
+					birthDate: '1991-06-25',
+					firstNames: 'Federico Rodrigo',
+					gender: 'm',
+					id: '/PrWVv98TfOjrJDq5i3IMg==',
+					lastNames: 'Jasson'
+				}
+			},
+			
+			{
+				data: {
+					birthDate: '1978-05-22',
+					firstNames: 'Martynne',
+					gender: 'f',
+					id: 'tpGpEOlfTQSHU8b2b2e28Q==',
+					lastNames: 'Ariosto'
+				}
+			},
+			
+			{
+				data: {
+					birthDate: '1957-05-11',
+					firstNames: 'Adah',
+					gender: 'f',
+					id: 'quQ1wF01SxSOh4RJ5aOKFg==',
+					lastNames: 'Zak'
+				}
+			},
+			
+			{
+				data: {
+					birthDate: '1937-11-30',
+					firstNames: 'Valentijn Quill',
+					gender: 'm',
+					id: '1Xn2IEsCQ92JGkqN/pMjNw==',
+					lastNames: 'Monti'
+				}
+			},
+			
+			{
+				data: {
+					birthDate: '1970-03-04',
+					firstNames: 'Jelene Rowe',
+					gender: 'f',
+					id: 'D4tB6r/JRGuD02EQW5Uj3g==',
+					lastNames: 'Poehler'
+				}
+			}
+		];
+		
 		
 		/*
 		 * Requests the following service:
@@ -77,6 +131,8 @@
 		service.getAuthenticationState = function() {
 			// TODO: mocking
 			var deferred = $q.defer();
+			
+			//deferred.reject();
 			
 			$timeout(function() {
 				if (loggedIn) {
@@ -93,7 +149,7 @@
 						loggedIn: false
 					});
 				}
-			}, 1000);
+			}, 0);
 			
 			return deferred.promise;
 			
@@ -117,10 +173,18 @@
 			var deferred = $q.defer();
 			
 			$timeout(function() {
+				var user = null;
+				for (var i = 0; i < users.length; i++) {
+					if (users[i].data.id === userId) {
+						user = users[i];
+						break;
+					}
+				}
+				
 				deferred.resolve({
-					user: users[userId]
+					user: user
 				});
-			}, 1000);
+			}, 0);
 			
 			return deferred.promise;
 			
@@ -149,7 +213,15 @@
 			var deferred = $q.defer();
 			
 			$timeout(function() {
-				if (users.hasOwnProperty(userId)) {
+				var user = null;
+				for (var i = 0; i < users.length; i++) {
+					if (users[i].data.id === userId) {
+						user = users[i];
+						break;
+					}
+				}
+				
+				if (user !== null) {
 					loggedIn = true;
 					userLoggedInId = userId;
 				}
@@ -157,7 +229,7 @@
 				deferred.resolve({
 					loggedIn: loggedIn
 				});
-			}, 1000);
+			}, 200);
 			
 			return deferred.promise;
 			
@@ -186,18 +258,18 @@
 			// TODO: mocking
 			var deferred = $q.defer();
 			
-			/*$timeout(function() {
+			$timeout(function() {
 				loggedIn = false;
 				userLoggedInId = null;
 				deferred.resolve();
-			}, 1000);*/
+			}, 200);
 			
-			deferred.reject({
+			/*deferred.reject({
 				data: {
 					errorId: 'ERROR_TESTING'
 				},
 				status: 500
-			});
+			});*/
 			
 			return deferred.promise;
 			
@@ -208,6 +280,22 @@
 			};
 			
 			return communicator.sendHttpRequest(request);*/
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.searchPatients = function(searchString) {
+			// TODO: mocking
+			var deferred = $q.defer();
+			
+			$timeout(function() {
+				deferred.resolve({
+					results: patients
+				});
+			}, 200);
+			
+			return deferred.promise;
 		};
 	}
 })();

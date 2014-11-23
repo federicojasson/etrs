@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: forms
 	var module = angular.module('forms');
 	
-	// Controllers
+	// Controller: LogOutFormController
 	module.controller('LogOutFormController', [
 		'$route',
 		'authenticationManager',
@@ -32,9 +32,8 @@
 				// Refreshes the authentication state
 				authenticationManager.refreshAuthenticationState();
 
-				// Reloads the route to show the loading view until the refresh
-				// is over
-				$route.reload(); // TODO: maybe someone could be watching for changes and reloads
+				// Reloads the route to show the loading view
+				$route.reload();
 			}, function(response) {
 				// Error: the server responded with an HTTP error
 				var error = builder.buildError(response);

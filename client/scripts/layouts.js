@@ -2,6 +2,6 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: layouts
 	angular.module('layouts', []);
 })();

@@ -1,0 +1,53 @@
+<span main-layout>
+	<div class="row" ng-controller="SearchPatientFormController as form">
+		<h1>Buscar paciente</h1>
+		<div class="row">
+			<div class="col-sm-7">
+				<div class="input-group">
+					<input
+						class="form-control input-lg"
+						ng-change="form.scheduleSubmit()"
+						ng-model="form.inputModels.searchString.value"
+						placeholder="Buscar"
+						type="text"
+					>
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-search"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<span ng-if="form.includeResultsArea()">
+			<hr>
+
+			<span ng-if="form.includeNoResultsFoundArea()">
+				<div class="no-results-found-text">
+					La búsqueda no tuvo resultados.
+				</div>
+			</span>
+
+			<span ng-if="form.includePatientsArea()">
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="col-sm-3">Apellido y nombres</th>
+							<th class="col-sm-3">Sexo</th>
+							<th class="col-sm-4">Fecha de nacimiento</th>
+							<th class="col-sm-2">Edad</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr class="patient-table-link" ng-click="form.goToPatientRoute(patient.data.id)" ng-repeat="patient in form.getPatients()">
+							<td>{{ patient.data.lastNames }}, {{ patient.data.firstNames }}</td>
+							<td>{{ patient.data.gender | gender }}</td>
+							<td>{{ patient.data.birthDate | date: "d 'de' MMMM 'de' y" }}</td>
+							<td>{{ patient.data.birthDate | age }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</span>
+		</span>
+	</div>
+</span>

@@ -1,2 +1,17 @@
 - Ingresar datos de debug
 - Verificar consultas SQL manualmente (especialmente aquéllas con VARBINARY)
+
+- Tener en cuenta los siguientes errores HTTP:
+
+Errores semánticos (no sintácticos)????????? dudoso (implementación)
+422 Unprocessable Entity
+The request was well-formed but was unable to be followed due to semantic errors.
+Con isUserAuthorized ocurre lo mismo: SecureController implementa sólo una parte
+de la verificación (puede haber una "verificación semántica" que debe hacerse
+en la lógica, tal vez podría verificarse igualmente la entrada).
+Si se desea implementar todo en las dos funciones, debería enrocarse las verificaciones
+(verificar la entrada primero y los permisos después)
+
+
+Indicar en la documentación del server API los headers obligatorios para la request
+Ejemplo: Content-Type: application/json

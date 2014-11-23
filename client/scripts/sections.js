@@ -2,7 +2,7 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: sections
 	angular.module('sections', [
 		'managers'
 	]);

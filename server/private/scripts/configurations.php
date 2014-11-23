@@ -65,7 +65,7 @@ $app->notFound(function() use ($app) {
 
 // Middlewares
 $app->add(new Slim\Middleware\ContentTypes());
-$app->add(new SessionMiddleware(new DatabaseSessionStorageHandler()));
+//$app->add(new SessionMiddleware(new DatabaseSessionStorageHandler()));
 
 
 // Singletons

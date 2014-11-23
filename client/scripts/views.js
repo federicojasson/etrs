@@ -2,7 +2,7 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: views
 	var module = angular.module('views', [
 		'managers',
 		'ngRoute'
@@ -14,13 +14,13 @@
 		config
 	]);
 	
-	// Controllers
+	// Controller: ViewController
 	module.controller('ViewController', [
 		'viewManager',
 		ViewController
 	]);
 	
-	// Directives
+	// Directive: view
 	module.directive('view', viewDirective);
 	
 	/*
@@ -136,6 +136,25 @@
 			templateUrl: 'templates/views/log-in-view.html'
 		});
 		
+		// Route: /patient/:id
+		$routeProvider.when('/patient/:id', {
+			authorizedUserRoles: [
+				'dr'
+			],
+			resolve: dependencies,
+			templateUrl: 'templates/views/patient-view.html'
+		});
+		
+		// Route: /search-patient
+		$routeProvider.when('/search-patient', {
+			authorizedUserRoles: [
+				'dr',
+				'op'
+			],
+			resolve: dependencies,
+			templateUrl: 'templates/views/search-patient-view.html'
+		});
+		
 		// Route: /tasks
 		$routeProvider.when('/tasks', {
 			authorizedUserRoles: [
@@ -146,6 +165,18 @@
 			],
 			resolve: dependencies,
 			templateUrl: 'templates/views/tasks-view.html'
+		});
+		
+		// Route: /user/:id
+		$routeProvider.when('/user/:id', {
+			authorizedUserRoles: [
+				'ad',
+				'dr',
+				'op',
+				'rs'
+			],
+			resolve: dependencies,
+			templateUrl: 'templates/views/user-view.html'
 		});
 		
 		// There is no matching route: it redirects the user to the root route

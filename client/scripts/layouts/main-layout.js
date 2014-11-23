@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: layouts
 	var module = angular.module('layouts');
 	
-	// Directives
+	// Directive: mainLayout
 	module.directive('mainLayout', mainLayoutDirective);
 	
 	/*

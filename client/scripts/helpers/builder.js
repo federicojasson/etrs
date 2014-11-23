@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: helpers
 	var module = angular.module('helpers');
 	
-	// Services
+	// Service: builder
 	module.service('builder', [
 		'contentManager',
 		builderService
@@ -25,10 +25,10 @@
 		 * It receives the response sent by the server.
 		 */
 		service.buildError = function(response) {
-			var errorId = response.data.errorId;
-			var errorDescription = contentManager.getErrors()[errorId].description;
+			var id = response.data.errorId;
+			var description = contentManager.getErrors()[id].description;
 			
-			var details = 'ID: ' + errorId + '\n\n' + 'Descripción:\n' + errorDescription;
+			var details = 'ID: ' + id + '\n\n' + 'Descripción:\n' + description;
 			var message = 'Error ' + response.status;
 			
 			return {
@@ -42,8 +42,9 @@
 		 * 
 		 * It receives its details.
 		 */
-		service.buildFatalError = function(details) {
-			var message = 'Se produjo un error y la aplicación no puede continuar';
+		service.buildFatalError = function(description) {
+			var details = 'Descripción:\n' + description;
+			var message = 'Error fatal';
 			
 			return {
 				details: details,

@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: filters
 	var module = angular.module('filters');
 	
-	// Filters
+	// Filter: honorificName
 	module.filter('honorificName', [
 		'contentManager',
 		honorificNameFilter

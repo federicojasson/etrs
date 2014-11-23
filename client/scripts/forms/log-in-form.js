@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: forms
 	var module = angular.module('forms');
 	
-	// Controllers
+	// Controller: LogInFormController
 	module.controller('LogInFormController', [
 		'$route',
 		'authenticationManager',
@@ -130,9 +130,8 @@
 					// Refreshes the authentication state
 					authenticationManager.refreshAuthenticationState();
 					
-					// Reloads the route to show the loading view until the
-					// refresh is over
-					$route.reload(); // TODO: maybe someone could be watching for changes and reloads
+					// Reloads the route to show the loading view
+					$route.reload();
 				} else {
 					// The user was not logged in
 					

@@ -32,6 +32,18 @@ class LogInController extends SecureController {
 		$request = $app->request;
 		$validator = $app->validator;
 		
+		// Gets the request's content type
+		$contentType = $request->headers->get(HTTP_HEADER_CONTENT_TYPE);
+		
+		if ($contentType !== HTTP_CONTENT_TYPE_JSON) {
+			// The content type is not JSON
+			return false;
+		}
+		
+		// TODO: use special class (overriding request maybe, that have a method
+		// getJsonBody and checks everything) Tiene que hacer json_decode una vez
+		// y devolver null si falla
+		
 		// Gets the input
 		$input = $request->getBody();
 		

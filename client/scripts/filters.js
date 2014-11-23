@@ -2,7 +2,7 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: filters
 	angular.module('filters', [
 		'managers'
 	]);

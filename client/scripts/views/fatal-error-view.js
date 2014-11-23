@@ -5,21 +5,21 @@
 	// Module: views
 	var module = angular.module('views');
 	
-	// Controller: ErrorViewController
-	module.controller('ErrorViewController', [
+	// Controller: FatalErrorViewController
+	module.controller('FatalErrorViewController', [
 		'$location',
 		'$scope',
 		'$window',
 		'errorManager',
-		ErrorViewController
+		FatalErrorViewController
 	]);
 	
 	/*
-	 * Controller: ErrorViewController
+	 * Controller: FatalErrorViewController
 	 * 
-	 * Offers logic functions for the error view.
+	 * Offers logic functions for the fatal error view.
 	 */
-	function ErrorViewController($location, $scope, $window, errorManager) {
+	function FatalErrorViewController($location, $scope, $window, errorManager) {
 		var controller = this;
 		
 		/*

@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: helpers
 	var module = angular.module('helpers');
 	
-	// Services
+	// Service: communicator
 	module.service('communicator', [
 		'$resource',
 		communicatorService

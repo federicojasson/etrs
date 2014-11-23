@@ -2,7 +2,7 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: helpers
 	angular.module('helpers', [
 		'managers',
 		'ngResource'

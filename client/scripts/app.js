@@ -2,7 +2,7 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: app
 	var module = angular.module('app', [
 		'filters',
 		'forms',
@@ -13,7 +13,7 @@
 		'views'
 	]);
 	
-	// Configuration
+	// Config
 	module.config([
 		'$locationProvider',
 		config

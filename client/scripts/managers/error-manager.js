@@ -2,10 +2,10 @@
 'use strict';
 
 (function() {
-	// Module
+	// Module: managers
 	var module = angular.module('managers');
 	
-	// Services
+	// Service: errorManager
 	module.service('errorManager', [
 		'$location',
 		errorManagerService
