@@ -102,7 +102,7 @@
 			
 			{
 				data: {
-					birthDate: '1937-11-30',
+					birthDate: '1937-11-23',
 					firstNames: 'Valentijn Quill',
 					gender: 'm',
 					id: '1Xn2IEsCQ92JGkqN/pMjNw==',
@@ -112,7 +112,7 @@
 			
 			{
 				data: {
-					birthDate: '1970-03-04',
+					birthDate: '1970-09-04',
 					firstNames: 'Jelene Rowe',
 					gender: 'f',
 					id: 'D4tB6r/JRGuD02EQW5Uj3g==',
@@ -160,6 +160,30 @@
 			};
 			
 			return communicator.sendHttpRequest(request);*/
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getPatientData = function(patientId) {
+			// TODO: mocking
+			var deferred = $q.defer();
+			
+			$timeout(function() {
+				var patient = null;
+				for (var i = 0; i < patients.length; i++) {
+					if (patients[i].data.id === patientId) {
+						patient = patients[i];
+						break;
+					}
+				}
+				
+				deferred.resolve({
+					patient: patient
+				});
+			}, 0);
+			
+			return deferred.promise;
 		};
 		
 		/*
@@ -290,8 +314,10 @@
 			var deferred = $q.defer();
 			
 			$timeout(function() {
+				var results = (searchString.length > 0)? patients : [];
+				
 				deferred.resolve({
-					results: patients
+					results: results
 				});
 			}, 200);
 			

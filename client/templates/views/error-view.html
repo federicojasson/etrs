@@ -1,34 +1,36 @@
 <span main-layout>
-	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3 well" ng-controller="ErrorViewController as view">
-			<h1>{{ view.getOccurredError().message }}</h1>
-			<p>
-				Se produjo un error.
-			</p>
+	<span ng-controller="ErrorViewController as view">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3 well">
+				<h1>{{ view.getOccurredError().message }}</h1>
+				<p>
+					Se produjo un error.
+				</p>
 
-			<hr>
+				<hr>
 
-			<h2>Detalles</h2>
-			<pre>{{ view.getOccurredError().details }}</pre>
+				<h2>Detalles</h2>
+				<pre>{{ view.getOccurredError().details }}</pre>
 
-			<hr>
+				<hr>
 
-			<h2>Acciones</h2>
-			<ul>
-				<li>
-					Regresar a la <a href="#/">página de inicio</a>.
-				</li>
-				<li>
-					<a class="link" ng-click="view.refreshPage()">Recargar</a>
-					la página.
-				</li>
-				<li>
-					Si el error ocurre frecuentemente, por favor
-					<a href="#/contact">contacte al administrador</a> y
-					repórtelo, incluyendo los detalles y el contexto en el
-					que se produjo.
-				</li>
-			</ul>
+				<h2>Acciones</h2>
+				<ul>
+					<li>
+						Regresar a la <a href="#/">página de inicio</a>.
+					</li>
+					<li>
+						<a class="pointer" ng-click="view.refreshPage()">Recargar</a>
+						la página.
+					</li>
+					<li>
+						Si el error ocurre frecuentemente, por favor
+						<a href="#/contact">contacte al administrador</a> y
+						repórtelo, incluyendo los detalles y el contexto en el
+						que se produjo.
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
+	</span>
 </span>

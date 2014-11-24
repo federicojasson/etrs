@@ -1,0 +1,375 @@
+<span main-layout>
+	<span ng-controller="CreatePatientFormController as form">
+		<h1>Ingresar nuevo paciente</h1>
+		
+		<form class="form-horizontal" ng-submit="form.submit()" novalidate>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Utilice los botones de la izquierda para navegar por las distintas secciones.
+				</div>
+
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<ul class="nav nav-pills nav-stacked">
+								<li ng-class="{ 'active': form.isCurrentArea('data') }">
+									<a class="default-button-text pointer" ng-click="form.setCurrentArea('data')">
+										Datos biográficos
+									</a>
+								</li>
+								<li ng-class="{ 'active': form.isCurrentArea('background') }">
+									<a class="default-button-text pointer" ng-click="form.setCurrentArea('background')">
+										Antecedentes patológicos
+									</a>
+								</li>
+								<li ng-class="{ 'active': form.isCurrentArea('medications') }">
+									<a class="default-button-text pointer" ng-click="form.setCurrentArea('medications')">
+										Medicación concomitante
+									</a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-sm-9">
+							<span ng-if="form.isCurrentArea('data')">
+								<fieldset>
+									<legend>Complete la información biográfica del paciente</legend>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Nombres y apellidos</label>
+										<div class="col-sm-4">
+											<input class="form-control" placeholder="Nombres" type="input">
+										</div>
+										<div class="col-sm-4">
+											<input class="form-control" placeholder="Apellidos" type="input">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Sexo</label>
+										<div class="col-sm-8">
+											<span
+												combo-box-input
+												model="TODO"
+												options="[
+													{ label: 'Femenino', value: 'f' },
+													{ label: 'Masculino', value: 'm' }
+												]"
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Fecha de nacimiento</label>
+										<div class="col-sm-8">
+											<span datepicker-input model="form.TODO"></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Años de educación</label>
+										<div class="col-sm-8">
+											<input class="form-control" type="input">
+										</div>
+									</div>
+								</fieldset>
+							</span>
+
+							<span ng-if="form.isCurrentArea('background')">
+								<fieldset>
+									<legend>Indique qué antecedentes patológicos tiene el paciente</legend>
+									
+									<div class="form-group">
+										<label class="col-sm-4 control-label">HTA</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">DBT</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Dislipemia</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Cardiopatía</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">TEC</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Tratamientos psiquiátricos</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">HIV</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Familiares de primer grado con Alzheimer</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+								</fieldset>
+							</span>
+
+							<span ng-if="form.isCurrentArea('medications')">
+								<fieldset>
+									<legend>Indique las medicaciones que el paciente toma actualmente</legend>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Antipsicóticos</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Antidepresivos</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Benzodiacepinas</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Melatonina</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Antihipertensivos</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Antiagregantes / Anticoagulantes</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Hipolipemiantes</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Normoglucemiantes</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-4 control-label">Levotiroxina</label>
+										<div class="col-sm-8">
+											<span
+												model="TODO"
+												name="TODO"
+												options="[
+													{ label: 'Sí', value: true },
+													{ label: 'No', value: false },
+													{ label: 'Se desconoce', value: null }
+												]"
+												radio-buttons-input
+											></span>
+										</div>
+									</div>
+								</fieldset>
+							</span>
+
+							<span ng-if="form.isCurrentArea('summary')">
+								TODO: resumen
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="panel-footer">
+					<button class="btn btn-danger default-button-text pull-right" type="submit">Ingresar paciente</button>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</form>
+	</span>
+</span>

@@ -6,6 +6,7 @@
 	var module = angular.module('app', [
 		'filters',
 		'forms',
+		'inputs',
 		'layouts',
 		'managers',
 		'sections',

@@ -4,6 +4,8 @@
 (function() {
 	// Module: views
 	var module = angular.module('views', [
+		'filters',
+		'helpers',
 		'managers',
 		'ngRoute'
 	]);
@@ -85,6 +87,24 @@
 			templateUrl: 'templates/views/contact-view.html'
 		});
 		
+		// Route: /create-consultation/:patientId
+		$routeProvider.when('/create-consultation/:patientId', {
+			authorizedUserRoles: [
+				'dr'
+			],
+			resolve: dependencies,
+			templateUrl: 'templates/views/create-consultation-view.html'
+		});
+		
+		// Route: /create-patient
+		$routeProvider.when('/create-patient', {
+			authorizedUserRoles: [
+				'dr'
+			],
+			resolve: dependencies,
+			templateUrl: 'templates/views/create-patient-view.html'
+		});
+		
 		// Route: /error
 		$routeProvider.when('/error', {
 			authorizedUserRoles: [
@@ -136,8 +156,8 @@
 			templateUrl: 'templates/views/log-in-view.html'
 		});
 		
-		// Route: /patient/:id
-		$routeProvider.when('/patient/:id', {
+		// Route: /patient/:patientId
+		$routeProvider.when('/patient/:patientId', {
 			authorizedUserRoles: [
 				'dr'
 			],
@@ -167,8 +187,8 @@
 			templateUrl: 'templates/views/tasks-view.html'
 		});
 		
-		// Route: /user/:id
-		$routeProvider.when('/user/:id', {
+		// Route: /user/:userId
+		$routeProvider.when('/user/:userId', {
 			authorizedUserRoles: [
 				'ad',
 				'dr',

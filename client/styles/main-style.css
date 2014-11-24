@@ -34,9 +34,58 @@ h1, h2, h3, h4, h5, h6 {
 	font-family: "Bebas Neue", sans-serif;
 }
 
+input[readonly] {
+	background-color: #f0f0f0 !important;
+	cursor: text !important;
+}
+
 pre {
 	white-space: pre-line;
 	word-break: normal;
+}
+
+.credits-text {
+	color: #aaaaaa;
+	font-size: 0.8em;
+	margin-bottom: 48px;
+	margin-top: -8px;
+	text-align: center;
+}
+
+.default-button-text {
+	font-size: 0.9em;
+	line-height: 1.6;
+	text-transform: uppercase;
+}
+
+.footer-list-element {
+	color: #666666;
+	font-size: 0.9em;
+	font-weight: 300;
+	margin-bottom: 4px;
+}
+
+.footer-list-header {
+	font-size: 0.92em;
+	font-weight: 700;
+	margin-bottom: 8px;
+	text-transform: uppercase;
+}
+
+.footer-list-link {
+	color: inherit;
+}
+
+.footer-logo-image {
+	background-image: url(../images/footer-logo-sprite.png);
+	background-position: 0px -72px;
+	background-repeat: no-repeat;
+	height: 72px;
+	width: 256px;
+}
+
+.footer-logo-image:hover {
+	background-position: 0px 0px;
 }
 
 .full-center {
@@ -51,8 +100,10 @@ pre {
 	width: 100%;
 }
 
-.link {
-	cursor: pointer;
+.large-button-text {
+	font-size: 1em;
+	line-height: 1.7;
+	text-transform: uppercase;
 }
 
 .loading-image {
@@ -93,7 +144,6 @@ pre {
 	background-image: url(../images/navbar-logo-sprite.png);
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
-	display: block;
 	height: 48px;
 	width: 80px;
 }
@@ -124,7 +174,11 @@ pre {
 
 .patient-table-link:hover {
 	background-color: #f0f0f0;
-	color: green;
+	color: #008000;
+}
+
+.pointer {
+	cursor: pointer;
 }
 
 .presentation-text {
@@ -159,5 +213,5 @@ pre {
 .view-container {
 	min-height: 320px;
 	padding-bottom: 24px;
-	padding-top: 24px;
+	padding-top: 8px;
 }

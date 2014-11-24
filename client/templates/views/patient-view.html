@@ -1,3 +1,13 @@
 <span main-layout>
-	patient view
+	<span ng-controller="PatientViewController as view">
+		<span ng-if="! view.isReady()">
+			TODO: loading image
+		</span>
+		
+		<span ng-if="view.isReady()">
+			<a ng-href="#/create-consultation/{{ view.getPatient().data.id | base64ToHexadecimal }}">
+				Ingresar nueva consulta médica
+			</a>
+		</span>
+	</span>
 </span>

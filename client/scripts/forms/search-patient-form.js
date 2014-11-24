@@ -12,6 +12,7 @@
 		'$timeout',
 		'base64ToHexadecimalFilter',
 		'builder',
+		'errorManager',
 		'server',
 		SearchPatientFormController
 	]);
@@ -21,7 +22,7 @@
 	 * 
 	 * Offers logic functions for the search patient form.
 	 */
-	function SearchPatientFormController($location, $scope, $timeout, base64ToHexadecimalFilter, builder, server) {
+	function SearchPatientFormController($location, $scope, $timeout, base64ToHexadecimalFilter, builder, errorManager, server) {
 		var controller = this;
 		
 		/*
@@ -46,9 +47,46 @@
 		 * Submits the form.
 		 */
 		function submit() {
-			server.searchPatients().then(function(response) {
+			if (! validate()) {
+				// At least one input model is invalid
+				return;
+			}
+			
+			// Gets the input values
+			var searchString = searchStringInputModel.value;
+			
+			// Searches the patients
+			server.searchPatients(searchString).then(function(response) {
+				// TODO: nothing more?
 				patients = response.results;
+			}, function(response) {
+				// Error: the server responded with an HTTP error
+				var error = builder.buildError(response);
+				errorManager.reportError(error);
 			});
+		}
+		
+		/*
+		 * Validates the form input and returns the result.
+		 */
+		function validate() {
+			// TODO: metodo repetido en todos los forms: agregar validador
+			
+			// The form input is valid if all the input models are
+			var isValid = true;
+			
+			// Gets the input models
+			var inputModels = controller.inputModels;
+			
+			// Validates the input models
+			for (var property in inputModels) {
+				if (inputModels.hasOwnProperty(property)) {
+					// Validates the input model and ANDs the result
+					isValid &= inputModels[property].validate();
+				}
+			}
+			
+			return isValid;
 		}
 		
 		/*

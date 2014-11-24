@@ -5,20 +5,20 @@
 	
 	"dr": [
 		{
+			"title": "Pacientes",
 			"tasks": [
 				{
-					"description": "Busque un paciente ingresando palabras clave.\nLa aplicación realizará automáticamente una búsqueda inteligente.\nLos resultados se mostrarán ordenados alfabéticamente, teniendo en cuenta el apellido de los pacientes.",
 					"title": "Buscar paciente",
+					"description": "Encuentre un paciente ingresando palabras clave.\nLa aplicación realizará automáticamente una búsqueda inteligente y mostrará los resultados ordenados de acuerdo a su relevancia.",
 					"url": "/search-patient"
 				},
 				
 				{
-					"description": "TODO: descripción aquí Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.",
-					"title": "Agregar nuevo paciente",
-					"url": "/new-patient"
+					"title": "Ingresar nuevo paciente",
+					"description": "Ingrese un nuevo paciente en el sistema.\nAntes de utilizar esta herramienta, por favor verifique que el paciente no se encuentre ya en el sistema, para evitar duplicados.",
+					"url": "/create-patient"
 				}
-			],
-			"title": "Pacientes"
+			]
 		}
 	],
 	

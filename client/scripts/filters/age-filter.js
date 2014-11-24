@@ -18,8 +18,10 @@
 		 * Filters the input.
 		 */
 		function filter(input) {
-			// TODO
-			return '22';
+			// TODO: CHECK THIS!
+			var ageDifMs = Date.now() - new Date(input).getTime();
+			var ageDate = new Date(ageDifMs); // miliseconds from epoch
+			return Math.abs(ageDate.getUTCFullYear() - 1970);
 		}
 		
 		return filter;

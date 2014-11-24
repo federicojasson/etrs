@@ -1,0 +1,8 @@
+<label class="radio-inline" ng-repeat="option in options">
+	<input
+		name="{{ name }}"
+		ng-model="model"
+		ng-value="option.value"
+		type="radio"
+	> {{ option.label }}
+</label>

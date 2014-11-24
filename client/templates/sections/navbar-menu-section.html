@@ -1,10 +1,10 @@
 <span ng-if="section.includeLogInArea()">
-	<a class="btn btn-success navbar-btn" href="#/log-in">Iniciar sesión</a>
+	<a class="btn btn-success default-button-text navbar-btn" href="#/log-in">Iniciar sesión</a>
 </span>
 
 <span ng-if="section.includeLoggedInUserArea()">
 	<div class="btn-group navbar-btn" dropdown>
-		<button class="btn btn-danger" ng-click="section.goToTasksRoute()" type="button">
+		<button class="btn btn-danger default-button-text" ng-click="section.goToTasksRoute()" type="button">
 			Tareas
 		</button>
 		<button class="btn btn-danger dropdown-toggle" type="button">
@@ -31,7 +31,7 @@
 				<a href="#/change-password">Cambiar contraseña</a>
 			</li>
 			<li>
-				<a class="link" ng-click="form.submit()" ng-controller="LogOutFormController as form">Cerrar sesión</a>
+				<a class="pointer" ng-click="form.submit()" ng-controller="LogOutFormController as form">Cerrar sesión</a>
 			</li>
 		</ul>
 	</div>

@@ -2,6 +2,26 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/create-consultation-view.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/managers/content-manager.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/inputs/datepicker-input.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/views/patient-view.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/sections/navbar-menu-section.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/views/tasks-view.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/inputs/datepicker-input.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/index.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/views/error-view.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/layouts/main-layout.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/patient-view.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/helpers/server.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/views.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/views/fatal-error-view.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/create-patient-view.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/styles/main-style.css</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/log-in-view.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/managers/view-manager.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/change-password-view.html</file>
+        </group>
     </open-files>
 </project-private>
