@@ -48,6 +48,10 @@ pre {
 	word-break: normal;
 }
 
+textarea {
+	resize: none;
+}
+
 .credits-text {
 	color: #aaaaaa;
 	font-size: 0.8em;
