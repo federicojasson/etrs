@@ -74,6 +74,16 @@
 			templateUrl: 'templates/views/change-password-view.html'
 		});
 		
+		// Route: /consultation/:consultationId
+		$routeProvider.when('/consultation/:consultationId', {
+			authorizedUserRoles: [
+				'dr',
+				'op'
+			],
+			resolve: dependencies,
+			templateUrl: 'templates/views/consultation-view.html'
+		});
+		
 		// Route: /contact
 		$routeProvider.when('/contact', {
 			authorizedUserRoles: [

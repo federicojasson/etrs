@@ -27,7 +27,7 @@
 		var loggedIn = true;
 		var userLoggedInId = 'doctor';
 		
-		var users = [
+		function usersFunction() { return [
 			{
 				data: {
 					firstNames: 'Agustina',
@@ -67,9 +67,9 @@
 					role: 'rs'
 				}
 			}
-		];
+		]}
 		
-		var patients = [
+		function patientsFunction() { return [
 			{
 				data: {
 					birthDate: '1991-06-25',
@@ -119,7 +119,35 @@
 					lastNames: 'Poehler'
 				}
 			}
-		];
+		]}
+		
+		function consultationsFunction() { return [
+			{
+				data: {
+					date: '2012-05-19',
+					diagnosis: null,
+					id: '1ZmzdRvZSHG4ESNYndVzLw=='
+				},
+				
+				metadata: {
+					creator: 'administrator',
+					patient: 'D4tB6r/JRGuD02EQW5Uj3g=='
+				}
+			},
+			
+			{
+				data: {
+					date: '2013-11-08',
+					diagnosis: 'Demencia vascular',
+					id: 'EioQHYxlTqe4hoskJDCBHQ=='
+				},
+				
+				metadata: {
+					creator: 'doctor',
+					patient: 'D4tB6r/JRGuD02EQW5Uj3g=='
+				}
+			}
+		]}
 		
 		
 		/*
@@ -165,9 +193,36 @@
 		/*
 		 * TODO
 		 */
+		service.getConsultations = function(patientId) {
+			// TODO: mocking
+			var deferred = $q.defer();
+			
+			var consultations = consultationsFunction();
+			
+			$timeout(function() {
+				var foundConsultations = [];
+				for (var i = 0; i < consultations.length; i++) {
+					if (consultations[i].metadata.patient === patientId) {
+						foundConsultations.push(consultations[i]);
+					}
+				}
+				
+				deferred.resolve({
+					consultations: foundConsultations
+				});
+			}, 0);
+			
+			return deferred.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
 		service.getPatientData = function(patientId) {
 			// TODO: mocking
 			var deferred = $q.defer();
+			
+			var patients = patientsFunction();
 			
 			$timeout(function() {
 				var patient = null;
@@ -196,7 +251,10 @@
 			// TODO: mocking
 			var deferred = $q.defer();
 			
+			var users = usersFunction();
+			
 			$timeout(function() {
+				
 				var user = null;
 				for (var i = 0; i < users.length; i++) {
 					if (users[i].data.id === userId) {
@@ -237,6 +295,8 @@
 			var deferred = $q.defer();
 			
 			$timeout(function() {
+				var users = users();
+				
 				var user = null;
 				for (var i = 0; i < users.length; i++) {
 					if (users[i].data.id === userId) {
@@ -314,7 +374,7 @@
 			var deferred = $q.defer();
 			
 			$timeout(function() {
-				var results = (searchString.length > 0)? patients : [];
+				var results = (searchString.length > 0)? patientsFunction() : [];
 				
 				deferred.resolve({
 					results: results

@@ -5,6 +5,32 @@
 		</span>
 		
 		<span ng-if="view.isReady()">
+			<h1>{{ view.getPatient().data.firstNames }} {{ view.getPatient().data.lastNames }}</h1>
+			
+			<h2>Datos biográficos</h2>
+			...
+			
+			<h2>Consultas médicas</h2>
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="col-sm-4">Fecha de la consulta</th>
+						<th class="col-sm-4">Creador/a</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr class="patient-table-link" ng-click="view.goToConsultationRoute(consultation.data.id)" ng-repeat="consultation in view.getConsultations()">
+						<td>{{ consultation.data.date | date: "d 'de' MMMM 'de' y" }}</td>
+						<td>{{ consultation.metadata.creator.data | honorificName }}</td>
+					</tr>
+					<tr>
+						<td class="danger" colspan="2">
+							El paciente fue diagnosticado con demencia vascular
+						</td>
+					</tr>
+				</tbody>
+			</table>
 			<a ng-href="#/create-consultation/{{ view.getPatient().data.id | base64ToHexadecimal }}">
 				Ingresar nueva consulta médica
 			</a>
