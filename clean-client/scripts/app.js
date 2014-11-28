@@ -55,13 +55,37 @@
 			url: '/'
 		});
 		
-		$stateProvider.state('default.index.private', {
+		$stateProvider.state('default.index.administrator', {
 			templateUrl: 'templates/views/index-view.html'
 		});
 		
-		$stateProvider.state('default.index.public', {
+		$stateProvider.state('default.index.anonymous', {
 			templateUrl: 'templates/views/log-in-view.html'
 		});
+		
+		$stateProvider.state('default.index.doctor', {
+			templateUrl: 'templates/views/index-view.html'
+		});
+		
+		$stateProvider.state('default.index.operator', {
+			templateUrl: 'templates/views/index-view.html'
+		});
+		
+		$stateProvider.state('default.log-in', {
+			controller: 'AccessController',
+			templateUrl: inclusionTemplate,
+			url: '/log-in'
+		});
+		
+		$stateProvider.state('default.log-in.anonymous', {
+			templateUrl: 'templates/views/log-in-view.html'
+		});
+		
+		
+		
+		
+		
+		
 		
 		$stateProvider.state('default.tasks', {
 			controller: 'AccessController',
@@ -69,13 +93,25 @@
 			url: '/tasks'
 		});
 		
-		$stateProvider.state('default.tasks.private', {
+		$stateProvider.state('default.tasks.administrator', {
 			templateUrl: 'templates/views/tasks-view.html'
 		});
 		
-		$stateProvider.state('default.tasks.public', {
+		$stateProvider.state('default.tasks.anonymous', {
 			templateUrl: 'templates/views/log-in-view.html'
 		});
+		
+		$stateProvider.state('default.tasks.doctor', {
+			templateUrl: 'templates/views/tasks-view.html'
+		});
+		
+		$stateProvider.state('default.tasks.operator', {
+			templateUrl: 'templates/views/tasks-view.html'
+		});
+		
+		
+		
+		
 		
 		$urlRouterProvider.otherwise('/');
 	}
@@ -88,6 +124,8 @@
 	function AccessController($state) {
 		// TODO: chequear si esta logueado
 		var loggedIn = false;
+		
+		console.log($state);
 		
 		if (loggedIn) {
 			$state.go('.private');
