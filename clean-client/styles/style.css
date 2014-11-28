@@ -1,0 +1,119 @@
+@font-face {
+	font-family: "Bebas Neue";
+	src: local("Bebas Neue"), local("BebasNeue"), url(../fonts/BebasNeue.otf);
+}
+
+@font-face {
+	font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 300;
+	src: local("Open Sans Light"), local("OpenSans-Light"), url(../fonts/OpenSans-Light.ttf);
+}
+
+@font-face {
+	font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 400;
+	src: local("Open Sans Normal"), local("OpenSans-Normal"), url(../fonts/OpenSans-Normal.ttf);
+}
+
+@font-face {
+	font-family: "Open Sans";
+	font-style: normal;
+	font-weight: 700;
+	src: local("Open Sans Bold"), local("OpenSans-Bold"), url(../fonts/OpenSans-Bold.ttf);
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+	min-width: 1024px;
+}
+
+.content-container {
+	min-height: 320px;
+	padding-bottom: 24px;
+	padding-top: 8px;
+}
+
+.footer-logo-image {
+	background-image: url(../images/footer-logo-sprite.png);
+	background-position: 0px -72px;
+	background-repeat: no-repeat;
+	display: block;
+	height: 72px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 256px;
+}
+
+.footer-logo-image:hover {
+	background-position: 0px 0px;
+}
+
+.footer-text {
+	color: #aaaaaa;
+	font-size: 0.8em;
+	margin-bottom: 48px;
+	margin-top: -8px;
+	text-align: center;
+}
+
+.fully-centered {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.fully-centered-container {
+	display: table;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+}
+
+.loading-image {
+	background-image: url(../images/loading.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 30%;
+	margin: 0px auto 5% auto;
+	max-height: 256px;
+	max-width: 256px;
+	min-height: 64px;
+}
+
+.loading-text {
+	color: #aaaaaa;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
+	letter-spacing: 2px;
+	text-align: center;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+	user-select: none;
+}
+
+.navbar-logo-image {
+	background-image: url(../images/navbar-logo-sprite.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 48px;
+	width: 80px;
+}
+
+.navbar-logo-image:hover {
+	background-position: 0px -48px;
+}
+
+.navbar-logo-text {
+	color: #666666;
+	float: left;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
+	line-height: 48px;
+	margin-left: 16px;
+	padding-top: 2px;
+}
