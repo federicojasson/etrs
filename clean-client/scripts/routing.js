@@ -39,6 +39,14 @@
 		// State: site
 		$stateProvider.state('site', {
 			abstract: true,
+			resolve: {
+				'authentication': [
+					'authentication',
+					function(authentication) {
+						return authentication.getDeferredTaskPromise();
+					}
+				]
+			},
 			templateUrl: 'templates/layouts/site.html'
 		});
 		
@@ -128,6 +136,15 @@
 			templateUrl: 'templates/views/home.html'
 		});
 		
+		// State: site.logIn
+		$stateProvider.state('site.logIn', {
+			controller: 'RoutingController',
+			template: inclusionTemplate,
+			url: '/log-in'
+		}).state('site.logIn.anonymous', {
+			templateUrl: 'templates/views/log-in.html'
+		});
+		
 		// State: site.searchPatients
 		$stateProvider.state('site.searchPatients', {
 			controller: 'RoutingController',
@@ -155,6 +172,15 @@
 	 */
 	function RoutingController($location, $state, authentication) {
 		/*
+		 * The substates, in function of the user roles.
+		 */
+		var substates = {
+			ad: '.administrator',
+			dr: '.doctor',
+			op: '.operator'
+		}
+		
+		/*
 		 * Redirects the user to a substate of the current state, according to
 		 * the requesting user.
 		 * 
@@ -173,22 +199,8 @@
 			}
 			
 			// The user is logged in: the state transition depends on her role
-			switch (authentication.getLoggedInUser().mainData.role) {
-				case 'ad': {
-					setState('.administrator');
-					return;
-				}
-
-				case 'dr': {
-					setState('.doctor');
-					return;
-				}
-
-				case 'op': {
-					setState('.operator');
-					return;
-				}
-			}
+			var userRole = authentication.getLoggedInUser().mainData.role;
+			setState(substates[userRole]);
 		}
 		
 		/*

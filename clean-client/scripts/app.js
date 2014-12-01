@@ -5,6 +5,7 @@
 	// Module: app
 	var module = angular.module('app', [
 		'components',
+		'filters',
 		'helpers',
 		'routing',
 		'ui.bootstrap'

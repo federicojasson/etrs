@@ -39,7 +39,7 @@
 					lastNames: 'Jasson',
 					gender: 'm',
 					email: 'federicojasson@something.com',
-					role: 'dr'
+					role: 'ad'
 				},
 				metadata: {
 					creationDatetime: '2014-11-30T19:20:30+00:00'

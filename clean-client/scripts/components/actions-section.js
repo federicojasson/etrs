@@ -25,19 +25,8 @@
 		 */
 		controller.getActionSet = function() {
 			// The action set depends on the user role
-			switch (authentication.getLoggedInUser().mainData.role) {
-				case 'ad': {
-					return contents.getAdministratorActionSet();
-				}
-
-				case 'dr': {
-					return contents.getDoctorActionSet();
-				}
-
-				case 'op': {
-					return contents.getOperatorActionSet();
-				}
-			}
+			var userRole = authentication.getLoggedInUser().mainData.role;
+			return contents.getActionSet(userRole);
 		};
 	}
 })();

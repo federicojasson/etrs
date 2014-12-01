@@ -38,6 +38,13 @@
 		var loggedInUser = null;
 		
 		/*
+		 * Returns the promise of the deferred task.
+		 */
+		service.getDeferredTaskPromise = function() {
+			return deferredTask.promise;
+		};
+		
+		/*
 		 * Returns the logged in user.
 		 */
 		service.getLoggedInUser = function() {

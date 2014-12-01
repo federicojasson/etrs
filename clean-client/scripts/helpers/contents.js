@@ -46,10 +46,10 @@
 		};
 		
 		/*
-		 * The action sets.
+		 * The action sets, in function of the user roles.
 		 */
 		var actionSets = {
-			administrator: [
+			ad: [
 				{
 					actions: [
 						actions.searchPatients,
@@ -73,7 +73,7 @@
 				}
 			],
 			
-			doctor: [
+			dr: [
 				{
 					actions: [
 						actions.searchPatients,
@@ -83,7 +83,7 @@
 				}
 			],
 			
-			operator: [
+			op: [
 				{
 					actions: [
 						actions.searchPatients
@@ -94,24 +94,41 @@
 		};
 		
 		/*
-		 * Returns the administrator action set.
+		 * The user honorific titles, in function of the user roles and genders.
 		 */
-		service.getAdministratorActionSet = function() {
-			return actionSets.administrator;
+		var honorificTitles = {
+			ad: {
+				f: 'Sra.',
+				m: 'Sr.'
+			},
+			
+			dr: {
+				f: 'Dra.',
+				m: 'Dr.'
+			},
+			
+			op: {
+				f: 'Sra.',
+				m: 'Sr.'
+			}
 		};
 		
 		/*
-		 * Returns the doctor action set.
+		 * Returns an action set.
+		 * 
+		 * It receives the user's role.
 		 */
-		service.getDoctorActionSet = function() {
-			return actionSets.doctor;
+		service.getActionSet = function(userRole) {
+			return actionSets[userRole];
 		};
 		
 		/*
-		 * Returns the operator action set.
+		 * Returns an honorific title.
+		 * 
+		 * It receives the user's role and gender.
 		 */
-		service.getOperatorActionSet = function() {
-			return actionSets.operator;
+		service.getHonorificTitle = function(userRole, userGender) {
+			return honorificTitles[userRole][userGender];
 		};
 	}
 })();
