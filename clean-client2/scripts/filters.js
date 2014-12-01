@@ -2,8 +2,6 @@
 'use strict';
 
 (function() {
-	// Module: helpers
-	angular.module('helpers', [
-		'ngResource'
-	]);
+	// Module: filters
+	angular.module('filters', []);
 })();
