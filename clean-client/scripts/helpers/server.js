@@ -50,11 +50,11 @@
 		/*
 		 * Sends an HTTP request to a given URL.
 		 * 
-		 * It receives a request object that holds the URL, the HTTP method to
-		 * use, the input and whether the expected response is an array. This
-		 * object should have the following structure:
+		 * It receives an object containing the parameters: the URL, the HTTP
+		 * method to use, the input and whether the expected response is an
+		 * array. This object should have the following structure:
 		 * 
-		 *	request: {
+		 *	parameters: {
 		 *		input: ...,
 		 *		method: ...,
 		 *		responseIsArray: ...,
@@ -67,12 +67,12 @@
 		 * The function returns a promise that gets resolved when the server
 		 * responds.
 		 */
-		function sendHttpRequest(request) {
-			// Gets the request parameters
-			var input = request.input;
-			var method = request.method;
-			var responseIsArray = request.responseIsArray;
-			var url = request.url;
+		function sendHttpRequest(parameters) {
+			// Extracts the parameters
+			var input = parameters.input;
+			var method = parameters.method;
+			var responseIsArray = parameters.responseIsArray;
+			var url = parameters.url;
 			
 			// Initializes undefined optional parameters with default values
 			input = (angular.isDefined(input))? input : {};

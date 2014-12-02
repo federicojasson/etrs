@@ -25,7 +25,7 @@
 		</div>
 		
 		<div class="btn-group navbar-btn" dropdown>
-			<a class="btn btn-primary">
+			<a class="btn btn-primary" ng-href="#/user/{{ navbarMenu.getUser().id }}">
 				{{ navbarMenu.getUser() | honorificName }}
 			</a>
 			<button class="btn btn-primary dropdown-toggle" type="button">

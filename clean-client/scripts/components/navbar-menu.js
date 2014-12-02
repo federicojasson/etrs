@@ -7,7 +7,6 @@
 	
 	// Controller: NavbarMenuController
 	module.controller('NavbarMenuController', [
-		'$location',
 		'authentication',
 		NavbarMenuController
 	]);
@@ -20,7 +19,7 @@
 	 * 
 	 * Offers functions for the navbar menu.
 	 */
-	function NavbarMenuController($location, authentication) {
+	function NavbarMenuController(authentication) {
 		var controller = this;
 		
 		/*

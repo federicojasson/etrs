@@ -145,6 +145,21 @@
 			templateUrl: 'templates/views/log-in.html'
 		});
 		
+		// State: site.patient
+		$stateProvider.state('site.patient', {
+			controller: 'RoutingController',
+			template: inclusionTemplate,
+			url: '/patient/{patientId:[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}}'
+		}).state('site.patient.anonymous', {
+			templateUrl: 'templates/views/log-in.html'
+		}).state('site.patient.administrator', {
+			templateUrl: 'templates/views/patient.html'
+		}).state('site.patient.doctor', {
+			templateUrl: 'templates/views/patient.html'
+		}).state('site.patient.operator', {
+			templateUrl: 'templates/views/patient.html'
+		});
+		
 		// State: site.searchPatients
 		$stateProvider.state('site.searchPatients', {
 			controller: 'RoutingController',
@@ -158,6 +173,34 @@
 			templateUrl: 'templates/views/search-patients.html'
 		}).state('site.searchPatients.operator', {
 			templateUrl: 'templates/views/search-patients.html'
+		});
+		
+		// State: site.study
+		$stateProvider.state('site.study', {
+			controller: 'RoutingController',
+			template: inclusionTemplate,
+			url: '/study/{studyId:[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}}'
+		}).state('site.study.anonymous', {
+			templateUrl: 'templates/views/log-in.html'
+		}).state('site.study.administrator', {
+			templateUrl: 'templates/views/study.html'
+		}).state('site.study.operator', {
+			templateUrl: 'templates/views/study.html'
+		});
+		
+		// State: site.user
+		$stateProvider.state('site.user', {
+			controller: 'RoutingController',
+			template: inclusionTemplate,
+			url: '/user/{userId:(?![.])(?!.*[.]$)(?!.*[.]{2})[.0-9A-Za-z]{1,32}}'
+		}).state('site.user.anonymous', {
+			templateUrl: 'templates/views/log-in.html'
+		}).state('site.user.administrator', {
+			templateUrl: 'templates/views/user.html'
+		}).state('site.user.doctor', {
+			templateUrl: 'templates/views/user.html'
+		}).state('site.user.operator', {
+			templateUrl: 'templates/views/user.html'
 		});
 		
 		// Default route

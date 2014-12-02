@@ -538,6 +538,33 @@
 		}
 		
 		/*
+		 * Merges two objects and returns the result. The properties of a source
+		 * object are copied into a target object.
+		 * 
+		 * It receives the source and target objects.
+		 */
+		function merge(source, target) {
+			for (var property in source) {
+				if (source[property].constructor === Object) {
+					// The property is an object
+					
+					if (angular.isUndefined(target[property]) || target[property].constructor !== Object) {
+						// The target property is undefined or is not an object
+						target[property] = {};
+					}
+					
+					// Merges the inner objects
+					target[property] = merge(source[property], target[property]);
+				} else {
+					// The property is not an object
+					target[property] = source[property];
+				}
+			}
+			
+			return target;
+		}
+		
+		/*
 		 * TODO
 		 */
 		service.getConsultation = function(consultationId) {
@@ -747,7 +774,45 @@
 			};
 			
 			// Sets the fields to take into account
-			fields = newFields;
+			fields = merge(newFields, {
+				consultation: {
+					imageAnalysis: false,
+					laboratoryResults: false,
+					mainData: false,
+					metadata: false,
+					neurocognitiveAssessment: false,
+					patientBackground: false,
+					patientMedications: false,
+					treatments: false
+				},
+				
+				experiment: {
+					files: false,
+					mainData: false,
+					metadata: false
+				},
+				
+				file: {
+					mainData: false,
+					metadata: false
+				},
+				
+				patient: {
+					mainData: false,
+					metadata: false
+				},
+				
+				study: {
+					files: false,
+					mainData: false,
+					metadata: false
+				},
+				
+				user: {
+					mainData: false,
+					metadata: false
+				}
+			});
 		};
 	}
 })();
