@@ -36,7 +36,9 @@
 					<a href="#/change-password">Cambiar contraseña</a>
 				</li>
 				<li>
-					<a class="clickable">Cerrar sesión TODO</a>
+					<a class="clickable" ng-click="logOutForm.submit()" ng-controller="LogOutFormController as logOutForm">
+						Cerrar sesión
+					</a>
 				</li>
 			</ul>
 		</div>

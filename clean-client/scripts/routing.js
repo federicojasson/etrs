@@ -121,6 +121,21 @@
 			templateUrl: 'templates/views/create-user.html'
 		});
 		
+		// State: site.help
+		$stateProvider.state('site.help', {
+			controller: 'RoutingController',
+			template: inclusionTemplate,
+			url: '/help'
+		}).state('site.help.anonymous', {
+			templateUrl: 'templates/views/help.html'
+		}).state('site.help.administrator', {
+			templateUrl: 'templates/views/help.html'
+		}).state('site.help.doctor', {
+			templateUrl: 'templates/views/help.html'
+		}).state('site.help.operator', {
+			templateUrl: 'templates/views/help.html'
+		});
+		
 		// State: site.home
 		$stateProvider.state('site.home', {
 			controller: 'RoutingController',
@@ -143,6 +158,21 @@
 			url: '/log-in'
 		}).state('site.logIn.anonymous', {
 			templateUrl: 'templates/views/log-in.html'
+		});
+		
+		// State: site.news
+		$stateProvider.state('site.news', {
+			controller: 'RoutingController',
+			template: inclusionTemplate,
+			url: '/news'
+		}).state('site.news.anonymous', {
+			templateUrl: 'templates/views/log-in.html'
+		}).state('site.news.administrator', {
+			templateUrl: 'templates/views/news.html'
+		}).state('site.news.doctor', {
+			templateUrl: 'templates/views/news.html'
+		}).state('site.news.operator', {
+			templateUrl: 'templates/views/news.html'
 		});
 		
 		// State: site.patient

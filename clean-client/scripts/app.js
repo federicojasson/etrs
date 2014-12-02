@@ -6,6 +6,7 @@
 	var module = angular.module('app', [
 		'components',
 		'filters',
+		'forms',
 		'helpers',
 		'routing',
 		'ui.bootstrap'

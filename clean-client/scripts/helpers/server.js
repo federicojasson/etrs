@@ -24,7 +24,7 @@
 		var service = this;
 		
 		// TODO: remove mocking data
-		var loggedIn = true;
+		var loggedIn = false;
 		var loggedInUserId = 'federicojasson';
 		var consultations = [];
 		var experiments = [];
