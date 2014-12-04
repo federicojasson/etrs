@@ -34,7 +34,10 @@
 		 * If the input is invalid, the form is not submitted.
 		 */
 		controller.submit = function() {
-			if (! inputValidator.validate(controller.inputModels)) {
+			// Gets the input models
+			var inputModels = controller.inputModels;
+			
+			if (! inputValidator.validate(inputModels)) {
 				// The input is invalid
 				return;
 			}

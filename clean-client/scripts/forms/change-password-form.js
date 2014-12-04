@@ -55,14 +55,17 @@
 		 * If the input is invalid, the form is not submitted.
 		 */
 		controller.submit = function() {
-			if (! inputValidator.validate(controller.inputModels)) {
+			// Gets the input models
+			var inputModels = controller.inputModels;
+			
+			if (! inputValidator.validate(inputModels)) {
 				// The input is invalid
 				return;
 			}
 			
 			// Gets the input
-			var userNewPassword = controller.inputModels.userNewPassword.value;
-			var userPassword = controller.inputModels.userPassword.value;
+			var userNewPassword = inputModels.userNewPassword.value;
+			var userPassword = inputModels.userPassword.value;
 			
 			// Changes the password
 			server.changePassword(userNewPassword, userPassword).then(function() {

@@ -25,7 +25,19 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			// TODO
+			experimentCommandLine: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateCommandLine(this)
+				}
+			}),
+			
+			experimentName: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateName(this)
+				}
+			})
 		};
 		
 		/*
@@ -34,13 +46,17 @@
 		 * If the input is invalid, the form is not submitted.
 		 */
 		controller.submit = function() {
-			if (! inputValidator.validate(controller.inputModels)) {
+			// Gets the input models
+			var inputModels = controller.inputModels;
+			
+			if (! inputValidator.validate(inputModels)) {
 				// The input is invalid
 				return;
 			}
 			
 			// Gets the input
-			// TODO
+			var experimentCommandLine = inputModels.experimentCommandLine.value;
+			var experimentName = inputModels.experimentName.value;
 			
 			// Creates the experiment
 			server.createExperiment().then(function() {

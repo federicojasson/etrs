@@ -25,7 +25,29 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			// TODO
+			birthDate: new InputModel(),
+			
+			educationYears: new InputModel({
+				validationFunction: function() {
+					// TODO
+				}
+			}),
+			
+			firstName: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateName(this)
+				}
+			}),
+			
+			gender: new InputModel(),
+			
+			lastName: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateName(this)
+				}
+			})
 		};
 		
 		/*
@@ -34,13 +56,20 @@
 		 * If the input is invalid, the form is not submitted.
 		 */
 		controller.submit = function() {
-			if (! inputValidator.validate(controller.inputModels)) {
+			// Gets the input models
+			var inputModels = controller.inputModels;
+			
+			if (! inputValidator.validate(inputModels)) {
 				// The input is invalid
 				return;
 			}
 			
 			// Gets the input
-			// TODO
+			var birthDate = inputModels.birthDate.value;
+			var educationYears = inputModels.educationYears.value;
+			var firstName = inputModels.firstName.value;
+			var gender = inputModels.gender.value;
+			var lastName = inputModels.lastName.value;
 			
 			// Creates the patient
 			server.createPatient().then(function() {

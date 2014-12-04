@@ -615,7 +615,7 @@
 		/*
 		 * TODO
 		 */
-		service.requestUserCreation = function() {
+		service.requestUserCreation = function(userEmailAddress, userRole) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {

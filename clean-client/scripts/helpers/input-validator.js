@@ -52,11 +52,37 @@
 		};
 		
 		/*
+		 * Validates a command line.
+		 * 
+		 * It receives the input model.
+		 */
+		service.validateName = function(inputModel) {
+			// TODO
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
+		};
+		
+		/*
 		 * Validates an email address.
 		 * 
 		 * It receives the input model.
 		 */
 		service.validateEmailAddress = function(inputModel) {
+			// TODO
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
+		};
+		
+		/*
+		 * Validates a name.
+		 * 
+		 * It receives the input model.
+		 */
+		service.validateName = function(inputModel) {
 			// TODO
 			
 			// The input is valid

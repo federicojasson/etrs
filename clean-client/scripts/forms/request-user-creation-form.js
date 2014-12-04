@@ -25,7 +25,14 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			// TODO
+			userEmailAddress: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateEmailAddress(this)
+				}
+			}),
+			
+			userRole: new InputModel()
 		};
 		
 		/*
@@ -34,16 +41,20 @@
 		 * If the input is invalid, the form is not submitted.
 		 */
 		controller.submit = function() {
-			if (! inputValidator.validate(controller.inputModels)) {
+			// Gets the input models
+			var inputModels = controller.inputModels;
+			
+			if (! inputValidator.validate(inputModels)) {
 				// The input is invalid
 				return;
 			}
 			
 			// Gets the input
-			// TODO
+			var userEmailAddress = inputModels.userEmailAddress;
+			var userRole = inputModels.userRole;
 			
 			// Requests the user creation
-			server.requestUserCreation().then(function() {
+			server.requestUserCreation(userEmailAddress, userRole).then(function() {
 				// TODO: what to do now
 			}, function(response) {
 				// TODO: error
