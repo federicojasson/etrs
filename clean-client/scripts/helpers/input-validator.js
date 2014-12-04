@@ -17,16 +17,6 @@
 		var service = this;
 		
 		/*
-		 * Determines whether the length of an input is longer (or equal) than a
-		 * certain minimum.
-		 * 
-		 * It receives the input and the minimum length.
-		 */
-		service.meetsMinimumLength = function(input, minimumLength) {
-			return input.length >= minimumLength;
-		}
-		
-		/*
 		 * Validates a set of input models and returns the result.
 		 * 
 		 * It receives an object containing the input models. Note that these
@@ -59,6 +49,92 @@
 			}
 			
 			return result;
+		};
+		
+		/*
+		 * Validates an email address.
+		 * 
+		 * It receives the input model.
+		 */
+		service.validateEmailAddress = function(inputModel) {
+			// TODO
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
+		};
+		
+		/*
+		 * Validates a password.
+		 * 
+		 * It receives the input model.
+		 */
+		service.validatePassword = function(inputModel) {
+			// Gets the input model's value
+			var value = inputModel.value;
+			
+			if (value.length < 8) {
+				// The input is too short
+				inputModel.message = 'La contraseña debe tener al menos 8 caracteres';
+				return false;
+			}
+			
+			if (! /(?=.*[a-z])/.test(value)) {
+				// The input doesn't have a lowercase letter
+				inputModel.message = 'La contraseña debe tener al menos una letra minúscula'
+				return false;
+			}
+			
+			if (! /(?=.*[A-Z])/.test(value)) {
+				// The input doesn't have an uppercase letter
+				inputModel.message = 'La contraseña debe tener al menos una letra mayúscula'
+				return false;
+			}
+			
+			if (! /(?=.*[0-9])/.test(value)) {
+				// The input doesn't have a digit
+				inputModel.message = 'La contraseña debe tener al menos un dígito';
+				return false;
+			}
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
+		};
+		
+		/*
+		 * Validates a password confirmation.
+		 * 
+		 * It receives the input model and the password with which its value
+		 * must match.
+		 */
+		service.validatePasswordConfirmation = function(inputModel, password) {
+			if (inputModel.value !== password) {
+				// The passwords don't match
+				inputModel.message = 'Las contraseñas ingresadas no coinciden';
+				return false;
+			}
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
+		};
+		
+		/*
+		 * Validates a required input.
+		 * 
+		 * It receives the input model.
+		 */
+		service.validateRequiredInput = function(inputModel) {
+			if (inputModel.value.length < 1) {
+				// The input was not entered
+				inputModel.message = 'Este campo es obligatorio';
+				return false;
+			}
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
 		};
 	}
 })();

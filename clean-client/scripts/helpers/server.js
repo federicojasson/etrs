@@ -24,7 +24,7 @@
 		var service = this;
 		
 		// TODO: remove mocking data
-		var loggedIn = false;
+		var loggedIn = true;
 		var loggedInUserId = 'federicojasson';
 		var consultations = [];
 		var experiments = [];
@@ -38,7 +38,7 @@
 					firstNames: 'Federico Rodrigo',
 					lastNames: 'Jasson',
 					gender: 'm',
-					email: 'federicojasson@something.com',
+					emailAddress: 'federicojasson@something.com',
 					role: 'ad'
 				},
 				metadata: {
@@ -100,6 +100,58 @@
 			// Returns the promise
 			return deferredTask.$promise;
 		}
+		
+		/*
+		 * TODO
+		 */
+		service.changePassword = function(userNewPassword, userPassword) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.createExperiment = function() {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.createPatient = function() {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.createUser = function() {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
 		
 		/*
 		 * TODO
@@ -554,6 +606,19 @@
 			$timeout(function() {
 				loggedIn = false;
 				loggedInUserId = null;
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.requestUserCreation = function() {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
 				deferredTask.resolve();
 			}, 100);
 			

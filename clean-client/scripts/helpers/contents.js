@@ -32,10 +32,10 @@
 				url: '/create-patient'
 			},
 			
-			createUser: {
+			requestUserCreation: {
 				description: 'TODO: description',
 				title: 'Ingresar nuevo usuario',
-				url: '/create-user'
+				url: '/request-user-creation'
 			},
 			
 			searchPatients: {
@@ -60,7 +60,7 @@
 
 				{
 					actions: [
-						actions.createUser
+						actions.requestUserCreation
 					],
 					title: 'Usuarios'
 				},

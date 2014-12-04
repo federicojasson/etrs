@@ -114,26 +114,15 @@
 		$stateProvider.state('site.createUser', {
 			controller: 'RoutingController',
 			template: inclusionTemplate,
-			url: '/create-user'
+			url: '/create-user/{requestCode:[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}}'
 		}).state('site.createUser.anonymous', {
-			templateUrl: 'templates/views/log-in.html'
-		}).state('site.createUser.administrator', {
 			templateUrl: 'templates/views/create-user.html'
 		});
 		
 		// State: site.help
 		$stateProvider.state('site.help', {
-			controller: 'RoutingController',
-			template: inclusionTemplate,
+			templateUrl: 'templates/views/help.html',
 			url: '/help'
-		}).state('site.help.anonymous', {
-			templateUrl: 'templates/views/help.html'
-		}).state('site.help.administrator', {
-			templateUrl: 'templates/views/help.html'
-		}).state('site.help.doctor', {
-			templateUrl: 'templates/views/help.html'
-		}).state('site.help.operator', {
-			templateUrl: 'templates/views/help.html'
 		});
 		
 		// State: site.home
@@ -188,6 +177,17 @@
 			templateUrl: 'templates/views/patient.html'
 		}).state('site.patient.operator', {
 			templateUrl: 'templates/views/patient.html'
+		});
+		
+		// State: site.requestUserCreation
+		$stateProvider.state('site.requestUserCreation', {
+			controller: 'RoutingController',
+			template: inclusionTemplate,
+			url: '/request-user-creation'
+		}).state('site.requestUserCreation.anonymous', {
+			templateUrl: 'templates/views/log-in.html'
+		}).state('site.requestUserCreation.administrator', {
+			templateUrl: 'templates/views/request-user-creation.html'
 		});
 		
 		// State: site.searchPatients

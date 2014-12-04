@@ -28,27 +28,13 @@
 		controller.inputModels = {
 			userId: new InputModel({
 				validationFunction: function() {
-					this.message = '';
-
-					if (! inputValidator.meetsMinimumLength(this.value, 1)) {
-						this.message = 'Ingrese un nombre de usuario';
-						return false;
-					}
-
-					return true;
+					return inputValidator.validateRequiredInput(this);
 				}
 			}),
 			
 			userPassword: new InputModel({
 				validationFunction: function() {
-					this.message = '';
-
-					if (! inputValidator.meetsMinimumLength(this.value, 1)) {
-						this.message = 'Ingrese su contraseña';
-						return false;
-					}
-
-					return true;
+					return inputValidator.validateRequiredInput(this);
 				}
 			})
 		};
@@ -56,7 +42,7 @@
 		/*
 		 * Submits the form.
 		 * 
-		 * If any input is invalid, the form is not submitted.
+		 * If the input is invalid, the form is not submitted.
 		 */
 		controller.submit = function() {
 			if (! inputValidator.validate(controller.inputModels)) {
