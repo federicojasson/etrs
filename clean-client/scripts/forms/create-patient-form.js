@@ -64,15 +64,14 @@
 				return;
 			}
 			
-			// Gets the input
-			var birthDate = inputModels.birthDate.value;
-			var educationYears = inputModels.educationYears.value;
-			var firstName = inputModels.firstName.value;
-			var gender = inputModels.gender.value;
-			var lastName = inputModels.lastName.value;
-			
 			// Creates the patient
-			server.createPatient().then(function() {
+			server.createPatient({
+				birthDate: inputModels.birthDate.value,
+				educationYears: inputModels.educationYears.value,
+				firstName: inputModels.firstName.value,
+				gender: inputModels.gender.value,
+				lastName: inputModels.lastName.value
+			}).then(function() {
 				// TODO: what to do now
 			}, function(response) {
 				// TODO: error

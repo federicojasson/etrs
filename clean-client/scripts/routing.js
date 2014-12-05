@@ -114,7 +114,7 @@
 		$stateProvider.state('site.createUser', {
 			controller: 'RoutingController',
 			template: inclusionTemplate,
-			url: '/create-user/{requestCode:[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}}'
+			url: '/create-user/{requestId:[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}}'
 		}).state('site.createUser.anonymous', {
 			templateUrl: 'templates/views/create-user.html'
 		});
@@ -222,7 +222,7 @@
 		$stateProvider.state('site.user', {
 			controller: 'RoutingController',
 			template: inclusionTemplate,
-			url: '/user/{userId:(?![.])(?!.*[.]$)(?!.*[.]{2})[.0-9A-Za-z]{1,32}}'
+			url: '/user/{userId:(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{1,32}}'
 		}).state('site.user.anonymous', {
 			templateUrl: 'templates/views/log-in.html'
 		}).state('site.user.administrator', {

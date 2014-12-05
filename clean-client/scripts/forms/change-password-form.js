@@ -25,24 +25,24 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			userNewPassword: new InputModel({
+			newPassword: new InputModel({
 				validationFunction: function() {
 					return	inputValidator.validateRequiredInput(this) &&
 							inputValidator.validatePassword(this);
 				}
 			}),
 			
-			userNewPasswordConfirmation: new InputModel({
+			newPasswordConfirmation: new InputModel({
 				validationFunction: function() {
-					// Gets the entered password
-					var password = controller.inputModels.userNewPassword.value;
+					// Gets the entered new password
+					var newPassword = controller.inputModels.newPassword.value;
 					
 					return	inputValidator.validateRequiredInput(this) &&
-							inputValidator.validatePasswordConfirmation(this, password);
+							inputValidator.validatePasswordConfirmation(this, newPassword);
 				}
 			}),
 			
-			userPassword: new InputModel({
+			password: new InputModel({
 				validationFunction: function() {
 					return inputValidator.validateRequiredInput(this);
 				}
@@ -63,12 +63,11 @@
 				return;
 			}
 			
-			// Gets the input
-			var userNewPassword = inputModels.userNewPassword.value;
-			var userPassword = inputModels.userPassword.value;
-			
-			// Changes the password
-			server.changePassword(userNewPassword, userPassword).then(function() {
+			// Changes the user's password
+			server.changePassword({
+				newPassword: inputModels.newPassword.value,
+				password: inputModels.password.value
+			}).then(function() {
 				// TODO: what to do now
 			}, function(response) {
 				// TODO: error

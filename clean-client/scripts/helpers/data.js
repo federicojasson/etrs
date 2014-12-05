@@ -58,35 +58,51 @@
 			var consultationFields = fields.consultation;
 			
 			if (consultationFields.imageAnalysis) {
-				promises.push(server.getConsultationImageAnalysis(consultationId));
+				promises.push(server.getConsultationImageAnalysis({
+					id: consultationId
+				}));
 			}
 			
 			if (consultationFields.laboratoryResults) {
-				promises.push(server.getConsultationLaboratoryResults(consultationId));
+				promises.push(server.getConsultationLaboratoryResults({
+					id: consultationId
+				}));
 			}
 			
 			if (consultationFields.mainData) {
-				promises.push(server.getConsultationMainData(consultationId));
+				promises.push(server.getConsultationMainData({
+					id: consultationId
+				}));
 			}
 			
 			if (consultationFields.metadata) {
-				promises.push(server.getConsultationMetadata(consultationId));
+				promises.push(server.getConsultationMetadata({
+					id: consultationId
+				}));
 			}
 			
 			if (consultationFields.neurocognitiveAssessment) {
-				promises.push(server.getConsultationNeurocognitiveAssessment(consultationId));
+				promises.push(server.getConsultationNeurocognitiveAssessment({
+					id: consultationId
+				}));
 			}
 			
 			if (consultationFields.patientBackground) {
-				promises.push(server.getConsultationPatientBackground(consultationId));
+				promises.push(server.getConsultationPatientBackground({
+					id: consultationId
+				}));
 			}
 			
 			if (consultationFields.patientMedications) {
-				promises.push(server.getConsultationPatientMedications(consultationId));
+				promises.push(server.getConsultationPatientMedications({
+					id: consultationId
+				}));
 			}
 			
 			if (consultationFields.treatments) {
-				promises.push(server.getConsultationTreatments(consultationId));
+				promises.push(server.getConsultationTreatments({
+					id: consultationId
+				}));
 			}
 			
 			// Waits until all tasks are completed
@@ -178,15 +194,21 @@
 			var experimentFields = fields.experiment;
 			
 			if (experimentFields.files) {
-				promises.push(server.getExperimentFiles(experimentId));
+				promises.push(server.getExperimentFiles({
+					id: experimentId
+				}));
 			}
 			
 			if (experimentFields.mainData) {
-				promises.push(server.getExperimentMainData(experimentId));
+				promises.push(server.getExperimentMainData({
+					id: experimentId
+				}));
 			}
 			
 			if (experimentFields.metadata) {
-				promises.push(server.getExperimentMetadata(experimentId));
+				promises.push(server.getExperimentMetadata({
+					id: experimentId
+				}));
 			}
 			
 			// Waits until all tasks are completed
@@ -269,11 +291,15 @@
 			var fileFields = fields.file;
 			
 			if (fileFields.mainData) {
-				promises.push(server.getFileMainData(fileId));
+				promises.push(server.getFileMainData({
+					id: fileId
+				}));
 			}
 			
 			if (fileFields.metadata) {
-				promises.push(server.getFileMetadata(fileId));
+				promises.push(server.getFileMetadata({
+					id: fileId
+				}));
 			}
 			
 			// Waits until all tasks are completed
@@ -339,11 +365,15 @@
 			var patientFields = fields.patient;
 			
 			if (patientFields.mainData) {
-				promises.push(server.getPatientMainData(patientId));
+				promises.push(server.getPatientMainData({
+					id: patientId
+				}));
 			}
 			
 			if (patientFields.metadata) {
-				promises.push(server.getPatientMetadata(patientId));
+				promises.push(server.getPatientMetadata({
+					id: patientId
+				}));
 			}
 			
 			// Waits until all tasks are completed
@@ -409,15 +439,21 @@
 			var studyFields = fields.study;
 			
 			if (studyFields.files) {
-				promises.push(server.getStudyFiles(studyId));
+				promises.push(server.getStudyFiles({
+					id: studyId
+				}));
 			}
 			
 			if (studyFields.mainData) {
-				promises.push(server.getStudyMainData(studyId));
+				promises.push(server.getStudyMainData({
+					id: studyId
+				}));
 			}
 			
 			if (studyFields.metadata) {
-				promises.push(server.getStudyMetadata(studyId));
+				promises.push(server.getStudyMetadata({
+					id: studyId
+				}));
 			}
 			
 			// Waits until all tasks are completed
@@ -506,11 +542,15 @@
 			var userFields = fields.user;
 			
 			if (userFields.mainData) {
-				promises.push(server.getUserMainData(userId));
+				promises.push(server.getUserMainData({
+					id: userId
+				}));
 			}
 			
 			if (userFields.metadata) {
-				promises.push(server.getUserMetadata(userId));
+				promises.push(server.getUserMetadata({
+					id: userId
+				}));
 			}
 			
 			// Waits until all tasks are completed

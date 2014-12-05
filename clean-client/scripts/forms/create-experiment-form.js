@@ -25,14 +25,14 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			experimentCommandLine: new InputModel({
+			commandLine: new InputModel({
 				validationFunction: function() {
 					return	inputValidator.validateRequiredInput(this) &&
 							inputValidator.validateCommandLine(this)
 				}
 			}),
-			
-			experimentName: new InputModel({
+
+			name: new InputModel({
 				validationFunction: function() {
 					return	inputValidator.validateRequiredInput(this) &&
 							inputValidator.validateName(this)
@@ -54,12 +54,11 @@
 				return;
 			}
 			
-			// Gets the input
-			var experimentCommandLine = inputModels.experimentCommandLine.value;
-			var experimentName = inputModels.experimentName.value;
-			
 			// Creates the experiment
-			server.createExperiment().then(function() {
+			server.createExperiment({
+				commandLine: inputModels.experiment.commandLine.value,
+				name: inputModels.experiment.name.value
+			}).then(function() {
 				// TODO: what to do now
 			}, function(response) {
 				// TODO: error

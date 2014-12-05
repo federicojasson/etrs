@@ -68,8 +68,8 @@
 			deferredTask = $q.defer();
 			
 			// Gets the authentication state
-			server.getAuthenticationState().then(function(response) {
-				if (response.loggedIn) {
+			server.getAuthenticationState().then(function(output) {
+				if (output.loggedIn) {
 					// The user is logged in
 					
 					data.prepare({
@@ -79,7 +79,7 @@
 					});
 					
 					// Gets the user's data
-					data.getUser(response.userId).then(function(user) {
+					data.getUser(output.id).then(function(user) {
 						// Sets the logged in user
 						loggedInUser = user;
 

@@ -25,14 +25,14 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			userEmailAddress: new InputModel({
+			emailAddress: new InputModel({
 				validationFunction: function() {
 					return	inputValidator.validateRequiredInput(this) &&
 							inputValidator.validateEmailAddress(this)
 				}
 			}),
 			
-			userRole: new InputModel()
+			role: new InputModel()
 		};
 		
 		/*
@@ -49,12 +49,11 @@
 				return;
 			}
 			
-			// Gets the input
-			var userEmailAddress = inputModels.userEmailAddress;
-			var userRole = inputModels.userRole;
-			
 			// Requests the user creation
-			server.requestUserCreation(userEmailAddress, userRole).then(function() {
+			server.requestUserCreation({
+				emailAddress: inputModels.emailAddress,
+				role: inputModels.role
+			}).then(function() {
 				// TODO: what to do now
 			}, function(response) {
 				// TODO: error

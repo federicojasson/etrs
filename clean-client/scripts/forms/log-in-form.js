@@ -26,13 +26,13 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			userId: new InputModel({
+			id: new InputModel({
 				validationFunction: function() {
 					return inputValidator.validateRequiredInput(this);
 				}
 			}),
 			
-			userPassword: new InputModel({
+			password: new InputModel({
 				validationFunction: function() {
 					return inputValidator.validateRequiredInput(this);
 				}
@@ -53,13 +53,12 @@
 				return;
 			}
 			
-			// Gets the input
-			var userId = inputModels.userId.value;
-			var userPassword = inputModels.userPassword.value;
-			
 			// Logs in the user
-			server.logIn(userId, userPassword).then(function(response) {
-				if (response.loggedIn) {
+			server.logIn({
+				id: inputModels.id.value,
+				password: inputModels.password.value
+			}).then(function(output) {
+				if (output.loggedIn) {
 					// The user was logged in
 					
 					// Refreshes the authentication state

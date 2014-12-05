@@ -56,8 +56,21 @@
 		 * 
 		 * It receives the input model.
 		 */
-		service.validateName = function(inputModel) {
-			// TODO
+		service.validateCommandLine = function(inputModel) {
+			// Gets the input model's value
+			var value = inputModel.value;
+			
+			if (value.length > 1024) {
+				// The input is too long
+				inputModel.message = 'Este campo puede tener a lo sumo 1024 caracteres';
+				return false;
+			}
+			
+			if (! /^.*( |^):input( |$).*$/.test(value)) {
+				// The input doesn't have the input placeholder
+				inputModel.message = 'La línea debe contener el indicador :input para el archivo de entrada';
+				return false;
+			}
 			
 			// The input is valid
 			inputModel.message = '';
@@ -70,7 +83,20 @@
 		 * It receives the input model.
 		 */
 		service.validateEmailAddress = function(inputModel) {
-			// TODO
+			// Gets the input model's value
+			var value = inputModel.value;
+			
+			if (value.length > 254) {
+				// The input is too long
+				inputModel.message = 'Este campo puede tener a lo sumo 254 caracteres';
+				return false;
+			}
+			
+			if (! /(?!.*[ ])(?!.*@.*@)^.+@.+$/.test(value)) {
+				// The input is not a valid email address
+				inputModel.message = 'La dirección de correo electrónico ingresada no es válida';
+				return false;
+			}
 			
 			// The input is valid
 			inputModel.message = '';
@@ -83,7 +109,11 @@
 		 * It receives the input model.
 		 */
 		service.validateName = function(inputModel) {
-			// TODO
+			if (inputModel.value.length > 48) {
+				// The input is too long
+				inputModel.message = 'Este campo puede tener a lo sumo 48 caracteres';
+				return false;
+			}
 			
 			// The input is valid
 			inputModel.message = '';
@@ -105,19 +135,19 @@
 				return false;
 			}
 			
-			if (! /(?=.*[a-z])/.test(value)) {
+			if (! /^.*[a-z].*$/.test(value)) {
 				// The input doesn't have a lowercase letter
-				inputModel.message = 'La contraseña debe tener al menos una letra minúscula'
+				inputModel.message = 'La contraseña debe tener al menos una letra minúscula';
 				return false;
 			}
 			
-			if (! /(?=.*[A-Z])/.test(value)) {
+			if (! /^.*[A-Z].*$/.test(value)) {
 				// The input doesn't have an uppercase letter
-				inputModel.message = 'La contraseña debe tener al menos una letra mayúscula'
+				inputModel.message = 'La contraseña debe tener al menos una letra mayúscula';
 				return false;
 			}
 			
-			if (! /(?=.*[0-9])/.test(value)) {
+			if (! /^.*[0-9].*$/.test(value)) {
 				// The input doesn't have a digit
 				inputModel.message = 'La contraseña debe tener al menos un dígito';
 				return false;
@@ -155,6 +185,50 @@
 			if (inputModel.value.length < 1) {
 				// The input was not entered
 				inputModel.message = 'Este campo es obligatorio';
+				return false;
+			}
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
+		};
+		
+		/*
+		 * Validates a user ID.
+		 * 
+		 * It receives the input model.
+		 */
+		service.validateUserId = function(inputModel) {
+			// Gets the input model's value
+			var value = inputModel.value;
+			
+			if (value.length > 32) {
+				// The input is too long
+				inputModel.message = 'Este campo puede tener a lo sumo 32 caracteres';
+				return false;
+			}
+			
+			if (! /^[.0-9A-Za-z]*$/.test(value)) {
+				// The input contains invalid characters
+				inputModel.message = 'El ID puede contener únicamente letras, dígitos y puntos';
+				return false;
+			}
+			
+			if (/^.*[.]{2}.*$/.test(value)) {
+				// The input has two or more consecutive dots
+				inputModel.message = 'El ID no puede contener dos o más puntos consecutivos';
+				return false;
+			}
+			
+			if (/^[.].*$/.test(value)) {
+				// The input starts with a dot
+				inputModel.message = 'El ID no puede contener un punto al comienzo';
+				return false;
+			}
+			
+			if (/^.*[.]$/.test(value)) {
+				// The input ends with a dot
+				inputModel.message = 'El ID no puede contener un punto al final';
 				return false;
 			}
 			

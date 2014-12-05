@@ -25,7 +25,28 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			// TODO
+			firstName: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateName(this)
+				}
+			}),
+			
+			gender: new InputModel(),
+			
+			id: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateUserId(this)
+				}
+			}),
+			
+			lastName: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateName(this)
+				}
+			})
 		};
 		
 		/*
@@ -42,11 +63,12 @@
 				return;
 			}
 			
-			// Gets the input
-			// TODO
+			// TODO: check if user exists
 			
 			// Creates the user
-			server.createUser().then(function() {
+			server.createUser({
+				// TODO
+			}).then(function() {
 				// TODO: what to do now
 			}, function(response) {
 				// TODO: error

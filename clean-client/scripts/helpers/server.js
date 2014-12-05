@@ -24,7 +24,7 @@
 		var service = this;
 		
 		// TODO: remove mocking data
-		var loggedIn = true;
+		var loggedIn = false;
 		var loggedInUserId = 'federicojasson';
 		var consultations = [];
 		var experiments = [];
@@ -51,13 +51,13 @@
 		 * Sends an HTTP request to a given URL.
 		 * 
 		 * It receives an object containing the parameters: the URL, the HTTP
-		 * method to use, the input and whether the expected response is an
-		 * array. This object should have the following structure:
+		 * method to use, the input and whether the expected output is an array.
+		 * This object should have the following structure:
 		 * 
 		 *	parameters: {
 		 *		input: ...,
 		 *		method: ...,
-		 *		responseIsArray: ...,
+		 *		outputIsArray: ...,
 		 *		url: ...
 		 *	}
 		 * 
@@ -71,7 +71,7 @@
 			// Extracts the parameters
 			var input = parameters.input;
 			var method = parameters.method;
-			var responseIsArray = parameters.responseIsArray;
+			var outputIsArray = parameters.outputIsArray;
 			var url = parameters.url;
 			
 			// Initializes undefined optional parameters with default values
@@ -92,7 +92,7 @@
 			// Sends the request
 			var deferredTask = $resource(url, urlInput, {
 				sendRequest: {
-					isArray: responseIsArray,
+					isArray: outputIsArray,
 					method: method
 				}
 			}).sendRequest(bodyInput);
@@ -104,7 +104,7 @@
 		/*
 		 * TODO
 		 */
-		service.changePassword = function(userNewPassword, userPassword) {
+		service.changePassword = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
@@ -117,7 +117,7 @@
 		/*
 		 * TODO
 		 */
-		service.createExperiment = function() {
+		service.createExperiment = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
@@ -130,7 +130,7 @@
 		/*
 		 * TODO
 		 */
-		service.createPatient = function() {
+		service.createPatient = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
@@ -143,7 +143,7 @@
 		/*
 		 * TODO
 		 */
-		service.createUser = function() {
+		service.createUser = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
@@ -161,8 +161,8 @@
 			
 			$timeout(function() {
 				deferredTask.resolve({
-					loggedIn: loggedIn,
-					userId: loggedInUserId
+					id: loggedInUserId,
+					loggedIn: loggedIn
 				});
 			}, 100);
 			
@@ -172,12 +172,12 @@
 		/*
 		 * TODO
 		 */
-		service.getConsultationImageAnalysis = function(consultationId) {
+		service.getConsultationImageAnalysis = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].id === consultationId) {
+					if (consultations[i].id === input.id) {
 						deferredTask.resolve(consultations[i].imageAnalysis);
 						return;
 					}
@@ -192,12 +192,12 @@
 		/*
 		 * TODO
 		 */
-		service.getConsultationLaboratoryResults = function(consultationId) {
+		service.getConsultationLaboratoryResults = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].id === consultationId) {
+					if (consultations[i].id === input.id) {
 						deferredTask.resolve(consultations[i].laboratoryResults);
 						return;
 					}
@@ -212,12 +212,12 @@
 		/*
 		 * TODO
 		 */
-		service.getConsultationMainData = function(consultationId) {
+		service.getConsultationMainData = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].id === consultationId) {
+					if (consultations[i].id === input.id) {
 						deferredTask.resolve(consultations[i].mainData);
 						return;
 					}
@@ -232,12 +232,12 @@
 		/*
 		 * TODO
 		 */
-		service.getConsultationMetadata = function(consultationId) {
+		service.getConsultationMetadata = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].id === consultationId) {
+					if (consultations[i].id === input.id) {
 						deferredTask.resolve(consultations[i].metadata);
 						return;
 					}
@@ -252,12 +252,12 @@
 		/*
 		 * TODO
 		 */
-		service.getConsultationNeurocognitiveAssessment = function(consultationId) {
+		service.getConsultationNeurocognitiveAssessment = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].id === consultationId) {
+					if (consultations[i].id === input.id) {
 						deferredTask.resolve(consultations[i].neurocognitiveAssessment);
 						return;
 					}
@@ -272,12 +272,12 @@
 		/*
 		 * TODO
 		 */
-		service.getConsultationPatientBackground = function(consultationId) {
+		service.getConsultationPatientBackground = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].id === consultationId) {
+					if (consultations[i].id === input.id) {
 						deferredTask.resolve(consultations[i].patientBackground);
 						return;
 					}
@@ -292,12 +292,12 @@
 		/*
 		 * TODO
 		 */
-		service.getConsultationPatientMedications = function(consultationId) {
+		service.getConsultationPatientMedications = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].id === consultationId) {
+					if (consultations[i].id === input.id) {
 						deferredTask.resolve(consultations[i].patientMedications);
 						return;
 					}
@@ -312,12 +312,12 @@
 		/*
 		 * TODO
 		 */
-		service.getConsultationTreatments = function(consultationId) {
+		service.getConsultationTreatments = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].id === consultationId) {
+					if (consultations[i].id === input.id) {
 						deferredTask.resolve(consultations[i].treatments);
 						return;
 					}
@@ -332,12 +332,12 @@
 		/*
 		 * TODO
 		 */
-		service.getExperimentFiles = function(experimentId) {
+		service.getExperimentFiles = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < experiments.length; i++) {
-					if (experiments[i].id === experimentId) {
+					if (experiments[i].id === input.id) {
 						deferredTask.resolve(experiments[i].files);
 						return;
 					}
@@ -352,12 +352,12 @@
 		/*
 		 * TODO
 		 */
-		service.getExperimentMainData = function(experimentId) {
+		service.getExperimentMainData = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < experiments.length; i++) {
-					if (experiments[i].id === experimentId) {
+					if (experiments[i].id === input.id) {
 						deferredTask.resolve(experiments[i].mainData);
 						return;
 					}
@@ -372,12 +372,12 @@
 		/*
 		 * TODO
 		 */
-		service.getExperimentMetadata = function(experimentId) {
+		service.getExperimentMetadata = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < experiments.length; i++) {
-					if (experiments[i].id === experimentId) {
+					if (experiments[i].id === input.id) {
 						deferredTask.resolve(experiments[i].metadata);
 						return;
 					}
@@ -392,12 +392,12 @@
 		/*
 		 * TODO
 		 */
-		service.getFileMainData = function(fileId) {
+		service.getFileMainData = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < files.length; i++) {
-					if (files[i].id === fileId) {
+					if (files[i].id === input.id) {
 						deferredTask.resolve(files[i].mainData);
 						return;
 					}
@@ -412,12 +412,12 @@
 		/*
 		 * TODO
 		 */
-		service.getFileMetadata = function(fileId) {
+		service.getFileMetadata = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < files.length; i++) {
-					if (files[i].id === fileId) {
+					if (files[i].id === input.id) {
 						deferredTask.resolve(files[i].metadata);
 						return;
 					}
@@ -432,12 +432,12 @@
 		/*
 		 * TODO
 		 */
-		service.getPatientMainData = function(patientId) {
+		service.getPatientMainData = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < patients.length; i++) {
-					if (patients[i].id === patientId) {
+					if (patients[i].id === input.id) {
 						deferredTask.resolve(patients[i].mainData);
 						return;
 					}
@@ -452,12 +452,12 @@
 		/*
 		 * TODO
 		 */
-		service.getPatientMetadata = function(patientId) {
+		service.getPatientMetadata = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < patients.length; i++) {
-					if (patients[i].id === patientId) {
+					if (patients[i].id === input.id) {
 						deferredTask.resolve(patients[i].metadata);
 						return;
 					}
@@ -472,12 +472,12 @@
 		/*
 		 * TODO
 		 */
-		service.getStudyFiles = function(studyId) {
+		service.getStudyFiles = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < studies.length; i++) {
-					if (studies[i].id === studyId) {
+					if (studies[i].id === input.id) {
 						deferredTask.resolve(studies[i].files);
 						return;
 					}
@@ -492,12 +492,12 @@
 		/*
 		 * TODO
 		 */
-		service.getStudyMainData = function(studyId) {
+		service.getStudyMainData = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < studies.length; i++) {
-					if (studies[i].id === studyId) {
+					if (studies[i].id === input.id) {
 						deferredTask.resolve(studies[i].mainData);
 						return;
 					}
@@ -512,12 +512,12 @@
 		/*
 		 * TODO
 		 */
-		service.getStudyMetadata = function(studyId) {
+		service.getStudyMetadata = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < studies.length; i++) {
-					if (studies[i].id === studyId) {
+					if (studies[i].id === input.id) {
 						deferredTask.resolve(studies[i].metadata);
 						return;
 					}
@@ -532,12 +532,12 @@
 		/*
 		 * TODO
 		 */
-		service.getUserMainData = function(userId) {
+		service.getUserMainData = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < users.length; i++) {
-					if (users[i].id === userId) {
+					if (users[i].id === input.id) {
 						deferredTask.resolve(users[i].mainData);
 						return;
 					}
@@ -552,12 +552,12 @@
 		/*
 		 * TODO
 		 */
-		service.getUserMetadata = function(userId) {
+		service.getUserMetadata = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				for (var i = 0; i < users.length; i++) {
-					if (users[i].id === userId) {
+					if (users[i].id === input.id) {
 						deferredTask.resolve(users[i].metadata);
 						return;
 					}
@@ -572,13 +572,13 @@
 		/*
 		 * TODO
 		 */
-		service.logIn = function(userId, userPassword) {
+		service.logIn = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
 				var user = null;
 				for (var i = 0; i < users.length; i++) {
-					if (users[i].id === userId) {
+					if (users[i].id === input.id) {
 						user = users[i];
 						break;
 					}
@@ -586,7 +586,7 @@
 				
 				if (user !== null) {
 					loggedIn = true;
-					loggedInUserId = userId;
+					loggedInUserId = input.id;
 				}
 				
 				deferredTask.resolve({
@@ -615,7 +615,7 @@
 		/*
 		 * TODO
 		 */
-		service.requestUserCreation = function(userEmailAddress, userRole) {
+		service.requestUserCreation = function(input) {
 			var deferredTask = $q.defer();
 			
 			$timeout(function() {
