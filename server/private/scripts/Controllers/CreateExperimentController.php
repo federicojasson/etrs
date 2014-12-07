@@ -3,10 +3,10 @@
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/log-out
+ *	URL:	/server/create-experiment
  *	Method:	POST
  */
-class LogOutController extends SecureController {
+class CreateExperimentController extends SecureController {
 	
 	/*
 	 * Executes the controller.
@@ -19,8 +19,7 @@ class LogOutController extends SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// The service has no input
-		return true;
+		// TODO: implement
 	}
 	
 	/*

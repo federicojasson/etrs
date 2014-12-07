@@ -1,0 +1,5 @@
+# Enables the runtime rewriting engine
+RewriteEngine On
+
+# Rewrites all URLs so that Slim handles the request
+RewriteRule ^ index.php [L]

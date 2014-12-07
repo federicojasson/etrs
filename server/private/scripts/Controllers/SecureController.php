@@ -1,54 +1,55 @@
 <?php
 
 /*
- * This class represents a controller that makes security checks. Specifically,
- * it implements the user authorization verification method.
+ * This class encapsulates the logic of a service that performs security checks.
  * 
- * In order to do its job, the controller should receive the user roles
- * authorized to access this service.
- * 
- * Subclasses must still implement the service's logic and the input validation
- * method.
+ * Subclasses must implement the execution function. For security reasons, every
+ * controller has to implement, also, a method to validate the input and another
+ * one to check if the user is authorized to use the service. This is a measure
+ * to help the developer not to forget to do this tasks.
  */
 abstract class SecureController extends Controller {
 	
 	/*
-	 * The authorized user roles.
-	 */
-	private $authorizedUserRoles;
-	
-	/*
-	 * Creates an instance of this class.
+	 * Serves the request.
 	 * 
-	 * It receives the user roles authorized to request this service.
+	 * Before executing the controller, it validates the input and checks if the
+	 * user is authorized to use this service.
 	 */
-	public function __construct($authorizedUserRoles) {
-		parent::__construct();
-		$this->authorizedUserRoles = $authorizedUserRoles;
-	}
-	
-	/*
-	 * Determines whether the user is authorized to execute this service.
-	 * 
-	 * The decision is made according to the user's authentication state and the
-	 * user roles authorized to invoke the service.
-	 */
-	protected function isUserAuthorized() {
-		// TODO: tal vez crear un AuthorizationManager si hay distintos tipos de validacioens que hacer (por ejemplo, qué usuarios pueden modificar una entrada)
-		
+	public function serve() {
 		$app = $this->app;
-		$authenticator = $app->authenticator;
-		$businessLogicDatabase = $app->businessLogicDatabase;
 		
-		if (! $authenticator->isUserLoggedIn()) {
-			// The user is not logged in
-			return in_array(USER_ROLE_ANONYMOUS, $this->authorizedUserRoles);
+		if (! $this->isInputValid()) {
+			// The input is invalid
+			$app->halt(HTTP_STATUS_BAD_REQUEST, [
+				'id' => ERROR_ID_INVALID_INPUT
+			]);
 		}
-
-		// The user is logged in: the decision depends on her role
-		$userId = $authenticator->getLoggedInUserId();
-		$userData = $businessLogicDatabase->getUserData($userId);
-		return in_array($userData['role'], $this->authorizedUserRoles);
+		
+		if (! $this->isUserAuthorized()) {
+			// The user is not authorized
+			$app->halt(HTTP_STATUS_FORBIDDEN, [
+				'id' => ERROR_ID_UNAUTHORIZED_USER
+			]);
+		}
+		
+		// Executes the controller
+		$this->execute();
 	}
+	
+	/*
+	 * Executes the controller.
+	 */
+	protected abstract function execute();
+	
+	/*
+	 * Determines whether the input is valid.
+	 */
+	protected abstract function isInputValid();
+	
+	/*
+	 * Determines whether the user is authorized to use this service.
+	 */
+	protected abstract function isUserAuthorized();
 	
 }

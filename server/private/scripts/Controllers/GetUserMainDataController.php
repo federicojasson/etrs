@@ -3,10 +3,10 @@
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/log-out
+ *	URL:	/server/get-user-main-data
  *	Method:	POST
  */
-class LogOutController extends SecureController {
+class GetUserMainDataController extends SecureController {
 	
 	/*
 	 * Executes the controller.
@@ -19,8 +19,7 @@ class LogOutController extends SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// The service has no input
-		return true;
+		// TODO: implement
 	}
 	
 	/*
