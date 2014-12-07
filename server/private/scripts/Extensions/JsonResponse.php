@@ -2,12 +2,12 @@
 
 /*
  * This class extends the Slim's Response class, to allow an object or an array
- * to be set as the response body, automatically encoding it in JSON format.
+ * to be set as body, automatically encoding it in JSON format.
  */
 class JsonResponse extends \Slim\Http\Response {
 	
 	/*
-	 * Gets and sets the response body.
+	 * Gets and sets the body.
 	 * 
 	 * The method redefines a deprecated version, and calls getBody or setBody
 	 * instead. This is necessary because the Slim framework still uses it.
@@ -21,7 +21,7 @@ class JsonResponse extends \Slim\Http\Response {
     }
 	
 	/*
-	 * Sets the response body.
+	 * Sets the body.
 	 * 
 	 * If an object or an array is received, it encodes it in JSON format.
 	 */
@@ -32,13 +32,13 @@ class JsonResponse extends \Slim\Http\Response {
 			return;
 		}
 		
-		// Encodes the output in JSON format
+		// Encodes the output
 		$encodedOutput = json_encode($output);
 		
-		// Sets the response content type
+		// Sets the content type
 		$this->headers->set(HTTP_HEADER_CONTENT_TYPE, HTTP_CONTENT_TYPE_JSON);
 		
-		// Sets the encoded version as the output
+		// Sets the encoded version as the body
 		parent::setBody($encodedOutput);
     }
 	

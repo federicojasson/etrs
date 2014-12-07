@@ -4,7 +4,6 @@
 (function() {
 	// Module: helpers
 	angular.module('helpers', [
-		'managers',
 		'ngResource'
 	]);
 })();

@@ -5,20 +5,20 @@
 	// Module: forms
 	var module = angular.module('forms');
 	
-	// Controller: CreatePatientFormController
-	module.controller('CreatePatientFormController', [
+	// Controller: CreateExperimentFormController
+	module.controller('CreateExperimentFormController', [
 		'InputModel',
 		'inputValidator',
 		'server',
-		CreatePatientFormController
+		CreateExperimentFormController
 	]);
 	
 	/*
-	 * Controller: CreatePatientFormController
+	 * Controller: CreateExperimentFormController
 	 * 
-	 * Implements the logic of the create patient form.
+	 * Implements the logic of the create experiment form.
 	 */
-	function CreatePatientFormController(InputModel, inputValidator, server) {
+	function CreateExperimentFormController(InputModel, inputValidator, server) {
 		var controller = this;
 		
 		/*
@@ -26,24 +26,14 @@
 		 */
 		controller.inputModels = {
 			mainData: {
-				birthDate: new InputModel(),
-
-				educationYears: new InputModel({
-					validationFunction: function() {
-						// TODO
-					}
-				}),
-
-				firstName: new InputModel({
+				commandLine: new InputModel({
 					validationFunction: function() {
 						return	inputValidator.validateRequiredInput(this) &&
-								inputValidator.validateName(this)
+								inputValidator.validateCommandLine(this)
 					}
 				}),
 
-				gender: new InputModel(),
-
-				lastName: new InputModel({
+				name: new InputModel({
 					validationFunction: function() {
 						return	inputValidator.validateRequiredInput(this) &&
 								inputValidator.validateName(this)
@@ -66,14 +56,11 @@
 				return;
 			}
 			
-			// Creates the patient
-			server.createPatient({
+			// Creates the experiment
+			server.createExperiment({
 				mainData: {
-					birthDate: inputModels.mainData.birthDate.value,
-					educationYears: inputModels.mainData.educationYears.value,
-					firstName: inputModels.mainData.firstName.value,
-					gender: inputModels.mainData.gender.value,
-					lastName: inputModels.mainData.lastName.value
+					commandLine: inputModels.mainData.commandLine.value,
+					name: inputModels.mainData.name.value
 				}
 			}).then(function() {
 				// TODO: what to do now

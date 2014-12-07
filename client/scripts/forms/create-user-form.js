@@ -5,35 +5,34 @@
 	// Module: forms
 	var module = angular.module('forms');
 	
-	// Controller: CreatePatientFormController
-	module.controller('CreatePatientFormController', [
+	// Controller: CreateUserFormController
+	module.controller('CreateUserFormController', [
 		'InputModel',
 		'inputValidator',
 		'server',
-		CreatePatientFormController
+		CreateUserFormController
 	]);
 	
 	/*
-	 * Controller: CreatePatientFormController
+	 * Controller: CreateUserFormController
 	 * 
-	 * Implements the logic of the create patient form.
+	 * Implements the logic of the create user form.
 	 */
-	function CreatePatientFormController(InputModel, inputValidator, server) {
+	function CreateUserFormController(InputModel, inputValidator, server) {
 		var controller = this;
 		
 		/*
 		 * The input models.
 		 */
 		controller.inputModels = {
+			id: new InputModel({
+				validationFunction: function() {
+					return	inputValidator.validateRequiredInput(this) &&
+							inputValidator.validateUserId(this)
+				}
+			}),
+			
 			mainData: {
-				birthDate: new InputModel(),
-
-				educationYears: new InputModel({
-					validationFunction: function() {
-						// TODO
-					}
-				}),
-
 				firstName: new InputModel({
 					validationFunction: function() {
 						return	inputValidator.validateRequiredInput(this) &&
@@ -48,7 +47,7 @@
 						return	inputValidator.validateRequiredInput(this) &&
 								inputValidator.validateName(this)
 					}
-				})
+				})	
 			}
 		};
 		
@@ -66,15 +65,11 @@
 				return;
 			}
 			
-			// Creates the patient
-			server.createPatient({
-				mainData: {
-					birthDate: inputModels.mainData.birthDate.value,
-					educationYears: inputModels.mainData.educationYears.value,
-					firstName: inputModels.mainData.firstName.value,
-					gender: inputModels.mainData.gender.value,
-					lastName: inputModels.mainData.lastName.value
-				}
+			// TODO: check if user exists
+			
+			// Creates the user
+			server.createUser({
+				// TODO
 			}).then(function() {
 				// TODO: what to do now
 			}, function(response) {

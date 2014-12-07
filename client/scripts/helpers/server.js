@@ -7,9 +7,9 @@
 	
 	// Service: server
 	module.service('server', [
-		'$q', // TODO: mocking
-		'$timeout', // TODO: mocking
-		'communicator',
+		'$q', // TODO: remove
+		'$resource',
+		'$timeout', // TODO: remove
 		serverService
 	]);
 	
@@ -20,286 +20,565 @@
 	 * 
 	 * All requests to the server should be done through this service.
 	 */
-	function serverService($q, $timeout, communicator) {
+	function serverService($q, $resource, $timeout) {
 		var service = this;
 		
-		// TODO: mocking
-		var loggedIn = true;
-		var userLoggedInId = 'doctor';
-		
-		function usersFunction() { return [
+		// TODO: remove mocking data
+		var loggedIn = false;
+		var loggedInUserId = 'federicojasson';
+		var consultations = [];
+		var experiments = [];
+		var files = [];
+		var patients = [];
+		var studies = [];
+		var users = [
 			{
-				data: {
-					firstNames: 'Agustina',
-					gender: 'f',
-					id: 'administrator',
-					lastNames: 'Fernández',
-					role: 'ad'
-				}
-			},
-
-			{
-				data: {
-					firstNames: 'Fernando',
-					gender: 'm',
-					id: 'doctor',
-					lastNames: 'Rodríguez',
-					role: 'dr'
-				}
-			},
-
-			{
-				data: {
-					firstNames: 'Romina',
-					gender: 'f',
-					id: 'operator',
-					lastNames: 'Sánchez',
-					role: 'op'
-				}
-			},
-
-			{
-				data: {
-					firstNames: 'Gerardo',
-					gender: 'm',
-					id: 'researcher',
-					lastNames: 'Díaz',
-					role: 'rs'
-				}
-			}
-		]}
-		
-		function patientsFunction() { return [
-			{
-				data: {
-					birthDate: '1991-06-25',
+				id: 'federicojasson',
+				mainData: {
 					firstNames: 'Federico Rodrigo',
+					lastNames: 'Jasson',
 					gender: 'm',
-					id: '/PrWVv98TfOjrJDq5i3IMg==',
-					lastNames: 'Jasson'
-				}
-			},
-			
-			{
-				data: {
-					birthDate: '1978-05-22',
-					firstNames: 'Martynne',
-					gender: 'f',
-					id: 'tpGpEOlfTQSHU8b2b2e28Q==',
-					lastNames: 'Ariosto'
-				}
-			},
-			
-			{
-				data: {
-					birthDate: '1957-05-11',
-					firstNames: 'Adah',
-					gender: 'f',
-					id: 'quQ1wF01SxSOh4RJ5aOKFg==',
-					lastNames: 'Zak'
-				}
-			},
-			
-			{
-				data: {
-					birthDate: '1937-11-23',
-					firstNames: 'Valentijn Quill',
-					gender: 'm',
-					id: '1Xn2IEsCQ92JGkqN/pMjNw==',
-					lastNames: 'Monti'
-				}
-			},
-			
-			{
-				data: {
-					birthDate: '1970-09-04',
-					firstNames: 'Jelene Rowe',
-					gender: 'f',
-					id: 'D4tB6r/JRGuD02EQW5Uj3g==',
-					lastNames: 'Poehler'
+					emailAddress: 'federicojasson@something.com',
+					role: 'ad'
+				},
+				metadata: {
+					creationDatetime: '2014-11-30T19:20:30+00:00'
 				}
 			}
-		]}
-		
-		function consultationsFunction() { return [
-			{
-				data: {
-					date: '2012-05-19',
-					diagnosis: null,
-					id: '1ZmzdRvZSHG4ESNYndVzLw=='
-				},
-				
-				metadata: {
-					creator: 'administrator',
-					patient: 'D4tB6r/JRGuD02EQW5Uj3g=='
-				}
-			},
-			
-			{
-				data: {
-					date: '2013-11-08',
-					diagnosis: 'Demencia vascular',
-					id: 'EioQHYxlTqe4hoskJDCBHQ=='
-				},
-				
-				metadata: {
-					creator: 'doctor',
-					patient: 'D4tB6r/JRGuD02EQW5Uj3g=='
-				}
-			}
-		]}
-		
+		];
 		
 		/*
-		 * Requests the following service:
+		 * Sends an HTTP request to a given URL.
 		 * 
-		 * URL:		/server/get-authentication-state
-		 * Method:	POST
+		 * It receives an object containing the parameters: the URL, the HTTP
+		 * method to use, the input and whether the expected output is an array.
+		 * This object should have the following structure:
+		 * 
+		 *	parameters: {
+		 *		input: ...,
+		 *		method: ...,
+		 *		outputIsArray: ...,
+		 *		url: ...
+		 *	}
+		 * 
+		 * The input property is optional, for cases in which there is no need
+		 * to send input.
+.		 * 
+		 * The function returns a promise that gets resolved when the server
+		 * responds.
+		 */
+		function sendHttpRequest(parameters) {
+			// Extracts the parameters
+			var input = parameters.input;
+			var method = parameters.method;
+			var outputIsArray = parameters.outputIsArray;
+			var url = parameters.url;
+			
+			// Initializes undefined optional parameters with default values
+			input = (angular.isDefined(input))? input : {};
+			
+			// Initializes the input objects (only one will be actually used)
+			var bodyInput = {};
+			var urlInput = {};
+			
+			if (method === 'GET') {
+				// The input is sent as a query string
+				urlInput = input;
+			} else {
+				// The input is sent in the request body
+				bodyInput = input;
+			}
+			
+			// Sends the request
+			var deferredTask = $resource(url, urlInput, {
+				sendRequest: {
+					isArray: outputIsArray,
+					method: method
+				}
+			}).sendRequest(bodyInput);
+			
+			// Returns the promise
+			return deferredTask.$promise;
+		}
+		
+		/*
+		 * TODO
+		 */
+		service.changePassword = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.createExperiment = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.createPatient = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.createUser = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
 		 */
 		service.getAuthenticationState = function() {
-			// TODO: mocking
-			var deferred = $q.defer();
-			
-			//deferred.reject();
+			var deferredTask = $q.defer();
 			
 			$timeout(function() {
-				if (loggedIn) {
-					deferred.resolve({
-						loggedIn: true,
-						user: {
-							data: {
-								id: userLoggedInId
-							}
-						}
-					});
-				} else {
-					deferred.resolve({
-						loggedIn: false
-					});
-				}
-			}, 0);
+				deferredTask.resolve({
+					id: loggedInUserId,
+					loggedIn: loggedIn
+				});
+			}, 100);
 			
-			return deferred.promise;
-			
-			/*var request = {
-				method: 'POST',
-				responseIsArray: false,
-				url: 'server/get-authentication-state'
-			};
-			
-			return communicator.sendHttpRequest(request);*/
+			return deferredTask.promise;
 		};
 		
 		/*
 		 * TODO
 		 */
-		service.getConsultations = function(patientId) {
-			// TODO: mocking
-			var deferred = $q.defer();
-			
-			var consultations = consultationsFunction();
+		service.getConsultationImageAnalysis = function(input) {
+			var deferredTask = $q.defer();
 			
 			$timeout(function() {
-				var foundConsultations = [];
 				for (var i = 0; i < consultations.length; i++) {
-					if (consultations[i].metadata.patient === patientId) {
-						foundConsultations.push(consultations[i]);
+					if (consultations[i].id === input.id) {
+						deferredTask.resolve(consultations[i].imageAnalysis);
+						return;
 					}
 				}
 				
-				deferred.resolve({
-					consultations: foundConsultations
-				});
-			}, 0);
+				deferredTask.reject();
+			}, 100);
 			
-			return deferred.promise;
+			return deferredTask.promise;
 		};
 		
 		/*
 		 * TODO
 		 */
-		service.getPatientData = function(patientId) {
-			// TODO: mocking
-			var deferred = $q.defer();
-			
-			var patients = patientsFunction();
+		service.getConsultationLaboratoryResults = function(input) {
+			var deferredTask = $q.defer();
 			
 			$timeout(function() {
-				var patient = null;
+				for (var i = 0; i < consultations.length; i++) {
+					if (consultations[i].id === input.id) {
+						deferredTask.resolve(consultations[i].laboratoryResults);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getConsultationMainData = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < consultations.length; i++) {
+					if (consultations[i].id === input.id) {
+						deferredTask.resolve(consultations[i].mainData);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getConsultationMetadata = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < consultations.length; i++) {
+					if (consultations[i].id === input.id) {
+						deferredTask.resolve(consultations[i].metadata);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getConsultationNeurocognitiveAssessment = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < consultations.length; i++) {
+					if (consultations[i].id === input.id) {
+						deferredTask.resolve(consultations[i].neurocognitiveAssessment);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getConsultationPatientBackground = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < consultations.length; i++) {
+					if (consultations[i].id === input.id) {
+						deferredTask.resolve(consultations[i].patientBackground);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getConsultationPatientMedications = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < consultations.length; i++) {
+					if (consultations[i].id === input.id) {
+						deferredTask.resolve(consultations[i].patientMedications);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getConsultationTreatments = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < consultations.length; i++) {
+					if (consultations[i].id === input.id) {
+						deferredTask.resolve(consultations[i].treatments);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getExperimentFiles = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < experiments.length; i++) {
+					if (experiments[i].id === input.id) {
+						deferredTask.resolve(experiments[i].files);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getExperimentMainData = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < experiments.length; i++) {
+					if (experiments[i].id === input.id) {
+						deferredTask.resolve(experiments[i].mainData);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getExperimentMetadata = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < experiments.length; i++) {
+					if (experiments[i].id === input.id) {
+						deferredTask.resolve(experiments[i].metadata);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getFileMainData = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < files.length; i++) {
+					if (files[i].id === input.id) {
+						deferredTask.resolve(files[i].mainData);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getFileMetadata = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < files.length; i++) {
+					if (files[i].id === input.id) {
+						deferredTask.resolve(files[i].metadata);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getPatientMainData = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
 				for (var i = 0; i < patients.length; i++) {
-					if (patients[i].data.id === patientId) {
-						patient = patients[i];
-						break;
+					if (patients[i].id === input.id) {
+						deferredTask.resolve(patients[i].mainData);
+						return;
 					}
 				}
 				
-				deferred.resolve({
-					patient: patient
-				});
-			}, 0);
+				deferredTask.reject();
+			}, 100);
 			
-			return deferred.promise;
+			return deferredTask.promise;
 		};
 		
 		/*
-		 * Requests the following service:
-		 * 
-		 * URL:		/server/get-user-data
-		 * Method:	POST
+		 * TODO
 		 */
-		service.getUserData = function(userId) {
-			// TODO: mocking
-			var deferred = $q.defer();
-			
-			var users = usersFunction();
+		service.getPatientMetadata = function(input) {
+			var deferredTask = $q.defer();
 			
 			$timeout(function() {
-				
-				var user = null;
-				for (var i = 0; i < users.length; i++) {
-					if (users[i].data.id === userId) {
-						user = users[i];
-						break;
+				for (var i = 0; i < patients.length; i++) {
+					if (patients[i].id === input.id) {
+						deferredTask.resolve(patients[i].metadata);
+						return;
 					}
 				}
 				
-				deferred.resolve({
-					user: user
-				});
-			}, 0);
+				deferredTask.reject();
+			}, 100);
 			
-			return deferred.promise;
-			
-			/*var input = {
-				userId: userId
-			};
-			
-			var request = {
-				input: input,
-				method: 'POST',
-				responseIsArray: false,
-				url: 'server/get-user-data'
-			};
-			
-			return communicator.sendHttpRequest(request);*/
+			return deferredTask.promise;
 		};
 		
 		/*
-		 * Requests the following service:
-		 * 
-		 * URL:		/server/log-in
-		 * Method:	POST
+		 * TODO
 		 */
-		service.logIn = function(userId, userPassword) {
-			// TODO: mocking
-			var deferred = $q.defer();
+		service.getStudyFiles = function(input) {
+			var deferredTask = $q.defer();
 			
 			$timeout(function() {
-				var users = users();
+				for (var i = 0; i < studies.length; i++) {
+					if (studies[i].id === input.id) {
+						deferredTask.resolve(studies[i].files);
+						return;
+					}
+				}
 				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getStudyMainData = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < studies.length; i++) {
+					if (studies[i].id === input.id) {
+						deferredTask.resolve(studies[i].mainData);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getStudyMetadata = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < studies.length; i++) {
+					if (studies[i].id === input.id) {
+						deferredTask.resolve(studies[i].metadata);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getUserMainData = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < users.length; i++) {
+					if (users[i].id === input.id) {
+						deferredTask.resolve(users[i].mainData);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.getUserMetadata = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				for (var i = 0; i < users.length; i++) {
+					if (users[i].id === input.id) {
+						deferredTask.resolve(users[i].metadata);
+						return;
+					}
+				}
+				
+				deferredTask.reject();
+			}, 100);
+			
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.logIn = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
 				var user = null;
 				for (var i = 0; i < users.length; i++) {
-					if (users[i].data.id === userId) {
+					if (users[i].id === input.id) {
 						user = users[i];
 						break;
 					}
@@ -307,81 +586,43 @@
 				
 				if (user !== null) {
 					loggedIn = true;
-					userLoggedInId = userId;
+					loggedInUserId = input.id;
 				}
 				
-				deferred.resolve({
+				deferredTask.resolve({
 					loggedIn: loggedIn
 				});
-			}, 200);
+			}, 100);
 			
-			return deferred.promise;
-			
-			/*var input = {
-				userId: userId,
-				userPassword: userPassword
-			};
-			
-			var request = {
-				input: input,
-				method: 'POST',
-				responseIsArray: false,
-				url: 'server/log-in'
-			};
-			
-			return communicator.sendHttpRequest(request);*/
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
-		 * URL:		/server/log-out
-		 * Method:	POST
-		 */
-		service.logOut = function() {
-			// TODO: mocking
-			var deferred = $q.defer();
-			
-			$timeout(function() {
-				loggedIn = false;
-				userLoggedInId = null;
-				deferred.resolve();
-			}, 200);
-			
-			/*deferred.reject({
-				data: {
-					errorId: 'ERROR_TESTING'
-				},
-				status: 500
-			});*/
-			
-			return deferred.promise;
-			
-			/*var request = {
-				method: 'POST',
-				responseIsArray: false,
-				url: 'server/log-out'
-			};
-			
-			return communicator.sendHttpRequest(request);*/
+			return deferredTask.promise;
 		};
 		
 		/*
 		 * TODO
 		 */
-		service.searchPatients = function(searchString) {
-			// TODO: mocking
-			var deferred = $q.defer();
+		service.logOut = function() {
+			var deferredTask = $q.defer();
 			
 			$timeout(function() {
-				var results = (searchString.length > 0)? patientsFunction() : [];
-				
-				deferred.resolve({
-					results: results
-				});
-			}, 200);
+				loggedIn = false;
+				loggedInUserId = null;
+				deferredTask.resolve();
+			}, 100);
 			
-			return deferred.promise;
+			return deferredTask.promise;
+		};
+		
+		/*
+		 * TODO
+		 */
+		service.requestUserCreation = function(input) {
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve();
+			}, 100);
+			
+			return deferredTask.promise;
 		};
 	}
 })();

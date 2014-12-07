@@ -7,10 +7,9 @@
 	
 	// Controller: LogInFormController
 	module.controller('LogInFormController', [
-		'$route',
-		'authenticationManager',
-		'builder',
-		'errorManager',
+		'InputModel',
+		'authentication',
+		'inputValidator',
 		'server',
 		LogInFormController
 	]);
@@ -18,130 +17,62 @@
 	/*
 	 * Controller: LogInFormController
 	 * 
-	 * Offers logic functions for the log in form.
+	 * Implements the logic of the log in form.
 	 */
-	function LogInFormController($route, authenticationManager, builder, errorManager, server) {
+	function LogInFormController(InputModel, authentication, inputValidator, server) {
 		var controller = this;
-		
-		/*
-		 * Indicates whether the informative alert should be included.
-		 */
-		var includeInformativeAlert = false;
-		
-		/*
-		 * The user ID input model.
-		 */
-		var userIdInputModel = builder.buildInputModel(function() {
-			this.isValid = true;
-			this.message = '';
-
-			if (this.value.length === 0) {
-				// The input is invalid
-				this.isValid = false;
-				this.message = 'Ingrese un nombre de usuario';
-			}
-
-			return this.isValid;
-		});
-		
-		/*
-		 * The user password input model.
-		 */
-		var userPasswordInputModel = builder.buildInputModel(function() {
-			this.isValid = true;
-			this.message = '';
-
-			if (this.value.length === 0) {
-				// The input is invalid
-				this.isValid = false;
-				this.message = 'Ingrese su contraseña';
-			}
-			
-			return this.isValid;
-		});
-		
-		/*
-		 * Validates the form input and returns the result.
-		 */
-		function validate() {
-			// The form input is valid if all the input models are
-			var isValid = true;
-			
-			// Gets the input models
-			var inputModels = controller.inputModels;
-			
-			// Validates the input models
-			for (var property in inputModels) {
-				if (inputModels.hasOwnProperty(property)) {
-					// Validates the input model and ANDs the result
-					isValid &= inputModels[property].validate();
-				}
-			}
-			
-			return isValid;
-		}
 		
 		/*
 		 * The input models.
 		 */
 		controller.inputModels = {
-			userId: userIdInputModel,
-			userPassword: userPasswordInputModel
-		};
-		
-		/*
-		 * Closes the informative alert.
-		 */
-		controller.closeInformativeAlert = function() {
-			includeInformativeAlert = false;
-		};
-		
-		/*
-		 * Determines whether the informative alert should be included.
-		 */
-		controller.includeInformativeAlert = function() {
-			return includeInformativeAlert;
+			id: new InputModel({
+				validationFunction: function() {
+					return inputValidator.validateRequiredInput(this);
+				}
+			}),
+			
+			password: new InputModel({
+				validationFunction: function() {
+					return inputValidator.validateRequiredInput(this);
+				}
+			})
 		};
 		
 		/*
 		 * Submits the form.
 		 * 
-		 * If any of the input models is invalid, the appropriate actions are
-		 * taken and the form is not submitted.
+		 * If the input is invalid, the form is not submitted.
 		 */
 		controller.submit = function() {
-			// Hides the informative alert
-			includeInformativeAlert = false;
+			// Gets the input models
+			var inputModels = controller.inputModels;
 			
-			if (! validate()) {
-				// At least one input model is invalid
+			if (! inputValidator.validate(inputModels)) {
+				// The input is invalid
 				return;
 			}
 			
-			// Gets the input values
-			var userId = userIdInputModel.value;
-			var userPassword = userPasswordInputModel.value;
-			
 			// Logs in the user
-			server.logIn(userId, userPassword).then(function(response) {
-				if (response.loggedIn) {
+			server.logIn({
+				id: inputModels.id.value,
+				password: inputModels.password.value
+			}).then(function(output) {
+				if (output.loggedIn) {
 					// The user was logged in
 					
 					// Refreshes the authentication state
-					authenticationManager.refreshAuthenticationState();
+					authentication.refreshState();
 					
-					// Reloads the route to show the loading view
-					$route.reload();
+					// Reloads the route
+					// TODO: HOW
 				} else {
 					// The user was not logged in
 					
-					// Shows an informative alert
-					includeInformativeAlert = true;
+					// TODO
 				}
 			}, function(response) {
-				// Error: the server responded with an HTTP error
-				var error = builder.buildError(response);
-				errorManager.reportError(error);
+				// TODO: error
 			});
 		};
 	}

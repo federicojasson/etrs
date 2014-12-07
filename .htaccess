@@ -5,9 +5,9 @@ Options -Indexes
 RewriteEngine on
 
 # The root URL is mapped to the client application
-RewriteRule ^(/)?$ clean-client/index.html [L]
+RewriteRule ^(/)?$ client/index.html [L]
 
 # Rewrites all URLs, except those that are prefixed with client/ or server/
-RewriteCond %{REQUEST_URI} !^clean-client/(.*)$
+RewriteCond %{REQUEST_URI} !^client/(.*)$
 RewriteCond %{REQUEST_URI} !^server/(.*)$
-RewriteRule ^(.*)$ clean-client/$1 [L]
+RewriteRule ^(.*)$ client/$1 [L]

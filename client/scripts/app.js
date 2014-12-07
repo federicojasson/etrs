@@ -4,14 +4,12 @@
 (function() {
 	// Module: app
 	var module = angular.module('app', [
+		'components',
 		'filters',
 		'forms',
-		'inputs',
-		'layouts',
-		'managers',
-		'sections',
-		'ui.bootstrap',
-		'views'
+		'helpers',
+		'routing',
+		'ui.bootstrap'
 	]);
 	
 	// Config
@@ -22,8 +20,7 @@
 	
 	// Run
 	module.run([
-		'authenticationManager',
-		'contentManager',
+		'authentication',
 		run
 	]);
 	
@@ -31,23 +28,15 @@
 	 * Applies application-wide configurations.
 	 */
 	function config($locationProvider) {
-		// Uses the HTML5 history API
-		// This allows for use of regular URL path and search segments, instead
-		// of their hashbang equivalents
-		// If the HTML5 history API is not supported by the browser, the service
-		// will fall back to using the hashbang URLs automatically
+		// Activates the HTML5 history API
 		$locationProvider.html5Mode(true);
 	}
 	
 	/*
 	 * Performs initialization tasks.
 	 */
-	function run(authenticationManager, contentManager) {
-		// Loads the application's content
-		contentManager.loadContent();
-		
+	function run(authentication) {
 		// Refreshes the authentication state
-		authenticationManager.refreshAuthenticationState();
+		authentication.refreshState();
 	}
 })();
-

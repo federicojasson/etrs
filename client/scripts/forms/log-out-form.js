@@ -7,10 +7,8 @@
 	
 	// Controller: LogOutFormController
 	module.controller('LogOutFormController', [
-		'$route',
-		'authenticationManager',
-		'builder',
-		'errorManager',
+		'$location',
+		'authentication',
 		'server',
 		LogOutFormController
 	]);
@@ -18,9 +16,9 @@
 	/*
 	 * Controller: LogOutFormController
 	 * 
-	 * Offers logic functions for the log out form.
+	 * Implements the logic of the log out form.
 	 */
-	function LogOutFormController($route, authenticationManager, builder, errorManager, server) {
+	function LogOutFormController($location, authentication, server) {
 		var controller = this;
 		
 		/*
@@ -30,14 +28,12 @@
 			// Logs out the user
 			server.logOut().then(function() {
 				// Refreshes the authentication state
-				authenticationManager.refreshAuthenticationState();
+				authentication.refreshState();
 
-				// Reloads the route to show the loading view
-				$route.reload();
+				// Redirects the user to the root route
+				$location.path('/');
 			}, function(response) {
-				// Error: the server responded with an HTTP error
-				var error = builder.buildError(response);
-				errorManager.reportError(error);
+				// TODO: error
 			});
 		};
 	}

@@ -4,9 +4,7 @@
 (function() {
 	// Module: forms
 	angular.module('forms', [
-		'filters',
-		'helpers',
-		'managers',
-		'ngRoute'
+		'classes',
+		'helpers'
 	]);
 })();

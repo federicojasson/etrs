@@ -1,5 +1,5 @@
 - Ingresar datos de debug
-- Verificar consultas SQL manualmente (especialmente aquéllas con VARBINARY)
+- Verificar consultas SQL manualmente (especialmente aquellas con VARBINARY)
 
 - Tener en cuenta los siguientes errores HTTP:
 
@@ -15,3 +15,22 @@ Si se desea implementar todo en las dos funciones, debería enrocarse las verifi
 
 Indicar en la documentación del server API los headers obligatorios para la request
 Ejemplo: Content-Type: application/json
+
+
+
+
+
+
+
+
+Leer:
+http://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication#477579
+
+Prestar atención a las cuestiones de seguridad
+
+
+
+
+
+
+Generar un código de activación, hashearlo y hacerlo el requestId

@@ -4,6 +4,6 @@
 (function() {
 	// Module: filters
 	angular.module('filters', [
-		'managers'
+		'helpers'
 	]);
 })();
