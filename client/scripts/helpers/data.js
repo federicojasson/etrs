@@ -22,6 +22,8 @@
 	 * 
 	 * The service also offers a cache feature, so that the data already loaded
 	 * is not requested again.
+	 * 
+	 * TODO: refactor code like the server side (load using fors)
 	 */
 	function dataService($q, server) {
 		var service = this;

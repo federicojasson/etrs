@@ -21,6 +21,10 @@ $container->singleton('authentication', function() {
 	return new Authentication();
 });
 
+$container->singleton('authorizationValidator', function() {
+	return new AuthorizationValidator();
+});
+
 $container->singleton('businessLogicDatabase', function() {
 	return new BusinessLogicDatabase();
 });
@@ -31,6 +35,10 @@ $container->singleton('configurations', function() {
 
 $container->singleton('cryptography', function() {
 	return new Cryptography();
+});
+
+$container->singleton('data', function() {
+	return new Data();
 });
 
 $container->singleton('inputValidator', function() {

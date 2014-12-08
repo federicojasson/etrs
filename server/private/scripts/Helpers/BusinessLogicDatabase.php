@@ -64,84 +64,91 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectExperimentFiles($consultationId) {
+	public function selectExperimentFiles($experimentId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectExperimentMainData($consultationId) {
+	public function selectExperimentMainData($experimentId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectExperimentMetadata($consultationId) {
+	public function selectExperimentMetadata($experimentId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectFileMainData($consultationId) {
+	public function selectFileMainData($fileId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectFileMetadata($consultationId) {
+	public function selectFileMetadata($fileId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectPatientMainData($consultationId) {
+	public function selectPatientMainData($patientId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectPatientMetadata($consultationId) {
+	public function selectPatientMetadata($patientId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectStudyFiles($consultationId) {
+	public function selectStudyFiles($studyId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectStudyMainData($consultationId) {
+	public function selectStudyMainData($studyId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectStudyMetadata($consultationId) {
+	public function selectStudyMetadata($studyId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectUserMainData($consultationId) {
+	public function selectUserAuthenticationData($userId) {
 		// TODO: implement
 	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectUserMetadata($consultationId) {
+	public function selectUserMainData($userId) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function selectUserMetadata($userId) {
 		// TODO: implement
 	}
 	

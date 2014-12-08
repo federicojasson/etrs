@@ -16,30 +16,30 @@ class Configurations extends Helper {
 	private $filePaths;
 	
 	/*
-	 * Creates an instance of this class.
-	 */
-	public function __construct() {
-		parent::__construct();
-		
-		// Initializes the configurations array
-		$this->configurations = [];
-		
-		// Initializes the file paths array
-		$this->filePaths = $this->readJsonFile(FILE_PATH_CONFIGURATIONS_FILE_PATHS);
-	}
-	
-	/*
 	 * Returns a certain configuration.
 	 * 
 	 * It receives the configuration's ID.
 	 */
 	public function get($configurationId) {
-		if (! isset($this->configurations[$configurationId])) {
+		$configurations = $this->configurations;
+		
+		if (! isset($configurations[$configurationId])) {
 			// The configuration has not been loaded yet
 			$this->load($configurationId);
 		}
 		
-		return $this->configurations[$configurationId];
+		return $configurations[$configurationId];
+	}
+	
+	/*
+	 * Performs initialization tasks.
+	 */
+	protected function initialize() {
+		// Initializes the configurations array
+		$this->configurations = [];
+		
+		// Initializes the file paths
+		$this->filePaths = $this->readJsonFile(FILE_PATH_CONFIGURATIONS_FILE_PATHS);
 	}
 	
 	/*

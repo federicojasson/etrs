@@ -46,8 +46,10 @@ require 'private/scripts/Extensions/JsonResponse.php';
 // Helpers
 require 'private/scripts/Helpers/Helper.php';
 require 'private/scripts/Helpers/Authentication.php';
+require 'private/scripts/Helpers/AuthorizationValidator.php';
 require 'private/scripts/Helpers/Configurations.php';
 require 'private/scripts/Helpers/Cryptography.php';
+require 'private/scripts/Helpers/Data.php';
 require 'private/scripts/Helpers/Database.php';
 require 'private/scripts/Helpers/BusinessLogicDatabase.php';
 require 'private/scripts/Helpers/WebServerDatabase.php';

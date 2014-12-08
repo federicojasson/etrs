@@ -47,7 +47,16 @@ class LogInController extends SecureController {
 	 * Determines whether the user is authorized to use this service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ANONYMOUS
+		];
+		
+		// TODO: Name of method
+		// Validates the authentication and returns the result
+		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
 	}
 
 }

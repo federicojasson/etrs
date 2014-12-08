@@ -20,10 +20,6 @@ abstract class Database extends Helper {
 	 * TODO: remove if not used
 	 */
 	public function commitTransaction() {
-		// Tests the connection
-		$this->testConnection();
-		
-		// Commits the current transaction
 		$this->pdo->commit();
 	}
 	
@@ -32,10 +28,6 @@ abstract class Database extends Helper {
 	 * TODO: remove if not used
 	 */
 	public function rollBackTransaction() {
-		// Tests the connection
-		$this->testConnection();
-		
-		// Rolls back the current transaction
 		$this->pdo->rollBack();
 	}
 	
@@ -44,10 +36,6 @@ abstract class Database extends Helper {
 	 * TODO: remove if not used
 	 */
 	public function startTransaction() {
-		// Tests the connection
-		$this->testConnection();
-		
-		// Starts a new transaction
 		$this->pdo->beginTransaction();
 	}
 	
@@ -64,9 +52,6 @@ abstract class Database extends Helper {
 	 * It receives the statement and the parameters to prepare it.
 	 */
 	protected function executePreparedStatement($statement, $parameters) {
-		// Tests the connection
-		$this->testConnection();
-		
 		// Prepares and executes the statement
 		$preparedStatement = $this->pdo->prepare($statement);
 		$preparedStatement->execute($parameters);
@@ -76,20 +61,17 @@ abstract class Database extends Helper {
 	}
 	
 	/*
-	 * Tests the connection with the database. If it hasn't been established
-	 * yet, it does it.
+	 * Performs initialization tasks.
 	 */
-	private function testConnection() {
-		if (is_null($this->pdo)) {
-			// The connection has not been established yet
-			
-			// Connects to the database
-			$this->pdo = $this->connect();
-			
-			// Configures the PDO instance
-			$this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-			$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}
+	protected function initialize() {
+		// Connects to the database
+		$pdo = $this->connect();
+
+		// Configures the PDO instance
+		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+		$this->pdo = $pdo;
 	}
 	
 }

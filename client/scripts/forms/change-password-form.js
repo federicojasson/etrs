@@ -25,6 +25,12 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
+			currentPassword: new InputModel({
+				validationFunction: function() {
+					return inputValidator.validateRequiredInput(this);
+				}
+			}),
+			
 			newPassword: new InputModel({
 				validationFunction: function() {
 					return	inputValidator.validateRequiredInput(this) &&
@@ -39,12 +45,6 @@
 					
 					return	inputValidator.validateRequiredInput(this) &&
 							inputValidator.validatePasswordConfirmation(this, newPassword);
-				}
-			}),
-			
-			password: new InputModel({
-				validationFunction: function() {
-					return inputValidator.validateRequiredInput(this);
 				}
 			})
 		};
@@ -65,8 +65,8 @@
 			
 			// Changes the user's password
 			server.changePassword({
-				newPassword: inputModels.newPassword.value,
-				password: inputModels.password.value
+				currentPassword: inputModels.currentPassword.value,
+				newPassword: inputModels.newPassword.value
 			}).then(function() {
 				// TODO: what to do now
 			}, function(response) {

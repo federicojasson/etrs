@@ -40,3 +40,9 @@ define('JSON_STRUCTURE_TYPE_VALUE', 'value');
 // Operation modes
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
+
+// User roles
+define('USER_ROLE_ADMINISTRATOR', 'ad');
+define('USER_ROLE_ANONYMOUS', '__');
+define('USER_ROLE_DOCTOR', 'dr');
+define('USER_ROLE_OPERATOR', 'op');

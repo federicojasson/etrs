@@ -18,6 +18,12 @@ abstract class Helper {
 	 */
 	public function __construct() {
 		$this->app = \Slim\Slim::getInstance();
+		$this->initialize();
 	}
+	
+	/*
+	 * Performs initialization tasks.
+	 */
+	protected function initialize() {}
 	
 }
