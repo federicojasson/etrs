@@ -12,7 +12,19 @@ class GetStudyMainDataController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		
+		// Gets the study ID
+		$studyId = $input['id'];
+		
+		// Gets the study
+		$study = $app->data->getStudy($studyId, ['mainData']);
+		
+		// Sets the output
+		$app->response->setBody($study['mainData']);
 	}
 	
 	/*

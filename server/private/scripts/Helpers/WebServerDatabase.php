@@ -12,7 +12,7 @@ class WebServerDatabase extends Database {
 	 */
 	protected function connect() {
 		// Gets the configuration of the database
-		$configuration = $this->app->configurations->get(CONFIGURATION_ID_WEB_SERVER_DATABASE);
+		$configuration = $this->app->configurations->get('webServerDatabase');
 		$dsn = $configuration['dsn'];
 		$password = $configuration['password'];
 		$username = $configuration['username'];

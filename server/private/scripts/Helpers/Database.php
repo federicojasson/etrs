@@ -24,6 +24,19 @@ abstract class Database extends Helper {
 	}
 	
 	/*
+	 * TODO: comments
+	 */
+	public function getFirstOrDefaultResult($results) {
+		if (count($results) === 0) {
+			// The query didn't return any result
+			return null;
+		}
+		
+		// Returns the first result
+		return $results[0];
+	}
+	
+	/*
 	 * Rolls back the current transaction.
 	 * TODO: remove if not used
 	 */

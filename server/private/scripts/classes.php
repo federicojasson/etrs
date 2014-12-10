@@ -5,8 +5,10 @@
  */
 
 // Auxiliars
-require 'private/scripts/Auxiliars/ColumnSet.php';
-require 'private/scripts/Auxiliars/JsonStructureDescription.php';
+require 'private/scripts/Auxiliars/Email.php';
+require 'private/scripts/Auxiliars/JsonStructureDescriptor.php';
+require 'private/scripts/Auxiliars/SessionStorageHandler.php';
+require 'private/scripts/Auxiliars/DatabaseSessionStorageHandler.php';
 
 // Controllers
 require 'private/scripts/Controllers/Controller.php';
@@ -41,7 +43,8 @@ require 'private/scripts/Controllers/LogOutController.php';
 require 'private/scripts/Controllers/RequestUserCreationController.php';
 
 // Extensions
-require 'private/scripts/Extensions/JsonResponse.php';
+require 'private/scripts/Extensions/Request.php';
+require 'private/scripts/Extensions/Response.php';
 
 // Helpers
 require 'private/scripts/Helpers/Helper.php';
@@ -53,6 +56,10 @@ require 'private/scripts/Helpers/Data.php';
 require 'private/scripts/Helpers/Database.php';
 require 'private/scripts/Helpers/BusinessLogicDatabase.php';
 require 'private/scripts/Helpers/WebServerDatabase.php';
+require 'private/scripts/Helpers/EmailBuilder.php';
 require 'private/scripts/Helpers/InputValidator.php';
 require 'private/scripts/Helpers/Services.php';
 require 'private/scripts/Helpers/Session.php';
+
+// Middlewares
+require 'private/scripts/Middlewares/SessionMiddleware.php';

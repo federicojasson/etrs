@@ -12,7 +12,19 @@ class GetUserMetadataController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		
+		// Gets the user ID
+		$userId = $input['id'];
+		
+		// Gets the user
+		$user = $app->data->getUser($userId, ['metadata']);
+		
+		// Sets the output
+		$app->response->setBody($user['metadata']);
 	}
 	
 	/*

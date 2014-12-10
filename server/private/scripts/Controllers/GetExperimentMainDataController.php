@@ -12,7 +12,19 @@ class GetExperimentMainDataController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		
+		// Gets the experiment ID
+		$experimentId = $input['id'];
+		
+		// Gets the experiment
+		$experiment = $app->data->getExperiment($experimentId, ['mainData']);
+		
+		// Sets the output
+		$app->response->setBody($experiment['mainData']);
 	}
 	
 	/*

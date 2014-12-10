@@ -58,8 +58,8 @@
 				id: inputModels.id.value,
 				password: inputModels.password.value
 			}).then(function(output) {
-				if (output.loggedIn) {
-					// The user was logged in
+				if (output.authenticated) {
+					// The user was authenticated
 					
 					// Refreshes the authentication state
 					authentication.refreshState();
@@ -67,7 +67,7 @@
 					// Reloads the route
 					// TODO: HOW
 				} else {
-					// The user was not logged in
+					// The user was not authenticated
 					
 					// TODO
 				}

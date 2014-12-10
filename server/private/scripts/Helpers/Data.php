@@ -4,6 +4,8 @@
  * TODO: comments
  * 
  * TODO: add connection between data if necessary (probably not)
+ * 
+ * TODO: check if cache works OK with reference (test the database queries)
  */
 class Data extends Helper {
 	
@@ -17,7 +19,7 @@ class Data extends Helper {
 	 */
 	public function getConsultation($consultationId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$consultations = $this->cache['consultations'];
+		$consultations = &$this->cache['consultations'];
 		
 		if (! isset($consultations[$consultationId])) {
 			// Initializes the consultation and stores it in cache
@@ -27,7 +29,7 @@ class Data extends Helper {
 		}
 		
 		// Gets the consultation from the cache
-		$consultation = $consultations[$consultationId];
+		$consultation = &$consultations[$consultationId];
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
@@ -56,7 +58,7 @@ class Data extends Helper {
 	 */
 	public function getExperiment($experimentId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$experiments = $this->cache['experiments'];
+		$experiments = &$this->cache['experiments'];
 		
 		if (! isset($experiments[$experimentId])) {
 			// Initializes the experiment and stores it in cache
@@ -66,7 +68,7 @@ class Data extends Helper {
 		}
 		
 		// Gets the experiment from the cache
-		$experiment = $experiments[$experimentId];
+		$experiment = &$experiments[$experimentId];
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
@@ -90,7 +92,7 @@ class Data extends Helper {
 	 */
 	public function getFile($fileId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$files = $this->cache['files'];
+		$files = &$this->cache['files'];
 		
 		if (! isset($files[$fileId])) {
 			// Initializes the file and stores it in cache
@@ -100,7 +102,7 @@ class Data extends Helper {
 		}
 		
 		// Gets the file from the cache
-		$file = $files[$fileId];
+		$file = &$files[$fileId];
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
@@ -123,7 +125,7 @@ class Data extends Helper {
 	 */
 	public function getPatient($patientId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$patients = $this->cache['patients'];
+		$patients = &$this->cache['patients'];
 		
 		if (! isset($patients[$patientId])) {
 			// Initializes the patient and stores it in cache
@@ -133,7 +135,7 @@ class Data extends Helper {
 		}
 		
 		// Gets the patient from the cache
-		$patient = $patients[$patientId];
+		$patient = &$patients[$patientId];
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
@@ -156,7 +158,7 @@ class Data extends Helper {
 	 */
 	public function getStudy($studyId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$studies = $this->cache['studies'];
+		$studies = &$this->cache['studies'];
 		
 		if (! isset($studies[$studyId])) {
 			// Initializes the study and stores it in cache
@@ -166,7 +168,7 @@ class Data extends Helper {
 		}
 		
 		// Gets the study from the cache
-		$study = $studies[$studyId];
+		$study = &$studies[$studyId];
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
@@ -190,7 +192,7 @@ class Data extends Helper {
 	 */
 	public function getUser($userId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$users = $this->cache['users'];
+		$users = &$this->cache['users'];
 		
 		if (! isset($users[$userId])) {
 			// Initializes the user and stores it in cache
@@ -200,7 +202,7 @@ class Data extends Helper {
 		}
 		
 		// Gets the user from the cache
-		$user = $users[$userId];
+		$user = &$users[$userId];
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [

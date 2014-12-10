@@ -12,7 +12,19 @@ class GetPatientMetadataController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		
+		// Gets the patient ID
+		$patientId = $input['id'];
+		
+		// Gets the patient
+		$patient = $app->data->getPatient($patientId, ['metadata']);
+		
+		// Sets the output
+		$app->response->setBody($patient['metadata']);
 	}
 	
 	/*

@@ -37,6 +37,13 @@ class Cryptography extends Helper {
 	}
 	
 	/*
+	 * TODO: comments
+	 */
+	public function hashFileMd5() {
+		// TODO: implement
+	}
+	
+	/*
 	 * Computes and returns the hash of a password, applying the SHA-512 hash
 	 * function and the PBKDF2 key derivation function.
 	 * 

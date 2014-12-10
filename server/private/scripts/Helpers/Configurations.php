@@ -21,7 +21,7 @@ class Configurations extends Helper {
 	 * It receives the configuration's ID.
 	 */
 	public function get($configurationId) {
-		$configurations = $this->configurations;
+		$configurations = &$this->configurations;
 		
 		if (! isset($configurations[$configurationId])) {
 			// The configuration has not been loaded yet

@@ -1,10 +1,9 @@
 <?php
 
 /*
- * This class extends the Slim's Response class, to allow an object or an array
- * to be set as body, automatically encoding it in JSON format.
+ * This class extends the Slim's Response class and adds functionality.
  */
-class JsonResponse extends \Slim\Http\Response {
+class Response extends \Slim\Http\Response {
 	
 	/*
 	 * Gets and sets the body.
@@ -23,7 +22,8 @@ class JsonResponse extends \Slim\Http\Response {
 	/*
 	 * Sets the body.
 	 * 
-	 * If an object or an array is received, it encodes it in JSON format.
+	 * It receives the output to be set. If it is not a string, it tries to
+	 * encode it in JSON format.
 	 */
     public function setBody($output) {
 		if (is_string($output)) {

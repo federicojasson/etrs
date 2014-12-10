@@ -9,11 +9,6 @@
 class LogInController extends SecureController {
 	
 	/*
-	 * TODO: comments
-	 */
-	private $input;
-	
-	/*
 	 * Executes the controller.
 	 */
 	protected function execute() {
@@ -27,20 +22,20 @@ class LogInController extends SecureController {
 		$app = $this->app;
 		
 		// Defines the expected JSON structure
-		$jsonStructureDescription = new JsonStructureDescription(JSON_STRUCTURE_TYPE_OBJECT, [
-			'id' => new JsonStructureDescription(JSON_STRUCTURE_TYPE_VALUE, function() {
+		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function() {
 				// TODO: validation
 				return true;
 			}),
 			
-			'password' => new JsonStructureDescription(JSON_STRUCTURE_TYPE_VALUE, function() {
+			'password' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function() {
 				// TODO: validation
 				return true;
 			})
 		]);
 		
-		// Validates the JSON request and returns the result
-		return $app->inputValidator->validateJsonRequest($app->request, $jsonStructureDescription, $this->input);
+		// Validates the request and returns the result
+		return $app->inputValidator->validateJsonRequest($app->request, $jsonStructureDescriptor);
 	}
 	
 	/*
@@ -54,7 +49,6 @@ class LogInController extends SecureController {
 			USER_ROLE_ANONYMOUS
 		];
 		
-		// TODO: Name of method
 		// Validates the authentication and returns the result
 		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
 	}

@@ -21,26 +21,26 @@
 		 */
 		var actions = {
 			createExperiment: {
-				description: 'TODO: description',
 				title: 'Ingresar nuevo experimento',
+				description: 'TODO: description',
 				url: '/create-experiment'
 			},
 			
 			createPatient: {
-				description: 'TODO: description',
 				title: 'Ingresar nuevo paciente',
+				description: 'TODO: description',
 				url: '/create-patient'
 			},
 			
 			requestUserCreation: {
-				description: 'TODO: description',
 				title: 'Ingresar nuevo usuario',
+				description: 'TODO: description',
 				url: '/request-user-creation'
 			},
 			
 			searchPatients: {
-				description: 'TODO: description',
 				title: 'Buscar pacientes',
+				description: 'TODO: description',
 				url: '/search-patients'
 			}
 		};
@@ -51,44 +51,44 @@
 		var actionSets = {
 			ad: [
 				{
+					title: 'Pacientes',
 					actions: [
 						actions.searchPatients,
 						actions.createPatient
-					],
-					title: 'Pacientes'
+					]
 				},
 
 				{
+					title: 'Usuarios',
 					actions: [
 						actions.requestUserCreation
-					],
-					title: 'Usuarios'
+					]
 				},
 
 				{
+					title: 'Experimentos',
 					actions: [
 						actions.createExperiment
-					],
-					title: 'Experimentos'
+					]
 				}
 			],
 			
 			dr: [
 				{
+					title: 'Pacientes',
 					actions: [
 						actions.searchPatients,
 						actions.createPatient
-					],
-					title: 'Pacientes'
+					]
 				}
 			],
 			
 			op: [
 				{
+					title: 'Pacientes',
 					actions: [
 						actions.searchPatients
-					],
-					title: 'Pacientes'
+					]
 				}
 			]
 		};

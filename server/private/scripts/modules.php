@@ -10,8 +10,12 @@ $container = $app->container;
 
 // Extensions
 
+$container->singleton('request', function($configuration) {
+	return new Request($configuration['environment']);
+});
+
 $container->singleton('response', function() {
-	return new JsonResponse();
+	return new Response();
 });
 
 
@@ -41,6 +45,10 @@ $container->singleton('data', function() {
 	return new Data();
 });
 
+$container->singleton('emailBuilder', function() {
+	return new EmailBuilder();
+});
+
 $container->singleton('inputValidator', function() {
 	return new InputValidator();
 });
@@ -56,3 +64,7 @@ $container->singleton('session', function() {
 $container->singleton('webServerDatabase', function() {
 	return new WebServerDatabase();
 });
+
+
+// Middlewares
+$app->add(new SessionMiddleware(new DatabaseSessionStorageHandler()));

@@ -590,7 +590,7 @@
 				}
 				
 				deferredTask.resolve({
-					loggedIn: loggedIn
+					authenticated: loggedIn
 				});
 			}, 100);
 			

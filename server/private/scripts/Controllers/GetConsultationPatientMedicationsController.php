@@ -12,7 +12,19 @@ class GetConsultationPatientMedicationsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		
+		// Gets the consultation ID
+		$consultationId = $input['id'];
+		
+		// Gets the consultation
+		$consultation = $app->data->getConsultation($consultationId, ['patientMedications']);
+		
+		// Sets the output
+		$app->response->setBody($consultation['patientMedications']);
 	}
 	
 	/*

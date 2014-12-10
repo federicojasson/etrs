@@ -12,7 +12,19 @@ class GetFileMainDataController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		
+		// Gets the file ID
+		$fileId = $input['id'];
+		
+		// Gets the file
+		$file = $app->data->getFile($fileId, ['mainData']);
+		
+		// Sets the output
+		$app->response->setBody($file['mainData']);
 	}
 	
 	/*
