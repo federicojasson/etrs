@@ -4,6 +4,7 @@
  * This script defines the constants of the application.
  */
 
+define('ALGORITHM_HASH_SHA512', 'sha512');
 define('CRLF', "\r\n");
 define('EMAIL_BUILDER_FROM', 'from');
 define('EMAIL_BUILDER_MESSAGE', 'message');
@@ -13,7 +14,6 @@ define('ERROR_ID_INVALID_INPUT', 'INVALID_INPUT');
 define('ERROR_ID_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
 define('FILE_PATH_CONFIGURATIONS_FILE_PATHS', 'private/configurations/file-paths.json');
 define('FILE_PATH_LOGS_DEBUG', 'private/logs/debug.log');
-define('HASHING_ALGORITHM_SHA512', 'sha512');
 define('HTTP_CONTENT_TYPE_JSON', 'application/json');
 define('HTTP_HEADER_CONTENT_TYPE', 'Content-Type');
 define('HTTP_METHOD_POST', 'POST');
@@ -24,6 +24,9 @@ define('JSON_STRUCTURE_TYPE_OBJECT', 'object');
 define('JSON_STRUCTURE_TYPE_VALUE', 'value');
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
+define('PASSWORD_HASH_ITERATIONS', 20000); // TODO: test strength
+define('PASSWORD_SALT_LENGTH', 64);
+define('SESSION_IDLE_LIFETIME', 512); // TODO: define lifetime
 define('SLIM_ENVIRONMENT_INPUT', 'slim.input');
 define('USER_ROLE_ADMINISTRATOR', 'ad');
 define('USER_ROLE_ANONYMOUS', '__');

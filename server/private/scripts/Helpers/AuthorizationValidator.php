@@ -18,8 +18,8 @@ class AuthorizationValidator extends Helper {
 		}
 		
 		// The user is logged in: the decision depends on her role
-		$userRole = $authentication->getLoggedInUser()['mainData']['role'];
-		return in_array($userRole, $authorizedUserRoles);
+		$loggedInUser = $authentication->getLoggedInUser();
+		return in_array($userRole, $loggedInUser['mainData']['role']);
 	}
 	
 }

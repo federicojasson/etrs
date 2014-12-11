@@ -1,9 +1,22 @@
 <?php
 
 /*
- * This interface offers methods to manage the session's data persistence.
+ * This class offers methods to manage the session's data persistence in a
+ * database. It implements the SessionStorageHandler interface.
  */
 class DatabaseSessionStorageHandler implements SessionStorageHandler {
+	
+	/*
+	 * The database where the session data is stored.
+	 */
+	private $database;
+	
+	/*
+	 * Creates an instance of this class.
+	 */
+	public function __construct($database) {
+		$this->database = $database;
+	}
 	
 	/*
 	 * Invoked when the session is closed.
@@ -11,7 +24,8 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * It returns whether the operation succeeded.
 	 */
 	public function onClose() {
-		// TODO
+		// There's nothing to do
+		return true;
 	}
 	
 	/*
@@ -22,7 +36,10 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * It returns whether the operation succeeded.
 	 */
 	public function onDestroy($sessionId) {
-		// TODO
+		// Deletes the session from the database
+		$this->database->deleteSession($sessionId);
+		
+		return true;
 	}
 	
 	/*
@@ -33,19 +50,23 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * It returns whether the operation succeeded.
 	 */
 	public function onGarbageCollection($idleLifetime) {
-		// TODO
+		// Deletes the expired sessions from the database
+		$this->database->deleteExpiredSessions(SESSION_IDLE_LIFETIME);
+		
+		return true;
 	}
 	
 	/*
 	 * Invoked when the session is being opened.
 	 * 
-	 * It receives the path where to save the session's files (for those cases
-	 * where direct file management is necessary) and the session's name.
+	 * It receives the path where to save the session (for those cases where
+	 * direct file management is necessary) and the session's name.
 	 * 
 	 * It returns whether the operation succeeded.
 	 */
 	public function onOpen($savePath, $sessionName) {
-		// TODO
+		// There's nothing to do
+		return true;
 	}
 	
 	/*
@@ -57,7 +78,16 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * no data to read.
 	 */
 	public function onRead($sessionId) {
-		// TODO
+		// Selects the session in the database
+		$session = $this->database->selectSession($sessionId);
+
+		if (is_null($session)) {
+			// The session doesn't exist
+			return '';
+		}
+
+		// Returns the session's data
+		return $session['data'];
 	}
 	
 	/*
@@ -68,7 +98,10 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * It returns whether the operation succeeded.
 	 */
 	public function onWrite($sessionId, $sessionData) {
-		// TODO
+		// Inserts or updates the session in the database
+		$this->database->insertOrUpdateSession($sessionId, $sessionData);
+		
+		return true;
 	}
 	
 }

@@ -38,7 +38,7 @@ class EmailBuilder extends Helper {
 	/*
 	 * TODO: comments
 	 */
-	public function reset() {
+	public function newEmail() {
 		$this->properties = [];
 		return $this;
 	}

@@ -33,8 +33,8 @@ interface SessionStorageHandler {
 	/*
 	 * Invoked when the session is being opened.
 	 * 
-	 * It receives the path where to save the session's files (for those cases
-	 * where direct file management is necessary) and the session's name.
+	 * It receives the path where to save the session (for those cases where
+	 * direct file management is necessary) and the session's name.
 	 * 
 	 * It returns whether the operation succeeded.
 	 */

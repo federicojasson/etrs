@@ -49,6 +49,7 @@ require 'private/scripts/Extensions/Response.php';
 // Helpers
 require 'private/scripts/Helpers/Helper.php';
 require 'private/scripts/Helpers/Authentication.php';
+require 'private/scripts/Helpers/Authenticator.php';
 require 'private/scripts/Helpers/AuthorizationValidator.php';
 require 'private/scripts/Helpers/Configurations.php';
 require 'private/scripts/Helpers/Cryptography.php';

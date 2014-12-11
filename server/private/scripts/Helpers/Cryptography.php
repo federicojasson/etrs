@@ -6,6 +6,13 @@
 class Cryptography extends Helper {
 	
 	/*
+	 * Generates and returns a password salt.
+	 */
+	public function generatePasswordSalt() {
+		return $this->generateRandomBytes(PASSWORD_SALT_LENGTH);
+	}
+	
+	/*
 	 * Generates and returns a random byte sequence.
 	 * 
 	 * It receives the length of the sequence.
@@ -37,21 +44,22 @@ class Cryptography extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Computes and returns the hash of a file, applying the MD5 hash function.
+	 * 
+	 * It receives the file's path.
 	 */
-	public function hashFileMd5() {
-		// TODO: implement
+	public function hashFileMd5($filePath) {
+		return md5_file($filePath, true);
 	}
 	
 	/*
 	 * Computes and returns the hash of a password, applying the SHA-512 hash
 	 * function and the PBKDF2 key derivation function.
 	 * 
-	 * It receives the password, the salt to use and the number of iterations.
+	 * It receives the password and the salt to use.
 	 */
-	public function hashPasswordSha512($password, $salt, $iterations) {
-		// Hashes the password and returns the result
-		return hash_pbkdf2(HASHING_ALGORITHM_SHA512, $password, $salt, $iterations, 0, true);
+	public function hashPasswordSha512($password, $salt) {
+		return hash_pbkdf2(ALGORITHM_HASH_SHA512, $password, $salt, PASSWORD_HASH_ITERATIONS, 0, true);
 	}
 	
 }

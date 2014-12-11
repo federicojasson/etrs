@@ -25,6 +25,10 @@ $container->singleton('authentication', function() {
 	return new Authentication();
 });
 
+$container->singleton('authenticator', function() {
+	return new Authenticator();
+});
+
 $container->singleton('authorizationValidator', function() {
 	return new AuthorizationValidator();
 });
@@ -67,4 +71,10 @@ $container->singleton('webServerDatabase', function() {
 
 
 // Middlewares
-$app->add(new SessionMiddleware(new DatabaseSessionStorageHandler()));
+
+{
+	$database = $app->webServerDatabase;
+	$sessionStorageHandler = new DatabaseSessionStorageHandler($database);
+	$middleware = new SessionMiddleware($sessionStorageHandler);
+	$app->add($middleware);
+}
