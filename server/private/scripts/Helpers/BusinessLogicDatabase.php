@@ -10,7 +10,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectConsultationImageAnalysis($consultationId) {
+	public function selectNotErasedConsultationImageAnalysis($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -43,7 +43,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectConsultationLaboratoryResults($consultationId) {
+	public function selectNotErasedConsultationLaboratoryResults($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -83,7 +83,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectConsultationMainData($consultationId) {
+	public function selectNotErasedConsultationMainData($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -117,7 +117,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectConsultationMetadata($consultationId) {
+	public function selectNotErasedConsultationMetadata($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -148,7 +148,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectConsultationNeurocognitiveAssessment($consultationId) {
+	public function selectNotErasedConsultationNeurocognitiveAssessment($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -181,7 +181,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectConsultationPatientBackground($consultationId) {
+	public function selectNotErasedConsultationPatientBackground($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -217,7 +217,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectConsultationPatientMedications($consultationId) {
+	public function selectNotErasedConsultationPatientMedications($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -254,7 +254,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectConsultationTreatments($consultationId) {
+	public function selectNotErasedConsultationTreatments($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -290,12 +290,16 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectExperimentFiles($experimentId) {
+	public function selectNotErasedExperimentFiles($experimentId) {
 		// Defines the statement
 		$statement = '
-			SELECT file AS file
-			FROM experiments_files
-			WHERE experiment = :experimentId
+			SELECT experiments_files.file AS file
+			FROM experiments_files INNER JOIN experiments_metadata
+			ON experiments_files.experiment = experiments_metadata.experiment
+			WHERE
+				NOT experiments_metadata.erased
+				AND
+				experiments_files.experiment = :experimentId
 		';
 		
 		// Sets the parameters
@@ -313,14 +317,18 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectExperimentMainData($experimentId) {
+	public function selectNotErasedExperimentMainData($experimentId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				name AS name,
-				command_line AS commandLine
-			FROM experiments_main_data
-			WHERE experiment = :experimentId
+				experiments_main_data.name AS name,
+				experiments_main_data.command_line AS commandLine
+			FROM experiments_main_data INNER JOIN experiments_metadata
+			ON experiments_main_data.experiment = experiments_metadata.experiment
+			WHERE
+				NOT experiments_metadata.erased
+				AND
+				experiments_main_data.experiment = :experimentId
 			LIMIT 1
 		';
 		
@@ -339,7 +347,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectExperimentMetadata($experimentId) {
+	public function selectNotErasedExperimentMetadata($experimentId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -347,7 +355,10 @@ class BusinessLogicDatabase extends Database {
 				erased AS erased,
 				creation_datetime AS creationDatetime
 			FROM experiments_metadata
-			WHERE experiment = :experimentId
+			WHERE
+				NOT erased
+				AND
+				experiment = :experimentId
 			LIMIT 1
 		';
 		
@@ -366,14 +377,18 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectFileMainData($fileId) {
+	public function selectNotErasedFileMainData($fileId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				hash AS hash,
-				name AS name
-			FROM files_main_data
-			WHERE file = :fileId
+				files_main_data.hash AS hash,
+				files_main_data.name AS name
+			FROM files_main_data INNER JOIN files_metadata
+			ON files_main_data.file = files_metadata.file
+			WHERE
+				NOT files_metadata.erased
+				AND
+				files_main_data.file = :fileId
 			LIMIT 1
 		';
 		
@@ -392,7 +407,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectFileMetadata($fileId) {
+	public function selectNotErasedFileMetadata($fileId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -400,7 +415,10 @@ class BusinessLogicDatabase extends Database {
 				erased AS erased,
 				creation_datetime AS creationDatetime
 			FROM files_metadata
-			WHERE file = :fileId
+			WHERE
+				NOT erased
+				AND
+				file = :fileId
 			LIMIT 1
 		';
 		
@@ -419,17 +437,21 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectPatientMainData($patientId) {
+	public function selectNotErasedPatientMainData($patientId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				first_name AS firstName,
-				last_name AS lastName,
-				gender AS gender,
-				birth_date AS birthDate,
-				education_years AS educationYears
-			FROM patients_main_data
-			WHERE patient = :patientId
+				patients_main_data.first_name AS firstName,
+				patients_main_data.last_name AS lastName,
+				patients_main_data.gender AS gender,
+				patients_main_data.birth_date AS birthDate,
+				patients_main_data.education_years AS educationYears
+			FROM patients_main_data INNER JOIN patients_metadata
+			ON patients_main_data.patient = patients_metadata.patient
+			WHERE
+				NOT patients_metadata.erased
+				AND
+				patients_main_data.patient = :patientId
 			LIMIT 1
 		';
 		
@@ -448,7 +470,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectPatientMetadata($patientId) {
+	public function selectNotErasedPatientMetadata($patientId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -456,7 +478,10 @@ class BusinessLogicDatabase extends Database {
 				erased AS erased,
 				creation_datetime AS creationDatetime
 			FROM patients_metadata
-			WHERE patient = :patientId
+			WHERE
+				NOT erased
+				AND
+				patient = :patientId
 			LIMIT 1
 		';
 		
@@ -475,12 +500,16 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectStudyFiles($studyId) {
+	public function selectNotErasedStudyFiles($studyId) {
 		// Defines the statement
 		$statement = '
-			SELECT file AS file
-			FROM studies_files
-			WHERE study = :studyId
+			SELECT studies_files.file AS file
+			FROM studies_files INNER JOIN studies_metadata
+			ON studies_files.study = studies_metadata.study
+			WHERE
+				NOT studies_metadata.erased
+				AND
+				studies_files.study = :studyId
 		';
 		
 		// Sets the parameters
@@ -498,12 +527,16 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectStudyMainData($studyId) {
+	public function selectNotErasedStudyMainData($studyId) {
 		// Defines the statement
 		$statement = '
-			SELECT observations AS observations
-			FROM studies_main_data
-			WHERE study = :studyId
+			SELECT studies_main_data.observations AS observations
+			FROM studies_main_data INNER JOIN studies_metadata
+			ON studies_main_data.study = studies_metadata.study
+			WHERE
+				NOT studies_metadata.erased
+				AND
+				studies_main_data.study = :studyId
 			LIMIT 1
 		';
 		
@@ -522,7 +555,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectStudyMetadata($studyId) {
+	public function selectNotErasedStudyMetadata($studyId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -533,7 +566,10 @@ class BusinessLogicDatabase extends Database {
 				erased AS erased,
 				creation_datetime AS creationDatetime
 			FROM studies_metadata
-			WHERE study = :studyId
+			WHERE
+				NOT erased
+				AND
+				study = :studyId
 			LIMIT 1
 		';
 		
@@ -552,14 +588,18 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectUserAuthenticationData($userId) {
+	public function selectNotErasedUserAuthenticationData($userId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				password_hash AS passwordHash,
-				password_salt AS passwordSalt
-			FROM users_authentication_data
-			WHERE user = :userId
+				users_authentication_data.password_hash AS passwordHash,
+				users_authentication_data.password_salt AS passwordSalt
+			FROM users_authentication_data INNER JOIN users_metadata
+			ON users_authentication_data.user = users_metadata.user
+			WHERE
+				NOT users_metadata.erased
+				AND
+				users_authentication_data.user = :userId
 			LIMIT 1
 		';
 		
@@ -578,17 +618,21 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectUserMainData($userId) {
+	public function selectNotErasedUserMainData($userId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				first_name AS firstName,
-				last_name AS lastName,
-				gender AS gender,
-				email_address AS emailAddress,
-				role AS role
-			FROM users_main_data
-			WHERE user = :userId
+				users_main_data.first_name AS firstName,
+				users_main_data.last_name AS lastName,
+				users_main_data.gender AS gender,
+				users_main_data.email_address AS emailAddress,
+				users_main_data.role AS role
+			FROM users_main_data INNER JOIN users_metadata
+			ON users_main_data.user = users_metadata.user
+			WHERE
+				NOT users_metadata.erased
+				AND
+				users_main_data.user = :userId
 			LIMIT 1
 		';
 		
@@ -607,14 +651,17 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectUserMetadata($userId) {
+	public function selectNotErasedUserMetadata($userId) {
 		// Defines the statement
 		$statement = '
 			SELECT
 				erased AS erased,
 				creation_datetime AS creationDatetime
 			FROM users_metadata
-			WHERE user = :userId
+			WHERE
+				NOT erased
+				AND
+				user = :userId
 			LIMIT 1
 		';
 		

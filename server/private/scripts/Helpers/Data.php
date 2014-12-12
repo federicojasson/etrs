@@ -34,14 +34,14 @@ class Data extends Helper {
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'imageAnalysis' => [ $businessLogicDatabase, 'selectConsultationImageAnalysis' ],
-			'laboratoryResults' => [ $businessLogicDatabase, 'selectConsultationLaboratoryResults' ],
-			'mainData' => [ $businessLogicDatabase, 'selectConsultationMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectConsultationMetadata' ],
-			'neurocognitiveAssessment' => [ $businessLogicDatabase, 'selectConsultationNeurocognitiveAssessment' ],
-			'patientBackground' => [ $businessLogicDatabase, 'selectConsultationPatientBackground' ],
-			'patientMedications' => [ $businessLogicDatabase, 'selectConsultationPatientMedications' ],
-			'treatments' => [ $businessLogicDatabase, 'selectConsultationTreatments' ]
+			'imageAnalysis' => [ $businessLogicDatabase, 'selectNotErasedConsultationImageAnalysis' ],
+			'laboratoryResults' => [ $businessLogicDatabase, 'selectNotErasedConsultationLaboratoryResults' ],
+			'mainData' => [ $businessLogicDatabase, 'selectNotErasedConsultationMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectNotErasedConsultationMetadata' ],
+			'neurocognitiveAssessment' => [ $businessLogicDatabase, 'selectNotErasedConsultationNeurocognitiveAssessment' ],
+			'patientBackground' => [ $businessLogicDatabase, 'selectNotErasedConsultationPatientBackground' ],
+			'patientMedications' => [ $businessLogicDatabase, 'selectNotErasedConsultationPatientMedications' ],
+			'treatments' => [ $businessLogicDatabase, 'selectNotErasedConsultationTreatments' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
@@ -73,9 +73,9 @@ class Data extends Helper {
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'files' => [ $businessLogicDatabase, 'selectExperimentFiles' ],
-			'mainData' => [ $businessLogicDatabase, 'selectExperimentMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectExperimentMetadata' ]
+			'files' => [ $businessLogicDatabase, 'selectNotErasedExperimentFiles' ],
+			'mainData' => [ $businessLogicDatabase, 'selectNotErasedExperimentMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectNotErasedExperimentMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
@@ -107,8 +107,8 @@ class Data extends Helper {
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'mainData' => [ $businessLogicDatabase, 'selectFileMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectFileMetadata' ]
+			'mainData' => [ $businessLogicDatabase, 'selectNotErasedFileMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectNotErasedFileMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
@@ -140,8 +140,8 @@ class Data extends Helper {
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'mainData' => [ $businessLogicDatabase, 'selectPatientMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectPatientMetadata' ]
+			'mainData' => [ $businessLogicDatabase, 'selectNotErasedPatientMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectNotErasedPatientMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
@@ -173,9 +173,9 @@ class Data extends Helper {
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'files' => [ $businessLogicDatabase, 'selectStudyFiles' ],
-			'mainData' => [ $businessLogicDatabase, 'selectStudyMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectStudyMetadata' ]
+			'files' => [ $businessLogicDatabase, 'selectNotErasedStudyFiles' ],
+			'mainData' => [ $businessLogicDatabase, 'selectNotErasedStudyMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectNotErasedStudyMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
@@ -207,9 +207,9 @@ class Data extends Helper {
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'authenticationData' => [ $businessLogicDatabase, 'selectUserAuthenticationData' ],
-			'mainData' => [ $businessLogicDatabase, 'selectUserMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectUserMetadata' ]
+			'authenticationData' => [ $businessLogicDatabase, 'selectNotErasedUserAuthenticationData' ],
+			'mainData' => [ $businessLogicDatabase, 'selectNotErasedUserMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectNotErasedUserMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
