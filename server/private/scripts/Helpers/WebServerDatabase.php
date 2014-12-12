@@ -6,31 +6,31 @@
 class WebServerDatabase extends Database {
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function deleteExpiredSessions($sessionIdleLifetime) {
-		// TODO
+		// TODO: implement
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function deleteSession($sessionId) {
-		// TODO
+		// TODO: implement
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function insertOrUpdateSession($sessionId, $sessionData) {
-		// TODO
+		// TODO: implement
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	public function selectSession($sessionId) {
-		// TODO
+		// TODO: implement
 	}
 	
 	/*
@@ -40,10 +40,10 @@ class WebServerDatabase extends Database {
 	 */
 	protected function connect() {
 		// Gets the configuration of the database
-		$configuration = $this->app->configurations->get('webServerDatabase');
+		$configuration = &$this->app->configurations->get('webServerDatabase');
 		$dsn = $configuration['dsn'];
-		$password = $configuration['password'];
 		$username = $configuration['username'];
+		$password = $configuration['password'];
 		
 		// Creates and returns a PDO instance
 		return new PDO($dsn, $username, $password);

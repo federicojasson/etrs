@@ -1,24 +1,26 @@
 <?php
 
 /*
- * TODO: comments
+ * This helper manages the authentication state.
  */
 class Authentication extends Helper {
 	
 	/*
-	 * TODO: comments
+	 * Returns the logged in user.
 	 */
 	public function getLoggedInUser() {
-		// TODO: get user ID
-		$userId = 'id de usuario';
-		return $this->app->data->getUser($userId, ['mainData']);
+		// Gets the logged in user's ID
+		$loggedInUserId = $this->app->session->getData(SESSION_DATA_LOGGED_IN_USER_ID);
+		
+		// Gets and returns the logged in user
+		return $this->app->data->getUser($loggedInUserId, ['mainData']);
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether the user is logged in.
 	 */
 	public function isUserLoggedIn() {
-		// TODO
+		return $this->app->session->containsData(SESSION_DATA_LOGGED_IN_USER_ID);
 	}
 	
 }

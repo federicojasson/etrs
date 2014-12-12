@@ -1,7 +1,7 @@
 <?php
 
 /*
- * TODO: comments
+ * This helper offers authorization validation functions.
  */
 class AuthorizationValidator extends Helper {
 	
@@ -19,7 +19,7 @@ class AuthorizationValidator extends Helper {
 		
 		// The user is logged in: the decision depends on her role
 		$loggedInUser = $authentication->getLoggedInUser();
-		return in_array($userRole, $loggedInUser['mainData']['role']);
+		return in_array($loggedInUser['mainData']['role'], $authorizedUserRoles);
 	}
 	
 }

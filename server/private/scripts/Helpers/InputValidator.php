@@ -1,7 +1,7 @@
 <?php
 
 /*
- * TODO: comments
+ * This helper offers input validation functions.
  */
 class InputValidator extends Helper {
 	

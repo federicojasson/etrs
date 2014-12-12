@@ -17,28 +17,13 @@ abstract class Database extends Helper {
 	
 	/*
 	 * Commits the current transaction.
-	 * TODO: remove if not used
 	 */
 	public function commitTransaction() {
 		$this->pdo->commit();
 	}
 	
 	/*
-	 * TODO: comments
-	 */
-	public function getFirstOrDefaultResult($results) {
-		if (count($results) === 0) {
-			// The query didn't return any result
-			return null;
-		}
-		
-		// Returns the first result
-		return $results[0];
-	}
-	
-	/*
 	 * Rolls back the current transaction.
-	 * TODO: remove if not used
 	 */
 	public function rollBackTransaction() {
 		$this->pdo->rollBack();
@@ -46,7 +31,6 @@ abstract class Database extends Helper {
 	
 	/*
 	 * Starts a new transaction.
-	 * TODO: remove if not used
 	 */
 	public function startTransaction() {
 		$this->pdo->beginTransaction();
@@ -71,6 +55,22 @@ abstract class Database extends Helper {
 		
 		// Fetches and returns the results
 		return $preparedStatement->fetchAll();
+	}
+	
+	/*
+	 * Returns the first result of a query, or null if the query didn't produce
+	 * any.
+	 * 
+	 * It receives an array of query results.
+	 */
+	protected function getFirstResultOrNull($results) {
+		if (count($results) === 0) {
+			// The query didn't produce any result
+			return null;
+		}
+		
+		// Returns the first result
+		return $results[0];
 	}
 	
 	/*

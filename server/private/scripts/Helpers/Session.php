@@ -1,7 +1,7 @@
 <?php
 
 /*
- * TODO: comments
+ * This helper offers an interface to access the PHP session.
  */
 class Session extends Helper {
 	
@@ -10,37 +10,50 @@ class Session extends Helper {
 	 * 
 	 * It receives the entry's key.
 	 */
-	public function clearData($key) {
-		unset($_SESSION[$key]);
+	public function clearData($entryKey) {
+		unset($_SESSION[$entryKey]);
+	}
+	
+	/*
+	 * Determines whether a certain data entry exists.
+	 * 
+	 * It receives the entry's key.
+	 */
+	public function containsData($entryKey) {
+		return isset($_SESSION[$entryKey]);
 	}
 	
 	/*
 	 * Returns the value of a data entry.
 	 * 
-	 * It receives the data's key.
+	 * It receives the entry's key.
 	 */
-	public function getData($key) {
-		return $_SESSION[$key];
+	public function getData($entryKey) {
+		return $_SESSION[$entryKey];
 	}
 	
 	/*
 	 * Sets the value of a data entry.
+	 * 
+	 * It receives the entry's key and the value to be set.
 	 */
-	public function setData($key, $value) {
-		$_SESSION[$key] = $value;
+	public function setData($entryKey, $entryValue) {
+		$_SESSION[$entryKey] = $entryValue;
 	}
 	
 	/*
-	 * Sets a storage handler to manage the data persistence.
+	 * Sets a session storage handler to manage the data persistence.
+	 * 
+	 * It receives the session storage handler.
 	 */
-	public function setStorageHandler($storageHandler) {
+	public function setStorageHandler($sessionStorageHandler) {
 		session_set_save_handler(
-			[ $storageHandler, 'onOpen' ],
-			[ $storageHandler, 'onClose' ],
-			[ $storageHandler, 'onRead' ],
-			[ $storageHandler, 'onWrite' ],
-			[ $storageHandler, 'onDestroy' ],
-			[ $storageHandler, 'onGarbageCollection' ]
+			[ $sessionStorageHandler, 'onOpen' ],
+			[ $sessionStorageHandler, 'onClose' ],
+			[ $sessionStorageHandler, 'onRead' ],
+			[ $sessionStorageHandler, 'onWrite' ],
+			[ $sessionStorageHandler, 'onDestroy' ],
+			[ $sessionStorageHandler, 'onGarbageCollection' ]
 		);
 	}
 	

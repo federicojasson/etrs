@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This helper allows to obtain the application's configurations.
+ * This helper allows to obtain configurations.
  */
 class Configurations extends Helper {
 	
@@ -23,6 +23,7 @@ class Configurations extends Helper {
 	public function get($configurationId) {
 		$configurations = &$this->configurations;
 		
+		// Lazy loading
 		if (! isset($configurations[$configurationId])) {
 			// The configuration has not been loaded yet
 			$this->load($configurationId);

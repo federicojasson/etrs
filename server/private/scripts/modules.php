@@ -7,9 +7,6 @@
 $app = \Slim\Slim::getInstance();
 $container = $app->container;
 
-
-// Extensions
-
 $container->singleton('request', function($configuration) {
 	return new Request($configuration['environment']);
 });
@@ -17,9 +14,6 @@ $container->singleton('request', function($configuration) {
 $container->singleton('response', function() {
 	return new Response();
 });
-
-
-// Helpers
 
 $container->singleton('authentication', function() {
 	return new Authentication();
@@ -68,9 +62,6 @@ $container->singleton('session', function() {
 $container->singleton('webServerDatabase', function() {
 	return new WebServerDatabase();
 });
-
-
-// Middlewares
 
 {
 	$database = $app->webServerDatabase;

@@ -1,24 +1,25 @@
 <?php
 
 /*
- * TODO: comments
+ * This helpers offers functions to authenticate entities of the application,
+ * such as users and requests.
  */
 class Authenticator extends Helper {
 	
 	/*
-	 * TODO: comments
+	 * Authenticates a password recovery request and returns the result.
 	 */
 	public function authenticatePasswordRecoveryRequest() {
-		// TODO
+		// TODO: implement
 	}
 	
 	/*
-	 * TODO: comments
+	 * Authenticates a user and returns the result.
+	 * 
+	 * It receives the user's ID and her alleged password.
 	 */
-	public function authenticateUser($userId, $password) {
+	public function authenticateUser($userId, $allegedPassword) {
 		$app = $this->app;
-		
-		// TODO: clean code
 		
 		// Gets the user
 		$user = $app->data->getUser($userId, ['authenticationData']);
@@ -28,19 +29,22 @@ class Authenticator extends Helper {
 			return false;
 		}
 		
-		$passwordHash = $user['authenticationData']['passwordHash'];
-		$passwordSalt = $user['authenticationData']['passwordSalt'];
+		// Gets the user's authentication data
+		$userPasswordHash = $user['authenticationData']['passwordHash'];
+		$userPasswordSalt = $user['authenticationData']['passwordSalt'];
 		
-		$computedPasswordHash = $app->cryptography->hashPasswordSha512($password, $passwordSalt);
+		// Computes the hash of the alleged password, using the stored salt
+		$allegedPasswordHash = $app->cryptography->hashPassword($allegedPassword, $userPasswordSalt);
 		
-		return $computedPasswordHash === $passwordHash;
+		// Compares the computed hash with the stored one and returns the result
+		return $allegedPasswordHash === $userPasswordHash;
 	}
 	
 	/*
-	 * TODO: comments
+	 * Authenticates a user creation request and returns the result.
 	 */
 	public function authenticateUserCreationRequest() {
-		// TODO
+		// TODO: implement
 	}
 	
 }

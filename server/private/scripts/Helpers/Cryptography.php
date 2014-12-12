@@ -13,23 +13,6 @@ class Cryptography extends Helper {
 	}
 	
 	/*
-	 * Generates and returns a random byte sequence.
-	 * 
-	 * It receives the length of the sequence.
-	 */
-	public function generateRandomBytes($length) {
-		// Generates the random bytes
-		$bytes = openssl_random_pseudo_bytes($length, $cryptographicallyStrong);
-		
-		if (! $cryptographicallyStrong) {
-			// The algorithm used is not cryptographically strong
-			// TODO: log warning message
-		}
-		
-		return $bytes;
-	}
-	
-	/*
 	 * Generates and returns a UUID v4.
 	 */
 	public function generateUuidV4() {
@@ -44,22 +27,40 @@ class Cryptography extends Helper {
 	}
 	
 	/*
-	 * Computes and returns the hash of a file, applying the MD5 hash function.
+	 * Computes and returns the hash of a file.
 	 * 
 	 * It receives the file's path.
 	 */
-	public function hashFileMd5($filePath) {
+	public function hashFile($filePath) {
+		// Applies the MD5 hash function
 		return md5_file($filePath, true);
 	}
 	
 	/*
-	 * Computes and returns the hash of a password, applying the SHA-512 hash
-	 * function and the PBKDF2 key derivation function.
+	 * Computes and returns the hash of a password.
 	 * 
 	 * It receives the password and the salt to use.
 	 */
-	public function hashPasswordSha512($password, $salt) {
+	public function hashPassword($password, $salt) {
+		// Applies the SHA-512 hash function and the PBKDF2 key derivation
 		return hash_pbkdf2(ALGORITHM_HASH_SHA512, $password, $salt, PASSWORD_HASH_ITERATIONS, 0, true);
+	}
+	
+	/*
+	 * Generates and returns a random byte sequence.
+	 * 
+	 * It receives the length of the sequence.
+	 */
+	private function generateRandomBytes($length) {
+		// Generates the random bytes
+		$bytes = openssl_random_pseudo_bytes($length, $cryptographicallyStrong);
+		
+		if (! $cryptographicallyStrong) {
+			// The algorithm used is not cryptographically strong
+			// TODO: log warning message
+		}
+		
+		return $bytes;
 	}
 	
 }

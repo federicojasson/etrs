@@ -64,6 +64,19 @@ class JsonStructureDescriptor {
 	}
 	
 	/*
+	 * Determines whether an array is sequential.
+	 * 
+	 * It receives the array.
+	 */
+	private function isSequentialArray($array) {
+		// Initializes an array with the sequential indices
+		$indexArray = range(0, count($array) - 1);
+		
+		// Compares the keys of the array with the index array
+		return array_keys($array) === $indexArray;
+	}
+	
+	/*
 	 * Validates a JSON array.
 	 * 
 	 * It receives the JSON array.
@@ -83,7 +96,7 @@ class JsonStructureDescriptor {
 		$count = count($jsonArray);
 		for ($i = 0; $i < $count; $i++) {
 			// Validates the element
-			$isValid = $this->definition->validateJsonStructure($jsonStructure[$i]);
+			$isValid = $this->definition->validateJsonStructure($jsonArray[$i]);
 			
 			if (! $isValid) {
 				// The element didn't pass the validation
@@ -137,17 +150,6 @@ class JsonStructureDescriptor {
 		
 		// Calls the validation function and returns the result
 		return call_user_func($this->definition, $jsonValue);
-	}
-	
-	/*
-	 * Determines whether an array is sequential.
-	 */
-	private function isSequentialArray($array) {
-		// Initializes an array with the sequential indices
-		$indexArray = range(0, count($array) - 1);
-		
-		// Compares the keys of the array with the index array
-		return array_keys($array) === $indexArray;
 	}
 	
 }

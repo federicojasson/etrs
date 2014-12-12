@@ -13,6 +13,8 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	
 	/*
 	 * Creates an instance of this class.
+	 * 
+	 * It receives the database in which the session data should be stored.
 	 */
 	public function __construct($database) {
 		$this->database = $database;

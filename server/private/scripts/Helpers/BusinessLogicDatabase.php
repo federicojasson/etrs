@@ -5,6 +5,8 @@
  */
 class BusinessLogicDatabase extends Database {
 	
+	// TODO: change queries
+	
 	/*
 	 * TODO: comments
 	 */
@@ -30,8 +32,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -63,8 +65,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -93,8 +95,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -121,8 +123,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -146,8 +148,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -171,8 +173,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -204,8 +206,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -229,8 +231,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -278,8 +280,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -305,8 +307,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -331,8 +333,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -358,8 +360,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -387,8 +389,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -414,8 +416,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -461,8 +463,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -491,8 +493,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -517,8 +519,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -546,8 +548,8 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -572,8 +574,15 @@ class BusinessLogicDatabase extends Database {
 		// Executes the statement
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
-		// Returns the first or the default result
-		return $this->getFirstOrDefaultResult($results);
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function updateUserAuthenticationData($userId, $userPasswordHash, $userPasswordSalt) {
+		// TODO: implement
 	}
 	
 	/*
@@ -583,10 +592,10 @@ class BusinessLogicDatabase extends Database {
 	 */
 	protected function connect() {
 		// Gets the configuration of the database
-		$configuration = $this->app->configurations->get('businessLogicDatabase');
+		$configuration = &$this->app->configurations->get('businessLogicDatabase');
 		$dsn = $configuration['dsn'];
-		$password = $configuration['password'];
 		$username = $configuration['username'];
+		$password = $configuration['password'];
 		
 		// Creates and returns a PDO instance
 		return new PDO($dsn, $username, $password);

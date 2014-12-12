@@ -1,10 +1,11 @@
 <?php
 
 /*
- * TODO: comments
+ * This helper facilitates the obtaining data of the business logic.
+ * 
+ * It offers a data cache to reduce the database queries.
  * 
  * TODO: add connection between data if necessary (probably not)
- * 
  * TODO: check if cache works OK with reference (test the database queries)
  */
 class Data extends Helper {

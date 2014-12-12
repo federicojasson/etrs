@@ -17,7 +17,7 @@ class Services extends Helper {
 	public function define($url, $method, $controller) {
 		// Defines the routing rule for the service
 		$this->app->map($url, function() use ($controller) {
-			// Serves the request through the controller
+			// Serves the request using the controller
 			$controller->serve();
 		})->via($method);
 	}
