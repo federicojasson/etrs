@@ -10,7 +10,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function consultationExists($consultationId) {
+	public function nonErasedConsultationExists($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT EXISTS (
@@ -38,12 +38,12 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function experimentExists($experimentId) {
+	public function nonErasedExperimentExists($experimentId) {
 		// Defines the statement
 		$statement = '
 			SELECT EXISTS (
 				SELECT *
-				FROM consultations
+				FROM experiments
 				WHERE
 					NOT erased
 					AND
@@ -66,12 +66,12 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function fileExists($fileId) {
+	public function nonErasedFileExists($fileId) {
 		// Defines the statement
 		$statement = '
 			SELECT EXISTS (
 				SELECT *
-				FROM consultations
+				FROM files
 				WHERE
 					NOT erased
 					AND
@@ -94,12 +94,12 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function patientExists($patientId) {
+	public function nonErasedPatientExists($patientId) {
 		// Defines the statement
 		$statement = '
 			SELECT EXISTS (
 				SELECT *
-				FROM consultations
+				FROM patients
 				WHERE
 					NOT erased
 					AND
@@ -110,6 +110,62 @@ class BusinessLogicDatabase extends Database {
 		// Sets the parameters
 		$parameters = [
 			':patientId' => $patientId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return $results[0];
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function nonErasedStudyExists($studyId) {
+		// Defines the statement
+		$statement = '
+			SELECT EXISTS (
+				SELECT *
+				FROM studies
+				WHERE
+					NOT erased
+					AND
+					id = :studyId
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':studyId' => $studyId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return $results[0];
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function nonErasedUserExists($userId) {
+		// Defines the statement
+		$statement = '
+			SELECT EXISTS (
+				SELECT *
+				FROM users
+				WHERE
+					NOT erased
+					AND
+					id = :userId
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':userId' => $userId
 		];
 		
 		// Executes the statement
@@ -474,7 +530,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedExperimentFiles($experimentId) {
+	public function selectNonErasedExperimentFiles($experimentId) {
 		// Defines the statement
 		$statement = '
 			SELECT experiments_files.file AS file
@@ -501,7 +557,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedStudyFiles($studyId) {
+	public function selectNonErasedStudyFiles($studyId) {
 		// Defines the statement
 		$statement = '
 			SELECT studies_files.file AS file
@@ -715,64 +771,8 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function studyExists($studyId) {
-		// Defines the statement
-		$statement = '
-			SELECT EXISTS (
-				SELECT *
-				FROM consultations
-				WHERE
-					NOT erased
-					AND
-					id = :studyId
-			)
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':studyId' => $studyId
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		// Returns the result
-		return $results[0];
-	}
-	
-	/*
-	 * TODO: comments
-	 */
 	public function updateUserAuthenticationData($userId, $userPasswordHash, $userPasswordSalt) {
 		// TODO: implement
-	}
-	
-	/*
-	 * TODO: comments
-	 */
-	public function userExists($userId) {
-		// Defines the statement
-		$statement = '
-			SELECT EXISTS (
-				SELECT *
-				FROM consultations
-				WHERE
-					NOT erased
-					AND
-					id = :userId
-			)
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':userId' => $userId
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		// Returns the result
-		return $results[0];
 	}
 	
 	/*

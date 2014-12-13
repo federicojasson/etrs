@@ -49,4 +49,5 @@ require 'private/scripts/Helpers/EmailBuilder.php';
 require 'private/scripts/Helpers/InputValidator.php';
 require 'private/scripts/Helpers/Services.php';
 require 'private/scripts/Helpers/Session.php';
+require 'private/scripts/Helpers/Utilities.php';
 require 'private/scripts/Middlewares/SessionMiddleware.php';

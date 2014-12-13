@@ -12,7 +12,36 @@ class LogInController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		
+		// Gets the user's ID and her alleged password
+		$userId = $input['id'];
+		$userAllegedPassword = $input['password'];
+		
+		if ($app->authenticator->authenticateUser($userId, $userAllegedPassword)) {
+			// The user was authenticated
+			
+			// Logs in the user in the system
+			$app->authentication->logInUser($userId);
+			
+			// Defines the output
+			$output = [
+				'authenticated' => true
+			];
+		} else {
+			// The user was not authenticated
+			
+			// Defines the output
+			$output = [
+				'authenticated' => false
+			];
+		}
+		
+		// Sets the output
+		$app->response->setBody($output);
 	}
 	
 	/*
@@ -20,22 +49,21 @@ class LogInController extends SecureController {
 	 */
 	protected function isInputValid() {
 		$app = $this->app;
+		$inputValidator = $app->inputValidator;
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function() {
-				// TODO: validation
-				return true;
+			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+				return $inputValidator->isNonEmptyString($jsonValue);
 			}),
 			
-			'password' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function() {
-				// TODO: validation
-				return true;
+			'password' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+				return $inputValidator->isNonEmptyString($jsonValue);
 			})
 		]);
 		
 		// Validates the request and returns the result
-		return $app->inputValidator->validateJsonRequest($app->request, $jsonStructureDescriptor);
+		return $inputValidator->validateJsonRequest($app->request, $jsonStructureDescriptor);
 	}
 	
 	/*

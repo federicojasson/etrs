@@ -7,18 +7,11 @@
 class Authenticator extends Helper {
 	
 	/*
-	 * Authenticates a password recovery request and returns the result.
-	 */
-	public function authenticatePasswordRecoveryRequest() {
-		// TODO: implement
-	}
-	
-	/*
 	 * Authenticates a user and returns the result.
 	 * 
 	 * It receives the user's ID and her alleged password.
 	 */
-	public function authenticateUser($userId, $allegedPassword) {
+	public function authenticateUser($userId, $userAllegedPassword) {
 		$app = $this->app;
 		
 		// Gets the user
@@ -34,17 +27,10 @@ class Authenticator extends Helper {
 		$userPasswordSalt = $user['authenticationData']['passwordSalt'];
 		
 		// Computes the hash of the alleged password, using the stored salt
-		$allegedPasswordHash = $app->cryptography->hashPassword($allegedPassword, $userPasswordSalt);
+		$userAllegedPasswordHash = $app->cryptography->hashPassword($userAllegedPassword, $userPasswordSalt);
 		
 		// Compares the computed hash with the stored one and returns the result
-		return $allegedPasswordHash === $userPasswordHash;
-	}
-	
-	/*
-	 * Authenticates a user creation request and returns the result.
-	 */
-	public function authenticateUserCreationRequest() {
-		// TODO: implement
+		return $userAllegedPasswordHash === $userPasswordHash;
 	}
 	
 }

@@ -39,25 +39,35 @@ class GetConsultationImageAnalysisController extends SecureController {
 	 */
 	protected function isInputValid() {
 		$app = $this->app;
+		$inputValidator = $app->inputValidator;
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function() {
-				// TODO: validation
-				return true;
+			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+				return $inputValidator->isValidConsultationId($jsonValue);
 			})
 		]);
 		
 		// Validates the request and returns the result
-		return $app->inputValidator->validateJsonRequest($app->request, $jsonStructureDescriptor);
+		return $inputValidator->validateJsonRequest($app->request, $jsonStructureDescriptor);
 	}
 	
 	/*
 	 * Determines whether the user is authorized to use this service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
-		return true;
+		$app = $this->app;
+		
+		// TODO: is $authorizedUserRoles ok?
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
+		];
+		
+		// Validates the authentication and returns the result
+		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
 	}
 
 }

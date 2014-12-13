@@ -6,6 +6,69 @@
 class InputValidator extends Helper {
 	
 	/*
+	 * Determines whether an input is a non empty string.
+	 * 
+	 * It receives the input.
+	 */
+	public function isNonEmptyString($input) {
+		return strlen($input) > 0;
+	}
+	
+	/*
+	 * Determines whether an input is a valid consultation ID.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidConsultationId($input) {
+		return $this->isValidUuidV4($input);
+	}
+	
+	/*
+	 * Determines whether an input is a valid experiment ID.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidExperimentId($input) {
+		return $this->isValidUuidV4($input);
+	}
+	
+	/*
+	 * Determines whether an input is a valid file ID.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidFileId($input) {
+		return $this->isValidUuidV4($input);
+	}
+	
+	/*
+	 * Determines whether an input is a valid patient ID.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidPatientId($input) {
+		return $this->isValidUuidV4($input);
+	}
+	
+	/*
+	 * Determines whether an input is a valid study ID.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidStudyId($input) {
+		return $this->isValidUuidV4($input);
+	}
+	
+	/*
+	 * Determines whether an input is a valid user ID.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidUserId($input) {
+		return preg_match('/^(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{1,32}$/', $input);
+	}
+	
+	/*
 	 * Validates a JSON request and returns the result.
 	 * 
 	 * If the request is valid, the input is replaced by its decoded version.
@@ -42,6 +105,15 @@ class InputValidator extends Helper {
 		$request->setBody($decodedInput);
 		
 		return true;
+	}
+	
+	/*
+	 * Determines whether an input is a valid UUID v4.
+	 * 
+	 * It receives the input.
+	 */
+	private function isValidUuidV4($input) {
+		return preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$/', $input);
 	}
 	
 }

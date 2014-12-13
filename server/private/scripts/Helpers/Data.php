@@ -83,7 +83,7 @@ class Data extends Helper {
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'files' => [ $businessLogicDatabase, 'selectNotErasedExperimentFiles' ],
+			'files' => [ $businessLogicDatabase, 'selectNonErasedExperimentFiles' ],
 			'mainData' => [ $businessLogicDatabase, 'selectExperimentMainData' ],
 			'metadata' => [ $businessLogicDatabase, 'selectExperimentMetadata' ]
 		];
@@ -207,7 +207,7 @@ class Data extends Helper {
 		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'files' => [ $businessLogicDatabase, 'selectNotErasedStudyFiles' ],
+			'files' => [ $businessLogicDatabase, 'selectNonErasedStudyFiles' ],
 			'mainData' => [ $businessLogicDatabase, 'selectStudyMainData' ],
 			'metadata' => [ $businessLogicDatabase, 'selectStudyMetadata' ]
 		];
@@ -280,88 +280,88 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	private function checkConsultationMetadata($consultationId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
 		$consultationMetadata = &$this->cache['consultations'][$consultationId]['metadata'];
 
-		if (! $businessLogicDatabase->userExists($consultationMetadata['creator'])) {
-			// The user doesn't exist
+		if (! $businessLogicDatabase->nonErasedUserExists($consultationMetadata['creator'])) {
+			// The user doesn't exist or has been erased
 			$consultationMetadata['creator'] = null;
 		}
 
-		if (! $businessLogicDatabase->patientExists($consultationMetadata['patient'])) {
-			// The patient doesn't exist
+		if (! $businessLogicDatabase->nonErasedPatientExists($consultationMetadata['patient'])) {
+			// The patient doesn't exist or has been erased
 			$consultationMetadata['patient'] = null;
 		}
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	private function checkExperimentMetadata($experimentId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
 		$experimentMetadata = &$this->cache['experiments'][$experimentId]['metadata'];
 
-		if (! $businessLogicDatabase->userExists($experimentMetadata['creator'])) {
-			// The user doesn't exist
+		if (! $businessLogicDatabase->nonErasedUserExists($experimentMetadata['creator'])) {
+			// The user doesn't exist or has been erased
 			$experimentMetadata['creator'] = null;
 		}
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	private function checkFileMetadata($fileId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
 		$fileMetadata = &$this->cache['files'][$fileId]['metadata'];
 
-		if (! $businessLogicDatabase->userExists($fileMetadata['creator'])) {
-			// The user doesn't exist
+		if (! $businessLogicDatabase->nonErasedUserExists($fileMetadata['creator'])) {
+			// The user doesn't exist or has been erased
 			$fileMetadata['creator'] = null;
 		}
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	private function checkPatientMetadata($patientId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
 		$patientMetadata = &$this->cache['patients'][$patientId]['metadata'];
 
-		if (! $businessLogicDatabase->userExists($patientMetadata['creator'])) {
-			// The user doesn't exist
+		if (! $businessLogicDatabase->nonErasedUserExists($patientMetadata['creator'])) {
+			// The user doesn't exist or has been erased
 			$patientMetadata['creator'] = null;
 		}
 	}
 	
 	/*
-	 * TODO
+	 * TODO: comments
 	 */
 	private function checkStudyMetadata($studyId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
 		$studyMetadata = &$this->cache['studies'][$studyId]['metadata'];
 
-		if (! $businessLogicDatabase->consultationExists($studyMetadata['consultation'])) {
-			// The consultation doesn't exist
+		if (! $businessLogicDatabase->nonErasedConsultationExists($studyMetadata['consultation'])) {
+			// The consultation doesn't exist or has been erased
 			$studyMetadata['consultation'] = null;
 		}
 
-		if (! $businessLogicDatabase->userExists($studyMetadata['creator'])) {
-			// The user doesn't exist
+		if (! $businessLogicDatabase->nonErasedUserExists($studyMetadata['creator'])) {
+			// The user doesn't exist or has been erased
 			$studyMetadata['creator'] = null;
 		}
 
-		if (! $businessLogicDatabase->experimentExists($studyMetadata['experiment'])) {
-			// The experiment doesn't exist
+		if (! $businessLogicDatabase->nonErasedExperimentExists($studyMetadata['experiment'])) {
+			// The experiment doesn't exist or has been erased
 			$studyMetadata['experiment'] = null;
 		}
 
 		$studyMetadataReport = $studyMetadata['report'];
 		if (! is_null($studyMetadataReport)) {
-			if (! $businessLogicDatabase->fileExists($studyMetadataReport)) {
-				// The file doesn't exist
+			if (! $businessLogicDatabase->nonErasedFileExists($studyMetadataReport)) {
+				// The file doesn't exist or has been erased
 				$studyMetadata['report'] = null;
 			}
 		}
@@ -374,8 +374,8 @@ class Data extends Helper {
 		// Sets the cache entry's default value
 		$cacheEntry = null;
 
-		if ($this->app->businessLogicDatabase->consultationExists($consultationId)) {
-			// The consultation exists
+		if ($this->app->businessLogicDatabase->nonErasedConsultationExists($consultationId)) {
+			// The consultation exists and has not been erased
 			$cacheEntry = [
 				'id' => $consultationId
 			];
@@ -392,8 +392,8 @@ class Data extends Helper {
 		// Sets the cache entry's default value
 		$cacheEntry = null;
 
-		if ($this->app->businessLogicDatabase->experimentExists($experimentId)) {
-			// The experiment exists
+		if ($this->app->businessLogicDatabase->nonErasedExperimentExists($experimentId)) {
+			// The experiment exists and has not been erased
 			$cacheEntry = [
 				'id' => $experimentId
 			];
@@ -410,8 +410,8 @@ class Data extends Helper {
 		// Sets the cache entry's default value
 		$cacheEntry = null;
 
-		if ($this->app->businessLogicDatabase->fileExists($fileId)) {
-			// The file exists
+		if ($this->app->businessLogicDatabase->nonErasedFileExists($fileId)) {
+			// The file exists and has not been erased
 			$cacheEntry = [
 				'id' => $fileId
 			];
@@ -428,8 +428,8 @@ class Data extends Helper {
 		// Sets the cache entry's default value
 		$cacheEntry = null;
 
-		if ($this->app->businessLogicDatabase->patientExists($patientId)) {
-			// The patient exists
+		if ($this->app->businessLogicDatabase->nonErasedPatientExists($patientId)) {
+			// The patient exists and has not been erased
 			$cacheEntry = [
 				'id' => $patientId
 			];
@@ -446,8 +446,8 @@ class Data extends Helper {
 		// Sets the cache entry's default value
 		$cacheEntry = null;
 
-		if ($this->app->businessLogicDatabase->studyExists($studyId)) {
-			// The study exists
+		if ($this->app->businessLogicDatabase->nonErasedStudyExists($studyId)) {
+			// The study exists and has not been erased
 			$cacheEntry = [
 				'id' => $studyId
 			];
@@ -464,8 +464,8 @@ class Data extends Helper {
 		// Sets the cache entry's default value
 		$cacheEntry = null;
 
-		if ($this->app->businessLogicDatabase->userExists($userId)) {
-			// The user exists
+		if ($this->app->businessLogicDatabase->nonErasedUserExists($userId)) {
+			// The user exists and has not been erased
 			$cacheEntry = [
 				'id' => $userId
 			];

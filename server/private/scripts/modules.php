@@ -59,6 +59,10 @@ $container->singleton('session', function() {
 	return new Session();
 });
 
+$container->singleton('utilities', function() {
+	return new Utilities();
+});
+
 $container->singleton('webServerDatabase', function() {
 	return new WebServerDatabase();
 });
