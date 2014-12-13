@@ -23,6 +23,13 @@ class GetExperimentFilesController extends SecureController {
 		// Gets the experiment
 		$experiment = $app->data->getExperiment($experimentId, ['files']);
 		
+		if (is_null($experiment)) {
+			// The experiment doesn't exist
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_EXPERIMENT
+			]);
+		}
+		
 		// Sets the output
 		$app->response->setBody($experiment['files']);
 	}

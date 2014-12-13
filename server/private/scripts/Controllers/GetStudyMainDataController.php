@@ -23,6 +23,13 @@ class GetStudyMainDataController extends SecureController {
 		// Gets the study
 		$study = $app->data->getStudy($studyId, ['mainData']);
 		
+		if (is_null($study)) {
+			// The study doesn't exist
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_STUDY
+			]);
+		}
+		
 		// Sets the output
 		$app->response->setBody($study['mainData']);
 	}

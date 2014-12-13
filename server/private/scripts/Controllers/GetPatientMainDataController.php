@@ -23,6 +23,13 @@ class GetPatientMainDataController extends SecureController {
 		// Gets the patient
 		$patient = $app->data->getPatient($patientId, ['mainData']);
 		
+		if (is_null($patient)) {
+			// The patient doesn't exist
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_PATIENT
+			]);
+		}
+		
 		// Sets the output
 		$app->response->setBody($patient['mainData']);
 	}

@@ -24,7 +24,7 @@ class Authenticator extends Helper {
 		// Gets the user
 		$user = $app->data->getUser($userId, ['authenticationData']);
 		
-		if (is_null($user['authenticationData'])) {
+		if (is_null($user)) {
 			// The user doesn't exist
 			return false;
 		}

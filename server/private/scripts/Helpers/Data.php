@@ -5,8 +5,7 @@
  * 
  * It offers a data cache to reduce the database queries.
  * 
- * TODO: add connection between data if necessary (probably not)
- * TODO: check if cache works OK with reference (test the database queries)
+ * TODO: deep code cleaning
  */
 class Data extends Helper {
 	
@@ -23,31 +22,39 @@ class Data extends Helper {
 		$consultations = &$this->cache['consultations'];
 		
 		if (! isset($consultations[$consultationId])) {
-			// Initializes the consultation and stores it in cache
-			$consultations[$consultationId] = [
-				'id' => $consultationId
-			];
+			// The cache entry has not been initialized yet
+			$this->initializeConsultationCacheEntry($consultationId);
 		}
 		
 		// Gets the consultation from the cache
 		$consultation = &$consultations[$consultationId];
 		
+		if (is_null($consultation)) {
+			// The consultation doesn't exist
+			return null;
+		}
+		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'imageAnalysis' => [ $businessLogicDatabase, 'selectNotErasedConsultationImageAnalysis' ],
-			'laboratoryResults' => [ $businessLogicDatabase, 'selectNotErasedConsultationLaboratoryResults' ],
-			'mainData' => [ $businessLogicDatabase, 'selectNotErasedConsultationMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectNotErasedConsultationMetadata' ],
-			'neurocognitiveAssessment' => [ $businessLogicDatabase, 'selectNotErasedConsultationNeurocognitiveAssessment' ],
-			'patientBackground' => [ $businessLogicDatabase, 'selectNotErasedConsultationPatientBackground' ],
-			'patientMedications' => [ $businessLogicDatabase, 'selectNotErasedConsultationPatientMedications' ],
-			'treatments' => [ $businessLogicDatabase, 'selectNotErasedConsultationTreatments' ]
+			'imageAnalysis' => [ $businessLogicDatabase, 'selectConsultationImageAnalysis' ],
+			'laboratoryResults' => [ $businessLogicDatabase, 'selectConsultationLaboratoryResults' ],
+			'mainData' => [ $businessLogicDatabase, 'selectConsultationMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectConsultationMetadata' ],
+			'neurocognitiveAssessment' => [ $businessLogicDatabase, 'selectConsultationNeurocognitiveAssessment' ],
+			'patientBackground' => [ $businessLogicDatabase, 'selectConsultationPatientBackground' ],
+			'patientMedications' => [ $businessLogicDatabase, 'selectConsultationPatientMedications' ],
+			'treatments' => [ $businessLogicDatabase, 'selectConsultationTreatments' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
 		foreach ($fieldLoadFunctions as $field => $loadFunction) {
 			if (in_array($field, $fields) && ! isset($consultation[$field])) {
 				$consultation[$field] = call_user_func($loadFunction, $consultationId);
+				
+				if ($field === 'metadata') {
+					// Checks the metadata of the consultation
+					$this->checkConsultationMetadata($consultationId);
+				}
 			}
 		}
 		
@@ -62,26 +69,34 @@ class Data extends Helper {
 		$experiments = &$this->cache['experiments'];
 		
 		if (! isset($experiments[$experimentId])) {
-			// Initializes the experiment and stores it in cache
-			$experiments[$experimentId] = [
-				'id' => $experimentId
-			];
+			// The cache entry has not been initialized yet
+			$this->initializeExperimentCacheEntry($experimentId);
 		}
 		
 		// Gets the experiment from the cache
 		$experiment = &$experiments[$experimentId];
 		
+		if (is_null($experiment)) {
+			// The experiment doesn't exist
+			return null;
+		}
+		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
 			'files' => [ $businessLogicDatabase, 'selectNotErasedExperimentFiles' ],
-			'mainData' => [ $businessLogicDatabase, 'selectNotErasedExperimentMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectNotErasedExperimentMetadata' ]
+			'mainData' => [ $businessLogicDatabase, 'selectExperimentMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectExperimentMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
 		foreach ($fieldLoadFunctions as $field => $loadFunction) {
 			if (in_array($field, $fields) && ! isset($experiment[$field])) {
 				$experiment[$field] = call_user_func($loadFunction, $experimentId);
+				
+				if ($field === 'metadata') {
+					// Checks the metadata of the experiment
+					$this->checkExperimentMetadata($experimentId);
+				}
 			}
 		}
 		
@@ -96,25 +111,33 @@ class Data extends Helper {
 		$files = &$this->cache['files'];
 		
 		if (! isset($files[$fileId])) {
-			// Initializes the file and stores it in cache
-			$files[$fileId] = [
-				'id' => $fileId
-			];
+			// The cache entry has not been initialized yet
+			$this->initializeFileCacheEntry($fileId);
 		}
 		
 		// Gets the file from the cache
 		$file = &$files[$fileId];
 		
+		if (is_null($file)) {
+			// The file doesn't exist
+			return null;
+		}
+		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'mainData' => [ $businessLogicDatabase, 'selectNotErasedFileMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectNotErasedFileMetadata' ]
+			'mainData' => [ $businessLogicDatabase, 'selectFileMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectFileMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
 		foreach ($fieldLoadFunctions as $field => $loadFunction) {
 			if (in_array($field, $fields) && ! isset($file[$field])) {
 				$file[$field] = call_user_func($loadFunction, $fileId);
+				
+				if ($field === 'metadata') {
+					// Checks the metadata of the file
+					$this->checkFileMetadata($fileId);
+				}
 			}
 		}
 		
@@ -129,25 +152,33 @@ class Data extends Helper {
 		$patients = &$this->cache['patients'];
 		
 		if (! isset($patients[$patientId])) {
-			// Initializes the patient and stores it in cache
-			$patients[$patientId] = [
-				'id' => $patientId
-			];
+			// The cache entry has not been initialized yet
+			$this->initializePatientCacheEntry($patientId);
 		}
 		
 		// Gets the patient from the cache
 		$patient = &$patients[$patientId];
 		
+		if (is_null($patient)) {
+			// The patient doesn't exist
+			return null;
+		}
+		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'mainData' => [ $businessLogicDatabase, 'selectNotErasedPatientMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectNotErasedPatientMetadata' ]
+			'mainData' => [ $businessLogicDatabase, 'selectPatientMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectPatientMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
 		foreach ($fieldLoadFunctions as $field => $loadFunction) {
 			if (in_array($field, $fields) && ! isset($patient[$field])) {
 				$patient[$field] = call_user_func($loadFunction, $patientId);
+				
+				if ($field === 'metadata') {
+					// Checks the metadata of the patient
+					$this->checkPatientMetadata($patientId);
+				}
 			}
 		}
 		
@@ -162,26 +193,34 @@ class Data extends Helper {
 		$studies = &$this->cache['studies'];
 		
 		if (! isset($studies[$studyId])) {
-			// Initializes the study and stores it in cache
-			$studies[$studyId] = [
-				'id' => $studyId
-			];
+			// The cache entry has not been initialized yet
+			$this->initializeStudyCacheEntry($studyId);
 		}
 		
 		// Gets the study from the cache
 		$study = &$studies[$studyId];
 		
+		if (is_null($study)) {
+			// The study doesn't exist
+			return null;
+		}
+		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
 			'files' => [ $businessLogicDatabase, 'selectNotErasedStudyFiles' ],
-			'mainData' => [ $businessLogicDatabase, 'selectNotErasedStudyMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectNotErasedStudyMetadata' ]
+			'mainData' => [ $businessLogicDatabase, 'selectStudyMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectStudyMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
 		foreach ($fieldLoadFunctions as $field => $loadFunction) {
 			if (in_array($field, $fields) && ! isset($study[$field])) {
 				$study[$field] = call_user_func($loadFunction, $studyId);
+				
+				if ($field === 'metadata') {
+					// Checks the metadata of the study
+					$this->checkStudyMetadata($studyId);
+				}
 			}
 		}
 		
@@ -196,20 +235,23 @@ class Data extends Helper {
 		$users = &$this->cache['users'];
 		
 		if (! isset($users[$userId])) {
-			// Initializes the user and stores it in cache
-			$users[$userId] = [
-				'id' => $userId
-			];
+			// The cache entry has not been initialized yet
+			$this->initializeUserCacheEntry($userId);
 		}
 		
 		// Gets the user from the cache
 		$user = &$users[$userId];
 		
+		if (is_null($user)) {
+			// The user doesn't exist
+			return null;
+		}
+		
 		// Defines the load functions for the different fields
 		$fieldLoadFunctions = [
-			'authenticationData' => [ $businessLogicDatabase, 'selectNotErasedUserAuthenticationData' ],
-			'mainData' => [ $businessLogicDatabase, 'selectNotErasedUserMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectNotErasedUserMetadata' ]
+			'authenticationData' => [ $businessLogicDatabase, 'selectUserAuthenticationData' ],
+			'mainData' => [ $businessLogicDatabase, 'selectUserMainData' ],
+			'metadata' => [ $businessLogicDatabase, 'selectUserMetadata' ]
 		];
 		
 		// Loads the requested fields that have not been loaded yet
@@ -235,6 +277,202 @@ class Data extends Helper {
 			'studies' => [],
 			'users' => []
 		];
+	}
+	
+	/*
+	 * TODO
+	 */
+	private function checkConsultationMetadata($consultationId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		$consultationMetadata = &$this->cache['consultations'][$consultationId]['metadata'];
+
+		if (! $businessLogicDatabase->userExists($consultationMetadata['creator'])) {
+			// The user doesn't exist
+			$consultationMetadata['creator'] = null;
+		}
+
+		if (! $businessLogicDatabase->patientExists($consultationMetadata['patient'])) {
+			// The patient doesn't exist
+			$consultationMetadata['patient'] = null;
+		}
+	}
+	
+	/*
+	 * TODO
+	 */
+	private function checkExperimentMetadata($experimentId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		$experimentMetadata = &$this->cache['experiments'][$experimentId]['metadata'];
+
+		if (! $businessLogicDatabase->userExists($experimentMetadata['creator'])) {
+			// The user doesn't exist
+			$experimentMetadata['creator'] = null;
+		}
+	}
+	
+	/*
+	 * TODO
+	 */
+	private function checkFileMetadata($fileId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		$fileMetadata = &$this->cache['files'][$fileId]['metadata'];
+
+		if (! $businessLogicDatabase->userExists($fileMetadata['creator'])) {
+			// The user doesn't exist
+			$fileMetadata['creator'] = null;
+		}
+	}
+	
+	/*
+	 * TODO
+	 */
+	private function checkPatientMetadata($patientId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		$patientMetadata = &$this->cache['patients'][$patientId]['metadata'];
+
+		if (! $businessLogicDatabase->userExists($patientMetadata['creator'])) {
+			// The user doesn't exist
+			$patientMetadata['creator'] = null;
+		}
+	}
+	
+	/*
+	 * TODO
+	 */
+	private function checkStudyMetadata($studyId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		$studyMetadata = &$this->cache['studies'][$studyId]['metadata'];
+
+		if (! $businessLogicDatabase->consultationExists($studyMetadata['consultation'])) {
+			// The consultation doesn't exist
+			$studyMetadata['consultation'] = null;
+		}
+
+		if (! $businessLogicDatabase->userExists($studyMetadata['creator'])) {
+			// The user doesn't exist
+			$studyMetadata['creator'] = null;
+		}
+
+		if (! $businessLogicDatabase->experimentExists($studyMetadata['experiment'])) {
+			// The experiment doesn't exist
+			$studyMetadata['experiment'] = null;
+		}
+
+		$studyMetadataReport = $studyMetadata['report'];
+		if (! is_null($studyMetadataReport)) {
+			if (! $businessLogicDatabase->fileExists($studyMetadataReport)) {
+				// The file doesn't exist
+				$studyMetadata['report'] = null;
+			}
+		}
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializeConsultationCacheEntry($consultationId) {
+		// Sets the cache entry's default value
+		$cacheEntry = null;
+
+		if ($this->app->businessLogicDatabase->consultationExists($consultationId)) {
+			// The consultation exists
+			$cacheEntry = [
+				'id' => $consultationId
+			];
+		}
+		
+		// Initializes the cache entry
+		$this->cache['consultations'][$consultationId] = $cacheEntry;
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializeExperimentCacheEntry($experimentId) {
+		// Sets the cache entry's default value
+		$cacheEntry = null;
+
+		if ($this->app->businessLogicDatabase->experimentExists($experimentId)) {
+			// The experiment exists
+			$cacheEntry = [
+				'id' => $experimentId
+			];
+		}
+		
+		// Initializes the cache entry
+		$this->cache['experiments'][$experimentId] = $cacheEntry;
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializeFileCacheEntry($fileId) {
+		// Sets the cache entry's default value
+		$cacheEntry = null;
+
+		if ($this->app->businessLogicDatabase->fileExists($fileId)) {
+			// The file exists
+			$cacheEntry = [
+				'id' => $fileId
+			];
+		}
+		
+		// Initializes the cache entry
+		$this->cache['files'][$fileId] = $cacheEntry;
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializePatientCacheEntry($patientId) {
+		// Sets the cache entry's default value
+		$cacheEntry = null;
+
+		if ($this->app->businessLogicDatabase->patientExists($patientId)) {
+			// The patient exists
+			$cacheEntry = [
+				'id' => $patientId
+			];
+		}
+		
+		// Initializes the cache entry
+		$this->cache['patients'][$patientId] = $cacheEntry;
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializeStudyCacheEntry($studyId) {
+		// Sets the cache entry's default value
+		$cacheEntry = null;
+
+		if ($this->app->businessLogicDatabase->studyExists($studyId)) {
+			// The study exists
+			$cacheEntry = [
+				'id' => $studyId
+			];
+		}
+		
+		// Initializes the cache entry
+		$this->cache['studies'][$studyId] = $cacheEntry;
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializeUserCacheEntry($userId) {
+		// Sets the cache entry's default value
+		$cacheEntry = null;
+
+		if ($this->app->businessLogicDatabase->userExists($userId)) {
+			// The user exists
+			$cacheEntry = [
+				'id' => $userId
+			];
+		}
+		
+		// Initializes the cache entry
+		$this->cache['users'][$userId] = $cacheEntry;
 	}
 	
 }

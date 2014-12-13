@@ -7,38 +7,6 @@
 $app = \Slim\Slim::getInstance();
 $services = $app->services;
 
-// URL:		/server/change-password
-// Method:	POST
-$services->define(
-	'/change-password',
-	HTTP_METHOD_POST,
-	new ChangePasswordController()
-);
-
-// URL:		/server/create-experiment
-// Method:	POST
-$services->define(
-	'/create-experiment',
-	HTTP_METHOD_POST,
-	new CreateExperimentController()
-);
-
-// URL:		/server/create-patient
-// Method:	POST
-$services->define(
-	'/create-patient',
-	HTTP_METHOD_POST,
-	new CreatePatientController()
-);
-
-// URL:		/server/create-user
-// Method:	POST
-$services->define(
-	'/create-user',
-	HTTP_METHOD_POST,
-	new CreateUserController()
-);
-
 // URL:		/server/get-authentication-state
 // Method:	POST
 $services->define(
@@ -221,12 +189,4 @@ $services->define(
 	'/log-out',
 	HTTP_METHOD_POST,
 	new LogOutController()
-);
-
-// URL:		/server/request-user-creation
-// Method:	POST
-$services->define(
-	'/request-user-creation',
-	HTTP_METHOD_POST,
-	new RequestUserCreationController()
 );

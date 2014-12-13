@@ -23,6 +23,13 @@ class GetConsultationPatientMedicationsController extends SecureController {
 		// Gets the consultation
 		$consultation = $app->data->getConsultation($consultationId, ['patientMedications']);
 		
+		if (is_null($consultation)) {
+			// The consultation doesn't exist
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_CONSULTATION
+			]);
+		}
+		
 		// Sets the output
 		$app->response->setBody($consultation['patientMedications']);
 	}

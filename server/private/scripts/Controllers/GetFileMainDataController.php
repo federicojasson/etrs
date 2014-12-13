@@ -23,6 +23,13 @@ class GetFileMainDataController extends SecureController {
 		// Gets the file
 		$file = $app->data->getFile($fileId, ['mainData']);
 		
+		if (is_null($file)) {
+			// The file doesn't exist
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_FILE
+			]);
+		}
+		
 		// Sets the output
 		$app->response->setBody($file['mainData']);
 	}

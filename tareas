@@ -18,6 +18,9 @@ Ejemplo: Content-Type: application/json
 
 
 
+See TRANSACTION LEVELS
+http://dev.mysql.com/doc/refman/5.1/en/set-transaction.html
+
 
 
 Diccionario para el chequeo de contraseñas?

@@ -39,8 +39,9 @@ class WebServerDatabase extends Database {
 	 * It returns the PDO instance representing the connection.
 	 */
 	protected function connect() {
-		// Gets the configuration of the database
 		$configuration = &$this->app->configurations->get('webServerDatabase');
+		
+		// Gets the configuration of the database
 		$dsn = $configuration['dsn'];
 		$username = $configuration['username'];
 		$password = $configuration['password'];

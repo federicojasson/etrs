@@ -2,29 +2,137 @@
 
 /*
  * This helper represents the business logic database.
+ * 
+ * TODO: deep code cleaning
  */
 class BusinessLogicDatabase extends Database {
 	
-	// TODO: change queries
+	/*
+	 * TODO: comments
+	 */
+	public function consultationExists($consultationId) {
+		// Defines the statement
+		$statement = '
+			SELECT EXISTS (
+				SELECT *
+				FROM consultations
+				WHERE
+					NOT erased
+					AND
+					id = :consultationId
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultationId' => $consultationId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return $results[0];
+	}
 	
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedConsultationImageAnalysis($consultationId) {
+	public function experimentExists($experimentId) {
+		// Defines the statement
+		$statement = '
+			SELECT EXISTS (
+				SELECT *
+				FROM consultations
+				WHERE
+					NOT erased
+					AND
+					id = :experimentId
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':experimentId' => $experimentId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return $results[0];
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function fileExists($fileId) {
+		// Defines the statement
+		$statement = '
+			SELECT EXISTS (
+				SELECT *
+				FROM consultations
+				WHERE
+					NOT erased
+					AND
+					id = :fileId
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':fileId' => $fileId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return $results[0];
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function patientExists($patientId) {
+		// Defines the statement
+		$statement = '
+			SELECT EXISTS (
+				SELECT *
+				FROM consultations
+				WHERE
+					NOT erased
+					AND
+					id = :patientId
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':patientId' => $patientId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return $results[0];
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function selectConsultationImageAnalysis($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				consultations_image_analysis.doppler_normal_neck_vessels AS dopplerNormalNeckVessels,
-				consultations_image_analysis.nmr_decreased_cerebral_cortex AS nmrDecreasedCerebralCortex,
-				consultations_image_analysis.nmr_decreased_hippocampal_volume AS nmrDecreasedHippocampalVolume,
-				consultations_image_analysis.nmr_frontotemporal_pattern AS nmrFrontotemporalPattern,
-				consultations_image_analysis.nmr_vascular_pattern AS nmrVascularPattern
-			FROM consultations_image_analysis INNER JOIN consultations_metadata
-			ON consultations_image_analysis.consultation = consultations_metadata.consultation
-			WHERE
-				NOT consultations_metadata.erased
-				AND
-				consultations_image_analysis.consultation = :consultationId
+				doppler_normal_neck_vessels AS dopplerNormalNeckVessels,
+				nmr_decreased_cerebral_cortex AS nmrDecreasedCerebralCortex,
+				nmr_decreased_hippocampal_volume AS nmrDecreasedHippocampalVolume,
+				nmr_frontotemporal_pattern AS nmrFrontotemporalPattern,
+				nmr_vascular_pattern AS nmrVascularPattern
+			FROM consultations_image_analysis
+			WHERE consultation = :consultationId
 			LIMIT 1
 		';
 		
@@ -43,28 +151,24 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedConsultationLaboratoryResults($consultationId) {
+	public function selectConsultationLaboratoryResults($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				consultations_laboratory_results.apo_e4 AS apoE4,
-				consultations_laboratory_results.b_vitamin AS bVitamin,
-				consultations_laboratory_results.c_reactive_protein AS cReactiveProtein,
-				consultations_laboratory_results.calcium AS calcium,
-				consultations_laboratory_results.d_vitamin AS dVitamin,
-				consultations_laboratory_results.folic_acid AS folicAcid,
-				consultations_laboratory_results.homocysteine AS homocysteine,
-				consultations_laboratory_results.phosphorus AS phosphorus,
-				consultations_laboratory_results.thyroids AS thyroids,
-				consultations_laboratory_results.total_cholesterol AS totalCholesterol,
-				consultations_laboratory_results.triglycerides AS triglycerides,
-				consultations_laboratory_results.vdrl as vdrl
-			FROM consultations_laboratory_results INNER JOIN consultations_metadata
-			ON consultations_laboratory_results.consultation = consultations_metadata.consultation
-			WHERE
-				NOT consultations_metadata.erased
-				AND
-				consultations_laboratory_results.consultation = :consultationId
+				apo_e4 AS apoE4,
+				b_vitamin AS bVitamin,
+				c_reactive_protein AS cReactiveProtein,
+				calcium AS calcium,
+				d_vitamin AS dVitamin,
+				folic_acid AS folicAcid,
+				homocysteine AS homocysteine,
+				phosphorus AS phosphorus,
+				thyroids AS thyroids,
+				total_cholesterol AS totalCholesterol,
+				triglycerides AS triglycerides,
+				vdrl as vdrl
+			FROM consultations_laboratory_results
+			WHERE consultation = :consultationId
 			LIMIT 1
 		';
 		
@@ -83,22 +187,18 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedConsultationMainData($consultationId) {
+	public function selectConsultationMainData($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				consultations_main_data.date AS date,
-				consultations_main_data.clinical_impression AS clinicalImpression,
-				consultations_main_data.diagnosis AS diagnosis,
-				consultations_main_data.indications AS indications,
-				consultations_main_data.observations AS observations,
-				consultations_main_data.reasons AS reasons
-			FROM consultations_main_data INNER JOIN consultations_metadata
-			ON consultations_main_data.consultation = consultations_metadata.consultation
-			WHERE
-				NOT consultations_metadata.erased
-				AND
-				consultations_main_data.consultation = :consultationId
+				date AS date,
+				clinical_impression AS clinicalImpression,
+				diagnosis AS diagnosis,
+				indications AS indications,
+				observations AS observations,
+				reasons AS reasons
+			FROM consultations_main_data
+			WHERE consultation = :consultationId
 			LIMIT 1
 		';
 		
@@ -117,19 +217,15 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedConsultationMetadata($consultationId) {
+	public function selectConsultationMetadata($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
 				creator AS creator,
 				patient AS patient,
-				erased AS erased,
 				creation_datetime AS creationDatetime
 			FROM consultations_metadata
-			WHERE
-				NOT erased
-				AND
-				consultation = :consultationId
+			WHERE consultation = :consultationId
 			LIMIT 1
 		';
 		
@@ -148,21 +244,17 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedConsultationNeurocognitiveAssessment($consultationId) {
+	public function selectConsultationNeurocognitiveAssessment($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				consultations_neurocognitive_assessment.addenbrooke_cognitive_examination AS addenbrookeCognitiveExamination,
-				consultations_neurocognitive_assessment.eye_tracking_pattern AS eyeTrackingPattern,
-				consultations_neurocognitive_assessment.ineco_frontal_screening AS inecoFrontalScreening,
-				consultations_neurocognitive_assessment.mini_mental_state_examination AS miniMentalStateExamination,
-				consultations_neurocognitive_assessment.working_memory_index AS workingMemoryIndex
-			FROM consultations_neurocognitive_assessment INNER JOIN consultations_metadata
-			ON consultations_neurocognitive_assessment.consultation = consultations_metadata.consultation
-			WHERE
-				NOT consultations_metadata.erased
-				AND
-				consultations_neurocognitive_assessment.consultation = :consultationId
+				addenbrooke_cognitive_examination AS addenbrookeCognitiveExamination,
+				eye_tracking_pattern AS eyeTrackingPattern,
+				ineco_frontal_screening AS inecoFrontalScreening,
+				mini_mental_state_examination AS miniMentalStateExamination,
+				working_memory_index AS workingMemoryIndex
+			FROM consultations_neurocognitive_assessment
+			WHERE consultation = :consultationId
 			LIMIT 1
 		';
 		
@@ -181,24 +273,20 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedConsultationPatientBackground($consultationId) {
+	public function selectConsultationPatientBackground($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				consultations_patient_background.diabetes AS diabetes,
-				consultations_patient_background.dyslipidemia AS dyslipidemia,
-				consultations_patient_background.heart_disease AS heartDisease,
-				consultations_patient_background.hiv AS hiv,
-				consultations_patient_background.hypertension AS hypertension,
-				consultations_patient_background.psychiatric_disorder AS psychiatricDisorder,
-				consultations_patient_background.relative_with_alzheimer AS relativeWithAlzheimer,
-				consultations_patient_background.traumatic_brain_injury AS traumaticBrainInjury
-			FROM consultations_patient_background INNER JOIN consultations_metadata
-			ON consultations_patient_background.consultation = consultations_metadata.consultation
-			WHERE
-				NOT consultations_metadata.erased
-				AND
-				consultations_patient_background.consultation = :consultationId
+				diabetes AS diabetes,
+				dyslipidemia AS dyslipidemia,
+				heart_disease AS heartDisease,
+				hiv AS hiv,
+				hypertension AS hypertension,
+				psychiatric_disorder AS psychiatricDisorder,
+				relative_with_alzheimer AS relativeWithAlzheimer,
+				traumatic_brain_injury AS traumaticBrainInjury
+			FROM consultations_patient_background
+			WHERE consultation = :consultationId
 			LIMIT 1
 		';
 		
@@ -217,25 +305,21 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedConsultationPatientMedications($consultationId) {
+	public function selectConsultationPatientMedications($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				consultations_patient_medications.antidepressants AS antidepressants,
-				consultations_patient_medications.antidiabetics AS antidiabetics,
-				consultations_patient_medications.antihypertensives AS antihypertensives,
-				consultations_patient_medications.antiplatelets_anticoagulants AS antiplateletsAnticoagulants,
-				consultations_patient_medications.antipsychotics AS antipsychotics,
-				consultations_patient_medications.benzodiazepines AS benzodiazepines,
-				consultations_patient_medications.hypolipidemics AS hypolipidemics,
-				consultations_patient_medications.levothyroxine AS levothyroxine,
-				consultations_patient_medications.melatonin AS melatonin
-			FROM consultations_patient_medications INNER JOIN consultations_metadata
-			ON consultations_patient_medications.consultation = consultations_metadata.consultation
-			WHERE
-				NOT consultations_metadata.erased
-				AND
-				consultations_patient_medications.consultation = :consultationId
+				antidepressants AS antidepressants,
+				antidiabetics AS antidiabetics,
+				antihypertensives AS antihypertensives,
+				antiplatelets_anticoagulants AS antiplateletsAnticoagulants,
+				antipsychotics AS antipsychotics,
+				benzodiazepines AS benzodiazepines,
+				hypolipidemics AS hypolipidemics,
+				levothyroxine AS levothyroxine,
+				melatonin AS melatonin
+			FROM consultations_patient_medications
+			WHERE consultation = :consultationId
 			LIMIT 1
 		';
 		
@@ -254,30 +338,130 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedConsultationTreatments($consultationId) {
+	public function selectConsultationTreatments($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				consultations_treatments.acetylcholinesterase_inhibitor AS acetylcholinesteraseInhibitor,
-				consultations_treatments.acetylsalicylic_acid AS acetylsalicylicAcid,
-				consultations_treatments.b_vitamin AS bVitamin,
-				consultations_treatments.concomitant_disease_referral AS concomitantDiseaseReferral,
-				consultations_treatments.folic_acid AS folicAcid,
-				consultations_treatments.memantine AS memantine,
-				consultations_treatments.neurocognitive_rehabilitation AS neurocognitiveRehabilitation,
-				consultations_treatments.physical_exercise AS physicalExercise
-			FROM consultations_treatments INNER JOIN consultations_metadata
-			ON consultations_treatments.consultation = consultations_metadata.consultation
-			WHERE
-				NOT consultations_metadata.erased
-				AND
-				consultations_treatments.consultation = :consultationId
+				acetylcholinesterase_inhibitor AS acetylcholinesteraseInhibitor,
+				acetylsalicylic_acid AS acetylsalicylicAcid,
+				b_vitamin AS bVitamin,
+				concomitant_disease_referral AS concomitantDiseaseReferral,
+				folic_acid AS folicAcid,
+				memantine AS memantine,
+				neurocognitive_rehabilitation AS neurocognitiveRehabilitation,
+				physical_exercise AS physicalExercise
+			FROM consultations_treatments
+			WHERE consultation = :consultationId
 			LIMIT 1
 		';
 		
 		// Sets the parameters
 		$parameters = [
 			':consultationId' => $consultationId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function selectExperimentMainData($experimentId) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				name AS name,
+				command_line AS commandLine
+			FROM experiments_main_data
+			WHERE experiment = :experimentId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':experimentId' => $experimentId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function selectExperimentMetadata($experimentId) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				creator AS creator,
+				creation_datetime AS creationDatetime
+			FROM experiments_metadata
+			WHERE experiment = :experimentId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':experimentId' => $experimentId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function selectFileMainData($fileId) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				hash AS hash,
+				name AS name
+			FROM files_main_data
+			WHERE file = :fileId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':fileId' => $fileId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function selectFileMetadata($fileId) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				creator AS creator,
+				creation_datetime AS creationDatetime
+			FROM files_metadata
+			WHERE file = :fileId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':fileId' => $fileId
 		];
 		
 		// Executes the statement
@@ -294,10 +478,10 @@ class BusinessLogicDatabase extends Database {
 		// Defines the statement
 		$statement = '
 			SELECT experiments_files.file AS file
-			FROM experiments_files INNER JOIN experiments_metadata
-			ON experiments_files.experiment = experiments_metadata.experiment
+			FROM experiments_files INNER JOIN files
+			ON experiments_files.file = files.id
 			WHERE
-				NOT experiments_metadata.erased
+				NOT files.erased
 				AND
 				experiments_files.experiment = :experimentId
 		';
@@ -317,197 +501,14 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedExperimentMainData($experimentId) {
-		// Defines the statement
-		$statement = '
-			SELECT
-				experiments_main_data.name AS name,
-				experiments_main_data.command_line AS commandLine
-			FROM experiments_main_data INNER JOIN experiments_metadata
-			ON experiments_main_data.experiment = experiments_metadata.experiment
-			WHERE
-				NOT experiments_metadata.erased
-				AND
-				experiments_main_data.experiment = :experimentId
-			LIMIT 1
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':experimentId' => $experimentId
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		// Returns the first result, or null if there is none
-		return $this->getFirstResultOrNull($results);
-	}
-	
-	/*
-	 * TODO: comments
-	 */
-	public function selectNotErasedExperimentMetadata($experimentId) {
-		// Defines the statement
-		$statement = '
-			SELECT
-				creator AS creator,
-				erased AS erased,
-				creation_datetime AS creationDatetime
-			FROM experiments_metadata
-			WHERE
-				NOT erased
-				AND
-				experiment = :experimentId
-			LIMIT 1
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':experimentId' => $experimentId
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		// Returns the first result, or null if there is none
-		return $this->getFirstResultOrNull($results);
-	}
-	
-	/*
-	 * TODO: comments
-	 */
-	public function selectNotErasedFileMainData($fileId) {
-		// Defines the statement
-		$statement = '
-			SELECT
-				files_main_data.hash AS hash,
-				files_main_data.name AS name
-			FROM files_main_data INNER JOIN files_metadata
-			ON files_main_data.file = files_metadata.file
-			WHERE
-				NOT files_metadata.erased
-				AND
-				files_main_data.file = :fileId
-			LIMIT 1
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':fileId' => $fileId
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		// Returns the first result, or null if there is none
-		return $this->getFirstResultOrNull($results);
-	}
-	
-	/*
-	 * TODO: comments
-	 */
-	public function selectNotErasedFileMetadata($fileId) {
-		// Defines the statement
-		$statement = '
-			SELECT
-				creator AS creator,
-				erased AS erased,
-				creation_datetime AS creationDatetime
-			FROM files_metadata
-			WHERE
-				NOT erased
-				AND
-				file = :fileId
-			LIMIT 1
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':fileId' => $fileId
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		// Returns the first result, or null if there is none
-		return $this->getFirstResultOrNull($results);
-	}
-	
-	/*
-	 * TODO: comments
-	 */
-	public function selectNotErasedPatientMainData($patientId) {
-		// Defines the statement
-		$statement = '
-			SELECT
-				patients_main_data.first_name AS firstName,
-				patients_main_data.last_name AS lastName,
-				patients_main_data.gender AS gender,
-				patients_main_data.birth_date AS birthDate,
-				patients_main_data.education_years AS educationYears
-			FROM patients_main_data INNER JOIN patients_metadata
-			ON patients_main_data.patient = patients_metadata.patient
-			WHERE
-				NOT patients_metadata.erased
-				AND
-				patients_main_data.patient = :patientId
-			LIMIT 1
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':patientId' => $patientId
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		// Returns the first result, or null if there is none
-		return $this->getFirstResultOrNull($results);
-	}
-	
-	/*
-	 * TODO: comments
-	 */
-	public function selectNotErasedPatientMetadata($patientId) {
-		// Defines the statement
-		$statement = '
-			SELECT
-				creator AS creator,
-				erased AS erased,
-				creation_datetime AS creationDatetime
-			FROM patients_metadata
-			WHERE
-				NOT erased
-				AND
-				patient = :patientId
-			LIMIT 1
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':patientId' => $patientId
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		// Returns the first result, or null if there is none
-		return $this->getFirstResultOrNull($results);
-	}
-	
-	/*
-	 * TODO: comments
-	 */
 	public function selectNotErasedStudyFiles($studyId) {
 		// Defines the statement
 		$statement = '
 			SELECT studies_files.file AS file
-			FROM studies_files INNER JOIN studies_metadata
-			ON studies_files.study = studies_metadata.study
+			FROM studies_files INNER JOIN files
+			ON studies_files.file = files.id
 			WHERE
-				NOT studies_metadata.erased
+				NOT files.erased
 				AND
 				studies_files.study = :studyId
 		';
@@ -527,16 +528,67 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedStudyMainData($studyId) {
+	public function selectPatientMainData($patientId) {
 		// Defines the statement
 		$statement = '
-			SELECT studies_main_data.observations AS observations
-			FROM studies_main_data INNER JOIN studies_metadata
-			ON studies_main_data.study = studies_metadata.study
-			WHERE
-				NOT studies_metadata.erased
-				AND
-				studies_main_data.study = :studyId
+			SELECT
+				first_name AS firstName,
+				last_name AS lastName,
+				gender AS gender,
+				birth_date AS birthDate,
+				education_years AS educationYears
+			FROM patients_main_data
+			WHERE patient = :patientId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':patientId' => $patientId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function selectPatientMetadata($patientId) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				creator AS creator,
+				creation_datetime AS creationDatetime
+			FROM patients_metadata
+			WHERE patient = :patientId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':patientId' => $patientId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return $this->getFirstResultOrNull($results);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function selectStudyMainData($studyId) {
+		// Defines the statement
+		$statement = '
+			SELECT observations AS observations
+			FROM studies_main_data
+			WHERE study = :studyId
 			LIMIT 1
 		';
 		
@@ -555,7 +607,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedStudyMetadata($studyId) {
+	public function selectStudyMetadata($studyId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -563,13 +615,9 @@ class BusinessLogicDatabase extends Database {
 				creator AS creator,
 				experiment AS experiment,
 				report AS report,
-				erased AS erased,
 				creation_datetime AS creationDatetime
 			FROM studies_metadata
-			WHERE
-				NOT erased
-				AND
-				study = :studyId
+			WHERE study = :studyId
 			LIMIT 1
 		';
 		
@@ -588,18 +636,14 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedUserAuthenticationData($userId) {
+	public function selectUserAuthenticationData($userId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				users_authentication_data.password_hash AS passwordHash,
-				users_authentication_data.password_salt AS passwordSalt
-			FROM users_authentication_data INNER JOIN users_metadata
-			ON users_authentication_data.user = users_metadata.user
-			WHERE
-				NOT users_metadata.erased
-				AND
-				users_authentication_data.user = :userId
+				password_hash AS passwordHash,
+				password_salt AS passwordSalt
+			FROM users_authentication_data
+			WHERE user = :userId
 			LIMIT 1
 		';
 		
@@ -618,21 +662,17 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedUserMainData($userId) {
+	public function selectUserMainData($userId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				users_main_data.first_name AS firstName,
-				users_main_data.last_name AS lastName,
-				users_main_data.gender AS gender,
-				users_main_data.email_address AS emailAddress,
-				users_main_data.role AS role
-			FROM users_main_data INNER JOIN users_metadata
-			ON users_main_data.user = users_metadata.user
-			WHERE
-				NOT users_metadata.erased
-				AND
-				users_main_data.user = :userId
+				first_name AS firstName,
+				last_name AS lastName,
+				gender AS gender,
+				email_address AS emailAddress,
+				role AS role
+			FROM users_main_data
+			WHERE user = :userId
 			LIMIT 1
 		';
 		
@@ -651,17 +691,12 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNotErasedUserMetadata($userId) {
+	public function selectUserMetadata($userId) {
 		// Defines the statement
 		$statement = '
-			SELECT
-				erased AS erased,
-				creation_datetime AS creationDatetime
+			SELECT creation_datetime AS creationDatetime
 			FROM users_metadata
-			WHERE
-				NOT erased
-				AND
-				user = :userId
+			WHERE user = :userId
 			LIMIT 1
 		';
 		
@@ -675,6 +710,34 @@ class BusinessLogicDatabase extends Database {
 		
 		// Returns the first result, or null if there is none
 		return $this->getFirstResultOrNull($results);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function studyExists($studyId) {
+		// Defines the statement
+		$statement = '
+			SELECT EXISTS (
+				SELECT *
+				FROM consultations
+				WHERE
+					NOT erased
+					AND
+					id = :studyId
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':studyId' => $studyId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return $results[0];
 	}
 	
 	/*
@@ -685,13 +748,42 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
+	 * TODO: comments
+	 */
+	public function userExists($userId) {
+		// Defines the statement
+		$statement = '
+			SELECT EXISTS (
+				SELECT *
+				FROM consultations
+				WHERE
+					NOT erased
+					AND
+					id = :userId
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':userId' => $userId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return $results[0];
+	}
+	
+	/*
 	 * Connects to the database.
 	 * 
 	 * It returns the PDO instance representing the connection.
 	 */
 	protected function connect() {
-		// Gets the configuration of the database
 		$configuration = &$this->app->configurations->get('businessLogicDatabase');
+		
+		// Gets the configuration of the database
 		$dsn = $configuration['dsn'];
 		$username = $configuration['username'];
 		$password = $configuration['password'];
