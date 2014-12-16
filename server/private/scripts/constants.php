@@ -21,7 +21,7 @@ define('ERROR_ID_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
 define('ERROR_ID_UNDEFINED_SERVICE', 'UNDEFINED_SERVICE');
 define('ERROR_ID_UNEXPECTED_ERROR', 'UNEXPECTED_ERROR');
 define('FILE_PATH_CONFIGURATIONS_FILE_PATHS', 'private/configurations/file-paths.json');
-define('FILE_PATH_LOGS_DEBUG', 'private/logs/debug.log');
+define('FILE_PATH_LOGS_LOG', 'private/logs/log.log');
 define('HTTP_CONTENT_TYPE_JSON', 'application/json');
 define('HTTP_HEADER_CONTENT_TYPE', 'Content-Type');
 define('HTTP_METHOD_POST', 'POST');
@@ -34,11 +34,10 @@ define('JSON_STRUCTURE_TYPE_OBJECT', 'object');
 define('JSON_STRUCTURE_TYPE_VALUE', 'value');
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
-define('PASSWORD_HASH_ITERATIONS', 20000); // TODO: test strength
+define('PASSWORD_ITERATIONS', 64000);
 define('PASSWORD_SALT_LENGTH', 64);
 define('SESSION_DATA_LOGGED_IN_USER_ID', 'loggedInUserId');
-define('SESSION_IDLE_LIFETIME', 512); // TODO: define lifetime
-define('SLIM_ENVIRONMENT_INPUT', 'slim.input');
+define('SESSION_IDLE_LIFETIME', 2160);
 define('USER_ROLE_ADMINISTRATOR', 'ad');
 define('USER_ROLE_ANONYMOUS', '__');
 define('USER_ROLE_DOCTOR', 'dr');

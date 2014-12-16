@@ -4,8 +4,6 @@
  * This helper facilitates the obtaining data of the business logic.
  * 
  * It offers a data cache to reduce the database queries.
- * 
- * TODO: deep code cleaning
  */
 class Data extends Helper {
 	
@@ -15,7 +13,9 @@ class Data extends Helper {
 	private $cache;
 	
 	/*
-	 * TODO: comments
+	 * Returns a consultation.
+	 * 
+	 * It receives the consultation's ID and the fields to get.
 	 */
 	public function getConsultation($consultationId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -62,7 +62,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Returns an experiment.
+	 * 
+	 * It receives the experiment's ID and the fields to get.
 	 */
 	public function getExperiment($experimentId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -104,7 +106,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Returns a file.
+	 * 
+	 * It receives the file's ID and the fields to get.
 	 */
 	public function getFile($fileId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -145,7 +149,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Returns a patient.
+	 * 
+	 * It receives the patient's ID and the fields to get.
 	 */
 	public function getPatient($patientId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -186,7 +192,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Returns a study.
+	 * 
+	 * It receives the study's ID and the fields to get.
 	 */
 	public function getStudy($studyId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -228,7 +236,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Returns a user.
+	 * 
+	 * It receives the user's ID and the fields to get.
 	 */
 	public function getUser($userId, $fields) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -280,7 +290,10 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Checks if the data pointed by a consultation's metadata exist. It
+	 * nullifies those that don't.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	private function checkConsultationMetadata($consultationId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -298,7 +311,10 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Checks if the data pointed by an experiment's metadata exist. It
+	 * nullifies those that don't.
+	 * 
+	 * It receives the experiment's ID.
 	 */
 	private function checkExperimentMetadata($experimentId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -311,7 +327,10 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Checks if the data pointed by a file's metadata exist. It nullifies those
+	 * that don't.
+	 * 
+	 * It receives the file's ID.
 	 */
 	private function checkFileMetadata($fileId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -324,7 +343,10 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Checks if the data pointed by a patient's metadata exist. It nullifies
+	 * those that don't.
+	 * 
+	 * It receives the patient's ID.
 	 */
 	private function checkPatientMetadata($patientId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -337,7 +359,10 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Checks if the data pointed by a study's metadata exist. It nullifies
+	 * those that don't.
+	 * 
+	 * It receives the study's ID.
 	 */
 	private function checkStudyMetadata($studyId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
@@ -358,9 +383,9 @@ class Data extends Helper {
 			$studyMetadata['experiment'] = null;
 		}
 
-		$studyMetadataReport = $studyMetadata['report'];
-		if (! is_null($studyMetadataReport)) {
-			if (! $businessLogicDatabase->nonErasedFileExists($studyMetadataReport)) {
+		$studyReport = $studyMetadata['report'];
+		if (! is_null($studyReport)) {
+			if (! $businessLogicDatabase->nonErasedFileExists($studyReport)) {
 				// The file doesn't exist or has been erased
 				$studyMetadata['report'] = null;
 			}
@@ -368,7 +393,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the cache entry of a consultation.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	private function initializeConsultationCacheEntry($consultationId) {
 		// Sets the cache entry's default value
@@ -386,7 +413,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the cache entry of an experiment.
+	 * 
+	 * It receives the experiment's ID.
 	 */
 	private function initializeExperimentCacheEntry($experimentId) {
 		// Sets the cache entry's default value
@@ -404,7 +433,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the cache entry of a file.
+	 * 
+	 * It receives the file's ID.
 	 */
 	private function initializeFileCacheEntry($fileId) {
 		// Sets the cache entry's default value
@@ -422,7 +453,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the cache entry of a patient.
+	 * 
+	 * It receives the patient's ID.
 	 */
 	private function initializePatientCacheEntry($patientId) {
 		// Sets the cache entry's default value
@@ -440,7 +473,9 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the cache entry of a study.
+	 * 
+	 * It receives the study's ID.
 	 */
 	private function initializeStudyCacheEntry($studyId) {
 		// Sets the cache entry's default value
@@ -458,12 +493,14 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the cache entry of a user.
+	 * 
+	 * It receives the user's ID.
 	 */
 	private function initializeUserCacheEntry($userId) {
 		// Sets the cache entry's default value
 		$cacheEntry = null;
-
+		
 		if ($this->app->businessLogicDatabase->nonErasedUserExists($userId)) {
 			// The user exists and has not been erased
 			$cacheEntry = [

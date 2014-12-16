@@ -4,6 +4,7 @@
  * This script includes the classes of the application.
  */
 
+require 'private/scripts/Auxiliars/DatabaseLogWriter.php';
 require 'private/scripts/Auxiliars/Email.php';
 require 'private/scripts/Auxiliars/JsonStructureDescriptor.php';
 require 'private/scripts/Auxiliars/SessionStorageHandler.php';
@@ -50,4 +51,9 @@ require 'private/scripts/Helpers/InputValidator.php';
 require 'private/scripts/Helpers/Services.php';
 require 'private/scripts/Helpers/Session.php';
 require 'private/scripts/Helpers/Utilities.php';
+require 'private/scripts/Middlewares/ConfigurationsMiddleware.php';
+require 'private/scripts/Middlewares/ErrorsMiddleware.php';
+require 'private/scripts/Middlewares/ExtensionsMiddleware.php';
+require 'private/scripts/Middlewares/HelpersMiddleware.php';
+require 'private/scripts/Middlewares/ServicesMiddleware.php';
 require 'private/scripts/Middlewares/SessionMiddleware.php';

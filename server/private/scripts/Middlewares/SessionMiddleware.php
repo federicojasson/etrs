@@ -1,38 +1,36 @@
 <?php
 
 /*
- * This middleware performs tasks related to the PHP session.
+ * This middleware initializes the session.
  */
 class SessionMiddleware extends \Slim\Middleware {
-	
-	/*
-	 * The session storage handler.
-	 */
-	private $sessionStorageHandler;
-	
-	/*
-	 * Creates an instance of this class.
-	 * 
-	 * It receives the session storage handler to use.
-	 */
-	public function __construct($sessionStorageHandler) {
-		$this->sessionStorageHandler = $sessionStorageHandler;
-	}
 	
 	/*
 	 * Executes the middleware.
 	 */
 	public function call() {
-		$session = $this->app->session;
-		
-		// Sets the session storage handler
-		$session->setStorageHandler($this->sessionStorageHandler);
-		
-		// Starts the session
-		$session->start();
+		// Initializes the session
+		$this->initializeSession();
 		
 		// Calls the next middleware
 		$this->next->call();
+	}
+	
+	/*
+	 * Initializes the session.
+	 */
+	private function initializeSession() {
+		$app = $this->app;
+		$session = $app->session;
+		
+		// Initializas the session storage handler
+		$sessionStorageHandler = new DatabaseSessionStorageHandler($app->webServerDatabase);
+		
+		// Sets the session storage handler
+		$session->setStorageHandler($sessionStorageHandler);
+		
+		// Starts the session
+		$session->start();
 	}
 	
 }

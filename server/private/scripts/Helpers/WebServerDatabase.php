@@ -6,17 +6,17 @@
 class WebServerDatabase extends Database {
 	
 	/*
-	 * TODO: comments
+	 * Deletes the expired sessions.
+	 * 
+	 * It receives the time in minutes that the sessions can live without activity (i.e.,
+	 * their idle lifetime).
 	 */
 	public function deleteExpiredSessions($sessionIdleLifetime) {
-		// TODO: think what happens when current session is deleted?
-		// TODO: WHERE expression
-		
 		// Defines the statement
 		$statement = '
 			DELETE
 			FROM sessions
-			WHERE TODO
+			WHERE last_access_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :sessionIdleLifetime MINUTE)
 		';
 		
 		// Sets the parameters
@@ -29,7 +29,9 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes a session.
+	 * 
+	 * It receives the session's ID.
 	 */
 	public function deleteSession($sessionId) {
 		// Defines the statement
@@ -50,11 +52,11 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Inserts (or updates) a session.
+	 * 
+	 * It receives the session's ID and the values to insert/update the row.
 	 */
 	public function insertOrUpdateSession($sessionId, $sessionData) {
-		// TODO: careful: placeholder used twice
-		
 		// Defines the statement
 		$statement = '
 			INSERT INTO sessions (
@@ -85,7 +87,9 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a session.
+	 * 
+	 * It receives the session's ID.
 	 */
 	public function selectSession($sessionId) {
 		// Defines the statement
@@ -116,16 +120,11 @@ class WebServerDatabase extends Database {
 	 * It returns the PDO instance representing the connection.
 	 */
 	protected function connect() {
-		$configuration = &$this->app->configurations->get('webServerDatabase');
-		
 		// Gets the configuration of the database
+		$configuration = $this->app->configurations->get('webServerDatabase');
 		$dsn = $configuration['dsn'];
 		$username = $configuration['username'];
 		$password = $configuration['password'];
-		
-		$this->app->log->debug('dsn: ' . $dsn);
-		$this->app->log->debug('username: ' . $username);
-		$this->app->log->debug('password: ' . $password);
 		
 		// Creates and returns a PDO instance
 		return new PDO($dsn, $username, $password);

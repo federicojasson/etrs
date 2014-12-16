@@ -18,7 +18,7 @@ class GetPatientMainDataController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the patient ID
-		$patientId = $input['id'];
+		$patientId = $app->utilities->uuidToBinary($input['id']);
 		
 		// Gets the patient
 		$patient = $app->data->getPatient($patientId, ['mainData']);
@@ -44,7 +44,7 @@ class GetPatientMainDataController extends SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				return $inputValidator->isValidPatientId($jsonValue);
+				return $inputValidator->isValidUuidV4($jsonValue);
 			})
 		]);
 		

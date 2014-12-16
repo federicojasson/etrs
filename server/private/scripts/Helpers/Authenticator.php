@@ -23,11 +23,13 @@ class Authenticator extends Helper {
 		}
 		
 		// Gets the user's authentication data
-		$userPasswordHash = $user['authenticationData']['passwordHash'];
-		$userPasswordSalt = $user['authenticationData']['passwordSalt'];
+		$userAuthenticationData = $user['authenticationData'];
+		$userPasswordHash = $userAuthenticationData['passwordHash'];
+		$userPasswordSalt = $userAuthenticationData['passwordSalt'];
+		$userPasswordIterations = $userAuthenticationData['passwordIterations'];
 		
 		// Computes the hash of the alleged password, using the stored salt
-		$userAllegedPasswordHash = $app->cryptography->hashPassword($userAllegedPassword, $userPasswordSalt);
+		$userAllegedPasswordHash = $app->cryptography->hashPassword($userAllegedPassword, $userPasswordSalt, $userPasswordIterations);
 		
 		// Compares the computed hash with the stored one and returns the result
 		return $userAllegedPasswordHash === $userPasswordHash;

@@ -2,25 +2,24 @@
 
 /*
  * This helper represents the business logic database.
- * 
- * TODO: deep code cleaning
  */
 class BusinessLogicDatabase extends Database {
 	
 	/*
-	 * TODO: comments
+	 * Determines whether a consultation exists and has not been erased.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function nonErasedConsultationExists($consultationId) {
 		// Defines the statement
 		$statement = '
-			SELECT EXISTS (
-				SELECT *
-				FROM consultations
-				WHERE
-					NOT erased
-					AND
-					id = :consultationId
-			)
+			SELECT 0
+			FROM consultations
+			WHERE
+				NOT erased
+				AND
+				id = :consultationId
+			LIMIT 1
 		';
 		
 		// Sets the parameters
@@ -32,23 +31,24 @@ class BusinessLogicDatabase extends Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		// Returns the result
-		return $results[0];
+		return count($results) === 1;
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether an experiment exists and has not been erased.
+	 * 
+	 * It receives the experiment's ID.
 	 */
 	public function nonErasedExperimentExists($experimentId) {
 		// Defines the statement
 		$statement = '
-			SELECT EXISTS (
-				SELECT *
-				FROM experiments
-				WHERE
-					NOT erased
-					AND
-					id = :experimentId
-			)
+			SELECT 0
+			FROM experiments
+			WHERE
+				NOT erased
+				AND
+				id = :experimentId
+			LIMIT 1
 		';
 		
 		// Sets the parameters
@@ -60,23 +60,24 @@ class BusinessLogicDatabase extends Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		// Returns the result
-		return $results[0];
+		return count($results) === 1;
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether a file exists and has not been erased.
+	 * 
+	 * It receives the file's ID.
 	 */
 	public function nonErasedFileExists($fileId) {
 		// Defines the statement
 		$statement = '
-			SELECT EXISTS (
-				SELECT *
-				FROM files
-				WHERE
-					NOT erased
-					AND
-					id = :fileId
-			)
+			SELECT 0
+			FROM files
+			WHERE
+				NOT erased
+				AND
+				id = :fileId
+			LIMIT 1
 		';
 		
 		// Sets the parameters
@@ -88,23 +89,24 @@ class BusinessLogicDatabase extends Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		// Returns the result
-		return $results[0];
+		return count($results) === 1;
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether a patient exists and has not been erased.
+	 * 
+	 * It receives the patient's ID.
 	 */
 	public function nonErasedPatientExists($patientId) {
 		// Defines the statement
 		$statement = '
-			SELECT EXISTS (
-				SELECT *
-				FROM patients
-				WHERE
-					NOT erased
-					AND
-					id = :patientId
-			)
+			SELECT 0
+			FROM patients
+			WHERE
+				NOT erased
+				AND
+				id = :patientId
+			LIMIT 1
 		';
 		
 		// Sets the parameters
@@ -116,23 +118,24 @@ class BusinessLogicDatabase extends Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		// Returns the result
-		return $results[0];
+		return count($results) === 1;
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether a study exists and has not been erased.
+	 * 
+	 * It receives the study's ID.
 	 */
 	public function nonErasedStudyExists($studyId) {
 		// Defines the statement
 		$statement = '
-			SELECT EXISTS (
-				SELECT *
-				FROM studies
-				WHERE
-					NOT erased
-					AND
-					id = :studyId
-			)
+			SELECT 0
+			FROM studies
+			WHERE
+				NOT erased
+				AND
+				id = :studyId
+			LIMIT 1
 		';
 		
 		// Sets the parameters
@@ -144,23 +147,24 @@ class BusinessLogicDatabase extends Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		// Returns the result
-		return $results[0];
+		return count($results) === 1;
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether a user exists and has not been erased.
+	 * 
+	 * It receives the user's ID.
 	 */
 	public function nonErasedUserExists($userId) {
 		// Defines the statement
 		$statement = '
-			SELECT EXISTS (
-				SELECT *
-				FROM users
-				WHERE
-					NOT erased
-					AND
-					id = :userId
-			)
+			SELECT 0
+			FROM users
+			WHERE
+				NOT erased
+				AND
+				id = :userId
+			LIMIT 1
 		';
 		
 		// Sets the parameters
@@ -172,11 +176,13 @@ class BusinessLogicDatabase extends Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		// Returns the result
-		return $results[0];
+		return count($results) === 1;
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a consultation's image analysis.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function selectConsultationImageAnalysis($consultationId) {
 		// Defines the statement
@@ -205,7 +211,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a consultation's laboratory results.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function selectConsultationLaboratoryResults($consultationId) {
 		// Defines the statement
@@ -241,7 +249,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a consultation's main data.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function selectConsultationMainData($consultationId) {
 		// Defines the statement
@@ -271,7 +281,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a consultation's metadata.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function selectConsultationMetadata($consultationId) {
 		// Defines the statement
@@ -298,7 +310,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a consultation's neurocognitive assessment.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function selectConsultationNeurocognitiveAssessment($consultationId) {
 		// Defines the statement
@@ -327,7 +341,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a consultation's patient background.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function selectConsultationPatientBackground($consultationId) {
 		// Defines the statement
@@ -359,7 +375,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a consultation's patient medications.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function selectConsultationPatientMedications($consultationId) {
 		// Defines the statement
@@ -392,7 +410,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a consultation's treatments.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function selectConsultationTreatments($consultationId) {
 		// Defines the statement
@@ -424,7 +444,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns an experiment's main data.
+	 * 
+	 * It receives the experiment's ID.
 	 */
 	public function selectExperimentMainData($experimentId) {
 		// Defines the statement
@@ -450,7 +472,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns an experiment's metadata.
+	 * 
+	 * It receives the experiment's ID.
 	 */
 	public function selectExperimentMetadata($experimentId) {
 		// Defines the statement
@@ -476,7 +500,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a file's main data.
+	 * 
+	 * It receives the file's ID.
 	 */
 	public function selectFileMainData($fileId) {
 		// Defines the statement
@@ -502,7 +528,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a file's metadata.
+	 * 
+	 * It receives the file's ID.
 	 */
 	public function selectFileMetadata($fileId) {
 		// Defines the statement
@@ -528,7 +556,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns an experiment's files that have not been erased.
+	 * 
+	 * It receives the experiment's ID.
 	 */
 	public function selectNonErasedExperimentFiles($experimentId) {
 		// Defines the statement
@@ -555,7 +585,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a study's files that have not been erased.
+	 * 
+	 * It receives the study's ID.
 	 */
 	public function selectNonErasedStudyFiles($studyId) {
 		// Defines the statement
@@ -582,7 +614,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a patient's main data.
+	 * 
+	 * It receives the patient's ID.
 	 */
 	public function selectPatientMainData($patientId) {
 		// Defines the statement
@@ -611,7 +645,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a patient's metadata.
+	 * 
+	 * It receives the patient's ID.
 	 */
 	public function selectPatientMetadata($patientId) {
 		// Defines the statement
@@ -637,7 +673,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a study's main data.
+	 * 
+	 * It receives the study's ID.
 	 */
 	public function selectStudyMainData($studyId) {
 		// Defines the statement
@@ -661,7 +699,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a study's metadata.
+	 * 
+	 * It receives the study's ID.
 	 */
 	public function selectStudyMetadata($studyId) {
 		// Defines the statement
@@ -690,14 +730,17 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a user's authentication data.
+	 * 
+	 * It receives the user's ID.
 	 */
 	public function selectUserAuthenticationData($userId) {
 		// Defines the statement
 		$statement = '
 			SELECT
 				password_hash AS passwordHash,
-				password_salt AS passwordSalt
+				password_salt AS passwordSalt,
+				password_iterations AS passwordIterations
 			FROM users_authentication_data
 			WHERE user = :userId
 			LIMIT 1
@@ -716,7 +759,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a user's main data.
+	 * 
+	 * It receives the user's ID.
 	 */
 	public function selectUserMainData($userId) {
 		// Defines the statement
@@ -745,7 +790,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns a user's metadata.
+	 * 
+	 * It receives the user's ID.
 	 */
 	public function selectUserMetadata($userId) {
 		// Defines the statement
@@ -769,21 +816,13 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
-	 */
-	public function updateUserAuthenticationData($userId, $userPasswordHash, $userPasswordSalt) {
-		// TODO: implement
-	}
-	
-	/*
 	 * Connects to the database.
 	 * 
 	 * It returns the PDO instance representing the connection.
 	 */
 	protected function connect() {
-		$configuration = &$this->app->configurations->get('businessLogicDatabase');
-		
 		// Gets the configuration of the database
+		$configuration = $this->app->configurations->get('businessLogicDatabase');
 		$dsn = $configuration['dsn'];
 		$username = $configuration['username'];
 		$password = $configuration['password'];

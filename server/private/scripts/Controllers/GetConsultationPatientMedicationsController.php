@@ -18,7 +18,7 @@ class GetConsultationPatientMedicationsController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the consultation ID
-		$consultationId = $input['id'];
+		$consultationId = $app->utilities->uuidToBinary($input['id']);
 		
 		// Gets the consultation
 		$consultation = $app->data->getConsultation($consultationId, ['patientMedications']);
@@ -44,7 +44,7 @@ class GetConsultationPatientMedicationsController extends SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				return $inputValidator->isValidConsultationId($jsonValue);
+				return $inputValidator->isValidUuidV4($jsonValue);
 			})
 		]);
 		

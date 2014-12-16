@@ -41,9 +41,9 @@ class Cryptography extends Helper {
 	 * 
 	 * It receives the password and the salt to use.
 	 */
-	public function hashPassword($password, $salt) {
+	public function hashPassword($password, $salt, $iterations) {
 		// Applies the SHA-512 hash function and the PBKDF2 key derivation
-		return hash_pbkdf2(ALGORITHM_HASH_SHA512, $password, $salt, PASSWORD_HASH_ITERATIONS, 0, true);
+		return hash_pbkdf2(ALGORITHM_HASH_SHA512, $password, $salt, $iterations, 0, true);
 	}
 	
 	/*
@@ -57,7 +57,7 @@ class Cryptography extends Helper {
 		
 		if (! $cryptographicallyStrong) {
 			// The algorithm used is not cryptographically strong
-			// TODO: log warning message
+			$this->app->log->warning(''); // TODO: log warning message
 		}
 		
 		return $bytes;

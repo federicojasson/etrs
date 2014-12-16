@@ -18,7 +18,7 @@ class GetFileMainDataController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the file ID
-		$fileId = $input['id'];
+		$fileId = $app->utilities->uuidToBinary($input['id']);
 		
 		// Gets the file
 		$file = $app->data->getFile($fileId, ['mainData']);
@@ -44,7 +44,7 @@ class GetFileMainDataController extends SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				return $inputValidator->isValidFileId($jsonValue);
+				return $inputValidator->isValidUuidV4($jsonValue);
 			})
 		]);
 		

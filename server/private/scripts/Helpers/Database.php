@@ -44,7 +44,7 @@ abstract class Database extends Helper {
 	protected abstract function connect();
 	
 	/*
-	 * Executes a prepared statement.
+	 * Executes a prepared statement and returns the results.
 	 * 
 	 * It receives the statement and the parameters to prepare it.
 	 */
@@ -52,6 +52,11 @@ abstract class Database extends Helper {
 		// Prepares and executes the statement
 		$preparedStatement = $this->pdo->prepare($statement);
 		$preparedStatement->execute($parameters);
+		
+		if ($preparedStatement->columnCount() === 0) {
+			// The statement is not a query
+			return null;
+		}
 		
 		// Fetches and returns the results
 		return $preparedStatement->fetchAll();

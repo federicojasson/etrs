@@ -17,7 +17,7 @@ class EmailBuilder extends Helper {
 	 * Builds and returns the email.
 	 */
 	public function build() {
-		$state = &$this->state;
+		$state = $this->state;
 		
 		// Gets the basic information of the email
 		$to = $state[EMAIL_BUILDER_TO];
