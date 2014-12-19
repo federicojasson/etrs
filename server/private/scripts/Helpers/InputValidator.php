@@ -41,11 +41,11 @@ class InputValidator extends Helper {
 	 * structure.
 	 */
 	public function validateJsonRequest($request, $jsonStructureDescriptor) {
-		// Gets the content type
-		$contentType = $request->headers->get(HTTP_HEADER_CONTENT_TYPE);
+		// Gets the media type
+		$mediaType = $request->getMediaType();
 		
-		if ($contentType !== HTTP_CONTENT_TYPE_JSON) {
-			// The content type is not JSON
+		if ($mediaType !== HTTP_MEDIA_TYPE_JSON) {
+			// The media type is not JSON
 			return false;
 		}
 		

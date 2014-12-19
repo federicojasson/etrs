@@ -9,8 +9,10 @@ class ConfigurationsMiddleware extends \Slim\Middleware {
 	 * Applies debug configurations.
 	 */
 	public function applyDebugConfigurations() {
+		// TODO: set debug config first?
+		
 		// Initializes a log writer to store logs in a file
-		$fileHandle = fopen(FILE_PATH_LOGS_LOG, 'a');
+		$fileHandle = fopen(FILE_PATH_LOGS_DEBUG, 'a');
 		$logWriter = new \Slim\LogWriter($fileHandle);
 
 		// Configures the framework
@@ -25,8 +27,6 @@ class ConfigurationsMiddleware extends \Slim\Middleware {
 			'log.writer' => $logWriter,
 			'routes.case_sensitive' => true
 		]);
-		
-		// TODO: set logger in here
 	}
 	
 	/*
@@ -34,6 +34,8 @@ class ConfigurationsMiddleware extends \Slim\Middleware {
 	 */
 	public function applyReleaseConfigurations() {
 		$app = $this->app;
+		
+		// TODO: set debug config first?
 		
 		// Initializes a log writer to store logs in a database
 		$database = $app->webServerDatabase;
@@ -51,8 +53,6 @@ class ConfigurationsMiddleware extends \Slim\Middleware {
 			'log.writer' => $logWriter,
 			'routes.case_sensitive' => true
 		]);
-		
-		// TODO: set logger in here
 	}
 	
 	/*

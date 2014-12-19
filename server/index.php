@@ -12,8 +12,8 @@ require 'private/scripts/constants.php';
 
 // Initializes the framework
 $app = new \Slim\Slim([
-	//'mode' => OPERATION_MODE_DEBUG
-	'mode' => OPERATION_MODE_RELEASE
+	'mode' => OPERATION_MODE_DEBUG
+	//'mode' => OPERATION_MODE_RELEASE
 ]);
 
 // Adds the middlewares

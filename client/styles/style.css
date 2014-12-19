@@ -54,40 +54,6 @@ textarea {
 	resize: none;
 }
 
-.action-group-list li {
-	margin-top: 48px;
-}
-
-.action-list li {
-	margin-top: 24px;
-	padding-left: 32px;
-}
-
-.action-list a {
-	color: inherit;
-	display: block;
-	padding: 1px 24px 12px 24px;
-}
-
-.action-list a:focus {
-	color: inherit;
-	text-decoration: none;
-}
-
-.action-list a:hover {
-	background-color: #f0f0f0;
-	color: inherit;
-	text-decoration: none;
-}
-
-.action-list a:hover h3 {
-	text-decoration: underline;
-}
-
-.as-is-text {
-	white-space: pre-line;
-}
-
 .btn {
 	font-size: 0.9em;
 	line-height: 1.6;
@@ -98,16 +64,6 @@ textarea {
 	font-size: 1em;
 	line-height: 1.7;
 	text-transform: uppercase;
-}
-
-.clickable {
-	cursor: pointer;
-}
-
-.content-container {
-	min-height: 320px;
-	padding-bottom: 24px;
-	padding-top: 8px;
 }
 
 .footer-logo-image {
@@ -125,30 +81,49 @@ textarea {
 	background-position: 0px 0px;
 }
 
-.footer-menu-list a {
-	color: inherit;
-}
-
-.footer-menu-list-element {
-	color: #666666;
-	font-size: 0.9em;
-	font-weight: 300;
-	margin-bottom: 4px;
-}
-
-.footer-menu-list-header {
-	font-size: 0.92em;
-	font-weight: 700;
-	margin-bottom: 8px;
-	text-transform: uppercase;
-}
-
 .footer-text {
 	color: #aaaaaa;
 	font-size: 0.8em;
-	margin-bottom: 48px;
-	margin-top: -8px;
+	margin: -8px 0px 48px 0px;
 	text-align: center;
+}
+
+.fully-centered {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.fully-centered-container {
+	display: table;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+}
+
+.loading-image {
+	background-image: url(../images/loading.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 30%;
+	margin: 0px auto 64px auto;
+	max-height: 256px;
+	max-width: 256px;
+	min-height: 64px;
+}
+
+.loading-text {
+	color: #aaaaaa;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
+	letter-spacing: 2px;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+	user-select: none;
 }
 
 .lock-image {
@@ -176,7 +151,10 @@ textarea {
 	float: left;
 	font-family: "Bebas Neue", sans-serif;
 	font-size: 1.8em;
-	line-height: 48px;
-	margin-left: 16px;
-	padding-top: 2px;
+	line-height: 50px;
+	padding-left: 16px;
+}
+
+.view-container {
+	min-height: 320px;
 }

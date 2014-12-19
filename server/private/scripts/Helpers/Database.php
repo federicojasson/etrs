@@ -87,7 +87,7 @@ abstract class Database extends Helper {
 
 		// Configures the PDO instance
 		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
 		
 		$this->pdo = $pdo;
 	}

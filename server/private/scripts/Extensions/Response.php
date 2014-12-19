@@ -35,8 +35,8 @@ class Response extends \Slim\Http\Response {
 		// Encodes the output
 		$encodedOutput = json_encode($output);
 		
-		// Sets the content type
-		$this->headers->set(HTTP_HEADER_CONTENT_TYPE, HTTP_CONTENT_TYPE_JSON);
+		// Sets the Content-Type header
+		$this->headers->set(HTTP_HEADER_CONTENT_TYPE, HTTP_MEDIA_TYPE_JSON);
 		
 		// Sets the encoded version as the body
 		parent::setBody($encodedOutput);

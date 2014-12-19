@@ -52,6 +52,39 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
+	 * Inserts a log.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertLog($logId, $logLevel, $logMessage) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO logs (
+				id,
+				creation_datetime,
+				level,
+				message
+			)
+			VALUES (
+				:logId,
+				UTC_TIMESTAMP(),
+				:logLevel,
+				:logMessage
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':logId' => $logId,
+			':logLevel' => $logLevel,
+			':logMessage' => $logMessage
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Inserts (or updates) a session.
 	 * 
 	 * It receives the session's ID and the values to insert/update the row.
@@ -73,7 +106,6 @@ class WebServerDatabase extends Database {
 			UPDATE
 				last_access_datetime = UTC_TIMESTAMP(),
 				data = :sessionData
-
 		';
 		
 		// Sets the parameters
@@ -84,6 +116,32 @@ class WebServerDatabase extends Database {
 		
 		// Executes the statement
 		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Determines whether a log exists.
+	 * 
+	 * It receives the log's ID.
+	 */
+	public function logExists($logId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM logs
+			WHERE id = :logId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':logId' => $logId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
 	}
 	
 	/*

@@ -4,7 +4,8 @@
 (function() {
 	// Module: forms
 	angular.module('forms', [
-		'classes',
-		'helpers'
+		'authentication',
+		'inputValidator',
+		'server'
 	]);
 })();

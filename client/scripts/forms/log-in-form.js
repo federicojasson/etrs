@@ -7,9 +7,9 @@
 	
 	// Controller: LogInFormController
 	module.controller('LogInFormController', [
-		'InputModel',
 		'authentication',
 		'inputValidator',
+		'InputModel',
 		'server',
 		LogInFormController
 	]);
@@ -17,9 +17,9 @@
 	/*
 	 * Controller: LogInFormController
 	 * 
-	 * Implements the logic of the log in form.
+	 * Offers functions for the log in form.
 	 */
-	function LogInFormController(InputModel, authentication, inputValidator, server) {
+	function LogInFormController(authentication, inputValidator, InputModel, server) {
 		var controller = this;
 		
 		/*
@@ -45,10 +45,9 @@
 		 * If the input is invalid, the form is not submitted.
 		 */
 		controller.submit = function() {
-			// Gets the input models
 			var inputModels = controller.inputModels;
 			
-			if (! inputValidator.validate(inputModels)) {
+			if (! inputValidator.validateInputModels(inputModels)) {
 				// The input is invalid
 				return;
 			}
@@ -63,16 +62,13 @@
 					
 					// Refreshes the authentication state
 					authentication.refreshState();
-					
-					// Reloads the route
-					// TODO: HOW
 				} else {
 					// The user was not authenticated
 					
-					// TODO
+					// TODO: show not-authenticated message
 				}
 			}, function(response) {
-				// TODO: error
+				// TODO: handle error
 			});
 		};
 	}
