@@ -17,6 +17,31 @@
 		var service = this;
 		
 		/*
+		 * Validates an email address.
+		 * 
+		 * It receives the input model.
+		 */
+		service.validateEmailAddress = function(inputModel) {
+			var value = inputModel.value;
+			
+			if (value.length > 254) {
+				// The input is too long
+				inputModel.message = 'Este campo puede tener a lo sumo 254 caracteres';
+				return false;
+			}
+			
+			if (! /(?!.*[ ])(?!.*@.*@)^.+@.+$/.test(value)) {
+				// The input is not a valid email address
+				inputModel.message = 'La dirección de correo electrónico ingresada no es válida';
+				return false;
+			}
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
+		};
+		
+		/*
 		 * Validates a set of input models and returns the result.
 		 * 
 		 * It receives an object containing the input models. Note that these
@@ -65,6 +90,47 @@
 			return true;
 		};
 		
-		// TODO: implement
+		/*
+		 * Validates a user ID.
+		 * 
+		 * It receives the input model.
+		 */
+		service.validateUserId = function(inputModel) {
+			var value = inputModel.value;
+			
+			if (value.length > 32) {
+				// The input is too long
+				inputModel.message = 'Este campo puede tener a lo sumo 32 caracteres';
+				return false;
+			}
+			
+			if (! /^[.0-9A-Za-z]*$/.test(value)) {
+				// The input contains invalid characters
+				inputModel.message = 'El ID puede contener únicamente letras, dígitos y puntos';
+				return false;
+			}
+			
+			if (/^.*[.]{2}.*$/.test(value)) {
+				// The input has two or more consecutive dots
+				inputModel.message = 'El ID no puede contener dos o más puntos consecutivos';
+				return false;
+			}
+			
+			if (/^[.].*$/.test(value)) {
+				// The input starts with a dot
+				inputModel.message = 'El ID no puede contener un punto al comienzo';
+				return false;
+			}
+			
+			if (/^.*[.]$/.test(value)) {
+				// The input ends with a dot
+				inputModel.message = 'El ID no puede contener un punto al final';
+				return false;
+			}
+			
+			// The input is valid
+			inputModel.message = '';
+			return true;
+		};
 	}
 })();

@@ -3,41 +3,67 @@
 		<div class="lock-image"></div>
 	</div>
 	
-	<div class="col-sm-6 col-sm-offset-1 well">
-		<form ng-controller="LogInFormController as logInForm" ng-submit="logInForm.submit()" novalidate>
-			<fieldset>
-				<legend>Ingrese su nombre de usuario y contraseña</legend>
-				
-				<div class="form-group" ng-class="{ 'has-error': ! logInForm.inputModels.id.isValid }">
-					<input
-						class="form-control input-lg"
-						ng-model="logInForm.inputModels.id.value"
-						placeholder="Nombre de usuario"
-						popover="{{ logInForm.inputModels.id.message }}"
-						popover-placement="left"
-						popover-trigger="focus"
-						type="text"
+	<div class="col-sm-6 col-sm-offset-1">
+		<div class="row">
+			<div class="col-sm-12 well">
+				<form ng-controller="LogInFormController as logInForm" ng-submit="logInForm.submit()" novalidate>
+					<fieldset>
+						<legend>Iniciar de sesión</legend>
+						
+						<div class="form-group">
+							Ingrese su nombre de usuario y su contraseña.
+						</div>
+
+						<div class="form-group" ng-class="{ 'has-error': ! logInForm.inputModels.id.isValid }">
+							<input
+								class="form-control input-lg"
+								ng-model="logInForm.inputModels.id.value"
+								placeholder="Nombre de usuario"
+								popover="{{ logInForm.inputModels.id.message }}"
+								popover-placement="left"
+								popover-trigger="focus"
+								type="text"
+							>
+						</div>
+
+						<div class="form-group" ng-class="{ 'has-error': ! logInForm.inputModels.password.isValid }">
+							<input
+								class="form-control input-lg"
+								ng-model="logInForm.inputModels.password.value"
+								placeholder="Contraseña"
+								popover="{{ logInForm.inputModels.password.message }}"
+								popover-placement="left"
+								popover-trigger="focus"
+								type="password"
+							>
+						</div>
+					</fieldset>
+
+					<div
+						alert
+						class="form-group"
+						close="logInForm.onCloseAlert()"
+						ng-if="logInForm.showAlert()"
+						type="danger"
 					>
-				</div>
-				
-				<div class="form-group" ng-class="{ 'has-error': ! logInForm.inputModels.password.isValid }">
-					<input
-						class="form-control input-lg"
-						ng-model="logInForm.inputModels.password.value"
-						placeholder="Contraseña"
-						popover="{{ logInForm.inputModels.password.message }}"
-						popover-placement="left"
-						popover-trigger="focus"
-						type="password"
-					>
-				</div>
-			</fieldset>
-			
-			<div class="form-group">
-				<button class="btn btn-default btn-lg pull-right" type="submit">
-					Iniciar sesión
-				</button>
+						No fue posible autenticarse en el servidor.<br>
+						Intente reingresar su nombre de usuario y su contraseña.<br>
+						Si olvidó su contraseña, ingrese <a href="#/request-password-recovery">aquí</a>.
+					</div>
+
+					<div class="form-group">
+						<button class="btn btn-default btn-lg pull-right uppercase" type="submit">
+							Iniciar sesión
+						</button>
+					</div>
+				</form>
 			</div>
-		</form>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12 text-right">
+				<a href="#/request-password-recovery">¿Olvidó su contraseña?</a>
+			</div>
+		</div>
 	</div>
 </div>

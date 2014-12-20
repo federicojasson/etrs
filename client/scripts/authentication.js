@@ -14,6 +14,12 @@
 		run
 	]);
 	
+	// Controller: AuthenticationController
+	module.controller('AuthenticationController', [
+		'authentication',
+		AuthenticationController
+	]);
+	
 	// Service: authentication
 	module.service('authentication', [
 		'data',
@@ -27,6 +33,29 @@
 	function run(authentication) {
 		// Refreshes the authentication state
 		authentication.refreshState();
+	}
+	
+	/*
+	 * Controller: AuthenticationController
+	 * 
+	 * TODO: comments
+	 */
+	function AuthenticationController(authentication) {
+		var controller = this;
+		
+		/*
+		 * TODO: comments
+		 */
+		controller.getLoggedInUser = function() {
+			return authentication.getLoggedInUser;
+		};
+		
+		/*
+		 * TODO: comments
+		 */
+		controller.isUserLoggedIn = function() {
+			return authentication.isUserLoggedIn();
+		};
 	}
 	
 	/*
@@ -78,6 +107,7 @@
 		 * Refreshes the authentication state.
 		 */
 		service.refreshState = function() {
+			// The refresh process starts
 			isRefreshingState = true;
 			
 			// Gets the authentication state

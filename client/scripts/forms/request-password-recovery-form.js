@@ -5,21 +5,20 @@
 	// Module: forms
 	var module = angular.module('forms');
 	
-	// Controller: LogInFormController
-	module.controller('LogInFormController', [
-		'authentication',
+	// Controller: RequestPasswordRecoveryFormController
+	module.controller('RequestPasswordRecoveryFormController', [
 		'inputValidator',
 		'InputModel',
 		'server',
-		LogInFormController
+		RequestPasswordRecoveryFormController
 	]);
 	
 	/*
-	 * Controller: LogInFormController
+	 * Controller: RequestPasswordRecoveryFormController
 	 * 
-	 * Offers functions for the log in form.
+	 * Offers functions for the request password recovery form.
 	 */
-	function LogInFormController(authentication, inputValidator, InputModel, server) {
+	function RequestPasswordRecoveryFormController(inputValidator, InputModel, server) {
 		var controller = this;
 		
 		/*
@@ -31,13 +30,13 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			id: new InputModel({
+			emailAddress: new InputModel({
 				validationFunction: function() {
 					return inputValidator.validateRequiredInput(this);
 				}
 			}),
 			
-			password: new InputModel({
+			id: new InputModel({
 				validationFunction: function() {
 					return inputValidator.validateRequiredInput(this);
 				}
@@ -74,12 +73,13 @@
 				return;
 			}
 			
-			// Logs in the user
-			server.logIn({
-				id: inputModels.id.value,
-				password: inputModels.password.value
+			// Requests the password recovery
+			server.requestPasswordRecovery({
+				emailAddress: inputModels.emailAddress.value,
+				id: inputModels.id.value
 			}).then(function(output) {
-				if (output.authenticated) {
+				// TODO: handle output
+				/*if (output.authenticated) {
 					// The user was authenticated
 					
 					// Refreshes the authentication state
@@ -89,7 +89,7 @@
 					
 					// Shows the alert
 					showAlert = true;
-				}
+				}*/
 			}, function(response) {
 				// TODO: handle error
 			});

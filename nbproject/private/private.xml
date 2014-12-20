@@ -3,10 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/data.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/input-validator.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/authentication.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/styles/style.css</file>
+            <file>file:/C:/xampp/htdocs/etrs/zbackup_new_new/client/scripts/forms/create-user-form.js</file>
             <file>file:/C:/xampp/htdocs/etrs/client/scripts/forms/log-in-form.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/log-in-view.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/layouts/site-layout.html</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/server.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/scripts/forms/request-password-recovery-form.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/images/lock.png</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/request-password-recovery-view.html</file>
         </group>
     </open-files>
 </project-private>

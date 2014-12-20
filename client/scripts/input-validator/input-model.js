@@ -30,15 +30,16 @@
 		 */
 		function InputModel(parameters) {
 			if (angular.isDefined(parameters)) {
-				// Extracts the parameters
-				
 				var initialValue = parameters.initialValue;
+				var validationFunction = parameters.validationFunction;
+				
 				if (angular.isDefined(initialValue)) {
+					// Initial value received
 					this.value = initialValue;
 				}
 				
-				var validationFunction = parameters.validationFunction;
 				if (angular.isDefined(validationFunction)) {
+					// Validation function received
 					this.validationFunction = validationFunction;
 				}
 			}
@@ -68,14 +69,10 @@
 		 * returns the result.
 		 */
 		InputModel.prototype.validateInput = function() {
-			// Validates the input
-			var isValid = this.validationFunction();
+			// Validates the input and sets the result
+			this.isValid = this.validationFunction();
 			
-			// Sets the result
-			this.isValid = isValid;
-			
-			// Returns the result
-			return isValid;
+			return this.isValid;
 		};
 		
 		/*

@@ -7,8 +7,41 @@
 					<span class="navbar-logo-text">Eye Tracking Record System</span>
 				</div>
 
-				<div class="collapse navbar-collapse navbar-right">
-					collapsable
+				<div class="collapse navbar-collapse navbar-right" ng-controller="AuthenticationController as authentication">
+					<span ng-if="authentication.isUserLoggedIn()">
+						<div class="btn-group navbar-btn" dropdown>
+							<a class="btn btn-primary" ng-href="#/profile">
+								{{ authentication.getLoggedInUser() | honorificName }}
+							</a>
+							<button class="btn btn-primary dropdown-toggle" type="button">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li class="dropdown-header">Configuración de la cuenta</li>
+								<li>
+									<a href="#/change-password">
+										Cambiar contraseña
+									</a>
+								</li>
+								<li>
+									<a href="#/change-email-address">
+										Cambiar dirección de correo electrónico
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li class="dropdown-header">Sesión</li>
+								<li>
+									<a class="clickable" ng-click="logOutForm.submit()" ng-controller="LogOutFormController as logOutForm">
+										Cerrar sesión
+									</a>
+								</li>
+							</ul>
+						</div>
+					</span>
+					
+					<span ng-if="! authentication.isUserLoggedIn()">
+						<a class="btn btn-success navbar-btn uppercase" href="#/log-in">Iniciar sesión</a>
+					</span>
 				</div>
 			</div>
 		</div>

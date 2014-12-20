@@ -683,11 +683,10 @@
 		 * It receives the consultation's ID.
 		 */
 		service.getConsultation = function(consultationId) {
+			var consultations = cache.consultations;
+			
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
-			
-			// Gets the consultations in cache
-			var consultations = cache.consultations;
 			
 			if (angular.isDefined(consultations[consultationId])) {
 				// The consultation has already been loaded
@@ -719,11 +718,10 @@
 		 * It receives the experiment's ID.
 		 */
 		service.getExperiment = function(experimentId) {
+			var experiments = cache.experiments;
+			
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
-			
-			// Gets the experiments in cache
-			var experiments = cache.experiments;
 			
 			if (angular.isDefined(experiments[experimentId])) {
 				// The experiment has already been loaded
@@ -755,11 +753,10 @@
 		 * It receives the file's ID.
 		 */
 		service.getFile = function(fileId) {
+			var files = cache.files;
+			
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
-			
-			// Gets the files in cache
-			var files = cache.files;
 			
 			if (angular.isDefined(files[fileId])) {
 				// The file has already been loaded
@@ -791,11 +788,10 @@
 		 * It receives the patient's ID.
 		 */
 		service.getPatient = function(patientId) {
+			var patients = cache.patients;
+			
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
-			
-			// Gets the patients in cache
-			var patients = cache.patients;
 			
 			if (angular.isDefined(patients[patientId])) {
 				// The patient has already been loaded
@@ -827,11 +823,10 @@
 		 * It receives the study's ID.
 		 */
 		service.getStudy = function(studyId) {
+			var studies = cache.studies;
+			
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
-			
-			// Gets the studies in cache
-			var studies = cache.studies;
 			
 			if (angular.isDefined(studies[studyId])) {
 				// The study has already been loaded
@@ -863,11 +858,10 @@
 		 * It receives the user's ID.
 		 */
 		service.getUser = function(userId) {
+			var users = cache.users;
+			
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
-			
-			// Gets the users in cache
-			var users = cache.users;
 			
 			if (angular.isDefined(users[userId])) {
 				// The user has already been loaded

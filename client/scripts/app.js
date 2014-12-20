@@ -5,6 +5,7 @@
 	// Module: app
 	angular.module('app', [
 		'ui.bootstrap',
+		'authentication',
 		'forms',
 		'layouts',
 		'router',

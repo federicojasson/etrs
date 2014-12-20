@@ -44,7 +44,6 @@
 		 * responds.
 		 */
 		function sendHttpRequest(parameters) {
-			// Extracts the parameters
 			var url = parameters.url;
 			var method = parameters.method;
 			var input = parameters.input;
@@ -415,6 +414,21 @@
 		service.logOut = function() {
 			return sendHttpRequest({
 				url: 'server/log-out',
+				method: 'POST',
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/request-password-recovery
+		 *	Method:	POST
+		 */
+		service.requestPasswordRecovery = function(input) {
+			// TODO: implement server side service
+			return sendHttpRequest({
+				url: 'server/request-password-recovery',
 				method: 'POST',
 				outputIsArray: false
 			});

@@ -54,16 +54,20 @@ textarea {
 	resize: none;
 }
 
-.btn {
+.btn.uppercase {
 	font-size: 0.9em;
 	line-height: 1.6;
 	text-transform: uppercase;
 }
 
-.btn.btn-lg {
+.btn.btn-lg.uppercase {
 	font-size: 1em;
 	line-height: 1.7;
 	text-transform: uppercase;
+}
+
+.clickable {
+	cursor: pointer;
 }
 
 .footer-logo-image {
@@ -99,6 +103,14 @@ textarea {
 	height: 100%;
 	position: fixed;
 	width: 100%;
+}
+
+.inbox-image {
+	background-image: url(../images/inbox.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
 }
 
 .loading-image {

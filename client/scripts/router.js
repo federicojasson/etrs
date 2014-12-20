@@ -31,11 +31,74 @@
 		// Defines the states
 		var states = [
 			{
+				name: 'changeEmailAddress',
+				definition: {
+					url: '/change-email-address',
+					layoutController: 'SiteLayoutController',
+					viewController: 'ChangeEmailAddressViewController'
+				}
+			},
+			
+			{
+				name: 'changePassword',
+				definition: {
+					url: '/change-password',
+					layoutController: 'SiteLayoutController',
+					viewController: 'ChangePasswordViewController'
+				}
+			},
+			
+			{
+				name: 'contact',
+				definition: {
+					url: '/contact',
+					layoutController: 'SiteLayoutController',
+					viewController: 'ContactViewController'
+				}
+			},
+			
+			{
 				name: 'home',
 				definition: {
 					url: '/',
 					layoutController: 'SiteLayoutController',
 					viewController: 'HomeViewController'
+				}
+			},
+			
+			{
+				name: 'logIn',
+				definition: {
+					url: '/log-in',
+					layoutController: 'SiteLayoutController',
+					viewController: 'LogInViewController'
+				}
+			},
+			
+			{
+				name: 'profile',
+				definition: {
+					url: '/profile',
+					layoutController: 'SiteLayoutController',
+					viewController: 'ProfileViewController'
+				}
+			},
+			
+			{
+				name: 'requestPasswordRecovery',
+				definition: {
+					url: '/request-password-recovery',
+					layoutController: 'SiteLayoutController',
+					viewController: 'RequestPasswordRecoveryViewController'
+				}
+			},
+			
+			{
+				name: 'user',
+				definition: {
+					url: '/user/{userId:(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{1,32}}',
+					layoutController: 'SiteLayoutController',
+					viewController: 'UserViewController'
 				}
 			}
 		];
