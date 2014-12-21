@@ -195,13 +195,15 @@ INSERT INTO image_tests (
 	is_erased,
 	creator,
 	creation_datetime,
-	name
+	name,
+	data_type_definition
 ) VALUES (
 	UNHEX('0b7b260b05584ac992494ee548770b4e'),
 	FALSE,
 	'federicojasson',
 	UTC_TIMESTAMP(),
-	'RMN con patrón frontotemporal'
+	'RMN con patrón frontotemporal',
+	'type:boolean;Sí:true;No:false'
 );
 
 INSERT INTO neurocognitive_evaluations (
@@ -209,13 +211,15 @@ INSERT INTO neurocognitive_evaluations (
 	is_erased,
 	creator,
 	creation_datetime,
-	name
+	name,
+	data_type_definition
 ) VALUES (
 	UNHEX('9deea86b950e484f809e532d0a0196a4'),
 	FALSE,
 	'federicojasson',
 	UTC_TIMESTAMP(),
-	'MMSE'
+	'MMSE',
+	'type:integer_range;min:0;max:30'
 );
 
 INSERT INTO laboratory_tests (
@@ -223,13 +227,15 @@ INSERT INTO laboratory_tests (
 	is_erased,
 	creator,
 	creation_datetime,
-	name
+	name,
+	data_type_definition
 ) VALUES (
 	UNHEX('57f76e03c90445049f1e3222a17a72f0'),
 	FALSE,
 	'federicojasson',
 	UTC_TIMESTAMP(),
-	'Triglicéridos'
+	'Triglicéridos',
+	'type:integer_fix_values;Normal:0;Alto:1'
 );
 
 INSERT INTO consultations (
@@ -260,10 +266,12 @@ INSERT INTO consultations (
 
 INSERT INTO consultations_neurocognitive_evaluations (
 	consultation,
-	neurocognitive_evaluation
+	neurocognitive_evaluation,
+	value
 ) VALUES (
 	UNHEX('283db1dad6004f059e527bd9626a1f28'),
-	UNHEX('9deea86b950e484f809e532d0a0196a4')
+	UNHEX('9deea86b950e484f809e532d0a0196a4'),
+	27
 );
 
 INSERT INTO consultations_backgrounds (
@@ -276,18 +284,22 @@ INSERT INTO consultations_backgrounds (
 
 INSERT INTO consultations_image_tests (
 	consultation,
-	image_test
+	image_test,
+	value
 ) VALUES (
 	UNHEX('283db1dad6004f059e527bd9626a1f28'),
-	UNHEX('0b7b260b05584ac992494ee548770b4e')
+	UNHEX('0b7b260b05584ac992494ee548770b4e'),
+	FALSE
 );
 
 INSERT INTO consultations_laboratory_tests (
 	consultation,
-	laboratory_test
+	laboratory_test,
+	value
 ) VALUES (
 	UNHEX('283db1dad6004f059e527bd9626a1f28'),
-	UNHEX('57f76e03c90445049f1e3222a17a72f0')
+	UNHEX('57f76e03c90445049f1e3222a17a72f0'),
+	1
 );
 
 INSERT INTO consultations_medications (
