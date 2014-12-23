@@ -17,13 +17,6 @@
 		var service = this;
 		
 		/*
-		 * TODO: comments
-		 */
-		service.isUndefinedOrNull = function(variable) {
-			return angular.isUndefined(variable) || variable === null;
-		};
-		
-		/*
 		 * Merges two objects and returns the result. The properties of a source
 		 * object are copied into a target object.
 		 * 

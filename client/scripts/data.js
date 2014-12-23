@@ -98,13 +98,16 @@
 					var background = output;
 					var creator = background.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the background in the cache
 					cache.backgrounds[backgroundId] = background;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -112,7 +115,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							background.creator = values[index++];
 						}
@@ -163,13 +166,16 @@
 					var clinicalImpression = output;
 					var creator = clinicalImpression.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the clinical impression in the cache
 					cache.clinicalImpressions[clinicalImpressionId] = clinicalImpression;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -177,7 +183,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							clinicalImpression.creator = values[index++];
 						}
@@ -236,28 +242,40 @@
 					var neurocognitiveEvaluations = consultation.neurocognitiveEvaluations;
 					var treatments = consultation.treatments;
 					
+					// Initializes undefined fields with default values
+					clinicalImpression = (angular.isDefined(clinicalImpression))? clinicalImpression : null;
+					creator = (angular.isDefined(creator))? creator : null;
+					diagnosis = (angular.isDefined(diagnosis))? diagnosis : null;
+					patient = (angular.isDefined(patient))? patient : null;
+					backgrounds = (angular.isDefined(backgrounds))? backgrounds : [];
+					imageTests = (angular.isDefined(imageTests))? imageTests : [];
+					laboratoryTests = (angular.isDefined(laboratoryTests))? laboratoryTests : [];
+					medications = (angular.isDefined(medications))? medications : [];
+					neurocognitiveEvaluations = (angular.isDefined(neurocognitiveEvaluations))? neurocognitiveEvaluations : [];
+					treatments = (angular.isDefined(treatments))? treatments : [];
+					
 					// Stores the consultation in the cache
 					cache.consultations[consultationId] = consultation;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(clinicalImpression)) {
+					if (clinicalImpression !== null) {
 						// Gets the clinical impression
 						promises.push(service.getClinicalImpression(clinicalImpression));
 					}
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
 					
-					if (! utilities.isUndefinedOrNull(diagnosis)) {
+					if (diagnosis !== null) {
 						// Gets the diagnosis
 						promises.push(service.getDiagnosis(diagnosis));
 					}
 					
-					if (! utilities.isUndefinedOrNull(patient)) {
+					if (patient !== null) {
 						// Gets the patient
 						promises.push(service.getPatient(patient));
 					}
@@ -295,22 +313,22 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(clinicalImpression)) {
+						if (clinicalImpression !== null) {
 							// Sets the clinical impression
 							consultation.clinicalImpression = values[index++];
 						}
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							consultation.creator = values[index++];
 						}
 						
-						if (! utilities.isUndefinedOrNull(diagnosis)) {
+						if (diagnosis !== null) {
 							// Sets the diagnosis
 							consultation.diagnosis = values[index++];
 						}
 						
-						if (! utilities.isUndefinedOrNull(patient)) {
+						if (patient !== null) {
 							// Sets the patient
 							consultation.patient = values[index++];
 						}
@@ -390,13 +408,16 @@
 					var diagnosis = output;
 					var creator = diagnosis.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the diagnosis in the cache
 					cache.diagnoses[diagnosisId] = diagnosis;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -404,7 +425,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							diagnosis.creator = values[index++];
 						}
@@ -455,13 +476,17 @@
 					var creator = experiment.creator;
 					var files = experiment.files;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					files = (angular.isDefined(files))? files : [];
+					
 					// Stores the experiment in the cache
 					cache.experiments[experimentId] = experiment;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -474,7 +499,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							experiment.creator = values[index++];
 						}
@@ -529,13 +554,16 @@
 					var file = output;
 					var creator = file.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the file in the cache
 					cache.files[fileId] = file;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -543,7 +571,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							file.creator = values[index++];
 						}
@@ -593,13 +621,16 @@
 					var imageTest = output;
 					var creator = imageTest.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the image test in the cache
 					cache.imageTests[imageTestId] = imageTest;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -607,7 +638,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							imageTest.creator = values[index++];
 						}
@@ -658,13 +689,16 @@
 					var laboratoryTest = output;
 					var creator = laboratoryTest.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the laboratory test in the cache
 					cache.laboratoryTests[laboratoryTestId] = laboratoryTest;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -672,7 +706,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							laboratoryTest.creator = values[index++];
 						}
@@ -722,13 +756,16 @@
 					var medication = output;
 					var creator = medication.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the medication in the cache
 					cache.medications[medicationId] = medication;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -736,7 +773,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							medication.creator = values[index++];
 						}
@@ -787,13 +824,16 @@
 					var neurocognitiveEvaluation = output;
 					var creator = neurocognitiveEvaluation.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the neurocognitive evaluation in the cache
 					cache.neurocognitiveEvaluations[neurocognitiveEvaluationId] = neurocognitiveEvaluation;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -801,7 +841,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							neurocognitiveEvaluation.creator = values[index++];
 						}
@@ -851,13 +891,16 @@
 					var patient = output;
 					var creator = patient.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the patient in the cache
 					cache.patients[patientId] = patient;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -865,7 +908,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							patient.creator = values[index++];
 						}
@@ -919,28 +962,35 @@
 					var report = study.report;
 					var files = study.files;
 					
+					// Initializes undefined fields with default values
+					consultation = (angular.isDefined(consultation))? consultation : null;
+					creator = (angular.isDefined(creator))? creator : null;
+					experiment = (angular.isDefined(experiment))? experiment : null;
+					report = (angular.isDefined(report))? report : null;
+					files = (angular.isDefined(files))? files : [];
+					
 					// Stores the study in the cache
 					cache.studies[studyId] = study;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(consultation)) {
+					if (consultation !== null) {
 						// Gets the consultation
 						promises.push(service.getConsultation(consultation));
 					}
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
 					
-					if (! utilities.isUndefinedOrNull(experiment)) {
+					if (experiment !== null) {
 						// Gets the experiment
 						promises.push(service.getExperiment(experiment));
 					}
 					
-					if (! utilities.isUndefinedOrNull(report)) {
+					if (report !== null) {
 						// Gets the report
 						promises.push(service.getFile(report));
 					}
@@ -953,22 +1003,22 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(consultation)) {
+						if (consultation !== null) {
 							// Sets the consultation
 							study.consultation = values[index++];
 						}
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							study.creator = values[index++];
 						}
 						
-						if (! utilities.isUndefinedOrNull(experiment)) {
+						if (experiment !== null) {
 							// Sets the experiment
 							study.experiment = values[index++];
 						}
 						
-						if (! utilities.isUndefinedOrNull(report)) {
+						if (report !== null) {
 							// Sets the report
 							study.report = values[index++];
 						}
@@ -1023,13 +1073,16 @@
 					var treatment = output;
 					var creator = treatment.creator;
 					
+					// Initializes undefined fields with default values
+					creator = (angular.isDefined(creator))? creator : null;
+					
 					// Stores the treatment in the cache
 					cache.treatments[treatmentId] = treatment;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
 					
-					if (! utilities.isUndefinedOrNull(creator)) {
+					if (creator !== null) {
 						// Gets the creator
 						promises.push(service.getUser(creator));
 					}
@@ -1037,7 +1090,7 @@
 					$q.all(promises).then(function(values) {
 						var index = 0;
 						
-						if (! utilities.isUndefinedOrNull(creator)) {
+						if (creator !== null) {
 							// Sets the creator
 							treatment.creator = values[index++];
 						}
