@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This middleware registers the helpers of the application.
+ * This middleware defines the helpers of the application.
  */
 class HelpersMiddleware extends \Slim\Middleware {
 	
@@ -9,83 +9,108 @@ class HelpersMiddleware extends \Slim\Middleware {
 	 * Executes the middleware.
 	 */
 	public function call() {
-		// Registers the helpers
-		$this->registerHelpers();
+		$container = $this->app->container;
+		
+		// Defines the helpers
+		$container->singleton('authentication', [ $this, 'initializeAuthenticationHelper' ]);
+		$container->singleton('authenticator', [ $this, 'initializeAuthenticatorHelper' ]);
+		$container->singleton('authorizationValidator', [ $this, 'initializeAuthorizationValidatorHelper' ]);
+		$container->singleton('businessLogicDatabase', [ $this, 'initializeBusinessLogicDatabaseHelper' ]);
+		$container->singleton('configurations', [ $this, 'initializeConfigurationsHelper' ]);
+		$container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
+		$container->singleton('data', [ $this, 'initializeDataHelper' ]);
+		$container->singleton('emailBuilder', [ $this, 'initializeEmailBuilderHelper' ]);
+		$container->singleton('inputValidator', [ $this, 'initializeInputValidatorHelper' ]);
+		$container->singleton('services', [ $this, 'initializeServicesHelper' ]);
+		$container->singleton('session', [ $this, 'initializeSessionHelper' ]);
+		$container->singleton('webServerDatabase', [ $this, 'initializeWebServerDatabaseHelper' ]);
 		
 		// Calls the next middleware
 		$this->next->call();
 	}
 	
 	/*
-	 * Registers the helpers.
+	 * Initializes the authentication helper.
 	 */
-	private function registerHelpers() {
-		$container = $this->app->container;
-		
-		// Authentication helper
-		$container->singleton('authentication', function() {
-			return new Authentication();
-		});
-
-		// Authenticator helper
-		$container->singleton('authenticator', function() {
-			return new Authenticator();
-		});
-
-		// Authorization validator helper
-		$container->singleton('authorizationValidator', function() {
-			return new AuthorizationValidator();
-		});
-
-		// Business logic database helper
-		$container->singleton('businessLogicDatabase', function() {
-			return new BusinessLogicDatabase();
-		});
-
-		// Configurations helper
-		$container->singleton('configurations', function() {
-			return new Configurations();
-		});
-
-		// Cryptography helper
-		$container->singleton('cryptography', function() {
-			return new Cryptography();
-		});
-
-		// Data helper
-		$container->singleton('data', function() {
-			return new Data();
-		});
-
-		// Email builder helper
-		$container->singleton('emailBuilder', function() {
-			return new EmailBuilder();
-		});
-
-		// Input validator helper
-		$container->singleton('inputValidator', function() {
-			return new InputValidator();
-		});
-
-		// Services helper
-		$container->singleton('services', function() {
-			return new Services();
-		});
-
-		// Session helper
-		$container->singleton('session', function() {
-			return new Session();
-		});
-
-		// Utilities helper
-		$container->singleton('utilities', function() {
-			return new Utilities();
-		});
-
-		// Web server database helper
-		$container->singleton('webServerDatabase', function() {
-			return new WebServerDatabase();
-		});
+	public function initializeAuthenticationHelper() {
+		return new Authentication();
+	}
+	
+	/*
+	 * Initializes the authenticator helper.
+	 */
+	public function initializeAuthenticatorHelper() {
+		return new Authenticator();
+	}
+	
+	/*
+	 * Initializes the authorization validator helper.
+	 */
+	public function initializeAuthorizationValidatorHelper() {
+		return new AuthorizationValidator();
+	}
+	
+	/*
+	 * Initializes the business logic database helper.
+	 */
+	public function initializeBusinessLogicDatabaseHelper() {
+		return new BusinessLogicDatabase();
+	}
+	
+	/*
+	 * Initializes the configurations helper.
+	 */
+	public function initializeConfigurationsHelper() {
+		return new Configurations();
+	}
+	
+	/*
+	 * Initializes the cryptography helper.
+	 */
+	public function initializeCryptographyHelper() {
+		return new Cryptography();
+	}
+	
+	/*
+	 * Initializes the data helper.
+	 */
+	public function initializeDataHelper() {
+		return new Data();
+	}
+	
+	/*
+	 * Initializes the email builder helper.
+	 */
+	public function initializeEmailBuilderHelper() {
+		return new EmailBuilder();
+	}
+	
+	/*
+	 * Initializes the input validator helper.
+	 */
+	public function initializeInputValidatorHelper() {
+		return new InputValidator();
+	}
+	
+	/*
+	 * Initializes the services helper.
+	 */
+	public function initializeServicesHelper() {
+		return new Services();
+	}
+	
+	/*
+	 * Initializes the session helper.
+	 */
+	public function initializeSessionHelper() {
+		return new Session();
+	}
+	
+	/*
+	 * Initializes the web server database helper.
+	 */
+	public function initializeWebServerDatabaseHelper() {
+		return new WebServerDatabase();
 	}
 	
 }

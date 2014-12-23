@@ -1,0 +1,5 @@
+{
+	"dsn": "mysql:host=localhost;dbname=etrs_web_server;charset=utf8",
+	"username": "etrs_web_server",
+	"password": "password"
+}

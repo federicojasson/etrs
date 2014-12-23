@@ -37,6 +37,9 @@ Prestar atención a las cuestiones de seguridad
 
 
 
+Sesiones: leer http://stackoverflow.com/questions/15510094/securely-creating-and-destroying-login-sessions-in-php
+
+
 
 
 Generar un código de activación, hashearlo y hacerlo el requestId

@@ -8,8 +8,8 @@ class WebServerDatabase extends Database {
 	/*
 	 * Deletes the expired sessions.
 	 * 
-	 * It receives the time in minutes that the sessions can live without
-	 * activity (i.e., their idle lifetime).
+	 * It receives the time in minutes that the sessions can live without activity (i.e.,
+	 * their idle lifetime).
 	 */
 	public function deleteExpiredSessions($sessionIdleLifetime) {
 		// Defines the statement
@@ -56,19 +56,19 @@ class WebServerDatabase extends Database {
 	 * 
 	 * It receives the values to insert.
 	 */
-	public function insertLog($logId, $logType, $logMessage) {
+	public function insertLog($logId, $logLevel, $logMessage) {
 		// Defines the statement
 		$statement = '
 			INSERT INTO logs (
 				id,
 				creation_datetime,
-				type,
+				level,
 				message
 			)
 			VALUES (
 				:logId,
 				UTC_TIMESTAMP(),
-				:logType,
+				:logLevel,
 				:logMessage
 			)
 		';
@@ -76,7 +76,7 @@ class WebServerDatabase extends Database {
 		// Sets the parameters
 		$parameters = [
 			':logId' => $logId,
-			':logType' => $logType,
+			':logLevel' => $logLevel,
 			':logMessage' => $logMessage
 		];
 		
@@ -85,7 +85,7 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
-	 * Inserts or updates a session.
+	 * Inserts (or updates) a session.
 	 * 
 	 * It receives the session's ID and the values to insert/update the row.
 	 */
@@ -145,7 +145,7 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns a session. If it doesn't exist, null is returned.
+	 * Selects and returns a session.
 	 * 
 	 * It receives the session's ID.
 	 */
@@ -153,7 +153,6 @@ class WebServerDatabase extends Database {
 		// Defines the statement
 		$statement = '
 			SELECT
-				id AS id,
 				last_access_datetime AS lastAccessDatetime,
 				data AS data
 			FROM sessions
@@ -170,7 +169,7 @@ class WebServerDatabase extends Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		// Returns the first result, or null if there is none
-		return getFirstElementOrNull($results);
+		return $this->getFirstResultOrNull($results);
 	}
 	
 	/*
@@ -181,7 +180,6 @@ class WebServerDatabase extends Database {
 	protected function connect() {
 		// Gets the configuration of the database
 		$configuration = $this->app->configurations->get('webServerDatabase');
-		
 		$dsn = $configuration['dsn'];
 		$username = $configuration['username'];
 		$password = $configuration['password'];

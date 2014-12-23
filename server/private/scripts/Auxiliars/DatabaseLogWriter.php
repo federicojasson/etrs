@@ -6,16 +6,22 @@
 class DatabaseLogWriter {
 	
 	/*
-	 * The database where the logs are written.
+	 * The cryptography helper.
+	 */
+	private $cryptography;
+	
+	/*
+	 * The database helper through which the logs are written.
 	 */
 	private $database;
 	
 	/*
 	 * Creates an instance of this class.
 	 * 
-	 * It receives the database in which the logs should be written.
+	 * It receives the cryptography and database helpers.
 	 */
-	public function __construct($database) {
+	public function __construct($cryptography, $database) {
+		$this->cryptography = $cryptography;
 		$this->database = $database;
 	}
 	
@@ -27,24 +33,24 @@ class DatabaseLogWriter {
     public function write($message, $level) {
 		$database = $this->database;
 		
-		// Generates an ID for the log
+		// Generate a random ID for the log
 		do {
-			$logId = ''; // TODO: compute id
+			$logId = $this->cryptography->generateRandomId();
 		} while ($database->logExists($logId));
 		
-		// Gets the value of the level
-		$logLevel = getLevelValue($level);
+		// Gets the type of the log
+		$logType = getLogType($level);
 		
 		// Inserts a log in the database
-		$database->insertLog($logId, $logLevel, $message);
+		$database->insertLog($logId, $logType, $message);
     }
 	
 	/*
-	 * Returns the value of a level.
+	 * Returns the type of a log, according to its level.
 	 * 
 	 * It receives the level.
 	 */
-	private function getLevelValue($level) {
+	private function getLogType($level) {
 		switch ($level) {
 			case Log::EMERGENCY: {
 				return 'EM';

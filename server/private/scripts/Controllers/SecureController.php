@@ -27,7 +27,7 @@ abstract class SecureController extends Controller {
 		}
 		
 		if (! $this->isUserAuthorized()) {
-			// The user is not authorized
+			// The user is not authorized to use this service
 			$app->halt(HTTP_STATUS_FORBIDDEN, [
 				'id' => ERROR_ID_UNAUTHORIZED_USER
 			]);

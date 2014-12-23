@@ -13,17 +13,10 @@ class Cryptography extends Helper {
 	}
 	
 	/*
-	 * Generates and returns a UUID v4.
+	 * Generates and returns a random ID.
 	 */
-	public function generateUuidV4() {
-		// Generates 16 random bytes
-		$bytes = $this->generateRandomBytes(16);
-		
-		// Sets the fixed bits of the UUID v4 to meet the RFC 4122 standard
-		$bytes[6] = chr(ord($bytes[6]) & 0x0f | 0x40);
-		$bytes[8] = chr(ord($bytes[8]) & 0x3f | 0x80);
-		
-		return $bytes;
+	public function generateRandomId() {
+		return $this->generateRandomBytes(RANDOM_ID_LENGTH);
 	}
 	
 	/*
@@ -32,18 +25,18 @@ class Cryptography extends Helper {
 	 * It receives the file's path.
 	 */
 	public function hashFile($filePath) {
-		// Applies the MD5 hash function
+		// Applies MD5
 		return md5_file($filePath, true);
 	}
 	
 	/*
 	 * Computes and returns the hash of a password.
 	 * 
-	 * It receives the password and the salt to use.
+	 * It receives the password, the salt and the key derivation iterations.
 	 */
 	public function hashPassword($password, $salt, $iterations) {
-		// Applies the SHA-512 hash function and the PBKDF2 key derivation
-		return hash_pbkdf2(ALGORITHM_HASH_SHA512, $password, $salt, $iterations, 0, true);
+		// Applies SHA-512 and the PBKDF2 key derivation function
+		return hash_pbkdf2('sha512', $password, $salt, $iterations, 0, true);
 	}
 	
 	/*
@@ -52,6 +45,8 @@ class Cryptography extends Helper {
 	 * It receives the length of the sequence.
 	 */
 	private function generateRandomBytes($length) {
+		$cryptographicallyStrong = false;
+		
 		// Generates the random bytes
 		$bytes = openssl_random_pseudo_bytes($length, $cryptographicallyStrong);
 		

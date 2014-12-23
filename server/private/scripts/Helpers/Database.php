@@ -44,7 +44,8 @@ abstract class Database extends Helper {
 	protected abstract function connect();
 	
 	/*
-	 * Executes a prepared statement and returns the results.
+	 * Executes a prepared statement and returns the results, or null if the
+	 * statement is not a query.
 	 * 
 	 * It receives the statement and the parameters to prepare it.
 	 */
@@ -60,22 +61,6 @@ abstract class Database extends Helper {
 		
 		// Fetches and returns the results
 		return $preparedStatement->fetchAll();
-	}
-	
-	/*
-	 * Returns the first result of a query, or null if the query didn't produce
-	 * any.
-	 * 
-	 * It receives an array of query results.
-	 */
-	protected function getFirstResultOrNull($results) {
-		if (count($results) === 0) {
-			// The query didn't produce any result
-			return null;
-		}
-		
-		// Returns the first result
-		return $results[0];
 	}
 	
 	/*

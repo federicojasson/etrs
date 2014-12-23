@@ -9,6 +9,7 @@ require 'private/scripts/Slim/Slim.php';
 
 require 'private/scripts/classes.php';
 require 'private/scripts/constants.php';
+require 'private/scripts/functions.php';
 
 // Initializes the framework
 $app = new \Slim\Slim([
@@ -21,7 +22,7 @@ $app->add(new SessionMiddleware());
 $app->add(new ServicesMiddleware());
 $app->add(new ConfigurationsMiddleware());
 $app->add(new HelpersMiddleware());
-$app->add(new ErrorsMiddleware());
+$app->add(new ErrorHandlersMiddleware());
 $app->add(new ExtensionsMiddleware());
 
 // Serves the incoming request

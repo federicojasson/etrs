@@ -12,8 +12,13 @@ class LogOutController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
+		$app = $this->app;
+		
 		// Logs out the user from the system
-		$this->app->authentication->logOutUser();
+		$app->authentication->logOutUser();
+		
+		// Destroys the session
+		$app->session->destroy();
 	}
 	
 	/*

@@ -22,8 +22,8 @@ class Response extends \Slim\Http\Response {
 	/*
 	 * Sets the body.
 	 * 
-	 * It receives the output to be set. If it is not a string, it tries to
-	 * encode it in JSON format.
+	 * It receives the output to be set. If it is not a string, it encodes it in
+	 * JSON format.
 	 */
     public function setBody($output) {
 		if (is_string($output)) {

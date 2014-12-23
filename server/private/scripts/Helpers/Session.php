@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This helper offers an interface to access the PHP session.
+ * This helper offers an interface to access the session.
  */
 class Session extends Helper {
 	
@@ -21,6 +21,21 @@ class Session extends Helper {
 	 */
 	public function containsData($entryKey) {
 		return isset($_SESSION[$entryKey]);
+	}
+	
+	/*
+	 * Destroys the session entirely. This includes its data and the client's
+	 * cookie associated with it.
+	 */
+	public function destroy() {
+		// Clears all the data entries
+		$_SESSION = array();
+		
+		// Destroys the client's session cookie
+		$this->destroySessionCookie();
+		
+		// Destroys the PHP session
+		session_destroy();
 	}
 	
 	/*
@@ -58,10 +73,29 @@ class Session extends Helper {
 	}
 	
 	/*
-	 * Resumes the PHP session or creates a new one.
+	 * Resumes the session or creates a new one.
 	 */
 	public function start() {
+		// Starts the PHP session
 		session_start();
+	}
+	
+	/*
+	 * Destroys the client's session cookie.
+	 */
+	private function destroySessionCookie() {
+		$name = session_name();
+		$value = ''; // This will clear the cookie's data
+		$expire = time() - 42000; // This will expire the cookie immediately
+		
+		$cookieParameters = session_get_cookie_params();
+		$path = $cookieParameters["path"];
+		$domain = $cookieParameters["domain"];
+		$secure = $cookieParameters["secure"];
+		$httpOnly = $cookieParameters["httponly"];
+		
+		// Sends a new cookie to the client to override the old one
+		setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
 	}
 	
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This helper facilitates the obtaining data of the business logic.
+ * This helper facilitates obtaining business logic data.
  * 
  * It offers a data cache to reduce the database queries.
  */
@@ -13,265 +13,244 @@ class Data extends Helper {
 	private $cache;
 	
 	/*
-	 * Returns a consultation.
+	 * Returns a background, or null if it doesn't exists or has been erased.
 	 * 
-	 * It receives the consultation's ID and the fields to get.
+	 * It receives the background's ID.
 	 */
-	public function getConsultation($consultationId, $fields) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
+	public function getBackground($backgroundId) {
+		$backgrounds = &$this->cache['backgrounds'];
+		
+		if (! isset($backgrounds[$backgroundId])) {
+			// The cache entry has not been initialized yet
+			$backgrounds[$backgroundId] = $this->loadBackground($backgroundId);
+		}
+		
+		// Returns the background from the cache
+		return $backgrounds[$backgroundId];
+	}
+	
+	/*
+	 * Returns a clinical impression, or null if it doesn't exists or has been
+	 * erased.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function getClinicalImpression($clinicalImpressionId) {
+		$clinicalImpressions = &$this->cache['clinicalImpressions'];
+		
+		if (! isset($clinicalImpressions[$clinicalImpressionId])) {
+			// The cache entry has not been initialized yet
+			$clinicalImpressions[$clinicalImpressionId] = $this->loadClinicalImpression($clinicalImpressionId);
+		}
+		
+		// Returns the clinical impression from the cache
+		return $clinicalImpressions[$clinicalImpressionId];
+	}
+	
+	/*
+	 * Returns a consultation, or null if it doesn't exists or has been erased.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultation($consultationId) {
 		$consultations = &$this->cache['consultations'];
 		
 		if (! isset($consultations[$consultationId])) {
 			// The cache entry has not been initialized yet
-			$this->initializeConsultationCacheEntry($consultationId);
+			$consultations[$consultationId] = $this->loadConsultation($consultationId);
 		}
 		
-		// Gets the consultation from the cache
-		$consultation = &$consultations[$consultationId];
-		
-		if (is_null($consultation)) {
-			// The consultation doesn't exist
-			return null;
-		}
-		
-		// Defines the load functions for the different fields
-		$fieldLoadFunctions = [
-			'imageAnalysis' => [ $businessLogicDatabase, 'selectConsultationImageAnalysis' ],
-			'laboratoryResults' => [ $businessLogicDatabase, 'selectConsultationLaboratoryResults' ],
-			'mainData' => [ $businessLogicDatabase, 'selectConsultationMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectConsultationMetadata' ],
-			'neurocognitiveAssessment' => [ $businessLogicDatabase, 'selectConsultationNeurocognitiveAssessment' ],
-			'patientBackground' => [ $businessLogicDatabase, 'selectConsultationPatientBackground' ],
-			'patientMedications' => [ $businessLogicDatabase, 'selectConsultationPatientMedications' ],
-			'treatments' => [ $businessLogicDatabase, 'selectConsultationTreatments' ]
-		];
-		
-		// Loads the requested fields that have not been loaded yet
-		foreach ($fieldLoadFunctions as $field => $loadFunction) {
-			if (in_array($field, $fields) && ! isset($consultation[$field])) {
-				$consultation[$field] = call_user_func($loadFunction, $consultationId);
-				
-				if ($field === 'metadata') {
-					// Checks the metadata of the consultation
-					$this->checkConsultationMetadata($consultationId);
-				}
-			}
-		}
-		
-		return $consultation;
+		// Returns the consultation from the cache
+		return $consultations[$consultationId];
 	}
 	
 	/*
-	 * Returns an experiment.
+	 * Returns a diagnosis, or null if it doesn't exists or has been erased.
 	 * 
-	 * It receives the experiment's ID and the fields to get.
+	 * It receives the diagnosis's ID.
 	 */
-	public function getExperiment($experimentId, $fields) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
+	public function getDiagnosis($diagnosisId) {
+		$diagnoses = &$this->cache['diagnoses'];
+		
+		if (! isset($diagnoses[$diagnosisId])) {
+			// The cache entry has not been initialized yet
+			$diagnoses[$diagnosisId] = $this->loadDiagnosis($diagnosisId);
+		}
+		
+		// Returns the diagnosis from the cache
+		return $diagnoses[$diagnosisId];
+	}
+	
+	/*
+	 * Returns an experiment, or null if it doesn't exists or has been erased.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function getExperiment($experimentId) {
 		$experiments = &$this->cache['experiments'];
 		
 		if (! isset($experiments[$experimentId])) {
 			// The cache entry has not been initialized yet
-			$this->initializeExperimentCacheEntry($experimentId);
+			$experiments[$experimentId] = $this->loadExperiment($experimentId);
 		}
 		
-		// Gets the experiment from the cache
-		$experiment = &$experiments[$experimentId];
-		
-		if (is_null($experiment)) {
-			// The experiment doesn't exist
-			return null;
-		}
-		
-		// Defines the load functions for the different fields
-		$fieldLoadFunctions = [
-			'files' => [ $businessLogicDatabase, 'selectNonErasedExperimentFiles' ],
-			'mainData' => [ $businessLogicDatabase, 'selectExperimentMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectExperimentMetadata' ]
-		];
-		
-		// Loads the requested fields that have not been loaded yet
-		foreach ($fieldLoadFunctions as $field => $loadFunction) {
-			if (in_array($field, $fields) && ! isset($experiment[$field])) {
-				$experiment[$field] = call_user_func($loadFunction, $experimentId);
-				
-				if ($field === 'metadata') {
-					// Checks the metadata of the experiment
-					$this->checkExperimentMetadata($experimentId);
-				}
-			}
-		}
-		
-		return $experiment;
+		// Returns the experiment from the cache
+		return $experiments[$experimentId];
 	}
 	
 	/*
-	 * Returns a file.
+	 * Returns a file, or null if it doesn't exists or has been erased.
 	 * 
-	 * It receives the file's ID and the fields to get.
+	 * It receives the file's ID.
 	 */
-	public function getFile($fileId, $fields) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
+	public function getFile($fileId) {
 		$files = &$this->cache['files'];
 		
 		if (! isset($files[$fileId])) {
 			// The cache entry has not been initialized yet
-			$this->initializeFileCacheEntry($fileId);
+			$files[$fileId] = $this->loadFile($fileId);
 		}
 		
-		// Gets the file from the cache
-		$file = &$files[$fileId];
-		
-		if (is_null($file)) {
-			// The file doesn't exist
-			return null;
-		}
-		
-		// Defines the load functions for the different fields
-		$fieldLoadFunctions = [
-			'mainData' => [ $businessLogicDatabase, 'selectFileMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectFileMetadata' ]
-		];
-		
-		// Loads the requested fields that have not been loaded yet
-		foreach ($fieldLoadFunctions as $field => $loadFunction) {
-			if (in_array($field, $fields) && ! isset($file[$field])) {
-				$file[$field] = call_user_func($loadFunction, $fileId);
-				
-				if ($field === 'metadata') {
-					// Checks the metadata of the file
-					$this->checkFileMetadata($fileId);
-				}
-			}
-		}
-		
-		return $file;
+		// Returns the file from the cache
+		return $files[$fileId];
 	}
 	
 	/*
-	 * Returns a patient.
+	 * Returns an image test, or null if it doesn't exists or has been erased.
 	 * 
-	 * It receives the patient's ID and the fields to get.
+	 * It receives the image test's ID.
 	 */
-	public function getPatient($patientId, $fields) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
+	public function getImageTest($imageTestId) {
+		$imageTests = &$this->cache['imageTests'];
+		
+		if (! isset($imageTests[$imageTestId])) {
+			// The cache entry has not been initialized yet
+			$imageTests[$imageTestId] = $this->loadImageTest($imageTestId);
+		}
+		
+		// Returns the image test from the cache
+		return $imageTests[$imageTestId];
+	}
+	
+	/*
+	 * Returns a laboratory test, or null if it doesn't exists or has been
+	 * erased.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function getLaboratoryTest($laboratoryTestId) {
+		$laboratoryTests = &$this->cache['laboratoryTests'];
+		
+		if (! isset($laboratoryTests[$laboratoryTestId])) {
+			// The cache entry has not been initialized yet
+			$laboratoryTests[$laboratoryTestId] = $this->loadLaboratoryTest($laboratoryTestId);
+		}
+		
+		// Returns the laboratory test from the cache
+		return $laboratoryTests[$laboratoryTestId];
+	}
+	
+	/*
+	 * Returns a medication, or null if it doesn't exists or has been erased.
+	 * 
+	 * It receives the medication's ID.
+	 */
+	public function getMedication($medicationId) {
+		$medications = &$this->cache['medications'];
+		
+		if (! isset($medications[$medicationId])) {
+			// The cache entry has not been initialized yet
+			$medications[$medicationId] = $this->loadMedication($medicationId);
+		}
+		
+		// Returns the medication from the cache
+		return $medications[$medicationId];
+	}
+	
+	/*
+	 * Returns a neurocognitive evaluation, or null if it doesn't exists or has
+	 * been erased.
+	 * 
+	 * It receives the neurocognitive evaluation's ID.
+	 */
+	public function getNeurocognitiveEvaluation($neurocognitiveEvaluationId) {
+		$neurocognitiveEvaluations = &$this->cache['neurocognitiveEvaluations'];
+		
+		if (! isset($neurocognitiveEvaluations[$neurocognitiveEvaluationId])) {
+			// The cache entry has not been initialized yet
+			$neurocognitiveEvaluations[$neurocognitiveEvaluationId] = $this->loadNeurocognitiveEvaluation($neurocognitiveEvaluationId);
+		}
+		
+		// Returns the neurocognitive evaluation from the cache
+		return $neurocognitiveEvaluations[$neurocognitiveEvaluationId];
+	}
+	
+	/*
+	 * Returns a patient, or null if it doesn't exists or has been erased.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function getPatient($patientId) {
 		$patients = &$this->cache['patients'];
 		
 		if (! isset($patients[$patientId])) {
 			// The cache entry has not been initialized yet
-			$this->initializePatientCacheEntry($patientId);
+			$patients[$patientId] = $this->loadPatient($patientId);
 		}
 		
-		// Gets the patient from the cache
-		$patient = &$patients[$patientId];
-		
-		if (is_null($patient)) {
-			// The patient doesn't exist
-			return null;
-		}
-		
-		// Defines the load functions for the different fields
-		$fieldLoadFunctions = [
-			'mainData' => [ $businessLogicDatabase, 'selectPatientMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectPatientMetadata' ]
-		];
-		
-		// Loads the requested fields that have not been loaded yet
-		foreach ($fieldLoadFunctions as $field => $loadFunction) {
-			if (in_array($field, $fields) && ! isset($patient[$field])) {
-				$patient[$field] = call_user_func($loadFunction, $patientId);
-				
-				if ($field === 'metadata') {
-					// Checks the metadata of the patient
-					$this->checkPatientMetadata($patientId);
-				}
-			}
-		}
-		
-		return $patient;
+		// Returns the patient from the cache
+		return $patients[$patientId];
 	}
 	
 	/*
-	 * Returns a study.
+	 * Returns a study, or null if it doesn't exists or has been erased.
 	 * 
-	 * It receives the study's ID and the fields to get.
+	 * It receives the study's ID.
 	 */
-	public function getStudy($studyId, $fields) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
+	public function getStudy($studyId) {
 		$studies = &$this->cache['studies'];
 		
 		if (! isset($studies[$studyId])) {
 			// The cache entry has not been initialized yet
-			$this->initializeStudyCacheEntry($studyId);
+			$studies[$studyId] = $this->loadStudy($studyId);
 		}
 		
-		// Gets the study from the cache
-		$study = &$studies[$studyId];
-		
-		if (is_null($study)) {
-			// The study doesn't exist
-			return null;
-		}
-		
-		// Defines the load functions for the different fields
-		$fieldLoadFunctions = [
-			'files' => [ $businessLogicDatabase, 'selectNonErasedStudyFiles' ],
-			'mainData' => [ $businessLogicDatabase, 'selectStudyMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectStudyMetadata' ]
-		];
-		
-		// Loads the requested fields that have not been loaded yet
-		foreach ($fieldLoadFunctions as $field => $loadFunction) {
-			if (in_array($field, $fields) && ! isset($study[$field])) {
-				$study[$field] = call_user_func($loadFunction, $studyId);
-				
-				if ($field === 'metadata') {
-					// Checks the metadata of the study
-					$this->checkStudyMetadata($studyId);
-				}
-			}
-		}
-		
-		return $study;
+		// Returns the study from the cache
+		return $studies[$studyId];
 	}
 	
 	/*
-	 * Returns a user.
+	 * Returns a treatment, or null if it doesn't exists or has been erased.
 	 * 
-	 * It receives the user's ID and the fields to get.
+	 * It receives the treatment's ID.
 	 */
-	public function getUser($userId, $fields) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
+	public function getTreatment($treatmentId) {
+		$treatments = &$this->cache['treatments'];
+		
+		if (! isset($treatments[$treatmentId])) {
+			// The cache entry has not been initialized yet
+			$treatments[$treatmentId] = $this->loadTreatment($treatmentId);
+		}
+		
+		// Returns the treatment from the cache
+		return $treatments[$treatmentId];
+	}
+	
+	/*
+	 * Returns a user, or null if it doesn't exists or has been erased.
+	 * 
+	 * It receives the user's ID.
+	 */
+	public function getUser($userId) {
 		$users = &$this->cache['users'];
 		
 		if (! isset($users[$userId])) {
 			// The cache entry has not been initialized yet
-			$this->initializeUserCacheEntry($userId);
+			$users[$userId] = $this->loadUser($userId);
 		}
 		
-		// Gets the user from the cache
-		$user = &$users[$userId];
-		
-		if (is_null($user)) {
-			// The user doesn't exist
-			return null;
-		}
-		
-		// Defines the load functions for the different fields
-		$fieldLoadFunctions = [
-			'authenticationData' => [ $businessLogicDatabase, 'selectUserAuthenticationData' ],
-			'mainData' => [ $businessLogicDatabase, 'selectUserMainData' ],
-			'metadata' => [ $businessLogicDatabase, 'selectUserMetadata' ]
-		];
-		
-		// Loads the requested fields that have not been loaded yet
-		foreach ($fieldLoadFunctions as $field => $loadFunction) {
-			if (in_array($field, $fields) && ! isset($user[$field])) {
-				$user[$field] = call_user_func($loadFunction, $userId);
-			}
-		}
-		
-		return $user;
+		// Returns the user from the cache
+		return $users[$userId];
 	}
 	
 	/*
@@ -280,236 +259,420 @@ class Data extends Helper {
 	protected function initialize() {
 		// Initializes the cache
 		$this->cache = [
+			'backgrounds' => [],
+			'clinicalImpressions' => [],
 			'consultations' => [],
+			'diagnoses' => [],
 			'experiments' => [],
 			'files' => [],
+			'imageTests' => [],
+			'laboratoryTests' => [],
+			'medications' => [],
+			'neurocognitiveEvaluations' => [],
 			'patients' => [],
 			'studies' => [],
+			'treatments' => [],
 			'users' => []
 		];
 	}
 	
 	/*
-	 * Checks if the data pointed by a consultation's metadata exist. It
-	 * nullifies those that don't.
+	 * Loads a background and returns it. If it doesn't exist or has been
+	 * erased, null is returned.
+	 * 
+	 * It receives the background's ID.
+	 */
+	private function loadBackground($backgroundId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the background
+		$background = $businessLogicDatabase->selectNonErasedBackground($backgroundId);
+		
+		if (is_null($background)) {
+			// The background doesn't exist or has been erased
+			return null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($background['creator'])) {
+			// The creator doesn't exist or has been erased
+			$background['creator'] = null;
+		}
+		
+		return $background;
+	}
+	
+	/*
+	 * Loads a clinical impression and returns it. If it doesn't exist or has
+	 * been erased, null is returned.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	private function loadClinicalImpression($clinicalImpressionId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the clinical impression
+		$clinicalImpression = $businessLogicDatabase->selectNonErasedClinicalImpression($clinicalImpressionId);
+		
+		if (is_null($clinicalImpression)) {
+			// The clinical impression doesn't exist or has been erased
+			return null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($clinicalImpression['creator'])) {
+			// The creator doesn't exist or has been erased
+			$clinicalImpression['creator'] = null;
+		}
+		
+		return $clinicalImpression;
+	}
+	
+	/*
+	 * Loads a consultation and returns it. If it doesn't exist or has been
+	 * erased, null is returned.
 	 * 
 	 * It receives the consultation's ID.
 	 */
-	private function checkConsultationMetadata($consultationId) {
+	private function loadConsultation($consultationId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$consultationMetadata = &$this->cache['consultations'][$consultationId]['metadata'];
-
-		if (! $businessLogicDatabase->nonErasedUserExists($consultationMetadata['creator'])) {
-			// The user doesn't exist or has been erased
-			$consultationMetadata['creator'] = null;
-		}
-
-		if (! $businessLogicDatabase->nonErasedPatientExists($consultationMetadata['patient'])) {
-			// The patient doesn't exist or has been erased
-			$consultationMetadata['patient'] = null;
-		}
-	}
-	
-	/*
-	 * Checks if the data pointed by an experiment's metadata exist. It
-	 * nullifies those that don't.
-	 * 
-	 * It receives the experiment's ID.
-	 */
-	private function checkExperimentMetadata($experimentId) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$experimentMetadata = &$this->cache['experiments'][$experimentId]['metadata'];
-
-		if (! $businessLogicDatabase->nonErasedUserExists($experimentMetadata['creator'])) {
-			// The user doesn't exist or has been erased
-			$experimentMetadata['creator'] = null;
-		}
-	}
-	
-	/*
-	 * Checks if the data pointed by a file's metadata exist. It nullifies those
-	 * that don't.
-	 * 
-	 * It receives the file's ID.
-	 */
-	private function checkFileMetadata($fileId) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$fileMetadata = &$this->cache['files'][$fileId]['metadata'];
-
-		if (! $businessLogicDatabase->nonErasedUserExists($fileMetadata['creator'])) {
-			// The user doesn't exist or has been erased
-			$fileMetadata['creator'] = null;
-		}
-	}
-	
-	/*
-	 * Checks if the data pointed by a patient's metadata exist. It nullifies
-	 * those that don't.
-	 * 
-	 * It receives the patient's ID.
-	 */
-	private function checkPatientMetadata($patientId) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$patientMetadata = &$this->cache['patients'][$patientId]['metadata'];
-
-		if (! $businessLogicDatabase->nonErasedUserExists($patientMetadata['creator'])) {
-			// The user doesn't exist or has been erased
-			$patientMetadata['creator'] = null;
-		}
-	}
-	
-	/*
-	 * Checks if the data pointed by a study's metadata exist. It nullifies
-	 * those that don't.
-	 * 
-	 * It receives the study's ID.
-	 */
-	private function checkStudyMetadata($studyId) {
-		$businessLogicDatabase = $this->app->businessLogicDatabase;
-		$studyMetadata = &$this->cache['studies'][$studyId]['metadata'];
-
-		if (! $businessLogicDatabase->nonErasedConsultationExists($studyMetadata['consultation'])) {
+		
+		// Selects the consultation
+		$consultation = $businessLogicDatabase->selectNonErasedConsultation($consultationId);
+		
+		if (is_null($consultation)) {
 			// The consultation doesn't exist or has been erased
-			$studyMetadata['consultation'] = null;
+			return null;
 		}
-
-		if (! $businessLogicDatabase->nonErasedUserExists($studyMetadata['creator'])) {
-			// The user doesn't exist or has been erased
-			$studyMetadata['creator'] = null;
-		}
-
-		if (! $businessLogicDatabase->nonErasedExperimentExists($studyMetadata['experiment'])) {
-			// The experiment doesn't exist or has been erased
-			$studyMetadata['experiment'] = null;
-		}
-
-		$studyReport = $studyMetadata['report'];
-		if (! is_null($studyReport)) {
-			if (! $businessLogicDatabase->nonErasedFileExists($studyReport)) {
-				// The file doesn't exist or has been erased
-				$studyMetadata['report'] = null;
+		
+		$consultationClinicalImpression = $consultation['clinicalImpression'];
+		if (! is_null($consultationClinicalImpression)) {
+			if (! $businessLogicDatabase->nonErasedClinicalImpressionExists($consultationClinicalImpression)) {
+				// The clinical impression doesn't exist or has been erased
+				$consultation['clinicalImpression'] = null;
 			}
 		}
-	}
-	
-	/*
-	 * Initializes the cache entry of a consultation.
-	 * 
-	 * It receives the consultation's ID.
-	 */
-	private function initializeConsultationCacheEntry($consultationId) {
-		// Sets the cache entry's default value
-		$cacheEntry = null;
-
-		if ($this->app->businessLogicDatabase->nonErasedConsultationExists($consultationId)) {
-			// The consultation exists and has not been erased
-			$cacheEntry = [
-				'id' => $consultationId
-			];
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($consultation['creator'])) {
+			// The creator doesn't exist or has been erased
+			$consultation['creator'] = null;
 		}
 		
-		// Initializes the cache entry
-		$this->cache['consultations'][$consultationId] = $cacheEntry;
+		$consultationDiagnosis = $consultation['diagnosis'];
+		if (! is_null($consultationDiagnosis)) {
+			if (! $businessLogicDatabase->nonErasedDiagnosisExists($consultationDiagnosis)) {
+				// The diagnosis doesn't exist or has been erased
+				$consultation['diagnosis'] = null;
+			}
+		}
+		
+		if (! $businessLogicDatabase->nonErasedPatientExists($consultation['patient'])) {
+			// The patient doesn't exist or has been erased
+			$consultation['patient'] = null;
+		}
+		
+		// Loads the consultation's backgrounds
+		$consultation['backgrounds'] = $businessLogicDatabase->selectConsultationNonErasedBackgrounds($consultationId);
+		
+		// Loads the consultation's image tests
+		$consultation['imageTests'] = $businessLogicDatabase->selectConsultationNonErasedImageTests($consultationId);
+		
+		// Loads the consultation's laboratory tests
+		$consultation['laboratoryTests'] = $businessLogicDatabase->selectConsultationNonErasedLaboratoryTests($consultationId);
+		
+		// Loads the consultation's medications
+		$consultation['medications'] = $businessLogicDatabase->selectConsultationNonErasedMedications($consultationId);
+		
+		// Loads the consultation's neurocognitive evaluations
+		$consultation['neurocognitiveEvaluations'] = $businessLogicDatabase->selectConsultationNonErasedNeurocognitiveEvaluations($consultationId);
+		
+		// Loads the consultation's treatments
+		$consultation['treatments'] = $businessLogicDatabase->selectConsultationNonErasedTreatments($consultationId);
+		
+		return $consultation;
 	}
 	
 	/*
-	 * Initializes the cache entry of an experiment.
+	 * Loads a diagnosis and returns it. If it doesn't exist or has been erased,
+	 * null is returned.
+	 * 
+	 * It receives the diagnosis's ID.
+	 */
+	private function loadDiagnosis($diagnosisId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the diagnosis
+		$diagnosis = $businessLogicDatabase->selectNonErasedDiagnosis($diagnosisId);
+		
+		if (is_null($diagnosis)) {
+			// The diagnosis doesn't exist or has been erased
+			return null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($diagnosis['creator'])) {
+			// The creator doesn't exist or has been erased
+			$diagnosis['creator'] = null;
+		}
+		
+		return $diagnosis;
+	}
+	
+	/*
+	 * Loads an experiment and returns it. If it doesn't exist or has been
+	 * erased, null is returned.
 	 * 
 	 * It receives the experiment's ID.
 	 */
-	private function initializeExperimentCacheEntry($experimentId) {
-		// Sets the cache entry's default value
-		$cacheEntry = null;
-
-		if ($this->app->businessLogicDatabase->nonErasedExperimentExists($experimentId)) {
-			// The experiment exists and has not been erased
-			$cacheEntry = [
-				'id' => $experimentId
-			];
+	private function loadExperiment($experimentId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the experiment
+		$experiment = $businessLogicDatabase->selectNonErasedExperiment($experimentId);
+		
+		if (is_null($experiment)) {
+			// The experiment doesn't exist or has been erased
+			return null;
 		}
 		
-		// Initializes the cache entry
-		$this->cache['experiments'][$experimentId] = $cacheEntry;
+		if (! $businessLogicDatabase->nonErasedUserExists($experiment['creator'])) {
+			// The creator doesn't exist or has been erased
+			$experiment['creator'] = null;
+		}
+		
+		// Loads the experiment's files
+		$experiment['files'] = $businessLogicDatabase->selectExperimentNonErasedFiles($experimentId);
+		
+		return $experiment;
 	}
 	
 	/*
-	 * Initializes the cache entry of a file.
+	 * Loads a file and returns it. If it doesn't exist or has been erased, null
+	 * is returned.
 	 * 
 	 * It receives the file's ID.
 	 */
-	private function initializeFileCacheEntry($fileId) {
-		// Sets the cache entry's default value
-		$cacheEntry = null;
-
-		if ($this->app->businessLogicDatabase->nonErasedFileExists($fileId)) {
-			// The file exists and has not been erased
-			$cacheEntry = [
-				'id' => $fileId
-			];
+	private function loadFile($fileId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the file
+		$file = $businessLogicDatabase->selectNonErasedFile($fileId);
+		
+		if (is_null($file)) {
+			// The file doesn't exist or has been erased
+			return null;
 		}
 		
-		// Initializes the cache entry
-		$this->cache['files'][$fileId] = $cacheEntry;
+		if (! $businessLogicDatabase->nonErasedUserExists($file['creator'])) {
+			// The creator doesn't exist or has been erased
+			$file['creator'] = null;
+		}
+		
+		return $file;
 	}
 	
 	/*
-	 * Initializes the cache entry of a patient.
+	 * Loads an image test and returns it. If it doesn't exist or has been
+	 * erased, null is returned.
+	 * 
+	 * It receives the image test's ID.
+	 */
+	private function loadImageTest($imageTestId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the image test
+		$imageTest = $businessLogicDatabase->selectNonErasedImageTest($imageTestId);
+		
+		if (is_null($imageTest)) {
+			// The image test doesn't exist or has been erased
+			return null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($imageTest['creator'])) {
+			// The creator doesn't exist or has been erased
+			$imageTest['creator'] = null;
+		}
+		
+		return $imageTest;
+	}
+	
+	/*
+	 * Loads a laboratory test and returns it. If it doesn't exist or has been
+	 * erased, null is returned.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	private function loadLaboratoryTest($laboratoryTestId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the laboratory test
+		$laboratoryTest = $businessLogicDatabase->selectNonErasedLaboratoryTest($laboratoryTestId);
+		
+		if (is_null($laboratoryTest)) {
+			// The laboratory test doesn't exist or has been erased
+			return null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($laboratoryTest['creator'])) {
+			// The creator doesn't exist or has been erased
+			$laboratoryTest['creator'] = null;
+		}
+		
+		return $laboratoryTest;
+	}
+	
+	/*
+	 * Loads a medication and returns it. If it doesn't exist or has been
+	 * erased, null is returned.
+	 * 
+	 * It receives the medication's ID.
+	 */
+	private function loadMedication($medicationId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the medication
+		$medication = $businessLogicDatabase->selectNonErasedMedication($medicationId);
+		
+		if (is_null($medication)) {
+			// The medication doesn't exist or has been erased
+			return null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($medication['creator'])) {
+			// The creator doesn't exist or has been erased
+			$medication['creator'] = null;
+		}
+		
+		return $medication;
+	}
+	
+	/*
+	 * Loads a neurocognitive evaluation and returns it. If it doesn't exist or
+	 * has been erased, null is returned.
+	 * 
+	 * It receives the neurocognitive evaluation's ID.
+	 */
+	private function loadNeurocognitiveEvaluation($neurocognitiveEvaluationId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the neurocognitive evaluation
+		$neurocognitiveEvaluation = $businessLogicDatabase->selectNonErasedNeurocognitiveEvaluation($neurocognitiveEvaluationId);
+		
+		if (is_null($neurocognitiveEvaluation)) {
+			// The neurocognitive evaluation doesn't exist or has been erased
+			return null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($neurocognitiveEvaluation['creator'])) {
+			// The creator doesn't exist or has been erased
+			$neurocognitiveEvaluation['creator'] = null;
+		}
+		
+		return $neurocognitiveEvaluation;
+	}
+	
+	/*
+	 * Loads a patient and returns it. If it doesn't exist or has been erased,
+	 * null is returned.
 	 * 
 	 * It receives the patient's ID.
 	 */
-	private function initializePatientCacheEntry($patientId) {
-		// Sets the cache entry's default value
-		$cacheEntry = null;
-
-		if ($this->app->businessLogicDatabase->nonErasedPatientExists($patientId)) {
-			// The patient exists and has not been erased
-			$cacheEntry = [
-				'id' => $patientId
-			];
+	private function loadPatient($patientId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the patient
+		$patient = $businessLogicDatabase->selectNonErasedPatient($patientId);
+		
+		if (is_null($patient)) {
+			// The patient doesn't exist or has been erased
+			return null;
 		}
 		
-		// Initializes the cache entry
-		$this->cache['patients'][$patientId] = $cacheEntry;
+		if (! $businessLogicDatabase->nonErasedUserExists($patient['creator'])) {
+			// The creator doesn't exist or has been erased
+			$patient['creator'] = null;
+		}
+		
+		return $patient;
 	}
 	
 	/*
-	 * Initializes the cache entry of a study.
+	 * Loads a study and returns it. If it doesn't exist or has been erased,
+	 * null is returned.
 	 * 
 	 * It receives the study's ID.
 	 */
-	private function initializeStudyCacheEntry($studyId) {
-		// Sets the cache entry's default value
-		$cacheEntry = null;
-
-		if ($this->app->businessLogicDatabase->nonErasedStudyExists($studyId)) {
-			// The study exists and has not been erased
-			$cacheEntry = [
-				'id' => $studyId
-			];
+	private function loadStudy($studyId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the study
+		$study = $businessLogicDatabase->selectNonErasedStudy($studyId);
+		
+		if (is_null($study)) {
+			// The study doesn't exist or has been erased
+			return null;
 		}
 		
-		// Initializes the cache entry
-		$this->cache['studies'][$studyId] = $cacheEntry;
+		if (! $businessLogicDatabase->nonErasedConsultationExists($study['consultation'])) {
+			// The consultation doesn't exist or has been erased
+			$study['consultation'] = null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($study['creator'])) {
+			// The creator doesn't exist or has been erased
+			$study['creator'] = null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedExperimentExists($study['experiment'])) {
+			// The experiment doesn't exist or has been erased
+			$study['experiment'] = null;
+		}
+		
+		$studyReport = $study['report'];
+		if (! is_null($studyReport)) {
+			if (! $businessLogicDatabase->nonErasedFileExists($studyReport)) {
+				// The report doesn't exist or has been erased
+				$study['report'] = null;
+			}
+		}
+		
+		// Loads the study's files
+		$study['files'] = $businessLogicDatabase->selectStudyNonErasedFiles($studyId);
+		
+		return $study;
 	}
 	
 	/*
-	 * Initializes the cache entry of a user.
+	 * Loads a treatment and returns it. If it doesn't exist or has been erased,
+	 * null is returned.
+	 * 
+	 * It receives the treatment's ID.
+	 */
+	private function loadTreatment($treatmentId) {
+		$businessLogicDatabase = $this->app->businessLogicDatabase;
+		
+		// Selects the treatment
+		$treatment = $businessLogicDatabase->selectNonErasedTreatment($treatmentId);
+		
+		if (is_null($treatment)) {
+			// The treatment doesn't exist or has been erased
+			return null;
+		}
+		
+		if (! $businessLogicDatabase->nonErasedUserExists($treatment['creator'])) {
+			// The creator doesn't exist or has been erased
+			$treatment['creator'] = null;
+		}
+		
+		return $treatment;
+	}
+	
+	/*
+	 * Loads a user and returns it. If it doesn't exist or has been erased, null
+	 * is returned.
 	 * 
 	 * It receives the user's ID.
 	 */
-	private function initializeUserCacheEntry($userId) {
-		// Sets the cache entry's default value
-		$cacheEntry = null;
-		
-		if ($this->app->businessLogicDatabase->nonErasedUserExists($userId)) {
-			// The user exists and has not been erased
-			$cacheEntry = [
-				'id' => $userId
-			];
-		}
-		
-		// Initializes the cache entry
-		$this->cache['users'][$userId] = $cacheEntry;
+	private function loadUser($userId) {
+		// Selects the user and returns it
+		return $this->app->businessLogicDatabase->selectNonErasedUser($userId);
 	}
 	
 }

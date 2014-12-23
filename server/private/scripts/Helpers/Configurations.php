@@ -23,7 +23,6 @@ class Configurations extends Helper {
 	public function get($configurationId) {
 		$configurations = &$this->configurations;
 		
-		// Lazy loading
 		if (! isset($configurations[$configurationId])) {
 			// The configuration has not been loaded yet
 			$this->load($configurationId);
@@ -40,7 +39,7 @@ class Configurations extends Helper {
 		$this->configurations = [];
 		
 		// Initializes the file paths
-		$this->filePaths = $this->readJsonFile(FILE_PATH_CONFIGURATIONS_FILE_PATHS);
+		$this->filePaths = readJsonFile(FILE_PATH_CONFIGURATIONS_FILE_PATHS);
 	}
 	
 	/*
@@ -53,20 +52,7 @@ class Configurations extends Helper {
 		$filePath = $this->filePaths[$configurationId];
 		
 		// Reads the file and stores the result
-		$this->configurations[$configurationId] = $this->readJsonFile($filePath);
-	}
-	
-	/*
-	 * Reads the content of a JSON file, decodes it and returns the result.
-	 * 
-	 * It receives the file path.
-	 */
-	private function readJsonFile($filePath) {
-		// Gets the file's content
-		$fileContent = file_get_contents($filePath);
-		
-		// Decodes the file's content and returns the result
-		return json_decode($fileContent, true);
+		$this->configurations[$configurationId] = readJsonFile($filePath);
 	}
 	
 }

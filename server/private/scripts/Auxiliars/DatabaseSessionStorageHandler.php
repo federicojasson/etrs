@@ -7,14 +7,14 @@
 class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	
 	/*
-	 * The database where the session data is stored.
+	 * The database helper through which the session data is accessed.
 	 */
 	private $database;
 	
 	/*
 	 * Creates an instance of this class.
 	 * 
-	 * It receives the database in which the session data should be stored.
+	 * It receives the database helper.
 	 */
 	public function __construct($database) {
 		$this->database = $database;
@@ -47,11 +47,11 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	/*
 	 * Invoked periodically in order to purge old sessions' data.
 	 * 
-	 * It receives the idle lifetime of the sessions.
+	 * It receives the idle lifetime of a session.
 	 * 
 	 * It returns whether the operation succeeded.
 	 */
-	public function onGarbageCollection($idleLifetime) {
+	public function onGarbageCollection($sessionIdleLifetime) {
 		// Deletes the expired sessions from the database
 		$this->database->deleteExpiredSessions(SESSION_IDLE_LIFETIME);
 		
@@ -66,7 +66,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * 
 	 * It returns whether the operation succeeded.
 	 */
-	public function onOpen($savePath, $sessionName) {
+	public function onOpen($path, $sessionName) {
 		// There's nothing to do
 		return true;
 	}
@@ -80,7 +80,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * no data to read.
 	 */
 	public function onRead($sessionId) {
-		// Selects the session in the database
+		// Selects the session from the database
 		$session = $this->database->selectSession($sessionId);
 
 		if (is_null($session)) {

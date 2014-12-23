@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This middleware registers the extensions of the application.
+ * This middleware defines the extensions of the application.
  */
 class ExtensionsMiddleware extends \Slim\Middleware {
 	
@@ -9,28 +9,28 @@ class ExtensionsMiddleware extends \Slim\Middleware {
 	 * Executes the middleware.
 	 */
 	public function call() {
-		// Registers the extensions
-		$this->registerExtensions();
+		$container = $this->app->container;
+		
+		// Defines the extensions
+		$container->singleton('request', [ $this, 'initializeRequestExtension' ]);
+		$container->singleton('response', [ $this, 'initializeResponseExtension' ]);
 		
 		// Calls the next middleware
 		$this->next->call();
 	}
 	
 	/*
-	 * Registers the extensions.
+	 * Initializes the request extension.
 	 */
-	private function registerExtensions() {
-		$container = $this->app->container;
-		
-		// Request extension
-		$container->singleton('request', function($configurations) {
-			return new Request($configurations['environment']);
-		});
-		
-		// Response extension
-		$container->singleton('response', function() {
-			return new Response();
-		});
+	public function initializeRequestExtension($configurations) {
+		return new Request($configurations['environment']);
+	}
+	
+	/*
+	 * Initializes the response extension.
+	 */
+	public function initializeResponseExtension() {
+		return new Response();
 	}
 	
 }

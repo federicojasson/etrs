@@ -10,8 +10,9 @@ class ConfigurationsMiddleware extends \Slim\Middleware {
 	 */
 	public function applyDebugConfigurations() {
 		// TODO: set debug config first?
+		// TODO: use file to configure the application?
 		
-		// Initializes a log writer to store logs in a file
+		// Initializes the log writer to use
 		$fileHandle = fopen(FILE_PATH_LOGS_DEBUG, 'a');
 		$logWriter = new \Slim\LogWriter($fileHandle);
 
@@ -36,10 +37,10 @@ class ConfigurationsMiddleware extends \Slim\Middleware {
 		$app = $this->app;
 		
 		// TODO: set debug config first?
+		// TODO: use file to configure the application?
 		
-		// Initializes a log writer to store logs in a database
-		$database = $app->webServerDatabase;
-		$logWriter = new DatabaseLogWriter($database);
+		// Initializes the log writer use
+		$logWriter = new DatabaseLogWriter($app->cryptography, $app->webServerDatabase);
 
 		// Configures the framework
 		$app->config([

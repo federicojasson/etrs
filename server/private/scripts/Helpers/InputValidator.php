@@ -15,21 +15,21 @@ class InputValidator extends Helper {
 	}
 	
 	/*
+	 * Determines whether an input is a valid random ID.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidRandomId($input) {
+		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
+	}
+	
+	/*
 	 * Determines whether an input is a valid user ID.
 	 * 
 	 * It receives the input.
 	 */
 	public function isValidUserId($input) {
 		return preg_match('/^(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{1,32}$/', $input);
-	}
-	
-	/*
-	 * Determines whether an input is a valid UUID v4.
-	 * 
-	 * It receives the input.
-	 */
-	public function isValidUuidV4($input) {
-		return preg_match('/^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$/', $input);
 	}
 	
 	/*

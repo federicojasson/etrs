@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This helper allows to define and configure the services of the server.
+ * This helper allows to define the services of the server.
  * 
  * A service is defined by its URL, the HTTP method through which it is invoked
  * and the controller that serves the requests.

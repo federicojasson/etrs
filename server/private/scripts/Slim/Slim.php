@@ -220,8 +220,8 @@ class Slim
 
         // Define default middleware stack
         $this->middleware = array($this);
-        $this->add(new \Slim\Middleware\Flash());
-        $this->add(new \Slim\Middleware\MethodOverride());
+        //$this->add(new \Slim\Middleware\Flash());
+        //$this->add(new \Slim\Middleware\MethodOverride());
 
         // Make default if first instance
         if (is_null(static::getInstance())) {
