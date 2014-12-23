@@ -369,22 +369,22 @@ class Data extends Helper {
 			$consultation['patient'] = null;
 		}
 		
-		// Loads the backgrounds
+		// Loads the consultation's backgrounds
 		$consultation['backgrounds'] = $businessLogicDatabase->selectConsultationNonErasedBackgrounds($consultationId);
 		
-		// Loads the image tests
+		// Loads the consultation's image tests
 		$consultation['imageTests'] = $businessLogicDatabase->selectConsultationNonErasedImageTests($consultationId);
 		
-		// Loads the laboratory tests
+		// Loads the consultation's laboratory tests
 		$consultation['laboratoryTests'] = $businessLogicDatabase->selectConsultationNonErasedLaboratoryTests($consultationId);
 		
-		// Loads the medications
+		// Loads the consultation's medications
 		$consultation['medications'] = $businessLogicDatabase->selectConsultationNonErasedMedications($consultationId);
 		
-		// Loads the neurocognitive evaluations
+		// Loads the consultation's neurocognitive evaluations
 		$consultation['neurocognitiveEvaluations'] = $businessLogicDatabase->selectConsultationNonErasedNeurocognitiveEvaluations($consultationId);
 		
-		// Loads the treatments
+		// Loads the consultation's treatments
 		$consultation['treatments'] = $businessLogicDatabase->selectConsultationNonErasedTreatments($consultationId);
 		
 		return $consultation;
@@ -437,7 +437,7 @@ class Data extends Helper {
 			$experiment['creator'] = null;
 		}
 		
-		// Loads the files
+		// Loads the experiment's files
 		$experiment['files'] = $businessLogicDatabase->selectExperimentNonErasedFiles($experimentId);
 		
 		return $experiment;
@@ -633,7 +633,7 @@ class Data extends Helper {
 			}
 		}
 		
-		// Loads the files
+		// Loads the study's files
 		$study['files'] = $businessLogicDatabase->selectStudyNonErasedFiles($studyId);
 		
 		return $study;
