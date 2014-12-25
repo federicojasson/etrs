@@ -26,7 +26,7 @@
 			
 			// Gets the user's honorific title
 			var honorificTitle = 'Dr.'; // TODO: get honorific title
-
+			
 			// Composes and returns the user's honorific name
 			return honorificTitle + ' ' + userLastNames;
 		}

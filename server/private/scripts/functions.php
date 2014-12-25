@@ -5,6 +5,19 @@
  */
 
 /*
+ * TODO: comments
+ */
+function binaryToHexadecimal($binary) {
+	if (is_null($binary)) {
+		// The parameter received is null
+		return null;
+	}
+	
+	// Converts from binary to hexadecimal and returns the result
+	return bin2hex($binary);
+}
+
+/*
  * Returns the first element of an array, or null if the array is empty.
  * 
  * It receives the array.
@@ -17,6 +30,19 @@ function getFirstElementOrNull($array) {
 
 	// Returns the first element
 	return $array[0];
+}
+
+/*
+ * TODO: comments
+ */
+function hexadecimalToBinary($hexadecimal) {
+	if (is_null($hexadecimal)) {
+		// The parameter received is null
+		return null;
+	}
+	
+	// Converts from hexadecimal to binary and returns the result
+	return hex2bin($hexadecimal);
 }
 
 /*

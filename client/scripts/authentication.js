@@ -47,7 +47,7 @@
 		 * Returns the logged in user.
 		 */
 		controller.getLoggedInUser = function() {
-			return authentication.getLoggedInUser;
+			return authentication.getLoggedInUser();
 		};
 		
 		/*

@@ -19,6 +19,7 @@ class HelpersMiddleware extends \Slim\Middleware {
 		$container->singleton('configurations', [ $this, 'initializeConfigurationsHelper' ]);
 		$container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
 		$container->singleton('data', [ $this, 'initializeDataHelper' ]);
+		$container->singleton('dataFilter', [ $this, 'initializeDataFilterHelper' ]);
 		$container->singleton('emailBuilder', [ $this, 'initializeEmailBuilderHelper' ]);
 		$container->singleton('inputValidator', [ $this, 'initializeInputValidatorHelper' ]);
 		$container->singleton('services', [ $this, 'initializeServicesHelper' ]);
@@ -76,6 +77,13 @@ class HelpersMiddleware extends \Slim\Middleware {
 	 */
 	public function initializeDataHelper() {
 		return new Data();
+	}
+	
+	/*
+	 * Initializes the data filter helper.
+	 */
+	public function initializeDataFilterHelper() {
+		return new DataFilter();
 	}
 	
 	/*

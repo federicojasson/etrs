@@ -11,6 +11,11 @@ class InputValidator extends Helper {
 	 * It receives the input.
 	 */
 	public function isNonEmptyString($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
 		return strlen($input) > 0;
 	}
 	
@@ -20,6 +25,11 @@ class InputValidator extends Helper {
 	 * It receives the input.
 	 */
 	public function isValidRandomId($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
 	}
 	
@@ -29,6 +39,11 @@ class InputValidator extends Helper {
 	 * It receives the input.
 	 */
 	public function isValidUserId($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
 		return preg_match('/^(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{1,32}$/', $input);
 	}
 	
