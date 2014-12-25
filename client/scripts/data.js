@@ -35,9 +35,9 @@
 		var cache;
 		
 		/*
-		 * The entities to take into account when loading the data.
+		 * The entities to consider when loading the data.
 		 */
-		var entities;
+		var consideredEntities;
 		
 		/*
 		 * Gets an entity asynchronously and returns a promise that gets
@@ -88,7 +88,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.backgrounds) {
+			if (consideredEntities.backgrounds) {
 				// The backgrounds should be loaded
 				
 				// Gets the background
@@ -156,7 +156,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.clinicalImpressions) {
+			if (consideredEntities.clinicalImpressions) {
 				// The clinical impressions should be loaded
 				
 				// Gets the clinical impression
@@ -223,7 +223,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.consultations) {
+			if (consideredEntities.consultations) {
 				// The consultations should be loaded
 				
 				// Gets the consultation
@@ -398,7 +398,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.diagnoses) {
+			if (consideredEntities.diagnoses) {
 				// The diagnoses should be loaded
 				
 				// Gets the diagnosis
@@ -465,7 +465,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.experiments) {
+			if (consideredEntities.experiments) {
 				// The experiments should be loaded
 				
 				// Gets the experiment
@@ -544,7 +544,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.files) {
+			if (consideredEntities.files) {
 				// The files should be loaded
 				
 				// Gets the file
@@ -611,7 +611,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.imageTests) {
+			if (consideredEntities.imageTests) {
 				// The image tests should be loaded
 				
 				// Gets the image test
@@ -679,7 +679,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.laboratoryTests) {
+			if (consideredEntities.laboratoryTests) {
 				// The laboratory tests should be loaded
 				
 				// Gets the laboratory test
@@ -746,7 +746,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.medications) {
+			if (consideredEntities.medications) {
 				// The medications should be loaded
 				
 				// Gets the medication
@@ -814,7 +814,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.neurocognitiveEvaluations) {
+			if (consideredEntities.neurocognitiveEvaluations) {
 				// The neurocognitive evaluations should be loaded
 				
 				// Gets the neurocognitive evaluation
@@ -881,7 +881,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.patients) {
+			if (consideredEntities.patients) {
 				// The patients should be loaded
 				
 				// Gets the patient
@@ -948,7 +948,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.studies) {
+			if (consideredEntities.studies) {
 				// The studies should be loaded
 				
 				// Gets the study
@@ -1063,7 +1063,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.treatments) {
+			if (consideredEntities.treatments) {
 				// The treatments should be loaded
 				
 				// Gets the treatment
@@ -1130,7 +1130,7 @@
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (entities.users) {
+			if (consideredEntities.users) {
 				// The users should be loaded
 				
 				// Gets the user
@@ -1301,12 +1301,11 @@
 		
 		/*
 		 * Prepares the service to start fetching data. The function clears the
-		 * cache and sets the entities to take into account when loading the
-		 * data.
+		 * cache and sets the entities to consider when loading the data.
 		 * 
-		 * It receives the entities.
+		 * It receives the entities to consider.
 		 */
-		service.prepare = function(newEntities) {
+		service.prepare = function(newConsideredEntities) {
 			// Clears the cache
 			cache = {
 				backgrounds: [],
@@ -1325,8 +1324,8 @@
 				users: []
 			};
 			
-			// Sets the entities to take into account
-			entities = utilities.mergeObjects(newEntities, {
+			// Sets the entities to consider
+			consideredEntities = utilities.mergeObjects(newConsideredEntities, {
 				backgrounds: false,
 				clinicalImpressions: false,
 				consultations: false,
