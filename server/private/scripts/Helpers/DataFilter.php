@@ -9,12 +9,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterBackground($background) {
+		// TODO: filter fields
+		
 		// Converts the background's binary fields to hexadecimal
-		$filteredBackground = $this->binaryToHexadecimalEntityFields($background, [
+		$filteredBackground = $this->applyFunction('bin2hex', $background, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredBackground;
 	}
@@ -23,12 +23,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterClinicalImpression($clinicalImpression) {
+		// TODO: filter fields
+		
 		// Converts the clinical impression's binary fields to hexadecimal
-		$filteredClinicalImpression = $this->binaryToHexadecimalEntityFields($clinicalImpression, [
+		$filteredClinicalImpression = $this->applyFunction('bin2hex', $clinicalImpression, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredClinicalImpression;
 	}
@@ -37,15 +37,15 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterConsultation($consultation) {
+		// TODO: filter fields
+		
 		// Converts the consultation's binary fields to hexadecimal
-		$filteredConsultation = $this->binaryToHexadecimalEntityFields($consultation, [
+		$filteredConsultation = $this->applyFunction('bin2hex', $consultation, [
 			'id',
 			'clinicalImpression',
 			'diagnosis',
 			'patient'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredConsultation;
 	}
@@ -54,12 +54,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterDiagnosis($diagnosis) {
+		// TODO: filter fields
+		
 		// Converts the diagnosis's binary fields to hexadecimal
-		$filteredDiagnosis = $this->binaryToHexadecimalEntityFields($diagnosis, [
+		$filteredDiagnosis = $this->applyFunction('bin2hex', $diagnosis, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredDiagnosis;
 	}
@@ -68,12 +68,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterExperiment($experiment) {
+		// TODO: filter fields
+		
 		// Converts the experiment's binary fields to hexadecimal
-		$filteredExperiment = $this->binaryToHexadecimalEntityFields($experiment, [
+		$filteredExperiment = $this->applyFunction('bin2hex', $experiment, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredExperiment;
 	}
@@ -82,13 +82,13 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterFile($file) {
+		// TODO: filter fields
+		
 		// Converts the file's binary fields to hexadecimal
-		$filteredFile = $this->binaryToHexadecimalEntityFields($file, [
+		$filteredFile = $this->applyFunction('bin2hex', $file, [
 			'id',
 			'hash'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredFile;
 	}
@@ -97,12 +97,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterImageTest($imageTest) {
+		// TODO: filter fields
+		
 		// Converts the image test's binary fields to hexadecimal
-		$filteredImageTest = $this->binaryToHexadecimalEntityFields($imageTest, [
+		$filteredImageTest = $this->applyFunction('bin2hex', $imageTest, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredImageTest;
 	}
@@ -111,12 +111,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterLaboratoryTest($laboratoryTest) {
+		// TODO: filter fields
+		
 		// Converts the laboratory test's binary fields to hexadecimal
-		$filteredLaboratoryTest = $this->binaryToHexadecimalEntityFields($laboratoryTest, [
+		$filteredLaboratoryTest = $this->applyFunction('bin2hex', $laboratoryTest, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredLaboratoryTest;
 	}
@@ -125,12 +125,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterMedication($medication) {
+		// TODO: filter fields
+		
 		// Converts the medication's binary fields to hexadecimal
-		$filteredMedication = $this->binaryToHexadecimalEntityFields($medication, [
+		$filteredMedication = $this->applyFunction('bin2hex', $medication, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredMedication;
 	}
@@ -139,12 +139,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterNeurocognitiveEvaluation($neurocognitiveEvaluation) {
+		// TODO: filter fields
+		
 		// Converts the neurocognitive evaluation's binary fields to hexadecimal
-		$filteredNeurocognitiveEvaluation = $this->binaryToHexadecimalEntityFields($neurocognitiveEvaluation, [
+		$filteredNeurocognitiveEvaluation = $this->applyFunction('bin2hex', $neurocognitiveEvaluation, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredNeurocognitiveEvaluation;
 	}
@@ -153,12 +153,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterPatient($patient) {
+		// TODO: filter fields
+		
 		// Converts the patient's binary fields to hexadecimal
-		$filteredPatient = $this->binaryToHexadecimalEntityFields($patient, [
+		$filteredPatient = $this->applyFunction('bin2hex', $patient, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredPatient;
 	}
@@ -166,16 +166,16 @@ class DataFilter extends Helper {
 	/*
 	 * TODO: comments
 	 */
-	public function filterStudy($study) {
+	public function filterStudy($study) {		
+		// TODO: filter fields
+		
 		// Converts the study's binary fields to hexadecimal
-		$filteredStudy = $this->binaryToHexadecimalEntityFields($study, [
+		$filteredStudy = $this->applyFunction('bin2hex', $study, [
 			'id',
 			'consultation',
 			'experiment',
 			'report'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredStudy;
 	}
@@ -184,12 +184,12 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterTreatment($treatment) {
+		// TODO: filter fields
+		
 		// Converts the treatment's binary fields to hexadecimal
-		$filteredTreatment = $this->binaryToHexadecimalEntityFields($treatment, [
+		$filteredTreatment = $this->applyFunction('bin2hex', $treatment, [
 			'id'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredTreatment;
 	}
@@ -198,33 +198,33 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	public function filterUser($user) {
+		// TODO: filter fields
+		
 		// Converts the user's binary fields to hexadecimal
-		$filteredUser = $this->binaryToHexadecimalEntityFields($user, [
+		$filteredUser = $this->applyFunction('bin2hex', $user, [
 			'passwordHash',
 			'passwordSalt'
 		]);
-		
-		// TODO: filter fields
 		
 		return $filteredUser;
 	}
 	
 	/*
-	 * Converts the binary fields of an entity to hexadecimal and returns the
-	 * result.
-	 * 
-	 * It receives the entity and an array containing the binary fields.
+	 * TODO: comments
 	 * 
 	 * TODO: name
 	 */
-	private function binaryToHexadecimalEntityFields($entity, $fields) {
-		// Converts the binary fields to hexadecimal
+	private function applyFunction($function, $entity, $fields) {
 		$count = count($fields);
 		for ($i = 0; $i < $count; $i++) {
 			$field = $fields[$i];
 			
-			// Converts the binary field to hexadecimal
-			$entity[$field] = binaryToHexadecimal($entity[$field]);
+			if (isset($entity[$field])) {
+				// The entity contains the field
+				
+				// Applies the function
+				$entity[$field] = call_user_func($function, $entity[$field]);
+			}
 		}
 		
 		return $entity;

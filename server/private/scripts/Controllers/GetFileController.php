@@ -18,7 +18,7 @@ class GetFileController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the file's ID
-		$fileId = hexadecimalToBinary($input['id']);
+		$fileId = hex2bin($input['id']);
 		
 		// Gets the file
 		$file = $app->data->getFile($fileId);

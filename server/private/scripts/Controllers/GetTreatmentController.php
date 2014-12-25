@@ -18,7 +18,7 @@ class GetTreatmentController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the treatment's ID
-		$treatmentId = hexadecimalToBinary($input['id']);
+		$treatmentId = hex2bin($input['id']);
 		
 		// Gets the treatment
 		$treatment = $app->data->getTreatment($treatmentId);

@@ -18,7 +18,7 @@ class GetPatientController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the patient's ID
-		$patientId = hexadecimalToBinary($input['id']);
+		$patientId = hex2bin($input['id']);
 		
 		// Gets the patient
 		$patient = $app->data->getPatient($patientId);

@@ -18,7 +18,7 @@ class GetStudyController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the study's ID
-		$studyId = hexadecimalToBinary($input['id']);
+		$studyId = hex2bin($input['id']);
 		
 		// Gets the study
 		$study = $app->data->getStudy($studyId);

@@ -18,7 +18,7 @@ class GetConsultationController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the consultation's ID
-		$consultationId = hexadecimalToBinary($input['id']);
+		$consultationId = hex2bin($input['id']);
 		
 		// Gets the consultation
 		$consultation = $app->data->getConsultation($consultationId);

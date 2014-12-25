@@ -18,7 +18,7 @@ class GetDiagnosisController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the diagnosis's ID
-		$diagnosisId = hexadecimalToBinary($input['id']);
+		$diagnosisId = hex2bin($input['id']);
 		
 		// Gets the diagnosis
 		$diagnosis = $app->data->getDiagnosis($diagnosisId);

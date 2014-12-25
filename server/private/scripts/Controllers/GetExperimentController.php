@@ -18,7 +18,7 @@ class GetExperimentController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the experiment's ID
-		$experimentId = hexadecimalToBinary($input['id']);
+		$experimentId = hex2bin($input['id']);
 		
 		// Gets the experiment
 		$experiment = $app->data->getExperiment($experimentId);

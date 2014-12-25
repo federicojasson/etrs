@@ -18,7 +18,7 @@ class GetMedicationController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the medication's ID
-		$medicationId = hexadecimalToBinary($input['id']);
+		$medicationId = hex2bin($input['id']);
 		
 		// Gets the medication
 		$medication = $app->data->getMedication($medicationId);

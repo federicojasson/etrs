@@ -18,7 +18,7 @@ class GetBackgroundController extends SecureController {
 		$input = $app->request->getBody();
 		
 		// Gets the background's ID
-		$backgroundId = hexadecimalToBinary($input['id']);
+		$backgroundId = hex2bin($input['id']);
 		
 		// Gets the background
 		$background = $app->data->getBackground($backgroundId);
