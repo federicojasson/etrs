@@ -1,4 +1,0 @@
-{
-	"businessLogicDatabase": "private/configurations/business-logic-database.json",
-	"webServerDatabase": "private/configurations/web-server-database.json"
-}

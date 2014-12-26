@@ -39,7 +39,11 @@ class Configurations extends Helper {
 		$this->configurations = [];
 		
 		// Initializes the file paths
-		$this->filePaths = readJsonFile(FILE_PATH_CONFIGURATIONS_FILE_PATHS);
+		$this->filePaths = [
+			'businessLogicDatabase' => 'private/configurations/business-logic-database.json',
+			'webServerDatabase' => 'private/configurations/web-server-database.json',
+			'email' => 'private/configurations/email.json'
+		];
 	}
 	
 	/*

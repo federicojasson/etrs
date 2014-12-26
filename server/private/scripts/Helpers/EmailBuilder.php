@@ -20,10 +20,10 @@ class EmailBuilder extends Helper {
 		$state = $this->state;
 		
 		// Gets the basic information of the email
-		$from = $state[EMAIL_FROM];
-		$to = $state[EMAIL_TO];
-		$subject = $state[EMAIL_SUBJECT];
-		$message = $state[EMAIL_MESSAGE];
+		$from = $state[EMAIL_BUILDER_PARAMETER_FROM];
+		$to = $state[EMAIL_BUILDER_PARAMETER_TO];
+		$subject = $state[EMAIL_BUILDER_PARAMETER_SUBJECT];
+		$message = $state[EMAIL_BUILDER_PARAMETER_MESSAGE];
 		
 		// Initializes the additional headers
 		$additionalHeaders = '';
@@ -40,8 +40,8 @@ class EmailBuilder extends Helper {
 	 * It receives the email address of the sender.
 	 */
 	public function from($from) {
-		// Saves the property in the state array
-		$this->state[EMAIL_FROM] = $from;
+		// Saves the parameter in the state array
+		$this->state[EMAIL_BUILDER_PARAMETER_FROM] = $from;
 		
 		return $this;
 	}
@@ -52,8 +52,8 @@ class EmailBuilder extends Helper {
 	 * It receives the message.
 	 */
 	public function message($message) {
-		// Saves the property in the state array
-		$this->state[EMAIL_MESSAGE] = $message;
+		// Saves the parameter in the state array
+		$this->state[EMAIL_BUILDER_PARAMETER_MESSAGE] = $message;
 		
 		return $this;
 	}
@@ -75,8 +75,8 @@ class EmailBuilder extends Helper {
 	 * It receives the subject.
 	 */
 	public function subject($subject) {
-		// Saves the property in the state array
-		$this->state[EMAIL_SUBJECT] = $subject;
+		// Saves the parameter in the state array
+		$this->state[EMAIL_BUILDER_PARAMETER_SUBJECT] = $subject;
 		
 		return $this;
 	}
@@ -87,8 +87,8 @@ class EmailBuilder extends Helper {
 	 * It receives the email address of the receiver.
 	 */
 	public function to($to) {
-		// Saves the property in the state array
-		$this->state[EMAIL_TO] = $to;
+		// Saves the parameter in the state array
+		$this->state[EMAIL_BUILDER_PARAMETER_TO] = $to;
 		
 		return $this;
 	}

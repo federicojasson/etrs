@@ -12,6 +12,8 @@ class Data extends Helper {
 	 */
 	private $cache;
 	
+	// TODO: use private function getEntity?
+	
 	/*
 	 * Returns a background, or null if it doesn't exists or has been erased.
 	 * 

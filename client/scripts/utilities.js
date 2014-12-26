@@ -17,6 +17,8 @@
 		var service = this;
 		
 		/*
+		 * TODO: remove if not used
+		 * 
 		 * Merges two objects and returns the result. The properties of a source
 		 * object are copied into a target object.
 		 * 

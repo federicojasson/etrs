@@ -66,7 +66,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * 
 	 * It returns whether the operation succeeded.
 	 */
-	public function onOpen($path, $sessionName) {
+	public function onOpen($sessionPath, $sessionName) {
 		// There's nothing to do
 		return true;
 	}

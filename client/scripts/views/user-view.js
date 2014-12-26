@@ -7,6 +7,8 @@
 	
 	// Controller: UserViewController
 	module.controller('UserViewController', [
+		'$stateParams',
+		'authentication',
 		'views',
 		UserViewController
 	]);
@@ -16,14 +18,21 @@
 	 * 
 	 * Offers functions for the user view.
 	 */
-	function UserViewController(views) {
+	function UserViewController($stateParams, authentication, views) {
 		var controller = this;
 		
 		/*
 		 * Returns the URL of the view's template.
 		 */
 		controller.getTemplateUrl = function() {
-			// TODO: sent to profile view if user is the logged in
+			if (authentication.isUserLoggedIn()) {
+				// The user is logged in
+				
+				if ($stateParams.userId === authentication.getLoggedInUser().id) {
+					// The user ID corresponds to the one logged in
+					return 'templates/views/profile-view.html'
+				}
+			}
 			
 			return views.selectTemplateUrlOrRedirect({
 				ad: 'templates/views/user-view.html',

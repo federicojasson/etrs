@@ -1,0 +1,8 @@
+{
+	"TODO": "define email address",
+	"webServerEmailAddress": "etrs@etrs.com.ar",
+	
+	"passwordRecoveryEmail": {
+		"templateFilePath": "private/templates/emails/password-recovery-email.html"
+	}
+}

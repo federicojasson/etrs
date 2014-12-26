@@ -258,14 +258,39 @@ class DataFilter extends Helper {
 	}
 	
 	/*
+	 * Performs initialization tasks.
+	 */
+	protected function initialize() {
+		// Initializes the authorized fields according to the role of the logged
+		// in user
+		switch ($this->app->authentication->getLoggedInUser()['role']) {
+			case USER_ROLE_ADMINISTRATOR: {
+				$this->initializeAdministratorAuthorizedFields();
+				break;
+			}
+			
+			case USER_ROLE_DOCTOR: {
+				$this->initializeDoctorAuthorizedFields();
+				break;
+			}
+			
+			case USER_ROLE_OPERATOR: {
+				$this->initializeOperatorAuthorizedFields();
+				break;
+			}
+		}
+	}
+	
+	/*
 	 * TODO: comments
 	 * 
 	 * TODO: name
 	 */
-	private function applyFunction($function, $entity, $fields) {
-		$count = count($fields);
+	private function applyFunction($function, $entity, $consideredFields) {
+		// Applies the function to the considered fields of the entity
+		$count = count($consideredFields);
 		for ($i = 0; $i < $count; $i++) {
-			$field = $fields[$i];
+			$field = $consideredFields[$i];
 			
 			if (isset($entity[$field])) {
 				// The entity contains the field
@@ -282,7 +307,295 @@ class DataFilter extends Helper {
 	 * TODO: comments
 	 */
 	private function filterFields($entity, $authorizedFields) {
-		// TODO: implement
+		// Initializes the filtered entity
+		$filteredEntity = [];
+		
+		// Filters the fields of the entity, leaving only the authorized ones
+		$count = count($authorizedFields);
+		for ($i = 0; $i < $count; $i++) {
+			$field = $authorizedFields[$i];
+			
+			// Sets the field in the filtered entity
+			$filteredEntity[$field] = $entity[$field];
+		}
+		
+		return $filteredEntity;
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializeAdministratorAuthorizedFields() {
+		$this->authorizedFields = [
+			'backgrounds' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name'
+			],
+			
+			'clinicalImpressions' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name'
+			],
+			
+			'consultations' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'clinicalImpression',
+				'creator',
+				'diagnosis',
+				'patient',
+				'creationDatetime',
+				'date',
+				'reasons',
+				'observations',
+				'indications'
+			],
+			
+			'diagnoses' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name'
+			],
+			
+			'experiments' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name',
+				'commandLine'
+			],
+			
+			'files' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name',
+				'hash'
+			],
+			
+			'imageTests' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name',
+				'dataTypeDefinition'
+			],
+			
+			'laboratoryTests' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name',
+				'dataTypeDefinition'
+			],
+			
+			'medications' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name'
+			],
+			
+			'neurocognitiveEvaluations' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name',
+				'dataTypeDefinition'
+			],
+			
+			'patients' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'firstNames',
+				'lastNames',
+				'gender',
+				'birthDate',
+				'educationYears'
+			],
+			
+			'studies' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'consultation',
+				'creator',
+				'experiment',
+				'report',
+				'creationDatetime',
+				'observations'
+			],
+			
+			'treatments' => [
+				// TODO: define fields
+				'id',
+				'isErased',
+				'creator',
+				'creationDatetime',
+				'name'
+			],
+			
+			'users' => [
+				// TODO: define fields
+				'id', // TODO: send id?
+				'lastNames',
+				'gender',
+				'role'
+			]
+		];
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializeDoctorAuthorizedFields() {
+		$this->authorizedFields = [
+			'backgrounds' => [
+				// TODO: define fields
+			],
+			
+			'clinicalImpressions' => [
+				// TODO: define fields
+			],
+			
+			'consultations' => [
+				// TODO: define fields
+			],
+			
+			'diagnoses' => [
+				// TODO: define fields
+			],
+			
+			'experiments' => [
+				// TODO: define fields
+			],
+			
+			'files' => [
+				// TODO: define fields
+			],
+			
+			'imageTests' => [
+				// TODO: define fields
+			],
+			
+			'laboratoryTests' => [
+				// TODO: define fields
+			],
+			
+			'medications' => [
+				// TODO: define fields
+			],
+			
+			'neurocognitiveEvaluations' => [
+				// TODO: define fields
+			],
+			
+			'patients' => [
+				// TODO: define fields
+			],
+			
+			'studies' => [
+				// TODO: define fields
+			],
+			
+			'treatments' => [
+				// TODO: define fields
+			],
+			
+			'users' => [
+				// TODO: define fields
+			]
+		];
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function initializeOperatorAuthorizedFields() {
+		$this->authorizedFields = [
+			'backgrounds' => [
+				// TODO: define fields
+			],
+			
+			'clinicalImpressions' => [
+				// TODO: define fields
+			],
+			
+			'consultations' => [
+				// TODO: define fields
+			],
+			
+			'diagnoses' => [
+				// TODO: define fields
+			],
+			
+			'experiments' => [
+				// TODO: define fields
+			],
+			
+			'files' => [
+				// TODO: define fields
+			],
+			
+			'imageTests' => [
+				// TODO: define fields
+			],
+			
+			'laboratoryTests' => [
+				// TODO: define fields
+			],
+			
+			'medications' => [
+				// TODO: define fields
+			],
+			
+			'neurocognitiveEvaluations' => [
+				// TODO: define fields
+			],
+			
+			'patients' => [
+				// TODO: define fields
+			],
+			
+			'studies' => [
+				// TODO: define fields
+			],
+			
+			'treatments' => [
+				// TODO: define fields
+			],
+			
+			'users' => [
+				// TODO: define fields
+			]
+		];
 	}
 	
 }

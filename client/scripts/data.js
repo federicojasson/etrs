@@ -4,15 +4,13 @@
 (function() {
 	// Module: data
 	var module = angular.module('data', [
-		'server',
-		'utilities'
+		'server'
 	]);
 	
 	// Service: data
 	module.service('data', [
 		'$q',
 		'server',
-		'utilities',
 		dataService
 	]);
 	
@@ -26,7 +24,7 @@
 	 * 
 	 * The service also offers a cache feature, to avoid unnecessary requests.
 	 */
-	function dataService($q, server, utilities) {
+	function dataService($q, server) {
 		var service = this;
 		
 		/*
@@ -1324,8 +1322,8 @@
 				users: []
 			};
 			
-			// Sets the entities to consider
-			consideredEntities = utilities.mergeObjects(newConsideredEntities, {
+			// Resets the considered entities
+			consideredEntities = {
 				backgrounds: false,
 				clinicalImpressions: false,
 				consultations: false,
@@ -1340,7 +1338,12 @@
 				studies: false,
 				treatments: false,
 				users: false
-			});
+			};
+			
+			// Sets the entities to consider
+			for (var i = 0; i < newConsideredEntities.length; i++) {
+				consideredEntities[newConsideredEntities[i]] = true;
+			}
 		};
 	}
 })();

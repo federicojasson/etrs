@@ -30,7 +30,7 @@ abstract class Database extends Helper {
 	}
 	
 	/*
-	 * Starts a new transaction.
+	 * Starts a transaction.
 	 */
 	public function startTransaction() {
 		$this->pdo->beginTransaction();

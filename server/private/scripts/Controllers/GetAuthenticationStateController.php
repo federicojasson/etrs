@@ -15,27 +15,25 @@ class GetAuthenticationStateController extends SecureController {
 		$app = $this->app;
 		$authentication = $app->authentication;
 		
+		// Initializes the output
+		$output = [];
+		
 		if ($authentication->isUserLoggedIn()) {
 			// The user is logged in
+			$loggedIn = true;
 			
 			// Gets the logged in user
 			$loggedInUser = $authentication->getLoggedInUser();
 			
-			// TODO: what if $loggedInUser is null?
-			
-			// Defines the output
-			$output = [
-				'id' => $loggedInUser['id'],
-				'loggedIn' => true
-			];
+			// Sets the logged in user's ID
+			$output['id'] = $loggedInUser['id'];
 		} else {
 			// The user is not logged in
-			
-			// Defines the output
-			$output = [
-				'loggedIn' => false
-			];
+			$loggedIn = false;
 		}
+		
+		// Sets the logged in parameter
+		$output['loggedIn'] = $loggedIn;
 		
 		// Sets the output
 		$app->response->setBody($output);

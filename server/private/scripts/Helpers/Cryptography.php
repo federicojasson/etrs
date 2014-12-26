@@ -20,6 +20,13 @@ class Cryptography extends Helper {
 	}
 	
 	/*
+	 * Generates and returns a random password.
+	 */
+	public function generateRandomPassword() {
+		return $this->generateRandomBytes(RANDOM_PASSWORD_LENGTH);
+	}
+	
+	/*
 	 * Computes and returns the hash of a file.
 	 * 
 	 * It receives the file's path.

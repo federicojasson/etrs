@@ -38,7 +38,7 @@ interface SessionStorageHandler {
 	 * 
 	 * It returns whether the operation succeeded.
 	 */
-	public function onOpen($path, $sessionName);
+	public function onOpen($sessionPath, $sessionName);
 	
 	/*
 	 * Invoked when the data of the session needs to be read.

@@ -30,13 +30,13 @@
 		 * The input models.
 		 */
 		controller.inputModels = {
-			emailAddress: new InputModel({
+			id: new InputModel({
 				validationFunction: function() {
 					return inputValidator.validateRequiredInput(this);
 				}
 			}),
 			
-			id: new InputModel({
+			emailAddress: new InputModel({
 				validationFunction: function() {
 					return inputValidator.validateRequiredInput(this);
 				}
@@ -75,21 +75,19 @@
 			
 			// Requests the password recovery
 			server.requestPasswordRecovery({
-				emailAddress: inputModels.emailAddress.value,
-				id: inputModels.id.value
+				id: inputModels.id.value,
+				emailAddress: inputModels.emailAddress.value
 			}).then(function(output) {
-				// TODO: handle output
-				/*if (output.authenticated) {
-					// The user was authenticated
+				if (output.requestAccepted) {
+					// The request was accepted
 					
-					// Refreshes the authentication state
-					authentication.refreshState();
+					// TODO: show confirmation modal dialog
 				} else {
-					// The user was not authenticated
+					// The request was not accepted
 					
 					// Shows the alert
 					showAlert = true;
-				}*/
+				}
 			}, function(response) {
 				// TODO: handle error
 			});

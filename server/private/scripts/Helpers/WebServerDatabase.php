@@ -52,6 +52,26 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
+	 * TODO: comments
+	 */
+	public function deleteUserPasswordRecoveryRequests($userId) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM password_recovery_requests
+			WHERE user = :userId
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':userId' => $userId
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Inserts a log.
 	 * 
 	 * It receives the values to insert.
@@ -145,6 +165,32 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
+	 * Determines whether a password recovery request exists.
+	 * 
+	 * It receives the password recovery request's ID.
+	 */
+	public function passwordRecoveryRequestExists($passwordRecoveryRequestId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM password_recovery_requests
+			WHERE id = :passwordRecoveryRequestId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':passwordRecoveryRequestId' => $passwordRecoveryRequestId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Selects and returns a session. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the session's ID.
@@ -179,7 +225,7 @@ class WebServerDatabase extends Database {
 	 * It returns the PDO instance representing the connection.
 	 */
 	protected function connect() {
-		// Gets the configuration of the database
+		// Gets the database configuration
 		$configuration = $this->app->configurations->get('webServerDatabase');
 		
 		$dsn = $configuration['dsn'];

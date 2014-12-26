@@ -746,7 +746,7 @@ class BusinessLogicDatabase extends Database {
 			SELECT
 				id AS id,
 				is_erased AS isErased,
-				consultation AS consultation
+				consultation AS consultation,
 				creator AS creator,
 				experiment AS experiment,
 				report AS report,
@@ -869,7 +869,7 @@ class BusinessLogicDatabase extends Database {
 	 * It returns the PDO instance representing the connection.
 	 */
 	protected function connect() {
-		// Gets the configuration of the database
+		// Gets the database configuration
 		$configuration = $this->app->configurations->get('businessLogicDatabase');
 		
 		$dsn = $configuration['dsn'];

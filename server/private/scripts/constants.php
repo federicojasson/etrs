@@ -5,10 +5,10 @@
  */
 
 define('CRLF', "\r\n");
-define('EMAIL_FROM', 'from');
-define('EMAIL_MESSAGE', 'message');
-define('EMAIL_SUBJECT', 'subject');
-define('EMAIL_TO', 'to');
+define('EMAIL_BUILDER_PARAMETER_FROM', 'from');
+define('EMAIL_BUILDER_PARAMETER_MESSAGE', 'message');
+define('EMAIL_BUILDER_PARAMETER_SUBJECT', 'subject');
+define('EMAIL_BUILDER_PARAMETER_TO', 'to');
 define('ERROR_ID_INVALID_INPUT', 'INVALID_INPUT');
 define('ERROR_ID_NON_EXISTENT_BACKGROUND', 'NON_EXISTENT_BACKGROUND');
 define('ERROR_ID_NON_EXISTENT_CLINICAL_IMPRESSION', 'NON_EXISTENT_CLINICAL_IMPRESSION');
@@ -27,7 +27,6 @@ define('ERROR_ID_NON_EXISTENT_USER', 'NON_EXISTENT_USER');
 define('ERROR_ID_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
 define('ERROR_ID_UNDEFINED_SERVICE', 'UNDEFINED_SERVICE');
 define('ERROR_ID_UNEXPECTED_ERROR', 'UNEXPECTED_ERROR');
-define('FILE_PATH_CONFIGURATIONS_FILE_PATHS', 'private/configurations/file-paths.json');
 define('FILE_PATH_LOGS_DEBUG', 'private/logs/debug.log');
 define('HTTP_HEADER_CONTENT_TYPE', 'Content-Type');
 define('HTTP_MEDIA_TYPE_JSON', 'application/json');
@@ -41,8 +40,10 @@ define('JSON_STRUCTURE_TYPE_OBJECT', 'object');
 define('JSON_STRUCTURE_TYPE_VALUE', 'value');
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
+define('PASSWORD_ITERATIONS', 64000);
 define('PASSWORD_SALT_LENGTH', 64);
 define('RANDOM_ID_LENGTH', 16);
+define('RANDOM_PASSWORD_LENGTH', 16);
 define('SESSION_DATA_LOGGED_IN_USER_ID', 'loggedInUserId');
 define('SESSION_IDLE_LIFETIME', 2160);
 define('USER_ROLE_ADMINISTRATOR', 'ad');

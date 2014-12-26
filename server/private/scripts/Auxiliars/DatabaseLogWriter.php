@@ -33,16 +33,16 @@ class DatabaseLogWriter {
     public function write($message, $level) {
 		$database = $this->database;
 		
-		// Generate a random ID for the log
+		// Generate a random ID
 		do {
-			$logId = $this->cryptography->generateRandomId();
-		} while ($database->logExists($logId));
+			$id = $this->cryptography->generateRandomId();
+		} while ($database->logExists($id));
 		
 		// Gets the type of the log
-		$logType = getLogType($level);
+		$type = getLogType($level);
 		
 		// Inserts a log in the database
-		$database->insertLog($logId, $logType, $message);
+		$database->insertLog($id, $type, $message);
     }
 	
 	/*

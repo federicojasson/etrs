@@ -38,7 +38,7 @@
 	/*
 	 * Controller: AuthenticationController
 	 * 
-	 * TODO: comments
+	 * Offers functions to access the authentication state.
 	 */
 	function AuthenticationController(authentication) {
 		var controller = this;
@@ -116,9 +116,9 @@
 					// The user is logged in
 					
 					// Prepares the data service
-					data.prepare({
-						users: true
-					});
+					data.prepare([
+						'users'
+					]);
 					
 					// Gets the user's data
 					data.getUser(output.id).then(function(user) {
@@ -140,8 +140,6 @@
 			}, function(response) {
 				// TODO: handle error
 			});
-			
-			// TODO: return promise instead?
 		};
 	}
 })();

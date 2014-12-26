@@ -23,25 +23,19 @@ class LogInController extends SecureController {
 		
 		if ($app->authenticator->authenticateUser($userId, $userAllegedPassword)) {
 			// The user was authenticated
+			$authenticated = true;
 			
 			// Logs in the user in the system
 			$app->authentication->logInUser($userId);
-			
-			// Defines the output
-			$output = [
-				'authenticated' => true
-			];
 		} else {
 			// The user was not authenticated
-			
-			// Defines the output
-			$output = [
-				'authenticated' => false
-			];
+			$authenticated = false;
 		}
 		
 		// Sets the output
-		$app->response->setBody($output);
+		$app->response->setBody([
+			'authenticated' => $authenticated
+		]);
 	}
 	
 	/*
