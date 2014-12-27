@@ -120,17 +120,18 @@ class WebServerDatabase extends Database {
 			VALUES (
 				:sessionId,
 				UTC_TIMESTAMP(),
-				:sessionData
+				:sessionDataForInsert
 			)
 			ON DUPLICATE KEY
 			UPDATE
 				last_access_datetime = UTC_TIMESTAMP(),
-				data = :sessionData
+				data = :sessionDataForUpdate
 		';
 		
 		// Sets the parameters
 		$parameters = [
-			':sessionData' => $sessionData,
+			':sessionDataForInsert' => $sessionData,
+			':sessionDataForUpdate' => $sessionData,
 			':sessionId' => $sessionId
 		];
 		

@@ -70,9 +70,6 @@ class RequestPasswordRecoveryController extends SecureController {
 		// Builds the email message
 		$emailMessage = $this->buildEmailMessage($templateFilePath, $password);
 		
-		// TODO: debug
-		$app->log->info($emailMessage);
-		
 		// Sends an email to the user with a link for password recovery
 		$app->emailBuilder
 		->newEmail()

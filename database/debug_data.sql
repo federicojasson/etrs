@@ -1,5 +1,7 @@
 USE etrs_business_logic;
 
+SET NAMES utf8;
+
 INSERT INTO users (
 	id,
 	is_erased,
