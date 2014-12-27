@@ -7,7 +7,7 @@
 	
 	// Controller: RequestPasswordRecoveryFormController
 	module.controller('RequestPasswordRecoveryFormController', [
-		'dialogs',
+		'informationDialog',
 		'inputValidator',
 		'InputModel',
 		'router',
@@ -20,7 +20,7 @@
 	 * 
 	 * Offers functions for the request password recovery form.
 	 */
-	function RequestPasswordRecoveryFormController(dialogs, inputValidator, InputModel, router, server) {
+	function RequestPasswordRecoveryFormController(informationDialog, inputValidator, InputModel, router, server) {
 		var controller = this;
 		
 		/*
@@ -85,7 +85,7 @@
 					// The request was accepted
 					
 					// Shows an information dialog
-					dialogs.showInformationDialog({
+					informationDialog.show({
 						title: 'Solicitud aceptada',
 						message: [
 							'Su solicitud de recuperación de contraseña ha sido aceptada.',

@@ -124,7 +124,9 @@ class RequestPasswordRecoveryController extends SecureController {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Builds and returns the message of the password recovery email.
+	 * 
+	 * It receives the template's file path and the request's password.
 	 */
 	private function buildEmailMessage($templateFilePath, $password) {
 		// Gets the template

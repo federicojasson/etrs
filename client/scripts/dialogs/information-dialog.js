@@ -7,31 +7,33 @@
 	
 	// Controller: InformationDialogController
 	module.controller('InformationDialogController', [
-		'$modal',
 		'informationDialog',
 		InformationDialogController
 	]);
 	
 	// Service: informationDialog
-	module.service('informationDialog', informationDialogService);
+	module.service('informationDialog', [
+		'$modal',
+		informationDialogService
+	]);
 	
 	/*
 	 * Controller: InformationDialogController
 	 * 
-	 * TODO: comments
+	 * Offers functions for the information dialog.
 	 */
-	function InformationDialogController($modal, informationDialog) {
+	function InformationDialogController(informationDialog) {
 		var controller = this;
 		
 		/*
-		 * TODO: comments
+		 * Returns the information dialog's message.
 		 */
 		controller.getMessage = function() {
 			return informationDialog.getMessage();
 		};
 		
 		/*
-		 * TODO: comments
+		 * Returns the information dialog's title.
 		 */
 		controller.getTitle = function() {
 			return informationDialog.getTitle();
@@ -41,47 +43,73 @@
 	/*
 	 * Service: informationDialog
 	 * 
-	 * TODO: comments
+	 * Offers functions to handle the information dialog.
 	 */
-	function informationDialogService() {
+	function informationDialogService($modal) {
 		var service = this;
 		
 		/*
-		 * TODO: comments
+		 * The information dialog's message.
 		 */
 		var message;
 		
 		/*
-		 * TODO: comments
+		 * The information dialog's title.
 		 */
 		var title;
 		
 		/*
-		 * TODO: comments
+		 * Returns the information dialog's message.
 		 */
 		service.getMessage = function() {
 			return message;
 		};
 		
 		/*
-		 * TODO: comments
+		 * Returns the information dialog's title.
 		 */
 		service.getTitle = function() {
 			return title;
 		};
 		
 		/*
-		 * TODO: comments
+		 * Shows the information dialog.
+		 * 
+		 * It receives an object containing the parameters: the title, the
+		 * message to show and a callback function to be executed when the
+		 * dialog is closed. This object should have the following structure:
+		 * 
+		 *	parameters: {
+		 *		title: ...,
+		 *		message: ...,
+		 *		onClose: ...
+		 *	}
+		 *	
+		 *	The message can be a string or an array containing the different
+		 *	lines.
 		 */
-		service.setMessage = function(newMessage) {
-			message = newMessage;
-		};
-		
-		/*
-		 * TODO: comments
-		 */
-		service.setTitle = function(newTitle) {
-			title = newTitle;
+		service.show = function(parameters) {
+			var onClose = parameters.onClose;
+			
+			// Sets the title and message
+			title = parameters.title;
+			message = parameters.message;
+			
+			if (! angular.isArray(message)) {
+				// The message is not an array
+				message = [ message ];
+			}
+			
+			// Opens the dialog
+			var modal = $modal.open({
+				backdrop: 'static',
+				controller: 'InformationDialogController',
+				controllerAs: 'dialog',
+				templateUrl: 'templates/dialogs/information-dialog.html'
+			});
+			
+			// Sets the callback function
+			modal.result.then(onClose, onClose);
 		};
 	}
 })();
