@@ -12,23 +12,13 @@ class Data extends Helper {
 	 */
 	private $cache;
 	
-	// TODO: use private function getEntity?
-	
 	/*
 	 * Returns a background, or null if it doesn't exists or has been erased.
 	 * 
 	 * It receives the background's ID.
 	 */
 	public function getBackground($backgroundId) {
-		$backgrounds = &$this->cache['backgrounds'];
-		
-		if (! isset($backgrounds[$backgroundId])) {
-			// The cache entry has not been initialized yet
-			$backgrounds[$backgroundId] = $this->loadBackground($backgroundId);
-		}
-		
-		// Returns the background from the cache
-		return $backgrounds[$backgroundId];
+		return $this->getEntity($backgroundId, $this->cache['backgrounds'], [ $this, 'loadBackground' ]);
 	}
 	
 	/*
@@ -38,15 +28,7 @@ class Data extends Helper {
 	 * It receives the clinical impression's ID.
 	 */
 	public function getClinicalImpression($clinicalImpressionId) {
-		$clinicalImpressions = &$this->cache['clinicalImpressions'];
-		
-		if (! isset($clinicalImpressions[$clinicalImpressionId])) {
-			// The cache entry has not been initialized yet
-			$clinicalImpressions[$clinicalImpressionId] = $this->loadClinicalImpression($clinicalImpressionId);
-		}
-		
-		// Returns the clinical impression from the cache
-		return $clinicalImpressions[$clinicalImpressionId];
+		return $this->getEntity($clinicalImpressionId, $this->cache['clinicalImpressions'], [ $this, 'loadClinicalImpression' ]);
 	}
 	
 	/*
@@ -55,15 +37,7 @@ class Data extends Helper {
 	 * It receives the consultation's ID.
 	 */
 	public function getConsultation($consultationId) {
-		$consultations = &$this->cache['consultations'];
-		
-		if (! isset($consultations[$consultationId])) {
-			// The cache entry has not been initialized yet
-			$consultations[$consultationId] = $this->loadConsultation($consultationId);
-		}
-		
-		// Returns the consultation from the cache
-		return $consultations[$consultationId];
+		return $this->getEntity($consultationId, $this->cache['consultations'], [ $this, 'loadConsultation' ]);
 	}
 	
 	/*
@@ -72,15 +46,7 @@ class Data extends Helper {
 	 * It receives the diagnosis's ID.
 	 */
 	public function getDiagnosis($diagnosisId) {
-		$diagnoses = &$this->cache['diagnoses'];
-		
-		if (! isset($diagnoses[$diagnosisId])) {
-			// The cache entry has not been initialized yet
-			$diagnoses[$diagnosisId] = $this->loadDiagnosis($diagnosisId);
-		}
-		
-		// Returns the diagnosis from the cache
-		return $diagnoses[$diagnosisId];
+		return $this->getEntity($diagnosisId, $this->cache['diagnoses'], [ $this, 'loadDiagnosis' ]);
 	}
 	
 	/*
@@ -89,15 +55,7 @@ class Data extends Helper {
 	 * It receives the experiment's ID.
 	 */
 	public function getExperiment($experimentId) {
-		$experiments = &$this->cache['experiments'];
-		
-		if (! isset($experiments[$experimentId])) {
-			// The cache entry has not been initialized yet
-			$experiments[$experimentId] = $this->loadExperiment($experimentId);
-		}
-		
-		// Returns the experiment from the cache
-		return $experiments[$experimentId];
+		return $this->getEntity($experimentId, $this->cache['experiments'], [ $this, 'loadExperiment' ]);
 	}
 	
 	/*
@@ -106,15 +64,7 @@ class Data extends Helper {
 	 * It receives the file's ID.
 	 */
 	public function getFile($fileId) {
-		$files = &$this->cache['files'];
-		
-		if (! isset($files[$fileId])) {
-			// The cache entry has not been initialized yet
-			$files[$fileId] = $this->loadFile($fileId);
-		}
-		
-		// Returns the file from the cache
-		return $files[$fileId];
+		return $this->getEntity($fileId, $this->cache['files'], [ $this, 'loadFile' ]);
 	}
 	
 	/*
@@ -123,15 +73,7 @@ class Data extends Helper {
 	 * It receives the image test's ID.
 	 */
 	public function getImageTest($imageTestId) {
-		$imageTests = &$this->cache['imageTests'];
-		
-		if (! isset($imageTests[$imageTestId])) {
-			// The cache entry has not been initialized yet
-			$imageTests[$imageTestId] = $this->loadImageTest($imageTestId);
-		}
-		
-		// Returns the image test from the cache
-		return $imageTests[$imageTestId];
+		return $this->getEntity($imageTestId, $this->cache['imageTests'], [ $this, 'loadImageTest' ]);
 	}
 	
 	/*
@@ -141,15 +83,7 @@ class Data extends Helper {
 	 * It receives the laboratory test's ID.
 	 */
 	public function getLaboratoryTest($laboratoryTestId) {
-		$laboratoryTests = &$this->cache['laboratoryTests'];
-		
-		if (! isset($laboratoryTests[$laboratoryTestId])) {
-			// The cache entry has not been initialized yet
-			$laboratoryTests[$laboratoryTestId] = $this->loadLaboratoryTest($laboratoryTestId);
-		}
-		
-		// Returns the laboratory test from the cache
-		return $laboratoryTests[$laboratoryTestId];
+		return $this->getEntity($laboratoryTestId, $this->cache['laboratoryTests'], [ $this, 'loadLaboratoryTest' ]);
 	}
 	
 	/*
@@ -158,15 +92,7 @@ class Data extends Helper {
 	 * It receives the medication's ID.
 	 */
 	public function getMedication($medicationId) {
-		$medications = &$this->cache['medications'];
-		
-		if (! isset($medications[$medicationId])) {
-			// The cache entry has not been initialized yet
-			$medications[$medicationId] = $this->loadMedication($medicationId);
-		}
-		
-		// Returns the medication from the cache
-		return $medications[$medicationId];
+		return $this->getEntity($medicationId, $this->cache['medications'], [ $this, 'loadMedication' ]);
 	}
 	
 	/*
@@ -176,15 +102,7 @@ class Data extends Helper {
 	 * It receives the neurocognitive evaluation's ID.
 	 */
 	public function getNeurocognitiveEvaluation($neurocognitiveEvaluationId) {
-		$neurocognitiveEvaluations = &$this->cache['neurocognitiveEvaluations'];
-		
-		if (! isset($neurocognitiveEvaluations[$neurocognitiveEvaluationId])) {
-			// The cache entry has not been initialized yet
-			$neurocognitiveEvaluations[$neurocognitiveEvaluationId] = $this->loadNeurocognitiveEvaluation($neurocognitiveEvaluationId);
-		}
-		
-		// Returns the neurocognitive evaluation from the cache
-		return $neurocognitiveEvaluations[$neurocognitiveEvaluationId];
+		return $this->getEntity($neurocognitiveEvaluationId, $this->cache['neurocognitiveEvaluations'], [ $this, 'loadNeurocognitiveEvaluation' ]);
 	}
 	
 	/*
@@ -193,15 +111,7 @@ class Data extends Helper {
 	 * It receives the patient's ID.
 	 */
 	public function getPatient($patientId) {
-		$patients = &$this->cache['patients'];
-		
-		if (! isset($patients[$patientId])) {
-			// The cache entry has not been initialized yet
-			$patients[$patientId] = $this->loadPatient($patientId);
-		}
-		
-		// Returns the patient from the cache
-		return $patients[$patientId];
+		return $this->getEntity($patientId, $this->cache['patients'], [ $this, 'loadPatient' ]);
 	}
 	
 	/*
@@ -210,15 +120,7 @@ class Data extends Helper {
 	 * It receives the study's ID.
 	 */
 	public function getStudy($studyId) {
-		$studies = &$this->cache['studies'];
-		
-		if (! isset($studies[$studyId])) {
-			// The cache entry has not been initialized yet
-			$studies[$studyId] = $this->loadStudy($studyId);
-		}
-		
-		// Returns the study from the cache
-		return $studies[$studyId];
+		return $this->getEntity($studyId, $this->cache['studies'], [ $this, 'loadStudy' ]);
 	}
 	
 	/*
@@ -227,15 +129,7 @@ class Data extends Helper {
 	 * It receives the treatment's ID.
 	 */
 	public function getTreatment($treatmentId) {
-		$treatments = &$this->cache['treatments'];
-		
-		if (! isset($treatments[$treatmentId])) {
-			// The cache entry has not been initialized yet
-			$treatments[$treatmentId] = $this->loadTreatment($treatmentId);
-		}
-		
-		// Returns the treatment from the cache
-		return $treatments[$treatmentId];
+		return $this->getEntity($treatmentId, $this->cache['treatments'], [ $this, 'loadTreatment' ]);
 	}
 	
 	/*
@@ -244,15 +138,7 @@ class Data extends Helper {
 	 * It receives the user's ID.
 	 */
 	public function getUser($userId) {
-		$users = &$this->cache['users'];
-		
-		if (! isset($users[$userId])) {
-			// The cache entry has not been initialized yet
-			$users[$userId] = $this->loadUser($userId);
-		}
-		
-		// Returns the user from the cache
-		return $users[$userId];
+		return $this->getEntity($userId, $this->cache['users'], [ $this, 'loadUser' ]);
 	}
 	
 	/*
@@ -276,6 +162,22 @@ class Data extends Helper {
 			'treatments' => [],
 			'users' => []
 		];
+	}
+	
+	/*
+	 * Returns an entity, or null if it doesn't exists or has been erased.
+	 * 
+	 * It receives the entity's ID, its corresponding cache and the load
+	 * function, in case it hasn't been loaded yet.
+	 */
+	private function getEntity($entityId, &$entityCache, $loadFunction) {
+		if (! isset($entityCache[$entityId])) {
+			// The cache entry has not been initialized yet
+			$entityCache[$entityId] = call_user_func($loadFunction, $entityId);
+		}
+		
+		// Returns the entity from the cache
+		return $entityCache[$entityId];
 	}
 	
 	/*

@@ -52,7 +52,9 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes the password recovery requests belonging to a certain user.
+	 * 
+	 * It receives the user's ID.
 	 */
 	public function deleteUserPasswordRecoveryRequests($userId) {
 		// Defines the statement

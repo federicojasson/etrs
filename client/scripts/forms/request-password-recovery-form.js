@@ -7,8 +7,10 @@
 	
 	// Controller: RequestPasswordRecoveryFormController
 	module.controller('RequestPasswordRecoveryFormController', [
+		'dialogs',
 		'inputValidator',
 		'InputModel',
+		'router',
 		'server',
 		RequestPasswordRecoveryFormController
 	]);
@@ -18,7 +20,7 @@
 	 * 
 	 * Offers functions for the request password recovery form.
 	 */
-	function RequestPasswordRecoveryFormController(inputValidator, InputModel, server) {
+	function RequestPasswordRecoveryFormController(dialogs, inputValidator, InputModel, router, server) {
 		var controller = this;
 		
 		/*
@@ -81,7 +83,14 @@
 				if (output.requestAccepted) {
 					// The request was accepted
 					
-					// TODO: show confirmation modal dialog
+					// Shows an information dialog
+					dialogs.showInformationDialog({
+						title: 'Solicitud aceptada',
+						message: 'Su solicitud de recuperación de contraseña ha sido aceptada. Se ha enviado un correo electrónico a su casilla. Para continuar con el proceso deberá seguir los pasos indicados en el mismo.', // TODO: too long
+						onClose: function() {
+							// Redirects the user to the root route
+							router.redirect('/');
+						}});
 				} else {
 					// The request was not accepted
 					

@@ -43,10 +43,10 @@
 		 * 
 		 * The function makes use of the cache to avoid unnecesary requests.
 		 * 
-		 * It receives the entity's ID, its corresponding cache and its load
+		 * It receives the entity's ID, its corresponding cache and the load
 		 * function, in case it hasn't been loaded yet.
 		 */
-		function getEntity(entityId, entityCache, entityLoadFunction) {
+		function getEntity(entityId, entityCache, loadFunction) {
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
@@ -59,7 +59,7 @@
 				// The entity has not been loaded yet
 				
 				// Loads the entity
-				entityLoadFunction(entityId).then(function(entity) {
+				loadFunction(entityId).then(function(entity) {
 					// Resolves the deferred task
 					deferredTask.resolve(entity);
 				}, function(response) {

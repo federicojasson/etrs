@@ -15,7 +15,7 @@
 	
 	// TODO: debug
 	angular.module('app').run(['$timeout', 'data', function($timeout, data) {
-		/*$timeout(function() {
+		$timeout(function() {
 			data.prepare([
 				'backgrounds',
 				'clinicalImpressions',
@@ -103,6 +103,6 @@
 					console.log(object);
 				});
 			});
-		}, 1000);*/
+		}, 1000);
 	}]);
 })();

@@ -6,7 +6,7 @@
 class DataFilter extends Helper {
 	
 	/*
-	 * TODO: comments
+	 * The fields of each table authorized to be retrieved.
 	 */
 	private $authorizedFields;
 	
@@ -14,7 +14,7 @@ class DataFilter extends Helper {
 	 * Filters a background object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the background.
@@ -37,7 +37,7 @@ class DataFilter extends Helper {
 	 * Filters a clinical impression object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the clinical impression.
@@ -60,7 +60,7 @@ class DataFilter extends Helper {
 	 * Filters a consultation object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the consultation.
@@ -86,7 +86,7 @@ class DataFilter extends Helper {
 	 * Filters a diagnosis object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the diagnosis.
@@ -109,7 +109,7 @@ class DataFilter extends Helper {
 	 * Filters an experiment object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the experiment.
@@ -132,7 +132,7 @@ class DataFilter extends Helper {
 	 * Filters a file object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the file.
@@ -156,7 +156,7 @@ class DataFilter extends Helper {
 	 * Filters an image test object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the image test.
@@ -179,7 +179,7 @@ class DataFilter extends Helper {
 	 * Filters a laboratory test object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the laboratory test.
@@ -202,7 +202,7 @@ class DataFilter extends Helper {
 	 * Filters a medication object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the medication.
@@ -225,7 +225,7 @@ class DataFilter extends Helper {
 	 * Filters a neurocognitive evaluation object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the neurocognitive evaluation.
@@ -248,7 +248,7 @@ class DataFilter extends Helper {
 	 * Filters a patient object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the patient.
@@ -271,7 +271,7 @@ class DataFilter extends Helper {
 	 * Filters a study object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the study.
@@ -297,7 +297,7 @@ class DataFilter extends Helper {
 	 * Filters a treatment object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the treatment.
@@ -320,7 +320,7 @@ class DataFilter extends Helper {
 	 * Filters a user object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
-	 * authorized to see and applies the necessary conversions on those
+	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
 	 * It receives the user.
@@ -365,15 +365,16 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Applies a function to a set of fields of an entity.
 	 * 
-	 * TODO: name
+	 * It receives the function, the entity and the fields in which the function
+	 * will be applied.
 	 */
-	private function applyFunction($function, $entity, $consideredFields) {
-		// Applies the function to the considered fields of the entity
-		$count = count($consideredFields);
+	private function applyFunction($function, $entity, $fields) {
+		// Applies the function to the specified fields
+		$count = count($fields);
 		for ($i = 0; $i < $count; $i++) {
-			$field = $consideredFields[$i];
+			$field = $fields[$i];
 			
 			if (isset($entity[$field])) {
 				// The entity contains the field
@@ -387,7 +388,9 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters the fields of an entity, leaving only an authorized subset.
+	 * 
+	 * It receives the entity and the authorized fields.
 	 */
 	private function filterFields($entity, $authorizedFields) {
 		// Initializes the filtered entity
@@ -406,7 +409,8 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the fields that the administrators are authorized to
+	 * retrieve.
 	 */
 	private function initializeAdministratorAuthorizedFields() {
 		$this->authorizedFields = [
@@ -556,7 +560,7 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the fields that the doctors are authorized to retrieve.
 	 */
 	private function initializeDoctorAuthorizedFields() {
 		$this->authorizedFields = [
@@ -619,7 +623,7 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Initializes the fields that the operators are authorized to retrieve.
 	 */
 	private function initializeOperatorAuthorizedFields() {
 		$this->authorizedFields = [
