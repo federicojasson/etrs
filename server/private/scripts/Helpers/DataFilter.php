@@ -7,12 +7,17 @@ class DataFilter extends Helper {
 	
 	/*
 	 * TODO: comments
-	 * TODO: initialize
 	 */
 	private $authorizedFields;
 	
 	/*
-	 * TODO: comments
+	 * Filters a background object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the background.
 	 */
 	public function filterBackground($background) {
 		$filteredBackground = $background;
@@ -29,7 +34,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a clinical impression object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the clinical impression.
 	 */
 	public function filterClinicalImpression($clinicalImpression) {
 		$filteredClinicalImpression = $clinicalImpression;
@@ -46,7 +57,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a consultation object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the consultation.
 	 */
 	public function filterConsultation($consultation) {
 		$filteredConsultation = $consultation;
@@ -66,7 +83,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a diagnosis object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the diagnosis.
 	 */
 	public function filterDiagnosis($diagnosis) {
 		$filteredDiagnosis = $diagnosis;
@@ -83,7 +106,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters an experiment object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the experiment.
 	 */
 	public function filterExperiment($experiment) {
 		$filteredExperiment = $experiment;
@@ -100,7 +129,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a file object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the file.
 	 */
 	public function filterFile($file) {
 		$filteredFile = $file;
@@ -118,7 +153,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters an image test object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the image test.
 	 */
 	public function filterImageTest($imageTest) {
 		$filteredImageTest = $imageTest;
@@ -135,7 +176,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a laboratory test object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the laboratory test.
 	 */
 	public function filterLaboratoryTest($laboratoryTest) {
 		$filteredLaboratoryTest = $laboratoryTest;
@@ -152,7 +199,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a medication object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the medication.
 	 */
 	public function filterMedication($medication) {
 		$filteredMedication = $medication;
@@ -169,7 +222,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a neurocognitive evaluation object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the neurocognitive evaluation.
 	 */
 	public function filterNeurocognitiveEvaluation($neurocognitiveEvaluation) {
 		$filteredNeurocognitiveEvaluation = $neurocognitiveEvaluation;
@@ -186,7 +245,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a patient object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the patient.
 	 */
 	public function filterPatient($patient) {
 		$filteredPatient = $patient;
@@ -203,7 +268,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a study object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the study.
 	 */
 	public function filterStudy($study) {
 		$filteredStudy = $study;
@@ -223,7 +294,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a treatment object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the treatment.
 	 */
 	public function filterTreatment($treatment) {
 		$filteredTreatment = $treatment;
@@ -240,7 +317,13 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a user object and returns the result.
+	 * 
+	 * The function filters out the fields that the requesting user is not
+	 * authorized to see and applies the necessary conversions on those
+	 * remaining.
+	 * 
+	 * It receives the user.
 	 */
 	public function filterUser($user) {
 		$filteredUser = $user;

@@ -107,7 +107,7 @@ class WebServerDatabase extends Database {
 	/*
 	 * Inserts or updates a session.
 	 * 
-	 * It receives the session's ID and the values to insert/update the row.
+	 * It receives the values to insert/update the row.
 	 */
 	public function insertOrUpdateSession($sessionId, $sessionData) {
 		// Defines the statement
@@ -132,6 +132,45 @@ class WebServerDatabase extends Database {
 		$parameters = [
 			':sessionData' => $sessionData,
 			':sessionId' => $sessionId
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts a password recovery request.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertPasswordRecoveryRequest($id, $user, $passwordHash, $passwordSalt, $passwordIterations) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO password_recovery_requests (
+				id,
+				user,
+				creation_datetime,
+				password_hash,
+				password_salt,
+				password_iterations
+			)
+			VALUES (
+				:id,
+				:user,
+				UTC_TIMESTAMP(),
+				:passwordHash,
+				:passwordSalt,
+				:passwordIterations
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':user' => $user,
+			':passwordHash' => $passwordHash,
+			':passwordSalt' => $passwordSalt,
+			':passwordIterations' => $passwordIterations
 		];
 		
 		// Executes the statement

@@ -56,7 +56,7 @@ class RequestPasswordRecoveryController extends SecureController {
 		$passwordHash = $cryptography->hashPassword($password, $passwordSalt, $passwordIterations);
 		
 		// Inserts a password recovery request
-		$webServerDatabase->insertPasswordRecoveryRequest($id, $userId, $passwordHash, $passwordSalt, $passwordIterations);// TODO: implement
+		$webServerDatabase->insertPasswordRecoveryRequest($id, $userId, $passwordHash, $passwordSalt, $passwordIterations);
 		
 		// Commits the transaction
 		$webServerDatabase->commitTransaction();
@@ -69,6 +69,9 @@ class RequestPasswordRecoveryController extends SecureController {
 		
 		// Builds the email message
 		$emailMessage = $this->buildEmailMessage($templateFilePath, $password);
+		
+		// TODO: debug
+		$app->log->info($emailMessage);
 		
 		// Sends an email to the user with a link for password recovery
 		$app->emailBuilder
@@ -126,8 +129,13 @@ class RequestPasswordRecoveryController extends SecureController {
 	/*
 	 * TODO: comments
 	 */
-	private function buildEmailMessage($templateFilePath, $passwordRecoveryRequestPassword) {
-		// TODO: implement
+	private function buildEmailMessage($templateFilePath, $password) {
+		// Gets the template
+		$template = file_get_contents($templateFilePath);
+		
+		// Replaces the :password placeholder with the hexadecimal
+		// representation of the password and returns the result
+		return str_replace(':password', bin2hex($password), $template);
 	}
 	
 	/*
