@@ -18,6 +18,7 @@
 		
 		/*
 		 * TODO: remove if not used
+		 * TODO: use angular.isObject
 		 * 
 		 * Merges two objects and returns the result. The properties of a source
 		 * object are copied into a target object.

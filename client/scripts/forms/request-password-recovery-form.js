@@ -66,6 +66,7 @@
 		 */
 		controller.submit = function() {
 			var inputModels = controller.inputModels;
+			var emailAddress = inputModels.emailAddress.value;
 			
 			// Hides the alert
 			showAlert = false;
@@ -78,7 +79,7 @@
 			// Requests the password recovery
 			server.requestPasswordRecovery({
 				id: inputModels.id.value,
-				emailAddress: inputModels.emailAddress.value
+				emailAddress: emailAddress
 			}).then(function(output) {
 				if (output.requestAccepted) {
 					// The request was accepted
@@ -86,7 +87,10 @@
 					// Shows an information dialog
 					dialogs.showInformationDialog({
 						title: 'Solicitud aceptada',
-						message: 'Su solicitud de recuperación de contraseña ha sido aceptada. Se ha enviado un correo electrónico a su casilla. Para continuar con el proceso deberá seguir los pasos indicados en el mismo.', // TODO: too long
+						message: [
+							'Su solicitud de recuperación de contraseña ha sido aceptada.',
+							'Se ha enviado un correo electrónico a ' + emailAddress + '. Para continuar con el proceso deberá seguir los pasos indicados en el mismo.'
+						],
 						onClose: function() {
 							// Redirects the user to the root route
 							router.redirect('/');

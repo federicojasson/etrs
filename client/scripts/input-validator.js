@@ -58,7 +58,7 @@
 					// Gets the child object
 					var child = inputModels[property];
 					
-					if (angular.isDefined(child.validateInput) && child.validateInput.constructor === Function) {
+					if (angular.isDefined(child.validateInput) && angular.isFunction(child.validateInput)) {
 						// The validateInput property corresponds to the input
 						// model's validateInput function, so it invokes it
 						areValid &= child.validateInput();

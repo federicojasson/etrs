@@ -10,6 +10,7 @@
 	// Service: dialogs
 	module.service('dialogs', [
 		'$modal',
+		'informationDialog',
 		dialogsService
 	]);
 	
@@ -18,7 +19,7 @@
 	 * 
 	 * TODO: comments
 	 */
-	function dialogsService($modal) {
+	function dialogsService($modal, informationDialog) {
 		var service = this;
 		
 		/*
@@ -33,15 +34,29 @@
 		 *		message: ...,
 		 *		onClose: ...
 		 *	}
+		 *	
+		 *	The message can be a string or an array containing the different
+		 *	lines.
 		 */
 		service.showInformationDialog = function(parameters) {
-			var title = parameters.title; // TODO: use somehow
-			var message = parameters.message; // TODO: use somehow
+			var title = parameters.title;
+			var message = parameters.message;
 			var onClose = parameters.onClose;
+			
+			if (! angular.isArray(message)) {
+				// The message is not an array
+				message = [ message ];
+			}
+			
+			// Sets the title and message
+			informationDialog.setTitle(title);
+			informationDialog.setMessage(message);
 			
 			// Opens the dialog
 			var modal = $modal.open({
 				backdrop: 'static',
+				controller: 'InformationDialogController',
+				controllerAs: 'dialog',
 				templateUrl: 'templates/dialogs/information-dialog.html'
 			});
 			
