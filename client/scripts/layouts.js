@@ -7,53 +7,53 @@
 		'authentication'
 	]);
 	
-	// Controller: LayoutController
-	module.controller('LayoutController', [
-		'authentication',
-		LayoutController
-	]);
-	
 	// Directive: layout
-	module.directive('layout', layoutDirective);
-	
-	/*
-	 * Controller: LayoutController
-	 * 
-	 * TODO: comments
-	 */
-	function LayoutController(authentication) {
-		var controller = this;
-		
-		/*
-		 * Returns the URL of the layout's template.
-		 */
-		controller.getTemplateUrl = function() {
-			if (! authentication.isReady()) {
-				// The authentication service is not ready
-				return 'templates/layouts/loading-layout.html';
-			}
-			
-			return 'templates/layouts/site-layout.html';
-		};
-	}
+	module.directive('layout', [
+        '$controller',
+        'authentication',
+        layoutDirective
+    ]);
 	
 	/*
 	 * Directive: layout
 	 * 
 	 * Includes the layout.
 	 */
-	function layoutDirective() {
+	function layoutDirective($controller, authentication) {
+        /*
+         * TODO: comments
+         * TODO: name
+         */
+        function getControllerName() {
+            if (! authentication.isReady()) {
+                // The authentication service is not ready
+                return 'LoadingLayoutController';
+            }
+            
+            // TODO: error
+            
+            return 'SiteLayoutController';
+        }
+        
 		/*
 		 * Returns the directive's options.
 		 */
 		function getOptions() {
 			return {
-				controller: 'LayoutController',
-				controllerAs: 'layout',
+                link: link,
 				scope: {},
 				template: '<span ng-include="layout.getTemplateUrl()"></span>'
 			};
 		}
+        
+        /*
+         * TODO: comments
+         */
+        function link(scope) {
+            // TODO: check
+            var controllerName = getControllerName();
+            scope.layout = $controller(controllerName);
+        }
 		
 		// Gets and returns the directive's options
 		return getOptions();
