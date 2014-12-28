@@ -4,8 +4,7 @@
 (function() {
 	// Module: authentication
 	var module = angular.module('authentication', [
-		'data',
-		'server'
+		'app'
 	]);
 	
 	// Run

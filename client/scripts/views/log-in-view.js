@@ -6,26 +6,28 @@
 	var module = angular.module('views');
 	
 	// Controller: LogInViewController
-	module.controller('LogInViewController', [
-		'views',
-		LogInViewController
-	]);
+	module.controller('LogInViewController', LogInViewController);
 	
 	/*
 	 * Controller: LogInViewController
 	 * 
 	 * Offers functions for the log in view.
 	 */
-	function LogInViewController(views) {
+	function LogInViewController() {
 		var controller = this;
 		
 		/*
 		 * Returns the URL of the view's template.
 		 */
 		controller.getTemplateUrl = function() {
-			return views.selectTemplateUrlOrRedirect({
-				__: 'templates/views/log-in-view.html'
-			});
+			return 'templates/views/log-in-view.html';
+		};
+		
+		/*
+		 * Returns the title of the document when the view is active.
+		 */
+		controller.getTitle = function() {
+			return 'Iniciar sesión - ETRS';
 		};
 	}
 })();

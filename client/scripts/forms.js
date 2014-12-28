@@ -4,10 +4,6 @@
 (function() {
 	// Module: forms
 	angular.module('forms', [
-		'authentication',
-		'dialogs',
-		'inputValidator',
-		'router',
-		'server'
+		'app'
 	]);
 })();

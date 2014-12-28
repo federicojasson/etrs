@@ -6,26 +6,28 @@
 	var module = angular.module('views');
 	
 	// Controller: RequestPasswordRecoveryViewController
-	module.controller('RequestPasswordRecoveryViewController', [
-		'views',
-		RequestPasswordRecoveryViewController
-	]);
+	module.controller('RequestPasswordRecoveryViewController', RequestPasswordRecoveryViewController);
 	
 	/*
 	 * Controller: RequestPasswordRecoveryViewController
 	 * 
 	 * Offers functions for the request password recovery view.
 	 */
-	function RequestPasswordRecoveryViewController(views) {
+	function RequestPasswordRecoveryViewController() {
 		var controller = this;
 		
 		/*
 		 * Returns the URL of the view's template.
 		 */
 		controller.getTemplateUrl = function() {
-			return views.selectTemplateUrlOrRedirect({
-				__: 'templates/views/request-password-recovery-view.html'
-			});
+			return 'templates/views/request-password-recovery-view.html';
+		};
+		
+		/*
+		 * Returns the title of the document when the view is active.
+		 */
+		controller.getTitle = function() {
+			return 'Recuperar contraseña - ETRS';
 		};
 	}
 })();

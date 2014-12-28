@@ -4,7 +4,7 @@
 (function() {
 	// Module: server
 	var module = angular.module('server', [
-		'ngResource'
+		'app'
 	]);
 	
 	// Service: server

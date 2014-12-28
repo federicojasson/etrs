@@ -25,12 +25,12 @@ class DatabaseLogWriter {
 		$this->database = $database;
 	}
 	
-    /*
+	/*
 	 * Writes a log in the database.
 	 * 
 	 * It receives the message and the level.
 	 */
-    public function write($message, $level) {
+	public function write($message, $level) {
 		$database = $this->database;
 		
 		// Generate a random ID
@@ -43,7 +43,7 @@ class DatabaseLogWriter {
 		
 		// Inserts a log in the database
 		$database->insertLog($id, $type, $message);
-    }
+	}
 	
 	/*
 	 * Returns the type of a log, according to its level.

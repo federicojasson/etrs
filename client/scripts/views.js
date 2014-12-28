@@ -4,37 +4,33 @@
 (function() {
 	// Module: views
 	var module = angular.module('views', [
-		'ui.router',
-		'authentication',
-		'router'
+		'app'
 	]);
 	
 	// Directive: view
 	module.directive('view', [
 		'$controller',
-		'$state',
+		'title',
+		'view',
 		viewDirective
 	]);
 	
-	// Service: views
-	module.service('views', [
-		'authentication',
-		'router',
-		viewsService
-	]);
+	// Service: view
+	module.service('view', viewService);
 	
 	/*
 	 * Directive: view
 	 * 
 	 * Includes the view.
 	 */
-	function viewDirective($controller, $state) {
+	function viewDirective($controller, title, view) {
 		/*
 		 * Returns the directive's options.
 		 */
 		function getOptions() {
 			return {
 				link: link,
+				restrict: 'A',
 				scope: {},
 				template: '<span ng-include="view.getTemplateUrl()"></span>'
 			};
@@ -44,8 +40,17 @@
 		 * Invoked during the linking phase.
 		 */
 		function link(scope) {
-			// Binds the view's controller to the scope
-			scope.view = $controller($state.current.viewController);
+			// TODO: comments
+			scope.$watch(view.getControllerName, function(controllerName) {
+				// Loads the view's controller
+				var controller = $controller(controllerName);// TODO: should destroyed the current controller?
+				
+				// Sets the title of the document
+				title.set(controller.getTitle());
+				
+				// Binds the controller to the scope
+				scope.view = controller; 
+			});
 		}
 		
 		// Gets and returns the directive's options
@@ -53,44 +58,30 @@
 	}
 	
 	/*
-	 * Service: views
+	 * Service: view
 	 * 
-	 * Offers functions for the views.
+	 * TODO: comments
 	 */
-	function viewsService(authentication, router) {
+	function viewService() {
 		var service = this;
 		
 		/*
-		 * Selects a template URL according to the current authentication state.
-		 * If there's no template defined for the requesting user, it redirects
-		 * her to the root route.
-		 * 
-		 * It receives an object containing a property for each user role
-		 * authorized to access the view, whose value indicates the URL of the
-		 * corresponding template. The special property '__' can be used to
-		 * indicate the URL of the template for anonymous users.
+		 * TODO: comments
 		 */
-		service.selectTemplateUrlOrRedirect = function(templateUrls) {
-			var userRole;
-			
-			if (authentication.isUserLoggedIn()) {
-				// The user is logged in
-				userRole = authentication.getLoggedInUser().role;
-			} else {
-				// The user is not logged in
-				userRole = '__';
-			}
-			
-			if (! templateUrls.hasOwnProperty(userRole)) {
-				// The user is not authorized to access the view
-				
-				// Redirects the user to the root route
-				router.redirect('/');
-				
-				return null;
-			}
-			
-			return templateUrls[userRole];
+		var controllerName;
+		
+		/*
+		 * TODO: comments
+		 */
+		service.getControllerName = function() {
+			return controllerName;
+		};
+		
+		/*
+		 * TODO: comments
+		 */
+		service.setControllerName = function(newControllerName) {
+			controllerName = newControllerName;
 		};
 	}
 })();

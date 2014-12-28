@@ -41,7 +41,7 @@
 		/*
 		 * The title of the document.
 		 */
-		var title = 'ETRS';
+		var title;
 		
 		/*
 		 * Returns the title of the document.
@@ -53,7 +53,7 @@
 		/*
 		 * Sets the title of the document.
 		 * 
-		 * It receives the new title.
+		 * It receives the title.
 		 */
 		service.set = function(newTitle) {
 			title = newTitle;

@@ -10,8 +10,8 @@ class Request extends \Slim\Http\Request {
 	 * 
 	 * It receives the input to be set.
 	 */
-    public function setBody($input) {
+	public function setBody($input) {
 		$this->env['slim.input'] = $input;
-    }
+	}
 	
 }
