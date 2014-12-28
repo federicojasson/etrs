@@ -5,22 +5,22 @@
 	// Module: layouts
 	var module = angular.module('layouts');
 	
-	// Controller: SiteLayoutController
-	module.controller('SiteLayoutController', SiteLayoutController);
+	// Controller: LoadingLayoutController
+	module.controller('LoadingLayoutController', LoadingLayoutController);
 	
 	/*
-	 * Controller: SiteLayoutController
+	 * Controller: LoadingLayoutController
 	 * 
-	 * Offers functions for the site layout.
+	 * Offers functions for the loading layout.
 	 */
-	function SiteLayoutController() {
+	function LoadingLayoutController() {
 		var controller = this;
 		
 		/*
 		 * Returns the URL of the layout's template.
 		 */
 		controller.getTemplateUrl = function() {
-			return 'templates/layouts/site-layout.html';
+			return 'templates/layouts/loading-layout.html';
 		};
 	}
 })();

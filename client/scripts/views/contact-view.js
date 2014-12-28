@@ -6,29 +6,21 @@
 	var module = angular.module('views');
 	
 	// Controller: ContactViewController
-	module.controller('ContactViewController', [
-		'views',
-		ContactViewController
-	]);
+	module.controller('ContactViewController', ContactViewController);
 	
 	/*
 	 * Controller: ContactViewController
 	 * 
 	 * Offers functions for the contact view.
 	 */
-	function ContactViewController(views) {
+	function ContactViewController() {
 		var controller = this;
 		
 		/*
 		 * Returns the URL of the view's template.
 		 */
 		controller.getTemplateUrl = function() {
-			return views.selectTemplateUrlOrRedirect({
-				__: 'templates/views/contact-view.html',
-				ad: 'templates/views/contact-view.html',
-				dr: 'templates/views/contact-view.html',
-				op: 'templates/views/contact-view.html'
-			});
+			return 'templates/views/contact-view.html';
 		};
 	}
 })();

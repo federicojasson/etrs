@@ -5,22 +5,22 @@
 	// Module: layouts
 	var module = angular.module('layouts');
 	
-	// Controller: SiteLayoutController
-	module.controller('SiteLayoutController', SiteLayoutController);
+	// Controller: ErrorLayoutController
+	module.controller('ErrorLayoutController', ErrorLayoutController);
 	
 	/*
-	 * Controller: SiteLayoutController
+	 * Controller: ErrorLayoutController
 	 * 
-	 * Offers functions for the site layout.
+	 * Offers functions for the error layout.
 	 */
-	function SiteLayoutController() {
+	function ErrorLayoutController() {
 		var controller = this;
 		
 		/*
 		 * Returns the URL of the layout's template.
 		 */
 		controller.getTemplateUrl = function() {
-			return 'templates/layouts/site-layout.html';
+			return 'templates/layouts/error-layout.html';
 		};
 	}
 })();

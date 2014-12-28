@@ -4,40 +4,55 @@
 (function() {
 	// Module: layouts
 	var module = angular.module('layouts', [
-		'ui.router',
 		'authentication'
 	]);
 	
-	// Directive: layout
-	module.directive('layout', [
-		'$controller',
-		'$state',
-		layoutDirective
+	// Controller: LayoutController
+	module.controller('LayoutController', [
+		'authentication',
+		LayoutController
 	]);
+	
+	// Directive: layout
+	module.directive('layout', layoutDirective);
+	
+	/*
+	 * Controller: LayoutController
+	 * 
+	 * TODO: comments
+	 */
+	function LayoutController(authentication) {
+		var controller = this;
+		
+		/*
+		 * Returns the URL of the layout's template.
+		 */
+		controller.getTemplateUrl = function() {
+			if (! authentication.isReady()) {
+				// The authentication service is not ready
+				return 'templates/layouts/loading-layout.html';
+			}
+			
+			return 'templates/layouts/site-layout.html';
+		};
+	}
 	
 	/*
 	 * Directive: layout
 	 * 
 	 * Includes the layout.
 	 */
-	function layoutDirective($controller, $state) {
+	function layoutDirective() {
 		/*
 		 * Returns the directive's options.
 		 */
 		function getOptions() {
 			return {
-				link: link,
+				controller: 'LayoutController',
+				controllerAs: 'layout',
 				scope: {},
 				template: '<span ng-include="layout.getTemplateUrl()"></span>'
 			};
-		}
-		
-		/*
-		 * Invoked during the linking phase.
-		 */
-		function link(scope) {
-			// Binds the layout's controller to the scope
-			scope.layout = $controller($state.current.layoutController);
 		}
 		
 		// Gets and returns the directive's options
