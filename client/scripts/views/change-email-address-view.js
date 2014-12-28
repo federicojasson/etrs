@@ -22,5 +22,12 @@
 		controller.getTemplateUrl = function() {
 			return 'templates/views/change-email-address-view.html';
 		};
+		
+		/*
+		 * Returns the title of the document when the view is active.
+		 */
+		controller.getTitle = function() {
+			return 'Cambiar dirección de correo electrónico - ETRS';
+		};
 	}
 })();

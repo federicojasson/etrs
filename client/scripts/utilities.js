@@ -3,5 +3,7 @@
 
 (function() {
 	// Module: utilities
-	angular.module('utilities', []);
+	angular.module('utilities', [
+		'app'
+	]);
 })();

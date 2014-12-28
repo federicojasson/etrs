@@ -22,5 +22,12 @@
 		controller.getTemplateUrl = function() {
 			return 'templates/views/user-view.html';
 		};
+		
+		/*
+		 * Returns the title of the document when the view is active.
+		 */
+		controller.getTitle = function() {
+			return 'Usuario - ETRS'; // TODO: change title
+		};
 	}
 })();

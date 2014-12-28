@@ -11,13 +11,13 @@ class Response extends \Slim\Http\Response {
 	 * The method redefines a deprecated version, and calls getBody or setBody
 	 * instead. This is necessary because the Slim framework still uses it.
 	 */
-    public function body($output = null) {
-        if (! is_null($output)) {
-            $this->setBody($output);
-        }
+	public function body($output = null) {
+		if (! is_null($output)) {
+			$this->setBody($output);
+		}
 		
-        return $this->getBody();
-    }
+		return $this->getBody();
+	}
 	
 	/*
 	 * Sets the body.
@@ -25,7 +25,7 @@ class Response extends \Slim\Http\Response {
 	 * It receives the output to be set. If it is not a string, it encodes it in
 	 * JSON format.
 	 */
-    public function setBody($output) {
+	public function setBody($output) {
 		if (is_string($output)) {
 			// The content is a string
 			parent::setBody($output);
@@ -40,6 +40,6 @@ class Response extends \Slim\Http\Response {
 		
 		// Sets the encoded version as the body
 		parent::setBody($encodedOutput);
-    }
+	}
 	
 }

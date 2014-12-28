@@ -4,7 +4,7 @@
 (function() {
 	// Module: router
 	var module = angular.module('router', [
-		'ui.router'
+		'app'
 	]);
 	
 	// Config
@@ -13,6 +13,18 @@
 		'$stateProvider',
 		'$urlRouterProvider',
 		config
+	]);
+	
+	// Run
+	module.run([
+		'$rootScope',
+		'$state',
+		'authentication',
+		'errorHandler',
+		'layout',
+		'router',
+		'view',
+		run
 	]);
 	
 	// Service: router
@@ -34,7 +46,7 @@
 				name: 'changeEmailAddress',
 				definition: {
 					url: '/change-email-address',
-					viewControllers: {
+					controllers: {
 						__: 'LogInViewController',
 						ad: 'ChangeEmailAddressViewController',
 						dr: 'ChangeEmailAddressViewController',
@@ -47,7 +59,7 @@
 				name: 'changePassword',
 				definition: {
 					url: '/change-password',
-					viewControllers: {
+					controllers: {
 						__: 'LogInViewController',
 						ad: 'ChangePasswordViewController',
 						dr: 'ChangePasswordViewController',
@@ -60,7 +72,7 @@
 				name: 'contact',
 				definition: {
 					url: '/contact',
-					viewControllers: {
+					controllers: {
 						__: 'ContactViewController',
 						ad: 'ContactViewController',
 						dr: 'ContactViewController',
@@ -73,7 +85,7 @@
 				name: 'home',
 				definition: {
 					url: '/',
-					viewControllers: {
+					controllers: {
 						__: 'LogInViewController',
 						ad: 'HomeViewController',
 						dr: 'HomeViewController',
@@ -86,7 +98,7 @@
 				name: 'logIn',
 				definition: {
 					url: '/log-in',
-					viewControllers: {
+					controllers: {
 						__: 'LogInViewController'
 					}
 				}
@@ -96,7 +108,7 @@
 				name: 'profile',
 				definition: {
 					url: '/profile',
-					viewControllers: {
+					controllers: {
 						__: 'LogInViewController',
 						ad: 'ProfileViewController',
 						dr: 'ProfileViewController',
@@ -109,7 +121,7 @@
 				name: 'requestPasswordRecovery',
 				definition: {
 					url: '/request-password-recovery',
-					viewControllers: {
+					controllers: {
 						__: 'RequestPasswordRecoveryViewController'
 					}
 				}
@@ -119,7 +131,7 @@
 				name: 'user',
 				definition: {
 					url: '/user/{userId:(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{1,32}}',
-					viewControllers: {
+					controllers: {
 						__: 'LogInViewController',
 						ad: 'UserViewController',
 						dr: 'UserViewController',
@@ -143,6 +155,94 @@
 		
 		// Sets the default route
 		$urlRouterProvider.otherwise('/');
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	function run($rootScope, $state, authentication, errorHandler, layout, router, view) {
+		/*
+		 * TODO: comments
+		 */
+		function setControllers() {
+			setLayoutController();
+			setViewController();
+		}
+		
+		/*
+		 * TODO: comments
+		 */
+		function setLayoutController() {
+			// Gets the name of the layout's controller
+			var controllerName;
+			if (authentication.isReady()) {
+				// The authentication service is ready
+				
+				if (errorHandler.errorOccurred()) {
+					// An error occurred
+					controllerName = 'ErrorLayoutController';
+				} else {
+					// No error occurred
+					controllerName = 'SiteLayoutController';
+				}
+			} else {
+				// The authentication service is not ready
+				controllerName = 'LoadingLayoutController';
+			}
+			
+			// Sets the name of the layout's controller
+			layout.setControllerName(controllerName);
+		}
+		
+		/*
+		 * TODO: comments
+		 */
+		function setViewController() {
+			var controllers = $state.current.controllers;
+			
+			if (! authentication.isReady()) {
+				// The authentication service is not ready
+				return;
+			}
+
+			// Gets the user's role
+			var userRole;
+			if (authentication.isUserLoggedIn()) {
+				// The user is logged in
+				userRole = authentication.getLoggedInUser().role;
+			} else {
+				// The user is not logged in
+				userRole = '__';
+			}
+
+			if (! controllers.hasOwnProperty(userRole)) {
+				// The user is not authorized to access the current route
+
+				// Redirects the user to the root route
+				router.redirect('/');
+
+				return;
+			}
+
+			// Sets the name of the view's controller
+			var controllerName = controllers[userRole];
+			view.setControllerName(controllerName);
+		}
+		
+		// TODO: comments
+		$rootScope.$on('$stateChangeSuccess', function() {
+			setControllers();
+		});
+		
+		// TODO: comments
+		$rootScope.$watch(authentication.isReady, function() {
+			setControllers();
+		});
+		
+		// TODO: comments
+		$rootScope.$watch(errorHandler.errorOccurred, function() {
+			setControllers();
+		});
 	}
 	
 	/*

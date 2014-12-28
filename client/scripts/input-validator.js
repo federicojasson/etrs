@@ -3,7 +3,9 @@
 
 (function() {
 	// Module: inputValidator
-	var module = angular.module('inputValidator', []);
+	var module = angular.module('inputValidator', [
+		'app'
+	]);
 	
 	// Service: inputValidator
 	module.service('inputValidator', inputValidatorService);

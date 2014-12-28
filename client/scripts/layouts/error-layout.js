@@ -22,5 +22,12 @@
 		controller.getTemplateUrl = function() {
 			return 'templates/layouts/error-layout.html';
 		};
+		
+		/*
+		 * Returns the title of the document when the layout is active.
+		 */
+		controller.getTitle = function() {
+			return 'Error - ETRS';
+		};
 	}
 })();

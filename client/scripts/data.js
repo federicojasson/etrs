@@ -4,7 +4,7 @@
 (function() {
 	// Module: data
 	var module = angular.module('data', [
-		'server'
+		'app'
 	]);
 	
 	// Service: data

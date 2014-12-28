@@ -4,6 +4,6 @@
 (function() {
 	// Module: dialogs
 	angular.module('dialogs', [
-		'ui.bootstrap'
+		'app'
 	]);
 })();
