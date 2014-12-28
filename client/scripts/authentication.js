@@ -22,6 +22,8 @@
 	// Service: authentication
 	module.service('authentication', [
 		'data',
+		'errorHandler',
+		'Error',
 		'server',
 		authenticationService
 	]);
@@ -68,7 +70,7 @@
 	 * client application synchronized with its corresponding state in the
 	 * server.
 	 */
-	function authenticationService(data, server) {
+	function authenticationService(data, errorHandler, Error, server) {
 		var service = this;
 		
 		/*
@@ -127,7 +129,9 @@
 						// The refresh process is over
 						isRefreshingState = false;
 					}, function(response) {
-						// TODO: handle error
+						// The server responded with an HTTP error
+						var error = Error.createFromResponse(response);
+						errorHandler.reportError(error);
 					});
 				} else {
 					// The user is not logged in
@@ -137,7 +141,9 @@
 					isRefreshingState = false;
 				}
 			}, function(response) {
-				// TODO: handle error
+				// The server responded with an HTTP error
+				var error = Error.createFromResponse(response);
+				errorHandler.reportError(error);
 			});
 		};
 	}

@@ -7,8 +7,30 @@
 		'app'
 	]);
 	
+	// Controller: ErrorHandlerController
+	module.controller('ErrorHandlerController', [
+		'errorHandler',
+		ErrorHandlerController
+	]);
+	
 	// Service: errorHandler
 	module.service('errorHandler', errorHandlerService);
+	
+	/*
+	 * Controller: ErrorHandlerController
+	 * 
+	 * TODO: comments
+	 */
+	function ErrorHandlerController(errorHandler) {
+		var controller = this;
+		
+		/*
+		 * TODO: comments
+		 */
+		controller.getError = function() {
+			return errorHandler.getError();
+		};
+	}
 	
 	/*
 	 * Service: errorHandler

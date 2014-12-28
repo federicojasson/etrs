@@ -8,6 +8,8 @@
 	// Controller: LogInFormController
 	module.controller('LogInFormController', [
 		'authentication',
+		'errorHandler',
+		'Error',
 		'inputValidator',
 		'InputModel',
 		'server',
@@ -19,7 +21,7 @@
 	 * 
 	 * Offers functions for the log in form.
 	 */
-	function LogInFormController(authentication, inputValidator, InputModel, server) {
+	function LogInFormController(authentication, errorHandler, Error, inputValidator, InputModel, server) {
 		var controller = this;
 		
 		/*
@@ -91,7 +93,9 @@
 					showAlert = true;
 				}
 			}, function(response) {
-				// TODO: handle error
+				// The server responded with an HTTP error
+				var error = Error.createFromResponse(response);
+				errorHandler.reportError(error);
 			});
 		};
 	}

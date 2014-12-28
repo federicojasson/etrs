@@ -1,1 +1,11 @@
-TODO: error layout
+<div class="fully-centered-container">
+	<div class="fully-centered" ng-controller="ErrorHandlerController as errorHandler">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3 well">
+				TODO: error layout
+				{{ errorHandler.getError().message }}<br>
+				{{ errorHandler.getError().details }}
+			</div>
+		</div>
+	</div>
+</div>

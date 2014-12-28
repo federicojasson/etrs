@@ -8,6 +8,8 @@
 	// Controller: LogOutFormController
 	module.controller('LogOutFormController', [
 		'authentication',
+		'errorHandler',
+		'Error',
 		'server',
 		LogOutFormController
 	]);
@@ -17,7 +19,7 @@
 	 * 
 	 * Offers functions for the log out form.
 	 */
-	function LogOutFormController(authentication, server) {
+	function LogOutFormController(authentication, errorHandler, Error, server) {
 		var controller = this;
 		
 		/*
@@ -29,7 +31,9 @@
 				// Refreshes the authentication state
 				authentication.refreshState();
 			}, function(response) {
-				// TODO: handle error
+				// The server responded with an HTTP error
+				var error = Error.createFromResponse(response);
+				errorHandler.reportError(error);
 			});
 		};
 	}

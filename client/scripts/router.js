@@ -175,19 +175,18 @@
 		function setLayoutController() {
 			// Gets the name of the layout's controller
 			var controllerName;
-			if (authentication.isReady()) {
-				// The authentication service is ready
-				
-				if (errorHandler.errorOccurred()) {
-					// An error occurred
-					controllerName = 'ErrorLayoutController';
-				} else {
-					// No error occurred
-					controllerName = 'SiteLayoutController';
-				}
+			if (errorHandler.errorOccurred()) {
+				// An error occurred
+				controllerName = 'ErrorLayoutController';
 			} else {
-				// The authentication service is not ready
-				controllerName = 'LoadingLayoutController';
+				// No error occurred
+				if (authentication.isReady()) {
+					// The authentication service is ready	
+					controllerName = 'SiteLayoutController';
+				} else {
+					// The authentication service is not ready
+					controllerName = 'LoadingLayoutController';
+				}
 			}
 			
 			// Sets the name of the layout's controller

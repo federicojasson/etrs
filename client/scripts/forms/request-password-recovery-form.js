@@ -8,6 +8,8 @@
 	// Controller: RequestPasswordRecoveryFormController
 	module.controller('RequestPasswordRecoveryFormController', [
 		'informationDialog',
+		'errorHandler',
+		'Error',
 		'inputValidator',
 		'InputModel',
 		'router',
@@ -20,7 +22,7 @@
 	 * 
 	 * Offers functions for the request password recovery form.
 	 */
-	function RequestPasswordRecoveryFormController(informationDialog, inputValidator, InputModel, router, server) {
+	function RequestPasswordRecoveryFormController(informationDialog, errorHandler, Error, inputValidator, InputModel, router, server) {
 		var controller = this;
 		
 		/*
@@ -102,7 +104,9 @@
 					showAlert = true;
 				}
 			}, function(response) {
-				// TODO: handle error
+				// The server responded with an HTTP error
+				var error = Error.createFromResponse(response);
+				errorHandler.reportError(error);
 			});
 		};
 	}
