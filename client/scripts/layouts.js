@@ -43,7 +43,7 @@
 			// Listens for changes in the name of the layout controller
 			scope.$watch(layout.getControllerName, function(controllerName) {
 				// Loads the layout's controller
-				var controller = $controller(controllerName);// TODO: should destroyed the current controller?
+				var controller = $controller(controllerName);
 				
 				// Sets the title of the page
 				title.set(controller.getTitle());

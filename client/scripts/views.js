@@ -43,7 +43,7 @@
 			// Listens for changes in the name of the view controller
 			scope.$watch(view.getControllerName, function(controllerName) {
 				// Loads the view's controller
-				var controller = $controller(controllerName);// TODO: should destroyed the current controller?
+				var controller = $controller(controllerName);
 				
 				// Sets the title of the page
 				title.set(controller.getTitle());
