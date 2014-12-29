@@ -40,12 +40,12 @@
 		 * Invoked during the linking phase.
 		 */
 		function link(scope) {
-			// TODO: comments
+			// Listens for changes in the name of the layout controller
 			scope.$watch(layout.getControllerName, function(controllerName) {
 				// Loads the layout's controller
 				var controller = $controller(controllerName);// TODO: should destroyed the current controller?
 				
-				// Sets the title of the document
+				// Sets the title of the page
 				title.set(controller.getTitle());
 				
 				// Binds the controller to the scope
@@ -60,25 +60,27 @@
 	/*
 	 * Service: layout
 	 * 
-	 * TODO: comments
+	 * Offers functions to change the active layout.
 	 */
 	function layoutService() {
 		var service = this;
 		
 		/*
-		 * TODO: comments
+		 * The name of the controller which is loaded with the layout.
 		 */
 		var controllerName;
 		
 		/*
-		 * TODO: comments
+		 * Returns the name of the layout controller.
 		 */
 		service.getControllerName = function() {
 			return controllerName;
 		};
 		
 		/*
-		 * TODO: comments
+		 * Sets the name of the layout controller.
+		 * 
+		 * It receives the controller name.
 		 */
 		service.setControllerName = function(newControllerName) {
 			controllerName = newControllerName;

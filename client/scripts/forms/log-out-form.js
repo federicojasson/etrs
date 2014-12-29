@@ -30,9 +30,9 @@
 			server.logOut().then(function() {
 				// Refreshes the authentication state
 				authentication.refreshState();
-			}, function(response) {
+			}, function(serverResponse) {
 				// The server responded with an HTTP error
-				var error = Error.createFromResponse(response);
+				var error = Error.createFromServerResponse(serverResponse);
 				errorHandler.reportError(error);
 			});
 		};

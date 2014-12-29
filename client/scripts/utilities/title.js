@@ -17,13 +17,13 @@
 	/*
 	 * Controller: TitleController
 	 * 
-	 * Offers functions to display the title of the document.
+	 * Offers functions to display the title of the page.
 	 */
 	function TitleController(title) {
 		var controller = this;
 		
 		/*
-		 * Returns the title of the document.
+		 * Returns the title of the page.
 		 */
 		controller.get = function() {
 			return title.get();
@@ -33,25 +33,25 @@
 	/*
 	 * Service: title
 	 * 
-	 * Offers functions to obtain and change the title of the document.
+	 * Offers functions to obtain and change the title of the page.
 	 */
 	function titleService() {
 		var service = this;
 		
 		/*
-		 * The title of the document.
+		 * The title of the page.
 		 */
 		var title;
 		
 		/*
-		 * Returns the title of the document.
+		 * Returns the title of the page.
 		 */
 		service.get = function() {
 			return title;
 		};
 		
 		/*
-		 * Sets the title of the document.
+		 * Sets the title of the page.
 		 * 
 		 * It receives the title.
 		 */

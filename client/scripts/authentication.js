@@ -39,7 +39,7 @@
 	/*
 	 * Controller: AuthenticationController
 	 * 
-	 * Offers functions to access the authentication state.
+	 * Offers functions to access the authentication service.
 	 */
 	function AuthenticationController(authentication) {
 		var controller = this;
@@ -128,9 +128,9 @@
 						
 						// The refresh process is over
 						isRefreshingState = false;
-					}, function(response) {
+					}, function(serverResponse) {
 						// The server responded with an HTTP error
-						var error = Error.createFromResponse(response);
+						var error = Error.createFromServerResponse(serverResponse);
 						errorHandler.reportError(error);
 					});
 				} else {
@@ -140,9 +140,9 @@
 					// The refresh process is over
 					isRefreshingState = false;
 				}
-			}, function(response) {
+			}, function(serverResponse) {
 				// The server responded with an HTTP error
-				var error = Error.createFromResponse(response);
+				var error = Error.createFromServerResponse(serverResponse);
 				errorHandler.reportError(error);
 			});
 		};

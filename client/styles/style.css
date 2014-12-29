@@ -54,16 +54,14 @@ textarea {
 	resize: none;
 }
 
-.btn.uppercase {
-	font-size: 0.9em;
-	line-height: 1.6;
-	text-transform: uppercase;
-}
-
-.btn.btn-lg.uppercase {
+.btn.btn-lg.text-uppercase {
 	font-size: 1em;
 	line-height: 1.7;
-	text-transform: uppercase;
+}
+
+.btn.text-uppercase {
+	font-size: 0.9em;
+	line-height: 1.6;
 }
 
 .clickable {
@@ -94,7 +92,6 @@ textarea {
 
 .fully-centered {
 	display: table-cell;
-	text-align: center;
 	vertical-align: middle;
 }
 
@@ -130,6 +127,7 @@ textarea {
 	font-family: "Bebas Neue", sans-serif;
 	font-size: 1.8em;
 	letter-spacing: 2px;
+	text-align: center;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -169,4 +167,8 @@ textarea {
 
 .view-container {
 	min-height: 320px;
+}
+
+.well pre {
+	background-color: #ffffff;
 }

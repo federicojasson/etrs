@@ -62,9 +62,9 @@
 				loadFunction(entityId).then(function(entity) {
 					// Resolves the deferred task
 					deferredTask.resolve(entity);
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			}
 			
@@ -120,13 +120,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(background);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The backgrounds should not be loaded
@@ -188,13 +188,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(clinicalImpression);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The clinical impressions should not be loaded
@@ -363,13 +363,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(consultation);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The consultations should not be loaded
@@ -430,13 +430,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(diagnosis);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The diagnoses should not be loaded
@@ -509,13 +509,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(experiment);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The experiments should not be loaded
@@ -576,13 +576,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(file);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The files should not be loaded
@@ -643,13 +643,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(imageTest);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The image tests should not be loaded
@@ -711,13 +711,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(laboratoryTest);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The laboratory tests should not be loaded
@@ -778,13 +778,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(medication);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The medications should not be loaded
@@ -846,13 +846,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(neurocognitiveEvaluation);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The neurocognitive evaluations should not be loaded
@@ -913,13 +913,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(patient);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The patients should not be loaded
@@ -1028,13 +1028,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(study);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The studies should not be loaded
@@ -1095,13 +1095,13 @@
 						
 						// Resolves the deferred task
 						deferredTask.resolve(treatment);
-					}, function(response) {
+					}, function(serverResponse) {
 						// Rejects the deferred task
-						deferredTask.reject(response);
+						deferredTask.reject(serverResponse);
 					});
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The treatments should not be loaded
@@ -1142,9 +1142,9 @@
 					
 					// Resolves the deferred task
 					deferredTask.resolve(user);
-				}, function(response) {
+				}, function(serverResponse) {
 					// Rejects the deferred task
-					deferredTask.reject(response);
+					deferredTask.reject(serverResponse);
 				});
 			} else {
 				// The users should not be loaded

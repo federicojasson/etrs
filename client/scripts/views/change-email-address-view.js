@@ -24,7 +24,7 @@
 		};
 		
 		/*
-		 * Returns the title of the document when the view is active.
+		 * Returns the title of the page when the view is active.
 		 */
 		controller.getTitle = function() {
 			return 'Cambiar dirección de correo electrónico - ETRS';

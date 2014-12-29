@@ -40,12 +40,12 @@
 		 * Invoked during the linking phase.
 		 */
 		function link(scope) {
-			// TODO: comments
+			// Listens for changes in the name of the view controller
 			scope.$watch(view.getControllerName, function(controllerName) {
 				// Loads the view's controller
 				var controller = $controller(controllerName);// TODO: should destroyed the current controller?
 				
-				// Sets the title of the document
+				// Sets the title of the page
 				title.set(controller.getTitle());
 				
 				// Binds the controller to the scope
@@ -60,25 +60,27 @@
 	/*
 	 * Service: view
 	 * 
-	 * TODO: comments
+	 * Offers functions to change the active view.
 	 */
 	function viewService() {
 		var service = this;
 		
 		/*
-		 * TODO: comments
+		 * The name of the controller which is loaded with the view.
 		 */
 		var controllerName;
 		
 		/*
-		 * TODO: comments
+		 * Returns the name of the view controller.
 		 */
 		service.getControllerName = function() {
 			return controllerName;
 		};
 		
 		/*
-		 * TODO: comments
+		 * Sets the name of the view controller.
+		 * 
+		 * It receives the controller name.
 		 */
 		service.setControllerName = function(newControllerName) {
 			controllerName = newControllerName;

@@ -24,7 +24,7 @@
 		};
 		
 		/*
-		 * Returns the title of the document when the layout is active.
+		 * Returns the title of the page when the layout is active.
 		 */
 		controller.getTitle = function() {
 			return 'Cargando - ETRS';

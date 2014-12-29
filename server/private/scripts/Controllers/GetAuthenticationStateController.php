@@ -15,11 +15,6 @@ class GetAuthenticationStateController extends SecureController {
 		$app = $this->app;
 		$authentication = $app->authentication;
 		
-		// TODO: debug
-		$app->halt(HTTP_STATUS_BAD_REQUEST, [
-			'id' => ERROR_ID_INVALID_INPUT
-		]);
-		
 		// Initializes the output
 		$output = [];
 		

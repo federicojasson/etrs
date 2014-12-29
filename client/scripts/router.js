@@ -158,21 +158,21 @@
 	}
 	
 	/*
-	 * TODO: comments
+	 * Performs module initialization tasks.
 	 */
 	function run($rootScope, $state, authentication, errorHandler, layout, router, view) {
 		/*
-		 * TODO: comments
+		 * Sets the layout and view.
 		 */
-		function setControllers() {
-			setLayoutController();
-			setViewController();
+		function setLayoutAndView() {
+			setLayout();
+			setView();
 		}
 		
 		/*
-		 * TODO: comments
+		 * Sets the layout, according to the state of the application.
 		 */
-		function setLayoutController() {
+		function setLayout() {
 			// Gets the name of the layout's controller
 			var controllerName;
 			if (errorHandler.errorOccurred()) {
@@ -194,9 +194,12 @@
 		}
 		
 		/*
-		 * TODO: comments
+		 * Sets the view, according to the state of the application.
+		 * 
+		 * If the current state doesn't have a controller intended for the
+		 * requesting user, it redirects her to the root route.
 		 */
-		function setViewController() {
+		function setView() {
 			var controllers = $state.current.controllers;
 			
 			if (! authentication.isReady()) {
@@ -228,19 +231,22 @@
 			view.setControllerName(controllerName);
 		}
 		
-		// TODO: comments
+		// Listens for state transitions
 		$rootScope.$on('$stateChangeSuccess', function() {
-			setControllers();
+			// Sets the layout and view
+			setLayoutAndView();
 		});
 		
-		// TODO: comments
+		// Listens for changes in the authentication service
 		$rootScope.$watch(authentication.isReady, function() {
-			setControllers();
+			// Sets the layout and view
+			setLayoutAndView();
 		});
 		
-		// TODO: comments
+		// Listens for changes in the error handler service
 		$rootScope.$watch(errorHandler.errorOccurred, function() {
-			setControllers();
+			// Sets the layout and view
+			setLayoutAndView();
 		});
 	}
 	

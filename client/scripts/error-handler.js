@@ -19,13 +19,13 @@
 	/*
 	 * Controller: ErrorHandlerController
 	 * 
-	 * TODO: comments
+	 * Offers functions to access the error handler service.
 	 */
 	function ErrorHandlerController(errorHandler) {
 		var controller = this;
 		
 		/*
-		 * TODO: comments
+		 * Returns the occurred error.
 		 */
 		controller.getError = function() {
 			return errorHandler.getError();
@@ -56,7 +56,7 @@
 		};
 		
 		/*
-		 * Returns the error.
+		 * Returns the occurred error.
 		 */
 		service.getError = function() {
 			return error;
