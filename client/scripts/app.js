@@ -7,6 +7,7 @@
 		'ngResource',
 		'ui.bootstrap',
 		'ui.router',
+		'actions',
 		'authentication',
 		'data',
 		'dialogs',

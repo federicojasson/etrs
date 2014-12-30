@@ -43,6 +43,19 @@
 		// Defines the states
 		var states = [
 			{
+				name: 'actions',
+				definition: {
+					url: '/actions',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ActionsViewController',
+						dr: 'ActionsViewController',
+						op: 'ActionsViewController'
+					}
+				}
+			},
+			
+			{
 				name: 'changeEmailAddress',
 				definition: {
 					url: '/change-email-address',
@@ -77,6 +90,31 @@
 						ad: 'ContactViewController',
 						dr: 'ContactViewController',
 						op: 'ContactViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'createPatient',
+				definition: {
+					url: '/create-patient',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreatePatientViewController',
+						dr: 'CreatePatientViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'help',
+				definition: {
+					url: '/help',
+					controllers: {
+						__: 'HelpViewController',
+						ad: 'HelpViewController',
+						dr: 'HelpViewController',
+						op: 'HelpViewController'
 					}
 				}
 			},
@@ -123,6 +161,19 @@
 					url: '/request-password-recovery',
 					controllers: {
 						__: 'RequestPasswordRecoveryViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'searchPatient',
+				definition: {
+					url: '/search-patient',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'SearchPatientViewController',
+						dr: 'SearchPatientViewController',
+						op: 'SearchPatientViewController'
 					}
 				}
 			},

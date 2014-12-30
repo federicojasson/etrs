@@ -10,7 +10,27 @@
 				<div class="collapse navbar-collapse navbar-right" ng-controller="AuthenticationController as authentication">
 					<span ng-if="authentication.isUserLoggedIn()">
 						<div class="btn-group navbar-btn" dropdown>
-							<a class="btn btn-primary" ng-href="#/profile">
+							<a class="btn btn-danger" href="#/actions">
+								Acciones
+							</a>
+							<button class="btn btn-danger dropdown-toggle" dropdown-toggle type="button">
+								<span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" ng-controller="ActionsController as actions">
+								<li class="dropdown-header" ng-repeat-start="actionGroup in actions.get()">
+									{{ actionGroup.title }}
+								</li>
+								<li ng-repeat="action in actionGroup.actions">
+									<a ng-href="#{{ action.url }}">
+										{{ action.title }}
+									</a>
+								</li>
+								<li ng-class="{ divider: ! $last }" ng-repeat-end></li>
+							</ul>
+						</div>
+						
+						<div class="btn-group navbar-btn" dropdown>
+							<a class="btn btn-primary" href="#/profile">
 								{{ authentication.getLoggedInUser() | honorificName }}
 							</a>
 							<button class="btn btn-primary dropdown-toggle" dropdown-toggle type="button">

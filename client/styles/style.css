@@ -163,6 +163,12 @@ textarea {
 	font-size: 1.8em;
 	line-height: 50px;
 	padding-left: 16px;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 .view-container {
