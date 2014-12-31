@@ -166,14 +166,14 @@
 			},
 			
 			{
-				name: 'searchPatient',
+				name: 'searchPatients',
 				definition: {
-					url: '/search-patient',
+					url: '/search-patients',
 					controllers: {
 						__: 'LogInViewController',
-						ad: 'SearchPatientViewController',
-						dr: 'SearchPatientViewController',
-						op: 'SearchPatientViewController'
+						ad: 'SearchPatientsViewController',
+						dr: 'SearchPatientsViewController',
+						op: 'SearchPatientsViewController'
 					}
 				}
 			},

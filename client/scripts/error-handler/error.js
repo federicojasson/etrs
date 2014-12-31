@@ -15,7 +15,7 @@
 	 */
 	function ErrorFactory() {
 		/*
-		 * The descriptions of the errors, organized according to their IDs.
+		 * The descriptions of the errors, organized according to ID.
 		 */
 		var errorDescriptions = {
 			// TODO: errorDescriptions
