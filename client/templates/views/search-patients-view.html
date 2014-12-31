@@ -1,1 +1,23 @@
-search patients view
+<h1>Buscar pacientes</h1>
+
+<form ng-controller="SearchPatientsFormController as searchPatientsForm" ng-submit="searchPatientsForm.submit()" novalidate>
+	<div class="input-group">
+		<input
+			class="form-control input-lg"
+			ng-change="searchPatientsForm.scheduleSubmit()"
+			ng-model="searchPatientsForm.inputModels.query.value"
+			placeholder="Palabras clave"
+			type="text"
+		>
+		<div class="input-group-addon">
+			<span class="glyphicon glyphicon-search"></span>
+		</div>
+	</div>
+	
+	<hr>
+	
+	TODO: results in here
+	<div ng-repeat="item in searchPatientsForm.getSearchResults()">
+		{{ item }}
+	</div>
+</form>
