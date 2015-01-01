@@ -29,6 +29,7 @@ require 'private/scripts/Controllers/GetUserController.php';
 require 'private/scripts/Controllers/LogInController.php';
 require 'private/scripts/Controllers/LogOutController.php';
 require 'private/scripts/Controllers/RequestPasswordRecoveryController.php';
+require 'private/scripts/Controllers/SearchPatientsController.php';
 require 'private/scripts/Extensions/Request.php';
 require 'private/scripts/Extensions/Response.php';
 require 'private/scripts/Helpers/Helper.php';

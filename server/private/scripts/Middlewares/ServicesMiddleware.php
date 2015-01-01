@@ -165,6 +165,14 @@ class ServicesMiddleware extends \Slim\Middleware {
 			HTTP_METHOD_POST,
 			new RequestPasswordRecoveryController()
 		);
+		
+		// URL:		/server/search-patients
+		// Method:	POST
+		$services->define(
+			'/search-patients',
+			HTTP_METHOD_POST,
+			new SearchPatientsController()
+		);
 	}
 	
 }

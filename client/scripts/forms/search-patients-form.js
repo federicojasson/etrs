@@ -8,7 +8,11 @@
 	// Controller: SearchPatientsFormController
 	module.controller('SearchPatientsFormController', [
 		'$timeout',
+		'errorHandler',
+		'Error',
 		'searchPatientsForm',
+		'InputModel',
+		'server',
 		SearchPatientsFormController
 	]);
 	
@@ -20,13 +24,22 @@
 	 * 
 	 * Offers functions for the search patients form.
 	 */
-	function SearchPatientsFormController($timeout, searchPatientsForm) {
+	function SearchPatientsFormController($timeout, errorHandler, Error, searchPatientsForm, InputModel, server) {
 		var controller = this;
 		
 		/*
 		 * TODO
 		 */
 		var scheduledTask;
+		
+		/*
+		 * The input models.
+		 */
+		controller.inputModels = {
+			query: new InputModel({
+				initialValue: searchPatientsForm.getQuery()
+			})
+		};
 		
 		/*
 		 * TODO: comments
@@ -39,7 +52,7 @@
 		 * TODO: comments
 		 */
 		controller.scheduleSubmit = function() {
-			// Cancels the timer's scheduled task
+			// Cancels the scheduled task
 			$timeout.cancel(scheduledTask);
 			
 			// Schedules the submission of the form
@@ -53,12 +66,23 @@
 		 * TODO: comments
 		 */
 		controller.submit = function() {
-			// TODO: implement
+			var inputModels = controller.inputModels;
 			
-			searchPatientsForm.setSearchResults([
-				'Paciente 1',
-				'Paciente 2'
-			]);
+			// Searches the patients
+			server.searchPatients({
+				query: inputModels.query.value
+			}).then(function(output) {
+				// TODO: implement
+				searchPatientsForm.setQuery(inputModels.query.value);
+				searchPatientsForm.setSearchResults([
+					'Paciente 1',
+					'Paciente 2'
+				]);
+			}, function(serverResponse) {
+				// The server responded with an HTTP error
+				var error = Error.createFromServerResponse(serverResponse);
+				errorHandler.reportError(error);
+			});
 		};
 	}
 	
@@ -73,13 +97,32 @@
 		/*
 		 * TODO: comments
 		 */
+		var query = '';
+		
+		/*
+		 * TODO: comments
+		 */
 		var searchResults = [];
+		
+		/*
+		 * TODO: comments
+		 */
+		service.getQuery = function() {
+			return query;
+		};
 		
 		/*
 		 * TODO: comments
 		 */
 		service.getSearchResults = function() {
 			return searchResults;
+		};
+		
+		/*
+		 * TODO: comments
+		 */
+		service.setQuery = function(newQuery) {
+			query = newQuery;
 		};
 		
 		/*

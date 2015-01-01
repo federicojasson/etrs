@@ -343,5 +343,20 @@
 				outputIsArray: false
 			});
 		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-patients
+		 *	Method:	POST
+		 */
+		service.searchPatients = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-patients',
+				method: 'POST',
+				input: input,
+				outputIsArray: true
+			});
+		};
 	}
 })();
