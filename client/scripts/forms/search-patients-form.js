@@ -7,6 +7,7 @@
 	
 	// Controller: SearchPatientsFormController
 	module.controller('SearchPatientsFormController', [
+		'$q',
 		'$timeout',
 		'errorHandler',
 		'Error',
@@ -24,7 +25,7 @@
 	 * 
 	 * Offers functions for the search patients form.
 	 */
-	function SearchPatientsFormController($timeout, errorHandler, Error, searchPatientsForm, InputModel, server) {
+	function SearchPatientsFormController($q, $timeout, errorHandler, Error, searchPatientsForm, InputModel, server) {
 		var controller = this;
 		
 		/*
@@ -72,6 +73,13 @@
 			server.searchPatients({
 				query: inputModels.query.value
 			}).then(function(output) {
+				var promises = [];
+				for (var i = i; i < output.length; i++) {
+					promises.push(data.getPatient(output[i]));
+				}
+				
+				$q.all();
+				
 				// TODO: implement
 				searchPatientsForm.setQuery(inputModels.query.value);
 				searchPatientsForm.setSearchResults([
