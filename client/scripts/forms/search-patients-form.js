@@ -9,10 +9,12 @@
 	module.controller('SearchPatientsFormController', [
 		'$q',
 		'$timeout',
+		'data',
 		'errorHandler',
 		'Error',
 		'searchPatientsForm',
 		'InputModel',
+		'router',
 		'server',
 		SearchPatientsFormController
 	]);
@@ -25,13 +27,18 @@
 	 * 
 	 * Offers functions for the search patients form.
 	 */
-	function SearchPatientsFormController($q, $timeout, errorHandler, Error, searchPatientsForm, InputModel, server) {
+	function SearchPatientsFormController($q, $timeout, data, errorHandler, Error, searchPatientsForm, InputModel, router, server) {
 		var controller = this;
 		
 		/*
-		 * TODO
+		 * TODO: comments
 		 */
 		var scheduledTask;
+		
+		/*
+		 * TODO: comments
+		 */
+		var showSearchResults = searchPatientsForm.getQuery().length > 0;
 		
 		/*
 		 * The input models.
@@ -52,6 +59,13 @@
 		/*
 		 * TODO: comments
 		 */
+		controller.goToPatientRoute = function(patientId) {
+			router.redirect('/patient/' + patientId);
+		};
+		
+		/*
+		 * TODO: comments
+		 */
 		controller.scheduleSubmit = function() {
 			// Cancels the scheduled task
 			$timeout.cancel(scheduledTask);
@@ -66,26 +80,55 @@
 		/*
 		 * TODO: comments
 		 */
+		controller.showSearchResults = function() {
+			return showSearchResults;
+		};
+		
+		/*
+		 * TODO: comments
+		 */
 		controller.submit = function() {
 			var inputModels = controller.inputModels;
+			var query = inputModels.query.value; // TODO: what about trim?
+			
+			// Hides the search results
+			showSearchResults = false;
+			
+			if (query.length === 0) {
+				// There is no query
+				
+				// Resets the form's service
+				searchPatientsForm.setQuery('');
+				searchPatientsForm.setSearchResults([]);
+				
+				return;
+			}
 			
 			// Searches the patients
 			server.searchPatients({
-				query: inputModels.query.value
+				query: query
 			}).then(function(output) {
+				// Initializes an array for the deferred tasks' promises
 				var promises = [];
-				for (var i = i; i < output.length; i++) {
+				
+				// Prepares the data service
+				data.prepare([
+					'patients'
+				]);
+				
+				// Gets the patients
+				for (var i = 0; i < output.length; i++) {
 					promises.push(data.getPatient(output[i]));
 				}
 				
-				$q.all();
+				return $q.all(promises);
+			}).then(function(patients) {
+				// Sets the query and the search results in the form's service
+				searchPatientsForm.setQuery(query);
+				searchPatientsForm.setSearchResults(patients);
 				
-				// TODO: implement
-				searchPatientsForm.setQuery(inputModels.query.value);
-				searchPatientsForm.setSearchResults([
-					'Paciente 1',
-					'Paciente 2'
-				]);
+				// Shows the search results
+				showSearchResults = true;
 			}, function(serverResponse) {
 				// The server responded with an HTTP error
 				var error = Error.createFromServerResponse(serverResponse);

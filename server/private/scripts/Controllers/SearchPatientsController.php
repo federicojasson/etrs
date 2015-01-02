@@ -13,6 +13,9 @@ class SearchPatientsController extends SecureController {
 	 */
 	protected function execute() {
 		// TODO: implement
+		$this->app->response->setBody([
+			'1894068380304e0ca7ebf25d25e72dca'
+		]);
 	}
 	
 	/*
@@ -20,6 +23,7 @@ class SearchPatientsController extends SecureController {
 	 */
 	protected function isInputValid() {
 		// TODO: implement
+		return true;
 	}
 	
 	/*

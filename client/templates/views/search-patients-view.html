@@ -14,10 +14,35 @@
 		</div>
 	</div>
 	
-	<hr>
-	
-	TODO: results in here
-	<div ng-repeat="item in searchPatientsForm.getSearchResults()">
-		{{ item }}
-	</div>
+	<span ng-if="searchPatientsForm.showSearchResults()">
+		<hr>
+
+		<span ng-if="searchPatientsForm.getSearchResults().length === 0">
+			<div class="no-search-results-text">
+				La búsqueda no obtuvo ningún resultado
+			</div>
+		</span>
+		
+		<span ng-if="searchPatientsForm.getSearchResults().length > 0">
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="col-sm-3">Apellido y nombres</th>
+						<th class="col-sm-3">Sexo</th>
+						<th class="col-sm-4">Fecha de nacimiento</th>
+						<th class="col-sm-2">Edad</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr class="selectable-table-row" ng-click="searchPatientsForm.goToPatientRoute(patient.id)" ng-repeat="patient in searchPatientsForm.getSearchResults()">
+						<td>{{ patient.lastNames }}, {{ patient.firstNames }}</td>
+						<td>{{ patient.gender | gender }}</td>
+						<td>{{ patient.birthDate | date: "d 'de' MMMM 'de' y" }}</td>
+						<td>{{ patient.birthDate | age }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</span>
+	</span>
 </form>

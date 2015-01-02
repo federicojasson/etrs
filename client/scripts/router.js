@@ -143,6 +143,19 @@
 			},
 			
 			{
+				name: 'patient',
+				definition: {
+					url: '/patient/{patientId:[0-9A-Fa-f]{32}}',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'PatientViewController',
+						dr: 'PatientViewController',
+						op: 'PatientViewController'
+					}
+				}
+			},
+			
+			{
 				name: 'profile',
 				definition: {
 					url: '/profile',

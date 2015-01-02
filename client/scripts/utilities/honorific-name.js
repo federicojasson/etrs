@@ -35,9 +35,9 @@
 		};
 		
 		/*
-		 * Filters the input.
+		 * Filters the user.
 		 * 
-		 * It receives the input.
+		 * It receives the user.
 		 */
 		function filter(user) {
 			var userLastNames = user.lastNames;

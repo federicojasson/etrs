@@ -208,6 +208,27 @@ textarea {
 	user-select: none;
 }
 
+.no-search-results-text {
+	color: #aaaaaa;
+	line-height: 128px;
+	text-align: center;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.selectable-table-row {
+	cursor: pointer;
+}
+
+.selectable-table-row:hover {
+	background-color: #f0f0f0;
+	color: #008000;
+}
+
 .view-container {
 	min-height: 320px;
 }
