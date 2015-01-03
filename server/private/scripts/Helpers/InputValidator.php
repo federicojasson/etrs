@@ -6,17 +6,15 @@
 class InputValidator extends Helper {
 	
 	/*
-	 * Determines whether an input is a non empty string.
-	 * 
-	 * It receives the input.
+	 * TODO: comments
 	 */
-	public function isNonEmptyString($input) {
+	public function isValidQuery($input) {
 		if (! is_string($input)) {
 			// The input is not a string
 			return false;
 		}
 		
-		return strlen($input) > 0;
+		return preg_match('/^[\x09\x20-\x7E\x80-\xFE]{1,256}$/', $input);
 	}
 	
 	/*
@@ -31,6 +29,20 @@ class InputValidator extends Helper {
 		}
 		
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
+	}
+	
+	/*
+	 * Determines whether an input is a valid required input.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidRequiredInput($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		return strlen($input) > 0;
 	}
 	
 	/*

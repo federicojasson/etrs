@@ -737,23 +737,12 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNonErasedPatientsByQuery($query) {
+	public function selectNonErasedPatientIdsByQuery($query) {
 		// Defines the statement
 		$statement = '
-			SELECT
-				id AS id,
-				is_erased AS isErased,
-				creator AS creator,
-				creation_datetime AS creationDatetime,
-				first_names AS firstNames,
-				last_names AS lastNames,
-				gender AS gender,
-				birth_date AS birthDate,
-				education_years AS educationYears
+			SELECT id AS id
 			FROM non_erased_patients
-			WHERE
-				MATCH(first_names, last_names)
-				AGAINST(:query IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)
+			WHERE MATCH(first_names, last_names) AGAINST(:query IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)
 		';
 		
 		// Sets the parameters

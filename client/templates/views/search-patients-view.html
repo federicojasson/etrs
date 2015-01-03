@@ -1,16 +1,21 @@
 <h1>Buscar pacientes</h1>
 
 <form ng-controller="SearchPatientsFormController as searchPatientsForm" ng-submit="searchPatientsForm.submit()" novalidate>
-	<div class="input-group">
-		<input
-			class="form-control input-lg"
-			ng-change="searchPatientsForm.scheduleSubmit()"
-			ng-model="searchPatientsForm.inputModels.query.value"
-			placeholder="Palabras clave"
-			type="text"
-		>
-		<div class="input-group-addon">
-			<span class="glyphicon glyphicon-search"></span>
+	<div class="form-group" ng-class="{ 'has-error': ! searchPatientsForm.inputModels.query.isValid }">
+		<div class="input-group">
+			<input
+				class="form-control input-lg"
+				ng-change="searchPatientsForm.scheduleSubmit()"
+				ng-model="searchPatientsForm.inputModels.query.value"
+				placeholder="Palabras clave"
+				popover="{{ searchPatientsForm.inputModels.query.message }}"
+				popover-placement="bottom"
+				popover-trigger="focus"
+				type="text"
+			>
+			<div class="input-group-addon">
+				<span class="glyphicon glyphicon-search"></span>
+			</div>
 		</div>
 	</div>
 	

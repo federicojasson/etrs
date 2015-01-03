@@ -21,18 +21,17 @@ class SearchPatientsController extends SecureController {
 		$query = $input['query'];
 		
 		// Searches the patients
-		$patients = $app->data->searchPatients($query); // TODO: implement
+		$patientIds = $app->businessLogicDatabase->selectNonErasedPatientIdsByQuery($query);
 		
-		// Filters the patients
-		$filteredPatients = [];
-		$count = count($patients);
+		// Filters the patient IDs
+		$filteredPatientIds = [];
+		$count = count($patientIds);
 		for ($i = 0; $i < $count; $i++) {
-			// Filters the patient
-			$filteredPatients[$i] = $app->dataFilter->filterPatient($patients[$i]);
+			$filteredPatientIds[$i] = bin2hex($patientIds[$i]['id']); // TODO: do it directly?
 		}
 		
 		// Sets the output
-		$app->response->setBody($filteredPatients);
+		$app->response->setBody($filteredPatientIds);
 	}
 	
 	/*
@@ -45,8 +44,7 @@ class SearchPatientsController extends SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'query' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				// TODO: implement
-				return true;
+				return $inputValidator->isValidQuery($jsonValue);
 			})
 		]);
 		
