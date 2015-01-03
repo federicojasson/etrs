@@ -7,7 +7,6 @@
 	
 	// Controller: SearchPatientsFormController
 	module.controller('SearchPatientsFormController', [
-		'$q',
 		'$timeout',
 		'data',
 		'errorHandler',
@@ -15,7 +14,6 @@
 		'searchPatientsForm',
 		'InputModel',
 		'router',
-		'server',
 		SearchPatientsFormController
 	]);
 	
@@ -27,7 +25,7 @@
 	 * 
 	 * Offers functions for the search patients form.
 	 */
-	function SearchPatientsFormController($q, $timeout, data, errorHandler, Error, searchPatientsForm, InputModel, router, server) {
+	function SearchPatientsFormController($timeout, data, errorHandler, Error, searchPatientsForm, InputModel, router) {
 		var controller = this;
 		
 		/*
@@ -89,7 +87,7 @@
 		 */
 		controller.submit = function() {
 			var inputModels = controller.inputModels;
-			var query = inputModels.query.value; // TODO: what about trim?
+			var query = inputModels.query.value;
 			
 			// Hides the search results
 			showSearchResults = false;
@@ -104,24 +102,14 @@
 				return;
 			}
 			
+			// Prepares the data service
+			data.prepare([
+				'patients'
+			]);
+			
 			// Searches the patients
-			server.searchPatients({
+			data.searchPatients({ // TODO: implement
 				query: query
-			}).then(function(output) {
-				// Initializes an array for the deferred tasks' promises
-				var promises = [];
-				
-				// Prepares the data service
-				data.prepare([
-					'patients'
-				]);
-				
-				// Gets the patients
-				for (var i = 0; i < output.length; i++) {
-					promises.push(data.getPatient(output[i]));
-				}
-				
-				return $q.all(promises);
 			}).then(function(patients) {
 				// Sets the query and the search results in the form's service
 				searchPatientsForm.setQuery(query);

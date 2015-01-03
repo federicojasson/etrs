@@ -12,18 +12,46 @@ class SearchPatientsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
-		$this->app->response->setBody([
-			'1894068380304e0ca7ebf25d25e72dca'
-		]);
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		
+		// Gets the query
+		$query = $input['query'];
+		
+		// Searches the patients
+		$patients = $app->data->searchPatients($query); // TODO: implement
+		
+		// Filters the patients
+		$filteredPatients = [];
+		$count = count($patients);
+		for ($i = 0; $i < $count; $i++) {
+			// Filters the patient
+			$filteredPatients[$i] = $app->dataFilter->filterPatient($patients[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredPatients);
 	}
 	
 	/*
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
-		return true;
+		$app = $this->app;
+		$inputValidator = $app->inputValidator;
+		
+		// Defines the expected JSON structure
+		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'query' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+				// TODO: implement
+				return true;
+			})
+		]);
+		
+		// Validates the request and returns the result
+		return $inputValidator->validateJsonRequest($app->request, $jsonStructureDescriptor);
 	}
 	
 	/*

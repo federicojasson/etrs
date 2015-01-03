@@ -735,6 +735,39 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
+	 * TODO: comments
+	 */
+	public function selectNonErasedPatientsByQuery($query) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				first_names AS firstNames,
+				last_names AS lastNames,
+				gender AS gender,
+				birth_date AS birthDate,
+				education_years AS educationYears
+			FROM non_erased_patients
+			WHERE
+				MATCH(first_names, last_names)
+				AGAINST(:query IN NATURAL LANGUAGE MODE WITH QUERY EXPANSION)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':query' => $query
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Selects and returns a study. If it doesn't exist or has been erased, null
 	 * is returned.
 	 * 

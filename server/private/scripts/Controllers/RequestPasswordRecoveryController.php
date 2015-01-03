@@ -40,7 +40,7 @@ class RequestPasswordRecoveryController extends SecureController {
 		$webServerDatabase->startTransaction();
 		
 		// Deletes any previous password recovery request of the user
-		$webServerDatabase->deleteUserPasswordRecoveryRequests($userId);
+		$webServerDatabase->deletePasswordRecoveryRequestsByUser($userId);
 		
 		// Generate a random ID
 		do {

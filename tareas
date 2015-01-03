@@ -1,3 +1,5 @@
+- Eliminar _idx sufijo en INDEX de la base de datos
+
 - Ingresar datos de debug
 - Verificar consultas SQL manualmente (especialmente aquellas con VARBINARY)
 

@@ -56,7 +56,7 @@ class WebServerDatabase extends Database {
 	 * 
 	 * It receives the user's ID.
 	 */
-	public function deleteUserPasswordRecoveryRequests($userId) {
+	public function deletePasswordRecoveryRequestsByUser($userId) {
 		// Defines the statement
 		$statement = '
 			DELETE
