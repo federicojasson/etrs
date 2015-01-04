@@ -14,7 +14,11 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
-		return preg_match('/^[\x09\x20-\x7E\x80-\xFE]{1,256}$/', $input);
+		// Gets the input's length
+		$length = getStringLength($input);
+		
+		// Checks whether the input's length is appropriate
+		return $length > 0 && $length <= 256;
 	}
 	
 	/*
@@ -28,6 +32,7 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
+		// Checks whether the input matches a regular expression
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
 	}
 	
@@ -42,7 +47,8 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
-		return strlen($input) > 0;
+		// Checks whether the input's length is appropriate
+		return getStringLength($input) > 0;
 	}
 	
 	/*
@@ -56,6 +62,7 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
+		// Checks whether the input matches a regular expression
 		return preg_match('/^(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{1,32}$/', $input);
 	}
 	

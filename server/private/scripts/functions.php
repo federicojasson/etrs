@@ -20,6 +20,13 @@ function getFirstElementOrNull($array) {
 }
 
 /*
+ * TODO: comments
+ */
+function getStringLength($string) {
+	return mb_strlen($string, 'UTF-8');
+}
+
+/*
  * Determines whether an array is sequential.
  * 
  * It receives the array.

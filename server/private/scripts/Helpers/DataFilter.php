@@ -401,8 +401,12 @@ class DataFilter extends Helper {
 		for ($i = 0; $i < $count; $i++) {
 			$field = $authorizedFields[$i];
 			
-			// Sets the field in the filtered entity
-			$filteredEntity[$field] = $entity[$field];
+			if (isset($entity[$field])) {
+				// The entity contains the field
+				
+				// Sets the field in the filtered entity
+				$filteredEntity[$field] = $entity[$field];
+			}
 		}
 		
 		return $filteredEntity;

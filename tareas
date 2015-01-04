@@ -47,3 +47,28 @@ Sesiones: leer http://stackoverflow.com/questions/15510094/securely-creating-and
 
 
 Generar un código de activación, hashearlo y hacerlo el requestId
+
+
+
+
+
+
+
+
+
+
+CUIDADO: encoding vulnerability?? research this
+
+http://stackoverflow.com/questions/1447699/strlen-mb-strlen-which-to-use
+
+Generally you'll circumnavigate most encoding-related problems by consistently
+using UTF-8 for everything and by specifying the correct encoding in the
+HTTP-header (Content-Type: text/html; charset=UTF-8) - this will yield the
+correct encoding (UTF-8) in all the variables that are passed into your string
+(we're not talking about rouge scripts that deliberately try to mess with the
+encoding to allow for some attack vectors into your script). You also should not
+rely on non-ascii-characters in your GET parameters or in the URL (that's also a
+reason why SEO-friendly links remove those characters or substitute them).
+
+
+

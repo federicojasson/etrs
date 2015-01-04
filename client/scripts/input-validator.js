@@ -79,17 +79,9 @@
 		 * TODO: comments
 		 */
 		service.validateQuery = function(inputModel) {
-			var value = inputModel.value;
-			
-			if (value.length > 256) {
+			if (inputModel.value.length > 256) {
 				// The input is too long
 				inputModel.message = 'Este campo puede tener a lo sumo 256 caracteres';
-				return false;
-			}
-			
-			if (! /^[\x09\x20-\x7E\x80-\xFE]*$/.test(value)) {
-				// The input contains invalid characters
-				inputModel.message = 'La consulta contiene caracteres no soportados';
 				return false;
 			}
 			

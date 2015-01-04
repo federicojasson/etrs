@@ -22,7 +22,9 @@ class ErrorHandlersMiddleware extends \Slim\Middleware {
 	/*
 	 * Invoked when an error occurs.
 	 */
-	public function onError() {
+	public function onError($exception) { // TODO: debug (remove $exception parameter also)
+		\Slim\Slim::getInstance()->log->debug($exception->getMessage());
+		
 		$this->app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
 			'id' => ERROR_ID_UNEXPECTED_ERROR
 		]);

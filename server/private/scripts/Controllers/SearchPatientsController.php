@@ -20,16 +20,17 @@ class SearchPatientsController extends SecureController {
 		// Gets the query
 		$query = $input['query'];
 		
-		// TODO: escape query special characters (*, + , others?)
+		// Gets the search expression from the query
+		$expression = $this->getExpressionFromQuery($query);
 		
-		// Searches the patients
-		$patientIds = $app->businessLogicDatabase->selectNonErasedPatientIdsByQuery($query);
+		// Selects the patients
+		$patients = $app->businessLogicDatabase->selectNonErasedPatientsByFullTextSearch($expression);
 		
-		// Filters the patient IDs
+		// Filters the patients and gets their IDs
 		$filteredPatientIds = [];
-		$count = count($patientIds);
+		$count = count($patients);
 		for ($i = 0; $i < $count; $i++) {
-			$filteredPatientIds[$i] = bin2hex($patientIds[$i]['id']); // TODO: do it directly?
+			$filteredPatientIds[$i] = $app->dataFilter->filterPatient($patients[$i])['id'];
 		}
 		
 		// Sets the output
@@ -70,6 +71,38 @@ class SearchPatientsController extends SecureController {
 		
 		// Validates the authentication and returns the result
 		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function getExpressionFromQuery($query) {
+		// Sanitizes the query
+		$query = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $query);
+		$query = preg_replace('/[^ 0-9A-Za-z]/', '', $query);
+		$query = preg_replace('/[ ]+/', ' ', $query);
+		$query = trim($query);
+		
+		if (getStringLength($query) === 0) {
+			// The sanitized query is empty
+			return '';
+		}
+		
+		// Gets the words of the query
+		$queryWords = explode(' ', $query);
+		
+		// Computes the words of the expression
+		$expressionWords = [];
+		$count = count($queryWords);
+		for ($i = 0; $i < $count; $i++) {
+			// Adds a wildcard to the end of the query's word
+			$expressionWords[$i] = $queryWords[$i] . '*';
+		}
+		
+		// Builds the expression concatenating its words
+		$expression = implode(' ', $expressionWords);
+		
+		return $expression;
 	}
 
 }
