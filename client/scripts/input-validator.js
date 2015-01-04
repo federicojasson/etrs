@@ -79,9 +79,9 @@
 		 * TODO: comments
 		 */
 		service.validateQuery = function(inputModel) {
-			if (inputModel.value.length > 256) {
+			if (inputModel.value.length > 160) {
 				// The input is too long
-				inputModel.message = 'Este campo puede tener a lo sumo 256 caracteres';
+				inputModel.message = 'Este campo puede tener a lo sumo 160 caracteres';
 				return false;
 			}
 			
@@ -96,7 +96,7 @@
 		 * It receives the input model.
 		 */
 		service.validateRequiredInput = function(inputModel) {
-			if (inputModel.value.length < 1) {
+			if (inputModel.value.length === 0) {
 				// The input was not entered
 				inputModel.message = 'Este campo es obligatorio';
 				return false;

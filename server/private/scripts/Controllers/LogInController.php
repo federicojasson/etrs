@@ -48,11 +48,11 @@ class LogInController extends SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				return $inputValidator->isValidRequiredInput($jsonValue);
+				return $inputValidator->isNonEmptyString($jsonValue);
 			}),
 			
 			'password' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				return $inputValidator->isValidRequiredInput($jsonValue);
+				return $inputValidator->isNonEmptyString($jsonValue);
 			})
 		]);
 		

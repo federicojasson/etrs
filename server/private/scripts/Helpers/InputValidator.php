@@ -6,6 +6,21 @@
 class InputValidator extends Helper {
 	
 	/*
+	 * Determines whether an input is a non-empty string.
+	 * 
+	 * It receives the input.
+	 */
+	public function isNonEmptyString($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input's length is appropriate
+		return getStringLength($input) > 0;
+	}
+	
+	/*
 	 * TODO: comments
 	 */
 	public function isValidQuery($input) {
@@ -14,11 +29,11 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
-		// Gets the input's length
-		$length = getStringLength($input);
+		// Gets the trimmed input's length
+		$length = getStringLength(trim($input));
 		
 		// Checks whether the input's length is appropriate
-		return $length > 0 && $length <= 256;
+		return $length > 0 && $length <= 160;
 	}
 	
 	/*
@@ -34,21 +49,6 @@ class InputValidator extends Helper {
 		
 		// Checks whether the input matches a regular expression
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
-	}
-	
-	/*
-	 * Determines whether an input is a valid required input.
-	 * 
-	 * It receives the input.
-	 */
-	public function isValidRequiredInput($input) {
-		if (! is_string($input)) {
-			// The input is not a string
-			return false;
-		}
-		
-		// Checks whether the input's length is appropriate
-		return getStringLength($input) > 0;
 	}
 	
 	/*
