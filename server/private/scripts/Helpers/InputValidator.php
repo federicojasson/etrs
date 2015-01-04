@@ -21,6 +21,21 @@ class InputValidator extends Helper {
 	}
 	
 	/*
+	 * Determines whether an input is a positive integer.
+	 * 
+	 * It receives the input.
+	 */
+	public function isPositiveInteger($input) {
+		if (! is_int($input)) {
+			// The input is not an integer
+			return false;
+		}
+		
+		// Checks whether the input range is appropriate
+		return $input > 0;
+	}
+	
+	/*
 	 * TODO: comments
 	 */
 	public function isValidQuery($input) {

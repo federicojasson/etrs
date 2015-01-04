@@ -132,9 +132,9 @@ class WebServerDatabase extends Database {
 		
 		// Sets the parameters
 		$parameters = [
+			':sessionId' => $sessionId,
 			':sessionDataForInsert' => $sessionData,
-			':sessionDataForUpdate' => $sessionData,
-			':sessionId' => $sessionId
+			':sessionDataForUpdate' => $sessionData
 		];
 		
 		// Executes the statement

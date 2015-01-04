@@ -17,14 +17,19 @@ class SearchPatientsController extends SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		
-		// Gets the query
+		// Gets the query and the page
 		$query = $input['query'];
+		$page = $input['page'];
 		
 		// Gets the search expression from the query
 		$expression = $this->getExpressionFromQuery($query);
 		
+		// Gets the limit and the offset, in function of the requested page
+		$limit = SEARCH_RESULTS_PER_PAGE;
+		$offset = $limit * ($page - 1);
+		
 		// Selects the patients
-		$patients = $app->businessLogicDatabase->selectNonErasedPatientsByFullTextSearch($expression);
+		$patients = $app->businessLogicDatabase->selectNonErasedPatientsByFullTextSearch($expression, $limit, $offset);
 		
 		// Filters the patients and gets their IDs
 		$filteredPatientIds = [];
@@ -48,6 +53,10 @@ class SearchPatientsController extends SecureController {
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'query' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
 				return $inputValidator->isValidQuery($jsonValue);
+			}),
+			
+			'page' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+				return $inputValidator->isPositiveInteger($jsonValue);
 			})
 		]);
 		

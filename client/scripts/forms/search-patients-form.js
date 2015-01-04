@@ -50,6 +50,10 @@
 				validationFunction: function() {
 					return inputValidator.validateQuery(this);
 				}
+			}),
+			
+			page: new InputModel({
+				initialValue: searchPatientsForm.getPage()
 			})
 		};
 		
@@ -63,19 +67,39 @@
 		/*
 		 * TODO: comments
 		 */
-		controller.goToPatientRoute = function(patientId) {
+		controller.getTotalSearchResults = function() {
+			return searchPatientsForm.getTotalSearchResults();
+		};
+		
+		/*
+		 * TODO: comments
+		 */
+		controller.onPageChange = function() {
+			// Submits the form
+			controller.submit();
+		};
+		
+		/*
+		 * TODO: comments
+		 */
+		controller.onPatientClick = function(patientId) {
 			router.redirect('/patient/' + patientId);
 		};
 		
 		/*
 		 * TODO: comments
 		 */
-		controller.scheduleSubmit = function() {
-			// Cancels the scheduled task
+		controller.onQueryChange = function() {
+			// Cancels the scheduled task (if there is any)
 			$timeout.cancel(scheduledTask);
 			
-			// Schedules the submission of the form
+			// Schedules a new task
 			scheduledTask = $timeout(function() {
+				// TODO: check if empty query
+				
+				// Resets the page
+				controller.inputModels.page.value = 1;
+				
 				// Submits the form
 				controller.submit();
 			}, 750);
@@ -94,28 +118,23 @@
 		controller.submit = function() {
 			var inputModels = controller.inputModels;
 			var query = inputModels.query.value;
+			var page = inputModels.page.value;
 			
 			// Hides the search results
 			showSearchResults = false;
+			
+			// Cancels the scheduled task (if there is any)
+			$timeout.cancel(scheduledTask);
 			
 			if (! inputValidator.validateInputModels(inputModels)) {
 				// The input is invalid
 				return;
 			}
 			
-			if (query.length === 0) {
-				// There is no query
-				
-				// Resets the form's service
-				searchPatientsForm.setQuery('');
-				searchPatientsForm.setSearchResults([]);
-				
-				return;
-			}
-			
 			// Searches the patients
 			server.searchPatients({
-				query: query
+				query: query,
+				page: page
 			}).then(function(output) {
 				// Initializes an array for the deferred tasks' promises
 				var promises = [];
@@ -132,8 +151,10 @@
 				
 				return $q.all(promises);
 			}).then(function(patients) {
-				// Sets the query and the search results in the form's service
+				// Updates the form's service
 				searchPatientsForm.setQuery(query);
+				searchPatientsForm.setPage(page);
+				searchPatientsForm.setTotalSearchResults(20); // TODO: get actual total
 				searchPatientsForm.setSearchResults(patients);
 				
 				// Shows the search results
@@ -157,12 +178,29 @@
 		/*
 		 * TODO: comments
 		 */
+		var page = 1;
+		
+		/*
+		 * TODO: comments
+		 */
 		var query = '';
 		
 		/*
 		 * TODO: comments
 		 */
 		var searchResults = [];
+		
+		/*
+		 * TODO: comments
+		 */
+		var totalSearchResults = 0;
+		
+		/*
+		 * TODO: comments
+		 */
+		service.getPage = function() {
+			return page;
+		};
 		
 		/*
 		 * TODO: comments
@@ -181,6 +219,20 @@
 		/*
 		 * TODO: comments
 		 */
+		service.getTotalSearchResults = function() {
+			return totalSearchResults;
+		};
+		
+		/*
+		 * TODO: comments
+		 */
+		service.setPage = function(newPage) {
+			page = newPage;
+		};
+		
+		/*
+		 * TODO: comments
+		 */
 		service.setQuery = function(newQuery) {
 			query = newQuery;
 		};
@@ -190,6 +242,13 @@
 		 */
 		service.setSearchResults = function(newSearchResults) {
 			searchResults = newSearchResults;
+		};
+		
+		/*
+		 * TODO: comments
+		 */
+		service.setTotalSearchResults = function(newTotalSearchResults) {
+			totalSearchResults = newTotalSearchResults;
 		};
 	}
 })();

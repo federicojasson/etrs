@@ -737,7 +737,7 @@ class BusinessLogicDatabase extends Database {
 	/*
 	 * TODO: comments
 	 */
-	public function selectNonErasedPatientsByFullTextSearch($expression) {
+	public function selectNonErasedPatientsByFullTextSearch($expression, $limit, $offset) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -754,11 +754,15 @@ class BusinessLogicDatabase extends Database {
 			WHERE
 				MATCH(first_names, last_names)
 				AGAINST(:expression IN BOOLEAN MODE)
+			LIMIT :limit
+			OFFSET :offset
 		';
 		
 		// Sets the parameters
 		$parameters = [
-			':expression' => $expression
+			':expression' => $expression,
+			':limit' => $limit,
+			':offset' => $offset
 		];
 		
 		// Executes the statement
