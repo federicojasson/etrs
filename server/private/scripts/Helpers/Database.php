@@ -19,21 +19,36 @@ abstract class Database extends Helper {
 	 * Commits the current transaction.
 	 */
 	public function commitTransaction() {
-		$this->pdo->commit();
+		try {
+			$this->pdo->commit();
+		} catch (PDOException $exception) {
+			// A PDO exception was thrown
+			$this->app->error($exception);
+		}
 	}
 	
 	/*
 	 * Rolls back the current transaction.
 	 */
 	public function rollBackTransaction() {
-		$this->pdo->rollBack();
+		try {
+			$this->pdo->rollBack();
+		} catch (PDOException $exception) {
+			// A PDO exception was thrown
+			$this->app->error($exception);
+		}
 	}
 	
 	/*
 	 * Starts a transaction.
 	 */
 	public function startTransaction() {
-		$this->pdo->beginTransaction();
+		try {
+			$this->pdo->beginTransaction();
+		} catch (PDOException $exception) {
+			// A PDO exception was thrown
+			$this->app->error($exception);
+		}
 	}
 	
 	/*
@@ -50,32 +65,42 @@ abstract class Database extends Helper {
 	 * It receives the statement and the parameters to prepare it.
 	 */
 	protected function executePreparedStatement($statement, $parameters) {
-		// Prepares and executes the statement
-		$preparedStatement = $this->pdo->prepare($statement);
-		$preparedStatement->execute($parameters);
-		
-		if ($preparedStatement->columnCount() === 0) {
-			// The statement is not a query
-			return null;
+		try {
+			// Prepares and executes the statement
+			$preparedStatement = $this->pdo->prepare($statement);
+			$preparedStatement->execute($parameters);
+
+			if ($preparedStatement->columnCount() === 0) {
+				// The statement is not a query
+				return null;
+			}
+
+			// Fetches and returns the results
+			return $preparedStatement->fetchAll();
+		} catch (PDOException $exception) {
+			// A PDO exception was thrown
+			$this->app->error($exception);
 		}
-		
-		// Fetches and returns the results
-		return $preparedStatement->fetchAll();
 	}
 	
 	/*
 	 * Performs initialization tasks.
 	 */
 	protected function initialize() {
-		// Connects to the database
-		$pdo = $this->connect();
+		try {
+			// Connects to the database
+			$pdo = $this->connect();
 
-		// Configures the PDO instance
-		$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-		$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
-		
-		$this->pdo = $pdo;
+			// Configures the PDO instance
+			$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+			$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
+
+			$this->pdo = $pdo;
+		} catch (PDOException $exception) {
+			// A PDO exception was thrown
+			$this->app->error($exception);
+		}
 	}
 	
 }

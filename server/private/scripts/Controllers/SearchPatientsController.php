@@ -20,6 +20,8 @@ class SearchPatientsController extends SecureController {
 		// Gets the query
 		$query = $input['query'];
 		
+		// TODO: escape query special characters (*, + , others?)
+		
 		// Searches the patients
 		$patientIds = $app->businessLogicDatabase->selectNonErasedPatientIdsByQuery($query);
 		

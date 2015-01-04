@@ -71,20 +71,6 @@
 						actions.searchPatients,
 						actions.createPatient
 					]
-				},
-				{
-					title: 'Pacientes',
-					actions: [
-						actions.searchPatients,
-						actions.createPatient
-					]
-				},
-				{
-					title: 'Pacientes',
-					actions: [
-						actions.searchPatients,
-						actions.createPatient
-					]
 				}
 			],
 			
