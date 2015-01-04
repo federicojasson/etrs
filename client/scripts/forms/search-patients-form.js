@@ -74,14 +74,6 @@
 		/*
 		 * TODO: comments
 		 */
-		controller.onPageChange = function() {
-			// Submits the form
-			controller.submit();
-		};
-		
-		/*
-		 * TODO: comments
-		 */
 		controller.onPatientClick = function(patientId) {
 			router.redirect('/patient/' + patientId);
 		};
@@ -93,13 +85,14 @@
 			// Cancels the scheduled task (if there is any)
 			$timeout.cancel(scheduledTask);
 			
+			// Resets the page
+			controller.inputModels.page.value = 1;
+			
+			// Hides the search results
+			showSearchResults = false;
+			
 			// Schedules a new task
 			scheduledTask = $timeout(function() {
-				// TODO: check if empty query
-				
-				// Resets the page
-				controller.inputModels.page.value = 1;
-				
 				// Submits the form
 				controller.submit();
 			}, 750);
@@ -128,6 +121,18 @@
 			
 			if (! inputValidator.validateInputModels(inputModels)) {
 				// The input is invalid
+				return;
+			}
+			
+			if (query.length === 0) {
+				// There is no query
+				
+				// Resets the form's service TODO: check
+				searchPatientsForm.setQuery('');
+				searchPatientsForm.setPage(1);
+				searchPatientsForm.setTotalSearchResults(0);
+				searchPatientsForm.setSearchResults([]);
+				
 				return;
 			}
 			

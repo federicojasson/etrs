@@ -55,8 +55,9 @@
 					first-text="&laquo;"
 					items-per-page="10"
 					last-text="&raquo;"
+					max-size="10"
 					next-text="&rsaquo;"
-					ng-change="searchPatientsForm.onPageChange()"
+					ng-change="searchPatientsForm.submit()"
 					ng-model="searchPatientsForm.inputModels.page.value"
 					pagination
 					previous-text="&lsaquo;"
