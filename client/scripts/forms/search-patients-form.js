@@ -39,7 +39,7 @@
 		/*
 		 * TODO: comments
 		 */
-		var showSearchResults = searchPatientsForm.getQuery().length > 0;
+		var showResults = searchPatientsForm.getQuery().length > 0;
 		
 		/*
 		 * The input models.
@@ -60,15 +60,15 @@
 		/*
 		 * TODO: comments
 		 */
-		controller.getSearchResults = function() {
-			return searchPatientsForm.getSearchResults();
+		controller.getResults = function() {
+			return searchPatientsForm.getResults();
 		};
 		
 		/*
 		 * TODO: comments
 		 */
-		controller.getTotalSearchResults = function() {
-			return searchPatientsForm.getTotalSearchResults();
+		controller.getTotalResults = function() {
+			return searchPatientsForm.getTotalResults();
 		};
 		
 		/*
@@ -82,14 +82,14 @@
 		 * TODO: comments
 		 */
 		controller.onQueryChange = function() {
+			// Hides the results
+			showResults = false;
+			
 			// Cancels the scheduled task (if there is any)
 			$timeout.cancel(scheduledTask);
 			
 			// Resets the page
 			controller.inputModels.page.value = 1;
-			
-			// Hides the search results
-			showSearchResults = false;
 			
 			// Schedules a new task
 			scheduledTask = $timeout(function() {
@@ -101,8 +101,8 @@
 		/*
 		 * TODO: comments
 		 */
-		controller.showSearchResults = function() {
-			return showSearchResults;
+		controller.showResults = function() {
+			return showResults;
 		};
 		
 		/*
@@ -113,8 +113,8 @@
 			var query = inputModels.query.value;
 			var page = inputModels.page.value;
 			
-			// Hides the search results
-			showSearchResults = false;
+			// Hides the results
+			showResults = false;
 			
 			// Cancels the scheduled task (if there is any)
 			$timeout.cancel(scheduledTask);
@@ -127,11 +127,11 @@
 			if (query.length === 0) {
 				// There is no query
 				
-				// Resets the form's service TODO: check
+				// Resets the form's service
 				searchPatientsForm.setQuery('');
 				searchPatientsForm.setPage(1);
-				searchPatientsForm.setTotalSearchResults(0);
-				searchPatientsForm.setSearchResults([]);
+				searchPatientsForm.setTotalResults(0);
+				searchPatientsForm.setResults([]);
 				
 				return;
 			}
@@ -141,6 +141,9 @@
 				query: query,
 				page: page
 			}).then(function(output) {
+				var totalResults = output.totalResults; // TODO: check
+				var results = output.results;
+				
 				// Initializes an array for the deferred tasks' promises
 				var promises = [];
 				
@@ -150,8 +153,8 @@
 				]);
 				
 				// Gets the patients
-				for (var i = 0; i < output.length; i++) {
-					promises.push(data.getPatient(output[i]));
+				for (var i = 0; i < results.length; i++) {
+					promises.push(data.getPatient(results[i]));
 				}
 				
 				return $q.all(promises);
@@ -159,11 +162,11 @@
 				// Updates the form's service
 				searchPatientsForm.setQuery(query);
 				searchPatientsForm.setPage(page);
-				searchPatientsForm.setTotalSearchResults(20); // TODO: get actual total
-				searchPatientsForm.setSearchResults(patients);
+				searchPatientsForm.setTotalResults(totalResults);
+				searchPatientsForm.setResults(patients);
 				
-				// Shows the search results
-				showSearchResults = true;
+				// Shows the results
+				showResults = true;
 			}, function(serverResponse) {
 				// The server responded with an HTTP error
 				var error = Error.createFromServerResponse(serverResponse);
@@ -193,12 +196,12 @@
 		/*
 		 * TODO: comments
 		 */
-		var searchResults = [];
+		var results = [];
 		
 		/*
 		 * TODO: comments
 		 */
-		var totalSearchResults = 0;
+		var totalResults = 0;
 		
 		/*
 		 * TODO: comments
@@ -217,15 +220,15 @@
 		/*
 		 * TODO: comments
 		 */
-		service.getSearchResults = function() {
-			return searchResults;
+		service.getResults = function() {
+			return results;
 		};
 		
 		/*
 		 * TODO: comments
 		 */
-		service.getTotalSearchResults = function() {
-			return totalSearchResults;
+		service.getTotalResults = function() {
+			return totalResults;
 		};
 		
 		/*
@@ -245,15 +248,15 @@
 		/*
 		 * TODO: comments
 		 */
-		service.setSearchResults = function(newSearchResults) {
-			searchResults = newSearchResults;
+		service.setResults = function(newResults) {
+			results = newResults;
 		};
 		
 		/*
 		 * TODO: comments
 		 */
-		service.setTotalSearchResults = function(newTotalSearchResults) {
-			totalSearchResults = newTotalSearchResults;
+		service.setTotalResults = function(newTotalResults) {
+			totalResults = newTotalResults;
 		};
 	}
 })();

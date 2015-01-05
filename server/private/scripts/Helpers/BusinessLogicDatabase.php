@@ -740,7 +740,7 @@ class BusinessLogicDatabase extends Database {
 	public function selectNonErasedPatientsByFullTextSearch($expression, $limit, $offset) {
 		// Defines the statement
 		$statement = '
-			SELECT
+			SELECT SQL_CALC_FOUND_ROWS
 				id AS id,
 				is_erased AS isErased,
 				creator AS creator,

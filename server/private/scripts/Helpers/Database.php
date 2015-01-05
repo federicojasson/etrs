@@ -40,6 +40,20 @@ abstract class Database extends Helper {
 	}
 	
 	/*
+	 * TODO: comments
+	 */
+	public function selectFoundRows() {
+		// Defines the statement
+		$statement = 'SELECT FOUND_ROWS() AS foundRows';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		// Returns the found rows
+		return $results[0]['foundRows'];
+	}
+	
+	/*
 	 * Starts a transaction.
 	 */
 	public function startTransaction() {
@@ -62,9 +76,9 @@ abstract class Database extends Helper {
 	 * Executes a prepared statement and returns the results, or null if the
 	 * statement is not a query.
 	 * 
-	 * It receives the statement and the parameters to prepare it.
+	 * It receives the statement and, optionally, the parameters to prepare it.
 	 */
-	protected function executePreparedStatement($statement, $parameters) {
+	protected function executePreparedStatement($statement, $parameters = null) {
 		try {
 			// Prepares and executes the statement
 			$preparedStatement = $this->pdo->prepare($statement);

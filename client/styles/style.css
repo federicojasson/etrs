@@ -208,7 +208,7 @@ textarea {
 	user-select: none;
 }
 
-.no-search-results-text {
+.no-results-text {
 	color: #aaaaaa;
 	line-height: 128px;
 	text-align: center;

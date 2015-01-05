@@ -13,6 +13,7 @@ class SearchPatientsController extends SecureController {
 	 */
 	protected function execute() {
 		$app = $this->app;
+		$businessLogicDatabase = $app->businessLogicDatabase;
 		
 		// Gets the input
 		$input = $app->request->getBody();
@@ -29,7 +30,7 @@ class SearchPatientsController extends SecureController {
 		$offset = $limit * ($page - 1);
 		
 		// Selects the patients
-		$patients = $app->businessLogicDatabase->selectNonErasedPatientsByFullTextSearch($expression, $limit, $offset);
+		$patients = $businessLogicDatabase->selectNonErasedPatientsByFullTextSearch($expression, $limit, $offset);
 		
 		// Filters the patients and gets their IDs
 		$filteredPatientIds = [];
@@ -38,8 +39,14 @@ class SearchPatientsController extends SecureController {
 			$filteredPatientIds[$i] = $app->dataFilter->filterPatient($patients[$i])['id'];
 		}
 		
+		// Selects the found rows
+		$foundRows = $businessLogicDatabase->selectFoundRows();
+		
 		// Sets the output
-		$app->response->setBody($filteredPatientIds);
+		$app->response->setBody([
+			'totalResults' => $foundRows,
+			'results' => $filteredPatientIds
+		]);
 	}
 	
 	/*

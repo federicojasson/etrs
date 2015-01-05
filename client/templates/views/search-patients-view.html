@@ -19,16 +19,16 @@
 		</div>
 	</div>
 	
-	<span ng-if="searchPatientsForm.showSearchResults()">
+	<span ng-if="searchPatientsForm.showResults()">
 		<hr>
 
-		<span ng-if="searchPatientsForm.getSearchResults().length === 0">
-			<div class="no-search-results-text">
+		<span ng-if="searchPatientsForm.getResults().length === 0">
+			<div class="no-results-text">
 				La búsqueda no obtuvo ningún resultado
 			</div>
 		</span>
 		
-		<span ng-if="searchPatientsForm.getSearchResults().length > 0">
+		<span ng-if="searchPatientsForm.getResults().length > 0">
 			<table class="table">
 				<thead>
 					<tr>
@@ -40,7 +40,7 @@
 				</thead>
 
 				<tbody>
-					<tr class="selectable-table-row" ng-click="searchPatientsForm.onPatientClick(patient.id)" ng-repeat="patient in searchPatientsForm.getSearchResults()">
+					<tr class="selectable-table-row" ng-click="searchPatientsForm.onPatientClick(patient.id)" ng-repeat="patient in searchPatientsForm.getResults()">
 						<td>{{ patient.lastNames }}, {{ patient.firstNames }}</td>
 						<td>{{ patient.gender | gender }}</td>
 						<td>{{ patient.birthDate | date: "d 'de' MMMM 'de' y" }}</td>
@@ -61,7 +61,7 @@
 					ng-model="searchPatientsForm.inputModels.page.value"
 					pagination
 					previous-text="&lsaquo;"
-					total-items="searchPatientsForm.getTotalSearchResults()"
+					total-items="searchPatientsForm.getTotalResults()"
 				></span>
 			</div>
 		</span>
