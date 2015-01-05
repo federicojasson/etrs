@@ -355,7 +355,7 @@
 				url: 'server/search-patients',
 				method: 'POST',
 				input: input,
-				outputIsArray: true
+				outputIsArray: false
 			});
 		};
 	}

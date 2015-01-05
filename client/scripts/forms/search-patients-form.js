@@ -112,6 +112,7 @@
 			var inputModels = controller.inputModels;
 			var query = inputModels.query.value;
 			var page = inputModels.page.value;
+			var totalResults;
 			
 			// Hides the results
 			showResults = false;
@@ -141,7 +142,7 @@
 				query: query,
 				page: page
 			}).then(function(output) {
-				var totalResults = output.totalResults; // TODO: check
+				totalResults = output.totalResults;
 				var results = output.results;
 				
 				// Initializes an array for the deferred tasks' promises
