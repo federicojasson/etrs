@@ -6,6 +6,53 @@
 class BusinessLogicDatabase extends Database {
 	
 	/*
+	 * Inserts a patient.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertPatient($id, $creator, $firstNames, $lastNames, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO patients (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				first_names,
+				last_names,
+				gender,
+				birth_date,
+				education_years
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:firstNames,
+				:lastNames,
+				:gender,
+				:birthDate,
+				:educationYears
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':firstNames' => $firstNames,
+			':lastNames' => $lastNames,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Determines whether a clinical impression exists and has not been erased.
 	 * 
 	 * It receives the clinical impression's ID.
@@ -178,6 +225,32 @@ class BusinessLogicDatabase extends Database {
 		// Sets the parameters
 		$parameters = [
 			':userId' => $userId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a patient exists.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function patientExists($patientId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM patients
+			WHERE id = :patientId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':patientId' => $patientId
 		];
 		
 		// Executes the statement

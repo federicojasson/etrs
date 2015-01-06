@@ -55,7 +55,7 @@ class RequestPasswordRecoveryController extends SecureController {
 		$passwordIterations = PASSWORD_ITERATIONS;
 		$passwordHash = $cryptography->hashPassword($password, $passwordSalt, $passwordIterations);
 		
-		// Inserts a password recovery request
+		// Inserts the password recovery request
 		$webServerDatabase->insertPasswordRecoveryRequest($id, $userId, $passwordHash, $passwordSalt, $passwordIterations);
 		
 		// Commits the transaction
