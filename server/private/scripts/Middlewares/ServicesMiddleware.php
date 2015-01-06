@@ -22,6 +22,14 @@ class ServicesMiddleware extends \Slim\Middleware {
 	private function defineServices() {
 		$services = $this->app->services;
 		
+		// URL:		/server/create-patient
+		// Method:	POST
+		$services->define(
+			'/create-patient',
+			HTTP_METHOD_POST,
+			new CreatePatientController()
+		);
+		
 		// URL:		/server/get-authentication-state
 		// Method:	POST
 		$services->define(

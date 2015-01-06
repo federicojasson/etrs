@@ -29,7 +29,7 @@
 		 */
 		function getOptions() {
 			return {
-				link: link,
+				link: onLink,
 				restrict: 'A',
 				scope: {},
 				template: '<span ng-include="layout.getTemplateUrl()"></span>'
@@ -39,7 +39,7 @@
 		/*
 		 * Invoked during the linking phase.
 		 */
-		function link(scope) {
+		function onLink(scope) {
 			// Listens for changes in the name of the layout controller
 			scope.$watch(layout.getControllerName, function(controllerName) {
 				// Loads the layout's controller

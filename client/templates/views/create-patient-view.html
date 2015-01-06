@@ -1,1 +1,81 @@
-create patient view
+<h1>Ingresar paciente</h1>
+<p>
+	Complete los campos con la información del paciente.
+</p>
+
+<hr>
+
+<form class="form-horizontal" ng-controller="CreatePatientFormController as createPatientForm" ng-submit="createPatientForm.submit()" novalidate>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Nombres y apellido</label>
+		
+		<div class="col-sm-4">
+			<input
+				class="form-control"
+				ng-model="createPatientForm.inputModels.firstNames.value"
+				placeholder="Nombres"
+				popover="{{ createPatientForm.inputModels.firstNames.message }}"
+				popover-placement="left"
+				popover-trigger="focus"
+				type="text"
+			>
+		</div>
+		
+		<div class="col-sm-4">
+			<input
+				class="form-control"
+				ng-model="createPatientForm.inputModels.lastNames.value"
+				placeholder="Apellido"
+				popover="{{ createPatientForm.inputModels.lastNames.message }}"
+				popover-placement="left"
+				popover-trigger="focus"
+				type="text"
+			>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Sexo</label>
+		
+		<div class="col-sm-8">
+			TODO
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Fecha de cumpleaños</label>
+		
+		<div class="col-sm-8">
+			<span
+				date-input
+				ng-model="createPatientForm.inputModels.birthDate.value"
+				popover="{{ createPatientForm.inputModels.birthDate.message }}"
+				popover-placement="left"
+				popover-trigger="focus"
+			></span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Años de educación</label>
+		
+		<div class="col-sm-4">
+			<input
+				class="form-control"
+				ng-model="createPatientForm.inputModels.educationYears.value"
+				popover="{{ createPatientForm.inputModels.educationYears.message }}"
+				popover-placement="left"
+				popover-trigger="focus"
+				type="text"
+			>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-12">
+			<button class="btn btn-default pull-right text-uppercase" type="submit">
+				Ingresar paciente
+			</button>
+		</div>
+	</div>
+</form>

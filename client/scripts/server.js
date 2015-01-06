@@ -79,6 +79,21 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/create-patient
+		 *	Method:	POST
+		 */
+		service.createPatient = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-patient',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/get-authentication-state
 		 *	Method:	POST
 		 */

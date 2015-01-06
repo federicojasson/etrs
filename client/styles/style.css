@@ -231,6 +231,8 @@ textarea {
 
 .view-container {
 	min-height: 320px;
+	padding-bottom: 32px;
+	padding-top: 8px;
 }
 
 .well pre {

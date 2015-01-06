@@ -11,6 +11,7 @@ require 'private/scripts/Auxiliars/Email.php';
 require 'private/scripts/Auxiliars/JsonStructureDescriptor.php';
 require 'private/scripts/Controllers/Controller.php';
 require 'private/scripts/Controllers/SecureController.php';
+require 'private/scripts/Controllers/CreatePatientController.php';
 require 'private/scripts/Controllers/GetAuthenticationStateController.php';
 require 'private/scripts/Controllers/GetBackgroundController.php';
 require 'private/scripts/Controllers/GetClinicalImpressionController.php';
