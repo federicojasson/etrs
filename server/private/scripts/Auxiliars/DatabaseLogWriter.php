@@ -41,7 +41,7 @@ class DatabaseLogWriter {
 		// Gets the type of the log
 		$type = getLogType($level);
 		
-		// Inserts the log in the database
+		// Inserts the log
 		$database->insertLog($id, $type, $message);
 	}
 	

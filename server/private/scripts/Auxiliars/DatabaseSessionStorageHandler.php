@@ -100,7 +100,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	 * It returns whether the operation succeeded.
 	 */
 	public function onWrite($sessionId, $sessionData) {
-		// Inserts or updates the session in the database
+		// Inserts or updates the session
 		$this->database->insertOrUpdateSession($sessionId, $sessionData);
 		
 		return true;
