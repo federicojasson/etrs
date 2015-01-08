@@ -128,6 +128,39 @@
 			},
 			
 			{
+				name: 'createExperiment',
+				definition: {
+					url: '/create-experiment',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateExperimentViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'createImageTest',
+				definition: {
+					url: '/create-image-test',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateImageTestViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'createLaboratoryTest',
+				definition: {
+					url: '/create-laboratory-test',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateLaboratoryTestViewController'
+					}
+				}
+			},
+			
+			{
 				name: 'createPatient',
 				definition: {
 					url: '/create-patient',
@@ -204,6 +237,39 @@
 					controllers: {
 						__: 'LogInViewController',
 						ad: 'ManageDiagnosesViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageExperiments',
+				definition: {
+					url: '/manage-experiments',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageExperimentsViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageImageTests',
+				definition: {
+					url: '/manage-image-tests',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageImageTestsViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageLaboratoryTests',
+				definition: {
+					url: '/manage-laboratory-tests',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageLaboratoryTestsViewController'
 					}
 				}
 			},
