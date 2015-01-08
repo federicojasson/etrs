@@ -95,6 +95,39 @@
 			},
 			
 			{
+				name: 'createBackground',
+				definition: {
+					url: '/create-background',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateBackgroundViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'createClinicalImpression',
+				definition: {
+					url: '/create-clinical-impression',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateClinicalImpressionViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'createDiagnosis',
+				definition: {
+					url: '/create-diagnosis',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateDiagnosisViewController'
+					}
+				}
+			},
+			
+			{
 				name: 'createPatient',
 				definition: {
 					url: '/create-patient',
@@ -138,6 +171,39 @@
 					url: '/log-in',
 					controllers: {
 						__: 'LogInViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageBackgrounds',
+				definition: {
+					url: '/manage-backgrounds',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageBackgroundsViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageClinicalImpressions',
+				definition: {
+					url: '/manage-clinical-impressions',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageClinicalImpressionsViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageDiagnoses',
+				definition: {
+					url: '/manage-diagnoses',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageDiagnosesViewController'
 					}
 				}
 			},
