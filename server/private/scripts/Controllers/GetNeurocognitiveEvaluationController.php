@@ -16,8 +16,6 @@ class GetNeurocognitiveEvaluationController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		
-		// Gets the neurocognitive evaluation's ID
 		$neurocognitiveEvaluationId = hex2bin($input['id']);
 		
 		// Gets the neurocognitive evaluation

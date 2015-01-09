@@ -79,12 +79,147 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/create-background
+		 *	Method:	POST
+		 */
+		service.createBackground = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-background',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/create-clinical-impression
+		 *	Method:	POST
+		 */
+		service.createClinicalImpression = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-clinical-impression',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/create-diagnosis
+		 *	Method:	POST
+		 */
+		service.createDiagnosis = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-diagnosis',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/create-experiment
+		 *	Method:	POST
+		 */
+		service.createExperiment = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-experiment',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/create-image-test
+		 *	Method:	POST
+		 */
+		service.createImageTest = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-image-test',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/create-laboratory-test
+		 *	Method:	POST
+		 */
+		service.createLaboratoryTest = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-laboratory-test',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/create-medication
+		 *	Method:	POST
+		 */
+		service.createMedication = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-medication',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/create-neurocognitive-evaluation
+		 *	Method:	POST
+		 */
+		service.createNeurocognitiveEvaluation = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-neurocognitive-evaluation',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/create-patient
 		 *	Method:	POST
 		 */
 		service.createPatient = function(input) {
 			return sendHttpRequest({
 				url: 'server/create-patient',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/create-treatment
+		 *	Method:	POST
+		 */
+		service.createTreatment = function(input) {
+			return sendHttpRequest({
+				url: 'server/create-treatment',
 				method: 'POST',
 				input: input,
 				outputIsArray: false

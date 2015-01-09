@@ -16,8 +16,6 @@ class GetLaboratoryTestController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		
-		// Gets the laboratory test's ID
 		$laboratoryTestId = hex2bin($input['id']);
 		
 		// Gets the laboratory test

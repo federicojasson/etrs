@@ -3,10 +3,10 @@
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/create-patient
+ *	URL:	/server/create-neurocognitive-evaluation
  *	Method:	POST
  */
-class CreatePatientController extends SecureController {
+class CreateNeurocognitiveEvaluationController extends SecureController {
 	
 	/*
 	 * Executes the controller.
@@ -17,11 +17,8 @@ class CreatePatientController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$firstNames = $input['firstNames'];
-		$lastNames = $input['lastNames'];
-		$gender = $input['gender'];
-		$birthDate = $input['birthDate'];
-		$educationYears = $input['educationYears'];
+		$name = $input['name'];
+		$dataTypeDefinition = $input['dataTypeDefinition'];
 		
 		// Gets the logged in user's ID
 		$creator = $app->authentication->getLoggedInUser()['id'];
@@ -32,10 +29,10 @@ class CreatePatientController extends SecureController {
 		// Generate a random ID
 		do {
 			$id = $app->cryptography->generateRandomId();
-		} while ($businessLogicDatabase->patientExists($id));
+		} while ($businessLogicDatabase->neurocognitiveEvaluationExists($id));
 		
-		// Inserts the patient
-		$businessLogicDatabase->insertPatient($id, $creator, $firstNames, $lastNames, $gender, $birthDate, $educationYears);
+		// Inserts the neurocognitive evaluation
+		$businessLogicDatabase->insertNeurocognitiveEvaluation($id, $creator, $name, $dataTypeDefinition);
 		
 		// Commits the transaction
 		$businessLogicDatabase->commitTransaction();
@@ -55,27 +52,12 @@ class CreatePatientController extends SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'firstNames' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+			'name' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
 				// TODO: implement
 				return true;
 			}),
 			
-			'lastNames' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				// TODO: implement
-				return true;
-			}),
-			
-			'gender' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				// TODO: implement
-				return true;
-			}),
-			
-			'birthDate' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				// TODO: implement
-				return true;
-			}),
-			
-			'educationYears' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+			'dataTypeDefinition' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
 				// TODO: implement
 				return true;
 			})
@@ -93,8 +75,7 @@ class CreatePatientController extends SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			USER_ROLE_ADMINISTRATOR,
-			USER_ROLE_DOCTOR
+			USER_ROLE_ADMINISTRATOR
 		];
 		
 		// Validates the authentication and returns the result

@@ -16,8 +16,6 @@ class LogInController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		
-		// Gets the user's ID and her alleged password
 		$userId = $input['id'];
 		$userAllegedPassword = $input['password'];
 		

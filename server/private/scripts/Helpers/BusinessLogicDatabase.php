@@ -6,6 +6,428 @@
 class BusinessLogicDatabase extends Database {
 	
 	/*
+	 * Determines whether a background exists.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function backgroundExists($backgroundId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM backgrounds
+			WHERE id = :backgroundId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':backgroundId' => $backgroundId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a clinical impression exists.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function clinicalImpressionExists($clinicalImpressionId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM clinical_impressions
+			WHERE id = :clinicalImpressionId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':clinicalImpressionId' => $clinicalImpressionId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a diagnosis exists.
+	 * 
+	 * It receives the diagnosis's ID.
+	 */
+	public function diagnosisExists($diagnosisId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM diagnoses
+			WHERE id = :diagnosisId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':diagnosisId' => $diagnosisId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether an experiment exists.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function experimentExists($experimentId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM experiments
+			WHERE id = :experimentId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':experimentId' => $experimentId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether an image test exists.
+	 * 
+	 * It receives the image test's ID.
+	 */
+	public function imageTestExists($imageTestId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM image_tests
+			WHERE id = :imageTestId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':imageTestId' => $imageTestId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Inserts a background.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertBackground($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO backgrounds (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts a clinical impression.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertClinicalImpression($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO clinical_impressions (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts a diagnosis.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertDiagnosis($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO diagnoses (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts an experiment.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertExperiment($id, $creator, $name, $commandLine) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO experiments (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name,
+				command_line
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name,
+				:commandLine
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name,
+			':commandLine' => $commandLine
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts an image test.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertImageTest($id, $creator, $name, $dataTypeDefinition) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO image_tests (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name,
+				data_type_definition
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name,
+				:dataTypeDefinition
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name,
+			':dataTypeDefinition' => $dataTypeDefinition
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts a laboratory test.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertLaboratoryTest($id, $creator, $name, $dataTypeDefinition) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO laboratory_tests (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name,
+				data_type_definition
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name,
+				:dataTypeDefinition
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name,
+			':dataTypeDefinition' => $dataTypeDefinition
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts a medication.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertMedication($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO medications (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts a neurocognitive evaluation.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertNeurocognitiveEvaluation($id, $creator, $name, $dataTypeDefinition) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO neurocognitive_evaluations (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name,
+				data_type_definition
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name,
+				:dataTypeDefinition
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name,
+			':dataTypeDefinition' => $dataTypeDefinition
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Inserts a patient.
 	 * 
 	 * It receives the values to insert.
@@ -50,6 +472,119 @@ class BusinessLogicDatabase extends Database {
 		
 		// Executes the statement
 		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Inserts a treatment.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertTreatment($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO treatments (
+				id,
+				is_erased,
+				creator,
+				creation_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Determines whether a laboratory test exists.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function laboratoryTestExists($laboratoryTestId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM laboratory_tests
+			WHERE id = :laboratoryTestId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':laboratoryTestId' => $laboratoryTestId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a medication exists.
+	 * 
+	 * It receives the medication's ID.
+	 */
+	public function medicationExists($medicationId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM medications
+			WHERE id = :medicationId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':medicationId' => $medicationId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a neurocognitive evaluation exists.
+	 * 
+	 * It receives the neurocognitive evaluation's ID.
+	 */
+	public function neurocognitiveEvaluationExists($neurocognitiveEvaluationId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM neurocognitive_evaluations
+			WHERE id = :neurocognitiveEvaluationId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':neurocognitiveEvaluationId' => $neurocognitiveEvaluationId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
 	}
 	
 	/*
@@ -971,6 +1506,32 @@ class BusinessLogicDatabase extends Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		return $results;
+	}
+	
+	/*
+	 * Determines whether a treatment exists.
+	 * 
+	 * It receives the treatment's ID.
+	 */
+	public function treatmentExists($treatmentId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM treatments
+			WHERE id = :treatmentId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':treatmentId' => $treatmentId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
 	}
 	
 	/*

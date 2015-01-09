@@ -18,8 +18,6 @@ class RequestPasswordRecoveryController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		
-		// Gets the user's ID and her alleged email address
 		$userId = $input['id'];
 		$userAllegedEmailAddress = $input['emailAddress'];
 		

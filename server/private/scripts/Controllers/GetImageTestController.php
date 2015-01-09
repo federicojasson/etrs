@@ -16,8 +16,6 @@ class GetImageTestController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		
-		// Gets the image test's ID
 		$imageTestId = hex2bin($input['id']);
 		
 		// Gets the image test

@@ -16,8 +16,6 @@ class GetClinicalImpressionController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		
-		// Gets the clinical impression's ID
 		$clinicalImpressionId = hex2bin($input['id']);
 		
 		// Gets the clinical impression

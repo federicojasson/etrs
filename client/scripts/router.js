@@ -161,6 +161,28 @@
 			},
 			
 			{
+				name: 'createMedication',
+				definition: {
+					url: '/create-medication',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateMedicationViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'createNeurocognitiveEvaluation',
+				definition: {
+					url: '/create-neurocognitive-evaluation',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateNeurocognitiveEvaluationViewController'
+					}
+				}
+			},
+			
+			{
 				name: 'createPatient',
 				definition: {
 					url: '/create-patient',
@@ -168,6 +190,17 @@
 						__: 'LogInViewController',
 						ad: 'CreatePatientViewController',
 						dr: 'CreatePatientViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'createTreatment',
+				definition: {
+					url: '/create-treatment',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'CreateTreatmentViewController'
 					}
 				}
 			},
@@ -270,6 +303,39 @@
 					controllers: {
 						__: 'LogInViewController',
 						ad: 'ManageLaboratoryTestsViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageMedications',
+				definition: {
+					url: '/manage-medications',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageMedicationsViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageNeurocognitiveEvaluations',
+				definition: {
+					url: '/manage-neurocognitive-evaluations',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageNeurocognitiveEvaluationsViewController'
+					}
+				}
+			},
+			
+			{
+				name: 'manageTreatments',
+				definition: {
+					url: '/manage-treatments',
+					controllers: {
+						__: 'LogInViewController',
+						ad: 'ManageTreatmentsViewController'
 					}
 				}
 			},

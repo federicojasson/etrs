@@ -17,8 +17,6 @@ class SearchPatientsController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		
-		// Gets the query and the page
 		$query = $input['query'];
 		$page = $input['page'];
 		
