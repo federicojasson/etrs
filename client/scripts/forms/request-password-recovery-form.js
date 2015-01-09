@@ -93,6 +93,7 @@
 							'Su solicitud de recuperación de contraseña ha sido aceptada.',
 							'Se ha enviado un correo electrónico a ' + emailAddress + '. Para continuar con el proceso deberá seguir los pasos indicados en el mismo.'
 						],
+						
 						onClose: function() {
 							// Redirects the user to the root route
 							router.redirect('/');
