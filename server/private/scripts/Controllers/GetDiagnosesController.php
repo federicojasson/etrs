@@ -12,7 +12,20 @@ class GetDiagnosesController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the diagnoses
+		$diagnoses = $app->businessLogicDatabase->selectNonErasedDiagnoses(); // TODO: implement
+		
+		// Filters the diagnoses
+		$filteredDiagnoses = [];
+		$count = count($diagnoses);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredDiagnoses[$i] = $app->dataFilter->filterDiagnosis($diagnoses[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredDiagnoses);
 	}
 	
 	/*

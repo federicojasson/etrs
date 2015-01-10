@@ -12,7 +12,20 @@ class GetLaboratoryTestsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the laboratory tests
+		$laboratoryTests = $app->businessLogicDatabase->selectNonErasedLaboratoryTests(); // TODO: implement
+		
+		// Filters the laboratory tests
+		$filteredLaboratoryTests = [];
+		$count = count($laboratoryTests);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredLaboratoryTests[$i] = $app->dataFilter->filterLaboratoryTest($laboratoryTests[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredLaboratoryTests);
 	}
 	
 	/*

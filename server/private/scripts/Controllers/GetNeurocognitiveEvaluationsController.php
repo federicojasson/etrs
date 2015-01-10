@@ -12,7 +12,20 @@ class GetNeurocognitiveEvaluationsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the neurocognitive evaluations
+		$neurocognitiveEvaluations = $app->businessLogicDatabase->selectNonErasedNeurocognitiveEvaluations(); // TODO: implement
+		
+		// Filters the neurocognitive evaluations
+		$filteredNeurocognitiveEvaluations = [];
+		$count = count($neurocognitiveEvaluations);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredNeurocognitiveEvaluations[$i] = $app->dataFilter->filterNeurocognitiveEvaluation($neurocognitiveEvaluations[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredNeurocognitiveEvaluations);
 	}
 	
 	/*

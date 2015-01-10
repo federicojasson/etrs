@@ -12,7 +12,20 @@ class GetBackgroundsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the backgrounds
+		$backgrounds = $app->businessLogicDatabase->selectNonErasedBackgrounds(); // TODO: implement
+		
+		// Filters the backgrounds
+		$filteredBackgrounds = [];
+		$count = count($backgrounds);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredBackgrounds[$i] = $app->dataFilter->filterBackground($backgrounds[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredBackgrounds);
 	}
 	
 	/*

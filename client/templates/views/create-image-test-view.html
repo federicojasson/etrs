@@ -1,1 +1,44 @@
-TODO: create image test view
+<h1>Ingresar TODO: name</h1>
+<p>Complete los campos con la información solicitada.</p>
+
+<hr>
+
+<form class="form-horizontal" ng-controller="CreateImageTestFormController as createImageTestForm" ng-submit="createImageTestForm.submit()" novalidate>
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Nombre</label>
+		
+		<div class="col-sm-8">
+			<input
+				class="form-control"
+				ng-model="createImageTestForm.inputModels.name.value"
+				popover="{{ createImageTestForm.inputModels.name.message }}"
+				popover-placement="left"
+				popover-trigger="focus"
+				type="text"
+			>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<label class="col-sm-4 control-label">Definición del tipo de dato</label>
+		
+		<div class="col-sm-8">
+			<input
+				class="form-control"
+				ng-model="createImageTestForm.inputModels.dataTypeDefinition.value"
+				popover="{{ createImageTestForm.inputModels.dataTypeDefinition.message }}"
+				popover-placement="left"
+				popover-trigger="focus"
+				type="text"
+			>
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-12">
+			<button class="btn btn-default pull-right text-uppercase" type="submit">
+				Ingresar TODO: name
+			</button>
+		</div>
+	</div>
+</form>

@@ -12,7 +12,20 @@ class GetImageTestsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the image tests
+		$imageTests = $app->businessLogicDatabase->selectNonErasedImageTests(); // TODO: implement
+		
+		// Filters the image tests
+		$filteredImageTests = [];
+		$count = count($imageTests);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredImageTests[$i] = $app->dataFilter->filterImageTest($imageTests[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredImageTests);
 	}
 	
 	/*

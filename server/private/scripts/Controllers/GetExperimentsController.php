@@ -12,7 +12,20 @@ class GetExperimentsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the experiments
+		$experiments = $app->businessLogicDatabase->selectNonErasedExperiments(); // TODO: implement
+		
+		// Filters the experiments
+		$filteredExperiments = [];
+		$count = count($experiments);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredExperiments[$i] = $app->dataFilter->filterExperiment($experiments[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredExperiments);
 	}
 	
 	/*

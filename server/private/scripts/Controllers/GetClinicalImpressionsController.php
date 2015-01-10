@@ -12,7 +12,20 @@ class GetClinicalImpressionsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the clinical impressions
+		$clinicalImpressions = $app->businessLogicDatabase->selectNonErasedClinicalImpressions(); // TODO: implement
+		
+		// Filters the clinical impressions
+		$filteredClinicalImpressions = [];
+		$count = count($clinicalImpressions);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredClinicalImpressions[$i] = $app->dataFilter->filterClinicalImpression($clinicalImpressions[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredClinicalImpressions);
 	}
 	
 	/*

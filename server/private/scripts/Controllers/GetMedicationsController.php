@@ -12,7 +12,20 @@ class GetMedicationsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the medications
+		$medications = $app->businessLogicDatabase->selectNonErasedMedications(); // TODO: implement
+		
+		// Filters the medications
+		$filteredMedications = [];
+		$count = count($medications);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredMedications[$i] = $app->dataFilter->filterMedication($medications[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredMedications);
 	}
 	
 	/*

@@ -1,6 +1,8 @@
 // Uses strict mode in the whole script
 'use strict';
 
+// TODO: handle files upload
+
 (function() {
 	// Module: forms
 	var module = angular.module('forms');
@@ -11,6 +13,7 @@
 		'Error',
 		'inputValidator',
 		'InputModel',
+		'router',
 		'server',
 		CreateExperimentFormController
 	]);
@@ -20,7 +23,7 @@
 	 * 
 	 * Offers functions for the create experiment form.
 	 */
-	function CreateExperimentFormController(errorHandler, Error, inputValidator, InputModel, server) {
+	function CreateExperimentFormController(errorHandler, Error, inputValidator, InputModel, router, server) {
 		var controller = this;
 		
 		/*
@@ -59,9 +62,9 @@
 			server.createExperiment({
 				name: inputModels.name.value,
 				commandLine: inputModels.commandLine.value
-			}).then(function(output) {
-				// TODO: implement
-				console.log('experiment created');
+			}).then(function() {
+				// Redirects the user to the manage experiments route
+				router.redirect('/manage-experiments');
 			}, function(serverResponse) {
 				// The server responded with an HTTP error
 				var error = Error.createFromServerResponse(serverResponse);

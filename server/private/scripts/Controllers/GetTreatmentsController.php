@@ -12,7 +12,20 @@ class GetTreatmentsController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Selects the treatments
+		$treatments = $app->businessLogicDatabase->selectNonErasedTreatments(); // TODO: implement
+		
+		// Filters the treatments
+		$filteredTreatments = [];
+		$count = count($treatments);
+		for ($i = 0; $i < $count; $i++) {
+			$filteredTreatments[$i] = $app->dataFilter->filterTreatment($treatments[$i]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($filteredTreatments);
 	}
 	
 	/*
