@@ -27,7 +27,7 @@
 		 * Returns the title of the page when the view is active.
 		 */
 		controller.getTitle = function() {
-			return 'Ingresar TODO: name - ETRS';
+			return 'Ingresar examen de laboratorio - ETRS';
 		};
 	}
 })();

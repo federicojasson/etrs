@@ -229,6 +229,141 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/erase-background
+		 *	Method:	POST
+		 */
+		service.eraseBackground = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-background',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/erase-clinical-impression
+		 *	Method:	POST
+		 */
+		service.eraseClinicalImpression = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-clinical-impression',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/erase-diagnosis
+		 *	Method:	POST
+		 */
+		service.eraseDiagnosis = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-diagnosis',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/erase-experiment
+		 *	Method:	POST
+		 */
+		service.eraseExperiment = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-experiment',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/erase-image-test
+		 *	Method:	POST
+		 */
+		service.eraseImageTest = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-image-test',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/erase-laboratory-test
+		 *	Method:	POST
+		 */
+		service.eraseLaboratoryTest = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-laboratory-test',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/erase-medication
+		 *	Method:	POST
+		 */
+		service.eraseMedication = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-medication',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/erase-neurocognitive-evaluation
+		 *	Method:	POST
+		 */
+		service.eraseNeurocognitiveEvaluation = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-neurocognitive-evaluation',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/erase-treatment
+		 *	Method:	POST
+		 */
+		service.eraseTreatment = function(input) {
+			return sendHttpRequest({
+				url: 'server/erase-treatment',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/get-authentication-state
 		 *	Method:	POST
 		 */

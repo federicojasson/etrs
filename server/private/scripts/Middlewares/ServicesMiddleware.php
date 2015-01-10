@@ -102,6 +102,78 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new CreateTreatmentController()
 		);
 		
+		// URL:		/server/erase-background
+		// Method:	POST
+		$services->define(
+			'/erase-background',
+			HTTP_METHOD_POST,
+			new EraseBackgroundController()
+		);
+		
+		// URL:		/server/erase-clinical-impression
+		// Method:	POST
+		$services->define(
+			'/erase-clinical-impression',
+			HTTP_METHOD_POST,
+			new EraseClinicalImpressionController()
+		);
+		
+		// URL:		/server/erase-diagnosis
+		// Method:	POST
+		$services->define(
+			'/erase-diagnosis',
+			HTTP_METHOD_POST,
+			new EraseDiagnosisController()
+		);
+		
+		// URL:		/server/erase-experiment
+		// Method:	POST
+		$services->define(
+			'/erase-experiment',
+			HTTP_METHOD_POST,
+			new EraseExperimentController()
+		);
+		
+		// URL:		/server/erase-image-test
+		// Method:	POST
+		$services->define(
+			'/erase-image-test',
+			HTTP_METHOD_POST,
+			new EraseImageTestController()
+		);
+		
+		// URL:		/server/erase-laboratory-test
+		// Method:	POST
+		$services->define(
+			'/erase-laboratory-test',
+			HTTP_METHOD_POST,
+			new EraseLaboratoryTestController()
+		);
+		
+		// URL:		/server/erase-medication
+		// Method:	POST
+		$services->define(
+			'/erase-medication',
+			HTTP_METHOD_POST,
+			new EraseMedicationController()
+		);
+		
+		// URL:		/server/erase-neurocognitive-evaluation
+		// Method:	POST
+		$services->define(
+			'/erase-neurocognitive-evaluation',
+			HTTP_METHOD_POST,
+			new EraseNeurocognitiveEvaluationController()
+		);
+		
+		// URL:		/server/erase-treatment
+		// Method:	POST
+		$services->define(
+			'/erase-treatment',
+			HTTP_METHOD_POST,
+			new EraseTreatmentController()
+		);
+		
 		// URL:		/server/get-authentication-state
 		// Method:	POST
 		$services->define(
