@@ -393,6 +393,20 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/get-backgrounds
+		 *	Method:	POST
+		 */
+		service.getBackgrounds = function() {
+			return sendHttpRequest({
+				url: 'server/get-backgrounds',
+				method: 'POST',
+				outputIsArray: true
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/get-clinical-impression
 		 *	Method:	POST
 		 */
@@ -408,6 +422,20 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/get-clinical-impressions
+		 *	Method:	POST
+		 */
+		service.getClinicalImpressions = function() {
+			return sendHttpRequest({
+				url: 'server/get-clinical-impressions',
+				method: 'POST',
+				outputIsArray: true
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/get-consultation
 		 *	Method:	POST
 		 */
@@ -417,6 +445,20 @@
 				method: 'POST',
 				input: input,
 				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/get-diagnoses
+		 *	Method:	POST
+		 */
+		service.getDiagnoses = function() {
+			return sendHttpRequest({
+				url: 'server/get-diagnoses',
+				method: 'POST',
+				outputIsArray: true
 			});
 		};
 		
@@ -453,6 +495,20 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/get-experiments
+		 *	Method:	POST
+		 */
+		service.getExperiments = function() {
+			return sendHttpRequest({
+				url: 'server/get-experiments',
+				method: 'POST',
+				outputIsArray: true
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/get-file
 		 *	Method:	POST
 		 */
@@ -483,6 +539,20 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/get-image-tests
+		 *	Method:	POST
+		 */
+		service.getImageTests = function() {
+			return sendHttpRequest({
+				url: 'server/get-image-tests',
+				method: 'POST',
+				outputIsArray: true
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/get-laboratory-test
 		 *	Method:	POST
 		 */
@@ -492,6 +562,20 @@
 				method: 'POST',
 				input: input,
 				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/get-laboratory-tests
+		 *	Method:	POST
+		 */
+		service.getLaboratoryTests = function() {
+			return sendHttpRequest({
+				url: 'server/get-laboratory-tests',
+				method: 'POST',
+				outputIsArray: true
 			});
 		};
 		
@@ -513,6 +597,20 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/get-medications
+		 *	Method:	POST
+		 */
+		service.getMedications = function() {
+			return sendHttpRequest({
+				url: 'server/get-medications',
+				method: 'POST',
+				outputIsArray: true
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/get-neurocognitive-evaluation
 		 *	Method:	POST
 		 */
@@ -522,6 +620,20 @@
 				method: 'POST',
 				input: input,
 				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/get-neurocognitive-evaluations
+		 *	Method:	POST
+		 */
+		service.getNeurocognitiveEvaluations = function() {
+			return sendHttpRequest({
+				url: 'server/get-neurocognitive-evaluations',
+				method: 'POST',
+				outputIsArray: true
 			});
 		};
 		
@@ -567,6 +679,20 @@
 				method: 'POST',
 				input: input,
 				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/get-treatments
+		 *	Method:	POST
+		 */
+		service.getTreatments = function() {
+			return sendHttpRequest({
+				url: 'server/get-treatments',
+				method: 'POST',
+				outputIsArray: true
 			});
 		};
 		
