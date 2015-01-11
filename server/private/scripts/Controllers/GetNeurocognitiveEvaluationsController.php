@@ -15,7 +15,7 @@ class GetNeurocognitiveEvaluationsController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the neurocognitive evaluations
-		$neurocognitiveEvaluations = $app->businessLogicDatabase->selectNonErasedNeurocognitiveEvaluations(); // TODO: implement
+		$neurocognitiveEvaluations = $app->businessLogicDatabase->selectNonErasedNeurocognitiveEvaluations();
 		
 		// Filters the neurocognitive evaluations
 		$filteredNeurocognitiveEvaluations = [];

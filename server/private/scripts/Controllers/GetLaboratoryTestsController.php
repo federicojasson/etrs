@@ -15,7 +15,7 @@ class GetLaboratoryTestsController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the laboratory tests
-		$laboratoryTests = $app->businessLogicDatabase->selectNonErasedLaboratoryTests(); // TODO: implement
+		$laboratoryTests = $app->businessLogicDatabase->selectNonErasedLaboratoryTests();
 		
 		// Filters the laboratory tests
 		$filteredLaboratoryTests = [];

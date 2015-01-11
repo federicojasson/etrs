@@ -15,7 +15,7 @@ class GetMedicationsController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the medications
-		$medications = $app->businessLogicDatabase->selectNonErasedMedications(); // TODO: implement
+		$medications = $app->businessLogicDatabase->selectNonErasedMedications();
 		
 		// Filters the medications
 		$filteredMedications = [];

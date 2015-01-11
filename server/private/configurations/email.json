@@ -4,5 +4,9 @@
 	
 	"passwordRecoveryEmail": {
 		"templateFilePath": "private/templates/emails/password-recovery-email.html"
+	},
+	
+	"userCreationEmail": {
+		"templateFilePath": "private/templates/emails/user-creation-email.html"
 	}
 }

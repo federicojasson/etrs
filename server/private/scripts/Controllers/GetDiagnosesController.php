@@ -15,7 +15,7 @@ class GetDiagnosesController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the diagnoses
-		$diagnoses = $app->businessLogicDatabase->selectNonErasedDiagnoses(); // TODO: implement
+		$diagnoses = $app->businessLogicDatabase->selectNonErasedDiagnoses();
 		
 		// Filters the diagnoses
 		$filteredDiagnoses = [];

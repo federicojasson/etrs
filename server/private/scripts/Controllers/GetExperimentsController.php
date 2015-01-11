@@ -15,7 +15,7 @@ class GetExperimentsController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the experiments
-		$experiments = $app->businessLogicDatabase->selectNonErasedExperiments(); // TODO: implement
+		$experiments = $app->businessLogicDatabase->selectNonErasedExperiments();
 		
 		// Filters the experiments
 		$filteredExperiments = [];

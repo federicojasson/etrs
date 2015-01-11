@@ -181,6 +181,45 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
+	 * Inserts a user creation request.
+	 * 
+	 * It receives the values to insert.
+	 */
+	public function insertUserCreationRequest($id, $passwordHash, $passwordSalt, $passwordIterations, $role) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO user_creation_requests (
+				id,
+				creation_datetime,
+				password_hash,
+				password_salt,
+				password_iterations,
+				role
+			)
+			VALUES (
+				:id,
+				UTC_TIMESTAMP(),
+				:passwordHash,
+				:passwordSalt,
+				:passwordIterations,
+				:role
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':passwordHash' => $passwordHash,
+			':passwordSalt' => $passwordSalt,
+			':passwordIterations' => $passwordIterations,
+			':role' => $role
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Determines whether a log exists.
 	 * 
 	 * It receives the log's ID.
@@ -262,6 +301,32 @@ class WebServerDatabase extends Database {
 	}
 	
 	/*
+	 * Determines whether a user creation request exists.
+	 * 
+	 * It receives the user creation request's ID.
+	 */
+	public function userCreationRequestExists($userCreationRequestId) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM user_creation_requests
+			WHERE id = :userCreationRequestId
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':userCreationRequestId' => $userCreationRequestId
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Connects to the database.
 	 * 
 	 * It returns the PDO instance representing the connection.
@@ -269,7 +334,6 @@ class WebServerDatabase extends Database {
 	protected function connect() {
 		// Gets the database configuration
 		$configuration = $this->app->configurations->get('webServerDatabase');
-		
 		$dsn = $configuration['dsn'];
 		$username = $configuration['username'];
 		$password = $configuration['password'];

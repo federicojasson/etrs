@@ -1008,6 +1008,27 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
+	 * Selects and returns the backgrounds.
+	 */
+	public function selectNonErasedBackgrounds() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name
+			FROM non_erased_backgrounds
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
+	}
+	
+	/*
 	 * Selects and returns a clinical impression. If it doesn't exist or has
 	 * been erased, null is returned.
 	 * 
@@ -1037,6 +1058,27 @@ class BusinessLogicDatabase extends Database {
 		
 		// Returns the first result, or null if there is none
 		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Selects and returns the clinical impressions.
+	 */
+	public function selectNonErasedClinicalImpressions() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name
+			FROM non_erased_clinical_impressions
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
 	}
 	
 	/*
@@ -1075,6 +1117,27 @@ class BusinessLogicDatabase extends Database {
 		
 		// Returns the first result, or null if there is none
 		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Selects and returns the diagnoses.
+	 */
+	public function selectNonErasedDiagnoses() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name
+			FROM non_erased_diagnoses
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
 	}
 	
 	/*
@@ -1140,6 +1203,28 @@ class BusinessLogicDatabase extends Database {
 		
 		// Returns the first result, or null if there is none
 		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Selects and returns the experiments.
+	 */
+	public function selectNonErasedExperiments() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name,
+				command_line AS commandLine
+			FROM non_erased_experiments
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
 	}
 	
 	/*
@@ -1209,6 +1294,28 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
+	 * Selects and returns the image tests.
+	 */
+	public function selectNonErasedImageTests() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name,
+				data_type_definition AS dataTypeDefinition
+			FROM non_erased_image_tests
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
+	}
+	
+	/*
 	 * Selects and returns a laboratory test. If it doesn't exist or has been
 	 * erased, null is returned.
 	 * 
@@ -1239,6 +1346,28 @@ class BusinessLogicDatabase extends Database {
 		
 		// Returns the first result, or null if there is none
 		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Selects and returns the laboratory tests.
+	 */
+	public function selectNonErasedLaboratoryTests() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name,
+				data_type_definition AS dataTypeDefinition
+			FROM non_erased_laboratory_tests
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
 	}
 	
 	/*
@@ -1274,6 +1403,27 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
+	 * Selects and returns the medications.
+	 */
+	public function selectNonErasedMedications() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name
+			FROM non_erased_medications
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
+	}
+	
+	/*
 	 * Selects and returns a neurocognitive evaluation. If it doesn't exist or
 	 * has been erased, null is returned.
 	 * 
@@ -1304,6 +1454,28 @@ class BusinessLogicDatabase extends Database {
 		
 		// Returns the first result, or null if there is none
 		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Selects and returns the neurocognitive evaluations.
+	 */
+	public function selectNonErasedNeurocognitiveEvaluations() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name,
+				data_type_definition AS dataTypeDefinition
+			FROM non_erased_neurocognitive_evaluations
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
 	}
 	
 	/*
@@ -1447,6 +1619,27 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
+	 * Selects and returns the treatments.
+	 */
+	public function selectNonErasedTreatments() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				creation_datetime AS creationDatetime,
+				name AS name
+			FROM non_erased_treatments
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		return $results;
+	}
+	
+	/*
 	 * Selects and returns a user. If it doesn't exist or has been erased, null
 	 * is returned.
 	 * 
@@ -1542,7 +1735,6 @@ class BusinessLogicDatabase extends Database {
 	protected function connect() {
 		// Gets the database configuration
 		$configuration = $this->app->configurations->get('businessLogicDatabase');
-		
 		$dsn = $configuration['dsn'];
 		$username = $configuration['username'];
 		$password = $configuration['password'];

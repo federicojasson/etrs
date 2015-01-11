@@ -15,7 +15,7 @@ class GetImageTestsController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the image tests
-		$imageTests = $app->businessLogicDatabase->selectNonErasedImageTests(); // TODO: implement
+		$imageTests = $app->businessLogicDatabase->selectNonErasedImageTests();
 		
 		// Filters the image tests
 		$filteredImageTests = [];

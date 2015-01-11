@@ -3,10 +3,10 @@
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/request-password-recovery
+ *	URL:	/server/request-user-creation
  *	Method:	POST
  */
-class RequestPasswordRecoveryController extends SecureController {
+class RequestUserCreationController extends SecureController {
 	
 	/*
 	 * Executes the controller.
@@ -18,32 +18,25 @@ class RequestPasswordRecoveryController extends SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$userId = $input['id'];
-		$userAllegedEmailAddress = $input['emailAddress'];
+		$userAllegedPassword = $input['password'];
+		$emailAddress = $input['emailAddress'];
+		$role = $input['role'];
 		
-		// Gets the user
-		$user = $app->data->getUser($userId);
+		// Gets the logged in user's ID
+		$userId = $app->authentication->getLoggedInUser()['id'];
 		
-		if (is_null($user)) {
-			// The user doesn't exist
-			$this->rejectRequest();
-		}
-		
-		if ($userAllegedEmailAddress !== $user['emailAddress']) {
-			// The email addresses don't match
+		if (! $app->authenticator->authenticateUser($userId, $userAllegedPassword)) {
+			// The user was not authenticated
 			$this->rejectRequest();
 		}
 		
 		// Starts a transaction
 		$webServerDatabase->startTransaction();
 		
-		// Deletes any previous password recovery request of the user
-		$webServerDatabase->deletePasswordRecoveryRequestsByUser($userId);
-		
 		// Generate a random ID
 		do {
 			$id = $cryptography->generateRandomId();
-		} while ($webServerDatabase->passwordRecoveryRequestExists($id));
+		} while ($webServerDatabase->userCreationRequestExists($id));
 		
 		// Generates a random password
 		$password = $cryptography->generateRandomPassword();
@@ -53,8 +46,8 @@ class RequestPasswordRecoveryController extends SecureController {
 		$passwordIterations = PASSWORD_ITERATIONS;
 		$passwordHash = $cryptography->hashPassword($password, $passwordSalt, $passwordIterations);
 		
-		// Inserts the password recovery request
-		$webServerDatabase->insertPasswordRecoveryRequest($id, $userId, $passwordHash, $passwordSalt, $passwordIterations);
+		// Inserts the user creation request
+		$webServerDatabase->insertUserCreationRequest($id, $passwordHash, $passwordSalt, $passwordIterations, $role);
 		
 		// Commits the transaction
 		$webServerDatabase->commitTransaction();
@@ -62,17 +55,17 @@ class RequestPasswordRecoveryController extends SecureController {
 		// Gets the email configuration
 		$configuration = $app->configurations->get('email');
 		$webServerEmailAddress = $configuration['webServerEmailAddress'];
-		$templateFilePath = $configuration['passwordRecoveryEmail']['templateFilePath'];
+		$templateFilePath = $configuration['userCreationEmail']['templateFilePath'];
 		
 		// Builds the email message
 		$emailMessage = $this->buildEmailMessage($templateFilePath, $password);
 		
-		// Sends an email with a link for password recovery
+		// Sends an email with a link for user creation
 		$app->emailBuilder
 		->newEmail()
 		->from($webServerEmailAddress)
-		->to($userAllegedEmailAddress)
-		->subject('ETRS - Recuperación de contraseña')
+		->to($emailAddress)
+		->subject('ETRS - Creación de usuario')
 		->message($emailMessage)
 		->build()
 		->send();
@@ -92,12 +85,19 @@ class RequestPasswordRecoveryController extends SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				return $inputValidator->isNonEmptyString($jsonValue);
+			'password' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+				// TODO: implement
+				return true;
 			}),
 			
 			'emailAddress' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
-				return $inputValidator->isNonEmptyString($jsonValue);
+				// TODO: implement
+				return true;
+			}),
+			
+			'role' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($jsonValue) use ($inputValidator) {
+				// TODO: implement
+				return true;
 			})
 		]);
 		
@@ -113,7 +113,7 @@ class RequestPasswordRecoveryController extends SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			USER_ROLE_ANONYMOUS
+			USER_ROLE_ADMINISTRATOR
 		];
 		
 		// Validates the authentication and returns the result
@@ -121,7 +121,7 @@ class RequestPasswordRecoveryController extends SecureController {
 	}
 	
 	/*
-	 * Builds and returns the message of the password recovery email.
+	 * Builds and returns the message of the user creation email.
 	 * 
 	 * It receives the template's file path and the request's password.
 	 */
@@ -135,7 +135,7 @@ class RequestPasswordRecoveryController extends SecureController {
 	}
 	
 	/*
-	 * Rejects the password recovery request.
+	 * Rejects the user creation request.
 	 */
 	private function rejectRequest() {
 		$app = $this->app;

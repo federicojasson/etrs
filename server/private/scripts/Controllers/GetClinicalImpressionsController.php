@@ -15,7 +15,7 @@ class GetClinicalImpressionsController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the clinical impressions
-		$clinicalImpressions = $app->businessLogicDatabase->selectNonErasedClinicalImpressions(); // TODO: implement
+		$clinicalImpressions = $app->businessLogicDatabase->selectNonErasedClinicalImpressions();
 		
 		// Filters the clinical impressions
 		$filteredClinicalImpressions = [];

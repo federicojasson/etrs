@@ -15,7 +15,7 @@ class GetTreatmentsController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the treatments
-		$treatments = $app->businessLogicDatabase->selectNonErasedTreatments(); // TODO: implement
+		$treatments = $app->businessLogicDatabase->selectNonErasedTreatments();
 		
 		// Filters the treatments
 		$filteredTreatments = [];

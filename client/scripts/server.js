@@ -758,6 +758,21 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/request-user-creation
+		 *	Method:	POST
+		 */
+		service.requestUserCreation = function(input) {
+			return sendHttpRequest({
+				url: 'server/request-user-creation',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/search-patients
 		 *	Method:	POST
 		 */

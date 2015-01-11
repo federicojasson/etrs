@@ -15,7 +15,7 @@ class GetBackgroundsController extends SecureController {
 		$app = $this->app;
 		
 		// Selects the backgrounds
-		$backgrounds = $app->businessLogicDatabase->selectNonErasedBackgrounds(); // TODO: implement
+		$backgrounds = $app->businessLogicDatabase->selectNonErasedBackgrounds();
 		
 		// Filters the backgrounds
 		$filteredBackgrounds = [];
