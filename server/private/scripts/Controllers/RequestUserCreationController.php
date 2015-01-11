@@ -47,7 +47,7 @@ class RequestUserCreationController extends SecureController {
 		$passwordHash = $cryptography->hashPassword($password, $passwordSalt, $passwordIterations);
 		
 		// Inserts the user creation request
-		$webServerDatabase->insertUserCreationRequest($id, $passwordHash, $passwordSalt, $passwordIterations, $role);
+		$webServerDatabase->insertUserCreationRequest($id, $passwordHash, $passwordSalt, $passwordIterations, $emailAddress, $role);
 		
 		// Commits the transaction
 		$webServerDatabase->commitTransaction();

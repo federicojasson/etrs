@@ -185,7 +185,7 @@ class WebServerDatabase extends Database {
 	 * 
 	 * It receives the values to insert.
 	 */
-	public function insertUserCreationRequest($id, $passwordHash, $passwordSalt, $passwordIterations, $role) {
+	public function insertUserCreationRequest($id, $passwordHash, $passwordSalt, $passwordIterations, $emailAddress, $role) {
 		// Defines the statement
 		$statement = '
 			INSERT INTO user_creation_requests (
@@ -194,6 +194,7 @@ class WebServerDatabase extends Database {
 				password_hash,
 				password_salt,
 				password_iterations,
+				email_address,
 				role
 			)
 			VALUES (
@@ -202,6 +203,7 @@ class WebServerDatabase extends Database {
 				:passwordHash,
 				:passwordSalt,
 				:passwordIterations,
+				:emailAddress,
 				:role
 			)
 		';
@@ -212,6 +214,7 @@ class WebServerDatabase extends Database {
 			':passwordHash' => $passwordHash,
 			':passwordSalt' => $passwordSalt,
 			':passwordIterations' => $passwordIterations,
+			':emailAddress' => $emailAddress,
 			':role' => $role
 		];
 		
