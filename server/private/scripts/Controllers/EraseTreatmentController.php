@@ -12,7 +12,28 @@ class EraseTreatmentController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		$businessLogicDatabase = $app->businessLogicDatabase;
+		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$treatmentId = $input['id'];
+		
+		if (! $businessLogicDatabase->nonErasedTreatmentExists($treatmentId)) { // TODO: check or implement
+			// The treatment doesn't exist or has already been erased
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_TREATMENT
+			]);
+		}
+		
+		// Erases the treatment
+		$businessLogicDatabase->eraseTreatment($treatmentId); // TODO: implement
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

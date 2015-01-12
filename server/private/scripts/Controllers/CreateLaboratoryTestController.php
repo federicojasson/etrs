@@ -15,6 +15,9 @@ class CreateLaboratoryTestController extends SecureController {
 		$app = $this->app;
 		$businessLogicDatabase = $app->businessLogicDatabase;
 		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
 		// Gets the input
 		$input = $app->request->getBody();
 		$name = $input['name'];
@@ -22,9 +25,6 @@ class CreateLaboratoryTestController extends SecureController {
 		
 		// Gets the logged in user's ID
 		$creator = $app->authentication->getLoggedInUser()['id'];
-		
-		// Starts a transaction
-		$businessLogicDatabase->startTransaction();
 		
 		// Generate a random ID
 		do {
@@ -34,13 +34,13 @@ class CreateLaboratoryTestController extends SecureController {
 		// Inserts the laboratory test
 		$businessLogicDatabase->insertLaboratoryTest($id, $creator, $name, $dataTypeDefinition);
 		
-		// Commits the transaction
-		$businessLogicDatabase->commitTransaction();
-		
 		// Sets the output
 		$app->response->setBody([
 			'id' => bin2hex($id)
 		]);
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

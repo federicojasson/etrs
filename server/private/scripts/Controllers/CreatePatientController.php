@@ -15,6 +15,9 @@ class CreatePatientController extends SecureController {
 		$app = $this->app;
 		$businessLogicDatabase = $app->businessLogicDatabase;
 		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
 		// Gets the input
 		$input = $app->request->getBody();
 		$firstNames = $input['firstNames'];
@@ -26,9 +29,6 @@ class CreatePatientController extends SecureController {
 		// Gets the logged in user's ID
 		$creator = $app->authentication->getLoggedInUser()['id'];
 		
-		// Starts a transaction
-		$businessLogicDatabase->startTransaction();
-		
 		// Generate a random ID
 		do {
 			$id = $app->cryptography->generateRandomId();
@@ -37,13 +37,13 @@ class CreatePatientController extends SecureController {
 		// Inserts the patient
 		$businessLogicDatabase->insertPatient($id, $creator, $firstNames, $lastNames, $gender, $birthDate, $educationYears);
 		
-		// Commits the transaction
-		$businessLogicDatabase->commitTransaction();
-		
 		// Sets the output
 		$app->response->setBody([
 			'id' => bin2hex($id)
 		]);
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

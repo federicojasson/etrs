@@ -25,6 +25,7 @@
 }
 
 body {
+	color: #333333;
 	font-family: "Open Sans", sans-serif;
 	min-width: 1024px;
 }
@@ -91,6 +92,10 @@ textarea {
 	white-space: pre-line;
 }
 
+.btn.btn-block.text-left {
+	text-align: left;
+}
+
 .btn.btn-lg.text-uppercase {
 	font-size: 1em;
 	line-height: 1.7;
@@ -137,6 +142,10 @@ textarea {
 	height: 100%;
 	position: fixed;
 	width: 100%;
+}
+
+.glyphicon {
+	color: #333333;
 }
 
 .inbox-image {
@@ -208,7 +217,7 @@ textarea {
 	user-select: none;
 }
 
-.no-results-text {
+.no-items-text {
 	color: #aaaaaa;
 	line-height: 128px;
 	text-align: center;

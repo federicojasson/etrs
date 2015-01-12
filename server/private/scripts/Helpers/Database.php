@@ -29,6 +29,7 @@ abstract class Database extends Helper {
 	
 	/*
 	 * Rolls back the current transaction.
+	 * TODO: not really used
 	 */
 	public function rollBackTransaction() {
 		try {

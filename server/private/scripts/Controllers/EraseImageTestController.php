@@ -12,7 +12,28 @@ class EraseImageTestController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		$businessLogicDatabase = $app->businessLogicDatabase;
+		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$imageTestId = $input['id'];
+		
+		if (! $businessLogicDatabase->nonErasedImageTestExists($imageTestId)) { // TODO: check or implement
+			// The image test doesn't exist or has already been erased
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_IMAGE_TEST
+			]);
+		}
+		
+		// Erases the image test
+		$businessLogicDatabase->eraseImageTest($imageTestId); // TODO: implement
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

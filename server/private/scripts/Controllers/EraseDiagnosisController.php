@@ -12,7 +12,28 @@ class EraseDiagnosisController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		$businessLogicDatabase = $app->businessLogicDatabase;
+		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$diagnosisId = $input['id'];
+		
+		if (! $businessLogicDatabase->nonErasedDiagnosisExists($diagnosisId)) { // TODO: check or implement
+			// The diagnosis doesn't exist or has already been erased
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_DIAGNOSIS
+			]);
+		}
+		
+		// Erases the diagnosis
+		$businessLogicDatabase->eraseDiagnosis($diagnosisId); // TODO: implement
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

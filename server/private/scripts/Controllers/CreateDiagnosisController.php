@@ -15,15 +15,15 @@ class CreateDiagnosisController extends SecureController {
 		$app = $this->app;
 		$businessLogicDatabase = $app->businessLogicDatabase;
 		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
 		// Gets the input
 		$input = $app->request->getBody();
 		$name = $input['name'];
 		
 		// Gets the logged in user's ID
 		$creator = $app->authentication->getLoggedInUser()['id'];
-		
-		// Starts a transaction
-		$businessLogicDatabase->startTransaction();
 		
 		// Generate a random ID
 		do {
@@ -33,13 +33,13 @@ class CreateDiagnosisController extends SecureController {
 		// Inserts the diagnosis
 		$businessLogicDatabase->insertDiagnosis($id, $creator, $name);
 		
-		// Commits the transaction
-		$businessLogicDatabase->commitTransaction();
-		
 		// Sets the output
 		$app->response->setBody([
 			'id' => bin2hex($id)
 		]);
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

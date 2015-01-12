@@ -12,7 +12,28 @@ class EraseMedicationController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		$businessLogicDatabase = $app->businessLogicDatabase;
+		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$medicationId = $input['id'];
+		
+		if (! $businessLogicDatabase->nonErasedMedicationExists($medicationId)) { // TODO: check or implement
+			// The medication doesn't exist or has already been erased
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_MEDICATION
+			]);
+		}
+		
+		// Erases the medication
+		$businessLogicDatabase->eraseMedication($medicationId); // TODO: implement
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

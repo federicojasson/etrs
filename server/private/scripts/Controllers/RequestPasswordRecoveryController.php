@@ -16,6 +16,9 @@ class RequestPasswordRecoveryController extends SecureController {
 		$cryptography = $app->cryptography;
 		$webServerDatabase = $app->webServerDatabase;
 		
+		// Starts a transaction
+		$webServerDatabase->startTransaction();
+		
 		// Gets the input
 		$input = $app->request->getBody();
 		$userId = $input['id'];
@@ -33,9 +36,6 @@ class RequestPasswordRecoveryController extends SecureController {
 			// The email addresses don't match
 			$this->rejectRequest();
 		}
-		
-		// Starts a transaction
-		$webServerDatabase->startTransaction();
 		
 		// Deletes any previous password recovery request of the user
 		$webServerDatabase->deletePasswordRecoveryRequestsByUser($userId);
@@ -55,9 +55,6 @@ class RequestPasswordRecoveryController extends SecureController {
 		
 		// Inserts the password recovery request
 		$webServerDatabase->insertPasswordRecoveryRequest($id, $userId, $passwordHash, $passwordSalt, $passwordIterations);
-		
-		// Commits the transaction
-		$webServerDatabase->commitTransaction();
 		
 		// Gets the email configuration
 		$configuration = $app->configurations->get('email');
@@ -81,6 +78,9 @@ class RequestPasswordRecoveryController extends SecureController {
 		$app->response->setBody([
 			'requestAccepted' => true
 		]);
+		
+		// Commits the transaction
+		$webServerDatabase->commitTransaction();
 	}
 	
 	/*

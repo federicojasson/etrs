@@ -12,7 +12,28 @@ class EraseBackgroundController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		$businessLogicDatabase = $app->businessLogicDatabase;
+		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$backgroundId = $input['id'];
+		
+		if (! $businessLogicDatabase->nonErasedBackgroundExists($backgroundId)) { // TODO: check or implement
+			// The background doesn't exist or has already been erased
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_BACKGROUND
+			]);
+		}
+		
+		// Erases the background
+		$businessLogicDatabase->eraseBackground($backgroundId); // TODO: implement
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

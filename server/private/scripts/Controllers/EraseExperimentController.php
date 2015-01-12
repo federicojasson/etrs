@@ -12,7 +12,30 @@ class EraseExperimentController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		$businessLogicDatabase = $app->businessLogicDatabase;
+		
+		// TODO: erase files
+		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$experimentId = $input['id'];
+		
+		if (! $businessLogicDatabase->nonErasedExperimentExists($experimentId)) { // TODO: check or implement
+			// The experiment doesn't exist or has already been erased
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_EXPERIMENT
+			]);
+		}
+		
+		// Erases the experiment
+		$businessLogicDatabase->eraseExperiment($experimentId); // TODO: implement
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

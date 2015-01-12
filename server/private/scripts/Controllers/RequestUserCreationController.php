@@ -16,6 +16,9 @@ class RequestUserCreationController extends SecureController {
 		$cryptography = $app->cryptography;
 		$webServerDatabase = $app->webServerDatabase;
 		
+		// Starts a transaction
+		$webServerDatabase->startTransaction();
+		
 		// Gets the input
 		$input = $app->request->getBody();
 		$userAllegedPassword = $input['password'];
@@ -29,9 +32,6 @@ class RequestUserCreationController extends SecureController {
 			// The user was not authenticated
 			$this->rejectRequest();
 		}
-		
-		// Starts a transaction
-		$webServerDatabase->startTransaction();
 		
 		// Generate a random ID
 		do {
@@ -48,9 +48,6 @@ class RequestUserCreationController extends SecureController {
 		
 		// Inserts the user creation request
 		$webServerDatabase->insertUserCreationRequest($id, $passwordHash, $passwordSalt, $passwordIterations, $emailAddress, $role);
-		
-		// Commits the transaction
-		$webServerDatabase->commitTransaction();
 		
 		// Gets the email configuration
 		$configuration = $app->configurations->get('email');
@@ -74,6 +71,9 @@ class RequestUserCreationController extends SecureController {
 		$app->response->setBody([
 			'requestAccepted' => true
 		]);
+		
+		// Commits the transaction
+		$webServerDatabase->commitTransaction();
 	}
 	
 	/*

@@ -12,7 +12,28 @@ class EraseClinicalImpressionController extends SecureController {
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: implement
+		$app = $this->app;
+		$businessLogicDatabase = $app->businessLogicDatabase;
+		
+		// Starts a transaction
+		$businessLogicDatabase->startTransaction();
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$clinicalImpressionId = $input['id'];
+		
+		if (! $businessLogicDatabase->nonErasedClinicalImpressionExists($clinicalImpressionId)) { // TODO: check or implement
+			// The clinical impression doesn't exist or has already been erased
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'id' => ERROR_ID_NON_EXISTENT_CLINICAL_IMPRESSION
+			]);
+		}
+		
+		// Erases the clinical impression
+		$businessLogicDatabase->eraseClinicalImpression($clinicalImpressionId); // TODO: implement
+		
+		// Commits the transaction
+		$businessLogicDatabase->commitTransaction();
 	}
 	
 	/*
