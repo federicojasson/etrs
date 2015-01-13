@@ -1,34 +1,34 @@
 <?php
 
-namespace Etrs\Controllers\Experiments;
+namespace Etrs\Controllers\Authentication;
 
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/experiments/get
+ *	URL:	/server/authentication/sign-in
  *	Method:	POST
  */
-class Get extends \Etrs\Controllers\SecureController {
+class SignIn extends \Etrs\Controllers\SecureController {
 	
 	/*
 	 * Executes the controller.
 	 */
 	protected function execute() {
-		// TODO: Controllers/Experiments/Get.php
+		// TODO: Controllers/Authentication/SignIn.php
 	}
 	
 	/*
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: Controllers/Experiments/Get.php
+		// TODO: Controllers/Authentication/SignIn.php
 	}
 	
 	/*
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: Controllers/Experiments/Get.php
+		// TODO: Controllers/Authentication/SignIn.php
 	}
 	
 }
