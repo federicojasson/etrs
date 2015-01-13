@@ -1,6 +1,6 @@
 <?php
 
-namespace Etrs\Controllers;
+namespace App\Controllers;
 
 /*
  * This class encapsulates the logic of a service that performs security checks.
@@ -10,7 +10,7 @@ namespace Etrs\Controllers;
  * one to check if the user is authorized to use the service. This is a measure
  * to help the developer not to forget to do these tasks.
  */
-abstract class SecureController extends \Etrs\Controllers\Controller {
+abstract class SecureController extends \App\Controllers\Controller {
 	
 	/*
 	 * Serves the request.
@@ -35,14 +35,14 @@ abstract class SecureController extends \Etrs\Controllers\Controller {
 			]);
 		}
 		
-		// Executes the controller
-		$this->execute();
+		// Calls the controller
+		$this->call();
 	}
 	
 	/*
-	 * Executes the controller.
+	 * Calls the controller.
 	 */
-	protected abstract function execute();
+	protected abstract function call();
 	
 	/*
 	 * Determines whether the input is valid.

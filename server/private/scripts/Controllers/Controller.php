@@ -1,6 +1,6 @@
 <?php
 
-namespace Etrs\Controllers;
+namespace App\Controllers;
 
 /*
  * This class encapsulates the logic of a service.

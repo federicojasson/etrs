@@ -1,6 +1,6 @@
 <?php
 
-namespace Etrs\Controllers\Authentication;
+namespace App\Controllers\Authentication;
 
 /*
  * This controller is responsible for the following service:
@@ -8,12 +8,12 @@ namespace Etrs\Controllers\Authentication;
  *	URL:	/server/authentication/sign-in
  *	Method:	POST
  */
-class SignIn extends \Etrs\Controllers\SecureController {
+class SignIn extends \App\Controllers\SecureController {
 	
 	/*
-	 * Executes the controller.
+	 * Calls the controller.
 	 */
-	protected function execute() {
+	protected function call() {
 		// TODO: Controllers/Authentication/SignIn.php
 	}
 	

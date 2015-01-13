@@ -1,6 +1,6 @@
 <?php
 
-namespace Etrs\Controllers\Experiments;
+namespace App\Controllers\Experiments;
 
 /*
  * This controller is responsible for the following service:
@@ -8,12 +8,12 @@ namespace Etrs\Controllers\Experiments;
  *	URL:	/server/experiments/erase
  *	Method:	POST
  */
-class Erase extends \Etrs\Controllers\SecureController {
+class Erase extends \App\Controllers\SecureController {
 	
 	/*
-	 * Executes the controller.
+	 * Calls the controller.
 	 */
-	protected function execute() {
+	protected function call() {
 		// TODO: Controllers/Experiments/Erase.php
 	}
 	
