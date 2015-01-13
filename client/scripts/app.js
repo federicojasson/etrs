@@ -2,6 +2,5 @@
 'use strict';
 
 (function() {
-	// Module: app
 	angular.module('app', []);
 })();
