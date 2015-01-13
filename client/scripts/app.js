@@ -36,7 +36,7 @@
 				'imageTests',
 				'laboratoryTests',
 				'medications',
-				'neurocognitiveEvaluations',
+				'neurocognitiveTests',
 				'patients',
 				'studies',
 				'treatments',
@@ -60,7 +60,7 @@
 			}).then(function() {
 				return data.getMedication('5c7bafdf4aaf459f9eda4e6d991e03a4');
 			}).then(function() {
-				return data.getNeurocognitiveEvaluation('9deea86b950e484f809e532d0a0196a4');
+				return data.getNeurocognitiveTest('9deea86b950e484f809e532d0a0196a4');
 			}).then(function() {
 				return data.getPatient('1894068380304e0ca7ebf25d25e72dca');
 			}).then(function() {
@@ -97,7 +97,7 @@
 				data.getMedication('5c7bafdf4aaf459f9eda4e6d991e03a4').then(function(object) {
 					console.log(object);
 				});
-				data.getNeurocognitiveEvaluation('9deea86b950e484f809e532d0a0196a4').then(function(object) {
+				data.getNeurocognitiveTest('9deea86b950e484f809e532d0a0196a4').then(function(object) {
 					console.log(object);
 				});
 				data.getPatient('1894068380304e0ca7ebf25d25e72dca').then(function(object) {

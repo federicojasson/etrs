@@ -1,4 +1,17 @@
-- Eliminar _idx sufijo en INDEX de la base de datos
+Tareas:
+
+- Agregar orderCriterion en búsquedas
+- Agregar metadatos en base de datos
+- Actualizar los helpers de base de datos en función de las tablas finales.
+- Comentar base de datos
+
+
+--------------------------------------------------------------------------------
+
+
+
+
+
 
 - Ingresar datos de debug
 - Verificar consultas SQL manualmente (especialmente aquellas con VARBINARY)

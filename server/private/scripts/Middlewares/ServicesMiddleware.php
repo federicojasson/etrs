@@ -78,12 +78,12 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new CreateMedicationController()
 		);
 		
-		// URL:		/server/create-neurocognitive-evaluation
+		// URL:		/server/create-neurocognitive-test
 		// Method:	POST
 		$services->define(
-			'/create-neurocognitive-evaluation',
+			'/create-neurocognitive-test',
 			HTTP_METHOD_POST,
-			new CreateNeurocognitiveEvaluationController()
+			new CreateNeurocognitiveTestController()
 		);
 		
 		// URL:		/server/create-patient
@@ -158,12 +158,12 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new EraseMedicationController()
 		);
 		
-		// URL:		/server/erase-neurocognitive-evaluation
+		// URL:		/server/erase-neurocognitive-test
 		// Method:	POST
 		$services->define(
-			'/erase-neurocognitive-evaluation',
+			'/erase-neurocognitive-test',
 			HTTP_METHOD_POST,
-			new EraseNeurocognitiveEvaluationController()
+			new EraseNeurocognitiveTestController()
 		);
 		
 		// URL:		/server/erase-treatment
@@ -190,14 +190,6 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new GetBackgroundController()
 		);
 		
-		// URL:		/server/get-backgrounds
-		// Method:	POST
-		$services->define(
-			'/get-backgrounds',
-			HTTP_METHOD_POST,
-			new GetBackgroundsController()
-		);
-		
 		// URL:		/server/get-clinical-impression
 		// Method:	POST
 		$services->define(
@@ -206,28 +198,12 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new GetClinicalImpressionController()
 		);
 		
-		// URL:		/server/get-clinical-impressions
-		// Method:	POST
-		$services->define(
-			'/get-clinical-impressions',
-			HTTP_METHOD_POST,
-			new GetClinicalImpressionsController()
-		);
-		
 		// URL:		/server/get-consultation
 		// Method:	POST
 		$services->define(
 			'/get-consultation',
 			HTTP_METHOD_POST,
 			new GetConsultationController()
-		);
-		
-		// URL:		/server/get-diagnoses
-		// Method:	POST
-		$services->define(
-			'/get-diagnoses',
-			HTTP_METHOD_POST,
-			new GetDiagnosesController()
 		);
 		
 		// URL:		/server/get-diagnosis
@@ -246,14 +222,6 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new GetExperimentController()
 		);
 		
-		// URL:		/server/get-experiments
-		// Method:	POST
-		$services->define(
-			'/get-experiments',
-			HTTP_METHOD_POST,
-			new GetExperimentsController()
-		);
-		
 		// URL:		/server/get-file
 		// Method:	POST
 		$services->define(
@@ -270,14 +238,6 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new GetImageTestController()
 		);
 		
-		// URL:		/server/get-image-tests
-		// Method:	POST
-		$services->define(
-			'/get-image-tests',
-			HTTP_METHOD_POST,
-			new GetImageTestsController()
-		);
-		
 		// URL:		/server/get-laboratory-test
 		// Method:	POST
 		$services->define(
@@ -286,36 +246,12 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new GetLaboratoryTestController()
 		);
 		
-		// URL:		/server/get-laboratory-tests
-		// Method:	POST
-		$services->define(
-			'/get-laboratory-tests',
-			HTTP_METHOD_POST,
-			new GetLaboratoryTestsController()
-		);
-		
 		// URL:		/server/get-medication
 		// Method:	POST
 		$services->define(
 			'/get-medication',
 			HTTP_METHOD_POST,
 			new GetMedicationController()
-		);
-		
-		// URL:		/server/get-medications
-		// Method:	POST
-		$services->define(
-			'/get-medications',
-			HTTP_METHOD_POST,
-			new GetMedicationsController()
-		);
-		
-		// URL:		/server/get-neurocognitive-evaluations
-		// Method:	POST
-		$services->define(
-			'/get-neurocognitive-evaluations',
-			HTTP_METHOD_POST,
-			new GetNeurocognitiveEvaluationsController()
 		);
 		
 		// URL:		/server/get-patient
@@ -340,14 +276,6 @@ class ServicesMiddleware extends \Slim\Middleware {
 			'/get-treatment',
 			HTTP_METHOD_POST,
 			new GetTreatmentController()
-		);
-		
-		// URL:		/server/get-treatments
-		// Method:	POST
-		$services->define(
-			'/get-treatments',
-			HTTP_METHOD_POST,
-			new GetTreatmentsController()
 		);
 		
 		// URL:		/server/get-user
@@ -390,12 +318,84 @@ class ServicesMiddleware extends \Slim\Middleware {
 			new RequestUserCreationController()
 		);
 		
+		// URL:		/server/search-backgrounds
+		// Method:	POST
+		$services->define(
+			'/search-backgrounds',
+			HTTP_METHOD_POST,
+			new SearchBackgroundsController()
+		);
+		
+		// URL:		/server/search-clinical-impressions
+		// Method:	POST
+		$services->define(
+			'/search-clinical-impressions',
+			HTTP_METHOD_POST,
+			new SearchClinicalImpressionsController()
+		);
+		
+		// URL:		/server/search-diagnoses
+		// Method:	POST
+		$services->define(
+			'/search-diagnoses',
+			HTTP_METHOD_POST,
+			new SearchDiagnosesController()
+		);
+		
+		// URL:		/server/search-experiments
+		// Method:	POST
+		$services->define(
+			'/search-experiments',
+			HTTP_METHOD_POST,
+			new SearchExperimentsController()
+		);
+		
+		// URL:		/server/search-image-tests
+		// Method:	POST
+		$services->define(
+			'/search-image-tests',
+			HTTP_METHOD_POST,
+			new SearchImageTestsController()
+		);
+		
+		// URL:		/server/search-laboratory-tests
+		// Method:	POST
+		$services->define(
+			'/search-laboratory-tests',
+			HTTP_METHOD_POST,
+			new SearchLaboratoryTestsController()
+		);
+		
+		// URL:		/server/search-medications
+		// Method:	POST
+		$services->define(
+			'/search-medications',
+			HTTP_METHOD_POST,
+			new SearchMedicationsController()
+		);
+		
+		// URL:		/server/search-neurocognitive-tests
+		// Method:	POST
+		$services->define(
+			'/search-neurocognitive-tests',
+			HTTP_METHOD_POST,
+			new SearchNeurocognitiveTestsController()
+		);
+		
 		// URL:		/server/search-patients
 		// Method:	POST
 		$services->define(
 			'/search-patients',
 			HTTP_METHOD_POST,
 			new SearchPatientsController()
+		);
+		
+		// URL:		/server/search-treatments
+		// Method:	POST
+		$services->define(
+			'/search-treatments',
+			HTTP_METHOD_POST,
+			new SearchTreatmentsController()
 		);
 	}
 	

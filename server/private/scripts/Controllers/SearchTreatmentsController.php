@@ -3,10 +3,10 @@
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/search-patients
+ *	URL:	/server/search-treatments
  *	Method:	POST
  */
-class SearchPatientsController extends SecureController {
+class SearchTreatmentsController extends SecureController {
 	
 	/*
 	 * Executes the controller.
@@ -21,8 +21,8 @@ class SearchPatientsController extends SecureController {
 		$page = $input['page'];
 		
 		if ($query === '*') {
-			// Selects the patients
-			$patients = $businessLogicDatabase->selectNonErasedPatients();
+			// Selects the treatments
+			$treatments = $businessLogicDatabase->selectNonErasedTreatments();
 		} else {
 			// Gets the search expression from the query
 			$searchExpression = getSearchExpressionFromQuery($query);
@@ -31,15 +31,15 @@ class SearchPatientsController extends SecureController {
 			$limit = SEARCH_RESULTS_PER_PAGE;
 			$offset = $limit * ($page - 1);
 
-			// Selects the patients
-			$patients = $businessLogicDatabase->selectNonErasedPatientsByFullTextSearch($searchExpression, $limit, $offset);
+			// Selects the treatments
+			$treatments = $businessLogicDatabase->selectNonErasedTreatmentsByFullTextSearch($searchExpression, $limit, $offset); // TODO: implement
 		}
 		
-		// Filters the patients and gets their IDs
-		$filteredPatientIds = [];
-		$count = count($patients);
+		// Filters the treatments and gets their IDs
+		$filteredTreatmentIds = [];
+		$count = count($treatments);
 		for ($i = 0; $i < $count; $i++) {
-			$filteredPatientIds[$i] = $app->dataFilter->filterPatient($patients[$i])['id'];
+			$filteredTreatmentIds[$i] = $app->dataFilter->filterTreatment($treatments[$i])['id'];
 		}
 		
 		// Selects the found rows
@@ -48,7 +48,7 @@ class SearchPatientsController extends SecureController {
 		// Sets the output
 		$app->response->setBody([
 			'totalResults' => $foundRows,
-			'results' => $filteredPatientIds
+			'results' => $filteredTreatmentIds
 		]);
 	}
 	
@@ -82,10 +82,7 @@ class SearchPatientsController extends SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: check authorized user roles
-			USER_ROLE_ADMINISTRATOR,
-			USER_ROLE_DOCTOR,
-			USER_ROLE_OPERATOR
+			USER_ROLE_ADMINISTRATOR
 		];
 		
 		// Validates the authentication and returns the result

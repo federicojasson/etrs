@@ -237,7 +237,7 @@
 					var imageTests = consultation.imageTests;
 					var laboratoryTests = consultation.laboratoryTests;
 					var medications = consultation.medications;
-					var neurocognitiveEvaluations = consultation.neurocognitiveEvaluations;
+					var neurocognitiveTests = consultation.neurocognitiveTests;
 					var treatments = consultation.treatments;
 					
 					// Initializes undefined fields with default values
@@ -249,7 +249,7 @@
 					imageTests = (angular.isDefined(imageTests))? imageTests : [];
 					laboratoryTests = (angular.isDefined(laboratoryTests))? laboratoryTests : [];
 					medications = (angular.isDefined(medications))? medications : [];
-					neurocognitiveEvaluations = (angular.isDefined(neurocognitiveEvaluations))? neurocognitiveEvaluations : [];
+					neurocognitiveTests = (angular.isDefined(neurocognitiveTests))? neurocognitiveTests : [];
 					treatments = (angular.isDefined(treatments))? treatments : [];
 					
 					// Stores the consultation in the cache
@@ -298,9 +298,9 @@
 						promises.push(service.getMedication(medications[i]));
 					}
 					
-					// Gets the neurocognitive evaluations
-					for (var i = 0; i < neurocognitiveEvaluations.length; i++) {
-						promises.push(service.getNeurocognitiveEvaluation(neurocognitiveEvaluations[i]));
+					// Gets the neurocognitive tests
+					for (var i = 0; i < neurocognitiveTests.length; i++) {
+						promises.push(service.getNeurocognitiveTest(neurocognitiveTests[i]));
 					}
 					
 					// Gets the treatments
@@ -351,9 +351,9 @@
 							medications[i] = values[index++];
 						}
 						
-						// Sets the neurocognitive evaluations
-						for (var i = 0; i < neurocognitiveEvaluations.length; i++) {
-							neurocognitiveEvaluations[i] = values[index++];
+						// Sets the neurocognitive tests
+						for (var i = 0; i < neurocognitiveTests.length; i++) {
+							neurocognitiveTests[i] = values[index++];
 						}
 						
 						// Sets the treatments
@@ -798,35 +798,35 @@
 		}
 		
 		/*
-		 * Loads a neurocognitive evaluation asynchronously and returns a
-		 * promise that gets resolved when the object is completely built. The
-		 * neurocognitive evaluation is stored in the cache for future requests.
+		 * Loads a neurocognitive test asynchronously and returns a promise that
+		 * gets resolved when the object is completely built. The neurocognitive
+		 * test is stored in the cache for future requests.
 		 * 
-		 * Any other data connected with the neurocognitive evaluation is also
-		 * loaded, taking into account the entities indicated when the service
-		 * was prepared.
+		 * Any other data connected with the neurocognitive test is also loaded,
+		 * taking into account the entities indicated when the service was
+		 * prepared.
 		 * 
-		 * It receives the neurocognitive evaluation's ID.
+		 * It receives the neurocognitive test's ID.
 		 */
-		function loadNeurocognitiveEvaluation(neurocognitiveEvaluationId) {
+		function loadNeurocognitiveTest(neurocognitiveTestId) {
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			if (consideredEntities.neurocognitiveEvaluations) {
-				// The neurocognitive evaluations should be loaded
+			if (consideredEntities.neurocognitiveTests) {
+				// The neurocognitive tests should be loaded
 				
-				// Gets the neurocognitive evaluation
-				server.getNeurocognitiveEvaluation({
-					id: neurocognitiveEvaluationId
+				// Gets the neurocognitive test
+				server.getNeurocognitiveTest({
+					id: neurocognitiveTestId
 				}).then(function(output) {
-					var neurocognitiveEvaluation = output;
-					var creator = neurocognitiveEvaluation.creator;
+					var neurocognitiveTest = output;
+					var creator = neurocognitiveTest.creator;
 					
 					// Initializes undefined fields with default values
 					creator = (angular.isDefined(creator))? creator : null;
 					
-					// Stores the neurocognitive evaluation in the cache
-					cache.neurocognitiveEvaluations[neurocognitiveEvaluationId] = neurocognitiveEvaluation;
+					// Stores the neurocognitive test in the cache
+					cache.neurocognitiveTests[neurocognitiveTestId] = neurocognitiveTest;
 					
 					// Initializes an array for the deferred tasks' promises
 					var promises = [];
@@ -841,11 +841,11 @@
 						
 						if (creator !== null) {
 							// Sets the creator
-							neurocognitiveEvaluation.creator = values[index++];
+							neurocognitiveTest.creator = values[index++];
 						}
 						
 						// Resolves the deferred task
-						deferredTask.resolve(neurocognitiveEvaluation);
+						deferredTask.resolve(neurocognitiveTest);
 					}, function(serverResponse) {
 						// Rejects the deferred task
 						deferredTask.reject(serverResponse);
@@ -855,10 +855,10 @@
 					deferredTask.reject(serverResponse);
 				});
 			} else {
-				// The neurocognitive evaluations should not be loaded
+				// The neurocognitive tests should not be loaded
 				
 				// Resolves the deferred task
-				deferredTask.resolve(neurocognitiveEvaluationId);
+				deferredTask.resolve(neurocognitiveTestId);
 			}
 			
 			// Returns the promise of the deferred task
@@ -1248,13 +1248,13 @@
 		};
 		
 		/*
-		 * Gets a neurocognitive evaluation asynchronously and returns a promise
-		 * that gets resolved when the object is ready.
+		 * Gets a neurocognitive test asynchronously and returns a promise that
+		 * gets resolved when the object is ready.
 		 * 
-		 * It receives the neurocognitive evaluation's ID.
+		 * It receives the neurocognitive test's ID.
 		 */
-		service.getNeurocognitiveEvaluation = function(neurocognitiveEvaluationId) {
-			return getEntity(neurocognitiveEvaluationId, cache.neurocognitiveEvaluations, loadNeurocognitiveEvaluation);
+		service.getNeurocognitiveTest = function(neurocognitiveTestId) {
+			return getEntity(neurocognitiveTestId, cache.neurocognitiveTests, loadNeurocognitiveTest);
 		};
 		
 		/*
@@ -1315,7 +1315,7 @@
 				imageTests: [],
 				laboratoryTests: [],
 				medications: [],
-				neurocognitiveEvaluations: [],
+				neurocognitiveTests: [],
 				patients: [],
 				studies: [],
 				treatments: [],
@@ -1333,7 +1333,7 @@
 				imageTests: false,
 				laboratoryTests: false,
 				medications: false,
-				neurocognitiveEvaluations: false,
+				neurocognitiveTests: false,
 				patients: false,
 				studies: false,
 				treatments: false,

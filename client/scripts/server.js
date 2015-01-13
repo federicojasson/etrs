@@ -184,12 +184,12 @@
 		/*
 		 * Requests the following service:
 		 * 
-		 *	URL:	/server/create-neurocognitive-evaluation
+		 *	URL:	/server/create-neurocognitive-test
 		 *	Method:	POST
 		 */
-		service.createNeurocognitiveEvaluation = function(input) {
+		service.createNeurocognitiveTest = function(input) {
 			return sendHttpRequest({
-				url: 'server/create-neurocognitive-evaluation',
+				url: 'server/create-neurocognitive-test',
 				method: 'POST',
 				input: input,
 				outputIsArray: false
@@ -334,12 +334,12 @@
 		/*
 		 * Requests the following service:
 		 * 
-		 *	URL:	/server/erase-neurocognitive-evaluation
+		 *	URL:	/server/erase-neurocognitive-test
 		 *	Method:	POST
 		 */
-		service.eraseNeurocognitiveEvaluation = function(input) {
+		service.eraseNeurocognitiveTest = function(input) {
 			return sendHttpRequest({
-				url: 'server/erase-neurocognitive-evaluation',
+				url: 'server/erase-neurocognitive-test',
 				method: 'POST',
 				input: input,
 				outputIsArray: false
@@ -393,20 +393,6 @@
 		/*
 		 * Requests the following service:
 		 * 
-		 *	URL:	/server/get-backgrounds
-		 *	Method:	POST
-		 */
-		service.getBackgrounds = function() {
-			return sendHttpRequest({
-				url: 'server/get-backgrounds',
-				method: 'POST',
-				outputIsArray: true
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
 		 *	URL:	/server/get-clinical-impression
 		 *	Method:	POST
 		 */
@@ -422,20 +408,6 @@
 		/*
 		 * Requests the following service:
 		 * 
-		 *	URL:	/server/get-clinical-impressions
-		 *	Method:	POST
-		 */
-		service.getClinicalImpressions = function() {
-			return sendHttpRequest({
-				url: 'server/get-clinical-impressions',
-				method: 'POST',
-				outputIsArray: true
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
 		 *	URL:	/server/get-consultation
 		 *	Method:	POST
 		 */
@@ -445,20 +417,6 @@
 				method: 'POST',
 				input: input,
 				outputIsArray: false
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
-		 *	URL:	/server/get-diagnoses
-		 *	Method:	POST
-		 */
-		service.getDiagnoses = function() {
-			return sendHttpRequest({
-				url: 'server/get-diagnoses',
-				method: 'POST',
-				outputIsArray: true
 			});
 		};
 		
@@ -495,20 +453,6 @@
 		/*
 		 * Requests the following service:
 		 * 
-		 *	URL:	/server/get-experiments
-		 *	Method:	POST
-		 */
-		service.getExperiments = function() {
-			return sendHttpRequest({
-				url: 'server/get-experiments',
-				method: 'POST',
-				outputIsArray: true
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
 		 *	URL:	/server/get-file
 		 *	Method:	POST
 		 */
@@ -539,20 +483,6 @@
 		/*
 		 * Requests the following service:
 		 * 
-		 *	URL:	/server/get-image-tests
-		 *	Method:	POST
-		 */
-		service.getImageTests = function() {
-			return sendHttpRequest({
-				url: 'server/get-image-tests',
-				method: 'POST',
-				outputIsArray: true
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
 		 *	URL:	/server/get-laboratory-test
 		 *	Method:	POST
 		 */
@@ -562,20 +492,6 @@
 				method: 'POST',
 				input: input,
 				outputIsArray: false
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
-		 *	URL:	/server/get-laboratory-tests
-		 *	Method:	POST
-		 */
-		service.getLaboratoryTests = function() {
-			return sendHttpRequest({
-				url: 'server/get-laboratory-tests',
-				method: 'POST',
-				outputIsArray: true
 			});
 		};
 		
@@ -597,43 +513,15 @@
 		/*
 		 * Requests the following service:
 		 * 
-		 *	URL:	/server/get-medications
+		 *	URL:	/server/get-neurocognitive-test
 		 *	Method:	POST
 		 */
-		service.getMedications = function() {
+		service.getNeurocognitiveTest = function(input) {
 			return sendHttpRequest({
-				url: 'server/get-medications',
-				method: 'POST',
-				outputIsArray: true
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
-		 *	URL:	/server/get-neurocognitive-evaluation
-		 *	Method:	POST
-		 */
-		service.getNeurocognitiveEvaluation = function(input) {
-			return sendHttpRequest({
-				url: 'server/get-neurocognitive-evaluation',
+				url: 'server/get-neurocognitive-test',
 				method: 'POST',
 				input: input,
 				outputIsArray: false
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
-		 *	URL:	/server/get-neurocognitive-evaluations
-		 *	Method:	POST
-		 */
-		service.getNeurocognitiveEvaluations = function() {
-			return sendHttpRequest({
-				url: 'server/get-neurocognitive-evaluations',
-				method: 'POST',
-				outputIsArray: true
 			});
 		};
 		
@@ -679,20 +567,6 @@
 				method: 'POST',
 				input: input,
 				outputIsArray: false
-			});
-		};
-		
-		/*
-		 * Requests the following service:
-		 * 
-		 *	URL:	/server/get-treatments
-		 *	Method:	POST
-		 */
-		service.getTreatments = function() {
-			return sendHttpRequest({
-				url: 'server/get-treatments',
-				method: 'POST',
-				outputIsArray: true
 			});
 		};
 		
@@ -773,12 +647,147 @@
 		/*
 		 * Requests the following service:
 		 * 
+		 *	URL:	/server/search-backgrounds
+		 *	Method:	POST
+		 */
+		service.searchBackgrounds = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-backgrounds',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-clinical-impressions
+		 *	Method:	POST
+		 */
+		service.searchClinicalImpressions = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-clinical-impressions',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-diagnoses
+		 *	Method:	POST
+		 */
+		service.searchDiagnoses = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-diagnoses',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-experiments
+		 *	Method:	POST
+		 */
+		service.searchExperiments = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-experiments',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-image-tests
+		 *	Method:	POST
+		 */
+		service.searchImageTests = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-image-tests',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-laboratory-tests
+		 *	Method:	POST
+		 */
+		service.searchLaboratoryTests = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-laboratory-tests',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-medications
+		 *	Method:	POST
+		 */
+		service.searchMedications = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-medications',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-neurocognitive-tests
+		 *	Method:	POST
+		 */
+		service.searchNeurocognitiveTests = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-neurocognitive-tests',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
 		 *	URL:	/server/search-patients
 		 *	Method:	POST
 		 */
 		service.searchPatients = function(input) {
 			return sendHttpRequest({
 				url: 'server/search-patients',
+				method: 'POST',
+				input: input,
+				outputIsArray: false
+			});
+		};
+		
+		/*
+		 * Requests the following service:
+		 * 
+		 *	URL:	/server/search-treatments
+		 *	Method:	POST
+		 */
+		service.searchTreatments = function(input) {
+			return sendHttpRequest({
+				url: 'server/search-treatments',
 				method: 'POST',
 				input: input,
 				outputIsArray: false

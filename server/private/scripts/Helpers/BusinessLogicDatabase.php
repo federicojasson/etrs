@@ -390,14 +390,14 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Inserts a neurocognitive evaluation.
+	 * Inserts a neurocognitive test.
 	 * 
 	 * It receives the values to insert.
 	 */
-	public function insertNeurocognitiveEvaluation($id, $creator, $name, $dataTypeDefinition) {
+	public function insertNeurocognitiveTest($id, $creator, $name, $dataTypeDefinition) {
 		// Defines the statement
 		$statement = '
-			INSERT INTO neurocognitive_evaluations (
+			INSERT INTO neurocognitive_tests (
 				id,
 				is_erased,
 				creator,
@@ -562,22 +562,22 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Determines whether a neurocognitive evaluation exists.
+	 * Determines whether a neurocognitive test exists.
 	 * 
-	 * It receives the neurocognitive evaluation's ID.
+	 * It receives the neurocognitive test's ID.
 	 */
-	public function neurocognitiveEvaluationExists($neurocognitiveEvaluationId) {
+	public function neurocognitiveTestExists($neurocognitiveTestId) {
 		// Defines the statement
 		$statement = '
 			SELECT 0
-			FROM neurocognitive_evaluations
-			WHERE id = :neurocognitiveEvaluationId
+			FROM neurocognitive_tests
+			WHERE id = :neurocognitiveTestId
 			LIMIT 1
 		';
 		
 		// Sets the parameters
 		$parameters = [
-			':neurocognitiveEvaluationId' => $neurocognitiveEvaluationId
+			':neurocognitiveTestId' => $neurocognitiveTestId
 		];
 		
 		// Executes the statement
@@ -900,18 +900,18 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns a consultation's neurocognitive evaluations that have
-	 * not been erased.
+	 * Selects and returns a consultation's neurocognitive tests that have not
+	 * been erased.
 	 * 
 	 * It receives the consultation's ID.
 	 */
-	public function selectConsultationNonErasedNeurocognitiveEvaluations($consultationId) {
+	public function selectConsultationNonErasedNeurocognitiveTests($consultationId) {
 		// Defines the statement
 		$statement = '
 			SELECT
-				neurocognitive_evaluation AS neurocognitiveEvaluation,
+				neurocognitive_test AS neurocognitiveTest,
 				value AS value
-			FROM consultations_non_erased_neurocognitive_evaluations
+			FROM consultations_non_erased_neurocognitive_tests
 			WHERE consultation = :consultationId
 		';
 		
@@ -1008,7 +1008,7 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the backgrounds.
+	 * Selects and returns the backgrounds that have not been erased.
 	 */
 	public function selectNonErasedBackgrounds() {
 		// Defines the statement
@@ -1061,7 +1061,7 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the clinical impressions.
+	 * Selects and returns the clinical impressions that have not been erased.
 	 */
 	public function selectNonErasedClinicalImpressions() {
 		// Defines the statement
@@ -1120,7 +1120,7 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the diagnoses.
+	 * Selects and returns the diagnoses that have not been erased.
 	 */
 	public function selectNonErasedDiagnoses() {
 		// Defines the statement
@@ -1206,7 +1206,7 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the experiments.
+	 * Selects and returns the experiments that have not been erased.
 	 */
 	public function selectNonErasedExperiments() {
 		// Defines the statement
@@ -1294,7 +1294,7 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the image tests.
+	 * Selects and returns the image tests that have not been erased.
 	 */
 	public function selectNonErasedImageTests() {
 		// Defines the statement
@@ -1349,7 +1349,7 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the laboratory tests.
+	 * Selects and returns the laboratory tests that have not been erased.
 	 */
 	public function selectNonErasedLaboratoryTests() {
 		// Defines the statement
@@ -1403,7 +1403,7 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the medications.
+	 * Selects and returns the medications that have not been erased.
 	 */
 	public function selectNonErasedMedications() {
 		// Defines the statement
@@ -1424,12 +1424,12 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns a neurocognitive evaluation. If it doesn't exist or
-	 * has been erased, null is returned.
+	 * Selects and returns a neurocognitive test. If it doesn't exist or has
+	 * been erased, null is returned.
 	 * 
-	 * It receives the neurocognitive evaluation's ID.
+	 * It receives the neurocognitive test's ID.
 	 */
-	public function selectNonErasedNeurocognitiveEvaluation($neurocognitiveEvaluationId) {
+	public function selectNonErasedNeurocognitiveTest($neurocognitiveTestId) {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -1439,14 +1439,14 @@ class BusinessLogicDatabase extends Database {
 				creation_datetime AS creationDatetime,
 				name AS name,
 				data_type_definition AS dataTypeDefinition
-			FROM non_erased_neurocognitive_evaluations
-			WHERE id = :neurocognitiveEvaluationId
+			FROM non_erased_neurocognitive_tests
+			WHERE id = :neurocognitiveTestId
 			LIMIT 1
 		';
 		
 		// Sets the parameters
 		$parameters = [
-			':neurocognitiveEvaluationId' => $neurocognitiveEvaluationId
+			':neurocognitiveTestId' => $neurocognitiveTestId
 		];
 		
 		// Executes the statement
@@ -1457,9 +1457,9 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the neurocognitive evaluations.
+	 * Selects and returns the neurocognitive tests that have not been erased.
 	 */
-	public function selectNonErasedNeurocognitiveEvaluations() {
+	public function selectNonErasedNeurocognitiveTests() {
 		// Defines the statement
 		$statement = '
 			SELECT
@@ -1469,7 +1469,7 @@ class BusinessLogicDatabase extends Database {
 				creation_datetime AS creationDatetime,
 				name AS name,
 				data_type_definition AS dataTypeDefinition
-			FROM non_erased_neurocognitive_evaluations
+			FROM non_erased_neurocognitive_tests
 		';
 		
 		// Executes the statement
@@ -1515,9 +1515,12 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Selects and returns non-erased patients obtained by performing a
+	 * full-text search.
+	 * 
+	 * It receives TODO: comments
 	 */
-	public function selectNonErasedPatientsByFullTextSearch($expression, $limit, $offset) {
+	public function selectNonErasedPatientsByFullTextSearch($searchExpression, $limit, $offset) {
 		// Defines the statement
 		$statement = '
 			SELECT SQL_CALC_FOUND_ROWS
@@ -1533,14 +1536,14 @@ class BusinessLogicDatabase extends Database {
 			FROM non_erased_patients
 			WHERE
 				MATCH(first_names, last_names)
-				AGAINST(:expression IN BOOLEAN MODE)
+				AGAINST(:searchExpression IN BOOLEAN MODE)
 			LIMIT :limit
 			OFFSET :offset
 		';
 		
 		// Sets the parameters
 		$parameters = [
-			':expression' => $expression,
+			':searchExpression' => $searchExpression,
 			':limit' => $limit,
 			':offset' => $offset
 		];
@@ -1619,7 +1622,7 @@ class BusinessLogicDatabase extends Database {
 	}
 	
 	/*
-	 * Selects and returns the treatments.
+	 * Selects and returns the treatments that have not been erased.
 	 */
 	public function selectNonErasedTreatments() {
 		// Defines the statement

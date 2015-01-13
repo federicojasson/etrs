@@ -1,2 +1,0 @@
-# Denies all external access to the files in this directory
-deny from all

@@ -222,26 +222,26 @@ class DataFilter extends Helper {
 	}
 	
 	/*
-	 * Filters a neurocognitive evaluation object and returns the result.
+	 * Filters a neurocognitive test object and returns the result.
 	 * 
 	 * The function filters out the fields that the requesting user is not
 	 * authorized to retrieve and applies the necessary conversions on those
 	 * remaining.
 	 * 
-	 * It receives the neurocognitive evaluation.
+	 * It receives the neurocognitive test.
 	 */
-	public function filterNeurocognitiveEvaluation($neurocognitiveEvaluation) {
-		$filteredNeurocognitiveEvaluation = $neurocognitiveEvaluation;
+	public function filterNeurocognitiveTest($neurocognitiveTest) {
+		$filteredNeurocognitiveTest = $neurocognitiveTest;
 		
 		// Filters the fields
-		$filteredNeurocognitiveEvaluation = $this->filterFields($filteredNeurocognitiveEvaluation, $this->authorizedFields['neurocognitiveEvaluations']);
+		$filteredNeurocognitiveTest = $this->filterFields($filteredNeurocognitiveTest, $this->authorizedFields['neurocognitiveTests']);
 		
 		// Converts the binary fields to hexadecimal
-		$filteredNeurocognitiveEvaluation = $this->applyFunction('bin2hex', $filteredNeurocognitiveEvaluation, [
+		$filteredNeurocognitiveTest = $this->applyFunction('bin2hex', $filteredNeurocognitiveTest, [
 			'id'
 		]);
 		
-		return $filteredNeurocognitiveEvaluation;
+		return $filteredNeurocognitiveTest;
 	}
 	
 	/*
@@ -509,7 +509,7 @@ class DataFilter extends Helper {
 				'name'
 			],
 			
-			'neurocognitiveEvaluations' => [
+			'neurocognitiveTests' => [
 				// TODO: define fields
 				'id',
 				'isErased',
@@ -604,7 +604,7 @@ class DataFilter extends Helper {
 				// TODO: define fields
 			],
 			
-			'neurocognitiveEvaluations' => [
+			'neurocognitiveTests' => [
 				// TODO: define fields
 			],
 			
@@ -667,7 +667,7 @@ class DataFilter extends Helper {
 				// TODO: define fields
 			],
 			
-			'neurocognitiveEvaluations' => [
+			'neurocognitiveTests' => [
 				// TODO: define fields
 			],
 			

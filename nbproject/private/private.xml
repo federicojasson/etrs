@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/manage-backgrounds-view.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/styles/style.css</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/views/search-patients-view.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/templates/layouts/error-layout.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/views/manage-backgrounds-view.js</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

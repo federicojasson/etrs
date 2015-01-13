@@ -172,12 +172,12 @@
 			},
 			
 			{
-				name: 'createNeurocognitiveEvaluation',
+				name: 'createNeurocognitiveTest',
 				definition: {
-					url: '/create-neurocognitive-evaluation',
+					url: '/create-neurocognitive-test',
 					controllers: {
 						__: 'LogInViewController',
-						ad: 'CreateNeurocognitiveEvaluationViewController'
+						ad: 'CreateNeurocognitiveTestViewController'
 					}
 				}
 			},
@@ -319,12 +319,12 @@
 			},
 			
 			{
-				name: 'manageNeurocognitiveEvaluations',
+				name: 'manageNeurocognitiveTests',
 				definition: {
-					url: '/manage-neurocognitive-evaluations',
+					url: '/manage-neurocognitive-tests',
 					controllers: {
 						__: 'LogInViewController',
-						ad: 'ManageNeurocognitiveEvaluationsViewController'
+						ad: 'ManageNeurocognitiveTestsViewController'
 					}
 				}
 			},

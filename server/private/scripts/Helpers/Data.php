@@ -96,13 +96,13 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * Returns a neurocognitive evaluation, or null if it doesn't exists or has
-	 * been erased.
+	 * Returns a neurocognitive test, or null if it doesn't exists or has been
+	 * erased.
 	 * 
-	 * It receives the neurocognitive evaluation's ID.
+	 * It receives the neurocognitive test's ID.
 	 */
-	public function getNeurocognitiveEvaluation($neurocognitiveEvaluationId) {
-		return $this->getEntity($neurocognitiveEvaluationId, $this->cache['neurocognitiveEvaluations'], [ $this, 'loadNeurocognitiveEvaluation' ]);
+	public function getNeurocognitiveTest($neurocognitiveTestId) {
+		return $this->getEntity($neurocognitiveTestId, $this->cache['neurocognitiveTests'], [ $this, 'loadNeurocognitiveTest' ]);
 	}
 	
 	/*
@@ -156,7 +156,7 @@ class Data extends Helper {
 			'imageTests' => [],
 			'laboratoryTests' => [],
 			'medications' => [],
-			'neurocognitiveEvaluations' => [],
+			'neurocognitiveTests' => [],
 			'patients' => [],
 			'studies' => [],
 			'treatments' => [],
@@ -285,8 +285,8 @@ class Data extends Helper {
 		// Loads the medications
 		$consultation['medications'] = $businessLogicDatabase->selectConsultationNonErasedMedications($consultationId);
 		
-		// Loads the neurocognitive evaluations
-		$consultation['neurocognitiveEvaluations'] = $businessLogicDatabase->selectConsultationNonErasedNeurocognitiveEvaluations($consultationId);
+		// Loads the neurocognitive tests
+		$consultation['neurocognitiveTests'] = $businessLogicDatabase->selectConsultationNonErasedNeurocognitiveTests($consultationId);
 		
 		// Loads the treatments
 		$consultation['treatments'] = $businessLogicDatabase->selectConsultationNonErasedTreatments($consultationId);
@@ -448,28 +448,28 @@ class Data extends Helper {
 	}
 	
 	/*
-	 * Loads a neurocognitive evaluation and returns it. If it doesn't exist or
-	 * has been erased, null is returned.
+	 * Loads a neurocognitive test and returns it. If it doesn't exist or has
+	 * been erased, null is returned.
 	 * 
-	 * It receives the neurocognitive evaluation's ID.
+	 * It receives the neurocognitive test's ID.
 	 */
-	private function loadNeurocognitiveEvaluation($neurocognitiveEvaluationId) {
+	private function loadNeurocognitiveTest($neurocognitiveTestId) {
 		$businessLogicDatabase = $this->app->businessLogicDatabase;
 		
-		// Selects the neurocognitive evaluation
-		$neurocognitiveEvaluation = $businessLogicDatabase->selectNonErasedNeurocognitiveEvaluation($neurocognitiveEvaluationId);
+		// Selects the neurocognitive test
+		$neurocognitiveTest = $businessLogicDatabase->selectNonErasedNeurocognitiveTest($neurocognitiveTestId);
 		
-		if (is_null($neurocognitiveEvaluation)) {
-			// The neurocognitive evaluation doesn't exist or has been erased
+		if (is_null($neurocognitiveTest)) {
+			// The neurocognitive test doesn't exist or has been erased
 			return null;
 		}
 		
-		if (! $businessLogicDatabase->nonErasedUserExists($neurocognitiveEvaluation['creator'])) {
+		if (! $businessLogicDatabase->nonErasedUserExists($neurocognitiveTest['creator'])) {
 			// The creator doesn't exist or has been erased
-			$neurocognitiveEvaluation['creator'] = null;
+			$neurocognitiveTest['creator'] = null;
 		}
 		
-		return $neurocognitiveEvaluation;
+		return $neurocognitiveTest;
 	}
 	
 	/*

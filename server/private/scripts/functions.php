@@ -18,6 +18,38 @@ function getFirstElementOrNull($array) {
 	// Returns the first element
 	return $array[0];
 }
+	
+/*
+ * TODO: comments
+ */
+function getSearchExpressionFromQuery($query) {
+	// Sanitizes the query
+	$query = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $query);
+	$query = preg_replace('/[^ 0-9A-Za-z]/', '', $query);
+	$query = preg_replace('/[ ]+/', ' ', $query);
+	$query = trim($query);
+
+	if (getStringLength($query) === 0) {
+		// The sanitized query is empty
+		return '';
+	}
+
+	// Gets the words of the query
+	$queryWords = explode(' ', $query);
+
+	// Computes the words of the search expression
+	$searchExpressionWords = [];
+	$count = count($queryWords);
+	for ($i = 0; $i < $count; $i++) {
+		// Adds a wildcard to the end of the query's word
+		$searchExpressionWords[$i] = $queryWords[$i] . '*';
+	}
+
+	// Builds the search expression concatenating its words
+	$searchExpression = implode(' ', $searchExpressionWords);
+
+	return $searchExpression;
+}
 
 /*
  * TODO: comments

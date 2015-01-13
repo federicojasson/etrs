@@ -208,7 +208,7 @@ INSERT INTO image_tests (
 	'type:boolean;Sí:true;No:false'
 );
 
-INSERT INTO neurocognitive_evaluations (
+INSERT INTO neurocognitive_tests (
 	id,
 	is_erased,
 	creator,
@@ -266,9 +266,9 @@ INSERT INTO consultations (
 	''
 );
 
-INSERT INTO consultations_neurocognitive_evaluations (
+INSERT INTO consultations_neurocognitive_tests (
 	consultation,
-	neurocognitive_evaluation,
+	neurocognitive_test,
 	value
 ) VALUES (
 	UNHEX('283db1dad6004f059e527bd9626a1f28'),
