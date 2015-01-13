@@ -5,6 +5,9 @@
 	angular.module('app', [
 		'app.authentication',
 		'app.experiments',
-		'app.users'
+		'app.routing',
+		'app.title',
+		'app.users',
+		'app.utilities'
 	]);
 })();

@@ -2,7 +2,7 @@
 'use strict';
 
 (function() {
-	angular.module('app.authentication', [
+	angular.module('app.title', [
 		'app'
 	]);
 })();

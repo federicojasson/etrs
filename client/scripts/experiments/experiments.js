@@ -2,5 +2,7 @@
 'use strict';
 
 (function() {
-	angular.module('app.experiments', []);
+	angular.module('app.experiments', [
+		'app'
+	]);
 })();
