@@ -3,8 +3,11 @@
 
 (function() {
 	angular.module('app', [
+		'ngResource',
 		'app.authentication',
+		'app.communications',
 		'app.experiments',
+		'app.patients',
 		'app.routing',
 		'app.title',
 		'app.users',

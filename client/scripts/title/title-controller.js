@@ -2,14 +2,22 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').controller('TitleController', TitleController);
+	angular.module('app.title').controller('TitleController', [
+		'title',
+		TitleController
+	]);
 	
 	/*
-	 * TODO: comments
+	 * Offers functions to access the page's title.
 	 */
-	function TitleController() {
+	function TitleController(title) {
 		var controller = this;
 		
-		// TODO: TitleController()
+		/*
+		 * Returns the title of the page.
+		 */
+		controller.get = function() {
+			return title.get();
+		};
 	}
 })();

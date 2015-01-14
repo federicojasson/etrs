@@ -10,6 +10,13 @@
 	function authenticationService() {
 		var service = this;
 		
+		/*
+		 * TODO: comments
+		 */
+		service.refreshState = function() {
+			// TODO: refreshState()
+		};
+		
 		// TODO: authenticationService()
 	}
 })();

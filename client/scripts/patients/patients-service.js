@@ -2,21 +2,21 @@
 'use strict';
 
 (function() {
-	angular.module('app.users').service('users', usersService);
+	angular.module('app.patients').service('patients', patientsService);
 	
 	/*
 	 * TODO: comments
 	 */
-	function usersService() {
+	function patientsService() {
 		var service = this;
 		
 		/*
 		 * TODO: comments
 		 */
 		service.get = function() {
-			// TODO: usersService.get
+			// TODO: patientsService.get
 		};
 		
-		// TODO: usersService()
+		// TODO: patientsService()
 	}
 })();

@@ -9,7 +9,7 @@
 		<link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="styles/style.css" rel="stylesheet">
 		
-		<title>TODO: title</title>
+		<title ng-bind="title.get()" ng-controller="TitleController as title"></title>
 	</head>
 	
 	<body>
@@ -26,11 +26,18 @@
 		
 		<script src="scripts/app.js"></script>
 		<script src="scripts/authentication/authentication.js"></script>
+		<script src="scripts/authentication/authentication-run.js"></script>
 		<script src="scripts/authentication/authentication-service.js"></script>
+		<script src="scripts/communications/communications.js"></script>
+		<script src="scripts/communications/server-service.js"></script>
 		<script src="scripts/experiments/experiments.js"></script>
 		<script src="scripts/experiments/experiments-service.js"></script>
+		<script src="scripts/patients/patients.js"></script>
+		<script src="scripts/patients/patients-service.js"></script>
 		<script src="scripts/routing/routing.js"></script>
-		<script src="scripts/routing/router-service.js"></script>
+		<script src="scripts/routing/routing-config.js"></script>
+		<script src="scripts/routing/routing-run.js"></script>
+		<script src="scripts/routing/routing-service.js"></script>
 		<script src="scripts/title/title.js"></script>
 		<script src="scripts/title/title-controller.js"></script>
 		<script src="scripts/title/title-service.js"></script>

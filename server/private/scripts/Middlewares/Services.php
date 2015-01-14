@@ -88,6 +88,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Experiments\Search()
 		);
 		
+		// URL:		/server/patients/get
+		// Method:	POST
+		$services->define(
+			'/patients/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Get()
+		);
+		
 		// URL:		/server/users/get
 		// Method:	POST
 		$services->define(

@@ -4,6 +4,11 @@
  * This script defines the constants of the application.
  */
 
+define('CRLF', "\r\n");
+define('EMAIL_BUILDER_PARAMETER_FROM', 'from');
+define('EMAIL_BUILDER_PARAMETER_MESSAGE', 'message');
+define('EMAIL_BUILDER_PARAMETER_SUBJECT', 'subject');
+define('EMAIL_BUILDER_PARAMETER_TO', 'to');
 define('ERROR_INVALID_INPUT', 'INVALID_INPUT');
 define('ERROR_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
 define('HTTP_HEADER_CONTENT_TYPE', 'Content-Type');

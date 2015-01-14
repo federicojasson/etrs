@@ -19,6 +19,27 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Initializes the Authentication helper.
+	 */
+	public function initializeAuthenticationHelper() {
+		return new \App\Helpers\Authentication();
+	}
+	
+	/*
+	 * Initializes the Cryptography helper.
+	 */
+	public function initializeCryptographyHelper() {
+		return new \App\Helpers\Cryptography();
+	}
+	
+	/*
+	 * Initializes the EmailBuilder helper.
+	 */
+	public function initializeEmailBuilderHelper() {
+		return new \App\Helpers\EmailBuilder();
+	}
+	
+	/*
 	 * Initializes the Services helper.
 	 */
 	public function initializeServicesHelper() {
@@ -31,6 +52,9 @@ class Helpers extends \Slim\Middleware {
 	private function defineHelpers() {
 		$container = $this->app->container;
 		
+		$container->singleton('authentication', [ $this, 'initializeAuthenticationHelper' ]);
+		$container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
+		$container->singleton('emailBuilder', [ $this, 'initializeEmailBuilderHelper' ]);
 		$container->singleton('services', [ $this, 'initializeServicesHelper' ]);
 	}
 	
