@@ -25,10 +25,29 @@ class Cryptography extends \App\Helpers\Helper {
 	 * Generates and returns a salt.
 	 */
 	public function generateSalt() {
-		return $this->generateRandomBytesSequence(SALT_LENGTH);
+		return $this->generateRandomBytesSequence(PASSWORD_SALT_LENGTH);
 	}
 	
-	// TODO: Helpers/Cryptography.php
+	/*
+	 * Computes and returns the hash of a file.
+	 * 
+	 * It receives the file's path.
+	 */
+	public function hashFile($filePath) {
+		// Applies MD5
+		return md5_file($filePath, true);
+	}
+	
+	/*
+	 * Computes and returns the hash of a password.
+	 * 
+	 * It receives the password, the salt and the iterations used in the key
+	 * derivation.
+	 */
+	public function hashPassword($password, $salt, $iterations) {
+		// Applies SHA-512 and the PBKDF2 key derivation function
+		return hash_pbkdf2('sha512', $password, $salt, $iterations, 0, true);
+	}
 	
 	/*
 	 * Generates and returns a sequence of random bytes.

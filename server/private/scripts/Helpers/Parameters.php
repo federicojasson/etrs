@@ -18,17 +18,17 @@ class Parameters extends \App\Helpers\Helper {
 	private $parameters;
 	
 	/*
-	 * Returns a parameter.
+	 * Returns a set of parameters.
 	 * 
-	 * It receives the parameter's ID.
+	 * It receives the set's ID.
 	 */
 	public function get($id) {
 		if (! isset($this->parameters[$id])) {
-			// The parameter has not been loaded yet
+			// The parameters have not been loaded yet
 			$this->load($id);
 		}
 		
-		// Returns the parameter
+		// Returns the parameters
 		return $this->parameters[$id];
 	}
 	
@@ -48,12 +48,12 @@ class Parameters extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Loads a parameter.
+	 * Loads a set of parameters.
 	 * 
-	 * It receives the parameter's ID.
+	 * It receives the set's ID.
 	 */
 	private function load($id) {
-		// Gets the path of the parameter's file
+		// Gets the path of the parameters' file
 		$filePath = $this->filePaths[$id];
 		
 		// Reads the file's content and stores the result
