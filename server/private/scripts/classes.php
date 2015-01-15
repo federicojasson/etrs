@@ -4,6 +4,8 @@
  * This script includes the classes of the application.
  */
 
+require 'private/scripts/Auxiliars/SessionStorageHandler.php';
+require 'private/scripts/Auxiliars/DatabaseSessionStorageHandler.php';
 require 'private/scripts/Auxiliars/Email.php';
 require 'private/scripts/Auxiliars/JsonStructureDescriptor.php';
 require 'private/scripts/Controllers/Controller.php';
