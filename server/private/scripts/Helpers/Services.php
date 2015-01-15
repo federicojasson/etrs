@@ -17,8 +17,10 @@ class Services extends \App\Helpers\Helper {
 	 * responsible for handling the requests.
 	 */
 	public function define($url, $method, $controller) {
+		$app = $this->app;
+		
 		// Defines the routing rule for the service
-		$this->app->map($url, function() use ($controller) {
+		$app->map($url, function() use ($controller) {
 			// Serves the request using the controller
 			$controller->serveRequest();
 		})->via($method);

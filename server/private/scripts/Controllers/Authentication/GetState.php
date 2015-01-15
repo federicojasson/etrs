@@ -21,14 +21,16 @@ class GetState extends \App\Controllers\SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: Controllers/Authentication/GetState.php
+		// The service has no input
+		return true;
 	}
 	
 	/*
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: Controllers/Authentication/GetState.php
+		// The service is available for all users
+		return true;
 	}
 	
 }

@@ -3,21 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/utilities/utilities.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/utilities/utilities-service.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/authentication/authentication-service.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/experiments/experiments.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/index.html</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/title/title.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/routing/router-service.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/routing/routing.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/authentication/authentication.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/title/title-service.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/users/users.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/app.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/experiments/experiments-service.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/title/title-controller.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/scripts/users/users-service.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helpers/InputValidator.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Auxiliars/JsonStructureDescriptor.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/classes.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Controllers/Authentication/SignIn.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Middlewares/Helpers.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helpers/AuthorizationValidator.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Controllers/Experiments/Edit.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Controllers/Experiments/Erase.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/functions.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helpers/Database.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Auxiliars/Email.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Controllers/Authentication/GetState.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helpers/EmailBuilder.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Controllers/Authentication/SignOut.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helpers/Cryptography.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helpers/Parameters.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Extensions/Response.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Controllers/Experiments/Create.php</file>
         </group>
     </open-files>
 </project-private>

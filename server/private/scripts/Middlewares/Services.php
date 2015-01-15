@@ -22,11 +22,11 @@ class Services extends \Slim\Middleware {
 	 * Defines the services.
 	 */
 	private function defineServices() {
-		$services = $this->app->services;
+		$app = $this->app;
 		
 		// URL:		/server/authentication/get-state
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/authentication/get-state',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Authentication\GetState()
@@ -34,7 +34,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/authentication/sign-in
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/authentication/sign-in',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Authentication\SignIn()
@@ -42,7 +42,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/authentication/sign-out
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/authentication/sign-out',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Authentication\SignOut()
@@ -50,7 +50,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/experiments/create
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/experiments/create',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Experiments\Create()
@@ -58,7 +58,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/experiments/edit
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/experiments/edit',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Experiments\Edit()
@@ -66,7 +66,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/experiments/erase
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/experiments/erase',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Experiments\Erase()
@@ -74,7 +74,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/experiments/get
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/experiments/get',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Experiments\Get()
@@ -82,7 +82,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/experiments/search
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/experiments/search',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Experiments\Search()
@@ -90,7 +90,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/patients/get
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/patients/get',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Patients\Get()
@@ -98,7 +98,7 @@ class Services extends \Slim\Middleware {
 		
 		// URL:		/server/users/get
 		// Method:	POST
-		$services->define(
+		$app->services->define(
 			'/users/get',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Users\Get()

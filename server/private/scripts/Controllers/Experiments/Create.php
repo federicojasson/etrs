@@ -28,7 +28,15 @@ class Create extends \App\Controllers\SecureController {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: Controllers/Experiments/Create.php
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR
+		];
+		
+		// Validates the authentication and returns the result
+		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
 	}
 	
 }

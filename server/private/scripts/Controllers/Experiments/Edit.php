@@ -28,7 +28,15 @@ class Edit extends \App\Controllers\SecureController {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: Controllers/Experiments/Edit.php
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR
+		];
+		
+		// Validates the authentication and returns the result
+		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
 	}
 	
 }

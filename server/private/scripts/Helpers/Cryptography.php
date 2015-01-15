@@ -36,14 +36,15 @@ class Cryptography extends \App\Helpers\Helper {
 	 * It receives the length of the sequence.
 	 */
 	private function generateRandomBytesSequence($length) {
-		$cryptographicallyStrong = false;
+		$app = $this->app;
 		
 		// Generates the sequence
+		$cryptographicallyStrong = false;
 		$sequence = openssl_random_pseudo_bytes($length, $cryptographicallyStrong);
 		
 		if (! $cryptographicallyStrong) {
 			// The algorithm used is not cryptographically strong
-			$this->app->log->warning(''); // TODO: log warning message
+			$app->log->warning(''); // TODO: log warning message
 		}
 		
 		return $sequence;

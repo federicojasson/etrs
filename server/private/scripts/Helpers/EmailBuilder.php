@@ -19,13 +19,11 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * Builds and returns the email.
 	 */
 	public function build() {
-		$state = $this->state;
-		
 		// Gets the basic information of the email
-		$from = $state[EMAIL_BUILDER_PARAMETER_FROM];
-		$to = $state[EMAIL_BUILDER_PARAMETER_TO];
-		$subject = $state[EMAIL_BUILDER_PARAMETER_SUBJECT];
-		$message = $state[EMAIL_BUILDER_PARAMETER_MESSAGE];
+		$from = $this->state[EMAIL_BUILDER_PARAMETER_FROM];
+		$to = $this->state[EMAIL_BUILDER_PARAMETER_TO];
+		$subject = $this->state[EMAIL_BUILDER_PARAMETER_SUBJECT];
+		$message = $this->state[EMAIL_BUILDER_PARAMETER_MESSAGE];
 		
 		// Initializes the additional headers
 		$additionalHeaders = '';

@@ -26,6 +26,27 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Initializes the Authenticator helper.
+	 */
+	public function initializeAuthenticatorHelper() {
+		return new \App\Helpers\Authenticator();
+	}
+	
+	/*
+	 * Initializes the AuthorizationValidator helper.
+	 */
+	public function initializeAuthorizationValidatorHelper() {
+		return new \App\Helpers\AuthorizationValidator();
+	}
+	
+	/*
+	 * Initializes the BusinessLogicDatabase helper.
+	 */
+	public function initializeBusinessLogicDatabaseHelper() {
+		return new \App\Helpers\BusinessLogicDatabase();
+	}
+	
+	/*
 	 * Initializes the Cryptography helper.
 	 */
 	public function initializeCryptographyHelper() {
@@ -40,6 +61,20 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Initializes the InputValidator helper.
+	 */
+	public function initializeInputValidatorHelper() {
+		return new \App\Helpers\InputValidator();
+	}
+	
+	/*
+	 * Initializes the Parameters helper.
+	 */
+	public function initializeParametersHelper() {
+		return new \App\Helpers\Parameters();
+	}
+	
+	/*
 	 * Initializes the Services helper.
 	 */
 	public function initializeServicesHelper() {
@@ -47,15 +82,36 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Initializes the Session helper.
+	 */
+	public function initializeSessionHelper() {
+		return new \App\Helpers\Session();
+	}
+	
+	/*
+	 * Initializes the WebServerDatabase helper.
+	 */
+	public function initializeWebServerDatabaseHelper() {
+		return new \App\Helpers\WebServerDatabase();
+	}
+	
+	/*
 	 * Defines the helpers.
 	 */
 	private function defineHelpers() {
-		$container = $this->app->container;
+		$app = $this->app;
 		
-		$container->singleton('authentication', [ $this, 'initializeAuthenticationHelper' ]);
-		$container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
-		$container->singleton('emailBuilder', [ $this, 'initializeEmailBuilderHelper' ]);
-		$container->singleton('services', [ $this, 'initializeServicesHelper' ]);
+		$app->container->singleton('authentication', [ $this, 'initializeAuthenticationHelper' ]);
+		$app->container->singleton('authenticator', [ $this, 'initializeAuthenticatorHelper' ]);
+		$app->container->singleton('authorizationValidator', [ $this, 'initializeAuthorizationValidatorHelper' ]);
+		$app->container->singleton('businessLogicDatabase', [ $this, 'initializeBusinessLogicDatabaseHelper' ]);
+		$app->container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
+		$app->container->singleton('emailBuilder', [ $this, 'initializeEmailBuilderHelper' ]);
+		$app->container->singleton('inputValidator', [ $this, 'initializeInputValidatorHelper' ]);
+		$app->container->singleton('parameters', [ $this, 'initializeParametersHelper' ]);
+		$app->container->singleton('services', [ $this, 'initializeServicesHelper' ]);
+		$app->container->singleton('session', [ $this, 'initializeSessionHelper' ]);
+		$app->container->singleton('webServerDatabase', [ $this, 'initializeWebServerDatabaseHelper' ]);
 	}
 	
 }

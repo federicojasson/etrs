@@ -21,14 +21,25 @@ class SignOut extends \App\Controllers\SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: Controllers/Authentication/SignOut.php
+		// The service has no input
+		return true;
 	}
 	
 	/*
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: Controllers/Authentication/SignOut.php
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
+		];
+		
+		// Validates the authentication and returns the result
+		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
 	}
 	
 }
