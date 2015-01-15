@@ -5,7 +5,8 @@ SET NAMES utf8;
 INSERT INTO users (
 	id,
 	is_erased,
-	creation_datetime,
+	insertion_datetime,
+	last_update_datetime,
 	first_names,
 	last_names,
 	gender,
@@ -17,6 +18,7 @@ INSERT INTO users (
 ) VALUES (
 	'federicojasson',
 	FALSE,
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Federico Rodrigo',
 	'Jasson',
@@ -31,8 +33,10 @@ INSERT INTO users (
 INSERT INTO patients (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	first_names,
 	last_names,
 	gender,
@@ -42,6 +46,8 @@ INSERT INTO patients (
 	UNHEX('1894068380304e0ca7ebf25d25e72dca'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Josefina',
 	'Martínez',
@@ -53,14 +59,18 @@ INSERT INTO patients (
 INSERT INTO files (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name,
 	hash
 ) VALUES (
 	UNHEX('5d4a52954eb440899df7474154b96ba0'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'report1.pdf',
 	UNHEX('8C7DD922AD47494FC02C388E12C00EAC')
@@ -69,14 +79,18 @@ INSERT INTO files (
 INSERT INTO files (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name,
 	hash
 ) VALUES (
 	UNHEX('6346a6dfce5540598544b65cbdcc2bf5'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'archivo1.pdf',
 	UNHEX('867DD9250347494FC021388E11500cae')
@@ -85,14 +99,18 @@ INSERT INTO files (
 INSERT INTO files (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name,
 	hash
 ) VALUES (
 	UNHEX('0f54836d16144515a9cbe3facd147545'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'archivo2.pdf',
 	UNHEX('117aa92502474900C0f1388E113b07a8')
@@ -101,14 +119,18 @@ INSERT INTO files (
 INSERT INTO experiments (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name,
 	command_line
 ) VALUES (
 	UNHEX('a16f4de5cf164c508fec3a1aa45455fd'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Experimento de Eye Tracking 1',
 	'programa.exe -f :input'
@@ -125,13 +147,17 @@ INSERT into experiments_files (
 INSERT INTO diagnoses (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name
 ) VALUES (
 	UNHEX('b6aff0cecc964aab848c3539f8c56f14'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Demencia tipo Alzheimer'
 );
@@ -139,13 +165,17 @@ INSERT INTO diagnoses (
 INSERT INTO clinical_impressions (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name
 ) VALUES (
 	UNHEX('67f86454a18a4d2d88a7185b78e7aaae'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Demencia'
 );
@@ -153,13 +183,17 @@ INSERT INTO clinical_impressions (
 INSERT INTO treatments (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name
 ) VALUES (
 	UNHEX('076ded42464b4a3cb4a284c6b969bd1e'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Taller neurocognitivo'
 );
@@ -167,13 +201,17 @@ INSERT INTO treatments (
 INSERT INTO medications (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name
 ) VALUES (
 	UNHEX('5c7bafdf4aaf459f9eda4e6d991e03a4'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Levotiroxina'
 );
@@ -181,13 +219,17 @@ INSERT INTO medications (
 INSERT INTO backgrounds (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name
 ) VALUES (
 	UNHEX('fed917638d304431a12d4670af9bca9d'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Cardiopatía'
 );
@@ -195,14 +237,18 @@ INSERT INTO backgrounds (
 INSERT INTO image_tests (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name,
 	data_type_definition
 ) VALUES (
 	UNHEX('0b7b260b05584ac992494ee548770b4e'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'RMN con patrón frontotemporal',
 	'type:boolean;Sí:true;No:false'
@@ -211,14 +257,18 @@ INSERT INTO image_tests (
 INSERT INTO neurocognitive_tests (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name,
 	data_type_definition
 ) VALUES (
 	UNHEX('9deea86b950e484f809e532d0a0196a4'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'MMSE',
 	'type:integer_range;min:0;max:30'
@@ -227,14 +277,18 @@ INSERT INTO neurocognitive_tests (
 INSERT INTO laboratory_tests (
 	id,
 	is_erased,
-	creator,
-	creation_datetime,
+	insertor,
+	last_updater,
+	insertion_datetime,
+	last_update_datetime,
 	name,
 	data_type_definition
 ) VALUES (
 	UNHEX('57f76e03c90445049f1e3222a17a72f0'),
 	FALSE,
 	'federicojasson',
+	'federicojasson',
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'Triglicéridos',
 	'type:integer_fix_values;Normal:0;Alto:1'
@@ -244,10 +298,12 @@ INSERT INTO consultations (
 	id,
 	is_erased,
 	clinical_impression,
-	creator,
 	diagnosis,
+	insertor,
+	last_updater,
 	patient,
-	creation_datetime,
+	insertion_datetime,
+	last_update_datetime,
 	date,
 	reasons,
 	observations,
@@ -256,9 +312,11 @@ INSERT INTO consultations (
 	UNHEX('283db1dad6004f059e527bd9626a1f28'),
 	FALSE,
 	UNHEX('67f86454a18a4d2d88a7185b78e7aaae'),
-	'federicojasson',
 	UNHEX('b6aff0cecc964aab848c3539f8c56f14'),
+	'federicojasson',
+	'federicojasson',
 	UNHEX('1894068380304e0ca7ebf25d25e72dca'),
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	'2013-05-01',
 	'Síntomas del paciente',
@@ -324,18 +382,22 @@ INSERT INTO studies (
 	id,
 	is_erased,
 	consultation,
-	creator,
 	experiment,
+	insertor,
+	last_updater,
 	report,
-	creation_datetime,
+	insertion_datetime,
+	last_update_datetime,
 	observations
 ) VALUES (
 	UNHEX('cb34783c21264abfb4fc0b371bd2b2fa'),
 	FALSE,
 	UNHEX('283db1dad6004f059e527bd9626a1f28'),
-	'federicojasson',
 	UNHEX('a16f4de5cf164c508fec3a1aa45455fd'),
+	'federicojasson',
+	'federicojasson',
 	NULL,
+	UTC_TIMESTAMP(),
 	UTC_TIMESTAMP(),
 	''
 );
@@ -348,59 +410,59 @@ INSERT into studies_files (
 	UNHEX('6346a6dfce5540598544b65cbdcc2bf5')
 );
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf05d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '1 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf05d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '1 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf15d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '2 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf15d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '2 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf35d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '3 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf35d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '3 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf45d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '4 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf45d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '4 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf55d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '5 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf55d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '5 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf65d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '6 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf65d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '6 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf75d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '7 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf75d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '7 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf85d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '8 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf85d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '8 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf95d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '9 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf95d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '9 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf06d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '10 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf06d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '10 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf16d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '11 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf16d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '11 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf26d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '12 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf26d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '12 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf36d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '13 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf36d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '13 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf46d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '14 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf46d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '14 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf56d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '15 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf56d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '15 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf66d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '16 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf66d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '16 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf76d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '17 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf76d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '17 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf86d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '18 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf86d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '18 Martínez', 'f', '1985-12-20', 10);
 
-INSERT INTO patients (id, is_erased, creator, creation_datetime, first_names, last_names, gender, birth_date, education_years)
-VALUES (UNHEX('1894068380304e0ca7ebf96d25e72dca'), FALSE, 'federicojasson', UTC_TIMESTAMP(), 'Josefina', '19 Martínez', 'f', '1985-12-20', 10);
+INSERT INTO patients (id, is_erased, insertor, last_updater, insertion_datetime, last_update_datetime, first_names, last_names, gender, birth_date, education_years)
+VALUES (UNHEX('1894068380304e0ca7ebf96d25e72dca'), FALSE, 'federicojasson', 'federicojasson', UTC_TIMESTAMP(), UTC_TIMESTAMP(), 'Josefina', '19 Martínez', 'f', '1985-12-20', 10);
