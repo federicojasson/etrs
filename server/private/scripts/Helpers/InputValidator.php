@@ -7,8 +7,6 @@ namespace App\Helpers;
  */
 class InputValidator extends \App\Helpers\Helper {
 	
-	// TODO: InputValidator.php
-	
 	/*
 	 * Validates a JSON request and returns the result.
 	 * 

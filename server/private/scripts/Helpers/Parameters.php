@@ -28,6 +28,7 @@ class Parameters extends \App\Helpers\Helper {
 			$this->load($id);
 		}
 		
+		// Returns the parameter
 		return $this->parameters[$id];
 	}
 	

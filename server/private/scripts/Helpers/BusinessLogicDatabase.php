@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 /*
- * TODO: comments
+ * This helper represents the business logic database.
  */
 class BusinessLogicDatabase extends \App\Helpers\Database {
 	// TODO: BusinessLogicDatabase.php
