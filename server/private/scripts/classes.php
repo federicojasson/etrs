@@ -34,6 +34,7 @@ require 'private/scripts/Helpers/Authenticator.php';
 require 'private/scripts/Helpers/AuthorizationValidator.php';
 require 'private/scripts/Helpers/BusinessLogicDatabase.php';
 require 'private/scripts/Helpers/Cryptography.php';
+require 'private/scripts/Helpers/DataFilter.php';
 require 'private/scripts/Helpers/EmailBuilder.php';
 require 'private/scripts/Helpers/InputValidator.php';
 require 'private/scripts/Helpers/Parameters.php';

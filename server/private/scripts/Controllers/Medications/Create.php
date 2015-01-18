@@ -23,13 +23,24 @@ class Create extends \App\Controllers\SecureController {
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
-		// TODO: Controllers/Medications/Create.php
+		do {
+			// Generates a random ID
+			$id = $app->cryptography->generateRandomId();
+		} while ($app->businessLogicDatabase->medicationExists($id));
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Creates the medication
-		$app->businessLogicDatabase->createMedication($id); // TODO: implement
+		$app->businessLogicDatabase->createMedication($id, $signedInUser['id'], $signedInUser['id'], $name);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody([
+			'id' => bin2hex($id)
+		]);
 	}
 	
 	/*

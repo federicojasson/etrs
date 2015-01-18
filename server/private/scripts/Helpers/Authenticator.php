@@ -23,15 +23,11 @@ class Authenticator extends \App\Helpers\Helper {
 			return false;
 		}
 		
-		$passwordHash = $user['passwordHash'];
-		$salt = $user['salt'];
-		$keyDerivationIterations = $user['keyDerivationIterations'];
+		// Computes the hash of the alleged password, using the salt
+		$allegedPasswordHash = $app->cryptography->hashPassword($allegedPassword, $user['salt'], $user['keyDerivationIterations']);
 		
-		// Computes the hash of the alleged password, using the stored salt
-		$allegedPasswordHash = $app->cryptography->hashPassword($allegedPassword, $salt, $keyDerivationIterations);
-		
-		// Compares the computed hash with the stored one and returns the result
-		return $allegedPasswordHash === $passwordHash;
+		// Compares the password hashes and returns the result
+		return $allegedPasswordHash === $user['passwordHash'];
 	}
 	
 }

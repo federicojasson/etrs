@@ -45,6 +45,21 @@ abstract class Database extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Rolls back the current transaction.
+	 */
+	public function rollBackTransaction() {
+		$app = $this->app;
+		
+		try {
+			// Rolls back the transaction
+			$this->pdo->rollBack();
+		} catch (PDOException $exception) {
+			// A PDO exception was thrown
+			$app->error($exception);
+		}
+	}
+	
+	/*
 	 * Starts a read-only transaction.
 	 */
 	public function startReadOnlyTransaction() {
@@ -131,6 +146,8 @@ abstract class Database extends \App\Helpers\Helper {
 			
 			// TODO: set isolation level somewhere
 			//SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE
+			
+			// TODO: should one-query operations be in transactions?
 
 			$this->pdo = $pdo;
 		} catch (PDOException $exception) {

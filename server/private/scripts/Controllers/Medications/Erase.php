@@ -23,10 +23,11 @@ class Erase extends \App\Controllers\SecureController {
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
-		if (! $app->businessLogicDatabase->nonErasedMedicationExists($id)) {// TODO: implement
+		if (! $app->businessLogicDatabase->nonErasedMedicationExists($id)) {
 			// The medication doesn't exist
 			
-			// TODO: rollback transaction?
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_NOT_FOUND, [

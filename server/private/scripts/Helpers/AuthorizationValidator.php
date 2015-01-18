@@ -22,8 +22,8 @@ class AuthorizationValidator extends \App\Helpers\Helper {
 		}
 		
 		// The user is signed in: the decision depends on her role
-		$user = $app->authentication->getSignedInUser();
-		return in_array($user['role'], $authorizedUserRoles);
+		$signedInUser = $app->authentication->getSignedInUser();
+		return in_array($signedInUser['role'], $authorizedUserRoles);
 	}
 	
 }

@@ -14,7 +14,38 @@ class Get extends \App\Controllers\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: Controllers/Medications/Get.php
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = $input['id'];
+		
+		// Starts a read-only transaction
+		$app->businessLogicDatabase->startReadOnlyTransaction();
+		
+		// Gets the medication
+		$medication = $app->businessLogicDatabase->getNonErasedMedication($id);
+		
+		if (is_null($medication)) {
+			// The medication doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_MEDICATION
+			]);
+		}
+		
+		// Filters the medication
+		$filteredMedication = $app->dataFilter->filterMedication($medication);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody($filteredMedication);
 	}
 	
 	/*

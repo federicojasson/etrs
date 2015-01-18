@@ -10,7 +10,7 @@ class Authentication extends \App\Helpers\Helper {
 	/*
 	 * The signed in user.
 	 */
-	private $signedInUser;
+	private $signedInUser; // TODO: use cache? consistenty issue
 	
 	/*
 	 * Returns the signed in user.

@@ -14,14 +14,59 @@ class Edit extends \App\Controllers\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: Controllers/Medications/Edit.php
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = $input['id'];
+		$name = $input['name'];
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		if (! $app->businessLogicDatabase->nonErasedMedicationExists($id)) {
+			// The medication doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_MEDICATION
+			]);
+		}
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Edits the medication
+		$app->businessLogicDatabase->editMedication($id, $signedInUser['id'], $name);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 	}
 	
 	/*
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: Controllers/Medications/Edit.php
+		$app = $this->app;
+		
+		// Defines the expected JSON structure
+		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement validation
+				return true;
+			}),
+			
+			'name' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement validation
+				return true;
+			})
+		]);
+		
+		// Validates the request and returns the result
+		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	
 	/*
