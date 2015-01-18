@@ -88,6 +88,46 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Experiments\Search()
 		);
 		
+		// URL:		/server/medications/create
+		// Method:	POST
+		$app->services->define(
+			'/medications/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Medications\Create()
+		);
+		
+		// URL:		/server/medications/edit
+		// Method:	POST
+		$app->services->define(
+			'/medications/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Medications\Edit()
+		);
+		
+		// URL:		/server/medications/erase
+		// Method:	POST
+		$app->services->define(
+			'/medications/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Medications\Erase()
+		);
+		
+		// URL:		/server/medications/get
+		// Method:	POST
+		$app->services->define(
+			'/medications/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Medications\Get()
+		);
+		
+		// URL:		/server/medications/search
+		// Method:	POST
+		$app->services->define(
+			'/medications/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Medications\Search()
+		);
+		
 		// URL:		/server/patients/get
 		// Method:	POST
 		$app->services->define(

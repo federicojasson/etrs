@@ -23,6 +23,8 @@ abstract class SecureController extends \App\Controllers\Controller {
 		
 		if (! $this->isInputValid()) {
 			// The input is invalid
+			
+			// Halts the execution
 			$app->halt(HTTP_STATUS_BAD_REQUEST, [
 				'error' => ERROR_INVALID_INPUT
 			]);
@@ -30,6 +32,8 @@ abstract class SecureController extends \App\Controllers\Controller {
 		
 		if (! $this->isUserAuthorized()) {
 			// The user is not authorized to use this service
+			
+			// Halts the execution
 			$app->halt(HTTP_STATUS_FORBIDDEN, [
 				'error' => ERROR_UNAUTHORIZED_USER
 			]);

@@ -45,14 +45,35 @@ abstract class Database extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Starts a new transaction.
+	 * Starts a read-only transaction.
 	 */
-	public function startTransaction() {
+	public function startReadOnlyTransaction() {
 		$app = $this->app;
 		
 		try {
-			// Starts a transaction
-			$this->pdo->beginTransaction();
+			// Defines the statement
+			$statement = 'START TRANSACTION READ ONLY';
+
+			// Executes the statement
+			$this->executePreparedStatement($statement);
+		} catch (PDOException $exception) {
+			// A PDO exception was thrown
+			$app->error($exception);
+		}
+	}
+	
+	/*
+	 * Starts a read-write transaction.
+	 */
+	public function startReadWiteTransaction() {
+		$app = $this->app;
+		
+		try {
+			// Defines the statement
+			$statement = 'START TRANSACTION READ WRITE';
+
+			// Executes the statement
+			$this->executePreparedStatement($statement);
 		} catch (PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
@@ -107,6 +128,9 @@ abstract class Database extends \App\Helpers\Helper {
 			$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 			$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
+			
+			// TODO: set isolation level somewhere
+			//SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE
 
 			$this->pdo = $pdo;
 		} catch (PDOException $exception) {

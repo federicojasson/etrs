@@ -44,16 +44,22 @@ class DatabaseLogWriter {
 	public function write($message, $level) {
 		$app = $this->app;
 		
+		// Starts a read-write transaction
+		$app->webServerDatabase->startReadWriteTransaction();
+		
 		do {
 			// Generates a random ID
 			$id = $app->cryptography->generateRandomId();
-		} while ($this->webServerDatabase->logExists($id));
+		} while ($app->webServerDatabase->logExists($id));
 		
 		// Gets the log's level used in the database
 		$databaseLevel = $this->databaseLevels[$level];
 		
 		// Creates the log
 		$app->webServerDatabase->createLog($id, $databaseLevel, $message);
+		
+		// Commits the transaction
+		$app->webServerDatabase->commitTransaction();
 	}
 	
 }

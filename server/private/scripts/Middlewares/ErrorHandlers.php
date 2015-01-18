@@ -24,6 +24,7 @@ class ErrorHandlers extends \Slim\Middleware {
 	public function onError() {
 		$app = $this->app;
 		
+		// Halts the execution
 		$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
 			'error' => ERROR_UNEXPECTED_ERROR
 		]);
@@ -35,6 +36,7 @@ class ErrorHandlers extends \Slim\Middleware {
 	public function onNotFound() {
 		$app = $this->app;
 		
+		// Halts the execution
 		$app->halt(HTTP_STATUS_NOT_FOUND, [
 			'error' => ERROR_UNDEFINED_SERVICE
 		]);
