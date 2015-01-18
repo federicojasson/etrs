@@ -6,7 +6,7 @@ namespace App\Helpers;
  * This helper represents a database and offers convenient methods to
  * communicate with it.
  * 
- * Subclasses must define the connection parameters and implement the queries.
+ * Subclasses must implement the connect function and the necessary queries.
  */
 abstract class Database extends \App\Helpers\Helper {
 	
@@ -22,6 +22,7 @@ abstract class Database extends \App\Helpers\Helper {
 		$app = $this->app;
 		
 		try {
+			// Commits the transaction
 			$this->pdo->commit();
 		} catch (PDOException $exception) {
 			// A PDO exception was thrown
@@ -30,9 +31,9 @@ abstract class Database extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Selects and returns the number of rows found in the last query.
+	 * Returns the number of rows found in the last query.
 	 */
-	public function selectFoundRows() {
+	public function getFoundRows() {
 		// Defines the statement
 		$statement = 'SELECT FOUND_ROWS() AS foundRows';
 		
@@ -44,12 +45,13 @@ abstract class Database extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Starts a transaction.
+	 * Starts a new transaction.
 	 */
 	public function startTransaction() {
 		$app = $this->app;
 		
 		try {
+			// Starts a transaction
 			$this->pdo->beginTransaction();
 		} catch (PDOException $exception) {
 			// A PDO exception was thrown
@@ -60,13 +62,13 @@ abstract class Database extends \App\Helpers\Helper {
 	/*
 	 * Connects to the database.
 	 * 
-	 * It returns the PDO instance representing the connection.
+	 * It returns a PDO instance representing the connection.
 	 */
 	protected abstract function connect();
 	
 	/*
-	 * Executes a prepared statement and returns the results, or null if the
-	 * statement is not a query.
+	 * Executes a prepared statement and returns the results. If the statement
+	 * is not a query, null is returned.
 	 * 
 	 * It receives the statement and, optionally, the parameters to prepare it.
 	 */
@@ -85,7 +87,7 @@ abstract class Database extends \App\Helpers\Helper {
 			
 			// Fetches and returns the results
 			return $preparedStatement->fetchAll();
-		} catch (PDOException $exception) {
+		} catch (PDOException $exception) { // TODO: PDOException or \PDOException
 			// A PDO exception was thrown
 			$app->error($exception);
 		}
@@ -102,9 +104,9 @@ abstract class Database extends \App\Helpers\Helper {
 			$pdo = $this->connect();
 
 			// Configures the PDO instance
-			$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-			$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
+			$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+			$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
 
 			$this->pdo = $pdo;
 		} catch (PDOException $exception) {

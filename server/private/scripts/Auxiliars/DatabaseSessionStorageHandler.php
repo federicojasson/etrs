@@ -3,7 +3,7 @@
 namespace App\Auxiliars;
 
 /*
- * This class offers methods to manage the session's data persistence in a
+ * This class offers methods to handle the session's data persistence using a
  * database.
  * 
  * It implements the SessionStorageHandler interface.
@@ -11,17 +11,15 @@ namespace App\Auxiliars;
 class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHandler {
 	
 	/*
-	 * The BusinessLogicDatabase helper.
+	 * The application.
 	 */
-	private $webServerDatabase;
+	private $app;
 	
 	/*
 	 * Creates an instance of this class.
-	 * 
-	 * It receives the BusinessLogicDatabase helper.
 	 */
-	public function __construct($webServerDatabase) {
-		$this->webServerDatabase = $webServerDatabase;
+	public function __construct() {
+		$this->app = \Slim\Slim::getInstance();
 	}
 	
 	/*
@@ -30,18 +28,24 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 	 * It returns whether the operation succeeded.
 	 */
 	public function onClose() {
-		// TODO: DatabaseSessionStorageHandler.php
+		// There's nothing to do
+		return true;
 	}
 	
 	/*
-	 * Invoked when the session is destroyed or regenerated.
+	 * Invoked when the session is destroyed.
 	 * 
 	 * It returns whether the operation succeeded.
 	 * 
-	 * It receives the new session's ID, in case it is regenerated.
+	 * It receives the session's ID.
 	 */
 	public function onDestroy($id) {
-		// TODO: DatabaseSessionStorageHandler.php
+		$app = $this->app;
+		
+		// Erases the session
+		$app->webServerDatabase->eraseSession($id);
+		
+		return true;
 	}
 	
 	/*
@@ -49,10 +53,15 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 	 * 
 	 * It returns whether the operation succeeded.
 	 * 
-	 * It receives the idle lifetime of a session.
+	 * It receives the idle lifetime in seconds of the session.
 	 */
 	public function onGarbageCollection($idleLifetime) {
-		// TODO: DatabaseSessionStorageHandler.php
+		$app = $this->app;
+		
+		// Erases the idle sessions
+		$app->webServerDatabase->eraseIdleSessions($idleLifetime);
+		
+		return true;
 	}
 	
 	/*
@@ -64,7 +73,8 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 	 * direct file management is necessary) and the session's name.
 	 */
 	public function onOpen($path, $name) {
-		// TODO: DatabaseSessionStorageHandler.php
+		// There's nothing to do
+		return true;
 	}
 	
 	/*
@@ -76,18 +86,34 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 	 * It receives the session's ID.
 	 */
 	public function onRead($id) {
-		// TODO: DatabaseSessionStorageHandler.php
+		$app = $this->app;
+		
+		// Gets the session
+		$session = $app->webServerDatabase->getSession($id);
+
+		if (is_null($session)) {
+			// The session doesn't exist
+			return '';
+		}
+
+		// Returns the session's data
+		return $session['data'];
 	}
 	
 	/*
-	 * Invoked when the data of the session needs to be stored.
+	 * Invoked when the data of the session needs to be written.
 	 * 
 	 * It returns whether the operation succeeded.
 	 * 
 	 * It receives the session's ID and its data.
 	 */
 	public function onWrite($id, $data) {
-		// TODO: DatabaseSessionStorageHandler.php
+		$app = $this->app;
+		
+		// Creates or edits the session
+		$app->webServerDatabase->createOrEditSession($id, $data);
+		
+		return true;
 	}
 	
 }

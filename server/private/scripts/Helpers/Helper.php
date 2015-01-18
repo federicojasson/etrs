@@ -6,7 +6,7 @@ namespace App\Helpers;
  * This class represents a helper. Helpers are singletons that offer very
  * specific functionalities.
  * 
- * Subclasses must implement the helper's logic. Optionally, an initialization
+ * Subclasses must implement the helper's logic. Optionally, the initialize
  * function can be overridden to perform bootstrapping tasks.
  */
 abstract class Helper {

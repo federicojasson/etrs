@@ -15,11 +15,11 @@ interface SessionStorageHandler {
 	public function onClose();
 	
 	/*
-	 * Invoked when the session is destroyed or regenerated.
+	 * Invoked when the session is destroyed.
 	 * 
 	 * It returns whether the operation succeeded.
 	 * 
-	 * It receives the new session's ID, in case it is regenerated.
+	 * It receives the session's ID.
 	 */
 	public function onDestroy($id);
 	
@@ -28,7 +28,7 @@ interface SessionStorageHandler {
 	 * 
 	 * It returns whether the operation succeeded.
 	 * 
-	 * It receives the idle lifetime of a session.
+	 * It receives the idle lifetime of the session.
 	 */
 	public function onGarbageCollection($idleLifetime);
 	
@@ -53,7 +53,7 @@ interface SessionStorageHandler {
 	public function onRead($id);
 	
 	/*
-	 * Invoked when the data of the session needs to be stored.
+	 * Invoked when the data of the session needs to be written.
 	 * 
 	 * It returns whether the operation succeeded.
 	 * 

@@ -21,7 +21,18 @@ class Erase extends \App\Controllers\SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: Controllers/Experiments/Erase.php
+		$app = $this->app;
+		
+		// Defines the expected JSON structure
+		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement validation
+				return true;
+			})
+		]);
+		
+		// Validates the request and returns the result
+		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	
 	/*
@@ -36,7 +47,7 @@ class Erase extends \App\Controllers\SecureController {
 		];
 		
 		// Validates the authentication and returns the result
-		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
+		return $app->authorizationValidator->validateAuthentication($authorizedUserRoles);
 	}
 	
 }

@@ -5,6 +5,22 @@
  */
 
 /*
+ * Returns the first element of an array. If the array is empty, null is
+ * returned.
+ * 
+ * It receives the array.
+ */
+function getFirstElementOrNull($array) {
+	if (count($array) === 0) {
+		// The array is empty
+		return null;
+	}
+
+	// Returns the first element
+	return $array[0];
+}
+
+/*
  * Determines whether an array is sequential.
  * 
  * It receives the array.
@@ -22,10 +38,10 @@ function isSequentialArray($array) {
  * 
  * It receives the file's path.
  */
-function readJsonFile($filePath) {
+function readJsonFile($path) {
 	// Gets the file's content
-	$fileContent = file_get_contents($filePath);
+	$content = file_get_contents($path);
 
 	// Decodes the content and returns the result
-	return json_decode($fileContent, true);
+	return json_decode($content, true);
 }

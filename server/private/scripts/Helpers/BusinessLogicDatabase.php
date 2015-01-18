@@ -10,7 +10,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	/*
 	 * Connects to the database.
 	 * 
-	 * It returns the PDO instance representing the connection.
+	 * It returns a PDO instance representing the connection.
 	 */
 	protected function connect() {
 		$app = $this->app;
@@ -22,7 +22,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$password = $parameters['password'];
 		
 		// Creates and returns the PDO instance
-		return new PDO($dsn, $username, $password);
+		return new \PDO($dsn, $username, $password);
 	}
 	
 }

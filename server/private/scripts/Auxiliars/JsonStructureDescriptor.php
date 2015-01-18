@@ -4,19 +4,19 @@ namespace App\Auxiliars;
 
 /*
  * This class represents a descriptor of a JSON structure. Instances can be used
- * in combination to define the expected structure of a JSON structure and
+ * in combination to define the expected structure of a JSON input and
  * subsequently validating it.
  * 
  * A JSON structure descriptor holds the type of JSON structure that is supposed
  * to match against, which can be an array, an object or a value. For each type,
  * a definition indicates the way it should be validated:
  * 
- * - Arrays: a JsonStructureDescriptor instance is used, which determines how
- *   all the array's elements must be validated.
+ * - Arrays: a JsonStructureDescriptor instance is used, which describes the
+ *   structure of all the array's elements.
  * 
  * - Objects: an associative array is used, whose values are
- *   JsonStructureDescriptor instances that determine how each property must be
- *   validated.
+ *   JsonStructureDescriptor instances that describe the structure of each
+ *   property.
  * 
  * - Values: a validation function is used, which is invoked in order to
  *   validate the value.

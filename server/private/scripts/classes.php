@@ -5,6 +5,7 @@
  */
 
 require 'private/scripts/Auxiliars/SessionStorageHandler.php';
+require 'private/scripts/Auxiliars/DatabaseLogWriter.php';
 require 'private/scripts/Auxiliars/DatabaseSessionStorageHandler.php';
 require 'private/scripts/Auxiliars/Email.php';
 require 'private/scripts/Auxiliars/JsonStructureDescriptor.php';
@@ -19,7 +20,6 @@ require 'private/scripts/Controllers/Experiments/Erase.php';
 require 'private/scripts/Controllers/Experiments/Get.php';
 require 'private/scripts/Controllers/Experiments/Search.php';
 require 'private/scripts/Controllers/Patients/Get.php';
-require 'private/scripts/Controllers/Users/Get.php';
 require 'private/scripts/Extensions/Request.php';
 require 'private/scripts/Extensions/Response.php';
 require 'private/scripts/Helpers/Helper.php';

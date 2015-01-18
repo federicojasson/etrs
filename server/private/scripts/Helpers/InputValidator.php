@@ -12,12 +12,13 @@ class InputValidator extends \App\Helpers\Helper {
 	 * 
 	 * If the request is valid, the input is replaced by its decoded version.
 	 * 
-	 * It receives the request and the descriptor of the expected JSON
-	 * structure.
+	 * It receives the descriptor of the expected JSON structure.
 	 */
-	public function validateJsonRequest($request, $jsonStructureDescriptor) {
+	public function validateJsonRequest($jsonStructureDescriptor) {
+		$app = $this->app;
+		
 		// Gets the media type
-		$mediaType = $request->getMediaType();
+		$mediaType = $app->request->getMediaType();
 		
 		if ($mediaType !== HTTP_MEDIA_TYPE_JSON) {
 			// The media type is not JSON
@@ -25,7 +26,7 @@ class InputValidator extends \App\Helpers\Helper {
 		}
 		
 		// Gets the input
-		$input = $request->getBody();
+		$input = $app->request->getBody();
 		
 		// Decodes the input
 		$decodedInput = json_decode($input, true);
@@ -41,7 +42,7 @@ class InputValidator extends \App\Helpers\Helper {
 		}
 		
 		// Replaces the input with its decoded version
-		$request->setBody($decodedInput);
+		$app->request->setBody($decodedInput);
 		
 		return true;
 	}

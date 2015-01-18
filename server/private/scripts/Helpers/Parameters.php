@@ -56,7 +56,7 @@ class Parameters extends \App\Helpers\Helper {
 		// Gets the path of the parameters' file
 		$filePath = $this->filePaths[$id];
 		
-		// Reads the file's content and stores the result
+		// Reads the file and stores the result
 		$this->parameters[$id] = readJsonFile($filePath);
 	}
 	

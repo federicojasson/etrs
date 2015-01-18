@@ -4,9 +4,6 @@ namespace App\Helpers;
 
 /*
  * This helper acts as a builder of Email objects.
- * 
- * The newEmail function should be used to reset its state before starting to
- * build an object.
  */
 class EmailBuilder extends \App\Helpers\Helper {
 	
@@ -19,11 +16,11 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * Builds and returns the email.
 	 */
 	public function build() {
-		// Gets the basic information of the email
-		$from = $this->state[EMAIL_BUILDER_PARAMETER_FROM];
-		$to = $this->state[EMAIL_BUILDER_PARAMETER_TO];
-		$subject = $this->state[EMAIL_BUILDER_PARAMETER_SUBJECT];
-		$message = $this->state[EMAIL_BUILDER_PARAMETER_MESSAGE];
+		// Gets the information of the email
+		$from = $this->state[EMAIL_BUILDER_STATE_FROM];
+		$to = $this->state[EMAIL_BUILDER_STATE_TO];
+		$subject = $this->state[EMAIL_BUILDER_STATE_SUBJECT];
+		$message = $this->state[EMAIL_BUILDER_STATE_MESSAGE];
 		
 		// Initializes the additional headers
 		$additionalHeaders = '';
@@ -40,7 +37,7 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * It receives the email address of the sender.
 	 */
 	public function from($from) {
-		$this->state[EMAIL_BUILDER_PARAMETER_FROM] = $from;
+		$this->state[EMAIL_BUILDER_STATE_FROM] = $from;
 		
 		return $this;
 	}
@@ -51,14 +48,14 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * It receives the message.
 	 */
 	public function message($message) {
-		$this->state[EMAIL_BUILDER_PARAMETER_MESSAGE] = $message;
+		$this->state[EMAIL_BUILDER_STATE_MESSAGE] = $message;
 		
 		return $this;
 	}
 	
 	/*
-	 * Resets the state of the builder in order to start creating a new email
-	 * and returns the builder.
+	 * Resets the state of the builder in order to create a new email and
+	 * returns the builder.
 	 */
 	public function newEmail() {
 		$this->state = [];
@@ -72,7 +69,7 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * It receives the subject.
 	 */
 	public function subject($subject) {
-		$this->state[EMAIL_BUILDER_PARAMETER_SUBJECT] = $subject;
+		$this->state[EMAIL_BUILDER_STATE_SUBJECT] = $subject;
 		
 		return $this;
 	}
@@ -83,7 +80,7 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * It receives the email address of the receiver.
 	 */
 	public function to($to) {
-		$this->state[EMAIL_BUILDER_PARAMETER_TO] = $to;
+		$this->state[EMAIL_BUILDER_STATE_TO] = $to;
 		
 		return $this;
 	}

@@ -16,7 +16,7 @@ class Authenticator extends \App\Helpers\Helper {
 		$app = $this->app;
 		
 		// Gets the user
-		$user = $app->data->getUser($id); // TODO: how to obtain the user?
+		$user = $app->webServerDatabase->getUser($id);
 		
 		if (is_null($user)) {
 			// The user doesn't exist
@@ -24,11 +24,11 @@ class Authenticator extends \App\Helpers\Helper {
 		}
 		
 		$passwordHash = $user['passwordHash'];
-		$passwordSalt = $user['passwordSalt'];
-		$passwordIterations = $user['passwordIterations'];
+		$salt = $user['salt'];
+		$keyDerivationIterations = $user['keyDerivationIterations'];
 		
 		// Computes the hash of the alleged password, using the stored salt
-		$allegedPasswordHash = $app->cryptography->hashPassword($allegedPassword, $passwordSalt, $passwordIterations);
+		$allegedPasswordHash = $app->cryptography->hashPassword($allegedPassword, $salt, $keyDerivationIterations);
 		
 		// Compares the computed hash with the stored one and returns the result
 		return $allegedPasswordHash === $passwordHash;

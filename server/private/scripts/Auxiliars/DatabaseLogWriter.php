@@ -8,37 +8,32 @@ namespace App\Auxiliars;
 class DatabaseLogWriter {
 	
 	/*
-	 * The Cryptography helper.
+	 * The application.
 	 */
-	private $cryptography;
+	private $app;
 	
 	/*
 	 * The log levels used in the database.
 	 */
-	private $databaseLevels = [
-		Log::DEBUG => 'DE',
-		Log::INFO => 'IN',
-		Log::NOTICE => 'NO',
-		Log::WARN => 'WA',
-		Log::ERROR => 'ER',
-		Log::CRITICAL => 'CR',
-		Log::ALERT => 'AL',
-		Log::EMERGENCY => 'EM'
-	];
-	
-	/*
-	 * The WebServerDatabase helper.
-	 */
-	private $webServerDatabase;
+	private $databaseLevels;
 	
 	/*
 	 * Creates an instance of this class.
-	 * 
-	 * It receives the Cryptography and WebServerDatabase helpers.
 	 */
-	public function __construct($cryptography, $webServerDatabase) {
-		$this->cryptography = $cryptography;
-		$this->webServerDatabase = $webServerDatabase;
+	public function __construct() {
+		$this->app = \Slim\Slim::getInstance();
+		
+		// Initializes the log levels used in the database
+		$this->databaseLevels = [
+			Log::DEBUG => LOG_LEVEL_DEBUG,
+			Log::INFO => LOG_LEVEL_INFORMATION,
+			Log::NOTICE => LOG_LEVEL_NOTICE,
+			Log::WARN => LOG_LEVEL_WARNING,
+			Log::ERROR => LOG_LEVEL_ERROR,
+			Log::CRITICAL => LOG_LEVEL_CRITICAL,
+			Log::ALERT => LOG_LEVEL_ALERT,
+			Log::EMERGENCY => LOG_LEVEL_EMERGENCY
+		];
 	}
 	
 	/*
@@ -47,16 +42,18 @@ class DatabaseLogWriter {
 	 * It receives the log's message and its level.
 	 */
 	public function write($message, $level) {
+		$app = $this->app;
+		
 		do {
 			// Generates a random ID
-			$id = $this->cryptography->generateRandomId();
-		} while ($this->webServerDatabase->logExists($id)); // TODO: implement
+			$id = $app->cryptography->generateRandomId();
+		} while ($this->webServerDatabase->logExists($id));
 		
 		// Gets the log's level used in the database
 		$databaseLevel = $this->databaseLevels[$level];
 		
-		// Inserts the log
-		$this->webServerDatabase->insertLog($id, $databaseLevel, $message); // TODO: implement
+		// Creates the log
+		$app->webServerDatabase->createLog($id, $databaseLevel, $message);
 	}
 	
 }

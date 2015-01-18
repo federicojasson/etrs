@@ -24,11 +24,11 @@ class Session extends \Slim\Middleware {
 	private function initializeSession() {
 		$app = $this->app;
 		
-		// Initializas the session storage handler
-		$sessionStorageHandler = new DatabaseSessionStorageHandler($app->webServerDatabase);
+		// Initializas a session storage handler
+		$storageHandler = new \App\Auxiliars\DatabaseSessionStorageHandler();
 		
-		// Sets the session storage handler
-		$app->session->setStorageHandler($sessionStorageHandler);
+		// Sets the session's storage handler
+		$app->session->setStorageHandler($storageHandler);
 		
 		// Starts the session
 		$app->session->start();

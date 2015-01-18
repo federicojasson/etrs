@@ -36,7 +36,7 @@ class Create extends \App\Controllers\SecureController {
 		];
 		
 		// Validates the authentication and returns the result
-		return $app->authorizationValidator->validateAuthentication($app->authentication, $authorizedUserRoles);
+		return $app->authorizationValidator->validateAuthentication($authorizedUserRoles);
 	}
 	
 }
