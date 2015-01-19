@@ -71,7 +71,6 @@ class Get extends \App\Controllers\SecureController {
 	 */
 	protected function isUserAuthorized() {
 		// TODO: Controllers/Medications/Get.php
-		return true;
 	}
 	
 }

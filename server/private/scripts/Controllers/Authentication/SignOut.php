@@ -14,7 +14,10 @@ class SignOut extends \App\Controllers\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: Controllers/Authentication/SignOut.php
+		$app = $this->app;
+		
+		// Signs out the user from the system
+		$app->authentication->signOutUser();
 	}
 	
 	/*

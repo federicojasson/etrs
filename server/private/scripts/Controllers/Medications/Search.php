@@ -14,6 +14,8 @@ class Search extends \App\Controllers\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
+		$app = $this->app;
+		
 		// TODO: Controllers/Medications/Search.php
 	}
 	

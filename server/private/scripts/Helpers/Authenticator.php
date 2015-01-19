@@ -10,9 +10,9 @@ class Authenticator extends \App\Helpers\Helper {
 	/*
 	 * Authenticates a user and returns the result.
 	 * 
-	 * It receives the user's ID and her alleged password.
+	 * It receives the user's ID and password.
 	 */
-	public function authenticateUser($id, $allegedPassword) {
+	public function authenticateUser($id, $password) {
 		$app = $this->app;
 		
 		// Gets the user
@@ -23,11 +23,11 @@ class Authenticator extends \App\Helpers\Helper {
 			return false;
 		}
 		
-		// Computes the hash of the alleged password, using the salt
-		$allegedPasswordHash = $app->cryptography->hashPassword($allegedPassword, $user['salt'], $user['keyDerivationIterations']);
+		// Computes the hash of the password using the salt
+		$passwordHash = $app->cryptography->hashPassword($password, $user['salt'], $user['keyDerivationIterations']);
 		
-		// Compares the password hashes and returns the result
-		return $allegedPasswordHash === $user['passwordHash'];
+		// Compares the hash with the stored one and returns the result
+		return $passwordHash === $user['passwordHash'];
 	}
 	
 }

@@ -14,7 +14,34 @@ class SignIn extends \App\Controllers\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: Controllers/Authentication/SignIn.php
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = $input['id'];
+		$password = $input['password'];
+		
+		if ($app->authenticator->authenticateUser($id, $password)) {
+			// The user was authenticated
+			
+			// Signs in the user in the system
+			$app->authentication->signInUser($id);
+			
+			// Defines the output
+			$output = [
+				'authenticated' => true
+			];
+		} else {
+			// The user was not authenticated
+			
+			// Defines the output
+			$output = [
+				'authenticated' => false
+			];
+		}
+		
+		// Sets the output
+		$app->response->setBody($output);
 	}
 	
 	/*

@@ -26,23 +26,22 @@ class Session extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Destroys the session.
-	 */
-	public function destroy() {
-		// Clears all the data entries
-		$_SESSION = array();
-		
-		// Destroys the PHP session
-		session_destroy();
-	}
-	
-	/*
 	 * Returns the value of a data entry.
 	 * 
 	 * It receives the entry's key.
 	 */
 	public function getData($key) {
 		return $_SESSION[$key];
+	}
+	
+	/*
+	 * Regenerates the session's ID.
+	 * 
+	 * This method doesn't clear the session's data.
+	 */
+	public function regenerateId() {
+		// Regenerates the PHP session's ID
+		session_regenerate_id(true);
 	}
 	
 	/*

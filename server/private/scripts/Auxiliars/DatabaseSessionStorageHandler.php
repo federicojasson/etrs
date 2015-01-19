@@ -42,8 +42,11 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 	public function onDestroy($id) {
 		$app = $this->app;
 		
+		// Converts the session's ID to binary
+		$databaseId = hex2bin($id);
+		
 		// Erases the session
-		$app->webServerDatabase->eraseSession($id);
+		$app->webServerDatabase->eraseSession($databaseId);
 		
 		return true;
 	}
@@ -88,8 +91,11 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 	public function onRead($id) {
 		$app = $this->app;
 		
+		// Converts the session's ID to binary
+		$databaseId = hex2bin($id);
+		
 		// Gets the session
-		$session = $app->webServerDatabase->getSession($id);
+		$session = $app->webServerDatabase->getSession($databaseId);
 
 		if (is_null($session)) {
 			// The session doesn't exist
@@ -110,8 +116,11 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 	public function onWrite($id, $data) {
 		$app = $this->app;
 		
+		// Converts the session's ID to binary
+		$databaseId = hex2bin($id);
+		
 		// Creates or edits the session
-		$app->webServerDatabase->createOrEditSession($id, $data);
+		$app->webServerDatabase->createOrEditSession($databaseId, $data);
 		
 		return true;
 	}

@@ -10,7 +10,7 @@ class Authentication extends \App\Helpers\Helper {
 	/*
 	 * The signed in user.
 	 */
-	private $signedInUser; // TODO: use cache? consistenty issue
+	private $signedInUser;
 	
 	/*
 	 * Returns the signed in user.
@@ -19,7 +19,7 @@ class Authentication extends \App\Helpers\Helper {
 		$app = $this->app;
 		
 		if (! isset($this->signedInUser)) {
-			// The signed in user has not been initialized yet
+			// The signed in user has not been obtained yet
 			
 			// Gets the user's ID
 			$id = $app->session->getData(SESSION_DATA_USER);
@@ -50,6 +50,9 @@ class Authentication extends \App\Helpers\Helper {
 	public function signInUser($id) {
 		$app = $this->app;
 		
+		// Regenerates the session's ID
+		$app->session->regenerateId();
+		
 		// Sets a session data entry to store the user's ID
 		$app->session->setData(SESSION_DATA_USER, $id);
 	}
@@ -62,6 +65,9 @@ class Authentication extends \App\Helpers\Helper {
 		
 		// Clears the session data entry that stores the user's ID
 		$app->session->clearData(SESSION_DATA_USER);
+		
+		// Regenerates the session's ID
+		$app->session->regenerateId();
 	}
 	
 }
