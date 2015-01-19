@@ -22,8 +22,8 @@ abstract class Database extends \App\Helpers\Helper {
 		$app = $this->app;
 		
 		try {
-			// Commits the transaction
-			$this->pdo->commit();
+			// Commits the current transaction
+			$this->pdo->exec('COMMIT');
 		} catch (PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
@@ -51,8 +51,8 @@ abstract class Database extends \App\Helpers\Helper {
 		$app = $this->app;
 		
 		try {
-			// Rolls back the transaction
-			$this->pdo->rollBack();
+			// Rolls back the current transaction
+			$this->pdo->exec('ROLLBACK');
 		} catch (PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
@@ -66,11 +66,8 @@ abstract class Database extends \App\Helpers\Helper {
 		$app = $this->app;
 		
 		try {
-			// Defines the statement
-			$statement = 'START TRANSACTION READ ONLY';
-
-			// Executes the statement
-			$this->executePreparedStatement($statement);
+			// Starts a read-only transaction
+			$this->pdo->exec('START TRANSACTION READ ONLY');
 		} catch (PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
@@ -84,11 +81,8 @@ abstract class Database extends \App\Helpers\Helper {
 		$app = $this->app;
 		
 		try {
-			// Defines the statement
-			$statement = 'START TRANSACTION READ WRITE';
-
-			// Executes the statement
-			$this->executePreparedStatement($statement);
+			// Starts a read-write transaction
+			$this->pdo->exec('START TRANSACTION READ WRITE');
 		} catch (PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
@@ -146,6 +140,12 @@ abstract class Database extends \App\Helpers\Helper {
 			
 			// TODO: set isolation level somewhere
 			//SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE
+			
+			// TODO: set cache
+			// Is the cache clear after session close?
+			//SET SESSION query_cache_size = research!
+			//SET SESSION query_cache_type = ON
+			//SET SESSION query_cache_limit = research!
 			
 			// TODO: should one-query operations be in transactions?
 

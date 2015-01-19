@@ -10,7 +10,7 @@ class WebServerDatabase extends \App\Helpers\Database {
 	/*
 	 * Creates a log.
 	 * 
-	 * It receives the log's information.
+	 * It receives the log's data.
 	 */
 	public function createLog($id, $level, $message) {
 		// Defines the statement
@@ -43,7 +43,7 @@ class WebServerDatabase extends \App\Helpers\Database {
 	/*
 	 * Creates or edits a session.
 	 * 
-	 * It receives the session's information.
+	 * It receives the session's data.
 	 */
 	public function createOrEditSession($id, $data) {
 		// Defines the statement

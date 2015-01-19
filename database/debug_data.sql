@@ -11,8 +11,8 @@ INSERT INTO users (
 	email_address,
 	role,
 	password_hash,
-	password_salt,
-	password_iterations
+	salt,
+	key_derivation_iterations
 ) VALUES (
 	'federicojasson',
 	UTC_TIMESTAMP(),

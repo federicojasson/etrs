@@ -10,6 +10,13 @@ class DataFilter extends \App\Helpers\Helper {
 	/*
 	 * TODO: comments
 	 */
+	public function filterExperiment($experiment) {
+		// TODO: implement filterExperiment
+	}
+	
+	/*
+	 * TODO: comments
+	 */
 	public function filterMedication($medication) {
 		// TODO: implement filterMedication
 	}

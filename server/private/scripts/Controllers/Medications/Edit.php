@@ -18,7 +18,7 @@ class Edit extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$id = $input['id'];
+		$id = hex2bin($input['id']);
 		$name = $input['name'];
 		
 		// Starts a read-write transaction
@@ -53,13 +53,13 @@ class Edit extends \App\Controllers\SecureController {
 		$app = $this->app;
 		
 		// Defines the expected JSON structure
-		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 				// TODO: implement validation
 				return true;
 			}),
 			
-			'name' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 				// TODO: implement validation
 				return true;
 			})

@@ -14,7 +14,35 @@ class Erase extends \App\Controllers\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: Controllers/Experiments/Erase.php
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		if (! $app->businessLogicDatabase->nonErasedExperimentExists($id)) {
+			// The experiment doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_EXPERIMENT
+			]);
+		}
+		
+		// Erases the experiment
+		$app->businessLogicDatabase->eraseExperiment($id);
+		
+		// Erases the experiment's files
+		$app->businessLogicDatabase->eraseExperimentFiles($id);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 	}
 	
 	/*
@@ -24,8 +52,8 @@ class Erase extends \App\Controllers\SecureController {
 		$app = $this->app;
 		
 		// Defines the expected JSON structure
-		$jsonStructureDescriptor = new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'id' => new JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 				// TODO: implement validation
 				return true;
 			})
