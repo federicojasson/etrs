@@ -244,6 +244,30 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Gets the non-erased files of an experiment.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function getExperimentNonErasedFiles($id) {
+		// Defines the statement
+		$statement = '
+			SELECT file AS id
+			FROM experiments_non_erased_files
+			WHERE experiment = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Gets a non-erased experiment. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the experiment's ID.

@@ -217,6 +217,32 @@ class WebServerDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a user exists.
+	 * 
+	 * It receives the user's ID.
+	 */
+	public function userExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM users
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Connects to the database.
 	 * 
 	 * It returns a PDO instance representing the connection.

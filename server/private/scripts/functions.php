@@ -21,6 +21,15 @@ function getFirstElementOrNull($array) {
 }
 
 /*
+ * Returns the length of a string.
+ * 
+ * It receives the string.
+ */
+function getStringLength($string) {
+	return mb_strlen($string, 'UTF-8');
+}
+
+/*
  * Determines whether an array is sequential.
  * 
  * It receives the array.

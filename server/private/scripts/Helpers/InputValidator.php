@@ -8,6 +8,21 @@ namespace App\Helpers;
 class InputValidator extends \App\Helpers\Helper {
 	
 	/*
+	 * Determines whether an input is a non-empty string.
+	 * 
+	 * It receives the input.
+	 */
+	public function isNonEmptyString($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input's length is valid
+		return getStringLength($input) > 0;
+	}
+	
+	/*
 	 * Determines whether an input is a random ID.
 	 * 
 	 * It receives the input.
