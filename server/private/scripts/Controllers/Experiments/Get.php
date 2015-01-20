@@ -57,8 +57,7 @@ class Get extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement validation
-				return true;
+				return $app->inputValidator->isRandomId($input);
 			})
 		]);
 		
@@ -70,7 +69,15 @@ class Get extends \App\Controllers\SecureController {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: Controllers/Experiments/Get.php
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			// TODO: define authorized user roles
+		];
+		
+		// Validates the authentication and returns the result
+		return $app->authorizationValidator->validateAuthentication($authorizedUserRoles);
 	}
 	
 }

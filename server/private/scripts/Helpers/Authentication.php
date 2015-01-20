@@ -8,27 +8,16 @@ namespace App\Helpers;
 class Authentication extends \App\Helpers\Helper {
 	
 	/*
-	 * The signed in user.
-	 */
-	private $signedInUser;
-	
-	/*
 	 * Returns the signed in user.
 	 */
 	public function getSignedInUser() {
 		$app = $this->app;
 		
-		if (! isset($this->signedInUser)) {
-			// The signed in user has not been obtained yet
-			
-			// Gets the user's ID
-			$id = $app->session->getData(SESSION_DATA_USER);
-			
-			// Gets the user
-			$this->signedInUser = $app->webServerDatabase->getUser($id);
-		}
+		// Gets the user's ID
+		$id = $app->session->getData(SESSION_DATA_USER);
 		
-		return $this->signedInUser;
+		// Gets and returns the user
+		return $app->webServerDatabase->getUser($id);
 	}
 	
 	/*

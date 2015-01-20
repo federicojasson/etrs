@@ -62,8 +62,8 @@ class Cryptography extends \App\Helpers\Helper {
 		$sequence = openssl_random_pseudo_bytes($length, $cryptographicallyStrong);
 		
 		if (! $cryptographicallyStrong) {
-			// The algorithm used is not cryptographically strong
-			$app->log->warning(''); // TODO: log warning message
+			// The algorithm used is cryptographically weak
+			$app->log->warning('Random bytes generated with a cryptographically weak algorithm.');
 		}
 		
 		return $sequence;

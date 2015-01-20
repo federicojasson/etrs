@@ -12,6 +12,7 @@ class DataFilter extends \App\Helpers\Helper {
 	 */
 	public function filterExperiment($experiment) {
 		// TODO: implement filterExperiment
+		return $experiment;
 	}
 	
 	/*
@@ -19,6 +20,15 @@ class DataFilter extends \App\Helpers\Helper {
 	 */
 	public function filterMedication($medication) {
 		// TODO: implement filterMedication
+		return $medication;
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function filterPatient($patient) {
+		// TODO: implement filterPatient
+		return $patient;
 	}
 	
 }

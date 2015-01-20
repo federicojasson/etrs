@@ -309,6 +309,42 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Gets a non-erased patient. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function getNonErasedPatient($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				creator AS creator,
+				last_editor AS lastEditor,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				first_name AS firstName,
+				last_name AS lastName,
+				gender AS gender,
+				birth_date AS birthDate,
+				education_years AS educationYears
+			FROM non_erased_patients
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
 	 * Determines whether a medication exists.
 	 * 
 	 * It receives the medication's ID.

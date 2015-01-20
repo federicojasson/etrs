@@ -8,6 +8,21 @@ namespace App\Helpers;
 class InputValidator extends \App\Helpers\Helper {
 	
 	/*
+	 * Determines whether an input is a random ID.
+	 * 
+	 * It receives the input.
+	 */
+	public function isRandomId($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input matches a regular expression
+		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
+	}
+	
+	/*
 	 * Validates a JSON request and returns the result.
 	 * 
 	 * If the request is valid, the input is replaced by its decoded version.
