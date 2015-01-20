@@ -8,23 +8,24 @@ namespace App\Helpers;
 class DataFilter extends \App\Helpers\Helper {
 	
 	/*
-	 * TODO: comments
+	 * The fields authorized to be retrieved for each data type.
 	 */
 	private $authorizedFields;
 	
 	/*
-	 * TODO: comments
+	 * Filters an experiment and returns the result.
+	 * 
+	 * It receives the experiment.
 	 */
 	public function filterExperiment($experiment) {
-		// TODO: comments in method
 		$app = $this->app;
 		
 		// Initializes the filtered experiment
 		$filteredExperiment = $experiment;
 		$filteredExperiment['files'] = [];
 		
-		// Filters the experiment's fields
-		$filteredExperiment = $this->filterFields($filteredExperiment, $this->authorizedFields['experiments']);
+		// Removes the experiment's unauthorized fields
+		$filteredExperiment = $this->removeUnauthorizedFields($filteredExperiment, $this->authorizedFields['experiments']);
 		
 		if (isset($filteredExperiment['id'])) {
 			$filteredExperiment['id'] = bin2hex($experiment['id']);
@@ -55,58 +56,293 @@ class DataFilter extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a medication and returns the result.
+	 * 
+	 * It receives the medication.
 	 */
 	public function filterMedication($medication) {
-		// TODO: implement filterMedication
-		return $medication;
+		$app = $this->app;
+		
+		// Initializes the filtered medication
+		$filteredMedication = $medication;
+		
+		// Removes the medication's unauthorized fields
+		$filteredMedication = $this->removeUnauthorizedFields($filteredMedication, $this->authorizedFields['medications']);
+		
+		if (isset($filteredMedication['id'])) {
+			$filteredMedication['id'] = bin2hex($medication['id']);
+		}
+		
+		if (isset($filteredMedication['creator'])) {
+			if (! $app->webServerDatabase->userExists($medication['creator'])) {
+				$filteredMedication['creator'] = null;
+			}
+		}
+		
+		if (isset($filteredMedication['lastEditor'])) {
+			if (! $app->webServerDatabase->userExists($medication['lastEditor'])) {
+				$filteredMedication['lastEditor'] = null;
+			}
+		}
+		
+		return $filteredMedication;
 	}
 	
 	/*
-	 * TODO: comments
+	 * Filters a patient and returns the result.
+	 * 
+	 * It receives the patient.
 	 */
 	public function filterPatient($patient) {
-		// TODO: implement filterPatient
-		return $patient;
+		$app = $this->app;
+		
+		// Initializes the filtered patient
+		$filteredPatient = $patient;
+		
+		// Removes the patient's unauthorized fields
+		$filteredPatient = $this->removeUnauthorizedFields($filteredPatient, $this->authorizedFields['patients']);
+		
+		if (isset($filteredPatient['id'])) {
+			$filteredPatient['id'] = bin2hex($patient['id']);
+		}
+		
+		if (isset($filteredPatient['creator'])) {
+			if (! $app->webServerDatabase->userExists($patient['creator'])) {
+				$filteredPatient['creator'] = null;
+			}
+		}
+		
+		if (isset($filteredPatient['lastEditor'])) {
+			if (! $app->webServerDatabase->userExists($patient['lastEditor'])) {
+				$filteredPatient['lastEditor'] = null;
+			}
+		}
+		
+		return $filteredPatient;
 	}
 	
 	/*
 	 * Performs initialization tasks.
 	 */
 	protected function initialize() {
-		// TODO: user role
+		$app = $this->app;
 		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Initializes the authorized fields according to the role of the user
+		switch ($signedInUser['role']) {
+			case USER_ROLE_ADMINISTRATOR: {
+				$this->initializeAdministratorAuthorizedFields();
+				break;
+			}
+			
+			case USER_ROLE_DOCTOR: {
+				$this->initializeDoctorAuthorizedFields();
+				break;
+			}
+			
+			case USER_ROLE_OPERATOR: {
+				$this->initializeOperatorAuthorizedFields();
+				break;
+			}
+		}
+	}
+	
+	/*
+	 * Initializes the fields authorized to be retrieved by administrators.
+	 */
+	private function initializeAdministratorAuthorizedFields() {
 		// Initializes the authorized fields
 		$this->authorizedFields = [
+			'backgrounds' => [
+				// TODO: define authorized fields
+			],
+			
+			'clinicalImpressions' => [
+				// TODO: define authorized fields
+			],
+			
+			'consultations' => [
+				// TODO: define authorized fields
+			],
+			
+			'diagnoses' => [
+				// TODO: define authorized fields
+			],
+			
 			'experiments' => [
-				'id',
-				'creator',
-				'lastEditor',
-				'creationDatetime',
-				'lastEditionDatetime',
-				'name',
-				'commandLine',
-				'files'
+				// TODO: define authorized fields
+			],
+			
+			'files' => [
+				// TODO: define authorized fields
+			],
+			
+			'imageTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'laboratoryTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'medications' => [
+				// TODO: define authorized fields
+			],
+			
+			'neurocognitiveTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'patients' => [
+				// TODO: define authorized fields
+			],
+			
+			'studies' => [
+				// TODO: define authorized fields
+			],
+			
+			'treatments' => [
+				// TODO: define authorized fields
 			]
-			// TODO: authorized fields
 		];
 	}
 	
 	/*
-	 * Filters the fields of an entity, leaving only a subset.
-	 * 
-	 * It receives the entity and the fields.
+	 * Initializes the fields authorized to be retrieved by doctors.
 	 */
-	private function filterFields($entity, $fields) {
+	private function initializeDoctorAuthorizedFields() {
+		// Initializes the authorized fields
+		$this->authorizedFields = [
+			'backgrounds' => [
+				// TODO: define authorized fields
+			],
+			
+			'clinicalImpressions' => [
+				// TODO: define authorized fields
+			],
+			
+			'consultations' => [
+				// TODO: define authorized fields
+			],
+			
+			'diagnoses' => [
+				// TODO: define authorized fields
+			],
+			
+			'experiments' => [
+				// TODO: define authorized fields
+			],
+			
+			'files' => [
+				// TODO: define authorized fields
+			],
+			
+			'imageTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'laboratoryTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'medications' => [
+				// TODO: define authorized fields
+			],
+			
+			'neurocognitiveTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'patients' => [
+				// TODO: define authorized fields
+			],
+			
+			'studies' => [
+				// TODO: define authorized fields
+			],
+			
+			'treatments' => [
+				// TODO: define authorized fields
+			]
+		];
+	}
+	
+	/*
+	 * Initializes the fields authorized to be retrieved by operators.
+	 */
+	private function initializeOperatorAuthorizedFields() {
+		// Initializes the authorized fields
+		$this->authorizedFields = [
+			'backgrounds' => [
+				// TODO: define authorized fields
+			],
+			
+			'clinicalImpressions' => [
+				// TODO: define authorized fields
+			],
+			
+			'consultations' => [
+				// TODO: define authorized fields
+			],
+			
+			'diagnoses' => [
+				// TODO: define authorized fields
+			],
+			
+			'experiments' => [
+				// TODO: define authorized fields
+			],
+			
+			'files' => [
+				// TODO: define authorized fields
+			],
+			
+			'imageTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'laboratoryTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'medications' => [
+				// TODO: define authorized fields
+			],
+			
+			'neurocognitiveTests' => [
+				// TODO: define authorized fields
+			],
+			
+			'patients' => [
+				// TODO: define authorized fields
+			],
+			
+			'studies' => [
+				// TODO: define authorized fields
+			],
+			
+			'treatments' => [
+				// TODO: define authorized fields
+			]
+		];
+	}
+	
+	/*
+	 * Removes the unauthorized fields of an entity.
+	 * 
+	 * It receives the entity and the authorized fields.
+	 */
+	private function removeUnauthorizedFields($entity, $authorizedFields) {
 		// Initializes the filtered entity
 		$filteredEntity = [];
 		
-		// Filters the entity's fields
-		$count = count($fields);
+		// Adds the authorized fields to the filtered entity
+		$count = count($authorizedFields);
 		for ($i = 0; $i < $count; $i++) {
-			// TODO: comments
-			$field = $fields[$i];
-			$filteredEntity[$field] = $entity[$field];
+			$authorizedField = $authorizedFields[$i];
+			$filteredEntity[$authorizedField] = $entity[$authorizedField];
 		}
 		
 		return $filteredEntity;

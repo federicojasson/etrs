@@ -25,6 +25,7 @@ require 'private/scripts/Controllers/Medications/Erase.php';
 require 'private/scripts/Controllers/Medications/Get.php';
 require 'private/scripts/Controllers/Medications/Search.php';
 require 'private/scripts/Controllers/Patients/Get.php';
+require 'private/scripts/Controllers/Patients/Search.php';
 require 'private/scripts/Extensions/Request.php';
 require 'private/scripts/Extensions/Response.php';
 require 'private/scripts/Helpers/Helper.php';
