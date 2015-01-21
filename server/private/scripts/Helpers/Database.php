@@ -131,15 +131,15 @@ abstract class Database extends \App\Helpers\Helper {
 		
 		try {
 			// Connects to the database
-			$pdo = $this->connect();
+			$this->pdo = $this->connect();
 
-			// Configures the PDO instance
-			$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
-			$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
-			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
+			// Configures the PDO
+			$this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+			$this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+			$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
 			
-			// TODO: set isolation level somewhere
-			//SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE
+			// Sets the isolation level for the transactions
+			$this->pdo->exec('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
 			
 			// TODO: set cache
 			// Is the cache clear after session close?
@@ -148,8 +148,6 @@ abstract class Database extends \App\Helpers\Helper {
 			//SET SESSION query_cache_limit = research!
 			
 			// TODO: should one-query operations be in transactions?
-
-			$this->pdo = $pdo;
 		} catch (PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);

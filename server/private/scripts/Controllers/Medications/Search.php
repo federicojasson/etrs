@@ -19,7 +19,7 @@ class Search extends \App\Controllers\SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		$expression = $input['expression'];
-		$orderCriterion = $input['orderCriterion']; // TODO: how to use
+		$sortCriterion = $input['sortCriterion'];
 		$page = $input['page'];
 		
 		// TODO: process expression
@@ -30,7 +30,7 @@ class Search extends \App\Controllers\SecureController {
 		$offset = $limit * ($page - 1);
 		
 		// Searches the medications
-		$medications = $app->businessLogicDatabase->searchNonErasedMedications($TODOexpression, $orderCriterion, $limit, $offset); // TODO: implement
+		$medications = $app->businessLogicDatabase->searchNonErasedMedications($TODOexpression, $sortCriterion, $limit, $offset); // TODO: implement
 		
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
@@ -62,14 +62,23 @@ class Search extends \App\Controllers\SecureController {
 				return true;
 			}),
 			
-			'orderCriterion' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement validation
-				return true;
-			}),
+			'sortCriterion' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+					return $app->inputValidator->isCertainString($input, [
+						// TODO: define sort fields
+					]);
+				}),
+				
+				'order' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+					return $app->inputValidator->isCertainString($input, [
+						'ascending',
+						'descending'
+					]);
+				})
+			]),
 			
 			'page' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement validation
-				return true;
+				return $app->inputValidator->isPositiveInteger($input);
 			})
 		]);
 		

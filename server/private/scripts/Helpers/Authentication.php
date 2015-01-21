@@ -16,8 +16,15 @@ class Authentication extends \App\Helpers\Helper {
 		// Gets the user's ID
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
-		// Gets and returns the user
-		return $app->webServerDatabase->getUser($id);
+		// Gets the user
+		$user = $app->webServerDatabase->getUser($id);
+		
+		if (is_null($user)) {
+			// The user doesn't exist
+			// TODO: do something if the user doesn't exist
+		}
+		
+		return $user;
 	}
 	
 	/*
