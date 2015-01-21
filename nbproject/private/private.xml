@@ -5,12 +5,17 @@
             <url>server/private/scripts/Helpers/InputValidator.php</url>
             <bookmark id="3">
                 <name/>
-                <line>102</line>
+                <line>103</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helpers/Session.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helpers/Cryptography.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Middlewares/Session.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/constants.php</file>
+        </group>
     </open-files>
 </project-private>

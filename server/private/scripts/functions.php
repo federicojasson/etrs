@@ -5,6 +5,42 @@
  */
 
 /*
+ * Returns a boolean expression from a regular one.
+ * 
+ * The returned boolean expression is a sanitized version with wildcards.
+ * 
+ * It receives the expression.
+ */
+function getBooleanExpression($expression) {
+	// Sanitizes the expression
+	$expression = iconv(CHARACTER_ENCODING_UTF8, 'ASCII//TRANSLIT//IGNORE', $expression);
+	$expression = preg_replace('/[^ 0-9A-Za-z]/', '', $expression);
+	$expression = preg_replace('/[ ]+/', ' ', $expression);
+	$expression = trim($expression);
+
+	if (getStringLength($expression) === 0) {
+		// The sanitized expression is empty
+		return '';
+	}
+
+	// Gets the words of the expression
+	$expressionWords = explode(' ', $expression);
+
+	// Computes the words of the boolean expression
+	$booleanExpressionWords = [];
+	$count = count($expressionWords);
+	for ($i = 0; $i < $count; $i++) {
+		// Adds a wildcard to the end of the word
+		$booleanExpressionWords[$i] = $expressionWords[$i] . '*';
+	}
+
+	// Builds the boolean expression concatenating the computed words
+	$booleanExpression = implode(' ', $booleanExpressionWords);
+
+	return $booleanExpression;
+}
+
+/*
  * Returns the first element of an array. If the array is empty, null is
  * returned.
  * 
@@ -21,12 +57,29 @@ function getFirstElementOrNull($array) {
 }
 
 /*
+ * Returns an ORDER BY clause from a sorting criterion.
+ * 
+ * It receives the sorting criterion.
+ */
+function getOrderByClause($sortingCriterion) {
+	// Initializes the clause
+	$orderByClause = '';
+	
+	// Appends the field and the order in which the results should be sorted
+	$orderByClause .= $sortingCriterion['field'];
+	$orderByClause .= ' ';
+	$orderByClause .= ($sortingCriterion['order'] === SORTING_ORDER_ASCENDING)? 'ASC' : 'DESC';
+	
+	return $orderByClause;
+}
+
+/*
  * Returns the length of a string.
  * 
  * It receives the string.
  */
 function getStringLength($string) {
-	return mb_strlen($string, 'UTF-8');
+	return mb_strlen($string, CHARACTER_ENCODING_UTF8);
 }
 
 /*

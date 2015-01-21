@@ -8,30 +8,6 @@ namespace App\Helpers;
 class InputValidator extends \App\Helpers\Helper {
 	
 	/*
-	 * Determines whether an input is a string and matches any of a certain set.
-	 * 
-	 * It receives the input and the strings.
-	 */
-	public function isCertainString($input, $strings) {
-		if (! is_string($input)) {
-			// The input is not a string
-			return false;
-		}
-		
-		// Checks whether the input matches any of the strings
-		$count = count($strings);
-		for ($i = 0; $i < $count; $i++) {
-			if ($input === $strings[$i]) {
-				// The input matches the string
-				return true;
-			}
-		}
-		
-		// The input doesn't match any of the strings
-		return false;
-	}
-	
-	/*
 	 * Determines whether an input is a non-empty string.
 	 * 
 	 * It receives the input.
@@ -59,6 +35,31 @@ class InputValidator extends \App\Helpers\Helper {
 		
 		// Checks whether the input's range is valid
 		return $input > 0;
+	}
+	
+	/*
+	 * Determines whether an input is a string and matches any of a predefined
+	 * set.
+	 * 
+	 * It receives the input and the predefined strings.
+	 */
+	public function isPredefinedString($input, $predefinedStrings) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input matches any of the predefined strings
+		$count = count($predefinedStrings);
+		for ($i = 0; $i < $count; $i++) {
+			if ($input === $predefinedStrings[$i]) {
+				// The input matches the predefined string
+				return true;
+			}
+		}
+		
+		// The input doesn't match any of the predefined strings
+		return false;
 	}
 	
 	/*

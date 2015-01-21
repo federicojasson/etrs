@@ -19,18 +19,21 @@ class Search extends \App\Controllers\SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		$expression = $input['expression'];
-		$sortCriterion = $input['sortCriterion'];
+		$sortingCriterion = $input['sortingCriterion'];
 		$page = $input['page'];
 		
-		// TODO: process expression
-		$TODOexpression = $expression;
+		// Gets a boolean expression
+		$booleanExpression = getBooleanExpression($expression);
+		
+		// Gets the ORDER BY clause
+		$orderByClause = getOrderByClause($sortingCriterion);
 		
 		// Calculates the limit and the offset, in function of the page
 		$limit = SEARCH_RESULTS_PER_PAGE;
 		$offset = $limit * ($page - 1);
 		
 		// Searches the experiments
-		$experiments = $app->businessLogicDatabase->searchNonErasedExperiments($TODOexpression, $sortCriterion, $limit, $offset); // TODO: implement
+		$experiments = $app->businessLogicDatabase->searchNonErasedExperiments($booleanExpression, $orderByClause, $limit, $offset);
 		
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
@@ -62,17 +65,20 @@ class Search extends \App\Controllers\SecureController {
 				return true;
 			}),
 			
-			'sortCriterion' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'sortingCriterion' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-					return $app->inputValidator->isCertainString($input, [
-						// TODO: define sort fields
+					return $app->inputValidator->isPredefinedString($input, [
+						'creation_datetime',
+						'last_edition_datetime',
+						'name'
+						// TODO: add other fields?
 					]);
 				}),
 				
 				'order' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-					return $app->inputValidator->isCertainString($input, [
-						'ascending',
-						'descending'
+					return $app->inputValidator->isPredefinedString($input, [
+						SORTING_ORDER_ASCENDING,
+						SORTING_ORDER_DESCENDING
 					]);
 				})
 			]),

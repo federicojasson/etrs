@@ -46,7 +46,7 @@ class Cryptography extends \App\Helpers\Helper {
 	 */
 	public function hashPassword($password, $salt, $keyDerivationIterations) {
 		// Applies SHA-512 and the PBKDF2 key derivation function
-		return hash_pbkdf2('sha512', $password, $salt, $keyDerivationIterations, 0, true);
+		return hash_pbkdf2(HASH_FUNCTION_SHA512, $password, $salt, $keyDerivationIterations, 0, true);
 	}
 	
 	/*

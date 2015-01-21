@@ -25,7 +25,9 @@ class Session extends \Slim\Middleware {
 		$app = $this->app;
 		
 		// Configures the generation of the session IDs
-		$app->session->configureIdsGeneration('sha256', 4);
+		// 4 bits per character are used so that the resulting IDs can be
+		// written in hexadecimal format
+		$app->session->configureIdsGeneration(HASH_FUNCTION_SHA256, 4);
 		
 		// Initializes a session storage handler
 		$storageHandler = new \App\Auxiliars\DatabaseSessionStorageHandler();

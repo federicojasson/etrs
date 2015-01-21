@@ -17,10 +17,10 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 */
 	public function build() {
 		// Gets the information of the email
-		$from = $this->state[EMAIL_BUILDER_STATE_FROM];
-		$to = $this->state[EMAIL_BUILDER_STATE_TO];
-		$subject = $this->state[EMAIL_BUILDER_STATE_SUBJECT];
-		$message = $this->state[EMAIL_BUILDER_STATE_MESSAGE];
+		$from = $this->state[EMAIL_FROM];
+		$to = $this->state[EMAIL_TO];
+		$subject = $this->state[EMAIL_SUBJECT];
+		$message = $this->state[EMAIL_MESSAGE];
 		
 		// Initializes the additional headers
 		$additionalHeaders = '';
@@ -37,7 +37,7 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * It receives the email address of the sender.
 	 */
 	public function from($from) {
-		$this->state[EMAIL_BUILDER_STATE_FROM] = $from;
+		$this->state[EMAIL_FROM] = $from;
 		
 		return $this;
 	}
@@ -48,7 +48,7 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * It receives the message.
 	 */
 	public function message($message) {
-		$this->state[EMAIL_BUILDER_STATE_MESSAGE] = $message;
+		$this->state[EMAIL_MESSAGE] = $message;
 		
 		return $this;
 	}
@@ -69,7 +69,7 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * It receives the subject.
 	 */
 	public function subject($subject) {
-		$this->state[EMAIL_BUILDER_STATE_SUBJECT] = $subject;
+		$this->state[EMAIL_SUBJECT] = $subject;
 		
 		return $this;
 	}
@@ -80,7 +80,7 @@ class EmailBuilder extends \App\Helpers\Helper {
 	 * It receives the email address of the receiver.
 	 */
 	public function to($to) {
-		$this->state[EMAIL_BUILDER_STATE_TO] = $to;
+		$this->state[EMAIL_TO] = $to;
 		
 		return $this;
 	}

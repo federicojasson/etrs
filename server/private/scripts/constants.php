@@ -4,11 +4,12 @@
  * This script defines the constants of the application.
  */
 
+define('CHARACTER_ENCODING_UTF8', 'UTF-8');
 define('CRLF', "\r\n");
-define('EMAIL_BUILDER_STATE_FROM', 'from');
-define('EMAIL_BUILDER_STATE_MESSAGE', 'message');
-define('EMAIL_BUILDER_STATE_SUBJECT', 'subject');
-define('EMAIL_BUILDER_STATE_TO', 'to');
+define('EMAIL_FROM', 'from');
+define('EMAIL_MESSAGE', 'message');
+define('EMAIL_SUBJECT', 'subject');
+define('EMAIL_TO', 'to');
 define('ERROR_INVALID_INPUT', 'INVALID_INPUT');
 define('ERROR_NON_EXISTENT_EXPERIMENT', 'NON_EXISTENT_EXPERIMENT');
 define('ERROR_NON_EXISTENT_MEDICATION', 'NON_EXISTENT_MEDICATION');
@@ -16,6 +17,8 @@ define('ERROR_NON_EXISTENT_PATIENT', 'NON_EXISTENT_PATIENT');
 define('ERROR_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
 define('ERROR_UNDEFINED_SERVICE', 'UNDEFINED_SERVICE');
 define('ERROR_UNEXPECTED_ERROR', 'UNEXPECTED_ERROR');
+define('HASH_FUNCTION_SHA256', 'sha256');
+define('HASH_FUNCTION_SHA512', 'sha512');
 define('HTTP_HEADER_CONTENT_TYPE', 'Content-Type');
 define('HTTP_MEDIA_TYPE_JSON', 'application/json');
 define('HTTP_METHOD_POST', 'POST');
@@ -42,6 +45,8 @@ define('RANDOM_PASSWORD_LENGTH', 64);
 define('SALT_LENGTH', 64);
 define('SEARCH_RESULTS_PER_PAGE', 10);
 define('SESSION_DATA_USER', 'user');
+define('SORTING_ORDER_ASCENDING', 'ascending');
+define('SORTING_ORDER_DESCENDING', 'descending');
 define('USER_ROLE_ADMINISTRATOR', 'ad');
 define('USER_ROLE_ANONYMOUS', '__');
 define('USER_ROLE_DOCTOR', 'dr');

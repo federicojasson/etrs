@@ -447,6 +447,99 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Performs a full-text search and returns non-erased experiments.
+	 * 
+	 * It receives an expression, an ORDER BY clause, the limit of rows to
+	 * return and an offset.
+	 */
+	public function searchNonErasedExperiments($expression, $orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_experiments
+			WHERE
+				MATCH(name)
+				AGAINST(:expression IN BOOLEAN MODE)
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':expression' => $expression,
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a full-text search and returns non-erased medications.
+	 * 
+	 * It receives an expression, an ORDER BY clause, the limit of rows to
+	 * return and an offset.
+	 */
+	public function searchNonErasedMedications($expression, $orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_medications
+			WHERE
+				MATCH(name)
+				AGAINST(:expression IN BOOLEAN MODE)
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':expression' => $expression,
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a full-text search and returns non-erased patients.
+	 * 
+	 * It receives an expression, an ORDER BY clause, the limit of rows to
+	 * return and an offset.
+	 */
+	public function searchNonErasedPatients($expression, $orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_patients
+			WHERE
+				MATCH(first_name, last_name)
+				AGAINST(:expression IN BOOLEAN MODE)
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':expression' => $expression,
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Connects to the database.
 	 * 
 	 * It returns a PDO instance representing the connection.
