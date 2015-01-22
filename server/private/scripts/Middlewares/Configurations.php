@@ -11,10 +11,12 @@ class Configurations extends \Slim\Middleware {
 	 * Applies debug configurations.
 	 */
 	public function applyDebugConfigurations() {
+		$app = $this->app;
+		
 		// TODO: implement
 		$fileHandle = fopen('private/logs/debug.log', 'a');
 		$logWriter = new \Slim\LogWriter($fileHandle);
-		$this->app->config([
+		$app->config([
 			'log.writer' => $logWriter
 		]);
 	}
@@ -23,7 +25,12 @@ class Configurations extends \Slim\Middleware {
 	 * Applies release configurations.
 	 */
 	public function applyReleaseConfigurations() {
+		$app = $this->app;
+		
 		// TODO: implement
+		$app->config([
+			'debug' => false
+		]);
 	}
 	
 	/*

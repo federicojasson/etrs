@@ -25,7 +25,7 @@ class EmailBuilder extends \App\Helpers\Helper {
 		// Initializes the additional headers
 		$additionalHeaders = '';
 		$additionalHeaders .= 'From: ' . $from . CRLF;
-		// TODO: test and complete with additional headers
+		// TODO: test and complete with additional headers if necessary
 		
 		// Creates and returns the email
 		return new Email($to, $subject, $message, $additionalHeaders);

@@ -24,7 +24,7 @@ abstract class Database extends \App\Helpers\Helper {
 		try {
 			// Commits the current transaction
 			$this->pdo->exec('COMMIT');
-		} catch (PDOException $exception) {
+		} catch (\PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
 		}
@@ -53,7 +53,7 @@ abstract class Database extends \App\Helpers\Helper {
 		try {
 			// Rolls back the current transaction
 			$this->pdo->exec('ROLLBACK');
-		} catch (PDOException $exception) {
+		} catch (\PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
 		}
@@ -68,7 +68,7 @@ abstract class Database extends \App\Helpers\Helper {
 		try {
 			// Starts a read-only transaction
 			$this->pdo->exec('START TRANSACTION READ ONLY');
-		} catch (PDOException $exception) {
+		} catch (\PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
 		}
@@ -83,7 +83,7 @@ abstract class Database extends \App\Helpers\Helper {
 		try {
 			// Starts a read-write transaction
 			$this->pdo->exec('START TRANSACTION READ WRITE');
-		} catch (PDOException $exception) {
+		} catch (\PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
 		}
@@ -117,7 +117,7 @@ abstract class Database extends \App\Helpers\Helper {
 			
 			// Fetches and returns the results
 			return $preparedStatement->fetchAll();
-		} catch (PDOException $exception) { // TODO: PDOException or \PDOException
+		} catch (\PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
 		}
@@ -136,7 +136,7 @@ abstract class Database extends \App\Helpers\Helper {
 			// Configures the PDO
 			$this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
 			$this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
-			$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); // TODO: test erros and configure this
+			$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			
 			// Sets the isolation level for the transactions
 			$this->pdo->exec('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
@@ -148,7 +148,7 @@ abstract class Database extends \App\Helpers\Helper {
 			//SET SESSION query_cache_limit = research!
 			
 			// TODO: should one-query operations be in transactions?
-		} catch (PDOException $exception) {
+		} catch (\PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);
 		}

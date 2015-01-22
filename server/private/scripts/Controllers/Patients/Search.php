@@ -76,8 +76,8 @@ class Search extends \App\Controllers\SecureController {
 						'first_name',
 						'last_name',
 						'gender',
-						'birth_date'
-						// TODO: add other fields?
+						'birth_date',
+						'education_years'
 					]);
 				}),
 				
@@ -106,8 +106,9 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			USER_ROLE_ADMINISTRATOR
-			// TODO: define authorized user roles
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
 		];
 		
 		// Validates the authentication and returns the result

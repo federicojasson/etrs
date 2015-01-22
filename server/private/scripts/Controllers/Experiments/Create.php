@@ -61,8 +61,7 @@ class Create extends \App\Controllers\SecureController {
 			}),
 			
 			'commandLine' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement validation
-				return true;
+				return $app->inputValidator->isCommandLine();
 			})
 		]);
 		

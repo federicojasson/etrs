@@ -23,6 +23,21 @@ class InputValidator extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Determines whether an input is a command line.
+	 * 
+	 * It receives the input.
+	 */
+	public function isCommandLine($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input matches a regular expression
+		return preg_match('/^[^\p{Cc}]*$/u', $input); // TODO: define regexp (length valid and containing :file)
+	}
+	
+	/*
 	 * Determines whether an input is a non-empty string.
 	 * 
 	 * It receives the input.
