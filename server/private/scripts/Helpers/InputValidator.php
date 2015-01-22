@@ -8,6 +8,21 @@ namespace App\Helpers;
 class InputValidator extends \App\Helpers\Helper {
 	
 	/*
+	 * Determines whether an input is a bounded string.
+	 * 
+	 * It receives the input.
+	 */
+	public function isBoundedString($input, $maximumLength) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input's length is valid
+		return getStringLength($input) <= $maximumLength;
+	}
+	
+	/*
 	 * Determines whether an input is a non-empty string.
 	 * 
 	 * It receives the input.
@@ -60,6 +75,21 @@ class InputValidator extends \App\Helpers\Helper {
 		
 		// The input doesn't match any of the predefined strings
 		return false;
+	}
+	
+	/*
+	 * Determines whether an input is a printable string.
+	 * 
+	 * It receives the input.
+	 */
+	public function isPrintableString($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input matches a regular expression
+		return preg_match('/^[^\p{Cc}]*$/u', $input);
 	}
 	
 	/*
