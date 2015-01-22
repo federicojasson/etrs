@@ -15,8 +15,6 @@ function getBooleanExpression($expression) {
 	// Sanitizes the expression
 	$expression = iconv(CHARACTER_ENCODING_UTF8, 'ASCII//TRANSLIT//IGNORE', $expression);
 	$expression = preg_replace('/[^ 0-9A-Za-z]/', '', $expression);
-	$expression = preg_replace('/[ ]+/', ' ', $expression);
-	$expression = trim($expression);
 
 	if (getStringLength($expression) === 0) {
 		// The sanitized expression is empty
@@ -106,4 +104,19 @@ function readJsonFile($path) {
 
 	// Decodes the content and returns the result
 	return json_decode($content, true);
+}
+
+/*
+ * Trims a string, removing duplicate, leading and trailing whitespaces.
+ * 
+ * It receives the string.
+ */
+function trimString($string) {
+	// Removes duplicate whitespaces
+	$string = preg_replace('/[ ]+/', ' ', $string);
+	
+	// Removes leading and trailing whitespaces
+	$string = trim($string);
+	
+	return $string;
 }

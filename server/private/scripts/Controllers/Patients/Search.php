@@ -18,7 +18,7 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$expression = $input['expression'];
+		$expression = trimString($input['expression']);
 		$sortingCriterion = $input['sortingCriterion'];
 		$page = $input['page'];
 		
@@ -61,8 +61,11 @@ class Search extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'expression' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement validation
-				return true;
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 128) &&
+						$app->inputValidator->isPrintableString($input);
 			}),
 			
 			'sortingCriterion' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
@@ -103,6 +106,7 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR
 			// TODO: define authorized user roles
 		];
 		

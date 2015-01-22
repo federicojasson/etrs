@@ -19,7 +19,7 @@ class Edit extends \App\Controllers\SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);
-		$name = $input['name'];
+		$name = trimString($input['name']);
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -59,8 +59,11 @@ class Edit extends \App\Controllers\SecureController {
 			}),
 			
 			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement validation
-				return true;
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 128) &&
+						$app->inputValidator->isPrintableString($input);
 			})
 		]);
 		

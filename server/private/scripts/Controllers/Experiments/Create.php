@@ -18,7 +18,7 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$name = $input['name'];
+		$name = trimString($input['name']);
 		$commandLine = $input['commandLine'];
 		
 		// Starts a read-write transaction
@@ -53,8 +53,11 @@ class Create extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement validation
-				return true;
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 128) &&
+						$app->inputValidator->isPrintableString($input);
 			}),
 			
 			'commandLine' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
