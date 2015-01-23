@@ -8,7 +8,7 @@ namespace App\Extensions;
 class Response extends \Slim\Http\Response {
 	
 	/*
-	 * Gets, and optionally sets, the response's body.
+	 * Returns, and optionally sets, the response's body.
 	 * 
 	 * It receives, optionally, the output to be set.
 	 * 

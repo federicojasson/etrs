@@ -124,7 +124,7 @@ class WebServerDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
-	 * Gets a session. If it doesn't exist, null is returned.
+	 * Returns a session. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the session's ID.
 	 */
@@ -154,7 +154,7 @@ class WebServerDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
-	 * Gets a user. If it doesn't exist, null is returned.
+	 * Returns a user. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the user's ID.
 	 */

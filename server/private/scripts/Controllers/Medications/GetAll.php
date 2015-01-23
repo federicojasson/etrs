@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers\Patients;
+namespace App\Controllers\Medications;
 
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/patients/search
+ *	URL:	/server/medications/get-all
  *	Method:	POST
  */
-class Search extends \App\Controllers\SecureController {
+class GetAll extends \App\Controllers\SecureController {
 	
 	/*
 	 * Calls the controller.
@@ -18,12 +18,8 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$expression = trimString($input['expression']);
 		$sortingCriterion = $input['sortingCriterion'];
 		$page = $input['page'];
-		
-		// Gets a boolean expression
-		$booleanExpression = getBooleanExpression($expression);
 		
 		// Gets the ORDER BY clause
 		$orderByClause = getOrderByClause($sortingCriterion);
@@ -32,17 +28,17 @@ class Search extends \App\Controllers\SecureController {
 		$limit = RESULTS_PER_PAGE;
 		$offset = $limit * ($page - 1);
 		
-		// Searches the patients
-		$patients = $app->businessLogicDatabase->searchNonErasedPatients($booleanExpression, $orderByClause, $limit, $offset);
+		// Gets all the medications
+		$medications = $app->businessLogicDatabase->getAllNonErasedMedications($orderByClause, $limit, $offset);
 		
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Gets the results
 		$results = [];
-		$count = count($patients);
+		$count = count($medications);
 		for ($i = 0; $i < $count; $i++) {
-			$results[$i] = bin2hex($patients[$i]['id']);
+			$results[$i] = bin2hex($medications[$i]['id']);
 		}
 		
 		// Sets the output
@@ -60,24 +56,12 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'expression' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				$input = trimString($input);
-				
-				return	$app->inputValidator->isNonEmptyString($input) &&
-						$app->inputValidator->isBoundedString($input, 128) &&
-						$app->inputValidator->isPrintableString($input);
-			}),
-			
 			'sortingCriterion' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 					return $app->inputValidator->isPredefinedString($input, [
 						'creation_datetime',
 						'last_edition_datetime',
-						'first_name',
-						'last_name',
-						'gender',
-						'birth_date',
-						'education_years'
+						'name'
 					]);
 				}),
 				
@@ -107,8 +91,8 @@ class Search extends \App\Controllers\SecureController {
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
 			USER_ROLE_ADMINISTRATOR,
-			USER_ROLE_DOCTOR,
-			USER_ROLE_OPERATOR
+			USER_ROLE_DOCTOR
+			// TODO: USER_ROLE_OPERATOR?
 		];
 		
 		// Validates the authentication and returns the result

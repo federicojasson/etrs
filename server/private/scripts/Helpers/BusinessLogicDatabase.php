@@ -91,6 +91,58 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Creates a patient.
+	 * 
+	 * It receives the patient's data.
+	 */
+	public function createPatient($id, $creator, $lastEditor, $firstName, $lastName, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO patients (
+				id,
+				is_erased,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				first_name,
+				last_name,
+				gender,
+				birth_date,
+				education_years
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:firstName,
+				:lastName,
+				:gender,
+				:birthDate,
+				:educationYears
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $lastEditor,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Edits an experiment.
 	 * 
 	 * It receives the experiment's data.
@@ -244,7 +296,88 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
-	 * Gets the non-erased files of an experiment.
+	 * Returns all the non-erased experiments.
+	 * 
+	 * It receives an ORDER BY clause, the limit of rows to return and an
+	 * offset.
+	 */
+	public function getAllNonErasedExperiments($orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_experiments
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns all the non-erased medications.
+	 * 
+	 * It receives an ORDER BY clause, the limit of rows to return and an
+	 * offset.
+	 */
+	public function getAllNonErasedMedications($orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_medications
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns all the non-erased patients.
+	 * 
+	 * It receives an ORDER BY clause, the limit of rows to return and an
+	 * offset.
+	 */
+	public function getAllNonErasedPatients($orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_patients
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased files of an experiment.
 	 * 
 	 * It receives the experiment's ID.
 	 */
@@ -268,7 +401,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
-	 * Gets a non-erased experiment. If it doesn't exist, null is returned.
+	 * Returns a non-erased experiment. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the experiment's ID.
 	 */
@@ -301,7 +434,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
-	 * Gets a non-erased medication. If it doesn't exist, null is returned.
+	 * Returns a non-erased medication. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the medication's ID.
 	 */
@@ -333,7 +466,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
-	 * Gets a non-erased patient. If it doesn't exist, null is returned.
+	 * Returns a non-erased patient. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the patient's ID.
 	 */
@@ -430,6 +563,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT 0
 			FROM non_erased_medications
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a patient exists.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function patientExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM patients
 			WHERE id = :id
 			LIMIT 1
 		';

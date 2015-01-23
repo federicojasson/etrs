@@ -80,6 +80,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Experiments\Get()
 		);
 		
+		// URL:		/server/experiments/get-all
+		// Method:	POST
+		$app->services->define(
+			'/experiments/get-all',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\GetAll()
+		);
+		
 		// URL:		/server/experiments/search
 		// Method:	POST
 		$app->services->define(
@@ -120,6 +128,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Medications\Get()
 		);
 		
+		// URL:		/server/medications/get-all
+		// Method:	POST
+		$app->services->define(
+			'/medications/get-all',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Medications\GetAll()
+		);
+		
 		// URL:		/server/medications/search
 		// Method:	POST
 		$app->services->define(
@@ -128,12 +144,44 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Medications\Search()
 		);
 		
+		// URL:		/server/patients/create
+		// Method:	POST
+		$app->services->define(
+			'/patients/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Create()
+		);
+		
+		// URL:		/server/patients/edit
+		// Method:	POST
+		$app->services->define(
+			'/patients/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Edit()
+		);
+		
+		// URL:		/server/patients/erase
+		// Method:	POST
+		$app->services->define(
+			'/patients/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Erase()
+		);
+		
 		// URL:		/server/patients/get
 		// Method:	POST
 		$app->services->define(
 			'/patients/get',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Patients\Get()
+		);
+		
+		// URL:		/server/patients/get-all
+		// Method:	POST
+		$app->services->define(
+			'/patients/get-all',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\GetAll()
 		);
 		
 		// URL:		/server/patients/search

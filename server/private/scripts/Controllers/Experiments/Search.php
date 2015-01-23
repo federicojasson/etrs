@@ -29,7 +29,7 @@ class Search extends \App\Controllers\SecureController {
 		$orderByClause = getOrderByClause($sortingCriterion);
 		
 		// Calculates the limit and the offset, in function of the page
-		$limit = SEARCH_RESULTS_PER_PAGE;
+		$limit = RESULTS_PER_PAGE;
 		$offset = $limit * ($page - 1);
 		
 		// Searches the experiments
