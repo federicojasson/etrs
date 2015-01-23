@@ -251,10 +251,11 @@ class WebServerDatabase extends \App\Helpers\Database {
 		$app = $this->app;
 		
 		// Gets the database's parameters
-		$parameters = $app->parameters->get('webServerDatabase');
-		$dsn = $parameters['dsn'];
-		$username = $parameters['username'];
-		$password = $parameters['password'];
+		$parameters = $app->parameters->get(PARAMETERS_DATABASES);
+		$webServerDatabase = $parameters['webServerDatabase'];
+		$dsn = $webServerDatabase['dsn'];
+		$username = $webServerDatabase['username'];
+		$password = $webServerDatabase['password'];
 		
 		// Creates and returns the PDO instance
 		return new \PDO($dsn, $username, $password);

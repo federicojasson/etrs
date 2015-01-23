@@ -38,9 +38,8 @@ class Parameters extends \App\Helpers\Helper {
 	protected function initialize() {
 		// Initializes the file paths
 		$this->filePaths = [
-			'businessLogicDatabase' => 'private/parameters/business-logic-database.json',
-			'webServerDatabase' => 'private/parameters/web-server-database.json',
-			'email' => 'private/parameters/email.json'
+			PARAMETERS_DATABASES => 'private/parameters/databases.json',
+			PARAMETERS_EMAILS => 'private/parameters/emails.json'
 		];
 		
 		// Initializes the parameters array

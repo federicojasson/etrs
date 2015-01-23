@@ -5,11 +5,6 @@
  */
 
 define('CHARACTER_ENCODING_UTF8', 'UTF-8');
-define('CRLF', "\r\n");
-define('EMAIL_FROM', 'from');
-define('EMAIL_MESSAGE', 'message');
-define('EMAIL_SUBJECT', 'subject');
-define('EMAIL_TO', 'to');
 define('ERROR_INVALID_INPUT', 'INVALID_INPUT');
 define('ERROR_NON_EXISTENT_EXPERIMENT', 'NON_EXISTENT_EXPERIMENT');
 define('ERROR_NON_EXISTENT_MEDICATION', 'NON_EXISTENT_MEDICATION');
@@ -40,6 +35,8 @@ define('LOG_LEVEL_NOTICE', 'no');
 define('LOG_LEVEL_WARNING', 'wa');
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
+define('PARAMETERS_DATABASES', 'databases');
+define('PARAMETERS_EMAILS', 'emails');
 define('RANDOM_ID_LENGTH', 16);
 define('RANDOM_PASSWORD_LENGTH', 64);
 define('RESULTS_PER_PAGE', 10);

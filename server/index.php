@@ -4,8 +4,8 @@
  * This script initializes the application.
  */
 
-require 'private/vendors/Slim/Slim.php';
-\Slim\Slim::registerAutoloader();
+require 'private/vendors/PHPMailer/PHPMailerAutoload.php';
+require 'private/vendors/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
 
 require 'private/scripts/classes.php';
 require 'private/scripts/constants.php';

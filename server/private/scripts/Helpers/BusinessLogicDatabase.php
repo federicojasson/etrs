@@ -707,10 +707,11 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$app = $this->app;
 		
 		// Gets the database's parameters
-		$parameters = $app->parameters->get('businessLogicDatabase');
-		$dsn = $parameters['dsn'];
-		$username = $parameters['username'];
-		$password = $parameters['password'];
+		$parameters = $app->parameters->get(PARAMETERS_DATABASES);
+		$businessLogicDatabase = $parameters['businessLogicDatabase'];
+		$dsn = $businessLogicDatabase['dsn'];
+		$username = $businessLogicDatabase['username'];
+		$password = $businessLogicDatabase['password'];
 		
 		// Creates and returns the PDO instance
 		return new \PDO($dsn, $username, $password);

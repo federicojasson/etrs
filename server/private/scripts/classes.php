@@ -7,7 +7,6 @@
 require 'private/scripts/Auxiliars/SessionStorageHandler.php';
 require 'private/scripts/Auxiliars/DatabaseLogWriter.php';
 require 'private/scripts/Auxiliars/DatabaseSessionStorageHandler.php';
-require 'private/scripts/Auxiliars/Email.php';
 require 'private/scripts/Auxiliars/JsonStructureDescriptor.php';
 require 'private/scripts/Controllers/Controller.php';
 require 'private/scripts/Controllers/SecureController.php';
@@ -42,7 +41,7 @@ require 'private/scripts/Helpers/AuthorizationValidator.php';
 require 'private/scripts/Helpers/BusinessLogicDatabase.php';
 require 'private/scripts/Helpers/Cryptography.php';
 require 'private/scripts/Helpers/DataFilter.php';
-require 'private/scripts/Helpers/EmailBuilder.php';
+require 'private/scripts/Helpers/EmailFactory.php';
 require 'private/scripts/Helpers/InputValidator.php';
 require 'private/scripts/Helpers/Parameters.php';
 require 'private/scripts/Helpers/Services.php';

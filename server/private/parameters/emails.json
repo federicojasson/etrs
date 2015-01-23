@@ -1,0 +1,26 @@
+{
+	"smtp": {
+		"host": "TODO: define",
+		"port": "TODO: define",
+		"protocol": "tls",
+		"username": "TODO: define",
+		"password": "TODO: define"
+	},
+	
+	"sender": {
+		"emailAddress": "TODO: define email address",
+		"name": "ETRS"
+	},
+	
+	"passwordRecoveryEmail": {
+		"subject": "ETRS - Recuperación de contraseña",
+		"templatePath": "private/templates/emails/password-recovery-email.html",
+		"alternativeTemplatePath": "private/templates/emails/password-recovery-email.txt"
+	},
+	
+	"userCreationEmail": {
+		"subject": "ETRS - Invitación",
+		"templatePath": "private/templates/emails/user-creation-email.html",
+		"alternativeTemplatePath": "private/templates/emails/user-creation-email.txt"
+	}
+}

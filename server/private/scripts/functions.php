@@ -60,13 +60,17 @@ function getFirstElementOrNull($array) {
  * It receives the sorting criterion.
  */
 function getOrderByClause($sortingCriterion) {
+	// Gets the sorting's field and order
+	$field = $sortingCriterion['field'];
+	$order = $sortingCriterion['order'];
+	
 	// Initializes the clause
 	$orderByClause = '';
 	
 	// Appends the field and the order in which the results should be sorted
-	$orderByClause .= $sortingCriterion['field'];
+	$orderByClause .= $field;
 	$orderByClause .= ' ';
-	$orderByClause .= ($sortingCriterion['order'] === SORTING_ORDER_ASCENDING)? 'ASC' : 'DESC';
+	$orderByClause .= ($order === SORTING_ORDER_ASCENDING)? 'ASC' : 'DESC';
 	
 	return $orderByClause;
 }
@@ -104,6 +108,36 @@ function readJsonFile($path) {
 
 	// Decodes the content and returns the result
 	return json_decode($content, true);
+}
+
+/*
+ * Reads the content of a template, replaces its placeholders and returns the result.
+ * 
+ * It receives the template's path and a mapping containing placeholders as its
+ * keys and replacements as its values.
+ */
+function readTemplate($path, $mapping) {
+	// Gets the file's content
+	$content = file_get_contents($path);
+	
+	// Replaces the placeholders and returns the result
+	return replacePlaceholders($content, $mapping);
+}
+
+/*
+ * Given a string with placeholders, it replaces them with specific strings and
+ * returns the result.
+ * 
+ * It receives the string and a mapping containing placeholders as its keys and
+ * replacements as its values.
+ */
+function replacePlaceholders($string, $mapping) {
+	// Gets the placeholders and the replacements in different arrays
+	$placeholders = array_keys($mapping);
+	$replacements = array_values($mapping);
+
+	// Replaces the placeholders and returns the result
+	return str_replace($placeholders, $replacements, $string);
 }
 
 /*
