@@ -34,7 +34,28 @@ class InputValidator extends \App\Helpers\Helper {
 		}
 		
 		// Checks whether the input matches a regular expression
-		return preg_match('/^[^\p{Cc}]*$/u', $input); // TODO: define regexp (length valid and containing :file)
+		return preg_match('/^.*:input.*$/', $input);
+	}
+	
+	/*
+	 * Determines whether an input is a date.
+	 * 
+	 * It receives the input.
+	 */
+	public function isDate($input) {
+		// TODO: implement
+	}
+	
+	/*
+	 * Determines whether an input is a gender.
+	 * 
+	 * It receives the input.
+	 */
+	public function isGender($input) {
+		return $this->isPredefinedString($input, [
+			GENDER_FEMALE,
+			GENDER_MALE
+		]);
 	}
 	
 	/*
@@ -120,6 +141,18 @@ class InputValidator extends \App\Helpers\Helper {
 		
 		// Checks whether the input matches a regular expression
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
+	}
+	
+	/*
+	 * Determines whether an input is a sorting order.
+	 * 
+	 * It receives the input.
+	 */
+	public function isSortingOrder($input) {
+		return $this->isPredefinedString($input, [
+			SORTING_ORDER_ASCENDING,
+			SORTING_ORDER_DESCENDING
+		]);
 	}
 	
 	/*

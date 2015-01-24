@@ -55,14 +55,14 @@ function getFirstElementOrNull($array) {
 }
 
 /*
- * Returns an ORDER BY clause from a sorting criterion.
+ * Returns an ORDER BY clause from a sorting.
  * 
- * It receives the sorting criterion.
+ * It receives the sorting.
  */
-function getOrderByClause($sortingCriterion) {
+function getOrderByClause($sorting) {
 	// Gets the sorting's field and order
-	$field = $sortingCriterion['field'];
-	$order = $sortingCriterion['order'];
+	$field = $sorting['field'];
+	$order = $sorting['order'];
 	
 	// Initializes the clause
 	$orderByClause = '';
@@ -111,12 +111,13 @@ function readJsonFile($path) {
 }
 
 /*
- * Reads the content of a template, replaces its placeholders and returns the result.
+ * Reads the content of a template file, replaces its placeholders and returns
+ * the result.
  * 
- * It receives the template's path and a mapping containing placeholders as its
- * keys and replacements as its values.
+ * It receives the file's path and a mapping containing placeholders as its keys
+ * and replacements as its values.
  */
-function readTemplate($path, $mapping) {
+function readTemplateFile($path, $mapping) {
 	// Gets the file's content
 	$content = file_get_contents($path);
 	
@@ -150,7 +151,7 @@ function trimString($string) {
 	$string = preg_replace('/[ ]+/', ' ', $string);
 	
 	// Removes leading and trailing whitespaces
-	$string = trim($string);
+	$string = trim($string, ' ');
 	
 	return $string;
 }

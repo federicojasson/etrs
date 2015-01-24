@@ -18,11 +18,11 @@ class GetAll extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$sortingCriterion = $input['sortingCriterion'];
+		$sorting = $input['sorting'];
 		$page = $input['page'];
 		
 		// Gets the ORDER BY clause
-		$orderByClause = getOrderByClause($sortingCriterion);
+		$orderByClause = getOrderByClause($sorting);
 		
 		// Calculates the limit and the offset, in function of the page
 		$limit = RESULTS_PER_PAGE;
@@ -56,7 +56,7 @@ class GetAll extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'sortingCriterion' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'sorting' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 					return $app->inputValidator->isPredefinedString($input, [
 						'creation_datetime',
@@ -66,10 +66,7 @@ class GetAll extends \App\Controllers\SecureController {
 				}),
 				
 				'order' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-					return $app->inputValidator->isPredefinedString($input, [
-						SORTING_ORDER_ASCENDING,
-						SORTING_ORDER_DESCENDING
-					]);
+					return $app->inputValidator->isSortingOrder($input);
 				})
 			]),
 			

@@ -29,8 +29,8 @@ class EmailFactory extends \App\Helpers\Helper {
 		];
 		
 		// Computes the email's body and alternative body
-		$body = readTemplate($templatePath, $mapping);
-		$alternativeBody = readTemplate($alternativeTemplatePath, $mapping);
+		$body = readTemplateFile($templatePath, $mapping);
+		$alternativeBody = readTemplateFile($alternativeTemplatePath, $mapping);
 		
 		// Creates and returns the email
 		return $this->createEmail($recipient, $subject, $body, $alternativeBody);
@@ -58,8 +58,8 @@ class EmailFactory extends \App\Helpers\Helper {
 		];
 		
 		// Computes the email's body and alternative body
-		$body = readTemplate($templatePath, $mapping);
-		$alternativeBody = readTemplate($alternativeTemplatePath, $mapping);
+		$body = readTemplateFile($templatePath, $mapping);
+		$alternativeBody = readTemplateFile($alternativeTemplatePath, $mapping);
 		
 		// Creates and returns the email
 		return $this->createEmail($recipient, $subject, $body, $alternativeBody);
@@ -91,7 +91,7 @@ class EmailFactory extends \App\Helpers\Helper {
 		$email->Username = $smtp['username'];
 		$email->Password = $smtp['password'];
 		
-		// Sets the email's information
+		// Sets the email's data
 		$email->From = $sender['emailAddress'];
 		$email->FromName = $sender['name'];
 		$email->addAddress($recipient['emailAddress'], (isset($recipient['name']))? $recipient['name'] : '');

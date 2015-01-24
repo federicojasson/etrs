@@ -17,6 +17,8 @@ class Erase extends \App\Controllers\SecureController {
 		$app = $this->app;
 		
 		// TODO: implement
+		// TODO: should erase consultations
+		// TODO: consultations should erase studies... etc
 	}
 	
 	/*

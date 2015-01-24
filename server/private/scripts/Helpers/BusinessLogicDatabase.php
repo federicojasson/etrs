@@ -201,6 +201,42 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Edits a patient.
+	 * 
+	 * It receives the patient's data.
+	 */
+	public function editPatient($id, $lastEditor, $firstName, $lastName, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			UPDATE patients
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				first_name = :firstName,
+				last_name = :lastName,
+				gender = :gender,
+				birth_date = :birthDate,
+				education_years = :educationYears
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Erases an experiment.
 	 * 
 	 * It receives the experiment's ID.
@@ -228,7 +264,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	 * 
 	 * It receives the experiment's ID.
 	 */
-	public function eraseExperimentFiles($id) {
+	public function eraseExperimentFiles($id) { // TODO: método dudoso (podría usarse getExperimentNonErasedFiles y eliminarlas manualmente)
 		// Defines the statement
 		$statement = '
 			UPDATE files
@@ -563,6 +599,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT 0
 			FROM non_erased_medications
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a non-erased patient exists.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function nonErasedPatientExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_patients
 			WHERE id = :id
 			LIMIT 1
 		';

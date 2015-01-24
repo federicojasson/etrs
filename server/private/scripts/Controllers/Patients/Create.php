@@ -18,7 +18,11 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		// TODO: get input and sanite it
+		$firstName = trimString($input['firstName']);
+		$lastName = trimString($input['lastName']);
+		$gender = $input['gender'];
+		$birthDate = $input['birthDate'];
+		$educationYears = $input['educationYears'];
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -51,27 +55,31 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'first_name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
-				return true;
+			'firstName' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 48) &&
+						$app->inputValidator->isPrintableString($input);
 			}),
 			
-			'last_name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
-				return true;
+			'lastName' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 48) &&
+						$app->inputValidator->isPrintableString($input);
 			}),
 			
 			'gender' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
-				return true;
+				return $app->inputValidator->isGender($input);
 			}),
 			
-			'birth_date' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
-				return true;
+			'birthDate' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isDate($input);
 			}),
 			
-			'education_years' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+			'educationYears' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 				// TODO: implement
 				return true;
 			})

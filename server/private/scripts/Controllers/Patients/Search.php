@@ -19,14 +19,14 @@ class Search extends \App\Controllers\SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		$expression = trimString($input['expression']);
-		$sortingCriterion = $input['sortingCriterion'];
+		$sorting = $input['sorting'];
 		$page = $input['page'];
 		
 		// Gets a boolean expression
 		$booleanExpression = getBooleanExpression($expression);
 		
 		// Gets the ORDER BY clause
-		$orderByClause = getOrderByClause($sortingCriterion);
+		$orderByClause = getOrderByClause($sorting);
 		
 		// Calculates the limit and the offset, in function of the page
 		$limit = RESULTS_PER_PAGE;
@@ -68,7 +68,7 @@ class Search extends \App\Controllers\SecureController {
 						$app->inputValidator->isPrintableString($input);
 			}),
 			
-			'sortingCriterion' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+			'sorting' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 					return $app->inputValidator->isPredefinedString($input, [
 						'creation_datetime',
@@ -82,10 +82,7 @@ class Search extends \App\Controllers\SecureController {
 				}),
 				
 				'order' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-					return $app->inputValidator->isPredefinedString($input, [
-						SORTING_ORDER_ASCENDING,
-						SORTING_ORDER_DESCENDING
-					]);
+					return $app->inputValidator->isSortingOrder($input);
 				})
 			]),
 			

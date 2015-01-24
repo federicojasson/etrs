@@ -21,7 +21,14 @@ class Authentication extends \App\Helpers\Helper {
 		
 		if (is_null($user)) {
 			// The user doesn't exist
-			// TODO: do something if the user doesn't exist
+			
+			// Signs out the user from the system
+			$this->signOutUser();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_USER
+			]);
 		}
 		
 		return $user;
