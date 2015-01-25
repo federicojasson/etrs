@@ -128,6 +128,54 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Experiments\Search()
 		);
 		
+		// URL:		/server/image-tests/create
+		// Method:	POST
+		$app->services->define(
+			'/image-tests/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ImageTests\Create()
+		);
+		
+		// URL:		/server/image-tests/edit
+		// Method:	POST
+		$app->services->define(
+			'/image-tests/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ImageTests\Edit()
+		);
+		
+		// URL:		/server/image-tests/erase
+		// Method:	POST
+		$app->services->define(
+			'/image-tests/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ImageTests\Erase()
+		);
+		
+		// URL:		/server/image-tests/get
+		// Method:	POST
+		$app->services->define(
+			'/image-tests/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ImageTests\Get()
+		);
+		
+		// URL:		/server/image-tests/get-all
+		// Method:	POST
+		$app->services->define(
+			'/image-tests/get-all',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ImageTests\GetAll()
+		);
+		
+		// URL:		/server/image-tests/search
+		// Method:	POST
+		$app->services->define(
+			'/image-tests/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ImageTests\Search()
+		);
+		
 		// URL:		/server/medications/create
 		// Method:	POST
 		$app->services->define(
