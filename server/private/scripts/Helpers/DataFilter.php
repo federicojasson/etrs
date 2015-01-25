@@ -31,18 +31,6 @@ class DataFilter extends \App\Helpers\Helper {
 			$filteredExperiment['id'] = bin2hex($experiment['id']);
 		}
 		
-		if (isset($filteredExperiment['creator'])) {
-			if (! $app->webServerDatabase->userExists($experiment['creator'])) {
-				$filteredExperiment['creator'] = null;
-			}
-		}
-		
-		if (isset($filteredExperiment['lastEditor'])) {
-			if (! $app->webServerDatabase->userExists($experiment['lastEditor'])) {
-				$filteredExperiment['lastEditor'] = null;
-			}
-		}
-		
 		if (isset($filteredExperiment['files'])) {
 			$files = $app->businessLogicDatabase->getExperimentNonErasedFiles($experiment['id']);
 			
@@ -53,6 +41,27 @@ class DataFilter extends \App\Helpers\Helper {
 		}
 		
 		return $filteredExperiment;
+	}
+	
+	/*
+	 * Filters an image test and returns the result.
+	 * 
+	 * It receives the image test.
+	 */
+	public function filterImageTest($imageTest) {
+		$app = $this->app;
+		
+		// Initializes the filtered image test
+		$filteredImageTest = $imageTest;
+		
+		// Removes the image test's unauthorized fields
+		$filteredImageTest = $this->removeUnauthorizedFields($filteredImageTest, $this->authorizedFields['imageTests']);
+		
+		if (isset($filteredImageTest['id'])) {
+			$filteredImageTest['id'] = bin2hex($imageTest['id']);
+		}
+		
+		return $filteredImageTest;
 	}
 	
 	/*
@@ -71,18 +80,6 @@ class DataFilter extends \App\Helpers\Helper {
 		
 		if (isset($filteredMedication['id'])) {
 			$filteredMedication['id'] = bin2hex($medication['id']);
-		}
-		
-		if (isset($filteredMedication['creator'])) {
-			if (! $app->webServerDatabase->userExists($medication['creator'])) {
-				$filteredMedication['creator'] = null;
-			}
-		}
-		
-		if (isset($filteredMedication['lastEditor'])) {
-			if (! $app->webServerDatabase->userExists($medication['lastEditor'])) {
-				$filteredMedication['lastEditor'] = null;
-			}
 		}
 		
 		return $filteredMedication;
@@ -104,18 +101,6 @@ class DataFilter extends \App\Helpers\Helper {
 		
 		if (isset($filteredPatient['id'])) {
 			$filteredPatient['id'] = bin2hex($patient['id']);
-		}
-		
-		if (isset($filteredPatient['creator'])) {
-			if (! $app->webServerDatabase->userExists($patient['creator'])) {
-				$filteredPatient['creator'] = null;
-			}
-		}
-		
-		if (isset($filteredPatient['lastEditor'])) {
-			if (! $app->webServerDatabase->userExists($patient['lastEditor'])) {
-				$filteredPatient['lastEditor'] = null;
-			}
 		}
 		
 		return $filteredPatient;

@@ -74,6 +74,9 @@ class EmailFactory extends \App\Helpers\Helper {
 	private function createEmail($recipient, $subject, $body, $alternativeBody) {
 		$app = $this->app;
 		
+		// Initializes the recipient's name (if it is not defined)
+		$recipient['name'] = (isset($recipient['name']))? $recipient['name'] : '';
+		
 		// Gets the SMTP and sender's parameters
 		$parameters = $app->parameters->get(PARAMETERS_EMAILS);
 		$smtp = $parameters['smtp'];
@@ -94,7 +97,7 @@ class EmailFactory extends \App\Helpers\Helper {
 		// Sets the email's data
 		$email->From = $sender['emailAddress'];
 		$email->FromName = $sender['name'];
-		$email->addAddress($recipient['emailAddress'], (isset($recipient['name']))? $recipient['name'] : '');
+		$email->addAddress($recipient['emailAddress'], $recipient['name']);
 		$email->Subject = $subject;
 		$email->isHTML();
 		$email->Body = $body;

@@ -16,7 +16,32 @@ class Create extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Gets the input
+		$input = $app->request->getBody();
+		$name = trimString($input['name']);
+		$dataTypeDefinition = $input['dataTypeDefinition'];
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		do {
+			// Generates a random ID
+			$id = $app->cryptography->generateRandomId();
+		} while ($app->businessLogicDatabase->imageTestExists($id));
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Creates the image test
+		$app->businessLogicDatabase->createImageTest($id, $signedInUser['id'], $signedInUser['id'], $name, $dataTypeDefinition);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody([
+			'id' => bin2hex($id)
+		]);
 	}
 	
 	/*
@@ -27,7 +52,22 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				if (! $app->inputValidator->isString($input)) {
+					return false;
+				}
+				
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 128) &&
+						$app->inputValidator->isPrintableString($input);
+			}),
+			
+			'dataTypeDefinition' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+				return true;
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -42,7 +82,7 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: implement
+			USER_ROLE_ADMINISTRATOR
 		];
 		
 		// Validates the authentication and returns the result

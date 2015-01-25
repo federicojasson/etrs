@@ -16,7 +16,36 @@ class Get extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Starts a read-only transaction
+		$app->businessLogicDatabase->startReadOnlyTransaction();
+		
+		// Gets the image test
+		$imageTest = $app->businessLogicDatabase->getNonErasedImageTest($id);
+		
+		if (is_null($imageTest)) {
+			// The image test doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_IMAGE_TEST
+			]);
+		}
+		
+		// Filters the image test
+		$filteredImageTest = $app->dataFilter->filterImageTest($imageTest);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody($filteredImageTest);
 	}
 	
 	/*
@@ -27,7 +56,9 @@ class Get extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -42,7 +73,9 @@ class Get extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: implement
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
+			// TODO: USER_ROLE_OPERATOR?
 		];
 		
 		// Validates the authentication and returns the result

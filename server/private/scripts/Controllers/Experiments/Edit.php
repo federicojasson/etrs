@@ -60,6 +60,10 @@ class Edit extends \App\Controllers\SecureController {
 			}),
 			
 			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				if (! $app->inputValidator->isString($input)) {
+					return false;
+				}
+				
 				$input = trimString($input);
 				
 				return	$app->inputValidator->isNonEmptyString($input) &&

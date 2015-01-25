@@ -16,7 +16,7 @@ function getBooleanExpression($expression) {
 	$expression = iconv(CHARACTER_ENCODING_UTF8, 'ASCII//TRANSLIT//IGNORE', $expression);
 	$expression = preg_replace('/[^ 0-9A-Za-z]/', '', $expression);
 
-	if (getStringLength($expression) === 0) {
+	if (isStringEmpty($expression)) {
 		// The sanitized expression is empty
 		return '';
 	}
@@ -95,6 +95,15 @@ function isSequentialArray($array) {
 
 	// Compares the keys of the array with the indices and returns the result
 	return array_keys($array) === $indices;
+}
+
+/*
+ * Determines whether a string is empty.
+ * 
+ * It receives the string.
+ */
+function isStringEmpty($string) {
+	return getStringLength($string) === 0;
 }
 
 /*

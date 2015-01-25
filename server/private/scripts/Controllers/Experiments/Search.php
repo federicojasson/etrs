@@ -22,9 +22,6 @@ class Search extends \App\Controllers\SecureController {
 		$sorting = $input['sorting'];
 		$page = $input['page'];
 		
-		// Gets a boolean expression
-		$booleanExpression = getBooleanExpression($expression);
-		
 		// Gets the ORDER BY clause
 		$orderByClause = getOrderByClause($sorting);
 		
@@ -32,8 +29,20 @@ class Search extends \App\Controllers\SecureController {
 		$limit = RESULTS_PER_PAGE;
 		$offset = $limit * ($page - 1);
 		
-		// Searches the experiments
-		$experiments = $app->businessLogicDatabase->searchNonErasedExperiments($booleanExpression, $orderByClause, $limit, $offset);
+		if (isStringEmpty($expression)) {
+			// All experiments should be included in the search
+			
+			// Searches the experiments
+			$experiments = $app->businessLogicDatabase->searchAllNonErasedExperiments($orderByClause, $limit, $offset);
+		} else {
+			// Only specific experiments should be included in the search
+			
+			// Gets a boolean expression
+			$booleanExpression = getBooleanExpression($expression);
+			
+			// Searches the experiments
+			$experiments = $app->businessLogicDatabase->searchSpecificNonErasedExperiments($booleanExpression, $orderByClause, $limit, $offset);
+		}
 		
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
@@ -61,11 +70,18 @@ class Search extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'expression' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				if (! $app->inputValidator->isString($input)) {
+					return false;
+				}
+				
 				$input = trimString($input);
 				
-				return	$app->inputValidator->isNonEmptyString($input) &&
-						$app->inputValidator->isBoundedString($input, 128) &&
-						$app->inputValidator->isPrintableString($input);
+				if (isStringEmpty($input)) {
+					return true;
+				} else {
+					return	$app->inputValidator->isBoundedString($input, 128) &&
+							$app->inputValidator->isPrintableString($input);
+				}
 			}),
 			
 			'sorting' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
