@@ -48,6 +48,38 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Authentication\SignOut()
 		);
 		
+		// URL:		/server/consultations/create
+		// Method:	POST
+		$app->services->define(
+			'/consultations/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Consultations\Create()
+		);
+		
+		// URL:		/server/consultations/edit
+		// Method:	POST
+		$app->services->define(
+			'/consultations/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Consultations\Edit()
+		);
+		
+		// URL:		/server/consultations/erase
+		// Method:	POST
+		$app->services->define(
+			'/consultations/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Consultations\Erase()
+		);
+		
+		// URL:		/server/consultations/get
+		// Method:	POST
+		$app->services->define(
+			'/consultations/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Consultations\Get()
+		);
+		
 		// URL:		/server/experiments/create
 		// Method:	POST
 		$app->services->define(
@@ -190,6 +222,38 @@ class Services extends \Slim\Middleware {
 			'/patients/search',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Patients\Search()
+		);
+		
+		// URL:		/server/studies/create
+		// Method:	POST
+		$app->services->define(
+			'/studies/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Create()
+		);
+		
+		// URL:		/server/studies/edit
+		// Method:	POST
+		$app->services->define(
+			'/studies/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Edit()
+		);
+		
+		// URL:		/server/studies/erase
+		// Method:	POST
+		$app->services->define(
+			'/studies/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Erase()
+		);
+		
+		// URL:		/server/studies/get
+		// Method:	POST
+		$app->services->define(
+			'/studies/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Get()
 		);
 	}
 	

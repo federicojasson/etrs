@@ -8,6 +8,21 @@ namespace App\Helpers;
 class InputValidator extends \App\Helpers\Helper {
 	
 	/*
+	 * Determines whether an input is a bounded integer.
+	 * 
+	 * It receives the input.
+	 */
+	public function isBoundedInteger($input, $maximumValue) {
+		if (! is_int($input)) {
+			// The input is not an integer
+			return false;
+		}
+		
+		// Checks whether the input's range is valid
+		return $input <= $maximumValue;
+	}
+	
+	/*
 	 * Determines whether an input is a bounded string.
 	 * 
 	 * It receives the input.
@@ -71,6 +86,21 @@ class InputValidator extends \App\Helpers\Helper {
 		
 		// Checks whether the input's length is valid
 		return getStringLength($input) > 0;
+	}
+	
+	/*
+	 * Determines whether an input is a non-negative integer.
+	 * 
+	 * It receives the input.
+	 */
+	public function isNonNegativeInteger($input) {
+		if (! is_int($input)) {
+			// The input is not an integer
+			return false;
+		}
+		
+		// Checks whether the input's range is valid
+		return $input >= 0;
 	}
 	
 	/*

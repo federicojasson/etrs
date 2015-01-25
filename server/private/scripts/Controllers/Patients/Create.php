@@ -80,8 +80,8 @@ class Create extends \App\Controllers\SecureController {
 			}),
 			
 			'educationYears' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
-				return true;
+				return	$app->inputValidator->isNonNegativeInteger($input) &&
+						$app->inputValidator->isBoundedInteger($input, 100);
 			})
 		]);
 		
