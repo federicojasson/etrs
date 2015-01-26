@@ -402,6 +402,29 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Erases a study.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function eraseStudy($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE studies
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Determines whether an experiment exists.
 	 * 
 	 * It receives the experiment's ID.
@@ -590,6 +613,66 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Returns a non-erased study. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function getNonErasedStudy($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				consultation AS consultation,
+				creator AS creator,
+				experiment AS experiment,
+				last_editor AS lastEditor,
+				report AS report,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				observations AS observations
+			FROM non_erased_studies
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Returns the non-erased files of a study.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function getStudyNonErasedFiles($id) {
+		// Defines the statement
+		$statement = '
+			SELECT file AS id
+			FROM studies_non_erased_files
+			WHERE study = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Determines whether an image test exists.
 	 * 
 	 * It receives the image test's ID.
@@ -668,6 +751,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a non-erased file exists.
+	 * 
+	 * It receives the file's ID.
+	 */
+	public function nonErasedFileExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_files
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Determines whether a non-erased image test exists.
 	 * 
 	 * It receives the image test's ID.
@@ -729,6 +838,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT 0
 			FROM non_erased_patients
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a non-erased study exists.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function nonErasedStudyExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_studies
 			WHERE id = :id
 			LIMIT 1
 		';

@@ -41,6 +41,7 @@ require 'private/scripts/Controllers/Studies/Create.php';
 require 'private/scripts/Controllers/Studies/Edit.php';
 require 'private/scripts/Controllers/Studies/Erase.php';
 require 'private/scripts/Controllers/Studies/Get.php';
+require 'private/scripts/Controllers/Test/Upload.php'; // TODO: remove this
 require 'private/scripts/Extensions/Request.php';
 require 'private/scripts/Extensions/Response.php';
 require 'private/scripts/Helpers/Helper.php';

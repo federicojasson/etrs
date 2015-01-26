@@ -1,0 +1,19 @@
+exception 'ErrorException' with message 'move_uploaded_file(files/test/test.txt): failed to open stream: No such file or directory' in C:\xampp\htdocs\etrs\server\private\scripts\Controllers\Test\Upload.php:17
+Stack trace:
+#0 [internal function]: Slim\Slim::handleErrors(2, 'move_uploaded_f...', 'C:\\xampp\\htdocs...', 17, Array)
+#1 C:\xampp\htdocs\etrs\server\private\scripts\Controllers\Test\Upload.php(17): move_uploaded_file('C:\\xampp\\tmp\\ph...', 'files/test/test...')
+#2 C:\xampp\htdocs\etrs\server\private\scripts\Controllers\SecureController.php(43): App\Controllers\Test\Upload->call()
+#3 C:\xampp\htdocs\etrs\server\private\scripts\Helpers\Services.php(25): App\Controllers\SecureController->serveRequest()
+#4 [internal function]: App\Helpers\Services->App\Helpers\{closure}()
+#5 C:\xampp\htdocs\etrs\server\private\vendors\Slim\Route.php(468): call_user_func_array(Object(Closure), Array)
+#6 C:\xampp\htdocs\etrs\server\private\vendors\Slim\Slim.php(1338): Slim\Route->dispatch()
+#7 C:\xampp\htdocs\etrs\server\private\scripts\Middlewares\Session.php(18): Slim\Slim->call()
+#8 C:\xampp\htdocs\etrs\server\private\scripts\Middlewares\Services.php(18): App\Middlewares\Session->call()
+#9 C:\xampp\htdocs\etrs\server\private\scripts\Middlewares\Configurations.php(44): App\Middlewares\Services->call()
+#10 C:\xampp\htdocs\etrs\server\private\scripts\Middlewares\Helpers.php(18): App\Middlewares\Configurations->call()
+#11 C:\xampp\htdocs\etrs\server\private\scripts\Middlewares\ErrorHandlers.php(18): App\Middlewares\Helpers->call()
+#12 C:\xampp\htdocs\etrs\server\private\scripts\Middlewares\Extensions.php(18): App\Middlewares\ErrorHandlers->call()
+#13 C:\xampp\htdocs\etrs\server\private\vendors\Slim\Middleware\PrettyExceptions.php(67): App\Middlewares\Extensions->call()
+#14 C:\xampp\htdocs\etrs\server\private\vendors\Slim\Slim.php(1283): Slim\Middleware\PrettyExceptions->call()
+#15 C:\xampp\htdocs\etrs\server\index.php(29): Slim\Slim->run()
+#16 {main}

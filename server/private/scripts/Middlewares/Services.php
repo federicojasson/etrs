@@ -271,6 +271,15 @@ class Services extends \Slim\Middleware {
 			HTTP_METHOD_POST,
 			new \App\Controllers\Studies\Get()
 		);
+		
+		// TODO: remove
+		// URL:		/server/test/upload
+		// Method:	POST
+		$app->services->define(
+			'/test/upload',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Test\Upload()
+		);
 	}
 	
 }

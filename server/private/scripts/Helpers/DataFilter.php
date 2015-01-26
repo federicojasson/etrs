@@ -107,6 +107,54 @@ class DataFilter extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Filters a study and returns the result.
+	 * 
+	 * It receives the study.
+	 */
+	public function filterStudy($study) {
+		$app = $this->app;
+		
+		// Initializes the filtered study
+		$filteredStudy = $study;
+		
+		// Removes the study's unauthorized fields
+		$filteredStudy = $this->removeUnauthorizedFields($filteredStudy, $this->authorizedFields['studies']);
+		
+		if (isset($filteredStudy['id'])) {
+			$filteredStudy['id'] = bin2hex($study['id']);
+		}
+		
+		if (isset($filteredStudy['consultation'])) {
+			$filteredStudy['consultation'] = bin2hex($study['consultation']);
+		}
+		
+		if (isset($filteredStudy['experiment'])) {
+			$filteredStudy['experiment'] = bin2hex($study['experiment']);
+		}
+		
+		if (isset($filteredStudy['report'])) {
+			if (! is_null($study['report'])) {
+				if ($app->businessLogicDatabase->nonErasedFileExists($study['report'])) {
+					$filteredStudy['report'] = bin2hex($study['report']);
+				} else {
+					$filteredStudy['report'] = null;
+				}
+			}
+		}
+		
+		if (isset($filteredStudy['files'])) {
+			$files = $app->businessLogicDatabase->getStudyNonErasedFiles($study['id']);
+			
+			$count = count($files);
+			for ($i = 0; $i < $count; $i++) {
+				$filteredStudy['files'][$i] = bin2hex($files[$i]['id']);
+			}
+		}
+		
+		return $filteredStudy;
+	}
+	
+	/*
 	 * Performs initialization tasks.
 	 */
 	protected function initialize() {
