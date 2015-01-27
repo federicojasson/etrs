@@ -195,6 +195,27 @@ class DataFilter extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Filters a neurocognitive test and returns the result.
+	 * 
+	 * It receives the neurocognitive test.
+	 */
+	public function filterNeurocognitiveTest($neurocognitiveTest) {
+		$app = $this->app;
+		
+		// Initializes the filtered neurocognitive test
+		$filteredNeurocognitiveTest = $neurocognitiveTest;
+		
+		// Removes the neurocognitive test's unauthorized fields
+		$filteredNeurocognitiveTest = $this->removeUnauthorizedFields($filteredNeurocognitiveTest, $this->authorizedFields['neurocognitiveTests']);
+		
+		if (isset($filteredNeurocognitiveTest['id'])) {
+			$filteredNeurocognitiveTest['id'] = bin2hex($neurocognitiveTest['id']);
+		}
+		
+		return $filteredNeurocognitiveTest;
+	}
+	
+	/*
 	 * Filters a patient and returns the result.
 	 * 
 	 * It receives the patient.
@@ -261,6 +282,27 @@ class DataFilter extends \App\Helpers\Helper {
 		}
 		
 		return $filteredStudy;
+	}
+	
+	/*
+	 * Filters a treatment and returns the result.
+	 * 
+	 * It receives the treatment.
+	 */
+	public function filterTreatment($treatment) {
+		$app = $this->app;
+		
+		// Initializes the filtered treatment
+		$filteredTreatment = $treatment;
+		
+		// Removes the treatment's unauthorized fields
+		$filteredTreatment = $this->removeUnauthorizedFields($filteredTreatment, $this->authorizedFields['treatments']);
+		
+		if (isset($filteredTreatment['id'])) {
+			$filteredTreatment['id'] = bin2hex($treatment['id']);
+		}
+		
+		return $filteredTreatment;
 	}
 	
 	/*

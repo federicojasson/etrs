@@ -360,6 +360,46 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Medications\Search()
 		);
 		
+		// URL:		/server/neurocognitive-tests/create
+		// Method:	POST
+		$app->services->define(
+			'/neurocognitive-tests/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\NeurocognitiveTests\Create()
+		);
+		
+		// URL:		/server/neurocognitive-tests/edit
+		// Method:	POST
+		$app->services->define(
+			'/neurocognitive-tests/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\NeurocognitiveTests\Edit()
+		);
+		
+		// URL:		/server/neurocognitive-tests/erase
+		// Method:	POST
+		$app->services->define(
+			'/neurocognitive-tests/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\NeurocognitiveTests\Erase()
+		);
+		
+		// URL:		/server/neurocognitive-tests/get
+		// Method:	POST
+		$app->services->define(
+			'/neurocognitive-tests/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\NeurocognitiveTests\Get()
+		);
+		
+		// URL:		/server/neurocognitive-tests/search
+		// Method:	POST
+		$app->services->define(
+			'/neurocognitive-tests/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\NeurocognitiveTests\Search()
+		);
+		
 		// URL:		/server/patients/create
 		// Method:	POST
 		$app->services->define(
@@ -439,6 +479,46 @@ class Services extends \Slim\Middleware {
 			'/test/upload',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Test\Upload()
+		);
+		
+		// URL:		/server/treatments/create
+		// Method:	POST
+		$app->services->define(
+			'/treatments/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Treatments\Create()
+		);
+		
+		// URL:		/server/treatments/edit
+		// Method:	POST
+		$app->services->define(
+			'/treatments/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Treatments\Edit()
+		);
+		
+		// URL:		/server/treatments/erase
+		// Method:	POST
+		$app->services->define(
+			'/treatments/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Treatments\Erase()
+		);
+		
+		// URL:		/server/treatments/get
+		// Method:	POST
+		$app->services->define(
+			'/treatments/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Treatments\Get()
+		);
+		
+		// URL:		/server/treatments/search
+		// Method:	POST
+		$app->services->define(
+			'/treatments/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Treatments\Search()
 		);
 	}
 	
