@@ -13,6 +13,48 @@ class DataFilter extends \App\Helpers\Helper {
 	private $authorizedFields;
 	
 	/*
+	 * Filters a background and returns the result.
+	 * 
+	 * It receives the background.
+	 */
+	public function filterBackground($background) {
+		$app = $this->app;
+		
+		// Initializes the filtered background
+		$filteredBackground = $background;
+		
+		// Removes the background's unauthorized fields
+		$filteredBackground = $this->removeUnauthorizedFields($filteredBackground, $this->authorizedFields['backgrounds']);
+		
+		if (isset($filteredBackground['id'])) {
+			$filteredBackground['id'] = bin2hex($background['id']);
+		}
+		
+		return $filteredBackground;
+	}
+	
+	/*
+	 * Filters a clinical impression and returns the result.
+	 * 
+	 * It receives the clinical impression.
+	 */
+	public function filterClinicalImpression($clinicalImpression) {
+		$app = $this->app;
+		
+		// Initializes the filtered clinical impression
+		$filteredClinicalImpression = $clinicalImpression;
+		
+		// Removes the clinical impression's unauthorized fields
+		$filteredClinicalImpression = $this->removeUnauthorizedFields($filteredClinicalImpression, $this->authorizedFields['clinicalImpressions']);
+		
+		if (isset($filteredClinicalImpression['id'])) {
+			$filteredClinicalImpression['id'] = bin2hex($clinicalImpression['id']);
+		}
+		
+		return $filteredClinicalImpression;
+	}
+	
+	/*
 	 * Filters a consultation and returns the result.
 	 * 
 	 * It receives the consultation.

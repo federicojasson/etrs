@@ -8,6 +8,138 @@ namespace App\Helpers;
 class BusinessLogicDatabase extends \App\Helpers\Database {
 	
 	/*
+	 * Determines whether a background exists.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function backgroundExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM backgrounds
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a clinical impression exists.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function clinicalImpressionExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM clinical_impressions
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Creates a background.
+	 * 
+	 * It receives the background's data.
+	 */
+	public function createBackground($id, $creator, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO experiments (
+				id,
+				is_erased,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a clinical impression.
+	 * 
+	 * It receives the clinical impression's data.
+	 */
+	public function createClinicalImpression($id, $creator, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO clinical_impressions (
+				id,
+				is_erased,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Creates an experiment.
 	 * 
 	 * It receives the experiment's data.
@@ -235,6 +367,62 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Edits a background.
+	 * 
+	 * It receives the background's data.
+	 */
+	public function editBackground($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE backgrounds
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a clinical impression.
+	 * 
+	 * It receives the clinical impression's data.
+	 */
+	public function editClinicalImpression($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE clinical_impressions
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Edits an experiment.
 	 * 
 	 * It receives the experiment's data.
@@ -386,6 +574,52 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 			':lastEditor' => $lastEditor,
 			':report' => $report,
 			':observations' => $observations
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Erases a background.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function eraseBackground($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE backgrounds
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Erases a clinical impression.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function eraseClinicalImpression($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE clinical_impressions
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
 		];
 		
 		// Executes the statement
@@ -578,6 +812,73 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		return $results;
+	}
+	
+	/*
+	 * Returns a non-erased background. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function getNonErasedBackground($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				last_editor AS lastEditor,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				name AS name
+			FROM non_erased_backgrounds
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Returns a non-erased clinical impression. If it doesn't exist, null is
+	 * returned.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function getNonErasedClinicalImpression($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				last_editor AS lastEditor,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				name AS name
+			FROM non_erased_clinical_impressions
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
 	}
 	
 	/*
@@ -870,6 +1171,58 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a non-erased background exists.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function nonErasedBackgroundExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_backgrounds
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a non-erased clinical impression exists.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function nonErasedClinicalImpressionExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_clinical_impressions
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Determines whether a non-erased consultation exists.
 	 * 
 	 * It receives the consultation's ID.
@@ -1078,6 +1431,62 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Performs a search that includes all non-erased backgrounds and returns
+	 * the results.
+	 * 
+	 * It receives an ORDER BY clause, the limit of rows to return and an
+	 * offset.
+	 */
+	public function searchAllNonErasedBackgrounds($orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_backgrounds
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a search that includes all non-erased clinical impressions and
+	 * returns the results.
+	 * 
+	 * It receives an ORDER BY clause, the limit of rows to return and an
+	 * offset.
+	 */
+	public function searchAllNonErasedClinicalImpressions($orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_clinical_impressions
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Performs a search that includes all non-erased experiments and returns
 	 * the results.
 	 * 
@@ -1179,6 +1588,70 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		
 		// Sets the parameters
 		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a search that includes specific non-erased backgrounds and
+	 * returns the results.
+	 * 
+	 * It receives an expression, an ORDER BY clause, the limit of rows to
+	 * return and an offset.
+	 */
+	public function searchSpecificNonErasedBackgrounds($expression, $orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_backgrounds
+			WHERE
+				MATCH(name)
+				AGAINST(:expression IN BOOLEAN MODE)
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':expression' => $expression,
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a search that includes specific non-erased clinical impressions
+	 * and returns the results.
+	 * 
+	 * It receives an expression, an ORDER BY clause, the limit of rows to
+	 * return and an offset.
+	 */
+	public function searchSpecificNonErasedClinicalImpressions($expression, $orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_clinical_impressions
+			WHERE
+				MATCH(name)
+				AGAINST(:expression IN BOOLEAN MODE)
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':expression' => $expression,
 			':limit' => $limit,
 			':offset' => $offset
 		];

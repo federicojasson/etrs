@@ -48,6 +48,86 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Authentication\SignOut()
 		);
 		
+		// URL:		/server/backgrounds/create
+		// Method:	POST
+		$app->services->define(
+			'/backgrounds/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Backgrounds\Create()
+		);
+		
+		// URL:		/server/backgrounds/edit
+		// Method:	POST
+		$app->services->define(
+			'/backgrounds/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Backgrounds\Edit()
+		);
+		
+		// URL:		/server/backgrounds/erase
+		// Method:	POST
+		$app->services->define(
+			'/backgrounds/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Backgrounds\Erase()
+		);
+		
+		// URL:		/server/backgrounds/get
+		// Method:	POST
+		$app->services->define(
+			'/backgrounds/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Backgrounds\Get()
+		);
+		
+		// URL:		/server/backgrounds/search
+		// Method:	POST
+		$app->services->define(
+			'/backgrounds/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Backgrounds\Search()
+		);
+		
+		// URL:		/server/clinical-impressions/create
+		// Method:	POST
+		$app->services->define(
+			'/clinical-impressions/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ClinicalImpressions\Create()
+		);
+		
+		// URL:		/server/clinical-impressions/edit
+		// Method:	POST
+		$app->services->define(
+			'/clinical-impressions/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ClinicalImpressions\Edit()
+		);
+		
+		// URL:		/server/clinical-impressions/erase
+		// Method:	POST
+		$app->services->define(
+			'/clinical-impressions/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ClinicalImpressions\Erase()
+		);
+		
+		// URL:		/server/clinical-impressions/get
+		// Method:	POST
+		$app->services->define(
+			'/clinical-impressions/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ClinicalImpressions\Get()
+		);
+		
+		// URL:		/server/clinical-impressions/search
+		// Method:	POST
+		$app->services->define(
+			'/clinical-impressions/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\ClinicalImpressions\Search()
+		);
+		
 		// URL:		/server/consultations/create
 		// Method:	POST
 		$app->services->define(
