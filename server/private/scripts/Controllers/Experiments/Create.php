@@ -19,7 +19,7 @@ class Create extends \App\Controllers\SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		$name = trimString($input['name']);
-		$commandLine = $input['commandLine'];
+		$commandLine = $input['commandLine']; // TODO: process somehow?
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -65,6 +65,7 @@ class Create extends \App\Controllers\SecureController {
 			}),
 			
 			'commandLine' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: trim?
 				return $app->inputValidator->isCommandLine();
 			})
 		]);

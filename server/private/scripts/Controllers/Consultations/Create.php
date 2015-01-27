@@ -42,7 +42,7 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: implement
+			// TODO: define user roles
 		];
 		
 		// Validates the authentication and returns the result

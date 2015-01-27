@@ -13,6 +13,31 @@ class DataFilter extends \App\Helpers\Helper {
 	private $authorizedFields;
 	
 	/*
+	 * Filters a consultation and returns the result.
+	 * 
+	 * It receives the consultation.
+	 */
+	public function filterConsultation($consultation) {
+		$app = $this->app;
+		
+		// Initializes the filtered consultation
+		$filteredConsultation = $consultation;
+		$filteredConsultation['backgrounds'] = [];
+		$filteredConsultation['imageTests'] = [];
+		$filteredConsultation['laboratoryTests'] = [];
+		$filteredConsultation['medications'] = [];
+		$filteredConsultation['neurocognitiveTests'] = [];
+		$filteredConsultation['treatments'] = [];
+		
+		// Removes the consultation's unauthorized fields
+		$filteredConsultation = $this->removeUnauthorizedFields($filteredConsultation, $this->authorizedFields['consultations']);
+		
+		// TODO: filter fields
+		
+		return $filteredConsultation;
+	}
+	
+	/*
 	 * Filters an experiment and returns the result.
 	 * 
 	 * It receives the experiment.

@@ -20,7 +20,7 @@ class Edit extends \App\Controllers\SecureController {
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);
 		$name = trimString($input['name']);
-		$dataTypeDefinition = $input['dataTypeDefinition'];
+		$dataTypeDefinition = $input['dataTypeDefinition']; // TODO: process somehow?
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();

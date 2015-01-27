@@ -20,7 +20,7 @@ class Edit extends \App\Controllers\SecureController {
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);
 		$name = trimString($input['name']);
-		$commandLine = $input['commandLine'];
+		$commandLine = $input['commandLine']; // TODO: process somehow?
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -72,6 +72,7 @@ class Edit extends \App\Controllers\SecureController {
 			}),
 			
 			'commandLine' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: trim?
 				return $app->inputValidator->isCommandLine();
 			})
 		]);

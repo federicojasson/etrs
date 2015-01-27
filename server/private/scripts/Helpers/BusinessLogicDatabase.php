@@ -186,6 +186,55 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Creates a study.
+	 * 
+	 * It receives the study's data.
+	 */
+	public function createStudy($id, $consultation, $creator, $experiment, $lastEditor, $report, $observations) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO studies (
+				id,
+				is_erased,
+				consultation,
+				creator,
+				experiment,
+				last_editor,
+				report,
+				creation_datetime,
+				last_edition_datetime,
+				observations
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:consultation,
+				:creator,
+				:experiment,
+				:lastEditor,
+				:report,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:observations
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':consultation' => $consultation,
+			':creator' => $creator,
+			':experiment' => $experiment,
+			':lastEditor' => $lastEditor,
+			':report' => $report,
+			':observations' => $observations
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Edits an experiment.
 	 * 
 	 * It receives the experiment's data.
@@ -303,6 +352,63 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 			':gender' => $gender,
 			':birthDate' => $birthDate,
 			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a study.
+	 * 
+	 * It receives the study's data.
+	 */
+	public function editStudy($id, $consultation, $experiment, $lastEditor, $report, $observations) {
+		// Defines the statement
+		$statement = '
+			UPDATE studies
+			SET
+				consultation = :consultation,
+				experiment = :experiment,
+				last_editor = :lastEditor,
+				report = :report,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				observations = :observations
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':consultation' => $consultation,
+			':experiment' => $experiment,
+			':lastEditor' => $lastEditor,
+			':report' => $report,
+			':observations' => $observations
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Erases a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultation($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE consultations
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
 		];
 		
 		// Executes the statement
@@ -472,6 +578,45 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		return $results;
+	}
+	
+	/*
+	 * Returns a non-erased consultation. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getNonErasedConsultation($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				clinical_impression AS clinicalImpression,
+				creator AS creator,
+				diagnosis AS diagnosis,
+				last_editor AS lastEditor,
+				patient AS patient,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				date AS date,
+				reasons AS reasons,
+				observations AS observations,
+				indications AS indications
+			FROM non_erased_consultations
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
 	}
 	
 	/*
@@ -708,6 +853,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT 0
 			FROM medications
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a non-erased consultation exists.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function nonErasedConsultationExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_consultations
 			WHERE id = :id
 			LIMIT 1
 		';
@@ -1144,6 +1315,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		return $results;
+	}
+	
+	/*
+	 * Determines whether a study exists.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function studyExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM studies
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
 	}
 	
 	/*
