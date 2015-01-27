@@ -18,7 +18,7 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$expression = trimString($input['expression']);
+		$expression = (is_null($input['expression']))? null : trimString($input['expression']);
 		$sorting = $input['sorting'];
 		$page = $input['page'];
 		
@@ -29,7 +29,7 @@ class Search extends \App\Controllers\SecureController {
 		$limit = RESULTS_PER_PAGE;
 		$offset = $limit * ($page - 1);
 		
-		if (isStringEmpty($expression)) {
+		if (is_null($expression)) {
 			// All medications should be included in the search
 			
 			// Searches the medications
@@ -70,18 +70,19 @@ class Search extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'expression' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				if (! $app->inputValidator->isString($input)) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				if (! is_string($input)) {
 					return false;
 				}
 				
 				$input = trimString($input);
 				
-				if (isStringEmpty($input)) {
-					return true;
-				} else {
-					return	$app->inputValidator->isBoundedString($input, 128) &&
-							$app->inputValidator->isPrintableString($input);
-				}
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 128) &&
+						$app->inputValidator->isPrintableString($input);
 			}),
 			
 			'sorting' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [

@@ -60,7 +60,7 @@ class Edit extends \App\Controllers\SecureController {
 			}),
 			
 			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				if (! $app->inputValidator->isString($input)) {
+				if (! is_string($input)) {
 					return false;
 				}
 				
@@ -72,8 +72,7 @@ class Edit extends \App\Controllers\SecureController {
 			}),
 			
 			'dataTypeDefinition' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
-				return true;
+				return $app->inputValidator->isDataTypeDefinition($input);
 			})
 		]);
 		

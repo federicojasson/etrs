@@ -36,7 +36,9 @@ class Create extends \App\Controllers\SecureController {
 			}),
 			
 			'report' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: remember that it can be null
+				if (is_null($input)) {
+					return true;
+				}
 				
 				return $app->inputValidator->isRandomId($input);
 			}),
