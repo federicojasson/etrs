@@ -160,6 +160,46 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Consultations\Get()
 		);
 		
+		// URL:		/server/diagnoses/create
+		// Method:	POST
+		$app->services->define(
+			'/diagnoses/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Diagnoses\Create()
+		);
+		
+		// URL:		/server/diagnoses/edit
+		// Method:	POST
+		$app->services->define(
+			'/diagnoses/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Diagnoses\Edit()
+		);
+		
+		// URL:		/server/diagnoses/erase
+		// Method:	POST
+		$app->services->define(
+			'/diagnoses/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Diagnoses\Erase()
+		);
+		
+		// URL:		/server/diagnoses/get
+		// Method:	POST
+		$app->services->define(
+			'/diagnoses/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Diagnoses\Get()
+		);
+		
+		// URL:		/server/diagnoses/search
+		// Method:	POST
+		$app->services->define(
+			'/diagnoses/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Diagnoses\Search()
+		);
+		
 		// URL:		/server/experiments/create
 		// Method:	POST
 		$app->services->define(
@@ -238,6 +278,46 @@ class Services extends \Slim\Middleware {
 			'/image-tests/search',
 			HTTP_METHOD_POST,
 			new \App\Controllers\ImageTests\Search()
+		);
+		
+		// URL:		/server/laboratory-tests/create
+		// Method:	POST
+		$app->services->define(
+			'/laboratory-tests/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\LaboratoryTests\Create()
+		);
+		
+		// URL:		/server/laboratory-tests/edit
+		// Method:	POST
+		$app->services->define(
+			'/laboratory-tests/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\LaboratoryTests\Edit()
+		);
+		
+		// URL:		/server/laboratory-tests/erase
+		// Method:	POST
+		$app->services->define(
+			'/laboratory-tests/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\LaboratoryTests\Erase()
+		);
+		
+		// URL:		/server/laboratory-tests/get
+		// Method:	POST
+		$app->services->define(
+			'/laboratory-tests/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\LaboratoryTests\Get()
+		);
+		
+		// URL:		/server/laboratory-tests/search
+		// Method:	POST
+		$app->services->define(
+			'/laboratory-tests/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\LaboratoryTests\Search()
 		);
 		
 		// URL:		/server/medications/create

@@ -140,6 +140,46 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Creates a diagnosis.
+	 * 
+	 * It receives the diagnosis' data.
+	 */
+	public function createDiagnosis($id, $creator, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO diagnoses (
+				id,
+				is_erased,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Creates an experiment.
 	 * 
 	 * It receives the experiment's data.
@@ -191,6 +231,49 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		// Defines the statement
 		$statement = '
 			INSERT INTO image_tests (
+				id,
+				is_erased,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name,
+				data_type_definition
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name,
+				:dataTypeDefinition
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $lastEditor,
+			':name' => $name,
+			':dataTypeDefinition' => $dataTypeDefinition
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a laboratory test.
+	 * 
+	 * It receives the laboratory test's data.
+	 */
+	public function createLaboratoryTest($id, $creator, $lastEditor, $name, $dataTypeDefinition) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO laboratory_tests (
 				id,
 				is_erased,
 				creator,
@@ -367,6 +450,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a diagnosis exists.
+	 * 
+	 * It receives the diagnosis' ID.
+	 */
+	public function diagnosisExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM diagnoses
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Edits a background.
 	 * 
 	 * It receives the background's data.
@@ -403,6 +512,34 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		// Defines the statement
 		$statement = '
 			UPDATE clinical_impressions
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a diagnosis.
+	 * 
+	 * It receives the diagnosis' data.
+	 */
+	public function editDiagnosis($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE diagnoses
 			SET
 				last_editor = :lastEditor,
 				last_edition_datetime = UTC_TIMESTAMP(),
@@ -461,6 +598,36 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		// Defines the statement
 		$statement = '
 			UPDATE image_tests
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name,
+				data_type_definition = :dataTypeDefinition
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name,
+			':dataTypeDefinition' => $dataTypeDefinition
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a laboratory test.
+	 * 
+	 * It receives the laboratory test's data.
+	 */
+	public function editLaboratoryTest($id, $lastEditor, $name, $dataTypeDefinition) {
+		// Defines the statement
+		$statement = '
+			UPDATE laboratory_tests
 			SET
 				last_editor = :lastEditor,
 				last_edition_datetime = UTC_TIMESTAMP(),
@@ -650,6 +817,29 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Erases a diagnosis.
+	 * 
+	 * It receives the diagnosis' ID.
+	 */
+	public function eraseDiagnosis($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE diagnoses
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Erases an experiment.
 	 * 
 	 * It receives the experiment's ID.
@@ -704,6 +894,29 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		// Defines the statement
 		$statement = '
 			UPDATE image_tests
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Erases a laboratory test.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function eraseLaboratoryTest($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE laboratory_tests
 			SET is_erased = TRUE
 			WHERE id = :id
 			LIMIT 1
@@ -921,6 +1134,39 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Returns a non-erased diagnosis. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the diagnosis' ID.
+	 */
+	public function getNonErasedDiagnosis($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				last_editor AS lastEditor,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				name AS name
+			FROM non_erased_diagnoses
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
 	 * Returns a non-erased experiment. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the experiment's ID.
@@ -972,6 +1218,41 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 				name AS name,
 				data_type_definition AS dataTypeDefinition
 			FROM non_erased_image_tests
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Returns a non-erased laboratory test. If it doesn't exist, null is
+	 * returned.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function getNonErasedLaboratoryTest($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				last_editor AS lastEditor,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				name AS name,
+				data_type_definition AS dataTypeDefinition
+			FROM non_erased_laboratory_tests
 			WHERE id = :id
 			LIMIT 1
 		';
@@ -1145,6 +1426,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a laboratory test exists.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function laboratoryTestExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM laboratory_tests
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Determines whether a medication exists.
 	 * 
 	 * It receives the medication's ID.
@@ -1249,6 +1556,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a non-erased diagnosis exists.
+	 * 
+	 * It receives the diagnosis' ID.
+	 */
+	public function nonErasedDiagnosisExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_diagnoses
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Determines whether a non-erased experiment exists.
 	 * 
 	 * It receives the experiment's ID.
@@ -1310,6 +1643,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT 0
 			FROM non_erased_image_tests
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a non-erased laboratory test exists.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function nonErasedLaboratoryTestExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_laboratory_tests
 			WHERE id = :id
 			LIMIT 1
 		';
@@ -1487,6 +1846,34 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Performs a search that includes all non-erased diagnoses and returns the
+	 * results.
+	 * 
+	 * It receives an ORDER BY clause, the limit of rows to return and an
+	 * offset.
+	 */
+	public function searchAllNonErasedDiagnoses($orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_diagnoses
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Performs a search that includes all non-erased experiments and returns
 	 * the results.
 	 * 
@@ -1526,6 +1913,34 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT SQL_CALC_FOUND_ROWS id AS id
 			FROM non_erased_image_tests
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a search that includes all non-erased laboratory tests and
+	 * returns the results.
+	 * 
+	 * It receives an ORDER BY clause, the limit of rows to return and an
+	 * offset.
+	 */
+	public function searchAllNonErasedLaboratoryTests($orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_laboratory_tests
 			ORDER BY ' . $orderByClause . '
 			LIMIT :limit OFFSET :offset
 		';
@@ -1663,6 +2078,38 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Performs a search that includes specific non-erased diagnoses and returns
+	 * the results.
+	 * 
+	 * It receives an expression, an ORDER BY clause, the limit of rows to
+	 * return and an offset.
+	 */
+	public function searchSpecificNonErasedDiagnoses($expression, $orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_diagnoses
+			WHERE
+				MATCH(name)
+				AGAINST(:expression IN BOOLEAN MODE)
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':expression' => $expression,
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Performs a search that includes specific non-erased experiments and
 	 * returns the results.
 	 * 
@@ -1706,6 +2153,38 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT SQL_CALC_FOUND_ROWS id AS id
 			FROM non_erased_image_tests
+			WHERE
+				MATCH(name)
+				AGAINST(:expression IN BOOLEAN MODE)
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':expression' => $expression,
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a search that includes specific non-erased laboratory tests and
+	 * returns the results.
+	 * 
+	 * It receives an expression, an ORDER BY clause, the limit of rows to
+	 * return and an offset.
+	 */
+	public function searchSpecificNonErasedLaboratoryTests($expression, $orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_laboratory_tests
 			WHERE
 				MATCH(name)
 				AGAINST(:expression IN BOOLEAN MODE)

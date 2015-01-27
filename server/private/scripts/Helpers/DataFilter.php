@@ -80,6 +80,27 @@ class DataFilter extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Filters a diagnosis and returns the result.
+	 * 
+	 * It receives the diagnosis.
+	 */
+	public function filterDiagnosis($diagnosis) {
+		$app = $this->app;
+		
+		// Initializes the filtered diagnosis
+		$filteredDiagnosis = $diagnosis;
+		
+		// Removes the diagnosis' unauthorized fields
+		$filteredDiagnosis = $this->removeUnauthorizedFields($filteredDiagnosis, $this->authorizedFields['diagnoses']);
+		
+		if (isset($filteredDiagnosis['id'])) {
+			$filteredDiagnosis['id'] = bin2hex($diagnosis['id']);
+		}
+		
+		return $filteredDiagnosis;
+	}
+	
+	/*
 	 * Filters an experiment and returns the result.
 	 * 
 	 * It receives the experiment.
@@ -129,6 +150,27 @@ class DataFilter extends \App\Helpers\Helper {
 		}
 		
 		return $filteredImageTest;
+	}
+	
+	/*
+	 * Filters a laboratory test and returns the result.
+	 * 
+	 * It receives the laboratory test.
+	 */
+	public function filterLaboratoryTest($laboratoryTest) {
+		$app = $this->app;
+		
+		// Initializes the filtered laboratory test
+		$filteredLaboratoryTest = $laboratoryTest;
+		
+		// Removes the laboratory test's unauthorized fields
+		$filteredLaboratoryTest = $this->removeUnauthorizedFields($filteredLaboratoryTest, $this->authorizedFields['laboratoryTests']);
+		
+		if (isset($filteredLaboratoryTest['id'])) {
+			$filteredLaboratoryTest['id'] = bin2hex($laboratoryTest['id']);
+		}
+		
+		return $filteredLaboratoryTest;
 	}
 	
 	/*
