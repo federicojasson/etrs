@@ -5,8 +5,8 @@ namespace App\Controllers\ImageTests;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/image-tests/get
- *	Method:	POST
+ * URL:		/server/image-tests/get
+ * Method:	POST
  */
 class Get extends \App\Controllers\SecureController {
 	

@@ -5,8 +5,8 @@ namespace App\Controllers\Authentication;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/authentication/get-state
- *	Method:	POST
+ * URL:		/server/authentication/get-state
+ * Method:	POST
  */
 class GetState extends \App\Controllers\SecureController {
 	

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers\NeurocognitiveTests;
+namespace App\Controllers\Patients;
 
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/neurocognitive-tests/edit
+ * URL:		/server/patients/erase
  * Method:	POST
  */
-class Edit extends \App\Controllers\SecureController {
+class Erase extends \App\Controllers\SecureController {
 	
 	/*
 	 * Calls the controller.
@@ -19,28 +19,24 @@ class Edit extends \App\Controllers\SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);
-		$name = trimString($input['name']);
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
-		if (! $app->businessLogicDatabase->nonErasedNeurocognitiveTestExists($id)) {
-			// The neurocognitive test doesn't exist
+		if (! $app->businessLogicDatabase->nonErasedPatientExists($id)) {
+			// The patient doesn't exist
 			
 			// Rolls back the transaction
 			$app->businessLogicDatabase->rollBackTransaction();
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_NEUROCOGNITIVE_TEST
+				'error' => ERROR_NON_EXISTENT_PATIENT
 			]);
 		}
 		
-		// Gets the signed in user
-		$signedInUser = $app->authentication->getSignedInUser();
-		
-		// Edits the neurocognitive test
-		$app->businessLogicDatabase->editNeurocognitiveTest($id, $signedInUser['id'], $name);
+		// Erases the patient
+		$app->data->erasePatient($id);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
@@ -56,18 +52,6 @@ class Edit extends \App\Controllers\SecureController {
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
-			}),
-			
-			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				if (! is_string($input)) {
-					return false;
-				}
-				
-				$input = trimString($input);
-				
-				return	$app->inputValidator->isNonEmptyString($input) &&
-						$app->inputValidator->isBoundedString($input, 128) &&
-						$app->inputValidator->isPrintableString($input);
 			})
 		]);
 		
@@ -83,7 +67,8 @@ class Edit extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			USER_ROLE_ADMINISTRATOR
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
 		];
 		
 		// Validates the authentication and returns the result

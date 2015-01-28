@@ -349,6 +349,58 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Creates a patient.
+	 * 
+	 * It receives the patient's data.
+	 */
+	public function createPatient($id, $creator, $lastEditor, $firstName, $lastName, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO patients (
+				id,
+				is_erased,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				first_name,
+				last_name,
+				gender,
+				birth_date,
+				education_years
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:firstName,
+				:lastName,
+				:gender,
+				:birthDate,
+				:educationYears
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $lastEditor,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Creates a treatment.
 	 * 
 	 * It receives the treatment's data.
@@ -611,6 +663,42 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Edits a patient.
+	 * 
+	 * It receives the patient's data.
+	 */
+	public function editPatient($id, $lastEditor, $firstName, $lastName, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			UPDATE patients
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				first_name = :firstName,
+				last_name = :lastName,
+				gender = :gender,
+				birth_date = :birthDate,
+				education_years = :educationYears
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Edits a treatment.
 	 * 
 	 * It receives the treatment's data.
@@ -685,6 +773,29 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Erases a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultation($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE consultations
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Erases a diagnosis.
 	 * 
 	 * It receives the diagnosis' ID.
@@ -693,6 +804,29 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		// Defines the statement
 		$statement = '
 			UPDATE diagnoses
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Erases a file.
+	 * 
+	 * It receives the file's ID.
+	 */
+	public function eraseFile($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE files
 			SET is_erased = TRUE
 			WHERE id = :id
 			LIMIT 1
@@ -800,6 +934,52 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Erases a patient.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function erasePatient($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE patients
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Erases a study.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function eraseStudy($id) {
+		// Defines the statement
+		$statement = '
+			UPDATE studies
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Erases a treatment.
 	 * 
 	 * It receives the treatment's ID.
@@ -820,6 +1000,54 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		
 		// Executes the statement
 		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Returns the non-erased studies of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedStudies($id) {
+		// Defines the statement
+		$statement = '
+			SELECT id AS id
+			FROM non_erased_studies
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased files of an experiment.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function getExperimentNonErasedFiles($id) {
+		// Defines the statement
+		$statement = '
+			SELECT file AS id
+			FROM experiments_non_erased_files
+			WHERE experiment = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
 	}
 	
 	/*
@@ -1060,6 +1288,79 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Returns a non-erased patient. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function getNonErasedPatient($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				creator AS creator,
+				last_editor AS lastEditor,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				first_name AS firstName,
+				last_name AS lastName,
+				gender AS gender,
+				birth_date AS birthDate,
+				education_years AS educationYears
+			FROM non_erased_patients
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Returns a non-erased study. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function getNonErasedStudy($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				consultation AS consultation,
+				creator AS creator,
+				experiment AS experiment,
+				last_editor AS lastEditor,
+				report AS report,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				observations AS observations
+			FROM non_erased_studies
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
 	 * Returns a non-erased treatment. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the treatment's ID.
@@ -1090,6 +1391,54 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		
 		// Returns the first result, or null if there is none
 		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Returns the non-erased consultations of a patient.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function getPatientNonErasedConsultations($id) {
+		// Defines the statement
+		$statement = '
+			SELECT id AS id
+			FROM non_erased_consultations
+			WHERE patient = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased files of a study.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function getStudyNonErasedFiles($id) {
+		// Defines the statement
+		$statement = '
+			SELECT file AS id
+			FROM studies_non_erased_files
+			WHERE study = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
 	}
 	
 	/*
@@ -1379,6 +1728,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a non-erased patient exists.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function nonErasedPatientExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_patients
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Determines whether a non-erased treatment exists.
 	 * 
 	 * It receives the treatment's ID.
@@ -1388,6 +1763,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT 0
 			FROM non_erased_treatments
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a patient exists.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function patientExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM patients
 			WHERE id = :id
 			LIMIT 1
 		';
@@ -1584,6 +1985,34 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT SQL_CALC_FOUND_ROWS id AS id
 			FROM non_erased_neurocognitive_tests
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a search that includes all non-erased patients and returns the
+	 * results.
+	 * 
+	 * It receives an ORDER BY clause, the limit of rows to return and an
+	 * offset.
+	 */
+	public function searchAllNonErasedPatients($orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_patients
 			ORDER BY ' . $orderByClause . '
 			LIMIT :limit OFFSET :offset
 		';
@@ -1834,6 +2263,38 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 			FROM non_erased_neurocognitive_tests
 			WHERE
 				MATCH(name)
+				AGAINST(:expression IN BOOLEAN MODE)
+			ORDER BY ' . $orderByClause . '
+			LIMIT :limit OFFSET :offset
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':expression' => $expression,
+			':limit' => $limit,
+			':offset' => $offset
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Performs a search that includes specific non-erased patients and returns
+	 * the results.
+	 * 
+	 * It receives an expression, an ORDER BY clause, the limit of rows to
+	 * return and an offset.
+	 */
+	public function searchSpecificNonErasedPatients($expression, $orderByClause, $limit, $offset) {
+		// Defines the statement
+		$statement = '
+			SELECT SQL_CALC_FOUND_ROWS id AS id
+			FROM non_erased_patients
+			WHERE
+				MATCH(first_name, last_name)
 				AGAINST(:expression IN BOOLEAN MODE)
 			ORDER BY ' . $orderByClause . '
 			LIMIT :limit OFFSET :offset

@@ -5,8 +5,8 @@ namespace App\Controllers\Authentication;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/authentication/sign-out
- *	Method:	POST
+ * URL:		/server/authentication/sign-out
+ * Method:	POST
  */
 class SignOut extends \App\Controllers\SecureController {
 	

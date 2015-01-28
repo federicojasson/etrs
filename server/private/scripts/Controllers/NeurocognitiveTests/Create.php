@@ -5,8 +5,8 @@ namespace App\Controllers\NeurocognitiveTests;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/neurocognitive-tests/create
- *	Method:	POST
+ * URL:		/server/neurocognitive-tests/create
+ * Method:	POST
  */
 class Create extends \App\Controllers\SecureController {
 	

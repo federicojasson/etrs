@@ -5,8 +5,8 @@ namespace App\Controllers\Medications;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/medications/get
- *	Method:	POST
+ * URL:		/server/medications/get
+ * Method:	POST
  */
 class Get extends \App\Controllers\SecureController {
 	

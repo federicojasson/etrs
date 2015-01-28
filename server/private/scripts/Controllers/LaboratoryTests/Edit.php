@@ -5,8 +5,8 @@ namespace App\Controllers\LaboratoryTests;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/laboratory-tests/edit
- *	Method:	POST
+ * URL:		/server/laboratory-tests/edit
+ * Method:	POST
  */
 class Edit extends \App\Controllers\SecureController {
 	

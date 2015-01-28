@@ -5,8 +5,8 @@ namespace App\Controllers\LaboratoryTests;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/laboratory-tests/erase
- *	Method:	POST
+ * URL:		/server/laboratory-tests/erase
+ * Method:	POST
  */
 class Erase extends \App\Controllers\SecureController {
 	

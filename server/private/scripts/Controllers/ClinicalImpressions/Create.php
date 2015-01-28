@@ -5,8 +5,8 @@ namespace App\Controllers\ClinicalImpressions;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/clinical-impressions/create
- *	Method:	POST
+ * URL:		/server/clinical-impressions/create
+ * Method:	POST
  */
 class Create extends \App\Controllers\SecureController {
 	

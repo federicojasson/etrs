@@ -328,6 +328,46 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\NeurocognitiveTests\Search()
 		);
 		
+		// URL:		/server/patients/create
+		// Method:	POST
+		$app->services->define(
+			'/patients/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Create()
+		);
+		
+		// URL:		/server/patients/edit
+		// Method:	POST
+		$app->services->define(
+			'/patients/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Edit()
+		);
+		
+		// URL:		/server/patients/erase
+		// Method:	POST
+		$app->services->define(
+			'/patients/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Erase()
+		);
+		
+		// URL:		/server/patients/get
+		// Method:	POST
+		$app->services->define(
+			'/patients/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Get()
+		);
+		
+		// URL:		/server/patients/search
+		// Method:	POST
+		$app->services->define(
+			'/patients/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Patients\Search()
+		);
+		
 		// URL:		/server/treatments/create
 		// Method:	POST
 		$app->services->define(

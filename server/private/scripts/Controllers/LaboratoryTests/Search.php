@@ -5,8 +5,8 @@ namespace App\Controllers\LaboratoryTests;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/laboratory-tests/search
- *	Method:	POST
+ * URL:		/server/laboratory-tests/search
+ * Method:	POST
  */
 class Search extends \App\Controllers\SecureController {
 	

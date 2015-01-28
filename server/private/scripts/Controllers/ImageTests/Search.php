@@ -5,8 +5,8 @@ namespace App\Controllers\ImageTests;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/image-tests/search
- *	Method:	POST
+ * URL:		/server/image-tests/search
+ * Method:	POST
  */
 class Search extends \App\Controllers\SecureController {
 	

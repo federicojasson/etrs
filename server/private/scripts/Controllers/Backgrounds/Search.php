@@ -5,8 +5,8 @@ namespace App\Controllers\Backgrounds;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/backgrounds/search
- *	Method:	POST
+ * URL:		/server/backgrounds/search
+ * Method:	POST
  */
 class Search extends \App\Controllers\SecureController {
 	

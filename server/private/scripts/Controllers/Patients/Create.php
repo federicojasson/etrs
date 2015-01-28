@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\LaboratoryTests;
+namespace App\Controllers\Patients;
 
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/laboratory-tests/create
+ * URL:		/server/patients/create
  * Method:	POST
  */
 class Create extends \App\Controllers\SecureController {
@@ -18,8 +18,11 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$name = trimString($input['name']);
-		$dataTypeDefinition = $input['dataTypeDefinition'];
+		$firstName = trimString($input['firstName']);
+		$lastName = trimString($input['lastName']);
+		$gender = $input['gender'];
+		$birthDate = $input['birthDate'];
+		$educationYears = $input['educationYears'];
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -27,13 +30,13 @@ class Create extends \App\Controllers\SecureController {
 		do {
 			// Generates a random ID
 			$id = $app->cryptography->generateRandomId();
-		} while ($app->businessLogicDatabase->laboratoryTestExists($id));
+		} while ($app->businessLogicDatabase->patientExists($id));
 		
 		// Gets the signed in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
-		// Creates the laboratory test
-		$app->businessLogicDatabase->createLaboratoryTest($id, $signedInUser['id'], $signedInUser['id'], $name, $dataTypeDefinition);
+		// Creates the patient
+		$app->businessLogicDatabase->createPatient($id, $signedInUser['id'], $signedInUser['id'], $firstName, $lastName, $gender, $birthDate, $educationYears);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
@@ -52,7 +55,7 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+			'firstName' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 				if (! is_string($input)) {
 					return false;
 				}
@@ -60,12 +63,33 @@ class Create extends \App\Controllers\SecureController {
 				$input = trimString($input);
 				
 				return	$app->inputValidator->isNonEmptyString($input) &&
-						$app->inputValidator->isBoundedString($input, 128) &&
+						$app->inputValidator->isBoundedString($input, 48) &&
 						$app->inputValidator->isPrintableString($input);
 			}),
 			
-			'dataTypeDefinition' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				return $app->inputValidator->isDataTypeDefinition($input);
+			'lastName' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				if (! is_string($input)) {
+					return false;
+				}
+				
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 48) &&
+						$app->inputValidator->isPrintableString($input);
+			}),
+			
+			'gender' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isGender($input);
+			}),
+			
+			'birthDate' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isDate($input);
+			}),
+			
+			'educationYears' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return	$app->inputValidator->isNonNegativeInteger($input) &&
+						$app->inputValidator->isBoundedInteger($input, 100);
 			})
 		]);
 		
@@ -81,7 +105,8 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			USER_ROLE_ADMINISTRATOR
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
 		];
 		
 		// Validates the authentication and returns the result

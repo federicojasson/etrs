@@ -5,8 +5,8 @@ namespace App\Controllers\Backgrounds;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/backgrounds/erase
- *	Method:	POST
+ * URL:		/server/backgrounds/erase
+ * Method:	POST
  */
 class Erase extends \App\Controllers\SecureController {
 	

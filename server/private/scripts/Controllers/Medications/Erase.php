@@ -5,8 +5,8 @@ namespace App\Controllers\Medications;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/medications/erase
- *	Method:	POST
+ * URL:		/server/medications/erase
+ * Method:	POST
  */
 class Erase extends \App\Controllers\SecureController {
 	

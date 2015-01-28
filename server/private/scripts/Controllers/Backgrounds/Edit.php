@@ -5,8 +5,8 @@ namespace App\Controllers\Backgrounds;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/backgrounds/edit
- *	Method:	POST
+ * URL:		/server/backgrounds/edit
+ * Method:	POST
  */
 class Edit extends \App\Controllers\SecureController {
 	

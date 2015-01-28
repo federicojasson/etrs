@@ -5,8 +5,8 @@ namespace App\Controllers\ClinicalImpressions;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/clinical-impressions/erase
- *	Method:	POST
+ * URL:		/server/clinical-impressions/erase
+ * Method:	POST
  */
 class Erase extends \App\Controllers\SecureController {
 	

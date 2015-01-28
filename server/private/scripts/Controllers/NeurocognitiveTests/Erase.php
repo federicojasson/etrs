@@ -5,8 +5,8 @@ namespace App\Controllers\NeurocognitiveTests;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/neurocognitive-tests/erase
- *	Method:	POST
+ * URL:		/server/neurocognitive-tests/erase
+ * Method:	POST
  */
 class Erase extends \App\Controllers\SecureController {
 	

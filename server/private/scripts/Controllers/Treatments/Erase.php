@@ -5,8 +5,8 @@ namespace App\Controllers\Treatments;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/treatments/erase
- *	Method:	POST
+ * URL:		/server/treatments/erase
+ * Method:	POST
  */
 class Erase extends \App\Controllers\SecureController {
 	

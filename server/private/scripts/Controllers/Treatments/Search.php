@@ -5,8 +5,8 @@ namespace App\Controllers\Treatments;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/treatments/search
- *	Method:	POST
+ * URL:		/server/treatments/search
+ * Method:	POST
  */
 class Search extends \App\Controllers\SecureController {
 	

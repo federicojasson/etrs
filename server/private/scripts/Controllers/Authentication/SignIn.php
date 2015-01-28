@@ -5,8 +5,8 @@ namespace App\Controllers\Authentication;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/authentication/sign-in
- *	Method:	POST
+ * URL:		/server/authentication/sign-in
+ * Method:	POST
  */
 class SignIn extends \App\Controllers\SecureController {
 	

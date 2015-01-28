@@ -5,8 +5,8 @@ namespace App\Controllers\ClinicalImpressions;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/clinical-impressions/search
- *	Method:	POST
+ * URL:		/server/clinical-impressions/search
+ * Method:	POST
  */
 class Search extends \App\Controllers\SecureController {
 	

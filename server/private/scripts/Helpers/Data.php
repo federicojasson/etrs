@@ -13,6 +13,94 @@ class Data extends \App\Helpers\Helper {
 	private $authorizedFields;
 	
 	/*
+	 * Erases a consultation and the associated resources.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultation($id) {
+		$app = $this->app;
+		
+		// Gets the consultation's studies
+		$studies = $app->businessLogicDatabase->getConsultationNonErasedStudies($id);
+		
+		// Erases the consultation's studies
+		foreach ($studies as $study) {
+			$this->eraseStudy($study['id']);
+		}
+		
+		// Erases the consultation
+		$app->businessLogicDatabase->eraseConsultation($id);
+	}
+	
+	/*
+	 * Erases an experiment and the associated resources.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function eraseExperiment($id) {
+		$app = $this->app;
+		
+		// Gets the experiment's files
+		$files = $app->businessLogicDatabase->getExperimentNonErasedFiles($id);
+		
+		// Erases the experiment's files
+		foreach ($files as $file) {
+			$app->businessLogicDatabase->eraseFile($file['id']);
+		}
+		
+		// TODO: erase studies?
+		
+		// Erases the experiment
+		$app->businessLogicDatabase->eraseExperiment($id);
+	}
+	
+	/*
+	 * Erases a patient and the associated resources.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function erasePatient($id) {
+		$app = $this->app;
+		
+		// Gets the patient's consultations
+		$consultations = $app->businessLogicDatabase->getPatientNonErasedConsultations($id);
+		
+		// Erases the patient's consultations
+		foreach ($consultations as $consultation) {
+			$this->eraseConsultation($consultation['id']);
+		}
+		
+		// Erases the patient
+		$app->businessLogicDatabase->erasePatient($id);
+	}
+	
+	/*
+	 * Erases a study and the associated resources.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function eraseStudy($id) {
+		$app = $this->app;
+		
+		// Gets the study
+		$study = $app->businessLogicDatabase->getNonErasedStudy($id);
+		
+		// Erases the study's report
+		$app->businessLogicDatabase->eraseFile($study['report']);
+		
+		// Gets the study's files
+		$files = $app->businessLogicDatabase->getStudyNonErasedFiles($id);
+		
+		// Erases the study's files
+		foreach ($files as $file) {
+			$app->businessLogicDatabase->eraseFile($file['id']);
+		}
+		
+		// Erases the study
+		$app->businessLogicDatabase->eraseStudy($id);
+	}
+	
+	/*
 	 * Filters a background and returns the result.
 	 * 
 	 * It receives the background.
@@ -157,6 +245,35 @@ class Data extends \App\Helpers\Helper {
 		}
 		
 		return $filteredNeurocognitiveTest;
+	}
+	
+	/*
+	 * Filters a patient and returns the result.
+	 * 
+	 * It receives the patient.
+	 */
+	public function filterPatient($patient) {
+		$app = $this->app;
+		
+		// Initializes the filtered patient
+		$filteredPatient = $patient;
+		
+		// Removes the patient's unauthorized fields
+		$filteredPatient = $this->removeUnauthorizedFields($filteredPatient, $this->authorizedFields['patients']);
+		
+		if (array_key_exists('id', $filteredPatient)) {
+			$filteredPatient['id'] = bin2hex($patient['id']);
+		}
+		
+		if (array_key_exists('consultations', $filteredPatient)) {
+			$consultations = $app->businessLogicDatabase->getPatientNonErasedConsultations($patient['id']);
+			
+			foreach ($consultations as $consultation) {
+				$filteredPatient['consultations'][] = bin2hex($consultation['id']);
+			}
+		}
+		
+		return $filteredPatient;
 	}
 	
 	/*

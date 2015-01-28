@@ -5,8 +5,8 @@ namespace App\Controllers\Backgrounds;
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/backgrounds/create
- *	Method:	POST
+ * URL:		/server/backgrounds/create
+ * Method:	POST
  */
 class Create extends \App\Controllers\SecureController {
 	

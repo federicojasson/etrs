@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\NeurocognitiveTests;
+namespace App\Controllers\Patients;
 
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/neurocognitive-tests/search
+ * URL:		/server/patients/search
  * Method:	POST
  */
 class Search extends \App\Controllers\SecureController {
@@ -30,19 +30,18 @@ class Search extends \App\Controllers\SecureController {
 		$offset = $limit * ($page - 1);
 		
 		if (is_null($expression)) {
-			// All neurocognitive tests should be included in the search
+			// All patients should be included in the search
 			
-			// Searches the neurocognitive tests
-			$neurocognitiveTests = $app->businessLogicDatabase->searchAllNonErasedNeurocognitiveTests($orderByClause, $limit, $offset);
+			// Searches the patients
+			$patients = $app->businessLogicDatabase->searchAllNonErasedPatients($orderByClause, $limit, $offset);
 		} else {
-			// Only specific neurocognitive tests should be included in the
-			// search
+			// Only specific patients should be included in the search
 			
 			// Gets a boolean expression
 			$booleanExpression = getBooleanExpression($expression);
 			
-			// Searches the neurocognitive tests
-			$neurocognitiveTests = $app->businessLogicDatabase->searchSpecificNonErasedNeurocognitiveTests($booleanExpression, $orderByClause, $limit, $offset);
+			// Searches the patients
+			$patients = $app->businessLogicDatabase->searchSpecificNonErasedPatients($booleanExpression, $orderByClause, $limit, $offset);
 		}
 		
 		// Gets the number of rows found
@@ -50,8 +49,8 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Gets the results
 		$results = [];
-		foreach ($neurocognitiveTests as $neurocognitiveTest) {
-			$results[] = bin2hex($neurocognitiveTest['id']);
+		foreach ($patients as $patient) {
+			$results[] = bin2hex($patient['id']);
 		}
 		
 		// Sets the output
@@ -90,7 +89,11 @@ class Search extends \App\Controllers\SecureController {
 					return $app->inputValidator->isPredefinedString($input, [
 						'creation_datetime',
 						'last_edition_datetime',
-						'name'
+						'first_name',
+						'last_name',
+						'gender',
+						'birth_date',
+						'education_years'
 					]);
 				}),
 				
@@ -117,7 +120,8 @@ class Search extends \App\Controllers\SecureController {
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
 			USER_ROLE_ADMINISTRATOR,
-			USER_ROLE_DOCTOR
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
 		];
 		
 		// Validates the authentication and returns the result
