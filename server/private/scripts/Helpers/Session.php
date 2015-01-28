@@ -34,7 +34,7 @@ class Session extends \App\Helpers\Helper {
 	 * It receives the entry's key.
 	 */
 	public function containsData($key) {
-		return isset($_SESSION[$key]);
+		return array_key_exists($key, $_SESSION);
 	}
 	
 	/*

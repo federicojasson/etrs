@@ -39,7 +39,7 @@ class Get extends \App\Controllers\SecureController {
 		}
 		
 		// Filters the laboratory test
-		$filteredLaboratoryTest = $app->dataFilter->filterLaboratoryTest($laboratoryTest);
+		$filteredLaboratoryTest = $app->data->filterLaboratoryTest($laboratoryTest);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();

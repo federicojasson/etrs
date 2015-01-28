@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\Treatments;
+namespace App\Controllers\Experiments;
 
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/treatments/get
+ *	URL:	/server/experiments/get
  *	Method:	POST
  */
 class Get extends \App\Controllers\SecureController {
@@ -23,29 +23,29 @@ class Get extends \App\Controllers\SecureController {
 		// Starts a read-only transaction
 		$app->businessLogicDatabase->startReadOnlyTransaction();
 		
-		// Gets the treatment
-		$treatment = $app->businessLogicDatabase->getNonErasedTreatment($id);
+		// Gets the experiment
+		$experiment = $app->businessLogicDatabase->getNonErasedExperiment($id);
 		
-		if (is_null($treatment)) {
-			// The treatment doesn't exist
+		if (is_null($experiment)) {
+			// The experiment doesn't exist
 			
 			// Rolls back the transaction
 			$app->businessLogicDatabase->rollBackTransaction();
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_TREATMENT
+				'error' => ERROR_NON_EXISTENT_EXPERIMENT
 			]);
 		}
 		
-		// Filters the treatment
-		$filteredTreatment = $app->data->filterTreatment($treatment);
+		// Filters the experiment
+		$filteredExperiment = $app->data->filterExperiment($experiment);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
 		
 		// Sets the output
-		$app->response->setBody($filteredTreatment);
+		$app->response->setBody($filteredExperiment);
 	}
 	
 	/*

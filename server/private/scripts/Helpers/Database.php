@@ -77,7 +77,7 @@ abstract class Database extends \App\Helpers\Helper {
 	/*
 	 * Starts a read-write transaction.
 	 */
-	public function startReadWiteTransaction() {
+	public function startReadWriteTransaction() {
 		$app = $this->app;
 		
 		try {

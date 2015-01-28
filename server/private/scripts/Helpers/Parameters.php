@@ -23,7 +23,7 @@ class Parameters extends \App\Helpers\Helper {
 	 * It receives the set's ID.
 	 */
 	public function get($id) {
-		if (! isset($this->parameters[$id])) {
+		if (! array_key_exists($id, $this->parameters)) {
 			// The parameters have not been loaded yet
 			$this->load($id);
 		}

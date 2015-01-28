@@ -59,6 +59,7 @@ class InputValidator extends \App\Helpers\Helper {
 	 */
 	public function isDataTypeDefinition($input) {
 		// TODO: implement
+		return true;
 	}
 	
 	/*
@@ -68,6 +69,7 @@ class InputValidator extends \App\Helpers\Helper {
 	 */
 	public function isDate($input) {
 		// TODO: implement
+		return true;
 	}
 	
 	/*

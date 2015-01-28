@@ -39,7 +39,7 @@ class Get extends \App\Controllers\SecureController {
 		}
 		
 		// Filters the medication
-		$filteredMedication = $app->dataFilter->filterMedication($medication);
+		$filteredMedication = $app->data->filterMedication($medication);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();

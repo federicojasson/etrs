@@ -128,38 +128,6 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\ClinicalImpressions\Search()
 		);
 		
-		// URL:		/server/consultations/create
-		// Method:	POST
-		$app->services->define(
-			'/consultations/create',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Consultations\Create()
-		);
-		
-		// URL:		/server/consultations/edit
-		// Method:	POST
-		$app->services->define(
-			'/consultations/edit',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Consultations\Edit()
-		);
-		
-		// URL:		/server/consultations/erase
-		// Method:	POST
-		$app->services->define(
-			'/consultations/erase',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Consultations\Erase()
-		);
-		
-		// URL:		/server/consultations/get
-		// Method:	POST
-		$app->services->define(
-			'/consultations/get',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Consultations\Get()
-		);
-		
 		// URL:		/server/diagnoses/create
 		// Method:	POST
 		$app->services->define(
@@ -198,46 +166,6 @@ class Services extends \Slim\Middleware {
 			'/diagnoses/search',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Diagnoses\Search()
-		);
-		
-		// URL:		/server/experiments/create
-		// Method:	POST
-		$app->services->define(
-			'/experiments/create',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Experiments\Create()
-		);
-		
-		// URL:		/server/experiments/edit
-		// Method:	POST
-		$app->services->define(
-			'/experiments/edit',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Experiments\Edit()
-		);
-		
-		// URL:		/server/experiments/erase
-		// Method:	POST
-		$app->services->define(
-			'/experiments/erase',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Experiments\Erase()
-		);
-		
-		// URL:		/server/experiments/get
-		// Method:	POST
-		$app->services->define(
-			'/experiments/get',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Experiments\Get()
-		);
-		
-		// URL:		/server/experiments/search
-		// Method:	POST
-		$app->services->define(
-			'/experiments/search',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Experiments\Search()
 		);
 		
 		// URL:		/server/image-tests/create
@@ -398,87 +326,6 @@ class Services extends \Slim\Middleware {
 			'/neurocognitive-tests/search',
 			HTTP_METHOD_POST,
 			new \App\Controllers\NeurocognitiveTests\Search()
-		);
-		
-		// URL:		/server/patients/create
-		// Method:	POST
-		$app->services->define(
-			'/patients/create',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Patients\Create()
-		);
-		
-		// URL:		/server/patients/edit
-		// Method:	POST
-		$app->services->define(
-			'/patients/edit',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Patients\Edit()
-		);
-		
-		// URL:		/server/patients/erase
-		// Method:	POST
-		$app->services->define(
-			'/patients/erase',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Patients\Erase()
-		);
-		
-		// URL:		/server/patients/get
-		// Method:	POST
-		$app->services->define(
-			'/patients/get',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Patients\Get()
-		);
-		
-		// URL:		/server/patients/search
-		// Method:	POST
-		$app->services->define(
-			'/patients/search',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Patients\Search()
-		);
-		
-		// URL:		/server/studies/create
-		// Method:	POST
-		$app->services->define(
-			'/studies/create',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Studies\Create()
-		);
-		
-		// URL:		/server/studies/edit
-		// Method:	POST
-		$app->services->define(
-			'/studies/edit',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Studies\Edit()
-		);
-		
-		// URL:		/server/studies/erase
-		// Method:	POST
-		$app->services->define(
-			'/studies/erase',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Studies\Erase()
-		);
-		
-		// URL:		/server/studies/get
-		// Method:	POST
-		$app->services->define(
-			'/studies/get',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Studies\Get()
-		);
-		
-		// TODO: remove
-		// URL:		/server/test/upload
-		// Method:	POST
-		$app->services->define(
-			'/test/upload',
-			HTTP_METHOD_POST,
-			new \App\Controllers\Test\Upload()
 		);
 		
 		// URL:		/server/treatments/create

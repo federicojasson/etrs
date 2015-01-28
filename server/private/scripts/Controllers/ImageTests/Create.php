@@ -19,7 +19,7 @@ class Create extends \App\Controllers\SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		$name = trimString($input['name']);
-		$dataTypeDefinition = $input['dataTypeDefinition']; // TODO: process somehow?
+		$dataTypeDefinition = $input['dataTypeDefinition'];
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();

@@ -39,7 +39,7 @@ class Get extends \App\Controllers\SecureController {
 		}
 		
 		// Filters the image test
-		$filteredImageTest = $app->dataFilter->filterImageTest($imageTest);
+		$filteredImageTest = $app->data->filterImageTest($imageTest);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();

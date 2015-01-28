@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\Treatments;
+namespace App\Controllers\Patients;
 
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/treatments/get
+ *	URL:	/server/patients/get
  *	Method:	POST
  */
 class Get extends \App\Controllers\SecureController {
@@ -23,29 +23,29 @@ class Get extends \App\Controllers\SecureController {
 		// Starts a read-only transaction
 		$app->businessLogicDatabase->startReadOnlyTransaction();
 		
-		// Gets the treatment
-		$treatment = $app->businessLogicDatabase->getNonErasedTreatment($id);
+		// Gets the patient
+		$patient = $app->businessLogicDatabase->getNonErasedPatient($id);
 		
-		if (is_null($treatment)) {
-			// The treatment doesn't exist
+		if (is_null($patient)) {
+			// The patient doesn't exist
 			
 			// Rolls back the transaction
 			$app->businessLogicDatabase->rollBackTransaction();
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_TREATMENT
+				'error' => ERROR_NON_EXISTENT_PATIENT
 			]);
 		}
 		
-		// Filters the treatment
-		$filteredTreatment = $app->data->filterTreatment($treatment);
+		// Filters the patient
+		$filteredPatient = $app->data->filterPatient($patient);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
 		
 		// Sets the output
-		$app->response->setBody($filteredTreatment);
+		$app->response->setBody($filteredPatient);
 	}
 	
 	/*
@@ -74,7 +74,8 @@ class Get extends \App\Controllers\SecureController {
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
 			USER_ROLE_ADMINISTRATOR,
-			USER_ROLE_DOCTOR
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
 		];
 		
 		// Validates the authentication and returns the result

@@ -75,7 +75,7 @@ class EmailFactory extends \App\Helpers\Helper {
 		$app = $this->app;
 		
 		// Initializes the recipient's name (if it is not defined)
-		$recipient['name'] = (isset($recipient['name']))? $recipient['name'] : '';
+		$recipient['name'] = (array_key_exists('name', $recipient))? $recipient['name'] : '';
 		
 		// Gets the SMTP and sender's parameters
 		$parameters = $app->parameters->get(PARAMETERS_EMAILS);

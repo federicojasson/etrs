@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers\Treatments;
+namespace App\Controllers\Patients;
 
 /*
  * This controller is responsible for the following service:
  * 
- *	URL:	/server/treatments/get
+ *	URL:	/server/patients/erase
  *	Method:	POST
  */
-class Get extends \App\Controllers\SecureController {
+class Erase extends \App\Controllers\SecureController {
 	
 	/*
 	 * Calls the controller.
@@ -20,32 +20,26 @@ class Get extends \App\Controllers\SecureController {
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);
 		
-		// Starts a read-only transaction
-		$app->businessLogicDatabase->startReadOnlyTransaction();
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
 		
-		// Gets the treatment
-		$treatment = $app->businessLogicDatabase->getNonErasedTreatment($id);
-		
-		if (is_null($treatment)) {
-			// The treatment doesn't exist
+		if (! $app->businessLogicDatabase->nonErasedPatientExists($id)) {
+			// The patient doesn't exist
 			
 			// Rolls back the transaction
 			$app->businessLogicDatabase->rollBackTransaction();
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_TREATMENT
+				'error' => ERROR_NON_EXISTENT_PATIENT
 			]);
 		}
 		
-		// Filters the treatment
-		$filteredTreatment = $app->data->filterTreatment($treatment);
+		// Erases the patient
+		$app->data->erasePatient($id);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
-		
-		// Sets the output
-		$app->response->setBody($filteredTreatment);
 	}
 	
 	/*

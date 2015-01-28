@@ -54,10 +54,10 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
-	 * Initializes the DataFilter helper.
+	 * Initializes the Data helper.
 	 */
-	public function initializeDataFilterHelper() {
-		return new \App\Helpers\DataFilter();
+	public function initializeDataHelper() {
+		return new \App\Helpers\Data();
 	}
 	
 	/*
@@ -113,7 +113,7 @@ class Helpers extends \Slim\Middleware {
 		$app->container->singleton('authorizationValidator', [ $this, 'initializeAuthorizationValidatorHelper' ]);
 		$app->container->singleton('businessLogicDatabase', [ $this, 'initializeBusinessLogicDatabaseHelper' ]);
 		$app->container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
-		$app->container->singleton('dataFilter', [ $this, 'initializeDataFilterHelper' ]);
+		$app->container->singleton('data', [ $this, 'initializeDataHelper' ]);
 		$app->container->singleton('emailFactory', [ $this, 'initializeEmailFactoryHelper' ]);
 		$app->container->singleton('inputValidator', [ $this, 'initializeInputValidatorHelper' ]);
 		$app->container->singleton('parameters', [ $this, 'initializeParametersHelper' ]);

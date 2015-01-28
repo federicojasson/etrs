@@ -39,7 +39,7 @@ class Get extends \App\Controllers\SecureController {
 		}
 		
 		// Filters the neurocognitive test
-		$filteredNeurocognitiveTest = $app->dataFilter->filterNeurocognitiveTest($neurocognitiveTest);
+		$filteredNeurocognitiveTest = $app->data->filterNeurocognitiveTest($neurocognitiveTest);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();

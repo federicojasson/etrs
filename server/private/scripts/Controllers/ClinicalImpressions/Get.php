@@ -39,7 +39,7 @@ class Get extends \App\Controllers\SecureController {
 		}
 		
 		// Filters the clinical impression
-		$filteredClinicalImpression = $app->dataFilter->filterClinicalImpression($clinicalImpression);
+		$filteredClinicalImpression = $app->data->filterClinicalImpression($clinicalImpression);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();

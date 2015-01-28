@@ -108,7 +108,7 @@ class JsonStructureDescriptor {
 		
 		// Validates the object's properties
 		foreach ($this->definition as $property => $jsonStructureDescriptor) {
-			if (! isset($jsonObject[$property])) {
+			if (! array_key_exists($property, $jsonObject)) {
 				// The property is not defined in the JSON object
 				return false;
 			}

@@ -39,7 +39,7 @@ class Get extends \App\Controllers\SecureController {
 		}
 		
 		// Filters the diagnosis
-		$filteredDiagnosis = $app->dataFilter->filterDiagnosis($diagnosis);
+		$filteredDiagnosis = $app->data->filterDiagnosis($diagnosis);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();

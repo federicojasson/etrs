@@ -39,7 +39,7 @@ class Get extends \App\Controllers\SecureController {
 		}
 		
 		// Filters the background
-		$filteredBackground = $app->dataFilter->filterBackground($background);
+		$filteredBackground = $app->data->filterBackground($background);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
