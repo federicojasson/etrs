@@ -20,7 +20,6 @@ class Edit extends \App\Controllers\SecureController {
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);
 		$name = trimString($input['name']);
-		$dataTypeDefinition = $input['dataTypeDefinition']; // TODO: process somehow?
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -41,7 +40,7 @@ class Edit extends \App\Controllers\SecureController {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Edits the image test
-		$app->businessLogicDatabase->editImageTest($id, $signedInUser['id'], $name, $dataTypeDefinition);
+		$app->businessLogicDatabase->editImageTest($id, $signedInUser['id'], $name);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
@@ -69,10 +68,6 @@ class Edit extends \App\Controllers\SecureController {
 				return	$app->inputValidator->isNonEmptyString($input) &&
 						$app->inputValidator->isBoundedString($input, 128) &&
 						$app->inputValidator->isPrintableString($input);
-			}),
-			
-			'dataTypeDefinition' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				return $app->inputValidator->isDataTypeDefinition($input);
 			})
 		]);
 		

@@ -27,7 +27,108 @@ class Edit extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'clinicalImpression' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'diagnosis' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'patient' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'date' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isDate($input);
+			}),
+			
+			'reasons' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'indications' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'observations' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'backgrounds' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_ARRAY,
+				new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			),
+			
+			'imageTests' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_ARRAY,
+				new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+					'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+						// TODO: implement
+						return true;
+					}),
+					
+					'value' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+						// TODO: implement
+						return true;
+					})
+				])
+			),
+			
+			'laboratoryTests' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_ARRAY,
+				new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+					'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+						// TODO: implement
+						return true;
+					}),
+					
+					'value' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+						// TODO: implement
+						return true;
+					})
+				])
+			),
+			
+			'medications' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_ARRAY,
+				new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			),
+			
+			'neurocognitiveTests' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_ARRAY,
+				new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+					'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+						// TODO: implement
+						return true;
+					}),
+					
+					'value' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+						// TODO: implement
+						return true;
+					})
+				])
+			),
+			
+			'treatments' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_ARRAY,
+				new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			)
 		]);
 		
 		// Validates the request and returns the result
@@ -42,6 +143,8 @@ class Edit extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
 			// TODO: define user roles
 		];
 		

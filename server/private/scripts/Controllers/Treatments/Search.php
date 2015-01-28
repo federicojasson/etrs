@@ -49,9 +49,8 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Gets the results
 		$results = [];
-		$count = count($treatments);
-		for ($i = 0; $i < $count; $i++) {
-			$results[$i] = bin2hex($treatments[$i]['id']);
+		foreach ($treatments as $treatment) {
+			$results[] = bin2hex($treatment['id']);
 		}
 		
 		// Sets the output
@@ -118,7 +117,6 @@ class Search extends \App\Controllers\SecureController {
 		$authorizedUserRoles = [
 			USER_ROLE_ADMINISTRATOR,
 			USER_ROLE_DOCTOR
-			// TODO: USER_ROLE_OPERATOR?
 		];
 		
 		// Validates the authentication and returns the result

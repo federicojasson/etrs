@@ -38,8 +38,21 @@ class Erase extends \App\Controllers\SecureController {
 		// Erases the experiment
 		$app->businessLogicDatabase->eraseExperiment($id);
 		
+		// Gets the experiment's files
+		$files = $app->businessLogicDatabase->getExperimentNonErasedFiles($id);
+		
 		// Erases the experiment's files
-		$app->businessLogicDatabase->eraseExperimentFiles($id); // TODO: rever la forma de eliminar
+		foreach ($files as $file) {
+			$app->businessLogicDatabase->eraseFile($file['id']);
+		}
+		
+		// Gets the experiment's studies
+		$studies = $app->businessLogicDatabase->getExperimentNonErasedStudies($id); // TODO: implement
+		
+		// Erases the experiment's studies
+		foreach ($studies as $study) {
+			// TODO: it should erase also its files and report
+		}
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();

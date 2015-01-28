@@ -140,9 +140,8 @@ class InputValidator extends \App\Helpers\Helper {
 		}
 		
 		// Checks whether the input matches any of the predefined strings
-		$count = count($predefinedStrings);
-		for ($i = 0; $i < $count; $i++) {
-			if ($input === $predefinedStrings[$i]) {
+		foreach ($predefinedStrings as $predefinedString) {
+			if ($input === $predefinedString) {
 				// The input matches the predefined string
 				return true;
 			}

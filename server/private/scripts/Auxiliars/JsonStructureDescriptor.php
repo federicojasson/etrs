@@ -82,10 +82,9 @@ class JsonStructureDescriptor {
 		}
 		
 		// Validates the array's elements
-		$count = count($jsonArray);
-		for ($i = 0; $i < $count; $i++) {
+		foreach ($jsonArray as $element) {
 			// Validates the element recursively
-			$isValid = $this->definition->validateJsonStructure($jsonArray[$i]);
+			$isValid = $this->definition->validateJsonStructure($element);
 			
 			if (! $isValid) {
 				// The element didn't pass the validation

@@ -4,6 +4,8 @@ namespace App\Helpers;
 
 /*
  * This helper is used to filter data before send it to the client.
+ * 
+ * TODO: clean code?
  */
 class DataFilter extends \App\Helpers\Helper {
 	
@@ -74,7 +76,86 @@ class DataFilter extends \App\Helpers\Helper {
 		// Removes the consultation's unauthorized fields
 		$filteredConsultation = $this->removeUnauthorizedFields($filteredConsultation, $this->authorizedFields['consultations']);
 		
-		// TODO: filter fields
+		if (isset($filteredConsultation['clinicalImpression'])) {
+			if (! is_null($consultation['clinicalImpression'])) {
+				if ($app->businessLogicDatabase->nonErasedClinicalImpressionExists($consultation['clinicalImpression'])) {
+					$filteredConsultation['clinicalImpression'] = bin2hex($consultation['clinicalImpression']);
+				} else {
+					$filteredConsultation['clinicalImpression'] = null;
+				}
+			}
+		}
+		
+		if (isset($filteredConsultation['diagnosis'])) {
+			if (! is_null($consultation['diagnosis'])) {
+				if ($app->businessLogicDatabase->nonErasedDiagnosisExists($consultation['diagnosis'])) {
+					$filteredConsultation['diagnosis'] = bin2hex($consultation['diagnosis']);
+				} else {
+					$filteredConsultation['diagnosis'] = null;
+				}
+			}
+		}
+		
+		if (isset($filteredConsultation['patient'])) {
+			$filteredConsultation['patient'] = bin2hex($consultation['patient']);
+		}
+		
+		if (isset($filteredConsultation['backgrounds'])) {
+			$backgrounds = $app->businessLogicDatabase->getConsultationNonErasedBackgrounds($consultation['id']);
+			
+			foreach ($backgrounds as $background) {
+				$filteredConsultation['backgrounds'][] = bin2hex($background['id']);
+			}
+		}
+		
+		if (isset($filteredConsultation['imageTests'])) {
+			$imageTests = $app->businessLogicDatabase->getConsultationNonErasedImageTests($consultation['id']);
+			
+			foreach ($imageTests as $imageTest) {
+				$filteredConsultation['imageTests'][] = [
+					'id' => bin2hex($imageTest['id']),
+					'value' => $imageTest['value']
+				];
+			}
+		}
+		
+		if (isset($filteredConsultation['laboratoryTests'])) {
+			$laboratoryTests = $app->businessLogicDatabase->getConsultationNonErasedLaboratoryTests($consultation['id']);
+			
+			foreach ($laboratoryTests as $laboratoryTest) {
+				$filteredConsultation['laboratoryTests'][] = [
+					'id' => bin2hex($laboratoryTest['id']),
+					'value' => $laboratoryTest['value']
+				];
+			}
+		}
+		
+		if (isset($filteredConsultation['medications'])) {
+			$medications = $app->businessLogicDatabase->getConsultationNonErasedMedications($consultation['id']);
+			
+			foreach ($medications as $medication) {
+				$filteredConsultation['medications'][] = bin2hex($medication['id']);
+			}
+		}
+		
+		if (isset($filteredConsultation['neurocognitiveTests'])) {
+			$neurocognitiveTests = $app->businessLogicDatabase->getConsultationNonErasedNeurocognitiveTests($consultation['id']);
+			
+			foreach ($neurocognitiveTests as $neurocognitiveTest) {
+				$filteredConsultation['neurocognitiveTests'][] = [
+					'id' => bin2hex($neurocognitiveTest['id']),
+					'value' => $neurocognitiveTest['value']
+				];
+			}
+		}
+		
+		if (isset($filteredConsultation['treatments'])) {
+			$treatments = $app->businessLogicDatabase->getConsultationNonErasedTreatments($consultation['id']);
+			
+			foreach ($treatments as $treatment) {
+				$filteredConsultation['treatments'][] = bin2hex($treatment['id']);
+			}
+		}
 		
 		return $filteredConsultation;
 	}
@@ -122,9 +203,8 @@ class DataFilter extends \App\Helpers\Helper {
 		if (isset($filteredExperiment['files'])) {
 			$files = $app->businessLogicDatabase->getExperimentNonErasedFiles($experiment['id']);
 			
-			$count = count($files);
-			for ($i = 0; $i < $count; $i++) {
-				$filteredExperiment['files'][$i] = bin2hex($files[$i]['id']);
+			foreach ($files as $file) {
+				$filteredExperiment['files'][] = bin2hex($file['id']);
 			}
 		}
 		
@@ -275,9 +355,8 @@ class DataFilter extends \App\Helpers\Helper {
 		if (isset($filteredStudy['files'])) {
 			$files = $app->businessLogicDatabase->getStudyNonErasedFiles($study['id']);
 			
-			$count = count($files);
-			for ($i = 0; $i < $count; $i++) {
-				$filteredStudy['files'][$i] = bin2hex($files[$i]['id']);
+			foreach ($files as $file) {
+				$filteredStudy['files'][] = bin2hex($file['id']);
 			}
 		}
 		
@@ -523,9 +602,7 @@ class DataFilter extends \App\Helpers\Helper {
 		$filteredEntity = [];
 		
 		// Adds the authorized fields to the filtered entity
-		$count = count($authorizedFields);
-		for ($i = 0; $i < $count; $i++) {
-			$authorizedField = $authorizedFields[$i];
+		foreach ($authorizedFields as $authorizedField) {
 			$filteredEntity[$authorizedField] = $entity[$authorizedField];
 		}
 		

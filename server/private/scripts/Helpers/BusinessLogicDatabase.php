@@ -60,6 +60,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a consultation exists.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function consultationExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM consultations
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Creates a background.
 	 * 
 	 * It receives the background's data.
@@ -677,15 +703,14 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	 * 
 	 * It receives the image test's data.
 	 */
-	public function editImageTest($id, $lastEditor, $name, $dataTypeDefinition) {
+	public function editImageTest($id, $lastEditor, $name) {
 		// Defines the statement
 		$statement = '
 			UPDATE image_tests
 			SET
 				last_editor = :lastEditor,
 				last_edition_datetime = UTC_TIMESTAMP(),
-				name = :name,
-				data_type_definition = :dataTypeDefinition
+				name = :name
 			WHERE id = :id
 			LIMIT 1
 		';
@@ -694,8 +719,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
-			':name' => $name,
-			':dataTypeDefinition' => $dataTypeDefinition
+			':name' => $name
 		];
 		
 		// Executes the statement
@@ -707,15 +731,14 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	 * 
 	 * It receives the laboratory test's data.
 	 */
-	public function editLaboratoryTest($id, $lastEditor, $name, $dataTypeDefinition) {
+	public function editLaboratoryTest($id, $lastEditor, $name) {
 		// Defines the statement
 		$statement = '
 			UPDATE laboratory_tests
 			SET
 				last_editor = :lastEditor,
 				last_edition_datetime = UTC_TIMESTAMP(),
-				name = :name,
-				data_type_definition = :dataTypeDefinition
+				name = :name
 			WHERE id = :id
 			LIMIT 1
 		';
@@ -724,8 +747,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
-			':name' => $name,
-			':dataTypeDefinition' => $dataTypeDefinition
+			':name' => $name
 		];
 		
 		// Executes the statement
@@ -765,15 +787,14 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	 * 
 	 * It receives the neurocognitive test's data.
 	 */
-	public function editNeurocognitiveTest($id, $lastEditor, $name, $dataTypeDefinition) {
+	public function editNeurocognitiveTest($id, $lastEditor, $name) {
 		// Defines the statement
 		$statement = '
 			UPDATE neurocognitive_tests
 			SET
 				last_editor = :lastEditor,
 				last_edition_datetime = UTC_TIMESTAMP(),
-				name = :name,
-				data_type_definition = :dataTypeDefinition
+				name = :name
 			WHERE id = :id
 			LIMIT 1
 		';
@@ -782,8 +803,7 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
-			':name' => $name,
-			':dataTypeDefinition' => $dataTypeDefinition
+			':name' => $name
 		];
 		
 		// Executes the statement
@@ -831,13 +851,11 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	 * 
 	 * It receives the study's data.
 	 */
-	public function editStudy($id, $consultation, $experiment, $lastEditor, $report, $observations) {
+	public function editStudy($id, $lastEditor, $report, $observations) {
 		// Defines the statement
 		$statement = '
 			UPDATE studies
 			SET
-				consultation = :consultation,
-				experiment = :experiment,
 				last_editor = :lastEditor,
 				report = :report,
 				last_edition_datetime = UTC_TIMESTAMP(),
@@ -849,8 +867,6 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		// Sets the parameters
 		$parameters = [
 			':id' => $id,
-			':consultation' => $consultation,
-			':experiment' => $experiment,
 			':lastEditor' => $lastEditor,
 			':report' => $report,
 			':observations' => $observations
@@ -1004,17 +1020,17 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
-	 * Erases the files of an experiment.
+	 * Erases a file.
 	 * 
-	 * It receives the experiment's ID.
+	 * It receives the file's ID.
 	 */
-	public function eraseExperimentFiles($id) { // TODO: método dudoso (podría usarse getExperimentNonErasedFiles y eliminarlas manualmente)
+	public function eraseFile($id) {
 		// Defines the statement
 		$statement = '
 			UPDATE files
-			INNER JOIN experiments_files ON files.id = experiments_files.file
-			SET files.is_erased = TRUE
-			WHERE experiments_files.experiment = :id
+			SET is_erased = TRUE
+			WHERE id = :id
+			LIMIT 1
 		';
 		
 		// Sets the parameters
@@ -1191,6 +1207,156 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Returns the non-erased backgrounds of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedBackgrounds($id) {
+		// Defines the statement
+		$statement = '
+			SELECT background AS id
+			FROM consultations_non_erased_backgrounds
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased image tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedImageTests($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				image_test AS id,
+				value AS value
+			FROM consultations_non_erased_image_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased laboratory tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedLaboratoryTests($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				laboratory_test AS id,
+				value AS value
+			FROM consultations_non_erased_laboratory_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased medications of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedMedications($id) {
+		// Defines the statement
+		$statement = '
+			SELECT medication AS id
+			FROM consultations_non_erased_medications
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased neurocognitive tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedNeurocognitiveTests($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				neurocognitive_test AS id,
+				value AS value
+			FROM consultations_non_erased_neurocognitive_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased treatments of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedTreatments($id) {
+		// Defines the statement
+		$statement = '
+			SELECT treatment AS id
+			FROM consultations_non_erased_treatments
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Returns the non-erased files of an experiment.
 	 * 
 	 * It receives the experiment's ID.
@@ -1301,8 +1467,8 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 				last_edition_datetime AS lastEditionDatetime,
 				date AS date,
 				reasons AS reasons,
-				observations AS observations,
-				indications AS indications
+				indications AS indications,
+				observations AS observations
 			FROM non_erased_consultations
 			WHERE id = :id
 			LIMIT 1

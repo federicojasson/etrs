@@ -50,9 +50,8 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Gets the results
 		$results = [];
-		$count = count($neurocognitiveTests);
-		for ($i = 0; $i < $count; $i++) {
-			$results[$i] = bin2hex($neurocognitiveTests[$i]['id']);
+		foreach ($neurocognitiveTests as $neurocognitiveTest) {
+			$results[] = bin2hex($neurocognitiveTest['id']);
 		}
 		
 		// Sets the output
@@ -119,7 +118,6 @@ class Search extends \App\Controllers\SecureController {
 		$authorizedUserRoles = [
 			USER_ROLE_ADMINISTRATOR,
 			USER_ROLE_DOCTOR
-			// TODO: USER_ROLE_OPERATOR?
 		];
 		
 		// Validates the authentication and returns the result

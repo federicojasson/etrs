@@ -26,10 +26,9 @@ function getBooleanExpression($expression) {
 
 	// Computes the words of the boolean expression
 	$booleanExpressionWords = [];
-	$count = count($expressionWords);
-	for ($i = 0; $i < $count; $i++) {
+	foreach ($expressionWords as $expressionWord) {
 		// Adds a wildcard to the end of the word
-		$booleanExpressionWords[$i] = $expressionWords[$i] . '*';
+		$booleanExpressionWords[] = $expressionWord . '*';
 	}
 
 	// Builds the boolean expression concatenating the computed words

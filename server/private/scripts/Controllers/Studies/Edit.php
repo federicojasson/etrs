@@ -19,8 +19,6 @@ class Edit extends \App\Controllers\SecureController {
 		// Gets the input
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);
-		$consultation = hex2bin($input['consultation']);
-		$experiment = hex2bin($input['experiment']);
 		$report = (is_null($input['report']))? null : hex2bin($input['report']);
 		$observations = $input['observations']; // TODO: trim?
 		
@@ -36,30 +34,6 @@ class Edit extends \App\Controllers\SecureController {
 			// Halts the execution
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
 				'error' => ERROR_NON_EXISTENT_STUDY
-			]);
-		}
-		
-		if (! $app->businessLogicDatabase->nonErasedConsultationExists($consultation)) {
-			// The consultation doesn't exist
-			
-			// Rolls back the transaction
-			$app->businessLogicDatabase->rollBackTransaction();
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_CONSULTATION
-			]);
-		}
-		
-		if (! $app->businessLogicDatabase->nonErasedExperimentExists($experiment)) {
-			// The experiment doesn't exist
-			
-			// Rolls back the transaction
-			$app->businessLogicDatabase->rollBackTransaction();
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_EXPERIMENT
 			]);
 		}
 		
@@ -82,7 +56,7 @@ class Edit extends \App\Controllers\SecureController {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Edits the study
-		$app->businessLogicDatabase->editStudy($id, $consultation, $experiment, $signedInUser['id'], $report, $observations);
+		$app->businessLogicDatabase->editStudy($id, $signedInUser['id'], $report, $observations);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
@@ -99,14 +73,6 @@ class Edit extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				return $app->inputValidator->isRandomId($input);
-			}),
-			
-			'consultation' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				return $app->inputValidator->isRandomId($input);
-			}),
-			
-			'experiment' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
 			}),
 			

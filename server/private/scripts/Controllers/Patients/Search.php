@@ -49,9 +49,8 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Gets the results
 		$results = [];
-		$count = count($patients);
-		for ($i = 0; $i < $count; $i++) {
-			$results[$i] = bin2hex($patients[$i]['id']);
+		foreach ($patients as $patient) {
+			$results[] = bin2hex($patient['id']);
 		}
 		
 		// Sets the output
