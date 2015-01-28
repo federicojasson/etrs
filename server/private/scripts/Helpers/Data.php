@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 /*
- * TODO: comments
+ * This helper offers data-related functionalities.
  */
 class Data extends \App\Helpers\Helper {
 	
