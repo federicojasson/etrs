@@ -1003,6 +1003,132 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Returns the non-erased backgrounds of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedBackgrounds($id) {
+		// Defines the statement
+		$statement = '
+			SELECT background AS id
+			FROM consultations_non_erased_backgrounds
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased image tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedImageTests($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				image_test AS id,
+				value AS value
+			FROM consultations_non_erased_image_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased laboratory tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedLaboratoryTests($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				laboratory_test AS id,
+				value AS value
+			FROM consultations_non_erased_laboratory_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased medications of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedMedications($id) {
+		// Defines the statement
+		$statement = '
+			SELECT medication AS id
+			FROM consultations_non_erased_medications
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased neurocognitive tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedNeurocognitiveTests($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				neurocognitive_test AS id,
+				value AS value
+			FROM consultations_non_erased_neurocognitive_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Returns the non-erased studies of a consultation.
 	 * 
 	 * It receives the consultation's ID.
@@ -1012,6 +1138,30 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT id AS id
 			FROM non_erased_studies
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-erased treatments of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonErasedTreatments($id) {
+		// Defines the statement
+		$statement = '
+			SELECT treatment AS id
+			FROM consultations_non_erased_treatments
 			WHERE consultation = :id
 		';
 		
@@ -1101,6 +1251,45 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 				last_edition_datetime AS lastEditionDatetime,
 				name AS name
 			FROM non_erased_clinical_impressions
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
+	 * Returns a non-erased consultation. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getNonErasedConsultation($id) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id AS id,
+				is_erased AS isErased,
+				clinical_impression AS clinicalImpression,
+				creator AS creator,
+				diagnosis AS diagnosis,
+				last_editor AS lastEditor,
+				patient AS patient,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				date AS date,
+				reasons AS reasons,
+				indications AS indications,
+				observations AS observations
+			FROM non_erased_consultations
 			WHERE id = :id
 			LIMIT 1
 		';

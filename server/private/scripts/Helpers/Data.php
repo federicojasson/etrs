@@ -143,6 +143,123 @@ class Data extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Filters a consultation and returns the result.
+	 * 
+	 * It receives the consultation.
+	 */
+	public function filterConsultation($consultation) {
+		$app = $this->app;
+		
+		// Initializes the filtered consultation
+		$filteredConsultation = $consultation;
+		$filteredConsultation['backgrounds'] = [];
+		$filteredConsultation['imageTests'] = [];
+		$filteredConsultation['laboratoryTests'] = [];
+		$filteredConsultation['medications'] = [];
+		$filteredConsultation['neurocognitiveTests'] = [];
+		$filteredConsultation['studies'] = [];
+		$filteredConsultation['treatments'] = [];
+		
+		// Removes the consultation's unauthorized fields
+		$filteredConsultation = $this->removeUnauthorizedFields($filteredConsultation, $this->authorizedFields['consultations']);
+		
+		if (array_key_exists('id', $filteredConsultation)) {
+			$filteredConsultation['id'] = bin2hex($consultation['id']);
+		}
+		
+		if (array_key_exists('clinicalImpression', $filteredConsultation)) {
+			if (! is_null($consultation['clinicalImpression'])) {
+				if ($app->businessLogicDatabase->nonErasedClinicalImpressionExists($consultation['clinicalImpression'])) {
+					$filteredConsultation['clinicalImpression'] = bin2hex($consultation['clinicalImpression']);
+				} else {
+					$filteredConsultation['clinicalImpression'] = null;
+				}
+			}
+		}
+		
+		if (array_key_exists('diagnosis', $filteredConsultation)) {
+			if (! is_null($consultation['diagnosis'])) {
+				if ($app->businessLogicDatabase->nonErasedDiagnosisExists($consultation['diagnosis'])) {
+					$filteredConsultation['diagnosis'] = bin2hex($consultation['diagnosis']);
+				} else {
+					$filteredConsultation['diagnosis'] = null;
+				}
+			}
+		}
+		
+		if (array_key_exists('patient', $filteredConsultation)) {
+			$filteredConsultation['patient'] = bin2hex($consultation['patient']);
+		}
+		
+		if (array_key_exists('backgrounds', $filteredConsultation)) {
+			$backgrounds = $app->businessLogicDatabase->getConsultationNonErasedBackgrounds($consultation['id']);
+			
+			foreach ($backgrounds as $background) {
+				$filteredConsultation['backgrounds'][] = bin2hex($background['id']);
+			}
+		}
+		
+		if (array_key_exists('imageTests', $filteredConsultation)) {
+			$imageTests = $app->businessLogicDatabase->getConsultationNonErasedImageTests($consultation['id']);
+			
+			foreach ($imageTests as $imageTest) {
+				$filteredConsultation['imageTests'][] = [
+					'id' => bin2hex($imageTest['id']),
+					'value' => $imageTest['value']
+				];
+			}
+		}
+		
+		if (array_key_exists('laboratoryTests', $filteredConsultation)) {
+			$laboratoryTests = $app->businessLogicDatabase->getConsultationNonErasedLaboratoryTests($consultation['id']);
+			
+			foreach ($laboratoryTests as $laboratoryTest) {
+				$filteredConsultation['laboratoryTests'][] = [
+					'id' => bin2hex($laboratoryTest['id']),
+					'value' => $laboratoryTest['value']
+				];
+			}
+		}
+		
+		if (array_key_exists('medications', $filteredConsultation)) {
+			$medications = $app->businessLogicDatabase->getConsultationNonErasedMedications($consultation['id']);
+			
+			foreach ($medications as $medication) {
+				$filteredConsultation['medications'][] = bin2hex($medication['id']);
+			}
+		}
+		
+		if (array_key_exists('neurocognitiveTests', $filteredConsultation)) {
+			$neurocognitiveTests = $app->businessLogicDatabase->getConsultationNonErasedNeurocognitiveTests($consultation['id']);
+			
+			foreach ($neurocognitiveTests as $neurocognitiveTest) {
+				$filteredConsultation['neurocognitiveTests'][] = [
+					'id' => bin2hex($neurocognitiveTest['id']),
+					'value' => $neurocognitiveTest['value']
+				];
+			}
+		}
+		
+		if (array_key_exists('studies', $filteredConsultation)) {
+			$studies = $app->businessLogicDatabase->getConsultationNonErasedStudies($consultation['id']);
+			
+			foreach ($studies as $study) {
+				$filteredConsultation['studies'][] = bin2hex($study['id']);
+			}
+		}
+		
+		if (array_key_exists('treatments', $filteredConsultation)) {
+			$treatments = $app->businessLogicDatabase->getConsultationNonErasedTreatments($consultation['id']);
+			
+			foreach ($treatments as $treatment) {
+				$filteredConsultation['treatments'][] = bin2hex($treatment['id']);
+			}
+		}
+		
+		return $filteredConsultation;
+	}
+	
+	/*
 	 * Filters a diagnosis and returns the result.
 	 * 
 	 * It receives the diagnosis.
@@ -257,6 +374,7 @@ class Data extends \App\Helpers\Helper {
 		
 		// Initializes the filtered patient
 		$filteredPatient = $patient;
+		$filteredPatient['consultations'] = [];
 		
 		// Removes the patient's unauthorized fields
 		$filteredPatient = $this->removeUnauthorizedFields($filteredPatient, $this->authorizedFields['patients']);

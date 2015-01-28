@@ -23,6 +23,7 @@ require 'private/scripts/Controllers/ClinicalImpressions/Edit.php';
 require 'private/scripts/Controllers/ClinicalImpressions/Erase.php';
 require 'private/scripts/Controllers/ClinicalImpressions/Get.php';
 require 'private/scripts/Controllers/ClinicalImpressions/Search.php';
+require 'private/scripts/Controllers/Consultations/Get.php';
 require 'private/scripts/Controllers/Diagnoses/Create.php';
 require 'private/scripts/Controllers/Diagnoses/Edit.php';
 require 'private/scripts/Controllers/Diagnoses/Erase.php';
