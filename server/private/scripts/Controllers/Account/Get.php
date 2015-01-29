@@ -16,22 +16,28 @@ class Get extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Starts a read-only transaction
+		$app->webServerDatabase->startReadOnlyTransaction();
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Filters the signed in user
+		$filteredSignedInUser = $app->data->filterSignedInUser($signedInUser); // TODO: implement
+		
+		// Commits the transaction
+		$app->webServerDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody($filteredSignedInUser);
 	}
 	
 	/*
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		$app = $this->app;
-		
-		// Defines the expected JSON structure
-		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
-		]);
-		
-		// Validates the request and returns the result
-		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
+		// The service has no input
+		return true;
 	}
 	
 	/*

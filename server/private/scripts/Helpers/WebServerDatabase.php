@@ -185,6 +185,46 @@ class WebServerDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Edits a user.
+	 * 
+	 * It receives the user's data.
+	 */
+	public function editUser($id, $passwordHash, $salt, $keyDerivationIterations, $firstName, $lastName, $gender, $emailAddress, $role) {
+		// Defines the statement
+		$statement = '
+			UPDATE users
+			SET
+				last_edition_datetime = UTC_TIMESTAMP(),
+				password_hash = :passwordHash,
+				salt = :salt,
+				key_derivation_iterations = :keyDerivationIterations,
+				first_name = :firstName,
+				last_name = :lastName,
+				gender = :gender,
+				email_address = :emailAddress,
+				role = :role
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':passwordHash' => $passwordHash,
+			':salt' => $salt,
+			':keyDerivationIterations' => $keyDerivationIterations,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':emailAddress' => $emailAddress,
+			':role' => $role
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Erases the idle sessions.
 	 * 
 	 * It receives the time in seconds that a session can live without activity

@@ -16,7 +16,31 @@ class ChangePassword extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Gets the input
+		$input = $app->request->getBody();
+		$password = $input['password'];
+		$newPassword = $input['newPassword'];
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		if (! $app->authenticator->authenticateUser($signedInUser['id'], $password)) {
+			// The user was not authenticated
+			
+			// TODO: output?
+			
+			return;
+		}
+		
+		// Computes the hash of the new password
+		$salt = $app->cryptography->generateSalt();
+		$keyDerivationIterations = KEY_DERIVATION_ITERATIONS;
+		$newPasswordHash = $app->cryptography->hashPassword($newPassword, $salt, $keyDerivationIterations);
+		
+		// Edits the user
+		$app->webServerDatabase->editUser($signedInUser['id'], $newPasswordHash, $salt, $keyDerivationIterations, $signedInUser['firstName'], $signedInUser['lastName'], $signedInUser['gender'], $signedInUser['emailAddress'], $signedInUser['role']);
+		
+		// TODO: output?
 	}
 	
 	/*
@@ -27,7 +51,13 @@ class ChangePassword extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'password' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isNonEmptyString($input);
+			}),
+			
+			'newPassword' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isPassword($input);
+			})
 		]);
 		
 		// Validates the request and returns the result

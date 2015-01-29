@@ -124,6 +124,16 @@ class InputValidator extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Determines whether an input is a password.
+	 * 
+	 * It receives the input.
+	 */
+	public function isPassword($input) {
+		// TODO: implement
+		return true;
+	}
+	
+	/*
 	 * Determines whether an input is a positive integer.
 	 * 
 	 * It receives the input.
