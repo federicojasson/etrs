@@ -60,6 +60,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Determines whether a consultation exists.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function consultationExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM consultations
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Creates a background.
 	 * 
 	 * It receives the background's data.
@@ -133,6 +159,229 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 			':creator' => $creator,
 			':lastEditor' => $lastEditor,
 			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a consultation.
+	 * 
+	 * It receives the consultation's data.
+	 */
+	public function createConsultation($id, $clinicalImpression, $creator, $diagnosis, $lastEditor, $patient, $date, $reasons, $indications, $observations) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations (
+				id,
+				is_erased,
+				clinical_impression,
+				creator,
+				diagnosis,
+				last_editor,
+				patient,
+				creation_datetime,
+				last_edition_datetime,
+				date,
+				reasons,
+				indications,
+				observations
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:clinicalImpression,
+				:creator,
+				:diagnosis,
+				:lastEditor,
+				:patient,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:date,
+				:reasons,
+				:indications,
+				:observations
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':clinicalImpression' => $clinicalImpression,
+			':creator' => $creator,
+			':diagnosis' => $diagnosis,
+			':lastEditor' => $lastEditor,
+			':patient' => $patient,
+			':date' => $date,
+			':reasons' => $reasons,
+			':indications' => $indications,
+			':observations' => $observations
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationBackground($consultation, $background) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_backgrounds (
+				consultation,
+				background
+			)
+			VALUES (
+				:consultation,
+				:background
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':background' => $background
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationImageTest($consultation, $imageTest, $value) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_image_tests (
+				consultation,
+				image_test,
+				value
+			)
+			VALUES (
+				:consultation,
+				:imageTest,
+				:value
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':imageTest' => $imageTest,
+			':value' => $value
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationLaboratoryTest($consultation, $laboratoryTest, $value) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_laboratory_tests (
+				consultation,
+				laboratory_test,
+				value
+			)
+			VALUES (
+				:consultation,
+				:laboratoryTest,
+				:value
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':laboratoryTest' => $laboratoryTest,
+			':value' => $value
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationMedication($consultation, $medication) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_medications (
+				consultation,
+				medication
+			)
+			VALUES (
+				:consultation,
+				:medication
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':medication' => $medication
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationNeurocognitiveTest($consultation, $neurocognitiveTest, $value) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_neurocognitive_tests (
+				consultation,
+				neurocognitive_test,
+				value
+			)
+			VALUES (
+				:consultation,
+				:neurocognitiveTest,
+				:value
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':neurocognitiveTest' => $neurocognitiveTest,
+			':value' => $value
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationTreatment($consultation, $treatment) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_medications (
+				consultation,
+				treatment
+			)
+			VALUES (
+				:consultation,
+				:treatment
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':treatment' => $treatment
 		];
 		
 		// Executes the statement
@@ -523,6 +772,44 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 	}
 	
 	/*
+	 * Edits a consultation.
+	 * 
+	 * It receives the consultation's data.
+	 */
+	public function editConsultation($id, $clinicalImpression, $diagnosis, $lastEditor, $date, $reasons, $indications, $observations) {
+		// Defines the statement
+		$statement = '
+			UPDATE consultations
+			SET
+				clinical_impression = :clinicalImpression,
+				diagnosis = :diagnosis,
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				date = :date,
+				reasons = :reasons,
+				indications = :indications,
+				observations = :observations
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':clinicalImpression' => $clinicalImpression,
+			':diagnosis' => $diagnosis,
+			':lastEditor' => $lastEditor,
+			':date' => $date,
+			':reasons' => $reasons,
+			':indications' => $indications,
+			':observations' => $observations
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Edits a diagnosis.
 	 * 
 	 * It receives the diagnosis' data.
@@ -784,6 +1071,138 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 			SET is_erased = TRUE
 			WHERE id = :id
 			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultationBackgrounds($id) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_backgrounds
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultationImageTests($id) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_image_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultationLaboratoryTests($id) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_laboratory_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultationMedications($id) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_medications
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultationNeurocognitiveTests($id) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_neurocognitive_tests
+			WHERE consultation = :id
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function eraseConsultationTreatments($id) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_treatments
+			WHERE consultation = :id
 		';
 		
 		// Sets the parameters
@@ -1770,6 +2189,32 @@ class BusinessLogicDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT 0
 			FROM non_erased_clinical_impressions
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a non-erased consultation exists.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function nonErasedConsultationExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM non_erased_consultations
 			WHERE id = :id
 			LIMIT 1
 		';

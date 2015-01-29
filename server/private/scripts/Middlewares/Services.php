@@ -128,6 +128,30 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\ClinicalImpressions\Search()
 		);
 		
+		// URL:		/server/consultations/create
+		// Method:	POST
+		$app->services->define(
+			'/consultations/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Consultations\Create()
+		);
+		
+		// URL:		/server/consultations/edit
+		// Method:	POST
+		$app->services->define(
+			'/consultations/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Consultations\Edit()
+		);
+		
+		// URL:		/server/consultations/erase
+		// Method:	POST
+		$app->services->define(
+			'/consultations/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Consultations\Erase()
+		);
+		
 		// URL:		/server/consultations/get
 		// Method:	POST
 		$app->services->define(

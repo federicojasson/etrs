@@ -13,6 +13,107 @@ class Data extends \App\Helpers\Helper {
 	private $authorizedFields;
 	
 	/*
+	 * Creates a consultation and associates it with the corresponding
+	 * resources.
+	 * 
+	 * It receives the consultation's data.
+	 */
+	public function createConsultation($id, $clinicalImpression, $creator, $diagnosis, $lastEditor, $patient, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) {
+		$app = $this->app;
+		
+		// Creates the consultation
+		$app->businessLogicDatabase->createConsultation($id, $clinicalImpression, $creator, $diagnosis, $lastEditor, $patient, $date, $reasons, $indications, $observations);
+		
+		// Associates the consultation with the backgrounds
+		foreach ($backgrounds as $background) {
+			$app->businessLogicDatabase->createConsultationBackground($id, $background);
+		}
+		
+		// Associates the consultation with the image tests
+		foreach ($imageTests as $imageTest) {
+			$app->businessLogicDatabase->createConsultationImageTest($id, $imageTest['id'], $imageTest['value']);
+		}
+		
+		// Associates the consultation with the laboratory tests
+		foreach ($laboratoryTests as $laboratoryTest) {
+			$app->businessLogicDatabase->createConsultationLaboratoryTest($id, $laboratoryTest['id'], $laboratoryTest['value']);
+		}
+		
+		// Associates the consultation with the medications
+		foreach ($medications as $medication) {
+			$app->businessLogicDatabase->createConsultationMedication($id, $medication);
+		}
+		
+		// Associates the consultation with the neurocognitive tests
+		foreach ($neurocognitiveTests as $neurocognitiveTest) {
+			$app->businessLogicDatabase->createConsultationNeurocognitiveTest($id, $neurocognitiveTest['id'], $neurocognitiveTest['value']);
+		}
+		
+		// Associates the consultation with the treatments
+		foreach ($treatments as $treatment) {
+			$app->businessLogicDatabase->createConsultationTreatment($id, $treatment);
+		}
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function editConsultation($id, $clinicalImpression, $diagnosis, $lastEditor, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) {
+		$app = $this->app;
+		
+		// Edits the consultation
+		$app->businessLogicDatabase->editConsultation($id, $clinicalImpression, $diagnosis, $lastEditor, $date, $reasons, $indications, $observations);
+		
+		// TODO: comments
+		$app->businessLogicDatabase->eraseConsultationBackgrounds($id);
+		
+		// Associates the consultation with the backgrounds
+		foreach ($backgrounds as $background) {
+			$app->businessLogicDatabase->createConsultationBackground($id, $background);
+		}
+		
+		// TODO: comments
+		$app->businessLogicDatabase->eraseConsultationImageTests($id);
+		
+		// Associates the consultation with the image tests
+		foreach ($imageTests as $imageTest) {
+			$app->businessLogicDatabase->createConsultationImageTest($id, $imageTest['id'], $imageTest['value']);
+		}
+		
+		// TODO: comments
+		$app->businessLogicDatabase->eraseConsultationLaboratoryTests($id);
+		
+		// Associates the consultation with the laboratory tests
+		foreach ($laboratoryTests as $laboratoryTest) {
+			$app->businessLogicDatabase->createConsultationLaboratoryTest($id, $laboratoryTest['id'], $laboratoryTest['value']);
+		}
+		
+		// TODO: comments
+		$app->businessLogicDatabase->eraseConsultationMedications($id);
+		
+		// Associates the consultation with the medications
+		foreach ($medications as $medication) {
+			$app->businessLogicDatabase->createConsultationMedication($id, $medication);
+		}
+		
+		// TODO: comments
+		$app->businessLogicDatabase->eraseConsultationNeurocognitiveTests($id);
+		
+		// Associates the consultation with the neurocognitive tests
+		foreach ($neurocognitiveTests as $neurocognitiveTest) {
+			$app->businessLogicDatabase->createConsultationNeurocognitiveTest($id, $neurocognitiveTest['id'], $neurocognitiveTest['value']);
+		}
+		
+		// TODO: comments
+		$app->businessLogicDatabase->eraseConsultationTreatments($id);
+		
+		// Associates the consultation with the treatments
+		foreach ($treatments as $treatment) {
+			$app->businessLogicDatabase->createConsultationTreatment($id, $treatment);
+		}
+	}
+	
+	/*
 	 * Erases a consultation and the associated resources.
 	 * 
 	 * It receives the consultation's ID.
