@@ -212,7 +212,7 @@ class Data extends \App\Helpers\Helper {
 		// Initializes the filtered background
 		$filteredBackground = $background;
 		
-		// Removes the background's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredBackground = $this->removeUnauthorizedFields($filteredBackground, $this->authorizedFields['backgrounds']);
 		
 		if (array_key_exists('id', $filteredBackground)) {
@@ -233,7 +233,7 @@ class Data extends \App\Helpers\Helper {
 		// Initializes the filtered clinical impression
 		$filteredClinicalImpression = $clinicalImpression;
 		
-		// Removes the clinical impression's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredClinicalImpression = $this->removeUnauthorizedFields($filteredClinicalImpression, $this->authorizedFields['clinicalImpressions']);
 		
 		if (array_key_exists('id', $filteredClinicalImpression)) {
@@ -261,7 +261,7 @@ class Data extends \App\Helpers\Helper {
 		$filteredConsultation['studies'] = [];
 		$filteredConsultation['treatments'] = [];
 		
-		// Removes the consultation's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredConsultation = $this->removeUnauthorizedFields($filteredConsultation, $this->authorizedFields['consultations']);
 		
 		if (array_key_exists('id', $filteredConsultation)) {
@@ -371,7 +371,7 @@ class Data extends \App\Helpers\Helper {
 		// Initializes the filtered diagnosis
 		$filteredDiagnosis = $diagnosis;
 		
-		// Removes the diagnosis' unauthorized fields
+		// Removes the unauthorized fields
 		$filteredDiagnosis = $this->removeUnauthorizedFields($filteredDiagnosis, $this->authorizedFields['diagnoses']);
 		
 		if (array_key_exists('id', $filteredDiagnosis)) {
@@ -392,7 +392,7 @@ class Data extends \App\Helpers\Helper {
 		// Initializes the filtered image test
 		$filteredImageTest = $imageTest;
 		
-		// Removes the image test's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredImageTest = $this->removeUnauthorizedFields($filteredImageTest, $this->authorizedFields['imageTests']);
 		
 		if (array_key_exists('id', $filteredImageTest)) {
@@ -413,7 +413,7 @@ class Data extends \App\Helpers\Helper {
 		// Initializes the filtered laboratory test
 		$filteredLaboratoryTest = $laboratoryTest;
 		
-		// Removes the laboratory test's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredLaboratoryTest = $this->removeUnauthorizedFields($filteredLaboratoryTest, $this->authorizedFields['laboratoryTests']);
 		
 		if (array_key_exists('id', $filteredLaboratoryTest)) {
@@ -434,7 +434,7 @@ class Data extends \App\Helpers\Helper {
 		// Initializes the filtered medication
 		$filteredMedication = $medication;
 		
-		// Removes the medication's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredMedication = $this->removeUnauthorizedFields($filteredMedication, $this->authorizedFields['medications']);
 		
 		if (array_key_exists('id', $filteredMedication)) {
@@ -455,7 +455,7 @@ class Data extends \App\Helpers\Helper {
 		// Initializes the filtered neurocognitive test
 		$filteredNeurocognitiveTest = $neurocognitiveTest;
 		
-		// Removes the neurocognitive test's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredNeurocognitiveTest = $this->removeUnauthorizedFields($filteredNeurocognitiveTest, $this->authorizedFields['neurocognitiveTests']);
 		
 		if (array_key_exists('id', $filteredNeurocognitiveTest)) {
@@ -477,7 +477,7 @@ class Data extends \App\Helpers\Helper {
 		$filteredPatient = $patient;
 		$filteredPatient['consultations'] = [];
 		
-		// Removes the patient's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredPatient = $this->removeUnauthorizedFields($filteredPatient, $this->authorizedFields['patients']);
 		
 		if (array_key_exists('id', $filteredPatient)) {
@@ -496,6 +496,26 @@ class Data extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Filters a study and returns the result.
+	 * 
+	 * It receives the study.
+	 */
+	public function filterStudy($study) {
+		$app = $this->app;
+		
+		// Initializes the filtered study
+		$filteredStudy = $study;
+		// TODO: add fields
+		
+		// Removes the unauthorized fields
+		$filteredStudy = $this->removeUnauthorizedFields($filteredStudy, $this->authorizedFields['studies']);
+		
+		// TODO
+		
+		return $filteredStudy;
+	}
+	
+	/*
 	 * Filters a treatment and returns the result.
 	 * 
 	 * It receives the treatment.
@@ -506,7 +526,7 @@ class Data extends \App\Helpers\Helper {
 		// Initializes the filtered treatment
 		$filteredTreatment = $treatment;
 		
-		// Removes the treatment's unauthorized fields
+		// Removes the unauthorized fields
 		$filteredTreatment = $this->removeUnauthorizedFields($filteredTreatment, $this->authorizedFields['treatments']);
 		
 		if (array_key_exists('id', $filteredTreatment)) {

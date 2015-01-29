@@ -24,6 +24,46 @@ class Services extends \Slim\Middleware {
 	private function defineServices() {
 		$app = $this->app;
 		
+		// URL:		/server/account/change-password
+		// Method:	POST
+		$app->services->define(
+			'/account/change-password',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Account\ChangePassword()
+		);
+		
+		// URL:		/server/account/create
+		// Method:	POST
+		$app->services->define(
+			'/account/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Account\Create()
+		);
+		
+		// URL:		/server/account/get
+		// Method:	POST
+		$app->services->define(
+			'/account/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Account\Get()
+		);
+		
+		// URL:		/server/account/recover-password
+		// Method:	POST
+		$app->services->define(
+			'/account/recover-password',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Account\RecoverPassword()
+		);
+		
+		// URL:		/server/account-creation-requests/create
+		// Method:	POST
+		$app->services->define(
+			'/account-creation-requests/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\AccountCreationRequests\Create()
+		);
+		
 		// URL:		/server/authentication/get-state
 		// Method:	POST
 		$app->services->define(
@@ -200,6 +240,46 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Diagnoses\Search()
 		);
 		
+		// URL:		/server/experiments/create
+		// Method:	POST
+		$app->services->define(
+			'/experiments/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Create()
+		);
+		
+		// URL:		/server/experiments/edit
+		// Method:	POST
+		$app->services->define(
+			'/experiments/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Edit()
+		);
+		
+		// URL:		/server/experiments/erase
+		// Method:	POST
+		$app->services->define(
+			'/experiments/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Erase()
+		);
+		
+		// URL:		/server/experiments/get
+		// Method:	POST
+		$app->services->define(
+			'/experiments/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Get()
+		);
+		
+		// URL:		/server/experiments/search
+		// Method:	POST
+		$app->services->define(
+			'/experiments/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Search()
+		);
+		
 		// URL:		/server/image-tests/create
 		// Method:	POST
 		$app->services->define(
@@ -360,6 +440,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\NeurocognitiveTests\Search()
 		);
 		
+		// URL:		/server/password-recovery-requests/create
+		// Method:	POST
+		$app->services->define(
+			'/password-recovery-requests/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\PasswordRecoveryRequests\Create()
+		);
+		
 		// URL:		/server/patients/create
 		// Method:	POST
 		$app->services->define(
@@ -398,6 +486,38 @@ class Services extends \Slim\Middleware {
 			'/patients/search',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Patients\Search()
+		);
+		
+		// URL:		/server/studies/create
+		// Method:	POST
+		$app->services->define(
+			'/studies/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Create()
+		);
+		
+		// URL:		/server/studies/edit
+		// Method:	POST
+		$app->services->define(
+			'/studies/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Edit()
+		);
+		
+		// URL:		/server/studies/erase
+		// Method:	POST
+		$app->services->define(
+			'/studies/erase',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Erase()
+		);
+		
+		// URL:		/server/studies/get
+		// Method:	POST
+		$app->services->define(
+			'/studies/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Get()
 		);
 		
 		// URL:		/server/treatments/create
