@@ -86,7 +86,7 @@ class Search extends \App\Controllers\SecureController {
 			
 			'sorting' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-					return $app->inputValidator->isPredefinedString($input, [
+					return $app->inputValidator->isPredefinedValue($input, [
 						'creation_datetime',
 						'last_edition_datetime',
 						'name'

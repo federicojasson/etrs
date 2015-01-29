@@ -8,6 +8,74 @@ namespace App\Helpers;
 class WebServerDatabase extends \App\Helpers\Database {
 	
 	/*
+	 * Determines whether an account creation request exists.
+	 * 
+	 * It receives the account creation request's ID.
+	 */
+	public function accountCreationRequestExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM account_creation_requests
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Creates an account creation request.
+	 * 
+	 * It receives the account creation request's data.
+	 */
+	public function createAccountCreationRequest($id, $creator, $passwordHash, $salt, $keyDerivationIterations, $role) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO account_creation_requests (
+				id,
+				creator,
+				creation_datetime,
+				password_hash,
+				salt,
+				key_derivation_iterations,
+				role
+			)
+			VALUES (
+				:id,
+				:creator,
+				UTC_TIMESTAMP(),
+				:passwordHash,
+				:salt,
+				:keyDerivationIterations,
+				:role
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':passwordHash' => $passwordHash,
+			':salt' => $salt,
+			':keyDerivationIterations' => $keyDerivationIterations,
+			':role' => $role
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Creates a log.
 	 * 
 	 * It receives the log's data.
@@ -71,6 +139,45 @@ class WebServerDatabase extends \App\Helpers\Database {
 			':id' => $id,
 			':dataForInsert' => $data,
 			':dataForUpdate' => $data
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a password recovery request.
+	 * 
+	 * It receives the password recovery request's data.
+	 */
+	public function createPasswordRecoveryRequest($id, $user, $passwordHash, $salt, $keyDerivationIterations) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO password_recovery_requests (
+				id,
+				user,
+				creation_datetime,
+				password_hash,
+				salt,
+				key_derivation_iterations
+			)
+			VALUES (
+				:id,
+				:user,
+				UTC_TIMESTAMP(),
+				:passwordHash,
+				:salt,
+				:keyDerivationIterations
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':user' => $user,
+			':passwordHash' => $passwordHash,
+			':salt' => $salt,
+			':keyDerivationIterations' => $keyDerivationIterations
 		];
 		
 		// Executes the statement
@@ -200,6 +307,32 @@ class WebServerDatabase extends \App\Helpers\Database {
 		$statement = '
 			SELECT 0
 			FROM logs
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
+	 * Determines whether a password recovery request exists.
+	 * 
+	 * It receives the password recovery request's ID.
+	 */
+	public function passwordRecoveryRequestExists($id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM password_recovery_requests
 			WHERE id = :id
 			LIMIT 1
 		';

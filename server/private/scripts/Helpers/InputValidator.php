@@ -73,12 +73,21 @@ class InputValidator extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Determines whether an input is an email address.
+	 * 
+	 * It receives the input.
+	 */
+	public function isEmailAddress($input) {
+		// TODO: implement
+	}
+	
+	/*
 	 * Determines whether an input is a gender.
 	 * 
 	 * It receives the input.
 	 */
 	public function isGender($input) {
-		return $this->isPredefinedString($input, [
+		return $this->isPredefinedValue($input, [
 			GENDER_FEMALE,
 			GENDER_MALE
 		]);
@@ -130,26 +139,19 @@ class InputValidator extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Determines whether an input is a string and matches any of a predefined
-	 * set.
+	 * Determines whether an input matches any value of a predefined set.
 	 * 
-	 * It receives the input and the predefined strings.
+	 * It receives the input and the values.
 	 */
-	public function isPredefinedString($input, $predefinedStrings) {
-		if (! is_string($input)) {
-			// The input is not a string
-			return false;
-		}
-		
-		// Checks whether the input matches any of the predefined strings
-		foreach ($predefinedStrings as $predefinedString) {
-			if ($input === $predefinedString) {
-				// The input matches the predefined string
+	public function isPredefinedValue($input, $values) {
+		foreach ($values as $value) {
+			if ($input === $value) {
+				// The input matches the value
 				return true;
 			}
 		}
 		
-		// The input doesn't match any of the predefined strings
+		// The input doesn't match any of the values
 		return false;
 	}
 	
@@ -189,9 +191,22 @@ class InputValidator extends \App\Helpers\Helper {
 	 * It receives the input.
 	 */
 	public function isSortingOrder($input) {
-		return $this->isPredefinedString($input, [
+		return $this->isPredefinedValue($input, [
 			SORTING_ORDER_ASCENDING,
 			SORTING_ORDER_DESCENDING
+		]);
+	}
+	
+	/*
+	 * Determines whether an input is a user role.
+	 * 
+	 * It receives the input
+	 */
+	public function isUserRole($input) {
+		return $this->isPredefinedValue($input, [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
 		]);
 	}
 	
