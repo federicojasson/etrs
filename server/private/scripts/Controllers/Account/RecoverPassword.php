@@ -16,7 +16,49 @@ class RecoverPassword extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// TODO: transactions?
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		$password = $input['password'];
+		$newPassword = $input['newPassword'];
+		
+		// Authenticates the recover password permission
+		$authenticated = $app->authenticator->authenticateRecoverPasswordPermissionByPassword($id, $password);
+		
+		if ($authenticated) {
+			// The recover password permission was authenticated
+			
+			// Gets the recover password permission
+			$recoverPasswordPermission = $app->webServerDatabase->getRecoverPasswordPermission($id);
+			
+			// Gets the user
+			$user = $app->webServerDatabase->getUser($recoverPasswordPermission['user']);
+			
+			// Computes the hash of the new password
+			$salt = $app->cryptography->generateSalt();
+			$keyDerivationIterations = KEY_DERIVATION_ITERATIONS;
+			$newPasswordHash = $app->cryptography->hashPassword($newPassword, $salt, $keyDerivationIterations);
+			
+			// Edits the user
+			$app->webServerDatabase->editUser(
+				$user['id'],
+				$newPasswordHash,
+				$salt,
+				$keyDerivationIterations,
+				$user['role'],
+				$user['firstName'],
+				$user['lastName'],
+				$user['gender'],
+				$user['emailAddress']
+			);
+		}
+		
+		// Sets the output
+		$app->response->setBody([
+			'authenticated' => $authenticated
+		]);
 	}
 	
 	/*
@@ -27,7 +69,17 @@ class RecoverPassword extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'password' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'newPassword' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -40,13 +92,8 @@ class RecoverPassword extends \App\Controllers\SecureController {
 	protected function isUserAuthorized() {
 		$app = $this->app;
 		
-		// Defines the authorized user roles
-		$authorizedUserRoles = [
-			// TODO: implement
-		];
-		
-		// Validates the account and returns the result
-		return $app->authorizationValidator->validateAccount($authorizedUserRoles);
+		// The service is available only for users not signed in
+		return ! $app->account->isUserSignedIn();
 	}
 	
 }

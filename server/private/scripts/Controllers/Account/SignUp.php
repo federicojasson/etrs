@@ -40,13 +40,8 @@ class SignUp extends \App\Controllers\SecureController {
 	protected function isUserAuthorized() {
 		$app = $this->app;
 		
-		// Defines the authorized user roles
-		$authorizedUserRoles = [
-			// TODO: implement
-		];
-		
-		// Validates the account and returns the result
-		return $app->authorizationValidator->validateAccount($authorizedUserRoles);
+		// The service is available only for users not signed in
+		return ! $app->account->isUserSignedIn();
 	}
 	
 }

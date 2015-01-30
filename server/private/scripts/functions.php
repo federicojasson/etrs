@@ -5,6 +5,31 @@
  */
 
 /*
+ * Returns the first element of an array. If the array is empty, null is
+ * returned.
+ * 
+ * It receives the array.
+ */
+function getFirstElementOrNull($array) {
+	if (count($array) === 0) {
+		// The array is empty
+		return null;
+	}
+
+	// Returns the first element
+	return $array[0];
+}
+
+/*
+ * Returns the length of a string.
+ * 
+ * It receives the string.
+ */
+function getStringLength($string) {
+	return mb_strlen($string, CHARACTER_ENCODING_UTF8);
+}
+
+/*
  * Determines whether an array is sequential.
  * 
  * It receives the array.
@@ -15,6 +40,15 @@ function isSequentialArray($array) {
 
 	// Compares the keys of the array with the indices and returns the result
 	return array_keys($array) === $indices;
+}
+
+/*
+ * Determines whether a string is empty.
+ * 
+ * It receives the string.
+ */
+function isStringEmpty($string) {
+	return getStringLength($string) === 0;
 }
 
 /*
@@ -59,4 +93,19 @@ function replacePlaceholders($string, $mapping) {
 
 	// Replaces the placeholders and returns the result
 	return str_replace($placeholders, $replacements, $string);
+}
+
+/*
+ * Trims a string, removing duplicate, leading and trailing whitespaces.
+ * 
+ * It receives the string.
+ */
+function trimString($string) {
+	// Removes duplicate whitespaces
+	$string = preg_replace('/[ ]+/', ' ', $string);
+	
+	// Removes leading and trailing whitespaces
+	$string = trim($string, ' ');
+	
+	return $string;
 }

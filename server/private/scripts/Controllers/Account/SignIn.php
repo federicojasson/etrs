@@ -16,7 +16,25 @@ class SignIn extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = $input['id'];
+		$password = $input['password'];
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($id, $password);
+		
+		if ($authenticated) {
+			// The user was authenticated
+			
+			// Signs in the user in the system
+			$app->account->signInUser($id);
+		}
+		
+		// Sets the output
+		$app->response->setBody([
+			'authenticated' => $authenticated
+		]);
 	}
 	
 	/*
@@ -27,7 +45,13 @@ class SignIn extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'password' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -40,13 +64,8 @@ class SignIn extends \App\Controllers\SecureController {
 	protected function isUserAuthorized() {
 		$app = $this->app;
 		
-		// Defines the authorized user roles
-		$authorizedUserRoles = [
-			// TODO: implement
-		];
-		
-		// Validates the account and returns the result
-		return $app->authorizationValidator->validateAccount($authorizedUserRoles);
+		// The service is available only for users not signed in
+		return ! $app->account->isUserSignedIn();
 	}
 	
 }

@@ -40,6 +40,13 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Initializes the BusinessLogicDatabase helper.
+	 */
+	public function initializeBusinessLogicDatabaseHelper() {
+		return new \App\Helpers\BusinessLogicDatabase();
+	}
+	
+	/*
 	 * Initializes the Cryptography helper.
 	 */
 	public function initializeCryptographyHelper() {
@@ -89,6 +96,13 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Initializes the WebServerDatabase helper.
+	 */
+	public function initializeWebServerDatabaseHelper() {
+		return new \App\Helpers\WebServerDatabase();
+	}
+	
+	/*
 	 * Defines the helpers.
 	 */
 	private function defineHelpers() {
@@ -97,6 +111,7 @@ class Helpers extends \Slim\Middleware {
 		$app->container->singleton('account', [ $this, 'initializeAccountHelper' ]);
 		$app->container->singleton('authenticator', [ $this, 'initializeAuthenticatorHelper' ]);
 		$app->container->singleton('authorizationValidator', [ $this, 'initializeAuthorizationValidatorHelper' ]);
+		$app->container->singleton('businessLogicDatabase', [ $this, 'initializeBusinessLogicDatabaseHelper' ]);
 		$app->container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
 		$app->container->singleton('emailFactory', [ $this, 'initializeEmailFactoryHelper' ]);
 		$app->container->singleton('files', [ $this, 'initializeFilesHelper' ]);
@@ -104,6 +119,7 @@ class Helpers extends \Slim\Middleware {
 		$app->container->singleton('parameters', [ $this, 'initializeParametersHelper' ]);
 		$app->container->singleton('services', [ $this, 'initializeServicesHelper' ]);
 		$app->container->singleton('session', [ $this, 'initializeSessionHelper' ]);
+		$app->container->singleton('webServerDatabase', [ $this, 'initializeWebServerDatabaseHelper' ]);
 	}
 	
 }

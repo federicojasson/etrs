@@ -2,6 +2,10 @@ Tareas (TODOs):
 
 - Comentar base de datos
 
+- Tareas de mantenimiento:
+	- Eliminar permisos vencidos.
+	- Eliminar archivos temporarios.
+
 - Recordar configurar (en php.ini):
 	session.gc_probability
 	session.gc_divisor

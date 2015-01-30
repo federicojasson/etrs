@@ -16,7 +16,45 @@ class EditPassword extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// TODO: transactions?
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$password = $input['password'];
+		$newPassword = $input['newPassword'];
+		
+		// Gets the signed in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($signedInUser['id'], $password);
+		
+		if ($authenticated) {
+			// The user was authenticated
+			
+			// Computes the hash of the new password
+			$salt = $app->cryptography->generateSalt();
+			$keyDerivationIterations = KEY_DERIVATION_ITERATIONS;
+			$newPasswordHash = $app->cryptography->hashPassword($newPassword, $salt, $keyDerivationIterations);
+			
+			// Edits the user
+			$app->webServerDatabase->editUser(
+				$signedInUser['id'],
+				$newPasswordHash,
+				$salt,
+				$keyDerivationIterations,
+				$signedInUser['role'],
+				$signedInUser['firstName'],
+				$signedInUser['lastName'],
+				$signedInUser['gender'],
+				$signedInUser['emailAddress']
+			);
+		}
+		
+		// Sets the output
+		$app->response->setBody([
+			'authenticated' => $authenticated
+		]);
 	}
 	
 	/*
@@ -27,7 +65,13 @@ class EditPassword extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'password' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'newPassword' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -40,13 +84,8 @@ class EditPassword extends \App\Controllers\SecureController {
 	protected function isUserAuthorized() {
 		$app = $this->app;
 		
-		// Defines the authorized user roles
-		$authorizedUserRoles = [
-			// TODO: implement
-		];
-		
-		// Validates the account and returns the result
-		return $app->authorizationValidator->validateAccount($authorizedUserRoles);
+		// The service is available only for signed in users
+		return $app->account->isUserSignedIn();
 	}
 	
 }

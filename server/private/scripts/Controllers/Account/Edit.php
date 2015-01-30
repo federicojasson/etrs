@@ -16,7 +16,43 @@ class Edit extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// TODO: transactions?
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$password = $input['password'];
+		$firstName = trimString($input['firstName']);
+		$lastName = trimString($input['lastName']);
+		$gender = $input['gender'];
+		$emailAddress = $input['emailAddress'];
+		
+		// Gets the signed in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($signedInUser['id'], $password);
+		
+		if ($authenticated) {
+			// The user was authenticated
+			
+			// Edits the user
+			$app->webServerDatabase->editUser(
+				$signedInUser['id'],
+				$signedInUser['passwordHash'],
+				$signedInUser['salt'],
+				$signedInUser['keyDerivationIterations'],
+				$signedInUser['role'],
+				$firstName,
+				$lastName,
+				$gender,
+				$emailAddress
+			);
+		}
+		
+		// Sets the output
+		$app->response->setBody([
+			'authenticated' => $authenticated
+		]);
 	}
 	
 	/*
@@ -27,7 +63,25 @@ class Edit extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'password' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'firstName' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'lastName' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'gender' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'emailAddress' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -40,13 +94,8 @@ class Edit extends \App\Controllers\SecureController {
 	protected function isUserAuthorized() {
 		$app = $this->app;
 		
-		// Defines the authorized user roles
-		$authorizedUserRoles = [
-			// TODO: implement
-		];
-		
-		// Validates the account and returns the result
-		return $app->authorizationValidator->validateAccount($authorizedUserRoles);
+		// The service is available only for signed in users
+		return $app->account->isUserSignedIn();
 	}
 	
 }

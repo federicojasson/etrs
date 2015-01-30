@@ -23,15 +23,8 @@ class Get extends \App\Controllers\SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		$app = $this->app;
-		
-		// Defines the expected JSON structure
-		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
-		]);
-		
-		// Validates the request and returns the result
-		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
+		// The service has no input
+		return true;
 	}
 	
 	/*
@@ -40,13 +33,8 @@ class Get extends \App\Controllers\SecureController {
 	protected function isUserAuthorized() {
 		$app = $this->app;
 		
-		// Defines the authorized user roles
-		$authorizedUserRoles = [
-			// TODO: implement
-		];
-		
-		// Validates the account and returns the result
-		return $app->authorizationValidator->validateAccount($authorizedUserRoles);
+		// The service is available only for signed in users
+		return $app->account->isUserSignedIn();
 	}
 	
 }

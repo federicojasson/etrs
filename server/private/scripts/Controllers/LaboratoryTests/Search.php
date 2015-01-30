@@ -16,7 +16,40 @@ class Search extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// TODO: transactions?
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$expression = (is_null($input['expression']))? null : $input['expression'];
+		$sorting = $input['sorting'];
+		$page = $input['page'];
+		
+		// Calculates the limit and the offset, in function of the page
+		$limit = RESULTS_PER_PAGE;
+		$offset = $limit * ($page - 1);
+		
+		if (is_null($expression)) {
+			// All laboratory tests should be included in the search
+			$laboratoryTests = $app->businessLogicDatabase->searchAllNonDeletedLaboratoryTests($sorting, $limit, $offset);
+		} else {
+			// Only specific laboratory tests should be included in the search
+			$laboratoryTests = $app->businessLogicDatabase->searchSpecificNonDeletedLaboratoryTests($sorting, $expression, $limit, $offset);
+		}
+		
+		// Gets the number of rows found
+		$foundRows = $app->businessLogicDatabase->getFoundRows();
+		
+		// Gets the results
+		$results = [];
+		foreach ($laboratoryTests as $laboratoryTest) {
+			$results[] = bin2hex($laboratoryTest['id']);
+		}
+		
+		// Sets the output
+		$app->response->setBody([
+			'totalResults' => $foundRows,
+			'results' => $results
+		]);
 	}
 	
 	/*
@@ -27,7 +60,23 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'expression' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'sorting' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
+				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+					// TODO: implement
+				}),
+				
+				'order' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+					// TODO: implement
+				})
+			]),
+			
+			'page' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -42,7 +91,8 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: implement
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
 		];
 		
 		// Validates the account and returns the result

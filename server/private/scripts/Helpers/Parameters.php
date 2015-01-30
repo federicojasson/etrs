@@ -39,7 +39,8 @@ class Parameters extends \App\Helpers\Helper {
 		// Initializes the file paths
 		$this->filePaths = [
 			PARAMETERS_DATABASES => 'private/parameters/databases.json',
-			PARAMETERS_EMAILS => 'private/parameters/emails.json'
+			PARAMETERS_EMAILS => 'private/parameters/emails.json',
+			PARAMETERS_SERVER => 'private/parameters/server.json'
 		];
 		
 		// Initializes the parameters

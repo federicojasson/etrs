@@ -16,7 +16,30 @@ class Create extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// TODO: transaction
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = $input['id'];
+		$emailAddress = $input['emailAddress'];
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByEmailAddress($id, $emailAddress);
+		
+		if ($authenticated) {
+			// The user was authenticated
+			
+			// Gets the user
+			$user = $app->webServerDatabase->getUser($id);
+			
+			// Creates the recover password permission
+			$this->createRecoverPasswordPermission($user); // TODO: change name to this method (it doesn't only create)
+		}
+		
+		// Sets the output
+		$app->response->setBody([
+			'authenticated' => $authenticated
+		]);
 	}
 	
 	/*
@@ -27,7 +50,13 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'emailAddress' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				// TODO: implement
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -40,13 +69,51 @@ class Create extends \App\Controllers\SecureController {
 	protected function isUserAuthorized() {
 		$app = $this->app;
 		
-		// Defines the authorized user roles
-		$authorizedUserRoles = [
-			// TODO: implement
-		];
+		// The service is available only for users not signed in
+		return ! $app->account->isUserSignedIn();
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	private function createRecoverPasswordPermission($user) {
+		$app = $this->app;
 		
-		// Validates the account and returns the result
-		return $app->authorizationValidator->validateAccount($authorizedUserRoles);
+		do {
+			// Generates a random ID
+			$id = $app->cryptography->generateRandomId();
+		} while ($app->webServerDatabase->recoverPasswordPermissionExists($id));
+		
+		// Generates a random password and computes its hash
+		$password = $app->cryptography->generateRandomPassword();
+		$salt = $app->cryptography->generateSalt();
+		$keyDerivationIterations = KEY_DERIVATION_ITERATIONS;
+		$passwordHash = $app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
+		
+		// Creates the recover password permission
+		$app->webServerDatabase->createRecoverPasswordPermission($id, $user['id'], $passwordHash, $salt, $keyDerivationIterations);
+		
+		// Gets the server's parameters
+		$parameters = $app->parameters->get(PARAMETERS_SERVER);
+		$domain = $parameters['domain'];
+		
+		// Creates an email to be sent to the specified address
+		$recipient = [
+			'emailAddress' => $user['emailAddress'],
+			'name' => $user['firstName'] . ' ' . $user['lastName']
+		];
+		$url = $domain . '/recover-password/' . bin2hex($id) . '/' . bin2hex($password);
+		$email = $app->emailFactory->createRecoverPasswordEmail($recipient, $url);
+		
+		// Sends the email
+		if (! $email->send()) {
+			// The email could not be delivered
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_UNDELIVERED_EMAIL
+			]);
+		}
 	}
 	
 }
