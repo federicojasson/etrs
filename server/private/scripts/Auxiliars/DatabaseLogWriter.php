@@ -25,14 +25,14 @@ class DatabaseLogWriter {
 		
 		// Initializes the log levels used in the database
 		$this->databaseLevels = [
-			Log::DEBUG => LOG_LEVEL_DEBUG,
-			Log::INFO => LOG_LEVEL_INFORMATION,
-			Log::NOTICE => LOG_LEVEL_NOTICE,
-			Log::WARN => LOG_LEVEL_WARNING,
-			Log::ERROR => LOG_LEVEL_ERROR,
-			Log::CRITICAL => LOG_LEVEL_CRITICAL,
-			Log::ALERT => LOG_LEVEL_ALERT,
-			Log::EMERGENCY => LOG_LEVEL_EMERGENCY
+			\Slim\Log::EMERGENCY => LOG_LEVEL_1,
+			\Slim\Log::ALERT => LOG_LEVEL_1,
+			\Slim\Log::CRITICAL => LOG_LEVEL_1,
+			\Slim\Log::ERROR => LOG_LEVEL_1,
+			\Slim\Log::WARN => LOG_LEVEL_2,
+			\Slim\Log::NOTICE => LOG_LEVEL_3,
+			\Slim\Log::INFO => LOG_LEVEL_3,
+			\Slim\Log::DEBUG => LOG_LEVEL_4
 		];
 	}
 	
@@ -44,9 +44,6 @@ class DatabaseLogWriter {
 	public function write($message, $level) {
 		$app = $this->app;
 		
-		// Starts a read-write transaction
-		$app->webServerDatabase->startReadWriteTransaction();
-		
 		do {
 			// Generates a random ID
 			$id = $app->cryptography->generateRandomId();
@@ -57,9 +54,6 @@ class DatabaseLogWriter {
 		
 		// Creates the log
 		$app->webServerDatabase->createLog($id, $databaseLevel, $message);
-		
-		// Commits the transaction
-		$app->webServerDatabase->commitTransaction();
 	}
 	
 }

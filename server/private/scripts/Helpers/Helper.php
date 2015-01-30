@@ -7,7 +7,7 @@ namespace App\Helpers;
  * specific functionalities.
  * 
  * Subclasses must implement the helper's logic. Optionally, the initialize
- * function can be overridden to perform bootstrapping tasks.
+ * function can be overridden to perform initialization tasks.
  */
 abstract class Helper {
 	

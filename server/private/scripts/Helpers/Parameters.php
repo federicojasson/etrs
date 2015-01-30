@@ -42,7 +42,7 @@ class Parameters extends \App\Helpers\Helper {
 			PARAMETERS_EMAILS => 'private/parameters/emails.json'
 		];
 		
-		// Initializes the parameters array
+		// Initializes the parameters
 		$this->parameters = [];
 	}
 	
@@ -53,10 +53,10 @@ class Parameters extends \App\Helpers\Helper {
 	 */
 	private function load($id) {
 		// Gets the path of the parameters' file
-		$filePath = $this->filePaths[$id];
+		$path = $this->filePaths[$id];
 		
 		// Reads the file and stores the result
-		$this->parameters[$id] = readJsonFile($filePath);
+		$this->parameters[$id] = readJsonFile($path);
 	}
 	
 }

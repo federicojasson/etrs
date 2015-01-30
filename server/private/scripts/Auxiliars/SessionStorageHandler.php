@@ -3,7 +3,7 @@
 namespace App\Auxiliars;
 
 /*
- * This interface offers methods to manage the session's data persistence.
+ * This interface offers methods to handle the session's data persistence.
  */
 interface SessionStorageHandler {
 	
@@ -28,7 +28,7 @@ interface SessionStorageHandler {
 	 * 
 	 * It returns whether the operation succeeded.
 	 * 
-	 * It receives the idle lifetime of the session.
+	 * It receives the idle lifetime in seconds of the session.
 	 */
 	public function onGarbageCollection($idleLifetime);
 	

@@ -43,7 +43,7 @@ class Authenticator extends \App\Helpers\Helper {
 			return false;
 		}
 		
-		// Computes the hash of the password using the salt
+		// Computes the hash of the password
 		$passwordHash = $app->cryptography->hashPassword($password, $user['salt'], $user['keyDerivationIterations']);
 		
 		// Compares the hash with the stored one and returns the result

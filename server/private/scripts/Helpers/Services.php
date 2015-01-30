@@ -13,7 +13,7 @@ class Services extends \App\Helpers\Helper {
 	/*
 	 * Defines a service.
 	 * 
-	 * It receives the service's URL, its HTTP method and the controller
+	 * It receives the service's URL, the HTTP method and the controller
 	 * responsible for handling the requests.
 	 */
 	public function define($url, $method, $controller) {

@@ -5,7 +5,7 @@ namespace App\Controllers;
 /*
  * This class encapsulates the logic of a service.
  * 
- * Subclasses must implement the service function.
+ * Subclasses must implement the serveRequest function.
  */
 abstract class Controller {
 	

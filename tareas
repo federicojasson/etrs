@@ -1,10 +1,16 @@
 Tareas (TODOs):
 
-- Agregar orderCriterion en búsquedas
-- Agregar metadatos en base de datos
-- Actualizar los helpers de base de datos en función de las tablas finales.
 - Comentar base de datos
 
+- Recordar configurar (en php.ini):
+	session.gc_probability
+	session.gc_divisor
+	session.gc_maxlifetime
+
+- Recordar configurar (en my.ini):
+	query_cache_limit = 1048576
+	query_cache_size = 10485760
+	query_cache_type = 1
 
 --------------------------------------------------------------------------------
 

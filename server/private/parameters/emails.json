@@ -12,10 +12,10 @@
 		"name": "ETRS"
 	},
 	
-	"passwordRecoveryEmail": {
+	"recoverPasswordEmail": {
 		"subject": "ETRS - Recuperación de contraseña",
-		"templatePath": "private/templates/emails/password-recovery-email.html",
-		"alternativeTemplatePath": "private/templates/emails/password-recovery-email.txt"
+		"templatePath": "private/templates/emails/recover-password-email.html",
+		"alternativeTemplatePath": "private/templates/emails/recover-password-email.txt"
 	},
 	
 	"signUpEmail": {

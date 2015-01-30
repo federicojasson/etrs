@@ -8,16 +8,43 @@ namespace App\Middlewares;
 class Configurations extends \Slim\Middleware {
 	
 	/*
-	 * Applies debug configurations.
+	 * Applies debug-mode configurations.
 	 */
 	public function applyDebugConfigurations() {
 		$app = $this->app;
 		
-		// TODO: implement
-		$fileHandle = fopen('private/logs/debug.log', 'a');
-		$logWriter = new \Slim\LogWriter($fileHandle);
+		// Enables the debug mode
+		$app->config('debug', true);
+		
+		// Initializes the log writer
+		$handle = fopen('private/logs/debug.log', FILE_ACCESS_MODE_APPEND);
+		$logWriter = new \Slim\LogWriter($handle);
+		
+		// Configures the logs
 		$app->config([
+			'log.enabled' => true,
+			'log.level' => \Slim\Log::DEBUG,
 			'log.writer' => $logWriter
+		]);
+		
+		// Configures the cookies
+		$app->config([ // TODO
+            'cookies.httponly' => true,
+            'cookies.secure' => true,
+            'cookies.encrypt' => true,
+			
+            'cookies.lifetime' => '20 minutes',
+            'cookies.path' => '/',
+            'cookies.domain' => null,
+            'cookies.secret_key' => 'CHANGE_ME',
+            'cookies.cipher' => MCRYPT_RIJNDAEL_256,
+            'cookies.cipher_mode' => MCRYPT_MODE_CBC
+		]);
+		
+		// Applies other configurations
+		$app->config([
+			'http.version' => '1.1',
+			'routes.case_sensitive' => true
 		]);
 	}
 	
@@ -27,9 +54,37 @@ class Configurations extends \Slim\Middleware {
 	public function applyReleaseConfigurations() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Disables the debug mode
+		$app->config('debug', false);
+		
+		// Initializes the log writer
+		$logWriter = new \App\Auxiliars\DatabaseLogWriter();
+		
+		// Configures the logs
 		$app->config([
-			'debug' => false
+			'log.enabled' => true,
+			'log.level' => \Slim\Log::INFO,
+			'log.writer' => $logWriter
+		]);
+		
+		// Configures the cookies
+		$app->config([ // TODO
+            'cookies.httponly' => true,
+            'cookies.secure' => true,
+            'cookies.encrypt' => true,
+			
+            'cookies.lifetime' => '20 minutes',
+            'cookies.path' => '/',
+            'cookies.domain' => null,
+            'cookies.secret_key' => 'CHANGE_ME',
+            'cookies.cipher' => MCRYPT_RIJNDAEL_256,
+            'cookies.cipher_mode' => MCRYPT_MODE_CBC
+		]);
+		
+		// Applies other configurations
+		$app->config([
+			'http.version' => '1.1',
+			'routes.case_sensitive' => true
 		]);
 	}
 	

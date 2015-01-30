@@ -3,25 +3,24 @@
 namespace App\Helpers;
 
 /*
- * This helper offers email-related functions.
+ * This helper offers methods to create emails.
  */
 class EmailFactory extends \App\Helpers\Helper {
 	
 	/*
-	 * Creates and returns an account creation email.
+	 * Creates and returns a recover password email.
 	 * 
-	 * It receives the recipient and the account creation URL to be included in
-	 * the email.
+	 * It receives the recipient and the URL to be included in the email.
 	 */
-	public function createAccountCreationEmail($recipient, $url) {
+	public function createRecoverPasswordEmail($recipient, $url) {
 		$app = $this->app;
 		
 		// Gets the email's parameters
 		$parameters = $app->parameters->get(PARAMETERS_EMAILS);
-		$accountCreationEmail = $parameters['accountCreationEmail'];
-		$subject = $accountCreationEmail['subject'];
-		$templatePath = $accountCreationEmail['templatePath'];
-		$alternativeTemplatePath = $accountCreationEmail['alternativeTemplatePath'];
+		$recoverPasswordEmail = $parameters['recoverPasswordEmail'];
+		$subject = $recoverPasswordEmail['subject'];
+		$templatePath = $recoverPasswordEmail['templatePath'];
+		$alternativeTemplatePath = $recoverPasswordEmail['alternativeTemplatePath'];
 		
 		// Defines a placeholder mapping
 		$mapping = [
@@ -37,20 +36,19 @@ class EmailFactory extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Creates and returns a password recovery email.
+	 * Creates and returns a sign up email.
 	 * 
-	 * It receives the recipient and the password recovery URL to be included in
-	 * the email.
+	 * It receives the recipient and the URL to be included in the email.
 	 */
-	public function createPasswordRecoveryEmail($recipient, $url) {
+	public function createSignUpEmail($recipient, $url) {
 		$app = $this->app;
 		
 		// Gets the email's parameters
 		$parameters = $app->parameters->get(PARAMETERS_EMAILS);
-		$passwordRecoveryEmail = $parameters['passwordRecoveryEmail'];
-		$subject = $passwordRecoveryEmail['subject'];
-		$templatePath = $passwordRecoveryEmail['templatePath'];
-		$alternativeTemplatePath = $passwordRecoveryEmail['alternativeTemplatePath'];
+		$signUpEmail = $parameters['signUpEmail'];
+		$subject = $signUpEmail['subject'];
+		$templatePath = $signUpEmail['templatePath'];
+		$alternativeTemplatePath = $signUpEmail['alternativeTemplatePath'];
 		
 		// Defines a placeholder mapping
 		$mapping = [
