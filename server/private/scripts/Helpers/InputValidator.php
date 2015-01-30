@@ -10,7 +10,7 @@ class InputValidator extends \App\Helpers\Helper {
 	/*
 	 * Determines whether an input is a bounded integer.
 	 * 
-	 * It receives the input.
+	 * It receives the input and the maximum allowed value.
 	 */
 	public function isBoundedInteger($input, $maximumValue) {
 		if (! is_int($input)) {
@@ -25,7 +25,7 @@ class InputValidator extends \App\Helpers\Helper {
 	/*
 	 * Determines whether an input is a bounded string.
 	 * 
-	 * It receives the input.
+	 * It receives the input and the maximum allowed length.
 	 */
 	public function isBoundedString($input, $maximumLength) {
 		if (! is_string($input)) {
@@ -49,7 +49,7 @@ class InputValidator extends \App\Helpers\Helper {
 		}
 		
 		// Checks whether the input matches a regular expression
-		return preg_match('/^.*:input.*$/', $input);
+		return preg_match('/^.*:input.*$/', $input); // TODO: check regular expression
 	}
 	
 	/*
@@ -79,6 +79,7 @@ class InputValidator extends \App\Helpers\Helper {
 	 */
 	public function isEmailAddress($input) {
 		// TODO: implement
+		return true;
 	}
 	
 	/*
@@ -210,7 +211,7 @@ class InputValidator extends \App\Helpers\Helper {
 	/*
 	 * Determines whether an input is a user role.
 	 * 
-	 * It receives the input
+	 * It receives the input.
 	 */
 	public function isUserRole($input) {
 		return $this->isPredefinedValue($input, [

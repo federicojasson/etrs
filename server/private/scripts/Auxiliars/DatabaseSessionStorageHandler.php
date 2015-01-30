@@ -45,8 +45,8 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 		// Converts the session's ID to binary
 		$databaseId = hex2bin($id);
 		
-		// Erases the session
-		$app->webServerDatabase->eraseSession($databaseId);
+		// Deletes the session
+		$app->webServerDatabase->deleteSession($databaseId);
 		
 		return true;
 	}
@@ -61,8 +61,8 @@ class DatabaseSessionStorageHandler implements \App\Auxiliars\SessionStorageHand
 	public function onGarbageCollection($idleLifetime) {
 		$app = $this->app;
 		
-		// Erases the idle sessions
-		$app->webServerDatabase->eraseIdleSessions($idleLifetime);
+		// Deletes the idle sessions
+		$app->webServerDatabase->deleteIdleSessions($idleLifetime);
 		
 		return true;
 	}

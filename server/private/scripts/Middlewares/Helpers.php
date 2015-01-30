@@ -68,6 +68,13 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Initializes the Files helper.
+	 */
+	public function initializeFilesHelper() {
+		return new \App\Helpers\Files();
+	}
+	
+	/*
 	 * Initializes the InputValidator helper.
 	 */
 	public function initializeInputValidatorHelper() {
@@ -115,6 +122,7 @@ class Helpers extends \Slim\Middleware {
 		$app->container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
 		$app->container->singleton('data', [ $this, 'initializeDataHelper' ]);
 		$app->container->singleton('emailFactory', [ $this, 'initializeEmailFactoryHelper' ]);
+		$app->container->singleton('files', [ $this, 'initializeFilesHelper' ]);
 		$app->container->singleton('inputValidator', [ $this, 'initializeInputValidatorHelper' ]);
 		$app->container->singleton('parameters', [ $this, 'initializeParametersHelper' ]);
 		$app->container->singleton('services', [ $this, 'initializeServicesHelper' ]);

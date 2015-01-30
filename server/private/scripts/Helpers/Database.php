@@ -97,6 +97,55 @@ abstract class Database extends \App\Helpers\Helper {
 	protected abstract function connect();
 	
 	/*
+	 * Deletes an entity.
+	 * 
+	 * It receives the entity's table and its ID.
+	 */
+	protected function deleteEntity($table, $id) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM ' . $table . '
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Determines whether an entity exists.
+	 * 
+	 * It receives the entity's table and its ID.
+	 */
+	protected function entityExists($table, $id) {
+		// Defines the statement
+		$statement = '
+			SELECT 0
+			FROM ' . $table . '
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the result
+		return count($results) === 1;
+	}
+	
+	/*
 	 * Executes a prepared statement and returns the results. If the statement
 	 * is not a query, null is returned.
 	 * 
@@ -124,6 +173,35 @@ abstract class Database extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Returns an entity. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the entity's table, the fields and their aliases, and its ID.
+	 */
+	protected function getEntity($table, $fieldsAndAliases, $id) {
+		// Gets the SELECT clause
+		$selectClause = getSelectClause($fieldsAndAliases);
+		
+		// Defines the statement
+		$statement = '
+			SELECT ' . $selectClause . '
+			FROM ' . $table . '
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
+	}
+	
+	/*
 	 * Performs initialization tasks.
 	 */
 	protected function initialize() {
@@ -140,14 +218,6 @@ abstract class Database extends \App\Helpers\Helper {
 			
 			// Sets the isolation level for the transactions
 			$this->pdo->exec('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
-			
-			// TODO: set cache
-			// Is the cache clear after session close?
-			//SET SESSION query_cache_size = research!
-			//SET SESSION query_cache_type = ON
-			//SET SESSION query_cache_limit = research!
-			
-			// TODO: should one-query operations be in transactions?
 		} catch (\PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);

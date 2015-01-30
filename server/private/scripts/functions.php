@@ -5,6 +5,8 @@
  */
 
 /*
+ * TODO: move to Database helper?
+ * 
  * Returns a boolean expression from a regular one.
  * 
  * The returned boolean expression is a sanitized version with wildcards.
@@ -54,6 +56,8 @@ function getFirstElementOrNull($array) {
 }
 
 /*
+ * TODO: move to Database helper?
+ * 
  * Returns an ORDER BY clause from a sorting.
  * 
  * It receives the sorting.
@@ -64,14 +68,35 @@ function getOrderByClause($sorting) {
 	$order = $sorting['order'];
 	
 	// Initializes the clause
-	$orderByClause = '';
+	$clause = '';
 	
 	// Appends the field and the order in which the results should be sorted
-	$orderByClause .= $field;
-	$orderByClause .= ' ';
-	$orderByClause .= ($order === SORTING_ORDER_ASCENDING)? 'ASC' : 'DESC';
+	$clause .= $field;
+	$clause .= ' ';
+	$clause .= ($order === SORTING_ORDER_ASCENDING)? 'ASC' : 'DESC';
 	
-	return $orderByClause;
+	return $clause;
+}
+
+/*
+ * TODO: move to Database helper?
+ * 
+ * Returns a SELECT clause from a set of fields.
+ * 
+ * It receives the fields and their aliases in an associative array.
+ */
+function getSelectClause($fieldsAndAliases) {
+	// Initializes the clause
+	$clause = '';
+	
+	// Builds the clause appending the fields and their aliases
+	$separator = '';
+	foreach ($fieldsAndAliases as $field => $alias) {
+		$clause .= $separator . $field . ' AS ' . $alias;
+		$separator = ', ';
+	}
+	
+	return $clause;
 }
 
 /*

@@ -12,15 +12,15 @@
 		"name": "ETRS"
 	},
 	
-	"accountCreationEmail": {
-		"subject": "ETRS - Invitación",
-		"templatePath": "private/templates/emails/account-creation-email.html",
-		"alternativeTemplatePath": "private/templates/emails/account-creation-email.txt"
-	},
-	
 	"passwordRecoveryEmail": {
 		"subject": "ETRS - Recuperación de contraseña",
 		"templatePath": "private/templates/emails/password-recovery-email.html",
 		"alternativeTemplatePath": "private/templates/emails/password-recovery-email.txt"
+	},
+	
+	"signUpEmail": {
+		"subject": "ETRS - Invitación",
+		"templatePath": "private/templates/emails/sign-up-email.html",
+		"alternativeTemplatePath": "private/templates/emails/sign-up-email.txt"
 	}
 }
