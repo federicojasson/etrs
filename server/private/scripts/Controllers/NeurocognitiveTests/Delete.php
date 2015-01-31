@@ -16,7 +16,23 @@ class Delete extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// TODO: transactions
+		
+		if (! $app->businessLogicDatabase->nonDeletedNeurocognitiveTestExists($id)) {
+			// The neurocognitive test doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_NEUROCOGNITIVE_TEST
+			]);
+		}
+		
+		// Deletes the neurocognitive test
+		$app->businessLogicDatabase->deleteNeurocognitiveTest($id);
 	}
 	
 	/*
@@ -28,7 +44,7 @@ class Delete extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
+				return $app->inputValidator->isRandomId($input);
 			})
 		]);
 		
@@ -44,7 +60,7 @@ class Delete extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: implement
+			USER_ROLE_ADMINISTRATOR
 		];
 		
 		// Validates the account and returns the result

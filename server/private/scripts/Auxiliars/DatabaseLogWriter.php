@@ -13,9 +13,9 @@ class DatabaseLogWriter {
 	private $app;
 	
 	/*
-	 * The log levels used in the database.
+	 * The level mapping.
 	 */
-	private $databaseLevels;
+	private $levelMapping;
 	
 	/*
 	 * Creates an instance of this class.
@@ -23,8 +23,8 @@ class DatabaseLogWriter {
 	public function __construct() {
 		$this->app = \Slim\Slim::getInstance();
 		
-		// Initializes the log levels used in the database
-		$this->databaseLevels = [
+		// Initializes the level mapping
+		$this->levelMapping = [
 			\Slim\Log::EMERGENCY => LOG_LEVEL_1,
 			\Slim\Log::ALERT => LOG_LEVEL_1,
 			\Slim\Log::CRITICAL => LOG_LEVEL_1,
@@ -49,11 +49,11 @@ class DatabaseLogWriter {
 			$id = $app->cryptography->generateRandomId();
 		} while ($app->webServerDatabase->logExists($id));
 		
-		// Gets the log's level used in the database
-		$databaseLevel = $this->databaseLevels[$level];
+		// Gets the level-equivalent used in the database
+		$level = $this->levelMapping[$level];
 		
 		// Creates the log
-		$app->webServerDatabase->createLog($id, $databaseLevel, $message);
+		$app->webServerDatabase->createLog($id, $level, $message);
 	}
 	
 }

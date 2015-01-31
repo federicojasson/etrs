@@ -16,7 +16,29 @@ class Get extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// TODO: transactions
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Gets the medication
+		$medication = $app->businessLogicDatabase->getNonDeletedMedication($id);
+		
+		if (is_null($medication)) {
+			// The medication doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_MEDICATION
+			]);
+		}
+		
+		// Filters the medication
+		$filteredMedication = $app->data->filterMedication($medication);
+		
+		// Sets the output
+		$app->response->setBody($filteredMedication);
 	}
 	
 	/*
@@ -28,7 +50,7 @@ class Get extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
+				return $app->inputValidator->isRandomId($input);
 			})
 		]);
 		
@@ -44,7 +66,8 @@ class Get extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: implement
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
 		];
 		
 		// Validates the account and returns the result

@@ -42,7 +42,7 @@ class Delete extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: implement
+			USER_ROLE_ADMINISTRATOR
 		];
 		
 		// Validates the account and returns the result
