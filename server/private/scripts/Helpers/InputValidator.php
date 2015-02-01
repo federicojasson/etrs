@@ -23,31 +23,18 @@ class InputValidator extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Determines whether an input is a data type definition.
-	 * 
-	 * It receives the input.
-	 */
-	public function isDataTypeDefinition($input) {
-		if (! is_string($input)) {
-			// The input is not a string
-			return false;
-		}
-		
-		// TODO: implement
-	}
-	
-	/*
 	 * Determines whether an input is an email address.
 	 * 
 	 * It receives the input.
 	 */
 	public function isEmailAddress($input) {
-		if (! is_string($input)) {
-			// The input is not a string
+		if (! $this->isBoundedString($input, 254)) {
+			// The input is not a string or is not bounded properly
 			return false;
 		}
 		
-		// TODO: implement
+		// Checks whether the input matches a regular expression
+		return preg_match('/(?!.*[ ])(?!.*@.*@)^.+@.+$/', $input);
 	}
 	
 	/*
@@ -56,7 +43,7 @@ class InputValidator extends \App\Helpers\Helper {
 	 * It receives the input.
 	 */
 	public function isGender($input) {
-		return $this->isPredefinedValue($input, [
+		return isValueInArray($input, [
 			GENDER_FEMALE,
 			GENDER_MALE
 		]);
@@ -90,23 +77,6 @@ class InputValidator extends \App\Helpers\Helper {
 		
 		// Checks whether the input's range is valid
 		return $input > 0;
-	}
-	
-	/*
-	 * Determines whether an input matches any value of a predefined set.
-	 * 
-	 * It receives the input and the values.
-	 */
-	public function isPredefinedValue($input, $values) {
-		foreach ($values as $value) {
-			if ($input === $value) {
-				// The input matches the value
-				return true;
-			}
-		}
-		
-		// The input doesn't match any of the values
-		return false;
 	}
 	
 	/*
@@ -145,10 +115,68 @@ class InputValidator extends \App\Helpers\Helper {
 	 * It receives the input.
 	 */
 	public function isSortingOrder($input) {
-		return $this->isPredefinedValue($input, [
+		return isValueInArray($input, [
 			SORTING_ORDER_ASCENDING,
 			SORTING_ORDER_DESCENDING
 		]);
+	}
+	
+	/*
+	 * Determines whether an input is a type description.
+	 * 
+	 * It receives the input.
+	 */
+	public function isTypeDescription($input) {
+		if (! $this->isNonEmptyString($input)) {
+			// The input is not a string or is an empty one
+			return false;
+		}
+		
+		// TODO: comment and order
+		$fields = explode(';', $input);
+		
+		$type = $fields[0];
+		
+		$definition = [];
+		
+		$count = count($fields);
+		for ($i = 1; $i < $count; $i++) {
+			$field = explode(':', $fields[$i]);
+			
+			if (count($field) !== 2) {
+				return false;
+			}
+			
+			$label = trimString($field[0]);
+			
+			if (isStringEmpty($label)) {
+				return false;
+			}
+			
+			if (array_key_exists($label, $definition)) {
+				return false;
+			}
+			
+			$definition[$label] = $field[1];
+		}
+		
+		switch ($type) {
+			case 'boolean': {
+				return $this->isBooleanTypeDefinition($definition);
+			}
+			
+			case 'integer_fix_values': {
+				return $this->isIntegerFixValuesTypeDefinition($definition);
+			}
+			
+			case 'integer_range': {
+				return $this->isIntegerRangeTypeDefinition($definition);
+			}
+			
+			default: {
+				return false;
+			}
+		}
 	}
 	
 	/*
@@ -161,8 +189,28 @@ class InputValidator extends \App\Helpers\Helper {
 			// The input is not a string
 			return false;
 		}
+
+		if (getStringLength($input) < 8) {
+			// The input is too short
+			return false;
+		}
+
+		if (! preg_match('/[0-9]/', $input)) {
+			// The input is too short
+			return false;
+		}
 		
-		// TODO: implement
+		if (! preg_match('/[A-Z]/', $input)) {
+			// The input doesn't contain an uppercase character
+			return false;
+		}
+
+		if (! preg_match('/[a-z]/', $input)) {
+			// The input doesn't contain a lowercase character
+			return false;
+		}
+
+		return true;
 	}
 	
 	/*
@@ -201,6 +249,93 @@ class InputValidator extends \App\Helpers\Helper {
 		
 		// Replaces the input with its decoded version
 		$app->request->setBody($decodedInput);
+		
+		return true;
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the definition.
+	 */
+	private function isBooleanTypeDefinition($definition) {
+		// TODO: comment and order
+		
+		if (count($definition) !== 2) {
+			return false;
+		}
+		
+		if (! isValueInArray('false', $definition)) {
+			return false;
+		}
+		
+		if (! isValueInArray('true', $definition)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the definition.
+	 */
+	private function isIntegerFixValuesTypeDefinition($definition) {
+		// TODO: comment and order
+		
+		if (count($definition) === 0) {
+			return false;
+		}
+		
+		foreach ($definition as $value) {
+			if (! isStringInteger($value)) {
+				return false;
+			}
+		}
+		
+		if (arrayContainsDuplicateValues($definition)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * TODO: comments
+	 * 
+	 * It receives the definition.
+	 */
+	private function isIntegerRangeTypeDefinition($definition) {
+		// TODO: comments and order
+		
+		if (count($definition) !== 2) {
+			return false;
+		}
+		
+		if (! array_key_exists('min', $definition)) {
+			return false;
+		}
+		
+		if (! array_key_exists('max', $definition)) {
+			return false;
+		}
+		
+		if (! isStringInteger($definition['min'])) {
+			return false;
+		}
+		
+		$minimum = (int) $definition['min'];
+		
+		if (! isStringInteger($definition['max'])) {
+			return false;
+		}
+		
+		$maximum = (int) $definition['max'];
+		
+		if ($maximum < $minimum) {
+			return false;
+		}
 		
 		return true;
 	}

@@ -32,8 +32,9 @@ class Create extends \App\Controllers\SecureController {
 			// Gets the user
 			$user = $app->webServerDatabase->getUser($id);
 			
-			// Creates the recover password permission
-			$this->createRecoverPasswordPermission($user); // TODO: change name to this method (it doesn't only create)
+			// Creates the recover password permission for the user and sends
+			// her an email
+			$this->createRecoverPasswordPermissionAndSendEmail($user);
 		}
 		
 		// Sets the output
@@ -74,9 +75,11 @@ class Create extends \App\Controllers\SecureController {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Creates a recover password permission for a user and sends her an email.
+	 * 
+	 * It receives the user.
 	 */
-	private function createRecoverPasswordPermission($user) {
+	private function createRecoverPasswordPermissionAndSendEmail($user) {
 		$app = $this->app;
 		
 		do {
@@ -91,7 +94,7 @@ class Create extends \App\Controllers\SecureController {
 		$passwordHash = $app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
 		
 		// Creates the recover password permission
-		$app->webServerDatabase->createRecoverPasswordPermission($id, $user['id'], $passwordHash, $salt, $keyDerivationIterations);
+		$app->webServerDatabase->createRecoverPasswordPermissionAndSendEmail($id, $user['id'], $passwordHash, $salt, $keyDerivationIterations);
 		
 		// Gets the server's parameters
 		$parameters = $app->parameters->get(PARAMETERS_SERVER);

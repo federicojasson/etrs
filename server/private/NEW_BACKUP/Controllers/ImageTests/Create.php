@@ -65,7 +65,7 @@ class Create extends \App\Controllers\SecureController {
 			}),
 			
 			'dataTypeDefinition' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				return $app->inputValidator->isDataTypeDefinition($input);
+				return $app->inputValidator->isTypeDescription($input);
 			})
 		]);
 		

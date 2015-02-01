@@ -39,8 +39,8 @@ class Create extends \App\Controllers\SecureController {
 						$app->inputValidator->isPrintableString($input);
 			}),
 			
-			'dataTypeDefinition' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				return $app->inputValidator->isDataTypeDefinition($input);
+			'typeDescription' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isTypeDescription($input);
 			})
 		]);
 		

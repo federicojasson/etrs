@@ -5,6 +5,13 @@
  */
 
 /*
+ * TODO: comments
+ */
+function arrayContainsDuplicateValues($array) {
+	return count(array_unique($array)) !== count($array);
+}
+
+/*
  * Returns the first element of an array. If the array is empty, null is
  * returned.
  * 
@@ -49,6 +56,22 @@ function isSequentialArray($array) {
  */
 function isStringEmpty($string) {
 	return getStringLength($string) === 0;
+}
+
+/*
+ * TODO: comments
+ */
+function isStringInteger($string) {
+	return (string) (int) $string === $string;
+}
+
+/*
+ * Determines whether a certain value is present in an array.
+ * 
+ * It receives the value and the array.
+ */
+function isValueInArray($value, $array) {
+	return in_array($value, $array, true);
 }
 
 /*

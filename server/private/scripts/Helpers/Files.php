@@ -35,7 +35,6 @@ class Files extends \App\Helpers\Helper {
 	public function downloadFile($id) {
 		// TODO: set headers? http://php.net/manual/en/function.readfile.php
 		
-		$path = ;
 		readfile($file);
 	}
 	
