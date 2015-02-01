@@ -16,8 +16,6 @@ class Get extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: transactions
-		
 		// Gets the input
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);

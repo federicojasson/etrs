@@ -19,14 +19,27 @@ function arrayContainsDuplicateElements($array) {
  * It receives the string.
  */
 function camelCaseToSnakeCase($string) {
-	// TODO: order and comment
-	preg_match_all('!([A-Z][0-9A-Z]*(?=$|[A-Z][0-9a-z])|[A-Za-z][0-9a-z]+)!', $string, $matches);
-	$ret = $matches[0];
-	foreach ($ret as &$match) {
-		$match = ($match == strtoupper($match))? strtolower($match) : lcfirst($match);
+	// Performs a regular expression search
+	preg_match_all('/[A-Za-z][0-9a-z]+|[A-Z][0-9A-Z]*(?=$|[A-Z][0-9a-z])/', $string, $matches);
+	$results = $matches[0];
+	
+	// Processes the results
+	foreach ($results as &$result) {
+		if ($result === strtoupper($result)) {
+			// The result is in uppercase
+			
+			// Converts the result to lowercase
+			$result = strtolower($result);
+		} else {
+			// The result is in lowercase
+			
+			// Converts the first character of the result to lowercase
+			$result = lcfirst($result);
+		}
 	}
 	
-	return implode('_', $ret);
+	// Builds and returns the new string
+	return implode('_', $results);
 }
 
 /*

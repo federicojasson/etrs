@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Controllers\Diagnoses;
+namespace App\Controllers\Experiments;
 
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/diagnoses/create
+ * URL:		/server/experiments/delete
  * Method:	POST
  */
-class Create extends \App\Controllers\SecureController {
+class Delete extends \App\Controllers\SecureController {
 	
 	/*
 	 * Calls the controller.
@@ -18,23 +18,19 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Gets the input
 		$input = $app->request->getBody();
-		$name = trimString($input['name']);
+		$id = hex2bin($input['id']);
 		
-		do {
-			// Generates a random ID
-			$id = $app->cryptography->generateRandomId();
-		} while ($app->businessLogicDatabase->diagnosisExists($id));
+		if (! $app->businessLogicDatabase->nonDeletedExperimentExists($id)) {
+			// The experiment doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_EXPERIMENT
+			]);
+		}
 		
-		// Gets the signed in user
-		$signedInUser = $app->account->getSignedInUser();
-		
-		// Creates the diagnosis
-		$app->businessLogicDatabase->createDiagnosis($id, $signedInUser['id'], $signedInUser['id'], $name);
-		
-		// Sets the output
-		$app->response->setBody([
-			'id' => bin2hex($id)
-		]);
+		// Deletes the experiment
+		$app->data->deleteExperiment($id);
 	}
 	
 	/*
@@ -45,16 +41,8 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			'name' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				if (! is_string($input)) {
-					return false;
-				}
-				
-				$input = trimString($input);
-				
-				return	$app->inputValidator->isNonEmptyString($input) &&
-						$app->inputValidator->isBoundedString($input, 128) &&
-						$app->inputValidator->isPrintableString($input);
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
 			})
 		]);
 		

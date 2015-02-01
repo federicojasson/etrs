@@ -240,6 +240,46 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Diagnoses\Search()
 		);
 		
+		// URL:		/server/experiments/create
+		// Method:	POST
+		$app->services->define(
+			'/experiments/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Create()
+		);
+		
+		// URL:		/server/experiments/delete
+		// Method:	POST
+		$app->services->define(
+			'/experiments/delete',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Delete()
+		);
+		
+		// URL:		/server/experiments/edit
+		// Method:	POST
+		$app->services->define(
+			'/experiments/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Edit()
+		);
+		
+		// URL:		/server/experiments/get
+		// Method:	POST
+		$app->services->define(
+			'/experiments/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Get()
+		);
+		
+		// URL:		/server/experiments/search
+		// Method:	POST
+		$app->services->define(
+			'/experiments/search',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Experiments\Search()
+		);
+		
 		// URL:		/server/image-tests/create
 		// Method:	POST
 		$app->services->define(
@@ -470,6 +510,46 @@ class Services extends \Slim\Middleware {
 			'/permissions/sign-up/exists',
 			HTTP_METHOD_POST,
 			new \App\Controllers\Permissions\SignUp\Exists()
+		);
+		
+		// URL:		/server/studies/create
+		// Method:	POST
+		$app->services->define(
+			'/studies/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Create()
+		);
+		
+		// URL:		/server/studies/delete
+		// Method:	POST
+		$app->services->define(
+			'/studies/delete',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Delete()
+		);
+		
+		// URL:		/server/studies/edit
+		// Method:	POST
+		$app->services->define(
+			'/studies/edit',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Edit()
+		);
+		
+		// URL:		/server/studies/get
+		// Method:	POST
+		$app->services->define(
+			'/studies/get',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Studies\Get()
+		);
+		
+		// URL:		/server/temporary-files/create
+		// Method:	POST
+		$app->services->define(
+			'/temporary-files/create',
+			HTTP_METHOD_POST,
+			new \App\Controllers\TemporaryFiles\Create()
 		);
 		
 		// URL:		/server/treatments/create

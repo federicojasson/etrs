@@ -16,8 +16,6 @@ class Create extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: transaction
-		
 		// Gets the input
 		$input = $app->request->getBody();
 		$id = $input['id'];

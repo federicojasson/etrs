@@ -8,6 +8,21 @@ namespace App\Helpers;
 class InputValidator extends \App\Helpers\Helper {
 	
 	/*
+	 * Determines whether an input is a bounded integer.
+	 * 
+	 * It receives the input and the maximum allowed value.
+	 */
+	public function isBoundedInteger($input, $maximumValue) {
+		if (! is_int($input)) {
+			// The input is not an integer
+			return false;
+		}
+		
+		// Checks whether the input's value is in range
+		return $input <= $maximumValue;
+	}
+	
+	/*
 	 * Determines whether an input is a bounded string.
 	 * 
 	 * It receives the input and the maximum allowed length.
@@ -43,6 +58,15 @@ class InputValidator extends \App\Helpers\Helper {
 			// The operation failed
 			return false;
 		}
+	}
+	
+	/*
+	 * Determines whether an input is a date.
+	 * 
+	 * It receives the input.
+	 */
+	public function isDate($input) {
+		// TODO: implement
 	}
 	
 	/*
@@ -98,7 +122,7 @@ class InputValidator extends \App\Helpers\Helper {
 			return false;
 		}
 		
-		// Checks whether the input's range is valid
+		// Checks whether the input's value is in range
 		return $input > 0;
 	}
 	

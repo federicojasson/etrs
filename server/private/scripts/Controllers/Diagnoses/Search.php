@@ -16,8 +16,6 @@ class Search extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: transactions?
-		
 		// Gets the input
 		$input = $app->request->getBody();
 		$expression = (is_null($input['expression']))? null : $input['expression'];

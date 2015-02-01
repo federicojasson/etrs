@@ -20,8 +20,6 @@ class Delete extends \App\Controllers\SecureController {
 		$input = $app->request->getBody();
 		$id = hex2bin($input['id']);
 		
-		// TODO: transactions
-		
 		if (! $app->businessLogicDatabase->nonDeletedImageTestExists($id)) {
 			// The image test doesn't exist
 			

@@ -16,7 +16,29 @@ class Create extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Gets the input
+		$input = $app->request->getBody();
+		$firstName = trimString($input['firstName']);
+		$lastName = trimString($input['lastName']);
+		$gender = $input['gender'];
+		$birthDate = $input['birthDate'];
+		$educationYears = $input['educationYears'];
+		
+		do {
+			// Generates a random ID
+			$id = $app->cryptography->generateRandomId();
+		} while ($app->businessLogicDatabase->patientExists($id));
+		
+		// Gets the signed in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Creates the patient
+		$app->businessLogicDatabase->createPatient($id, $signedInUser['id'], $signedInUser['id'], $firstName, $lastName, $gender, $birthDate, $educationYears);
+		
+		// Sets the output
+		$app->response->setBody([
+			'id' => bin2hex($id)
+		]);
 	}
 	
 	/*
@@ -27,7 +49,42 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'firstName' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				if (! is_string($input)) {
+					return false;
+				}
+				
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 48) &&
+						$app->inputValidator->isPrintableString($input);
+			}),
+			
+			'lastName' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				if (! is_string($input)) {
+					return false;
+				}
+				
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 48) &&
+						$app->inputValidator->isPrintableString($input);
+			}),
+			
+			'gender' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isGender($input);
+			}),
+			
+			'birthDate' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isDate($input);
+			}),
+			
+			'educationYears' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return	$app->inputValidator->isNonNegativeInteger($input) &&
+						$app->inputValidator->isBoundedInteger($input, 100);
+			})
 		]);
 		
 		// Validates the request and returns the result
@@ -42,7 +99,8 @@ class Create extends \App\Controllers\SecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			// TODO: implement
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
 		];
 		
 		// Validates the account and returns the result

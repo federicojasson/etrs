@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\ImageTests;
+namespace App\Controllers\Experiments;
 
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/image-tests/search
+ * URL:		/server/experiments/search
  * Method:	POST
  */
 class Search extends \App\Controllers\SecureController {
@@ -27,11 +27,11 @@ class Search extends \App\Controllers\SecureController {
 		$offset = $limit * ($page - 1);
 		
 		if (is_null($expression)) {
-			// All image tests should be included in the search
-			$imageTests = $app->businessLogicDatabase->searchAllNonDeletedImageTests($sorting, $limit, $offset);
+			// All experiments should be included in the search
+			$experiments = $app->businessLogicDatabase->searchAllNonDeletedExperiments($sorting, $limit, $offset);
 		} else {
-			// Only specific image tests should be included in the search
-			$imageTests = $app->businessLogicDatabase->searchSpecificNonDeletedImageTests($sorting, $expression, $limit, $offset);
+			// Only specific experiments should be included in the search
+			$experiments = $app->businessLogicDatabase->searchSpecificNonDeletedExperiments($sorting, $expression, $limit, $offset);
 		}
 		
 		// Gets the number of rows found
@@ -39,8 +39,8 @@ class Search extends \App\Controllers\SecureController {
 		
 		// Gets the results
 		$results = [];
-		foreach ($imageTests as $imageTest) {
-			$results[] = bin2hex($imageTest['id']);
+		foreach ($experiments as $experiment) {
+			$results[] = bin2hex($experiment['id']);
 		}
 		
 		// Sets the output
@@ -106,7 +106,7 @@ class Search extends \App\Controllers\SecureController {
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
 			USER_ROLE_ADMINISTRATOR,
-			USER_ROLE_DOCTOR
+			USER_ROLE_OPERATOR
 		];
 		
 		// Validates the account and returns the result
