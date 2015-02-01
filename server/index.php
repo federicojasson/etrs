@@ -18,12 +18,12 @@ $app = new \Slim\Slim([
 ]);
 
 // Adds the middlewares
-$app->add(new \App\Middlewares\Session());
-$app->add(new \App\Middlewares\Services());
-$app->add(new \App\Middlewares\Configurations());
-$app->add(new \App\Middlewares\Helpers());
-$app->add(new \App\Middlewares\ErrorHandlers());
-$app->add(new \App\Middlewares\Extensions());
+$app->add(new \App\Middleware\Session());
+$app->add(new \App\Middleware\Services());
+$app->add(new \App\Middleware\Configurations());
+$app->add(new \App\Middleware\Helpers());
+$app->add(new \App\Middleware\ErrorHandlers());
+$app->add(new \App\Middleware\Extensions());
 
 // Serves the request
 $app->run();
