@@ -23,6 +23,29 @@ class InputValidator extends \App\Helpers\Helper {
 	}
 	
 	/*
+	 * Determines whether an input is a data type descriptor.
+	 * 
+	 * It receives the input.
+	 */
+	public function isDataTypeDescriptor($input) {
+		if (! $this->isBoundedString($input, 1024)) {
+			// The input is not a string or is not bounded properly
+			return false;
+		}
+		
+		try {
+			// Tries to initialize a data type descriptor
+			new \App\Auxiliars\DataTypeDescriptor($input);
+			
+			// The operation succeeded
+			return true;
+		} catch (Exception $exception) {
+			// The operation failed
+			return false;
+		}
+	}
+	
+	/*
 	 * Determines whether an input is an email address.
 	 * 
 	 * It receives the input.
@@ -122,64 +145,6 @@ class InputValidator extends \App\Helpers\Helper {
 	}
 	
 	/*
-	 * Determines whether an input is a type description.
-	 * 
-	 * It receives the input.
-	 */
-	public function isTypeDescription($input) {
-		if (! $this->isNonEmptyString($input)) {
-			// The input is not a string or is an empty one
-			return false;
-		}
-		
-		// TODO: comment and order
-		$fields = explode(';', $input);
-		
-		$type = $fields[0];
-		
-		$definition = [];
-		
-		$count = count($fields);
-		for ($i = 1; $i < $count; $i++) {
-			$field = explode(':', $fields[$i]);
-			
-			if (count($field) !== 2) {
-				return false;
-			}
-			
-			$label = trimString($field[0]);
-			
-			if (isStringEmpty($label)) {
-				return false;
-			}
-			
-			if (array_key_exists($label, $definition)) {
-				return false;
-			}
-			
-			$definition[$label] = $field[1];
-		}
-		
-		switch ($type) {
-			case 'boolean': {
-				return $this->isBooleanTypeDefinition($definition);
-			}
-			
-			case 'integer_fix_values': {
-				return $this->isIntegerFixValuesTypeDefinition($definition);
-			}
-			
-			case 'integer_range': {
-				return $this->isIntegerRangeTypeDefinition($definition);
-			}
-			
-			default: {
-				return false;
-			}
-		}
-	}
-	
-	/*
 	 * Determines whether an input is a valid password.
 	 * 
 	 * It receives the input.
@@ -242,100 +207,13 @@ class InputValidator extends \App\Helpers\Helper {
 			return false;
 		}
 		
-		if (! $jsonStructureDescriptor->validateJsonStructure($decodedInput)) {
-			// The input didn't pass the validation
+		if (! $jsonStructureDescriptor->isValidJsonStructure($decodedInput)) {
+			// The input is invalid
 			return false;
 		}
 		
 		// Replaces the input with its decoded version
 		$app->request->setBody($decodedInput);
-		
-		return true;
-	}
-	
-	/*
-	 * TODO: comments
-	 * 
-	 * It receives the definition.
-	 */
-	private function isBooleanTypeDefinition($definition) {
-		// TODO: comment and order
-		
-		if (count($definition) !== 2) {
-			return false;
-		}
-		
-		if (! isValueInArray('false', $definition)) {
-			return false;
-		}
-		
-		if (! isValueInArray('true', $definition)) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	/*
-	 * TODO: comments
-	 * 
-	 * It receives the definition.
-	 */
-	private function isIntegerFixValuesTypeDefinition($definition) {
-		// TODO: comment and order
-		
-		if (count($definition) === 0) {
-			return false;
-		}
-		
-		foreach ($definition as $value) {
-			if (! isStringInteger($value)) {
-				return false;
-			}
-		}
-		
-		if (arrayContainsDuplicateValues($definition)) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	/*
-	 * TODO: comments
-	 * 
-	 * It receives the definition.
-	 */
-	private function isIntegerRangeTypeDefinition($definition) {
-		// TODO: comments and order
-		
-		if (count($definition) !== 2) {
-			return false;
-		}
-		
-		if (! array_key_exists('min', $definition)) {
-			return false;
-		}
-		
-		if (! array_key_exists('max', $definition)) {
-			return false;
-		}
-		
-		if (! isStringInteger($definition['min'])) {
-			return false;
-		}
-		
-		$minimum = (int) $definition['min'];
-		
-		if (! isStringInteger($definition['max'])) {
-			return false;
-		}
-		
-		$maximum = (int) $definition['max'];
-		
-		if ($maximum < $minimum) {
-			return false;
-		}
 		
 		return true;
 	}

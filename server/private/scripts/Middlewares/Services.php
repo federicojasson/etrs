@@ -520,6 +520,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controllers\Users\Delete()
 		);
 		
+		// URL:		/server/users/exists
+		// Method:	POST
+		$app->services->define(
+			'/users/exists',
+			HTTP_METHOD_POST,
+			new \App\Controllers\Users\Exists()
+		);
+		
 		// URL:		/server/users/get
 		// Method:	POST
 		$app->services->define(

@@ -44,50 +44,52 @@ class JsonStructureDescriptor {
 	}
 	
 	/*
-	 * Validates a JSON structure.
+	 * Determines whether an input is a valid JSON structure according to this
+	 * descriptor.
 	 * 
-	 * It receives the JSON structure.
+	 * It receives the input.
 	 */
-	public function validateJsonStructure($jsonStructure) {
-		// Calls the proper function depending on the expected type
+	public function isValidJsonStructure($input) {
+		// Calls the proper function depending on the type
 		switch ($this->type) {
 			case JSON_STRUCTURE_TYPE_ARRAY: {
-				return $this->validateJsonArray($jsonStructure);
+				return $this->isValidJsonArray($input);
 			}
 			
 			case JSON_STRUCTURE_TYPE_OBJECT: {
-				return $this->validateJsonObject($jsonStructure);
+				return $this->isValidJsonObject($input);
 			}
 			
 			case JSON_STRUCTURE_TYPE_VALUE: {
-				return $this->validateJsonValue($jsonStructure);
+				return $this->isValidJsonValue($input);
 			}
 		}
 	}
 	
 	/*
-	 * Validates a JSON array.
+	 * Determines whether an input is a valid JSON array according to this
+	 * descriptor.
 	 * 
-	 * It receives the JSON array.
+	 * It receives the input.
 	 */
-	private function validateJsonArray($jsonArray) {
-		if (! is_array($jsonArray)) {
+	private function isValidJsonArray($input) {
+		if (! is_array($input)) {
 			// The input is not an array
 			return false;
 		}
 		
-		if (! isSequentialArray($jsonArray)) {
+		if (! isSequentialArray($input)) {
 			// The input is not a sequential array
 			return false;
 		}
 		
 		// Validates the array's elements
-		foreach ($jsonArray as $element) {
+		foreach ($input as $element) {
 			// Validates the element recursively
-			$isValid = $this->definition->validateJsonStructure($element);
+			$isValid = $this->definition->isValidJsonStructure($element);
 			
 			if (! $isValid) {
-				// The element didn't pass the validation
+				// The element is invalid
 				return false;
 			}
 		}
@@ -96,28 +98,29 @@ class JsonStructureDescriptor {
 	}
 	
 	/*
-	 * Validates a JSON object.
+	 * Determines whether an input is a valid JSON object according to this
+	 * descriptor.
 	 * 
-	 * It receives the JSON object.
+	 * It receives the input.
 	 */
-	private function validateJsonObject($jsonObject) {
-		if (! is_array($jsonObject)) {
+	private function isValidJsonObject($input) {
+		if (! is_array($input)) {
 			// The input is not an array
 			return false;
 		}
 		
 		// Validates the object's properties
 		foreach ($this->definition as $property => $jsonStructureDescriptor) {
-			if (! array_key_exists($property, $jsonObject)) {
-				// The property is not defined in the JSON object
+			if (! array_key_exists($property, $input)) {
+				// The property is not defined in the input
 				return false;
 			}
 			
 			// Validates the property recursively
-			$isValid = $jsonStructureDescriptor->validateJsonStructure($jsonObject[$property]);
+			$isValid = $jsonStructureDescriptor->isValidJsonStructure($input[$property]);
 			
 			if (! $isValid) {
-				// The property didn't pass the validation
+				// The property is invalid
 				return false;
 			}
 		}
@@ -126,18 +129,19 @@ class JsonStructureDescriptor {
 	}
 	
 	/*
-	 * Validates a JSON value.
+	 * Determines whether an input is a valid JSON value according to this
+	 * descriptor.
 	 * 
-	 * It receives the JSON value.
+	 * It receives the input.
 	 */
-	private function validateJsonValue($jsonValue) {
-		if (is_array($jsonValue)) {
+	private function isValidJsonValue($input) {
+		if (is_array($input)) {
 			// The input is an array
 			return false;
 		}
 		
 		// Calls the validation function and returns the result
-		return call_user_func($this->definition, $jsonValue);
+		return call_user_func($this->definition, $input);
 	}
 	
 }

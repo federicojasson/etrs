@@ -117,15 +117,18 @@ abstract class Database extends \App\Helpers\Helper {
 		
 		try {
 			// Connects to the database
-			$this->pdo = $this->connect();
+			$pdo = $this->connect();
 
 			// Configures the PDO
-			$this->pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
-			$this->pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
-			$this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+			$pdo->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+			$pdo->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
+			$pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			
 			// Sets the isolation level for the transactions
-			$this->pdo->exec('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
+			$pdo->exec('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
+			
+			// Initializes the instance attribute
+			$this->pdo = $pdo;
 		} catch (\PDOException $exception) {
 			// A PDO exception was thrown
 			$app->error($exception);

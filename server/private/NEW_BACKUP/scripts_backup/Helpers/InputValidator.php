@@ -250,7 +250,7 @@ class InputValidator extends \App\Helpers\Helper {
 			return false;
 		}
 		
-		if (! $jsonStructureDescriptor->validateJsonStructure($decodedInput)) {
+		if (! $jsonStructureDescriptor->isValidJsonStructure($decodedInput)) {
 			// The input didn't pass the validation
 			return false;
 		}

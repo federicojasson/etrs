@@ -61,21 +61,41 @@ class Search extends \App\Controllers\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 			'expression' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
+				if (is_null($input)) {
+					return true;
+				}
+				
+				if (! is_string($input)) {
+					return false;
+				}
+				
+				$input = trimString($input);
+				
+				return	$app->inputValidator->isNonEmptyString($input) &&
+						$app->inputValidator->isBoundedString($input, 128) &&
+						$app->inputValidator->isPrintableString($input);
 			}),
 			
 			'sorting' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-					// TODO: implement
+					return isValueInArray($input, [
+						'creationDatetime',
+						'lastEditionDatetime',
+						'firstName',
+						'lastName',
+						'gender',
+						'birthDate',
+						'educationYears'
+					]);
 				}),
 				
 				'order' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-					// TODO: implement
+					return $app->inputValidator->isSortingOrder($input);
 				})
 			]),
 			
 			'page' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				// TODO: implement
+				return $app->inputValidator->isPositiveInteger($input);
 			})
 		]);
 		

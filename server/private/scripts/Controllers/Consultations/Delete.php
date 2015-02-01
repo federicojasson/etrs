@@ -16,7 +16,23 @@ class Delete extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// TODO: transactions
+		
+		if (! $app->businessLogicDatabase->nonDeletedConsultationExists($id)) {
+			// The consultation doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_CONSULTATION
+			]);
+		}
+		
+		// Deletes the consultation
+		$app->data->deleteConsultation($id);
 	}
 	
 	/*
@@ -27,7 +43,9 @@ class Delete extends \App\Controllers\SecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
-			// TODO: implement
+			'id' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			})
 		]);
 		
 		// Validates the request and returns the result

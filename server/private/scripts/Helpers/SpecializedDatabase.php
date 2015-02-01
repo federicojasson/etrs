@@ -195,7 +195,7 @@ abstract class SpecializedDatabase extends \App\Helpers\Database {
 		$expression = trimString($expression);
 
 		if (isStringEmpty($expression)) {
-			// The expression is empty
+			// The expression is an empty string
 			return '';
 		}
 
@@ -238,7 +238,7 @@ abstract class SpecializedDatabase extends \App\Helpers\Database {
 		$clause = '';
 
 		// Appends the field and the order in which the results should be sorted
-		$clause .= $field;
+		$clause .= camelCaseToSnakeCase($field);
 		$clause .= ' ';
 		$clause .= ($order === SORTING_ORDER_ASCENDING)? 'ASC' : 'DESC';
 

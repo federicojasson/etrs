@@ -16,7 +16,28 @@ class Create extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// TODO: transactions
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$name = trimString($input['name']);
+		$dataTypeDescriptor = $input['dataTypeDescriptor'];
+		
+		do {
+			// Generates a random ID
+			$id = $app->cryptography->generateRandomId();
+		} while ($app->businessLogicDatabase->neurocognitiveTestExists($id));
+		
+		// Gets the signed in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Creates the neurocognitive test
+		$app->businessLogicDatabase->createNeurocognitiveTest($id, $signedInUser['id'], $signedInUser['id'], $name, $dataTypeDescriptor);
+		
+		// Sets the output
+		$app->response->setBody([
+			'id' => bin2hex($id)
+		]);
 	}
 	
 	/*
@@ -39,8 +60,8 @@ class Create extends \App\Controllers\SecureController {
 						$app->inputValidator->isPrintableString($input);
 			}),
 			
-			'typeDescription' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				return $app->inputValidator->isTypeDescription($input);
+			'dataTypeDescriptor' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isDataTypeDescriptor($input);
 			})
 		]);
 		

@@ -5,6 +5,9 @@
  */
 
 define('CHARACTER_ENCODING_UTF8', 'UTF-8');
+define('DATA_TYPE_BOOLEAN', 'boolean');
+define('DATA_TYPE_INTEGER_FIX_VALUES', 'integer_fix_values');
+define('DATA_TYPE_INTEGER_RANGE', 'integer_range');
 define('ERROR_INVALID_INPUT', 'INVALID_INPUT');
 define('ERROR_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
 define('ERROR_UNDEFINED_SERVICE', 'UNDEFINED_SERVICE');

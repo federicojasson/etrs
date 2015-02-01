@@ -5,6 +5,7 @@
  */
 
 require 'private/scripts/Auxiliars/SessionStorageHandler.php';
+require 'private/scripts/Auxiliars/DataTypeDescriptor.php';
 require 'private/scripts/Auxiliars/DatabaseLogWriter.php';
 require 'private/scripts/Auxiliars/DatabaseSessionStorageHandler.php';
 require 'private/scripts/Auxiliars/JsonStructureDescriptor.php';
@@ -72,6 +73,7 @@ require 'private/scripts/Controllers/Treatments/Edit.php';
 require 'private/scripts/Controllers/Treatments/Get.php';
 require 'private/scripts/Controllers/Treatments/Search.php';
 require 'private/scripts/Controllers/Users/Delete.php';
+require 'private/scripts/Controllers/Users/Exists.php';
 require 'private/scripts/Controllers/Users/Get.php';
 require 'private/scripts/Extensions/Request.php';
 require 'private/scripts/Extensions/Response.php';
@@ -83,6 +85,7 @@ require 'private/scripts/Helpers/Authenticator.php';
 require 'private/scripts/Helpers/AuthorizationValidator.php';
 require 'private/scripts/Helpers/BusinessLogicDatabase.php';
 require 'private/scripts/Helpers/Cryptography.php';
+require 'private/scripts/Helpers/Data.php';
 require 'private/scripts/Helpers/EmailFactory.php';
 require 'private/scripts/Helpers/Files.php';
 require 'private/scripts/Helpers/InputValidator.php';

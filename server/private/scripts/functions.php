@@ -5,10 +5,28 @@
  */
 
 /*
- * TODO: comments
+ * Determines whether an array contains duplicate elements.
+ * 
+ * It receives the array.
  */
-function arrayContainsDuplicateValues($array) {
+function arrayContainsDuplicateElements($array) {
 	return count(array_unique($array)) !== count($array);
+}
+
+/*
+ * Converts a string from camel case notation to snake case notation.
+ * 
+ * It receives the string.
+ */
+function camelCaseToSnakeCase($string) {
+	// TODO: order and comment
+	preg_match_all('!([A-Z][0-9A-Z]*(?=$|[A-Z][0-9a-z])|[A-Za-z][0-9a-z]+)!', $string, $matches);
+	$ret = $matches[0];
+	foreach ($ret as &$match) {
+		$match = ($match == strtoupper($match))? strtolower($match) : lcfirst($match);
+	}
+	
+	return implode('_', $ret);
 }
 
 /*
@@ -59,7 +77,9 @@ function isStringEmpty($string) {
 }
 
 /*
- * TODO: comments
+ * Determines whether a string represents an integer.
+ * 
+ * It receives the string.
  */
 function isStringInteger($string) {
 	return (string) (int) $string === $string;
@@ -116,6 +136,15 @@ function replacePlaceholders($string, $mapping) {
 
 	// Replaces the placeholders and returns the result
 	return str_replace($placeholders, $replacements, $string);
+}
+
+/*
+ * Converts a string to boolean.
+ * 
+ * It receives the string.
+ */
+function stringToBoolean($string) {
+	return ($string === 'false')? false : true;
 }
 
 /*

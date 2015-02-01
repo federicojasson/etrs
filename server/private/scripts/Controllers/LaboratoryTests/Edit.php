@@ -16,7 +16,28 @@ class Edit extends \App\Controllers\SecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// TODO: transaction
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		$name = trimString($input['name']);
+		$dataTypeDescriptor = $input['dataTypeDescriptor'];
+		
+		if (! $app->businessLogicDatabase->nonDeletedLaboratoryTestExists($id)) {
+			// The laboratory test doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_LABORATORY_TEST
+			]);
+		}
+		
+		// Gets the signed in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Edits the laboratory test
+		$app->businessLogicDatabase->editLaboratoryTest($id, $signedInUser['id'], $name, $dataTypeDescriptor);
 	}
 	
 	/*
@@ -43,8 +64,8 @@ class Edit extends \App\Controllers\SecureController {
 						$app->inputValidator->isPrintableString($input);
 			}),
 			
-			'typeDescription' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-				return $app->inputValidator->isTypeDescription($input);
+			'dataTypeDescriptor' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
+				return $app->inputValidator->isDataTypeDescriptor($input);
 			})
 		]);
 		

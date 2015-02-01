@@ -21,6 +21,8 @@ abstract class SecureController extends \App\Controllers\Controller {
 	public function serveRequest() {
 		$app = $this->app;
 		
+		// TODO: invert order if input is never used in isUserAuthorized
+		
 		if (! $this->isInputValid()) {
 			// The input is invalid
 			
