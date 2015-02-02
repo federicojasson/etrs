@@ -2,6 +2,8 @@
 
 namespace App\Middleware;
 
+use \App\Extension as Extension;
+
 /*
  * This middleware defines extensions for vendors' components.
  */
@@ -24,14 +26,14 @@ class Extensions extends \Slim\Middleware {
 	 * It receives the configurations.
 	 */
 	public function initializeRequestExtension($configurations) {
-		return new \App\Extension\Request($configurations['environment']);
+		return new Extension\Request($configurations['environment']);
 	}
 	
 	/*
 	 * Initializes the Response extension.
 	 */
 	public function initializeResponseExtension() {
-		return new \App\Extension\Response();
+		return new Extension\Response();
 	}
 	
 	/*

@@ -8,7 +8,7 @@ namespace App\Helper;
  * A service is defined by its URL, the HTTP method through which it is invoked
  * and the controller that serves the requests.
  */
-class Services extends \App\Helper\Helper {
+class Services extends Helper {
 	
 	/*
 	 * Defines a service.

@@ -21,3 +21,5 @@ define('LOG_LEVEL_4', 4);
 
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
+
+define('RANDOM_ID_LENGTH', 16);

@@ -2,6 +2,8 @@
 
 namespace App\Middleware;
 
+use \App\Helper as Helper;
+
 /*
  * This middleware defines the helpers.
  */
@@ -19,38 +21,45 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Initializes the Authentication helper.
+	 */
+	public function initializeAuthenticationHelper() {
+		return new Helper\Authentication();
+	}
+	
+	/*
 	 * Initializes the Cryptography helper.
 	 */
 	public function initializeCryptographyHelper() {
-		return new \App\Helper\Cryptography();
+		return new Helper\Cryptography();
 	}
 	
 	/*
 	 * Initializes the Data helper.
 	 */
 	public function initializeDataHelper() {
-		return new \App\Helper\Data();
+		return new Helper\Data();
 	}
 	
 	/*
 	 * Initializes the Services helper.
 	 */
 	public function initializeServicesHelper() {
-		return new \App\Helper\Services();
+		return new Helper\Services();
 	}
 	
 	/*
 	 * Initializes the Session helper.
 	 */
 	public function initializeSessionHelper() {
-		return new \App\Helper\Session();
+		return new Helper\Session();
 	}
 	
 	/*
 	 * Initializes the WebServerDatabase helper.
 	 */
 	public function initializeWebServerDatabaseHelper() {
-		return new \App\Helper\Database\WebServerDatabase();
+		return new Helper\Database\WebServerDatabase();
 	}
 	
 	/*
@@ -60,6 +69,7 @@ class Helpers extends \Slim\Middleware {
 		$app = $this->app;
 		
 		// Defines the helpers
+		$app->container->singleton('authentication', [ $this, 'initializeAuthenticationHelper' ]);
 		$app->container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
 		$app->container->singleton('data', [ $this, 'initializeDataHelper' ]);
 		$app->container->singleton('services', [ $this, 'initializeServicesHelper' ]);

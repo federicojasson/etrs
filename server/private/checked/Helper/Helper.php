@@ -30,7 +30,7 @@ abstract class Helper {
 	 * Performs initialization tasks.
 	 */
 	protected function initialize() {
-		// By default, no initialization tasks need to be performed
+		// No initialization tasks need to be performed
 	}
 	
 }

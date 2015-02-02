@@ -2,6 +2,8 @@
 
 namespace App\Middleware;
 
+use \App\Auxiliar\LogWriter as LogWriter;
+
 /*
  * This middleware applies general configurations.
  */
@@ -58,7 +60,7 @@ class Configurations extends \Slim\Middleware {
 		$app->config('debug', false);
 		
 		// Initializes the log writer
-		$logWriter = new \App\Auxiliar\LogWriter\DatabaseLogWriter();
+		$logWriter = new LogWriter\DatabaseLogWriter();
 		
 		// Applies logs configurations
 		$app->config([
