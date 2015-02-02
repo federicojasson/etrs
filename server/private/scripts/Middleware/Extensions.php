@@ -19,18 +19,18 @@ class Extensions extends \Slim\Middleware {
 	}
 	
 	/*
-	 * Initializes the Request extension.
+	 * Creates the Request extension.
 	 * 
 	 * It receives the configurations.
 	 */
-	public function initializeRequestExtension($configurations) {
+	public function createRequestExtension($configurations) {
 		return new \App\Extension\Request($configurations['environment']);
 	}
 	
 	/*
-	 * Initializes the Response extension.
+	 * Creates the Response extension.
 	 */
-	public function initializeResponseExtension() {
+	public function createResponseExtension() {
 		return new \App\Extension\Response();
 	}
 	
@@ -41,8 +41,8 @@ class Extensions extends \Slim\Middleware {
 		$app = $this->app;
 		
 		// Defines the extensions
-		$app->container->singleton('request', [ $this, 'initializeRequestExtension' ]);
-		$app->container->singleton('response', [ $this, 'initializeResponseExtension' ]);
+		$app->container->singleton('request', [ $this, 'createRequestExtension' ]);
+		$app->container->singleton('response', [ $this, 'createResponseExtension' ]);
 	}
 	
 }

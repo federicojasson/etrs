@@ -13,7 +13,7 @@ class BooleanDescriptor extends DataTypeDescriptor {
 	 * It receives the input.
 	 */
 	public function isValidInput($input) {
-		return isValueInArray($input, $this->definition);
+		return isElementInArray($input, $this->definition);
 	}
 	
 }

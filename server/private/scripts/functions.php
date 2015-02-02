@@ -5,6 +5,28 @@
  */
 
 /*
+ * Determines whether an array contains duplicate elements.
+ * 
+ * It receives the array.
+ */
+function arrayContainsDuplicateElements($array) {
+	// Removes duplicate elements from the array
+	$arrayWithoutDuplicates = array_unique($array);
+	
+	// Compares the number of elements of both arrays and returns the result
+	return count($arrayWithoutDuplicates) !== count($array);
+}
+
+/*
+ * Returns the length of a string.
+ * 
+ * It receives the string.
+ */
+function getStringLength($string) {
+	return mb_strlen($string, 'UTF-8');
+}
+
+/*
  * Determines whether an array is sequential.
  * 
  * It receives the array.
@@ -18,12 +40,30 @@ function isSequentialArray($array) {
 }
 
 /*
- * Determines whether a certain value is present in an array.
+ * Determines whether a certain element is present in an array.
  * 
- * It receives the value and the array.
+ * It receives the element and the array.
  */
-function isValueInArray($value, $array) {
-	return in_array($value, $array, true);
+function isElementInArray($element, $array) {
+	return in_array($element, $array, true);
+}
+
+/*
+ * Determines whether a string is empty.
+ * 
+ * It receives the string.
+ */
+function isStringEmpty($string) {
+	return getStringLength($string) === 0;
+}
+
+/*
+ * Determines whether a string represents an integer.
+ * 
+ * It receives the string.
+ */
+function isStringInteger($string) {
+	return (string) (int) $string === $string;
 }
 
 /*
@@ -37,6 +77,15 @@ function readJsonFile($path) {
 	
 	// Decodes the content and returns the result
 	return json_decode($content, true);
+}
+
+/*
+ * Converts a string to boolean.
+ * 
+ * It receives the string.
+ */
+function stringToBoolean($string) {
+	return ($string === 'false')? false : true;
 }
 
 /*

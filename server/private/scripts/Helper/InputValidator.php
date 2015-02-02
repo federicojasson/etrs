@@ -9,6 +9,53 @@ class InputValidator extends Helper {
 	// TODO: implement methods
 	
 	/*
+	 * Determines whether an input is a data type descriptor.
+	 * 
+	 * It receives the input.
+	 */
+	public function isDataTypeDescriptor($input) {
+		if (! $this->isBoundedString($input, 1024)) {
+			// The input is not a string or is not bounded properly
+			return false;
+		}
+		
+		try {
+			// Tries to create a data type descriptor
+			\App\Auxiliar\DataTypeDescriptor\Factory::create($input);
+			
+			// The operation succeeded
+			return true;
+		} catch (\Exception $exception) {
+			// The operation failed
+			return false;
+		}
+	}
+	
+	/*
+	 * Determines whether an input is a date.
+	 * 
+	 * It receives the input.
+	 */
+	public function isDate($input) {
+		// TODO: implement
+	}
+	
+	/*
+	 * Determines whether an input is a positive integer.
+	 * 
+	 * It receives the input.
+	 */
+	public function isPositiveInteger($input) {
+		if (! is_int($input)) {
+			// The input is not an integer
+			return false;
+		}
+		
+		// Checks whether the input's value is in range
+		return $input > 0;
+	}
+	
+	/*
 	 * Determines whether an input is a random ID.
 	 * 
 	 * It receives the input.
@@ -21,6 +68,18 @@ class InputValidator extends Helper {
 		
 		// Checks whether the input matches a regular expression
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
+	}
+	
+	/*
+	 * Determines whether an input is a sorting order.
+	 * 
+	 * It receives the input.
+	 */
+	public function isSortingOrder($input) {
+		return isElementInArray($input, [
+			SORTING_ORDER_ASCENDING,
+			SORTING_ORDER_DESCENDING
+		]);
 	}
 	
 	/*

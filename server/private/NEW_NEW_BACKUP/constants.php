@@ -32,8 +32,6 @@ define('RANDOM_PASSWORD_LENGTH', 64);
 define('RESULTS_PER_PAGE', 10);
 define('SALT_LENGTH', 64);
 define('SESSION_DATA_USER', 'user');
-define('SORTING_ORDER_ASCENDING', 'ascending');
-define('SORTING_ORDER_DESCENDING', 'descending');
 define('USER_ROLE_ADMINISTRATOR', 'ad');
 define('USER_ROLE_ANONYMOUS', '__');
 define('USER_ROLE_DOCTOR', 'dr');

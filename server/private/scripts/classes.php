@@ -9,7 +9,7 @@ require 'private/scripts/Auxiliar/DataTypeDescriptor/DataTypeDescriptor.php';
 require 'private/scripts/Auxiliar/DataTypeDescriptor/BooleanDescriptor.php';
 require 'private/scripts/Auxiliar/DataTypeDescriptor/IntegerFixValuesDescriptor.php';
 require 'private/scripts/Auxiliar/DataTypeDescriptor/IntegerRangeDescriptor.php';
-require 'private/scripts/Auxiliar/DataTypeDescriptor/DataTypeDescriptorFactory.php';
+require 'private/scripts/Auxiliar/DataTypeDescriptor/Factory.php';
 
 // App\Auxiliar\JsonStructureDescriptor
 require 'private/scripts/Auxiliar/JsonStructureDescriptor/JsonStructureDescriptor.php';
@@ -119,6 +119,7 @@ require 'private/scripts/Extension/Response.php';
 
 // App\Helper
 require 'private/scripts/Helper/Helper.php';
+require 'private/scripts/Helper/AccessValidator.php';
 require 'private/scripts/Helper/Authentication.php';
 require 'private/scripts/Helper/Cryptography.php';
 require 'private/scripts/Helper/Data.php';

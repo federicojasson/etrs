@@ -90,7 +90,7 @@ class InputValidator extends \App\Helpers\Helper {
 	 * It receives the input.
 	 */
 	public function isGender($input) {
-		return isValueInArray($input, [
+		return isElementInArray($input, [
 			GENDER_FEMALE,
 			GENDER_MALE
 		]);
@@ -162,7 +162,7 @@ class InputValidator extends \App\Helpers\Helper {
 	 * It receives the input.
 	 */
 	public function isSortingOrder($input) {
-		return isValueInArray($input, [
+		return isElementInArray($input, [
 			SORTING_ORDER_ASCENDING,
 			SORTING_ORDER_DESCENDING
 		]);

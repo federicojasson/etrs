@@ -18,12 +18,12 @@ class AuthorizationValidator extends \App\Helpers\Helper {
 		
 		if (! $app->account->isUserSignedIn()) {
 			// The user is not signed in
-			return isValueInArray(USER_ROLE_ANONYMOUS, $authorizedUserRoles);
+			return isElementInArray(USER_ROLE_ANONYMOUS, $authorizedUserRoles);
 		}
 		
 		// The user is signed in: the decision depends on her role
 		$signedInUser = $app->account->getSignedInUser();
-		return isValueInArray($signedInUser['role'], $authorizedUserRoles);
+		return isElementInArray($signedInUser['role'], $authorizedUserRoles);
 	}
 	
 }

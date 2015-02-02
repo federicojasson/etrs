@@ -2,6 +2,9 @@
 
 namespace App\Controller\ClinicalImpression;
 
+use App\Auxiliar\JsonStructureDescriptor\JsonObjectDescriptor;
+use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
+
 /*
  * This controller is responsible for the following service:
  * 
@@ -21,14 +24,32 @@ class Create extends \App\Controller\SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the expected JSON structure
+		$jsonStructureDescriptor = new JsonObjectDescriptor([
+			'name' => new JsonValueDescriptor(function($input) use ($app) {
+				// TODO: implement
+			})
+		]);
+		
+		// Validates the request and returns the result
+		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	
 	/*
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR
+		];
+		
+		// Validates the access and returns the result
+		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
 }

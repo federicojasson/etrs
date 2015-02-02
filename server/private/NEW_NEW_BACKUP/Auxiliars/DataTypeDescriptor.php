@@ -219,7 +219,7 @@ class DataTypeDescriptor {
 			DATA_TYPE_INTEGER_RANGE
 		];
 		
-		if (! isValueInArray($type, $dataTypes)) {
+		if (! isElementInArray($type, $dataTypes)) {
 			// The type of the descriptor is not supported
 			throw new Exception();
 		}
@@ -234,7 +234,7 @@ class DataTypeDescriptor {
 	 * It receives the input.
 	 */
 	private function isValidBooleanValue($input) {
-		return isValueInArray($input, $this->definition);
+		return isElementInArray($input, $this->definition);
 	}
 	
 	/*
@@ -243,7 +243,7 @@ class DataTypeDescriptor {
 	 * It receives the input.
 	 */
 	private function isValidIntegerFixValuesValue($input) {
-		return isValueInArray($input, $this->definition);
+		return isElementInArray($input, $this->definition);
 	}
 	
 	/*
@@ -280,12 +280,12 @@ class DataTypeDescriptor {
 			throw new Exception();
 		}
 		
-		if (! isValueInArray('false', $definition)) {
+		if (! isElementInArray('false', $definition)) {
 			// The 'false' value is not present in the definition
 			throw new Exception();
 		}
 		
-		if (! isValueInArray('true', $definition)) {
+		if (! isElementInArray('true', $definition)) {
 			// The 'true' value is not present in the definition
 			throw new Exception();
 		}

@@ -76,7 +76,7 @@ class Search extends \App\Controllers\SecureController {
 			
 			'sorting' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_OBJECT, [
 				'field' => new \App\Auxiliars\JsonStructureDescriptor(JSON_STRUCTURE_TYPE_VALUE, function($input) use ($app) {
-					return isValueInArray($input, [
+					return isElementInArray($input, [
 						'creationDatetime',
 						'lastEditionDatetime',
 						'name'

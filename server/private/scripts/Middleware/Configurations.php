@@ -16,7 +16,7 @@ class Configurations extends \Slim\Middleware {
 		// Enables the debug mode
 		$app->config('debug', true);
 		
-		// Initializes the log writer
+		// Creates the log writer
 		$file = fopen('private/logs/debug.log', 'a');
 		$logWriter = new \Slim\LogWriter($file);
 		
@@ -57,7 +57,7 @@ class Configurations extends \Slim\Middleware {
 		// Disables the debug mode
 		$app->config('debug', false);
 		
-		// Initializes the log writer
+		// Creates the log writer
 		$logWriter = new \App\Auxiliar\LogWriter\DatabaseLogWriter();
 		
 		// Applies logs configurations

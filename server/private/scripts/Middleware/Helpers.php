@@ -19,58 +19,65 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
-	 * Initializes the Authentication helper.
+	 * Creates the AccessValidator helper.
 	 */
-	public function initializeAuthenticationHelper() {
+	public function createAccessValidatorHelper() {
+		return new \App\Helper\AccessValidator();
+	}
+	
+	/*
+	 * Creates the Authentication helper.
+	 */
+	public function createAuthenticationHelper() {
 		return new \App\Helper\Authentication();
 	}
 	
 	/*
-	 * Initializes the Cryptography helper.
+	 * Creates the Cryptography helper.
 	 */
-	public function initializeCryptographyHelper() {
+	public function createCryptographyHelper() {
 		return new \App\Helper\Cryptography();
 	}
 	
 	/*
-	 * Initializes the Data helper.
+	 * Creates the Data helper.
 	 */
-	public function initializeDataHelper() {
+	public function createDataHelper() {
 		return new \App\Helper\Data();
 	}
 	
 	/*
-	 * Initializes the InputValidator helper.
+	 * Creates the InputValidator helper.
 	 */
-	public function initializeInputValidatorHelper() {
+	public function createInputValidatorHelper() {
 		return new \App\Helper\InputValidator();
 	}
 	
 	/*
-	 * Initializes the Parameters helper.
+	 * Creates the Parameters helper.
 	 */
-	public function initializeParametersHelper() {
+	public function createParametersHelper() {
 		return new \App\Helper\Parameters();
 	}
 	
 	/*
-	 * Initializes the Services helper.
+	 * Creates the Services helper.
 	 */
-	public function initializeServicesHelper() {
+	public function createServicesHelper() {
 		return new \App\Helper\Services();
 	}
 	
 	/*
-	 * Initializes the Session helper.
+	 * Creates the Session helper.
 	 */
-	public function initializeSessionHelper() {
+	public function createSessionHelper() {
 		return new \App\Helper\Session();
 	}
 	
 	/*
-	 * Initializes the WebServerDatabase helper.
+	 * Creates the WebServerDatabase helper.
 	 */
-	public function initializeWebServerDatabaseHelper() {
+	public function createWebServerDatabaseHelper() {
 		return new \App\Helper\Database\WebServerDatabase();
 	}
 	
@@ -81,14 +88,15 @@ class Helpers extends \Slim\Middleware {
 		$app = $this->app;
 		
 		// Defines the helpers
-		$app->container->singleton('authentication', [ $this, 'initializeAuthenticationHelper' ]);
-		$app->container->singleton('cryptography', [ $this, 'initializeCryptographyHelper' ]);
-		$app->container->singleton('data', [ $this, 'initializeDataHelper' ]);
-		$app->container->singleton('inputValidator', [ $this, 'initializeInputValidatorHelper' ]);
-		$app->container->singleton('parameters', [ $this, 'initializeParametersHelper' ]);
-		$app->container->singleton('services', [ $this, 'initializeServicesHelper' ]);
-		$app->container->singleton('session', [ $this, 'initializeSessionHelper' ]);
-		$app->container->singleton('webServerDatabase', [ $this, 'initializeWebServerDatabaseHelper' ]);
+		$app->container->singleton('accessValidator', [ $this, 'createAccessValidatorHelper' ]);
+		$app->container->singleton('authentication', [ $this, 'createAuthenticationHelper' ]);
+		$app->container->singleton('cryptography', [ $this, 'createCryptographyHelper' ]);
+		$app->container->singleton('data', [ $this, 'createDataHelper' ]);
+		$app->container->singleton('inputValidator', [ $this, 'createInputValidatorHelper' ]);
+		$app->container->singleton('parameters', [ $this, 'createParametersHelper' ]);
+		$app->container->singleton('services', [ $this, 'createServicesHelper' ]);
+		$app->container->singleton('session', [ $this, 'createSessionHelper' ]);
+		$app->container->singleton('webServerDatabase', [ $this, 'createWebServerDatabaseHelper' ]);
 	}
 	
 }

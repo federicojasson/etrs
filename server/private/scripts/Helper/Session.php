@@ -6,7 +6,15 @@ namespace App\Helper;
  * This helper offers an interface to interact with the session.
  */
 class Session extends Helper {
-	// TODO: implement methods
+	
+	/*
+	 * Clears a data entry.
+	 * 
+	 * It receives the entry's key.
+	 */
+	public function clearData($key) {
+		unset($_SESSION[$key]);
+	}
 	
 	/*
 	 * Configures the generation of the session IDs.
@@ -18,6 +26,42 @@ class Session extends Helper {
 	public function configureIdsGeneration($hashFunction, $bitsPerCharacter) {
 		ini_set('session.hash_function', $hashFunction);
 		ini_set('session.hash_bits_per_character', $bitsPerCharacter);
+	}
+	
+	/*
+	 * Determines whether a certain data entry exists.
+	 * 
+	 * It receives the entry's key.
+	 */
+	public function containsData($key) {
+		return array_key_exists($key, $_SESSION);
+	}
+	
+	/*
+	 * Returns the value of a data entry.
+	 * 
+	 * It receives the entry's key.
+	 */
+	public function getData($key) {
+		return $_SESSION[$key];
+	}
+	
+	/*
+	 * Regenerates the session's ID.
+	 * 
+	 * Note that this method doesn't clear the session's data.
+	 */
+	public function regenerateId() {
+		session_regenerate_id(true);
+	}
+	
+	/*
+	 * Sets the value of a data entry.
+	 * 
+	 * It receives the entry's key and the value to be set.
+	 */
+	public function setData($key, $value) {
+		$_SESSION[$key] = $value;
 	}
 	
 	/*

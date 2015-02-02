@@ -21,14 +21,119 @@ class Create extends \App\Controller\SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the expected JSON structure
+		$jsonStructureDescriptor = new JsonObjectDescriptor([
+			'clinicalImpression' => new JsonValueDescriptor(function($input) use ($app) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'diagnosis' => new JsonValueDescriptor(function($input) use ($app) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'patient' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'date' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isDate($input);
+			}),
+			
+			'reasons' => new JsonValueDescriptor(function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'indications' => new JsonValueDescriptor(function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'observations' => new JsonValueDescriptor(function($input) use ($app) {
+				// TODO: implement
+			}),
+			
+			'backgrounds' => new JsonArrayDescriptor(
+				new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			),
+			
+			'imageTests' => new JsonArrayDescriptor(
+				new JsonObjectDescriptor([
+					'id' => new JsonValue(function($input) use ($app) {
+						return $app->inputValidator->isRandomId($input);
+					}),
+					
+					'value' => new JsonValue(function($input) use ($app) {
+						// TODO: implement
+					})
+				])
+			),
+			
+			'laboratoryTests' => new JsonArrayDescriptor(
+				new JsonObjectDescriptor([
+					'id' => new JsonValue(function($input) use ($app) {
+						return $app->inputValidator->isRandomId($input);
+					}),
+					
+					'value' => new JsonValue(function($input) use ($app) {
+						// TODO: implement
+					})
+				])
+			),
+			
+			'medications' => new JsonArrayDescriptor(
+				new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			),
+			
+			'neurocognitiveTests' => new JsonArrayDescriptor(
+				new JsonObjectDescriptor([
+					'id' => new JsonValue(function($input) use ($app) {
+						return $app->inputValidator->isRandomId($input);
+					}),
+					
+					'value' => new JsonValue(function($input) use ($app) {
+						// TODO: implement
+					})
+				])
+			),
+			
+			'treatments' => new JsonArrayDescriptor(
+				new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			)
+		]);
+		
+		// Validates the request and returns the result
+		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	
 	/*
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
+		];
+		
+		// Validates the access and returns the result
+		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
 }

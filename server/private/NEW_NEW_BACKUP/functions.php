@@ -103,7 +103,7 @@ function isStringInteger($string) {
  * 
  * It receives the value and the array.
  */
-function isValueInArray($value, $array) {
+function isElementInArray($value, $array) {
 	return in_array($value, $array, true);
 }
 
