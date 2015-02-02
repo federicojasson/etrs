@@ -4,8 +4,6 @@
  * This script initializes the application.
  */
 
-use \App\Middleware as Middleware;
-
 require 'private/vendors/PHPMailer/PHPMailerAutoload.php';
 require 'private/vendors/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
 
@@ -20,12 +18,12 @@ $app = new \Slim\Slim([
 ]);
 
 // Adds the middlewares
-$app->add(new Middleware\Session());
-$app->add(new Middleware\Services());
-$app->add(new Middleware\Configurations());
-$app->add(new Middleware\Helpers());
-$app->add(new Middleware\ErrorHandlers());
-$app->add(new Middleware\Extensions());
+$app->add(new \App\Middleware\Session());
+$app->add(new \App\Middleware\Services());
+$app->add(new \App\Middleware\Configurations());
+$app->add(new \App\Middleware\Helpers());
+$app->add(new \App\Middleware\ErrorHandlers());
+$app->add(new \App\Middleware\Extensions());
 
 // Serves the request
 $app->run();
