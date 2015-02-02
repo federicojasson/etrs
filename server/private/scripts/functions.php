@@ -18,12 +18,66 @@ function arrayContainsDuplicateElements($array) {
 }
 
 /*
+ * Converts a string from camel case notation to snake case notation.
+ * 
+ * It receives the string.
+ */
+function camelCaseToSnakeCase($string) {
+	// Performs a regular expression search
+	preg_match_all('/[A-Za-z][0-9a-z]+|[A-Z][0-9A-Z]*(?=$|[A-Z][0-9a-z])/', $string, $matches);
+	$words = $matches[0];
+	
+	// Processes the words
+	foreach ($words as &$word) {
+		if ($word === strtoupper($word)) {
+			// The word is in uppercase
+			
+			// Converts the word to lowercase
+			$word = strtolower($word);
+		} else {
+			// The word is in lowercase
+			
+			// Converts the first character of the word to lowercase
+			$word = lcfirst($word);
+		}
+	}
+	
+	// Builds and returns the new string
+	return implode('_', $words);
+}
+
+/*
+ * Returns the first element of an array. If the array is empty, null is
+ * returned.
+ * 
+ * It receives the array.
+ */
+function getFirstElementOrNull($array) {
+	if (count($array) === 0) {
+		// The array is empty
+		return null;
+	}
+
+	// Returns the first element
+	return $array[0];
+}
+
+/*
  * Returns the length of a string.
  * 
  * It receives the string.
  */
 function getStringLength($string) {
 	return mb_strlen($string, 'UTF-8');
+}
+
+/*
+ * Determines whether a certain element is present in an array.
+ * 
+ * It receives the element and the array.
+ */
+function isElementInArray($element, $array) {
+	return in_array($element, $array, true);
 }
 
 /*
@@ -37,15 +91,6 @@ function isSequentialArray($array) {
 
 	// Compares the keys of the array with the indices and returns the result
 	return array_keys($array) === $indices;
-}
-
-/*
- * Determines whether a certain element is present in an array.
- * 
- * It receives the element and the array.
- */
-function isElementInArray($element, $array) {
-	return in_array($element, $array, true);
 }
 
 /*

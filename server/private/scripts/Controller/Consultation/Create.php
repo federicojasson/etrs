@@ -2,6 +2,10 @@
 
 namespace App\Controller\Consultation;
 
+use App\Auxiliar\JsonStructureDescriptor\JsonArrayDescriptor;
+use App\Auxiliar\JsonStructureDescriptor\JsonObjectDescriptor;
+use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
+
 /*
  * This controller is responsible for the following service:
  * 
@@ -50,15 +54,15 @@ class Create extends \App\Controller\SecureController {
 			}),
 			
 			'reasons' => new JsonValueDescriptor(function($input) use ($app) {
-				// TODO: implement
+				return $app->inputValidator->isValidText($input, 0, 1024);
 			}),
 			
 			'indications' => new JsonValueDescriptor(function($input) use ($app) {
-				// TODO: implement
+				return $app->inputValidator->isValidText($input, 0, 1024);
 			}),
 			
 			'observations' => new JsonValueDescriptor(function($input) use ($app) {
-				// TODO: implement
+				return $app->inputValidator->isValidText($input, 0, 1024);
 			}),
 			
 			'backgrounds' => new JsonArrayDescriptor(

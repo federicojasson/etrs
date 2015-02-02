@@ -3,7 +3,8 @@
 namespace App\Auxiliar\DataTypeDescriptor;
 
 /*
- * TODO: comments
+ * This class represents a descriptor of the integer_fix_values data type.
+ * Instances can be used to validate inputs.
  */
 class IntegerFixValuesDescriptor extends DataTypeDescriptor {
 	

@@ -25,8 +25,6 @@ class Authentication extends Helper {
 			// Signs out the user from the system
 			$this->signOutUser();
 			
-			// TODO: should rollback current transaction (if any)?
-			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
 				'error' => ERROR_NON_EXISTENT_USER

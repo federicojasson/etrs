@@ -29,11 +29,15 @@ class Search extends \App\Controller\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'expression' => new JsonValueDescriptor(function($input) use ($app) {
-				// TODO: implement
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isValidText($input, 1, 128);
 			}),
 			
 			'page' => new JsonValueDescriptor(function($input) use ($app) {
-				return $app->inputValidator->isPositiveInteger($input);
+				return $app->inputValidator->isBoundedInteger($input, 1);
 			}),
 			
 			'sorting' => new JsonObjectDescriptor([

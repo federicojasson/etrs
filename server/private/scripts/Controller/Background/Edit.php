@@ -33,7 +33,7 @@ class Edit extends \App\Controller\SecureController {
 			}),
 			
 			'name' => new JsonValueDescriptor(function($input) use ($app) {
-				// TODO: implement
+				return $app->inputValidator->isValidText($input, 1, 128);
 			})
 		]);
 		

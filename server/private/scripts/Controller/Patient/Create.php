@@ -21,7 +21,33 @@ class Create extends \App\Controller\SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the expected JSON structure
+		$jsonStructureDescriptor = new JsonObjectDescriptor([
+			'firstName' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidText($input, 1, 48);
+			}),
+			
+			'lastName' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidText($input, 1, 48);
+			}),
+			
+			'gender' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isGender($input);
+			}),
+			
+			'birthDate' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isDate($input);
+			}),
+			
+			'educationYears' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isBoundedInteger($input, 0, 100);
+			})
+		]);
+		
+		// Validates the request and returns the result
+		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	
 	/*

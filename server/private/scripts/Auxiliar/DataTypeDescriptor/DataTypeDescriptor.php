@@ -3,7 +3,9 @@
 namespace App\Auxiliar\DataTypeDescriptor;
 
 /*
- * TODO: comments
+ * This class represents a descriptor of a data type.
+ * 
+ * Subclasses must implement the isValidInput function.
  */
 abstract class DataTypeDescriptor {
 	

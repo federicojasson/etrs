@@ -29,7 +29,7 @@ class Create extends \App\Controller\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'name' => new JsonValueDescriptor(function($input) use ($app) {
-				// TODO: implement
+				return $app->inputValidator->isValidText($input, 1, 128);
 			}),
 			
 			'dataTypeDescriptor' => new JsonValueDescriptor(function($input) use ($app) {

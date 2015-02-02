@@ -6,7 +6,6 @@ namespace App\Helper;
  * This helper offers cryptography-related functionalities.
  */
 class Cryptography extends Helper {
-	// TODO: implement methods
 	
 	/*
 	 * Generates and returns a random ID.

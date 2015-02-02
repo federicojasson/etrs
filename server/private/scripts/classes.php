@@ -9,7 +9,6 @@ require 'private/scripts/Auxiliar/DataTypeDescriptor/DataTypeDescriptor.php';
 require 'private/scripts/Auxiliar/DataTypeDescriptor/BooleanDescriptor.php';
 require 'private/scripts/Auxiliar/DataTypeDescriptor/IntegerFixValuesDescriptor.php';
 require 'private/scripts/Auxiliar/DataTypeDescriptor/IntegerRangeDescriptor.php';
-require 'private/scripts/Auxiliar/DataTypeDescriptor/Factory.php';
 
 // App\Auxiliar\JsonStructureDescriptor
 require 'private/scripts/Auxiliar/JsonStructureDescriptor/JsonStructureDescriptor.php';
@@ -29,7 +28,7 @@ require 'private/scripts/Controller/Controller.php';
 require 'private/scripts/Controller/SecureController.php';
 
 // App\Controller\Authentication
-require 'private/scripts/Controller/Authentication/Get.php';
+require 'private/scripts/Controller/Authentication/GetState.php';
 
 // App\Controller\Background
 require 'private/scripts/Controller/Background/Create.php';
@@ -123,6 +122,7 @@ require 'private/scripts/Helper/AccessValidator.php';
 require 'private/scripts/Helper/Authentication.php';
 require 'private/scripts/Helper/Cryptography.php';
 require 'private/scripts/Helper/Data.php';
+require 'private/scripts/Helper/DataTypeDescriptor.php';
 require 'private/scripts/Helper/InputValidator.php';
 require 'private/scripts/Helper/Parameters.php';
 require 'private/scripts/Helper/Services.php';
@@ -131,6 +131,7 @@ require 'private/scripts/Helper/Session.php';
 // App\Helper\Database
 require 'private/scripts/Helper/Database/Database.php';
 require 'private/scripts/Helper/Database/SpecializedDatabase.php';
+require 'private/scripts/Helper/Database/BusinessLogicDatabase.php';
 require 'private/scripts/Helper/Database/WebServerDatabase.php';
 
 // App\Middleware

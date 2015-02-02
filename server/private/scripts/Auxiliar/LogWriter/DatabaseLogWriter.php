@@ -47,8 +47,6 @@ class DatabaseLogWriter {
 	public function write($message, $level) {
 		$app = $this->app;
 		
-		// TODO: how to handle transactions here?
-		
 		// Generates random IDs until it finds one that is not in use
 		do {
 			$id = $app->cryptography->generateRandomId();

@@ -9,7 +9,6 @@ namespace App\Helper\Database;
  * Subclasses must implement the connect function.
  */
 abstract class Database extends \App\Helper\Helper {
-	// TODO: implement methods
 	
 	/*
 	 * The PDO instance that represents the connection with the database.
@@ -17,11 +16,98 @@ abstract class Database extends \App\Helper\Helper {
 	private $pdo;
 	
 	/*
+	 * Commits the current transaction.
+	 */
+	public function commitTransaction() {
+		$app = $this->app;
+		
+		try {
+			// Commits the current transaction
+			$this->pdo->exec('COMMIT');
+		} catch (\PDOException $exception) {
+			// A PDO exception was thrown
+			$app->error($exception);
+		}
+	}
+	
+	/*
+	 * Rolls back the current transaction.
+	 */
+	public function rollBackTransaction() {
+		$app = $this->app;
+		
+		try {
+			// Rolls back the current transaction
+			$this->pdo->exec('ROLLBACK');
+		} catch (\PDOException $exception) {
+			// A PDO exception was thrown
+			$app->error($exception);
+		}
+	}
+	
+	/*
+	 * Starts a read-only transaction.
+	 */
+	public function startReadOnlyTransaction() {
+		$app = $this->app;
+		
+		try {
+			// Starts a read-only transaction
+			$this->pdo->exec('START TRANSACTION READ ONLY');
+		} catch (\PDOException $exception) {
+			// A PDO exception was thrown
+			$app->error($exception);
+		}
+	}
+	
+	/*
+	 * Starts a read-write transaction.
+	 */
+	public function startReadWriteTransaction() {
+		$app = $this->app;
+		
+		try {
+			// Starts a read-write transaction
+			$this->pdo->exec('START TRANSACTION READ WRITE');
+		} catch (\PDOException $exception) {
+			// A PDO exception was thrown
+			$app->error($exception);
+		}
+	}
+	
+	/*
 	 * Connects to the database.
 	 * 
 	 * It returns a PDO instance representing the connection.
 	 */
 	protected abstract function connect();
+	
+	/*
+	 * Executes a prepared statement and returns the results. If the statement
+	 * is not a query, null is returned.
+	 * 
+	 * It receives the statement and, optionally, the parameters to prepare it.
+	 */
+	protected function executePreparedStatement($statement, $parameters = null) {
+		$app = $this->app;
+		
+		try {
+			// Prepares and executes the statement
+			$preparedStatement = $this->pdo->prepare($statement);
+			$preparedStatement->execute($parameters);
+			
+			if ($preparedStatement->columnCount() === 0) {
+				// The statement is not a query
+				return null;
+			}
+			
+			// Fetches and returns the results
+			return $preparedStatement->fetchAll();
+		} catch (\PDOException $exception) {
+			// A PDO exception was thrown
+			$app->error($exception);
+		}
+	}
 	
 	/*
 	 * Performs initialization tasks.

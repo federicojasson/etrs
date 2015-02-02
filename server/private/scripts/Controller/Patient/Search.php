@@ -29,11 +29,15 @@ class Search extends \App\Controller\SecureController {
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'expression' => new JsonValueDescriptor(function($input) use ($app) {
-				// TODO: implement
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isValidText($input, 1, 128);
 			}),
 			
 			'page' => new JsonValueDescriptor(function($input) use ($app) {
-				return $app->inputValidator->isPositiveInteger($input);
+				return $app->inputValidator->isBoundedInteger($input, 1);
 			}),
 			
 			'sorting' => new JsonObjectDescriptor([
@@ -63,7 +67,17 @@ class Search extends \App\Controller\SecureController {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
+		];
+		
+		// Validates the access and returns the result
+		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
 }

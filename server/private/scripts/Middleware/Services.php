@@ -26,12 +26,12 @@ class Services extends \Slim\Middleware {
 		
 		// Defines the services
 		
-		// URL:		/server/authentication/get
+		// URL:		/server/authentication/get-state
 		// Method:	POST
 		$app->services->define(
-			'/authentication/get',
+			'/authentication/get-state',
 			'POST',
-			new \App\Controller\Authentication\Get()
+			new \App\Controller\Authentication\GetState()
 		);
 		
 		// URL:		/server/background/create

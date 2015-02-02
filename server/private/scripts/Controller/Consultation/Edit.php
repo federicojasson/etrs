@@ -2,6 +2,10 @@
 
 namespace App\Controller\Consultation;
 
+use App\Auxiliar\JsonStructureDescriptor\JsonArrayDescriptor;
+use App\Auxiliar\JsonStructureDescriptor\JsonObjectDescriptor;
+use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
+
 /*
  * This controller is responsible for the following service:
  * 
@@ -21,7 +25,103 @@ class Edit extends \App\Controller\SecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the expected JSON structure
+		$jsonStructureDescriptor = new JsonObjectDescriptor([
+			'id' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'clinicalImpression' => new JsonValueDescriptor(function($input) use ($app) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'diagnosis' => new JsonValueDescriptor(function($input) use ($app) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'date' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isDate($input);
+			}),
+			
+			'reasons' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidText($input, 0, 1024);
+			}),
+			
+			'indications' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidText($input, 0, 1024);
+			}),
+			
+			'observations' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidText($input, 0, 1024);
+			}),
+			
+			'backgrounds' => new JsonArrayDescriptor(
+				new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			),
+			
+			'imageTests' => new JsonArrayDescriptor(
+				new JsonObjectDescriptor([
+					'id' => new JsonValue(function($input) use ($app) {
+						return $app->inputValidator->isRandomId($input);
+					}),
+					
+					'value' => new JsonValue(function($input) use ($app) {
+						// TODO: implement
+					})
+				])
+			),
+			
+			'laboratoryTests' => new JsonArrayDescriptor(
+				new JsonObjectDescriptor([
+					'id' => new JsonValue(function($input) use ($app) {
+						return $app->inputValidator->isRandomId($input);
+					}),
+					
+					'value' => new JsonValue(function($input) use ($app) {
+						// TODO: implement
+					})
+				])
+			),
+			
+			'medications' => new JsonArrayDescriptor(
+				new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			),
+			
+			'neurocognitiveTests' => new JsonArrayDescriptor(
+				new JsonObjectDescriptor([
+					'id' => new JsonValue(function($input) use ($app) {
+						return $app->inputValidator->isRandomId($input);
+					}),
+					
+					'value' => new JsonValue(function($input) use ($app) {
+						// TODO: implement
+					})
+				])
+			),
+			
+			'treatments' => new JsonArrayDescriptor(
+				new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			)
+		]);
+		
+		// Validates the request and returns the result
+		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	
 	/*

@@ -3,7 +3,8 @@
 namespace App\Auxiliar\JsonStructureDescriptor;
 
 /*
- * TODO: comments
+ * This class represents a descriptor of a JSON object. Instances can be used to
+ * validate inputs.
  */
 class JsonObjectDescriptor extends JsonStructureDescriptor {
 	
