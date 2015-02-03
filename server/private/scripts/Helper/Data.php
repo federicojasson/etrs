@@ -10,6 +10,34 @@ class Data extends Helper {
 	/*
 	 * TODO: comments
 	 */
+	public function deleteConsultation($id) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deleteExperiment($id) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deletePatient($id) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deleteStudy($id) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
 	public function getBackground($id) {
 		$app = $this->app;
 		

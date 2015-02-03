@@ -17,7 +17,32 @@ class Delete extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		if (! $app->businessLogicDatabase->nonDeletedPatientExists($id)) {
+			// The patient doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_PATIENT
+			]);
+		}
+		
+		// Deletes the patient
+		$app->data->deletePatient($id);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

@@ -372,12 +372,30 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Determines whether a non-deleted consultation exists.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function nonDeletedConsultationExists($id) {
+		return $this->entityExists('non_deleted_consultations', $id);
+	}
+	
+	/*
 	 * Determines whether a non-deleted diagnosis exists.
 	 * 
 	 * It receives the diagnosis' ID.
 	 */
 	public function nonDeletedDiagnosisExists($id) {
 		return $this->entityExists('non_deleted_diagnoses', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted experiment exists.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function nonDeletedExperimentExists($id) {
+		return $this->entityExists('non_deleted_experiments', $id);
 	}
 	
 	/*
@@ -414,6 +432,24 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function nonDeletedNeurocognitiveTestExists($id) {
 		return $this->entityExists('non_deleted_neurocognitive_tests', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted patient exists.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function nonDeletedPatientExists($id) {
+		return $this->entityExists('non_deleted_patients', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted study exists.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function nonDeletedStudyExists($id) {
+		return $this->entityExists('non_deleted_studies', $id);
 	}
 	
 	/*
