@@ -50,14 +50,14 @@ class InputValidator extends Helper {
 	 * It receives the input.
 	 */
 	public function isDataTypeDescriptor($input) {
-		if (! $this->isBoundedString($input, 0, 1024)) {
-			// The input is not a string or is not bounded properly
+		if (! $this->isValidText($input, 0, 1024)) {
+			// The input is not a valid text
 			return false;
 		}
 		
 		try {
 			// Tries to create a data type descriptor
-			$app->dataTypeDescriptor->create($input);
+			\App\Auxiliar\DataTypeDescriptor\Factory::create($input);
 			
 			// The operation succeeded
 			return true;
@@ -78,6 +78,7 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
+		$matches = [];
 		if (! preg_match('/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/', $input, $matches)) {
 			// The input doesn't match the regular expression
 			return false;
@@ -102,21 +103,6 @@ class InputValidator extends Helper {
 			GENDER_FEMALE,
 			GENDER_MALE
 		]);
-	}
-	
-	/*
-	 * Determines whether an input is a printable string.
-	 * 
-	 * It receives the input.
-	 */
-	public function isPrintableString($input) {
-		if (! is_string($input)) {
-			// The input is not a string
-			return false;
-		}
-		
-		// Checks whether the input matches a regular expression
-		return preg_match('/^[^\p{Cc}]*$/u', $input);
 	}
 	
 	/*
@@ -158,11 +144,16 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
+		if (! preg_match('/^[^\p{Cc}]*$/u', $input)) {
+			// The input contains non-printable characters
+			return false;
+		}
+		
 		// Trims the input
 		$input = trimString($input);
 		
-		return	$this->isBoundedString($input, $minimumLength, $maximumLength) &&
-				$this->isPrintableString($input);
+		// Checks whether the input is bounded
+		return $this->isBoundedString($input, $minimumLength, $maximumLength);
 	}
 	
 	/*

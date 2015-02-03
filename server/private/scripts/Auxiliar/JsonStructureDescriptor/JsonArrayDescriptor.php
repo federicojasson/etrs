@@ -27,7 +27,7 @@ class JsonArrayDescriptor extends JsonStructureDescriptor {
 		// Validates the array's elements
 		foreach ($input as $element) {
 			// Validates the element recursively
-			$isValid = $this->definition->isValidJsonStructure($element);
+			$isValid = $this->definition->isValidInput($element);
 			
 			if (! $isValid) {
 				// The element is invalid

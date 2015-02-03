@@ -33,6 +33,13 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Creates the Authenticator helper.
+	 */
+	public function createAuthenticatorHelper() {
+		return new \App\Helper\Authenticator();
+	}
+	
+	/*
 	 * Creates the BusinessLogicDatabase helper.
 	 */
 	public function createBusinessLogicDatabaseHelper() {
@@ -51,13 +58,6 @@ class Helpers extends \Slim\Middleware {
 	 */
 	public function createDataHelper() {
 		return new \App\Helper\Data();
-	}
-	
-	/*
-	 * Creates the DataTypeDescriptor helper.
-	 */
-	public function createDataTypeDescriptorHelper() {
-		return new \App\Helper\DataTypeDescriptor();
 	}
 	
 	/*
@@ -104,10 +104,10 @@ class Helpers extends \Slim\Middleware {
 		// Defines the helpers
 		$app->container->singleton('accessValidator', [ $this, 'createAccessValidatorHelper' ]);
 		$app->container->singleton('authentication', [ $this, 'createAuthenticationHelper' ]);
+		$app->container->singleton('authenticator', [ $this, 'createAuthenticatorHelper' ]);
 		$app->container->singleton('businessLogicDatabase', [ $this, 'createBusinessLogicDatabaseHelper' ]);
 		$app->container->singleton('cryptography', [ $this, 'createCryptographyHelper' ]);
 		$app->container->singleton('data', [ $this, 'createDataHelper' ]);
-		$app->container->singleton('dataTypeDescriptor', [ $this, 'createDataTypeDescriptorHelper' ]);
 		$app->container->singleton('inputValidator', [ $this, 'createInputValidatorHelper' ]);
 		$app->container->singleton('parameters', [ $this, 'createParametersHelper' ]);
 		$app->container->singleton('services', [ $this, 'createServicesHelper' ]);

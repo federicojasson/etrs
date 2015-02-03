@@ -78,7 +78,7 @@ abstract class SpecializedDatabase extends Database {
 	 */
 	protected function getEntity($table, $columnsToSelect, $id) {
 		// Gets the SELECT clause
-		$selectClause = $this->getColumnList($columnsToSelect);
+		$selectClause = $this->getSelectClause($columnsToSelect);
 		
 		// Defines the statement
 		$statement = '
@@ -109,7 +109,7 @@ abstract class SpecializedDatabase extends Database {
 	 */
 	protected function searchAllEntities($table, $columnsToSelect, $sorting, $limit, $offset) {
 		// Gets the SELECT clause
-		$selectClause = $this->getColumnList($columnsToSelect);
+		$selectClause = $this->getSelectClause($columnsToSelect);
 		
 		// Gets the ORDER BY clause
 		$orderByClause = $this->getOrderByClause($sorting);
@@ -144,10 +144,10 @@ abstract class SpecializedDatabase extends Database {
 	 */
 	protected function searchSpecificEntities($table, $columnsToSelect, $columnsToMatch, $sorting, $expression, $limit, $offset) {
 		// Gets the SELECT clause
-		$selectClause = $this->getColumnList($columnsToSelect);
+		$selectClause = $this->getSelectClause($columnsToSelect);
 		
 		// Gets the MATCH clause
-		$matchClause = $this->getColumnList($columnsToMatch);
+		$matchClause = $this->getMatchClause($columnsToMatch);
 		
 		// Gets the ORDER BY clause
 		$orderByClause = $this->getOrderByClause($sorting);
@@ -220,6 +220,15 @@ abstract class SpecializedDatabase extends Database {
 	private function getColumnList($columns) {
 		return implode(', ', $columns);
 	}
+	
+	/*
+	 * Returns a MATCH clause from a set of columns.
+	 * 
+	 * It receives the columns.
+	 */
+	private function getMatchClause($columns) {
+		return $this->getColumnList($columns);
+	}
 
 	/*
 	 * Returns an ORDER BY clause from a sorting.
@@ -238,6 +247,21 @@ abstract class SpecializedDatabase extends Database {
 		$clause .= ($order === SORTING_ORDER_ASCENDING)? 'ASC' : 'DESC';
 
 		return $clause;
+	}
+	
+	/*
+	 * Returns a SELECT clause from a set of columns.
+	 * 
+	 * It receives the columns.
+	 */
+	private function getSelectClause($columns) {
+		// Appends an alias to the columns
+		foreach ($columns as &$column) {
+			$column = $column . ' AS ' . camelCaseToSnakeCase($column);
+		}
+		
+		// Gets and returns a comma-separated list of the columns
+		return $this->getColumnList($columns);
 	}
 	
 }

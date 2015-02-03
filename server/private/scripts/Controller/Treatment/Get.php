@@ -17,7 +17,26 @@ class Get extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Gets the treatment
+		$treatment = $app->data->getTreatment($id);
+		
+		if (is_null($treatment)) {
+			// The treatment doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_TREATMENT
+			]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($treatment);
 	}
 	
 	/*

@@ -17,7 +17,26 @@ class Get extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Gets the laboratory test
+		$laboratoryTest = $app->data->getLaboratoryTest($id);
+		
+		if (is_null($laboratoryTest)) {
+			// The laboratory test doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_LABORATORY_TEST
+			]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($laboratoryTest);
 	}
 	
 	/*

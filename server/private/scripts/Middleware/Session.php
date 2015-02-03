@@ -2,8 +2,6 @@
 
 namespace App\Middleware;
 
-use App\Auxiliar\SessionStorageHandler\DatabaseSessionStorageHandler;
-
 /*
  * This middleware initializes the session.
  */
@@ -32,7 +30,7 @@ class Session extends \Slim\Middleware {
 		$app->session->configureIdsGeneration('sha256', 4);
 		
 		// Initializes a session storage handler
-		$storageHandler = new DatabaseSessionStorageHandler();
+		$storageHandler = new \App\Auxiliar\SessionStorageHandler\DatabaseSessionStorageHandler();
 		
 		// Sets the session's storage handler
 		$app->session->setStorageHandler($storageHandler);

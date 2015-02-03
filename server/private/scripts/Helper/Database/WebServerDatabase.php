@@ -117,10 +117,10 @@ class WebServerDatabase extends SpecializedDatabase {
 	public function getSession($id) {
 		// Defines the columns to select
 		$columnsToSelect = [
-			'id AS id',
-			'creation_datetime AS creationDatetime',
-			'last_edition_datetime AS lastEditionDatetime',
-			'data AS data'
+			'id',
+			'creation_datetime',
+			'last_edition_datetime',
+			'data'
 		];
 		
 		// Gets and returns the entity
@@ -135,17 +135,17 @@ class WebServerDatabase extends SpecializedDatabase {
 	public function getUser($id) {
 		// Defines the columns to select
 		$columnsToSelect = [
-			'id AS id',
-			'creation_datetime AS creationDatetime',
-			'last_edition_datetime AS lastEditionDatetime',
-			'password_hash AS passwordHash',
-			'salt AS salt',
-			'key_derivation_iterations AS keyDerivationIterations',
-			'role AS role',
-			'first_name AS firstName',
-			'last_name AS lastName',
-			'gender AS gender',
-			'email_address AS emailAddress'
+			'id',
+			'creation_datetime',
+			'last_edition_datetime',
+			'password_hash',
+			'salt',
+			'key_derivation_iterations',
+			'role',
+			'first_name',
+			'last_name',
+			'gender',
+			'email_address'
 		];
 		
 		// Gets and returns the entity

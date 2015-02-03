@@ -17,7 +17,22 @@ class Search extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$expression = (is_null($input['expression']))? null : $input['expression'];
+		$page = $input['page'];
+		$sorting = $input['sorting'];
+		
+		// Searches the medications
+		list($total, $results) = $app->data->searchMedications($expression, $page, $sorting);
+		
+		// Sets the output
+		$app->response->setBody([
+			'total' => $total,
+			'results' => $results
+		]);
 	}
 	
 	/*

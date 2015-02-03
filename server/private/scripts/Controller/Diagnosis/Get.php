@@ -17,7 +17,26 @@ class Get extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Gets the diagnosis
+		$diagnosis = $app->data->getDiagnosis($id);
+		
+		if (is_null($diagnosis)) {
+			// The diagnosis doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_DIAGNOSIS
+			]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($diagnosis);
 	}
 	
 	/*

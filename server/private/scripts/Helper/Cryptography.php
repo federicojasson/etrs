@@ -15,6 +15,17 @@ class Cryptography extends Helper {
 	}
 	
 	/*
+	 * Computes and returns the hash of a password.
+	 * 
+	 * It receives the password, the salt and the iterations to apply in the key
+	 * derivation.
+	 */
+	public function hashPassword($password, $salt, $keyDerivationIterations) {
+		// Applies SHA-512 and the PBKDF2 key derivation function
+		return hash_pbkdf2('sha512', $password, $salt, $keyDerivationIterations, 0, true);
+	}
+	
+	/*
 	 * Generates and returns a sequence of random bytes.
 	 * 
 	 * It receives the length of the sequence.

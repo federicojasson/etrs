@@ -24,6 +24,7 @@ function arrayContainsDuplicateElements($array) {
  */
 function camelCaseToSnakeCase($string) {
 	// Performs a regular expression search
+	$matches = [];
 	preg_match_all('/[A-Za-z][0-9a-z]+|[A-Z][0-9A-Z]*(?=$|[A-Z][0-9a-z])/', $string, $matches);
 	$words = $matches[0];
 	

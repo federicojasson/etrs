@@ -17,7 +17,26 @@ class Get extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Gets the background
+		$background = $app->data->getBackground($id);
+		
+		if (is_null($background)) {
+			// The background doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_BACKGROUND
+			]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($background);
 	}
 	
 	/*

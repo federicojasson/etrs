@@ -26,6 +26,22 @@ class Services extends \Slim\Middleware {
 		
 		// Defines the services
 		
+		// URL:		/server/account/sign-in
+		// Method:	POST
+		$app->services->define(
+			'/account/sign-in',
+			'POST',
+			new \App\Controller\Account\SignIn()
+		);
+		
+		// URL:		/server/account/sign-out
+		// Method:	POST
+		$app->services->define(
+			'/account/sign-out',
+			'POST',
+			new \App\Controller\Account\SignOut()
+		);
+		
 		// URL:		/server/authentication/get-state
 		// Method:	POST
 		$app->services->define(

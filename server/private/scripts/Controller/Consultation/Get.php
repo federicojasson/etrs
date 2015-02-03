@@ -17,7 +17,35 @@ class Get extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Starts a read-only transaction
+		$app->businessLogicDatabase->startReadOnlyTransaction(); // TODO: start it in here or in Data helper?
+		
+		// Gets the consultation
+		$consultation = $app->data->getConsultation($id);
+		
+		if (is_null($consultation)) {
+			// The consultation doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_CONSULTATION
+			]);
+		}
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody($consultation);
 	}
 	
 	/*

@@ -17,7 +17,35 @@ class Get extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Starts a read-only transaction
+		$app->businessLogicDatabase->startReadOnlyTransaction(); // TODO: start it in here or in Data helper?
+		
+		// Gets the experiment
+		$experiment = $app->data->getExperiment($id);
+		
+		if (is_null($experiment)) {
+			// The experiment doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_EXPERIMENT
+			]);
+		}
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody($experiment);
 	}
 	
 	/*

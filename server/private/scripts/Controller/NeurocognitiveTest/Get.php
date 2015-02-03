@@ -17,7 +17,26 @@ class Get extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		
+		// Gets the neurocognitive test
+		$neurocognitiveTest = $app->data->getNeurocognitiveTest($id);
+		
+		if (is_null($neurocognitiveTest)) {
+			// The neurocognitive test doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_NEUROCOGNITIVE_TEST
+			]);
+		}
+		
+		// Sets the output
+		$app->response->setBody($neurocognitiveTest);
 	}
 	
 	/*
