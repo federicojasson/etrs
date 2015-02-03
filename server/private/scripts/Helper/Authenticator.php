@@ -23,6 +23,11 @@ class Authenticator extends Helper {
 		$user = $app->webServerDatabase->getUser($id);
 		
 		if (is_null($user)) {
+			// Computes the hash of the password to cause a deliberate delay
+			// that avoids disclosing the fact that the user doesn't exist
+			$salt = $app->cryptography->generateSalt();
+			$app->cryptography->hashPassword($password, $salt, KEY_DERIVATION_ITERATIONS);
+			
 			// The user doesn't exist
 			return false;
 		}

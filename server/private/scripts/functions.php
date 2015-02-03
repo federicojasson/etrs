@@ -126,6 +126,25 @@ function readJsonFile($path) {
 }
 
 /*
+ * Converts a string from snake case notation to camel case notation.
+ * 
+ * It receives the string.
+ */
+function snakeCaseToCamelCase($string) {
+	// Replaces the underscores with whitespaces
+	$string = str_replace('_', ' ', $string);
+	
+	// Converts the first character of each word to uppercase
+	$string = ucwords($string);
+	
+	// Removes the whitespaces
+	$string = str_replace(' ', '', $string);
+	
+	// Converts the first character to lowercase and returns the result
+	return lcfirst($string);
+}
+
+/*
  * Converts a string to boolean.
  * 
  * It receives the string.

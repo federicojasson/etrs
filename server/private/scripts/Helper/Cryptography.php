@@ -15,6 +15,13 @@ class Cryptography extends Helper {
 	}
 	
 	/*
+	 * Generates and returns a salt.
+	 */
+	public function generateSalt() {
+		return $this->generateRandomBytesSequence(SALT_LENGTH);
+	}
+	
+	/*
 	 * Computes and returns the hash of a password.
 	 * 
 	 * It receives the password, the salt and the iterations to apply in the key

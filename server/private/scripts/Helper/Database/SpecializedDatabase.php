@@ -277,9 +277,10 @@ abstract class SpecializedDatabase extends Database {
 	 * It receives the columns.
 	 */
 	private function getSelectClause($columns) {
-		// Appends an alias to the columns
+		// Appends aliases to the columns
 		foreach ($columns as &$column) {
-			$column = $column . ' AS ' . camelCaseToSnakeCase($column);
+			$alias = snakeCaseToCamelCase($column);
+			$column = $column . ' AS ' . $alias;
 		}
 		
 		// Gets and returns a comma-separated list of the columns

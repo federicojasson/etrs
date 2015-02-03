@@ -57,6 +57,9 @@ class Authentication extends Helper {
 		
 		// Sets a data entry in the session to store the user
 		$app->session->setData(SESSION_DATA_USER, $id);
+		
+		// Logs the event
+		$app->log->info('The user ' . $id . ' has been signed in explicitly.'); // TODO: check log
 	}
 	
 	/*
@@ -65,11 +68,17 @@ class Authentication extends Helper {
 	public function signOutUser() {
 		$app = $this->app;
 		
+		// Gets the user's ID
+		$id = $app->session->getData(SESSION_DATA_USER);
+		
 		// Clears the session's data entry that stores the user
 		$app->session->clearData(SESSION_DATA_USER);
 		
 		// Regenerates the session's ID
 		$app->session->regenerateId();
+		
+		// Logs the event
+		$app->log->info('The user ' . $id . ' has been signed out explicitly.'); // TODO: check log
 	}
 	
 }

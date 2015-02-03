@@ -77,8 +77,10 @@ class Create extends \App\Controller\SecureController {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new JsonValue(function($input) use ($app) {
-						// TODO: implement
+					'value' => new JsonValue(function() {
+						// This input should be validated afterwards using the
+						// data type descriptor
+						return true;
 					})
 				])
 			),
@@ -89,8 +91,10 @@ class Create extends \App\Controller\SecureController {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new JsonValue(function($input) use ($app) {
-						// TODO: implement
+					'value' => new JsonValue(function() {
+						// This input should be validated afterwards using the
+						// data type descriptor
+						return true;
 					})
 				])
 			),
@@ -107,8 +111,10 @@ class Create extends \App\Controller\SecureController {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new JsonValue(function($input) use ($app) {
-						// TODO: implement
+					'value' => new JsonValue(function() {
+						// This input should be validated afterwards using the
+						// data type descriptor
+						return true;
 					})
 				])
 			),
@@ -122,6 +128,8 @@ class Create extends \App\Controller\SecureController {
 		
 		// Validates the request and returns the result
 		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
+		
+		// TODO: validate values here
 	}
 	
 	/*

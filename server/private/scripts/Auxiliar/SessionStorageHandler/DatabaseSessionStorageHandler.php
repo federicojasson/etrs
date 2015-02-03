@@ -7,6 +7,10 @@ namespace App\Auxiliar\SessionStorageHandler;
  * database.
  * 
  * Implements the SessionStorageHandler interface.
+ * 
+ * TODO: functionalities to implement
+ * get inactive sessions and delete them one by one (and log the event) -> use session_decode ( string $data ) to decode data
+ * add IPs on session data (on data level, not column)
  */
 class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	

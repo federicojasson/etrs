@@ -34,6 +34,8 @@ define('HTTP_STATUS_FORBIDDEN', 403);
 define('HTTP_STATUS_INTERNAL_SERVER_ERROR', 500);
 define('HTTP_STATUS_NOT_FOUND', 404);
 
+define('KEY_DERIVATION_ITERATIONS', 64000);
+
 define('LOG_LEVEL_1', 1);
 define('LOG_LEVEL_2', 2);
 define('LOG_LEVEL_3', 3);
@@ -47,6 +49,8 @@ define('PARAMETERS_EMAILS', 'emails');
 define('PARAMETERS_SERVER', 'server');
 
 define('RANDOM_ID_LENGTH', 16);
+
+define('SALT_LENGTH', 64);
 
 define('SEARCH_RESULTS_PER_PAGE', 10);
 

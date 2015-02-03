@@ -2,6 +2,10 @@ Tareas (TODOs):
 
 - Agregar licencia
 
+- Chequear Warnings
+
+- Obtener dirección IP en las sesiones y loguearlas
+
 - Implementar control de acceso más preciso
 
 - Transacciones en código PHP
@@ -11,6 +15,7 @@ Tareas (TODOs):
 - Tareas de mantenimiento:
 	- Eliminar permisos vencidos.
 	- Eliminar archivos temporarios.
+	- Eliminar logs antiguos.
 
 - Recordar configurar (en php.ini):
 	session.gc_probability
