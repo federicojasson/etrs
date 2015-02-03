@@ -14,7 +14,37 @@ class Create extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$firstName = trimString($input['firstName']);
+		$lastName = trimString($input['lastName']);
+		$gender = $input['gender'];
+		$birthDate = $input['birthDate'];
+		$educationYears = $input['educationYears'];
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		// Generates random IDs until an unused one is found
+		do {
+			$id = $app->cryptography->generateRandomId();
+		} while ($app->businessLogicDatabase->patientExists($id));
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Creates the patient
+		$app->businessLogicDatabase->createPatient($id, $signedInUser['id'], $firstName, $lastName, $gender, $birthDate, $educationYears);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody([
+			'id' => bin2hex($id)
+		]);
 	}
 	
 	/*

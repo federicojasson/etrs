@@ -8,6 +8,405 @@ namespace App\Helper\Database;
 class BusinessLogicDatabase extends SpecializedDatabase {
 	
 	/*
+	 * Determines whether a background exists.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function backgroundExists($id) {
+		return $this->entityExists('backgrounds', $id);
+	}
+	
+	/*
+	 * Determines whether a clinical impression exists.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function clinicalImpressionExists($id) {
+		return $this->entityExists('clinical_impressions', $id);
+	}
+	
+	/*
+	 * Creates a background.
+	 * 
+	 * It receives the background's data.
+	 */
+	public function createBackground($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO backgrounds (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a clinical impression.
+	 * 
+	 * It receives the clinical impression's data.
+	 */
+	public function createClinicalImpression($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO clinical_impressions (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a diagnosis.
+	 * 
+	 * It receives the diagnosis' data.
+	 */
+	public function createDiagnosis($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO diagnoses (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates an image test.
+	 * 
+	 * It receives the image test's data.
+	 */
+	public function createImageTest($id, $creator, $name, $dataTypeDescriptor) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO image_tests (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name,
+				data_type_descriptor
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name,
+				:dataTypeDescriptor
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name,
+			':dataTypeDescriptor' => $dataTypeDescriptor
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a laboratory test.
+	 * 
+	 * It receives the laboratory test's data.
+	 */
+	public function createLaboratoryTest($id, $creator, $name, $dataTypeDescriptor) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO laboratory_tests (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name,
+				data_type_descriptor
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name,
+				:dataTypeDescriptor
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name,
+			':dataTypeDescriptor' => $dataTypeDescriptor
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a medication.
+	 * 
+	 * It receives the medication's data.
+	 */
+	public function createMedication($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO medications (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a neurocognitive test.
+	 * 
+	 * It receives the neurocognitive test's data.
+	 */
+	public function createNeurocognitiveTest($id, $creator, $name, $dataTypeDescriptor) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO neurocognitive_tests (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name,
+				data_type_descriptor
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name,
+				:dataTypeDescriptor
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name,
+			':dataTypeDescriptor' => $dataTypeDescriptor
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a patient.
+	 * 
+	 * It receives the patient's data.
+	 */
+	public function createPatient($id, $creator, $firstName, $lastName, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO patients (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				first_name,
+				last_name,
+				gender,
+				birth_date,
+				education_years
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:firstName,
+				:lastName,
+				:gender,
+				:birthDate,
+				:educationYears
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a treatment.
+	 * 
+	 * It receives the treatment's data.
+	 */
+	public function createTreatment($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO treatments (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Deletes a background.
 	 * 
 	 * It receives the background's ID.
@@ -77,6 +476,281 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function deleteTreatment($id) {
 		$this->deleteEntity('treatments', $id);
+	}
+	
+	/*
+	 * Determines whether a diagnosis exists.
+	 * 
+	 * It receives the diagnosis' ID.
+	 */
+	public function diagnosisExists($id) {
+		return $this->entityExists('diagnoses', $id);
+	}
+	
+	/*
+	 * Edits a background.
+	 * 
+	 * It receives the background's data.
+	 */
+	public function editBackground($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE backgrounds
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a clinical impression.
+	 * 
+	 * It receives the clinical impression's data.
+	 */
+	public function editClinicalImpression($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE clinical_impressions
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a diagnosis.
+	 * 
+	 * It receives the diagnosis' data.
+	 */
+	public function editDiagnosis($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE diagnoses
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits an image test.
+	 * 
+	 * It receives the image test's data.
+	 */
+	public function editImageTest($id, $lastEditor, $name, $dataTypeDescriptor) {
+		// Defines the statement
+		$statement = '
+			UPDATE image_tests
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name,
+				data_type_descriptor = :dataTypeDescriptor
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name,
+			':dataTypeDescriptor' => $dataTypeDescriptor
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a laboratory test.
+	 * 
+	 * It receives the laboratory test's data.
+	 */
+	public function editLaboratoryTest($id, $lastEditor, $name, $dataTypeDescriptor) {
+		// Defines the statement
+		$statement = '
+			UPDATE laboratory_tests
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name,
+				data_type_descriptor = :dataTypeDescriptor
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name,
+			':dataTypeDescriptor' => $dataTypeDescriptor
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a medication.
+	 * 
+	 * It receives the medication's data.
+	 */
+	public function editMedication($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE medications
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a neurocognitive test.
+	 * 
+	 * It receives the neurocognitive test's data.
+	 */
+	public function editNeurocognitiveTest($id, $lastEditor, $name, $dataTypeDescriptor) {
+		// Defines the statement
+		$statement = '
+			UPDATE neurocognitive_tests
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name,
+				data_type_descriptor = :dataTypeDescriptor
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name,
+			':dataTypeDescriptor' => $dataTypeDescriptor
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a patient.
+	 * 
+	 * It receives the patient's data.
+	 */
+	public function editPatient($id, $lastEditor, $firstName, $lastName, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			UPDATE patients
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				first_name = :firstName,
+				last_name = :lastName,
+				gender = :gender,
+				birth_date = :birthDate,
+				education_years = :educationYears
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a treatment.
+	 * 
+	 * It receives the treatment's data.
+	 */
+	public function editTreatment($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE treatments
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
@@ -354,6 +1028,42 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Determines whether an image test exists.
+	 * 
+	 * It receives the image test's ID.
+	 */
+	public function imageTestExists($id) {
+		return $this->entityExists('image_tests', $id);
+	}
+	
+	/*
+	 * Determines whether a laboratory test exists.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function laboratoryTestExists($id) {
+		return $this->entityExists('laboratory_tests', $id);
+	}
+	
+	/*
+	 * Determines whether a medication exists.
+	 * 
+	 * It receives the medication's ID.
+	 */
+	public function medicationExists($id) {
+		return $this->entityExists('medications', $id);
+	}
+	
+	/*
+	 * Determines whether a neurocognitive test exists.
+	 * 
+	 * It receives the neurocognitive test's ID.
+	 */
+	public function neurocognitiveTestExists($id) {
+		return $this->entityExists('neurocognitive_tests', $id);
+	}
+	
+	/*
 	 * Determines whether a non-deleted background exists.
 	 * 
 	 * It receives the background's ID.
@@ -459,6 +1169,24 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function nonDeletedTreatmentExists($id) {
 		return $this->entityExists('non_deleted_treatments', $id);
+	}
+	
+	/*
+	 * Determines whether a patient exists.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function patientExists($id) {
+		return $this->entityExists('patients', $id);
+	}
+	
+	/*
+	 * Determines whether a treatment exists.
+	 * 
+	 * It receives the treatment's ID.
+	 */
+	public function treatmentExists($id) {
+		return $this->entityExists('treatments', $id);
 	}
 	
 	/*

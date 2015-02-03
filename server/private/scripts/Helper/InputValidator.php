@@ -84,10 +84,10 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
-		// Gets the year, the month and the day
-		$year = $matches[1];
-		$month = $matches[2];
+		// Gets the day, the month and the year
 		$day = $matches[3];
+		$month = $matches[2];
+		$year = $matches[1];
 
 		// Checks the validity of the date according to the calendar
 		return checkdate($month, $day, $year);

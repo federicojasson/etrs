@@ -17,7 +17,34 @@ class Create extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$name = trimString($input['name']);
+		$dataTypeDescriptor = trimString($input['dataTypeDescriptor']);
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		// Generates random IDs until an unused one is found
+		do {
+			$id = $app->cryptography->generateRandomId();
+		} while ($app->businessLogicDatabase->imageTestExists($id));
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Creates the image test
+		$app->businessLogicDatabase->createImageTest($id, $signedInUser['id'], $name, $dataTypeDescriptor);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody([
+			'id' => bin2hex($id)
+		]);
 	}
 	
 	/*

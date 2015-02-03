@@ -17,7 +17,36 @@ class Edit extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		$name = trimString($input['name']);
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		if (! $app->businessLogicDatabase->nonDeletedClinicalImpressionExists($id)) {
+			// The clinical impression doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_CLINICAL_IMPRESSION
+			]);
+		}
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Edits the clinical impression
+		$app->businessLogicDatabase->editClinicalImpression($id, $signedInUser['id'], $name);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

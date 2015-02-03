@@ -17,7 +17,37 @@ class Edit extends \App\Controller\SecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		$name = trimString($input['name']);
+		$dataTypeDescriptor = trimString($input['dataTypeDescriptor']);
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		if (! $app->businessLogicDatabase->nonDeletedNeurocognitiveTestExists($id)) {
+			// The neurocognitive test doesn't exist
+			
+			// Rolls back the transaction
+			$app->businessLogicDatabase->rollBackTransaction();
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_NEUROCOGNITIVE_TEST
+			]);
+		}
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Edits the neurocognitive test
+		$app->businessLogicDatabase->editNeurocognitiveTest($id, $signedInUser['id'], $name, $dataTypeDescriptor);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

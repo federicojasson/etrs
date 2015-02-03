@@ -47,7 +47,7 @@ class DatabaseLogWriter {
 	public function write($message, $level) {
 		$app = $this->app;
 		
-		// Generates random IDs until it finds one that is not in use
+		// Generates random IDs until an unused one is found
 		do {
 			$id = $app->cryptography->generateRandomId();
 		} while ($app->webServerDatabase->logExists($id));
