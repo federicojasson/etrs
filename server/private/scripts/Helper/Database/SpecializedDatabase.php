@@ -104,10 +104,10 @@ abstract class SpecializedDatabase extends Database {
 	 * Performs a search that includes all entities of a certain type and
 	 * returns the results.
 	 * 
-	 * It receives the entities' table, the columns to select, a sorting, the
-	 * limit of rows to return and an offset.
+	 * It receives the entities' table, the columns to select, the page and the
+	 * sorting.
 	 */
-	protected function searchAllEntities($table, $columnsToSelect, $sorting, $limit, $offset) {
+	protected function searchAllEntities($table, $columnsToSelect, $page, $sorting) {
 		// Gets the SELECT clause
 		$selectClause = $this->getSelectClause($columnsToSelect);
 		
@@ -121,6 +121,9 @@ abstract class SpecializedDatabase extends Database {
 			ORDER BY ' . $orderByClause . '
 			LIMIT :limit OFFSET :offset
 		';
+		
+		// Gets the limit and the offset
+		list($limit, $offset) = $this->getLimitAndOffset($page);
 		
 		// Sets the parameters
 		$parameters = [
@@ -139,10 +142,9 @@ abstract class SpecializedDatabase extends Database {
 	 * returns the results.
 	 * 
 	 * It receives entities' table, the columns to select, the columns to match
-	 * against, a sorting, an expression, the limit of rows to return and an
-	 * offset.
+	 * against, an expression, the page and the sorting.
 	 */
-	protected function searchSpecificEntities($table, $columnsToSelect, $columnsToMatch, $sorting, $expression, $limit, $offset) {
+	protected function searchSpecificEntities($table, $columnsToSelect, $columnsToMatch, $expression, $page, $sorting) {
 		// Gets the SELECT clause
 		$selectClause = $this->getSelectClause($columnsToSelect);
 		
@@ -165,6 +167,9 @@ abstract class SpecializedDatabase extends Database {
 		
 		// Gets a boolean expression
 		$booleanExpression = $this->getBooleanExpression($expression);
+		
+		// Gets the limit and the offset
+		list($limit, $offset) = $this->getLimitAndOffset($page);
 		
 		// Sets the parameters
 		$parameters = [
@@ -219,6 +224,23 @@ abstract class SpecializedDatabase extends Database {
 	 */
 	private function getColumnList($columns) {
 		return implode(', ', $columns);
+	}
+	
+	/*
+	 * Given a page, it returns the limit of rows that should be returned and
+	 * the corresponding offset.
+	 * 
+	 * It receives the page.
+	 */
+	private function getLimitAndOffset($page) {
+		// Calculates the limit and the offset, in function of the page
+		$limit = SEARCH_RESULTS_PER_PAGE;
+		$offset = $limit * ($page - 1);
+		
+		return [
+			$limit,
+			$offset
+		];
 	}
 	
 	/*

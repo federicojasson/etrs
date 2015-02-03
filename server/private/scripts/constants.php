@@ -48,6 +48,8 @@ define('PARAMETERS_SERVER', 'server');
 
 define('RANDOM_ID_LENGTH', 16);
 
+define('SEARCH_RESULTS_PER_PAGE', 10);
+
 define('SESSION_DATA_USER', 'user');
 
 define('SORTING_ORDER_ASCENDING', 'ascending');

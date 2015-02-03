@@ -24,7 +24,7 @@ class Get extends \App\Controller\SecureController {
 		$id = hex2bin($input['id']);
 		
 		// Starts a read-only transaction
-		$app->businessLogicDatabase->startReadOnlyTransaction(); // TODO: start it in here or in Data helper?
+		$app->businessLogicDatabase->startReadOnlyTransaction();
 		
 		// Gets the consultation
 		$consultation = $app->data->getConsultation($id);

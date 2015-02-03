@@ -56,7 +56,7 @@ class Search extends \App\Controller\SecureController {
 			}),
 			
 			'sorting' => new JsonObjectDescriptor([
-				'field' => new JsonValueDescriptor(function($input) use ($app) {
+				'field' => new JsonValueDescriptor(function($input) {
 					return isElementInArray($input, [
 						'creationDatetime',
 						'lastEditionDatetime',

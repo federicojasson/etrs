@@ -8,6 +8,78 @@ namespace App\Helper\Database;
 class BusinessLogicDatabase extends SpecializedDatabase {
 	
 	/*
+	 * Deletes a background.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function deleteBackground($id) {
+		$this->deleteEntity('backgrounds', $id);
+	}
+	
+	/*
+	 * Deletes a clinical impression.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function deleteClinicalImpression($id) {
+		$this->deleteEntity('clinical_impressions', $id);
+	}
+	
+	/*
+	 * Deletes a diagnosis.
+	 * 
+	 * It receives the diagnosis' ID.
+	 */
+	public function deleteDiagnosis($id) {
+		$this->deleteEntity('diagnoses', $id);
+	}
+	
+	/*
+	 * Deletes an image test.
+	 * 
+	 * It receives the image test's ID.
+	 */
+	public function deleteImageTest($id) {
+		$this->deleteEntity('image_tests', $id);
+	}
+	
+	/*
+	 * Deletes a laboratory test.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function deleteLaboratoryTest($id) {
+		$this->deleteEntity('laboratory_tests', $id);
+	}
+	
+	/*
+	 * Deletes a medication.
+	 * 
+	 * It receives the medication's ID.
+	 */
+	public function deleteMedication($id) {
+		$this->deleteEntity('medications', $id);
+	}
+	
+	/*
+	 * Deletes a neurocognitive test.
+	 * 
+	 * It receives the neurocognitive test's ID.
+	 */
+	public function deleteNeurocognitiveTest($id) {
+		$this->deleteEntity('neurocognitive_tests', $id);
+	}
+	
+	/*
+	 * Deletes a treatment.
+	 * 
+	 * It receives the treatment's ID.
+	 */
+	public function deleteTreatment($id) {
+		$this->deleteEntity('treatments', $id);
+	}
+	
+	/*
 	 * Returns a non-deleted background. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the background's ID.
@@ -279,6 +351,78 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		
 		// Gets and returns the entity
 		return $this->getEntity('non_deleted_treatments', $columnsToSelect, $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted background exists.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function nonDeletedBackgroundExists($id) {
+		return $this->entityExists('non_deleted_backgrounds', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted clinical impression exists.
+	 * 
+	 * It receives the clinical impression's ID.
+	 */
+	public function nonDeletedClinicalImpressionExists($id) {
+		return $this->entityExists('non_deleted_clinical_impressions', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted diagnosis exists.
+	 * 
+	 * It receives the diagnosis' ID.
+	 */
+	public function nonDeletedDiagnosisExists($id) {
+		return $this->entityExists('non_deleted_diagnoses', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted image test exists.
+	 * 
+	 * It receives the image test's ID.
+	 */
+	public function nonDeletedImageTestExists($id) {
+		return $this->entityExists('non_deleted_image_tests', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted laboratory test exists.
+	 * 
+	 * It receives the laboratory test's ID.
+	 */
+	public function nonDeletedLaboratoryTestExists($id) {
+		return $this->entityExists('non_deleted_laboratory_tests', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted medication exists.
+	 * 
+	 * It receives the medication's ID.
+	 */
+	public function nonDeletedMedicationExists($id) {
+		return $this->entityExists('non_deleted_medications', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted neurocognitive test exists.
+	 * 
+	 * It receives the neurocognitive test's ID.
+	 */
+	public function nonDeletedNeurocognitiveTestExists($id) {
+		return $this->entityExists('non_deleted_neurocognitive_tests', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted treatment exists.
+	 * 
+	 * It receives the treatment's ID.
+	 */
+	public function nonDeletedTreatmentExists($id) {
+		return $this->entityExists('non_deleted_treatments', $id);
 	}
 	
 	/*
