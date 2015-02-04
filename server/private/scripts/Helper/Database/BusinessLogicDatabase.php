@@ -8,33 +8,6 @@ namespace App\Helper\Database;
 class BusinessLogicDatabase extends SpecializedDatabase {
 	
 	/*
-	 * Determines whether a background exists.
-	 * 
-	 * It receives the background's ID.
-	 */
-	public function backgroundExists($id) {
-		return $this->entityExists('backgrounds', $id);
-	}
-	
-	/*
-	 * Determines whether a clinical impression exists.
-	 * 
-	 * It receives the clinical impression's ID.
-	 */
-	public function clinicalImpressionExists($id) {
-		return $this->entityExists('clinical_impressions', $id);
-	}
-	
-	/*
-	 * Determines whether a consultation exists.
-	 * 
-	 * It receives the consultation's ID.
-	 */
-	public function consultationExists($id) {
-		return $this->entityExists('consultations', $id);
-	}
-	
-	/*
 	 * Creates a background.
 	 * 
 	 * It receives the background's data.
@@ -485,15 +458,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function deleteTreatment($id) {
 		$this->deleteEntity('treatments', $id);
-	}
-	
-	/*
-	 * Determines whether a diagnosis exists.
-	 * 
-	 * It receives the diagnosis' ID.
-	 */
-	public function diagnosisExists($id) {
-		return $this->entityExists('diagnoses', $id);
 	}
 	
 	/*
@@ -1037,42 +1001,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * Determines whether an image test exists.
-	 * 
-	 * It receives the image test's ID.
-	 */
-	public function imageTestExists($id) {
-		return $this->entityExists('image_tests', $id);
-	}
-	
-	/*
-	 * Determines whether a laboratory test exists.
-	 * 
-	 * It receives the laboratory test's ID.
-	 */
-	public function laboratoryTestExists($id) {
-		return $this->entityExists('laboratory_tests', $id);
-	}
-	
-	/*
-	 * Determines whether a medication exists.
-	 * 
-	 * It receives the medication's ID.
-	 */
-	public function medicationExists($id) {
-		return $this->entityExists('medications', $id);
-	}
-	
-	/*
-	 * Determines whether a neurocognitive test exists.
-	 * 
-	 * It receives the neurocognitive test's ID.
-	 */
-	public function neurocognitiveTestExists($id) {
-		return $this->entityExists('neurocognitive_tests', $id);
-	}
-	
-	/*
 	 * Determines whether a non-deleted background exists.
 	 * 
 	 * It receives the background's ID.
@@ -1178,24 +1106,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function nonDeletedTreatmentExists($id) {
 		return $this->entityExists('non_deleted_treatments', $id);
-	}
-	
-	/*
-	 * Determines whether a patient exists.
-	 * 
-	 * It receives the patient's ID.
-	 */
-	public function patientExists($id) {
-		return $this->entityExists('patients', $id);
-	}
-	
-	/*
-	 * Determines whether a treatment exists.
-	 * 
-	 * It receives the treatment's ID.
-	 */
-	public function treatmentExists($id) {
-		return $this->entityExists('treatments', $id);
 	}
 	
 	/*

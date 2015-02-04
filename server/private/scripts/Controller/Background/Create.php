@@ -25,10 +25,8 @@ class Create extends \App\Controller\SpecializedSecureController {
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
-		// Generates random IDs until an unused one is found
-		do {
-			$id = $app->cryptography->generateRandomId();
-		} while ($app->businessLogicDatabase->backgroundExists($id));
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
 		
 		// Sets an output
 		$this->setOutputEntry('id', bin2hex($id));

@@ -47,10 +47,8 @@ class DatabaseLogWriter {
 	public function write($message, $level) {
 		$app = $this->app;
 		
-		// Generates random IDs until an unused one is found
-		do {
-			$id = $app->cryptography->generateRandomId();
-		} while ($app->webServerDatabase->logExists($id));
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
 		
 		// Maps the log's level to the one used in the database
 		$level = $this->levelMapping[$level];

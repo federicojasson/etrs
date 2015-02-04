@@ -66,8 +66,15 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	public function onGarbageCollection($maximumInactiveTime) {
 		$app = $this->app;
 		
-		// Deletes the inactive sessions
-		$app->webServerDatabase->deleteInactiveSessions($maximumInactiveTime);
+		// Gets the inactive sessions
+		$sessions = $app->webServerDatabase->getInactiveSessions($maximumInactiveTime);
+		
+		// Deletes the sessions
+		foreach ($sessions as $session) {
+			$app->webServerDatabase->deleteSession($session['id']);
+		}
+		
+		// TODO: log event
 		
 		return true;
 	}

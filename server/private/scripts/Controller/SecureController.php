@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 /*
- * This class encapsulates the logic of a service that performs security checks.
+ * This class encapsulates the logic of a secure service.
  * 
  * Subclasses must implement the call function. For security reasons, every
  * controller has to implement, also, the isInputValid method to validate the
@@ -19,7 +19,14 @@ abstract class SecureController extends Controller {
 	public function serveRequest() {
 		$app = $this->app;
 		
-		// TODO: invert order if input is never used in isUserAuthorized
+		if (! $this->isUserAuthorized()) {
+			// The user is not authorized to use this service
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_FORBIDDEN, [
+				'error' => ERROR_UNAUTHORIZED_USER
+			]);
+		}
 		
 		if (! $this->isInputValid()) {
 			// The input is invalid
@@ -27,15 +34,6 @@ abstract class SecureController extends Controller {
 			// Halts the execution
 			$app->halt(HTTP_STATUS_BAD_REQUEST, [
 				'error' => ERROR_INVALID_INPUT
-			]);
-		}
-		
-		if (! $this->isUserAuthorized()) {
-			// The user is not authorized to use this service
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_FORBIDDEN, [
-				'error' => ERROR_UNAUTHORIZED_USER
 			]);
 		}
 		

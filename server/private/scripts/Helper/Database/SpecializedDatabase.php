@@ -3,7 +3,7 @@
 namespace App\Helper\Database;
 
 /*
- * This helper represents a database and offers convenient operations to
+ * This helper represents a database and offers specialized operations to
  * communicate with it.
  */
 abstract class SpecializedDatabase extends Database {

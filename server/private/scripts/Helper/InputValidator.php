@@ -156,44 +156,4 @@ class InputValidator extends Helper {
 		return $this->isBoundedString($input, $minimumLength, $maximumLength);
 	}
 	
-	/*
-	 * Validates a JSON request and returns the result.
-	 * 
-	 * If the request is valid, the input is replaced by a decoded version.
-	 * 
-	 * It receives the descriptor of the expected JSON structure.
-	 */
-	public function validateJsonRequest($jsonStructureDescriptor) {
-		$app = $this->app;
-		
-		// Gets the media type
-		$mediaType = $app->request->getMediaType();
-		
-		if ($mediaType !== 'application/json') {
-			// The media type is not JSON
-			return false;
-		}
-		
-		// Gets the input
-		$input = $app->request->getBody();
-		
-		// Decodes the input
-		$input = json_decode($input, true);
-		
-		if (is_null($input)) {
-			// The input could not be decoded
-			return false;
-		}
-		
-		if (! $jsonStructureDescriptor->isValidInput($input)) {
-			// The input is invalid
-			return false;
-		}
-		
-		// Replaces the request's body with the decoded input
-		$app->request->setBody($input);
-		
-		return true;
-	}
-	
 }

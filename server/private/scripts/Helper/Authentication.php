@@ -59,7 +59,7 @@ class Authentication extends Helper {
 		$app->session->setData(SESSION_DATA_USER, $id);
 		
 		// Logs the event
-		$app->log->info('The user ' . $id . ' has been signed in explicitly.'); // TODO: check log
+		$app->log->info('The user ' . $id . ' has been signed in.');
 	}
 	
 	/*
@@ -78,7 +78,7 @@ class Authentication extends Helper {
 		$app->session->regenerateId();
 		
 		// Logs the event
-		$app->log->info('The user ' . $id . ' has been signed out explicitly.'); // TODO: check log
+		$app->log->info('The user ' . $id . ' has been signed out.');
 	}
 	
 }
