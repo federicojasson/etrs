@@ -26,6 +26,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Determines whether a consultation exists.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function consultationExists($id) {
+		return $this->entityExists('consultations', $id);
+	}
+	
+	/*
 	 * Creates a background.
 	 * 
 	 * It receives the background's data.

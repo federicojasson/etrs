@@ -12,13 +12,53 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
  * URL:		/server/consultation/create
  * Method:	POST
  */
-class Create extends \App\Controller\SecureController {
+class Create extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$clinicalImpression = (is_null($input['clinicalImpression']))? null : hex2bin($input['clinicalImpression']);
+		$diagnosis = (is_null($input['diagnosis']))? null : hex2bin($input['diagnosis']);
+		$patient = hex2bin($input['patient']);
+		$date = $input['date'];
+		$reasons = trimString($input['reasons']);
+		$indications = trimString($input['indications']);
+		$observations = trimString($input['observations']);
+		$backgrounds = $input['backgrounds'];
+		$imageTests = $input['imageTests'];
+		$laboratoryTests = $input['laboratoryTests'];
+		$medications = $input['medications'];
+		$neurocognitiveTests = $input['neurocognitiveTests'];
+		$treatments = $input['treatments'];
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		// TODO: checks
+		
+		// Generates random IDs until an unused one is found
+		do {
+			$id = $app->cryptography->generateRandomId();
+		} while ($app->businessLogicDatabase->consultationExists($id));
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Creates the consultation
+		$app->data->createConsultation($id, $clinicalImpression, $signedInUser['id'], $diagnosis, $patient, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+		
+		// Sets the output
+		$app->response->setBody([
+			'id' => bin2hex($id)
+		]);
 	}
 	
 	/*
@@ -126,10 +166,13 @@ class Create extends \App\Controller\SecureController {
 			)
 		]);
 		
-		// Validates the request and returns the result
-		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
+		if (! $app->inputValidator->validateJsonRequest($jsonStructureDescriptor)) {
+			// The JSON request is invalid
+			return false;
+		}
 		
 		// TODO: validate values here
+		return true;
 	}
 	
 	/*

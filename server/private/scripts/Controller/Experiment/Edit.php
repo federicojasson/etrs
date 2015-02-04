@@ -8,7 +8,7 @@ namespace App\Controller\Experiment;
  * URL:		/server/experiment/edit
  * Method:	POST
  */
-class Edit extends \App\Controller\SecureController {
+class Edit extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.

@@ -11,7 +11,7 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
  * URL:		/server/account/sign-in
  * Method:	POST
  */
-class SignIn extends \App\Controller\SecureController {
+class SignIn extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.
@@ -58,7 +58,7 @@ class SignIn extends \App\Controller\SecureController {
 			])
 		]);
 		
-		// Validates the request and returns the result
+		// Validates the JSON request and returns the result
 		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	

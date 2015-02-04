@@ -27,6 +27,7 @@ require 'private/scripts/Auxiliar/SessionStorageHandler/DatabaseSessionStorageHa
 // App\Controller
 require 'private/scripts/Controller/Controller.php';
 require 'private/scripts/Controller/SecureController.php';
+require 'private/scripts/Controller/SpecializedSecureController.php';
 
 // App\Controller\Account
 require 'private/scripts/Controller/Account/SignIn.php';

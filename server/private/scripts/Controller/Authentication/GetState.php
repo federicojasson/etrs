@@ -8,7 +8,7 @@ namespace App\Controller\Authentication;
  * URL:		/server/authentication/get-state
  * Method:	POST
  */
-class GetState extends \App\Controller\SecureController {
+class GetState extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.

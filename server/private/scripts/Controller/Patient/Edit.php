@@ -8,7 +8,7 @@ namespace App\Controller\Patient;
  * URL:		/server/patient/edit
  * Method:	POST
  */
-class Edit extends \App\Controller\SecureController {
+class Edit extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.
@@ -83,7 +83,7 @@ class Edit extends \App\Controller\SecureController {
 			})
 		]);
 		
-		// Validates the request and returns the result
+		// Validates the JSON request and returns the result
 		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	

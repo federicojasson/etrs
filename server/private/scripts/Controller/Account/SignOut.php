@@ -8,7 +8,7 @@ namespace App\Controller\Account;
  * URL:		/server/account/sign-out
  * Method:	POST
  */
-class SignOut extends \App\Controller\SecureController {
+class SignOut extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.

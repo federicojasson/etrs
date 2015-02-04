@@ -11,7 +11,7 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
  * URL:		/server/clinical-impression/delete
  * Method:	POST
  */
-class Delete extends \App\Controller\SecureController {
+class Delete extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.
@@ -58,7 +58,7 @@ class Delete extends \App\Controller\SecureController {
 			})
 		]);
 		
-		// Validates the request and returns the result
+		// Validates the JSON request and returns the result
 		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	

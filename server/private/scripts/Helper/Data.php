@@ -10,6 +10,13 @@ class Data extends Helper {
 	/*
 	 * TODO: comments
 	 */
+	public function createConsultation($id, $clinicalImpression, $creator, $diagnosis, $patient, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
 	public function deleteConsultation($id) {
 		// TODO: implement
 	}
@@ -32,6 +39,13 @@ class Data extends Helper {
 	 * TODO: comments
 	 */
 	public function deleteStudy($id) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function editConsultation($id, $clinicalImpression, $diagnosis, $lastEditor, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) {
 		// TODO: implement
 	}
 	

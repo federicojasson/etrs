@@ -11,7 +11,7 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
  * URL:		/server/laboratory-test/edit
  * Method:	POST
  */
-class Edit extends \App\Controller\SecureController {
+class Edit extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.
@@ -71,7 +71,7 @@ class Edit extends \App\Controller\SecureController {
 			})
 		]);
 		
-		// Validates the request and returns the result
+		// Validates the JSON request and returns the result
 		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
 	}
 	

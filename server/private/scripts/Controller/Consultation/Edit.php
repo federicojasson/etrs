@@ -12,13 +12,43 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
  * URL:		/server/consultation/edit
  * Method:	POST
  */
-class Edit extends \App\Controller\SecureController {
+class Edit extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$id = hex2bin($input['id']);
+		$clinicalImpression = (is_null($input['clinicalImpression']))? null : hex2bin($input['clinicalImpression']);
+		$diagnosis = (is_null($input['diagnosis']))? null : hex2bin($input['diagnosis']);
+		$date = $input['date'];
+		$reasons = trimString($input['reasons']);
+		$indications = trimString($input['indications']);
+		$observations = trimString($input['observations']);
+		$backgrounds = $input['backgrounds'];
+		$imageTests = $input['imageTests'];
+		$laboratoryTests = $input['laboratoryTests'];
+		$medications = $input['medications'];
+		$neurocognitiveTests = $input['neurocognitiveTests'];
+		$treatments = $input['treatments'];
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		// TODO: checks
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Edits the consultation
+		$app->data->editConsultation($id, $clinicalImpression, $diagnosis, $signedInUser['id'], $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 	}
 	
 	/*
@@ -126,10 +156,47 @@ class Edit extends \App\Controller\SecureController {
 			)
 		]);
 		
-		// Validates the request and returns the result
-		return $app->inputValidator->validateJsonRequest($jsonStructureDescriptor);
+		if (! $app->inputValidator->validateJsonRequest($jsonStructureDescriptor)) {
+			// The JSON request is invalid
+			return false;
+		}
+		
+		// Gets the input
+		$input = $app->request->getBody();
+		$imageTests = $input['imageTests'];
+		$laboratoryTests = $input['laboratoryTests'];
+		$neurocognitiveTests = $input['neurocognitiveTests'];
+		
+		// Validates the image test values
+		foreach ($imageTests as $imageTestInput) { // TODO: rename
+			// Gets the image test's ID and value
+			$id = $imageTestInput['id'];
+			$value = $imageTestInput['value'];
+			
+			// Gets the image test
+			$imageTest = $app->businessLogicDatabase->getNonDeletedImageTest($id);
+			
+			if (is_null($imageTest)) {
+				// The image test doesn't exist
+
+				// Halts the execution
+				$app->halt(HTTP_STATUS_NOT_FOUND, [
+					'error' => ERROR_NON_EXISTENT_IMAGE_TEST
+				]);
+			}
+			
+			// Creates the data type descriptor
+			$dataTypeDescriptor = \App\Auxiliar\DataTypeDescriptor\Factory::create($imageTest['dataTypeDescriptor']);
+			
+			if (! $dataTypeDescriptor->isValidInput($value)) {
+				// The input is invalid
+				return false;
+			}
+		}
 		
 		// TODO: validate values here
+		
+		return true;
 	}
 	
 	/*
