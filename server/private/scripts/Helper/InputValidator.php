@@ -8,43 +8,6 @@ namespace App\Helper;
 class InputValidator extends Helper {
 	
 	/*
-	 * Determines whether an input is a bounded integer.
-	 * 
-	 * It receives the input, the minimum allowed value and, optionally, the
-	 * maximum allowed value.
-	 */
-	public function isBoundedInteger($input, $minimumValue, $maximumValue = PHP_INT_MAX) {
-		if (! is_int($input)) {
-			// The input is not an integer
-			return false;
-		}
-		
-		// Checks whether the input's value is in range
-		return	$input >= $minimumValue &&
-				$input <= $maximumValue;
-	}
-	
-	/*
-	 * Determines whether an input is a bounded string.
-	 * 
-	 * It receives the input, the minimum allowed length and, optionally, the
-	 * maximum allowed length.
-	 */
-	public function isBoundedString($input, $minimumLength, $maximumLength = PHP_INT_MAX) {
-		if (! is_string($input)) {
-			// The input is not a string
-			return false;
-		}
-		
-		// Gets the input's length
-		$length = getStringLength($input);
-		
-		// Checks whether the input's length is in range
-		return	$length >= $minimumLength &&
-				$length <= $maximumLength;
-	}
-	
-	/*
 	 * Determines whether an input is a data type descriptor.
 	 * 
 	 * It receives the input.
@@ -94,6 +57,13 @@ class InputValidator extends Helper {
 	}
 	
 	/*
+	 * TODO: comments
+	 */
+	public function isEmailAddress($input) {
+		// TODO: implement
+	}
+	
+	/*
 	 * Determines whether an input is a gender.
 	 * 
 	 * It receives the input.
@@ -133,6 +103,57 @@ class InputValidator extends Helper {
 	}
 	
 	/*
+	 * TODO: comments
+	 */
+	public function isUserId($input) {
+		// TODO: implement
+	}
+	
+	/*
+	 * Determines whether an input is a valid integer.
+	 * 
+	 * It receives the input, the minimum allowed value and, optionally, the
+	 * maximum allowed value.
+	 */
+	public function isValidInteger($input, $minimumValue, $maximumValue = PHP_INT_MAX) {
+		if (! is_int($input)) {
+			// The input is not an integer
+			return false;
+		}
+		
+		// Checks whether the input's value is in range
+		return	$input >= $minimumValue &&
+				$input <= $maximumValue;
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function isValidPassword($input) {
+		// TODO: implement
+	}
+	
+	/*
+	 * Determines whether an input is a valid string.
+	 * 
+	 * It receives the input, the minimum allowed length and, optionally, the
+	 * maximum allowed length.
+	 */
+	public function isValidString($input, $minimumLength, $maximumLength = PHP_INT_MAX) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Gets the input's length
+		$length = getStringLength($input);
+		
+		// Checks whether the input's length is in range
+		return	$length >= $minimumLength &&
+				$length <= $maximumLength;
+	}
+	
+	/*
 	 * Determines whether an input is a valid text.
 	 * 
 	 * It receives the input, the minimum allowed length and, optionally, the
@@ -152,8 +173,8 @@ class InputValidator extends Helper {
 		// Trims the input
 		$input = trimString($input);
 		
-		// Checks whether the input is bounded
-		return $this->isBoundedString($input, $minimumLength, $maximumLength);
+		// Checks whether the input is a valid string
+		return $this->isValidString($input, $minimumLength, $maximumLength);
 	}
 	
 }

@@ -26,21 +26,37 @@ class Services extends \Slim\Middleware {
 		
 		// Defines the services
 		
-//		// URL:		/server/account/sign-in
-//		// Method:	POST
-//		$app->services->define(
-//			'/account/sign-in',
-//			'POST',
-//			new \App\Controller\Account\SignIn()
-//		);
-//		
-//		// URL:		/server/account/sign-out
-//		// Method:	POST
-//		$app->services->define(
-//			'/account/sign-out',
-//			'POST',
-//			new \App\Controller\Account\SignOut()
-//		);
+		// URL:		/server/account/recover-password
+		// Method:	POST
+		$app->services->define(
+			'/account/recover-password',
+			'POST',
+			new \App\Controller\Account\RecoverPassword()
+		);
+		
+		// URL:		/server/account/sign-in
+		// Method:	POST
+		$app->services->define(
+			'/account/sign-in',
+			'POST',
+			new \App\Controller\Account\SignIn()
+		);
+		
+		// URL:		/server/account/sign-out
+		// Method:	POST
+		$app->services->define(
+			'/account/sign-out',
+			'POST',
+			new \App\Controller\Account\SignOut()
+		);
+		
+		// URL:		/server/account/sign-up
+		// Method:	POST
+		$app->services->define(
+			'/account/sign-up',
+			'POST',
+			new \App\Controller\Account\SignUp()
+		);
 		
 		// URL:		/server/authentication/get-state
 		// Method:	POST
@@ -50,14 +66,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\Authentication\GetState()
 		);
 		
-//		// URL:		/server/background/create
-//		// Method:	POST
-//		$app->services->define(
-//			'/background/create',
-//			'POST',
-//			new \App\Controller\Background\Create()
-//		);
-//		
+		// URL:		/server/background/create
+		// Method:	POST
+		$app->services->define(
+			'/background/create',
+			'POST',
+			new \App\Controller\Background\Create()
+		);
+		
 //		// URL:		/server/background/delete
 //		// Method:	POST
 //		$app->services->define(

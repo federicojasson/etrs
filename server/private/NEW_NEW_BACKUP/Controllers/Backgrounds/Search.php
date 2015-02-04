@@ -70,7 +70,7 @@ class Search extends \App\Controllers\SecureController {
 				$input = trimString($input);
 				
 				return	$app->inputValidator->isNonEmptyString($input) &&
-						$app->inputValidator->isBoundedString($input, 128) &&
+						$app->inputValidator->isValidString($input, 128) &&
 						$app->inputValidator->isPrintableString($input);
 			}),
 			

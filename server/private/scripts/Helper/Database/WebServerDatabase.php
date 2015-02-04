@@ -110,6 +110,27 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Returns a recover password permission. If it doesn't exist, null is
+	 * returned.
+	 * 
+	 * It receives the recover password permission's ID.
+	 */
+	public function getRecoverPasswordPermission($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'user',
+			'creation_datetime',
+			'password_hash',
+			'salt',
+			'key_derivation_iterations'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('recover_password_permissions', $columnsToSelect, $id);
+	}
+	
+	/*
 	 * Returns a session. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the session's ID.
@@ -125,6 +146,27 @@ class WebServerDatabase extends SpecializedDatabase {
 		
 		// Gets and returns the entity
 		return $this->getEntity('sessions', $columnsToSelect, $id);
+	}
+	
+	/*
+	 * Returns a sign up permission. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the sign up permission's ID.
+	 */
+	public function getSignUpPermission($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'creator',
+			'creation_datetime',
+			'password_hash',
+			'salt',
+			'key_derivation_iterations',
+			'role'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('sign_up_permissions', $columnsToSelect, $id);
 	}
 	
 	/*

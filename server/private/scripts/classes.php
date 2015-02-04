@@ -30,14 +30,16 @@ require 'private/scripts/Controller/SecureController.php';
 require 'private/scripts/Controller/SpecializedSecureController.php';
 
 // App\Controller\Account
-//require 'private/scripts/Controller/Account/SignIn.php';
-//require 'private/scripts/Controller/Account/SignOut.php';
+require 'private/scripts/Controller/Account/RecoverPassword.php';
+require 'private/scripts/Controller/Account/SignIn.php';
+require 'private/scripts/Controller/Account/SignOut.php';
+require 'private/scripts/Controller/Account/SignUp.php';
 
 // App\Controller\Authentication
 require 'private/scripts/Controller/Authentication/GetState.php';
 
-//// App\Controller\Background
-//require 'private/scripts/Controller/Background/Create.php';
+// App\Controller\Background
+require 'private/scripts/Controller/Background/Create.php';
 //require 'private/scripts/Controller/Background/Delete.php';
 //require 'private/scripts/Controller/Background/Edit.php';
 //require 'private/scripts/Controller/Background/Get.php';

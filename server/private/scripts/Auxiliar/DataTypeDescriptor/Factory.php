@@ -241,7 +241,7 @@ class Factory {
 	}
 	
 	/*
-	 * Processes the definition of a integer_fix_values data type and returns
+	 * Processes the definition of an integer_fix_values data type and returns
 	 * the result.
 	 * 
 	 * It receives the definition.
@@ -275,7 +275,7 @@ class Factory {
 	}
 	
 	/*
-	 * Processes the definition of a integer_range data type and returns the
+	 * Processes the definition of an integer_range data type and returns the
 	 * result.
 	 * 
 	 * It receives the definition.

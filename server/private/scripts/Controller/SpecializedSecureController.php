@@ -37,10 +37,10 @@ abstract class SpecializedSecureController extends SecureController {
 	/*
 	 * Returns an input.
 	 * 
-	 * It receives the input's key and, optionally, a parsing function to be
+	 * It receives the input's key and, optionally, a filtering function to be
 	 * invoked on the input before it is returned.
 	 */
-	protected function getInput($key, $parsingFunction = null) {
+	protected function getInput($key, $filteringFunction = null) {
 		$app = $this->app;
 		
 		// Gets the input
@@ -52,21 +52,26 @@ abstract class SpecializedSecureController extends SecureController {
 			return null;
 		}
 		
-		if (is_null($parsingFunction)) {
-			// No parsing function needs to be invoked on the input
-			return $input;
+		if (! is_null($filteringFunction)) {
+			// Invokes the filtering function
+			$input = call_user_func($filteringFunction, $input);
 		}
 		
-		// Invokes the parsing function and returns the result
-		return call_user_func($parsingFunction, $input);
+		return $input;
 	}
 	
 	/*
 	 * Sets the value of an output entry.
 	 * 
-	 * It receives the entry's key and the value to be set.
+	 * It receives the entry's key, the value to be set and, optionally, a
+	 * filtering function to be invoked on the value before it is set.
 	 */
-	protected function setOutput($key, $value) {
+	protected function setOutput($key, $value, $filteringFunction = null) {
+		if (! is_null($filteringFunction)) {
+			// Invokes the filtering function
+			$value = call_user_func($filteringFunction, $value);
+		}
+		
 		$this->output[$key] = $value;
 	}
 	
@@ -85,8 +90,6 @@ abstract class SpecializedSecureController extends SecureController {
 	 * If the request is valid, the input is replaced by a decoded version.
 	 * 
 	 * It receives the descriptor of the expected JSON structure.
-	 * 
-	 * TODO: maybe remove Request extension and store decoded input in here
 	 */
 	protected function validateJsonRequest($jsonStructureDescriptor) {
 		$app = $this->app;

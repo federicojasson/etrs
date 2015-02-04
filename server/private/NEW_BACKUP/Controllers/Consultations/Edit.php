@@ -208,7 +208,7 @@ class Edit extends \App\Controllers\SecureController {
 				
 				$input = trimString($input);
 				
-				return	$app->inputValidator->isBoundedString($input, 1024) &&
+				return	$app->inputValidator->isValidString($input, 1024) &&
 						$app->inputValidator->isPrintableString($input);
 			}),
 			
@@ -219,7 +219,7 @@ class Edit extends \App\Controllers\SecureController {
 				
 				$input = trimString($input);
 				
-				return	$app->inputValidator->isBoundedString($input, 1024) &&
+				return	$app->inputValidator->isValidString($input, 1024) &&
 						$app->inputValidator->isPrintableString($input);
 			}),
 			
@@ -230,7 +230,7 @@ class Edit extends \App\Controllers\SecureController {
 				
 				$input = trimString($input);
 				
-				return	$app->inputValidator->isBoundedString($input, 1024) &&
+				return	$app->inputValidator->isValidString($input, 1024) &&
 						$app->inputValidator->isPrintableString($input);
 			}),
 			
