@@ -16,28 +16,22 @@ class GetState extends \App\Controller\SpecializedSecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		if ($app->authentication->isUserSignedIn()) {
-			// The user is signed in
-			
-			// Gets the signed in user
-			$signedInUser = $app->authentication->getSignedInUser();
-			
-			// Defines the output
-			$output = [
-				'signedIn' => true,
-				'user' => $signedInUser['id']
-			];
-		} else {
+		// Determines whether the user is signed in
+		$signedIn = $app->authentication->isUserSignedIn();
+		
+		// Sets an output
+		$this->setOutputEntry('signedIn', $signedIn);
+		
+		if (! $signedIn) {
 			// The user is not signed in
-			
-			// Defines the output
-			$output = [
-				'signedIn' => false
-			];
+			return;
 		}
 		
-		// Sets the output
-		$app->response->setBody($output);
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Sets an output
+		$this->setOutputEntry('user', $signedInUser['id']);
 	}
 	
 	/*

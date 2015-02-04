@@ -42,7 +42,7 @@ class Response extends \Slim\Http\Response {
 			$this->headers->set('Content-Type', 'application/json');
 		}
 		
-		// Sets the body
+		// Invokes the parent's function
 		parent::setBody($output);
 	}
 	

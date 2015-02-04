@@ -20,23 +20,21 @@ class SignIn extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		// Gets the input
-		$input = $app->request->getBody();
-		$credentials = $input['credentials'];
+		$credentials = $this->getInput('credentials');
 		
 		// Authenticates the user
 		$authenticated = $app->authenticator->authenticateUserByPassword($credentials);
 		
-		if ($authenticated) {
-			// The user was authenticated
-			
-			// Signs in the user in the system
-			$app->authentication->signInUser($credentials['id']);
+		// Sets an output
+		$this->setOutputEntry('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user was not authenticated
+			return;
 		}
 		
-		// Sets the output
-		$app->response->setBody([
-			'authenticated' => $authenticated
-		]);
+		// Signs in the user in the system
+		$app->authentication->signInUser($credentials['id']);
 	}
 	
 	/*

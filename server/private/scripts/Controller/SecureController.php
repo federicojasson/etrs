@@ -6,9 +6,10 @@ namespace App\Controller;
  * This class encapsulates the logic of a service that performs security checks.
  * 
  * Subclasses must implement the call function. For security reasons, every
- * controller has to implement, also, a method to validate the input and another
- * one to check if the user is authorized to use the service. This is a measure
- * to help the developer not to forget to do these tasks.
+ * controller has to implement, also, the isInputValid method to validate the
+ * input and the isUserAuthorized function to check if the user is authorized to
+ * use the service. This is a measure to help the developer not to forget to do
+ * these tasks.
  */
 abstract class SecureController extends Controller {
 	

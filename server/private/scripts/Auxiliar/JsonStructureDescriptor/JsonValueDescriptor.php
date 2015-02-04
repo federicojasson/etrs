@@ -19,7 +19,7 @@ class JsonValueDescriptor extends JsonStructureDescriptor {
 			return false;
 		}
 		
-		// Calls the validation function and returns the result
+		// Invokes the validation function and returns the result
 		return call_user_func($this->definition, $input);
 	}
 	

@@ -20,9 +20,8 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		// Gets the input
-		$input = $app->request->getBody();
-		$id = hex2bin($input['id']);
-		$name = trimString($input['name']);
+		$id = $this->getInput('id', 'hex2bin');
+		$name = $this->getInput('name', 'trimString');
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();

@@ -1003,9 +1003,9 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			'consultation',
 			'creator',
 			'experiment',
+			'input',
 			'last_editor',
 			'report',
-			'subject',
 			'creation_datetime',
 			'last_edition_datetime',
 			'observations'

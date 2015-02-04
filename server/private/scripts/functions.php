@@ -54,7 +54,7 @@ function camelCaseToSnakeCase($string) {
  * It receives the array.
  */
 function getFirstElementOrNull($array) {
-	if (count($array) === 0) {
+	if (isArrayEmpty($array)) {
 		// The array is empty
 		return null;
 	}
@@ -70,6 +70,15 @@ function getFirstElementOrNull($array) {
  */
 function getStringLength($string) {
 	return mb_strlen($string, 'UTF-8');
+}
+
+/*
+ * Determines whether an array is empty.
+ * 
+ * It receives the array.
+ */
+function isArrayEmpty($array) {
+	return count($array) === 0;
 }
 
 /*

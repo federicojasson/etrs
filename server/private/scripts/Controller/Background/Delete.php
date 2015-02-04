@@ -20,8 +20,7 @@ class Delete extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		// Gets the input
-		$input = $app->request->getBody();
-		$id = hex2bin($input['id']);
+		$id = $this->getInput('id', 'hex2bin');
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();

@@ -20,8 +20,7 @@ class Create extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		// Gets the input
-		$input = $app->request->getBody();
-		$name = trimString($input['name']);
+		$name = $this->getInput('name', 'trimString');
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -31,6 +30,9 @@ class Create extends \App\Controller\SpecializedSecureController {
 			$id = $app->cryptography->generateRandomId();
 		} while ($app->businessLogicDatabase->backgroundExists($id));
 		
+		// Sets an output
+		$this->setOutputEntry('id', bin2hex($id));
+		
 		// Gets the signed in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
@@ -39,11 +41,6 @@ class Create extends \App\Controller\SpecializedSecureController {
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
-		
-		// Sets the output
-		$app->response->setBody([
-			'id' => bin2hex($id)
-		]);
 	}
 	
 	/*

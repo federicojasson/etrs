@@ -249,7 +249,7 @@ class Factory {
 	 * Throws an exception if the operation fails.
 	 */
 	private static function processIntegerFixValuesDefinition($definition) {
-		if (count($definition) === 0) {
+		if (isArrayEmpty($definition)) {
 			// The definition contains no entries
 			throw new \Exception();
 		}
