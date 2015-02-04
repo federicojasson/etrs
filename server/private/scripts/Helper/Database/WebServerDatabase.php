@@ -78,31 +78,22 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * Creates a session.
+	 * Deletes the inactive sessions.
 	 * 
-	 * It receives the session's data.
+	 * It receives the maximum time that a session can remain inactive (in
+	 * seconds).
 	 */
-	public function createSession($id, $data) {
+	public function deleteInactiveSessions($maximumInactiveTime) {
 		// Defines the statement
 		$statement = '
-			INSERT INTO sessions (
-				id,
-				creation_datetime,
-				last_edition_datetime,
-				data
-			)
-			VALUES (
-				:id,
-				UTC_TIMESTAMP(),
-				UTC_TIMESTAMP(),
-				:data
-			)
+			DELETE
+			FROM sessions
+			WHERE last_edition_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumInactiveTime SECOND)
 		';
 		
 		// Sets the parameters
 		$parameters = [
-			':id' => $id,
-			':data' => $data
+			':maximumInactiveTime' => $maximumInactiveTime
 		];
 		
 		// Executes the statement
@@ -116,57 +107,6 @@ class WebServerDatabase extends SpecializedDatabase {
 	 */
 	public function deleteSession($id) {
 		$this->deleteEntity('sessions', $id);
-	}
-	
-	/*
-	 * Edits a session.
-	 * 
-	 * It receives the session's data.
-	 */
-	public function editSession($id, $data) {
-		// Defines the statement
-		$statement = '
-			UPDATE sessions
-			SET
-				last_edition_datetime = UTC_TIMESTAMP(),
-				data = :data
-			WHERE id = :id
-			LIMIT 1
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':id' => $id,
-			':data' => $data
-		];
-		
-		// Executes the statement
-		$this->executePreparedStatement($statement, $parameters);
-	}
-	
-	/*
-	 * Returns the inactive sessions.
-	 * 
-	 * It receives the maximum time that a session can remain inactive (in
-	 * seconds).
-	 */
-	public function getInactiveSessions($maximumInactiveTime) {
-		// Defines the statement
-		$statement = '
-			SELECT id
-			FROM sessions
-			WHERE last_edition_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumInactiveTime SECOND)
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':maximumInactiveTime' => $maximumInactiveTime
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		return $results;
 	}
 	
 	/*

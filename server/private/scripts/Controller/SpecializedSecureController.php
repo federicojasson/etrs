@@ -62,15 +62,6 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
-	 * Sets the output completely.
-	 * 
-	 * It receives the output.
-	 */
-	protected function setOutputCompletely($output) {
-		$this->output = $output;
-	}
-	
-	/*
 	 * Sets the value of an output entry.
 	 * 
 	 * It receives the entry's key and the value to be set.
@@ -80,11 +71,22 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Sets the output completely.
+	 * 
+	 * It receives the output.
+	 */
+	protected function setOutputCompletely($output) {
+		$this->output = $output;
+	}
+	
+	/*
 	 * Validates a JSON request and returns the result.
 	 * 
 	 * If the request is valid, the input is replaced by a decoded version.
 	 * 
 	 * It receives the descriptor of the expected JSON structure.
+	 * 
+	 * TODO: maybe remove Request extension and store decoded input in here
 	 */
 	protected function validateJsonRequest($jsonStructureDescriptor) {
 		$app = $this->app;
@@ -118,7 +120,5 @@ abstract class SpecializedSecureController extends SecureController {
 		
 		return true;
 	}
-	
-	// TODO: implement methods here
 	
 }

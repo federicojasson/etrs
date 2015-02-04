@@ -20,7 +20,7 @@ class GetState extends \App\Controller\SpecializedSecureController {
 		$signedIn = $app->authentication->isUserSignedIn();
 		
 		// Sets an output
-		$this->setOutputEntry('signedIn', $signedIn);
+		$this->setOutput('signedIn', $signedIn);
 		
 		if (! $signedIn) {
 			// The user is not signed in
@@ -31,7 +31,7 @@ class GetState extends \App\Controller\SpecializedSecureController {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Sets an output
-		$this->setOutputEntry('user', $signedInUser['id']);
+		$this->setOutput('user', $signedInUser['id']);
 	}
 	
 	/*
