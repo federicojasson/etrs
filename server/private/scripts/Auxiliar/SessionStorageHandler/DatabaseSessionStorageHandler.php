@@ -9,7 +9,6 @@ namespace App\Auxiliar\SessionStorageHandler;
  * Implements the SessionStorageHandler interface.
  * 
  * TODO: functionalities to implement
- * get inactive sessions and delete them one by one (and log the event) -> use session_decode ( string $data ) to decode data
  * add IPs on session data (on data level, not column)
  */
 class DatabaseSessionStorageHandler implements SessionStorageHandler {
@@ -66,15 +65,8 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	public function onGarbageCollection($maximumInactiveTime) {
 		$app = $this->app;
 		
-		// Gets the inactive sessions
-		$sessions = $app->webServerDatabase->getInactiveSessions($maximumInactiveTime);
-		
-		// Deletes the sessions
-		foreach ($sessions as $session) {
-			$app->webServerDatabase->deleteSession($session['id']);
-		}
-		
-		// TODO: log event
+		// Deletes the inactive sessions
+		$app->webServerDatabase->deleteInactiveSessions($maximumInactiveTime);
 		
 		return true;
 	}
