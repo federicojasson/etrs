@@ -5,6 +5,23 @@
  */
 
 /*
+ * Applies a function to all the elements of an array and returns the result.
+ * 
+ * It receives the array and the function to apply.
+ */
+function applyFunctionToArray($array, $function) {
+	// Initializes the new array
+	$newArray = [];
+	
+	foreach ($array as $value) {
+		// Applies the function and pushes the result into the new array
+		$newArray[] = call_user_func($function, $value);
+	}
+	
+	return $newArray;
+}
+
+/*
  * Determines whether an array contains duplicate elements.
  * 
  * It receives the array.

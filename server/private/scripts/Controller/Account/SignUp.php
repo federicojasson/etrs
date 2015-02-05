@@ -57,7 +57,7 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 	protected function isInputValid() {
 		$app = $this->app;
 		
-		// Defines the expected JSON structure
+		// Defines the JSON structure descriptor
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'credentials' => new JsonObjectDescriptor([
 				'id' => new JsonValueDescriptor(function($input) use ($app) {
@@ -109,7 +109,8 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 	}
 	
 	/*
-	 * Checks the non-existence of a user.
+	 * Checks the non-existence of a user. If it exists, the execution is
+	 * halted.
 	 * 
 	 * It receives the user's ID.
 	 */
@@ -117,7 +118,7 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		if ($app->data->user->exists($id)) {
-			// The user already exists
+			// The user exists
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_CONFLICT, [

@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Auxiliar\JsonStructureDescriptor\JsonObjectDescriptor;
+use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
+
 /*
  * This class encapsulates the logic of a secure service and offers specialized
  * methods.
@@ -61,6 +64,36 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Returns the JSON structure descriptor used in the search controllers.
+	 * 
+	 * It receives the sorting's fields.
+	 */
+	protected function getSearchJsonStructureDescriptor($sortingFields) {
+		$app = $this->app;
+		
+		// Defines and returns the JSON structure descriptor
+		return new JsonObjectDescriptor([
+			'expression' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidExpression($input);
+			}),
+			
+			'page' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidInteger($input, 1);
+			}),
+			
+			'sorting' => new JsonObjectDescriptor([
+				'field' => new JsonValueDescriptor(function($input) use ($sortingFields) {
+					return isElementInArray($input, $sortingFields);
+				}),
+				
+				'order' => new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isSortingOrder($input);
+				})
+			])
+		]);
+	}
+	
+	/*
 	 * Sets the value of an output entry.
 	 * 
 	 * It receives the entry's key, the value to be set and, optionally, a
@@ -76,7 +109,7 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
-	 * Sets the output completely.
+	 * Sets the output.
 	 * 
 	 * It receives the output.
 	 */

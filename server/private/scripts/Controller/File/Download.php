@@ -35,7 +35,7 @@ class Download extends \App\Controller\SpecializedSecureController {
 	protected function isInputValid() {
 		$app = $this->app;
 		
-		// Defines the expected JSON structure
+		// Defines the JSON structure descriptor
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'id' => new JsonValueDescriptor(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
@@ -64,7 +64,7 @@ class Download extends \App\Controller\SpecializedSecureController {
 	}
 	
 	/*
-	 * Returns a file. If the file doesn't exist, the execution is halted.
+	 * Returns a file. If it doesn't exist, the execution is halted.
 	 * 
 	 * It receives the file's ID.
 	 */

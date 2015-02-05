@@ -126,6 +126,21 @@ class InputValidator extends Helper {
 	}
 	
 	/*
+	 * Determines whether an input is a valid expression.
+	 * 
+	 * It receives the input.
+	 */
+	public function isValidExpression($input) {
+		if (is_null($input)) {
+			// The input is null
+			return true;
+		}
+		
+		// Checks whether the input is a valid text
+		return $this->isValidText($input, 1, 128);
+	}
+	
+	/*
 	 * Determines whether an input is a valid integer.
 	 * 
 	 * It receives the input, the minimum allowed value and, optionally, the

@@ -139,8 +139,8 @@ abstract class SpecializedDatabase extends Database {
 	/*
 	 * Searches specific entities of a certain type and returns the results.
 	 * 
-	 * It receives entities' table, the columns to select, the columns to match
-	 * against, an expression, the page and a sorting.
+	 * It receives entities' table, the columns to select, the columns to match,
+	 * an expression, the page and a sorting.
 	 */
 	protected function searchSpecificEntities($table, $columnsToSelect, $columnsToMatch, $expression, $page, $sorting) {
 		// Gets the SELECT clause

@@ -70,7 +70,9 @@ class LogModel extends EntityModel {
 	}
 	
 	/*
-	 * Searches entities of the type of this model and returns the results.
+	 * Searches entities of the type of this model. It returns an array
+	 * containing, as the first element, the total number of results, and as the
+	 * second, the results found in the page ready for presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

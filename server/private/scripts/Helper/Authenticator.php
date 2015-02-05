@@ -80,7 +80,7 @@ class Authenticator extends Helper {
 	}
 	
 	/*
-	 * Authenticates a user by her password and returns the result.
+	 * Authenticates a user by its password and returns the result.
 	 * 
 	 * It receives the user's credentials.
 	 */

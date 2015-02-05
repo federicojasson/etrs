@@ -74,38 +74,38 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\Background\Create()
 		);
 		
-//		// URL:		/server/background/delete
-//		// Method:	POST
-//		$app->services->define(
-//			'/background/delete',
-//			'POST',
-//			new \App\Controller\Background\Delete()
-//		);
-//		
-//		// URL:		/server/background/edit
-//		// Method:	POST
-//		$app->services->define(
-//			'/background/edit',
-//			'POST',
-//			new \App\Controller\Background\Edit()
-//		);
-//		
-//		// URL:		/server/background/get
-//		// Method:	POST
-//		$app->services->define(
-//			'/background/get',
-//			'POST',
-//			new \App\Controller\Background\Get()
-//		);
-//		
-//		// URL:		/server/background/search
-//		// Method:	POST
-//		$app->services->define(
-//			'/background/search',
-//			'POST',
-//			new \App\Controller\Background\search()
-//		);
-//		
+		// URL:		/server/background/delete
+		// Method:	POST
+		$app->services->define(
+			'/background/delete',
+			'POST',
+			new \App\Controller\Background\Delete()
+		);
+		
+		// URL:		/server/background/edit
+		// Method:	POST
+		$app->services->define(
+			'/background/edit',
+			'POST',
+			new \App\Controller\Background\Edit()
+		);
+		
+		// URL:		/server/background/get
+		// Method:	POST
+		$app->services->define(
+			'/background/get',
+			'POST',
+			new \App\Controller\Background\Get()
+		);
+		
+		// URL:		/server/background/search
+		// Method:	POST
+		$app->services->define(
+			'/background/search',
+			'POST',
+			new \App\Controller\Background\Search()
+		);
+		
 //		// URL:		/server/clinical-impression/create
 //		// Method:	POST
 //		$app->services->define(
@@ -143,7 +143,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/clinical-impression/search',
 //			'POST',
-//			new \App\Controller\ClinicalImpression\search()
+//			new \App\Controller\ClinicalImpression\Search()
 //		);
 //		
 //		// URL:		/server/consultation/create
@@ -215,7 +215,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/diagnosis/search',
 //			'POST',
-//			new \App\Controller\Diagnosis\search()
+//			new \App\Controller\Diagnosis\Search()
 //		);
 //		
 //		// URL:		/server/experiment/create
@@ -255,7 +255,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/experiment/search',
 //			'POST',
-//			new \App\Controller\Experiment\search()
+//			new \App\Controller\Experiment\Search()
 //		);
 		
 		// URL:		/server/file/download
@@ -311,7 +311,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/image-test/search',
 //			'POST',
-//			new \App\Controller\ImageTest\search()
+//			new \App\Controller\ImageTest\Search()
 //		);
 //		
 //		// URL:		/server/laboratory-test/create
@@ -351,7 +351,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/laboratory-test/search',
 //			'POST',
-//			new \App\Controller\LaboratoryTest\search()
+//			new \App\Controller\LaboratoryTest\Search()
 //		);
 //		
 //		// URL:		/server/medication/create
@@ -391,7 +391,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/medication/search',
 //			'POST',
-//			new \App\Controller\Medication\search()
+//			new \App\Controller\Medication\Search()
 //		);
 //		
 //		// URL:		/server/neurocognitive-test/create
@@ -431,7 +431,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/neurocognitive-test/search',
 //			'POST',
-//			new \App\Controller\NeurocognitiveTest\search()
+//			new \App\Controller\NeurocognitiveTest\Search()
 //		);
 //		
 //		// URL:		/server/patient/create
@@ -471,7 +471,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/patient/search',
 //			'POST',
-//			new \App\Controller\Patient\search()
+//			new \App\Controller\Patient\Search()
 //		);
 //		
 //		// URL:		/server/study/create
@@ -543,7 +543,7 @@ class Services extends \Slim\Middleware {
 //		$app->services->define(
 //			'/treatment/search',
 //			'POST',
-//			new \App\Controller\Treatment\search()
+//			new \App\Controller\Treatment\Search()
 //		);
 	}
 	

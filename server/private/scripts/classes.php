@@ -50,11 +50,11 @@ require 'private/scripts/Controller/Authentication/GetState.php';
 
 // App\Controller\Background
 require 'private/scripts/Controller/Background/Create.php';
-//require 'private/scripts/Controller/Background/Delete.php';
-//require 'private/scripts/Controller/Background/Edit.php';
-//require 'private/scripts/Controller/Background/Get.php';
-//require 'private/scripts/Controller/Background/Search.php';
-//
+require 'private/scripts/Controller/Background/Delete.php';
+require 'private/scripts/Controller/Background/Edit.php';
+require 'private/scripts/Controller/Background/Get.php';
+require 'private/scripts/Controller/Background/Search.php';
+
 //// App\Controller\ClinicalImpression
 //require 'private/scripts/Controller/ClinicalImpression/Create.php';
 //require 'private/scripts/Controller/ClinicalImpression/Delete.php';

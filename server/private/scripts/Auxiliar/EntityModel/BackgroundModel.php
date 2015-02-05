@@ -26,7 +26,10 @@ class BackgroundModel extends EntityModel {
 	 * It receives the entity's ID.
 	 */
 	public function delete($id) {
-		// The operation is not defined
+		$app = $this->app;
+		
+		// Deletes the background
+		$app->businessLogicDatabase->deleteBackground($id);
 	}
 	
 	/*
@@ -35,7 +38,11 @@ class BackgroundModel extends EntityModel {
 	 * It receives the entity's data.
 	 */
 	public function edit() {
-		// The operation is not defined
+		$app = $this->app;
+		
+		// Edits the background
+		$function = [ $app->businessLogicDatabase, 'editBackground' ];
+		call_user_func_array($function, func_get_args());
 	}
 	
 	/*
@@ -44,8 +51,10 @@ class BackgroundModel extends EntityModel {
 	 * It receives the entity's ID.
 	 */
 	public function exists($id) {
-		// The operation is not defined
-		return false;
+		$app = $this->app;
+		
+		// Determines whether the background exists
+		return $app->businessLogicDatabase->nonDeletedBackgroundExists($id);
 	}
 	
 	/*
@@ -54,8 +63,8 @@ class BackgroundModel extends EntityModel {
 	 * It receives the entity.
 	 */
 	public function filter($entity) {
-		// The operation is not defined
-		return null;
+		// TODO: implement
+		return $entity;
 	}
 	
 	/*
@@ -65,18 +74,43 @@ class BackgroundModel extends EntityModel {
 	 * It receives the entity's ID.
 	 */
 	public function get($id) {
-		// The operation is not defined
-		return null;
+		$app = $this->app;
+		
+		// Gets the background
+		return $app->businessLogicDatabase->getNonDeletedBackground($id);
 	}
 	
 	/*
-	 * Searches entities of the type of this model and returns the results.
+	 * Searches entities of the type of this model. It returns an array
+	 * containing, as the first element, the total number of results, and as the
+	 * second, the results found in the page ready for presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */
 	public function search($expression, $page, $sorting) {
-		// The operation is not defined
-		return null;
+		$app = $this->app;
+		
+		if (is_null($expression)) {
+			// Searches all backgrounds
+			$backgrounds = $app->businessLogicDatabase->searchAllNonDeletedBackgrounds($page, $sorting);
+		} else {
+			// Searches specific backgrounds
+			$backgrounds = $app->businessLogicDatabase->searchSpecificNonDeletedBackgrounds($expression, $page, $sorting);
+		}
+		
+		// Gets the number of rows found
+		$foundRows = $app->businessLogicDatabase->getFoundRows();
+		
+		// Gets the found IDs
+		$ids = array_column($backgrounds, 'id');
+		
+		// Converts the IDs to hexadecimal
+		$ids = applyFunctionToArray($ids, 'bin2hex');
+		
+		return [
+			$foundRows,
+			$ids
+		];
 	}
 	
 }

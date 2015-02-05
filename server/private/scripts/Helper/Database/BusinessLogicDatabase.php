@@ -48,6 +48,64 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Deletes a background.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function deleteBackground($id) {
+		$this->deleteEntity('backgrounds', $id);
+	}
+	
+	/*
+	 * Edits a background.
+	 * 
+	 * It receives the background's data.
+	 */
+	public function editBackground($id, $lastEditor, $name) {
+		// Defines the statement
+		$statement = '
+			UPDATE backgrounds
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Returns a non-deleted background. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function getNonDeletedBackground($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'is_deleted',
+			'creator',
+			'last_editor',
+			'creation_datetime',
+			'last_edition_datetime',
+			'name'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('non_deleted_backgrounds', $columnsToSelect, $id);
+	}
+	
+	/*
 	 * Returns a non-deleted file. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the file's ID.
@@ -67,6 +125,50 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		
 		// Gets and returns the entity
 		return $this->getEntity('non_deleted_files', $columnsToSelect, $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted background exists.
+	 * 
+	 * It receives the background's ID.
+	 */
+	public function nonDeletedBackgroundExists($id) {
+		return $this->entityExists('non_deleted_backgrounds', $id);
+	}
+	
+	/*
+	 * Searches all non-deleted backgrounds and returns the results.
+	 * 
+	 * It receives the page and a sorting.
+	 */
+	public function searchAllNonDeletedBackgrounds($page, $sorting) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id'
+		];
+		
+		// Searches all entities and returns the results
+		return $this->searchAllEntities('non_deleted_backgrounds', $columnsToSelect, $page, $sorting);
+	}
+	
+	/*
+	 * Searches specific non-deleted backgrounds and returns the results.
+	 * 
+	 * It receives an expression, the page and a sorting.
+	 */
+	public function searchSpecificNonDeletedBackgrounds($expression, $page, $sorting) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id'
+		];
+		
+		// Defines the columns to match
+		$columnsToMatch = [
+			'name'
+		];
+		
+		// Searches specific entities and returns the results
+		return $this->searchSpecificEntities('non_deleted_backgrounds', $columnsToSelect, $columnsToMatch, $expression, $page, $sorting);
 	}
 	
 //	/*
@@ -411,15 +513,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 //	}
 //	
 //	/*
-//	 * Deletes a background.
-//	 * 
-//	 * It receives the background's ID.
-//	 */
-//	public function deleteBackground($id) {
-//		$this->deleteEntity('backgrounds', $id);
-//	}
-//	
-//	/*
 //	 * Deletes a clinical impression.
 //	 * 
 //	 * It receives the clinical impression's ID.
@@ -480,34 +573,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 //	 */
 //	public function deleteTreatment($id) {
 //		$this->deleteEntity('treatments', $id);
-//	}
-//	
-//	/*
-//	 * Edits a background.
-//	 * 
-//	 * It receives the background's data.
-//	 */
-//	public function editBackground($id, $lastEditor, $name) {
-//		// Defines the statement
-//		$statement = '
-//			UPDATE backgrounds
-//			SET
-//				last_editor = :lastEditor,
-//				last_edition_datetime = UTC_TIMESTAMP(),
-//				name = :name
-//			WHERE id = :id
-//			LIMIT 1
-//		';
-//		
-//		// Sets the parameters
-//		$parameters = [
-//			':id' => $id,
-//			':lastEditor' => $lastEditor,
-//			':name' => $name
-//		];
-//		
-//		// Executes the statement
-//		$this->executePreparedStatement($statement, $parameters);
 //	}
 //	
 //	/*
@@ -748,26 +813,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 //		$this->executePreparedStatement($statement, $parameters);
 //	}
 //	
-//	/*
-//	 * Returns a non-deleted background. If it doesn't exist, null is returned.
-//	 * 
-//	 * It receives the background's ID.
-//	 */
-//	public function getNonDeletedBackground($id) {
-//		// Defines the columns to select
-//		$columnsToSelect = [
-//			'id',
-//			'is_deleted',
-//			'creator',
-//			'last_editor',
-//			'creation_datetime',
-//			'last_edition_datetime',
-//			'name'
-//		];
-//		
-//		// Gets and returns the entity
-//		return $this->getEntity('non_deleted_backgrounds', $columnsToSelect, $id);
-//	}
 //	
 //	/*
 //	 * Returns a non-deleted clinical impression. If it doesn't exist, null is

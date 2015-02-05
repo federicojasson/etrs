@@ -43,7 +43,7 @@ class SignIn extends \App\Controller\SpecializedSecureController {
 	protected function isInputValid() {
 		$app = $this->app;
 		
-		// Defines the expected JSON structure
+		// Defines the JSON structure descriptor
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'credentials' => new JsonObjectDescriptor([
 				'id' => new JsonValueDescriptor(function($input) use ($app) {
