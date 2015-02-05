@@ -48,7 +48,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 		$id = hex2bin($id);
 		
 		// Deletes the session
-		$app->webServerDatabase->deleteSession($id);
+		$app->data->session->delete($id);
 		
 		return true;
 	}
@@ -65,7 +65,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 		$app = $this->app;
 		
 		// Deletes the inactive sessions
-		$app->webServerDatabase->deleteInactiveSessions($maximumInactiveTime);
+		$app->data->session->deleteInactives($maximumInactiveTime);
 		
 		return true;
 	}
@@ -98,7 +98,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 		$id = hex2bin($id);
 		
 		// Gets the session
-		$session = $app->webServerDatabase->getSession($id);
+		$session = $app->data->session->get($id);
 		
 		if (is_null($session)) {
 			// The session doesn't exist
@@ -123,7 +123,7 @@ class DatabaseSessionStorageHandler implements SessionStorageHandler {
 		$id = hex2bin($id);
 		
 		// Creates or edits the session
-		$app->webServerDatabase->createOrEditSession($id, $data);
+		$app->data->session->createOrEdit($id, $data);
 		
 		return true;
 	}

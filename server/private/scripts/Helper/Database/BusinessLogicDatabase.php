@@ -12,41 +12,63 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 * 
 	 * It receives the background's data.
 	 */
-//	public function createBackground($id, $creator, $name) {
-//		// Defines the statement
-//		$statement = '
-//			INSERT INTO backgrounds (
-//				id,
-//				is_deleted,
-//				creator,
-//				last_editor,
-//				creation_datetime,
-//				last_edition_datetime,
-//				name
-//			)
-//			VALUES (
-//				:id,
-//				FALSE,
-//				:creator,
-//				:lastEditor,
-//				UTC_TIMESTAMP(),
-//				UTC_TIMESTAMP(),
-//				:name
-//			)
-//		';
-//		
-//		// Sets the parameters
-//		$parameters = [
-//			':id' => $id,
-//			':creator' => $creator,
-//			':lastEditor' => $creator,
-//			':name' => $name
-//		];
-//		
-//		// Executes the statement
-//		$this->executePreparedStatement($statement, $parameters);
-//	}
-//	
+	public function createBackground($id, $creator, $name) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO backgrounds (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Returns a non-deleted file. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the file's ID.
+	 */
+	public function getNonDeletedFile($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'is_deleted',
+			'creator',
+			'last_editor',
+			'creation_datetime',
+			'last_edition_datetime',
+			'name',
+			'hash'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('non_deleted_files', $columnsToSelect, $id);
+	}
+	
 //	/*
 //	 * Creates a clinical impression.
 //	 * 
@@ -1117,10 +1139,10 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$app = $this->app;
 		
 		// Gets the database's parameters
-		$parameters = $app->parameters->get(PARAMETERS_DATABASES);
-		$dsn = $parameters['businessLogicDatabase']['dsn'];
-		$username = $parameters['businessLogicDatabase']['username'];
-		$password = $parameters['businessLogicDatabase']['password'];
+		$parameters = $app->parameters->databases['businessLogicDatabase'];
+		$dsn = $parameters['dsn'];
+		$username = $parameters['username'];
+		$password = $parameters['password'];
 		
 		// Creates and returns the PDO instance
 		return new \PDO($dsn, $username, $password);

@@ -8,7 +8,8 @@ namespace App\Helper;
 class Authentication extends Helper {
 	
 	/*
-	 * Returns the signed in user.
+	 * Returns the signed in user. If the user doesn't exist, the user is signed
+	 * out and the execution is halted.
 	 */
 	public function getSignedInUser() {
 		$app = $this->app;
@@ -17,7 +18,7 @@ class Authentication extends Helper {
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
 		// Gets the user
-		$user = $app->webServerDatabase->getUser($id);
+		$user = $app->data->user->get($id);
 		
 		if (is_null($user)) {
 			// The user doesn't exist
@@ -79,6 +80,25 @@ class Authentication extends Helper {
 		
 		// Logs the event
 		$app->log->info('The user ' . $id . ' has been signed out.');
+	}
+	
+	/*
+	 * Signs up a user in the system. After the registration, the user is signed
+	 * in.
+	 * 
+	 * It receives the user's data.
+	 */
+	public function signUpUser($id, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
+		$app = $this->app;
+		
+		// Creates the user
+		$app->data->user->create($id, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress);
+		
+		// Logs the event
+		$app->log->info('The user ' . $id . ' has been signed up.');
+		
+		// Signs in the user in the system
+		$this->signInUser($id);
 	}
 	
 }

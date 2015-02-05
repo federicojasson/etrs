@@ -22,7 +22,11 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		// Gets the input
 		$credentials = $this->getInput('credentials');
 		$id = $this->getInput('id');
-		// TODO: get other input
+		$password = $this->getInput('password');
+		$firstName = $this->getInput('firstName', 'trimString');
+		$lastName = $this->getInput('lastName', 'trimString');
+		$gender = $this->getInput('gender');
+		$emailAddress = $this->getInput('emailAddress');
 		
 		// Authenticates the sign up permission
 		$authenticated = $app->authenticator->authenticateSignUpPermissionByPassword($credentials);
@@ -35,16 +39,16 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 			return;
 		}
 		
-		// Starts a read-write transaction
-		$app->webServerDatabase->startReadWriteTransaction();
-		
 		// Checks the non-existence of the user
 		$this->checkUserNonExistence($id);
 		
-		// TODO: implement sign up ---> use Data helper and Model?
+		// Computes the hash of the password
+		$salt = $app->cryptography->generateSalt();
+		$keyDerivationIterations = $app->parameters->cryptography['keyDerivationIterations'];
+		$passwordHash = $app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
 		
-		// Commits the transaction
-		$app->webServerDatabase->commitTransaction();
+		// Signs up the user in the system
+		$app->authentication->signUpUser($id, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress); // TODO: get parameters
 	}
 	
 	/*
@@ -105,10 +109,21 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Checks the non-existence of a user.
+	 * 
+	 * It receives the user's ID.
 	 */
 	private function checkUserNonExistence($id) {
-		// TODO: implement
+		$app = $this->app;
+		
+		if ($app->data->user->exists($id)) {
+			// The user already exists
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_CONFLICT, [
+				'error' => ERROR_ALREADY_EXISTING_USER
+			]);
+		}
 	}
 	
 }

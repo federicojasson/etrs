@@ -101,10 +101,9 @@ abstract class SpecializedDatabase extends Database {
 	}
 	
 	/*
-	 * Performs a search that includes all entities of a certain type and
-	 * returns the results.
+	 * Searches all entities of a certain type and returns the results.
 	 * 
-	 * It receives the entities' table, the columns to select, the page and the
+	 * It receives the entities' table, the columns to select, the page and a
 	 * sorting.
 	 */
 	protected function searchAllEntities($table, $columnsToSelect, $page, $sorting) {
@@ -138,11 +137,10 @@ abstract class SpecializedDatabase extends Database {
 	}
 	
 	/*
-	 * Performs a search that includes specific entities of a certain type and
-	 * returns the results.
+	 * Searches specific entities of a certain type and returns the results.
 	 * 
 	 * It receives entities' table, the columns to select, the columns to match
-	 * against, an expression, the page and the sorting.
+	 * against, an expression, the page and a sorting.
 	 */
 	protected function searchSpecificEntities($table, $columnsToSelect, $columnsToMatch, $expression, $page, $sorting) {
 		// Gets the SELECT clause

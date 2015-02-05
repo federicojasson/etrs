@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Background;
+namespace App\Controller\File;
 
 use App\Auxiliar\JsonStructureDescriptor\JsonObjectDescriptor;
 use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
@@ -8,10 +8,10 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/background/create
+ * URL:		/server/file/download
  * Method:	POST
  */
-class Create extends \App\Controller\SpecializedSecureController {
+class Download extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.
@@ -20,19 +20,13 @@ class Create extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		// Gets the input
-		$name = $this->getInput('name', 'trimString');
+		$id = $this->getInput('id', 'hex2bin');
 		
-		// Generates a random ID
-		$id = $app->cryptography->generateRandomId();
+		// Gets the file
+		$file = $this->getFile($id);
 		
-		// Gets the signed in user
-		$signedInUser = $app->authentication->getSignedInUser();
-		
-		// Creates the background
-		$app->data->background->create($id, $signedInUser['id'], $name);
-		
-		// Sets an output
-		$this->setOutput('id', $id, 'bin2hex');
+		// Downloads the file
+		$app->files->download($file);
 	}
 	
 	/*
@@ -43,8 +37,8 @@ class Create extends \App\Controller\SpecializedSecureController {
 		
 		// Defines the expected JSON structure
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
-			'name' => new JsonValueDescriptor(function($input) use ($app) {
-				return $app->inputValidator->isValidText($input, 1, 128);
+			'id' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
 			})
 		]);
 		
@@ -60,11 +54,36 @@ class Create extends \App\Controller\SpecializedSecureController {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			USER_ROLE_ADMINISTRATOR
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
 		];
 		
 		// Validates the access and returns the result
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
+	}
+	
+	/*
+	 * Returns a file. If the file doesn't exist, the execution is halted.
+	 * 
+	 * It receives the file's ID.
+	 */
+	private function getFile($id) {
+		$app = $this->app;
+		
+		// Gets the file
+		$file = $app->data->file->get($id);
+		
+		if (is_null($file)) {
+			// The file doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_FILE
+			]);
+		}
+		
+		return $file;
 	}
 	
 }

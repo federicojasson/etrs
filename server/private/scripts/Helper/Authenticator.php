@@ -21,7 +21,7 @@ class Authenticator extends Helper {
 		$password = $credentials['password'];
 		
 		// Gets the recover password permission
-		$recoverPasswordPermission = $app->webServerDatabase->getRecoverPasswordPermission($id);
+		$recoverPasswordPermission = $app->data->recoverPasswordPermission->get($id);
 		
 		if (is_null($recoverPasswordPermission)) {
 			// The recover password permission doesn't exist
@@ -30,7 +30,8 @@ class Authenticator extends Helper {
 			// that avoids disclosing the fact that the recover password
 			// permission doesn't exist
 			$salt = $app->cryptography->generateSalt();
-			$app->cryptography->hashPassword($password, $salt, KEY_DERIVATION_ITERATIONS);
+			$keyDerivationIterations = $app->parameters->cryptography['keyDerivationIterations'];
+			$app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
 			
 			return false;
 		}
@@ -56,7 +57,7 @@ class Authenticator extends Helper {
 		$password = $credentials['password'];
 		
 		// Gets the sign up permission
-		$signUpPermission = $app->webServerDatabase->getSignUpPermission($id);
+		$signUpPermission = $app->data->signUpPermission->get($id);
 		
 		if (is_null($signUpPermission)) {
 			// The sign up permission doesn't exist
@@ -65,7 +66,8 @@ class Authenticator extends Helper {
 			// that avoids disclosing the fact that the sign up permission
 			// doesn't exist
 			$salt = $app->cryptography->generateSalt();
-			$app->cryptography->hashPassword($password, $salt, KEY_DERIVATION_ITERATIONS);
+			$keyDerivationIterations = $app->parameters->cryptography['keyDerivationIterations'];
+			$app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
 			
 			return false;
 		}
@@ -90,7 +92,7 @@ class Authenticator extends Helper {
 		$password = $credentials['password'];
 		
 		// Gets the user
-		$user = $app->webServerDatabase->getUser($id);
+		$user = $app->data->user->get($id);
 		
 		if (is_null($user)) {
 			// The user doesn't exist
@@ -98,7 +100,8 @@ class Authenticator extends Helper {
 			// Computes the hash of the password to cause a deliberate delay
 			// that avoids disclosing the fact that the user doesn't exist
 			$salt = $app->cryptography->generateSalt();
-			$app->cryptography->hashPassword($password, $salt, KEY_DERIVATION_ITERATIONS);
+			$keyDerivationIterations = $app->parameters->cryptography['keyDerivationIterations'];
+			$app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
 			
 			return false;
 		}

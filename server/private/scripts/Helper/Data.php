@@ -3,31 +3,37 @@
 namespace App\Helper;
 
 /*
- * This helper offers data-related functionalities.
+ * This helper offers an interface to access the entity models.
  */
 class Data extends Helper {
 	
 	/*
-	 * The data models.
+	 * The entity models.
 	 */
-	private $dataModels;
+	private $entityModels;
 	
 	/*
-	 * Creates a background.
+	 * Invoked when an inaccessible property is obtained.
 	 * 
-	 * It receives the background's data.
+	 * It receives the property's name.
 	 */
-	public function createBackground($id, $creator, $name) {
-		$this->dataModels['background']->create($id, $creator, $name); // TODO: implement
+	public function __get($name) {
+		return $this->entityModels[$name];
 	}
 	
 	/*
 	 * Performs initialization tasks.
 	 */
 	protected function initialize() {
-		// Initializes the data models
-		$this->dataModels = [
-			// TODO: initialize data models
+		// Initializes the entity models
+		$this->entityModels = [
+			'background' => new \App\Auxiliar\EntityModel\BackgroundModel(),
+			'file' => new \App\Auxiliar\EntityModel\FileModel(),
+			'log' => new \App\Auxiliar\EntityModel\LogModel(),
+			'recoverPasswordPermission' => new \App\Auxiliar\EntityModel\RecoverPasswordPermissionModel(),
+			'session' => new \App\Auxiliar\EntityModel\SessionModel(),
+			'signUpPermission' => new \App\Auxiliar\EntityModel\SignUpPermissionModel(),
+			'user' => new \App\Auxiliar\EntityModel\UserModel()
 		];
 	}
 	

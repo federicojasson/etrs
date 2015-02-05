@@ -22,6 +22,16 @@ class Cryptography extends Helper {
 	}
 	
 	/*
+	 * Computes and returns the hash of a file.
+	 * 
+	 * It receives the file's path.
+	 */
+	public function hashFile($path) {
+		// Applies MD5
+		return md5_file($path, true);
+	}
+	
+	/*
 	 * Computes and returns the hash of a password.
 	 * 
 	 * It receives the password, the salt and the iterations to apply in the key

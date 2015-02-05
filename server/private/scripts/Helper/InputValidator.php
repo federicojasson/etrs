@@ -43,7 +43,7 @@ class InputValidator extends Helper {
 		
 		$matches = [];
 		if (! preg_match('/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/', $input, $matches)) {
-			// The input doesn't match the regular expression
+			// The input doesn't have a date format
 			return false;
 		}
 		
@@ -57,10 +57,18 @@ class InputValidator extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether an input is an email address.
+	 * 
+	 * It receives the input.
 	 */
 	public function isEmailAddress($input) {
-		// TODO: implement
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input has an email address format
+		return preg_match('/(?!.*[ ])(?!.*@.*@)(?=.{3,254}$)^.+@.+$/', $input);
 	}
 	
 	/*
@@ -86,7 +94,7 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
-		// Checks whether the input matches a regular expression
+		// Checks whether the input has a random ID format
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
 	}
 	
@@ -103,10 +111,18 @@ class InputValidator extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether an input is a user ID.
+	 * 
+	 * It receives the input.
 	 */
 	public function isUserId($input) {
-		// TODO: implement
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input has a user ID format
+		return preg_match('/^(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{3,32}$/', $input);
 	}
 	
 	/*
@@ -127,10 +143,32 @@ class InputValidator extends Helper {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Determines whether an input is a valid password.
+	 * 
+	 * It receives the input.
 	 */
 	public function isValidPassword($input) {
-		// TODO: implement
+		if (! $this->isValidString($input, 8)) {
+			// The input is not a valid string
+			return false;
+		}
+
+		if (! preg_match('/[0-9]/', $input)) {
+			// The input doesn't contain a digit
+			return false;
+		}
+		
+		if (! preg_match('/[A-Z]/', $input)) {
+			// The input doesn't contain an uppercase character
+			return false;
+		}
+
+		if (! preg_match('/[a-z]/', $input)) {
+			// The input doesn't contain a lowercase character
+			return false;
+		}
+
+		return true;
 	}
 	
 	/*

@@ -61,6 +61,13 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Creates the Files helper.
+	 */
+	public function createFilesHelper() {
+		return new \App\Helper\Files();
+	}
+	
+	/*
 	 * Creates the InputValidator helper.
 	 */
 	public function createInputValidatorHelper() {
@@ -108,6 +115,7 @@ class Helpers extends \Slim\Middleware {
 		$app->container->singleton('businessLogicDatabase', [ $this, 'createBusinessLogicDatabaseHelper' ]);
 		$app->container->singleton('cryptography', [ $this, 'createCryptographyHelper' ]);
 		$app->container->singleton('data', [ $this, 'createDataHelper' ]);
+		$app->container->singleton('files', [ $this, 'createFilesHelper' ]);
 		$app->container->singleton('inputValidator', [ $this, 'createInputValidatorHelper' ]);
 		$app->container->singleton('parameters', [ $this, 'createParametersHelper' ]);
 		$app->container->singleton('services', [ $this, 'createServicesHelper' ]);

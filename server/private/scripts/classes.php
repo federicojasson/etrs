@@ -11,6 +11,16 @@ require 'private/scripts/Auxiliar/DataTypeDescriptor/IntegerFixValuesDescriptor.
 require 'private/scripts/Auxiliar/DataTypeDescriptor/IntegerRangeDescriptor.php';
 require 'private/scripts/Auxiliar/DataTypeDescriptor/Factory.php';
 
+// App\Auxiliar\EntityModel
+require 'private/scripts/Auxiliar/EntityModel/EntityModel.php';
+require 'private/scripts/Auxiliar/EntityModel/BackgroundModel.php';
+require 'private/scripts/Auxiliar/EntityModel/FileModel.php';
+require 'private/scripts/Auxiliar/EntityModel/LogModel.php';
+require 'private/scripts/Auxiliar/EntityModel/RecoverPasswordPermissionModel.php';
+require 'private/scripts/Auxiliar/EntityModel/SessionModel.php';
+require 'private/scripts/Auxiliar/EntityModel/SignUpPermissionModel.php';
+require 'private/scripts/Auxiliar/EntityModel/UserModel.php';
+
 // App\Auxiliar\JsonStructureDescriptor
 require 'private/scripts/Auxiliar/JsonStructureDescriptor/JsonStructureDescriptor.php';
 require 'private/scripts/Auxiliar/JsonStructureDescriptor/JsonArrayDescriptor.php';
@@ -71,7 +81,11 @@ require 'private/scripts/Controller/Background/Create.php';
 //require 'private/scripts/Controller/Experiment/Edit.php';
 //require 'private/scripts/Controller/Experiment/Get.php';
 //require 'private/scripts/Controller/Experiment/Search.php';
-//
+
+// App\Controller\File
+require 'private/scripts/Controller/File/Download.php';
+require 'private/scripts/Controller/File/Upload.php';
+
 //// App\Controller\ImageTest
 //require 'private/scripts/Controller/ImageTest/Create.php';
 //require 'private/scripts/Controller/ImageTest/Delete.php';
@@ -131,6 +145,7 @@ require 'private/scripts/Helper/Authentication.php';
 require 'private/scripts/Helper/Authenticator.php';
 require 'private/scripts/Helper/Cryptography.php';
 require 'private/scripts/Helper/Data.php';
+require 'private/scripts/Helper/Files.php';
 require 'private/scripts/Helper/InputValidator.php';
 require 'private/scripts/Helper/Parameters.php';
 require 'private/scripts/Helper/Services.php';

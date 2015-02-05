@@ -257,7 +257,23 @@ class Services extends \Slim\Middleware {
 //			'POST',
 //			new \App\Controller\Experiment\search()
 //		);
-//		
+		
+		// URL:		/server/file/download
+		// Method:	POST
+		$app->services->define(
+			'/file/download',
+			'POST',
+			new \App\Controller\File\Download()
+		);
+		
+		// URL:		/server/file/upload
+		// Method:	POST
+		$app->services->define(
+			'/file/upload',
+			'POST',
+			new \App\Controller\File\Upload()
+		);
+		
 //		// URL:		/server/image-test/create
 //		// Method:	POST
 //		$app->services->define(

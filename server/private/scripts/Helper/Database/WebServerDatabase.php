@@ -6,7 +6,7 @@ namespace App\Helper\Database;
  * This helper represents the web server database.
  */
 class WebServerDatabase extends SpecializedDatabase {
-	
+
 	/*
 	 * Creates a log.
 	 * 
@@ -71,6 +71,59 @@ class WebServerDatabase extends SpecializedDatabase {
 			':id' => $id,
 			':dataForInsert' => $data,
 			':dataForUpdate' => $data
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+
+	/*
+	 * Creates a user.
+	 * 
+	 * It receives the user's data.
+	 */
+	public function createUser($id, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO users (
+				id,
+				creation_datetime,
+				last_edition_datetime,
+				password_hash,
+				salt,
+				key_derivation_iterations,
+				role,
+				first_name,
+				last_name,
+				gender,
+				email_address
+			)
+			VALUES (
+				:id,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:passwordHash,
+				:salt,
+				:keyDerivationIterations,
+				:role,
+				:firstName,
+				:lastName,
+				:gender,
+				:emailAddress
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':passwordHash' => $passwordHash,
+			':salt' => $salt,
+			':keyDerivationIterations' => $keyDerivationIterations,
+			':role' => $role,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':emailAddress' => $emailAddress
 		];
 		
 		// Executes the statement
@@ -195,6 +248,15 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Determines whether a user exists.
+	 * 
+	 * It receives the user's ID.
+	 */
+	public function userExists($id) {
+		return $this->entityExists('users', $id);
+	}
+	
+	/*
 	 * Connects to the database.
 	 * 
 	 * It returns a PDO instance representing the connection.
@@ -203,10 +265,10 @@ class WebServerDatabase extends SpecializedDatabase {
 		$app = $this->app;
 		
 		// Gets the database's parameters
-		$parameters = $app->parameters->get(PARAMETERS_DATABASES);
-		$dsn = $parameters['webServerDatabase']['dsn'];
-		$username = $parameters['webServerDatabase']['username'];
-		$password = $parameters['webServerDatabase']['password'];
+		$parameters = $app->parameters->databases['webServerDatabase'];
+		$dsn = $parameters['dsn'];
+		$username = $parameters['username'];
+		$password = $parameters['password'];
 		
 		// Creates and returns the PDO instance
 		return new \PDO($dsn, $username, $password);

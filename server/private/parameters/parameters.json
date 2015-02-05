@@ -1,0 +1,7 @@
+{
+	"cryptography": "private/parameters/cryptography.json",
+	"databases": "private/parameters/databases.json",
+	"emails": "private/parameters/emails.json",
+	"paths": "private/parameters/paths.json",
+	"server": "private/parameters/server.json"
+}

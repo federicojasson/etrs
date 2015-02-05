@@ -17,7 +17,8 @@ class Configurations extends \Slim\Middleware {
 		$app->config('debug', true);
 		
 		// Creates the log writer
-		$file = fopen('private/logs/debug.log', 'a');
+		$path = $app->parameters->paths['log'];
+		$file = fopen($path, 'a');
 		$logWriter = new \Slim\LogWriter($file);
 		
 		// Applies logs configurations

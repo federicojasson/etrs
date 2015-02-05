@@ -54,7 +54,7 @@ class DatabaseLogWriter {
 		$level = $this->levelMapping[$level];
 		
 		// Creates the log
-		$app->webServerDatabase->createLog($id, $level, $message);
+		$app->data->log->create($id, $level, $message);
 	}
 	
 }
