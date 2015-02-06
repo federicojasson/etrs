@@ -15,6 +15,7 @@ require 'private/scripts/Auxiliar/DataTypeDescriptor/Factory.php';
 require 'private/scripts/Auxiliar/EntityModel/EntityModel.php';
 require 'private/scripts/Auxiliar/EntityModel/BackgroundModel.php';
 require 'private/scripts/Auxiliar/EntityModel/ClinicalImpressionModel.php';
+require 'private/scripts/Auxiliar/EntityModel/ConsultationModel.php';
 require 'private/scripts/Auxiliar/EntityModel/DiagnosisModel.php';
 require 'private/scripts/Auxiliar/EntityModel/FileModel.php';
 require 'private/scripts/Auxiliar/EntityModel/ImageTestModel.php';
@@ -26,6 +27,7 @@ require 'private/scripts/Auxiliar/EntityModel/PatientModel.php';
 require 'private/scripts/Auxiliar/EntityModel/RecoverPasswordPermissionModel.php';
 require 'private/scripts/Auxiliar/EntityModel/SessionModel.php';
 require 'private/scripts/Auxiliar/EntityModel/SignUpPermissionModel.php';
+require 'private/scripts/Auxiliar/EntityModel/StudyModel.php';
 require 'private/scripts/Auxiliar/EntityModel/TreatmentModel.php';
 require 'private/scripts/Auxiliar/EntityModel/UserModel.php';
 
@@ -71,10 +73,10 @@ require 'private/scripts/Controller/ClinicalImpression/Get.php';
 require 'private/scripts/Controller/ClinicalImpression/Search.php';
 
 // App\Controller\Consultation
-//require 'private/scripts/Controller/Consultation/Create.php';
-//require 'private/scripts/Controller/Consultation/Delete.php';
-//require 'private/scripts/Controller/Consultation/Edit.php';
-//require 'private/scripts/Controller/Consultation/Get.php';
+require 'private/scripts/Controller/Consultation/Create.php';
+require 'private/scripts/Controller/Consultation/Delete.php';
+require 'private/scripts/Controller/Consultation/Edit.php';
+require 'private/scripts/Controller/Consultation/Get.php';
 
 // App\Controller\Diagnosis
 require 'private/scripts/Controller/Diagnosis/Create.php';
@@ -123,11 +125,11 @@ require 'private/scripts/Controller/NeurocognitiveTest/Get.php';
 require 'private/scripts/Controller/NeurocognitiveTest/Search.php';
 
 // App\Controller\Patient
-//require 'private/scripts/Controller/Patient/Create.php';
-//require 'private/scripts/Controller/Patient/Delete.php';
-//require 'private/scripts/Controller/Patient/Edit.php';
-//require 'private/scripts/Controller/Patient/Get.php';
-//require 'private/scripts/Controller/Patient/Search.php';
+require 'private/scripts/Controller/Patient/Create.php';
+require 'private/scripts/Controller/Patient/Delete.php';
+require 'private/scripts/Controller/Patient/Edit.php';
+require 'private/scripts/Controller/Patient/Get.php';
+require 'private/scripts/Controller/Patient/Search.php';
 
 // App\Controller\Study
 //require 'private/scripts/Controller/Study/Create.php';

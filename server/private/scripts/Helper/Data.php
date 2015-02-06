@@ -29,6 +29,7 @@ class Data extends Helper {
 		$this->entityModels = [
 			'background' => new \App\Auxiliar\EntityModel\BackgroundModel(),
 			'clinicalImpression' => new \App\Auxiliar\EntityModel\ClinicalImpressionModel(),
+			'consultation' => new \App\Auxiliar\EntityModel\ConsultationModel(),
 			'diagnosis' => new \App\Auxiliar\EntityModel\DiagnosisModel(),
 			'file' => new \App\Auxiliar\EntityModel\FileModel(),
 			'imageTest' => new \App\Auxiliar\EntityModel\ImageTestModel(),
@@ -40,6 +41,7 @@ class Data extends Helper {
 			'recoverPasswordPermission' => new \App\Auxiliar\EntityModel\RecoverPasswordPermissionModel(),
 			'session' => new \App\Auxiliar\EntityModel\SessionModel(),
 			'signUpPermission' => new \App\Auxiliar\EntityModel\SignUpPermissionModel(),
+			'study' => new \App\Auxiliar\EntityModel\StudyModel(),
 			'treatment' => new \App\Auxiliar\EntityModel\TreatmentModel(),
 			'user' => new \App\Auxiliar\EntityModel\UserModel()
 		];

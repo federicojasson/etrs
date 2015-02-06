@@ -28,7 +28,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				:lastEditor,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -39,7 +39,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
-			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -68,7 +67,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				:lastEditor,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -79,12 +78,110 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
-			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
 		// Executes the statement
 		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a consultation.
+	 * 
+	 * It receives the consultation's data.
+	 */
+	public function createConsultation($id, $clinicalImpression, $creator, $diagnosis, $patient, $date, $reasons, $indications, $observations) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations (
+				id,
+				is_deleted,
+				clinical_impression,
+				creator,
+				diagnosis,
+				last_editor,
+				patient,
+				creation_datetime,
+				last_edition_datetime,
+				date,
+				reasons,
+				indications,
+				observations
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:clinicalImpression,
+				:creator,
+				:diagnosis,
+				NULL,
+				:patient,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:date,
+				:reasons,
+				:indications,
+				:observations
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':clinicalImpression' => $clinicalImpression,
+			':creator' => $creator,
+			':diagnosis' => $diagnosis,
+			':patient' => $patient,
+			':date' => $date,
+			':reasons' => $reasons,
+			':indications' => $indications,
+			':observations' => $observations
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationBackground($consultation, $background) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationImageTest($consultation, $imageTest, $value) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationLaboratoryTest($consultation, $laboratoryTest, $value) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationMedication($consultation, $medication) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationNeurocognitiveTest($consultation, $neurocognitiveTest, $value) {
+		// TODO: implement
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function createConsultationTreatment($consultation, $treatment) {
+		// TODO: implement
 	}
 	
 	/*
@@ -108,7 +205,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				:lastEditor,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -119,7 +216,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
-			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -149,7 +245,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				:lastEditor,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name,
@@ -161,7 +257,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
-			':lastEditor' => $creator,
 			':name' => $name,
 			':dataTypeDescriptor' => $dataTypeDescriptor
 		];
@@ -192,7 +287,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				:lastEditor,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name,
@@ -204,7 +299,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
-			':lastEditor' => $creator,
 			':name' => $name,
 			':dataTypeDescriptor' => $dataTypeDescriptor
 		];
@@ -234,7 +328,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				:lastEditor,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -245,7 +339,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
-			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -275,7 +368,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				:lastEditor,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name,
@@ -287,9 +380,59 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
-			':lastEditor' => $creator,
 			':name' => $name,
 			':dataTypeDescriptor' => $dataTypeDescriptor
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a patient.
+	 * 
+	 * It receives the patient's data.
+	 */
+	public function createPatient($id, $creator, $firstName, $lastName, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO patients (
+				id,
+				is_deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				first_name,
+				last_name,
+				gender,
+				birth_date,
+				education_years
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				NULL,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:firstName,
+				:lastName,
+				:gender,
+				:birthDate,
+				:educationYears
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
 		];
 		
 		// Executes the statement
@@ -317,7 +460,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				:lastEditor,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -328,7 +471,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
-			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -352,6 +494,135 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function deleteClinicalImpression($id) {
 		$this->deleteEntity('clinical_impressions', $id);
+	}
+	
+	/*
+	 * Deletes a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function deleteConsultation($id) {
+		$this->deleteEntity('consultations', $id);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deleteConsultationBackgrounds($consultation) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_backgrounds
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deleteConsultationImageTests($consultation) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_image_tests
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deleteConsultationLaboratoryTests($consultation) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_laboratory_tests
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deleteConsultationMedications($consultation) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_medications
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deleteConsultationNeurocognitiveTests($consultation) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_neurocognitive_tests
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * TODO: comments
+	 */
+	public function deleteConsultationTreatments($consultation) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM consultations_treatments
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
@@ -397,6 +668,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function deleteNeurocognitiveTest($id) {
 		$this->deleteEntity('neurocognitive_tests', $id);
+	}
+	
+	/*
+	 * Deletes a patient.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function deletePatient($id) {
+		$this->deleteEntity('patients', $id);
 	}
 	
 	/*
@@ -458,6 +738,44 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			':id' => $id,
 			':lastEditor' => $lastEditor,
 			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a consultation.
+	 * 
+	 * It receives the consultation's data.
+	 */
+	public function editConsultation($id, $clinicalImpression, $diagnosis, $lastEditor, $date, $reasons, $indications, $observations) {
+		// Defines the statement
+		$statement = '
+			UPDATE consultations
+			SET
+				clinical_impression = :clinicalImpression,
+				diagnosis = :diagnosis,
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				date = :date,
+				reasons = :reasons,
+				indications = :indications,
+				observations = :observations
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':clinicalImpression' => $clinicalImpression,
+			':diagnosis' => $diagnosis,
+			':lastEditor' => $lastEditor,
+			':date' => $date,
+			':reasons' => $reasons,
+			':indications' => $indications,
+			':observations' => $observations
 		];
 		
 		// Executes the statement
@@ -611,6 +929,42 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Edits a patient.
+	 * 
+	 * It receives the patient's data.
+	 */
+	public function editPatient($id, $lastEditor, $firstName, $lastName, $gender, $birthDate, $educationYears) {
+		// Defines the statement
+		$statement = '
+			UPDATE patients
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				first_name = :firstName,
+				last_name = :lastName,
+				gender = :gender,
+				birth_date = :birthDate,
+				education_years = :educationYears
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':birthDate' => $birthDate,
+			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Edits a treatment.
 	 * 
 	 * It receives the treatment's data.
@@ -636,6 +990,30 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		
 		// Executes the statement
 		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Returns the non-deleted studies of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonDeletedStudies($consultation) {
+		// Defines the statement
+		$statement = '
+			SELECT id
+			FROM non_deleted_studies
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
 	}
 	
 	/*
@@ -679,6 +1057,34 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		
 		// Gets and returns the entity
 		return $this->getEntity('non_deleted_clinical_impressions', $columnsToSelect, $id);
+	}
+	
+	/*
+	 * Returns a non-deleted consultation. If it doesn't exist, null is
+	 * returned.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getNonDeletedConsultation($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'is_deleted',
+			'clinical_impression',
+			'creator',
+			'diagnosis',
+			'last_editor',
+			'patient',
+			'creation_datetime',
+			'last_edition_datetime',
+			'date',
+			'reasons',
+			'indications',
+			'observations'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('non_deleted_consultations', $columnsToSelect, $id);
 	}
 	
 	/*
@@ -814,6 +1220,31 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Returns a non-deleted patient. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function getNonDeletedPatient($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'is_deleted',
+			'creator',
+			'last_editor',
+			'creation_datetime',
+			'last_edition_datetime',
+			'first_name',
+			'last_name',
+			'gender',
+			'birth_date',
+			'education_years'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('non_deleted_patients', $columnsToSelect, $id);
+	}
+	
+	/*
 	 * Returns a non-deleted treatment. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the treatment's ID.
@@ -835,6 +1266,30 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Returns the non-deleted consultations of a patient.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function getPatientNonDeletedConsultations($patient) {
+		// Defines the statement
+		$statement = '
+			SELECT id
+			FROM non_deleted_consultations
+			WHERE patient = :patient
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':patient' => $patient
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Determines whether a non-deleted background exists.
 	 * 
 	 * It receives the background's ID.
@@ -850,6 +1305,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function nonDeletedClinicalImpressionExists($id) {
 		return $this->entityExists('non_deleted_clinical_impressions', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted consultation exists.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function nonDeletedConsultationExists($id) {
+		return $this->entityExists('non_deleted_consultations', $id);
 	}
 	
 	/*
@@ -895,6 +1359,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function nonDeletedNeurocognitiveTestExists($id) {
 		return $this->entityExists('non_deleted_neurocognitive_tests', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted patient exists.
+	 * 
+	 * It receives the patient's ID.
+	 */
+	public function nonDeletedPatientExists($id) {
+		return $this->entityExists('non_deleted_patients', $id);
 	}
 	
 	/*
@@ -1009,6 +1482,21 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		
 		// Searches all entities and returns the results
 		return $this->searchAllEntities('non_deleted_neurocognitive_tests', $columnsToSelect, $page, $sorting);
+	}
+	
+	/*
+	 * Searches all non-deleted patients and returns the results.
+	 * 
+	 * It receives the page and a sorting.
+	 */
+	public function searchAllNonDeletedPatients($page, $sorting) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id'
+		];
+		
+		// Searches all entities and returns the results
+		return $this->searchAllEntities('non_deleted_patients', $columnsToSelect, $page, $sorting);
 	}
 	
 	/*
@@ -1169,6 +1657,26 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Searches specific non-deleted patients and returns the results.
+	 * 
+	 * It receives an expression, the page and a sorting.
+	 */
+	public function searchSpecificNonDeletedPatients($expression, $page, $sorting) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id'
+		];
+		
+		// Defines the columns to match
+		$columnsToMatch = [
+			'name'
+		];
+		
+		// Searches specific entities and returns the results
+		return $this->searchSpecificEntities('non_deleted_patients', $columnsToSelect, $columnsToMatch, $expression, $page, $sorting);
+	}
+	
+	/*
 	 * Searches specific non-deleted treatments and returns the results.
 	 * 
 	 * It receives an expression, the page and a sorting.
@@ -1211,7 +1719,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 * 
 	 * It receives the entity's table and ID.
 	 */
-	protected function deleteEntity($table, $id) {
+	private function deleteEntity($table, $id) {
 		// Defines the statement
 		$statement = '
 			UPDATE ' . $table . '

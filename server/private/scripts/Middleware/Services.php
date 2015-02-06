@@ -146,37 +146,37 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\ClinicalImpression\Search()
 		);
 
-//		// URL:		/server/consultation/create
-//		// Method:	POST
-//		$app->services->define(
-//			'/consultation/create',
-//			'POST',
-//			new \App\Controller\Consultation\Create()
-//		);
-//
-//		// URL:		/server/consultation/delete
-//		// Method:	POST
-//		$app->services->define(
-//			'/consultation/delete',
-//			'POST',
-//			new \App\Controller\Consultation\Delete()
-//		);
-//
-//		// URL:		/server/consultation/edit
-//		// Method:	POST
-//		$app->services->define(
-//			'/consultation/edit',
-//			'POST',
-//			new \App\Controller\Consultation\Edit()
-//		);
-//
-//		// URL:		/server/consultation/get
-//		// Method:	POST
-//		$app->services->define(
-//			'/consultation/get',
-//			'POST',
-//			new \App\Controller\Consultation\Get()
-//		);
+		// URL:		/server/consultation/create
+		// Method:	POST
+		$app->services->define(
+			'/consultation/create',
+			'POST',
+			new \App\Controller\Consultation\Create()
+		);
+
+		// URL:		/server/consultation/delete
+		// Method:	POST
+		$app->services->define(
+			'/consultation/delete',
+			'POST',
+			new \App\Controller\Consultation\Delete()
+		);
+
+		// URL:		/server/consultation/edit
+		// Method:	POST
+		$app->services->define(
+			'/consultation/edit',
+			'POST',
+			new \App\Controller\Consultation\Edit()
+		);
+
+		// URL:		/server/consultation/get
+		// Method:	POST
+		$app->services->define(
+			'/consultation/get',
+			'POST',
+			new \App\Controller\Consultation\Get()
+		);
 
 		// URL:		/server/diagnosis/create
 		// Method:	POST
@@ -434,46 +434,46 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\NeurocognitiveTest\Search()
 		);
 
-//		// URL:		/server/patient/create
-//		// Method:	POST
-//		$app->services->define(
-//			'/patient/create',
-//			'POST',
-//			new \App\Controller\Patient\Create()
-//		);
-//
-//		// URL:		/server/patient/delete
-//		// Method:	POST
-//		$app->services->define(
-//			'/patient/delete',
-//			'POST',
-//			new \App\Controller\Patient\Delete()
-//		);
-//
-//		// URL:		/server/patient/edit
-//		// Method:	POST
-//		$app->services->define(
-//			'/patient/edit',
-//			'POST',
-//			new \App\Controller\Patient\Edit()
-//		);
-//
-//		// URL:		/server/patient/get
-//		// Method:	POST
-//		$app->services->define(
-//			'/patient/get',
-//			'POST',
-//			new \App\Controller\Patient\Get()
-//		);
-//
-//		// URL:		/server/patient/search
-//		// Method:	POST
-//		$app->services->define(
-//			'/patient/search',
-//			'POST',
-//			new \App\Controller\Patient\Search()
-//		);
-//
+		// URL:		/server/patient/create
+		// Method:	POST
+		$app->services->define(
+			'/patient/create',
+			'POST',
+			new \App\Controller\Patient\Create()
+		);
+
+		// URL:		/server/patient/delete
+		// Method:	POST
+		$app->services->define(
+			'/patient/delete',
+			'POST',
+			new \App\Controller\Patient\Delete()
+		);
+
+		// URL:		/server/patient/edit
+		// Method:	POST
+		$app->services->define(
+			'/patient/edit',
+			'POST',
+			new \App\Controller\Patient\Edit()
+		);
+
+		// URL:		/server/patient/get
+		// Method:	POST
+		$app->services->define(
+			'/patient/get',
+			'POST',
+			new \App\Controller\Patient\Get()
+		);
+
+		// URL:		/server/patient/search
+		// Method:	POST
+		$app->services->define(
+			'/patient/search',
+			'POST',
+			new \App\Controller\Patient\Search()
+		);
+
 //		// URL:		/server/study/create
 //		// Method:	POST
 //		$app->services->define(

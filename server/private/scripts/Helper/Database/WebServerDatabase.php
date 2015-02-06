@@ -82,11 +82,12 @@ class WebServerDatabase extends SpecializedDatabase {
 	 * 
 	 * It receives the user's data.
 	 */
-	public function createUser($id, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
+	public function createUser($id, $creator, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
 		// Defines the statement
 		$statement = '
 			INSERT INTO users (
 				id,
+				creator,
 				creation_datetime,
 				last_edition_datetime,
 				password_hash,
@@ -100,6 +101,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			)
 			VALUES (
 				:id,
+				:creator,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:passwordHash,
@@ -116,6 +118,7 @@ class WebServerDatabase extends SpecializedDatabase {
 		// Sets the parameters
 		$parameters = [
 			':id' => $id,
+			':creator' => $creator,
 			':passwordHash' => $passwordHash,
 			':salt' => $salt,
 			':keyDerivationIterations' => $keyDerivationIterations,
@@ -231,6 +234,7 @@ class WebServerDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
+			'creator',
 			'creation_datetime',
 			'last_edition_datetime',
 			'password_hash',

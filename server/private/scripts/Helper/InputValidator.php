@@ -79,7 +79,7 @@ class InputValidator extends Helper {
 	 * It receives the input.
 	 */
 	public function isExpression($input) {
-		if (is_null($input)) {
+		if (is_null($input)) { // TODO: doubt about this
 			// The input is null
 			return true;
 		}

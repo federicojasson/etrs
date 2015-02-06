@@ -48,7 +48,7 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		$passwordHash = $app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
 		
 		// Signs up the user in the system
-		$app->authentication->signUpUser($id, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress); // TODO: get parameters
+		$app->authentication->signUpUser($id, $creator, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress); // TODO: get parameters
 	}
 	
 	/*
