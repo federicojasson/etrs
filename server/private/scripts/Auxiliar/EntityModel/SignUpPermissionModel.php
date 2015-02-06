@@ -70,7 +70,7 @@ class SignUpPermissionModel extends EntityModel {
 	/*
 	 * Searches entities of the type of this model. It returns an array
 	 * containing, as the first element, the total number of results, and as the
-	 * second, the results found in the page ready for presentation.
+	 * second, the results ready for presentation found in the page.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

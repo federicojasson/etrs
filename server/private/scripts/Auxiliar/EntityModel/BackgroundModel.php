@@ -83,7 +83,7 @@ class BackgroundModel extends EntityModel {
 	/*
 	 * Searches entities of the type of this model. It returns an array
 	 * containing, as the first element, the total number of results, and as the
-	 * second, the results found in the page ready for presentation.
+	 * second, the results ready for presentation found in the page.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */
@@ -101,7 +101,7 @@ class BackgroundModel extends EntityModel {
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
-		// Gets the found IDs
+		// Gets the IDs
 		$ids = array_column($backgrounds, 'id');
 		
 		// Converts the IDs to hexadecimal

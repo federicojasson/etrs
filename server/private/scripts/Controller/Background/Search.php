@@ -35,7 +35,7 @@ class Search extends \App\Controller\SpecializedSecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// Gets the expected JSON structure
+		// Gets the JSON structure descriptor
 		$jsonStructureDescriptor = $this->getSearchJsonStructureDescriptor([
 			'creationDatetime',
 			'lastEditionDatetime',
