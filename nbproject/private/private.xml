@@ -11,6 +11,12 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Auxiliar/EntityModel/ConsultationModel.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Auxiliar/EntityModel/UserModel.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Helper/Database/BusinessLogicDatabase.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Controller/Consultation/Edit.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/Controller/Consultation/Create.php</file>
+        </group>
     </open-files>
 </project-private>
