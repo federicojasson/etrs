@@ -6,7 +6,8 @@ namespace App\Auxiliar\EntityModel;
  * This class offers an interface to perform operations on entities of a certain
  * type.
  * 
- * Subclasses must implement the different operations.
+ * Subclasses can define the different operations overriding the methods in this
+ * class.
  */
 abstract class EntityModel {
 	
@@ -27,35 +28,47 @@ abstract class EntityModel {
 	 * 
 	 * It receives the entity's data.
 	 */
-	public abstract function create();
+	public function create() {
+		// The operation is not defined
+	}
 	
 	/*
 	 * Deletes an entity of the type of this model.
 	 * 
 	 * It receives the entity's ID.
 	 */
-	public abstract function delete($id);
+	public function delete($id) {
+		// The operation is not defined
+	}
 	
 	/*
 	 * Edits an entity of the type of this model.
 	 * 
 	 * It receives the entity's data.
 	 */
-	public abstract function edit();
+	public function edit() {
+		// The operation is not defined
+	}
 	
 	/*
 	 * Determines whether an entity exists.
 	 * 
 	 * It receives the entity's ID.
 	 */
-	public abstract function exists($id);
+	public function exists($id) {
+		// The operation is not defined
+		return false;
+	}
 	
 	/*
 	 * Filters an entity for presentation and returns the result.
 	 * 
 	 * It receives the entity.
 	 */
-	public abstract function filter($entity);
+	public function filter($entity) {
+		// The operation is not defined
+		return $entity;
+	}
 	
 	/*
 	 * Returns an entity of the type of this model. If it doesn't exist, null is
@@ -63,15 +76,21 @@ abstract class EntityModel {
 	 * 
 	 * It receives the entity's ID.
 	 */
-	public abstract function get($id);
+	public function get($id) {
+		// The operation is not defined
+		return null;
+	}
 	
 	/*
 	 * Searches entities of the type of this model. It returns an array
 	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation found in the page.
+	 * second, the results ready for presentation that were found in the page.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */
-	public abstract function search($expression, $page, $sorting);
+	public function search($expression, $page, $sorting) {
+		// The operation is not defined
+		return [ 0, [] ];
+	}
 	
 }

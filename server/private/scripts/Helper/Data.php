@@ -36,6 +36,7 @@ class Data extends Helper {
 			'log' => new \App\Auxiliar\EntityModel\LogModel(),
 			'medication' => new \App\Auxiliar\EntityModel\MedicationModel(),
 			'neurocognitiveTest' => new \App\Auxiliar\EntityModel\NeurocognitiveTestModel(),
+			'patient' => new \App\Auxiliar\EntityModel\PatientModel(),
 			'recoverPasswordPermission' => new \App\Auxiliar\EntityModel\RecoverPasswordPermissionModel(),
 			'session' => new \App\Auxiliar\EntityModel\SessionModel(),
 			'signUpPermission' => new \App\Auxiliar\EntityModel\SignUpPermissionModel(),

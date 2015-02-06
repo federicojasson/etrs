@@ -22,6 +22,7 @@ require 'private/scripts/Auxiliar/EntityModel/LaboratoryTestModel.php';
 require 'private/scripts/Auxiliar/EntityModel/LogModel.php';
 require 'private/scripts/Auxiliar/EntityModel/MedicationModel.php';
 require 'private/scripts/Auxiliar/EntityModel/NeurocognitiveTestModel.php';
+require 'private/scripts/Auxiliar/EntityModel/PatientModel.php';
 require 'private/scripts/Auxiliar/EntityModel/RecoverPasswordPermissionModel.php';
 require 'private/scripts/Auxiliar/EntityModel/SessionModel.php';
 require 'private/scripts/Auxiliar/EntityModel/SignUpPermissionModel.php';

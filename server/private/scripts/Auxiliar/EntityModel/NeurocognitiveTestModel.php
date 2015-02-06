@@ -83,7 +83,7 @@ class NeurocognitiveTestModel extends EntityModel {
 	/*
 	 * Searches entities of the type of this model. It returns an array
 	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation found in the page.
+	 * second, the results ready for presentation that were found in the page.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */
@@ -107,10 +107,7 @@ class NeurocognitiveTestModel extends EntityModel {
 		// Converts the IDs to hexadecimal
 		$ids = applyFunctionToArray($ids, 'bin2hex');
 		
-		return [
-			$foundRows,
-			$ids
-		];
+		return [ $foundRows, $ids ];
 	}
 	
 }

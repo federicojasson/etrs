@@ -74,7 +74,7 @@ abstract class SpecializedSecureController extends SecureController {
 		// Defines and returns the JSON structure descriptor
 		return new JsonObjectDescriptor([
 			'expression' => new JsonValueDescriptor(function($input) use ($app) {
-				return $app->inputValidator->isValidExpression($input);
+				return $app->inputValidator->isExpression($input);
 			}),
 			
 			'page' => new JsonValueDescriptor(function($input) use ($app) {

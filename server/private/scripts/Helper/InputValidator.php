@@ -4,6 +4,8 @@ namespace App\Helper;
 
 /*
  * This helper offers input validation functions.
+ * 
+ * TODO: add specific functions like isPage or isName isFirstName isLastName
  */
 class InputValidator extends Helper {
 	
@@ -72,6 +74,21 @@ class InputValidator extends Helper {
 	}
 	
 	/*
+	 * Determines whether an input is an expression.
+	 * 
+	 * It receives the input.
+	 */
+	public function isExpression($input) {
+		if (is_null($input)) {
+			// The input is null
+			return true;
+		}
+		
+		// Checks whether the input is a valid text
+		return $this->isValidText($input, 1, 128);
+	}
+	
+	/*
 	 * Determines whether an input is a gender.
 	 * 
 	 * It receives the input.
@@ -123,21 +140,6 @@ class InputValidator extends Helper {
 		
 		// Checks whether the input has a user ID format
 		return preg_match('/^(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{3,32}$/', $input);
-	}
-	
-	/*
-	 * Determines whether an input is a valid expression.
-	 * 
-	 * It receives the input.
-	 */
-	public function isValidExpression($input) {
-		if (is_null($input)) {
-			// The input is null
-			return true;
-		}
-		
-		// Checks whether the input is a valid text
-		return $this->isValidText($input, 1, 128);
 	}
 	
 	/*
