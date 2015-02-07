@@ -17,6 +17,7 @@ require 'private/scripts/Auxiliar/EntityModel/BackgroundModel.php';
 require 'private/scripts/Auxiliar/EntityModel/ClinicalImpressionModel.php';
 require 'private/scripts/Auxiliar/EntityModel/ConsultationModel.php';
 require 'private/scripts/Auxiliar/EntityModel/DiagnosisModel.php';
+require 'private/scripts/Auxiliar/EntityModel/ExperimentModel.php';
 require 'private/scripts/Auxiliar/EntityModel/FileModel.php';
 require 'private/scripts/Auxiliar/EntityModel/ImageTestModel.php';
 require 'private/scripts/Auxiliar/EntityModel/LaboratoryTestModel.php';
@@ -87,10 +88,10 @@ require 'private/scripts/Controller/Diagnosis/Search.php';
 
 // App\Controller\Experiment
 //require 'private/scripts/Controller/Experiment/Create.php';
-//require 'private/scripts/Controller/Experiment/Delete.php';
+require 'private/scripts/Controller/Experiment/Delete.php';
 //require 'private/scripts/Controller/Experiment/Edit.php';
-//require 'private/scripts/Controller/Experiment/Get.php';
-//require 'private/scripts/Controller/Experiment/Search.php';
+require 'private/scripts/Controller/Experiment/Get.php';
+require 'private/scripts/Controller/Experiment/Search.php';
 
 // App\Controller\File
 require 'private/scripts/Controller/File/Download.php';
@@ -139,9 +140,9 @@ require 'private/scripts/Controller/SignUpPermission/Create.php';
 
 // App\Controller\Study
 //require 'private/scripts/Controller/Study/Create.php';
-//require 'private/scripts/Controller/Study/Delete.php';
+require 'private/scripts/Controller/Study/Delete.php';
 //require 'private/scripts/Controller/Study/Edit.php';
-//require 'private/scripts/Controller/Study/Get.php';
+require 'private/scripts/Controller/Study/Get.php';
 
 // App\Controller\Treatment
 require 'private/scripts/Controller/Treatment/Create.php';

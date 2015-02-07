@@ -158,12 +158,8 @@ class Factory {
 		// Splits the formatted descriptor
 		$fields = explode(';', $formattedDescriptor);
 		
-		// Trims the fields
-		foreach ($fields as &$field) {
-			$field = trimString($field);
-		}
-		
-		return $fields;
+		// Trims the fields and returns the results
+		return applyFunctionToArray($fields, 'trimString');
 	}
 	
 	/*
@@ -175,12 +171,8 @@ class Factory {
 		// Splits the field
 		$subfields = explode(':', $field);
 		
-		// Trims the subfields
-		foreach ($subfields as &$subfield) {
-			$subfield = trimString($subfield);
-		}
-		
-		return $subfields;
+		// Trims the subfields and returns the results
+		return applyFunctionToArray($subfields, 'trimString');
 	}
 	
 	/*
@@ -232,12 +224,8 @@ class Factory {
 			throw new \Exception();
 		}
 		
-		// Casts the values
-		foreach ($definition as &$value) {
-			$value = stringToBoolean($value);
-		}
-		
-		return $definition;
+		// Casts the values and returns the results
+		return applyFunctionToArray($definition, 'stringToBoolean');
 	}
 	
 	/*
@@ -266,12 +254,8 @@ class Factory {
 			throw new \Exception();
 		}
 		
-		// Casts the values
-		foreach ($definition as &$value) {
-			$value = (int) $value;
-		}
-		
-		return $definition;
+		// Casts the values and returns the results
+		return applyFunctionToArray($definition, 'stringToInteger');
 	}
 	
 	/*
@@ -306,9 +290,7 @@ class Factory {
 		}
 		
 		// Casts the values
-		foreach ($definition as &$value) {
-			$value = (int) $value;
-		}
+		$definition = applyFunctionToArray($definition, 'stringToInteger');
 		
 		// Gets the minimum and maximum allowed value
 		$minimumValue = $definition['min'];

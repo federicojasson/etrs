@@ -31,6 +31,7 @@ class Data extends Helper {
 			'clinicalImpression' => new \App\Auxiliar\EntityModel\ClinicalImpressionModel(),
 			'consultation' => new \App\Auxiliar\EntityModel\ConsultationModel(),
 			'diagnosis' => new \App\Auxiliar\EntityModel\DiagnosisModel(),
+			'experiment' => new \App\Auxiliar\EntityModel\ExperimentModel(),
 			'file' => new \App\Auxiliar\EntityModel\FileModel(),
 			'imageTest' => new \App\Auxiliar\EntityModel\ImageTestModel(),
 			'laboratoryTest' => new \App\Auxiliar\EntityModel\LaboratoryTestModel(),

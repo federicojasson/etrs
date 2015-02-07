@@ -1276,6 +1276,28 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Returns a non-deleted experiment. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function getNonDeletedExperiment($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'deleted',
+			'creator',
+			'last_editor',
+			'creation_datetime',
+			'last_edition_datetime',
+			'name',
+			'command_line'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('non_deleted_experiments', $columnsToSelect, $id);
+	}
+	
+	/*
 	 * Returns a non-deleted file. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the file's ID.
@@ -1542,6 +1564,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Determines whether a non-deleted experiment exists.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function nonDeletedExperimentExists($id) {
+		return $this->entityExists('non_deleted_experiments', $id);
+	}
+	
+	/*
 	 * Determines whether a non-deleted image test exists.
 	 * 
 	 * It receives the image test's ID.
@@ -1584,6 +1615,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function nonDeletedPatientExists($id) {
 		return $this->entityExists('non_deleted_patients', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted study exists.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function nonDeletedStudyExists($id) {
+		return $this->entityExists('non_deleted_studies', $id);
 	}
 	
 	/*
@@ -1638,6 +1678,21 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		
 		// Searches all entities and returns the results
 		return $this->searchAllEntities('non_deleted_diagnoses', $columnsToSelect, $page, $sorting);
+	}
+	
+	/*
+	 * Searches all non-deleted experiments and returns the results.
+	 * 
+	 * It receives the page and a sorting.
+	 */
+	public function searchAllNonDeletedExperiments($page, $sorting) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id'
+		];
+		
+		// Searches all entities and returns the results
+		return $this->searchAllEntities('non_deleted_experiments', $columnsToSelect, $page, $sorting);
 	}
 	
 	/*
@@ -1792,6 +1847,26 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Searches specific non-deleted experiments and returns the results.
+	 * 
+	 * It receives an expression, the page and a sorting.
+	 */
+	public function searchSpecificNonDeletedExperiments($expression, $page, $sorting) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id'
+		];
+		
+		// Defines the columns to match
+		$columnsToMatch = [
+			'name'
+		];
+		
+		// Searches specific entities and returns the results
+		return $this->searchSpecificEntities('non_deleted_experiments', $columnsToSelect, $columnsToMatch, $expression, $page, $sorting);
+	}
+	
+	/*
 	 * Searches specific non-deleted image tests and returns the results.
 	 * 
 	 * It receives an expression, the page and a sorting.
@@ -1885,7 +1960,8 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		
 		// Defines the columns to match
 		$columnsToMatch = [
-			'name'
+			'first_name',
+			'last_name'
 		];
 		
 		// Searches specific entities and returns the results

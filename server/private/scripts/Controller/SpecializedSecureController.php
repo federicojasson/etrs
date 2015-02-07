@@ -114,6 +114,25 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Checks the existence of an experiment. If it doesn't exist, the execution
+	 * is halted.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	protected function checkExperimentExistence($id) {
+		$app = $this->app;
+		
+		if (! $app->data->experiment->exists($id)) {
+			// The experiment doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_EXPERIMENT
+			]);
+		}
+	}
+	
+	/*
 	 * Checks the existence of an image test. If it doesn't exist, the execution
 	 * is halted.
 	 * 
@@ -204,6 +223,25 @@ abstract class SpecializedSecureController extends SecureController {
 			// Halts the execution
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
 				'error' => ERROR_NON_EXISTENT_PATIENT
+			]);
+		}
+	}
+	
+	/*
+	 * Checks the existence of a study. If it doesn't exist, the execution is
+	 * halted.
+	 * 
+	 * It receives the study's ID.
+	 */
+	protected function checkStudyExistence($id) {
+		$app = $this->app;
+		
+		if (! $app->data->study->exists($id)) {
+			// The study doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_STUDY
 			]);
 		}
 	}
@@ -337,6 +375,29 @@ abstract class SpecializedSecureController extends SecureController {
 		}
 		
 		return $diagnosis;
+	}
+	
+	/*
+	 * Returns an experiment. If it doesn't exist, the execution is halted.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	protected function getExperiment($id) {
+		$app = $this->app;
+		
+		// Gets the experiment
+		$experiment = $app->data->experiment->get($id);
+		
+		if (is_null($experiment)) {
+			// The experiment doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_EXPERIMENT
+			]);
+		}
+		
+		return $experiment;
 	}
 	
 	/*
@@ -536,6 +597,29 @@ abstract class SpecializedSecureController extends SecureController {
 				})
 			])
 		]);
+	}
+	
+	/*
+	 * Returns a study. If it doesn't exist, the execution is halted.
+	 * 
+	 * It receives the study's ID.
+	 */
+	protected function getStudy($id) {
+		$app = $this->app;
+		
+		// Gets the study
+		$study = $app->data->study->get($id);
+		
+		if (is_null($study)) {
+			// The study doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_STUDY
+			]);
+		}
+		
+		return $study;
 	}
 	
 	/*

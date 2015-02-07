@@ -42,4 +42,38 @@ class StudyModel extends EntityModel {
 		$app->businessLogicDatabase->commitTransaction();
 	}
 	
+	/*
+	 * Determines whether a study exists.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function exists($id) {
+		$app = $this->app;
+		
+		// Determines whether the study exists
+		return $app->businessLogicDatabase->nonDeletedStudyExists($id);
+	}
+	
+	/*
+	 * Filters a study for presentation and returns the result.
+	 * 
+	 * It receives the study.
+	 */
+	public function filter($study) {
+		// TODO: implement
+		return $study;
+	}
+	
+	/*
+	 * Returns a study. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function get($id) {
+		$app = $this->app;
+		
+		// Gets the study
+		return $app->businessLogicDatabase->getNonDeletedStudy($id);
+	}
+	
 }

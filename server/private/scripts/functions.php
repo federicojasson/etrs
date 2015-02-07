@@ -5,6 +5,20 @@
  */
 
 /*
+ * Applies a function to all the elements of an array and returns the result.
+ * 
+ * It receives the array and the function to apply.
+ */
+function applyFunctionToArray($array, $function) {
+	// Applies the function to all the elements of the array
+	foreach ($array as &$element) {
+		$element = call_user_func($function, $element);
+	}
+	
+	return $array;
+}
+
+/*
  * Determines whether an array contains duplicate elements.
  * 
  * It receives the array.
@@ -198,17 +212,21 @@ function stringToBoolean($string) {
 }
 
 /*
+ * Converts a string to integer.
+ * 
+ * It receives the string.
+ */
+function stringToInteger($string) {
+	return (int) $string;
+}
+
+/*
  * Converts a set of strings from hexadecimal to binary.
  * 
  * It receives the strings.
  */
 function stringsToBinary($strings) {
-	// Converts the strings from hexadecimal to binary
-	foreach ($strings as &$string) {
-		$string = hex2bin($string);
-	}
-	
-	return $strings;
+	return applyFunctionToArray($strings, 'hex2bin');
 }
 
 /*

@@ -225,15 +225,15 @@ class Services extends \Slim\Middleware {
 //			'POST',
 //			new \App\Controller\Experiment\Create()
 //		);
-//
-//		// URL:		/server/experiment/delete
-//		// Method:	POST
-//		$app->services->define(
-//			'/experiment/delete',
-//			'POST',
-//			new \App\Controller\Experiment\Delete()
-//		);
-//
+
+		// URL:		/server/experiment/delete
+		// Method:	POST
+		$app->services->define(
+			'/experiment/delete',
+			'POST',
+			new \App\Controller\Experiment\Delete()
+		);
+
 //		// URL:		/server/experiment/edit
 //		// Method:	POST
 //		$app->services->define(
@@ -241,22 +241,22 @@ class Services extends \Slim\Middleware {
 //			'POST',
 //			new \App\Controller\Experiment\Edit()
 //		);
-//
-//		// URL:		/server/experiment/get
-//		// Method:	POST
-//		$app->services->define(
-//			'/experiment/get',
-//			'POST',
-//			new \App\Controller\Experiment\Get()
-//		);
-//
-//		// URL:		/server/experiment/search
-//		// Method:	POST
-//		$app->services->define(
-//			'/experiment/search',
-//			'POST',
-//			new \App\Controller\Experiment\Search()
-//		);
+
+		// URL:		/server/experiment/get
+		// Method:	POST
+		$app->services->define(
+			'/experiment/get',
+			'POST',
+			new \App\Controller\Experiment\Get()
+		);
+
+		// URL:		/server/experiment/search
+		// Method:	POST
+		$app->services->define(
+			'/experiment/search',
+			'POST',
+			new \App\Controller\Experiment\Search()
+		);
 
 		// URL:		/server/file/download
 		// Method:	POST
@@ -497,15 +497,15 @@ class Services extends \Slim\Middleware {
 //			'POST',
 //			new \App\Controller\Study\Create()
 //		);
-//
-//		// URL:		/server/study/delete
-//		// Method:	POST
-//		$app->services->define(
-//			'/study/delete',
-//			'POST',
-//			new \App\Controller\Study\Delete()
-//		);
-//
+
+		// URL:		/server/study/delete
+		// Method:	POST
+		$app->services->define(
+			'/study/delete',
+			'POST',
+			new \App\Controller\Study\Delete()
+		);
+
 //		// URL:		/server/study/edit
 //		// Method:	POST
 //		$app->services->define(
@@ -513,14 +513,14 @@ class Services extends \Slim\Middleware {
 //			'POST',
 //			new \App\Controller\Study\Edit()
 //		);
-//
-//		// URL:		/server/study/get
-//		// Method:	POST
-//		$app->services->define(
-//			'/study/get',
-//			'POST',
-//			new \App\Controller\Study\Get()
-//		);
+
+		// URL:		/server/study/get
+		// Method:	POST
+		$app->services->define(
+			'/study/get',
+			'POST',
+			new \App\Controller\Study\Get()
+		);
 
 		// URL:		/server/treatment/create
 		// Method:	POST
