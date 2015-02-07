@@ -65,27 +65,4 @@ class Get extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a laboratory test. If it doesn't exist, the execution is halted.
-	 * 
-	 * It receives the laboratory test's ID.
-	 */
-	private function getLaboratoryTest($id) {
-		$app = $this->app;
-		
-		// Gets the laboratory test
-		$laboratoryTest = $app->data->laboratoryTest->get($id);
-		
-		if (is_null($laboratoryTest)) {
-			// The laboratory test doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_LABORATORY_TEST
-			]);
-		}
-		
-		return $laboratoryTest;
-	}
-	
 }

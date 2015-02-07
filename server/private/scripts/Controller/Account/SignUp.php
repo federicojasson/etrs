@@ -42,13 +42,14 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		// Checks the non-existence of the user
 		$this->checkUserNonExistence($id);
 		
+		// Gets the sign up permission
+		$signUpPermission = $app->data->signUpPermission->get($credentials['id']);
+		
 		// Computes the hash of the password
-		$salt = $app->cryptography->generateSalt();
-		$keyDerivationIterations = $app->parameters->cryptography['keyDerivationIterations'];
-		$passwordHash = $app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
+		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
 		
 		// Signs up the user in the system
-		$app->authentication->signUpUser($id, $creator, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress); // TODO: get parameters
+		$app->authentication->signUpUser($id, $signUpPermission['creator'], $passwordHash, $salt, $keyStretchingIterations, $signUpPermission['role'], $firstName, $lastName, $gender, $emailAddress);
 	}
 	
 	/*
@@ -106,25 +107,6 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		
 		// The service is available only to users not signed in
 		return ! $app->authentication->isUserSignedIn();
-	}
-	
-	/*
-	 * Checks the non-existence of a user. If it exists, the execution is
-	 * halted.
-	 * 
-	 * It receives the user's ID.
-	 */
-	private function checkUserNonExistence($id) {
-		$app = $this->app;
-		
-		if ($app->data->user->exists($id)) {
-			// The user exists
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_CONFLICT, [
-				'error' => ERROR_ALREADY_EXISTING_USER
-			]);
-		}
 	}
 	
 }

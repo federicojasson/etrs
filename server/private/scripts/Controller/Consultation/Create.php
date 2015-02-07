@@ -35,7 +35,35 @@ class Create extends \App\Controller\SpecializedSecureController {
 		$neurocognitiveTests = $this->getinput('neurocognitiveTests');
 		$treatments = $this->getinput('treatments');
 		
-		// TODO: checks
+		if (! is_null($clinicalImpression)) {
+			// Checks the existence of the clinical impression
+			$this->checkClinicalImpressionExistence($clinicalImpression);
+		}
+		
+		if (! is_null($diagnosis)) {
+			// Checks the existence of the diagnosis
+			$this->checkDiagnosisExistence($diagnosis);
+		}
+		
+		// Checks the existence of the patient
+		$this->checkPatientExistence($patient);
+		
+		// Checks the existence of the backgrounds
+		foreach ($backgrounds as $background) {
+			$this->checkBackgroundExistence($background);
+		}
+		
+		// Checks the existence of the medications
+		foreach ($medications as $medication) {
+			$this->checkMedicationExistence($medication);
+		}
+		
+		// Checks the existence of the treatments
+		foreach ($treatments as $treatment) {
+			$this->checkTreatmentExistence($treatment);
+		}
+		
+		// TODO: check image, laboratory and neurocognitive tests? what about validation
 		
 		// Generates a random ID
 		$id = $app->cryptography->generateRandomId();
@@ -158,7 +186,7 @@ class Create extends \App\Controller\SpecializedSecureController {
 		// Validates the JSON request and returns the result
 		return $this->validateJsonRequest($jsonStructureDescriptor);
 		
-		// TODO
+		// TODO: validation
 	}
 	
 	/*

@@ -4,8 +4,6 @@ namespace App\Helper;
 
 /*
  * This helper offers input validation functions.
- * 
- * TODO: add specific functions like isPage or isName isFirstName isLastName
  */
 class InputValidator extends Helper {
 	
@@ -71,21 +69,6 @@ class InputValidator extends Helper {
 		
 		// Checks whether the input has an email address format
 		return preg_match('/(?!.*[ ])(?!.*@.*@)(?=.{3,254}$)^.+@.+$/', $input);
-	}
-	
-	/*
-	 * Determines whether an input is an expression.
-	 * 
-	 * It receives the input.
-	 */
-	public function isExpression($input) {
-		if (is_null($input)) { // TODO: doubt about this
-			// The input is null
-			return true;
-		}
-		
-		// Checks whether the input is a valid text
-		return $this->isValidText($input, 1, 128);
 	}
 	
 	/*

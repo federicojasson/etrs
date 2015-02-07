@@ -3,16 +3,15 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on recover password
- * permissions.
+ * This class offers operations to manage recover password permissions.
  */
 class RecoverPasswordPermissionModel extends EntityModel {
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
+	 * Returns a recover password permission. If it doesn't exist, null is
 	 * returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the recover password permission's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;

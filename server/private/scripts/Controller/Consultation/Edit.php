@@ -38,7 +38,32 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		// Checks the existence of the consultation
 		$this->checkConsultationExistence($id);
 		
-		// TODO: checks
+		if (! is_null($clinicalImpression)) {
+			// Checks the existence of the clinical impression
+			$this->checkClinicalImpressionExistence($clinicalImpression);
+		}
+		
+		if (! is_null($diagnosis)) {
+			// Checks the existence of the diagnosis
+			$this->checkDiagnosisExistence($diagnosis);
+		}
+		
+		// Checks the existence of the backgrounds
+		foreach ($backgrounds as $background) {
+			$this->checkBackgroundExistence($background);
+		}
+		
+		// Checks the existence of the medications
+		foreach ($medications as $medication) {
+			$this->checkMedicationExistence($medication);
+		}
+		
+		// Checks the existence of the treatments
+		foreach ($treatments as $treatment) {
+			$this->checkTreatmentExistence($treatment);
+		}
+		
+		// TODO: check image, laboratory and neurocognitive tests? what about validation
 		
 		// Gets the signed in user
 		$signedInUser = $app->authentication->getSignedInUser();
@@ -155,7 +180,7 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		// Validates the JSON request and returns the result
 		return $this->validateJsonRequest($jsonStructureDescriptor);
 		
-		// TODO
+		// TODO: validation
 	}
 	
 	/*
@@ -172,25 +197,6 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		
 		// Validates the access and returns the result
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
-	}
-	
-	/*
-	 * Checks the existence of a consultation. If it doesn't exist, the
-	 * execution is halted.
-	 * 
-	 * It receives the consultation's ID.
-	 */
-	private function checkConsultationExistence($id) {
-		$app = $this->app;
-		
-		if (! $app->data->consultation->exists($id)) {
-			// The consultation doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_CONSULTATION
-			]);
-		}
 	}
 	
 }

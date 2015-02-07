@@ -61,23 +61,4 @@ class Delete extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Checks the existence of a treatment. If it doesn't exist, the execution
-	 * is halted.
-	 * 
-	 * It receives the treatment's ID.
-	 */
-	private function checkTreatmentExistence($id) {
-		$app = $this->app;
-		
-		if (! $app->data->treatment->exists($id)) {
-			// The treatment doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_TREATMENT
-			]);
-		}
-	}
-	
 }

@@ -62,23 +62,4 @@ class Delete extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Checks the existence of a consultation. If it doesn't exist, the
-	 * execution is halted.
-	 * 
-	 * It receives the consultation's ID.
-	 */
-	private function checkConsultationExistence($id) {
-		$app = $this->app;
-		
-		if (! $app->data->consultation->exists($id)) {
-			// The consultation doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_CONSULTATION
-			]);
-		}
-	}
-	
 }

@@ -65,28 +65,4 @@ class Get extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a neurocognitive test. If it doesn't exist, the execution is
-	 * halted.
-	 * 
-	 * It receives the neurocognitive test's ID.
-	 */
-	private function getNeurocognitiveTest($id) {
-		$app = $this->app;
-		
-		// Gets the neurocognitive test
-		$neurocognitiveTest = $app->data->neurocognitiveTest->get($id);
-		
-		if (is_null($neurocognitiveTest)) {
-			// The neurocognitive test doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_NEUROCOGNITIVE_TEST
-			]);
-		}
-		
-		return $neurocognitiveTest;
-	}
-	
 }

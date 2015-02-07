@@ -61,23 +61,4 @@ class Delete extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Checks the existence of a background. If it doesn't exist, the execution
-	 * is halted.
-	 * 
-	 * It receives the background's ID.
-	 */
-	private function checkBackgroundExistence($id) {
-		$app = $this->app;
-		
-		if (! $app->data->background->exists($id)) {
-			// The background doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_BACKGROUND
-			]);
-		}
-	}
-	
 }

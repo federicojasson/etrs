@@ -65,27 +65,4 @@ class Get extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a diagnosis. If it doesn't exist, the execution is halted.
-	 * 
-	 * It receives the diagnosis' ID.
-	 */
-	private function getDiagnosis($id) {
-		$app = $this->app;
-		
-		// Gets the diagnosis
-		$diagnosis = $app->data->diagnosis->get($id);
-		
-		if (is_null($diagnosis)) {
-			// The diagnosis doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_DIAGNOSIS
-			]);
-		}
-		
-		return $diagnosis;
-	}
-	
 }

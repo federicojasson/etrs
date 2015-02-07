@@ -65,27 +65,4 @@ class Get extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a medication. If it doesn't exist, the execution is halted.
-	 * 
-	 * It receives the medication's ID.
-	 */
-	private function getMedication($id) {
-		$app = $this->app;
-		
-		// Gets the medication
-		$medication = $app->data->medication->get($id);
-		
-		if (is_null($medication)) {
-			// The medication doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_MEDICATION
-			]);
-		}
-		
-		return $medication;
-	}
-	
 }

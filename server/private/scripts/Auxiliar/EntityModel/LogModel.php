@@ -3,21 +3,20 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on logs.
+ * This class offers operations to manage logs.
  */
 class LogModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a log.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the log's data.
 	 */
-	public function create() {
+	public function create($id, $level, $message) {
 		$app = $this->app;
 		
 		// Creates the log
-		$function = [ $app->webServerDatabase, 'createLog' ];
-		call_user_func_array($function, func_get_args());
+		$app->webServerDatabase->createLog($id, $level, $message);
 	}
 	
 }

@@ -88,11 +88,11 @@ class Authentication extends Helper {
 	 * 
 	 * It receives the user's data.
 	 */
-	public function signUpUser($id, $creator, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
+	public function signUpUser($id, $creator, $passwordHash, $salt, $keyStretchingIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
 		$app = $this->app;
 		
 		// Creates the user
-		$app->data->user->create($id, $creator, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress);
+		$app->data->user->create($id, $creator, $passwordHash, $salt, $keyStretchingIterations, $role, $firstName, $lastName, $gender, $emailAddress);
 		
 		// Logs the event
 		$app->log->info('The user ' . $id . ' has been signed up.');

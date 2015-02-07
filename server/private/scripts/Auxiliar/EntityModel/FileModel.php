@@ -3,15 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on files.
+ * This class offers operations to manage files.
  */
 class FileModel extends EntityModel {
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Deletes a file.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the file's ID.
+	 */
+	public function delete($id) {
+		$app = $this->app;
+		
+		// Deletes the file
+		$app->businessLogicDatabase->deleteFile($id);
+	}
+	
+	/*
+	 * Returns a file. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the file's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;

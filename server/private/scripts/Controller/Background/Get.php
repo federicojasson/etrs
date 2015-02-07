@@ -65,27 +65,4 @@ class Get extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a background. If it doesn't exist, the execution is halted.
-	 * 
-	 * It receives the background's ID.
-	 */
-	private function getBackground($id) {
-		$app = $this->app;
-		
-		// Gets the background
-		$background = $app->data->background->get($id);
-		
-		if (is_null($background)) {
-			// The background doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_BACKGROUND
-			]);
-		}
-		
-		return $background;
-	}
-	
 }

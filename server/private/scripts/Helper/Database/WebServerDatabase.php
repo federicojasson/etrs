@@ -58,19 +58,19 @@ class WebServerDatabase extends SpecializedDatabase {
 				:id,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
-				:dataForInsert
+				:dataToInsert
 			)
 			ON DUPLICATE KEY
 			UPDATE
 				last_edition_datetime = UTC_TIMESTAMP(),
-				data = :dataForUpdate
+				data = :dataToUpdate
 		';
 		
 		// Sets the parameters
 		$parameters = [
 			':id' => $id,
-			':dataForInsert' => $data,
-			':dataForUpdate' => $data
+			':dataToInsert' => $data,
+			':dataToUpdate' => $data
 		];
 		
 		// Executes the statement
@@ -82,7 +82,7 @@ class WebServerDatabase extends SpecializedDatabase {
 	 * 
 	 * It receives the user's data.
 	 */
-	public function createUser($id, $creator, $passwordHash, $salt, $keyDerivationIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
+	public function createUser($id, $creator, $passwordHash, $salt, $keyStretchingIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
 		// Defines the statement
 		$statement = '
 			INSERT INTO users (
@@ -92,7 +92,7 @@ class WebServerDatabase extends SpecializedDatabase {
 				last_edition_datetime,
 				password_hash,
 				salt,
-				key_derivation_iterations,
+				key_stretching_iterations,
 				role,
 				first_name,
 				last_name,
@@ -106,7 +106,7 @@ class WebServerDatabase extends SpecializedDatabase {
 				UTC_TIMESTAMP(),
 				:passwordHash,
 				:salt,
-				:keyDerivationIterations,
+				:keyStretchingIterations,
 				:role,
 				:firstName,
 				:lastName,
@@ -121,7 +121,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			':creator' => $creator,
 			':passwordHash' => $passwordHash,
 			':salt' => $salt,
-			':keyDerivationIterations' => $keyDerivationIterations,
+			':keyStretchingIterations' => $keyStretchingIterations,
 			':role' => $role,
 			':firstName' => $firstName,
 			':lastName' => $lastName,
@@ -166,6 +166,44 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Edits a user.
+	 * 
+	 * It receives the user's data.
+	 */
+	public function editUser($id, $passwordHash, $salt, $keyStretchingIterations, $firstName, $lastName, $gender, $emailAddress) {
+		// Defines the statement
+		$statement = '
+			UPDATE users
+			SET
+				last_edition_datetime = UTC_TIMESTAMP(),
+				password_hash = :passwordHash,
+				salt = :salt,
+				key_stretching_iterations = :keyStretchingIterations,
+				first_name = :firstName,
+				last_name = :lastName,
+				gender = :gender,
+				email_address = :emailAddress
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':passwordHash' => $passwordHash,
+			':salt' => $salt,
+			':keyStretchingIterations' => $keyStretchingIterations,
+			':firstName' => $firstName,
+			':lastName' => $lastName,
+			':gender' => $gender,
+			':emailAddress' => $emailAddress
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Returns a recover password permission. If it doesn't exist, null is
 	 * returned.
 	 * 
@@ -179,7 +217,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			'creation_datetime',
 			'password_hash',
 			'salt',
-			'key_derivation_iterations'
+			'key_stretching_iterations'
 		];
 		
 		// Gets and returns the entity
@@ -217,7 +255,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			'creation_datetime',
 			'password_hash',
 			'salt',
-			'key_derivation_iterations',
+			'key_stretching_iterations',
 			'role'
 		];
 		
@@ -239,7 +277,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			'last_edition_datetime',
 			'password_hash',
 			'salt',
-			'key_derivation_iterations',
+			'key_stretching_iterations',
 			'role',
 			'first_name',
 			'last_name',

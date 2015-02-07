@@ -29,15 +29,13 @@ class Authenticator extends Helper {
 			// Computes the hash of the password to cause a deliberate delay
 			// that avoids disclosing the fact that the recover password
 			// permission doesn't exist
-			$salt = $app->cryptography->generateSalt();
-			$keyDerivationIterations = $app->parameters->cryptography['keyDerivationIterations'];
-			$app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
+			$app->cryptography->hashNewPassword($password);
 			
 			return false;
 		}
 		
 		// Computes the hash of the password
-		$passwordHash = $app->cryptography->hashPassword($password, $recoverPasswordPermission['salt'], $recoverPasswordPermission['keyDerivationIterations']);
+		$passwordHash = $app->cryptography->hashPassword($password, $recoverPasswordPermission['salt'], $recoverPasswordPermission['keyStretchingIterations']);
 		
 		// Compares the hash with the stored one and returns the result
 		return $passwordHash === $recoverPasswordPermission['passwordHash'];
@@ -65,15 +63,13 @@ class Authenticator extends Helper {
 			// Computes the hash of the password to cause a deliberate delay
 			// that avoids disclosing the fact that the sign up permission
 			// doesn't exist
-			$salt = $app->cryptography->generateSalt();
-			$keyDerivationIterations = $app->parameters->cryptography['keyDerivationIterations'];
-			$app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
+			$app->cryptography->hashNewPassword($password);
 			
 			return false;
 		}
 		
 		// Computes the hash of the password
-		$passwordHash = $app->cryptography->hashPassword($password, $signUpPermission['salt'], $signUpPermission['keyDerivationIterations']);
+		$passwordHash = $app->cryptography->hashPassword($password, $signUpPermission['salt'], $signUpPermission['keyStretchingIterations']);
 		
 		// Compares the hash with the stored one and returns the result
 		return $passwordHash === $signUpPermission['passwordHash'];
@@ -99,15 +95,13 @@ class Authenticator extends Helper {
 			
 			// Computes the hash of the password to cause a deliberate delay
 			// that avoids disclosing the fact that the user doesn't exist
-			$salt = $app->cryptography->generateSalt();
-			$keyDerivationIterations = $app->parameters->cryptography['keyDerivationIterations'];
-			$app->cryptography->hashPassword($password, $salt, $keyDerivationIterations);
+			$app->cryptography->hashNewPassword($password);
 			
 			return false;
 		}
 		
 		// Computes the hash of the password
-		$passwordHash = $app->cryptography->hashPassword($password, $user['salt'], $user['keyDerivationIterations']);
+		$passwordHash = $app->cryptography->hashPassword($password, $user['salt'], $user['keyStretchingIterations']);
 		
 		// Compares the hash with the stored one and returns the result
 		return $passwordHash === $user['passwordHash'];

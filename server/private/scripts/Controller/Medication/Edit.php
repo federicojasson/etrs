@@ -69,23 +69,4 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Checks the existence of a medication. If it doesn't exist, the execution
-	 * is halted.
-	 * 
-	 * It receives the medication's ID.
-	 */
-	private function checkMedicationExistence($id) {
-		$app = $this->app;
-		
-		if (! $app->data->medication->exists($id)) {
-			// The medication doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_MEDICATION
-			]);
-		}
-	}
-	
 }

@@ -63,27 +63,4 @@ class Download extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a file. If it doesn't exist, the execution is halted.
-	 * 
-	 * It receives the file's ID.
-	 */
-	private function getFile($id) {
-		$app = $this->app;
-		
-		// Gets the file
-		$file = $app->data->file->get($id);
-		
-		if (is_null($file)) {
-			// The file doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_FILE
-			]);
-		}
-		
-		return $file;
-	}
-	
 }

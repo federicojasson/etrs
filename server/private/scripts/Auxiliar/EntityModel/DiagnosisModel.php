@@ -3,27 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on diagnoses.
+ * This class offers operations to manage diagnoses.
  */
 class DiagnosisModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a diagnosis.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the diagnosis' data.
 	 */
-	public function create() {
+	public function create($id, $creator, $name) {
 		$app = $this->app;
 		
 		// Creates the diagnosis
-		$function = [ $app->businessLogicDatabase, 'createDiagnosis' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->createDiagnosis($id, $creator, $name);
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes a diagnosis.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the diagnosis' ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -33,22 +32,21 @@ class DiagnosisModel extends EntityModel {
 	}
 	
 	/*
-	 * Edits an entity of the type of this model.
+	 * Edits a diagnosis.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the diagnosis' data.
 	 */
-	public function edit() {
+	public function edit($id, $lastEditor, $name) {
 		$app = $this->app;
 		
 		// Edits the diagnosis
-		$function = [ $app->businessLogicDatabase, 'editDiagnosis' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->editDiagnosis($id, $lastEditor, $name);
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Determines whether a diagnosis exists.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the diagnosis' ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -58,20 +56,19 @@ class DiagnosisModel extends EntityModel {
 	}
 	
 	/*
-	 * Filters an entity for presentation and returns the result.
+	 * Filters a diagnosis for presentation and returns the result.
 	 * 
-	 * It receives the entity.
+	 * It receives the diagnosis.
 	 */
-	public function filter($entity) {
+	public function filter($diagnosis) {
 		// TODO: implement
-		return $entity;
+		return $diagnosis;
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a diagnosis. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the diagnosis' ID.
 	 */
 	public function get($id) {
 		$app = $this->app;
@@ -81,9 +78,8 @@ class DiagnosisModel extends EntityModel {
 	}
 	
 	/*
-	 * Searches entities of the type of this model. It returns an array
-	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation that were found in the page.
+	 * Searches diagnoses. It returns an array containing the total number of
+	 * results and the results found in the page, ready for presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

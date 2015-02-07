@@ -66,27 +66,4 @@ class Get extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a patient. If it doesn't exist, the execution is halted.
-	 * 
-	 * It receives the patient's ID.
-	 */
-	private function getPatient($id) {
-		$app = $this->app;
-		
-		// Gets the patient
-		$patient = $app->data->patient->get($id);
-		
-		if (is_null($patient)) {
-			// The patient doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_PATIENT
-			]);
-		}
-		
-		return $patient;
-	}
-	
 }

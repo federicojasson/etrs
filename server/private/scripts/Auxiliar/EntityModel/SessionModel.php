@@ -3,25 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on sessions.
+ * This class offers operations to manage sessions.
  */
 class SessionModel extends EntityModel {
 	
 	/*
-	 * TODO: comments
+	 * Creates or edits a session.
+	 * 
+	 * It receives the session's data.
 	 */
-	public function createOrEdit() { // TODO: put in in parent class also?
+	public function createOrEdit($id, $data) {
 		$app = $this->app;
 		
 		// Creates or edits the session
-		$function = [ $app->webServerDatabase, 'createOrEditSession' ];
-		call_user_func_array($function, func_get_args());
+		$app->webServerDatabase->createOrEditSession($id, $data);
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes a session.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the session's ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -31,9 +32,12 @@ class SessionModel extends EntityModel {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes inactive sessions.
+	 * 
+	 * It receives the maximum time that a session can remain inactive (in
+	 * seconds).
 	 */
-	public function deleteInactives($maximumInactiveTime) { // TODO: put in in parent class also?
+	public function deleteInactives($maximumInactiveTime) {
 		$app = $this->app;
 		
 		// Deletes the inactive sessions
@@ -41,10 +45,9 @@ class SessionModel extends EntityModel {
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a session. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the session's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;

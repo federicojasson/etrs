@@ -3,27 +3,38 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on users.
+ * This class offers operations to manage users.
  */
 class UserModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a user.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the user's data.
 	 */
-	public function create() {
+	public function create($id, $creator, $passwordHash, $salt, $keyStretchingIterations, $role, $firstName, $lastName, $gender, $emailAddress) {
 		$app = $this->app;
 		
 		// Creates the user
-		$function = [ $app->webServerDatabase, 'createUser' ];
-		call_user_func_array($function, func_get_args());
+		$app->webServerDatabase->createUser($id, $creator, $passwordHash, $salt, $keyStretchingIterations, $role, $firstName, $lastName, $gender, $emailAddress);
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Edits a user.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the user's data.
+	 */
+	public function edit($id, $passwordHash, $salt, $keyStretchingIterations, $firstName, $lastName, $gender, $emailAddress) {
+		$app = $this->app;
+		
+		// Edits the user
+		$app->webServerDatabase->editUser($id, $passwordHash, $salt, $keyStretchingIterations, $firstName, $lastName, $gender, $emailAddress);
+	}
+	
+	/*
+	 * Determines whether a user exists.
+	 * 
+	 * It receives the user's ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -33,10 +44,9 @@ class UserModel extends EntityModel {
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a user. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the user's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;

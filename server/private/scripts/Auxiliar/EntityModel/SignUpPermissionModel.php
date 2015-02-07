@@ -3,15 +3,14 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on sign up permissions.
+ * This class offers operations to manage sign up permissions.
  */
 class SignUpPermissionModel extends EntityModel {
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a sign up permission. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the sign up permission's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;

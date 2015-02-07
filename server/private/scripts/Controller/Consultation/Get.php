@@ -66,27 +66,4 @@ class Get extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a consultation. If it doesn't exist, the execution is halted.
-	 * 
-	 * It receives the consultation's ID.
-	 */
-	private function getConsultation($id) {
-		$app = $this->app;
-		
-		// Gets the consultation
-		$consultation = $app->data->consultation->get($id);
-		
-		if (is_null($consultation)) {
-			// The consultation doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_CONSULTATION
-			]);
-		}
-		
-		return $consultation;
-	}
-	
 }

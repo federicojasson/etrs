@@ -3,27 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on patients.
+ * This class offers operations to manage patients.
  */
 class PatientModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a patient.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the patient's data.
 	 */
-	public function create() {
+	public function create($id, $creator, $firstName, $lastName, $gender, $birthDate, $educationYears) {
 		$app = $this->app;
 		
 		// Creates the patient
-		$function = [ $app->businessLogicDatabase, 'createPatient' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->createPatient($id, $creator, $firstName, $lastName, $gender, $birthDate, $educationYears);
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes a patient.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the patient's ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -31,10 +30,8 @@ class PatientModel extends EntityModel {
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
-		// Gets the patient's consultations
+		// Deletes the patient's consultations
 		$consultations = $app->businessLogicDatabase->getPatientNonDeletedConsultations($id);
-		
-		// Deletes the consultations
 		foreach ($consultations as $consultation) {
 			$app->data->consultation->delete($consultation['id']);
 		}
@@ -47,22 +44,21 @@ class PatientModel extends EntityModel {
 	}
 	
 	/*
-	 * Edits an entity of the type of this model.
+	 * Edits a patient.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the patient's data.
 	 */
-	public function edit() {
+	public function edit($id, $lastEditor, $firstName, $lastName, $gender, $birthDate, $educationYears) {
 		$app = $this->app;
 		
 		// Edits the patient
-		$function = [ $app->businessLogicDatabase, 'editPatient' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->editPatient($id, $lastEditor, $firstName, $lastName, $gender, $birthDate, $educationYears);
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Determines whether a patient exists.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the patient's ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -72,20 +68,19 @@ class PatientModel extends EntityModel {
 	}
 	
 	/*
-	 * Filters an entity for presentation and returns the result.
+	 * Filters a patient for presentation and returns the result.
 	 * 
-	 * It receives the entity.
+	 * It receives the patient.
 	 */
-	public function filter($entity) {
+	public function filter($patient) {
 		// TODO: implement
-		return $entity;
+		return $patient;
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a patient. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the patient's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;
@@ -95,9 +90,8 @@ class PatientModel extends EntityModel {
 	}
 	
 	/*
-	 * Searches entities of the type of this model. It returns an array
-	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation that were found in the page.
+	 * Searches patients. It returns an array containing the total number of
+	 * results and the results found in the page, ready for presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

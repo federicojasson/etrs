@@ -3,27 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on neurocognitive tests.
+ * This class offers operations to manage neurocognitive tests.
  */
 class NeurocognitiveTestModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a neurocognitive test.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the neurocognitive test's data.
 	 */
-	public function create() {
+	public function create($id, $creator, $name, $dataTypeDescriptor) {
 		$app = $this->app;
 		
 		// Creates the neurocognitive test
-		$function = [ $app->businessLogicDatabase, 'createNeurocognitiveTest' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->createNeurocognitiveTest($id, $creator, $name, $dataTypeDescriptor);
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes a neurocognitive test.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the neurocognitive test's ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -33,22 +32,21 @@ class NeurocognitiveTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Edits an entity of the type of this model.
+	 * Edits a neurocognitive test.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the neurocognitive test's data.
 	 */
-	public function edit() {
+	public function edit($id, $lastEditor, $name, $dataTypeDescriptor) {
 		$app = $this->app;
 		
 		// Edits the neurocognitive test
-		$function = [ $app->businessLogicDatabase, 'editNeurocognitiveTest' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->editNeurocognitiveTest($id, $lastEditor, $name, $dataTypeDescriptor);
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Determines whether a neurocognitive test exists.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the neurocognitive test's ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -58,20 +56,19 @@ class NeurocognitiveTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Filters an entity for presentation and returns the result.
+	 * Filters a neurocognitive test for presentation and returns the result.
 	 * 
-	 * It receives the entity.
+	 * It receives the neurocognitive test.
 	 */
-	public function filter($entity) {
+	public function filter($neurocognitiveTest) {
 		// TODO: implement
-		return $entity;
+		return $neurocognitiveTest;
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a neurocognitive test. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the neurocognitive test's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;
@@ -81,9 +78,9 @@ class NeurocognitiveTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Searches entities of the type of this model. It returns an array
-	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation that were found in the page.
+	 * Searches neurocognitive tests. It returns an array containing the total
+	 * number of results and the results found in the page, ready for
+	 * presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

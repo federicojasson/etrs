@@ -3,20 +3,17 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on consultations.
+ * This class offers operations to manage consultations.
  */
 class ConsultationModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a consultation.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the consultation's data.
 	 */
-	public function create() {
+	public function create($id, $clinicalImpression, $creator, $diagnosis, $patient, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) {
 		$app = $this->app;
-		
-		// Gets the function's arguments
-		list($id, $clinicalImpression, $creator, $diagnosis, $patient, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) = func_get_args();
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -24,7 +21,7 @@ class ConsultationModel extends EntityModel {
 		// Creates the consultation
 		$app->businessLogicDatabase->createConsultation($id, $clinicalImpression, $creator, $diagnosis, $patient, $date, $reasons, $indications, $observations);
 		
-		// TODO: comment
+		// Associates the data with the consultation
 		$this->associateData($id, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments);
 		
 		// Commits the transaction
@@ -32,9 +29,9 @@ class ConsultationModel extends EntityModel {
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes a consultation.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the consultation's ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -42,10 +39,8 @@ class ConsultationModel extends EntityModel {
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
-		// Gets the consultation's studies
+		// Deletes the consultation's studies
 		$studies = $app->businessLogicDatabase->getConsultationNonDeletedStudies($id);
-		
-		// Deletes the studies
 		foreach ($studies as $study) {
 			$app->data->study->delete($study['id']);
 		}
@@ -58,15 +53,12 @@ class ConsultationModel extends EntityModel {
 	}
 	
 	/*
-	 * Edits an entity of the type of this model.
+	 * Edits a consultation.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the consultation's data.
 	 */
-	public function edit() {
+	public function edit($id, $clinicalImpression, $diagnosis, $lastEditor, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) {
 		$app = $this->app;
-		
-		// Gets the function's arguments
-		list($id, $clinicalImpression, $diagnosis, $lastEditor, $date, $reasons, $indications, $observations, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) = func_get_args();
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
@@ -74,10 +66,10 @@ class ConsultationModel extends EntityModel {
 		// Edits the consultation
 		$app->businessLogicDatabase->editConsultation($id, $clinicalImpression, $diagnosis, $lastEditor, $date, $reasons, $indications, $observations);
 		
-		// TODO: delete info currently associated
-		$this->deleteAssociatedData($id);
+		// Disassociates all data from the consultation
+		$this->disassociateData($id);
 		
-		// TODO: comment
+		// Associates the data with the consultation
 		$this->associateData($id, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments);
 		
 		// Commits the transaction
@@ -85,9 +77,9 @@ class ConsultationModel extends EntityModel {
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Determines whether a consultation exists.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the consultation's ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -97,20 +89,19 @@ class ConsultationModel extends EntityModel {
 	}
 	
 	/*
-	 * Filters an entity for presentation and returns the result.
+	 * Filters a consultation for presentation and returns the result.
 	 * 
-	 * It receives the entity.
+	 * It receives the consultation.
 	 */
-	public function filter($entity) {
+	public function filter($consultation) {
 		// TODO: implement
-		return $entity;
+		return $consultation;
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a consultation. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the consultation's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;
@@ -120,64 +111,68 @@ class ConsultationModel extends EntityModel {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Associates data with a consultation.
+	 * 
+	 * It receives the consultation's ID and the data to associate.
 	 */
-	private function associateData($id, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) { // TODO: change name?
+	private function associateData($id, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) {
 		$app = $this->app;
 		
-		// Associates the backgrounds with the consultation
+		// Associates the backgrounds
 		foreach ($backgrounds as $background) {
 			$app->businessLogicDatabase->createConsultationBackground($id, $background);
 		}
 		
-		// Associates the image tests with the consultation
+		// Associates the image tests
 		foreach ($imageTests as $imageTest) {
 			$app->businessLogicDatabase->createConsultationImageTest($id, $imageTest['id'], $imageTest['value']);
 		}
 		
-		// Associates the laboratory tests with the consultation
+		// Associates the laboratory tests
 		foreach ($laboratoryTests as $laboratoryTest) {
 			$app->businessLogicDatabase->createConsultationLaboratoryTest($id, $laboratoryTest['id'], $laboratoryTest['value']);
 		}
 		
-		// Associates the medications with the consultation
+		// Associates the medications
 		foreach ($medications as $medication) {
 			$app->businessLogicDatabase->createConsultationMedication($id, $medication);
 		}
 		
-		// Associates the neurocognitive tests with the consultation
+		// Associates the neurocognitive tests
 		foreach ($neurocognitiveTests as $neurocognitiveTest) {
 			$app->businessLogicDatabase->createConsultationNeurocognitiveTest($id, $neurocognitiveTest['id'], $neurocognitiveTest['value']);
 		}
 		
-		// Associates the treatments with the consultation
+		// Associates the treatments
 		foreach ($treatments as $treatment) {
 			$app->businessLogicDatabase->createConsultationTreatment($id, $treatment);
 		}
 	}
 	
 	/*
-	 * TODO: comments
+	 * Disassociates all data from a consultation.
+	 * 
+	 * It receives the consultation's ID.
 	 */
-	private function deleteAssociatedData($id) { //TODO: rename?
+	private function disassociateData($id) {
 		$app = $this->app;
 		
-		// Deletes the backgrounds associated with the consultation
+		// Disassociates the backgrounds
 		$app->businessLogicDatabase->deleteConsultationBackgrounds($id);
 		
-		// Deletes the image tests associated with the consultation
+		// Disassociates the image tests
 		$app->businessLogicDatabase->deleteConsultationImageTests($id);
 		
-		// Deletes the laboratory tests associated with the consultation
+		// Disassociates the laboratory tests
 		$app->businessLogicDatabase->deleteConsultationLaboratoryTests($id);
 		
-		// Deletes the medications associated with the consultation
+		// Disassociates the medications
 		$app->businessLogicDatabase->deleteConsultationMedications($id);
 		
-		// Deletes the neurocognitive tests associated with the consultation
+		// Disassociates the neurocognitive tests
 		$app->businessLogicDatabase->deleteConsultationNeurocognitiveTests($id);
 		
-		// Deletes the treatments associated with the consultation
+		// Disassociates the treatments
 		$app->businessLogicDatabase->deleteConsultationTreatments($id);
 	}
 	

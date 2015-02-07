@@ -3,27 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on clinical impressions.
+ * This class offers operations to manage clinical impressions.
  */
 class ClinicalImpressionModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a clinical impression.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the clinical impression's data.
 	 */
-	public function create() {
+	public function create($id, $creator, $name) {
 		$app = $this->app;
 		
 		// Creates the clinical impression
-		$function = [ $app->businessLogicDatabase, 'createClinicalImpression' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->createClinicalImpression($id, $creator, $name);
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes a clinical impression.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the clinical impression's ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -33,22 +32,21 @@ class ClinicalImpressionModel extends EntityModel {
 	}
 	
 	/*
-	 * Edits an entity of the type of this model.
+	 * Edits a clinical impression.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the clinical impression's data.
 	 */
-	public function edit() {
+	public function edit($id, $lastEditor, $name) {
 		$app = $this->app;
 		
 		// Edits the clinical impression
-		$function = [ $app->businessLogicDatabase, 'editClinicalImpression' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->editClinicalImpression($id, $lastEditor, $name);
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Determines whether a clinical impression exists.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the clinical impression's ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -58,20 +56,19 @@ class ClinicalImpressionModel extends EntityModel {
 	}
 	
 	/*
-	 * Filters an entity for presentation and returns the result.
+	 * Filters a clinical impression for presentation and returns the result.
 	 * 
-	 * It receives the entity.
+	 * It receives the clinical impression.
 	 */
-	public function filter($entity) {
+	public function filter($clinicalImpression) {
 		// TODO: implement
-		return $entity;
+		return $clinicalImpression;
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a clinical impression. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the clinical impression's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;
@@ -81,9 +78,9 @@ class ClinicalImpressionModel extends EntityModel {
 	}
 	
 	/*
-	 * Searches entities of the type of this model. It returns an array
-	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation that were found in the page.
+	 * Searches clinical impressions. It returns an array containing the total
+	 * number of results and the results found in the page, ready for
+	 * presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

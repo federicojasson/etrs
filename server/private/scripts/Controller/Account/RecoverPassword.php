@@ -21,6 +21,7 @@ class RecoverPassword extends \App\Controller\SpecializedSecureController {
 		
 		// Gets the input
 		$credentials = $this->getInput('credentials');
+		$password = $this->getInput('password');
 		
 		// Authenticates the recover password permission
 		$authenticated = $app->authenticator->authenticateRecoverPasswordPermissionByPassword($credentials);
@@ -33,7 +34,17 @@ class RecoverPassword extends \App\Controller\SpecializedSecureController {
 			return;
 		}
 		
-		// TODO: implement recover password
+		// Gets the recover password permission
+		$recoverPasswordPermission = $app->data->recoverPasswordPermission->get($credentials['id']);
+		
+		// Gets the user
+		$user = $app->data->user->get($recoverPasswordPermission['user']);
+		
+		// Computes the hash of the password
+		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
+		
+		// Edits the user
+		$app->data->user->edit($user['id'], $passwordHash, $salt, $keyStretchingIterations, $user['firstName'], $user['lastName'], $user['gender'], $user['emailAddress']);
 	}
 	
 	/*

@@ -3,27 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on laboratory tests.
+ * This class offers operations to manage laboratory tests.
  */
 class LaboratoryTestModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a laboratory test.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the laboratory test's data.
 	 */
-	public function create() {
+	public function create($id, $creator, $name, $dataTypeDescriptor) {
 		$app = $this->app;
 		
 		// Creates the laboratory test
-		$function = [ $app->businessLogicDatabase, 'createLaboratoryTest' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->createLaboratoryTest($id, $creator, $name, $dataTypeDescriptor);
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes a laboratory test.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the laboratory test's ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -33,22 +32,21 @@ class LaboratoryTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Edits an entity of the type of this model.
+	 * Edits a laboratory test.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the laboratory test's data.
 	 */
-	public function edit() {
+	public function edit($id, $lastEditor, $name, $dataTypeDescriptor) {
 		$app = $this->app;
 		
 		// Edits the laboratory test
-		$function = [ $app->businessLogicDatabase, 'editLaboratoryTest' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->editLaboratoryTest($id, $lastEditor, $name, $dataTypeDescriptor);
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Determines whether a laboratory test exists.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the laboratory test's ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -58,20 +56,19 @@ class LaboratoryTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Filters an entity for presentation and returns the result.
+	 * Filters a laboratory test for presentation and returns the result.
 	 * 
-	 * It receives the entity.
+	 * It receives the laboratory test.
 	 */
-	public function filter($entity) {
+	public function filter($laboratoryTest) {
 		// TODO: implement
-		return $entity;
+		return $laboratoryTest;
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a laboratory test. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the laboratory test's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;
@@ -81,9 +78,9 @@ class LaboratoryTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Searches entities of the type of this model. It returns an array
-	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation that were found in the page.
+	 * Searches laboratory tests. It returns an array containing the total
+	 * number of results and the results found in the page, ready for
+	 * presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

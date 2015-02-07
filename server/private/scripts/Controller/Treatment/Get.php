@@ -65,27 +65,4 @@ class Get extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Returns a treatment. If it doesn't exist, the execution is halted.
-	 * 
-	 * It receives the treatment's ID.
-	 */
-	private function getTreatment($id) {
-		$app = $this->app;
-		
-		// Gets the treatment
-		$treatment = $app->data->treatment->get($id);
-		
-		if (is_null($treatment)) {
-			// The treatment doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_TREATMENT
-			]);
-		}
-		
-		return $treatment;
-	}
-	
 }

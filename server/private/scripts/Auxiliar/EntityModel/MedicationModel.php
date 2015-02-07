@@ -3,27 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on medications.
+ * This class offers operations to manage medications.
  */
 class MedicationModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates a medication.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the medication's data.
 	 */
-	public function create() {
+	public function create($id, $creator, $name) {
 		$app = $this->app;
 		
 		// Creates the medication
-		$function = [ $app->businessLogicDatabase, 'createMedication' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->createMedication($id, $creator, $name);
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes a medication.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the medication's ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -33,22 +32,21 @@ class MedicationModel extends EntityModel {
 	}
 	
 	/*
-	 * Edits an entity of the type of this model.
+	 * Edits a medication.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the medication's data.
 	 */
-	public function edit() {
+	public function edit($id, $lastEditor, $name) {
 		$app = $this->app;
 		
 		// Edits the medication
-		$function = [ $app->businessLogicDatabase, 'editMedication' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->editMedication($id, $lastEditor, $name);
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Determines whether a medication exists.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the medication's ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -58,20 +56,19 @@ class MedicationModel extends EntityModel {
 	}
 	
 	/*
-	 * Filters an entity for presentation and returns the result.
+	 * Filters a medication for presentation and returns the result.
 	 * 
-	 * It receives the entity.
+	 * It receives the medication.
 	 */
-	public function filter($entity) {
+	public function filter($medication) {
 		// TODO: implement
-		return $entity;
+		return $medication;
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns a medication. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the medication's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;
@@ -81,9 +78,8 @@ class MedicationModel extends EntityModel {
 	}
 	
 	/*
-	 * Searches entities of the type of this model. It returns an array
-	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation that were found in the page.
+	 * Searches medications. It returns an array containing the total number of
+	 * results and the results found in the page, ready for presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

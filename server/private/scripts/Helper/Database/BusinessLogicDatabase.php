@@ -143,45 +143,182 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Creates a background of a consultation.
+	 * 
+	 * It receives the consultation's ID and the background's ID.
 	 */
 	public function createConsultationBackground($consultation, $background) {
-		// TODO: implement
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_backgrounds (
+				consultation,
+				background
+			)
+			VALUES (
+				:consultation,
+				:background
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':background' => $background
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
-	 * TODO: comments
+	 * Creates an image test of a consultation.
+	 * 
+	 * It receives the consultation's ID, the image test's ID and the value.
 	 */
 	public function createConsultationImageTest($consultation, $imageTest, $value) {
-		// TODO: implement
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_image_tests (
+				consultation,
+				image_test,
+				value
+			)
+			VALUES (
+				:consultation,
+				:imageTest,
+				:value
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':imageTest' => $imageTest,
+			':value' => $value
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
-	 * TODO: comments
+	 * Creates a laboratory test of a consultation.
+	 * 
+	 * It receives the consultation's ID, the laboratory test's ID and the
+	 * value.
 	 */
 	public function createConsultationLaboratoryTest($consultation, $laboratoryTest, $value) {
-		// TODO: implement
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_laboratory_tests (
+				consultation,
+				laboratory_test,
+				value
+			)
+			VALUES (
+				:consultation,
+				:laboratoryTest,
+				:value
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':laboratoryTest' => $laboratoryTest,
+			':value' => $value
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
-	 * TODO: comments
+	 * Creates a medication of a consultation.
+	 * 
+	 * It receives the consultation's ID and the medication's ID.
 	 */
 	public function createConsultationMedication($consultation, $medication) {
-		// TODO: implement
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_medications (
+				consultation,
+				medication
+			)
+			VALUES (
+				:consultation,
+				:medication
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':medication' => $medication
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
-	 * TODO: comments
+	 * Creates a neurocognitive test of a consultation.
+	 * 
+	 * It receives the consultation's ID, the neurocognitive test's ID and the
+	 * value.
 	 */
 	public function createConsultationNeurocognitiveTest($consultation, $neurocognitiveTest, $value) {
-		// TODO: implement
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_neurocognitive_tests (
+				consultation,
+				neurocognitive_test,
+				value
+			)
+			VALUES (
+				:consultation,
+				:neurocognitiveTest,
+				:value
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':neurocognitiveTest' => $neurocognitiveTest,
+			':value' => $value
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
-	 * TODO: comments
+	 * Creates a treatment of a consultation.
+	 * 
+	 * It receives the consultation's ID and the treatment's ID.
 	 */
 	public function createConsultationTreatment($consultation, $treatment) {
-		// TODO: implement
+		// Defines the statement
+		$statement = '
+			INSERT INTO consultations_treatments (
+				consultation,
+				treatment
+			)
+			VALUES (
+				:consultation,
+				:treatment
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation,
+			':treatment' => $treatment
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
@@ -506,7 +643,9 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes the backgrounds of a consultation.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function deleteConsultationBackgrounds($consultation) {
 		// Defines the statement
@@ -526,7 +665,9 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes the image tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function deleteConsultationImageTests($consultation) {
 		// Defines the statement
@@ -546,7 +687,9 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes the laboratory tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function deleteConsultationLaboratoryTests($consultation) {
 		// Defines the statement
@@ -566,7 +709,9 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes the medications of a consultation.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function deleteConsultationMedications($consultation) {
 		// Defines the statement
@@ -586,7 +731,9 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes the neurocognitive tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function deleteConsultationNeurocognitiveTests($consultation) {
 		// Defines the statement
@@ -606,7 +753,9 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * TODO: comments
+	 * Deletes the treatments of a consultation.
+	 * 
+	 * It receives the consultation's ID.
 	 */
 	public function deleteConsultationTreatments($consultation) {
 		// Defines the statement
@@ -632,6 +781,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function deleteDiagnosis($id) {
 		$this->deleteEntity('diagnoses', $id);
+	}
+	
+	/*
+	 * Deletes a file.
+	 * 
+	 * It receives the file's ID.
+	 */
+	public function deleteFile($id) {
+		$this->deleteEntity('files', $id);
 	}
 	
 	/*
@@ -677,6 +835,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function deletePatient($id) {
 		$this->deleteEntity('patients', $id);
+	}
+	
+	/*
+	 * Deletes a study.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function deleteStudy($id) {
+		$this->deleteEntity('studies', $id);
 	}
 	
 	/*
@@ -1245,6 +1412,31 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Returns a non-deleted study. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function getNonDeletedStudy($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'is_deleted',
+			'consultation',
+			'creator',
+			'experiment',
+			'input',
+			'last_editor',
+			'report',
+			'creation_datetime',
+			'last_edition_datetime',
+			'observations'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('non_deleted_studies', $columnsToSelect, $id);
+	}
+	
+	/*
 	 * Returns a non-deleted treatment. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the treatment's ID.
@@ -1281,6 +1473,30 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Sets the parameters
 		$parameters = [
 			':patient' => $patient
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-deleted files of a study.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function getStudyNonDeletedFiles($study) {
+		// Defines the statement
+		$statement = '
+			SELECT file AS id
+			FROM studies_non_deleted_files
+			WHERE study = :study
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':study' => $study
 		];
 		
 		// Executes the statement
@@ -1719,7 +1935,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 * 
 	 * It receives the entity's table and ID.
 	 */
-	private function deleteEntity($table, $id) {
+	protected function deleteEntity($table, $id) {
 		// Defines the statement
 		$statement = '
 			UPDATE ' . $table . '

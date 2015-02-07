@@ -3,27 +3,26 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers an interface to perform operations on image tests.
+ * This class offers operations to manage image tests.
  */
 class ImageTestModel extends EntityModel {
 	
 	/*
-	 * Creates an entity of the type of this model.
+	 * Creates an image test.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the image test's data.
 	 */
-	public function create() {
+	public function create($id, $creator, $name, $dataTypeDescriptor) {
 		$app = $this->app;
 		
 		// Creates the image test
-		$function = [ $app->businessLogicDatabase, 'createImageTest' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->createImageTest($id, $creator, $name, $dataTypeDescriptor);
 	}
 	
 	/*
-	 * Deletes an entity of the type of this model.
+	 * Deletes an image test.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the image test's ID.
 	 */
 	public function delete($id) {
 		$app = $this->app;
@@ -33,22 +32,21 @@ class ImageTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Edits an entity of the type of this model.
+	 * Edits an image test.
 	 * 
-	 * It receives the entity's data.
+	 * It receives the image test's data.
 	 */
-	public function edit() {
+	public function edit($id, $lastEditor, $name, $dataTypeDescriptor) {
 		$app = $this->app;
 		
 		// Edits the image test
-		$function = [ $app->businessLogicDatabase, 'editImageTest' ];
-		call_user_func_array($function, func_get_args());
+		$app->businessLogicDatabase->editImageTest($id, $lastEditor, $name, $dataTypeDescriptor);
 	}
 	
 	/*
-	 * Determines whether an entity exists.
+	 * Determines whether an image test exists.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the image test's ID.
 	 */
 	public function exists($id) {
 		$app = $this->app;
@@ -58,20 +56,19 @@ class ImageTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Filters an entity for presentation and returns the result.
+	 * Filters an image test for presentation and returns the result.
 	 * 
-	 * It receives the entity.
+	 * It receives the image test.
 	 */
-	public function filter($entity) {
+	public function filter($imageTest) {
 		// TODO: implement
-		return $entity;
+		return $imageTest;
 	}
 	
 	/*
-	 * Returns an entity of the type of this model. If it doesn't exist, null is
-	 * returned.
+	 * Returns an image test. If it doesn't exist, null is returned.
 	 * 
-	 * It receives the entity's ID.
+	 * It receives the image test's ID.
 	 */
 	public function get($id) {
 		$app = $this->app;
@@ -81,9 +78,8 @@ class ImageTestModel extends EntityModel {
 	}
 	
 	/*
-	 * Searches entities of the type of this model. It returns an array
-	 * containing, as the first element, the total number of results, and as the
-	 * second, the results ready for presentation that were found in the page.
+	 * Searches image tests. It returns an array containing the total number of
+	 * results and the results found in the page, ready for presentation.
 	 * 
 	 * It receives an expression, the page and a sorting.
 	 */

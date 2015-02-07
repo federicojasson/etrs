@@ -74,23 +74,4 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Checks the existence of a laboratory test. If it doesn't exist, the
-	 * execution is halted.
-	 * 
-	 * It receives the laboratory test's ID.
-	 */
-	private function checkLaboratoryTestExistence($id) {
-		$app = $this->app;
-		
-		if (! $app->data->laboratoryTest->exists($id)) {
-			// The laboratory test doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_LABORATORY_TEST
-			]);
-		}
-	}
-	
 }

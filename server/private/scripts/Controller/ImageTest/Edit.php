@@ -74,23 +74,4 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
-	/*
-	 * Checks the existence of an image test. If it doesn't exist, the execution
-	 * is halted.
-	 * 
-	 * It receives the image test's ID.
-	 */
-	private function checkImageTestExistence($id) {
-		$app = $this->app;
-		
-		if (! $app->data->imageTest->exists($id)) {
-			// The image test doesn't exist
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_NOT_FOUND, [
-				'error' => ERROR_NON_EXISTENT_IMAGE_TEST
-			]);
-		}
-	}
-	
 }
