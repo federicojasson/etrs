@@ -1,7 +1,7 @@
 {
 	"identity": {
-		"emailAddress": "TODO: define email address",
-		"name": "ETRS"
+		"name": "ETRS",
+		"emailAddress": "TODO: define email address"
 	},
 	
 	"smtp": {

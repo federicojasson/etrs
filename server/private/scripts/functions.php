@@ -5,23 +5,6 @@
  */
 
 /*
- * Applies a function to all the elements of an array and returns the result.
- * 
- * It receives the array and the function to apply.
- */
-function applyFunctionToArray($array, $function) {
-	// Initializes the new array
-	$newArray = [];
-	
-	foreach ($array as $value) {
-		// Applies the function and pushes the result into the new array
-		$newArray[] = call_user_func($function, $value);
-	}
-	
-	return $newArray;
-}
-
-/*
  * Determines whether an array contains duplicate elements.
  * 
  * It receives the array.
@@ -90,19 +73,6 @@ function getStringLength($string) {
 }
 
 /*
- * TODO: comments
- */
-function hexadecimalsToBinaries($hexadecimals) {
-	// TODO: comment and order
-	$binaries = [];
-	foreach ($hexadecimals as $hexadecimal) {
-		$binaries[] = hex2bin($hexadecimal);
-	}
-
-	return $binaries;
-}
-
-/*
  * Determines whether an array is empty.
  * 
  * It receives the array.
@@ -157,6 +127,36 @@ function isStringInteger($string) {
 }
 
 /*
+ * Converts the IDs of a set of objects from hexadecimal to binary. It assumes
+ * that the objects are associative arrays containing the key 'id'.
+ * 
+ * It receives the objects.
+ */
+function objectIdsToBinary($objects) {
+	// Converts the IDs from hexadecimal to binary
+	foreach ($objects as &$object) {
+		$object['id'] = hex2bin($object['id']);
+	}
+
+	return $objects;
+}
+
+/*
+ * Converts the IDs of a set of objects from binary to hexadecimal. It assumes
+ * that the objects are associative arrays containing the key 'id'.
+ * 
+ * It receives the objects.
+ */
+function objectIdsToHexadecimal($objects) {
+	// Converts the IDs from binary to hexadecimal
+	foreach ($objects as &$object) {
+		$object['id'] = bin2hex($object['id']);
+	}
+
+	return $objects;
+}
+
+/*
  * Reads the content of a JSON file, decodes it and returns the result.
  * 
  * It receives the file's path.
@@ -198,6 +198,20 @@ function stringToBoolean($string) {
 }
 
 /*
+ * Converts a set of strings from hexadecimal to binary.
+ * 
+ * It receives the strings.
+ */
+function stringsToBinary($strings) {
+	// Converts the strings from hexadecimal to binary
+	foreach ($strings as &$string) {
+		$string = hex2bin($string);
+	}
+	
+	return $strings;
+}
+
+/*
  * Trims a string, removing duplicate, leading and trailing whitespaces.
  * 
  * It receives the string.
@@ -208,20 +222,4 @@ function trimString($string) {
 	
 	// Removes leading and trailing whitespaces and returns the result
 	return trim($string, ' ');
-}
-
-/*
- * TODO: comments
- */
-function idsToBinary($pairs) { // TODO: rename?  // TODO: reorder in file according to name
-	// TODO: comment and order
-	$newPairs = [];
-	foreach ($pairs as $pair) {
-		$newPairs[] = [
-			'id' => hex2bin($pair['id']),
-			'value' => $pair['value']
-		];
-	}
-
-	return $newPairs;
 }

@@ -98,11 +98,11 @@ class NeurocognitiveTestModel extends EntityModel {
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
+		// Converts the IDs to hexadecimal
+		$neurocognitiveTests = objectIdsToHexadecimal($neurocognitiveTests);
+		
 		// Gets the IDs
 		$ids = array_column($neurocognitiveTests, 'id');
-		
-		// Converts the IDs to hexadecimal
-		$ids = applyFunctionToArray($ids, 'bin2hex');
 		
 		return [ $foundRows, $ids ];
 	}

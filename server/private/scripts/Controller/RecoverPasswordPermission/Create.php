@@ -36,6 +36,9 @@ class Create extends \App\Controller\SpecializedSecureController {
 		// Generates a random ID
 		$id = $app->cryptography->generateRandomId();
 		
+		// Gets the user
+		$user = $app->data->user->get($credentials['id']);
+		
 		// Generates a random password
 		$password = $app->cryptography->generateRandomPassword();
 		
@@ -43,10 +46,16 @@ class Create extends \App\Controller\SpecializedSecureController {
 		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
 		
 		// Creates the recover password permission
-		$app->data->recoverPasswordPermission->create($id, $credentials['id'], $passwordHash, $salt, $keyStretchingIterations);
+		$app->data->recoverPasswordPermission->create($id, $user['id'], $passwordHash, $salt, $keyStretchingIterations);
+		
+		// Initializes the recipient of the email
+		$recipient = [
+			'name' => $user['firstName'] . $user['lastName'],
+			'emailAddress' => $user['emailAddress']
+		];
 		
 		// Creates a recover password email
-		$email = $app->emails->createRecoverPasswordEmail(); // TODO
+		$email = $app->emails->createRecoverPasswordEmail($id, $password, $recipient); // TODO: create email (what parameters?)
 		
 		// Sends the email
 		$delivered = $email->send();

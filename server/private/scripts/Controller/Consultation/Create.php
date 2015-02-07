@@ -28,12 +28,12 @@ class Create extends \App\Controller\SpecializedSecureController {
 		$reasons = $this->getInput('reasons', 'trimString');
 		$indications = $this->getInput('indications', 'trimString');
 		$observations = $this->getInput('observations', 'trimString');
-		$backgrounds = $this->getinput('backgrounds', 'hexadecimalsToBinaries');
-		$imageTests = $this->getinput('imageTests', 'idsToBinary'); // TODO: idsToBinary?
-		$laboratoryTests = $this->getinput('laboratoryTests', 'idsToBinary'); // TODO: idsToBinary?
-		$medications = $this->getinput('medications', 'hexadecimalsToBinaries');
-		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'idsToBinary'); // TODO: idsToBinary?
-		$treatments = $this->getinput('treatments', 'hexadecimalsToBinaries');
+		$backgrounds = $this->getinput('backgrounds', 'stringsToBinary');
+		$imageTests = $this->getinput('imageTests', 'objectIdsToBinary');
+		$laboratoryTests = $this->getinput('laboratoryTests', 'objectIdsToBinary');
+		$medications = $this->getinput('medications', 'stringsToBinary');
+		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'objectIdsToBinary');
+		$treatments = $this->getinput('treatments', 'stringsToBinary');
 		
 		if (! is_null($clinicalImpression)) {
 			// Checks the existence of the clinical impression
@@ -190,9 +190,9 @@ class Create extends \App\Controller\SpecializedSecureController {
 		}
 		
 		// Gets the input
-		$imageTests = $this->getInput('imageTests', 'idsToBinary'); // TODO: idsToBinary?
-		$laboratoryTests = $this->getInput('laboratoryTests', 'idsToBinary'); // TODO: idsToBinary?
-		$neurocognitiveTests = $this->getInput('neurocognitiveTests', 'idsToBinary'); // TODO: idsToBinary?
+		$imageTests = $this->getInput('imageTests', 'objectIdsToBinary');
+		$laboratoryTests = $this->getInput('laboratoryTests', 'objectIdsToBinary');
+		$neurocognitiveTests = $this->getInput('neurocognitiveTests', 'objectIdsToBinary');
 		
 		// Validates the values of the image tests
 		foreach ($imageTests as $imageTest) {

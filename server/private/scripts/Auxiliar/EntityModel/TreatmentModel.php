@@ -97,11 +97,11 @@ class TreatmentModel extends EntityModel {
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
+		// Converts the IDs to hexadecimal
+		$treatments = objectIdsToHexadecimal($treatments);
+		
 		// Gets the IDs
 		$ids = array_column($treatments, 'id');
-		
-		// Converts the IDs to hexadecimal
-		$ids = applyFunctionToArray($ids, 'bin2hex');
 		
 		return [ $foundRows, $ids ];
 	}

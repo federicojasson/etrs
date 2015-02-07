@@ -97,11 +97,11 @@ class ImageTestModel extends EntityModel {
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
+		// Converts the IDs to hexadecimal
+		$imageTests = objectIdsToHexadecimal($imageTests);
+		
 		// Gets the IDs
 		$ids = array_column($imageTests, 'id');
-		
-		// Converts the IDs to hexadecimal
-		$ids = applyFunctionToArray($ids, 'bin2hex');
 		
 		return [ $foundRows, $ids ];
 	}

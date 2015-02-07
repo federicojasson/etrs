@@ -19,7 +19,54 @@ class Create extends \App\Controller\SpecializedSecureController {
 	protected function call() {
 		$app = $this->app;
 		
-		// TODO: implement
+		// Gets the input
+		$credentials = $this->getInput('credentials');
+		$recipient = $this->getInput('recipient');
+		$role = $this->getInput('role');
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($signedInUser['id'], $credentials['password']);
+		
+		// Sets an output
+		$this->setOutput('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user was not authenticated
+			return;
+		}
+		
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
+		
+		// Generates a random password
+		$password = $app->cryptography->generateRandomPassword();
+		
+		// Computes the hash of the password
+		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
+		
+		// Creates the sign up permission
+		$app->data->signUpPermission->create($id, $signedInUser['id'], $passwordHash, $salt, $keyStretchingIterations, $role);
+		
+		// Creates a sign up email
+		$email = $app->emails->createSignUpEmail($id, $password, $recipient); // TODO: create email (what parameters?)
+		
+		// Sends the email
+		$delivered = $email->send();
+		
+		if (! $delivered) {
+			// The email could not be delivered
+			
+			// Deletes the just created sign up permission
+			$app->data->signUpPermission->delete($id);
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_UNDELIVERED_EMAIL
+			]);
+		}
 	}
 	
 	/*
@@ -36,12 +83,18 @@ class Create extends \App\Controller\SpecializedSecureController {
 				})
 			]),
 			
+			'recipient' => new JsonObjectDescriptor([
+				'name' => new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isValidString($input, 0);
+				}),
+				
+				'emailAddress' => new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isEmailAddress($input);
+				})
+			]),
+			
 			'role' => new JsonValueDescriptor(function($input) use ($app) {
 				return $app->inputValidator->isUserRole($input);
-			}),
-			
-			'name' => new JsonValueDescriptor(function($input) use ($app) {
-				return $app->inputValidator->isValidText($input, 0, 97);
 			})
 		]);
 		

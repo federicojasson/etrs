@@ -109,11 +109,11 @@ class PatientModel extends EntityModel {
 		// Gets the number of rows found
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
+		// Converts the IDs to hexadecimal
+		$patients = objectIdsToHexadecimal($patients);
+		
 		// Gets the IDs
 		$ids = array_column($patients, 'id');
-		
-		// Converts the IDs to hexadecimal
-		$ids = applyFunctionToArray($ids, 'bin2hex');
 		
 		return [ $foundRows, $ids ];
 	}

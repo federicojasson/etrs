@@ -117,6 +117,48 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 
 	/*
+	 * Creates a sign up permission.
+	 * 
+	 * It receives the sign up permission's data.
+	 */
+	public function createSignUpPermission($id, $creator, $passwordHash, $salt, $keyStretchingIterations, $role) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO sign_up_permissions (
+				id,
+				creator,
+				creation_datetime,
+				password_hash,
+				salt,
+				key_stretching_iterations,
+				role
+			)
+			VALUES (
+				:id,
+				:creator,
+				UTC_TIMESTAMP(),
+				:passwordHash,
+				:salt,
+				:keyStretchingIterations,
+				:role
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':passwordHash' => $passwordHash,
+			':salt' => $salt,
+			':keyStretchingIterations' => $keyStretchingIterations,
+			':role' => $role
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+
+	/*
 	 * Creates a user.
 	 * 
 	 * It receives the user's data.
@@ -211,6 +253,15 @@ class WebServerDatabase extends SpecializedDatabase {
 	 */
 	public function deleteSession($id) {
 		$this->deleteEntity('sessions', $id);
+	}
+	
+	/*
+	 * Deletes a sign up permission.
+	 * 
+	 * It receives the sign up permission's ID.
+	 */
+	public function deleteSignUpPermission($id) {
+		$this->deleteEntity('sign_up_permissions', $id);
 	}
 	
 	/*
