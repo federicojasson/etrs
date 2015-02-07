@@ -126,6 +126,19 @@ class InputValidator extends Helper {
 	}
 	
 	/*
+	 * Determines whether an input is a user role.
+	 * 
+	 * It receives the input.
+	 */
+	public function isUserRole($input) {
+		return isElementInArray($input, [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
+		]);
+	}
+	
+	/*
 	 * Determines whether an input is a valid integer.
 	 * 
 	 * It receives the input, the minimum allowed value and, optionally, the

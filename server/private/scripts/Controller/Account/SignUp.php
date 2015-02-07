@@ -29,7 +29,7 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		$emailAddress = $this->getInput('emailAddress');
 		
 		// Authenticates the sign up permission
-		$authenticated = $app->authenticator->authenticateSignUpPermissionByPassword($credentials);
+		$authenticated = $app->authenticator->authenticateSignUpPermissionByPassword($credentials['id'], $credentials['password']);
 		
 		// Sets an output
 		$this->setOutput('authenticated', $authenticated);

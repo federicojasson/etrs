@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Account;
+namespace App\Controller\RecoverPasswordPermission;
 
 use App\Auxiliar\JsonStructureDescriptor\JsonObjectDescriptor;
 use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
@@ -8,10 +8,10 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/account/sign-in
+ * URL:		/server/recover-password-permission/create
  * Method:	POST
  */
-class SignIn extends \App\Controller\SpecializedSecureController {
+class Create extends \App\Controller\SpecializedSecureController {
 	
 	/*
 	 * Calls the controller.
@@ -23,7 +23,7 @@ class SignIn extends \App\Controller\SpecializedSecureController {
 		$credentials = $this->getInput('credentials');
 		
 		// Authenticates the user
-		$authenticated = $app->authenticator->authenticateUserByPassword($credentials['id'], $credentials['password']);
+		$authenticated = $app->authenticator->authenticateUserByEmailAddress($credentials['id'], $credentials['emailAddress']);
 		
 		// Sets an output
 		$this->setOutput('authenticated', $authenticated);
@@ -33,8 +33,35 @@ class SignIn extends \App\Controller\SpecializedSecureController {
 			return;
 		}
 		
-		// Signs in the user in the system
-		$app->authentication->signInUser($credentials['id']);
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
+		
+		// Generates a random password
+		$password = $app->cryptography->generateRandomPassword();
+		
+		// Computes the hash of the password
+		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
+		
+		// Creates the recover password permission
+		$app->data->recoverPasswordPermission->create($id, $credentials['id'], $passwordHash, $salt, $keyStretchingIterations);
+		
+		// Creates a recover password email
+		$email = $app->emails->createRecoverPasswordEmail(); // TODO
+		
+		// Sends the email
+		$delivered = $email->send();
+		
+		if (! $delivered) {
+			// The email could not be delivered
+			
+			// Deletes the just created recover password permission
+			$app->data->recoverPasswordPermission->delete($id);
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_UNDELIVERED_EMAIL
+			]);
+		}
 	}
 	
 	/*
@@ -50,7 +77,7 @@ class SignIn extends \App\Controller\SpecializedSecureController {
 					return $app->inputValidator->isValidString($input, 1);
 				}),
 				
-				'password' => new JsonValueDescriptor(function($input) use ($app) {
+				'emailAddress' => new JsonValueDescriptor(function($input) use ($app) {
 					return $app->inputValidator->isValidString($input, 1);
 				})
 			])

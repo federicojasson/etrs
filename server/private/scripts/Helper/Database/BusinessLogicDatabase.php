@@ -17,7 +17,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO backgrounds (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -56,7 +56,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO clinical_impressions (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -95,7 +95,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO consultations (
 				id,
-				is_deleted,
+				deleted,
 				clinical_impression,
 				creator,
 				diagnosis,
@@ -331,7 +331,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO diagnoses (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -370,7 +370,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO image_tests (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -412,7 +412,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO laboratory_tests (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -454,7 +454,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO medications (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -493,7 +493,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO neurocognitive_tests (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -535,7 +535,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO patients (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -586,7 +586,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			INSERT INTO treatments (
 				id,
-				is_deleted,
+				deleted,
 				creator,
 				last_editor,
 				creation_datetime,
@@ -1192,7 +1192,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1214,7 +1214,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1236,7 +1236,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'clinical_impression',
 			'creator',
 			'diagnosis',
@@ -1263,7 +1263,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1284,7 +1284,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1306,7 +1306,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1329,7 +1329,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1351,7 +1351,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1373,7 +1373,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1395,7 +1395,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1420,7 +1420,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'consultation',
 			'creator',
 			'experiment',
@@ -1445,7 +1445,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the columns to select
 		$columnsToSelect = [
 			'id',
-			'is_deleted',
+			'deleted',
 			'creator',
 			'last_editor',
 			'creation_datetime',
@@ -1913,9 +1913,8 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * Connects to the database.
-	 * 
-	 * It returns a PDO instance representing the connection.
+	 * Connects to the database and returns a PDO instance representing the
+	 * connection.
 	 */
 	protected function connect() {
 		$app = $this->app;
@@ -1939,7 +1938,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the statement
 		$statement = '
 			UPDATE ' . $table . '
-			SET is_deleted = TRUE
+			SET deleted = TRUE
 			WHERE id = :id
 			LIMIT 1
 		';

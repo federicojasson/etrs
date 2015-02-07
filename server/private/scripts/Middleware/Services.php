@@ -474,6 +474,22 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\Patient\Search()
 		);
 
+		// URL:		/server/recover-password-permission/create
+		// Method:	POST
+		$app->services->define(
+			'/recover-password-permission/create',
+			'POST',
+			new \App\Controller\RecoverPasswordPermission\Create()
+		);
+
+		// URL:		/server/sign-up-permission/create
+		// Method:	POST
+		$app->services->define(
+			'/sign-up-permission/create',
+			'POST',
+			new \App\Controller\SignUpPermission\Create()
+		);
+
 //		// URL:		/server/study/create
 //		// Method:	POST
 //		$app->services->define(

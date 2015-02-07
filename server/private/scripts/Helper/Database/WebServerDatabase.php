@@ -78,6 +78,45 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 
 	/*
+	 * Creates a recover password permission.
+	 * 
+	 * It receives the recover password permission's data.
+	 */
+	public function createRecoverPasswordPermission($id, $user, $passwordHash, $salt, $keyStretchingIterations) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO recover_password_permissions (
+				id,
+				user,
+				creation_datetime,
+				password_hash,
+				salt,
+				key_stretching_iterations
+			)
+			VALUES (
+				:id,
+				:user,
+				UTC_TIMESTAMP(),
+				:passwordHash,
+				:salt,
+				:keyStretchingIterations
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':user' => $user,
+			':passwordHash' => $passwordHash,
+			':salt' => $salt,
+			':keyStretchingIterations' => $keyStretchingIterations
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+
+	/*
 	 * Creates a user.
 	 * 
 	 * It receives the user's data.
@@ -154,6 +193,15 @@ class WebServerDatabase extends SpecializedDatabase {
 		
 		// Executes the statement
 		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Deletes a recover password permission.
+	 * 
+	 * It receives the recover password permission's ID.
+	 */
+	public function deleteRecoverPasswordPermission($id) {
+		$this->deleteEntity('recover_password_permissions', $id);
 	}
 	
 	/*
@@ -299,9 +347,8 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
-	 * Connects to the database.
-	 * 
-	 * It returns a PDO instance representing the connection.
+	 * Connects to the database and returns a PDO instance representing the
+	 * connection.
 	 */
 	protected function connect() {
 		$app = $this->app;

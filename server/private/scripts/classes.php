@@ -131,6 +131,12 @@ require 'private/scripts/Controller/Patient/Edit.php';
 require 'private/scripts/Controller/Patient/Get.php';
 require 'private/scripts/Controller/Patient/Search.php';
 
+// App\Controller\RecoverPasswordPermission
+require 'private/scripts/Controller/RecoverPasswordPermission/Create.php';
+
+// App\Controller\SignUpPermission
+require 'private/scripts/Controller/SignUpPermission/Create.php';
+
 // App\Controller\Study
 //require 'private/scripts/Controller/Study/Create.php';
 //require 'private/scripts/Controller/Study/Delete.php';
@@ -155,6 +161,7 @@ require 'private/scripts/Helper/Authentication.php';
 require 'private/scripts/Helper/Authenticator.php';
 require 'private/scripts/Helper/Cryptography.php';
 require 'private/scripts/Helper/Data.php';
+require 'private/scripts/Helper/Emails.php';
 require 'private/scripts/Helper/Files.php';
 require 'private/scripts/Helper/InputValidator.php';
 require 'private/scripts/Helper/Parameters.php';

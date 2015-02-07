@@ -76,9 +76,8 @@ abstract class Database extends \App\Helper\Helper {
 	}
 	
 	/*
-	 * Connects to the database.
-	 * 
-	 * It returns a PDO instance representing the connection.
+	 * Connects to the database and returns a PDO instance representing the
+	 * connection.
 	 */
 	protected abstract function connect();
 	

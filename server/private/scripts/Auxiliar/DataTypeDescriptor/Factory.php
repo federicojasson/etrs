@@ -47,7 +47,7 @@ namespace App\Auxiliar\DataTypeDescriptor;
 class Factory {
 	
 	/*
-	 * Creates a DataTypeDescriptor instance.
+	 * Creates and returns a DataTypeDescriptor instance.
 	 * 
 	 * It receives a formatted descriptor.
 	 * 

@@ -8,6 +8,30 @@ namespace App\Auxiliar\EntityModel;
 class RecoverPasswordPermissionModel extends EntityModel {
 	
 	/*
+	 * Creates a recover password permission.
+	 * 
+	 * It receives the recover password permission's data.
+	 */
+	public function create($id, $user, $passwordHash, $salt, $keyStretchingIterations) {
+		$app = $this->app;
+		
+		// Creates the recover password permission
+		$app->webServerDatabase->createRecoverPasswordPermission($id, $user, $passwordHash, $salt, $keyStretchingIterations);
+	}
+	
+	/*
+	 * Deletes a recover password permission.
+	 * 
+	 * It receives the recover password permission's ID.
+	 */
+	public function delete($id) {
+		$app = $this->app;
+		
+		// Deletes the recover password permission
+		$app->webServerDatabase->deleteRecoverPasswordPermission($id);
+	}
+	
+	/*
 	 * Returns a recover password permission. If it doesn't exist, null is
 	 * returned.
 	 * 

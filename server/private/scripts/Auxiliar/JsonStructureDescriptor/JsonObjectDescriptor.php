@@ -27,9 +27,9 @@ class JsonObjectDescriptor extends JsonStructureDescriptor {
 			}
 			
 			// Validates the property recursively
-			$isValid = $jsonStructureDescriptor->isValidInput($input[$property]);
+			$valid = $jsonStructureDescriptor->isValidInput($input[$property]);
 			
-			if (! $isValid) {
+			if (! $valid) {
 				// The property is invalid
 				return false;
 			}

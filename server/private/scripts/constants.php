@@ -5,6 +5,7 @@
  */
 
 // TODO: some constant could be parameters
+// TODO: order better the individuals items
 
 define('DATA_TYPE_BOOLEAN', 'boolean');
 define('DATA_TYPE_INTEGER_FIX_VALUES', 'integer_fix_values');
@@ -29,6 +30,7 @@ define('ERROR_NON_EXISTENT_TREATMENT', 'NON_EXISTENT_TREATMENT');
 define('ERROR_NON_EXISTENT_USER', 'NON_EXISTENT_USER');
 define('ERROR_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
 define('ERROR_UNDEFINED_SERVICE', 'UNDEFINED_SERVICE');
+define('ERROR_UNDELIVERED_EMAIL', 'UNDELIVERED_EMAIL');
 define('ERROR_UNEXPECTED_ERROR', 'UNEXPECTED_ERROR');
 
 define('GENDER_FEMALE', 'f');
@@ -49,6 +51,8 @@ define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
 
 define('RANDOM_ID_LENGTH', 16);
+
+define('RANDOM_PASSWORD_LENGTH', 64);
 
 define('SALT_LENGTH', 64);
 

@@ -19,7 +19,7 @@ class Extensions extends \Slim\Middleware {
 	}
 	
 	/*
-	 * Creates the Request extension.
+	 * Creates and returns the Request extension.
 	 * 
 	 * It receives the configurations.
 	 */
@@ -28,7 +28,7 @@ class Extensions extends \Slim\Middleware {
 	}
 	
 	/*
-	 * Creates the Response extension.
+	 * Creates and returns the Response extension.
 	 */
 	public function createResponseExtension() {
 		return new \App\Extension\Response();

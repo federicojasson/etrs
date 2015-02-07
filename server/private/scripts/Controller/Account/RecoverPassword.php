@@ -24,7 +24,7 @@ class RecoverPassword extends \App\Controller\SpecializedSecureController {
 		$password = $this->getInput('password');
 		
 		// Authenticates the recover password permission
-		$authenticated = $app->authenticator->authenticateRecoverPasswordPermissionByPassword($credentials);
+		$authenticated = $app->authenticator->authenticateRecoverPasswordPermissionByPassword($credentials['id'], $credentials['password']);
 		
 		// Sets an output
 		$this->setOutput('authenticated', $authenticated);

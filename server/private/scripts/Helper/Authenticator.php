@@ -11,14 +11,10 @@ class Authenticator extends Helper {
 	 * Authenticates a recover password permission by its password and returns
 	 * the result.
 	 * 
-	 * It receives the recover password permission's credentials.
+	 * It receives the recover password permission's ID and password.
 	 */
-	public function authenticateRecoverPasswordPermissionByPassword($credentials) {
+	public function authenticateRecoverPasswordPermissionByPassword($id, $password) {
 		$app = $this->app;
-		
-		// Gets the recover password permission's ID and password
-		$id = $credentials['id'];
-		$password = $credentials['password'];
 		
 		// Gets the recover password permission
 		$recoverPasswordPermission = $app->data->recoverPasswordPermission->get($id);
@@ -45,14 +41,10 @@ class Authenticator extends Helper {
 	 * Authenticates a sign up permission by its password and returns the
 	 * result.
 	 * 
-	 * It receives the sign up permission's credentials.
+	 * It receives the sign up permission's ID and password.
 	 */
-	public function authenticateSignUpPermissionByPassword($credentials) {
+	public function authenticateSignUpPermissionByPassword($id, $password) {
 		$app = $this->app;
-		
-		// Gets the sign up permission's ID and password
-		$id = $credentials['id'];
-		$password = $credentials['password'];
 		
 		// Gets the sign up permission
 		$signUpPermission = $app->data->signUpPermission->get($id);
@@ -76,16 +68,32 @@ class Authenticator extends Helper {
 	}
 	
 	/*
-	 * Authenticates a user by its password and returns the result.
+	 * Authenticates a user by its email address and returns the result.
 	 * 
-	 * It receives the user's credentials.
+	 * It receives the user's ID and email address.
 	 */
-	public function authenticateUserByPassword($credentials) {
+	public function authenticateUserByEmailAddress($id, $emailAddress) {
 		$app = $this->app;
 		
-		// Gets the user's ID and password
-		$id = $credentials['id'];
-		$password = $credentials['password'];
+		// Gets the user
+		$user = $app->data->user->get($id);
+		
+		if (is_null($user)) {
+			// The user doesn't exist
+			return false;
+		}
+		
+		// Compares the email address with the stored one and returns the result
+		return $emailAddress === $user['emailAddress'];
+	}
+	
+	/*
+	 * Authenticates a user by its password and returns the result.
+	 * 
+	 * It receives the user's ID and password.
+	 */
+	public function authenticateUserByPassword($id, $password) {
+		$app = $this->app;
 		
 		// Gets the user
 		$user = $app->data->user->get($id);

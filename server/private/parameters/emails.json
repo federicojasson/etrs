@@ -1,15 +1,15 @@
 {
+	"identity": {
+		"emailAddress": "TODO: define email address",
+		"name": "ETRS"
+	},
+	
 	"smtp": {
 		"host": "TODO: define",
 		"port": "TODO: define",
 		"protocol": "tls",
 		"username": "TODO: define",
 		"password": "TODO: define"
-	},
-	
-	"sender": {
-		"emailAddress": "TODO: define email address",
-		"name": "ETRS"
 	},
 	
 	"recoverPasswordEmail": {
