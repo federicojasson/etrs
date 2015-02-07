@@ -48,7 +48,7 @@ abstract class Database extends \App\Helper\Helper {
 	/*
 	 * Starts a read-only transaction.
 	 */
-	public function startReadOnlyTransaction() {
+	public function startReadOnlyTransaction() { // TODO: remove if not used
 		$app = $this->app;
 		
 		try {
