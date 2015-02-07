@@ -90,6 +90,19 @@ function getStringLength($string) {
 }
 
 /*
+ * TODO: comments
+ */
+function hexadecimalsToBinaries($hexadecimals) {
+	// TODO: comment and order
+	$binaries = [];
+	foreach ($hexadecimals as $hexadecimal) {
+		$binaries[] = hex2bin($hexadecimal);
+	}
+
+	return $binaries;
+}
+
+/*
  * Determines whether an array is empty.
  * 
  * It receives the array.
@@ -113,6 +126,11 @@ function isElementInArray($element, $array) {
  * It receives the array.
  */
 function isSequentialArray($array) {
+	if (isArrayEmpty($array)) {
+		// The array is empty
+		return true;
+	}
+	
 	// Initializes an array with the sequential indices
 	$indices = range(0, count($array) - 1);
 
@@ -190,4 +208,20 @@ function trimString($string) {
 	
 	// Removes leading and trailing whitespaces and returns the result
 	return trim($string, ' ');
+}
+
+/*
+ * TODO: comments
+ */
+function idsToBinary($pairs) { // TODO: rename?  // TODO: reorder in file according to name
+	// TODO: comment and order
+	$newPairs = [];
+	foreach ($pairs as $pair) {
+		$newPairs[] = [
+			'id' => hex2bin($pair['id']),
+			'value' => $pair['value']
+		];
+	}
+
+	return $newPairs;
 }

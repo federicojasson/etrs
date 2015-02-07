@@ -118,6 +118,8 @@ class ConsultationModel extends EntityModel {
 	private function associateData($id, $backgrounds, $imageTests, $laboratoryTests, $medications, $neurocognitiveTests, $treatments) {
 		$app = $this->app;
 		
+		// TODO: how to handle duplicates?
+		
 		// Associates the backgrounds
 		foreach ($backgrounds as $background) {
 			$app->businessLogicDatabase->createConsultationBackground($id, $background);

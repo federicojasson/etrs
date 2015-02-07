@@ -8,8 +8,8 @@ namespace App\Helper;
 class Authentication extends Helper {
 	
 	/*
-	 * Returns the signed in user. If the user doesn't exist, the user is signed
-	 * out and the execution is halted.
+	 * Returns the signed in user. If it doesn't exist, the user is signed out
+	 * and the execution is halted.
 	 */
 	public function getSignedInUser() {
 		$app = $this->app;

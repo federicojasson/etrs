@@ -27,7 +27,7 @@ class ErrorHandlers extends \Slim\Middleware {
 		$app = $this->app;
 		
 		// Logs the event
-		$app->log->error('Unexpected error. Exception\'s message: ' . $exception->getMessage());
+		$app->log->error('Unexpected error. Message: ' . $exception->getMessage());
 		
 		// Halts the execution
 		$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [

@@ -386,29 +386,29 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
-	 * Returns an input.
+	 * Returns the value of an input entry.
 	 * 
-	 * It receives the input's key and, optionally, a filtering function to be
-	 * invoked on the input before it is returned.
+	 * It receives the entry's key and, optionally, a filtering function to be
+	 * invoked on the value before it is returned.
 	 */
 	protected function getInput($key, $filteringFunction = null) {
 		$app = $this->app;
 		
-		// Gets the input
+		// Gets the value
 		$inputs = $app->request->getBody();
-		$input = $inputs[$key];
+		$value = $inputs[$key];
 		
-		if (is_null($input)) {
-			// The input is null
+		if (is_null($value)) {
+			// The value is null
 			return null;
 		}
 		
 		if (! is_null($filteringFunction)) {
 			// Invokes the filtering function
-			$input = call_user_func($filteringFunction, $input);
+			$value = call_user_func($filteringFunction, $value);
 		}
 		
-		return $input;
+		return $value;
 	}
 	
 	/*
@@ -586,6 +586,20 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Validates the value of an image test and returns the result. If the image
+	 * test doesn't exist, the execution is halted.
+	 * 
+	 * It receives the image test's ID and the value to validate.
+	 */
+	protected function validateImageTestValue($id, $value) {
+		// Gets the image test
+		$imageTest = $this->getImageTest($id);
+		
+		// Validates the value and returns the result
+		return $this->validateDataTypeValue($imageTest['dataTypeDescriptor'], $value);
+	}
+	
+	/*
 	 * Validates a JSON request and returns the result.
 	 * 
 	 * If the request is valid, the input is replaced by a decoded version.
@@ -623,6 +637,47 @@ abstract class SpecializedSecureController extends SecureController {
 		$app->request->setBody($input);
 		
 		return true;
+	}
+	
+	/*
+	 * Validates the value of a laboratory test and returns the result. If the
+	 * laboratory test doesn't exist, the execution is halted.
+	 * 
+	 * It receives the laboratory test's ID and the value to validate.
+	 */
+	protected function validateLaboratoryTestValue($id, $value) {
+		// Gets the laboratory test
+		$laboratoryTest = $this->getLaboratoryTest($id);
+		
+		// Validates the value and returns the result
+		return $this->validateDataTypeValue($laboratoryTest['dataTypeDescriptor'], $value);
+	}
+	
+	/*
+	 * Validates the value of a neurocognitive test and returns the result. If
+	 * the neurocognitive test doesn't exist, the execution is halted.
+	 * 
+	 * It receives the neurocognitive test's ID and the value to validate.
+	 */
+	protected function validateNeurocognitiveTestValue($id, $value) {
+		// Gets the neurocognitive test
+		$neurocognitiveTest = $this->getNeurocognitiveTest($id);
+		
+		// Validates the value and returns the result
+		return $this->validateDataTypeValue($neurocognitiveTest['dataTypeDescriptor'], $value);
+	}
+	
+	/*
+	 * Validates the value of a data type and returns the result.
+	 * 
+	 * It receives a formatted descriptor and the value to validate.
+	 */
+	private function validateDataTypeValue($formattedDescriptor, $value) {
+		// Creates the data type descriptor
+		$dataTypeDescriptor = \App\Auxiliar\DataTypeDescriptor\Factory::create($formattedDescriptor);
+		
+		// Determines whether the value is valid
+		return $dataTypeDescriptor->isValidInput($value);
 	}
 	
 }

@@ -24,8 +24,8 @@ class Files extends Helper {
 	}
 	
 	/*
-	 * Checks the existence of a file. If the file doesn't exist, the execution
-	 * is halted.
+	 * Checks the existence of a file. If it doesn't exist, the execution is
+	 * halted.
 	 * 
 	 * It receives the file.
 	 */
@@ -46,8 +46,8 @@ class Files extends Helper {
 	}
 	
 	/*
-	 * Checks the integrity of a file. If the file is corrupted, the execution
-	 * is halted.
+	 * Checks the integrity of a file. If it is corrupted, the execution is
+	 * halted.
 	 * 
 	 * It receives the file.
 	 */

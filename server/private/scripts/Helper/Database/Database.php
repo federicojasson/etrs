@@ -83,8 +83,8 @@ abstract class Database extends \App\Helper\Helper {
 	protected abstract function connect();
 	
 	/*
-	 * Executes a prepared statement and returns the results. If the statement
-	 * is not a query, null is returned.
+	 * Prepares and executes a statement and returns the results. If the
+	 * statement is not a query, null is returned.
 	 * 
 	 * It receives the statement and, optionally, the parameters to prepare it.
 	 */

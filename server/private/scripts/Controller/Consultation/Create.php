@@ -28,12 +28,12 @@ class Create extends \App\Controller\SpecializedSecureController {
 		$reasons = $this->getInput('reasons', 'trimString');
 		$indications = $this->getInput('indications', 'trimString');
 		$observations = $this->getInput('observations', 'trimString');
-		$backgrounds = $this->getinput('backgrounds');
-		$imageTests = $this->getinput('imageTests');
-		$laboratoryTests = $this->getinput('laboratoryTests');
-		$medications = $this->getinput('medications');
-		$neurocognitiveTests = $this->getinput('neurocognitiveTests');
-		$treatments = $this->getinput('treatments');
+		$backgrounds = $this->getinput('backgrounds', 'hexadecimalsToBinaries');
+		$imageTests = $this->getinput('imageTests', 'idsToBinary'); // TODO: idsToBinary?
+		$laboratoryTests = $this->getinput('laboratoryTests', 'idsToBinary'); // TODO: idsToBinary?
+		$medications = $this->getinput('medications', 'hexadecimalsToBinaries');
+		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'idsToBinary'); // TODO: idsToBinary?
+		$treatments = $this->getinput('treatments', 'hexadecimalsToBinaries');
 		
 		if (! is_null($clinicalImpression)) {
 			// Checks the existence of the clinical impression
@@ -63,7 +63,8 @@ class Create extends \App\Controller\SpecializedSecureController {
 			$this->checkTreatmentExistence($treatment);
 		}
 		
-		// TODO: check image, laboratory and neurocognitive tests? what about validation
+		// The image tests, laboratory tests and neurocognitive tests have
+		// already been checked during the input validation
 		
 		// Generates a random ID
 		$id = $app->cryptography->generateRandomId();
@@ -130,11 +131,11 @@ class Create extends \App\Controller\SpecializedSecureController {
 			
 			'imageTests' => new JsonArrayDescriptor(
 				new JsonObjectDescriptor([
-					'id' => new JsonValue(function($input) use ($app) {
+					'id' => new JsonValueDescriptor(function($input) use ($app) {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new JsonValue(function() {
+					'value' => new JsonValueDescriptor(function() {
 						// This input should be validated afterwards using the
 						// data type descriptor
 						return true;
@@ -144,11 +145,11 @@ class Create extends \App\Controller\SpecializedSecureController {
 			
 			'laboratoryTests' => new JsonArrayDescriptor(
 				new JsonObjectDescriptor([
-					'id' => new JsonValue(function($input) use ($app) {
+					'id' => new JsonValueDescriptor(function($input) use ($app) {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new JsonValue(function() {
+					'value' => new JsonValueDescriptor(function() {
 						// This input should be validated afterwards using the
 						// data type descriptor
 						return true;
@@ -164,11 +165,11 @@ class Create extends \App\Controller\SpecializedSecureController {
 			
 			'neurocognitiveTests' => new JsonArrayDescriptor(
 				new JsonObjectDescriptor([
-					'id' => new JsonValue(function($input) use ($app) {
+					'id' => new JsonValueDescriptor(function($input) use ($app) {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new JsonValue(function() {
+					'value' => new JsonValueDescriptor(function() {
 						// This input should be validated afterwards using the
 						// data type descriptor
 						return true;
@@ -183,10 +184,41 @@ class Create extends \App\Controller\SpecializedSecureController {
 			)
 		]);
 		
-		// Validates the JSON request and returns the result
-		return $this->validateJsonRequest($jsonStructureDescriptor);
+		if (! $this->validateJsonRequest($jsonStructureDescriptor)) {
+			// The JSON request is invalid
+			return false;
+		}
 		
-		// TODO: validation
+		// Gets the input
+		$imageTests = $this->getInput('imageTests', 'idsToBinary'); // TODO: idsToBinary?
+		$laboratoryTests = $this->getInput('laboratoryTests', 'idsToBinary'); // TODO: idsToBinary?
+		$neurocognitiveTests = $this->getInput('neurocognitiveTests', 'idsToBinary'); // TODO: idsToBinary?
+		
+		// Validates the values of the image tests
+		foreach ($imageTests as $imageTest) {
+			if (! $this->validateImageTestValue($imageTest['id'], $imageTest['value'])) {
+				// The value is invalid
+				return false;
+			}
+		}
+		
+		// Validates the values of the laboratory tests
+		foreach ($laboratoryTests as $laboratoryTest) {
+			if (! $this->validateLaboratoryTestValue($laboratoryTest['id'], $laboratoryTest['value'])) {
+				// The value is invalid
+				return false;
+			}
+		}
+		
+		// Validates the values of the neurocognitive tests
+		foreach ($neurocognitiveTests as $neurocognitiveTest) {
+			if (! $this->validateNeurocognitiveTestValue($neurocognitiveTest['id'], $neurocognitiveTest['value'])) {
+				// The value is invalid
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	/*
