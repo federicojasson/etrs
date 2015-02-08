@@ -7,8 +7,6 @@ namespace App\Auxiliar\SessionStorageHandler;
  * database.
  * 
  * Implements the SessionStorageHandler interface.
- * 
- * TODO: add IPs on session data (on data level, not column)
  */
 class DatabaseSessionStorageHandler implements SessionStorageHandler {
 	

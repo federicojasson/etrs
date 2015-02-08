@@ -37,6 +37,12 @@ class Session extends \Slim\Middleware {
 		
 		// Starts the session
 		$app->session->start();
+		
+		// Gets the client's IP address
+		$ipAddress = $app->webServer->getClientIpAddress();
+		
+		// Sets a data entry in the session to store the IP address
+		$app->session->setData(SESSION_DATA_IP_ADDRESS, $ipAddress);
 	}
 	
 }

@@ -506,28 +506,12 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\RecoverPasswordPermission\Create()
 		);
 
-		// URL:		/server/recover-password-permission/exists
-		// Method:	POST
-		$app->services->define(
-			'/recover-password-permission/exists',
-			'POST',
-			new \App\Controller\RecoverPasswordPermission\Exists()
-		);
-
 		// URL:		/server/sign-up-permission/create
 		// Method:	POST
 		$app->services->define(
 			'/sign-up-permission/create',
 			'POST',
 			new \App\Controller\SignUpPermission\Create()
-		);
-
-		// URL:		/server/sign-up-permission/exists
-		// Method:	POST
-		$app->services->define(
-			'/sign-up-permission/exists',
-			'POST',
-			new \App\Controller\SignUpPermission\Exists()
 		);
 
 		// URL:		/server/study/create

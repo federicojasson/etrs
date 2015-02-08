@@ -256,6 +256,15 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Deletes a sign up permission.
+	 * 
+	 * It receives the sign up permission's ID.
+	 */
+	public function deleteSignUpPermission($id) {
+		$this->deleteEntity('sign_up_permissions', $id);
+	}
+	
+	/*
 	 * Deletes a user.
 	 * 
 	 * It receives the user's ID.
@@ -410,24 +419,6 @@ class WebServerDatabase extends SpecializedDatabase {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		return $results;
-	}
-	
-	/*
-	 * Determines whether a recover password permission exists.
-	 * 
-	 * It receives the recover password permission's ID.
-	 */
-	public function recoverPasswordPermissionExists($id) {
-		return $this->entityExists('recover_password_permissions', $id);
-	}
-	
-	/*
-	 * Determines whether a sign up permission exists.
-	 * 
-	 * It receives the sign up permission's ID.
-	 */
-	public function signUpPermissionExists($id) {
-		return $this->entityExists('sign_up_permissions', $id);
 	}
 	
 	/*

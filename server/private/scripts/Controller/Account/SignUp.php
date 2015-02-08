@@ -20,7 +20,7 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		// Gets the input
-		$credentials = $this->getInput('credentials');
+		$credentials = $this->getInput('credentials', 'stringsToBinary');
 		$id = $this->getInput('id');
 		$password = $this->getInput('password');
 		$firstName = $this->getInput('firstName', 'trimString');
@@ -48,10 +48,11 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		// Computes the hash of the password
 		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
 		
+		// Deletes the sign up permission
+		$app->data->signUpPermission->delete($signUpPermission['id']);
+		
 		// Signs up the user in the system
 		$app->authentication->signUpUser($id, $signUpPermission['creator'], $passwordHash, $salt, $keyStretchingIterations, $signUpPermission['role'], $firstName, $lastName, $gender, $emailAddress);
-		
-		// TODO: remove permission here or before sign up? o during transaction?
 	}
 	
 	/*
@@ -64,11 +65,11 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'credentials' => new JsonObjectDescriptor([
 				'id' => new JsonValueDescriptor(function($input) use ($app) {
-					return $app->inputValidator->isValidString($input, 1);
+					return $app->inputValidator->isRandomId($input);
 				}),
 				
 				'password' => new JsonValueDescriptor(function($input) use ($app) {
-					return $app->inputValidator->isValidString($input, 1);
+					return $app->inputValidator->isRandomPassword($input);
 				})
 			]),
 			

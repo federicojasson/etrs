@@ -20,7 +20,7 @@ class RecoverPassword extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		// Gets the input
-		$credentials = $this->getInput('credentials');
+		$credentials = $this->getInput('credentials', 'stringsToBinary');
 		$password = $this->getInput('password');
 		
 		// Authenticates the recover password permission
@@ -43,10 +43,11 @@ class RecoverPassword extends \App\Controller\SpecializedSecureController {
 		// Computes the hash of the password
 		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
 		
+		// Deletes the recover password permission
+		$app->data->recoverPasswordPermission->delete($recoverPasswordPermission['id']);
+		
 		// Edits the user
 		$app->data->user->edit($user['id'], $passwordHash, $salt, $keyStretchingIterations, $user['firstName'], $user['lastName'], $user['gender'], $user['emailAddress']);
-		
-		// TODO: remove permission here or before edition? o during transaction?
 	}
 	
 	/*
@@ -59,11 +60,11 @@ class RecoverPassword extends \App\Controller\SpecializedSecureController {
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'credentials' => new JsonObjectDescriptor([
 				'id' => new JsonValueDescriptor(function($input) use ($app) {
-					return $app->inputValidator->isValidString($input, 1);
+					return $app->inputValidator->isRandomId($input);
 				}),
 				
 				'password' => new JsonValueDescriptor(function($input) use ($app) {
-					return $app->inputValidator->isValidString($input, 1);
+					return $app->inputValidator->isRandomPassword($input);
 				})
 			]),
 			

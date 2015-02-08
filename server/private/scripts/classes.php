@@ -137,11 +137,9 @@ require 'private/scripts/Controller/Patient/Search.php';
 
 // App\Controller\RecoverPasswordPermission
 require 'private/scripts/Controller/RecoverPasswordPermission/Create.php';
-require 'private/scripts/Controller/RecoverPasswordPermission/Exists.php';
 
 // App\Controller\SignUpPermission
 require 'private/scripts/Controller/SignUpPermission/Create.php';
-require 'private/scripts/Controller/SignUpPermission/Exists.php';
 
 // App\Controller\Study
 require 'private/scripts/Controller/Study/Create.php';

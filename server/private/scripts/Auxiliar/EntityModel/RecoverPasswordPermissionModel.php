@@ -32,18 +32,6 @@ class RecoverPasswordPermissionModel extends EntityModel {
 	}
 	
 	/*
-	 * Determines whether a recover password permission exists.
-	 * 
-	 * It receives the recover password permission's ID.
-	 */
-	public function exists($id) {
-		$app = $this->app;
-		
-		// Determines whether the recover password permission exists
-		return $app->webServerDatabase->recoverPasswordPermissionExists($id);
-	}
-	
-	/*
 	 * Returns a recover password permission. If it doesn't exist, null is
 	 * returned.
 	 * 

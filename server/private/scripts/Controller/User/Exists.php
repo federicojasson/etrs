@@ -20,7 +20,19 @@ class Exists extends \App\Controller\SpecializedSecureController {
 		$app = $this->app;
 		
 		// Gets the input
+		$credentials = $this->getInput('credentials', 'stringsToBinary');
 		$id = $this->getInput('id');
+		
+		// Authenticates the sign up permission
+		$authenticated = $app->authenticator->authenticateSignUpPermissionByPassword($credentials['id'], $credentials['password']);
+		
+		// Sets an output
+		$this->setOutput('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The sign up permission was not authenticated
+			return;
+		}
 		
 		// Determines whether the user exists
 		$exists = $app->data->user->exists($id);
@@ -37,6 +49,16 @@ class Exists extends \App\Controller\SpecializedSecureController {
 		
 		// Defines the JSON structure descriptor
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
+			'credentials' => new JsonObjectDescriptor([
+				'id' => new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				}),
+				
+				'password' => new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomPassword($input);
+				})
+			]),
+			
 			'id' => new JsonValueDescriptor(function($input) use ($app) {
 				return $app->inputValidator->isUserId($input);
 			})
@@ -50,7 +72,10 @@ class Exists extends \App\Controller\SpecializedSecureController {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// The service is available only to users not signed in
+		return ! $app->authentication->isUserSignedIn();
 	}
 	
 }

@@ -1,19 +1,14 @@
 Tareas (TODOs):
 
 - Generar reporte
-- hex2bin random password
 
 - Agregar licencia
 
 - Chequear Warnings
 
-- Delay virtuales en operaciones de usuarios no logueados?
-
 - Obtener dirección IP en las sesiones y loguearlas
 
 - Implementar control de acceso más preciso
-
-- Transacciones en código PHP
 
 - Comentar base de datos
 

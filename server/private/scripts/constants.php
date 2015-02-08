@@ -4,9 +4,6 @@
  * This script defines the constants of the application.
  */
 
-// TODO: some constant could be parameters
-// TODO: order better the individuals items
-
 define('DATA_TYPE_BOOLEAN', 'boolean');
 define('DATA_TYPE_INTEGER_FIX_VALUES', 'integer_fix_values');
 define('DATA_TYPE_INTEGER_RANGE', 'integer_range');
@@ -52,13 +49,12 @@ define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
 
 define('RANDOM_ID_LENGTH', 16);
-
 define('RANDOM_PASSWORD_LENGTH', 64);
-
 define('SALT_LENGTH', 64);
 
 define('SEARCH_RESULTS_PER_PAGE', 10);
 
+define('SESSION_DATA_IP_ADDRESS', 'ip_address');
 define('SESSION_DATA_USER', 'user');
 
 define('SORTING_ORDER_ASCENDING', 'ascending');

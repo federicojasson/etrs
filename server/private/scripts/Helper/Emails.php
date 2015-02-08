@@ -143,6 +143,10 @@ class Emails extends Helper {
 	private function sendEmail($email) {
 		$app = $this->app;
 		
+		// Since the delivery of an email can take some time, the timeout limit
+		// is extended
+		$app->webServer->extendTimeoutLimitForEmailDelivery();
+		
 		try {
 			// Sends the email
 			$email->send();

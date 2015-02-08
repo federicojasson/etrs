@@ -59,8 +59,11 @@ class Authentication extends Helper {
 		// Sets a data entry in the session to store the user
 		$app->session->setData(SESSION_DATA_USER, $id);
 		
+		// Gets the client's IP address
+		$ipAddress = $app->session->getData(SESSION_DATA_IP_ADDRESS);
+		
 		// Logs the event
-		$app->log->info('The user ' . $id . ' has been signed in.');
+		$app->log->info('The user ' . $id . ' has been signed in (IP address: ' . $ipAddress . ').');
 	}
 	
 	/*
@@ -78,8 +81,11 @@ class Authentication extends Helper {
 		// Regenerates the session's ID
 		$app->session->regenerateId();
 		
+		// Gets the client's IP address
+		$ipAddress = $app->session->getData(SESSION_DATA_IP_ADDRESS);
+		
 		// Logs the event
-		$app->log->info('The user ' . $id . ' has been signed out.');
+		$app->log->info('The user ' . $id . ' has been signed out (IP address: ' . $ipAddress . ').');
 	}
 	
 	/*
@@ -94,8 +100,11 @@ class Authentication extends Helper {
 		// Creates the user
 		$app->data->user->create($id, $creator, $passwordHash, $salt, $keyStretchingIterations, $role, $firstName, $lastName, $gender, $emailAddress);
 		
+		// Gets the client's IP address
+		$ipAddress = $app->session->getData(SESSION_DATA_IP_ADDRESS);
+		
 		// Logs the event
-		$app->log->info('The user ' . $id . ' has been signed up.');
+		$app->log->info('The user ' . $id . ' has been signed up (IP address: ' . $ipAddress . ').');
 		
 		// Signs in the user in the system
 		$this->signInUser($id);

@@ -1,3 +1,6 @@
 {
-	"domain": "localhost/etrs"
+	"domain": "localhost/etrs",
+	"extensionTimeForEmailDelivery": 30,
+	"extensionTimeForFileHashing": 25,
+	"extensionTimeForPasswordHashing": 15
 }

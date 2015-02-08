@@ -114,6 +114,21 @@ class InputValidator extends Helper {
 	}
 	
 	/*
+	 * Determines whether an input is a random password.
+	 * 
+	 * It receives the input.
+	 */
+	public function isRandomPassword($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Checks whether the input has a random password format
+		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_PASSWORD_LENGTH . '}$/', $input);
+	}
+	
+	/*
 	 * Determines whether an input is a sorting order.
 	 * 
 	 * It receives the input.

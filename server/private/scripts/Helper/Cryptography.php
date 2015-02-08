@@ -27,6 +27,12 @@ class Cryptography extends Helper {
 	 * It receives the file's path.
 	 */
 	public function hashFile($path) {
+		$app = $this->app;
+		
+		// Since the hashing of a file can take some time, the timeout limit is
+		// extended
+		$app->webServer->extendTimeoutLimitForFileHashing();
+		
 		// Applies MD5
 		return md5_file($path, true);
 	}
@@ -61,6 +67,12 @@ class Cryptography extends Helper {
 	 * in the key stretching.
 	 */
 	public function hashPassword($password, $salt, $keyStretchingIterations) {
+		$app = $this->app;
+		
+		// Since the hashing of a password can take some time, the timeout limit
+		// is extended
+		$app->webServer->extendTimeoutLimitForPasswordHashing();
+		
 		// Applies SHA-512 and the PBKDF2 key derivation function
 		return hash_pbkdf2('sha512', $password, $salt, $keyStretchingIterations, 0, true);
 	}
