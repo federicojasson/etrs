@@ -38,6 +38,9 @@ class Files extends Helper {
 		if (! file_exists($path)) {
 			// The file doesn't exist
 			
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' has not been found.');
+			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
 				'error' => ERROR_NON_EXISTENT_FILE
@@ -62,6 +65,9 @@ class Files extends Helper {
 		
 		if ($hash !== $file['hash']) {
 			// The file is corrupted
+			
+			// Logs the event
+			$app->log->alert('The file ' . $path . ' is corrupted.');
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [

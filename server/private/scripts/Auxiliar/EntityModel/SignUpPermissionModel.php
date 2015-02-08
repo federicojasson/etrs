@@ -20,18 +20,6 @@ class SignUpPermissionModel extends EntityModel {
 	}
 	
 	/*
-	 * Deletes a sign up permission.
-	 * 
-	 * It receives the sign up permission's ID.
-	 */
-	public function delete($id) {
-		$app = $this->app;
-		
-		// Deletes the sign up permission
-		$app->webServerDatabase->deleteSignUpPermission($id);
-	}
-	
-	/*
 	 * Returns a sign up permission. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the sign up permission's ID.

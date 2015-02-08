@@ -50,25 +50,8 @@ class Create extends \App\Controller\SpecializedSecureController {
 		// Creates the sign up permission
 		$app->data->signUpPermission->create($id, $signedInUser['id'], $passwordHash, $salt, $keyStretchingIterations, $role);
 		
-		// Creates a sign up email
-		$email = $app->emails->createSignUpEmail($id, $password, $recipient); // TODO: create email (what parameters?)
-		
-		// Sends the email
-		$delivered = $email->send();
-		
-		if (! $delivered) {
-			// The email could not be delivered
-			
-			// Deletes the just created sign up permission
-			$app->data->signUpPermission->delete($id);
-			
-			// TODO: do this somewhere else
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
-				'error' => ERROR_UNDELIVERED_EMAIL
-			]);
-		}
+		// Sends a sign up email
+		$app->emails->createSignUpEmail($recipient, $id, $password);
 	}
 	
 	/*

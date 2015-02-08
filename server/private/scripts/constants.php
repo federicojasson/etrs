@@ -46,6 +46,7 @@ define('LOG_LEVEL_1', 1);
 define('LOG_LEVEL_2', 2);
 define('LOG_LEVEL_3', 3);
 define('LOG_LEVEL_4', 4);
+define('LOG_LEVEL_4', 5);
 
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');

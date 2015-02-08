@@ -784,6 +784,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Deletes an experiment.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function deleteExperiment($id) {
+		$this->deleteEntity('experiments', $id);
+	}
+	
+	/*
 	 * Deletes a file.
 	 * 
 	 * It receives the file's ID.
@@ -1175,6 +1184,54 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Sets the parameters
 		$parameters = [
 			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-deleted files of an experiment.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function getExperimentNonDeletedFiles($experiment) {
+		// Defines the statement
+		$statement = '
+			SELECT file AS id
+			FROM experiments_non_deleted_files
+			WHERE experiment = :experiment
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':experiment' => $experiment
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-deleted studies of an experiment.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function getExperimentNonDeletedStudies($experiment) {
+		// Defines the statement
+		$statement = '
+			SELECT id
+			FROM non_deleted_studies
+			WHERE experiment = :experiment
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':experiment' => $experiment
 		];
 		
 		// Executes the statement

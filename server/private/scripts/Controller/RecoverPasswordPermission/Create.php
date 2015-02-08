@@ -54,25 +54,8 @@ class Create extends \App\Controller\SpecializedSecureController {
 			'emailAddress' => $user['emailAddress']
 		];
 		
-		// Creates a recover password email
-		$email = $app->emails->createRecoverPasswordEmail($id, $password, $recipient); // TODO: create email (what parameters?)
-		
-		// Sends the email
-		$delivered = $email->send();
-		
-		if (! $delivered) {
-			// The email could not be delivered
-			
-			// Deletes the just created recover password permission
-			$app->data->recoverPasswordPermission->delete($id);
-			
-			// TODO: do this somewhere else
-			
-			// Halts the execution
-			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
-				'error' => ERROR_UNDELIVERED_EMAIL
-			]);
-		}
+		// Sends a recover password email
+		$app->emails->sendRecoverPasswordEmail($recipient, $id, $password);
 	}
 	
 	/*

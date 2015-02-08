@@ -13,7 +13,28 @@ class ExperimentModel extends EntityModel {
 	 * It receives the experiment's ID.
 	 */
 	public function delete($id) {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		// Deletes the experiment's files
+		$files = $app->businessLogicDatabase->getExperimentNonDeletedFiles($id);
+		foreach ($files as $file) {
+			$app->data->file->delete($file['id']);
+		}
+		
+		// Deletes the experiment's studies
+		$studies = $app->businessLogicDatabase->getExperimentNonDeletedStudies($id);
+		foreach ($studies as $study) {
+			$app->data->study->delete($study['id']);
+		}
+		
+		// Deletes the experiment
+		$app->businessLogicDatabase->deleteExperiment($id);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 	}
 	
 	/*

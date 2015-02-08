@@ -8,6 +8,37 @@ namespace App\Helper;
 class Emails extends Helper {
 	
 	/*
+	 * Sends a recover password email.
+	 * 
+	 * It receives the recipient and the recover password permission's ID and
+	 * password.
+	 */
+	public function sendRecoverPasswordEmail($recipient, $id, $password) {
+		// TODO: implement
+		
+		// Creates the email
+		$email = $this->createEmailFromWebServer($recipient, $subject, $body, $alternativeBody);
+		
+		// Sends the email
+		$this->sendEmail($email);
+	}
+	
+	/*
+	 * Sends a sign up email.
+	 * 
+	 * It receives the recipient and the sign up permission's ID and password.
+	 */
+	public function sendSignUpEmail($recipient, $id, $password) {
+		// TODO: implement
+		
+		// Creates the email
+		$email = $this->createEmailFromWebServer($recipient, $subject, $body, $alternativeBody);
+		
+		// Sends the email
+		$this->sendEmail($email);
+	}
+	
+	/*
 	 * Creates and returns an email.
 	 * 
 	 * It receives the sender, the recipient, the subject, the body in HTML and
@@ -59,6 +90,30 @@ class Emails extends Helper {
 		
 		// Creates and returns the email
 		$this->createEmail($identity, $recipient, $subject, $body, $alternativeBody);
+	}
+	
+	/*
+	 * Sends an email. If it is not delivered, the execution is halted.
+	 * 
+	 * It receives the email.
+	 */
+	private function sendEmail($email) {
+		$app = $this->app;
+		
+		// Sends the email
+		$delivered = $email->send();
+		
+		if (! $delivered) {
+			// The email could not be delivered
+			
+			// Logs the event
+			$app->log->error('An email failed to be delivered.');
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_UNDELIVERED_EMAIL
+			]);
+		}
 	}
 	
 }
