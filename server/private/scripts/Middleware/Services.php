@@ -218,13 +218,13 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\Diagnosis\Search()
 		);
 
-//		// URL:		/server/experiment/create
-//		// Method:	POST
-//		$app->services->define(
-//			'/experiment/create',
-//			'POST',
-//			new \App\Controller\Experiment\Create()
-//		);
+		// URL:		/server/experiment/create
+		// Method:	POST
+		$app->services->define(
+			'/experiment/create',
+			'POST',
+			new \App\Controller\Experiment\Create()
+		);
 
 		// URL:		/server/experiment/delete
 		// Method:	POST
@@ -234,13 +234,13 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\Experiment\Delete()
 		);
 
-//		// URL:		/server/experiment/edit
-//		// Method:	POST
-//		$app->services->define(
-//			'/experiment/edit',
-//			'POST',
-//			new \App\Controller\Experiment\Edit()
-//		);
+		// URL:		/server/experiment/edit
+		// Method:	POST
+		$app->services->define(
+			'/experiment/edit',
+			'POST',
+			new \App\Controller\Experiment\Edit()
+		);
 
 		// URL:		/server/experiment/get
 		// Method:	POST
@@ -264,6 +264,14 @@ class Services extends \Slim\Middleware {
 			'/file/download',
 			'POST',
 			new \App\Controller\File\Download()
+		);
+
+		// URL:		/server/file/get
+		// Method:	POST
+		$app->services->define(
+			'/file/get',
+			'POST',
+			new \App\Controller\File\Get()
 		);
 
 		// URL:		/server/file/upload

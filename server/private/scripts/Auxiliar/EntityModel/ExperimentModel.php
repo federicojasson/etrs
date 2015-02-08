@@ -8,6 +8,27 @@ namespace App\Auxiliar\EntityModel;
 class ExperimentModel extends EntityModel {
 	
 	/*
+	 * Creates an experiment.
+	 * 
+	 * It receives the experiment's data.
+	 */
+	public function create($id, $creator, $name, $commandLine, $files) {
+		$app = $this->app;
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		// Creates the experiment
+		$app->businessLogicDatabase->createExperiment($id, $creator, $name, $commandLine);
+		
+		// Associates the data with the experiment
+		$this->associateData($id, $files);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+	}
+	
+	/*
 	 * Deletes an experiment.
 	 * 
 	 * It receives the experiment's ID.
@@ -32,6 +53,30 @@ class ExperimentModel extends EntityModel {
 		
 		// Deletes the experiment
 		$app->businessLogicDatabase->deleteExperiment($id);
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
+	}
+	
+	/*
+	 * Edits an experiment.
+	 * 
+	 * It receives the experiment's data.
+	 */
+	public function edit($id, $lastEditor, $name, $commandLine, $files) {
+		$app = $this->app;
+		
+		// Starts a read-write transaction
+		$app->businessLogicDatabase->startReadWriteTransaction();
+		
+		// Edits the experiment
+		$app->businessLogicDatabase->editExperiment($id, $lastEditor, $name, $commandLine); // TODO
+		
+		// Disassociates all data from the experiment
+		$this->disassociateData($id); // TODO
+		
+		// Associates the data with the experiment
+		$this->associateData($id, $files);
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
@@ -98,6 +143,20 @@ class ExperimentModel extends EntityModel {
 		$ids = array_column($experiments, 'id');
 		
 		return [ $foundRows, $ids ];
+	}
+	
+	/*
+	 * Associates data with an experiment.
+	 * 
+	 * It receives the experiment's ID and the data to associate.
+	 */
+	private function associateData($id, $files) {
+		$app = $this->app;
+		
+		// Associates the files
+		foreach ($files as $file) {
+			$app->businessLogicDatabase->createExperimentFile($id, $file);
+		}
 	}
 	
 }

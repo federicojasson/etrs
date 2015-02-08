@@ -191,32 +191,32 @@ class Create extends \App\Controller\SpecializedSecureController {
 		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'objectIdsToBinary');
 		$treatments = $this->getinput('treatments', 'stringsToBinary');
 		
-		if (! $this->areValidBackgrounds($backgrounds)) {
+		if (! $this->areBackgroundsValid($backgrounds)) {
 			// The backgrounds are invalid
 			return false;
 		}
 		
-		if (! $this->areValidImageTests($imageTests)) {
+		if (! $this->areImageTestsValid($imageTests)) {
 			// The image tests are invalid
 			return false;
 		}
 		
-		if (! $this->areValidLaboratoryTests($laboratoryTests)) {
+		if (! $this->areLaboratoryTestsValid($laboratoryTests)) {
 			// The laboratory tests are invalid
 			return false;
 		}
 		
-		if (! $this->areValidMedications($medications)) {
+		if (! $this->areMedicationsValid($medications)) {
 			// The medications are invalid
 			return false;
 		}
 		
-		if (! $this->areValidNeurocognitiveTests($neurocognitiveTests)) {
+		if (! $this->areNeurocognitiveTestsValid($neurocognitiveTests)) {
 			// The neurocognitive tests are invalid
 			return false;
 		}
 		
-		if (! $this->areValidTreatments($treatments)) {
+		if (! $this->areTreatmentsValid($treatments)) {
 			// The treatments are invalid
 			return false;
 		}

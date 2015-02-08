@@ -16,6 +16,7 @@ Tareas (TODOs):
 	- Eliminar permisos vencidos.
 	- Eliminar archivos temporarios.
 	- Eliminar logs antiguos.
+	- Eliminar archivos huérfanos.
 
 - Recordar configurar (en php.ini):
 	session.gc_probability

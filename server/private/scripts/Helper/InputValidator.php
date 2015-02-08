@@ -8,6 +8,15 @@ namespace App\Helper;
 class InputValidator extends Helper {
 	
 	/*
+	 * Determines whether an input is a command line.
+	 * 
+	 * It receives the input.
+	 */
+	public function isCommandLine($input) {
+		// TODO: implement
+	}
+	
+	/*
 	 * Determines whether an input is a data type descriptor.
 	 * 
 	 * It receives the input.

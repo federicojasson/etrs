@@ -87,14 +87,15 @@ require 'private/scripts/Controller/Diagnosis/Get.php';
 require 'private/scripts/Controller/Diagnosis/Search.php';
 
 // App\Controller\Experiment
-//require 'private/scripts/Controller/Experiment/Create.php';
+require 'private/scripts/Controller/Experiment/Create.php';
 require 'private/scripts/Controller/Experiment/Delete.php';
-//require 'private/scripts/Controller/Experiment/Edit.php';
+require 'private/scripts/Controller/Experiment/Edit.php';
 require 'private/scripts/Controller/Experiment/Get.php';
 require 'private/scripts/Controller/Experiment/Search.php';
 
 // App\Controller\File
 require 'private/scripts/Controller/File/Download.php';
+require 'private/scripts/Controller/File/Get.php';
 require 'private/scripts/Controller/File/Upload.php';
 
 // App\Controller\ImageTest

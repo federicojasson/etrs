@@ -20,6 +20,28 @@ class FileModel extends EntityModel {
 	}
 	
 	/*
+	 * Determines whether a file exists.
+	 * 
+	 * It receives the file's ID.
+	 */
+	public function exists($id) {
+		$app = $this->app;
+		
+		// Determines whether the file exists
+		return $app->businessLogicDatabase->nonDeletedFileExists($id);
+	}
+	
+	/*
+	 * Filters a file for presentation and returns the result.
+	 * 
+	 * It receives the file.
+	 */
+	public function filter($file) {
+		// TODO: implement
+		return $file;
+	}
+	
+	/*
 	 * Returns a file. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the file's ID.

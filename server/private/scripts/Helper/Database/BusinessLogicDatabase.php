@@ -361,6 +361,76 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Creates an experiment.
+	 * 
+	 * It receives the experiment's data.
+	 */
+	public function createExperiment($id, $creator, $name, $commandLine) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO experiments (
+				id,
+				deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name,
+				command_line
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				NULL,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name,
+				:commandLine
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':name' => $name,
+			':commandLine' => $commandLine
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a file of an experiment.
+	 * 
+	 * It receives the experiment's ID and the file's ID.
+	 */
+	public function createExperimentFile($experiment, $file) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO experiments_files (
+				experiment,
+				file
+			)
+			VALUES (
+				:experiment,
+				:file
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':experiment' => $experiment,
+			':file' => $file
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Creates an image test.
 	 * 
 	 * It receives the image test's data.
@@ -1627,6 +1697,15 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function nonDeletedExperimentExists($id) {
 		return $this->entityExists('non_deleted_experiments', $id);
+	}
+	
+	/*
+	 * Determines whether a non-deleted file exists.
+	 * 
+	 * It receives the file's ID.
+	 */
+	public function nonDeletedFileExists($id) {
+		return $this->entityExists('non_deleted_files', $id);
 	}
 	
 	/*

@@ -44,8 +44,17 @@ abstract class SpecializedSecureController extends SecureController {
 	 * 
 	 * It receives the backgrounds.
 	 */
-	protected function areValidBackgrounds($backgrounds) {
+	protected function areBackgroundsValid($backgrounds) {
 		return ! arrayContainsDuplicateElements($backgrounds);
+	}
+	
+	/*
+	 * Determines whether a set of files is valid.
+	 * 
+	 * It receives the files.
+	 */
+	protected function areFilesValid($files) {
+		return ! arrayContainsDuplicateElements($files);
 	}
 	
 	/*
@@ -53,7 +62,7 @@ abstract class SpecializedSecureController extends SecureController {
 	 * 
 	 * It receives the image tests.
 	 */
-	protected function areValidImageTests($imageTests) {
+	protected function areImageTestsValid($imageTests) {
 		// Gets the IDs
 		$ids = array_column($imageTests, 'id');
 		
@@ -78,7 +87,7 @@ abstract class SpecializedSecureController extends SecureController {
 	 * 
 	 * It receives the laboratory tests.
 	 */
-	protected function areValidLaboratoryTests($laboratoryTests) {
+	protected function areLaboratoryTestsValid($laboratoryTests) {
 		// Gets the IDs
 		$ids = array_column($laboratoryTests, 'id');
 		
@@ -103,7 +112,7 @@ abstract class SpecializedSecureController extends SecureController {
 	 * 
 	 * It receives the medications.
 	 */
-	protected function areValidMedications($medications) {
+	protected function areMedicationsValid($medications) {
 		return ! arrayContainsDuplicateElements($medications);
 	}
 	
@@ -112,7 +121,7 @@ abstract class SpecializedSecureController extends SecureController {
 	 * 
 	 * It receives the neurocognitive tests.
 	 */
-	protected function areValidNeurocognitiveTests($neurocognitiveTests) {
+	protected function areNeurocognitiveTestsValid($neurocognitiveTests) {
 		// Gets the IDs
 		$ids = array_column($neurocognitiveTests, 'id');
 		
@@ -137,7 +146,7 @@ abstract class SpecializedSecureController extends SecureController {
 	 * 
 	 * It receives the treatments.
 	 */
-	protected function areValidTreatments($treatments) {
+	protected function areTreatmentsValid($treatments) {
 		return ! arrayContainsDuplicateElements($treatments);
 	}
 	
@@ -245,6 +254,37 @@ abstract class SpecializedSecureController extends SecureController {
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
 				'error' => ERROR_NON_EXISTENT_EXPERIMENT
 			]);
+		}
+	}
+	
+	/*
+	 * Checks the existence of a file. If it doesn't exist, the execution is
+	 * halted.
+	 * 
+	 * It receives the file's ID.
+	 */
+	protected function checkFileExistence($id) {
+		$app = $this->app;
+		
+		if (! $app->data->file->exists($id)) {
+			// The file doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_FILE
+			]);
+		}
+	}
+	
+	/*
+	 * Checks the existence of a set of files.
+	 * 
+	 * It receives the files' IDs.
+	 */
+	protected function checkFilesExistence($ids) {
+		// Checks the existence of the files
+		foreach ($ids as $id) {
+			$this->checkFileExistence($id);
 		}
 	}
 	
