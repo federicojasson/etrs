@@ -28,7 +28,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -39,6 +39,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -67,7 +68,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -78,6 +79,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -114,7 +116,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:clinicalImpression,
 				:creator,
 				:diagnosis,
-				NULL,
+				:lastEditor,
 				:patient,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
@@ -131,6 +133,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			':clinicalImpression' => $clinicalImpression,
 			':creator' => $creator,
 			':diagnosis' => $diagnosis,
+			':lastEditor' => $creator,
 			':patient' => $patient,
 			':date' => $date,
 			':reasons' => $reasons,
@@ -342,7 +345,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -353,6 +356,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -382,7 +386,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name,
@@ -394,6 +398,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name,
 			':commandLine' => $commandLine
 		];
@@ -452,7 +457,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name,
@@ -464,6 +469,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name,
 			':dataTypeDescriptor' => $dataTypeDescriptor
 		];
@@ -494,7 +500,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name,
@@ -506,6 +512,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name,
 			':dataTypeDescriptor' => $dataTypeDescriptor
 		];
@@ -535,7 +542,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -546,6 +553,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -575,7 +583,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name,
@@ -587,6 +595,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name,
 			':dataTypeDescriptor' => $dataTypeDescriptor
 		];
@@ -620,7 +629,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:firstName,
@@ -635,11 +644,92 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':firstName' => $firstName,
 			':lastName' => $lastName,
 			':gender' => $gender,
 			':birthDate' => $birthDate,
 			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a study.
+	 * 
+	 * It receives the study's data.
+	 */
+	public function createStudy($id, $consultation, $creator, $experiment, $input, $report, $observations) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO studies (
+				id,
+				deleted,
+				consultation
+				creator,
+				experiment,
+				input,
+				last_editor,
+				report,
+				creation_datetime,
+				last_edition_datetime,
+				observations
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:consultation,
+				:creator,
+				:experiment,
+				:input,
+				:lastEditor,
+				:report,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:observations
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':consultation' => $consultation,
+			':creator' => $creator,
+			':experiment' => $experiment,
+			':input' => $input,
+			':lastEditor' => $creator,
+			':report' => $report,
+			':observations' => $observations
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Creates a file of a study.
+	 * 
+	 * It receives the study's ID and the file's ID.
+	 */
+	public function createStudyFile($study, $file) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO studies_files (
+				study,
+				file
+			)
+			VALUES (
+				:study,
+				:file
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':study' => $study,
+			':file' => $file
 		];
 		
 		// Executes the statement
@@ -667,7 +757,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:id,
 				FALSE,
 				:creator,
-				NULL,
+				:lastEditor,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:name
@@ -678,6 +768,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
+			':lastEditor' => $creator,
 			':name' => $name
 		];
 		
@@ -945,6 +1036,28 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 */
 	public function deleteStudy($id) {
 		$this->deleteEntity('studies', $id);
+	}
+	
+	/*
+	 * Deletes the files of a study.
+	 * 
+	 * It receives the study's ID.
+	 */
+	public function deleteStudyFiles($study) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM studies_files
+			WHERE study = :study
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':study' => $study
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
 	}
 	
 	/*
@@ -1256,6 +1369,36 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			':gender' => $gender,
 			':birthDate' => $birthDate,
 			':educationYears' => $educationYears
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits a study.
+	 * 
+	 * It receives the study's data.
+	 */
+	public function editStudy($id, $lastEditor, $report, $observations) {
+		// Defines the statement
+		$statement = '
+			UPDATE studies
+			SET
+				last_editor = :lastEditor,
+				report = :report,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				observations = :observations
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':report' => $report,
+			':observations' => $observations
 		];
 		
 		// Executes the statement

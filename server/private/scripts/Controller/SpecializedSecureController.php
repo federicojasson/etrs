@@ -8,8 +8,6 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This class encapsulates the logic of a secure service and offers specialized
  * methods.
- * 
- * TODO: check class
  */
 abstract class SpecializedSecureController extends SecureController {
 	
@@ -853,7 +851,7 @@ abstract class SpecializedSecureController extends SecureController {
 	 * 
 	 * It receives the new output.
 	 */
-	protected function replaceOutput($output) {
+	protected function replaceOutput($output) { // TODO: rename
 		$this->output = $output;
 	}
 	

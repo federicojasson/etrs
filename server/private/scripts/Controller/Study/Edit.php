@@ -14,21 +14,93 @@ class Edit extends \App\Controller\SpecializedSecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$id = $this->getInput('id', 'hex2bin');
+		$report = $this->getInput('report', 'hex2bin');
+		$observations = $this->getInput('observations', 'trimString');
+		$files = $this->getinput('files', 'stringsToBinary');
+		
+		// Checks the existence of the study
+		$this->checkStudyExistence($id);
+		
+		if (! is_null($report)) {
+			// Checks the existence of the report
+			$this->checkFileExistence($report);
+		}
+		
+		// Checks the existence of the files
+		$this->checkFilesExistence($files);
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Edits the study
+		$app->data->study->edit($id, $signedInUser['id'], $report, $observations, $files);
 	}
 	
 	/*
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the JSON structure descriptor
+		$jsonStructureDescriptor = new JsonObjectDescriptor([
+			'id' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'report' => new JsonValueDescriptor(function($input) use ($app) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'observations' => new JsonValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidText($input, 0, 1024);
+			}),
+			
+			'files' => new JsonArrayDescriptor(
+				new JsonValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			)
+		]);
+		
+		if (! $this->validateJsonRequest($jsonStructureDescriptor)) {
+			// The JSON request is invalid
+			return false;
+		}
+		
+		// Gets the input
+		$files = $this->getinput('files', 'stringsToBinary');
+		
+		if (! $this->areFilesValid($files)) {
+			// The files are invalid
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/*
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_OPERATOR
+		];
+		
+		// Validates the access and returns the result
+		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
 }
