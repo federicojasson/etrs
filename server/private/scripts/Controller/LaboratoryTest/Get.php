@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$laboratoryTest = $app->data->laboratoryTest->filter($laboratoryTest);
 		
 		// Sets the output
-		$this->replaceOutput($laboratoryTest);
+		$this->setEntireOutput($laboratoryTest);
 	}
 	
 	/*

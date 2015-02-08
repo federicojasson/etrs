@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$neurocognitiveTest = $app->data->neurocognitiveTest->filter($neurocognitiveTest);
 		
 		// Sets the output
-		$this->replaceOutput($neurocognitiveTest);
+		$this->setEntireOutput($neurocognitiveTest);
 	}
 	
 	/*

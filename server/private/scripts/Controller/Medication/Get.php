@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$medication = $app->data->medication->filter($medication);
 		
 		// Sets the output
-		$this->replaceOutput($medication);
+		$this->setEntireOutput($medication);
 	}
 	
 	/*

@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$file = $app->data->file->filter($file);
 		
 		// Sets the output
-		$this->replaceOutput($file);
+		$this->setEntireOutput($file);
 	}
 	
 	/*

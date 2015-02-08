@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$experiment = $app->data->experiment->filter($experiment);
 		
 		// Sets the output
-		$this->replaceOutput($experiment);
+		$this->setEntireOutput($experiment);
 	}
 	
 	/*

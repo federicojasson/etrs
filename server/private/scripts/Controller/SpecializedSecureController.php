@@ -847,11 +847,11 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
-	 * Replaces the current output.
+	 * Sets the entire output, replacing any current entry.
 	 * 
-	 * It receives the new output.
+	 * It receives the output.
 	 */
-	protected function replaceOutput($output) { // TODO: rename
+	protected function setEntireOutput($output) {
 		$this->output = $output;
 	}
 	

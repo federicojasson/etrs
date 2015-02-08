@@ -25,7 +25,7 @@ class Search extends \App\Controller\SpecializedSecureController {
 		list($total, $results) = $app->data->clinicalImpression->search($expression, $page, $sorting);
 		
 		// Sets the output
-		$this->replaceOutput([
+		$this->setEntireOutput([
 			'total' => $total,
 			'results' => $results
 		]);
