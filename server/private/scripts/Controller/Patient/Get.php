@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$patient = $app->data->patient->filter($patient);
 		
 		// Sets the output
-		$this->setOutputCompletely($patient);
+		$this->replaceOutput($patient);
 	}
 	
 	/*

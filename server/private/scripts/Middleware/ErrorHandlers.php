@@ -23,7 +23,7 @@ class ErrorHandlers extends \Slim\Middleware {
 	 * 
 	 * It receives the exception which holds the information about the error.
 	 */
-	public function onError(\Exception $exception) {
+	public function onError($exception) {
 		$app = $this->app;
 		
 		// Logs the event

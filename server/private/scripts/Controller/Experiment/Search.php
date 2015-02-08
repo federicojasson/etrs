@@ -25,7 +25,7 @@ class Search extends \App\Controller\SpecializedSecureController {
 		list($total, $results) = $app->data->experiment->search($expression, $page, $sorting);
 		
 		// Sets the output
-		$this->setOutputCompletely([
+		$this->replaceOutput([
 			'total' => $total,
 			'results' => $results
 		]);

@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$clinicalImpression = $app->data->clinicalImpression->filter($clinicalImpression);
 		
 		// Sets the output
-		$this->setOutputCompletely($clinicalImpression);
+		$this->replaceOutput($clinicalImpression);
 	}
 	
 	/*

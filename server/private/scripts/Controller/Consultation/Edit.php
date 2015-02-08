@@ -49,22 +49,16 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		}
 		
 		// Checks the existence of the backgrounds
-		foreach ($backgrounds as $background) {
-			$this->checkBackgroundExistence($background);
-		}
+		$this->checkBackgroundsExistence($backgrounds);
 		
 		// Checks the existence of the medications
-		foreach ($medications as $medication) {
-			$this->checkMedicationExistence($medication);
-		}
+		$this->checkMedicationsExistence($medications);
 		
 		// Checks the existence of the treatments
-		foreach ($treatments as $treatment) {
-			$this->checkTreatmentExistence($treatment);
-		}
+		$this->checkTreatmentsExistence($treatments);
 		
-		// The image tests, laboratory tests and neurocognitive tests have
-		// already been checked during the input validation
+		// The image tests, laboratory tests and neurocognitive tests existence
+		// has already been checked during the input validation
 		
 		// Gets the signed in user
 		$signedInUser = $app->authentication->getSignedInUser();
@@ -184,32 +178,41 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		}
 		
 		// Gets the input
-		$imageTests = $this->getInput('imageTests', 'objectIdsToBinary');
-		$laboratoryTests = $this->getInput('laboratoryTests', 'objectIdsToBinary');
-		$neurocognitiveTests = $this->getInput('neurocognitiveTests', 'objectIdsToBinary');
+		$backgrounds = $this->getinput('backgrounds', 'stringsToBinary');
+		$imageTests = $this->getinput('imageTests', 'objectIdsToBinary');
+		$laboratoryTests = $this->getinput('laboratoryTests', 'objectIdsToBinary');
+		$medications = $this->getinput('medications', 'stringsToBinary');
+		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'objectIdsToBinary');
+		$treatments = $this->getinput('treatments', 'stringsToBinary');
 		
-		// Validates the values of the image tests
-		foreach ($imageTests as $imageTest) {
-			if (! $this->validateImageTestValue($imageTest['id'], $imageTest['value'])) {
-				// The value is invalid
-				return false;
-			}
+		if (! $this->areValidBackgrounds($backgrounds)) {
+			// The backgrounds are invalid
+			return false;
 		}
 		
-		// Validates the values of the laboratory tests
-		foreach ($laboratoryTests as $laboratoryTest) {
-			if (! $this->validateLaboratoryTestValue($laboratoryTest['id'], $laboratoryTest['value'])) {
-				// The value is invalid
-				return false;
-			}
+		if (! $this->areValidImageTests($imageTests)) {
+			// The image tests are invalid
+			return false;
 		}
 		
-		// Validates the values of the neurocognitive tests
-		foreach ($neurocognitiveTests as $neurocognitiveTest) {
-			if (! $this->validateNeurocognitiveTestValue($neurocognitiveTest['id'], $neurocognitiveTest['value'])) {
-				// The value is invalid
-				return false;
-			}
+		if (! $this->areValidLaboratoryTests($laboratoryTests)) {
+			// The laboratory tests are invalid
+			return false;
+		}
+		
+		if (! $this->areValidMedications($medications)) {
+			// The medications are invalid
+			return false;
+		}
+		
+		if (! $this->areValidNeurocognitiveTests($neurocognitiveTests)) {
+			// The neurocognitive tests are invalid
+			return false;
+		}
+		
+		if (! $this->areValidTreatments($treatments)) {
+			// The treatments are invalid
+			return false;
 		}
 		
 		return true;

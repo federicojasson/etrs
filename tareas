@@ -10,8 +10,6 @@ Tareas (TODOs):
 
 - Transacciones en código PHP
 
-- Check direct use of "database->" and see if is necessary/possible to use Data helper
-
 - Comentar base de datos
 
 - Tareas de mantenimiento:

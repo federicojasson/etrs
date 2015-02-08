@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$background = $app->data->background->filter($background);
 		
 		// Sets the output
-		$this->setOutputCompletely($background);
+		$this->replaceOutput($background);
 	}
 	
 	/*

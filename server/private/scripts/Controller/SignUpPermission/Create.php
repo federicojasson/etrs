@@ -62,6 +62,8 @@ class Create extends \App\Controller\SpecializedSecureController {
 			// Deletes the just created sign up permission
 			$app->data->signUpPermission->delete($id);
 			
+			// TODO: do this somewhere else
+			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
 				'error' => ERROR_UNDELIVERED_EMAIL

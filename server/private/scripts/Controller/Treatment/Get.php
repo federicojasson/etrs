@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$treatment = $app->data->treatment->filter($treatment);
 		
 		// Sets the output
-		$this->setOutputCompletely($treatment);
+		$this->replaceOutput($treatment);
 	}
 	
 	/*

@@ -8,6 +8,8 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This class encapsulates the logic of a secure service and offers specialized
  * methods.
+ * 
+ * TODO: check class
  */
 abstract class SpecializedSecureController extends SecureController {
 	
@@ -38,6 +40,108 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Determines whether a set of backgrounds is valid.
+	 * 
+	 * It receives the backgrounds.
+	 */
+	protected function areValidBackgrounds($backgrounds) {
+		return ! arrayContainsDuplicateElements($backgrounds);
+	}
+	
+	/*
+	 * Determines whether a set of image tests is valid.
+	 * 
+	 * It receives the image tests.
+	 */
+	protected function areValidImageTests($imageTests) {
+		// Gets the IDs
+		$ids = array_column($imageTests, 'id');
+		
+		if (arrayContainsDuplicateElements($ids)) {
+			// There are duplicate IDs
+			return false;
+		}
+		
+		// Validates the values
+		foreach ($imageTests as $imageTest) {
+			if (! $this->isValidImageTestValue($imageTest['id'], $imageTest['value'])) {
+				// The value is invalid
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * Determines whether a set of laboratory tests is valid.
+	 * 
+	 * It receives the laboratory tests.
+	 */
+	protected function areValidLaboratoryTests($laboratoryTests) {
+		// Gets the IDs
+		$ids = array_column($laboratoryTests, 'id');
+		
+		if (arrayContainsDuplicateElements($ids)) {
+			// There are duplicate IDs
+			return false;
+		}
+		
+		// Validates the values
+		foreach ($laboratoryTests as $laboratoryTest) {
+			if (! $this->isValidLaboratoryTestValue($laboratoryTest['id'], $laboratoryTest['value'])) {
+				// The value is invalid
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * Determines whether a set of medications is valid.
+	 * 
+	 * It receives the medications.
+	 */
+	protected function areValidMedications($medications) {
+		return ! arrayContainsDuplicateElements($medications);
+	}
+	
+	/*
+	 * Determines whether a set of neurocognitive tests is valid.
+	 * 
+	 * It receives the neurocognitive tests.
+	 */
+	protected function areValidNeurocognitiveTests($neurocognitiveTests) {
+		// Gets the IDs
+		$ids = array_column($neurocognitiveTests, 'id');
+		
+		if (arrayContainsDuplicateElements($ids)) {
+			// There are duplicate IDs
+			return false;
+		}
+		
+		// Validates the values
+		foreach ($neurocognitiveTests as $neurocognitiveTest) {
+			if (! $this->isValidNeurocognitiveTestValue($neurocognitiveTest['id'], $neurocognitiveTest['value'])) {
+				// The value is invalid
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	/*
+	 * Determines whether a set of treatments is valid.
+	 * 
+	 * It receives the treatments.
+	 */
+	protected function areValidTreatments($treatments) {
+		return ! arrayContainsDuplicateElements($treatments);
+	}
+	
+	/*
 	 * Checks the existence of a background. If it doesn't exist, the execution
 	 * is halted.
 	 * 
@@ -53,6 +157,18 @@ abstract class SpecializedSecureController extends SecureController {
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
 				'error' => ERROR_NON_EXISTENT_BACKGROUND
 			]);
+		}
+	}
+	
+	/*
+	 * Checks the existence of a set of backgrounds.
+	 * 
+	 * It receives the backgrounds' IDs.
+	 */
+	protected function checkBackgroundsExistence($ids) {
+		// Checks the existence of the backgrounds
+		foreach ($ids as $id) {
+			$this->checkBackgroundExistence($id);
 		}
 	}
 	
@@ -190,6 +306,18 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Checks the existence of a set of medications.
+	 * 
+	 * It receives the medications' IDs.
+	 */
+	protected function checkMedicationsExistence($ids) {
+		// Checks the existence of the medications
+		foreach ($ids as $id) {
+			$this->checkMedicationExistence($id);
+		}
+	}
+	
+	/*
 	 * Checks the existence of a neurocognitive test. If it doesn't exist, the
 	 * execution is halted.
 	 * 
@@ -262,6 +390,18 @@ abstract class SpecializedSecureController extends SecureController {
 			$app->halt(HTTP_STATUS_NOT_FOUND, [
 				'error' => ERROR_NON_EXISTENT_TREATMENT
 			]);
+		}
+	}
+	
+	/*
+	 * Checks the existence of a set of treatments.
+	 * 
+	 * It receives the treatments' IDs.
+	 */
+	protected function checkTreatmentsExistence($ids) {
+		// Checks the existence of the treatments
+		foreach ($ids as $id) {
+			$this->checkTreatmentExistence($id);
 		}
 	}
 	
@@ -646,6 +786,15 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Replaces the current output.
+	 * 
+	 * It receives the new output.
+	 */
+	protected function replaceOutput($output) {
+		$this->output = $output;
+	}
+	
+	/*
 	 * Sets the value of an output entry.
 	 * 
 	 * It receives the entry's key, the value to be set and, optionally, a
@@ -658,29 +807,6 @@ abstract class SpecializedSecureController extends SecureController {
 		}
 		
 		$this->output[$key] = $value;
-	}
-	
-	/*
-	 * Sets the output.
-	 * 
-	 * It receives the output.
-	 */
-	protected function setOutputCompletely($output) {
-		$this->output = $output;
-	}
-	
-	/*
-	 * Validates the value of an image test and returns the result. If the image
-	 * test doesn't exist, the execution is halted.
-	 * 
-	 * It receives the image test's ID and the value to validate.
-	 */
-	protected function validateImageTestValue($id, $value) {
-		// Gets the image test
-		$imageTest = $this->getImageTest($id);
-		
-		// Validates the value and returns the result
-		return $this->validateDataTypeValue($imageTest['dataTypeDescriptor'], $value);
 	}
 	
 	/*
@@ -724,44 +850,58 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
-	 * Validates the value of a laboratory test and returns the result. If the
-	 * laboratory test doesn't exist, the execution is halted.
-	 * 
-	 * It receives the laboratory test's ID and the value to validate.
-	 */
-	protected function validateLaboratoryTestValue($id, $value) {
-		// Gets the laboratory test
-		$laboratoryTest = $this->getLaboratoryTest($id);
-		
-		// Validates the value and returns the result
-		return $this->validateDataTypeValue($laboratoryTest['dataTypeDescriptor'], $value);
-	}
-	
-	/*
-	 * Validates the value of a neurocognitive test and returns the result. If
-	 * the neurocognitive test doesn't exist, the execution is halted.
-	 * 
-	 * It receives the neurocognitive test's ID and the value to validate.
-	 */
-	protected function validateNeurocognitiveTestValue($id, $value) {
-		// Gets the neurocognitive test
-		$neurocognitiveTest = $this->getNeurocognitiveTest($id);
-		
-		// Validates the value and returns the result
-		return $this->validateDataTypeValue($neurocognitiveTest['dataTypeDescriptor'], $value);
-	}
-	
-	/*
-	 * Validates the value of a data type and returns the result.
+	 * Determines whether the value of a data type is valid.
 	 * 
 	 * It receives a formatted descriptor and the value to validate.
 	 */
-	private function validateDataTypeValue($formattedDescriptor, $value) {
+	private function isValidDataTypeValue($formattedDescriptor, $value) {
 		// Creates the data type descriptor
 		$dataTypeDescriptor = \App\Auxiliar\DataTypeDescriptor\Factory::create($formattedDescriptor);
 		
 		// Determines whether the value is valid
 		return $dataTypeDescriptor->isValidInput($value);
+	}
+	
+	/*
+	 * Determines whether the value of an image test is valid. If the image test
+	 * doesn't exist, the execution is halted.
+	 * 
+	 * It receives the image test's ID and the value to validate.
+	 */
+	private function isValidImageTestValue($id, $value) {
+		// Gets the image test
+		$imageTest = $this->getImageTest($id);
+		
+		// Determines whether the value is valid
+		return $this->isValidDataTypeValue($imageTest['dataTypeDescriptor'], $value);
+	}
+	
+	/*
+	 * Determines whether the value of a laboratory test is valid. If the
+	 * laboratory test doesn't exist, the execution is halted.
+	 * 
+	 * It receives the laboratory test's ID and the value to validate.
+	 */
+	private function isValidLaboratoryTestValue($id, $value) {
+		// Gets the laboratory test
+		$laboratoryTest = $this->getLaboratoryTest($id);
+		
+		// Determines whether the value is valid
+		return $this->isValidDataTypeValue($laboratoryTest['dataTypeDescriptor'], $value);
+	}
+	
+	/*
+	 * Determines whether the value of a neurocognitive test is valid. If the
+	 * neurocognitive test doesn't exist, the execution is halted.
+	 * 
+	 * It receives the neurocognitive test's ID and the value to validate.
+	 */
+	private function isValidNeurocognitiveTestValue($id, $value) {
+		// Gets the neurocognitive test
+		$neurocognitiveTest = $this->getNeurocognitiveTest($id);
+		
+		// Determines whether the value is valid
+		return $this->isValidDataTypeValue($neurocognitiveTest['dataTypeDescriptor'], $value);
 	}
 	
 }

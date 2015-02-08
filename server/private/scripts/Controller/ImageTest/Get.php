@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$imageTest = $app->data->imageTest->filter($imageTest);
 		
 		// Sets the output
-		$this->setOutputCompletely($imageTest);
+		$this->replaceOutput($imageTest);
 	}
 	
 	/*

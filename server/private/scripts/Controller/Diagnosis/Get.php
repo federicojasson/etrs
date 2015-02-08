@@ -29,7 +29,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$diagnosis = $app->data->diagnosis->filter($diagnosis);
 		
 		// Sets the output
-		$this->setOutputCompletely($diagnosis);
+		$this->replaceOutput($diagnosis);
 	}
 	
 	/*
