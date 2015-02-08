@@ -157,6 +157,7 @@ require 'private/scripts/Controller/Treatment/Get.php';
 require 'private/scripts/Controller/Treatment/Search.php';
 
 // App\Controller\User
+require 'private/scripts/Controller/User/Delete.php';
 require 'private/scripts/Controller/User/Exists.php';
 require 'private/scripts/Controller/User/Get.php';
 
@@ -177,6 +178,7 @@ require 'private/scripts/Helper/InputValidator.php';
 require 'private/scripts/Helper/Parameters.php';
 require 'private/scripts/Helper/Services.php';
 require 'private/scripts/Helper/Session.php';
+require 'private/scripts/Helper/WebServer.php';
 
 // App\Helper\Database
 require 'private/scripts/Helper/Database/Database.php';

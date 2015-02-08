@@ -14,13 +14,13 @@
 	
 	"recoverPasswordEmail": {
 		"subject": "ETRS - Recuperar contraseña",
-		"templatePath": "private/templates/emails/recover-password-email.html",
-		"alternativeTemplatePath": "private/templates/emails/recover-password-email.txt"
+		"path": "private/templates/emails/recover-password-email.html",
+		"alternativePath": "private/templates/emails/recover-password-email.txt"
 	},
 	
 	"signUpEmail": {
 		"subject": "ETRS - Invitación",
-		"templatePath": "private/templates/emails/sign-up-email.html",
-		"alternativeTemplatePath": "private/templates/emails/sign-up-email.txt"
+		"path": "private/templates/emails/sign-up-email.html",
+		"alternativePath": "private/templates/emails/sign-up-email.txt"
 	}
 }

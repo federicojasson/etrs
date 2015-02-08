@@ -184,6 +184,37 @@ function readJsonFile($path) {
 }
 
 /*
+ * Reads the content of a template file, replaces its placeholders and returns
+ * the result.
+ * 
+ * It receives the file's path and a mapping containing placeholders as keys and
+ * replacements as values.
+ */
+function readTemplateFile($path, $mapping) {
+	// Gets the file's content
+	$content = file_get_contents($path);
+	
+	// Replaces the placeholders and returns the result
+	return replacePlaceholders($content, $mapping);
+}
+
+/*
+ * Given a string with placeholders, it replaces them with specific strings and
+ * returns the result.
+ * 
+ * It receives the string and a mapping containing placeholders as keys and
+ * replacements as values.
+ */
+function replacePlaceholders($string, $mapping) {
+	// Gets the placeholders and the replacements in different arrays
+	$placeholders = array_keys($mapping);
+	$replacements = array_values($mapping);
+
+	// Replaces the placeholders and returns the result
+	return str_replace($placeholders, $replacements, $string);
+}
+
+/*
  * Converts a string from snake case notation to camel case notation.
  * 
  * It receives the string.

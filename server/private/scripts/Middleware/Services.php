@@ -602,6 +602,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\Treatment\Search()
 		);
 
+		// URL:		/server/user/delete
+		// Method:	POST
+		$app->services->define(
+			'/user/delete',
+			'POST',
+			new \App\Controller\User\Delete()
+		);
+
 		// URL:		/server/user/exists
 		// Method:	POST
 		$app->services->define(

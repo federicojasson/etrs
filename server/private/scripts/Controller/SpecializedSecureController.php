@@ -444,6 +444,25 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Checks the existence of a user. If it doesn't exist, the execution is
+	 * halted.
+	 * 
+	 * It receives the user's ID.
+	 */
+	protected function checkUserExistence($id) {
+		$app = $this->app;
+		
+		if (! $app->data->user->exists($id)) {
+			// The user doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_USER
+			]);
+		}
+	}
+	
+	/*
 	 * Checks the non-existence of a user. If it exists, the execution is
 	 * halted.
 	 * 

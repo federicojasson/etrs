@@ -20,6 +20,30 @@ class UserModel extends EntityModel {
 	}
 	
 	/*
+	 * Deletes a user.
+	 * 
+	 * It receives the user's ID.
+	 */
+	public function delete($id) {
+		$app = $this->app;
+		
+		// Starts a read-write transaction
+		$app->webServerDatabase->startReadWriteTransaction();
+		
+		// Deletes the user's recover password permissions
+		$recoverPasswordPermissions = $app->webServerDatabase->getUserRecoverPasswordPermissions($id);
+		foreach ($recoverPasswordPermissions as $recoverPasswordPermission) {
+			$app->data->recoverPasswordPermission->delete($recoverPasswordPermission['id']);
+		}
+		
+		// Deletes the user
+		$app->webServerDatabase->deleteUser($id);
+		
+		// Commits the transaction
+		$app->webServerDatabase->commitTransaction();
+	}
+	
+	/*
 	 * Edits a user.
 	 * 
 	 * It receives the user's data.

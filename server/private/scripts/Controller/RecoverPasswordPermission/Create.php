@@ -50,7 +50,7 @@ class Create extends \App\Controller\SpecializedSecureController {
 		
 		// Initializes the recipient of the email
 		$recipient = [
-			'name' => $user['firstName'] . $user['lastName'],
+			'name' => $user['firstName'] . ' ' . $user['lastName'],
 			'emailAddress' => $user['emailAddress']
 		];
 		

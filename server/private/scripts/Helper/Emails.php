@@ -14,7 +14,28 @@ class Emails extends Helper {
 	 * password.
 	 */
 	public function sendRecoverPasswordEmail($recipient, $id, $password) {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the email's parameters
+		$parameters = $app->parameters->emails['recoverPasswordEmail'];
+		$subject = $parameters['subject'];
+		$path = $parameters['path'];
+		$alternativePath = $parameters['alternativePath'];
+		
+		// Builds a URL to recover the password
+		$url = '';
+		$url .= $app->webServer->getDomain();
+		$url .= '/recover-password/'; // TODO: hardcoded here?
+		$url .= bin2hex($id) . '/' . bin2hex($password);
+		
+		// Defines a placeholder mapping
+		$mapping = [
+			':url' => $url
+		];
+		
+		// Builds the email's body and alternative body
+		$body = readTemplateFile($path, $mapping);
+		$alternativeBody = readTemplateFile($alternativePath, $mapping);
 		
 		// Creates the email
 		$email = $this->createEmailFromWebServer($recipient, $subject, $body, $alternativeBody);
@@ -29,7 +50,28 @@ class Emails extends Helper {
 	 * It receives the recipient and the sign up permission's ID and password.
 	 */
 	public function sendSignUpEmail($recipient, $id, $password) {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the email's parameters
+		$parameters = $app->parameters->emails['signUpEmail'];
+		$subject = $parameters['subject'];
+		$path = $parameters['path'];
+		$alternativePath = $parameters['alternativePath'];
+		
+		// Builds a URL to sign up
+		$url = '';
+		$url .= $app->webServer->getDomain();
+		$url .= '/sign-up/'; // TODO: hardcoded here?
+		$url .= bin2hex($id) . '/' . bin2hex($password);
+		
+		// Defines a placeholder mapping
+		$mapping = [
+			':url' => $url
+		];
+		
+		// Builds the email's body and alternative body
+		$body = readTemplateFile($path, $mapping);
+		$alternativeBody = readTemplateFile($alternativePath, $mapping);
 		
 		// Creates the email
 		$email = $this->createEmailFromWebServer($recipient, $subject, $body, $alternativeBody);
@@ -64,6 +106,7 @@ class Emails extends Helper {
 		$email->Password = $smtp['password'];
 		
 		// Sets the data of the email
+		$email->CharSet = 'UTF-8';
 		$email->From = $sender['emailAddress'];
 		$email->FromName = $sender['name'];
 		$email->addAddress($recipient['emailAddress'], $recipient['name']);

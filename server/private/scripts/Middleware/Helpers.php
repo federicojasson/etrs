@@ -110,6 +110,13 @@ class Helpers extends \Slim\Middleware {
 	}
 	
 	/*
+	 * Creates and returns the WebServer helper.
+	 */
+	public function createWebServerHelper() {
+		return new \App\Helper\WebServer();
+	}
+	
+	/*
 	 * Defines the helpers.
 	 */
 	private function defineHelpers() {
@@ -119,7 +126,6 @@ class Helpers extends \Slim\Middleware {
 		$app->container->singleton('accessValidator', [ $this, 'createAccessValidatorHelper' ]);
 		$app->container->singleton('authentication', [ $this, 'createAuthenticationHelper' ]);
 		$app->container->singleton('authenticator', [ $this, 'createAuthenticatorHelper' ]);
-		$app->container->singleton('businessLogicDatabase', [ $this, 'createBusinessLogicDatabaseHelper' ]);
 		$app->container->singleton('cryptography', [ $this, 'createCryptographyHelper' ]);
 		$app->container->singleton('data', [ $this, 'createDataHelper' ]);
 		$app->container->singleton('emails', [ $this, 'createEmailsHelper' ]);
@@ -128,6 +134,8 @@ class Helpers extends \Slim\Middleware {
 		$app->container->singleton('parameters', [ $this, 'createParametersHelper' ]);
 		$app->container->singleton('services', [ $this, 'createServicesHelper' ]);
 		$app->container->singleton('session', [ $this, 'createSessionHelper' ]);
+		$app->container->singleton('webServer', [ $this, 'createWebServerHelper' ]);
+		$app->container->singleton('businessLogicDatabase', [ $this, 'createBusinessLogicDatabaseHelper' ]);
 		$app->container->singleton('webServerDatabase', [ $this, 'createWebServerDatabaseHelper' ]);
 	}
 	
