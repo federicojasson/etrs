@@ -26,6 +26,22 @@ class Services extends \Slim\Middleware {
 
 		// Defines the services
 
+		// URL:		/server/account/edit
+		// Method:	POST
+		$app->services->define(
+			'/account/edit',
+			'POST',
+			new \App\Controller\Account\Edit()
+		);
+
+		// URL:		/server/account/get
+		// Method:	POST
+		$app->services->define(
+			'/account/get',
+			'POST',
+			new \App\Controller\Account\Get()
+		);
+
 		// URL:		/server/account/recover-password
 		// Method:	POST
 		$app->services->define(
@@ -490,6 +506,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\RecoverPasswordPermission\Create()
 		);
 
+		// URL:		/server/recover-password-permission/exists
+		// Method:	POST
+		$app->services->define(
+			'/recover-password-permission/exists',
+			'POST',
+			new \App\Controller\RecoverPasswordPermission\Exists()
+		);
+
 		// URL:		/server/sign-up-permission/create
 		// Method:	POST
 		$app->services->define(
@@ -498,13 +522,21 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\SignUpPermission\Create()
 		);
 
-//		// URL:		/server/study/create
-//		// Method:	POST
-//		$app->services->define(
-//			'/study/create',
-//			'POST',
-//			new \App\Controller\Study\Create()
-//		);
+		// URL:		/server/sign-up-permission/exists
+		// Method:	POST
+		$app->services->define(
+			'/sign-up-permission/exists',
+			'POST',
+			new \App\Controller\SignUpPermission\Exists()
+		);
+
+		// URL:		/server/study/create
+		// Method:	POST
+		$app->services->define(
+			'/study/create',
+			'POST',
+			new \App\Controller\Study\Create()
+		);
 
 		// URL:		/server/study/delete
 		// Method:	POST
@@ -514,13 +546,13 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\Study\Delete()
 		);
 
-//		// URL:		/server/study/edit
-//		// Method:	POST
-//		$app->services->define(
-//			'/study/edit',
-//			'POST',
-//			new \App\Controller\Study\Edit()
-//		);
+		// URL:		/server/study/edit
+		// Method:	POST
+		$app->services->define(
+			'/study/edit',
+			'POST',
+			new \App\Controller\Study\Edit()
+		);
 
 		// URL:		/server/study/get
 		// Method:	POST
@@ -568,6 +600,22 @@ class Services extends \Slim\Middleware {
 			'/treatment/search',
 			'POST',
 			new \App\Controller\Treatment\Search()
+		);
+
+		// URL:		/server/user/exists
+		// Method:	POST
+		$app->services->define(
+			'/user/exists',
+			'POST',
+			new \App\Controller\User\Exists()
+		);
+
+		// URL:		/server/user/get
+		// Method:	POST
+		$app->services->define(
+			'/user/get',
+			'POST',
+			new \App\Controller\User\Get()
 		);
 	}
 

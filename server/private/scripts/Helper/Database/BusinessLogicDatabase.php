@@ -863,6 +863,28 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Deletes the files of an experiment.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function deleteExperimentFiles($experiment) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM experiments_files
+			WHERE experiment = :experiment
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':experiment' => $experiment
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Deletes a file.
 	 * 
 	 * It receives the file's ID.
@@ -1050,6 +1072,36 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			':id' => $id,
 			':lastEditor' => $lastEditor,
 			':name' => $name
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Edits an experiment.
+	 * 
+	 * It receives the experiment's data.
+	 */
+	public function editExperiment($id, $lastEditor, $name, $commandLine) {
+		// Defines the statement
+		$statement = '
+			UPDATE experiments
+			SET
+				last_editor = :lastEditor,
+				last_edition_datetime = UTC_TIMESTAMP(),
+				name = :name,
+				command_line = :commandLine
+			WHERE id = :id
+			LIMIT 1
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':lastEditor' => $lastEditor,
+			':name' => $name,
+			':commandLine' => $commandLine
 		];
 		
 		// Executes the statement

@@ -45,6 +45,8 @@ class RecoverPassword extends \App\Controller\SpecializedSecureController {
 		
 		// Edits the user
 		$app->data->user->edit($user['id'], $passwordHash, $salt, $keyStretchingIterations, $user['firstName'], $user['lastName'], $user['gender'], $user['emailAddress']);
+		
+		// TODO: remove permission here or before edition? o during transaction?
 	}
 	
 	/*

@@ -25,7 +25,7 @@ abstract class Database extends \App\Helper\Helper {
 			// Commits the current transaction
 			$this->pdo->exec('COMMIT');
 		} catch (\PDOException $exception) {
-			// A PDO exception was thrown
+			// The operation failed
 			$app->error($exception);
 		}
 	}
@@ -40,7 +40,7 @@ abstract class Database extends \App\Helper\Helper {
 			// Rolls back the current transaction
 			$this->pdo->exec('ROLLBACK');
 		} catch (\PDOException $exception) {
-			// A PDO exception was thrown
+			// The operation failed
 			$app->error($exception);
 		}
 	}
@@ -55,7 +55,7 @@ abstract class Database extends \App\Helper\Helper {
 			// Starts a read-only transaction
 			$this->pdo->exec('START TRANSACTION READ ONLY');
 		} catch (\PDOException $exception) {
-			// A PDO exception was thrown
+			// The operation failed
 			$app->error($exception);
 		}
 	}
@@ -70,7 +70,7 @@ abstract class Database extends \App\Helper\Helper {
 			// Starts a read-write transaction
 			$this->pdo->exec('START TRANSACTION READ WRITE');
 		} catch (\PDOException $exception) {
-			// A PDO exception was thrown
+			// The operation failed
 			$app->error($exception);
 		}
 	}
@@ -103,7 +103,7 @@ abstract class Database extends \App\Helper\Helper {
 			// Fetches and returns the results
 			return $preparedStatement->fetchAll();
 		} catch (\PDOException $exception) {
-			// A PDO exception was thrown
+			// An operation failed
 			$app->error($exception);
 		}
 	}
@@ -129,7 +129,7 @@ abstract class Database extends \App\Helper\Helper {
 			// Initializes the instance attribute
 			$this->pdo = $pdo;
 		} catch (\PDOException $exception) {
-			// A PDO exception was thrown
+			// An operation failed
 			$app->error($exception);
 		}
 	}

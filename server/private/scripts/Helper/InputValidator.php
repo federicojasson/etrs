@@ -13,7 +13,13 @@ class InputValidator extends Helper {
 	 * It receives the input.
 	 */
 	public function isCommandLine($input) {
-		// TODO: implement
+		if (! $this->isValidText($input, 0, 512)) {
+			// The input is not a valid text
+			return false;
+		}
+		
+		// Checks whether the input has a command line format
+		return preg_match('/^.*:input.*$/', $input);
 	}
 	
 	/*
@@ -77,7 +83,7 @@ class InputValidator extends Helper {
 		}
 		
 		// Checks whether the input has an email address format
-		return preg_match('/(?!.*[ ])(?!.*@.*@)(?=.{3,254}$)^.+@.+$/', $input);
+		return preg_match('/(?!.*[\p{Cc}])(?!.*[ ])(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input);
 	}
 	
 	/*
@@ -131,7 +137,7 @@ class InputValidator extends Helper {
 		}
 		
 		// Checks whether the input has a user ID format
-		return preg_match('/^(?!.*[.]{2})(?![.])(?!.*[.]$)[.0-9A-Za-z]{3,32}$/', $input);
+		return preg_match('/(?!.*[.]{2})(?![.])(?!.*[.]$)^[.0-9A-Za-z]{3,32}$/', $input);
 	}
 	
 	/*
@@ -225,7 +231,7 @@ class InputValidator extends Helper {
 			return false;
 		}
 		
-		if (! preg_match('/^[^\p{Cc}]*$/u', $input)) {
+		if (preg_match('/[\p{Cc}]/', $input)) {
 			// The input contains non-printable characters
 			return false;
 		}

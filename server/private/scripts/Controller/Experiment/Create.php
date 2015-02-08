@@ -22,7 +22,7 @@ class Create extends \App\Controller\SpecializedSecureController {
 		
 		// Gets the input
 		$name = $this->getInput('name', 'trimString');
-		$commandLine = $this->getInput('commandLine', 'trimString'); // TODO: trimString?
+		$commandLine = $this->getInput('commandLine', 'trimString');
 		$files = $this->getinput('files', 'stringsToBinary');
 		
 		// Checks the existence of the files

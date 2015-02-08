@@ -52,7 +52,7 @@ class Emails extends Helper {
 		$smtp = $app->parameters->emails['smtp'];
 		
 		// Initializes the email
-		$email = new \PHPMailer();
+		$email = new \PHPMailer(true);
 		
 		// Sets the SMTP parameters
 		$email->isSMTP();
@@ -89,7 +89,7 @@ class Emails extends Helper {
 		$identity = $app->parameters->emails['identity'];
 		
 		// Creates and returns the email
-		$this->createEmail($identity, $recipient, $subject, $body, $alternativeBody);
+		return $this->createEmail($identity, $recipient, $subject, $body, $alternativeBody);
 	}
 	
 	/*
@@ -100,14 +100,14 @@ class Emails extends Helper {
 	private function sendEmail($email) {
 		$app = $this->app;
 		
-		// Sends the email
-		$delivered = $email->send();
-		
-		if (! $delivered) {
-			// The email could not be delivered
+		try {
+			// Sends the email
+			$email->send();
+		} catch (\phpmailerException $exception) {
+			// The operation failed
 			
 			// Logs the event
-			$app->log->error('An email failed to be delivered.');
+			$app->log->error('An email failed to be delivered. Message: ' . $exception->getMessage());
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [

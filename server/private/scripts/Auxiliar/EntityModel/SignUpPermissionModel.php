@@ -20,6 +20,18 @@ class SignUpPermissionModel extends EntityModel {
 	}
 	
 	/*
+	 * Determines whether a sign up permission exists.
+	 * 
+	 * It receives the sign up permission's ID.
+	 */
+	public function exists($id) {
+		$app = $this->app;
+		
+		// Determines whether the sign up permission exists
+		return $app->webServerDatabase->signUpPermissionExists($id);
+	}
+	
+	/*
 	 * Returns a sign up permission. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the sign up permission's ID.

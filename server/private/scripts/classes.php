@@ -51,6 +51,8 @@ require 'private/scripts/Controller/SecureController.php';
 require 'private/scripts/Controller/SpecializedSecureController.php';
 
 // App\Controller\Account
+require 'private/scripts/Controller/Account/Edit.php';
+require 'private/scripts/Controller/Account/Get.php';
 require 'private/scripts/Controller/Account/RecoverPassword.php';
 require 'private/scripts/Controller/Account/SignIn.php';
 require 'private/scripts/Controller/Account/SignOut.php';
@@ -135,14 +137,16 @@ require 'private/scripts/Controller/Patient/Search.php';
 
 // App\Controller\RecoverPasswordPermission
 require 'private/scripts/Controller/RecoverPasswordPermission/Create.php';
+require 'private/scripts/Controller/RecoverPasswordPermission/Exists.php';
 
 // App\Controller\SignUpPermission
 require 'private/scripts/Controller/SignUpPermission/Create.php';
+require 'private/scripts/Controller/SignUpPermission/Exists.php';
 
 // App\Controller\Study
-//require 'private/scripts/Controller/Study/Create.php';
+require 'private/scripts/Controller/Study/Create.php';
 require 'private/scripts/Controller/Study/Delete.php';
-//require 'private/scripts/Controller/Study/Edit.php';
+require 'private/scripts/Controller/Study/Edit.php';
 require 'private/scripts/Controller/Study/Get.php';
 
 // App\Controller\Treatment
@@ -151,6 +155,10 @@ require 'private/scripts/Controller/Treatment/Delete.php';
 require 'private/scripts/Controller/Treatment/Edit.php';
 require 'private/scripts/Controller/Treatment/Get.php';
 require 'private/scripts/Controller/Treatment/Search.php';
+
+// App\Controller\User
+require 'private/scripts/Controller/User/Exists.php';
+require 'private/scripts/Controller/User/Get.php';
 
 // App\Extension
 require 'private/scripts/Extension/Request.php';

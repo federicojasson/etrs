@@ -826,6 +826,29 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Returns a user. If it doesn't exist, the execution is halted.
+	 * 
+	 * It receives the user's ID.
+	 */
+	protected function getUser($id) {
+		$app = $this->app;
+		
+		// Gets the user
+		$user = $app->data->user->get($id);
+		
+		if (is_null($user)) {
+			// The user doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_USER
+			]);
+		}
+		
+		return $user;
+	}
+	
+	/*
 	 * Replaces the current output.
 	 * 
 	 * It receives the new output.

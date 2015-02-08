@@ -70,10 +70,10 @@ class ExperimentModel extends EntityModel {
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
 		// Edits the experiment
-		$app->businessLogicDatabase->editExperiment($id, $lastEditor, $name, $commandLine); // TODO
+		$app->businessLogicDatabase->editExperiment($id, $lastEditor, $name, $commandLine);
 		
 		// Disassociates all data from the experiment
-		$this->disassociateData($id); // TODO
+		$this->disassociateData($id);
 		
 		// Associates the data with the experiment
 		$this->associateData($id, $files);
@@ -157,6 +157,18 @@ class ExperimentModel extends EntityModel {
 		foreach ($files as $file) {
 			$app->businessLogicDatabase->createExperimentFile($id, $file);
 		}
+	}
+	
+	/*
+	 * Disassociates all data from an experiment.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	private function disassociateData($id) {
+		$app = $this->app;
+		
+		// Disassociates the files
+		$app->businessLogicDatabase->deleteExperimentFiles($id);
 	}
 	
 }

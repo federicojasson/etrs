@@ -44,6 +44,16 @@ class UserModel extends EntityModel {
 	}
 	
 	/*
+	 * Filters a user for presentation and returns the result.
+	 * 
+	 * It receives the user.
+	 */
+	public function filter($user) {
+		// TODO: implement
+		return $user;
+	}
+	
+	/*
 	 * Returns a user. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the user's ID.

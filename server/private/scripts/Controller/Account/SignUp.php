@@ -50,6 +50,8 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 		
 		// Signs up the user in the system
 		$app->authentication->signUpUser($id, $signUpPermission['creator'], $passwordHash, $salt, $keyStretchingIterations, $signUpPermission['role'], $firstName, $lastName, $gender, $emailAddress);
+		
+		// TODO: remove permission here or before sign up? o during transaction?
 	}
 	
 	/*
