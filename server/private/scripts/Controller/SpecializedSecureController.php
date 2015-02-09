@@ -913,6 +913,46 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Validates a form data request and returns the result.
+	 * 
+	 * If the request is valid, the file's name and temporary path are set as
+	 * the input.
+	 * 
+	 * It receives the name of the expected input.
+	 */
+	protected function validateFormDataRequest($inputName) {
+		$app = $this->app;
+		
+		if (! $this->requestHasExpectedMediaType('multipart/form-data')) {
+			// The media type is not the expected one
+			return false;
+		}
+		
+		if (! isset($_FILES[$inputName])) {
+			// The file was not received
+			return false;
+		}
+		
+		// Gets the file
+		$file = $_FILES[$inputName];
+		
+		if ($file['error'] !== UPLOAD_ERR_OK) {
+			// There was an error during the file transmission
+			return false;
+		}
+		
+		// TODO: validate or sanitize file's name?
+		
+		// Sets the input
+		$app->request->setBody([
+			'name' => $file['name'],
+			'temporaryPath' => $file['tmp_name']
+		]);
+		
+		return true;
+	}
+	
+	/*
 	 * Validates a JSON request and returns the result.
 	 * 
 	 * If the request is valid, the input is replaced by a decoded version.
@@ -922,11 +962,8 @@ abstract class SpecializedSecureController extends SecureController {
 	protected function validateJsonRequest($jsonStructureDescriptor) {
 		$app = $this->app;
 		
-		// Gets the media type
-		$mediaType = $app->request->getMediaType();
-		
-		if ($mediaType !== 'application/json') {
-			// The media type is not JSON
+		if (! $this->requestHasExpectedMediaType('application/json')) {
+			// The media type is not the expected one
 			return false;
 		}
 		
@@ -946,7 +983,7 @@ abstract class SpecializedSecureController extends SecureController {
 			return false;
 		}
 		
-		// Replaces the request's body with the decoded input
+		// Replaces the input with the decoded version
 		$app->request->setBody($input);
 		
 		return true;
@@ -1005,6 +1042,21 @@ abstract class SpecializedSecureController extends SecureController {
 		
 		// Determines whether the value is valid
 		return $this->isValidDataTypeValue($neurocognitiveTest['dataTypeDescriptor'], $value);
+	}
+	
+	/*
+	 * Determines whether a request has the expected media type.
+	 * 
+	 * It receives the expected media type.
+	 */
+	private function requestHasExpectedMediaType($expectedMediaType) {
+		$app = $this->app;
+		
+		// Gets the media type
+		$mediaType = $app->request->getMediaType();
+		
+		// Compares the media types and returns the result
+		return $mediaType === $expectedMediaType;
 	}
 	
 }

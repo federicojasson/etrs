@@ -13,27 +13,52 @@ class Files extends Helper {
 	 * It receives the file.
 	 */
 	public function download($file) {
+		// Gets the file's path
+		$path = $this->getFilePath($file['id'], $file['name']);
+		
 		// Checks the existence of the file
-		$this->checkFileExistence($file);
+		$this->checkFileExistence($path);
 		
 		// Checks the integrity of the file
 		$this->checkFileIntegrity($file);
 		
+		// TODO: headers
+		
 		// Initiates the download
-		$this->initiateDownload($file);
+		readfile($path);
+	}
+	
+	/*
+	 * Uploads a file and returns its hash.
+	 * 
+	 * It receives the file's ID, name and temporary path.
+	 */
+	public function upload($id, $name, $temporaryPath) {
+		$app = $this->app;
+		
+		// Gets the path where the file should be permanently located
+		$path = $this->getFilePath($id, $name);
+		
+		// Checks the non-existence of the file
+		$this->checkFileNonExistence($path);
+		
+		// Moves the temporary file to its permanent location
+		$this->moveTemporaryFile($temporaryPath, $path);
+		
+		// Computes the hash of the file
+		$hash = $app->cryptography->hashFile($path);
+		
+		return $hash;
 	}
 	
 	/*
 	 * Checks the existence of a file. If it doesn't exist, the execution is
 	 * halted.
 	 * 
-	 * It receives the file.
+	 * It receives the file's path.
 	 */
-	private function checkFileExistence($file) {
+	private function checkFileExistence($path) {
 		$app = $this->app;
-		
-		// Gets the file's path
-		$path = $this->getFilePath($file['id'], $file['name']);
 		
 		if (! file_exists($path)) {
 			// The file doesn't exist
@@ -77,6 +102,61 @@ class Files extends Helper {
 	}
 	
 	/*
+	 * Checks the non-existence of a file. If it exists, the execution is
+	 * halted.
+	 * 
+	 * It receives the file's path.
+	 */
+	private function checkFileNonExistence($path) {
+		$app = $this->app;
+		
+		if (file_exists($path)) {
+			// The file exists
+			
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' already exists.');
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_ALREADY_EXISTING_FILE
+			]);
+		}
+	}
+	
+	/*
+	 * Creates a file's directory, if it doesn't exist already. If the operation
+	 * fails, the execution is halted.
+	 * 
+	 * It receives the file's path.
+	 */
+	private function createFileDirectory($path) {
+		$app = $this->app;
+		
+		// Gets the directory
+		$directory = dirname($path);
+		
+		if (is_dir($directory)) {
+			// The directory already exists
+			return;
+		}
+		
+		// Creates the directory
+		$created = mkdir($directory, FILES_ACCESS_PERMISSIONS, true);
+		
+		if (! $created) {
+			// The directory could not be created
+			
+			// Logs the event
+			$app->log->critical('The directory ' . $directory . ' could not be created.');
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_FILE_SYSTEM_PROBLEM
+			]);
+		}
+	}
+	
+	/*
 	 * Returns a file's path.
 	 * 
 	 * It receives the file's ID and name.
@@ -84,14 +164,14 @@ class Files extends Helper {
 	private function getFilePath($id, $name) {
 		$app = $this->app;
 		
-		// Gets the directory's path
-		$path = $app->parameters->paths['files'];
+		// Gets the files directory
+		$directory = $app->parameters->paths['files'];
 		
 		// Gets the file's relative path
 		$relativePath = $this->getRelativeFilePath($id, $name);
 		
 		// Builds and returns the path
-		return $path . $relativePath;
+		return $directory . $relativePath;
 	}
 	
 	/*
@@ -103,24 +183,61 @@ class Files extends Helper {
 		// Converts the ID to hexadecimal
 		$id = bin2hex($id);
 		
-		// Gets the directories
-		$directories = str_split($id, 4);
+		// Gets the subdirectories
+		$subdirectories = str_split($id, 4);
 		
 		// Builds and returns the path
-		return implode('/', $directories) . '/' . $name;
+		return implode('/', $subdirectories) . '/' . $name;
 	}
 	
 	/*
-	 * Initiates the download of a file.
+	 * Moves a temporary file to a permanent location. If the operation fails,
+	 * the execution is halted.
 	 * 
-	 * It receives the file.
+	 * It receives the file's temporary path and the destination path.
 	 */
-	private function initiateDownload($file) {
-		// Gets the file's path
-		$path = $this->getFilePath($file['id'], $file['name']);
+	private function moveTemporaryFile($temporaryPath, $path) {
+		$app = $this->app;
 		
-		// TODO: headers
-		readfile($path);
+		// Creates the destination directory
+		$this->createFileDirectory($path);
+		
+		// Moves the file
+		$moved = move_uploaded_file($temporaryPath, $path);
+		
+		if (! $moved) {
+			// The file could not be moved
+			
+			// Logs the event
+			$app->log->critical('The temporary file ' . $temporaryPath . ' could not be moved to its permanent location ' . $path . '.');
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_FILE_SYSTEM_PROBLEM
+			]);
+		}
+		
+		// Sets the file's access permissions
+		$this->setFileAccessPermissions($path, FILES_ACCESS_PERMISSIONS);
+	}
+	
+	/*
+	 * Sets a file's access permissions.
+	 * 
+	 * It receives the file's path and the access permissions to be set.
+	 */
+	private function setFileAccessPermissions($path, $accessPermissions) {
+		$app = $this->app;
+		
+		// Sets the file's access permissions
+		$set = chmod($path, $accessPermissions);
+		
+		if (! $set) {
+			// The access permissions could not be set
+			
+			// Logs the event
+			$app->log->warning('The access permissions of the file ' . $path . ' could not be set.');
+		}
 	}
 	
 }

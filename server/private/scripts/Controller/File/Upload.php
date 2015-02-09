@@ -14,14 +14,31 @@ class Upload extends \App\Controller\SpecializedSecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		// TODO: implement
+		$app = $this->app;
+		
+		// Gets the input
+		$name = $this->getInput('name'); // TODO: process name?
+		$temporaryPath = $this->getInput('temporaryPath');
+		
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Uploads the file
+		$hash = $app->files->upload($id, $name, $temporaryPath);
+		
+		// Creates the file
+		$app->data->file->create($id, $signedInUser['id'], $name, $hash);
 	}
 	
 	/*
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		// Validates the form data request and returns the result
+		return $this->validateFormDataRequest('file');
 	}
 	
 	/*

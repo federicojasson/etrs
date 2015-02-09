@@ -436,6 +436,49 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Creates a file.
+	 * 
+	 * It receives the file's data.
+	 */
+	public function createFile($id, $creator, $name, $hash) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO files (
+				id,
+				deleted,
+				creator,
+				last_editor,
+				creation_datetime,
+				last_edition_datetime,
+				name,
+				hash
+			)
+			VALUES (
+				:id,
+				FALSE,
+				:creator,
+				:lastEditor,
+				UTC_TIMESTAMP(),
+				UTC_TIMESTAMP(),
+				:name,
+				:hash
+			)
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator,
+			':lastEditor' => $creator,
+			':name' => $name,
+			':hash' => $hash
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Creates an image test.
 	 * 
 	 * It receives the image test's data.

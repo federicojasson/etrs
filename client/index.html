@@ -1,60 +1,15 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
 	<head>
-		<base href="/etrs/">
+		<title>TODO supply a title</title>
 		<meta charset="UTF-8">
-		
-		<link href="images/favicon.ico" rel="icon">
-		
-		<link href="vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="styles/style.css" rel="stylesheet">
-		
-		<title ng-bind="title.get()" ng-controller="TitleController as title"></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
-	
 	<body>
-		<span ui-view></span>
-		
-        <input type="file" nv-file-select uploader="uploader"/><br/>
-        <ul>
-            <li ng-repeat="item in uploader.queue">
-                Name: <span ng-bind="item.file.name"></span><br/>
-                <button ng-click="item.upload()">upload</button>
-            </li>
-        </ul>
-		
-		<!-- TODO: use minified version -->
-		<!--<script src="vendors/angular/angular.min.js"></script>-->
-		<!-- TODO: remove debug version -->
-		<script src="vendors/angular/angular.js"></script>
-		<script src="vendors/angular/angular-resource.min.js"></script>
-		<script src="vendors/angular/i18n/angular-locale_es.min.js"></script>
-		<script src="vendors/angular-ui/angular-ui-bootstrap-tpls-0.12.0.min.js"></script>
-		<script src="vendors/angular-ui/angular-ui-router.min.js"></script>
-		
-		<script src="scripts/app.js"></script>
-		<script src="scripts/authentication/authentication.js"></script>
-		<script src="scripts/authentication/authentication-controller.js"></script>
-		<script src="scripts/authentication/authentication-run.js"></script>
-		<script src="scripts/authentication/authentication-service.js"></script>
-		<script src="scripts/communications/communications.js"></script>
-		<script src="scripts/communications/server-service.js"></script>
-		<script src="scripts/experiments/experiments.js"></script>
-		<script src="scripts/experiments/experiments-service.js"></script>
-		<script src="scripts/experiments/manage-experiments-controller.js"></script>
-		<script src="scripts/experiments/manage-experiments-service.js"></script>
-		<script src="scripts/patients/patients.js"></script>
-		<script src="scripts/patients/patients-service.js"></script>
-		<script src="scripts/routing/routing.js"></script>
-		<script src="scripts/routing/routing-config.js"></script>
-		<script src="scripts/routing/routing-run.js"></script>
-		<script src="scripts/routing/routing-service.js"></script>
-		<script src="scripts/title/title.js"></script>
-		<script src="scripts/title/title-controller.js"></script>
-		<script src="scripts/title/title-service.js"></script>
-		<script src="scripts/users/users.js"></script>
-		<script src="scripts/users/users-service.js"></script>
-		<script src="scripts/utilities/utilities.js"></script>
-		<script src="scripts/utilities/utilities-service.js"></script>
+		<form enctype="multipart/form-data" action="server/file/upload" method="POST">
+			<input type="hidden" name="MAX_FILE_SIZE" value="512000000000000000000000" />
+			Send this file: <input name="file" type="file" />
+			<input type="submit" value="Upload file" />
+		</form>
 	</body>
 </html>

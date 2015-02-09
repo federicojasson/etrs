@@ -8,6 +8,18 @@ namespace App\Auxiliar\EntityModel;
 class FileModel extends EntityModel {
 	
 	/*
+	 * Creates a file.
+	 * 
+	 * It receives the file's data.
+	 */
+	public function create($id, $creator, $name, $hash) {
+		$app = $this->app;
+		
+		// Creates the file
+		$app->businessLogicDatabase->createFile($id, $creator, $name, $hash);
+	}
+	
+	/*
 	 * Deletes a file.
 	 * 
 	 * It receives the file's ID.
