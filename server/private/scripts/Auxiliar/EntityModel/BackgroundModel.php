@@ -61,8 +61,21 @@ class BackgroundModel extends EntityModel {
 	 * It receives the background.
 	 */
 	public function filter($background) {
-		// TODO: implement
-		return $background;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('background');
+		
+		// Filters the background's fields
+		$newBackground = filterArray($background, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newBackground['id'])) {
+			$newBackground['id'] = bin2hex($background['id']);
+		}
+		
+		return $newBackground;
 	}
 	
 	/*
@@ -98,7 +111,7 @@ class BackgroundModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$backgrounds = objectIdsToHexadecimal($backgrounds);
+		$backgrounds = arrayIdsToHexadecimal($backgrounds);
 		
 		// Gets the IDs
 		$ids = array_column($backgrounds, 'id');

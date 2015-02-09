@@ -1434,6 +1434,132 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Returns the non-deleted backgrounds of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonDeletedBackgrounds($consultation) {
+		// Defines the statement
+		$statement = '
+			SELECT background AS id
+			FROM consultations_non_deleted_backgrounds
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-deleted image tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonDeletedImageTests($consultation) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				image_test AS id,
+				value
+			FROM consultations_non_deleted_image_tests
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-deleted laboratory tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonDeletedLaboratoryTests($consultation) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				laboratory_test AS id,
+				value
+			FROM consultations_non_deleted_laboratory_tests
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-deleted medications of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonDeletedMedications($consultation) {
+		// Defines the statement
+		$statement = '
+			SELECT medication AS id
+			FROM consultations_non_deleted_medications
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-deleted neurocognitive tests of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonDeletedNeurocognitiveTests($consultation) {
+		// Defines the statement
+		$statement = '
+			SELECT
+				neurocognitive_test AS id,
+				value
+			FROM consultations_non_deleted_neurocognitive_tests
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
 	 * Returns the non-deleted studies of a consultation.
 	 * 
 	 * It receives the consultation's ID.
@@ -1443,6 +1569,30 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$statement = '
 			SELECT id
 			FROM non_deleted_studies
+			WHERE consultation = :consultation
+		';
+		
+		// Sets the parameters
+		$parameters = [
+			':consultation' => $consultation
+		];
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement, $parameters);
+		
+		return $results;
+	}
+	
+	/*
+	 * Returns the non-deleted treatments of a consultation.
+	 * 
+	 * It receives the consultation's ID.
+	 */
+	public function getConsultationNonDeletedTreatments($consultation) {
+		// Defines the statement
+		$statement = '
+			SELECT treatment AS id
+			FROM consultations_non_deleted_treatments
 			WHERE consultation = :consultation
 		';
 		

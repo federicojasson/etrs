@@ -105,8 +105,64 @@ class StudyModel extends EntityModel {
 	 * It receives the study.
 	 */
 	public function filter($study) {
-		// TODO: implement
-		return $study;
+		$app = $this->app;
+		
+		// Adds fields for the associated data
+		$study['files'] = [];
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('study');
+		
+		// Filters the study's fields
+		$newStudy = filterArray($study, $accessibleFields);
+		
+		// Attaches associated data and applies conversions
+		
+		if (isset($newStudy['id'])) {
+			$newStudy['id'] = bin2hex($study['id']);
+		}
+		
+		if (isset($newStudy['consultation'])) {
+			if ($app->businessLogicDatabase->nonDeletedConsultationExists($study['consultation'])) {
+				$newStudy['consultation'] = bin2hex($study['consultation']);
+			} else {
+				$newStudy['consultation'] = null;
+			}
+		}
+		
+		if (isset($newStudy['experiment'])) {
+			if ($app->businessLogicDatabase->nonDeletedExperimentExists($study['experiment'])) {
+				$newStudy['experiment'] = bin2hex($study['experiment']);
+			} else {
+				$newStudy['experiment'] = null;
+			}
+		}
+		
+		if (isset($newStudy['input'])) {
+			if ($app->businessLogicDatabase->nonDeletedFileExists($study['input'])) {
+				$newStudy['input'] = bin2hex($study['input']);
+			} else {
+				$newStudy['input'] = null;
+			}
+		}
+		
+		if (isset($newStudy['report'])) {
+			if ($app->businessLogicDatabase->nonDeletedFileExists($study['report'])) {
+				$newStudy['report'] = bin2hex($study['report']);
+			} else {
+				$newStudy['report'] = null;
+			}
+		}
+		
+		if (isset($newStudy['files'])) {
+			$files = $app->businessLogicDatabase->getStudyNonDeletedFiles($study['id']);
+			
+			foreach ($files as $file) {
+				$newStudy['files'][] = bin2hex($file['id']);
+			}
+		}
+		
+		return $newStudy;
 	}
 	
 	/*

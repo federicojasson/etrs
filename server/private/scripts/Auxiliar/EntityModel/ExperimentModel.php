@@ -100,8 +100,32 @@ class ExperimentModel extends EntityModel {
 	 * It receives the experiment.
 	 */
 	public function filter($experiment) {
-		// TODO: implement
-		return $experiment;
+		$app = $this->app;
+		
+		// Adds fields for the associated data
+		$experiment['files'] = [];
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('experiment');
+		
+		// Filters the experiment's fields
+		$newExperiment = filterArray($experiment, $accessibleFields);
+		
+		// Attaches associated data and applies conversions
+		
+		if (isset($newExperiment['id'])) {
+			$newExperiment['id'] = bin2hex($experiment['id']);
+		}
+		
+		if (isset($newExperiment['files'])) {
+			$files = $app->businessLogicDatabase->getExperimentNonDeletedFiles($experiment['id']);
+			
+			foreach ($files as $file) {
+				$newExperiment['files'][] = bin2hex($file['id']);
+			}
+		}
+		
+		return $newExperiment;
 	}
 	
 	/*
@@ -137,7 +161,7 @@ class ExperimentModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$experiments = objectIdsToHexadecimal($experiments);
+		$experiments = arrayIdsToHexadecimal($experiments);
 		
 		// Gets the IDs
 		$ids = array_column($experiments, 'id');

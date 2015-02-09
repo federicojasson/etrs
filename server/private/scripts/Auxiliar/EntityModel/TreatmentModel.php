@@ -61,8 +61,21 @@ class TreatmentModel extends EntityModel {
 	 * It receives the treatment.
 	 */
 	public function filter($treatment) {
-		// TODO: implement
-		return $treatment;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('treatment');
+		
+		// Filters the treatment's fields
+		$newTreatment = filterArray($treatment, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newTreatment['id'])) {
+			$newTreatment['id'] = bin2hex($treatment['id']);
+		}
+		
+		return $newTreatment;
 	}
 	
 	/*
@@ -98,7 +111,7 @@ class TreatmentModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$treatments = objectIdsToHexadecimal($treatments);
+		$treatments = arrayIdsToHexadecimal($treatments);
 		
 		// Gets the IDs
 		$ids = array_column($treatments, 'id');

@@ -1,12 +1,14 @@
 Tareas (TODOs):
 
+- Testear todos los servicios de forma automática (crear testers)
+
 - Generar reporte
 
 - Agregar licencia
 
 - Chequear Warnings
 
-- Obtener dirección IP en las sesiones y loguearlas
+- Log controllers
 
 - Implementar control de acceso más preciso
 
@@ -14,7 +16,6 @@ Tareas (TODOs):
 
 - Tareas de mantenimiento:
 	- Eliminar permisos vencidos.
-	- Eliminar archivos temporarios.
 	- Eliminar logs antiguos.
 	- Eliminar archivos huérfanos.
 

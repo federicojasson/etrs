@@ -61,8 +61,21 @@ class LaboratoryTestModel extends EntityModel {
 	 * It receives the laboratory test.
 	 */
 	public function filter($laboratoryTest) {
-		// TODO: implement
-		return $laboratoryTest;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('laboratoryTest');
+		
+		// Filters the laboratory test's fields
+		$newLaboratoryTest = filterArray($laboratoryTest, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newLaboratoryTest['id'])) {
+			$newLaboratoryTest['id'] = bin2hex($laboratoryTest['id']);
+		}
+		
+		return $newLaboratoryTest;
 	}
 	
 	/*
@@ -99,7 +112,7 @@ class LaboratoryTestModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$laboratoryTests = objectIdsToHexadecimal($laboratoryTests);
+		$laboratoryTests = arrayIdsToHexadecimal($laboratoryTests);
 		
 		// Gets the IDs
 		$ids = array_column($laboratoryTests, 'id');

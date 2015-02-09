@@ -19,13 +19,14 @@ class Emails extends Helper {
 		// Gets the email's parameters
 		$parameters = $app->parameters->emails['recoverPasswordEmail'];
 		$subject = $parameters['subject'];
+		$relativeUrl = $parameters['relativeUrl'];
 		$path = $parameters['path'];
 		$alternativePath = $parameters['alternativePath'];
 		
 		// Builds a URL to recover the password
 		$url = '';
 		$url .= $app->webServer->getDomain();
-		$url .= '/recover-password/'; // TODO: hardcoded here?
+		$url .= '/' . $relativeUrl;
 		$url .= bin2hex($id) . '/' . bin2hex($password);
 		
 		// Defines a placeholder mapping
@@ -55,13 +56,14 @@ class Emails extends Helper {
 		// Gets the email's parameters
 		$parameters = $app->parameters->emails['signUpEmail'];
 		$subject = $parameters['subject'];
+		$relativeUrl = $parameters['relativeUrl'];
 		$path = $parameters['path'];
 		$alternativePath = $parameters['alternativePath'];
 		
 		// Builds a URL to sign up
 		$url = '';
 		$url .= $app->webServer->getDomain();
-		$url .= '/sign-up/'; // TODO: hardcoded here?
+		$url .= '/' . $relativeUrl;
 		$url .= bin2hex($id) . '/' . bin2hex($password);
 		
 		// Defines a placeholder mapping

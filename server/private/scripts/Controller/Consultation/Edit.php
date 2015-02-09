@@ -29,10 +29,10 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		$indications = $this->getInput('indications', 'trimString');
 		$observations = $this->getInput('observations', 'trimString');
 		$backgrounds = $this->getinput('backgrounds', 'stringsToBinary');
-		$imageTests = $this->getinput('imageTests', 'objectIdsToBinary');
-		$laboratoryTests = $this->getinput('laboratoryTests', 'objectIdsToBinary');
+		$imageTests = $this->getinput('imageTests', 'arrayIdsToBinary');
+		$laboratoryTests = $this->getinput('laboratoryTests', 'arrayIdsToBinary');
 		$medications = $this->getinput('medications', 'stringsToBinary');
-		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'objectIdsToBinary');
+		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'arrayIdsToBinary');
 		$treatments = $this->getinput('treatments', 'stringsToBinary');
 		
 		// Checks the existence of the consultation
@@ -179,10 +179,10 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		
 		// Gets the input
 		$backgrounds = $this->getinput('backgrounds', 'stringsToBinary');
-		$imageTests = $this->getinput('imageTests', 'objectIdsToBinary');
-		$laboratoryTests = $this->getinput('laboratoryTests', 'objectIdsToBinary');
+		$imageTests = $this->getinput('imageTests', 'arrayIdsToBinary');
+		$laboratoryTests = $this->getinput('laboratoryTests', 'arrayIdsToBinary');
 		$medications = $this->getinput('medications', 'stringsToBinary');
-		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'objectIdsToBinary');
+		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'arrayIdsToBinary');
 		$treatments = $this->getinput('treatments', 'stringsToBinary');
 		
 		if (! $this->areBackgroundsValid($backgrounds)) {

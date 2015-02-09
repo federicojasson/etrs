@@ -84,8 +84,8 @@ class WebServer extends Helper {
 	public function getDomain() {
 		$app = $this->app;
 		
-		// TODO: comment
-		return $app->parameters->webServer['domain']; // TODO: check
+		// Gets and returns the domain
+		return $app->parameters->webServer['domain'];
 	}
 	
 	/*

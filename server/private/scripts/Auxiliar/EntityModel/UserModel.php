@@ -73,8 +73,25 @@ class UserModel extends EntityModel {
 	 * It receives the user.
 	 */
 	public function filter($user) {
-		// TODO: implement
-		return $user;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('user');
+		
+		// Filters the user's fields
+		$newUser = filterArray($user, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newUser['passwordHash'])) {
+			$newUser['passwordHash'] = bin2hex($user['passwordHash']);
+		}
+		
+		if (isset($newUser['salt'])) {
+			$newUser['salt'] = bin2hex($user['salt']);
+		}
+		
+		return $newUser;
 	}
 	
 	/*

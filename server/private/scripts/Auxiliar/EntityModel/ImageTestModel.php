@@ -61,8 +61,21 @@ class ImageTestModel extends EntityModel {
 	 * It receives the image test.
 	 */
 	public function filter($imageTest) {
-		// TODO: implement
-		return $imageTest;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('imageTest');
+		
+		// Filters the image test's fields
+		$newImageTest = filterArray($imageTest, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newImageTest['id'])) {
+			$newImageTest['id'] = bin2hex($imageTest['id']);
+		}
+		
+		return $newImageTest;
 	}
 	
 	/*
@@ -98,7 +111,7 @@ class ImageTestModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$imageTests = objectIdsToHexadecimal($imageTests);
+		$imageTests = arrayIdsToHexadecimal($imageTests);
 		
 		// Gets the IDs
 		$ids = array_column($imageTests, 'id');

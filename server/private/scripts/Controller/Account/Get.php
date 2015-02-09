@@ -23,7 +23,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		$user = $this->getUser($signedInUser['id']);
 		
 		// Filters the user
-		$user = $app->data->user->filter($user); // TODO: how to different it from the other case
+		$user = $app->data->user->filter($user);
 		
 		// Sets the output
 		$this->setEntireOutput($user);

@@ -58,7 +58,7 @@ class Get extends \App\Controller\SpecializedSecureController {
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
 			USER_ROLE_ADMINISTRATOR,
-			//USER_ROLE_DOCTOR, TODO: not sure!
+			USER_ROLE_DOCTOR,
 			USER_ROLE_OPERATOR
 		];
 		

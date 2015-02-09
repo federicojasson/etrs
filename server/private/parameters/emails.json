@@ -14,12 +14,14 @@
 	
 	"recoverPasswordEmail": {
 		"subject": "ETRS - Recuperar contraseña",
+		"relativeUrl": "recover-password/",
 		"path": "private/templates/emails/recover-password-email.html",
 		"alternativePath": "private/templates/emails/recover-password-email.txt"
 	},
 	
 	"signUpEmail": {
 		"subject": "ETRS - Invitación",
+		"relativeUrl": "sign-up/",
 		"path": "private/templates/emails/sign-up-email.html",
 		"alternativePath": "private/templates/emails/sign-up-email.txt"
 	}

@@ -32,6 +32,36 @@ function arrayContainsDuplicateElements($array) {
 }
 
 /*
+ * Converts the IDs of a set of arrays from hexadecimal to binary. It assumes
+ * that these contain the key 'id'.
+ * 
+ * It receives the arrays.
+ */
+function arrayIdsToBinary($arrays) {
+	// Converts the IDs from hexadecimal to binary
+	foreach ($arrays as &$array) {
+		$array['id'] = hex2bin($array['id']);
+	}
+
+	return $arrays;
+}
+
+/*
+ * Converts the IDs of a set of arrays from binary to hexadecimal. It assumes
+ * that these contain the key 'id'.
+ * 
+ * It receives the arrays.
+ */
+function arrayIdsToHexadecimal($arrays) {
+	// Converts the IDs from binary to hexadecimal
+	foreach ($arrays as &$array) {
+		$array['id'] = bin2hex($array['id']);
+	}
+
+	return $arrays;
+}
+
+/*
  * Converts a string from camel case notation to snake case notation.
  * 
  * It receives the string.
@@ -59,6 +89,27 @@ function camelCaseToSnakeCase($string) {
 	
 	// Builds and returns the new string
 	return implode('_', $words);
+}
+
+/*
+ * Filters the entries of an array, leaving only those whose keys belong to a
+ * certain set.
+ * 
+ * It receives the array and the keys.
+ */
+function filterArray($array, $keys) {
+	// Initializes the new array
+	$newArray = [];
+	
+	// Filters the entries
+	foreach ($keys as $key) {
+		if (array_key_exists($key, $array)) {
+			// The key is defined in the array
+			$newArray[$key] = $array[$key];
+		}
+	}
+	
+	return $newArray;
 }
 
 /*
@@ -138,36 +189,6 @@ function isStringEmpty($string) {
  */
 function isStringInteger($string) {
 	return (string) (int) $string === $string;
-}
-
-/*
- * Converts the IDs of a set of objects from hexadecimal to binary. It assumes
- * that the objects are associative arrays containing the key 'id'.
- * 
- * It receives the objects.
- */
-function objectIdsToBinary($objects) {
-	// Converts the IDs from hexadecimal to binary
-	foreach ($objects as &$object) {
-		$object['id'] = hex2bin($object['id']);
-	}
-
-	return $objects;
-}
-
-/*
- * Converts the IDs of a set of objects from binary to hexadecimal. It assumes
- * that the objects are associative arrays containing the key 'id'.
- * 
- * It receives the objects.
- */
-function objectIdsToHexadecimal($objects) {
-	// Converts the IDs from binary to hexadecimal
-	foreach ($objects as &$object) {
-		$object['id'] = bin2hex($object['id']);
-	}
-
-	return $objects;
 }
 
 /*

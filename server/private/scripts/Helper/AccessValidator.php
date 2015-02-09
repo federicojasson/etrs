@@ -8,6 +8,14 @@ namespace App\Helper;
 class AccessValidator extends Helper {
 	
 	/*
+	 * TODO: comments
+	 */
+	public function getAccessibleFields($entity) { // TODO: rename entity?
+		// TODO: implement
+		// TODO: user ---> special treat
+	}
+	
+	/*
 	 * Checks whether the requesting user is authorized to access according to
 	 * its privileges and returns the result.
 	 * 

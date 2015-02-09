@@ -61,8 +61,21 @@ class NeurocognitiveTestModel extends EntityModel {
 	 * It receives the neurocognitive test.
 	 */
 	public function filter($neurocognitiveTest) {
-		// TODO: implement
-		return $neurocognitiveTest;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('neurocognitiveTest');
+		
+		// Filters the neurocognitive test's fields
+		$newNeurocognitiveTest = filterArray($neurocognitiveTest, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newNeurocognitiveTest['id'])) {
+			$newNeurocognitiveTest['id'] = bin2hex($neurocognitiveTest['id']);
+		}
+		
+		return $newNeurocognitiveTest;
 	}
 	
 	/*
@@ -99,7 +112,7 @@ class NeurocognitiveTestModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$neurocognitiveTests = objectIdsToHexadecimal($neurocognitiveTests);
+		$neurocognitiveTests = arrayIdsToHexadecimal($neurocognitiveTests);
 		
 		// Gets the IDs
 		$ids = array_column($neurocognitiveTests, 'id');

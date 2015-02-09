@@ -61,8 +61,21 @@ class DiagnosisModel extends EntityModel {
 	 * It receives the diagnosis.
 	 */
 	public function filter($diagnosis) {
-		// TODO: implement
-		return $diagnosis;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('diagnosis');
+		
+		// Filters the diagnosis' fields
+		$newDiagnosis = filterArray($diagnosis, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newDiagnosis['id'])) {
+			$newDiagnosis['id'] = bin2hex($diagnosis['id']);
+		}
+		
+		return $newDiagnosis;
 	}
 	
 	/*
@@ -98,7 +111,7 @@ class DiagnosisModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$diagnoses = objectIdsToHexadecimal($diagnoses);
+		$diagnoses = arrayIdsToHexadecimal($diagnoses);
 		
 		// Gets the IDs
 		$ids = array_column($diagnoses, 'id');

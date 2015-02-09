@@ -37,8 +37,25 @@ class FileModel extends EntityModel {
 	 * It receives the file.
 	 */
 	public function filter($file) {
-		// TODO: implement
-		return $file;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('file');
+		
+		// Filters the file's fields
+		$newFile = filterArray($file, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newFile['id'])) {
+			$newFile['id'] = bin2hex($file['id']);
+		}
+		
+		if (isset($newFile['hash'])) {
+			$newFile['hash'] = bin2hex($file['hash']);
+		}
+		
+		return $newFile;
 	}
 	
 	/*

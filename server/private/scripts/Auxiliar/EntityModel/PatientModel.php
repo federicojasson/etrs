@@ -73,8 +73,32 @@ class PatientModel extends EntityModel {
 	 * It receives the patient.
 	 */
 	public function filter($patient) {
-		// TODO: implement
-		return $patient;
+		$app = $this->app;
+		
+		// Adds fields for the associated data
+		$patient['consultations'] = [];
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('patient');
+		
+		// Filters the patient's fields
+		$newPatient = filterArray($patient, $accessibleFields);
+		
+		// Attaches associated data and applies conversions
+		
+		if (isset($newPatient['id'])) {
+			$newPatient['id'] = bin2hex($patient['id']);
+		}
+		
+		if (isset($newPatient['consultations'])) {
+			$consultations = $app->businessLogicDatabase->getPatientNonDeletedConsultations($patient['id']);
+			
+			foreach ($consultations as $consultation) {
+				$newPatient['consultations'][] = bin2hex($consultation['id']);
+			}
+		}
+		
+		return $newPatient;
 	}
 	
 	/*
@@ -110,7 +134,7 @@ class PatientModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$patients = objectIdsToHexadecimal($patients);
+		$patients = arrayIdsToHexadecimal($patients);
 		
 		// Gets the IDs
 		$ids = array_column($patients, 'id');

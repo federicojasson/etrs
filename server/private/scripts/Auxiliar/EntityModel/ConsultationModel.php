@@ -94,8 +94,111 @@ class ConsultationModel extends EntityModel {
 	 * It receives the consultation.
 	 */
 	public function filter($consultation) {
-		// TODO: implement
-		return $consultation;
+		$app = $this->app;
+		
+		// Adds fields for the associated data
+		$consultation['backgrounds'] = [];
+		$consultation['imageTests'] = [];
+		$consultation['laboratoryTests'] = [];
+		$consultation['medications'] = [];
+		$consultation['neurocognitiveTests'] = [];
+		$consultation['studies'] = [];
+		$consultation['treatments'] = [];
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('consultation');
+		
+		// Filters the consultation's fields
+		$newConsultation = filterArray($consultation, $accessibleFields);
+		
+		// Attaches associated data and applies conversions
+		
+		if (isset($newConsultation['id'])) {
+			$newConsultation['id'] = bin2hex($consultation['id']);
+		}
+		
+		if (isset($newConsultation['clinicalImpression'])) {
+			if ($app->businessLogicDatabase->nonDeletedClinicalImpressionExists($consultation['clinicalImpression'])) {
+				$newConsultation['clinicalImpression'] = bin2hex($consultation['clinicalImpression']);
+			} else {
+				$newConsultation['clinicalImpression'] = null;
+			}
+		}
+		
+		if (isset($newConsultation['diagnosis'])) {
+			if ($app->businessLogicDatabase->nonDeletedDiagnosisExists($consultation['diagnosis'])) {
+				$newConsultation['diagnosis'] = bin2hex($consultation['diagnosis']);
+			} else {
+				$newConsultation['diagnosis'] = null;
+			}
+		}
+		
+		if (isset($newConsultation['patient'])) {
+			if ($app->businessLogicDatabase->nonDeletedPatientExists($consultation['patient'])) {
+				$newConsultation['patient'] = bin2hex($consultation['patient']);
+			} else {
+				$newConsultation['patient'] = null;
+			}
+		}
+		
+		if (isset($newConsultation['backgrounds'])) {
+			$backgrounds = $app->businessLogicDatabase->getConsultationNonDeletedBackgrounds($consultation['id']);
+			
+			foreach ($backgrounds as $background) {
+				$newConsultation['backgrounds'][] = bin2hex($background['id']);
+			}
+		}
+		
+		if (isset($newConsultation['imageTests'])) {
+			$imageTests = $app->businessLogicDatabase->getConsultationNonDeletedImageTests($consultation['id']);
+			
+			foreach ($imageTests as $imageTest) {
+				$newConsultation['imageTests'][] = [
+					'id' => bin2hex($imageTest['id']),
+					'value' => $imageTest['value']
+				];
+			}
+		}
+		
+		if (isset($newConsultation['laboratoryTests'])) {
+			$laboratoryTests = $app->businessLogicDatabase->getConsultationNonDeletedLaboratoryTests($consultation['id']);
+			
+			foreach ($laboratoryTests as $laboratoryTest) {
+				$newConsultation['laboratoryTests'][] = [
+					'id' => bin2hex($laboratoryTest['id']),
+					'value' => $laboratoryTest['value']
+				];
+			}
+		}
+		
+		if (isset($newConsultation['medications'])) {
+			$medications = $app->businessLogicDatabase->getConsultationNonDeletedMedications($consultation['id']);
+			
+			foreach ($medications as $medication) {
+				$newConsultation['medications'][] = bin2hex($medication['id']);
+			}
+		}
+		
+		if (isset($newConsultation['neurocognitiveTests'])) {
+			$neurocognitiveTests = $app->businessLogicDatabase->getConsultationNonDeletedNeurocognitiveTests($consultation['id']);
+			
+			foreach ($neurocognitiveTests as $neurocognitiveTest) {
+				$newConsultation['neurocognitiveTests'][] = [
+					'id' => bin2hex($neurocognitiveTest['id']),
+					'value' => $neurocognitiveTest['value']
+				];
+			}
+		}
+		
+		if (isset($newConsultation['treatments'])) {
+			$treatments = $app->businessLogicDatabase->getConsultationNonDeletedTreatments($consultation['id']);
+			
+			foreach ($treatments as $treatment) {
+				$newConsultation['treatments'][] = bin2hex($treatment['id']);
+			}
+		}
+		
+		return $newConsultation;
 	}
 	
 	/*

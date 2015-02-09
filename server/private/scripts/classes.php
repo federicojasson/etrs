@@ -142,6 +142,7 @@ require 'private/scripts/Controller/RecoverPasswordPermission/Create.php';
 require 'private/scripts/Controller/SignUpPermission/Create.php';
 
 // App\Controller\Study
+require 'private/scripts/Controller/Study/Conduct.php';
 require 'private/scripts/Controller/Study/Create.php';
 require 'private/scripts/Controller/Study/Delete.php';
 require 'private/scripts/Controller/Study/Edit.php';

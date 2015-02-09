@@ -514,6 +514,14 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\SignUpPermission\Create()
 		);
 
+		// URL:		/server/study/conduct
+		// Method:	POST
+		$app->services->define(
+			'/study/conduct',
+			'POST',
+			new \App\Controller\Study\Conduct()
+		);
+
 		// URL:		/server/study/create
 		// Method:	POST
 		$app->services->define(

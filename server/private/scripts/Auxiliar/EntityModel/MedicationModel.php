@@ -61,8 +61,21 @@ class MedicationModel extends EntityModel {
 	 * It receives the medication.
 	 */
 	public function filter($medication) {
-		// TODO: implement
-		return $medication;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('medication');
+		
+		// Filters the medication's fields
+		$newMedication = filterArray($medication, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newMedication['id'])) {
+			$newMedication['id'] = bin2hex($medication['id']);
+		}
+		
+		return $newMedication;
 	}
 	
 	/*
@@ -98,7 +111,7 @@ class MedicationModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$medications = objectIdsToHexadecimal($medications);
+		$medications = arrayIdsToHexadecimal($medications);
 		
 		// Gets the IDs
 		$ids = array_column($medications, 'id');

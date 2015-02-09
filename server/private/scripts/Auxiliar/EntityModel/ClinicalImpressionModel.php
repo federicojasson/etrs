@@ -61,8 +61,21 @@ class ClinicalImpressionModel extends EntityModel {
 	 * It receives the clinical impression.
 	 */
 	public function filter($clinicalImpression) {
-		// TODO: implement
-		return $clinicalImpression;
+		$app = $this->app;
+		
+		// Gets the accessible fields
+		$accessibleFields = $app->accessValidator->getAccessibleFields('clinicalImpression');
+		
+		// Filters the clinical impression's fields
+		$newClinicalImpression = filterArray($clinicalImpression, $accessibleFields);
+		
+		// Applies conversions
+		
+		if (isset($newClinicalImpression['id'])) {
+			$newClinicalImpression['id'] = bin2hex($clinicalImpression['id']);
+		}
+		
+		return $newClinicalImpression;
 	}
 	
 	/*
@@ -99,7 +112,7 @@ class ClinicalImpressionModel extends EntityModel {
 		$foundRows = $app->businessLogicDatabase->getFoundRows();
 		
 		// Converts the IDs to hexadecimal
-		$clinicalImpressions = objectIdsToHexadecimal($clinicalImpressions);
+		$clinicalImpressions = arrayIdsToHexadecimal($clinicalImpressions);
 		
 		// Gets the IDs
 		$ids = array_column($clinicalImpressions, 'id');

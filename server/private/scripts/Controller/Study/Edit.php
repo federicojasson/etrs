@@ -2,6 +2,10 @@
 
 namespace App\Controller\Study;
 
+use App\Auxiliar\JsonStructureDescriptor\JsonArrayDescriptor;
+use App\Auxiliar\JsonStructureDescriptor\JsonObjectDescriptor;
+use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
+
 /*
  * This controller is responsible for the following service:
  * 
