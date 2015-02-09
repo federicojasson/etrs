@@ -24,7 +24,7 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		$id = $this->getInput('id', 'hex2bin');
 		$name = $this->getInput('name', 'trimString');
 		$commandLine = $this->getInput('commandLine', 'trimString');
-		$files = $this->getinput('files', 'stringsToBinary');
+		$files = $this->getInput('files', 'stringsToBinary');
 		
 		// Checks the existence of the experiment
 		$this->checkExperimentExistence($id);
@@ -72,7 +72,7 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		}
 		
 		// Gets the input
-		$files = $this->getinput('files', 'stringsToBinary');
+		$files = $this->getInput('files', 'stringsToBinary');
 		
 		if (! $this->areFilesValid($files)) {
 			// The files are invalid

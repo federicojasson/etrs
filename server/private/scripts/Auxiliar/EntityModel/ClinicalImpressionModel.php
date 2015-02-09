@@ -64,7 +64,7 @@ class ClinicalImpressionModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('clinicalImpression');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_CLINICAL_IMPRESSION);
 		
 		// Filters the clinical impression's fields
 		$newClinicalImpression = filterArray($clinicalImpression, $accessibleFields);

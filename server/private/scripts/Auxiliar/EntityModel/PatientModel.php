@@ -79,7 +79,7 @@ class PatientModel extends EntityModel {
 		$patient['consultations'] = [];
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('patient');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_PATIENT);
 		
 		// Filters the patient's fields
 		$newPatient = filterArray($patient, $accessibleFields);

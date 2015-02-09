@@ -33,7 +33,7 @@ class Authenticator extends Helper {
 		// Computes the hash of the password
 		$passwordHash = $app->cryptography->hashPassword($password, $recoverPasswordPermission['salt'], $recoverPasswordPermission['keyStretchingIterations']);
 		
-		// Compares the hash with the stored one and returns the result
+		// Compares the password hashes and returns the result
 		return $passwordHash === $recoverPasswordPermission['passwordHash'];
 	}
 	
@@ -63,7 +63,7 @@ class Authenticator extends Helper {
 		// Computes the hash of the password
 		$passwordHash = $app->cryptography->hashPassword($password, $signUpPermission['salt'], $signUpPermission['keyStretchingIterations']);
 		
-		// Compares the hash with the stored one and returns the result
+		// Compares the password hashes and returns the result
 		return $passwordHash === $signUpPermission['passwordHash'];
 	}
 	
@@ -83,7 +83,7 @@ class Authenticator extends Helper {
 			return false;
 		}
 		
-		// Compares the email address with the stored one and returns the result
+		// Compares the email addresses and returns the result
 		return $emailAddress === $user['emailAddress'];
 	}
 	
@@ -111,7 +111,7 @@ class Authenticator extends Helper {
 		// Computes the hash of the password
 		$passwordHash = $app->cryptography->hashPassword($password, $user['salt'], $user['keyStretchingIterations']);
 		
-		// Compares the hash with the stored one and returns the result
+		// Compares the password hashes and returns the result
 		return $passwordHash === $user['passwordHash'];
 	}
 	

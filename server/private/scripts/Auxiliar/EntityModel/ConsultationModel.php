@@ -106,7 +106,7 @@ class ConsultationModel extends EntityModel {
 		$consultation['treatments'] = [];
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('consultation');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_CONSULTATION);
 		
 		// Filters the consultation's fields
 		$newConsultation = filterArray($consultation, $accessibleFields);

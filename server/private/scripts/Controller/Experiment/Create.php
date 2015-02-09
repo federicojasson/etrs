@@ -23,7 +23,7 @@ class Create extends \App\Controller\SpecializedSecureController {
 		// Gets the input
 		$name = $this->getInput('name', 'trimString');
 		$commandLine = $this->getInput('commandLine', 'trimString');
-		$files = $this->getinput('files', 'stringsToBinary');
+		$files = $this->getInput('files', 'stringsToBinary');
 		
 		// Checks the existence of the files
 		$this->checkFilesExistence($files);
@@ -70,7 +70,7 @@ class Create extends \App\Controller\SpecializedSecureController {
 		}
 		
 		// Gets the input
-		$files = $this->getinput('files', 'stringsToBinary');
+		$files = $this->getInput('files', 'stringsToBinary');
 		
 		if (! $this->areFilesValid($files)) {
 			// The files are invalid

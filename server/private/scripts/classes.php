@@ -114,6 +114,10 @@ require 'private/scripts/Controller/LaboratoryTest/Edit.php';
 require 'private/scripts/Controller/LaboratoryTest/Get.php';
 require 'private/scripts/Controller/LaboratoryTest/Search.php';
 
+// App\Controller\Log
+require 'private/scripts/Controller/Log/Get.php';
+require 'private/scripts/Controller/Log/Search.php';
+
 // App\Controller\Medication
 require 'private/scripts/Controller/Medication/Create.php';
 require 'private/scripts/Controller/Medication/Delete.php';

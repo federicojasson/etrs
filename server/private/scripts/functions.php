@@ -27,7 +27,7 @@ function arrayContainsDuplicateElements($array) {
 	// Removes duplicate elements from the array
 	$arrayWithoutDuplicates = array_unique($array);
 	
-	// Compares the number of elements of both arrays and returns the result
+	// Compares the number of elements on the arrays and returns the result
 	return count($arrayWithoutDuplicates) !== count($array);
 }
 

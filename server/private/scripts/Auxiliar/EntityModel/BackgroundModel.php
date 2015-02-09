@@ -64,7 +64,7 @@ class BackgroundModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('background');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_BACKGROUND);
 		
 		// Filters the background's fields
 		$newBackground = filterArray($background, $accessibleFields);

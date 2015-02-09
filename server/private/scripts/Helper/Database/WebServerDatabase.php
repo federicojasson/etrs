@@ -312,6 +312,24 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Returns a log. If it doesn't exist, null is returned.
+	 * 
+	 * It receives the log's ID.
+	 */
+	public function getLog($id) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id',
+			'creation_datetime',
+			'level',
+			'message'
+		];
+		
+		// Gets and returns the entity
+		return $this->getEntity('logs', $columnsToSelect, $id);
+	}
+	
+	/*
 	 * Returns a recover password permission. If it doesn't exist, null is
 	 * returned.
 	 * 
@@ -419,6 +437,41 @@ class WebServerDatabase extends SpecializedDatabase {
 		$results = $this->executePreparedStatement($statement, $parameters);
 		
 		return $results;
+	}
+	
+	/*
+	 * Searches all logs and returns the results.
+	 * 
+	 * It receives the page and a sorting.
+	 */
+	public function searchAllLogs($page, $sorting) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id'
+		];
+		
+		// Searches all entities and returns the results
+		return $this->searchAllEntities('logs', $columnsToSelect, $page, $sorting);
+	}
+	
+	/*
+	 * Searches specific logs and returns the results.
+	 * 
+	 * It receives an expression, the page and a sorting.
+	 */
+	public function searchSpecificLogs($expression, $page, $sorting) {
+		// Defines the columns to select
+		$columnsToSelect = [
+			'id'
+		];
+		
+		// Defines the columns to match
+		$columnsToMatch = [
+			'message'
+		];
+		
+		// Searches specific entities and returns the results
+		return $this->searchSpecificEntities('logs', $columnsToSelect, $columnsToMatch, $expression, $page, $sorting);
 	}
 	
 	/*

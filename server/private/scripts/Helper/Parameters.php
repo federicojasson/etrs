@@ -23,7 +23,7 @@ class Parameters extends Helper {
 	 * It receives the property's name.
 	 */
 	public function __get($name) {
-		if (! array_key_exists($name, $this->parameters)) {
+		if (! isset($this->parameters[$name])) {
 			// The parameters have not been loaded yet
 			
 			// Gets the path of the parameters file

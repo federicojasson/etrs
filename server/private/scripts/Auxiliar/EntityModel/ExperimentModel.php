@@ -106,7 +106,7 @@ class ExperimentModel extends EntityModel {
 		$experiment['files'] = [];
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('experiment');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_EXPERIMENT);
 		
 		// Filters the experiment's fields
 		$newExperiment = filterArray($experiment, $accessibleFields);

@@ -116,7 +116,7 @@ class Factory {
 				throw new \Exception();
 			}
 			
-			if (array_key_exists($label, $definition)) {
+			if (isset($definition[$label])) {
 				// An entry with the same label has already been added
 				throw new \Exception();
 			}
@@ -272,13 +272,13 @@ class Factory {
 			throw new \Exception();
 		}
 		
-		if (! array_key_exists('min', $definition)) {
-			// The 'min' label is not present in the definition
+		if (! isset($definition['min'])) {
+			// There is no entry with the label 'min'
 			throw new \Exception();
 		}
 		
-		if (! array_key_exists('max', $definition)) {
-			// The 'max' label is not present in the definition
+		if (! isset($definition['max'])) {
+			// There is no entry with the label 'max'
 			throw new \Exception();
 		}
 		

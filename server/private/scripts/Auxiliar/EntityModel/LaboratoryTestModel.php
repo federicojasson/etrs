@@ -64,7 +64,7 @@ class LaboratoryTestModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('laboratoryTest');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_LABORATORY_TEST);
 		
 		// Filters the laboratory test's fields
 		$newLaboratoryTest = filterArray($laboratoryTest, $accessibleFields);

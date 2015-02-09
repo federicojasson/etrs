@@ -64,7 +64,7 @@ class TreatmentModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('treatment');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_TREATMENT);
 		
 		// Filters the treatment's fields
 		$newTreatment = filterArray($treatment, $accessibleFields);

@@ -111,7 +111,7 @@ class StudyModel extends EntityModel {
 		$study['files'] = [];
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('study');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_STUDY);
 		
 		// Filters the study's fields
 		$newStudy = filterArray($study, $accessibleFields);

@@ -40,7 +40,7 @@ class FileModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('file');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_FILE);
 		
 		// Filters the file's fields
 		$newFile = filterArray($file, $accessibleFields);

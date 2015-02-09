@@ -36,6 +36,18 @@ class Authentication extends Helper {
 	}
 	
 	/*
+	 * Determines whether a certain user is the signed in one.
+	 * 
+	 * It receives the user's ID.
+	 */
+	public function isSignedInUser($id) {
+		$app = $this->app;
+		
+		// Compares the user IDs and returns the result
+		return $id === $app->session->getData(SESSION_DATA_USER);
+	}
+	
+	/*
 	 * Determines whether the user is signed in.
 	 */
 	public function isUserSignedIn() {

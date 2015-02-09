@@ -24,7 +24,7 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		$id = $this->getInput('id', 'hex2bin');
 		$report = $this->getInput('report', 'hex2bin');
 		$observations = $this->getInput('observations', 'trimString');
-		$files = $this->getinput('files', 'stringsToBinary');
+		$files = $this->getInput('files', 'stringsToBinary');
 		
 		// Checks the existence of the study
 		$this->checkStudyExistence($id);
@@ -81,7 +81,7 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		}
 		
 		// Gets the input
-		$files = $this->getinput('files', 'stringsToBinary');
+		$files = $this->getInput('files', 'stringsToBinary');
 		
 		if (! $this->areFilesValid($files)) {
 			// The files are invalid

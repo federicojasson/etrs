@@ -28,12 +28,12 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		$reasons = $this->getInput('reasons', 'trimString');
 		$indications = $this->getInput('indications', 'trimString');
 		$observations = $this->getInput('observations', 'trimString');
-		$backgrounds = $this->getinput('backgrounds', 'stringsToBinary');
-		$imageTests = $this->getinput('imageTests', 'arrayIdsToBinary');
-		$laboratoryTests = $this->getinput('laboratoryTests', 'arrayIdsToBinary');
-		$medications = $this->getinput('medications', 'stringsToBinary');
-		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'arrayIdsToBinary');
-		$treatments = $this->getinput('treatments', 'stringsToBinary');
+		$backgrounds = $this->getInput('backgrounds', 'stringsToBinary');
+		$imageTests = $this->getInput('imageTests', 'arrayIdsToBinary');
+		$laboratoryTests = $this->getInput('laboratoryTests', 'arrayIdsToBinary');
+		$medications = $this->getInput('medications', 'stringsToBinary');
+		$neurocognitiveTests = $this->getInput('neurocognitiveTests', 'arrayIdsToBinary');
+		$treatments = $this->getInput('treatments', 'stringsToBinary');
 		
 		// Checks the existence of the consultation
 		$this->checkConsultationExistence($id);
@@ -178,12 +178,12 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		}
 		
 		// Gets the input
-		$backgrounds = $this->getinput('backgrounds', 'stringsToBinary');
-		$imageTests = $this->getinput('imageTests', 'arrayIdsToBinary');
-		$laboratoryTests = $this->getinput('laboratoryTests', 'arrayIdsToBinary');
-		$medications = $this->getinput('medications', 'stringsToBinary');
-		$neurocognitiveTests = $this->getinput('neurocognitiveTests', 'arrayIdsToBinary');
-		$treatments = $this->getinput('treatments', 'stringsToBinary');
+		$backgrounds = $this->getInput('backgrounds', 'stringsToBinary');
+		$imageTests = $this->getInput('imageTests', 'arrayIdsToBinary');
+		$laboratoryTests = $this->getInput('laboratoryTests', 'arrayIdsToBinary');
+		$medications = $this->getInput('medications', 'stringsToBinary');
+		$neurocognitiveTests = $this->getInput('neurocognitiveTests', 'arrayIdsToBinary');
+		$treatments = $this->getInput('treatments', 'stringsToBinary');
 		
 		if (! $this->areBackgroundsValid($backgrounds)) {
 			// The backgrounds are invalid

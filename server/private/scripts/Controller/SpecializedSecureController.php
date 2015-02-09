@@ -693,6 +693,29 @@ abstract class SpecializedSecureController extends SecureController {
 	}
 	
 	/*
+	 * Returns a log. If it doesn't exist, the execution is halted.
+	 * 
+	 * It receives the log's ID.
+	 */
+	protected function getLog($id) {
+		$app = $this->app;
+		
+		// Gets the log
+		$log = $app->data->log->get($id);
+		
+		if (is_null($log)) {
+			// The log doesn't exist
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_NOT_FOUND, [
+				'error' => ERROR_NON_EXISTENT_LOG
+			]);
+		}
+		
+		return $log;
+	}
+	
+	/*
 	 * Returns a medication. If it doesn't exist, the execution is halted.
 	 * 
 	 * It receives the medication's ID.

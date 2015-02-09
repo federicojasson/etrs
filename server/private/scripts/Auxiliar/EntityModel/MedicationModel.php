@@ -64,7 +64,7 @@ class MedicationModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('medication');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_MEDICATION);
 		
 		// Filters the medication's fields
 		$newMedication = filterArray($medication, $accessibleFields);

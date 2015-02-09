@@ -64,7 +64,7 @@ class NeurocognitiveTestModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('neurocognitiveTest');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_NEUROCOGNITIVE_TEST);
 		
 		// Filters the neurocognitive test's fields
 		$newNeurocognitiveTest = filterArray($neurocognitiveTest, $accessibleFields);

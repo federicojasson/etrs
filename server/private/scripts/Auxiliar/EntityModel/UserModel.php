@@ -75,8 +75,11 @@ class UserModel extends EntityModel {
 	public function filter($user) {
 		$app = $this->app;
 		
+		// Gets the entity model
+		$entityModel = $this->getEntityModel($user['id']);
+		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('user');
+		$accessibleFields = $app->accessValidator->getAccessibleFields($entityModel);
 		
 		// Filters the user's fields
 		$newUser = filterArray($user, $accessibleFields);
@@ -104,6 +107,24 @@ class UserModel extends EntityModel {
 		
 		// Gets the user
 		return $app->webServerDatabase->getUser($id);
+	}
+	
+	/*
+	 * Returns the entity model corresponding to a certain user.
+	 * 
+	 * It receives the user's ID.
+	 */
+	private function getEntityModel($id) {
+		$app = $this->app;
+		
+		if ($app->authentication->isUserSignedIn()) {
+			if ($app->authentication->isSignedInUser($id)) {
+				// The user is the signed in one
+				return ENTITY_MODEL_ACCOUNT;
+			}
+		}
+		
+		return ENTITY_MODEL_USER;
 	}
 	
 }

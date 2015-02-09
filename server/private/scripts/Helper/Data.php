@@ -27,24 +27,24 @@ class Data extends Helper {
 	protected function initialize() {
 		// Initializes the entity models
 		$this->entityModels = [
-			'background' => new \App\Auxiliar\EntityModel\BackgroundModel(),
-			'clinicalImpression' => new \App\Auxiliar\EntityModel\ClinicalImpressionModel(),
-			'consultation' => new \App\Auxiliar\EntityModel\ConsultationModel(),
-			'diagnosis' => new \App\Auxiliar\EntityModel\DiagnosisModel(),
-			'experiment' => new \App\Auxiliar\EntityModel\ExperimentModel(),
-			'file' => new \App\Auxiliar\EntityModel\FileModel(),
-			'imageTest' => new \App\Auxiliar\EntityModel\ImageTestModel(),
-			'laboratoryTest' => new \App\Auxiliar\EntityModel\LaboratoryTestModel(),
-			'log' => new \App\Auxiliar\EntityModel\LogModel(),
-			'medication' => new \App\Auxiliar\EntityModel\MedicationModel(),
-			'neurocognitiveTest' => new \App\Auxiliar\EntityModel\NeurocognitiveTestModel(),
-			'patient' => new \App\Auxiliar\EntityModel\PatientModel(),
-			'recoverPasswordPermission' => new \App\Auxiliar\EntityModel\RecoverPasswordPermissionModel(),
-			'session' => new \App\Auxiliar\EntityModel\SessionModel(),
-			'signUpPermission' => new \App\Auxiliar\EntityModel\SignUpPermissionModel(),
-			'study' => new \App\Auxiliar\EntityModel\StudyModel(),
-			'treatment' => new \App\Auxiliar\EntityModel\TreatmentModel(),
-			'user' => new \App\Auxiliar\EntityModel\UserModel()
+			ENTITY_MODEL_BACKGROUND => new \App\Auxiliar\EntityModel\BackgroundModel(),
+			ENTITY_MODEL_CLINICAL_IMPRESSION => new \App\Auxiliar\EntityModel\ClinicalImpressionModel(),
+			ENTITY_MODEL_CONSULTATION => new \App\Auxiliar\EntityModel\ConsultationModel(),
+			ENTITY_MODEL_DIAGNOSIS => new \App\Auxiliar\EntityModel\DiagnosisModel(),
+			ENTITY_MODEL_EXPERIMENT => new \App\Auxiliar\EntityModel\ExperimentModel(),
+			ENTITY_MODEL_FILE => new \App\Auxiliar\EntityModel\FileModel(),
+			ENTITY_MODEL_IMAGE_TEST => new \App\Auxiliar\EntityModel\ImageTestModel(),
+			ENTITY_MODEL_LABORATORY_TEST => new \App\Auxiliar\EntityModel\LaboratoryTestModel(),
+			ENTITY_MODEL_LOG => new \App\Auxiliar\EntityModel\LogModel(),
+			ENTITY_MODEL_MEDICATION => new \App\Auxiliar\EntityModel\MedicationModel(),
+			ENTITY_MODEL_NEUROCOGNITIVE_TEST => new \App\Auxiliar\EntityModel\NeurocognitiveTestModel(),
+			ENTITY_MODEL_PATIENT => new \App\Auxiliar\EntityModel\PatientModel(),
+			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => new \App\Auxiliar\EntityModel\RecoverPasswordPermissionModel(),
+			ENTITY_MODEL_SESSION => new \App\Auxiliar\EntityModel\SessionModel(),
+			ENTITY_MODEL_SIGN_UP_PERMISSION => new \App\Auxiliar\EntityModel\SignUpPermissionModel(),
+			ENTITY_MODEL_STUDY => new \App\Auxiliar\EntityModel\StudyModel(),
+			ENTITY_MODEL_TREATMENT => new \App\Auxiliar\EntityModel\TreatmentModel(),
+			ENTITY_MODEL_USER => new \App\Auxiliar\EntityModel\UserModel()
 		];
 	}
 	

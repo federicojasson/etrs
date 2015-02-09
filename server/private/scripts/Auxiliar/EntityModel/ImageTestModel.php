@@ -64,7 +64,7 @@ class ImageTestModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('imageTest');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_IMAGE_TEST);
 		
 		// Filters the image test's fields
 		$newImageTest = filterArray($imageTest, $accessibleFields);

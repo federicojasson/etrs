@@ -378,6 +378,22 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\LaboratoryTest\Search()
 		);
 
+		// URL:		/server/log/get
+		// Method:	POST
+		$app->services->define(
+			'/log/get',
+			'POST',
+			new \App\Controller\Log\Get()
+		);
+
+		// URL:		/server/log/search
+		// Method:	POST
+		$app->services->define(
+			'/log/search',
+			'POST',
+			new \App\Controller\Log\Search()
+		);
+
 		// URL:		/server/medication/create
 		// Method:	POST
 		$app->services->define(

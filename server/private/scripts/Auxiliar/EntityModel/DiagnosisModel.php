@@ -64,7 +64,7 @@ class DiagnosisModel extends EntityModel {
 		$app = $this->app;
 		
 		// Gets the accessible fields
-		$accessibleFields = $app->accessValidator->getAccessibleFields('diagnosis');
+		$accessibleFields = $app->accessValidator->getAccessibleFields(ENTITY_MODEL_DIAGNOSIS);
 		
 		// Filters the diagnosis' fields
 		$newDiagnosis = filterArray($diagnosis, $accessibleFields);
