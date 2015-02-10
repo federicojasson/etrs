@@ -4,8 +4,6 @@ Tareas (TODOs):
   isUserSignedIn cuando sólo utiliza dato de la sesión (sin comprobar que el
   usuario existe)?
 
-- Testear todos los servicios de forma automática (crear testers)
-
 - Generar reporte
 
 - Agregar licencia

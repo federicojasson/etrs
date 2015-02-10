@@ -116,6 +116,9 @@ class StudyModel extends EntityModel {
 		// Filters the study's fields
 		$newStudy = filterArray($study, $accessibleFields);
 		
+		// Starts a read-only transaction
+		$app->businessLogicDatabase->startReadOnlyTransaction();
+		
 		// Attaches associated data and applies conversions
 		
 		if (isset($newStudy['id'])) {
@@ -161,6 +164,9 @@ class StudyModel extends EntityModel {
 				$newStudy['files'][] = bin2hex($file['id']);
 			}
 		}
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 		
 		return $newStudy;
 	}

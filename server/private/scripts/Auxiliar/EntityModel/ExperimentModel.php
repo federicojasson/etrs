@@ -111,6 +111,9 @@ class ExperimentModel extends EntityModel {
 		// Filters the experiment's fields
 		$newExperiment = filterArray($experiment, $accessibleFields);
 		
+		// Starts a read-only transaction
+		$app->businessLogicDatabase->startReadOnlyTransaction();
+		
 		// Attaches associated data and applies conversions
 		
 		if (isset($newExperiment['id'])) {
@@ -124,6 +127,9 @@ class ExperimentModel extends EntityModel {
 				$newExperiment['files'][] = bin2hex($file['id']);
 			}
 		}
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 		
 		return $newExperiment;
 	}

@@ -84,6 +84,9 @@ class PatientModel extends EntityModel {
 		// Filters the patient's fields
 		$newPatient = filterArray($patient, $accessibleFields);
 		
+		// Starts a read-only transaction
+		$app->businessLogicDatabase->startReadOnlyTransaction();
+		
 		// Attaches associated data and applies conversions
 		
 		if (isset($newPatient['id'])) {
@@ -97,6 +100,9 @@ class PatientModel extends EntityModel {
 				$newPatient['consultations'][] = bin2hex($consultation['id']);
 			}
 		}
+		
+		// Commits the transaction
+		$app->businessLogicDatabase->commitTransaction();
 		
 		return $newPatient;
 	}
