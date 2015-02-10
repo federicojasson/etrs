@@ -13,6 +13,8 @@ class Files extends Helper {
 	 * It receives the file.
 	 */
 	public function download($file) {
+		$app = $this->app;
+		
 		// Gets the file's path
 		$path = $this->getFilePath($file['id'], $file['name']);
 		
@@ -22,10 +24,12 @@ class Files extends Helper {
 		// Checks the integrity of the file
 		$this->checkFileIntegrity($file);
 		
-		// TODO: headers
+		// Sets the proper headers
+		$app->response->headers->set('Content-Disposition', 'attachment; filename=' . $file['name']); // TODO: is Content-Disposition safe?
+		$app->response->headers->set('Content-Type', 'application/octet-stream');
 		
 		// Initiates the download
-		readfile($path);
+		readfile($path); // TODO: doesn't support heavy files
 	}
 	
 	/*

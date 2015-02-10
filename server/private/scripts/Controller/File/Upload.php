@@ -31,6 +31,9 @@ class Upload extends \App\Controller\SpecializedSecureController {
 		
 		// Creates the file
 		$app->data->file->create($id, $signedInUser['id'], $name, $hash);
+		
+		// Sets an output
+		$this->setOutput('id', $id, 'bin2hex');
 	}
 	
 	/*
