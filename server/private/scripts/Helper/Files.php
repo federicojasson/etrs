@@ -30,6 +30,8 @@ class Files extends Helper {
 		
 		// Initiates the download
 		readfile($path); // TODO: doesn't support heavy files
+		//header('X-Sendfile: ' . $path); // TODO: testing
+		//virtual($path); // TODO: testing
 	}
 	
 	/*
