@@ -21,12 +21,18 @@ Tareas (TODOs):
 	- Eliminar logs antiguos.
 	- Eliminar archivos huérfanos.
 
+- Recordar configurar (en httpd.conf):
+	# Added to remove the Server response header
+	ServerTokens ProductOnly
+	ServerSignature Off
+
 - Recordar configurar (en php.ini):
 	session.gc_probability
 	session.gc_divisor
 	session.gc_maxlifetime
 	upload_max_filesize
 	post_max_size
+	expose_php=Off
 	
 	Note: Related Configurations Note
 	See also the file_uploads, upload_max_filesize, upload_tmp_dir, post_max_size and max_input_time directives in php.ini

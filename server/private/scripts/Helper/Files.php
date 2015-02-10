@@ -26,12 +26,11 @@ class Files extends Helper {
 		
 		// Sets the proper headers
 		$app->response->headers->set('Content-Disposition', 'attachment; filename=' . $file['name']); // TODO: is Content-Disposition safe?
+		$app->response->headers->set('Content-Length', filesize($path));
 		$app->response->headers->set('Content-Type', 'application/octet-stream');
 		
 		// Initiates the download
-		readfile($path); // TODO: doesn't support heavy files
-		//header('X-Sendfile: ' . $path); // TODO: testing
-		//virtual($path); // TODO: testing
+		virtual($path);
 	}
 	
 	/*
