@@ -24,7 +24,6 @@ class Create extends \App\Controller\SpecializedSecureController {
 		$consultation = $this->getInput('consultation', 'hex2bin');
 		$experiment = $this->getInput('experiment', 'hex2bin');
 		$input = $this->getInput('input', 'hex2bin');
-		$report = $this->getInput('report', 'hex2bin');
 		$observations = $this->getInput('observations', 'trimString');
 		$files = $this->getInput('files', 'stringsToBinary');
 		
@@ -37,11 +36,6 @@ class Create extends \App\Controller\SpecializedSecureController {
 		// Checks the existence of the input
 		$this->checkFileExistence($input);
 		
-		if (! is_null($report)) {
-			// Checks the existence of the report
-			$this->checkFileExistence($report);
-		}
-		
 		// Checks the existence of the files
 		$this->checkFilesExistence($files);
 		
@@ -52,7 +46,7 @@ class Create extends \App\Controller\SpecializedSecureController {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Creates the study
-		$app->data->study->create($id, $consultation, $signedInUser['id'], $experiment, $input, $report, $observations, $files);
+		$app->data->study->create($id, $consultation, $signedInUser['id'], $experiment, $input, $observations, $files);
 		
 		// Sets an output
 		$this->setOutput('id', $id, 'bin2hex');
@@ -75,14 +69,6 @@ class Create extends \App\Controller\SpecializedSecureController {
 			}),
 			
 			'input' => new JsonValueDescriptor(function($input) use ($app) {
-				return $app->inputValidator->isRandomId($input);
-			}),
-			
-			'report' => new JsonValueDescriptor(function($input) use ($app) {
-				if (is_null($input)) {
-					return true;
-				}
-				
 				return $app->inputValidator->isRandomId($input);
 			}),
 			

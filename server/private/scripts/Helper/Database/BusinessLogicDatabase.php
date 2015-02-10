@@ -704,7 +704,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 * 
 	 * It receives the study's data.
 	 */
-	public function createStudy($id, $consultation, $creator, $experiment, $input, $report, $observations) {
+	public function createStudy($id, $consultation, $creator, $experiment, $input, $observations) {
 		// Defines the statement
 		$statement = '
 			INSERT INTO studies (
@@ -715,7 +715,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				experiment,
 				input,
 				last_editor,
-				report,
+				output,
 				creation_datetime,
 				last_edition_datetime,
 				observations
@@ -728,7 +728,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 				:experiment,
 				:input,
 				:lastEditor,
-				:report,
+				NULL,
 				UTC_TIMESTAMP(),
 				UTC_TIMESTAMP(),
 				:observations
@@ -743,7 +743,6 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			':experiment' => $experiment,
 			':input' => $input,
 			':lastEditor' => $creator,
-			':report' => $report,
 			':observations' => $observations
 		];
 		
@@ -1423,13 +1422,13 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 * 
 	 * It receives the study's data.
 	 */
-	public function editStudy($id, $lastEditor, $report, $observations) {
+	public function editStudy($id, $lastEditor, $output, $observations) {
 		// Defines the statement
 		$statement = '
 			UPDATE studies
 			SET
 				last_editor = :lastEditor,
-				report = :report,
+				output = :output,
 				last_edition_datetime = UTC_TIMESTAMP(),
 				observations = :observations
 			WHERE id = :id
@@ -1440,7 +1439,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
-			':report' => $report,
+			':output' => $output,
 			':observations' => $observations
 		];
 		
@@ -1963,7 +1962,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			'experiment',
 			'input',
 			'last_editor',
-			'report',
+			'output',
 			'creation_datetime',
 			'last_edition_datetime',
 			'observations'

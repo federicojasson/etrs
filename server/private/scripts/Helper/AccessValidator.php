@@ -220,7 +220,7 @@ class AccessValidator extends Helper {
 				'experiment',
 				'input',
 				'lastEditor',
-				'report',
+				'output',
 				'creationDatetime',
 				'lastEditionDatetime',
 				'observations'
@@ -423,7 +423,7 @@ class AccessValidator extends Helper {
 				'experiment',
 				'input',
 				'lastEditor',
-				'report',
+				'output',
 				'creationDatetime',
 				'lastEditionDatetime',
 				'observations'
@@ -626,7 +626,7 @@ class AccessValidator extends Helper {
 				'experiment',
 				'input',
 				'lastEditor',
-				'report',
+				'output',
 				'creationDatetime',
 				'lastEditionDatetime',
 				'observations'
@@ -829,7 +829,7 @@ class AccessValidator extends Helper {
 				'experiment',
 				'input',
 				'lastEditor',
-				'report',
+				'output',
 				'creationDatetime',
 				'lastEditionDatetime',
 				'observations'

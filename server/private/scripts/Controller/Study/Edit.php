@@ -22,17 +22,11 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		
 		// Gets the input
 		$id = $this->getInput('id', 'hex2bin');
-		$report = $this->getInput('report', 'hex2bin');
 		$observations = $this->getInput('observations', 'trimString');
 		$files = $this->getInput('files', 'stringsToBinary');
 		
-		// Checks the existence of the study
-		$this->checkStudyExistence($id);
-		
-		if (! is_null($report)) {
-			// Checks the existence of the report
-			$this->checkFileExistence($report);
-		}
+		// Gets the study
+		$study = $this->getStudy($id);
 		
 		// Checks the existence of the files
 		$this->checkFilesExistence($files);
@@ -41,7 +35,7 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Edits the study
-		$app->data->study->edit($id, $signedInUser['id'], $report, $observations, $files);
+		$app->data->study->edit($id, $signedInUser['id'], $study['output'], $observations, $files);
 	}
 	
 	/*
@@ -53,14 +47,6 @@ class Edit extends \App\Controller\SpecializedSecureController {
 		// Defines the JSON structure descriptor
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'id' => new JsonValueDescriptor(function($input) use ($app) {
-				return $app->inputValidator->isRandomId($input);
-			}),
-			
-			'report' => new JsonValueDescriptor(function($input) use ($app) {
-				if (is_null($input)) {
-					return true;
-				}
-				
 				return $app->inputValidator->isRandomId($input);
 			}),
 			

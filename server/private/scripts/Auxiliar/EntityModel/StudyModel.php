@@ -12,14 +12,14 @@ class StudyModel extends EntityModel {
 	 * 
 	 * It receives the study's data.
 	 */
-	public function create($id, $consultation, $creator, $experiment, $input, $report, $observations, $files) {
+	public function create($id, $consultation, $creator, $experiment, $input, $observations, $files) {
 		$app = $this->app;
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
 		// Creates the study
-		$app->businessLogicDatabase->createStudy($id, $consultation, $creator, $experiment, $input, $report, $observations);
+		$app->businessLogicDatabase->createStudy($id, $consultation, $creator, $experiment, $input, $observations);
 		
 		// Associates the data with the study
 		$this->associateData($id, $files);
@@ -45,9 +45,9 @@ class StudyModel extends EntityModel {
 		// Deletes the study's input
 		$app->data->file->delete($study['input']);
 		
-		if (! is_null($study['report'])) {
-			// Deletes the study's report
-			$app->data->file->delete($study['report']);
+		if (! is_null($study['output'])) {
+			// Deletes the study's output
+			$app->data->file->delete($study['output']);
 		}
 		
 		// Deletes the study's files
@@ -68,14 +68,14 @@ class StudyModel extends EntityModel {
 	 * 
 	 * It receives the study's data.
 	 */
-	public function edit($id, $lastEditor, $report, $observations, $files) {
+	public function edit($id, $lastEditor, $output, $observations, $files) {
 		$app = $this->app;
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
 		// Edits the study
-		$app->businessLogicDatabase->editStudy($id, $lastEditor, $report, $observations);
+		$app->businessLogicDatabase->editStudy($id, $lastEditor, $output, $observations);
 		
 		// Disassociates all data from the study
 		$this->disassociateData($id);
@@ -146,11 +146,11 @@ class StudyModel extends EntityModel {
 			}
 		}
 		
-		if (isset($newStudy['report'])) {
-			if ($app->businessLogicDatabase->nonDeletedFileExists($study['report'])) {
-				$newStudy['report'] = bin2hex($study['report']);
+		if (isset($newStudy['output'])) {
+			if ($app->businessLogicDatabase->nonDeletedFileExists($study['output'])) {
+				$newStudy['output'] = bin2hex($study['output']);
 			} else {
-				$newStudy['report'] = null;
+				$newStudy['output'] = null;
 			}
 		}
 		
