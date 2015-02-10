@@ -55,25 +55,199 @@ class AccessValidator extends Helper {
 		// TODO: define fields
 		// Defines and returns the accessible fields
 		return [
-			ENTITY_MODEL_ACCOUNT => [],
-			ENTITY_MODEL_BACKGROUND => [],
-			ENTITY_MODEL_CLINICAL_IMPRESSION => [],
-			ENTITY_MODEL_CONSULTATION => [],
-			ENTITY_MODEL_DIAGNOSIS => [],
-			ENTITY_MODEL_EXPERIMENT => [],
-			ENTITY_MODEL_FILE => [],
-			ENTITY_MODEL_IMAGE_TEST => [],
-			ENTITY_MODEL_LABORATORY_TEST => [],
-			ENTITY_MODEL_LOG => [],
-			ENTITY_MODEL_MEDICATION => [],
-			ENTITY_MODEL_NEUROCOGNITIVE_TEST => [],
-			ENTITY_MODEL_PATIENT => [],
-			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => [],
-			ENTITY_MODEL_SESSION => [],
-			ENTITY_MODEL_SIGN_UP_PERMISSION => [],
-			ENTITY_MODEL_STUDY => [],
-			ENTITY_MODEL_TREATMENT => [],
-			ENTITY_MODEL_USER => []
+			ENTITY_MODEL_ACCOUNT => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role',
+				'firstName',
+				'lastName',
+				'gender',
+				'emailAddress'
+			],
+			ENTITY_MODEL_BACKGROUND => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_CLINICAL_IMPRESSION => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_CONSULTATION => [
+				'id',
+				'deleted',
+				'clinicalImpression',
+				'creator',
+				'diagnosis',
+				'lastEditor',
+				'patient',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'date',
+				'reasons',
+				'indications',
+				'observations'
+			],
+			ENTITY_MODEL_DIAGNOSIS => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_EXPERIMENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'commandLine'
+			],
+			ENTITY_MODEL_FILE => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'hash'
+			],
+			ENTITY_MODEL_IMAGE_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_LABORATORY_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_LOG => [
+				'id',
+				'creationDatetime',
+				'level',
+				'message'
+			],
+			ENTITY_MODEL_MEDICATION => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_NEUROCOGNITIVE_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_PATIENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'firstName',
+				'lastName',
+				'gender',
+				'birthDate',
+				'educationYears'
+			],
+			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => [
+				'id',
+				'user',
+				'creationDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations'
+			],
+			ENTITY_MODEL_SESSION => [
+				'id',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'data'
+			],
+			ENTITY_MODEL_SIGN_UP_PERMISSION => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role'
+			],
+			ENTITY_MODEL_STUDY => [
+				'id',
+				'deleted',
+				'consultation',
+				'creator',
+				'experiment',
+				'input',
+				'lastEditor',
+				'report',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'observations'
+			],
+			ENTITY_MODEL_TREATMENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_USER => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role',
+				'firstName',
+				'lastName',
+				'gender',
+				'emailAddress'
+			]
 		];
 	}
 	
@@ -84,25 +258,199 @@ class AccessValidator extends Helper {
 		// TODO: define fields
 		// Defines and returns the accessible fields
 		return [
-			ENTITY_MODEL_ACCOUNT => [],
-			ENTITY_MODEL_BACKGROUND => [],
-			ENTITY_MODEL_CLINICAL_IMPRESSION => [],
-			ENTITY_MODEL_CONSULTATION => [],
-			ENTITY_MODEL_DIAGNOSIS => [],
-			ENTITY_MODEL_EXPERIMENT => [],
-			ENTITY_MODEL_FILE => [],
-			ENTITY_MODEL_IMAGE_TEST => [],
-			ENTITY_MODEL_LABORATORY_TEST => [],
-			ENTITY_MODEL_LOG => [],
-			ENTITY_MODEL_MEDICATION => [],
-			ENTITY_MODEL_NEUROCOGNITIVE_TEST => [],
-			ENTITY_MODEL_PATIENT => [],
-			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => [],
-			ENTITY_MODEL_SESSION => [],
-			ENTITY_MODEL_SIGN_UP_PERMISSION => [],
-			ENTITY_MODEL_STUDY => [],
-			ENTITY_MODEL_TREATMENT => [],
-			ENTITY_MODEL_USER => []
+			ENTITY_MODEL_ACCOUNT => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role',
+				'firstName',
+				'lastName',
+				'gender',
+				'emailAddress'
+			],
+			ENTITY_MODEL_BACKGROUND => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_CLINICAL_IMPRESSION => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_CONSULTATION => [
+				'id',
+				'deleted',
+				'clinicalImpression',
+				'creator',
+				'diagnosis',
+				'lastEditor',
+				'patient',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'date',
+				'reasons',
+				'indications',
+				'observations'
+			],
+			ENTITY_MODEL_DIAGNOSIS => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_EXPERIMENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'commandLine'
+			],
+			ENTITY_MODEL_FILE => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'hash'
+			],
+			ENTITY_MODEL_IMAGE_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_LABORATORY_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_LOG => [
+				'id',
+				'creationDatetime',
+				'level',
+				'message'
+			],
+			ENTITY_MODEL_MEDICATION => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_NEUROCOGNITIVE_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_PATIENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'firstName',
+				'lastName',
+				'gender',
+				'birthDate',
+				'educationYears'
+			],
+			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => [
+				'id',
+				'user',
+				'creationDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations'
+			],
+			ENTITY_MODEL_SESSION => [
+				'id',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'data'
+			],
+			ENTITY_MODEL_SIGN_UP_PERMISSION => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role'
+			],
+			ENTITY_MODEL_STUDY => [
+				'id',
+				'deleted',
+				'consultation',
+				'creator',
+				'experiment',
+				'input',
+				'lastEditor',
+				'report',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'observations'
+			],
+			ENTITY_MODEL_TREATMENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_USER => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role',
+				'firstName',
+				'lastName',
+				'gender',
+				'emailAddress'
+			]
 		];
 	}
 	
@@ -113,25 +461,199 @@ class AccessValidator extends Helper {
 		// TODO: define fields
 		// Defines and returns the accessible fields
 		return [
-			ENTITY_MODEL_ACCOUNT => [],
-			ENTITY_MODEL_BACKGROUND => [],
-			ENTITY_MODEL_CLINICAL_IMPRESSION => [],
-			ENTITY_MODEL_CONSULTATION => [],
-			ENTITY_MODEL_DIAGNOSIS => [],
-			ENTITY_MODEL_EXPERIMENT => [],
-			ENTITY_MODEL_FILE => [],
-			ENTITY_MODEL_IMAGE_TEST => [],
-			ENTITY_MODEL_LABORATORY_TEST => [],
-			ENTITY_MODEL_LOG => [],
-			ENTITY_MODEL_MEDICATION => [],
-			ENTITY_MODEL_NEUROCOGNITIVE_TEST => [],
-			ENTITY_MODEL_PATIENT => [],
-			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => [],
-			ENTITY_MODEL_SESSION => [],
-			ENTITY_MODEL_SIGN_UP_PERMISSION => [],
-			ENTITY_MODEL_STUDY => [],
-			ENTITY_MODEL_TREATMENT => [],
-			ENTITY_MODEL_USER => []
+			ENTITY_MODEL_ACCOUNT => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role',
+				'firstName',
+				'lastName',
+				'gender',
+				'emailAddress'
+			],
+			ENTITY_MODEL_BACKGROUND => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_CLINICAL_IMPRESSION => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_CONSULTATION => [
+				'id',
+				'deleted',
+				'clinicalImpression',
+				'creator',
+				'diagnosis',
+				'lastEditor',
+				'patient',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'date',
+				'reasons',
+				'indications',
+				'observations'
+			],
+			ENTITY_MODEL_DIAGNOSIS => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_EXPERIMENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'commandLine'
+			],
+			ENTITY_MODEL_FILE => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'hash'
+			],
+			ENTITY_MODEL_IMAGE_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_LABORATORY_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_LOG => [
+				'id',
+				'creationDatetime',
+				'level',
+				'message'
+			],
+			ENTITY_MODEL_MEDICATION => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_NEUROCOGNITIVE_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_PATIENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'firstName',
+				'lastName',
+				'gender',
+				'birthDate',
+				'educationYears'
+			],
+			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => [
+				'id',
+				'user',
+				'creationDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations'
+			],
+			ENTITY_MODEL_SESSION => [
+				'id',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'data'
+			],
+			ENTITY_MODEL_SIGN_UP_PERMISSION => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role'
+			],
+			ENTITY_MODEL_STUDY => [
+				'id',
+				'deleted',
+				'consultation',
+				'creator',
+				'experiment',
+				'input',
+				'lastEditor',
+				'report',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'observations'
+			],
+			ENTITY_MODEL_TREATMENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_USER => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role',
+				'firstName',
+				'lastName',
+				'gender',
+				'emailAddress'
+			]
 		];
 	}
 	
@@ -142,25 +664,199 @@ class AccessValidator extends Helper {
 		// TODO: define fields
 		// Defines and returns the accessible fields
 		return [
-			ENTITY_MODEL_ACCOUNT => [],
-			ENTITY_MODEL_BACKGROUND => [],
-			ENTITY_MODEL_CLINICAL_IMPRESSION => [],
-			ENTITY_MODEL_CONSULTATION => [],
-			ENTITY_MODEL_DIAGNOSIS => [],
-			ENTITY_MODEL_EXPERIMENT => [],
-			ENTITY_MODEL_FILE => [],
-			ENTITY_MODEL_IMAGE_TEST => [],
-			ENTITY_MODEL_LABORATORY_TEST => [],
-			ENTITY_MODEL_LOG => [],
-			ENTITY_MODEL_MEDICATION => [],
-			ENTITY_MODEL_NEUROCOGNITIVE_TEST => [],
-			ENTITY_MODEL_PATIENT => [],
-			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => [],
-			ENTITY_MODEL_SESSION => [],
-			ENTITY_MODEL_SIGN_UP_PERMISSION => [],
-			ENTITY_MODEL_STUDY => [],
-			ENTITY_MODEL_TREATMENT => [],
-			ENTITY_MODEL_USER => []
+			ENTITY_MODEL_ACCOUNT => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role',
+				'firstName',
+				'lastName',
+				'gender',
+				'emailAddress'
+			],
+			ENTITY_MODEL_BACKGROUND => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_CLINICAL_IMPRESSION => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_CONSULTATION => [
+				'id',
+				'deleted',
+				'clinicalImpression',
+				'creator',
+				'diagnosis',
+				'lastEditor',
+				'patient',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'date',
+				'reasons',
+				'indications',
+				'observations'
+			],
+			ENTITY_MODEL_DIAGNOSIS => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_EXPERIMENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'commandLine'
+			],
+			ENTITY_MODEL_FILE => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'hash'
+			],
+			ENTITY_MODEL_IMAGE_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_LABORATORY_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_LOG => [
+				'id',
+				'creationDatetime',
+				'level',
+				'message'
+			],
+			ENTITY_MODEL_MEDICATION => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_NEUROCOGNITIVE_TEST => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name',
+				'dataTypeDescriptor'
+			],
+			ENTITY_MODEL_PATIENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'firstName',
+				'lastName',
+				'gender',
+				'birthDate',
+				'educationYears'
+			],
+			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => [
+				'id',
+				'user',
+				'creationDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations'
+			],
+			ENTITY_MODEL_SESSION => [
+				'id',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'data'
+			],
+			ENTITY_MODEL_SIGN_UP_PERMISSION => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role'
+			],
+			ENTITY_MODEL_STUDY => [
+				'id',
+				'deleted',
+				'consultation',
+				'creator',
+				'experiment',
+				'input',
+				'lastEditor',
+				'report',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'observations'
+			],
+			ENTITY_MODEL_TREATMENT => [
+				'id',
+				'deleted',
+				'creator',
+				'lastEditor',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'name'
+			],
+			ENTITY_MODEL_USER => [
+				'id',
+				'creator',
+				'creationDatetime',
+				'lastEditionDatetime',
+				'passwordHash',
+				'salt',
+				'keyStretchingIterations',
+				'role',
+				'firstName',
+				'lastName',
+				'gender',
+				'emailAddress'
+			]
 		];
 	}
 	
