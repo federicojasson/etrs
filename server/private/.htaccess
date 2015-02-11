@@ -1,2 +1,4 @@
 # Denies all external access to the files in this directory
+Order Deny,Allow
 Deny from all
+Allow from env=etrs_download

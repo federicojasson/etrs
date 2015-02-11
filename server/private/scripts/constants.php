@@ -4,6 +4,8 @@
  * This script defines the constants of the application.
  */
 
+define('APACHE_ENVIRONMENT_VARIABLE_DOWNLOAD', 'etrs_download');
+
 define('DATA_TYPE_BOOLEAN', 'boolean');
 define('DATA_TYPE_INTEGER_FIX_VALUES', 'integer_fix_values');
 define('DATA_TYPE_INTEGER_RANGE', 'integer_range');
