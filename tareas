@@ -4,6 +4,8 @@ Tareas (TODOs):
   isUserSignedIn cuando sólo utiliza dato de la sesión (sin comprobar que el
   usuario existe)?
 
+- ¿Agregar Permission/Exists?
+
 - Generar reporte
 
 - Agregar licencia
