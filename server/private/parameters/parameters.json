@@ -1,7 +1,0 @@
-{
-	"cryptography": "private/parameters/cryptography.json",
-	"databases": "private/parameters/databases.json",
-	"emails": "private/parameters/emails.json",
-	"paths": "private/parameters/paths.json",
-	"webServer": "private/parameters/web-server.json"
-}

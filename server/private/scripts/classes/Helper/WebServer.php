@@ -11,39 +11,21 @@ class WebServer extends Helper {
 	 * Extends the timeout limit for the delivery of an email.
 	 */
 	public function extendTimeoutLimitForEmailDelivery() {
-		$app = $this->app;
-		
-		// Gets the extension time
-		$extensionTime = $app->parameters->webServer['extensionTimeForEmailDelivery'];
-		
-		// Extends the timeout limit
-		$this->extendTimeoutLimit($extensionTime);
+		$this->extendTimeoutLimit(EXTENSION_TIME_EMAIL_DELIVERY);
 	}
 	
 	/*
 	 * Extends the timeout limit for the hashing of a file.
 	 */
 	public function extendTimeoutLimitForFileHashing() {
-		$app = $this->app;
-		
-		// Gets the extension time
-		$extensionTime = $app->parameters->webServer['extensionTimeForFileHashing'];
-		
-		// Extends the timeout limit
-		$this->extendTimeoutLimit($extensionTime);
+		$this->extendTimeoutLimit(EXTENSION_TIME_FILE_HASHING);
 	}
 	
 	/*
 	 * Extends the timeout limit for the hashing of a password.
 	 */
 	public function extendTimeoutLimitForPasswordHashing() {
-		$app = $this->app;
-		
-		// Gets the extension time
-		$extensionTime = $app->parameters->webServer['extensionTimeForPasswordHashing'];
-		
-		// Extends the timeout limit
-		$this->extendTimeoutLimit($extensionTime);
+		$this->extendTimeoutLimit(EXTENSION_TIME_PASSWORD_HASHING);
 	}
 	
 	/*

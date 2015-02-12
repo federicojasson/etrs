@@ -27,7 +27,7 @@ class Parameters extends Helper {
 			// The parameters have not been loaded yet
 			
 			// Gets the path of the parameters file
-			$path = ROOT_PATH . $this->paths[$name];
+			$path = $this->paths[$name];
 
 			// Reads the file and stores the result
 			$this->parameters[$name] = readJsonFile($path);
@@ -45,7 +45,13 @@ class Parameters extends Helper {
 		$this->parameters = [];
 		
 		// Initializes the paths
-		$this->paths = readJsonFile(ROOT_PATH . 'private/parameters/parameters.json');
+		$this->paths = [
+			'cryptography' => ROOT_PATH . 'private/parameters/cryptography.json',
+			'databases' => ROOT_PATH . 'private/parameters/databases.json',
+			'emails' => ROOT_PATH . 'private/parameters/emails.json',
+			'paths' => ROOT_PATH . 'private/parameters/paths.json',
+			'webServer' => ROOT_PATH . 'private/parameters/web-server.json'
+		];
 	}
 	
 }

@@ -61,8 +61,9 @@ function executeCronJob($path, $executionFunction) {
  * the lock.
  */
 function executeLongCronJob($executionFunction) {
-	// TODO: get path?
-	executeCronJob(ROOT_PATH . 'private/locks/long-cron-job.lock', $executionFunction);
+	// Executes the cron job
+	$path = ROOT_PATH . 'private/locks/long-cron-job.lock';
+	executeCronJob($path, $executionFunction);
 }
 
 /*
@@ -72,6 +73,7 @@ function executeLongCronJob($executionFunction) {
  * the lock.
  */
 function executeShortCronJob($executionFunction) {
-	// TODO: get path?
-	executeCronJob(ROOT_PATH . 'private/locks/short-cron-job.lock', $executionFunction);
+	// Executes the cron job
+	$path = ROOT_PATH . 'private/locks/short-cron-job.lock';
+	executeCronJob($path, $executionFunction);
 }

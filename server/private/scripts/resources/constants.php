@@ -55,7 +55,11 @@ define('ERROR_UNDEFINED_SERVICE', 'UNDEFINED_SERVICE');
 define('ERROR_UNDELIVERED_EMAIL', 'UNDELIVERED_EMAIL');
 define('ERROR_UNEXPECTED_ERROR', 'UNEXPECTED_ERROR');
 
-define('FILES_ACCESS_PERMISSIONS', 0600);
+define('EXTENSION_TIME_EMAIL_DELIVERY', 30); // Seconds
+define('EXTENSION_TIME_FILE_HASHING', 25); // Seconds
+define('EXTENSION_TIME_PASSWORD_HASHING', 15); // Seconds
+
+define('FILES_ACCESS_PERMISSIONS', 0600); // -rw-------
 
 define('GENDER_FEMALE', 'f');
 define('GENDER_MALE', 'm');
@@ -75,9 +79,9 @@ define('LOG_LEVEL_5', 5);
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');
 
-define('RANDOM_ID_LENGTH', 16);
-define('RANDOM_PASSWORD_LENGTH', 64);
-define('SALT_LENGTH', 64);
+define('RANDOM_ID_LENGTH', 16); // Bytes
+define('RANDOM_PASSWORD_LENGTH', 64); // Bytes
+define('SALT_LENGTH', 64); // Bytes
 
 define('SEARCH_RESULTS_PER_PAGE', 10);
 

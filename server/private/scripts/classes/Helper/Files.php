@@ -170,16 +170,11 @@ class Files extends Helper {
 	 * It receives the file's ID and name.
 	 */
 	private function getFilePath($id, $name) {
-		$app = $this->app;
-		
-		// Gets the files directory
-		$directory = ROOT_PATH . $app->parameters->paths['files'];
-		
 		// Gets the file's relative path
 		$relativePath = $this->getRelativeFilePath($id, $name);
 		
 		// Builds and returns the path
-		return $directory . $relativePath;
+		return ROOT_PATH . 'private/files/' . $relativePath;
 	}
 	
 	/*

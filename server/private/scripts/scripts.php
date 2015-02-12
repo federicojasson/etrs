@@ -18,7 +18,7 @@ require ROOT_PATH . 'private/scripts/vendors/Slim/Slim.php'; \Slim\Slim::registe
 /*
  * Invoked when a class is referenced and has not been defined yet.
  * 
- * It includes the class if the proper file exists.
+ * It includes the class if the corresponding file exists.
  * 
  * It receives the class.
  */
@@ -37,7 +37,10 @@ function onClassReference($class) {
 	}
 
 	// Builds the file's path
-	$path = ROOT_PATH . 'private/scripts/classes/' . str_replace('\\', '/', $suffix) . '.php';
+	$path = '';
+	$path .= ROOT_PATH . 'private/scripts/classes/';
+	$path .= str_replace('\\', '/', $suffix);
+	$path .= '.php';
 
 	if (file_exists($path)) {
 		// The file exists: it includes it

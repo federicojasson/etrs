@@ -1,8 +1,4 @@
 {
 	"TODO:": "set domain",
-	"domain": "localhost/etrs",
-	
-	"extensionTimeForEmailDelivery": 30,
-	"extensionTimeForFileHashing": 25,
-	"extensionTimeForPasswordHashing": 15
+	"domain": "localhost/etrs"
 }

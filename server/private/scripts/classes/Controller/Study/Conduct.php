@@ -17,8 +17,6 @@ class Conduct extends \App\Controller\SpecializedSecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
-		$app = $this->app;
-		
 		// Gets the input
 		$id = $this->getInput('id', 'hex2bin');
 		

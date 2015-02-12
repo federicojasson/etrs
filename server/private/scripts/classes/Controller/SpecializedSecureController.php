@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Auxiliar\DataTypeDescriptor\Factory;
 use App\Auxiliar\JsonStructureDescriptor\JsonObjectDescriptor;
 use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 
@@ -996,7 +997,7 @@ abstract class SpecializedSecureController extends SecureController {
 	 */
 	private function isValidDataTypeValue($formattedDescriptor, $value) {
 		// Creates the data type descriptor
-		$dataTypeDescriptor = \App\Auxiliar\DataTypeDescriptor\Factory::create($formattedDescriptor);
+		$dataTypeDescriptor = Factory::create($formattedDescriptor);
 		
 		// Determines whether the value is valid
 		return $dataTypeDescriptor->isValidInput($value);
