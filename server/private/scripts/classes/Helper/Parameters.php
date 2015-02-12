@@ -45,7 +45,7 @@ class Parameters extends Helper {
 		$this->parameters = [];
 		
 		// Initializes the paths
-		$this->paths = readJsonFile('private/parameters/parameters.json');
+		$this->paths = readJsonFile(__DIR__ . '/../../../parameters/parameters.json');
 	}
 	
 }
