@@ -5,7 +5,7 @@
  */
 
 // Classes
-spl_autoload_register('autoloadClass');
+spl_autoload_register('onClassReference');
 
 // Resources
 require __DIR__ . '/resources/constants.php';
@@ -16,11 +16,11 @@ require __DIR__ . '/vendors/PHPMailer/PHPMailerAutoload.php';
 require __DIR__ . '/vendors/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
 
 /*
- * Includes a class, if it exists and belongs to the application's namespace.
+ * Invoked when a class is referenced and has not been defined yet.
  * 
  * It receives the class.
  */
-function autoloadClass($class) {
+function onClassReference($class) {
 	// Initializes the application's namespace and its length
 	$applicationNamespace = 'App\\';
 	$length = strlen($applicationNamespace);
