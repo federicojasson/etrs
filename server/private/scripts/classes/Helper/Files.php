@@ -173,7 +173,7 @@ class Files extends Helper {
 		$app = $this->app;
 		
 		// Gets the files directory
-		$directory = $app->parameters->paths['files'];
+		$directory = ROOT_PATH . $app->parameters->paths['files'];
 		
 		// Gets the file's relative path
 		$relativePath = $this->getRelativeFilePath($id, $name);

@@ -1,16 +1,19 @@
 <?php
 
 /*
- * This script initializes the application.
+ * This script serves a request.
  */
 
+// Defines the root path
+define('ROOT_PATH', __DIR__ . '/');
+
 // Includes the application's scripts
-require __DIR__ . '/private/scripts/scripts.php';
+require ROOT_PATH . 'private/scripts/scripts.php';
 
 // Initializes the framework
 $app = new \Slim\Slim([
-	'mode' => OPERATION_MODE_DEBUG
-	//'mode' => OPERATION_MODE_RELEASE
+	//'mode' => OPERATION_MODE_DEBUG
+	'mode' => OPERATION_MODE_RELEASE
 ]);
 
 // Adds the middlewares

@@ -1,22 +1,24 @@
 <?php
 
 /*
- * This script initializes the application's scripts.
+ * This script includes the application's scripts.
  */
 
 // Classes
 spl_autoload_register('onClassReference');
 
-// Resources
-require __DIR__ . '/resources/constants.php';
-require __DIR__ . '/resources/functions.php';
+// Includes resources
+require ROOT_PATH . 'private/scripts/resources/constants.php';
+require ROOT_PATH . 'private/scripts/resources/utility-functions.php';
 
-// Vendors
-require __DIR__ . '/vendors/PHPMailer/PHPMailerAutoload.php';
-require __DIR__ . '/vendors/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
+// Includes vendors
+require ROOT_PATH . 'private/scripts/vendors/PHPMailer/PHPMailerAutoload.php';
+require ROOT_PATH . 'private/scripts/vendors/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
 
 /*
  * Invoked when a class is referenced and has not been defined yet.
+ * 
+ * It includes the class if the proper file exists.
  * 
  * It receives the class.
  */
@@ -35,7 +37,7 @@ function onClassReference($class) {
 	}
 
 	// Builds the file's path
-	$path = __DIR__ . '/classes/' . str_replace('\\', '/', $suffix) . '.php';
+	$path = ROOT_PATH . 'private/scripts/classes/' . str_replace('\\', '/', $suffix) . '.php';
 
 	if (file_exists($path)) {
 		// The file exists: it includes it

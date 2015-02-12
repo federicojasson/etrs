@@ -18,7 +18,7 @@ class Parameters extends Helper {
 	private $paths;
 	
 	/*
-	 * Invoked when an inaccessible property is obtained.
+	 * Invoked when an inaccessible property is tried to be obtained.
 	 * 
 	 * It receives the property's name.
 	 */
@@ -27,7 +27,7 @@ class Parameters extends Helper {
 			// The parameters have not been loaded yet
 			
 			// Gets the path of the parameters file
-			$path = $this->paths[$name];
+			$path = ROOT_PATH . $this->paths[$name];
 
 			// Reads the file and stores the result
 			$this->parameters[$name] = readJsonFile($path);
@@ -45,7 +45,7 @@ class Parameters extends Helper {
 		$this->parameters = [];
 		
 		// Initializes the paths
-		$this->paths = readJsonFile(__DIR__ . '/../../../parameters/parameters.json');
+		$this->paths = readJsonFile(ROOT_PATH . 'private/parameters/parameters.json');
 	}
 	
 }

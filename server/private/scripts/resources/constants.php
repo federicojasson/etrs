@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This script defines the constants of the application.
+ * This script defines constants.
  */
 
 define('APACHE_ENVIRONMENT_VARIABLE_DOWNLOAD', 'etrs_download');

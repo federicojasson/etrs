@@ -20,8 +20,8 @@ class Emails extends Helper {
 		$parameters = $app->parameters->emails['recoverPasswordEmail'];
 		$subject = $parameters['subject'];
 		$relativeUrl = $parameters['relativeUrl'];
-		$path = $parameters['path'];
-		$alternativePath = $parameters['alternativePath'];
+		$path = ROOT_PATH . $parameters['path'];
+		$alternativePath = ROOT_PATH . $parameters['alternativePath'];
 		
 		// Builds a URL to recover the password
 		$url = '';
@@ -57,8 +57,8 @@ class Emails extends Helper {
 		$parameters = $app->parameters->emails['signUpEmail'];
 		$subject = $parameters['subject'];
 		$relativeUrl = $parameters['relativeUrl'];
-		$path = $parameters['path'];
-		$alternativePath = $parameters['alternativePath'];
+		$path = ROOT_PATH . $parameters['path'];
+		$alternativePath = ROOT_PATH . $parameters['alternativePath'];
 		
 		// Builds a URL to sign up
 		$url = '';

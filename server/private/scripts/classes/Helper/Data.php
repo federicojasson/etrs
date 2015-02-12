@@ -13,7 +13,7 @@ class Data extends Helper {
 	private $entityModels;
 	
 	/*
-	 * Invoked when an inaccessible property is obtained.
+	 * Invoked when an inaccessible property is tried to be obtained.
 	 * 
 	 * It receives the property's name.
 	 */

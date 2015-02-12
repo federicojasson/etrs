@@ -28,14 +28,14 @@ class DatabaseLogWriter {
 		
 		// Initializes the level mapping
 		$this->levelMapping = [
-			Slim\Log::DEBUG => LOG_LEVEL_5,
-			Slim\Log::INFO => LOG_LEVEL_4,
-			Slim\Log::NOTICE => LOG_LEVEL_4,
-			Slim\Log::WARN => LOG_LEVEL_3,
-			Slim\Log::ERROR => LOG_LEVEL_2,
-			Slim\Log::CRITICAL => LOG_LEVEL_2,
-			Slim\Log::ALERT => LOG_LEVEL_1,
-			Slim\Log::EMERGENCY => LOG_LEVEL_1
+			\Slim\Log::DEBUG => LOG_LEVEL_5,
+			\Slim\Log::INFO => LOG_LEVEL_4,
+			\Slim\Log::NOTICE => LOG_LEVEL_4,
+			\Slim\Log::WARN => LOG_LEVEL_3,
+			\Slim\Log::ERROR => LOG_LEVEL_2,
+			\Slim\Log::CRITICAL => LOG_LEVEL_2,
+			\Slim\Log::ALERT => LOG_LEVEL_1,
+			\Slim\Log::EMERGENCY => LOG_LEVEL_1
 		];
 	}
 	

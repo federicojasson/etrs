@@ -4,26 +4,50 @@
  * This script clears old logs.
  */
 
-// Includes the cron jobs' utilities
-require __DIR__ . '/cron-jobs.php';
+// Defines the root path
+define('ROOT_PATH', __DIR__ . '/../../../');
 
-\CronJobs\Lock::create('lock', __DIR__ . '/lock');
-\CronJobs\Lock::acquire('lock');
+// Includes resources
+require ROOT_PATH . 'private/scripts/resources/cron-job-utilities.php';
 
-\CronJobs\Database::connect(); // TODO: parameters
+// Executes the cron job
+executeShortCronJob('execute');
 
-// Defines the statement
-$statement = '
-	DELETE
-	FROM logs
-	WHERE creation_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumInactiveTime SECOND)
-';
+/*
+ * Executes the cron job.
+ */
+function execute() {
+	// Gets the database's parameters
+	/*$dsn = ;
+	$username = ;
+	$password = ;*/
+	
+	// Connects to the database
+	//$pdo = connectToDatabase($dsn, $username, $password);
+	
+	// TODO: comments
+	// TODO: try catch
+	// TODO: implement
+	
+	// TODO: get dsn, username and password
+	/*$databaseParameters = readJsonFile(__DIR__ . '/../../parameters/databases.json');
+	$dsn = $databaseParameters['webServerDatabase']['dsn'];
+	$username = $databaseParameters['webServerDatabase']['username'];
+	$password = $databaseParameters['webServerDatabase']['password'];
+	
+	$pdo = connectToDatabase($dsn, $username, $password);
 
-// Sets the parameters
-$parameters = [
-	':maximumInactiveTime' => $maximumInactiveTime
-];
+	$statement = '
+		DELETE
+		FROM logs
+		WHERE creation_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumTime SECOND)
+	';
 
-\CronJobs\Database::executePreparedStatement($statement, $parameters);
+	$maximumTime = 1; // TODO: set parameters
+	$parameters = [
+		':maximumTime' => $maximumTime // TODO: set maximum time variable and change name
+	];
 
-\CronJobs\Lock::release('lock');
+	$preparedStatement = $pdo->prepare($statement);
+	$preparedStatement->execute($parameters);*/
+}

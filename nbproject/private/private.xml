@@ -11,14 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/cron-jobs/cron-jobs.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/classes/Helper/Parameters.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/cron-jobs/clear-old-logs.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/classes/Auxiliar/DataTypeDescriptor/Factory.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/classes/Middleware/Configurations.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/private/scripts/classes/Helper/Database/SpecializedDatabase.php</file>
-            <file>file:/C:/xampp/htdocs/etrs/server/index.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
