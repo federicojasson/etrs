@@ -522,12 +522,12 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\RecoverPasswordPermission\Authenticate()
 		);
 
-		// URL:		/server/recover-password-permission/create
+		// URL:		/server/recover-password-permission/request
 		// Method:	POST
 		$app->services->define(
-			'/recover-password-permission/create',
+			'/recover-password-permission/request',
 			'POST',
-			new \App\Controller\RecoverPasswordPermission\Create()
+			new \App\Controller\RecoverPasswordPermission\Request()
 		);
 
 		// URL:		/server/sign-up-permission/authenticate
@@ -538,12 +538,12 @@ class Services extends \Slim\Middleware {
 			new \App\Controller\SignUpPermission\Authenticate()
 		);
 
-		// URL:		/server/sign-up-permission/create
+		// URL:		/server/sign-up-permission/request
 		// Method:	POST
 		$app->services->define(
-			'/sign-up-permission/create',
+			'/sign-up-permission/request',
 			'POST',
-			new \App\Controller\SignUpPermission\Create()
+			new \App\Controller\SignUpPermission\Request()
 		);
 
 		// URL:		/server/study/conduct
