@@ -17,13 +17,21 @@ class Conduct extends \App\Controller\SpecializedSecureController {
 	 * Calls the controller.
 	 */
 	protected function call() {
+		$app = $this->app;
+		
 		// Gets the input
 		$id = $this->getInput('id', 'hex2bin');
 		
 		// Checks the existence of the study
 		$this->checkStudyExistence($id);
 		
-		// TODO: implement
+		// TODO: check current existence
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Creates a sandbox
+		$app->data->sandbox->create($id, $signedInUser['id']);
 	}
 	
 	/*

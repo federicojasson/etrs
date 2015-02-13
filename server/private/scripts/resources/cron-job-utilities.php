@@ -19,8 +19,8 @@ function connectToBusinessLogicDatabase() {
 	$username = $parameters['username'];
 	$password = $parameters['password'];
 	
-	// Connects to the database
-	connectToDatabase($dsn, $username, $password);
+	// Connects to the database and returns the PDO instance
+	return connectToDatabase($dsn, $username, $password);
 }
 
 /*
@@ -55,8 +55,8 @@ function connectToWebServerDatabase() {
 	$username = $parameters['username'];
 	$password = $parameters['password'];
 	
-	// Connects to the database
-	connectToDatabase($dsn, $username, $password);
+	// Connects to the database and returns the PDO instance
+	return connectToDatabase($dsn, $username, $password);
 }
 
 /*

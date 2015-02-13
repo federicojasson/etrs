@@ -27,6 +27,7 @@ define('ENTITY_MODEL_MEDICATION', 'medication');
 define('ENTITY_MODEL_NEUROCOGNITIVE_TEST', 'neurocognitiveTest');
 define('ENTITY_MODEL_PATIENT', 'patient');
 define('ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION', 'recoverPasswordPermission');
+define('ENTITY_MODEL_SANDBOX', 'sandbox');
 define('ENTITY_MODEL_SESSION', 'session');
 define('ENTITY_MODEL_SIGN_UP_PERMISSION', 'signUpPermission');
 define('ENTITY_MODEL_STUDY', 'study');

@@ -32,7 +32,7 @@ function deleteOldSignUpPermissions($pdo, $maximumAge) {
 		':maximumAge' => $maximumAge
 	];
 	
-	// Executes the statement
+	// Prepares and executes the statement
 	$preparedStatement = $pdo->prepare($statement);
 	$preparedStatement->execute($parameters);
 }

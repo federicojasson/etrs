@@ -32,7 +32,7 @@ function deleteInactiveSessions($pdo, $maximumInactivityTime) {
 		':maximumInactivityTime' => $maximumInactivityTime
 	];
 	
-	// Executes the statement
+	// Prepares and executes the statement
 	$preparedStatement = $pdo->prepare($statement);
 	$preparedStatement->execute($parameters);
 }

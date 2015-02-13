@@ -19,16 +19,5 @@ executeLongCronJob('execute');
  * Executes the cron job.
  */
 function execute() {
-	// Connects to the business logic database
-	//$pdo = connectToBusinessLogicDatabase();
-	
-	// Starts a read-write transaction
-	//startReadWriteTransaction($pdo); // TODO: implement
-	
-	// TODO: delete non-associated files
-	
-	// TODO: delete files physically
-	
-	// Commits the transaction
-	//commitTransaction($pdo); // TODO: implement
+	// TODO
 }

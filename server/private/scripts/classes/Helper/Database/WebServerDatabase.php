@@ -117,6 +117,36 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 
 	/*
+	 * Creates a sandbox.
+	 * 
+	 * It receives the sandbox's data.
+	 */
+	public function createSandbox($id, $creator) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO sandboxes (
+				id,
+				creator,
+				creation_datetime
+			)
+			VALUES (
+				:id,
+				:creator,
+				UTC_TIMESTAMP()
+			)
+		';
+		
+		// Defines the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+
+	/*
 	 * Creates a sign up permission.
 	 * 
 	 * It receives the sign up permission's data.

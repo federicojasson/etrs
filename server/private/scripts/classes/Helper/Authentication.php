@@ -101,8 +101,7 @@ class Authentication extends Helper {
 	}
 	
 	/*
-	 * Signs up a user in the system. After the registration, the user is signed
-	 * in.
+	 * Signs up a user in the system.
 	 * 
 	 * It receives the user's data.
 	 */
@@ -117,9 +116,6 @@ class Authentication extends Helper {
 		
 		// Logs the event
 		$app->log->info('The user ' . $id . ' has been signed up (IP address: ' . $ipAddress . ').');
-		
-		// Signs in the user in the system
-		$this->signInUser($id);
 	}
 	
 }
