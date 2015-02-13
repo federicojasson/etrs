@@ -4,8 +4,6 @@ Tareas (TODOs):
   isUserSignedIn cuando sólo utiliza dato de la sesión (sin comprobar que el
   usuario existe)?
 
-- ¿Agregar Permission/Exists?
-
 - Generar reporte
 
 - Agregar licencia
@@ -20,7 +18,7 @@ Tareas (TODOs):
 
 - Comentar base de datos
 
-- Tareas de mantenimiento:
+- Tareas de mantenimiento (hacer scripts pero que no sean cron jobs?):
 	- Eliminar archivos huérfanos.
 	- Eliminar entidades deleted por mucho tiempo.
 
