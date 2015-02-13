@@ -34,9 +34,9 @@ class Emails extends Helper {
 		];
 		
 		// Builds the email's body and alternative body
-		$path = ROOT_PATH . 'private/emails/recover-password-email.html';
+		$path = ROOT_DIRECTORY . '/private/emails/recover-password-email.html';
 		$body = readTemplateFile($path, $mapping);
-		$alternativePath = ROOT_PATH . 'private/emails/recover-password-email.txt';
+		$alternativePath = ROOT_DIRECTORY . '/private/emails/recover-password-email.txt';
 		$alternativeBody = readTemplateFile($alternativePath, $mapping);
 		
 		// Creates the email
@@ -63,7 +63,8 @@ class Emails extends Helper {
 		$url = '';
 		$url .= $app->webServer->getDomain();
 		$url .= '/' . $relativeUrl;
-		$url .= bin2hex($id) . '/' . bin2hex($password);
+		$url .= '/' . bin2hex($id);
+		$url .= '/' . bin2hex($password);
 		
 		// Defines a placeholder mapping
 		$mapping = [
@@ -71,9 +72,9 @@ class Emails extends Helper {
 		];
 		
 		// Builds the email's body and alternative body
-		$path = ROOT_PATH . 'private/emails/sign-up-email.html';
+		$path = ROOT_DIRECTORY . '/private/emails/sign-up-email.html';
 		$body = readTemplateFile($path, $mapping);
-		$alternativePath = ROOT_PATH . 'private/emails/sign-up-email.txt';
+		$alternativePath = ROOT_DIRECTORY . '/private/emails/sign-up-email.txt';
 		$alternativeBody = readTemplateFile($alternativePath, $mapping);
 		
 		// Creates the email

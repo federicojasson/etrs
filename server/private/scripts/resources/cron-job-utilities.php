@@ -5,8 +5,23 @@
  */
 
 // Includes resources
-require ROOT_PATH . 'private/scripts/resources/constants.php';
-require ROOT_PATH . 'private/scripts/resources/utility-functions.php';
+require ROOT_DIRECTORY . '/private/scripts/resources/constants.php';
+require ROOT_DIRECTORY . '/private/scripts/resources/utility-functions.php';
+
+/*
+ * Connects to the business logic database and returns a PDO instance
+ * representing the connection.
+ */
+function connectToBusinessLogicDatabase() {
+	// Gets the database's parameters
+	$parameters = getDatabaseParameters('businessLogicDatabase');
+	$dsn = $parameters['dsn'];
+	$username = $parameters['username'];
+	$password = $parameters['password'];
+	
+	// Connects to the database
+	connectToDatabase($dsn, $username, $password);
+}
 
 /*
  * Connects to a database and returns a PDO instance representing the
@@ -35,8 +50,7 @@ function connectToDatabase($dsn, $username, $password) {
  */
 function connectToWebServerDatabase() {
 	// Gets the database's parameters
-	$path = ROOT_PATH . 'private/parameters/databases.json';
-	$parameters = readJsonFile($path)['webServerDatabase'];
+	$parameters = getDatabaseParameters('webServerDatabase');
 	$dsn = $parameters['dsn'];
 	$username = $parameters['username'];
 	$password = $parameters['password'];
@@ -46,8 +60,8 @@ function connectToWebServerDatabase() {
 }
 
 /*
- * Executes a cron job, using a file as lock to avoid that multiple jobs get
- * executed at the same time.
+ * Executes a cron job, using a file as lock to avoid that multiple jobs of the
+ * same type get executed at the same time.
  * 
  * It receives the file's path and an execution function to be invoked when the
  * cron job acquires the lock.
@@ -74,23 +88,37 @@ function executeCronJob($path, $executionFunction) {
 /*
  * Executes a long cron job.
  * 
- * It receives an execution function to be invoked when the cron job acquires
- * the lock.
+ * It receives an execution function to be invoked when the cron job gains
+ * access.
  */
 function executeLongCronJob($executionFunction) {
 	// Executes the cron job
-	$path = ROOT_PATH . 'private/locks/long-cron-job.lock';
+	$path = ROOT_DIRECTORY . '/private/locks/long-cron-job.lock';
 	executeCronJob($path, $executionFunction);
 }
 
 /*
  * Executes a short cron job.
  * 
- * It receives an execution function to be invoked when the cron job acquires
- * the lock.
+ * It receives an execution function to be invoked when the cron job gains
+ * access.
  */
 function executeShortCronJob($executionFunction) {
 	// Executes the cron job
-	$path = ROOT_PATH . 'private/locks/short-cron-job.lock';
+	$path = ROOT_DIRECTORY . '/private/locks/short-cron-job.lock';
 	executeCronJob($path, $executionFunction);
+}
+
+/*
+ * Returns the parameters of a database.
+ * 
+ * It receives the database's name.
+ */
+function getDatabaseParameters($name) {
+	// Reads the databases parameters file and stores the result
+	$path = ROOT_DIRECTORY . '/private/parameters/databases.json';
+	$parameters = readJsonFile($path);
+	
+	// Returns the database's parameters
+	return $parameters[$name];
 }

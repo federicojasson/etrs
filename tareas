@@ -14,12 +14,15 @@ Tareas (TODOs):
 
 - Chequear Warnings
 
+- Eliminar recover password permission de un usuario si ya existe al pedir otro.
+
 - Implementar control de acceso más preciso
 
 - Comentar base de datos
 
 - Tareas de mantenimiento:
 	- Eliminar archivos huérfanos.
+	- Eliminar entidades deleted por mucho tiempo.
 
 - Recordar configurar (en httpd.conf):
 	# Added to remove the Server response header

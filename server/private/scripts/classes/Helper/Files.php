@@ -174,7 +174,7 @@ class Files extends Helper {
 		$relativePath = $this->getRelativeFilePath($id, $name);
 		
 		// Builds and returns the path
-		return ROOT_PATH . 'private/files/' . $relativePath;
+		return ROOT_DIRECTORY . '/private/files/' . $relativePath;
 	}
 	
 	/*

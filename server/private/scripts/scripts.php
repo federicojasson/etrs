@@ -8,12 +8,12 @@
 spl_autoload_register('onClassReference');
 
 // Includes resources
-require ROOT_PATH . 'private/scripts/resources/constants.php';
-require ROOT_PATH . 'private/scripts/resources/utility-functions.php';
+require ROOT_DIRECTORY . '/private/scripts/resources/constants.php';
+require ROOT_DIRECTORY . '/private/scripts/resources/utility-functions.php';
 
 // Includes vendors
-require ROOT_PATH . 'private/scripts/vendors/PHPMailer/PHPMailerAutoload.php';
-require ROOT_PATH . 'private/scripts/vendors/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
+require ROOT_DIRECTORY . '/private/scripts/vendors/PHPMailer/PHPMailerAutoload.php';
+require ROOT_DIRECTORY . '/private/scripts/vendors/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
 
 /*
  * Invoked when a class is referenced and has not been defined yet.
@@ -38,7 +38,7 @@ function onClassReference($class) {
 
 	// Builds the file's path
 	$path = '';
-	$path .= ROOT_PATH . 'private/scripts/classes/';
+	$path .= ROOT_DIRECTORY . '/private/scripts/classes/';
 	$path .= str_replace('\\', '/', $suffix);
 	$path .= '.php';
 

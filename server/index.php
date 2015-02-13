@@ -5,10 +5,10 @@
  */
 
 // Defines the root path
-define('ROOT_PATH', __DIR__ . '/');
+define('ROOT_DIRECTORY', __DIR__);
 
 // Includes the application's scripts
-require ROOT_PATH . 'private/scripts/scripts.php';
+require ROOT_DIRECTORY . '/private/scripts/scripts.php';
 
 // Initializes the framework
 $app = new \Slim\Slim([

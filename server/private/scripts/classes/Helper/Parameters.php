@@ -46,9 +46,9 @@ class Parameters extends Helper {
 		
 		// Initializes the paths
 		$this->paths = [
-			'databases' => ROOT_PATH . 'private/parameters/databases.json',
-			'emails' => ROOT_PATH . 'private/parameters/emails.json',
-			'webServer' => ROOT_PATH . 'private/parameters/web-server.json'
+			'databases' => ROOT_DIRECTORY . '/private/parameters/databases.json',
+			'emails' => ROOT_DIRECTORY . '/private/parameters/emails.json',
+			'webServer' => ROOT_DIRECTORY . '/private/parameters/web-server.json'
 		];
 	}
 	
