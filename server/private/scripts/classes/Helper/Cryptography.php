@@ -45,14 +45,12 @@ class Cryptography extends Helper {
 	 * It receives the password.
 	 */
 	public function hashNewPassword($password) {
-		$app = $this->app;
-		
 		// Generates a salt
 		$salt = $this->generateSalt();
 		
-		// Gets the number of iterations that should be applied in the key
+		// Defines the number of iterations that should be applied in the key
 		// stretching
-		$keyStretchingIterations = $app->parameters->cryptography['keyStretchingIterations'];
+		$keyStretchingIterations = KEY_STRETCHING_ITERATIONS;
 		
 		// Computes the hash of the password
 		$passwordHash = $this->hashPassword($password, $salt, $keyStretchingIterations);

@@ -10,6 +10,8 @@ Tareas (TODOs):
 
 - Agregar licencia
 
+- Chequear transacciones: dónde se inician. Chequear controladores y cron jobs.
+
 - Chequear Warnings
 
 - Implementar control de acceso más preciso
@@ -17,8 +19,6 @@ Tareas (TODOs):
 - Comentar base de datos
 
 - Tareas de mantenimiento:
-	- Eliminar permisos vencidos.
-	- Eliminar logs antiguos.
 	- Eliminar archivos huérfanos.
 
 - Recordar configurar (en httpd.conf):
