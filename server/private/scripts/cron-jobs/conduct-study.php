@@ -60,12 +60,121 @@ function execute() {
 	chdir($directory);
 	exec($commandLine);
 	
-	// TODO: move file to the corresponding location
+	$id = generateRandomId();
+	$hash = uploadFile($id, 'Reporte.pdf', $directory . '/output/Reporte.pdf');
+	createFile($pdo0, $id, $sandbox['creator'], 'Reporte.pdf', $hash);
+	updateStudy($pdo0, $study['id'], $sandbox['creator'], $id);
+	deleteSandbox($pdo1, $sandbox['id']);
+	
+	// TODO: remove sandbox physically
 }
 
 // TODO: clean code
 
 // TODO: non deleted only (RECHECK!)
+
+function deleteSandbox($pdo, $id) {
+	// Defines the statement
+	$statement = '
+		DELETE
+		FROM sandboxes
+		WHERE id = :id
+		LIMIT 1
+	';
+
+	// Defines the parameters
+	$parameters = [
+		':id' => $id
+	];
+
+	// Prepares and executes the statement
+	$preparedStatement = $pdo->prepare($statement);
+	$preparedStatement->execute($parameters);
+}
+
+function updateStudy($pdo, $id, $lastEditor, $output) {
+	// Defines the statement
+	$statement = '
+		UPDATE studies
+		SET
+			last_editor = :lastEditor,
+			last_edition_datetime = UTC_TIMESTAMP(),
+			output = :output
+		WHERE id = :id
+		LIMIT 1
+	';
+
+	// Defines the parameters
+	$parameters = [
+		':id' => $id,
+		':lastEditor' => $lastEditor,
+		':output' => $output
+	];
+
+	// Prepares and executes the statement
+	$preparedStatement = $pdo->prepare($statement);
+	$preparedStatement->execute($parameters);
+}
+
+function generateRandomId() {
+	return openssl_random_pseudo_bytes(LENGTH_RANDOM_ID);
+}
+
+function hashFile($path) {
+	return md5_file($path, true);
+}
+
+function uploadFile($id, $name, $temporaryPath) {
+	$path = getFilePath($id, $name);
+	
+	// TODO: checkFileNonExistence($path);
+	
+	$directory = dirname($path);
+	mkdir($directory, ACCESS_PERMISSIONS_DIRECTORY, true);
+	rename($temporaryPath, $path);
+	$hash = hashFile($path);
+	
+	return $hash;
+}
+
+function createFile($pdo, $id, $creator, $name, $hash) {
+	// Defines the statement
+	$statement = '
+		INSERT INTO files (
+			id,
+			deleted,
+			creator,
+			last_editor,
+			creation_datetime,
+			last_edition_datetime,
+			name,
+			hash
+		)
+		VALUES (
+			:id,
+			FALSE,
+			:creator,
+			:lastEditor,
+			UTC_TIMESTAMP(),
+			UTC_TIMESTAMP(),
+			:name,
+			:hash
+		)
+	';
+
+	// Defines the parameters
+	$parameters = [
+		':id' => $id,
+		':creator' => $creator,
+		':lastEditor' => $creator,
+		':name' => $name,
+		':hash' => $hash
+	];
+
+	// Prepares and executes the statement
+	$preparedStatement = $pdo->prepare($statement);
+	$preparedStatement->execute($parameters);
+}
 
 function getExperiment($pdo, $id) {
 	// Defines the statement

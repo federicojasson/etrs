@@ -4,7 +4,7 @@ Tareas (TODOs):
   isUserSignedIn cuando sólo utiliza dato de la sesión (sin comprobar que el
   usuario existe)?
 
-- Generar reporte
+- Limpiar código cron-jobs
 
 - Agregar licencia
 
@@ -14,7 +14,7 @@ Tareas (TODOs):
 
 - Eliminar recover password permission de un usuario si ya existe al pedir otro.
 
-- Implementar control de acceso más preciso
+- Implementar control de acceso más preciso?
 
 - Comentar base de datos
 
