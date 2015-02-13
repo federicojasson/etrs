@@ -5,7 +5,7 @@ namespace App\Helper;
 /*
  * This helper allows to define services.
  * 
- * A service is defined by its URL, the HTTP method through which it is invoked
+ * A service is defined by a URL, the HTTP method through which it is invoked
  * and the controller that serves the requests.
  */
 class Services extends Helper {

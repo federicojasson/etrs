@@ -32,19 +32,6 @@ class SessionModel extends EntityModel {
 	}
 	
 	/*
-	 * Deletes inactive sessions.
-	 * 
-	 * It receives the maximum time that a session can remain inactive (in
-	 * seconds).
-	 */
-	public function deleteInactives($maximumInactiveTime) {
-		$app = $this->app;
-		
-		// Deletes the inactive sessions
-		$app->webServerDatabase->deleteInactiveSessions($maximumInactiveTime);
-	}
-	
-	/*
 	 * Returns a session. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the session's ID.

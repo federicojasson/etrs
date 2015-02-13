@@ -1,7 +1,9 @@
 <?php
 
 /*
- * This script clears expired permissions.
+ * This script deletes the orphan files.
+ * 
+ * A file is orphan when is not associated with any entity of the system.
  */
 
 // Defines the root path
@@ -11,7 +13,7 @@ define('ROOT_PATH', __DIR__ . '/../../../');
 require ROOT_PATH . 'private/scripts/resources/cron-job-utilities.php';
 
 // Executes the cron job
-executeShortCronJob('execute');
+executeLongCronJob('execute');
 
 /*
  * Executes the cron job.

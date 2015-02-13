@@ -3,8 +3,9 @@
 namespace App\Auxiliar\DataTypeDescriptor;
 
 /*
- * This class represents a descriptor of the boolean data type. Instances can be
- * used to validate inputs.
+ * This class represents a descriptor of the boolean data type.
+ * 
+ * Instances of this class can be used to validate inputs.
  */
 class BooleanDescriptor extends DataTypeDescriptor {
 	

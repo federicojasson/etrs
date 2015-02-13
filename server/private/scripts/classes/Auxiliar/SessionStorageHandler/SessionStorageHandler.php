@@ -28,10 +28,9 @@ interface SessionStorageHandler {
 	 * 
 	 * It returns whether the operation succeeded.
 	 * 
-	 * It receives the maximum time that a session can remain inactive (in
-	 * seconds).
+	 * It receives the maximum inactivity time of a session (in seconds).
 	 */
-	public function onGarbageCollection($maximumInactiveTime);
+	public function onGarbageCollection($maximumInactivityTime);
 	
 	/*
 	 * Invoked when the session is being opened.

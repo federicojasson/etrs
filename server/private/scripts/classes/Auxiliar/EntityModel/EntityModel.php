@@ -3,8 +3,9 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class represents an entity model. Entity models offer operations to
- * manage a specific type of entity.
+ * This class represents an entity model.
+ * 
+ * Entity models offer operations to manage a specific type of entity.
  */
 abstract class EntityModel {
 	

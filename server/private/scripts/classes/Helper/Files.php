@@ -149,7 +149,7 @@ class Files extends Helper {
 		}
 		
 		// Creates the directory
-		$created = mkdir($directory, FILES_ACCESS_PERMISSIONS, true);
+		$created = mkdir($directory, ACCESS_PERMISSIONS_DIRECTORY, true);
 		
 		if (! $created) {
 			// The directory could not be created
@@ -221,7 +221,7 @@ class Files extends Helper {
 		}
 		
 		// Sets the file's access permissions
-		$this->setFileAccessPermissions($path, FILES_ACCESS_PERMISSIONS);
+		$this->setFileAccessPermissions($path, ACCESS_PERMISSIONS_FILE);
 	}
 	
 	/*

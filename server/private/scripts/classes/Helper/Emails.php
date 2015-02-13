@@ -157,7 +157,7 @@ class Emails extends Helper {
 			// The operation failed
 			
 			// Logs the event
-			$app->log->error('An email failed to be delivered. Message: ' . $exception->getMessage());
+			$app->log->error('Email failed to be delivered. Message: ' . $exception->getMessage());
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [

@@ -36,7 +36,7 @@ abstract class SpecializedDatabase extends Database {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id
 		];
@@ -59,7 +59,7 @@ abstract class SpecializedDatabase extends Database {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id
 		];
@@ -88,7 +88,7 @@ abstract class SpecializedDatabase extends Database {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id
 		];
@@ -124,7 +124,7 @@ abstract class SpecializedDatabase extends Database {
 		// Gets the limit and the offset
 		list($limit, $offset) = $this->getLimitAndOffset($page);
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':limit' => $limit,
 			':offset' => $offset
@@ -169,7 +169,7 @@ abstract class SpecializedDatabase extends Database {
 		// Gets the limit and the offset
 		list($limit, $offset) = $this->getLimitAndOffset($page);
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':booleanExpression' => $booleanExpression,
 			':limit' => $limit,

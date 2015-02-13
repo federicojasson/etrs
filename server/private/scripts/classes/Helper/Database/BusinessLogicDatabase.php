@@ -35,7 +35,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -75,7 +75,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -127,7 +127,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':clinicalImpression' => $clinicalImpression,
@@ -163,7 +163,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation,
 			':background' => $background
@@ -193,7 +193,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation,
 			':imageTest' => $imageTest,
@@ -225,7 +225,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation,
 			':laboratoryTest' => $laboratoryTest,
@@ -254,7 +254,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation,
 			':medication' => $medication
@@ -285,7 +285,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation,
 			':neurocognitiveTest' => $neurocognitiveTest,
@@ -314,7 +314,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation,
 			':treatment' => $treatment
@@ -352,7 +352,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -394,7 +394,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -425,7 +425,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':experiment' => $experiment,
 			':file' => $file
@@ -465,7 +465,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -508,7 +508,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -551,7 +551,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -592,7 +592,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -634,7 +634,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -683,7 +683,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -735,7 +735,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':consultation' => $consultation,
@@ -768,7 +768,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':study' => $study,
 			':file' => $file
@@ -806,7 +806,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -858,7 +858,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -880,7 +880,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -902,7 +902,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -924,7 +924,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -946,7 +946,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -968,7 +968,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -1008,7 +1008,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE experiment = :experiment
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':experiment' => $experiment
 		];
@@ -1093,7 +1093,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE study = :study
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':study' => $study
 		];
@@ -1128,7 +1128,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1156,7 +1156,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1189,7 +1189,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':clinicalImpression' => $clinicalImpression,
@@ -1222,7 +1222,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1251,7 +1251,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1281,7 +1281,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1311,7 +1311,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1340,7 +1340,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1369,7 +1369,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1402,7 +1402,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1435,7 +1435,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1464,7 +1464,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':lastEditor' => $lastEditor,
@@ -1488,7 +1488,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -1514,7 +1514,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -1540,7 +1540,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -1564,7 +1564,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -1590,7 +1590,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -1614,7 +1614,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -1638,7 +1638,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE consultation = :consultation
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':consultation' => $consultation
 		];
@@ -1662,7 +1662,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE experiment = :experiment
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':experiment' => $experiment
 		];
@@ -1686,7 +1686,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE experiment = :experiment
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':experiment' => $experiment
 		];
@@ -2006,7 +2006,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE patient = :patient
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':patient' => $patient
 		];
@@ -2030,7 +2030,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			WHERE study = :study
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':study' => $study
 		];
@@ -2542,7 +2542,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id
 		];

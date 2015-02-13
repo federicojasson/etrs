@@ -11,14 +11,14 @@ class Cryptography extends Helper {
 	 * Generates and returns a random ID.
 	 */
 	public function generateRandomId() {
-		return $this->generateRandomBytesSequence(RANDOM_ID_LENGTH);
+		return $this->generateRandomBytesSequence(LENGTH_RANDOM_ID);
 	}
 	
 	/*
 	 * Generates and returns a random password.
 	 */
 	public function generateRandomPassword() {
-		return $this->generateRandomBytesSequence(RANDOM_PASSWORD_LENGTH);
+		return $this->generateRandomBytesSequence(LENGTH_RANDOM_PASSWORD);
 	}
 	
 	/*
@@ -103,7 +103,7 @@ class Cryptography extends Helper {
 	 * Generates and returns a salt.
 	 */
 	private function generateSalt() {
-		return $this->generateRandomBytesSequence(SALT_LENGTH);
+		return $this->generateRandomBytesSequence(LENGTH_SALT);
 	}
 	
 }

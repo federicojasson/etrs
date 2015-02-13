@@ -5,6 +5,7 @@
  */
 
 // Includes resources
+require ROOT_PATH . 'private/scripts/resources/constants.php';
 require ROOT_PATH . 'private/scripts/resources/utility-functions.php';
 
 /*
@@ -26,6 +27,22 @@ function connectToDatabase($dsn, $username, $password) {
 	$pdo->exec('SET SESSION TRANSACTION ISOLATION LEVEL SERIALIZABLE');
 	
 	return $pdo;
+}
+
+/*
+ * Connects to the web server database and returns a PDO instance representing
+ * the connection.
+ */
+function connectToWebServerDatabase() {
+	// Gets the database's parameters
+	$path = ROOT_PATH . 'private/parameters/databases.json';
+	$parameters = readJsonFile($path)['webServerDatabase'];
+	$dsn = $parameters['dsn'];
+	$username = $parameters['username'];
+	$password = $parameters['password'];
+	
+	// Connects to the database
+	connectToDatabase($dsn, $username, $password);
 }
 
 /*

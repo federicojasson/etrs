@@ -29,7 +29,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':level' => $level,
@@ -66,7 +66,7 @@ class WebServerDatabase extends SpecializedDatabase {
 				data = :dataToUpdate
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':dataToInsert' => $data,
@@ -103,7 +103,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':user' => $user,
@@ -144,7 +144,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -196,7 +196,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			)
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':creator' => $creator,
@@ -208,29 +208,6 @@ class WebServerDatabase extends SpecializedDatabase {
 			':lastName' => $lastName,
 			':gender' => $gender,
 			':emailAddress' => $emailAddress
-		];
-		
-		// Executes the statement
-		$this->executePreparedStatement($statement, $parameters);
-	}
-	
-	/*
-	 * Deletes the inactive sessions.
-	 * 
-	 * It receives the maximum time that a session can remain inactive (in
-	 * seconds).
-	 */
-	public function deleteInactiveSessions($maximumInactiveTime) {
-		// Defines the statement
-		$statement = '
-			DELETE
-			FROM sessions
-			WHERE last_edition_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumInactiveTime SECOND)
-		';
-		
-		// Sets the parameters
-		$parameters = [
-			':maximumInactiveTime' => $maximumInactiveTime
 		];
 		
 		// Executes the statement
@@ -295,7 +272,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			LIMIT 1
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':id' => $id,
 			':passwordHash' => $passwordHash,
@@ -428,7 +405,7 @@ class WebServerDatabase extends SpecializedDatabase {
 			WHERE user = :user
 		';
 		
-		// Sets the parameters
+		// Defines the parameters
 		$parameters = [
 			':user' => $user
 		];

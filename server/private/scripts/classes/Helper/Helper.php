@@ -3,8 +3,9 @@
 namespace App\Helper;
 
 /*
- * This class represents a helper. Helpers are singletons that offer very
- * specific functionalities.
+ * This class represents a helper.
+ * 
+ * Helpers are singletons that offer very specific functionalities.
  * 
  * Subclasses can, optionally, override the initialize function to perform
  * initialization tasks.

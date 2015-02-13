@@ -110,7 +110,7 @@ class InputValidator extends Helper {
 		}
 		
 		// Checks whether the input has a random ID format
-		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
+		return preg_match('/^[0-9A-Fa-f]{' . 2 * LENGTH_RANDOM_ID . '}$/', $input);
 	}
 	
 	/*
@@ -125,7 +125,7 @@ class InputValidator extends Helper {
 		}
 		
 		// Checks whether the input has a random password format
-		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_PASSWORD_LENGTH . '}$/', $input);
+		return preg_match('/^[0-9A-Fa-f]{' . 2 * LENGTH_RANDOM_PASSWORD . '}$/', $input);
 	}
 	
 	/*
