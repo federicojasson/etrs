@@ -30,16 +30,15 @@ class Configurations extends \Slim\Middleware {
 		
 		// Applies cookies configurations
 		$app->config([ // TODO: check and test cookies configurations
-			'cookies.httponly' => true,
-			'cookies.secure' => true,
+			'cookies.cipher' => MCRYPT_RIJNDAEL_256,
+			'cookies.cipher_mode' => MCRYPT_MODE_CBC,
+			'cookies.domain' => null,
 			'cookies.encrypt' => true,
-
+			'cookies.httponly' => true,
 			'cookies.lifetime' => '20 minutes',
 			'cookies.path' => '/',
-			'cookies.domain' => null,
 			'cookies.secret_key' => 'CHANGE_ME',
-			'cookies.cipher' => MCRYPT_RIJNDAEL_256,
-			'cookies.cipher_mode' => MCRYPT_MODE_CBC
+			'cookies.secure' => true
 		]);
 		
 		// Applies other configurations
@@ -70,16 +69,15 @@ class Configurations extends \Slim\Middleware {
 		
 		// Applies cookies configurations
 		$app->config([ // TODO: check and test cookies configurations
-			'cookies.httponly' => true,
-			'cookies.secure' => true,
+			'cookies.cipher' => MCRYPT_RIJNDAEL_256,
+			'cookies.cipher_mode' => MCRYPT_MODE_CBC,
+			'cookies.domain' => null,
 			'cookies.encrypt' => true,
-
+			'cookies.httponly' => true,
 			'cookies.lifetime' => '20 minutes',
 			'cookies.path' => '/',
-			'cookies.domain' => null,
 			'cookies.secret_key' => 'CHANGE_ME',
-			'cookies.cipher' => MCRYPT_RIJNDAEL_256,
-			'cookies.cipher_mode' => MCRYPT_MODE_CBC
+			'cookies.secure' => true
 		]);
 		
 		// Applies other configurations

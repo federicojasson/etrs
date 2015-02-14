@@ -25,7 +25,7 @@ class Files extends Helper {
 		$this->checkFileIntegrity($file);
 		
 		// Sets the proper headers
-		$app->response->headers->set('Content-Disposition', 'attachment; filename=' . $file['name']); // TODO: is Content-Disposition safe?
+		$app->response->headers->set('Content-Disposition', 'attachment; filename=' . $file['name']);
 		$app->response->headers->set('Content-Length', filesize($path));
 		$app->response->headers->set('Content-Type', 'application/octet-stream');
 		
