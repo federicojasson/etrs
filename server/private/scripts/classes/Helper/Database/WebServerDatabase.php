@@ -281,6 +281,29 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Deletes the recover password permission of a user.
+	 * 
+	 * It receives the user's ID.
+	 */
+	public function deleteUserRecoverPasswordPermission($user) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM recover_password_permissions
+			WHERE user = :user
+			LIMIT 1
+		';
+		
+		// Defines the parameters
+		$parameters = [
+			':user' => $user
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Edits a user.
 	 * 
 	 * It receives the user's data.
@@ -420,30 +443,6 @@ class WebServerDatabase extends SpecializedDatabase {
 		
 		// Gets and returns the entity
 		return $this->getEntity('users', $columnsToSelect, $id);
-	}
-	
-	/*
-	 * Returns the recover password permissions of a user.
-	 * 
-	 * It receives the user's ID.
-	 */
-	public function getUserRecoverPasswordPermissions($user) {
-		// Defines the statement
-		$statement = '
-			SELECT id
-			FROM recover_password_permissions
-			WHERE user = :user
-		';
-		
-		// Defines the parameters
-		$parameters = [
-			':user' => $user
-		];
-		
-		// Executes the statement
-		$results = $this->executePreparedStatement($statement, $parameters);
-		
-		return $results;
 	}
 	
 	/*

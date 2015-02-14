@@ -15,8 +15,17 @@ class RecoverPasswordPermissionModel extends EntityModel {
 	public function create($id, $user, $passwordHash, $salt, $keyStretchingIterations) {
 		$app = $this->app;
 		
+		// Starts a read-write transaction
+		$app->webServerDatabase->startReadWriteTransaction();
+		
+		// Deletes the user's recover password permission (if there is any)
+		$app->webServerDatabase->deleteUserRecoverPasswordPermission($user);
+		
 		// Creates the recover password permission
 		$app->webServerDatabase->createRecoverPasswordPermission($id, $user, $passwordHash, $salt, $keyStretchingIterations);
+		
+		// Commits the transaction
+		$app->webServerDatabase->commitTransaction();
 	}
 	
 	/*

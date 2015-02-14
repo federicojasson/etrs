@@ -30,11 +30,8 @@ class UserModel extends EntityModel {
 		// Starts a read-write transaction
 		$app->webServerDatabase->startReadWriteTransaction();
 		
-		// Deletes the user's recover password permissions
-		$recoverPasswordPermissions = $app->webServerDatabase->getUserRecoverPasswordPermissions($id);
-		foreach ($recoverPasswordPermissions as $recoverPasswordPermission) {
-			$app->data->recoverPasswordPermission->delete($recoverPasswordPermission['id']);
-		}
+		// Deletes the user's recover password permission (if there is any)
+		$app->webServerDatabase->deleteUserRecoverPasswordPermission($id);
 		
 		// Deletes the user
 		$app->webServerDatabase->deleteUser($id);
