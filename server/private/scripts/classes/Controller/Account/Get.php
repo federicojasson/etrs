@@ -5,10 +5,10 @@ namespace App\Controller\Account;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/account/get
+ * URI:		/server/account/get
  * Method:	POST
  */
-class Get extends \App\Controller\SpecializedSecureController {
+class Get extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.

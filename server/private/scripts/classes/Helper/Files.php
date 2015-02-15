@@ -30,7 +30,7 @@ class Files extends Helper {
 		$app->response->headers->set('Content-Type', 'application/octet-stream');
 		
 		// Sets an Apache environment variable to allow the download
-		apache_setenv('APACHE_ENVIRONMENT_VARIABLE_DOWNLOAD', '1');
+		apache_setenv('APACHE_ENVIRONMENT_VARIABLE_ETRS_SUBREQUEST', '1');
 		
 		// Initiates the download
 		virtual($path);

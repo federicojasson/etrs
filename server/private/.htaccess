@@ -1,4 +1,5 @@
-# Denies all external access to the files in this directory
+# Denies all external access to this directory, except to subrequests made by
+# the server application
 Order Deny,Allow
 Deny from all
-Allow from env=etrs_download
+Allow from env=etrs_subrequest

@@ -8,10 +8,10 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/image-test/create
+ * URI:		/server/image-test/create
  * Method:	POST
  */
-class Create extends \App\Controller\SpecializedSecureController {
+class Create extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.
@@ -53,8 +53,8 @@ class Create extends \App\Controller\SpecializedSecureController {
 			})
 		]);
 		
-		// Validates the JSON request and returns the result
-		return $this->validateJsonRequest($jsonStructureDescriptor);
+		// Validates the JSON input and returns the result
+		return $this->validateJsonInput($jsonStructureDescriptor);
 	}
 	
 	/*

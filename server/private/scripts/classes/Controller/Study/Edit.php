@@ -9,10 +9,10 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/study/edit
+ * URI:		/server/study/edit
  * Method:	POST
  */
-class Edit extends \App\Controller\SpecializedSecureController {
+class Edit extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.
@@ -61,8 +61,8 @@ class Edit extends \App\Controller\SpecializedSecureController {
 			)
 		]);
 		
-		if (! $this->validateJsonRequest($jsonStructureDescriptor)) {
-			// The JSON request is invalid
+		if (! $this->validateJsonInput($jsonStructureDescriptor)) {
+			// The JSON input is invalid
 			return false;
 		}
 		

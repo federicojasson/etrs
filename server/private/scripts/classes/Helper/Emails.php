@@ -19,18 +19,18 @@ class Emails extends Helper {
 		// Gets the email's parameters
 		$parameters = $app->parameters->emails['recoverPasswordEmail'];
 		$subject = $parameters['subject'];
-		$relativeUrl = $parameters['relativeUrl'];
+		$relativeUri = $parameters['relativeUri'];
 		
-		// Builds a URL to recover the password
-		$url = '';
-		$url .= $app->webServer->getDomain();
-		$url .= '/' . $relativeUrl;
-		$url .= '/' . bin2hex($id);
-		$url .= '/' . bin2hex($password);
+		// Builds a URI to recover the password
+		$uri = '';
+		$uri .= $app->webServer->getDomain();
+		$uri .= '/' . $relativeUri;
+		$uri .= '/' . bin2hex($id);
+		$uri .= '/' . bin2hex($password);
 		
 		// Defines a placeholder mapping
 		$mapping = [
-			':url' => $url
+			':uri' => $uri
 		];
 		
 		// Builds the email's body and alternative body
@@ -57,18 +57,18 @@ class Emails extends Helper {
 		// Gets the email's parameters
 		$parameters = $app->parameters->emails['signUpEmail'];
 		$subject = $parameters['subject'];
-		$relativeUrl = $parameters['relativeUrl'];
+		$relativeUri = $parameters['relativeUri'];
 		
-		// Builds a URL to sign up
-		$url = '';
-		$url .= $app->webServer->getDomain();
-		$url .= '/' . $relativeUrl;
-		$url .= '/' . bin2hex($id);
-		$url .= '/' . bin2hex($password);
+		// Builds a URI to sign up
+		$uri = '';
+		$uri .= $app->webServer->getDomain();
+		$uri .= '/' . $relativeUri;
+		$uri .= '/' . bin2hex($id);
+		$uri .= '/' . bin2hex($password);
 		
 		// Defines a placeholder mapping
 		$mapping = [
-			':url' => $url
+			':uri' => $uri
 		];
 		
 		// Builds the email's body and alternative body

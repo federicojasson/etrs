@@ -1,13 +1,13 @@
 <?php
 
 /*
- * This script defines constants.
+ * This script defines global constants.
  */
 
 define('ACCESS_PERMISSIONS_DIRECTORY', 0600); // -rw-------
 define('ACCESS_PERMISSIONS_FILE', 0400); // -r--------
 
-define('APACHE_ENVIRONMENT_VARIABLE_DOWNLOAD', 'etrs_download');
+define('APACHE_ENVIRONMENT_VARIABLE_ETRS_SUBREQUEST', 'etrs_subrequest');
 
 define('DATA_TYPE_BOOLEAN', 'boolean');
 define('DATA_TYPE_INTEGER_FIX_VALUES', 'integer_fix_values');

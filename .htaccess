@@ -4,10 +4,10 @@ Options -Indexes
 # Enables the runtime rewriting engine
 RewriteEngine on
 
-# The root URL is mapped to the client application
+# Maps the root URI to the client application
 RewriteRule ^(/)?$ client/index.html [L]
 
-# Rewrites all URLs, except those prefixed with client/ or server/
+# Rewrites all URIs, except those prefixed with client/ or server/
 RewriteCond %{REQUEST_URI} !^client/(.*)$
 RewriteCond %{REQUEST_URI} !^server/(.*)$
 RewriteRule ^(.*)$ client/$1 [L]

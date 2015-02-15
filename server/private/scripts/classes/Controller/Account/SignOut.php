@@ -5,10 +5,10 @@ namespace App\Controller\Account;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/account/sign-out
+ * URI:		/server/account/sign-out
  * Method:	POST
  */
-class SignOut extends \App\Controller\SpecializedSecureController {
+class SignOut extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.

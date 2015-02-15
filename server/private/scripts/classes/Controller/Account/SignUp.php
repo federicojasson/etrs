@@ -8,10 +8,10 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/account/sign-up
+ * URI:		/server/account/sign-up
  * Method:	POST
  */
-class SignUp extends \App\Controller\SpecializedSecureController {
+class SignUp extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.
@@ -98,8 +98,8 @@ class SignUp extends \App\Controller\SpecializedSecureController {
 			})
 		]);
 		
-		// Validates the JSON request and returns the result
-		return $this->validateJsonRequest($jsonStructureDescriptor);
+		// Validates the JSON input and returns the result
+		return $this->validateJsonInput($jsonStructureDescriptor);
 	}
 	
 	/*

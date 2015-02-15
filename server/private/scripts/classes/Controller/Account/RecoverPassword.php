@@ -8,10 +8,10 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/account/recover-password
+ * URI:		/server/account/recover-password
  * Method:	POST
  */
-class RecoverPassword extends \App\Controller\SpecializedSecureController {
+class RecoverPassword extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.
@@ -73,8 +73,8 @@ class RecoverPassword extends \App\Controller\SpecializedSecureController {
 			})
 		]);
 		
-		// Validates the JSON request and returns the result
-		return $this->validateJsonRequest($jsonStructureDescriptor);
+		// Validates the JSON input and returns the result
+		return $this->validateJsonInput($jsonStructureDescriptor);
 	}
 	
 	/*

@@ -5,10 +5,10 @@ namespace App\Controller\Authentication;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/authentication/get-state
+ * URI:		/server/authentication/get-state
  * Method:	POST
  */
-class GetState extends \App\Controller\SpecializedSecureController {
+class GetState extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.

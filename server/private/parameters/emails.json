@@ -14,11 +14,11 @@
 	
 	"recoverPasswordEmail": {
 		"subject": "ETRS - Recuperar contraseña",
-		"relativeUrl": "recover-password"
+		"relativeUri": "account/recover-password"
 	},
 	
 	"signUpEmail": {
 		"subject": "ETRS - Invitación",
-		"relativeUrl": "sign-up"
+		"relativeUri": "account/sign-up"
 	}
 }

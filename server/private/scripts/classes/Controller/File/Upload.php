@@ -5,10 +5,10 @@ namespace App\Controller\File;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/file/upload
+ * URI:		/server/file/upload
  * Method:	POST
  */
-class Upload extends \App\Controller\SpecializedSecureController {
+class Upload extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.
@@ -40,8 +40,8 @@ class Upload extends \App\Controller\SpecializedSecureController {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// Validates the form data request and returns the result
-		return $this->validateFormDataRequest('file');
+		// Validates the form data input and returns the result
+		return $this->validateFormDataInput('file');
 	}
 	
 	/*

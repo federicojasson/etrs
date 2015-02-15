@@ -5,10 +5,10 @@ namespace App\Controller\Diagnosis;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/diagnosis/search
+ * URI:		/server/diagnosis/search
  * Method:	POST
  */
-class Search extends \App\Controller\SpecializedSecureController {
+class Search extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.
@@ -42,8 +42,8 @@ class Search extends \App\Controller\SpecializedSecureController {
 			'name'
 		]);
 		
-		// Validates the JSON request and returns the result
-		return $this->validateJsonRequest($jsonStructureDescriptor);
+		// Validates the JSON input and returns the result
+		return $this->validateJsonInput($jsonStructureDescriptor);
 	}
 	
 	/*

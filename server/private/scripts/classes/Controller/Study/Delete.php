@@ -8,10 +8,10 @@ use App\Auxiliar\JsonStructureDescriptor\JsonValueDescriptor;
 /*
  * This controller is responsible for the following service:
  * 
- * URL:		/server/study/delete
+ * URI:		/server/study/delete
  * Method:	POST
  */
-class Delete extends \App\Controller\SpecializedSecureController {
+class Delete extends \App\Controller\SpecializedExternalController {
 	
 	/*
 	 * Calls the controller.
@@ -42,8 +42,8 @@ class Delete extends \App\Controller\SpecializedSecureController {
 			})
 		]);
 		
-		// Validates the JSON request and returns the result
-		return $this->validateJsonRequest($jsonStructureDescriptor);
+		// Validates the JSON input and returns the result
+		return $this->validateJsonInput($jsonStructureDescriptor);
 	}
 	
 	/*

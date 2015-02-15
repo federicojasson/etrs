@@ -14,10 +14,6 @@ Tareas (TODOs):
 
 - Chequear Warnings
 
-- ¿Eliminar sign up permission de un email si ya existe al pedir otro? What about mails like fede+Testing@gmail.com
-
-- Implementar control de acceso más preciso?
-
 - Comentar base de datos
 
 - Tareas de mantenimiento (hacer scripts pero que no sean cron jobs?):
