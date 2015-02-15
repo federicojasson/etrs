@@ -17,19 +17,6 @@ require ROOT_DIRECTORY . '/private/scripts/vendors/PHPMailer/PHPMailerAutoload.p
 require ROOT_DIRECTORY . '/private/scripts/vendors/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
 
 /*
- * Mocks a request to allow internal services.
- */
-function mockRequest($uri) {
-	// TODO: test
-	$_SERVER['REMOTE_ADDR'] = '::1';
-	
-	\Slim\Environment::mock([
-		'PATH_INFO' => '/authentication/get-state',
-		'REQUEST_METHOD' => 'POST'
-	]);
-}
-
-/*
  * Invoked when a class is referenced and has not been defined yet.
  * 
  * It includes the class if the corresponding file exists.
@@ -88,8 +75,8 @@ function runApplication($operationMode, $middlewares) {
  */
 function serveExternalRequest() {
 	// Defines the operation mode
-	//$operationMode = OPERATION_MODE_DEBUG;
-	$operationMode = OPERATION_MODE_RELEASE;
+	$operationMode = OPERATION_MODE_DEBUG;
+	//$operationMode = OPERATION_MODE_RELEASE;
 
 	// Runs the application
 	runApplication($operationMode, [
@@ -109,11 +96,14 @@ function serveExternalRequest() {
  */
 function serveInternalRequest($uri) {
 	// Mocks the request
-	mockRequest($uri);
+	\Slim\Environment::mock([
+		'PATH_INFO' => $uri,
+		'REQUEST_METHOD' => 'POST'
+	]);
 	
 	// Defines the operation mode
-	//$operationMode = OPERATION_MODE_DEBUG;
-	$operationMode = OPERATION_MODE_RELEASE;
+	$operationMode = OPERATION_MODE_DEBUG;
+	//$operationMode = OPERATION_MODE_RELEASE;
 
 	// Runs the application
 	runApplication($operationMode, [

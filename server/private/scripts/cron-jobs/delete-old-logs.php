@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This script deletes old logs.
+ * This script deletes the old logs.
  */
 
 // Defines the root path

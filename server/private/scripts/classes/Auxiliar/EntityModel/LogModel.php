@@ -20,6 +20,18 @@ class LogModel extends EntityModel {
 	}
 	
 	/*
+	 * Deletes the old logs.
+	 * 
+	 * It receives the maximum age of a log (in months).
+	 */
+	public function deleteOld($maximumAge) {
+		$app = $this->app;
+		
+		// Deletes the old logs
+		$app->webServerDatabase->deleteOldLogs($maximumAge);
+	}
+	
+	/*
 	 * Filters a log for presentation and returns the result.
 	 * 
 	 * It receives the log.

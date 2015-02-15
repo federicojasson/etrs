@@ -26,7 +26,6 @@ class InternalServices extends \Slim\Middleware {
 
 		// Defines the internal services
 
-		// TODO: method?
 		// URI:		/server/log/delete-old
 		// Method:	POST
 		$app->services->define(
@@ -35,7 +34,6 @@ class InternalServices extends \Slim\Middleware {
 			new \App\Controller\Log\DeleteOld()
 		);
 
-		// TODO: method?
 		// URI:		/server/recover-password-permission/delete-old
 		// Method:	POST
 		$app->services->define(
@@ -44,7 +42,6 @@ class InternalServices extends \Slim\Middleware {
 			new \App\Controller\RecoverPasswordPermission\DeleteOld()
 		);
 
-		// TODO: method?
 		// URI:		/server/sandbox/process
 		// Method:	POST
 		$app->services->define(
@@ -53,7 +50,6 @@ class InternalServices extends \Slim\Middleware {
 			new \App\Controller\Sandbox\Process()
 		);
 
-		// TODO: method?
 		// URI:		/server/session/delete-inactive
 		// Method:	POST
 		$app->services->define(
@@ -62,7 +58,6 @@ class InternalServices extends \Slim\Middleware {
 			new \App\Controller\Session\DeleteInactive()
 		);
 
-		// TODO: method?
 		// URI:		/server/sign-up-permission/delete-old
 		// Method:	POST
 		$app->services->define(

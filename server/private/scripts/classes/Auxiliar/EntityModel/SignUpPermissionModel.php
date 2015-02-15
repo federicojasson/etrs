@@ -32,6 +32,18 @@ class SignUpPermissionModel extends EntityModel {
 	}
 	
 	/*
+	 * Deletes the old sign up permissions.
+	 * 
+	 * It receives the maximum age of a sign up permission (in hours).
+	 */
+	public function deleteOld($maximumAge) {
+		$app = $this->app;
+		
+		// Deletes the old sign up permissions
+		$app->webServerDatabase->deleteOldSignUpPermissions($maximumAge);
+	}
+	
+	/*
 	 * Returns a sign up permission. If it doesn't exist, null is returned.
 	 * 
 	 * It receives the sign up permission's ID.

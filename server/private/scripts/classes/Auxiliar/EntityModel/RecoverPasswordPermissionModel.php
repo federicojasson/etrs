@@ -41,6 +41,18 @@ class RecoverPasswordPermissionModel extends EntityModel {
 	}
 	
 	/*
+	 * Deletes the old recover password permissions.
+	 * 
+	 * It receives the maximum age of a recover password permission (in hours).
+	 */
+	public function deleteOld($maximumAge) {
+		$app = $this->app;
+		
+		// Deletes the old recover password permissions
+		$app->webServerDatabase->deleteOldRecoverPasswordPermissions($maximumAge);
+	}
+	
+	/*
 	 * Returns a recover password permission. If it doesn't exist, null is
 	 * returned.
 	 * 

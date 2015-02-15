@@ -245,6 +245,94 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 	
 	/*
+	 * Deletes the inactive sessions.
+	 * 
+	 * It receives the maximum inactivity time of a session (in minutes).
+	 */
+	public function deleteInactiveSessions($maximumInactivityTime) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM sessions
+			WHERE last_edition_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumInactivityTime MINUTE)
+		';
+		
+		// Defines the parameters
+		$parameters = [
+			':maximumInactivityTime' => $maximumInactivityTime
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Deletes the old logs.
+	 * 
+	 * It receives the maximum age of a log (in months).
+	 */
+	public function deleteOldLogs($maximumAge) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM logs
+			WHERE creation_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumAge MONTH)
+		';
+		
+		// Defines the parameters
+		$parameters = [
+			':maximumAge' => $maximumAge
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Deletes the old recover password permissions.
+	 * 
+	 * It receives the maximum age of a recover password permission (in hours).
+	 */
+	public function deleteOldRecoverPasswordPermissions($maximumAge) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM recover_password_permissions
+			WHERE creation_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumAge HOUR)
+		';
+		
+		// Defines the parameters
+		$parameters = [
+			':maximumAge' => $maximumAge
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
+	 * Deletes the old sign up permissions.
+	 * 
+	 * It receives the maximum age of a sign up permission (in hours).
+	 */
+	public function deleteOldSignUpPermissions($maximumAge) {
+		// Defines the statement
+		$statement = '
+			DELETE
+			FROM sign_up_permissions
+			WHERE creation_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumAge HOUR)
+		';
+		
+		// Defines the parameters
+		$parameters = [
+			':maximumAge' => $maximumAge
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+	
+	/*
 	 * Deletes a recover password permission.
 	 * 
 	 * It receives the recover password permission's ID.

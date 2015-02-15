@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This script deletes old sign up permissions.
+ * This script deletes the old sign up permissions.
  */
 
 // Defines the root path

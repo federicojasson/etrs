@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This script deletes inactive sessions.
+ * This script deletes the inactive sessions.
  */
 
 // Defines the root path

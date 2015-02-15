@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This script deletes old recover password permissions.
+ * This script deletes the old recover password permissions.
  */
 
 // Defines the root path

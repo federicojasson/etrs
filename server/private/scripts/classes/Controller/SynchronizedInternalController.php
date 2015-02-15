@@ -33,6 +33,6 @@ abstract class SynchronizedInternalController extends InternalController {
 	/*
 	 * Returns the path of the file used as lock.
 	 */
-	protected function getLockFilePath();
+	protected abstract function getLockFilePath();
 	
 }
