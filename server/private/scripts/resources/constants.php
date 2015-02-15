@@ -5,7 +5,7 @@
  */
 
 define('ACCESS_PERMISSIONS_DIRECTORY', 0600); // -rw-------
-define('ACCESS_PERMISSIONS_FILE', 0400); // -r--------
+define('ACCESS_PERMISSIONS_FILE', 0600); // -rw-------
 
 define('APACHE_ENVIRONMENT_VARIABLE_ETRS_SUBREQUEST', 'etrs_subrequest');
 
@@ -26,7 +26,6 @@ define('ENTITY_MODEL_LOG', 'log');
 define('ENTITY_MODEL_MEDICATION', 'medication');
 define('ENTITY_MODEL_NEUROCOGNITIVE_TEST', 'neurocognitiveTest');
 define('ENTITY_MODEL_PATIENT', 'patient');
-define('ENTITY_MODEL_PENDING_STUDY', 'pendingStudy');
 define('ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION', 'recoverPasswordPermission');
 define('ENTITY_MODEL_SESSION', 'session');
 define('ENTITY_MODEL_SIGN_UP_PERMISSION', 'signUpPermission');
@@ -99,6 +98,8 @@ define('SESSION_DATA_USER', 'user');
 
 define('SORTING_ORDER_ASCENDING', 'ascending');
 define('SORTING_ORDER_DESCENDING', 'descending');
+
+define('STUDY_OUTPUT_FILE_NAME', 'Reporte.pdf');
 
 define('USER_ROLE_ADMINISTRATOR', 'ad');
 define('USER_ROLE_ANONYMOUS', '__');

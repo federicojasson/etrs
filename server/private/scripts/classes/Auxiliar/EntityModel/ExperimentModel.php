@@ -147,6 +147,18 @@ class ExperimentModel extends EntityModel {
 	}
 	
 	/*
+	 * Returns the files of an experiment.
+	 * 
+	 * It receives the experiment's ID.
+	 */
+	public function getFiles($id) {
+		$app = $this->app;
+		
+		// Gets the experiment's files
+		return $app->businessLogicDatabase->getExperimentNonDeletedFiles($id);
+	}
+	
+	/*
 	 * Searches experiments. It returns an array containing the total number of
 	 * results and the results found in the page, ready for presentation.
 	 * 

@@ -22,6 +22,7 @@ class Edit extends \App\Controller\SpecializedExternalController {
 		
 		// Gets the input
 		$id = $this->getInput('id', 'hex2bin');
+		$pending = $this->getInput('pending');
 		$observations = $this->getInput('observations', 'trimString');
 		$files = $this->getInput('files', 'stringsToBinary');
 		
@@ -35,7 +36,7 @@ class Edit extends \App\Controller\SpecializedExternalController {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Edits the study
-		$app->data->study->edit($id, $signedInUser['id'], $study['output'], $observations, $files);
+		$app->data->study->edit($id, $pending, $signedInUser['id'], $study['output'], $observations, $files);
 	}
 	
 	/*
@@ -48,6 +49,10 @@ class Edit extends \App\Controller\SpecializedExternalController {
 		$jsonStructureDescriptor = new JsonObjectDescriptor([
 			'id' => new JsonValueDescriptor(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'pending' => new JsonValueDescriptor(function($input) {
+				return is_bool($input);
 			}),
 			
 			'observations' => new JsonValueDescriptor(function($input) use ($app) {

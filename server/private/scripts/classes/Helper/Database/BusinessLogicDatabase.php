@@ -710,6 +710,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			INSERT INTO studies (
 				id,
 				deleted,
+				pending,
 				consultation
 				creator,
 				experiment,
@@ -723,6 +724,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 			VALUES (
 				:id,
 				FALSE,
+				TRUE,
 				:consultation,
 				:creator,
 				:experiment,
@@ -1422,11 +1424,12 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 	 * 
 	 * It receives the study's data.
 	 */
-	public function editStudy($id, $lastEditor, $output, $observations) {
+	public function editStudy($id, $pending, $lastEditor, $output, $observations) {
 		// Defines the statement
 		$statement = '
 			UPDATE studies
 			SET
+				pending = :pending,
 				last_editor = :lastEditor,
 				output = :output,
 				last_edition_datetime = UTC_TIMESTAMP(),
@@ -1438,6 +1441,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		// Defines the parameters
 		$parameters = [
 			':id' => $id,
+			':pending' => $pending,
 			':lastEditor' => $lastEditor,
 			':output' => $output,
 			':observations' => $observations
@@ -1957,6 +1961,7 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		$columnsToSelect = [
 			'id',
 			'deleted',
+			'pending',
 			'consultation',
 			'creator',
 			'experiment',
@@ -1991,6 +1996,38 @@ class BusinessLogicDatabase extends SpecializedDatabase {
 		
 		// Gets and returns the entity
 		return $this->getEntity('non_deleted_treatments', $columnsToSelect, $id);
+	}
+	
+	/*
+	 * Returns the oldest non-deleted pending study. If there is none, null is
+	 * returned.
+	 */
+	public function getOldestNonDeletedPendingStudy() {
+		// Defines the statement
+		$statement = '
+			SELECT
+				id,
+				deleted,
+				pending,
+				consultation,
+				creator,
+				experiment,
+				input,
+				last_editor AS lastEditor,
+				output,
+				creation_datetime AS creationDatetime,
+				last_edition_datetime AS lastEditionDatetime,
+				observations
+			FROM non_deleted_pending_studies
+			ORDER BY last_edition_datetime ASC
+			LIMIT 1
+		';
+		
+		// Executes the statement
+		$results = $this->executePreparedStatement($statement);
+		
+		// Returns the first result, or null if there is none
+		return getFirstElementOrNull($results);
 	}
 	
 	/*

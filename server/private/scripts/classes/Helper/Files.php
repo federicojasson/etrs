@@ -8,6 +8,25 @@ namespace App\Helper;
 class Files extends Helper {
 	
 	/*
+	 * Copies a file out of the file system.
+	 * 
+	 * It receives the file and the destination path.
+	 */
+	public function copy($file, $destinationPath) {
+		// Gets the file's path
+		$path = $this->getFilePath($file['id'], $file['name']);
+		
+		// Checks the existence of the file
+		$this->checkFileExistence($path);
+		
+		// Checks the integrity of the file
+		$this->checkFileIntegrity($file);
+		
+		// Copies the file
+		$this->copyFile($path, $destinationPath);
+	}
+	
+	/*
 	 * Downloads a file.
 	 * 
 	 * It receives the file.
@@ -37,11 +56,11 @@ class Files extends Helper {
 	}
 	
 	/*
-	 * Uploads a file and returns its hash.
+	 * Moves a file into the file system and returns its hash.
 	 * 
-	 * It receives the file's ID, name and temporary path.
+	 * It receives the file's ID, name and source path.
 	 */
-	public function upload($id, $name, $temporaryPath) {
+	public function move($id, $name, $sourcePath) {
 		$app = $this->app;
 		
 		// Gets the path where the file will be located permanently
@@ -50,8 +69,55 @@ class Files extends Helper {
 		// Checks the non-existence of the file
 		$this->checkFileNonExistence($path);
 		
-		// Moves the temporary file to its permanent location
-		$this->moveTemporaryFile($temporaryPath, $path);
+		// Moves the file to its permanent location
+		$this->moveFile($sourcePath, $path, 'rename');
+		
+		// Computes the hash of the file
+		$hash = $app->cryptography->hashFile($path);
+		
+		return $hash;
+	}
+	
+	/*
+	 * Removes a file. If the operation fails, the execution is halted.
+	 * 
+	 * It receives the file's path.
+	 */
+	public function remove($path) {
+		$app = $this->app;
+		
+		// Removes the file
+		$removed = unlink($path);
+		
+		if (! $removed) {
+			// The file could not be removed
+			
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' could not be removed.');
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_FILE_SYSTEM_PROBLEM
+			]);
+		}
+	}
+	
+	/*
+	 * Uploads a file and returns its hash.
+	 * 
+	 * It receives the file's ID, name and source path.
+	 */
+	public function upload($id, $name, $sourcePath) {
+		$app = $this->app;
+		
+		// Gets the path where the file will be located permanently
+		$path = $this->getFilePath($id, $name);
+		
+		// Checks the non-existence of the file
+		$this->checkFileNonExistence($path);
+		
+		// Moves the file to its permanent location
+		$this->moveFile($sourcePath, $path, 'move_uploaded_file');
 		
 		// Computes the hash of the file
 		$hash = $app->cryptography->hashFile($path);
@@ -132,6 +198,37 @@ class Files extends Helper {
 	}
 	
 	/*
+	 * Copies a file to a certain location. If the operation fails, the
+	 * execution is halted.
+	 * 
+	 * It receives the source path and the destination path.
+	 */
+	private function copyFile($sourcePath, $destinationPath) {
+		$app = $this->app;
+		
+		// Creates the destination directory
+		$this->createFileDirectory($destinationPath);
+		
+		// Copies the file
+		$copied = copy($sourcePath, $destinationPath);
+		
+		if (! $copied) {
+			// The file could not be copied
+			
+			// Logs the event
+			$app->log->critical('The file ' . $sourcePath . ' could not be copied to the location ' . $destinationPath . '.');
+			
+			// Halts the execution
+			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
+				'error' => ERROR_FILE_SYSTEM_PROBLEM
+			]);
+		}
+		
+		// Sets the file's access permissions
+		$this->setFileAccessPermissions($destinationPath, ACCESS_PERMISSIONS_FILE);
+	}
+	
+	/*
 	 * Creates a file's directory, if it doesn't exist already. If the operation
 	 * fails, the execution is halted.
 	 * 
@@ -194,25 +291,26 @@ class Files extends Helper {
 	}
 	
 	/*
-	 * Moves a temporary file to a permanent location. If the operation fails,
-	 * the execution is halted.
+	 * Moves a file to a certain location. If the operation fails, the execution
+	 * is halted.
 	 * 
-	 * It receives the file's temporary path and the destination path.
+	 * It receives the source path, the destination path and a moving function
+	 * to be invoked in order to move the file.
 	 */
-	private function moveTemporaryFile($temporaryPath, $path) {
+	private function moveFile($sourcePath, $destinationPath, $movingFunction) {
 		$app = $this->app;
 		
 		// Creates the destination directory
-		$this->createFileDirectory($path);
+		$this->createFileDirectory($destinationPath);
 		
-		// Moves the file
-		$moved = move_uploaded_file($temporaryPath, $path);
+		// Invokes the moving function
+		$moved = call_user_func($movingFunction, $sourcePath, $destinationPath);
 		
 		if (! $moved) {
 			// The file could not be moved
 			
 			// Logs the event
-			$app->log->critical('The temporary file ' . $temporaryPath . ' could not be moved to its permanent location ' . $path . '.');
+			$app->log->critical('The file ' . $sourcePath . ' could not be moved to the location ' . $destinationPath . '.');
 			
 			// Halts the execution
 			$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
@@ -221,11 +319,11 @@ class Files extends Helper {
 		}
 		
 		// Sets the file's access permissions
-		$this->setFileAccessPermissions($path, ACCESS_PERMISSIONS_FILE);
+		$this->setFileAccessPermissions($destinationPath, ACCESS_PERMISSIONS_FILE);
 	}
 	
 	/*
-	 * Sets a file's access permissions.
+	 * Sets the access permissions of a file.
 	 * 
 	 * It receives the file's path and the access permissions to be set.
 	 */

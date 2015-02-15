@@ -546,14 +546,6 @@ class ExternalServices extends \Slim\Middleware {
 			new \App\Controller\SignUpPermission\Request()
 		);
 
-		// URI:		/server/study/conduct
-		// Method:	POST
-		$app->services->define(
-			'/study/conduct',
-			'POST',
-			new \App\Controller\Study\Conduct()
-		);
-
 		// URI:		/server/study/create
 		// Method:	POST
 		$app->services->define(

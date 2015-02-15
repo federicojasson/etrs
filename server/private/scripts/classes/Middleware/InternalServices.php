@@ -34,14 +34,6 @@ class InternalServices extends \Slim\Middleware {
 			new \App\Controller\Log\DeleteOld()
 		);
 
-		// URI:		/server/pending-study/conduct
-		// Method:	POST
-		$app->services->define(
-			'/pending-study/conduct',
-			'POST',
-			new \App\Controller\PendingStudy\Conduct()
-		);
-
 		// URI:		/server/recover-password-permission/delete-old
 		// Method:	POST
 		$app->services->define(
@@ -64,6 +56,14 @@ class InternalServices extends \Slim\Middleware {
 			'/sign-up-permission/delete-old',
 			'POST',
 			new \App\Controller\SignUpPermission\DeleteOld()
+		);
+
+		// URI:		/server/study/conduct-oldest-pending
+		// Method:	POST
+		$app->services->define(
+			'/study/conduct-oldest-pending',
+			'POST',
+			new \App\Controller\Study\ConductOldestPending()
 		);
 	}
 

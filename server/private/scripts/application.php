@@ -110,7 +110,7 @@ function serveInternalRequest($uri) {
 		new \App\Middleware\InternalServices(),
 		new \App\Middleware\Configurations(),
 		new \App\Middleware\Helpers(),
-		new \App\Middleware\ErrorHandlers(), // TODO: necessary?
-		new \App\Middleware\Extensions() // TODO: necessary?
+		new \App\Middleware\ErrorHandlers(),
+		new \App\Middleware\Extensions()
 	]);
 }

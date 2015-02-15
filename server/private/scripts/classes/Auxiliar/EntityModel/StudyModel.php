@@ -68,20 +68,22 @@ class StudyModel extends EntityModel {
 	 * 
 	 * It receives the study's data.
 	 */
-	public function edit($id, $lastEditor, $output, $observations, $files) {
+	public function edit($id, $pending, $lastEditor, $output, $observations, $files = null) {
 		$app = $this->app;
 		
 		// Starts a read-write transaction
 		$app->businessLogicDatabase->startReadWriteTransaction();
 		
 		// Edits the study
-		$app->businessLogicDatabase->editStudy($id, $lastEditor, $output, $observations);
+		$app->businessLogicDatabase->editStudy($id, $pending, $lastEditor, $output, $observations);
 		
-		// Disassociates all data from the study
-		$this->disassociateData($id);
-		
-		// Associates the data with the study
-		$this->associateData($id, $files);
+		if (! is_null($files)) {
+			// Disassociates all data from the study
+			$this->disassociateData($id);
+
+			// Associates the data with the study
+			$this->associateData($id, $files);
+		}
 		
 		// Commits the transaction
 		$app->businessLogicDatabase->commitTransaction();
@@ -181,6 +183,16 @@ class StudyModel extends EntityModel {
 		
 		// Gets the study
 		return $app->businessLogicDatabase->getNonDeletedStudy($id);
+	}
+	
+	/*
+	 * Returns the oldest pending study. If there is none, null is returned.
+	 */
+	public function getOldestPending() {
+		$app = $this->app;
+		
+		// Gets the oldest pending study
+		return $app->businessLogicDatabase->getOldestNonDeletedPendingStudy();
 	}
 	
 	/*

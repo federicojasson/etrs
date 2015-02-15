@@ -8,6 +8,27 @@ namespace App\Helper;
 class WebServer extends Helper {
 	
 	/*
+	 * Executes a command line. The operation is carried out in a certain
+	 * working directory. The caller is responsible for preparing the context so
+	 * that the execution takes place correctly.
+	 * 
+	 * It receives the working directory and the command line to execute.
+	 */
+	public function executeCommandLine($workingDirectory, $commandLine) {
+		// Saves the current working directory
+		$currentWorkingDirectory = getcwd();
+		
+		// Changes the working directory
+		chdir($workingDirectory);
+		
+		// Executes the command line
+		exec($commandLine);
+		
+		// Restores the previous working directory
+		chdir($currentWorkingDirectory);
+	}
+	
+	/*
 	 * Extends the timeout limit for the delivery of an email.
 	 */
 	public function extendTimeoutLimitForEmailDelivery() {

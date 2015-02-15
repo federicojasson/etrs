@@ -14,7 +14,6 @@ use App\Auxiliar\EntityModel\LogModel;
 use App\Auxiliar\EntityModel\MedicationModel;
 use App\Auxiliar\EntityModel\NeurocognitiveTestModel;
 use App\Auxiliar\EntityModel\PatientModel;
-use App\Auxiliar\EntityModel\PendingStudyModel;
 use App\Auxiliar\EntityModel\RecoverPasswordPermissionModel;
 use App\Auxiliar\EntityModel\SessionModel;
 use App\Auxiliar\EntityModel\SignUpPermissionModel;
@@ -59,7 +58,6 @@ class Data extends Helper {
 			ENTITY_MODEL_MEDICATION => new MedicationModel(),
 			ENTITY_MODEL_NEUROCOGNITIVE_TEST => new NeurocognitiveTestModel(),
 			ENTITY_MODEL_PATIENT => new PatientModel(),
-			ENTITY_MODEL_PENDING_STUDY => new PendingStudyModel(),
 			ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION => new RecoverPasswordPermissionModel(),
 			ENTITY_MODEL_SESSION => new SessionModel(),
 			ENTITY_MODEL_SIGN_UP_PERMISSION => new SignUpPermissionModel(),
