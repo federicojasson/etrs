@@ -19,7 +19,7 @@ class Session extends Helper {
 	/*
 	 * Configures the generation of the session IDs.
 	 * 
-	 * It receives the hash function that should be used to generate the IDs and
+	 * It receives the hash function that will be used to generate the IDs and
 	 * how many bits are stored in each character when the binary hash is
 	 * converted to a readable format.
 	 */

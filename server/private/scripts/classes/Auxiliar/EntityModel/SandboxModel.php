@@ -3,20 +3,20 @@
 namespace App\Auxiliar\EntityModel;
 
 /*
- * This class offers operations to manage sandboxes.
+ * This class offers operations to manage pending studies.
  */
-class SandboxModel extends EntityModel {
+class PendingStudyModel extends EntityModel {
 	
 	/*
-	 * Creates a sandbox.
+	 * Creates a pending study.
 	 * 
-	 * It receives the sandbox's data.
+	 * It receives the pending study's data.
 	 */
 	public function create($id, $creator) {
 		$app = $this->app;
 		
-		// Creates the sandbox
-		$app->webServerDatabase->createSandbox($id, $creator);
+		// Creates the pending study
+		$app->webServerDatabase->createPendingStudy($id, $creator);
 	}
 	
 }

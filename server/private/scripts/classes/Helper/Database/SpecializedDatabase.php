@@ -225,8 +225,8 @@ abstract class SpecializedDatabase extends Database {
 	}
 	
 	/*
-	 * Given a page, it returns the limit of rows that should be returned and
-	 * the corresponding offset.
+	 * Given a page, it returns the limit of rows to return and the
+	 * corresponding offset.
 	 * 
 	 * It receives the page.
 	 */

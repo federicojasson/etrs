@@ -2,6 +2,8 @@
 
 /*
  * This script deletes the old logs.
+ * 
+ * It should be executed periodically. Recommendation: once a month.
  */
 
 // Defines the root path

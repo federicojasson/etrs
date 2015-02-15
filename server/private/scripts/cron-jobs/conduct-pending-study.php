@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This script deletes the old recover password permissions.
+ * This script conducts the first pending study it finds.
  * 
- * It should be executed periodically. Recommendation: once every 30 minutes.
+ * It should be executed periodically. Recommendation: once every 5 minutes.
  */
 
 // Defines the root path
@@ -13,4 +13,4 @@ define('ROOT_DIRECTORY', __DIR__ . '/../../..');
 require ROOT_DIRECTORY . '/private/scripts/application.php';
 
 // Serves the internal request
-serveInternalRequest('/recover-password-permission/delete-old');
+serveInternalRequest('/pending-study/conduct');

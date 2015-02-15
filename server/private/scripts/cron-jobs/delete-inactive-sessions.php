@@ -2,6 +2,8 @@
 
 /*
  * This script deletes the inactive sessions.
+ * 
+ * It should be executed periodically. Recommendation: once an hour.
  */
 
 // Defines the root path

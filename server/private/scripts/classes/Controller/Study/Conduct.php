@@ -30,8 +30,8 @@ class Conduct extends \App\Controller\SpecializedExternalController {
 		// Gets the signed in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
-		// Creates a sandbox
-		$app->data->sandbox->create($id, $signedInUser['id']);
+		// Creates a pending study
+		$app->data->pendingStudy->create($id, $signedInUser['id']);
 	}
 	
 	/*

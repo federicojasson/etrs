@@ -26,8 +26,8 @@ define('ENTITY_MODEL_LOG', 'log');
 define('ENTITY_MODEL_MEDICATION', 'medication');
 define('ENTITY_MODEL_NEUROCOGNITIVE_TEST', 'neurocognitiveTest');
 define('ENTITY_MODEL_PATIENT', 'patient');
+define('ENTITY_MODEL_PENDING_STUDY', 'pendingStudy');
 define('ENTITY_MODEL_RECOVER_PASSWORD_PERMISSION', 'recoverPasswordPermission');
-define('ENTITY_MODEL_SANDBOX', 'sandbox');
 define('ENTITY_MODEL_SESSION', 'session');
 define('ENTITY_MODEL_SIGN_UP_PERMISSION', 'signUpPermission');
 define('ENTITY_MODEL_STUDY', 'study');
@@ -85,9 +85,9 @@ define('LOG_LEVEL_4', 4);
 define('LOG_LEVEL_5', 5);
 
 define('MAXIMUM_AGE_LOG', 12); // Months
-define('MAXIMUM_AGE_RECOVER_PASSWORD_PERMISSION', 4); // Hours
-define('MAXIMUM_AGE_SIGN_UP_PERMISSION', 120); // Hours
-define('MAXIMUM_INACTIVITY_TIME_SESSION', 2880); // Minutes
+define('MAXIMUM_AGE_RECOVER_PASSWORD_PERMISSION', 2); // Hours
+define('MAXIMUM_AGE_SIGN_UP_PERMISSION', 48); // Hours
+define('MAXIMUM_INACTIVITY_TIME_SESSION', 48); // Hours
 
 define('OPERATION_MODE_DEBUG', 'debug');
 define('OPERATION_MODE_RELEASE', 'release');

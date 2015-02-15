@@ -44,7 +44,7 @@ class Files extends Helper {
 	public function upload($id, $name, $temporaryPath) {
 		$app = $this->app;
 		
-		// Gets the path where the file should be permanently located
+		// Gets the path where the file will be located permanently
 		$path = $this->getFilePath($id, $name);
 		
 		// Checks the non-existence of the file

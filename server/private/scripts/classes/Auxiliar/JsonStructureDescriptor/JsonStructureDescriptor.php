@@ -9,7 +9,7 @@ namespace App\Auxiliar\JsonStructureDescriptor;
  * structure of a JSON input and subsequently validating it.
  * 
  * A JSON structure can be an array, an object or a value. For each type, a
- * definition indicates the way it should be validated:
+ * definition indicates the way it will be validated:
  * 
  * - Arrays: a JsonStructureDescriptor instance is used, which describes the
  *   structure of all the array's elements.

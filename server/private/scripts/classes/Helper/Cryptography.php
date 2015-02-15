@@ -48,7 +48,7 @@ class Cryptography extends Helper {
 		// Generates a salt
 		$salt = $this->generateSalt();
 		
-		// Defines the number of iterations that should be applied in the key
+		// Defines the number of iterations that will be applied in the key
 		// stretching
 		$keyStretchingIterations = KEY_STRETCHING_ITERATIONS;
 		

@@ -34,20 +34,20 @@ class InternalServices extends \Slim\Middleware {
 			new \App\Controller\Log\DeleteOld()
 		);
 
+		// URI:		/server/pending-study/conduct
+		// Method:	POST
+		$app->services->define(
+			'/pending-study/conduct',
+			'POST',
+			new \App\Controller\PendingStudy\Conduct()
+		);
+
 		// URI:		/server/recover-password-permission/delete-old
 		// Method:	POST
 		$app->services->define(
 			'/recover-password-permission/delete-old',
 			'POST',
 			new \App\Controller\RecoverPasswordPermission\DeleteOld()
-		);
-
-		// URI:		/server/sandbox/process
-		// Method:	POST
-		$app->services->define(
-			'/sandbox/process',
-			'POST',
-			new \App\Controller\Sandbox\Process()
 		);
 
 		// URI:		/server/session/delete-inactive

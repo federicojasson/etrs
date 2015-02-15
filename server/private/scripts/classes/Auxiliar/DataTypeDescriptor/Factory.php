@@ -16,29 +16,29 @@ namespace App\Auxiliar\DataTypeDescriptor;
  * | field 0 | field 1 | field 2 | field 3 | field 4 | ... | field n |
  *  --------- -------------------------------------------------------
  * 
- * The following rules should be respected:
+ * The following rules must be respected:
  * 
  * - The fields must be separated by semicolons (;).
  * - The type field must indicate one of the predefined data types.
  * - The definition fields must be of the form <label> : <value>. Each label
- *   should be a non-empty unique string and each value a non-empty string.
+ *   must be a non-empty unique string and each value a non-empty string.
  * 
  * Following are described the predefined data types and their specific
  * requirements:
  * 
  * - boolean
- *   It should have exactly 2 definition fields and the values 'false' and
- *   'true' must be included, one for each field.
+ *   It must have exactly 2 definition fields and the values 'false' and 'true'
+ *   have to be included, one for each field.
  *   Example: boolean ; Yes: true ; No: false
  * 
  * - integer_fix_values
- *   It should have at least 1 definition field and the values should be unique
+ *   It must have at least 1 definition field and the values have to be unique
  *   integers.
  *   Example: integer_fix_values ; Red: 1 ; Green: 2 ; Blue: 3
  * 
  * - integer_range
- *   It should have exactly 2 definition fields and the labels 'min' and 'max'
- *   must be included, one for each field. Both values should be integers. The
+ *   It must have exactly 2 definition fields and the labels 'min' and 'max'
+ *   have to be included, one for each field. Both values must be integers. The
  *   one corresponding to the 'min' label defines the minimum allowed value,
  *   while the one corresponding to the 'max' label defines the maximum allowed
  *   value. The relation maximum >= minimum must be observed.
@@ -98,7 +98,7 @@ class Factory {
 			$subfields = static::getSubfields($fields[$i]);
 			
 			if (count($subfields) !== 2) {
-				// There should be 2 subfields per field
+				// There must be 2 subfields per field
 				throw new \Exception();
 			}
 			

@@ -78,6 +78,36 @@ class WebServerDatabase extends SpecializedDatabase {
 	}
 
 	/*
+	 * Creates a pending study.
+	 * 
+	 * It receives the pending study's data.
+	 */
+	public function createPendingStudy($id, $creator) {
+		// Defines the statement
+		$statement = '
+			INSERT INTO pending_studies (
+				id,
+				creator,
+				creation_datetime
+			)
+			VALUES (
+				:id,
+				:creator,
+				UTC_TIMESTAMP()
+			)
+		';
+		
+		// Defines the parameters
+		$parameters = [
+			':id' => $id,
+			':creator' => $creator
+		];
+		
+		// Executes the statement
+		$this->executePreparedStatement($statement, $parameters);
+	}
+
+	/*
 	 * Creates a recover password permission.
 	 * 
 	 * It receives the recover password permission's data.
@@ -110,36 +140,6 @@ class WebServerDatabase extends SpecializedDatabase {
 			':passwordHash' => $passwordHash,
 			':salt' => $salt,
 			':keyStretchingIterations' => $keyStretchingIterations
-		];
-		
-		// Executes the statement
-		$this->executePreparedStatement($statement, $parameters);
-	}
-
-	/*
-	 * Creates a sandbox.
-	 * 
-	 * It receives the sandbox's data.
-	 */
-	public function createSandbox($id, $creator) {
-		// Defines the statement
-		$statement = '
-			INSERT INTO sandboxes (
-				id,
-				creator,
-				creation_datetime
-			)
-			VALUES (
-				:id,
-				:creator,
-				UTC_TIMESTAMP()
-			)
-		';
-		
-		// Defines the parameters
-		$parameters = [
-			':id' => $id,
-			':creator' => $creator
 		];
 		
 		// Executes the statement
@@ -247,14 +247,14 @@ class WebServerDatabase extends SpecializedDatabase {
 	/*
 	 * Deletes the inactive sessions.
 	 * 
-	 * It receives the maximum inactivity time of a session (in minutes).
+	 * It receives the maximum inactivity time of a session (in hours).
 	 */
 	public function deleteInactiveSessions($maximumInactivityTime) {
 		// Defines the statement
 		$statement = '
 			DELETE
 			FROM sessions
-			WHERE last_edition_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumInactivityTime MINUTE)
+			WHERE last_edition_datetime < DATE_SUB(UTC_TIMESTAMP(), INTERVAL :maximumInactivityTime HOUR)
 		';
 		
 		// Defines the parameters
