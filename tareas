@@ -6,8 +6,6 @@ Tareas (TODOs):
   isUserSignedIn cuando sólo utiliza dato de la sesión (sin comprobar que el
   usuario existe)?
 
-- Limpiar código cron-jobs
-
 - Agregar licencia
 
 - Chequear transacciones: dónde se inician. Chequear controladores y cron jobs.
@@ -15,10 +13,6 @@ Tareas (TODOs):
 - Chequear Warnings
 
 - Comentar base de datos
-
-- Tareas de mantenimiento (hacer scripts pero que no sean cron jobs?):
-	- Eliminar archivos huérfanos.
-	- Eliminar entidades deleted por mucho tiempo.
 
 - Recordar configurar (en httpd.conf):
 	# Added to remove the Server response header

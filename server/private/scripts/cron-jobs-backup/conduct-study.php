@@ -273,7 +273,7 @@ function getExperimentFiles($pdo, $experiment) {
 function getFilePath($id, $name) {
 	$id = bin2hex($id);
 	$subdirectories = str_split($id, 4);
-	return ROOT_DIRECTORY . '/private/files/' . implode('/', $subdirectories)  . '/' . $name;
+	return ROOT_DIRECTORY . '/private/files/' . implode('/', $subdirectories) . '/' . $name;
 }
 
 function getSandbox($pdo) {
