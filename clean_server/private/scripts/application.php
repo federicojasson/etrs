@@ -146,7 +146,7 @@ function serveHttpRequest() {
 	// Initializes the middlewares to use
 	$middlewares = [
 		new \App\Middleware\HttpServices(),
-		new \App\Middleware\Helpers()
+		new \App\Middleware\Singletons()
 	];
 	
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
@@ -166,7 +166,7 @@ function serveMockedRequest() {
 	// Initializes the middlewares to use
 	$middlewares = [
 		new \App\Middleware\MockedServices(),
-		new \App\Middleware\Helpers()
+		new \App\Middleware\Singletons()
 	];
 	
 	// Runs the application
