@@ -21,3 +21,33 @@
 /*
  * This script defines useful global functions.
  */
+
+/*
+ * Converts a string from camelCase or PascalCase to spinal-case.
+ * 
+ * Receives the string.
+ */
+function toSpinalCase($string) {
+	// Performs a regular expression search
+	$matches = [];
+	preg_match_all('/[A-Za-z][0-9a-z]+|[A-Z][0-9A-Z]*(?=$|[A-Z][0-9a-z])/', $string, $matches);
+	
+	// Gets the individual words found
+	$words = $matches[0];
+	
+	// Processes the words
+	foreach ($words as &$word) {
+		if ($word === strtoupper($word)) {
+			// The word is completely in uppercase
+			// Converts the word to lowercase
+			$word = strtolower($word);
+		} else {
+			// The word is not completely in uppercase
+			// Converts the first character of the word to lowercase
+			$word = lcfirst($word);
+		}
+	}
+	
+	// Builds and returns the new string
+	return implode('-', $words);
+}

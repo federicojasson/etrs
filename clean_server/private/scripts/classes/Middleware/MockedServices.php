@@ -18,21 +18,21 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace App\Middleware;
+
 /*
- * This script defines useful global constants.
+ * This middleware registers the mocked services.
  */
-
-define('CODE_INVALID_INPUT', 'INVALID_INPUT');
-define('CODE_SYSTEM_UNDER_MAINTENANCE', 'SYSTEM_UNDER_MAINTENANCE');
-define('CODE_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
-
-define('HTTP_METHOD_MOCK', 'MOCK');
-define('HTTP_METHOD_POST', 'POST');
-
-define('HTTP_STATUS_BAD_REQUEST', 400);
-define('HTTP_STATUS_FORBIDDEN', 403);
-define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
-
-define('OPERATION_MODE_DEBUG', 'debug');
-define('OPERATION_MODE_MAINTENANCE', 'maintenance');
-define('OPERATION_MODE_RELEASE', 'release');
+class MockedServices extends Services {
+	
+	/*
+	 * Returns the services to be registered.
+	 */
+	protected function getServices() {
+		return [
+			new \App\Service\Session\DeleteExpired(),
+			new \App\Service\User\Delete()
+		];
+	}
+	
+}

@@ -18,21 +18,34 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace App\Service\Authentication;
+
 /*
- * This script defines useful global constants.
+ * TODO: comment
  */
-
-define('CODE_INVALID_INPUT', 'INVALID_INPUT');
-define('CODE_SYSTEM_UNDER_MAINTENANCE', 'SYSTEM_UNDER_MAINTENANCE');
-define('CODE_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
-
-define('HTTP_METHOD_MOCK', 'MOCK');
-define('HTTP_METHOD_POST', 'POST');
-
-define('HTTP_STATUS_BAD_REQUEST', 400);
-define('HTTP_STATUS_FORBIDDEN', 403);
-define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
-
-define('OPERATION_MODE_DEBUG', 'debug');
-define('OPERATION_MODE_MAINTENANCE', 'maintenance');
-define('OPERATION_MODE_RELEASE', 'release');
+class GetState extends \App\Service\PostService {
+	
+	/*
+	 * Calls the service.
+	 */
+	protected function call() {
+		// TODO: implement \App\Service\Authentication\GetState
+	}
+	
+	/*
+	 * Determines whether the input is valid.
+	 */
+	protected function isInputValid() {
+		// TODO: implement \App\Service\Authentication\GetState
+		return true;
+	}
+	
+	/*
+	 * Determines whether the user is authorized to use the service.
+	 */
+	protected function isUserAuthorized() {
+		// TODO: implement \App\Service\Authentication\GetState
+		return true;
+	}
+	
+}

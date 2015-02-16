@@ -18,18 +18,18 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Helper;
+namespace App\Service\User;
 
 /*
  * TODO: comment
  */
-class Services extends Helper {
+class Delete extends \App\Service\MockedService {
 	
 	/*
-	 * TODO: comment
+	 * Executes the service.
 	 */
-	public function register($service) {
-		// TODO: implement
+	public function execute() {
+		// TODO: implement \App\Service\User\Delete
 	}
 	
 }

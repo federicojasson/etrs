@@ -18,25 +18,18 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\Session;
 
 /*
- * This middleware registers the external services.
+ * TODO: comment
  */
-class ExternalServices extends Services {
+class DeleteExpired extends \App\Service\MockedService {
 	
 	/*
-	 * The services to be registered.
+	 * Executes the service.
 	 */
-	private $services = [
-		// TODO: define services
-	];
-	
-	/*
-	 * Returns the services to be registered.
-	 */
-	protected function getServices() {
-		return $this->services;
+	public function execute() {
+		// TODO: implement \App\Service\Session\DeleteExpired
 	}
 	
 }

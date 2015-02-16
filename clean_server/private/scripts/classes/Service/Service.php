@@ -18,17 +18,19 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Helper;
+namespace App\Service;
 
 /*
- * This class represents a helper.
+ * This class represents a service.
  * 
- * A helper is a singleton that offers a very specific functionality.
+ * A service encapsulates the logic of a given task and can be executed through
+ * a specific URI and HTTP method.
  * 
- * Subclasses can, optionally, override the initialize method to perform
- * initialization tasks.
+ * Subclasses must implement the execute method, which executes the service, and
+ * the getUri and getMethod methods, which return the service's URI and HTTP
+ * method, respectively.
  */
-abstract class Helper {
+abstract class Service {
 	
 	/*
 	 * The application object.
@@ -41,16 +43,21 @@ abstract class Helper {
 	public function __construct() {
 		// Gets the application object
 		$this->app = \Slim\Slim::getInstance();
-		
-		// Initializes the helper
-		$this->initialize();
 	}
 	
 	/*
-	 * Performs initialization tasks.
+	 * Executes the service.
 	 */
-	protected function initialize() {
-		// No initialization tasks need to be performed
-	}
+	public abstract function execute();
+	
+	/*
+	 * Returns the HTTP method of the service.
+	 */
+	public abstract function getMethod();
+	
+	/*
+	 * Returns the URI of the service.
+	 */
+	public abstract function getUri();
 	
 }

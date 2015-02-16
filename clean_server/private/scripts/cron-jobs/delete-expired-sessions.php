@@ -18,25 +18,24 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
-
 /*
- * This middleware registers the internal services.
+ * This script executes a cron job.
+ * 
+ * Description:
+ * Deletes the expired sessions.
+ * 
+ * Execution:
+ * php -f delete-expired-sessions.php
+ * 
+ * Recommended execution frequency:
+ * Once an hour.
  */
-class InternalServices extends Services {
-	
-	/*
-	 * The services to be registered.
-	 */
-	private $services = [
-		// TODO: define services
-	];
-	
-	/*
-	 * Returns the services to be registered.
-	 */
-	protected function getServices() {
-		return $this->services;
-	}
-	
-}
+
+// Defines the root directory
+define('DIRECTORY_ROOT', __DIR__ . '/../../..');
+
+// Includes the application
+require DIRECTORY_ROOT . '/private/scripts/application.php';
+
+// Executes the cron job
+executeCronJob('/session/delete-expired');

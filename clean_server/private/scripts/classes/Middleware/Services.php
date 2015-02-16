@@ -32,8 +32,11 @@ abstract class Services extends \Slim\Middleware {
 	 * Calls the middleware.
 	 */
 	public function call() {
+		// Gets the services
+		$services = $this->getServices();
+		
 		// Registers the services
-		$this->registerServices();
+		$this->registerServices($services);
 
 		// Calls the next middleware
 		$this->next->call();
@@ -45,17 +48,33 @@ abstract class Services extends \Slim\Middleware {
 	protected abstract function getServices();
 	
 	/*
-	 * Registers the services.
+	 * Registers a service.
+	 * 
+	 * Receives the service.
 	 */
-	private function registerServices() {
+	private function registerService($service) {
 		$app = $this->app;
 		
-		// Gets the services
-		$services = $this->getServices();
+		// Gets the URI and the HTTP method of the service
+		$uri = $service->getUri();
+		$method = $service->getMethod();
 		
+		// Registers a routing rule for the service
+		$app->map($uri, function() use ($service) {
+			// Executes the service
+			$service->execute();
+		})->via($method);
+	}
+	
+	/*
+	 * Registers the services.
+	 * 
+	 * Receives the services.
+	 */
+	private function registerServices($services) {
 		// Registers the services
 		foreach ($services as $service) {
-			$app->services->register($service);
+			$this->registerService($service);
 		}
 	}
 	

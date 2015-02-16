@@ -18,21 +18,18 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace App\Service;
+
 /*
- * This script defines useful global constants.
+ * This class represents a mocked service.
  */
-
-define('CODE_INVALID_INPUT', 'INVALID_INPUT');
-define('CODE_SYSTEM_UNDER_MAINTENANCE', 'SYSTEM_UNDER_MAINTENANCE');
-define('CODE_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
-
-define('HTTP_METHOD_MOCK', 'MOCK');
-define('HTTP_METHOD_POST', 'POST');
-
-define('HTTP_STATUS_BAD_REQUEST', 400);
-define('HTTP_STATUS_FORBIDDEN', 403);
-define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
-
-define('OPERATION_MODE_DEBUG', 'debug');
-define('OPERATION_MODE_MAINTENANCE', 'maintenance');
-define('OPERATION_MODE_RELEASE', 'release');
+abstract class MockedService extends AutoloadedService {
+	
+	/*
+	 * Returns the HTTP method of the service.
+	 */
+	public function getMethod() {
+		return HTTP_METHOD_MOCK;
+	}
+	
+}

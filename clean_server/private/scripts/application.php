@@ -45,9 +45,9 @@ define('OPERATION_MODE', OPERATION_MODE_DEBUG);
 /*
  * Executes a cron job.
  * 
- * Receives the URI and the HTTP method of the service to execute.
+ * Receives the URI of the service to execute.
  */
-function executeCronJob($uri, $method) {
+function executeCronJob($uri) {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
 		// Prints an informative message
@@ -55,27 +55,22 @@ function executeCronJob($uri, $method) {
 		return;
 	}
 	
-	// Mocks the environment
+	// Mocks the environment to simulate an HTTP request
 	\Slim\Environment::mock([
 		'PATH_INFO' => $uri,
-		'REQUEST_METHOD' => $method
+		'REQUEST_METHOD' => HTTP_METHOD_MOCK
 	]);
 	
-	// Defines the middlewares to use
-	$middlewares = [
-		new \App\Middleware\InternalServices()
-	];
-	
-	// Runs the application
-	runApplication($middlewares);
+	// Serves the mocked request
+	serveMockedRequest();
 }
 
 /*
  * Executes a maintenance job.
  * 
- * Receives the URI and the HTTP method of the service to execute.
+ * Receives the URI of the service to execute.
  */
-function executeMaintenanceJob($uri, $method) {
+function executeMaintenanceJob($uri) {
 	if (OPERATION_MODE !== OPERATION_MODE_MAINTENANCE) {
 		// The system is not under maintenance
 		// Prints an informative message
@@ -83,19 +78,14 @@ function executeMaintenanceJob($uri, $method) {
 		return;
 	}
 	
-	// Mocks the environment
+	// Mocks the environment to simulate an HTTP request
 	\Slim\Environment::mock([
 		'PATH_INFO' => $uri,
-		'REQUEST_METHOD' => $method
+		'REQUEST_METHOD' => HTTP_METHOD_MOCK
 	]);
 	
-	// Defines the middlewares to use
-	$middlewares = [
-		new \App\Middleware\InternalServices()
-	];
-	
-	// Runs the application
-	runApplication($middlewares);
+	// Serves the mocked request
+	serveMockedRequest();
 }
 
 /*
@@ -120,8 +110,7 @@ function loadClass($class) {
 	// Builds the script's path
 	$path = '';
 	$path .= DIRECTORY_SCRIPTS . '/classes';
-	$path .= '/' . str_replace('\\', '/', $suffix);
-	$path .= '.php';
+	$path .= '/' . str_replace('\\', '/', $suffix) . '.php';
 
 	if (file_exists($path)) {
 		// The script exists
@@ -154,18 +143,31 @@ function runApplication($middlewares) {
  * Serves an HTTP request.
  */
 function serveHttpRequest() {
-	// TODO: recheck middleware order
-	
-	// Defines the middlewares to use
+	// Initializes the middlewares to use
 	$middlewares = [
-		new \App\Middleware\ExternalServices()
+		new \App\Middleware\HttpServices(),
+		new \App\Middleware\Helpers()
 	];
 	
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
-		// Defines an exceptional middleware
-		$middlewares[] = new \App\Middleware\Maintenance();
+		// Initializes an exceptional middleware
+		array_unshift($middlewares, new \App\Middleware\Maintenance()); // TODO: check order
 	}
+	
+	// Runs the application
+	runApplication($middlewares);
+}
+
+/*
+ * Serves a mocked request.
+ */
+function serveMockedRequest() {
+	// Initializes the middlewares to use
+	$middlewares = [
+		new \App\Middleware\MockedServices(),
+		new \App\Middleware\Helpers()
+	];
 	
 	// Runs the application
 	runApplication($middlewares);
