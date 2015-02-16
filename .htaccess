@@ -7,7 +7,8 @@ RewriteEngine on
 # Maps the root URI to the client application
 RewriteRule ^(/)?$ client/index.html [L]
 
-# Rewrites all URIs, except those prefixed with client/ or server/
+# Maps all URIs to the client application, except those prefixed with client/ or
+# server/
 RewriteCond %{REQUEST_URI} !^client/(.*)$
 RewriteCond %{REQUEST_URI} !^server/(.*)$
 RewriteRule ^(.*)$ client/$1 [L]

@@ -1,8 +1,8 @@
 # Enables the runtime rewriting engine
 RewriteEngine on
 
-# Rewrites all URIs so that AngularJS handles the requests, except those
-# corresponding to existing files or directories
+# Maps all URIs to index.html, except those corresponding to existing files or
+# directories
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [L]
