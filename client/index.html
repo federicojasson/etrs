@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
 	<head>
-		<title>TODO supply a title</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<title
+			ng-controller="TitleController as title"
+			ng-bind="title.get()"
+		></title>
 	</head>
+	
 	<body>
-		<form enctype="multipart/form-data" action="server/file/upload" method="POST">
-			<input type="hidden" name="MAX_FILE_SIZE" value="512000000000000000000000" />
-			Send this file: <input name="file" type="file" />
-			<input type="submit" value="Upload file" />
-		</form>
-		<form action="server/authentication/get-state" method="POST">
-			<input type="submit" value="Download file" />
-		</form>
+		Body
+		
+		<script src="vendors/angular/angular.min.js"></script>
+		<script src="vendors/angular/angular-resource.min.js"></script>
+		<script src="vendors/angular/i18n/angular-locale_es.min.js"></script>
+		<script src="scripts/app/app.js"></script>
+		<script src="scripts/app/app-constants.js"></script>
+		<script src="scripts/app/server/server.js"></script>
+		<script src="scripts/app/server/server-service.js"></script>
+		<script src="scripts/app/title/title.js"></script>
+		<script src="scripts/app/title/title-controller.js"></script>
+		<script src="scripts/app/title/title-service.js"></script>
+		<script src="scripts/authentication/authentication.js"></script>
+		<script src="scripts/authentication/authentication-service.js"></script>
 	</body>
 </html>

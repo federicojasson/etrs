@@ -24,7 +24,7 @@ class Emails extends Helper {
 		// Builds a URI to recover the password
 		$uri = '';
 		$uri .= $app->webServer->getDomain();
-		$uri .= '/' . $relativeUri;
+		$uri .= $relativeUri;
 		$uri .= '/' . bin2hex($id);
 		$uri .= '/' . bin2hex($password);
 		
@@ -62,7 +62,7 @@ class Emails extends Helper {
 		// Builds a URI to sign up
 		$uri = '';
 		$uri .= $app->webServer->getDomain();
-		$uri .= '/' . $relativeUri;
+		$uri .= $relativeUri;
 		$uri .= '/' . bin2hex($id);
 		$uri .= '/' . bin2hex($password);
 		

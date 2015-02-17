@@ -24,10 +24,10 @@ namespace App\Service;
  * This class represents a service.
  * 
  * A service encapsulates the logic of a given task and can be executed through
- * a specific URI and HTTP method.
+ * a specific URL and HTTP method.
  * 
  * Subclasses must implement the execute method, which executes the service, and
- * the getUri and getMethod methods, which return the service's URI and HTTP
+ * the getUrl and getMethod methods, which return the service's URL and HTTP
  * method, respectively.
  */
 abstract class Service {
@@ -56,8 +56,8 @@ abstract class Service {
 	public abstract function getMethod();
 	
 	/*
-	 * Returns the URI of the service.
+	 * Returns the URL of the service.
 	 */
-	public abstract function getUri();
+	public abstract function getUrl();
 	
 }

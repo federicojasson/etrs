@@ -26,7 +26,7 @@
 define('DIRECTORY_ROOT', __DIR__);
 
 // Includes the application
-require DIRECTORY_ROOT . '/private/scripts/application.php';
+require DIRECTORY_ROOT . '/private/scripts/app.php';
 
 // Serves the HTTP request
 serveHttpRequest();

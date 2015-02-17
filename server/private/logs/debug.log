@@ -1,0 +1,70 @@
+Unexpected error. Message: SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+exception 'Slim\Exception\Stop' in C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php:1017
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(1037): Slim\Slim->stop()
+#1 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\ErrorHandlers.php(35): Slim\Slim->halt(500, Array)
+#2 [internal function]: App\Middleware\ErrorHandlers->onError(Object(PDOException))
+#3 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(656): call_user_func_array(Array, Array)
+#4 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(638): Slim\Slim->callErrorHandler(Object(PDOException))
+#5 C:\xampp\htdocs\etrs\server\private\scripts\classes\Helper\Database\Database.php(133): Slim\Slim->error(Object(PDOException))
+#6 C:\xampp\htdocs\etrs\server\private\scripts\classes\Helper\Helper.php(27): App\Helper\Database\Database->initialize()
+#7 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Helpers.php(109): App\Helper\Helper->__construct()
+#8 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Helper\Set.php(228): App\Middleware\Helpers->createWebServerDatabaseHelper(Object(Slim\Helper\Set))
+#9 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Helper\Set.php(88): Slim\Helper\Set->Slim\Helper\{closure}(Object(Slim\Helper\Set))
+#10 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Helper\Set.php(185): Slim\Helper\Set->get('webServerDataba...')
+#11 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(234): Slim\Helper\Set->offsetGet('webServerDataba...')
+#12 C:\xampp\htdocs\etrs\server\private\scripts\classes\Auxiliar\EntityModel\SessionModel.php(55): Slim\Slim->__get('webServerDataba...')
+#13 C:\xampp\htdocs\etrs\server\private\scripts\classes\Auxiliar\SessionStorageHandler\DatabaseSessionStorageHandler.php(94): App\Auxiliar\EntityModel\SessionModel->get('\x96\xA3\xE6>sj\x1C\xFFc[\xBC\xE1\xBD\x04=...')
+#14 [internal function]: App\Auxiliar\SessionStorageHandler\DatabaseSessionStorageHandler->onRead('96a3e63e736a1cf...')
+#15 C:\xampp\htdocs\etrs\server\private\scripts\classes\Helper\Session.php(87): session_start()
+#16 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Session.php(41): App\Helper\Session->start()
+#17 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Session.php(17): App\Middleware\Session->initializeSession()
+#18 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\ExternalServices.php(18): App\Middleware\Session->call()
+#19 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Configurations.php(98): App\Middleware\ExternalServices->call()
+#20 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Helpers.php(18): App\Middleware\Configurations->call()
+#21 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\ErrorHandlers.php(18): App\Middleware\Helpers->call()
+#22 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Extensions.php(18): App\Middleware\ErrorHandlers->call()
+#23 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Middleware\PrettyExceptions.php(67): App\Middleware\Extensions->call()
+#24 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(1283): Slim\Middleware\PrettyExceptions->call()
+#25 C:\xampp\htdocs\etrs\server\private\scripts\application.php(70): Slim\Slim->run()
+#26 C:\xampp\htdocs\etrs\server\private\scripts\application.php(89): runApp('debug', Array)
+#27 C:\xampp\htdocs\etrs\server\index.php(14): serveExternalRequest()
+#28 {main}
+Unexpected error. Message: SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+Unexpected error. Message: SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+
+exception 'Slim\Exception\Stop' in C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php:1017
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(1037): Slim\Slim->stop()
+#1 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\ErrorHandlers.php(35): Slim\Slim->halt(500, Array)
+#2 [internal function]: App\Middleware\ErrorHandlers->onError(Object(PDOException))
+#3 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(656): call_user_func_array(Array, Array)
+#4 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(638): Slim\Slim->callErrorHandler(Object(PDOException))
+#5 C:\xampp\htdocs\etrs\server\private\scripts\classes\Helper\Database\Database.php(133): Slim\Slim->error(Object(PDOException))
+#6 C:\xampp\htdocs\etrs\server\private\scripts\classes\Helper\Helper.php(27): App\Helper\Database\Database->initialize()
+#7 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Helpers.php(109): App\Helper\Helper->__construct()
+#8 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Helper\Set.php(228): App\Middleware\Helpers->createWebServerDatabaseHelper(Object(Slim\Helper\Set))
+#9 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Helper\Set.php(88): Slim\Helper\Set->Slim\Helper\{closure}(Object(Slim\Helper\Set))
+#10 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Helper\Set.php(185): Slim\Helper\Set->get('webServerDataba...')
+#11 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(234): Slim\Helper\Set->offsetGet('webServerDataba...')
+#12 C:\xampp\htdocs\etrs\server\private\scripts\classes\Auxiliar\EntityModel\SessionModel.php(55): Slim\Slim->__get('webServerDataba...')
+#13 C:\xampp\htdocs\etrs\server\private\scripts\classes\Auxiliar\SessionStorageHandler\DatabaseSessionStorageHandler.php(94): App\Auxiliar\EntityModel\SessionModel->get('\xE2\xD3\x11\xF0\xE0\xC8\x93X\xEF\xB9\xD4\xD7\xD1cj...')
+#14 [internal function]: App\Auxiliar\SessionStorageHandler\DatabaseSessionStorageHandler->onRead('e2d311f0e0c8935...')
+#15 C:\xampp\htdocs\etrs\server\private\scripts\classes\Helper\Session.php(87): session_start()
+#16 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Session.php(41): App\Helper\Session->start()
+#17 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Session.php(17): App\Middleware\Session->initializeSession()
+#18 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\ExternalServices.php(18): App\Middleware\Session->call()
+#19 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Configurations.php(98): App\Middleware\ExternalServices->call()
+#20 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Helpers.php(18): App\Middleware\Configurations->call()
+#21 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\ErrorHandlers.php(18): App\Middleware\Helpers->call()
+#22 C:\xampp\htdocs\etrs\server\private\scripts\classes\Middleware\Extensions.php(18): App\Middleware\ErrorHandlers->call()
+#23 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Middleware\PrettyExceptions.php(67): App\Middleware\Extensions->call()
+#24 C:\xampp\htdocs\etrs\server\private\scripts\vendors\Slim\Slim.php(1283): Slim\Middleware\PrettyExceptions->call()
+#25 C:\xampp\htdocs\etrs\server\private\scripts\application.php(70): Slim\Slim->run()
+#26 C:\xampp\htdocs\etrs\server\private\scripts\application.php(89): runApp('debug', Array)
+#27 C:\xampp\htdocs\etrs\server\index.php(14): serveExternalRequest()
+#28 {main}
+Unexpected error. Message: SQLSTATE[HY000] [2002] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+

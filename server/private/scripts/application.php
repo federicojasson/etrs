@@ -55,7 +55,7 @@ function onClassReference($class) {
  * It receives the operation mode and the middlewares to add before serving the
  * request.
  */
-function runApplication($operationMode, $middlewares) {
+function runApp($operationMode, $middlewares) {
 	// Initializes the framework
 	$app = new \Slim\Slim([
 		'mode' => $operationMode
@@ -79,7 +79,7 @@ function serveExternalRequest() {
 	//$operationMode = OPERATION_MODE_RELEASE;
 
 	// Runs the application
-	runApplication($operationMode, [
+	runApp($operationMode, [
 		new \App\Middleware\Session(),
 		new \App\Middleware\ExternalServices(),
 		new \App\Middleware\Configurations(),
@@ -106,7 +106,7 @@ function serveInternalRequest($uri) {
 	//$operationMode = OPERATION_MODE_RELEASE;
 
 	// Runs the application
-	runApplication($operationMode, [
+	runApp($operationMode, [
 		new \App\Middleware\InternalServices(),
 		new \App\Middleware\Configurations(),
 		new \App\Middleware\Helpers(),

@@ -21,15 +21,15 @@
 namespace App\Service;
 
 /*
- * This class represents a service whose URI is automatically derived from the
+ * This class represents a service whose URL is automatically derived from the
  * fully qualified name of the class.
  */
 abstract class AutoloadedService extends Service {
 	
 	/*
-	 * Returns the URI of the service.
+	 * Returns the URL of the service.
 	 */
-	public function getUri() {
+	public function getUrl() {
 		// Gets the fully qualified name of the class
 		$class = get_class($this);
 		
@@ -47,17 +47,17 @@ abstract class AutoloadedService extends Service {
 		}
 		
 		// Replaces suffix's backslashes by slashes
-		$suffixWithSlashes = str_replace('\\', '/', $suffix);
+		$suffixWithoutBackslashes = str_replace('\\', '/', $suffix);
 		
 		// Gets the fragments of the suffix
-		$fragments = explode('/', $suffixWithSlashes);
+		$fragments = explode('/', $suffixWithoutBackslashes);
 		
 		// Converts the fragments to spinal-case
 		foreach ($fragments as &$fragment) {
 			$fragment = toSpinalCase($fragment);
 		}
 		
-		// Builds and returns the URI
+		// Builds and returns the URL
 		return '/' . implode('/', $fragments);
 	}
 	

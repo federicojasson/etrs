@@ -55,12 +55,12 @@ abstract class Services extends \Slim\Middleware {
 	private function registerService($service) {
 		$app = $this->app;
 		
-		// Gets the URI and the HTTP method of the service
-		$uri = $service->getUri();
+		// Gets the URL and the HTTP method of the service
+		$url = $service->getUrl();
 		$method = $service->getMethod();
 		
 		// Registers a routing rule for the service
-		$app->map($uri, function() use ($service) {
+		$app->map($url, function() use ($service) {
 			// Executes the service
 			$service->execute();
 		})->via($method);
