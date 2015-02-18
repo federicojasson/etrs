@@ -19,9 +19,8 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'app.authentication',
-		'app.utility'
+	angular.module('app.utility', [
+		'app.utility.server',
+		'app.utility.title'
 	]);
 })();

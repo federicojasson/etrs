@@ -19,9 +19,25 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'app.authentication',
-		'app.utility'
+	angular.module('app.authentication').service('authentication', [
+		'server',
+		authenticationService
 	]);
+	
+	/**
+	 * TODO: comment
+	 */
+	function authenticationService(server) {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getState = function() {
+			return server.sendHttpRequest({
+				url: '/authentication/get-state',
+				method: 'POST'
+			});
+		};
+	}
 })();

@@ -10,5 +10,5 @@ RewriteRule ^(/)?$ client/index.html [L]
 # Maps all URLs to the client application, except those prefixed with client/ or
 # server/
 RewriteCond %{REQUEST_URI} !^client/(.*)$
-RewriteCond %{REQUEST_URI} !^clean_server/(.*)$
+RewriteCond %{REQUEST_URI} !^server/(.*)$
 RewriteRule ^(.*)$ client/$1 [L]

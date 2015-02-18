@@ -1,5 +1,0 @@
-# Enables the runtime rewriting engine
-RewriteEngine on
-
-# Maps all URLs to index.php, except those corresponding to subrequests
-RewriteRule ^ index.php [L,NS]

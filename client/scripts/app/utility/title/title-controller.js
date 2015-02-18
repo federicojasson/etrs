@@ -19,9 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'app.authentication',
-		'app.utility'
+	angular.module('app.utility.title').controller('TitleController', [
+		'title',
+		TitleController
 	]);
+	
+	/**
+	 * This controller allows to access the title of the document.
+	 */
+	function TitleController(title) {
+		var _this = this;
+		
+		/**
+		 * Returns the title of the document.
+		 */
+		_this.get = function() {
+			return title.get();
+		};
+	}
 })();
