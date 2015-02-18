@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,7 +20,7 @@
 
 namespace App\Middleware;
 
-/*
+/**
  * This middleware registers services.
  * 
  * Subclasses must implement the getServices method, which has to return the
@@ -28,7 +28,7 @@ namespace App\Middleware;
  */
 abstract class Services extends \Slim\Middleware {
 	
-	/*
+	/**
 	 * Calls the middleware.
 	 */
 	public function call() {
@@ -42,12 +42,12 @@ abstract class Services extends \Slim\Middleware {
 		$this->next->call();
 	}
 	
-	/*
+	/**
 	 * Returns the services to be registered.
 	 */
 	protected abstract function getServices();
 	
-	/*
+	/**
 	 * Registers a service.
 	 * 
 	 * Receives the service.
@@ -66,7 +66,7 @@ abstract class Services extends \Slim\Middleware {
 		})->via($method);
 	}
 	
-	/*
+	/**
 	 * Registers the services.
 	 * 
 	 * Receives the services.

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -18,7 +18,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
+/**
  * This script includes the scripts of the application and defines bootstrapping
  * functions.
  */
@@ -28,12 +28,13 @@ define('DIRECTORY_SCRIPTS', DIRECTORY_ROOT . '/private/scripts');
 define('DIRECTORY_VENDORS', DIRECTORY_ROOT . '/private/vendors');
 
 // Includes vendors
-require DIRECTORY_VENDORS . '/PHPMailer/PHPMailerAutoload.php';
-require DIRECTORY_VENDORS . '/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
+require_once DIRECTORY_VENDORS . '/Doctrine2/autoload.php';
+require_once DIRECTORY_VENDORS . '/PHPMailer/PHPMailerAutoload.php';
+require_once DIRECTORY_VENDORS . '/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
 
 // Includes resources
-require DIRECTORY_SCRIPTS . '/resources/constants.php';
-require DIRECTORY_SCRIPTS . '/resources/functions.php';
+require_once DIRECTORY_SCRIPTS . '/resources/constants.php';
+require_once DIRECTORY_SCRIPTS . '/resources/functions.php';
 
 // Defines a class autoloader
 spl_autoload_register('loadClass');
@@ -43,7 +44,7 @@ define('OPERATION_MODE', OPERATION_MODE_DEBUG);
 //define('OPERATION_MODE', OPERATION_MODE_MAINTENANCE);
 //define('OPERATION_MODE', OPERATION_MODE_RELEASE);
 
-/*
+/**
  * Executes a cron job.
  * 
  * Receives the URL of the service to execute.
@@ -66,7 +67,7 @@ function executeCronJob($url) {
 	serveMockedRequest();
 }
 
-/*
+/**
  * Executes a maintenance job.
  * 
  * Receives the URL of the service to execute.
@@ -89,10 +90,10 @@ function executeMaintenanceJob($url) {
 	serveMockedRequest();
 }
 
-/*
+/**
  * Includes a class if the corresponding script exists.
  * 
- * Receives the fully qualified name of the class.
+ * Receives the fully-qualified class name.
  */
 function loadClass($class) {
 	// Defines the namespace of the application and gets its length
@@ -116,11 +117,11 @@ function loadClass($class) {
 	if (file_exists($path)) {
 		// The script exists
 		// Includes the script
-		require $path;
+		require_once $path;
 	}
 }
 
-/*
+/**
  * Registers a set of middlewares and runs the application.
  * 
  * Receives the middlewares.
@@ -140,7 +141,7 @@ function runApp($middlewares) {
 	$app->run();
 }
 
-/*
+/**
  * Serves an HTTP request.
  */
 function serveHttpRequest() {
@@ -161,7 +162,7 @@ function serveHttpRequest() {
 	runApp($middlewares);
 }
 
-/*
+/**
  * Serves a mocked request.
  */
 function serveMockedRequest() {

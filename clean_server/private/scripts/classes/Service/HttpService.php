@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,7 +20,7 @@
 
 namespace App\Service;
 
-/*
+/**
  * This class represents an HTTP service.
  * 
  * Subclasses must implement the call method. For security reasons, every
@@ -31,7 +31,7 @@ namespace App\Service;
  */
 abstract class HttpService extends AutoloadedService {
 	
-	/*
+	/**
 	 * Executes the service.
 	 */
 	public function execute() {
@@ -57,17 +57,17 @@ abstract class HttpService extends AutoloadedService {
 		$this->call();
 	}
 	
-	/*
+	/**
 	 * Calls the service.
 	 */
 	protected abstract function call();
 	
-	/*
+	/**
 	 * Determines whether the input is valid.
 	 */
 	protected abstract function isInputValid();
 	
-	/*
+	/**
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected abstract function isUserAuthorized();

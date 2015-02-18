@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,12 +20,12 @@
 
 namespace App\Service;
 
-/*
+/**
  * This class represents a mocked service.
  */
 abstract class MockedService extends AutoloadedService {
 	
-	/*
+	/**
 	 * Returns the HTTP method of the service.
 	 */
 	public function getMethod() {

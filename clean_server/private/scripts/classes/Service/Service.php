@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,7 +20,7 @@
 
 namespace App\Service;
 
-/*
+/**
  * This class represents a service.
  * 
  * A service encapsulates the logic of a given task and can be executed through
@@ -32,12 +32,12 @@ namespace App\Service;
  */
 abstract class Service {
 	
-	/*
+	/**
 	 * The application object.
 	 */
 	protected $app;
 	
-	/*
+	/**
 	 * Creates an instance of this class.
 	 */
 	public function __construct() {
@@ -45,17 +45,17 @@ abstract class Service {
 		$this->app = \Slim\Slim::getInstance();
 	}
 	
-	/*
+	/**
 	 * Executes the service.
 	 */
 	public abstract function execute();
 	
-	/*
+	/**
 	 * Returns the HTTP method of the service.
 	 */
 	public abstract function getMethod();
 	
-	/*
+	/**
 	 * Returns the URL of the service.
 	 */
 	public abstract function getUrl();

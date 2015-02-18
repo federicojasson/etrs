@@ -1,14 +1,14 @@
 {
 	"businessLogicDatabase": {
 		"dsn": "mysql:host=localhost;dbname=etrs_business_logic;charset=utf8",
-		"TODO": "use etrs_web_server user",
+		"TODO": "use etrs_server user",
 		"username": "etrs_admin",
 		"password": "password"
 	},
 	
-	"webServerDatabase": {
-		"dsn": "mysql:host=localhost;dbname=etrs_web_server;charset=utf8",
-		"TODO": "use etrs_web_server user",
+	"serverDatabase": {
+		"dsn": "mysql:host=localhost;dbname=etrs_server;charset=utf8",
+		"TODO": "use etrs_server user",
 		"username": "etrs_admin",
 		"password": "password"
 	}

@@ -1,4 +1,4 @@
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -24,13 +24,13 @@
 		TitleController
 	]);
 	
-	/*
+	/**
 	 * This controller allows to access the title of the document.
 	 */
 	function TitleController(title) {
 		var _this = this;
 		
-		/*
+		/**
 		 * Returns the title of the document.
 		 */
 		_this.get = function() {

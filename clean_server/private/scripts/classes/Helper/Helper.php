@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,7 +20,7 @@
 
 namespace App\Helper;
 
-/*
+/**
  * This class represents a helper.
  * 
  * A helper is a singleton that offers a very specific functionality.
@@ -30,12 +30,12 @@ namespace App\Helper;
  */
 abstract class Helper {
 	
-	/*
+	/**
 	 * The application object.
 	 */
 	protected $app;
 	
-	/*
+	/**
 	 * Creates an instance of this class.
 	 */
 	public function __construct() {
@@ -46,7 +46,7 @@ abstract class Helper {
 		$this->initialize();
 	}
 	
-	/*
+	/**
 	 * Performs initialization tasks.
 	 */
 	protected function initialize() {

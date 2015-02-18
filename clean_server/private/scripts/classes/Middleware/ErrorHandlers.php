@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,12 +20,12 @@
 
 namespace App\Middleware;
 
-/*
+/**
  * This middleware registers the error handlers.
  */
 class ErrorHandlers extends \Slim\Middleware {
 	
-	/*
+	/**
 	 * Calls the middleware.
 	 */
 	public function call() {
@@ -36,7 +36,7 @@ class ErrorHandlers extends \Slim\Middleware {
 		$this->next->call();
 	}
 	
-	/*
+	/**
 	 * Handles an error.
 	 * 
 	 * Receives the exception that contains the information about the error.
@@ -53,7 +53,7 @@ class ErrorHandlers extends \Slim\Middleware {
 		]);
 	}
 	
-	/*
+	/**
 	 * Handles a situation where the requested service is not found.
 	 */
 	public function handleNotFound() {
@@ -65,7 +65,7 @@ class ErrorHandlers extends \Slim\Middleware {
 		]);
 	}
 	
-	/*
+	/**
 	 * Registers the error handlers.
 	 */
 	private function registerErrorHandlers() {

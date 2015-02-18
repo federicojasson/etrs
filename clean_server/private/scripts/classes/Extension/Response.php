@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,12 +20,12 @@
 
 namespace App\Extension;
 
-/*
+/**
  * This class extends the Slim's Response class.
  */
 class Response extends \Slim\Http\Response {
 	
-	/*
+	/**
 	 * Returns, and optionally sets, the body.
 	 * 
 	 * The method redefines a deprecated version, and uses getBody and setBody
@@ -43,7 +43,7 @@ class Response extends \Slim\Http\Response {
 		return $this->getBody();
 	}
 	
-	/*
+	/**
 	 * Sets the body. If it is not a string, it encodes it in JSON format.
 	 * 
 	 * Receives the body to be set.

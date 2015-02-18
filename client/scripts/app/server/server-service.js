@@ -1,4 +1,4 @@
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -24,13 +24,13 @@
 		serverService
 	]);
 	
-	/*
+	/**
 	 * TODO: comment
 	 */
 	function serverService($resource) {
 		var _this = this;
 		
-		/*
+		/**
 		 * TODO: comment
 		 */
 		_this.sendHttpRequest = function(parameters) {

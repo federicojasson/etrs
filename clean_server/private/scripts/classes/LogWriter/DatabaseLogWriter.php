@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,17 +20,17 @@
 
 namespace App\LogWriter;
 
-/*
+/**
  * This class allows to write the logs in the corresponding database.
  */
 class DatabaseLogWriter {
 	
-	/*
+	/**
 	 * The application object.
 	 */
 	private $app;
 	
-	/*
+	/**
 	 * The level mapping.
 	 * 
 	 * Maps the log levels used in the application to those used in the
@@ -38,7 +38,7 @@ class DatabaseLogWriter {
 	 */
 	private $levelMapping;
 	
-	/*
+	/**
 	 * Creates an instance of this class.
 	 */
 	public function __construct() {
@@ -58,7 +58,7 @@ class DatabaseLogWriter {
 		];
 	}
 	
-	/*
+	/**
 	 * Writes a log.
 	 * 
 	 * Receives the log's message and level.

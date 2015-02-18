@@ -1,4 +1,4 @@
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -24,25 +24,25 @@
 		titleService
 	]);
 	
-	/*
+	/**
 	 * This service offers functions to handle the title of the document.
 	 */
 	function titleService(appAcronym) {
 		var _this = this;
 		
-		/*
+		/**
 		 * The title of the document.
 		 */
 		var _title;
 		
-		/*
+		/**
 		 * Returns the title of the document.
 		 */
 		_this.get = function() {
 			return _title;
 		};
 		
-		/*
+		/**
 		 * Sets the title of the document. It automatically appends the acronym
 		 * of the application at the end of the title, so there is no need to
 		 * include it.

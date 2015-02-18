@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,17 +20,18 @@
 
 namespace App\Middleware;
 
-/*
+/**
  * This middleware registers the HTTP services.
  */
 class HttpServices extends Services {
 	
-	/*
+	/**
 	 * Returns the services to be registered.
 	 */
 	protected function getServices() {
 		return [
-			new \App\Service\Authentication\GetState()
+			new \App\Service\Authentication\GetState(),
+			new \App\Service\Medication\Create()
 		];
 	}
 	

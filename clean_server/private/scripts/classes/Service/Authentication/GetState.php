@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,19 +20,19 @@
 
 namespace App\Service\Authentication;
 
-/*
+/**
  * TODO: comment
  */
 class GetState extends \App\Service\PostService {
 	
-	/*
+	/**
 	 * Calls the service.
 	 */
 	protected function call() {
 		// TODO: implement \App\Service\Authentication\GetState
 	}
 	
-	/*
+	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
@@ -40,7 +40,7 @@ class GetState extends \App\Service\PostService {
 		return true;
 	}
 	
-	/*
+	/**
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {

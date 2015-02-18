@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,12 +20,12 @@
 
 namespace App\Middleware;
 
-/*
+/**
  * This middleware halts the execution for maintenance.
  */
 class Maintenance extends \Slim\Middleware {
 	
-	/*
+	/**
 	 * Calls the middleware.
 	 */
 	public function call() {

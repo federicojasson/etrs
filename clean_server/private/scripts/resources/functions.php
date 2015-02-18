@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -18,11 +18,11 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
+/**
  * This script defines useful global functions.
  */
 
-/*
+/**
  * Converts a string from camelCase or PascalCase to spinal-case.
  * 
  * Receives the string.

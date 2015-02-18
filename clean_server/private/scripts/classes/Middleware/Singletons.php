@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,12 +20,12 @@
 
 namespace App\Middleware;
 
-/*
+/**
  * This middleware registers the singletons.
  */
 class Singletons extends \Slim\Middleware {
 	
-	/*
+	/**
 	 * Calls the middleware.
 	 */
 	public function call() {
@@ -39,7 +39,7 @@ class Singletons extends \Slim\Middleware {
 		$this->next->call();
 	}
 	
-	/*
+	/**
 	 * Returns the singletons to be registered.
 	 */
 	private function getSingletons() {
@@ -48,10 +48,10 @@ class Singletons extends \Slim\Middleware {
 		];
 	}
 	
-	/*
+	/**
 	 * Registers a singleton.
 	 * 
-	 * Receives the singleton's name and the fully qualified name of its class.
+	 * Receives the singleton's name and its fully-qualified class name.
 	 */
 	private function registerSingleton($name, $class) {
 		$app = $this->app;
@@ -63,7 +63,7 @@ class Singletons extends \Slim\Middleware {
 		});
 	}
 	
-	/*
+	/**
 	 * Registers the singletons.
 	 * 
 	 * Receives the singletons.

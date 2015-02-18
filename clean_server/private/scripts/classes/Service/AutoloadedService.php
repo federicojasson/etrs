@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,17 +20,17 @@
 
 namespace App\Service;
 
-/*
+/**
  * This class represents a service whose URL is automatically derived from the
- * fully qualified name of the class.
+ * fully-qualified class name.
  */
 abstract class AutoloadedService extends Service {
 	
-	/*
+	/**
 	 * Returns the URL of the service.
 	 */
 	public function getUrl() {
-		// Gets the fully qualified name of the class
+		// Gets the fully-qualified class name
 		$class = get_class($this);
 		
 		// Defines the namespace of the services and gets its length

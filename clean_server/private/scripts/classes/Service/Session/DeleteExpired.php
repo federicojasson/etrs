@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,12 +20,12 @@
 
 namespace App\Service\Session;
 
-/*
+/**
  * TODO: comment
  */
 class DeleteExpired extends \App\Service\MockedService {
 	
-	/*
+	/**
 	 * Executes the service.
 	 */
 	public function execute() {

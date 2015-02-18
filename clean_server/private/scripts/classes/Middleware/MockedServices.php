@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,12 +20,12 @@
 
 namespace App\Middleware;
 
-/*
+/**
  * This middleware registers the mocked services.
  */
 class MockedServices extends Services {
 	
-	/*
+	/**
 	 * Returns the services to be registered.
 	 */
 	protected function getServices() {

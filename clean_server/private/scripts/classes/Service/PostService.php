@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -20,12 +20,12 @@
 
 namespace App\Service;
 
-/*
+/**
  * This class represents an HTTP POST service.
  */
 abstract class PostService extends HttpService {
 	
-	/*
+	/**
 	 * Returns the HTTP method of the service.
 	 */
 	public function getMethod() {

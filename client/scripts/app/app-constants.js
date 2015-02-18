@@ -1,4 +1,4 @@
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -21,12 +21,12 @@
 (function() {
 	var module = angular.module('app');
 	
-	/*
+	/**
 	 * The acronym of the application.
 	 */
 	module.constant('appAcronym', 'ETRS');
 	
-	/*
+	/**
 	 * The name of the application.
 	 */
 	module.constant('appName', 'Eye Tracking Record System');

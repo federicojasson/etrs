@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * ETRS - Eye Tracking Record System
  * Copyright (C) 2015 Federico Jasson
  * 
@@ -18,7 +18,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/*
+/**
  * This script executes a maintenance job.
  * 
  * Description:
@@ -33,7 +33,7 @@
 define('DIRECTORY_ROOT', __DIR__ . '/../../..');
 
 // Includes the application
-require DIRECTORY_ROOT . '/private/scripts/app.php';
+require_once DIRECTORY_ROOT . '/private/scripts/app.php';
 
 // Executes the maintenance job
 executeMaintenanceJob('/user/delete');
