@@ -18,32 +18,39 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\User;
+namespace App\Helper;
 
 /**
- * TODO: comment
+ * This class offers cryptography-related functionalities.
  */
-class Delete extends \App\Service\Service {
+class Cryptography {
 	
 	/**
-	 * Executes the service.
+	 * Generates a random ID.
 	 */
-	protected function execute() {
-		// TODO: implement
+	public function generateRandomId() {
+		return $this->generateRandomBytesSequence(LENGTH_RANDOM_ID);
 	}
 	
 	/**
-	 * Determines whether the input is valid.
+	 * Generates a sequence of random bytes.
+	 * 
+	 * Receives the length of the sequence.
 	 */
-	protected function isInputValid() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected function isUserAuthorized() {
-		// TODO: implement
+	private function generateRandomBytesSequence($length) {
+		global $app;
+		
+		// Generates the sequence
+		$cryptographicallyStrong = false;
+		$sequence = openssl_random_pseudo_bytes($length, $cryptographicallyStrong);
+		
+		if (! $cryptographicallyStrong) {
+			// The algorithm used is cryptographically weak
+			// Logs the event
+			$app->log->warning('Random bytes generated with a cryptographically weak algorithm.');
+		}
+		
+		return $sequence;
 	}
 	
 }

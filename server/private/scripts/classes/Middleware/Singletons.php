@@ -44,7 +44,10 @@ class Singletons extends \Slim\Middleware {
 	 */
 	private function getSingletons() {
 		return [
-			'response' => new \App\Extension\Response()
+			'cryptography' => 'App\Helper\Cryptography',
+			'data' => 'App\Helper\Data',
+			'response' => 'App\Extension\Response',
+			'server' => 'App\Helper\Server'
 		];
 	}
 	
@@ -54,11 +57,11 @@ class Singletons extends \Slim\Middleware {
 	 * Receives the singleton's name and its fully-qualified class name.
 	 */
 	private function registerSingleton($name, $class) {
-		$app = $this->app;
+		global $app;
 		
 		// Registers a singleton initializer
 		$app->container->singleton($name, function() use ($class) {
-			// Creates and returns the singleton
+			// Returns the singleton
 			return new $class;
 		});
 	}

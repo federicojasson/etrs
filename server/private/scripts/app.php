@@ -23,16 +23,16 @@
  * functions.
  */
 
-// Defines useful directories
+// Defines the directories
 define('DIRECTORY_SCRIPTS', DIRECTORY_ROOT . '/private/scripts');
 define('DIRECTORY_VENDORS', DIRECTORY_ROOT . '/private/vendors');
 
-// Includes vendors
+// Includes the vendors
 require_once DIRECTORY_VENDORS . '/Doctrine2/autoload.php';
 require_once DIRECTORY_VENDORS . '/PHPMailer/PHPMailerAutoload.php';
 require_once DIRECTORY_VENDORS . '/Slim/Slim.php'; \Slim\Slim::registerAutoloader();
 
-// Includes resources
+// Includes the resources
 require_once DIRECTORY_SCRIPTS . '/resources/constants.php';
 require_once DIRECTORY_SCRIPTS . '/resources/functions.php';
 
@@ -40,54 +40,50 @@ require_once DIRECTORY_SCRIPTS . '/resources/functions.php';
 spl_autoload_register('loadClass');
 
 // Defines the operation mode
-define('OPERATION_MODE', OPERATION_MODE_DEBUG);
+define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 //define('OPERATION_MODE', OPERATION_MODE_MAINTENANCE);
-//define('OPERATION_MODE', OPERATION_MODE_RELEASE);
+//define('OPERATION_MODE', OPERATION_MODE_PRODUCTION);
 
 /**
  * Executes a cron job.
  * 
- * Receives the URL of the service to execute.
+ * Receives the URL and the HTTP method of the service to execute.
  */
-function executeCronJob($url) {
+function executeCronJob($url, $httpMethod) {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
-		// Prints an informative message
-		echo 'The system is under maintenance.';
 		return;
 	}
 	
 	// Mocks the environment to simulate an HTTP request
 	\Slim\Environment::mock([
 		'PATH_INFO' => $url,
-		'REQUEST_METHOD' => HTTP_METHOD_MOCK
+		'REQUEST_METHOD' => $httpMethod
 	]);
 	
-	// Serves the mocked request
-	serveMockedRequest();
+	// Serves the internal request
+	serveInternalRequest();
 }
 
 /**
  * Executes a maintenance job.
  * 
- * Receives the URL of the service to execute.
+ * Receives the URL and the HTTP method of the service to execute.
  */
-function executeMaintenanceJob($url) {
+function executeMaintenanceJob($url, $httpMethod) {
 	if (OPERATION_MODE !== OPERATION_MODE_MAINTENANCE) {
 		// The system is not under maintenance
-		// Prints an informative message
-		echo 'The system is not under maintenance.';
 		return;
 	}
 	
 	// Mocks the environment to simulate an HTTP request
 	\Slim\Environment::mock([
 		'PATH_INFO' => $url,
-		'REQUEST_METHOD' => HTTP_METHOD_MOCK
+		'REQUEST_METHOD' => $httpMethod
 	]);
 	
-	// Serves the mocked request
-	serveMockedRequest();
+	// Serves the internal request
+	serveInternalRequest();
 }
 
 /**
@@ -127,6 +123,8 @@ function loadClass($class) {
  * Receives the middlewares.
  */
 function runApp($middlewares) {
+	global $app;
+	
 	// Initializes the application
 	$app = new \Slim\Slim([
 		'mode' => OPERATION_MODE
@@ -142,12 +140,12 @@ function runApp($middlewares) {
 }
 
 /**
- * Serves an HTTP request.
+ * Serves an external request.
  */
-function serveHttpRequest() {
+function serveExternalRequest() {
 	// Initializes the middlewares to use
 	$middlewares = [
-		new \App\Middleware\HttpServices(),
+		new \App\Middleware\ExternalServices(),
 		new \App\Middleware\Singletons(),
 		new \App\Middleware\ErrorHandlers()
 	];
@@ -155,7 +153,7 @@ function serveHttpRequest() {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
 		// Initializes an exceptional middleware
-		array_unshift($middlewares, new \App\Middleware\Maintenance()); // TODO: check order
+		array_splice($middlewares, 1, 0, new \App\Middleware\Maintenance());
 	}
 	
 	// Runs the application
@@ -163,12 +161,12 @@ function serveHttpRequest() {
 }
 
 /**
- * Serves a mocked request.
+ * Serves an internal request.
  */
-function serveMockedRequest() {
+function serveInternalRequest() {
 	// Initializes the middlewares to use
 	$middlewares = [
-		new \App\Middleware\MockedServices(),
+		new \App\Middleware\InternalServices(),
 		new \App\Middleware\Singletons(),
 		new \App\Middleware\ErrorHandlers()
 	];

@@ -23,13 +23,13 @@ namespace App\Service\Medication;
 /**
  * TODO: comment
  */
-class Create extends \App\Service\PostService {
+class Create extends \App\Service\Service {
 	
 	/**
-	 * Calls the service.
+	 * Executes the service.
 	 */
-	protected function call() {
-		// TODO: implement \App\Service\Medication\Create
+	protected function execute() {
+		// TODO: implement
 		
 		$applicationMode = 'development';
 		if ($applicationMode == 'development') {
@@ -45,8 +45,9 @@ class Create extends \App\Service\PostService {
 		$config->setQueryCacheImpl($cache);
 		$config->setProxyDir(DIRECTORY_SCRIPTS . '/classes/Data/Proxy');
 		$config->setProxyNamespace('App\Data\Proxy');
-		$namingStrategy = new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy();
-		$config->setNamingStrategy($namingStrategy);
+		// TODO: set isolation level
+		//$namingStrategy = new \Doctrine\ORM\Mapping\UnderscoreNamingStrategy();
+		//$config->setNamingStrategy($namingStrategy);
 
 		if ($applicationMode == 'development') {
 			$config->setAutoGenerateProxyClasses(true);
@@ -66,47 +67,42 @@ class Create extends \App\Service\PostService {
 
 		$em = \Doctrine\ORM\EntityManager::create($connectionOptions, $config);
 
-		$user = new \App\Data\Entity\User();
-		$user->setId('usuario');
-		$user->setCreationDatetime(new \DateTime());
-		$user->setLastEditionDatetime(new \DateTime());
-		$user->setCreator(null);
-		$user->setEmailAddress('user@user.com');
-		$user->setFirstName('Nombre');
-		$user->setLastName('Apellido');
-		$user->setGender('m');
-		$user->setKeyStretchingIterations(64000);
-		$user->setPasswordHash('0');
-		$user->setSalt('0');
-		$user->setRole('ad');
+		$id;
 		
-		$medication = new \App\Data\Entity\Medication();
-		$medication->setCreator($user);
-		$medication->setLastEditor($user);
-		$medication->setName('Medicacion');
+		$em->transactional(function($em) use (&$id) {
+			$user = new \App\Data\Entity\User();
+			$user->setId('usuario');
+			$user->setEmailAddress('user@user.com');
+			$user->setFirstName('Nombre');
+			$user->setLastName('Apellido');
+			$user->setGender('m');
+			$user->setKeyStretchingIterations(64000);
+			$user->setPasswordHash('0');
+			$user->setSalt('0');
+			$user->setRole('ad');
+
+			$medication = new \App\Data\Entity\Medication();
+			$medication->setCreator($user);
+			$medication->setLastEditor($user);
+			$medication->setName('Medicacion');
+
+			$em->persist($medication);
+			$em->persist($user);
+			
+			$id = $medication->getId();
+		});
 		
-		$em->persist($medication);
-		$em->persist($user);
-		
-		$em->flush();
-		$em->clear();
-		
-		$medication = $em->getRepository('\App\Data\Entity\Medication')->find(1);
-		
-		if ($medication === null) {
-			echo "Medication 1 does not exist.\n";
-			exit(1);
-		}
-		
-		$medication->setName('Nombre cambiado');
-		$em->flush();
+		$em->transactional(function($em) use ($id) {
+			$medication = $em->getRepository('\App\Data\Entity\Medication')->find($id);
+			$medication->setName('Nombre cambiado');
+		});
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement \App\Service\Medication\Create
+		// TODO: implement
 		return true;
 	}
 	
@@ -114,7 +110,7 @@ class Create extends \App\Service\PostService {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement \App\Service\Medication\Create
+		// TODO: implement
 		return true;
 	}
 	

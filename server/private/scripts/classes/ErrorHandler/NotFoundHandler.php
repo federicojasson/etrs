@@ -18,32 +18,21 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\User;
+namespace App\ErrorHandler;
 
 /**
- * TODO: comment
+ * This class handles situations where the requested service is not found.
  */
-class Delete extends \App\Service\Service {
+class NotFoundHandler {
 	
 	/**
-	 * Executes the service.
+	 * TODO: comment
 	 */
-	protected function execute() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the input is valid.
-	 */
-	protected function isInputValid() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected function isUserAuthorized() {
-		// TODO: implement
+	public function __invoke() {
+		global $app;
+		
+		// Halts the execution
+		$app->server->haltExecution(HTTP_STATUS_NOT_FOUND, CODE_UNDEFINED_SERVICE);
 	}
 	
 }

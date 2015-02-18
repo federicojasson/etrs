@@ -23,20 +23,20 @@ namespace App\Service\Authentication;
 /**
  * TODO: comment
  */
-class GetState extends \App\Service\PostService {
+class GetState extends \App\Service\Service {
 	
 	/**
-	 * Calls the service.
+	 * Executes the service.
 	 */
-	protected function call() {
-		// TODO: implement \App\Service\Authentication\GetState
+	protected function execute() {
+		// TODO: implement
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement \App\Service\Authentication\GetState
+		// TODO: implement
 		return true;
 	}
 	
@@ -44,7 +44,7 @@ class GetState extends \App\Service\PostService {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement \App\Service\Authentication\GetState
+		// TODO: implement
 		return true;
 	}
 	

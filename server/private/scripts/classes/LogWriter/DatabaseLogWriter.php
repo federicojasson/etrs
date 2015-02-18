@@ -21,14 +21,9 @@
 namespace App\LogWriter;
 
 /**
- * This class allows to write the logs in the corresponding database.
+ * This class allows to write logs in the database.
  */
 class DatabaseLogWriter {
-	
-	/**
-	 * The application object.
-	 */
-	private $app;
 	
 	/**
 	 * The level mapping.
@@ -42,9 +37,6 @@ class DatabaseLogWriter {
 	 * Creates an instance of this class.
 	 */
 	public function __construct() {
-		// Gets the application object
-		$this->app = \Slim\Slim::getInstance();
-		
 		// Initializes the level mapping
 		$this->levelMapping = [
 			\Slim\Log::DEBUG => LOG_LEVEL_5,

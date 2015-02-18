@@ -23,13 +23,27 @@ namespace App\Service\Session;
 /**
  * TODO: comment
  */
-class DeleteExpired extends \App\Service\MockedService {
+class DeleteExpired extends \App\Service\Service {
 	
 	/**
 	 * Executes the service.
 	 */
-	public function execute() {
-		// TODO: implement \App\Service\Session\DeleteExpired
+	protected function execute() {
+		// TODO: implement
+	}
+	
+	/**
+	 * Determines whether the input is valid.
+	 */
+	protected function isInputValid() {
+		// TODO: implement
+	}
+	
+	/**
+	 * Determines whether the user is authorized to use the service.
+	 */
+	protected function isUserAuthorized() {
+		// TODO: implement
 	}
 	
 }

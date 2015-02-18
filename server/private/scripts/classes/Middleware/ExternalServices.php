@@ -18,18 +18,23 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service;
+namespace App\Middleware;
 
 /**
- * This class represents a mocked service.
+ * This middleware registers the external services.
  */
-abstract class MockedService extends AutoloadedService {
+class ExternalServices extends Services {
 	
 	/**
-	 * Returns the HTTP method of the service.
+	 * Returns the services to be registered.
 	 */
-	public function getMethod() {
-		return HTTP_METHOD_MOCK;
+	protected function getServices() {
+		return [
+			'POST' => [
+				'App\Service\Authentication\GetState',
+				'App\Service\Medication\Create'
+			]
+		];
 	}
 	
 }

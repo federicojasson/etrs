@@ -19,7 +19,7 @@
  */
 
 /**
- * This script defines useful global constants.
+ * This script defines global constants.
  */
 
 define('CODE_INVALID_INPUT', 'INVALID_INPUT');
@@ -28,14 +28,13 @@ define('CODE_UNAUTHORIZED_USER', 'UNAUTHORIZED_USER');
 define('CODE_UNDEFINED_SERVICE', 'UNDEFINED_SERVICE');
 define('CODE_UNEXPECTED_ERROR', 'UNEXPECTED_ERROR');
 
-define('HTTP_METHOD_MOCK', 'MOCK');
-define('HTTP_METHOD_POST', 'POST');
-
 define('HTTP_STATUS_BAD_REQUEST', 400);
 define('HTTP_STATUS_FORBIDDEN', 403);
 define('HTTP_STATUS_INTERNAL_SERVER_ERROR', 500);
 define('HTTP_STATUS_NOT_FOUND', 404);
 define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
+
+define('LENGTH_RANDOM_ID', 16); // Bytes
 
 define('LOG_LEVEL_1', 1);
 define('LOG_LEVEL_2', 2);
@@ -43,6 +42,6 @@ define('LOG_LEVEL_3', 3);
 define('LOG_LEVEL_4', 4);
 define('LOG_LEVEL_5', 5);
 
-define('OPERATION_MODE_DEBUG', 'debug');
+define('OPERATION_MODE_DEVELOPMENT', 'development');
 define('OPERATION_MODE_MAINTENANCE', 'maintenance');
-define('OPERATION_MODE_RELEASE', 'release');
+define('OPERATION_MODE_PRODUCTION', 'production');

@@ -22,6 +22,7 @@
 	angular.module('app', [
 		'ngResource',
 		'app.authentication',
+		'app.medication',
 		'app.utility'
 	]);
 })();

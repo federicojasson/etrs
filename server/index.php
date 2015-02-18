@@ -19,7 +19,7 @@
  */
 
 /**
- * This script serves an HTTP request.
+ * This script serves an external request.
  */
 
 // Defines the root directory
@@ -28,5 +28,5 @@ define('DIRECTORY_ROOT', __DIR__);
 // Includes the application
 require_once DIRECTORY_ROOT . '/private/scripts/app.php';
 
-// Serves the HTTP request
-serveHttpRequest();
+// Serves the external request
+serveExternalRequest();

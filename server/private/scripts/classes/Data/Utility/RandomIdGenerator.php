@@ -21,16 +21,20 @@
 namespace App\Data\Utility;
 
 /**
- * TODO: comment
+ * This class generates random IDs for database entities.
  */
 class RandomIdGenerator extends \Doctrine\ORM\Id\AbstractIdGenerator {
 	
 	/**
-	 * TODO: comment
+	 * Generates the ID of an entity.
+	 * 
+	 * Receives the entity manager and the entity.
 	 */
 	public function generate(\Doctrine\ORM\EntityManager $entityManager, $entity) {
-		// TODO: implement
-		return '1';
+		global $app;
+		
+		// Returns a random ID
+		return $app->cryptography->generateRandomId();
 	}
 	
 }

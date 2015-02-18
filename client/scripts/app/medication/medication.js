@@ -19,25 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.authentication').service('authentication', [
-		'server',
-		authenticationService
-	]);
-	
-	/**
-	 * TODO: comment
-	 */
-	function authenticationService(server) {
-		var _this = this;
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.getState = function() {
-			return server.sendHttpRequest({
-				url: '/authentication/get-state',
-				httpMethod: 'POST'
-			});
-		};
-	}
+	angular.module('app.medication', []);
 })();

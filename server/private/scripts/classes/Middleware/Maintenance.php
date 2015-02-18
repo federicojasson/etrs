@@ -29,12 +29,10 @@ class Maintenance extends \Slim\Middleware {
 	 * Calls the middleware.
 	 */
 	public function call() {
-		$app = $this->app;
+		global $app;
 		
 		// Halts the execution
-		$app->halt(HTTP_STATUS_SERVICE_UNAVAILABLE, [
-			'code' => CODE_SYSTEM_UNDER_MAINTENANCE
-		]);
+		$app->server->haltExecution(HTTP_STATUS_SERVICE_UNAVAILABLE, CODE_SYSTEM_UNDER_MAINTENANCE);
 	}
 	
 }

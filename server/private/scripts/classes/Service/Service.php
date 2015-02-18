@@ -23,41 +23,49 @@ namespace App\Service;
 /**
  * This class represents a service.
  * 
- * A service encapsulates the logic of a given task and can be executed through
- * a specific URL and HTTP method.
- * 
- * Subclasses must implement the execute method, which executes the service, and
- * the getUrl and getMethod methods, which return the service's URL and HTTP
- * method, respectively.
+ * Subclasses must implement the execute method. For security reasons, every
+ * service has to implement, also, the isInputValid method to validate the input
+ * and the isUserAuthorized method to check if the user is authorized to use the
+ * service. This is a measure to help the developer not to forget to do these
+ * tasks.
  */
 abstract class Service {
 	
 	/**
-	 * The application object.
+	 * Invokes the service.
 	 */
-	protected $app;
-	
-	/**
-	 * Creates an instance of this class.
-	 */
-	public function __construct() {
-		// Gets the application object
-		$this->app = \Slim\Slim::getInstance();
+	public function __invoke() {
+		global $app;
+		
+		if (! $this->isUserAuthorized()) {
+			// The user is not authorized to use the service
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_FORBIDDEN, CODE_UNAUTHORIZED_USER);
+		}
+		
+		if (! $this->isInputValid()) {
+			// The input is invalid
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_BAD_REQUEST, CODE_INVALID_INPUT);
+		}
+		
+		// Executes the service
+		$this->execute();
 	}
 	
 	/**
 	 * Executes the service.
 	 */
-	public abstract function execute();
+	protected abstract function execute();
 	
 	/**
-	 * Returns the HTTP method of the service.
+	 * Determines whether the input is valid.
 	 */
-	public abstract function getMethod();
+	protected abstract function isInputValid();
 	
 	/**
-	 * Returns the URL of the service.
+	 * Determines whether the user is authorized to use the service.
 	 */
-	public abstract function getUrl();
+	protected abstract function isUserAuthorized();
 	
 }

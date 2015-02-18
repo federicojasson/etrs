@@ -19,24 +19,25 @@
 'use strict';
 
 (function() {
-	angular.module('app.authentication').service('authentication', [
+	angular.module('app.medication').service('medication', [
 		'server',
-		authenticationService
+		medicationService
 	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function authenticationService(server) {
+	function medicationService(server) {
 		var _this = this;
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.getState = function() {
+		_this.create = function(input) {
 			return server.sendHttpRequest({
-				url: '/authentication/get-state',
-				httpMethod: 'POST'
+				url: '/medication/create',
+				httpMethod: 'POST',
+				input: input
 			});
 		};
 	}

@@ -21,182 +21,421 @@
 namespace App\Data\Entity;
 
 /**
+ * TODO: comment
+ * 
+ * Annotations:
+ * 
  * @Entity
- * @Table(name="users", schema="etrs")
+ * @Table(name = "users")
+ * @HasLifecycleCallbacks
  */
-class User extends Entity {
+class User {
 	
 	/**
-	 * @Id
-	 * @Column(type="binary", length=32, nullable=false)
-	 * @GeneratedValue(strategy="CUSTOM")
-	 * @CustomIdGenerator(class="App\Data\Utility\RandomIdGenerator")
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "creation_date_time",
+	 *		type = "datetime",
+	 *		nullable = false
+	 *	)
 	 */
-	protected $id;
+	protected $creationDateTime;
 	
 	/**
-	 * @ManyToOne(targetEntity="User")
-	 * @JoinColumn(name="creator", referencedColumnName="id", nullable=true,
-	 * onDelete="SET NULL")
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToOne(targetEntity = "User")
+	 * @JoinColumn(
+	 *		name = "creator",
+	 *		referencedColumnName = "id",
+	 *		onDelete = "SET NULL"
+	 *	)
 	 */
 	protected $creator;
 	
 	/**
-	 * @Column(type="datetime", nullable=false)
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "email_address",
+	 *		type = "string",
+	 *		length = 254,
+	 *		nullable = false
+	 *	)
 	 */
-	protected $creationDatetime;
+	protected $emailAddress;
 	
 	/**
-	 * @Column(type="datetime", nullable=false)
-	 */
-	protected $lastEditionDatetime;
-	
-	/**
-	 * @Column(type="binary", length=64, nullable=false, options={"fixed":true})
-	 */
-	protected $passwordHash;
-	
-	/**
-	 * @Column(type="binary", length=64, nullable=false, options={"fixed":true})
-	 */
-	protected $salt;
-	
-	/**
-	 * @Column(type="integer", nullable=false, options={"unsigned":true})
-	 */
-	protected $keyStretchingIterations;
-	
-	/**
-	 * @Column(type="binary", length=2, nullable=false, options={"fixed":true})
-	 */
-	protected $role;
-	
-	/**
-	 * @Column(type="string", length=48, nullable=false)
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "first_name",
+	 *		type = "string",
+	 *		length = 48,
+	 *		nullable = false
+	 *	)
 	 */
 	protected $firstName;
 	
 	/**
-	 * @Column(type="string", length=48, nullable=false)
-	 */
-	protected $lastName;
-	
-	/**
-	 * @Column(type="binary", length=1, nullable=false, options={"fixed":true})
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "gender",
+	 *		type = "binary",
+	 *		length = 1,
+	 *		nullable = false,
+	 *		options = {
+	 *			"fixed": true
+	 *		}
+	 *	)
 	 */
 	protected $gender;
 	
 	/**
-	 * @Column(type="string", length=254, nullable=false)
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "id",
+	 *		type = "binary",
+	 *		length = 32,
+	 *		nullable = false
+	 *	)
+	 * @Id
 	 */
-	protected $emailAddress;
-
-	public function getId() {
-		return $this->id;
+	protected $id;
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "key_stretching_iterations",
+	 *		type = "integer",
+	 *		nullable = false,
+	 *		options = {
+	 *			"unsigned": true
+	 *		}
+	 *	)
+	 */
+	protected $keyStretchingIterations;
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "last_edition_date_time",
+	 *		type = "datetime",
+	 *		nullable = false
+	 *	)
+	 */
+	protected $lastEditionDateTime;
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToOne(targetEntity = "User")
+	 * @JoinColumn(
+	 *		name = "last_editor",
+	 *		referencedColumnName = "id",
+	 *		onDelete = "SET NULL"
+	 *	)
+	 */
+	protected $lastEditor;
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "last_name",
+	 *		type = "string",
+	 *		length = 48,
+	 *		nullable = false
+	 *	)
+	 */
+	protected $lastName;
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "password_hash",
+	 *		type = "binary",
+	 *		length = 64,
+	 *		nullable = false,
+	 *		options = {
+	 *			"fixed": true
+	 *		}
+	 *	)
+	 */
+	protected $passwordHash;
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "role",
+	 *		type = "binary",
+	 *		length = 2,
+	 *		nullable = false,
+	 *		options = {
+	 *			"fixed": true
+	 *		}
+	 *	)
+	 */
+	protected $role;
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "salt",
+	 *		type = "binary",
+	 *		length = 64,
+	 *		nullable = false,
+	 *		options = {
+	 *			"fixed": true
+	 *		}
+	 *	)
+	 */
+	protected $salt;
+	
+	/**
+	 * Creates an instance of this class.
+	 */
+	public function __construct() {
+		// Sets default values
+		$this->creator = null;
+		$this->lastEditionDateTime = null;
+		$this->lastEditor = null;
 	}
 
+	/**
+	 * TODO: comment
+	 */
+	public function getCreationDateTime() {
+		return $this->creationDateTime;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
 	public function getCreator() {
 		return $this->creator;
 	}
-
-	public function getCreationDatetime() {
-		return $this->creationDatetime;
-	}
-
-	public function getLastEditionDatetime() {
-		return $this->lastEditionDatetime;
-	}
-
-	public function getPasswordHash() {
-		return $this->passwordHash;
-	}
-
-	public function getSalt() {
-		return $this->salt;
-	}
-
-	public function getKeyStretchingIterations() {
-		return $this->keyStretchingIterations;
-	}
-
-	public function getRole() {
-		return $this->role;
-	}
-
-	public function getFirstName() {
-		return $this->firstName;
-	}
-
-	public function getLastName() {
-		return $this->lastName;
-	}
-
-	public function getGender() {
-		return $this->gender;
-	}
-
+	
+	/**
+	 * TODO: comment
+	 */
 	public function getEmailAddress() {
 		return $this->emailAddress;
 	}
-
-	public function setId($id) {
-		$this->id = $id;
-		return $this;
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getFirstName() {
+		return $this->firstName;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getGender() {
+		return $this->gender;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getKeyStretchingIterations() {
+		return $this->keyStretchingIterations;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getLastEditionDateTime() {
+		return $this->lastEditionDateTime;
 	}
 
+	/**
+	 * TODO: comment
+	 */
+	public function getLastEditor() {
+		return $this->lastEditor;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getLastName() {
+		return $this->lastName;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getPasswordHash() {
+		return $this->passwordHash;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getRole() {
+		return $this->role;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function getSalt() {
+		return $this->salt;
+	}
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @PrePersist
+	 */
+	public function onPrePersist() {
+		global $app;
+		
+		// Gets the current UTC date-time
+		$currentDateTime = $app->server->getCurrentUtcDateTime();
+		
+		// Sets the creation date-time
+		$this->creationDateTime = $currentDateTime;
+	}
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Annotations:
+	 * 
+	 * @PreUpdate
+	 */
+	public function onPreUpdate() {
+		global $app;
+		
+		// Gets the current UTC date-time
+		$currentDateTime = $app->server->getCurrentUtcDateTime();
+		
+		// Sets the last-edition date-time
+		$this->lastEditionDateTime = $currentDateTime;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
 	public function setCreator($creator) {
 		$this->creator = $creator;
-		return $this;
 	}
-
-	public function setCreationDatetime($creationDatetime) {
-		$this->creationDatetime = $creationDatetime;
-		return $this;
-	}
-
-	public function setLastEditionDatetime($lastEditionDatetime) {
-		$this->lastEditionDatetime = $lastEditionDatetime;
-		return $this;
-	}
-
-	public function setPasswordHash($passwordHash) {
-		$this->passwordHash = $passwordHash;
-		return $this;
-	}
-
-	public function setSalt($salt) {
-		$this->salt = $salt;
-		return $this;
-	}
-
-	public function setKeyStretchingIterations($keyStretchingIterations) {
-		$this->keyStretchingIterations = $keyStretchingIterations;
-		return $this;
-	}
-
-	public function setRole($role) {
-		$this->role = $role;
-		return $this;
-	}
-
-	public function setFirstName($firstName) {
-		$this->firstName = $firstName;
-		return $this;
-	}
-
-	public function setLastName($lastName) {
-		$this->lastName = $lastName;
-		return $this;
-	}
-
-	public function setGender($gender) {
-		$this->gender = $gender;
-		return $this;
-	}
-
+	
+	/**
+	 * TODO: comment
+	 */
 	public function setEmailAddress($emailAddress) {
 		$this->emailAddress = $emailAddress;
-		return $this;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setFirstName($firstName) {
+		$this->firstName = $firstName;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setGender($gender) {
+		$this->gender = $gender;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setKeyStretchingIterations($keyStretchingIterations) {
+		$this->keyStretchingIterations = $keyStretchingIterations;
+	}
+
+	/**
+	 * TODO: comment
+	 */
+	public function setLastEditor($lastEditor) {
+		$this->lastEditor = $lastEditor;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setLastName($lastName) {
+		$this->lastName = $lastName;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setPasswordHash($passwordHash) {
+		$this->passwordHash = $passwordHash;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setRole($role) {
+		$this->role = $role;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setSalt($salt) {
+		$this->salt = $salt;
 	}
 	
 }

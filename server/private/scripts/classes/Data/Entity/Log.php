@@ -26,10 +26,10 @@ namespace App\Data\Entity;
  * Annotations:
  * 
  * @Entity
- * @Table(name = "medications")
+ * @Table(name = "logs")
  * @HasLifecycleCallbacks
  */
-class Medication {
+class Log {
 	
 	/**
 	 * TODO: comment
@@ -43,33 +43,6 @@ class Medication {
 	 *	)
 	 */
 	protected $creationDateTime;
-	
-	/**
-	 * TODO: comment
-	 * 
-	 * Annotations:
-	 * 
-	 * @ManyToOne(targetEntity = "User")
-	 * @JoinColumn(
-	 *		name = "creator",
-	 *		referencedColumnName = "id",
-	 *		onDelete = "SET NULL"
-	 *	)
-	 */
-	protected $creator;
-	
-	/**
-	 * TODO: comment
-	 * 
-	 * Annotations:
-	 * 
-	 * @Column(
-	 *		name = "deleted",
-	 *		type = "boolean",
-	 *		nullable = false
-	 *	)
-	 */
-	protected $deleted;
 	
 	/**
 	 * TODO: comment
@@ -97,26 +70,15 @@ class Medication {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "last_edition_date_time",
-	 *		type = "datetime",
-	 *		nullable = false
+	 *		name = "level",
+	 *		type = "smallint",
+	 *		nullable = false,
+	 *		options = {
+	 *			"unsigned": true
+	 *		}
 	 *	)
 	 */
-	protected $lastEditionDateTime;
-	
-	/**
-	 * TODO: comment
-	 * 
-	 * Annotations:
-	 * 
-	 * @ManyToOne(targetEntity = "User")
-	 * @JoinColumn(
-	 *		name = "last_editor",
-	 *		referencedColumnName = "id",
-	 *		onDelete = "SET NULL"
-	 *	)
-	 */
-	protected $lastEditor;
+	protected $level;
 	
 	/**
 	 * TODO: comment
@@ -124,44 +86,18 @@ class Medication {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "name",
+	 *		name = "message",
 	 *		type = "string",
-	 *		length = 128,
 	 *		nullable = false
 	 *	)
 	 */
-	protected $name;
-	
-	/**
-	 * Creates an instance of this class.
-	 */
-	public function __construct() {
-		// Sets default values
-		$this->creator = null;
-		$this->deleted = false;
-		$this->lastEditionDateTime = null;
-		$this->lastEditor = null;
-	}
+	protected $message;
 	
 	/**
 	 * TODO: comment
 	 */
 	public function getCreationDateTime() {
 		return $this->creationDateTime;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function getCreator() {
-		return $this->creator;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function getDeleted() {
-		return $this->deleted;
 	}
 	
 	/**
@@ -174,24 +110,17 @@ class Medication {
 	/**
 	 * TODO: comment
 	 */
-	public function getLastEditionDateTime() {
-		return $this->lastEditionDateTime;
+	public function getLevel() {
+		return $this->level;
 	}
 	
 	/**
 	 * TODO: comment
 	 */
-	public function getLastEditor() {
-		return $this->lastEditor;
+	public function getMessage() {
+		return $this->message;
 	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function getName() {
-		return $this->name;
-	}
-	
+
 	/**
 	 * TODO: comment
 	 * 
@@ -211,47 +140,16 @@ class Medication {
 	
 	/**
 	 * TODO: comment
-	 * 
-	 * Annotations:
-	 * 
-	 * @PreUpdate
 	 */
-	public function onPreUpdate() {
-		global $app;
-		
-		// Gets the current UTC date-time
-		$currentDateTime = $app->server->getCurrentUtcDateTime();
-		
-		// Sets the last-edition date-time
-		$this->lastEditionDateTime = $currentDateTime;
+	public function setLevel($level) {
+		$this->level = $level;
 	}
 	
 	/**
 	 * TODO: comment
 	 */
-	public function setCreator($creator) {
-		$this->creator = $creator;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function setDeleted($deleted) {
-		$this->deleted = $deleted;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function setLastEditor($lastEditor) {
-		$this->lastEditor = $lastEditor;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setMessage($message) {
+		$this->message = $message;
 	}
 	
 }

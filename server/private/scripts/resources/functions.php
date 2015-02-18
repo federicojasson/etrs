@@ -19,7 +19,7 @@
  */
 
 /**
- * This script defines useful global functions.
+ * This script defines global functions.
  */
 
 /**
@@ -48,6 +48,6 @@ function toSpinalCase($string) {
 		}
 	}
 	
-	// Builds and returns the new string
+	// Returns the new string
 	return implode('-', $words);
 }

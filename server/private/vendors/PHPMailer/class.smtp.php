@@ -444,7 +444,7 @@ class SMTP
                 $temp = new stdClass();
                 $ntlm_client = new ntlm_sasl_client_class;
                 //Check that functions are available
-                if (!$ntlm_client->Initialize($temp)) {
+                if (!$ntlm_client->setDefaultValues($temp)) {
                     $this->error = array('error' => $temp->error);
                     $this->edebug(
                         'You need to enable some modules in your php.ini file: '

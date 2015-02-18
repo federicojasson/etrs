@@ -36,7 +36,7 @@
 		_this.sendHttpRequest = function(parameters) {
 			// Extracts the parameters
 			var url = parameters.url;
-			var method = parameters.method;
+			var httpMethod = parameters.httpMethod;
 			var input = parameters.input;
 			
 			// Initializes the input if is undefined
@@ -46,7 +46,7 @@
 			var urlInput = {};
 			var bodyInput = {};
 			
-			if (method === 'GET') {
+			if (httpMethod === 'GET') {
 				// The input is sent as a query string
 				urlInput = input;
 			} else {
@@ -57,7 +57,7 @@
 			// Sends the request
 			var deferredTask = $resource('server' + url, urlInput, {
 				request: {
-					method: method
+					method: httpMethod
 				}
 			}).request(bodyInput);
 			

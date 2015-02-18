@@ -18,32 +18,34 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\User;
+namespace App\Helper;
 
 /**
- * TODO: comment
+ * This class offers server-related functionalities.
  */
-class Delete extends \App\Service\Service {
+class Server {
 	
 	/**
-	 * Executes the service.
+	 * Returns the current UTC date-time.
 	 */
-	protected function execute() {
-		// TODO: implement
+	public function getCurrentUtcDateTime() {
+		// Initializes the time zone
+		$timeZone = new \DateTimeZone('UTC');
+		
+		// Returns the current date-time
+		return new \DateTime(null, $timeZone);
 	}
 	
 	/**
-	 * Determines whether the input is valid.
+	 * TODO: comment
 	 */
-	protected function isInputValid() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected function isUserAuthorized() {
-		// TODO: implement
+	public function haltExecution($httpStatus, $code) {
+		global $app;
+		
+		// Halts the execution
+		$app->halt($httpStatus, [
+			'code' => $code
+		]);
 	}
 	
 }

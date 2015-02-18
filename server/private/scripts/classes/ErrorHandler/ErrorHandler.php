@@ -18,39 +18,26 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Helper;
+namespace App\ErrorHandler;
 
 /**
- * This class represents a helper.
- * 
- * A helper is a singleton that offers a very specific functionality.
- * 
- * Subclasses can, optionally, override the initialize method to perform
- * initialization tasks.
+ * This class handles errors.
  */
-abstract class Helper {
+class ErrorHandler {
 	
 	/**
-	 * The application object.
+	 * TODO: comment
+	 * 
+	 * Receives the exception that contains the information about the error.
 	 */
-	protected $app;
-	
-	/**
-	 * Creates an instance of this class.
-	 */
-	public function __construct() {
-		// Gets the application object
-		$this->app = \Slim\Slim::getInstance();
+	public function __invoke($exception) {
+		global $app;
 		
-		// Initializes the helper
-		$this->initialize();
-	}
-	
-	/**
-	 * Performs initialization tasks.
-	 */
-	protected function initialize() {
-		// No initialization tasks need to be performed
+		// Logs the event
+		$app->log->error('Unexpected error. Message: ' . $exception->getMessage());
+		
+		// Halts the execution
+		$app->server->haltExecution(HTTP_STATUS_INTERNAL_SERVER_ERROR, CODE_UNEXPECTED_ERROR);
 	}
 	
 }

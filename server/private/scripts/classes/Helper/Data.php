@@ -18,18 +18,18 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service;
+namespace App\Helper;
 
 /**
- * This class represents an HTTP POST service.
+ * This class offers data-related functionalities.
  */
-abstract class PostService extends HttpService {
+class Data {
 	
 	/**
-	 * Returns the HTTP method of the service.
+	 * TODO: comment
 	 */
-	public function getMethod() {
-		return HTTP_METHOD_POST;
+	public function __call($name, $arguments) {
+		// TODO
 	}
 	
 }

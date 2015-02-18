@@ -48,22 +48,47 @@ abstract class Services extends \Slim\Middleware {
 	protected abstract function getServices();
 	
 	/**
+	 * Returns the URL of a service.
+	 * 
+	 * Receives the fully-qualified class name of the service.
+	 */
+	private function getServiceUrl($class) {
+		// Defines the namespace of the services and gets its length
+		$namespace = 'App\\Service\\';
+		
+		$length = strlen($namespace);
+		
+		// Gets the suffix of the class
+		$suffix = substr($class, $length);
+		
+		// Replaces suffix's backslashes by slashes
+		$suffixWithoutBackslashes = str_replace('\\', '/', $suffix);
+		
+		// Gets the fragments of the suffix
+		$fragments = explode('/', $suffixWithoutBackslashes);
+		
+		// Converts the fragments to spinal-case
+		foreach ($fragments as &$fragment) {
+			$fragment = toSpinalCase($fragment);
+		}
+		
+		// Returns the URL
+		return '/' . implode('/', $fragments);
+	}
+	
+	/**
 	 * Registers a service.
 	 * 
-	 * Receives the service.
+	 * Receives the service's HTTP method and its fully-qualified class name.
 	 */
-	private function registerService($service) {
-		$app = $this->app;
+	private function registerService($httpMethod, $class) {
+		global $app;
 		
-		// Gets the URL and the HTTP method of the service
-		$url = $service->getUrl();
-		$method = $service->getMethod();
+		// Gets the URL of the service from its fully-qualified class name
+		$url = $this->getServiceUrl($class);
 		
 		// Registers a routing rule for the service
-		$app->map($url, function() use ($service) {
-			// Executes the service
-			$service->execute();
-		})->via($method);
+		$app->map($url, new $class)->via($httpMethod);
 	}
 	
 	/**
@@ -73,8 +98,10 @@ abstract class Services extends \Slim\Middleware {
 	 */
 	private function registerServices($services) {
 		// Registers the services
-		foreach ($services as $service) {
-			$this->registerService($service);
+		foreach ($services as $httpMethod => $services) {
+			foreach ($services as $class) {
+				$this->registerService($httpMethod, $class);
+			}
 		}
 	}
 	

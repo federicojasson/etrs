@@ -44,8 +44,8 @@
 		
 		/**
 		 * Sets the title of the document. It automatically appends the acronym
-		 * of the application at the end of the title, so there is no need to
-		 * include it.
+		 * of the application at the end of the title, so it must not be
+		 * included.
 		 * 
 		 * Receives the title to be set.
 		 */

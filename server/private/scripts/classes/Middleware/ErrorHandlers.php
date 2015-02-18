@@ -37,43 +37,14 @@ class ErrorHandlers extends \Slim\Middleware {
 	}
 	
 	/**
-	 * Handles an error.
-	 * 
-	 * Receives the exception that contains the information about the error.
-	 */
-	public function handleError($exception) {
-		$app = $this->app;
-		
-		// Logs the event
-		$app->log->error('Unexpected error. Message: ' . $exception->getMessage());
-		
-		// Halts the execution
-		$app->halt(HTTP_STATUS_INTERNAL_SERVER_ERROR, [
-			'code' => CODE_UNEXPECTED_ERROR
-		]);
-	}
-	
-	/**
-	 * Handles a situation where the requested service is not found.
-	 */
-	public function handleNotFound() {
-		$app = $this->app;
-		
-		// Halts the execution
-		$app->halt(HTTP_STATUS_NOT_FOUND, [
-			'code' => CODE_UNDEFINED_SERVICE
-		]);
-	}
-	
-	/**
 	 * Registers the error handlers.
 	 */
 	private function registerErrorHandlers() {
-		$app = $this->app;
+		global $app;
 		
 		// Registers the error handlers
-		$app->error([ $this, 'handleError' ]);
-		$app->notFound([ $this, 'handleNotFound' ]);
+		$app->error(new \App\ErrorHandler\ErrorHandler());
+		$app->notFound(new \App\ErrorHandler\NotFoundHandler());
 	}
 	
 }

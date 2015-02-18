@@ -38,4 +38,4 @@ define('DIRECTORY_ROOT', __DIR__ . '/../../..');
 require_once DIRECTORY_ROOT . '/private/scripts/app.php';
 
 // Executes the cron job
-executeCronJob('/session/delete-expired');
+executeCronJob('/session/delete-expired', 'POST');

@@ -18,32 +18,23 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\User;
+namespace App\Middleware;
 
 /**
- * TODO: comment
+ * This middleware registers the internal services.
  */
-class Delete extends \App\Service\Service {
+class InternalServices extends Services {
 	
 	/**
-	 * Executes the service.
+	 * Returns the services to be registered.
 	 */
-	protected function execute() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the input is valid.
-	 */
-	protected function isInputValid() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected function isUserAuthorized() {
-		// TODO: implement
+	protected function getServices() {
+		return [
+			'POST' => [
+				'App\Service\Session\DeleteExpired',
+				'App\Service\User\Delete'
+			]
+		];
 	}
 	
 }
