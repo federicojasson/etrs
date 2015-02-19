@@ -89,8 +89,11 @@ class Services extends \Slim\Middleware {
 		// Gets the URL of the service from its fully-qualified class name
 		$url = $this->getServiceUrl($class);
 		
-		// Registers a routing rule for the service
-		$app->map($url, new $class)->via($httpMethod);
+		// Registers a route for the service
+		$route = $app->map($url, new $class);
+		
+		// Sets the HTTP method through which the service must be invoked
+		$route->via($httpMethod);
 	}
 	
 	/**

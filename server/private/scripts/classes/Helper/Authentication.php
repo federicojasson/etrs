@@ -38,7 +38,7 @@ class Authentication {
 		$app->database->getReference('App\Database\Entity\User', $id);
 	}
 	
-	/*
+	/**
 	 * Determines whether the user is signed-in.
 	 */
 	public function isUserSignedIn() {

@@ -145,7 +145,7 @@ function serveExternalRequest() {
 	$middlewares = [
 		new \App\Middleware\Database(),
 		new \App\Middleware\Services($services),
-		new \App\Middleware\Singletons(),
+		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()
 	];
 	
@@ -183,7 +183,7 @@ function serveInternalRequest($url, $httpMethod) {
 	$middlewares = [
 		new \App\Middleware\Database(),
 		new \App\Middleware\Services($services),
-		new \App\Middleware\Singletons(),
+		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()
 	];
 	

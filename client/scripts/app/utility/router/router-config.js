@@ -28,6 +28,25 @@
 	 * TODO: comment
 	 */
 	function config($locationProvider) {
+		// Enables the HTML5 history API
+		$locationProvider.html5Mode(true);
+		
+		// Defines the states
+		var states = [
+			{
+				name: 'home',
+				definition: {
+					url: '/',
+					controllers: {
+						__: 'SignInViewController',
+						ad: 'HomeViewController',
+						dr: 'HomeViewController',
+						op: 'HomeViewController'
+					}
+				}
+			}
+		];
+		
 		// TODO: implement
 	}
 })();
