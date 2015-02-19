@@ -54,7 +54,7 @@ abstract class Services extends \Slim\Middleware {
 	 */
 	private function getServiceUrl($class) {
 		// Defines the namespace of the services and gets its length
-		$namespace = 'App\\Service\\';
+		$namespace = 'App\Service\\';
 		
 		$length = strlen($namespace);
 		

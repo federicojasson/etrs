@@ -47,7 +47,7 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 /**
  * Executes a cron job.
  * 
- * Receives the URL and the HTTP method of the service to execute.
+ * Receives the URL and the HTTP method of the requested service.
  */
 function executeCronJob($url, $httpMethod) {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
@@ -55,20 +55,14 @@ function executeCronJob($url, $httpMethod) {
 		return;
 	}
 	
-	// Mocks the environment to simulate an HTTP request
-	\Slim\Environment::mock([
-		'PATH_INFO' => $url,
-		'REQUEST_METHOD' => $httpMethod
-	]);
-	
 	// Serves the internal request
-	serveInternalRequest();
+	serveInternalRequest($url, $httpMethod);
 }
 
 /**
  * Executes a maintenance job.
  * 
- * Receives the URL and the HTTP method of the service to execute.
+ * Receives the URL and the HTTP method of the requested service.
  */
 function executeMaintenanceJob($url, $httpMethod) {
 	if (OPERATION_MODE !== OPERATION_MODE_MAINTENANCE) {
@@ -76,14 +70,8 @@ function executeMaintenanceJob($url, $httpMethod) {
 		return;
 	}
 	
-	// Mocks the environment to simulate an HTTP request
-	\Slim\Environment::mock([
-		'PATH_INFO' => $url,
-		'REQUEST_METHOD' => $httpMethod
-	]);
-	
 	// Serves the internal request
-	serveInternalRequest();
+	serveInternalRequest($url, $httpMethod);
 }
 
 /**
@@ -162,8 +150,16 @@ function serveExternalRequest() {
 
 /**
  * Serves an internal request.
+ * 
+ * Receives the URL and the HTTP method of the requested service.
  */
-function serveInternalRequest() {
+function serveInternalRequest($url, $httpMethod) {
+	// Mocks the environment to simulate an HTTP request
+	\Slim\Environment::mock([
+		'PATH_INFO' => $url,
+		'REQUEST_METHOD' => $httpMethod
+	]);
+	
 	// Initializes the middlewares to use
 	$middlewares = [
 		new \App\Middleware\InternalServices(),
