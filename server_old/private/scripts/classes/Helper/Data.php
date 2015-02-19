@@ -24,7 +24,7 @@ use App\Auxiliar\EntityModel\UserModel;
 /*
  * This helper offers an interface to access the entity models.
  */
-class Data extends Helper {
+class Database extends Helper {
 	
 	/*
 	 * The entity models.

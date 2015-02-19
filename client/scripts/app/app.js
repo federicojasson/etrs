@@ -21,6 +21,7 @@
 (function() {
 	angular.module('app', [
 		'ngResource',
+		'app.account',
 		'app.authentication',
 		'app.medication',
 		'app.utility'

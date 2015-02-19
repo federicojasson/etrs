@@ -18,26 +18,18 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\ErrorHandler;
+namespace App\Helper;
 
 /**
- * This class handles errors.
+ * This class TODO: comment
  */
-class ErrorHandler {
+class Session {
 	
 	/**
-	 * Invokes the error handler.
-	 * 
-	 * Receives the exception that contains the information about the error.
+	 * TODO: comment
 	 */
-	public function __invoke($exception) {
-		global $app;
-		
-		// Logs the event
-		$app->log->error('Unexpected error. Message: ' . $exception->getMessage());
-		
-		// Halts the execution
-		$app->server->haltExecution(HTTP_STATUS_INTERNAL_SERVER_ERROR, CODE_UNEXPECTED_ERROR);
+	public function getData($key) {
+		return $_SESSION[$key];
 	}
 	
 }

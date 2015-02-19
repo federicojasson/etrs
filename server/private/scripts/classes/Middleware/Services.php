@@ -21,31 +21,34 @@
 namespace App\Middleware;
 
 /**
- * This middleware registers services.
- * 
- * Subclasses must implement the getServices method, which has to return the
- * services to be registered.
+ * This class registers the services.
  */
-abstract class Services extends \Slim\Middleware {
+class Services extends \Slim\Middleware {
+	
+	/**
+	 * The services to be registered.
+	 */
+	private $services;
+	
+	/**
+	 * Creates an instance of the class.
+	 * 
+	 * Receives the services to be registered.
+	 */
+	public function __construct($services) {
+		$this->services = $services;
+	}
 	
 	/**
 	 * Calls the middleware.
 	 */
 	public function call() {
-		// Gets the services
-		$services = $this->getServices();
-		
 		// Registers the services
-		$this->registerServices($services);
+		$this->registerServices($this->services);
 
 		// Calls the next middleware
 		$this->next->call();
 	}
-	
-	/**
-	 * Returns the services to be registered.
-	 */
-	protected abstract function getServices();
 	
 	/**
 	 * Returns the URL of a service.
@@ -55,7 +58,6 @@ abstract class Services extends \Slim\Middleware {
 	private function getServiceUrl($class) {
 		// Defines the namespace of the services and gets its length
 		$namespace = 'App\Service\\';
-		
 		$length = strlen($namespace);
 		
 		// Gets the suffix of the class
@@ -92,7 +94,7 @@ abstract class Services extends \Slim\Middleware {
 	}
 	
 	/**
-	 * Registers the services.
+	 * Registers a set of services.
 	 * 
 	 * Receives the services.
 	 */

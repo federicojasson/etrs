@@ -18,26 +18,31 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\ErrorHandler;
+namespace App\Helper;
 
 /**
- * This class handles errors.
+ * This class TODO: comment
  */
-class ErrorHandler {
+class Authentication {
 	
 	/**
-	 * Invokes the error handler.
-	 * 
-	 * Receives the exception that contains the information about the error.
+	 * TODO: comment
 	 */
-	public function __invoke($exception) {
+	public function getSignedInUser() {
 		global $app;
 		
-		// Logs the event
-		$app->log->error('Unexpected error. Message: ' . $exception->getMessage());
+		// Gets the user's ID
+		$id = $app->session->getData(SESSION_DATA_USER);
 		
-		// Halts the execution
-		$app->server->haltExecution(HTTP_STATUS_INTERNAL_SERVER_ERROR, CODE_UNEXPECTED_ERROR);
+		// Returns the user
+		$app->database->getReference('App\Database\Entity\User', $id);
+	}
+	
+	/*
+	 * Determines whether the user is signed-in.
+	 */
+	public function isUserSignedIn() {
+		// TODO: implement
 	}
 	
 }

@@ -18,23 +18,23 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Database\Utility;
 
 /**
- * This middleware registers the external services.
+ * This class generates random IDs for database entities.
  */
-class ExternalServices extends Services {
+class RandomIdGenerator extends \Doctrine\ORM\Id\AbstractIdGenerator {
 	
 	/**
-	 * Returns the services to be registered.
+	 * Generates the ID of an entity.
+	 * 
+	 * Receives the entity manager and the entity.
 	 */
-	protected function getServices() {
-		return [
-			'POST' => [
-				'App\Service\Authentication\GetState',
-				'App\Service\Medication\Create'
-			]
-		];
+	public function generate(\Doctrine\ORM\EntityManager $entityManager, $entity) {
+		global $app;
+		
+		// Returns a random ID
+		return $app->cryptography->generateRandomId();
 	}
 	
 }

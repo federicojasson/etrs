@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * This middleware halts the execution for maintenance.
+ * This class halts the execution for maintenance.
  */
 class Maintenance extends \Slim\Middleware {
 	

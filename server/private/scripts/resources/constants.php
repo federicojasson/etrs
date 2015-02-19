@@ -45,3 +45,5 @@ define('LOG_LEVEL_5', 5);
 define('OPERATION_MODE_DEVELOPMENT', 'development');
 define('OPERATION_MODE_MAINTENANCE', 'maintenance');
 define('OPERATION_MODE_PRODUCTION', 'production');
+
+define('SESSION_DATA_USER', 'user');

@@ -26,7 +26,7 @@ namespace App\ErrorHandler;
 class NotFoundHandler {
 	
 	/**
-	 * TODO: comment
+	 * Invokes the error handler.
 	 */
 	public function __invoke() {
 		global $app;

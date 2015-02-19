@@ -21,34 +21,39 @@
 namespace App\Middleware;
 
 /**
- * This middleware registers the singletons.
+ * This class registers the singletons.
  */
 class Singletons extends \Slim\Middleware {
+	
+	/**
+	 * The singletons to be registered.
+	 */
+	private $singletons;
+	
+	/**
+	 * Creates an instance of the class.
+	 */
+	public function __construct() {
+		// Defines the singletons to be registered
+		$this->singletons = [
+			'authentication' => 'App\Helper\Authentication',
+			'cryptography' => 'App\Helper\Cryptography',
+			'database' => 'App\Helper\Database',
+			'response' => 'App\Extension\Response',
+			'server' => 'App\Helper\Server',
+			'session' => 'App\Helper\Session'
+		];
+	}
 	
 	/**
 	 * Calls the middleware.
 	 */
 	public function call() {
-		// Gets the singletons
-		$singletons = $this->getSingletons();
-		
 		// Registers the singletons
-		$this->registerSingletons($singletons);
+		$this->registerSingletons($this->singletons);
 
 		// Calls the next middleware
 		$this->next->call();
-	}
-	
-	/**
-	 * Returns the singletons to be registered.
-	 */
-	private function getSingletons() {
-		return [
-			'cryptography' => 'App\Helper\Cryptography',
-			'data' => 'App\Helper\Data',
-			'response' => 'App\Extension\Response',
-			'server' => 'App\Helper\Server'
-		];
 	}
 	
 	/**
@@ -67,7 +72,7 @@ class Singletons extends \Slim\Middleware {
 	}
 	
 	/**
-	 * Registers the singletons.
+	 * Registers a set of singletons.
 	 * 
 	 * Receives the singletons.
 	 */

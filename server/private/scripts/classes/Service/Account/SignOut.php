@@ -18,34 +18,18 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Medication;
+namespace App\Service\Account;
 
 /**
  * TODO: comment
  */
-class Create extends \App\Service\Service {
+class SignOut extends \App\Service\Service {
 	
 	/**
 	 * Executes the service.
 	 */
 	protected function execute() {
-		global $app;
-		
-		// TODO: get input somehow
-		$name = 'NOMBRE';
-		
-		// Gets the signed-in user
-		$signedInUser = $app->authentication->getSignedInUser();
-		
-		// Initializes the medication
-		$medication = new \App\Database\Entity\Medication();
-		$medication->setName($name);
-		$medication->setCreator($signedInUser);
-
-		// Creates the medication
-		$app->database->persist($medication);
-		
-		// TODO: set output: $medication->getId()
+		// TODO: implement
 	}
 	
 	/**

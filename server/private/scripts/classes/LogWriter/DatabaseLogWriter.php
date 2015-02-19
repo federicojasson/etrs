@@ -34,10 +34,10 @@ class DatabaseLogWriter {
 	private $levelMapping;
 	
 	/**
-	 * Creates an instance of this class.
+	 * Creates an instance of the class.
 	 */
 	public function __construct() {
-		// Initializes the level mapping
+		// Defines the level mapping
 		$this->levelMapping = [
 			\Slim\Log::DEBUG => LOG_LEVEL_5,
 			\Slim\Log::INFO => LOG_LEVEL_4,
@@ -56,10 +56,18 @@ class DatabaseLogWriter {
 	 * Receives the log's message and level.
 	 */
 	public function write($message, $level) {
+		global $app;
+		
 		// Maps the level to the corresponding value used in the database
 		$mappedLevel = $this->levelMapping[$level];
 		
-		// TODO: implement (database access)
+		// Initializes the log
+		$log = new \App\Database\Entity\Log();
+		$log->setLevel($mappedLevel);
+		$log->setMessage($message);
+
+		// Creates the log
+		$app->database->persist($log);
 	}
 	
 }

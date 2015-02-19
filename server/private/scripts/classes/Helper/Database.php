@@ -18,23 +18,31 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Helper;
 
 /**
- * This middleware registers the internal services.
+ * This class offers database-related functionalities.
  */
-class InternalServices extends Services {
+class Database {
 	
 	/**
-	 * Returns the services to be registered.
+	 * TODO: comment
 	 */
-	protected function getServices() {
-		return [
-			'POST' => [
-				'App\Service\Session\DeleteExpired',
-				'App\Service\User\Delete'
-			]
-		];
+	private $entityManager;
+	
+	/**
+	 * TODO: comment
+	 */
+	public function __call($name, $arguments) {
+		// TODO: comment
+		call_user_func_array([ $this->entityManager, $name ], $arguments);
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function setEntityManager($entityManager) {
+		$this->entityManager = $entityManager;
 	}
 	
 }

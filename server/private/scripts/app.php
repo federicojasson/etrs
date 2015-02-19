@@ -36,7 +36,7 @@ require_once DIRECTORY_VENDORS . '/Slim/Slim.php'; \Slim\Slim::registerAutoloade
 require_once DIRECTORY_SCRIPTS . '/resources/constants.php';
 require_once DIRECTORY_SCRIPTS . '/resources/functions.php';
 
-// Defines a class autoloader
+// Registers a class autoloader
 spl_autoload_register('loadClass');
 
 // Defines the operation mode
@@ -131,9 +131,20 @@ function runApp($middlewares) {
  * Serves an external request.
  */
 function serveExternalRequest() {
-	// Initializes the middlewares to use
+	// Defines the services
+	$services = [
+		'POST' => [
+			'App\Service\Account\SignIn',
+			'App\Service\Account\SignOut',
+			'App\Service\Authentication\GetState',
+			'App\Service\Medication\Create'
+		]
+	];
+	
+	// Initializes the middlewares
 	$middlewares = [
-		new \App\Middleware\ExternalServices(),
+		new \App\Middleware\Database(),
+		new \App\Middleware\Services($services),
 		new \App\Middleware\Singletons(),
 		new \App\Middleware\ErrorHandlers()
 	];
@@ -160,9 +171,18 @@ function serveInternalRequest($url, $httpMethod) {
 		'REQUEST_METHOD' => $httpMethod
 	]);
 	
-	// Initializes the middlewares to use
+	// Defines the services
+	$services = [
+		'POST' => [
+			'App\Service\Session\DeleteExpired',
+			'App\Service\User\Delete'
+		]
+	];
+	
+	// Initializes the middlewares
 	$middlewares = [
-		new \App\Middleware\InternalServices(),
+		new \App\Middleware\Database(),
+		new \App\Middleware\Services($services),
 		new \App\Middleware\Singletons(),
 		new \App\Middleware\ErrorHandlers()
 	];

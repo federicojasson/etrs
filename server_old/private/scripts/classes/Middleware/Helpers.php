@@ -57,7 +57,7 @@ class Helpers extends \Slim\Middleware {
 	 * Creates and returns the Data helper.
 	 */
 	public function createDataHelper() {
-		return new \App\Helper\Data();
+		return new \App\Helper\Database();
 	}
 	
 	/*
