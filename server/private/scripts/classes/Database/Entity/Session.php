@@ -21,15 +21,15 @@
 namespace App\Database\Entity;
 
 /**
- * This class represents a medication from the database.
+ * This class represents a session from the database.
  * 
  * Annotations:
  * 
  * @Entity
- * @Table(name = "medications")
+ * @Table(name = "sessions")
  * @HasLifecycleCallbacks
  */
-class Medication {
+class Session {
 	
 	/**
 	 * TODO: comment
@@ -49,27 +49,13 @@ class Medication {
 	 * 
 	 * Annotations:
 	 * 
-	 * @ManyToOne(targetEntity = "User")
-	 * @JoinColumn(
-	 *		name = "creator",
-	 *		referencedColumnName = "id",
-	 *		onDelete = "SET NULL"
-	 *	)
-	 */
-	protected $creator;
-	
-	/**
-	 * TODO: comment
-	 * 
-	 * Annotations:
-	 * 
 	 * @Column(
-	 *		name = "deleted",
-	 *		type = "boolean",
+	 *		name = "data",
+	 *		type = "string",
 	 *		nullable = false
 	 *	)
 	 */
-	protected $deleted;
+	protected $data;
 	
 	/**
 	 * TODO: comment
@@ -79,15 +65,13 @@ class Medication {
 	 * @Column(
 	 *		name = "id",
 	 *		type = "binary",
-	 *		length = 16,
+	 *		length = 32,
 	 *		nullable = false,
 	 *		options = {
 	 *			"fixed": true
 	 *		}
 	 *	)
 	 * @Id
-	 * @GeneratedValue(strategy = "CUSTOM")
-	 * @CustomIdGenerator(class = "App\Database\Utility\RandomIdGenerator")
 	 */
 	protected $id;
 	
@@ -104,42 +88,11 @@ class Medication {
 	protected $lastEditionDateTime;
 	
 	/**
-	 * TODO: comment
-	 * 
-	 * Annotations:
-	 * 
-	 * @ManyToOne(targetEntity = "User")
-	 * @JoinColumn(
-	 *		name = "last_editor",
-	 *		referencedColumnName = "id",
-	 *		onDelete = "SET NULL"
-	 *	)
-	 */
-	protected $lastEditor;
-	
-	/**
-	 * TODO: comment
-	 * 
-	 * Annotations:
-	 * 
-	 * @Column(
-	 *		name = "name",
-	 *		type = "string",
-	 *		length = 128,
-	 *		nullable = false
-	 *	)
-	 */
-	protected $name;
-	
-	/**
 	 * Creates an instance of the class.
 	 */
 	public function __construct() {
 		// Sets default values
-		$this->creator = null;
-		$this->deleted = false;
 		$this->lastEditionDateTime = null;
-		$this->lastEditor = null;
 	}
 	
 	/**
@@ -152,15 +105,8 @@ class Medication {
 	/**
 	 * TODO: comment
 	 */
-	public function getCreator() {
-		return $this->creator;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function getDeleted() {
-		return $this->deleted;
+	public function getData() {
+		return $this->data;
 	}
 	
 	/**
@@ -176,21 +122,7 @@ class Medication {
 	public function getLastEditionDateTime() {
 		return $this->lastEditionDateTime;
 	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function getLastEditor() {
-		return $this->lastEditor;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function getName() {
-		return $this->name;
-	}
-	
+
 	/**
 	 * TODO: comment
 	 * 
@@ -228,29 +160,15 @@ class Medication {
 	/**
 	 * TODO: comment
 	 */
-	public function setCreator($creator) {
-		$this->creator = $creator;
+	public function setData($data) {
+		$this->data = $data;
 	}
 	
 	/**
 	 * TODO: comment
 	 */
-	public function setDeleted($deleted) {
-		$this->deleted = $deleted;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function setLastEditor($lastEditor) {
-		$this->lastEditor = $lastEditor;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function setName($name) {
-		$this->name = $name;
+	public function setId($id) {
+		$this->id = $id;
 	}
 	
 }

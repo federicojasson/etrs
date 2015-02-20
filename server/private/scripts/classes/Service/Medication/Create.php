@@ -37,12 +37,10 @@ class Create extends \App\Service\Service {
 		// Gets the signed-in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
-		// Initializes the medication
+		// Creates the medication
 		$medication = new \App\Database\Entity\Medication();
 		$medication->setName($name);
 		$medication->setCreator($signedInUser);
-
-		// Creates the medication
 		$app->database->persist($medication);
 		
 		// TODO: set output: $medication->getId()

@@ -64,10 +64,10 @@ class Services extends \Slim\Middleware {
 		$suffix = substr($class, $length);
 		
 		// Replaces suffix's backslashes by slashes
-		$suffixWithoutBackslashes = str_replace('\\', '/', $suffix);
+		$suffixWithSlashes = str_replace('\\', '/', $suffix);
 		
 		// Gets the fragments of the suffix
-		$fragments = explode('/', $suffixWithoutBackslashes);
+		$fragments = explode('/', $suffixWithSlashes);
 		
 		// Converts the fragments to spinal-case
 		foreach ($fragments as &$fragment) {

@@ -26,6 +26,37 @@ namespace App\Helper;
 class Server {
 	
 	/**
+	 * Returns the IP address of the client.
+	 */
+	public function getClientIpAddress() {
+		// Gets the IP address
+		$ipAddress = $_SERVER['REMOTE_ADDR'];
+
+		// Converts the IP address to binary
+		$binaryIpAddress = inet_pton($ipAddress);
+		
+		if ($binaryIpAddress === false) {
+			// The IP address is invalid
+			return 'unknown';
+		}
+
+		// Defines the IPv4-mapped IPv6 address prefix and gets its length
+		$prefix = hex2bin('00000000000000000000ffff');
+		$length = strlen($prefix);
+		
+		if ($prefix === substr($binaryIpAddress, 0, $length)) {
+			// The IP address is an IPv4-mapped IPv6 address
+			// Removes the prefix
+			$binaryIpAddress = substr($binaryIpAddress, strlen($prefix));
+		}
+
+		// Converts the IP address back to its human-readable format
+		$canonicalIpAddress = inet_ntop($binaryIpAddress);
+
+		return $canonicalIpAddress;
+	}
+	
+	/**
 	 * Returns the current UTC date-time.
 	 */
 	public function getCurrentUtcDateTime() {

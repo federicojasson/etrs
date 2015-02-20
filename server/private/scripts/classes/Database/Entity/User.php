@@ -141,8 +141,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name = "last_edition_date_time",
-	 *		type = "datetime",
-	 *		nullable = false
+	 *		type = "datetime"
 	 *	)
 	 */
 	protected $lastEditionDateTime;

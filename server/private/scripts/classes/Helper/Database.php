@@ -31,18 +31,71 @@ class Database {
 	private $entityManager;
 	
 	/**
-	 * TODO: comment
+	 * Creates an instance of the class.
 	 */
-	public function __call($name, $arguments) {
-		// TODO: comment
-		call_user_func_array([ $this->entityManager, $name ], $arguments);
+	public function __construct() {
+		$this->entityManager = $this->initialize();
 	}
 	
 	/**
 	 * TODO: comment
 	 */
-	public function setEntityManager($entityManager) {
-		$this->entityManager = $entityManager;
+	public function __call($name, $arguments) {
+		// TODO: comment
+		return call_user_func_array([ $this->entityManager, $name ], $arguments);
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	private function initialize() {
+		global $app;
+		
+		// TODO: clean code: use operation mode
+		$applicationMode = 'development';
+		if ($applicationMode == 'development') {
+			$cache = new \Doctrine\Common\Cache\ArrayCache;
+		} else {
+			$cache = new \Doctrine\Common\Cache\ApcCache;
+		}
+
+		$config = new \Doctrine\ORM\Configuration;
+		$config->setMetadataCacheImpl($cache);
+		$driverImpl = $config->newDefaultAnnotationDriver(DIRECTORY_SCRIPTS . '/classes/Database/Entity');
+		$config->setMetadataDriverImpl($driverImpl);
+		$config->setQueryCacheImpl($cache);
+		$config->setProxyDir(DIRECTORY_SCRIPTS . '/classes/Database/Proxy');
+		$config->setProxyNamespace('App\Database\Proxy');
+
+		if ($applicationMode == 'development') {
+			$config->setAutoGenerateProxyClasses(true);
+		} else {
+			$config->setAutoGenerateProxyClasses(false);
+		}
+
+		$connectionOptions = array(
+			'driver' => 'pdo_mysql',
+			'user' => 'etrs_admin',
+			'password' => 'password',
+			'host' => 'localhost',
+			'port' => 3306,
+			'dbname' => 'etrs',
+			'charset' => 'utf8'
+		);
+
+		$entityManager = \Doctrine\ORM\EntityManager::create($connectionOptions, $config);
+		$connection = $entityManager->getConnection();
+		$connection->setTransactionIsolation(\Doctrine\DBAL\Connection::TRANSACTION_SERIALIZABLE);
+		
+		// TODO: order
+		$app->hook('slim.after.router', function() {
+			global $app;
+			
+			// Commits the data changes
+			$app->database->flush();
+		}, HOOK_PRIORITY_DATABASE);
+		
+		return $entityManager;
 	}
 	
 }
