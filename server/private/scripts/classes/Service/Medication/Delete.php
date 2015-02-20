@@ -45,7 +45,7 @@ class Delete extends \App\Service\Service {
 			$app->assertor->medicationFound($medication);
 			
 			// Deletes the medication
-			$medication->setDeleted(true);
+			$medication->setDeleted(true); // TODO: should be done somewhere else? (what if another entity trigger something else)
 			$entityManager->merge($medication);
 		});
 	}
