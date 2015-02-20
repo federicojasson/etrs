@@ -32,12 +32,7 @@ class Session {
 		// TODO: clean code
 		ini_set('session.hash_function', 'sha256');
 		ini_set('session.hash_bits_per_character', 4);
-		session_set_save_handler(new \App\Utility\SessionHandler\DatabaseSessionHandler(), false);
-		
-		global $app;
-		$app->hook('slim.after.router', function() {
-			session_write_close();
-		}, HOOK_PRIORITY_SESSION);
+		session_set_save_handler(new \App\Utility\SessionHandler\DatabaseSessionHandler());
 		
 		session_start();
 		

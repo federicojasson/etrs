@@ -32,7 +32,7 @@ namespace App\Database\Entity;
 class Log {
 	
 	/**
-	 * TODO: comment
+	 * The creation date-time.
 	 * 
 	 * Annotations:
 	 * 
@@ -45,7 +45,7 @@ class Log {
 	protected $creationDateTime;
 	
 	/**
-	 * TODO: comment
+	 * The ID.
 	 * 
 	 * Annotations:
 	 * 
@@ -58,6 +58,7 @@ class Log {
 	 *			"fixed": true
 	 *		}
 	 *	)
+	 * 
 	 * @Id
 	 * @GeneratedValue(strategy = "CUSTOM")
 	 * @CustomIdGenerator(class = "App\Database\Utility\RandomIdGenerator")
@@ -65,7 +66,7 @@ class Log {
 	protected $id;
 	
 	/**
-	 * TODO: comment
+	 * The level.
 	 * 
 	 * Annotations:
 	 * 
@@ -81,7 +82,7 @@ class Log {
 	protected $level;
 	
 	/**
-	 * TODO: comment
+	 * The message.
 	 * 
 	 * Annotations:
 	 * 
@@ -94,35 +95,35 @@ class Log {
 	protected $message;
 	
 	/**
-	 * TODO: comment
+	 * Returns the creation date-time.
 	 */
 	public function getCreationDateTime() {
 		return $this->creationDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the ID.
 	 */
 	public function getId() {
 		return $this->id;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the level.
 	 */
 	public function getLevel() {
 		return $this->level;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the message.
 	 */
 	public function getMessage() {
 		return $this->message;
 	}
 
 	/**
-	 * TODO: comment
+	 * Invoked before it is persisted.
 	 * 
 	 * Annotations:
 	 * 
@@ -131,22 +132,26 @@ class Log {
 	public function onPrePersist() {
 		global $app;
 		
-		// Gets the current UTC date-time
-		$currentDateTime = $app->server->getCurrentUtcDateTime();
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
 		
 		// Sets the creation date-time
 		$this->creationDateTime = $currentDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the level.
+	 * 
+	 * Receives the level to be set.
 	 */
 	public function setLevel($level) {
 		$this->level = $level;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the message.
+	 * 
+	 * Receives the message to be set.
 	 */
 	public function setMessage($message) {
 		$this->message = $message;

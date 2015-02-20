@@ -57,9 +57,9 @@ class Server {
 	}
 	
 	/**
-	 * Returns the current UTC date-time.
+	 * Returns the current date-time.
 	 */
-	public function getCurrentUtcDateTime() {
+	public function getCurrentDateTime() {
 		// Initializes the time zone
 		$timeZone = new \DateTimeZone('UTC');
 		

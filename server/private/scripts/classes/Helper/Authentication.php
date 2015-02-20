@@ -31,11 +31,11 @@ class Authentication {
 	public function getSignedInUser() {
 		global $app;
 		
-		// Gets the user's ID
+		// Gets the signed-in user's ID
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
-		// Returns the user
-		$app->database->getReference('App\Database\Entity\User', $id);
+		// Returns the signed-in user
+		return $app->database->getReference('App\Database\Entity\User', $id);
 	}
 	
 	/**

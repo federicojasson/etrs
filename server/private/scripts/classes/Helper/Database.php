@@ -41,7 +41,7 @@ class Database {
 	 * TODO: comment
 	 */
 	public function __call($name, $arguments) {
-		// TODO: comment
+		// TODO: order and comment
 		return call_user_func_array([ $this->entityManager, $name ], $arguments);
 	}
 	
@@ -53,7 +53,7 @@ class Database {
 		
 		// TODO: clean code: use operation mode
 		$applicationMode = 'development';
-		if ($applicationMode == 'development') {
+		if ($applicationMode === 'development') {
 			$cache = new \Doctrine\Common\Cache\ArrayCache;
 		} else {
 			$cache = new \Doctrine\Common\Cache\ApcCache;
@@ -67,35 +67,41 @@ class Database {
 		$config->setProxyDir(DIRECTORY_SCRIPTS . '/classes/Database/Proxy');
 		$config->setProxyNamespace('App\Database\Proxy');
 
-		if ($applicationMode == 'development') {
+		if ($applicationMode === 'development') {
 			$config->setAutoGenerateProxyClasses(true);
 		} else {
 			$config->setAutoGenerateProxyClasses(false);
 		}
 
+		$parameters = $app->parameters->database;
 		$connectionOptions = array(
 			'driver' => 'pdo_mysql',
-			'user' => 'etrs_admin',
-			'password' => 'password',
-			'host' => 'localhost',
-			'port' => 3306,
-			'dbname' => 'etrs',
-			'charset' => 'utf8'
+			'host' => $parameters['host'],
+			'port' => $parameters['port'],
+			'dbname' => $parameters['database'],
+			'charset' => $parameters['charset'],
+			'user' => $parameters['username'],
+			'password' => $parameters['password']
 		);
 
 		$entityManager = \Doctrine\ORM\EntityManager::create($connectionOptions, $config);
 		$connection = $entityManager->getConnection();
 		$connection->setTransactionIsolation(\Doctrine\DBAL\Connection::TRANSACTION_SERIALIZABLE);
 		
-		// TODO: order
-		$app->hook('slim.after.router', function() {
-			global $app;
-			
-			// Commits the data changes
-			$app->database->flush();
-		}, HOOK_PRIORITY_DATABASE);
-		
 		return $entityManager;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	private function transactional($closure) {
+		// TODO: order and comment
+		$return = null;
+		$this->entityManager->transactional(function() use ($closure, &$return) {
+			$return = call_user_func($closure);
+		});
+		
+		return $return;
 	}
 	
 }

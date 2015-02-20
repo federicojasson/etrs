@@ -32,7 +32,7 @@ namespace App\Database\Entity;
 class User {
 	
 	/**
-	 * TODO: comment
+	 * The creation date-time.
 	 * 
 	 * Annotations:
 	 * 
@@ -45,11 +45,12 @@ class User {
 	protected $creationDateTime;
 	
 	/**
-	 * TODO: comment
+	 * The creator.
 	 * 
 	 * Annotations:
 	 * 
 	 * @ManyToOne(targetEntity = "User")
+	 * 
 	 * @JoinColumn(
 	 *		name = "creator",
 	 *		referencedColumnName = "id",
@@ -59,7 +60,7 @@ class User {
 	protected $creator;
 	
 	/**
-	 * TODO: comment
+	 * The email address.
 	 * 
 	 * Annotations:
 	 * 
@@ -73,7 +74,7 @@ class User {
 	protected $emailAddress;
 	
 	/**
-	 * TODO: comment
+	 * The first name.
 	 * 
 	 * Annotations:
 	 * 
@@ -87,7 +88,7 @@ class User {
 	protected $firstName;
 	
 	/**
-	 * TODO: comment
+	 * The gender.
 	 * 
 	 * Annotations:
 	 * 
@@ -104,7 +105,7 @@ class User {
 	protected $gender;
 	
 	/**
-	 * TODO: comment
+	 * The ID.
 	 * 
 	 * Annotations:
 	 * 
@@ -114,12 +115,13 @@ class User {
 	 *		length = 32,
 	 *		nullable = false
 	 *	)
+	 * 
 	 * @Id
 	 */
 	protected $id;
 	
 	/**
-	 * TODO: comment
+	 * The key-stretching iterations.
 	 * 
 	 * Annotations:
 	 * 
@@ -135,7 +137,7 @@ class User {
 	protected $keyStretchingIterations;
 	
 	/**
-	 * TODO: comment
+	 * The last-edition date-time.
 	 * 
 	 * Annotations:
 	 * 
@@ -147,21 +149,7 @@ class User {
 	protected $lastEditionDateTime;
 	
 	/**
-	 * TODO: comment
-	 * 
-	 * Annotations:
-	 * 
-	 * @ManyToOne(targetEntity = "User")
-	 * @JoinColumn(
-	 *		name = "last_editor",
-	 *		referencedColumnName = "id",
-	 *		onDelete = "SET NULL"
-	 *	)
-	 */
-	protected $lastEditor;
-	
-	/**
-	 * TODO: comment
+	 * The last name.
 	 * 
 	 * Annotations:
 	 * 
@@ -175,7 +163,7 @@ class User {
 	protected $lastName;
 	
 	/**
-	 * TODO: comment
+	 * The password hash.
 	 * 
 	 * Annotations:
 	 * 
@@ -192,7 +180,7 @@ class User {
 	protected $passwordHash;
 	
 	/**
-	 * TODO: comment
+	 * The role.
 	 * 
 	 * Annotations:
 	 * 
@@ -209,7 +197,7 @@ class User {
 	protected $role;
 	
 	/**
-	 * TODO: comment
+	 * The salt.
 	 * 
 	 * Annotations:
 	 * 
@@ -232,102 +220,94 @@ class User {
 		// Sets default values
 		$this->creator = null;
 		$this->lastEditionDateTime = null;
-		$this->lastEditor = null;
 	}
 
 	/**
-	 * TODO: comment
+	 * Returns the creation date-time.
 	 */
 	public function getCreationDateTime() {
 		return $this->creationDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the creator.
 	 */
 	public function getCreator() {
 		return $this->creator;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the email address.
 	 */
 	public function getEmailAddress() {
 		return $this->emailAddress;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the first name.
 	 */
 	public function getFirstName() {
 		return $this->firstName;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the gender.
 	 */
 	public function getGender() {
 		return $this->gender;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the ID.
 	 */
 	public function getId() {
 		return $this->id;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the key-stretching iterations.
 	 */
 	public function getKeyStretchingIterations() {
 		return $this->keyStretchingIterations;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the last-edition date-time.
 	 */
 	public function getLastEditionDateTime() {
 		return $this->lastEditionDateTime;
 	}
-
-	/**
-	 * TODO: comment
-	 */
-	public function getLastEditor() {
-		return $this->lastEditor;
-	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the last name.
 	 */
 	public function getLastName() {
 		return $this->lastName;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the password hash.
 	 */
 	public function getPasswordHash() {
 		return $this->passwordHash;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the role.
 	 */
 	public function getRole() {
 		return $this->role;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the salt.
 	 */
 	public function getSalt() {
 		return $this->salt;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Invoked before it is persisted.
 	 * 
 	 * Annotations:
 	 * 
@@ -336,102 +316,107 @@ class User {
 	public function onPrePersist() {
 		global $app;
 		
-		// Gets the current UTC date-time
-		$currentDateTime = $app->server->getCurrentUtcDateTime();
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
 		
 		// Sets the creation date-time
 		$this->creationDateTime = $currentDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the creator.
 	 * 
-	 * Annotations:
-	 * 
-	 * @PreUpdate
+	 * Receives the user to be set.
 	 */
-	public function onPreUpdate() {
-		global $app;
-		
-		// Gets the current UTC date-time
-		$currentDateTime = $app->server->getCurrentUtcDateTime();
-		
-		// Sets the last-edition date-time
-		$this->lastEditionDateTime = $currentDateTime;
+	public function setCreator($user) {
+		$this->creator = $user;
 	}
 	
 	/**
-	 * TODO: comment
-	 */
-	public function setCreator($creator) {
-		$this->creator = $creator;
-	}
-	
-	/**
-	 * TODO: comment
+	 * Sets the email address.
+	 * 
+	 * Receives the email address to be set.
 	 */
 	public function setEmailAddress($emailAddress) {
 		$this->emailAddress = $emailAddress;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the first name.
+	 * 
+	 * Receives the first name to be set.
 	 */
 	public function setFirstName($firstName) {
 		$this->firstName = $firstName;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the gender.
+	 * 
+	 * Receives the gender to be set.
 	 */
 	public function setGender($gender) {
 		$this->gender = $gender;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
 	 */
 	public function setId($id) {
 		$this->id = $id;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the key-stretching iterations.
+	 * 
+	 * Receives the key-stretching iterations to be set.
 	 */
 	public function setKeyStretchingIterations($keyStretchingIterations) {
 		$this->keyStretchingIterations = $keyStretchingIterations;
 	}
-
+	
 	/**
-	 * TODO: comment
+	 * Sets the last-edition date-time.
+	 * 
+	 * Receives the date-time to be set.
 	 */
-	public function setLastEditor($lastEditor) {
-		$this->lastEditor = $lastEditor;
+	public function setLastEditionDateTime($dateTime) {
+		$this->lastEditionDateTime = $dateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the last name.
+	 * 
+	 * Receives the last name to be set.
 	 */
 	public function setLastName($lastName) {
 		$this->lastName = $lastName;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the password hash.
+	 * 
+	 * Receives the hash to be set.
 	 */
-	public function setPasswordHash($passwordHash) {
-		$this->passwordHash = $passwordHash;
+	public function setPasswordHash($hash) {
+		$this->passwordHash = $hash;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the role.
+	 * 
+	 * Receives the role to be set.
 	 */
 	public function setRole($role) {
 		$this->role = $role;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the salt.
+	 * 
+	 * Receives the salt to be set.
 	 */
 	public function setSalt($salt) {
 		$this->salt = $salt;

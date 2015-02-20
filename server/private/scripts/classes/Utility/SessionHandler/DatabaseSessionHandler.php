@@ -42,11 +42,14 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		// Converts the ID to binary
 		$binaryId = hex2bin($id);
 		
-		// Gets the session
-		$session = $app->database->getReference('App\Database\Entity\Session', $binaryId);
-		
-		// Deletes the session
-		$app->database->remove($session);
+		// Executes a transaction
+		$app->database->transactional(function($entityManager) use ($binaryId) {
+			// Gets the session
+			$session = $entityManager->getReference('App\Database\Entity\Session', $binaryId);
+
+			// Deletes the session
+			$entityManager->remove($session);
+		});
 		
 		return true;
 	}
@@ -97,22 +100,33 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		// Converts the ID to binary
 		$binaryId = hex2bin($id);
 		
-		// Gets the session
-		$session = $app->database->find('App\Database\Entity\Session', $binaryId);
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
 		
-		if (is_null($session)) {
-			// The session doesn't exist
-			// Creates the session
-			$session = new \App\Database\Entity\Session();
-			$session->setId($binaryId);
-			$session->setData($data);
-			$app->database->persist($session);
-		} else {
-			// The session already exists
-			// Edits the session
-			$session->setData($data);
-			$app->database->merge($session);
-		}
+		// Executes a transaction
+		$app->database->transactional(function($entityManager) use ($binaryId, $currentDateTime, $data) {
+			// Gets the session
+			$session = $entityManager->find('App\Database\Entity\Session', $binaryId);
+			
+			if (is_null($session)) {
+				// The session doesn't exist
+				
+				// Initializes the session
+				$session = new \App\Database\Entity\Session();
+				
+				// Creates the session
+				$session->setId($binaryId);
+				$session->setLastAccessDateTime($currentDateTime);
+				$session->setData($data);
+				$entityManager->persist($session);
+			} else {
+				// The session already exists
+				// Edits the session
+				$session->setLastAccessDateTime($currentDateTime);
+				$session->setData($data);
+				$entityManager->merge($session);
+			}
+		});
 		
 		return true;
 	}

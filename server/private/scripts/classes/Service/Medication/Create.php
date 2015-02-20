@@ -34,14 +34,24 @@ class Create extends \App\Service\Service {
 		// TODO: get input somehow
 		$name = 'NOMBRE';
 		
-		// Gets the signed-in user
-		$signedInUser = $app->authentication->getSignedInUser();
-		
-		// Creates the medication
-		$medication = new \App\Database\Entity\Medication();
-		$medication->setName($name);
-		$medication->setCreator($signedInUser);
-		$app->database->persist($medication);
+		// Executes a transaction
+		$id = $app->database->transactional(function($entityManager) use ($name) {
+			global $app;
+			
+			// Gets the signed-in user
+			$signedInUser = $app->authentication->getSignedInUser();
+			
+			// Initializes the medication
+			$medication = new \App\Database\Entity\Medication();
+			
+			// Creates the medication
+			$medication->setName($name);
+			$medication->setCreator($signedInUser);
+			$entityManager->persist($medication);
+			
+			// Returns the medication's ID
+			return $medication->getId();
+		});
 		
 		// TODO: set output: $medication->getId()
 	}

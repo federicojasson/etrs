@@ -32,7 +32,7 @@ namespace App\Database\Entity;
 class Medication {
 	
 	/**
-	 * TODO: comment
+	 * The creation date-time.
 	 * 
 	 * Annotations:
 	 * 
@@ -45,11 +45,12 @@ class Medication {
 	protected $creationDateTime;
 	
 	/**
-	 * TODO: comment
+	 * The creator.
 	 * 
 	 * Annotations:
 	 * 
 	 * @ManyToOne(targetEntity = "User")
+	 * 
 	 * @JoinColumn(
 	 *		name = "creator",
 	 *		referencedColumnName = "id",
@@ -59,7 +60,7 @@ class Medication {
 	protected $creator;
 	
 	/**
-	 * TODO: comment
+	 * Indicates whether it is deleted.
 	 * 
 	 * Annotations:
 	 * 
@@ -72,7 +73,7 @@ class Medication {
 	protected $deleted;
 	
 	/**
-	 * TODO: comment
+	 * The ID.
 	 * 
 	 * Annotations:
 	 * 
@@ -85,6 +86,7 @@ class Medication {
 	 *			"fixed": true
 	 *		}
 	 *	)
+	 * 
 	 * @Id
 	 * @GeneratedValue(strategy = "CUSTOM")
 	 * @CustomIdGenerator(class = "App\Database\Utility\RandomIdGenerator")
@@ -92,7 +94,7 @@ class Medication {
 	protected $id;
 	
 	/**
-	 * TODO: comment
+	 * The last-edition date-time.
 	 * 
 	 * Annotations:
 	 * 
@@ -104,11 +106,12 @@ class Medication {
 	protected $lastEditionDateTime;
 	
 	/**
-	 * TODO: comment
+	 * The last editor.
 	 * 
 	 * Annotations:
 	 * 
 	 * @ManyToOne(targetEntity = "User")
+	 * 
 	 * @JoinColumn(
 	 *		name = "last_editor",
 	 *		referencedColumnName = "id",
@@ -118,7 +121,7 @@ class Medication {
 	protected $lastEditor;
 	
 	/**
-	 * TODO: comment
+	 * The name.
 	 * 
 	 * Annotations:
 	 * 
@@ -143,56 +146,56 @@ class Medication {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the creation date-time.
 	 */
 	public function getCreationDateTime() {
 		return $this->creationDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the creator.
 	 */
 	public function getCreator() {
 		return $this->creator;
 	}
 	
 	/**
-	 * TODO: comment
-	 */
-	public function getDeleted() {
-		return $this->deleted;
-	}
-	
-	/**
-	 * TODO: comment
+	 * Returns the ID.
 	 */
 	public function getId() {
 		return $this->id;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the last-edition date-time.
 	 */
 	public function getLastEditionDateTime() {
 		return $this->lastEditionDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the last editor.
 	 */
 	public function getLastEditor() {
 		return $this->lastEditor;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the name.
 	 */
 	public function getName() {
 		return $this->name;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Determines whether it is deleted.
+	 */
+	public function isDeleted() {
+		return $this->deleted;
+	}
+	
+	/**
+	 * Invoked before it is persisted.
 	 * 
 	 * Annotations:
 	 * 
@@ -201,53 +204,53 @@ class Medication {
 	public function onPrePersist() {
 		global $app;
 		
-		// Gets the current UTC date-time
-		$currentDateTime = $app->server->getCurrentUtcDateTime();
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
 		
 		// Sets the creation date-time
 		$this->creationDateTime = $currentDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the creator.
 	 * 
-	 * Annotations:
-	 * 
-	 * @PreUpdate
+	 * Receives the user to be set.
 	 */
-	public function onPreUpdate() {
-		global $app;
-		
-		// Gets the current UTC date-time
-		$currentDateTime = $app->server->getCurrentUtcDateTime();
-		
-		// Sets the last-edition date-time
-		$this->lastEditionDateTime = $currentDateTime;
+	public function setCreator($user) {
+		$this->creator = $user;
 	}
 	
 	/**
-	 * TODO: comment
-	 */
-	public function setCreator($creator) {
-		$this->creator = $creator;
-	}
-	
-	/**
-	 * TODO: comment
+	 * Sets whether it is deleted.
+	 * 
+	 * Receives an indicator of whether it is deleted.
 	 */
 	public function setDeleted($deleted) {
 		$this->deleted = $deleted;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the last-edition date-time.
+	 * 
+	 * Receives the date-time to be set.
 	 */
-	public function setLastEditor($lastEditor) {
-		$this->lastEditor = $lastEditor;
+	public function setLastEditionDateTime($dateTime) {
+		$this->lastEditionDateTime = $dateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the last editor.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setLastEditor($user) {
+		$this->lastEditor = $user;
+	}
+	
+	/**
+	 * Sets the name.
+	 * 
+	 * Receives the name to be set.
 	 */
 	public function setName($name) {
 		$this->name = $name;

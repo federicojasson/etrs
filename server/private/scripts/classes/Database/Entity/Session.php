@@ -32,7 +32,7 @@ namespace App\Database\Entity;
 class Session {
 	
 	/**
-	 * TODO: comment
+	 * The creation date-time.
 	 * 
 	 * Annotations:
 	 * 
@@ -45,7 +45,7 @@ class Session {
 	protected $creationDateTime;
 	
 	/**
-	 * TODO: comment
+	 * The data.
 	 * 
 	 * Annotations:
 	 * 
@@ -58,7 +58,7 @@ class Session {
 	protected $data;
 	
 	/**
-	 * TODO: comment
+	 * The ID.
 	 * 
 	 * Annotations:
 	 * 
@@ -71,60 +71,54 @@ class Session {
 	 *			"fixed": true
 	 *		}
 	 *	)
+	 * 
 	 * @Id
 	 */
 	protected $id;
 	
 	/**
-	 * TODO: comment
+	 * The last-access date-time.
 	 * 
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "last_edition_date_time",
-	 *		type = "datetime"
+	 *		name = "last_access_date_time",
+	 *		type = "datetime",
+	 *		nullable = false
 	 *	)
 	 */
-	protected $lastEditionDateTime;
+	protected $lastAccessDateTime;
 	
 	/**
-	 * Creates an instance of the class.
-	 */
-	public function __construct() {
-		// Sets default values
-		$this->lastEditionDateTime = null;
-	}
-	
-	/**
-	 * TODO: comment
+	 * Returns the creation date-time.
 	 */
 	public function getCreationDateTime() {
 		return $this->creationDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the data.
 	 */
 	public function getData() {
 		return $this->data;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the ID.
 	 */
 	public function getId() {
 		return $this->id;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the last-access date-time.
 	 */
-	public function getLastEditionDateTime() {
-		return $this->lastEditionDateTime;
+	public function getLastAccessDateTime() {
+		return $this->lastAccessDateTime;
 	}
 
 	/**
-	 * TODO: comment
+	 * Invoked before it is persisted.
 	 * 
 	 * Annotations:
 	 * 
@@ -133,42 +127,38 @@ class Session {
 	public function onPrePersist() {
 		global $app;
 		
-		// Gets the current UTC date-time
-		$currentDateTime = $app->server->getCurrentUtcDateTime();
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
 		
 		// Sets the creation date-time
 		$this->creationDateTime = $currentDateTime;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the data.
 	 * 
-	 * Annotations:
-	 * 
-	 * @PreUpdate
-	 */
-	public function onPreUpdate() {
-		global $app;
-		
-		// Gets the current UTC date-time
-		$currentDateTime = $app->server->getCurrentUtcDateTime();
-		
-		// Sets the last-edition date-time
-		$this->lastEditionDateTime = $currentDateTime;
-	}
-	
-	/**
-	 * TODO: comment
+	 * Receives the data to be set.
 	 */
 	public function setData($data) {
 		$this->data = $data;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
 	 */
 	public function setId($id) {
 		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the last-access date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setLastAccessDateTime($dateTime) {
+		$this->lastAccessDateTime = $dateTime;
 	}
 	
 }
