@@ -23,7 +23,7 @@ namespace App\Service\Medication;
 /**
  * TODO: comment
  */
-class Create extends \App\Service\Service {
+class Delete extends \App\Service\Service {
 	
 	/**
 	 * Executes the service.
@@ -32,29 +32,22 @@ class Create extends \App\Service\Service {
 		global $app;
 		
 		// TODO: get input somehow
-		$name = 'NOMBRE';
+		$id = '41421421';
 		
 		// Executes a transaction
-		$id = $app->database->transactional(function($entityManager) use ($name) {
+		$app->database->transactional(function($entityManager) use ($id) {
 			global $app;
 			
-			// Gets the signed-in user
-			$signedInUser = $app->authentication->getSignedInUser();
+			// Gets the medication
+			$medication = $entityManager->find('App\Database\Entity\Medication', $id);
 			
-			// Initializes the medication
-			$medication = new \App\Database\Entity\Medication();
+			// Asserts conditions of the medication
+			$app->assertor->medicationFound($medication);
 			
-			// Creates the medication
-			$medication->setName($name);
-			$medication->setCreator($signedInUser);
-			$entityManager->persist($medication);
-			
-			// Returns the medication's ID
-			return $medication->getId();
+			// Deletes the medication
+			$medication->setDeleted(true);
+			$entityManager->merge($medication);
 		});
-		
-		// Adds the ouput
-		$this->addOutput('id', $id, 'bin2hex');
 	}
 	
 	/**

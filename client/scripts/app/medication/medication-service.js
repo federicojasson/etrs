@@ -40,5 +40,16 @@
 				input: input
 			});
 		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.delete = function(input) {
+			return server.sendHttpRequest({
+				url: '/medication/delete',
+				httpMethod: 'POST',
+				input: input
+			});
+		};
 	}
 })();

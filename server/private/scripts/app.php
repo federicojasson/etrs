@@ -53,7 +53,8 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 function executeCronJob($url, $httpMethod) {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
-		return;
+		// Exits the application
+		exit('The system is under maintenance');
 	}
 	
 	// Serves the internal request
@@ -68,7 +69,8 @@ function executeCronJob($url, $httpMethod) {
 function executeMaintenanceJob($url, $httpMethod) {
 	if (OPERATION_MODE !== OPERATION_MODE_MAINTENANCE) {
 		// The system is not under maintenance
-		return;
+		// Exits the application
+		exit('The system is not under maintenance');
 	}
 	
 	// Serves the internal request
@@ -138,7 +140,8 @@ function serveExternalRequest() {
 			'App\Service\Account\SignIn',
 			'App\Service\Account\SignOut',
 			'App\Service\Authentication\GetState',
-			'App\Service\Medication\Create'
+			'App\Service\Medication\Create',
+			'App\Service\Medication\Delete'
 		]
 	];
 	
@@ -153,7 +156,7 @@ function serveExternalRequest() {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
 		// Initializes an exceptional middleware
-		array_splice($middlewares, 1, 0, new \App\Middleware\Maintenance());
+		array_splice($middlewares, 2, 0, new \App\Middleware\Maintenance());
 	}
 	
 	// Runs the application

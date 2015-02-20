@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * This class TODO: comment
+ * This class initializes the session.
  */
 class Session extends \Slim\Middleware {
 	
@@ -29,10 +29,27 @@ class Session extends \Slim\Middleware {
 	 * Calls the middleware.
 	 */
 	public function call() {
-		// TODO: implement
+		// Initializes the session
+		$this->initializeSession();
 
 		// Calls the next middleware
 		$this->next->call();
+	}
+	
+	/**
+	 * Initializes the session.
+	 */
+	private function initializeSession() {
+		global $app;
+		
+		// Initializes the session implicitly
+		$app->session;
+		
+		// Gets the IP address of the client
+		$ipAddress = $app->server->getClientIpAddress();
+		
+		// Sets a data entry to store the IP address of the client
+		$app->session->setData(SESSION_DATA_IP_ADDRESS, $ipAddress);
 	}
 	
 }

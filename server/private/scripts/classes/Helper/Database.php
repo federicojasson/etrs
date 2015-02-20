@@ -34,6 +34,7 @@ class Database {
 	 * Creates an instance of the class.
 	 */
 	public function __construct() {
+		// TODO: clean code
 		$this->entityManager = $this->initialize();
 	}
 	
@@ -41,8 +42,26 @@ class Database {
 	 * TODO: comment
 	 */
 	public function __call($name, $arguments) {
+		if (! $this->entityManager->isOpen()) {
+			return;
+		}
+		
 		// TODO: order and comment
 		return call_user_func_array([ $this->entityManager, $name ], $arguments);
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function transactional($closure) {
+		// TODO: order and comment
+		$return = null;
+		
+		$this->__call('transactional', [ function($entityManager) use ($closure, &$return) {
+			$return = call_user_func($closure, $entityManager);
+		} ]);
+		
+		return $return;
 	}
 	
 	/**
@@ -89,19 +108,6 @@ class Database {
 		$connection->setTransactionIsolation(\Doctrine\DBAL\Connection::TRANSACTION_SERIALIZABLE);
 		
 		return $entityManager;
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	private function transactional($closure) {
-		// TODO: order and comment
-		$return = null;
-		$this->entityManager->transactional(function() use ($closure, &$return) {
-			$return = call_user_func($closure);
-		});
-		
-		return $return;
 	}
 	
 }

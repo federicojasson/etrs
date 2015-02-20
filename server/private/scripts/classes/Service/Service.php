@@ -31,6 +31,19 @@ namespace App\Service;
  */
 abstract class Service {
 	
+	/*
+	 * The output.
+	 */
+	private $output;
+	
+	/**
+	 * Creates an instance of the class.
+	 */
+	public function __construct() {
+		// Initializes the output
+		$this->output = '';
+	}
+	
 	/**
 	 * Invokes the service.
 	 */
@@ -51,6 +64,29 @@ abstract class Service {
 		
 		// Executes the service
 		$this->execute();
+		
+		// Sets the output
+		$app->response->setBody($this->output);
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	protected function addOutput($key, $value, $closure = null) {
+		if (! is_array($this->output)) {
+			// The output is not an array
+			// Reinitializes the output as an array
+			$this->output = [];
+		}
+		
+		if (! is_null($closure)) {
+			// A closure was received
+			// Invokes the closure
+			$value = call_user_func($closure);
+		}
+		
+		// Adds the output
+		$this->output[$key] = $value;
 	}
 	
 	/**
@@ -67,5 +103,14 @@ abstract class Service {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected abstract function isUserAuthorized();
+	
+	/**
+	 * Sets the output.
+	 * 
+	 * Receives the output to be set.
+	 */
+	protected function setOutput($output) {
+		$this->output = $output;
+	}
 	
 }

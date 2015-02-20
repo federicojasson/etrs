@@ -21,36 +21,28 @@
 namespace App\Helper;
 
 /**
- * This class TODO: comment
+ * TODO: comment
  */
-class Session {
+class Assertor {
 	
 	/**
 	 * TODO: comment
 	 */
-	public function __construct() {
-		// TODO: clean code
-		ini_set('session.hash_function', 'sha256');
-		ini_set('session.hash_bits_per_character', 4);
-		session_set_save_handler(new \App\Utility\SessionHandler\DatabaseSessionHandler());
-		
-		session_start();
-		
-		// TODO: log IP address
+	public function medicationFound($medication) {
+		$this->entityFound($medication, CODE_NON_EXISTENT_MEDICATION);
 	}
 	
 	/**
 	 * TODO: comment
 	 */
-	public function getData($key) {
-		return $_SESSION[$key];
-	}
-	
-	/**
-	 * TODO: comment
-	 */
-	public function setData($key, $value) {
-		$_SESSION[$key] = $value;
+	private function entityFound($entity, $code) {
+		global $app;
+		
+		if (is_null($entity)) {
+			// The entity was not found
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_NOT_FOUND, $code);
+		}
 	}
 	
 }

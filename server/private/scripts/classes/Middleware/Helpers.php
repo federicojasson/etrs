@@ -36,6 +36,7 @@ class Helpers extends \Slim\Middleware {
 	public function __construct() {
 		// Defines the helpers to be registered
 		$this->helpers = [
+			'assertor' => 'App\Helper\Assertor',
 			'authentication' => 'App\Helper\Authentication',
 			'cryptography' => 'App\Helper\Cryptography',
 			'database' => 'App\Helper\Database',
