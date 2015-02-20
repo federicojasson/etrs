@@ -81,8 +81,8 @@ abstract class Service {
 		
 		if (! is_null($closure)) {
 			// A closure was received
-			// Invokes the closure
-			$value = call_user_func($closure);
+			// Invokes the closure on the value
+			$value = call_user_func($closure, $value);
 		}
 		
 		// Adds the output

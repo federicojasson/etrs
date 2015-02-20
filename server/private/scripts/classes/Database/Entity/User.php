@@ -109,14 +109,14 @@ class User {
 	 * 
 	 * Annotations:
 	 * 
+	 * @Id
+	 * 
 	 * @Column(
 	 *		name = "id",
 	 *		type = "binary",
 	 *		length = 32,
 	 *		nullable = false
 	 *	)
-	 * 
-	 * @Id
 	 */
 	protected $id;
 	

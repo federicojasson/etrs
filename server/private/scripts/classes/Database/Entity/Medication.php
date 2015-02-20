@@ -25,7 +25,7 @@ namespace App\Database\Entity;
  * 
  * Annotations:
  * 
- * @Entity
+ * @Entity(repositoryClass = "App\Database\EntityRepository\CustomRepository")
  * @Table(name = "medications")
  * @HasLifecycleCallbacks
  */
@@ -77,6 +77,10 @@ class Medication {
 	 * 
 	 * Annotations:
 	 * 
+	 * @Id
+	 * @GeneratedValue(strategy = "CUSTOM")
+	 * @CustomIdGenerator(class = "App\Database\Utility\RandomIdGenerator")
+	 * 
 	 * @Column(
 	 *		name = "id",
 	 *		type = "binary",
@@ -86,10 +90,6 @@ class Medication {
 	 *			"fixed": true
 	 *		}
 	 *	)
-	 * 
-	 * @Id
-	 * @GeneratedValue(strategy = "CUSTOM")
-	 * @CustomIdGenerator(class = "App\Database\Utility\RandomIdGenerator")
 	 */
 	protected $id;
 	

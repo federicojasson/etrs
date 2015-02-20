@@ -80,7 +80,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		$binaryId = hex2bin($id);
 		
 		// Gets the session
-		$session = $app->database->find('App\Database\Entity\Session', $binaryId);
+		$session = $app->database->getRepository('App\Database\Entity\Session')->find($binaryId);
 		
 		if (is_null($session)) {
 			// The session doesn't exist
@@ -106,7 +106,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		// Executes a transaction
 		$app->database->transactional(function($entityManager) use ($binaryId, $currentDateTime, $data) {
 			// Gets the session
-			$session = $entityManager->find('App\Database\Entity\Session', $binaryId);
+			$session = $entityManager->getRepository('App\Database\Entity\Session')->find($binaryId);
 			
 			if (is_null($session)) {
 				// The session doesn't exist

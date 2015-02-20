@@ -62,6 +62,8 @@ class Session {
 	 * 
 	 * Annotations:
 	 * 
+	 * @Id
+	 * 
 	 * @Column(
 	 *		name = "id",
 	 *		type = "binary",
@@ -71,8 +73,6 @@ class Session {
 	 *			"fixed": true
 	 *		}
 	 *	)
-	 * 
-	 * @Id
 	 */
 	protected $id;
 	

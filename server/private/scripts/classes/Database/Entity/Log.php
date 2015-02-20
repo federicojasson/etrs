@@ -49,6 +49,10 @@ class Log {
 	 * 
 	 * Annotations:
 	 * 
+	 * @Id
+	 * @GeneratedValue(strategy = "CUSTOM")
+	 * @CustomIdGenerator(class = "App\Database\Utility\RandomIdGenerator")
+	 * 
 	 * @Column(
 	 *		name = "id",
 	 *		type = "binary",
@@ -58,10 +62,6 @@ class Log {
 	 *			"fixed": true
 	 *		}
 	 *	)
-	 * 
-	 * @Id
-	 * @GeneratedValue(strategy = "CUSTOM")
-	 * @CustomIdGenerator(class = "App\Database\Utility\RandomIdGenerator")
 	 */
 	protected $id;
 	

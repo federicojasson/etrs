@@ -39,7 +39,7 @@ class Delete extends \App\Service\Service {
 			global $app;
 			
 			// Gets the medication
-			$medication = $entityManager->find('App\Database\Entity\Medication', $id);
+			$medication = $entityManager->getRepository('App\Database\Entity\Medication')->findNonDeleted($id);
 			
 			// Asserts conditions of the medication
 			$app->assertor->medicationFound($medication);
