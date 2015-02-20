@@ -144,6 +144,7 @@ function serveExternalRequest() {
 	
 	// Initializes the middlewares
 	$middlewares = [
+		new \App\Middleware\Session(),
 		new \App\Middleware\Services($services),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()
@@ -152,7 +153,7 @@ function serveExternalRequest() {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
 		// Initializes an exceptional middleware
-		array_splice($middlewares, 0, 0, new \App\Middleware\Maintenance());
+		array_splice($middlewares, 1, 0, new \App\Middleware\Maintenance());
 	}
 	
 	// Runs the application
