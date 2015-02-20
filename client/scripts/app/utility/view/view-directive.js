@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.account',
-		'app.authentication',
-		'app.medication',
-		'app.utility'
+	angular.module('app.utility.view').directive('view', [
+		'$controller',
+		viewDirective
 	]);
+	
+	/**
+	 * TODO: comment
+	 */
+	function viewDirective($controller) {
+		// TODO: implement
+	}
 })();

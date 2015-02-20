@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.account',
-		'app.authentication',
-		'app.medication',
-		'app.utility'
+	angular.module('app.utility.layout').directive('layout', [
+		'$controller',
+		layoutDirective
 	]);
+	
+	/**
+	 * TODO: comment
+	 */
+	function layoutDirective($controller) {
+		// TODO: implement
+	}
 })();

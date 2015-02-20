@@ -19,12 +19,31 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.account',
-		'app.authentication',
-		'app.medication',
-		'app.utility'
-	]);
+	angular.module('app.utility.view').service('view', viewService);
+	
+	/**
+	 * TODO: comment
+	 */
+	function viewService() {
+		var _this = this;
+		
+		/**
+		 * The controller which must be loaded with the view.
+		 */
+		var _controller;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getController = function() {
+			return _controller;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.setController = function(controller) {
+			_controller = controller;
+		};
+	}
 })();

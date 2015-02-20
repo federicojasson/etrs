@@ -19,12 +19,31 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.account',
-		'app.authentication',
-		'app.medication',
-		'app.utility'
-	]);
+	angular.module('app.utility.layout').service('layout', layoutService);
+	
+	/**
+	 * TODO: comment
+	 */
+	function layoutService() {
+		var _this = this;
+		
+		/**
+		 * The controller which must be loaded with the layout.
+		 */
+		var _controller;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getController = function() {
+			return _controller;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.setController = function(controller) {
+			_controller = controller;
+		};
+	}
 })();

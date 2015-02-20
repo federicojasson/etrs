@@ -19,12 +19,35 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.account',
-		'app.authentication',
-		'app.medication',
-		'app.utility'
+	angular.module('app.utility.router').run([
+		'$rootScope',
+		'$state',
+		run
 	]);
+	
+	/**
+	 * TODO: comment
+	 */
+	function run($rootScope, $state) {
+		// Listens for state transitions
+		$rootScope.$on('$stateChangeSuccess', function() {
+			// Sets the layout and the view
+			setLayout();
+			setView();
+		});
+		
+		/**
+		 * TODO: comment
+		 */
+		function setLayout() {
+			// TODO: implement
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		function setView() {
+			// TODO: implement
+		}
+	}
 })();
