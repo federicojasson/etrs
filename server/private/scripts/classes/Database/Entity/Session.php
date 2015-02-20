@@ -118,13 +118,13 @@ class Session {
 	}
 
 	/**
-	 * Invoked before it is persisted.
+	 * Sets the current date-time as the creation date-time.
 	 * 
 	 * Annotations:
 	 * 
 	 * @PrePersist
 	 */
-	public function onPrePersist() {
+	public function setCreationDateTime() {
 		global $app;
 		
 		// Gets the current date-time
