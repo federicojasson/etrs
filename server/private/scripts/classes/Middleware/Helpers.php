@@ -39,7 +39,7 @@ class Helpers extends \Slim\Middleware {
 			'assertor' => 'App\Helper\Assertor',
 			'authentication' => 'App\Helper\Authentication',
 			'cryptography' => 'App\Helper\Cryptography',
-			'database' => 'App\Helper\Database',
+			'data' => 'App\Helper\Data',
 			'parameters' => 'App\Helper\Parameters',
 			'response' => 'App\Helper\Response',
 			'server' => 'App\Helper\Server',

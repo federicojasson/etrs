@@ -137,11 +137,11 @@ function serveExternalRequest() {
 	// Defines the services
 	$services = [
 		'POST' => [
-			'App\Service\Account\SignIn',
-			'App\Service\Account\SignOut',
-			'App\Service\Authentication\GetState',
-			'App\Service\Medication\Create',
-			'App\Service\Medication\Delete'
+			'/account/sign-in',
+			'/account/sign-out',
+			'/authentication/get-state',
+			'/medication/create',
+			'/medication/delete'
 		]
 	];
 	
@@ -178,8 +178,8 @@ function serveInternalRequest($url, $httpMethod) {
 	// Defines the services
 	$services = [
 		'POST' => [
-			'App\Service\Session\DeleteExpired',
-			'App\Service\User\Delete'
+			'/session/delete-expired',
+			'/user/delete'
 		]
 	];
 	

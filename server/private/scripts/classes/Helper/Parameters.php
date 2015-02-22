@@ -44,14 +44,14 @@ class Parameters {
 		
 		// Defines the paths of the parameters files
 		$this->paths = [
-			'database' => DIRECTORY_PARAMETERS . '/database.json'
+			'dbms' => DIRECTORY_PARAMETERS . '/dbms.json'
 		];
 	}
 	
 	/**
 	 * Returns a set of parameters according to the requested property.
 	 * 
-	 * Receives the property's name.
+	 * Receives the name of the property.
 	 */
 	public function __get($name) {
 		if (! array_key_exists($name, $this->parameters)) {

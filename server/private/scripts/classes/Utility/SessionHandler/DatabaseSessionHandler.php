@@ -29,7 +29,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	 * TODO: comment
 	 */
 	public function close() {
-		// There's nothing to do
+		// There is nothing to do
 		return true;
 	}
 
@@ -40,12 +40,12 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		global $app;
 		
 		// Converts the ID to binary
-		$binaryId = hex2bin($id);
+		$id = hex2bin($id);
 		
 		// Executes a transaction
-		$app->database->transactional(function($entityManager) use ($binaryId) {
+		$app->data->transactional(function($entityManager) use ($id) {
 			// Gets the session
-			$session = $entityManager->getReference('App\Database\Entity\Session', $binaryId);
+			$session = $entityManager->getReference('App\Data\Entity\Session', $id);
 
 			// Deletes the session
 			$entityManager->remove($session);
@@ -58,7 +58,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	 * TODO: comment
 	 */
 	public function gc($maximumInactivityTime) {
-		// There's nothing to do
+		// There is nothing to do
 		return true;
 	}
 
@@ -66,7 +66,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	 * TODO: comment
 	 */
 	public function open($path, $name) {
-		// There's nothing to do
+		// There is nothing to do
 		return true;
 	}
 
@@ -77,10 +77,10 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		global $app;
 		
 		// Converts the ID to binary
-		$binaryId = hex2bin($id);
+		$id = hex2bin($id);
 		
 		// Gets the session
-		$session = $app->database->getRepository('App\Database\Entity\Session')->find($binaryId);
+		$session = $app->data->getRepository('App\Data\Entity\Session')->find($id);
 		
 		if (is_null($session)) {
 			// The session doesn't exist
@@ -98,24 +98,24 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		global $app;
 		
 		// Converts the ID to binary
-		$binaryId = hex2bin($id);
+		$id = hex2bin($id);
 		
 		// Gets the current date-time
 		$currentDateTime = $app->server->getCurrentDateTime();
 		
 		// Executes a transaction
-		$app->database->transactional(function($entityManager) use ($binaryId, $currentDateTime, $data) {
+		$app->data->transactional(function($entityManager) use ($id, $currentDateTime, $data) {
 			// Gets the session
-			$session = $entityManager->getRepository('App\Database\Entity\Session')->find($binaryId);
+			$session = $entityManager->getRepository('App\Data\Entity\Session')->find($id);
 			
 			if (is_null($session)) {
 				// The session doesn't exist
 				
 				// Initializes the session
-				$session = new \App\Database\Entity\Session();
+				$session = new \App\Data\Entity\Session();
 				
 				// Creates the session
-				$session->setId($binaryId);
+				$session->setId($id);
 				$session->setLastAccessDateTime($currentDateTime);
 				$session->setData($data);
 				$entityManager->persist($session);

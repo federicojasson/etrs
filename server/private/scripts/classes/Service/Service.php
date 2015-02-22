@@ -31,7 +31,7 @@ namespace App\Service;
  */
 abstract class Service {
 	
-	/*
+	/**
 	 * The output.
 	 */
 	private $output;

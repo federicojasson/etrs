@@ -18,35 +18,25 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * This script defines global functions.
- */
+namespace App\Data\EntityRepository;
 
 /**
- * Reads and decodes the content of a JSON file.
- * 
- * Receives the file's path.
+ * This class TODO: comment
  */
-function readJsonFile($path) {
-	// Gets the content of the file
-	$content = file_get_contents($path);
+class CustomRepository extends \Doctrine\ORM\EntityRepository {
 	
-	// Returns the decoded content
-	return json_decode($content, true);
-}
-
-/**
- * Converts a string from spinal-case to PascalCase.
- * 
- * Receives the string.
- */
-function toPascalCase($string) {
-	// Replaces the dashes with whitespaces
-	$string = str_replace('-', ' ', $string);
+	/**
+	 * TODO: comment
+	 */
+	public function findNonDeleted($id) {
+		// Defines the criteria
+		$criteria = [
+			'id' => $id,
+			'deleted' => false
+		];
+		
+		// Returns the entity found
+		return $this->findOneBy($criteria);
+	}
 	
-	// Converts the first character of each word to uppercase
-	$string = ucwords($string);
-	
-	// Returns the string in PascalCase
-	return str_replace(' ', '', $string);
 }

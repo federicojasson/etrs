@@ -18,35 +18,34 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * This script defines global functions.
- */
+namespace App\Service\Post\Authentication;
 
 /**
- * Reads and decodes the content of a JSON file.
- * 
- * Receives the file's path.
+ * TODO: comment
  */
-function readJsonFile($path) {
-	// Gets the content of the file
-	$content = file_get_contents($path);
+class GetState extends \App\Service\Service {
 	
-	// Returns the decoded content
-	return json_decode($content, true);
-}
-
-/**
- * Converts a string from spinal-case to PascalCase.
- * 
- * Receives the string.
- */
-function toPascalCase($string) {
-	// Replaces the dashes with whitespaces
-	$string = str_replace('-', ' ', $string);
+	/**
+	 * Executes the service.
+	 */
+	protected function execute() {
+		// TODO: implement
+	}
 	
-	// Converts the first character of each word to uppercase
-	$string = ucwords($string);
+	/**
+	 * Determines whether the input is valid.
+	 */
+	protected function isInputValid() {
+		// TODO: implement
+		return true;
+	}
 	
-	// Returns the string in PascalCase
-	return str_replace(' ', '', $string);
+	/**
+	 * Determines whether the user is authorized to use the service.
+	 */
+	protected function isUserAuthorized() {
+		// TODO: implement
+		return true;
+	}
+	
 }

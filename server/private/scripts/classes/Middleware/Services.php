@@ -51,43 +51,39 @@ class Services extends \Slim\Middleware {
 	}
 	
 	/**
-	 * Returns the URL of a service.
+	 * Returns the fully-qualified class name of a service.
 	 * 
-	 * Receives the fully-qualified class name of the service.
+	 * Receives the URL and the HTTP method of the service.
 	 */
-	private function getServiceUrl($class) {
-		// Defines the namespace of the services and gets its length
-		$namespace = 'App\Service\\';
-		$length = strlen($namespace);
+	private function getServiceFullyQualifiedClassName($url, $httpMethod) {
+		// Prepends the HTTP method in lowercase to the URL
+		$string = strtolower($httpMethod) . $url;
 		
-		// Gets the suffix of the class
-		$suffix = substr($class, $length);
+		// Gets the string fragments separated by slashes
+		$fragments = explode('/', $string);
 		
-		// Replaces suffix's backslashes by slashes
-		$suffixWithSlashes = str_replace('\\', '/', $suffix);
-		
-		// Gets the fragments of the suffix
-		$fragments = explode('/', $suffixWithSlashes);
-		
-		// Converts the fragments to spinal-case
+		// Converts the fragments to PascalCase
 		foreach ($fragments as &$fragment) {
-			$fragment = toSpinalCase($fragment);
+			$fragment = toPascalCase($fragment);
 		}
 		
-		// Returns the URL
-		return '/' . implode('/', $fragments);
+		// Defines the namespace of the services
+		$namespace = 'App\Service\\';
+		
+		// Returns the fully-qualified class name of the service
+		return $namespace . implode('\\', $fragments);
 	}
 	
 	/**
 	 * Registers a service.
 	 * 
-	 * Receives the service's HTTP method and its fully-qualified class name.
+	 * Receives the URL and the HTTP method of the service.
 	 */
-	private function registerService($httpMethod, $class) {
+	private function registerService($url, $httpMethod) {
 		global $app;
 		
-		// Gets the URL of the service from its fully-qualified class name
-		$url = $this->getServiceUrl($class);
+		// Gets the fully-qualified class name of the service
+		$class = $this->getServiceFullyQualifiedClassName($url, $httpMethod);
 		
 		// Registers a route for the service
 		$route = $app->map($url, new $class);
@@ -103,9 +99,9 @@ class Services extends \Slim\Middleware {
 	 */
 	private function registerServices($services) {
 		// Registers the services
-		foreach ($services as $httpMethod => $services) {
-			foreach ($services as $class) {
-				$this->registerService($httpMethod, $class);
+		foreach ($services as $httpMethod => $urls) {
+			foreach ($urls as $url) {
+				$this->registerService($url, $httpMethod);
 			}
 		}
 	}

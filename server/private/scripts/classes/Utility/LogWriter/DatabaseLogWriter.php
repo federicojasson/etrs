@@ -59,15 +59,15 @@ class DatabaseLogWriter {
 		global $app;
 		
 		// Maps the level to the corresponding value used in the database
-		$mappedLevel = $this->levelMapping[$level];
+		$level = $this->levelMapping[$level];
 		
 		// Executes a transaction
-		$app->database->transactional(function($entityManager) use ($mappedLevel, $message) {
+		$app->data->transactional(function($entityManager) use ($level, $message) {
 			// Initializes the log
-			$log = new \App\Database\Entity\Log();
+			$log = new \App\Data\Entity\Log();
 			
 			// Creates the log
-			$log->setLevel($mappedLevel);
+			$log->setLevel($level);
 			$log->setMessage($message);
 			$entityManager->persist($log);
 		});

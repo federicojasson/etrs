@@ -18,35 +18,23 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * This script defines global functions.
- */
+namespace App\Data\Utility;
 
 /**
- * Reads and decodes the content of a JSON file.
- * 
- * Receives the file's path.
+ * This class generates random IDs for database entities.
  */
-function readJsonFile($path) {
-	// Gets the content of the file
-	$content = file_get_contents($path);
+class RandomIdGenerator extends \Doctrine\ORM\Id\AbstractIdGenerator {
 	
-	// Returns the decoded content
-	return json_decode($content, true);
-}
-
-/**
- * Converts a string from spinal-case to PascalCase.
- * 
- * Receives the string.
- */
-function toPascalCase($string) {
-	// Replaces the dashes with whitespaces
-	$string = str_replace('-', ' ', $string);
+	/**
+	 * Generates the ID of an entity.
+	 * 
+	 * Receives the entity manager and the entity.
+	 */
+	public function generate(\Doctrine\ORM\EntityManager $entityManager, $entity) {
+		global $app;
+		
+		// Returns a random ID
+		return $app->cryptography->generateRandomId();
+	}
 	
-	// Converts the first character of each word to uppercase
-	$string = ucwords($string);
-	
-	// Returns the string in PascalCase
-	return str_replace(' ', '', $string);
 }

@@ -33,9 +33,9 @@ class Server {
 		$ipAddress = $_SERVER['REMOTE_ADDR'];
 
 		// Converts the IP address to binary
-		$binaryIpAddress = inet_pton($ipAddress);
+		$ipAddress = inet_pton($ipAddress);
 		
-		if ($binaryIpAddress === false) {
+		if ($ipAddress === false) {
 			// The IP address is invalid
 			return 'unknown';
 		}
@@ -44,16 +44,16 @@ class Server {
 		$prefix = hex2bin('00000000000000000000ffff');
 		$length = strlen($prefix);
 		
-		if ($prefix === substr($binaryIpAddress, 0, $length)) {
+		if ($prefix === substr($ipAddress, 0, $length)) {
 			// The IP address is an IPv4-mapped IPv6 address
 			// Removes the prefix
-			$binaryIpAddress = substr($binaryIpAddress, strlen($prefix));
+			$ipAddress = substr($ipAddress, strlen($prefix));
 		}
 
-		// Converts the IP address back to its human-readable format
-		$canonicalIpAddress = inet_ntop($binaryIpAddress);
+		// Converts the IP address back to a human-readable format
+		$ipAddress = inet_ntop($ipAddress);
 
-		return $canonicalIpAddress;
+		return $ipAddress;
 	}
 	
 	/**

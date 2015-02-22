@@ -35,7 +35,7 @@ class Authentication {
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
 		// Returns the signed-in user
-		return $app->database->getReference('App\Database\Entity\User', $id);
+		return $app->data->getReference('App\Data\Entity\User', $id);
 	}
 	
 	/**
