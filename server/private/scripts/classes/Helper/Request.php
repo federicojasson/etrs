@@ -18,38 +18,35 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Helper;
 
 /**
- * This class initializes the session.
+ * This class extends the Slim's Request class.
  */
-class Session extends \Slim\Middleware {
+class Request extends \Slim\Http\Request {
 	
 	/**
-	 * Calls the middleware.
+	 * Creates an instance of the class.
 	 */
-	public function call() {
-		// Initializes the session
-		$this->initializeSession();
-
-		// Calls the next middleware
-		$this->next->call();
+	public function __construct() {
+		global $app;
+		
+		// Invokes the parent's constructor
+		parent::__construct($app->environment);
 	}
 	
 	/**
-	 * Initializes the session.
+	 * Determines whether it is a data request.
 	 */
-	private function initializeSession() {
-		global $app;
-		
-		// Initializes the session implicitly
-		$app->session;
-		
-		// Gets the IP address of the client
-		$ipAddress = $app->server->getClientIpAddress();
-		
-		// Sets a data entry in the session to store the IP address
-		$app->session->setData(SESSION_DATA_IP_ADDRESS, $ipAddress);
+	public function isDataRequest() {
+		return $this->getMediaType() === 'multipart/form-data';
+	}
+	
+	/**
+	 * Determines whether it is a JSON request.
+	 */
+	public function isJsonRequest() {
+		return $this->getMediaType() === 'application/json';
 	}
 	
 }

@@ -18,38 +18,37 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Helper;
 
 /**
- * This class initializes the session.
+ * This class TODO: comment
  */
-class Session extends \Slim\Middleware {
+class Authenticator {
 	
 	/**
-	 * Calls the middleware.
+	 * TODO: comment
 	 */
-	public function call() {
-		// Initializes the session
-		$this->initializeSession();
-
-		// Calls the next middleware
-		$this->next->call();
-	}
-	
-	/**
-	 * Initializes the session.
-	 */
-	private function initializeSession() {
+	public function authenticateUserByPassword($id, $password) {
 		global $app;
 		
-		// Initializes the session implicitly
-		$app->session;
+		// Gets the user
+		$user = $app->data->getRepository('App\Data\Entity\User')->find($id);
 		
-		// Gets the IP address of the client
-		$ipAddress = $app->server->getClientIpAddress();
+		if (is_null($user)) {
+			// The user doesn't exist
+			
+			// Computes the hash of the password to cause a deliberate delay
+			// that avoids disclosing the fact that the user doesn't exist
+			$app->cryptography->hashNewPassword($password);
+			
+			return false;
+		}
 		
-		// Sets a data entry in the session to store the IP address
-		$app->session->setData(SESSION_DATA_IP_ADDRESS, $ipAddress);
+		// Computes the hash of the password
+		$passwordHash = $app->cryptography->hashPassword($password, $user.getSalt(), $user.getKeyStretchingIterations());
+		
+		// Compares the password hashes
+		return $passwordHash === $user.getPasswordHash();
 	}
 	
 }

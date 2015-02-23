@@ -38,9 +38,11 @@ class Helpers extends \Slim\Middleware {
 		$this->helpers = [
 			'assertor' => 'App\Helper\Assertor',
 			'authentication' => 'App\Helper\Authentication',
+			'authenticator' => 'App\Helper\Authenticator',
 			'cryptography' => 'App\Helper\Cryptography',
 			'data' => 'App\Helper\Data',
 			'parameters' => 'App\Helper\Parameters',
+			'request' => 'App\Helper\Request',
 			'response' => 'App\Helper\Response',
 			'server' => 'App\Helper\Server',
 			'session' => 'App\Helper\Session'
@@ -68,7 +70,6 @@ class Helpers extends \Slim\Middleware {
 		
 		// Registers a singleton initializer for the helper
 		$app->container->singleton($name, function() use ($class) {
-			// Returns the helper
 			return new $class;
 		});
 	}

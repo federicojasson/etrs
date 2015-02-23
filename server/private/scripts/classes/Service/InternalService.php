@@ -18,38 +18,34 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service;
 
 /**
- * This class initializes the session.
+ * This class represents an internal service.
+ * 
+ * Subclasses must implement the isInputValid method to validate the input.
  */
-class Session extends \Slim\Middleware {
+abstract class InternalService extends Service {
 	
 	/**
-	 * Calls the middleware.
+	 * Invokes the service.
 	 */
-	public function call() {
-		// Initializes the session
-		$this->initializeSession();
-
-		// Calls the next middleware
-		$this->next->call();
-	}
-	
-	/**
-	 * Initializes the session.
-	 */
-	private function initializeSession() {
+	public function __invoke() {
 		global $app;
 		
-		// Initializes the session implicitly
-		$app->session;
+		if (! $this->isInputValid()) {
+			// The input is invalid
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_BAD_REQUEST, CODE_INVALID_INPUT);
+		}
 		
-		// Gets the IP address of the client
-		$ipAddress = $app->server->getClientIpAddress();
-		
-		// Sets a data entry in the session to store the IP address
-		$app->session->setData(SESSION_DATA_IP_ADDRESS, $ipAddress);
+		// Invokes the parent's function
+		parent::__invoke();
 	}
+	
+	/**
+	 * Determines whether the input is valid.
+	 */
+	protected abstract function isInputValid();
 	
 }

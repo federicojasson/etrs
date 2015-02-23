@@ -43,9 +43,10 @@
 		};
 		
 		/**
-		 * Sets the title of the document. It automatically appends the acronym
-		 * of the application at the end of the title, so it must not be
-		 * included.
+		 * Sets the title of the document.
+		 * 
+		 * The function appends the acronym of the application at the end of the
+		 * title, so it must not be included.
 		 * 
 		 * Receives the title to be set.
 		 */

@@ -23,7 +23,7 @@ namespace App\Service\Post\Medication;
 /**
  * TODO: comment
  */
-class Create extends \App\Service\Service {
+class Create extends \App\Service\ExternalService {
 	
 	/**
 	 * Executes the service.
@@ -38,7 +38,7 @@ class Create extends \App\Service\Service {
 		$id = $app->data->transactional(function($entityManager) use ($name) {
 			global $app;
 			
-			// Gets the signed-in user
+			// Gets the signed in user
 			$signedInUser = $app->authentication->getSignedInUser();
 			
 			// Initializes the medication
@@ -53,8 +53,8 @@ class Create extends \App\Service\Service {
 			return $medication->getId();
 		});
 		
-		// Adds the ouput
-		$this->addOutput('id', $id, 'bin2hex');
+		// Sets an output
+		$this->setOutput('id', $id, 'bin2hex');
 	}
 	
 	/**

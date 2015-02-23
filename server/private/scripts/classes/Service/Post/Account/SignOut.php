@@ -23,20 +23,23 @@ namespace App\Service\Post\Account;
 /**
  * TODO: comment
  */
-class SignOut extends \App\Service\Service {
+class SignOut extends \App\Service\ExternalService {
 	
 	/**
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Signs out the user from the system
+		$app->authentication->signOutUser();
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		// The service has no input
 		return true;
 	}
 	
@@ -44,8 +47,10 @@ class SignOut extends \App\Service\Service {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
-		return true;
+		global $app;
+		
+		// The service is available only to signed in users
+		return $app->authentication->isUserSignedIn();
 	}
 	
 }

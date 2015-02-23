@@ -23,7 +23,7 @@ namespace App\Service\Post\Medication;
 /**
  * TODO: comment
  */
-class Delete extends \App\Service\Service {
+class Delete extends \App\Service\ExternalService {
 	
 	/**
 	 * Executes the service.

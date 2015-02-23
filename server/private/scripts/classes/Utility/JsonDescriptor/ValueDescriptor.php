@@ -18,38 +18,24 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Utility\JsonDescriptor;
 
 /**
- * This class initializes the session.
+ * TODO: comment
  */
-class Session extends \Slim\Middleware {
+class ValueDescriptor extends JsonDescriptor {
 	
 	/**
-	 * Calls the middleware.
+	 * TODO: comment
 	 */
-	public function call() {
-		// Initializes the session
-		$this->initializeSession();
-
-		// Calls the next middleware
-		$this->next->call();
-	}
-	
-	/**
-	 * Initializes the session.
-	 */
-	private function initializeSession() {
-		global $app;
+	public function isValidInput($input) {
+		if (is_array($input)) {
+			// The input is an array
+			return false;
+		}
 		
-		// Initializes the session implicitly
-		$app->session;
-		
-		// Gets the IP address of the client
-		$ipAddress = $app->server->getClientIpAddress();
-		
-		// Sets a data entry in the session to store the IP address
-		$app->session->setData(SESSION_DATA_IP_ADDRESS, $ipAddress);
+		// Validates the value
+		return call_user_func($this->definition, $input);
 	}
 	
 }

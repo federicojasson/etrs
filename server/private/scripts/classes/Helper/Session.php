@@ -26,7 +26,7 @@ namespace App\Helper;
 class Session {
 	
 	/**
-	 * TODO: comment
+	 * Creates an instance of the class.
 	 */
 	public function __construct() {
 		// TODO: clean code
@@ -42,8 +42,29 @@ class Session {
 	/**
 	 * TODO: comment
 	 */
+	public function clearData($key) {
+		unset($_SESSION[$key]);
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function containsData($key) {
+		return array_key_exists($key, $_SESSION);
+	}
+	
+	/**
+	 * TODO: comment
+	 */
 	public function getData($key) {
 		return $_SESSION[$key];
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function regenerateId() {
+		session_regenerate_id(true);
 	}
 	
 	/**

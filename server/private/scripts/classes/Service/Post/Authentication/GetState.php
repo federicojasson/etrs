@@ -23,20 +23,37 @@ namespace App\Service\Post\Authentication;
 /**
  * TODO: comment
  */
-class GetState extends \App\Service\Service {
+class GetState extends \App\Service\ExternalService {
 	
 	/**
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Determines whether the user is signed in
+		$signedIn = $app->authentication->isUserSignedIn();
+		
+		// Sets an output
+		$this->setOutput('signedIn', $signedIn);
+		
+		if (! $signedIn) {
+			// The user is not signed in
+			return;
+		}
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Sets an output
+		$this->setOutput('user', $signedInUser->getId());
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		// The service has no input
 		return true;
 	}
 	
@@ -44,7 +61,7 @@ class GetState extends \App\Service\Service {
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		// The service is available to all users
 		return true;
 	}
 	

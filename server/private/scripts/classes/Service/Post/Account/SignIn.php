@@ -20,32 +20,76 @@
 
 namespace App\Service\Post\Account;
 
+use App\Utility\JsonDescriptor\ObjectDescriptor;
+use App\Utility\JsonDescriptor\ValueDescriptor;
+
 /**
  * TODO: comment
  */
-class SignIn extends \App\Service\Service {
+class SignIn extends \App\Service\ExternalService {
 	
 	/**
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Gets the input
+		$credentials = $this->getInput('credentials');
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($credentials['id'], $credentials['password']);
+		
+		// Sets an output
+		$this->setOutput('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user was not authenticated
+			return;
+		}
+		
+		// Signs in the user in the system
+		$app->authentication->signInUser($credentials['id']);
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
-		return true;
+		global $app;
+		
+		if (! $app->request->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Defines the JSON descriptor
+		$jsonDescriptor = new ObjectDescriptor([
+			'credentials' => new ObjectDescriptor([
+				'id' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				}),
+				
+				'password' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				})
+			])
+		]);
+		
+		// Validates the JSON input
+		return $this->isValidJsonInput($jsonDescriptor);
 	}
 	
 	/**
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
-		return true;
+		global $app;
+		
+		// The service is available only to not signed in users
+		return ! $app->authentication->isUserSignedIn();
 	}
 	
 }

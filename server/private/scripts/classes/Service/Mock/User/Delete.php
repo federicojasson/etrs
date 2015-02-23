@@ -23,7 +23,7 @@ namespace App\Service\Mock\User;
 /**
  * TODO: comment
  */
-class Delete extends \App\Service\Service {
+class Delete extends \App\Service\InternalService {
 	
 	/**
 	 * Executes the service.
@@ -36,13 +36,6 @@ class Delete extends \App\Service\Service {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected function isUserAuthorized() {
 		// TODO: implement
 	}
 	

@@ -23,7 +23,7 @@ namespace App\Service\Mock\Session;
 /**
  * TODO: comment
  */
-class DeleteExpired extends \App\Service\Service {
+class DeleteExpired extends \App\Service\InternalService {
 	
 	/**
 	 * Executes the service.
@@ -36,13 +36,6 @@ class DeleteExpired extends \App\Service\Service {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected function isUserAuthorized() {
 		// TODO: implement
 	}
 	

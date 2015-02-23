@@ -37,30 +37,13 @@ abstract class Service {
 	private $output;
 	
 	/**
-	 * Creates an instance of the class.
-	 */
-	public function __construct() {
-		// Initializes the output
-		$this->output = '';
-	}
-	
-	/**
 	 * Invokes the service.
 	 */
 	public function __invoke() {
 		global $app;
 		
-		if (! $this->isUserAuthorized()) {
-			// The user is not authorized to use the service
-			// Halts the execution
-			$app->server->haltExecution(HTTP_STATUS_FORBIDDEN, CODE_UNAUTHORIZED_USER);
-		}
-		
-		if (! $this->isInputValid()) {
-			// The input is invalid
-			// Halts the execution
-			$app->server->haltExecution(HTTP_STATUS_BAD_REQUEST, CODE_INVALID_INPUT);
-		}
+		// Initializes the output
+		$this->output = '';
 		
 		// Executes the service
 		$this->execute();
@@ -70,47 +53,37 @@ abstract class Service {
 	}
 	
 	/**
+	 * Executes the service.
+	 */
+	protected abstract function execute();
+	
+	/**
+	 * Replaces the output completely.
+	 * 
+	 * Receives the output to be set.
+	 */
+	protected function replaceOutput($output) {
+		$this->output = $output;
+	}
+	
+	/**
 	 * TODO: comment
 	 */
-	protected function addOutput($key, $value, $closure = null) {
+	protected function setOutput($key, $value, $filter = null) {
 		if (! is_array($this->output)) {
 			// The output is not an array
 			// Reinitializes the output as an array
 			$this->output = [];
 		}
 		
-		if (! is_null($closure)) {
-			// A closure was received
-			// Invokes the closure on the value
-			$value = call_user_func($closure, $value);
+		if (! is_null($filter)) {
+			// A filter was received
+			// Filters the value
+			$value = call_user_func($filter, $value);
 		}
 		
-		// Adds the output
+		// Sets the output
 		$this->output[$key] = $value;
-	}
-	
-	/**
-	 * Executes the service.
-	 */
-	protected abstract function execute();
-	
-	/**
-	 * Determines whether the input is valid.
-	 */
-	protected abstract function isInputValid();
-	
-	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected abstract function isUserAuthorized();
-	
-	/**
-	 * Sets the output.
-	 * 
-	 * Receives the output to be set.
-	 */
-	protected function setOutput($output) {
-		$this->output = $output;
 	}
 	
 }

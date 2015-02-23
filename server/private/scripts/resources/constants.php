@@ -35,7 +35,10 @@ define('HTTP_STATUS_INTERNAL_SERVER_ERROR', 500);
 define('HTTP_STATUS_NOT_FOUND', 404);
 define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
 
+define('KEY_STRETCHING_ITERATIONS', 64000);
+
 define('LENGTH_RANDOM_ID', 16); // Bytes
+define('LENGTH_SALT', 64); // Bytes
 
 define('LOG_LEVEL_1', 1);
 define('LOG_LEVEL_2', 2);

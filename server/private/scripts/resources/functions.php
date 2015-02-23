@@ -23,6 +23,27 @@
  */
 
 /**
+ * Determines whether an array is sequential.
+ * 
+ * Receives the array.
+ */
+function isArraySequential($array) {
+	// Gets the length of the array
+	$length = count($array);
+	
+	if ($length === 0) {
+		// The array is empty
+		return true;
+	}
+	
+	// Initializes an array with the sequential indices
+	$indices = range(0, $length - 1);
+	
+	// Compares the keys of the array with the indices
+	return array_keys($array) === $indices;
+}
+
+/**
  * Reads and decodes the content of a JSON file.
  * 
  * Receives the file's path.

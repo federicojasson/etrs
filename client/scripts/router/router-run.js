@@ -95,10 +95,10 @@
 			// Gets the user role
 			var userRole;
 			if (authentication.isUserSignedIn()) {
-				// The user is signed-in
+				// The user is signed in
 				userRole = authentication.getSignedInUser().role;
 			} else {
-				// The user is not signed-in
+				// The user is not signed in
 				userRole = '__';
 			}
 			

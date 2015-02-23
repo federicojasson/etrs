@@ -33,6 +33,30 @@ class Cryptography {
 	}
 	
 	/**
+	 * TODO: comment
+	 */
+	public function hashNewPassword($password) {
+		// Generates a salt
+		$salt = $this->generateRandomBytesSequence(LENGTH_SALT);
+		
+		// Defines the number of iterations for the key stretching
+		$keyStretchingIterations = KEY_STRETCHING_ITERATIONS;
+		
+		// Computes the hash of the password
+		$passwordHash = $this->hashPassword($password, $salt, $keyStretchingIterations);
+		
+		return [ $passwordHash, $salt, $keyStretchingIterations ];
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function hashPassword($password, $salt, $keyStretchingIterations) {
+		// Applies SHA-512 and the PBKDF2 key derivation function
+		return hash_pbkdf2('sha512', $password, $salt, $keyStretchingIterations, 0, true);
+	}
+	
+	/**
 	 * Generates a sequence of random bytes.
 	 * 
 	 * Receives the length of the sequence.
