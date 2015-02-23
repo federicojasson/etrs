@@ -18,15 +18,18 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace App\Configuration;
+
 /**
- * This script executes a server job.
+ * This class TODO: comment
  */
-
-// Defines the root directory
-define('DIRECTORY_ROOT', __DIR__);
-
-// Includes the application
-require_once DIRECTORY_ROOT . '/private/scripts/app.php';
-
-// Executes the server job
-executeServerJob();
+class Maintenance {
+	
+	/**
+	 * Invokes the configuration.
+	 */
+	public function __invoke() {
+		// TODO: implement
+	}
+	
+}

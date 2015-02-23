@@ -53,8 +53,12 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 function executeCronJob($url, $httpMethod) {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
+		
+		// Shows an informative message
+		echo 'The system is under maintenance';
+		
 		// Exits the application
-		exit('The system is under maintenance');
+		exit();
 	}
 	
 	// Serves the internal request
@@ -69,12 +73,41 @@ function executeCronJob($url, $httpMethod) {
 function executeMaintenanceJob($url, $httpMethod) {
 	if (OPERATION_MODE !== OPERATION_MODE_MAINTENANCE) {
 		// The system is not under maintenance
+		
+		// Shows an informative message
+		echo 'The system is not under maintenance';
+		
 		// Exits the application
-		exit('The system is not under maintenance');
+		exit();
 	}
 	
 	// Serves the internal request
 	serveInternalRequest($url, $httpMethod);
+}
+
+/**
+ * Executes a server job.
+ */
+function executeServerJob() {
+	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
+		// The system is under maintenance
+		
+		// Defines the response
+		$response = [
+			'code' => CODE_SYSTEM_UNDER_MAINTENANCE
+		];
+		
+		// Sends the response with the appropriate headers
+		http_response_code(HTTP_STATUS_SERVICE_UNAVAILABLE);
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		
+		// Exits the application
+		exit();
+	}
+	
+	// Serves the external request
+	serveExternalRequest();
 }
 
 /**
@@ -148,16 +181,11 @@ function serveExternalRequest() {
 	// Initializes the middlewares
 	$middlewares = [
 		new \App\Middleware\Session(),
+		new \App\Middleware\Configurations(),
 		new \App\Middleware\Services($services),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()
 	];
-	
-	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
-		// The system is under maintenance
-		// Initializes an exceptional middleware
-		array_splice($middlewares, 2, 0, new \App\Middleware\Maintenance());
-	}
 	
 	// Runs the application
 	runApp($middlewares);
@@ -185,6 +213,7 @@ function serveInternalRequest($url, $httpMethod) {
 	
 	// Initializes the middlewares
 	$middlewares = [
+		new \App\Middleware\Configurations(),
 		new \App\Middleware\Services($services),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()

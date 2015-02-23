@@ -18,21 +18,18 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Configuration;
 
 /**
- * This class halts the execution for maintenance.
+ * This class TODO: comment
  */
-class Maintenance extends \Slim\Middleware {
+class Production {
 	
 	/**
-	 * Calls the middleware.
+	 * Invokes the configuration.
 	 */
-	public function call() {
-		global $app;
-		
-		// Halts the execution
-		$app->server->haltExecution(HTTP_STATUS_SERVICE_UNAVAILABLE, CODE_SYSTEM_UNDER_MAINTENANCE);
+	public function __invoke() {
+		// TODO: implement
 	}
 	
 }

@@ -44,7 +44,7 @@ class Authentication {
 	public function isUserSignedIn() {
 		global $app;
 		
-		// Checks whether the session contains a data entry to store the user
+		// Checks if the session contains a data entry to store the user
 		return $app->session->containsData(SESSION_DATA_USER);
 	}
 	
