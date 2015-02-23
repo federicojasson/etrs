@@ -21,7 +21,7 @@
 namespace App\Configuration;
 
 /**
- * This class TODO: comment
+ * This class sets the maintenance-mode configuration.
  */
 class Maintenance {
 	

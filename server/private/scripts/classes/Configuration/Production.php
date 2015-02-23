@@ -21,7 +21,7 @@
 namespace App\Configuration;
 
 /**
- * This class TODO: comment
+ * This class sets the production-mode configuration.
  */
 class Production {
 	
