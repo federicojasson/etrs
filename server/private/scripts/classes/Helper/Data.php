@@ -77,7 +77,9 @@ class Data {
 		} else {
 			$cache = new \Doctrine\Common\Cache\ApcCache;
 		}
-
+		
+		\Doctrine\DBAL\Types\Type::addType('binary_string', 'App\Data\Type\BinaryString');
+		
 		$config = new \Doctrine\ORM\Configuration;
 		$config->setMetadataCacheImpl($cache);
 		$driverImpl = $config->newDefaultAnnotationDriver(DIRECTORY_SCRIPTS . '/classes/Data/Entity');

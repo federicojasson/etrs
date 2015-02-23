@@ -75,7 +75,7 @@
 				var child = object[fragment];
 				
 				// Initializes the child if is undefined
-				object[fragment] = (angular.isDefined(child))? child : {};
+				object[fragment] = (angular.isDefined(child)) ? child : {};
 				
 				// Sets the child as the current object
 				object = object[fragment];
@@ -87,7 +87,7 @@
 		 */
 		function sendHttpRequest(url, httpMethod, input) {
 			// Initializes the input if is undefined
-			input = (angular.isDefined(input))? input : {};
+			input = (angular.isDefined(input)) ? input : {};
 			
 			// Initializes the input objects (only one will be actually used)
 			var queryStringInput = {};
