@@ -174,7 +174,11 @@ function serveExternalRequest() {
 			'/account/sign-out',
 			'/authentication/get-state',
 			'/medication/create',
-			'/medication/delete'
+			'/medication/delete',
+			'/medication/edit',
+			'/medication/get',
+			'/medication/get-all',
+			'/medication/search'
 		]
 	];
 	

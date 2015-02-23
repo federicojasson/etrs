@@ -25,7 +25,7 @@ namespace App\Data\Entity;
  * 
  * Annotations:
  * 
- * @Entity
+ * @Entity(repositoryClass = "App\Data\EntityRepository\CustomRepository")
  * @Table(name = "sessions")
  * @HasLifecycleCallbacks
  */

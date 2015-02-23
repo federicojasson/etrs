@@ -45,10 +45,10 @@ class Authenticator {
 		}
 		
 		// Computes the hash of the password
-		$passwordHash = $app->cryptography->hashPassword($password, $user.getSalt(), $user.getKeyStretchingIterations());
+		$passwordHash = $app->cryptography->hashPassword($password, $user->getSalt(), $user->getKeyStretchingIterations());
 		
 		// Compares the password hashes
-		return $passwordHash === $user.getPasswordHash();
+		return $passwordHash === $user->getPasswordHash();
 	}
 	
 }
