@@ -19,31 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.view').service('view', viewService);
+	angular.module('app.authentication').run([
+		'authentication',
+		run
+	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function viewService() {
-		var _this = this;
-		
-		/**
-		 * The controller which must be loaded with the view.
-		 */
-		var _controller;
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.getController = function() {
-			return _controller;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.setController = function(controller) {
-			_controller = controller;
-		};
+	function run(authentication) {
+		// Gets the authentication state
+		authentication.getState();
 	}
 })();

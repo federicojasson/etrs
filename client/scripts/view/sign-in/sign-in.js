@@ -19,9 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.router',
-		'app.utility.server',
-		'app.utility.title'
-	]);
+	angular.module('app.view.signIn', []);
 })();

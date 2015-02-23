@@ -19,7 +19,7 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.router').config([
+	angular.module('app.router').config([
 		'$locationProvider',
 		'$stateProvider',
 		'$urlRouterProvider',
@@ -40,34 +40,38 @@
 		var states = getStates();
 		
 		// Registers the states
-		for (var i = 0; i < states.length; i++) {
-			var state = states[i];
+		for (var name in states) { if (! states.hasOwnProperty(name)) continue;
+			var definition = states[name];
 			
 			// Sets a template that includes the layout
-			state.definition.template = '<span layout></span>';
+			definition.template = '<span layout></span>';
 			
 			// Registers the state
-			$stateProvider.state(state.name, state.definition);
+			$stateProvider.state(name, definition);
 		}
 		
 		/**
 		 * TODO: comment
 		 */
 		function getStates() {
-			return [
-				{
-					name: 'home',
-					definition: {
-						url: '/',
-						controllers: {
-							__: 'SignInViewController',
-							ad: 'HomeViewController',
-							dr: 'HomeViewController',
-							op: 'HomeViewController'
-						}
+			return {
+				home: {
+					url: '/',
+					controllers: {
+						__: 'SignInViewController',
+						ad: 'HomeViewController',
+						dr: 'HomeViewController',
+						op: 'HomeViewController'
+					}
+				},
+				
+				signIn: {
+					url: '/sign-in',
+					controllers: {
+						__: 'SignInViewController'
 					}
 				}
-			];
+			};
 		}
 	}
 })();

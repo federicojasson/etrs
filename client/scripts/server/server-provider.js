@@ -30,17 +30,7 @@
 		/**
 		 * TODO: comment
 		 */
-		function getServices() {
-			return {
-				POST: [
-					'/account/sign-in',
-					'/account/sign-out',
-					'/authentication/get-state',
-					'/medication/create',
-					'/medication/delete'
-				]
-			};
-		}
+		var services = [];
 		
 		/**
 		 * TODO: comment
@@ -48,12 +38,15 @@
 		_this.$get = [
 			'Server',
 			function(Server) {
-				// Gets the services
-				var services = getServices();
-				
-				// Returns the service
 				return new Server(services);
 			}
 		];
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.registerService = function(service) {
+			services.push(service);
+		};
 	}
 })();

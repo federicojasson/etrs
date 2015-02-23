@@ -19,23 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.view').directive('view', [
-		'$controller',
-		viewDirective
-	]);
+	angular.module('app.view.signIn').controller('SignInViewController', SignInViewController);
 	
 	/**
 	 * TODO: comment
 	 */
-	function viewDirective($controller) {
+	function SignInViewController() {
+		var _this = this;
+		
 		/**
 		 * TODO: comment
 		 */
-		function getOptions() {
-			// TODO: implement
-		}
+		_this.getTemplateUrl = function() {
+			return 'templates/view/sign-in.html';
+		};
 		
-		// TODO: comment
-		return getOptions();
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return 'Iniciar sesión';
+		};
 	}
 })();

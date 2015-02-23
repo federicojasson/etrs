@@ -19,23 +19,50 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.layout').directive('layout', [
+	angular.module('app.layout').directive('layout', [
 		'$controller',
+		'layout',
+		'title',
 		layoutDirective
 	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function layoutDirective($controller) {
+	function layoutDirective($controller, layout, title) {
+		// Returns the directive's parameters
+		return getParameters();
+		
 		/**
 		 * TODO: comment
 		 */
-		function getOptions() {
-			// TODO: implement
+		function getParameters() {
+			return {
+				restrict: 'A',
+				scope: {},
+				template: '<span ng-include="layout.getTemplateUrl()"></span>',
+				link: registerControllerListener
+			};
 		}
 		
-		// TODO: comment
-		return getOptions();
+		/**
+		 * TODO: comment
+		 */
+		function registerControllerListener(scope) {
+			// Listens for changes in the controller
+			scope.$watch(layout.getController, function(controller) {
+				// Instantiates the controller
+				var instance = $controller(controller);
+				
+				// Listens for changes in the title made by the controller
+				scope.$watch(instance.getTitle, function(newTitle) {
+					// Sets the title of the document
+					title.set(newTitle);
+				});
+				
+				// Binds the controller to the scope
+				scope.layout = instance;
+			});
+		}
 	}
 })();

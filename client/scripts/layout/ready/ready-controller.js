@@ -19,5 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.router', []);
+	angular.module('app.layout.ready').controller('ReadyLayoutController', ReadyLayoutController);
+	
+	/**
+	 * TODO: comment
+	 */
+	function ReadyLayoutController() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTemplateUrl = function() {
+			return 'templates/layout/ready.html';
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return '';
+		};
+	}
 })();

@@ -19,31 +19,46 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.layout').service('layout', layoutService);
+	angular.module('app.server').config([
+		'serverProvider',
+		config
+	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function layoutService() {
-		var _this = this;
+	function config(serverProvider) {
+		// Gets the services
+		var services = getServices();
 		
-		/**
-		 * The controller which must be loaded with the layout.
-		 */
-		var _controller;
+		// Registers the services
+		for (var httpMethod in services) { if (! services.hasOwnProperty(httpMethod)) continue;
+			var urls = services[httpMethod];
+			
+			for (var i = 0; i < urls.length; i++) {
+				var url = urls[i];
+				
+				// Registers the service
+				serverProvider.registerService({
+					url: url,
+					httpMethod: httpMethod
+				});
+			}
+		}
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.getController = function() {
-			return _controller;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.setController = function(controller) {
-			_controller = controller;
-		};
+		function getServices() {
+			return {
+				POST: [
+					'/account/sign-in',
+					'/account/sign-out',
+					'/authentication/get-state',
+					'/medication/create',
+					'/medication/delete'
+				]
+			};
+		}
 	}
 })();

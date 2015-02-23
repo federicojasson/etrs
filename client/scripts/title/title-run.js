@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').run(run);
+	angular.module('app.title').run([
+		'title',
+		run
+	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function run() {
-		// TODO: implement
+	function run(title) {
+		// Sets an empty title
+		title.set('');
 	}
 })();

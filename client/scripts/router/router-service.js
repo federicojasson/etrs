@@ -19,22 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.title').controller('TitleController', [
-		'title',
-		TitleController
+	angular.module('app.router').service('router', [
+		'$location',
+		routerService
 	]);
 	
 	/**
-	 * This controller allows to access the title of the document.
+	 * TODO: comment
 	 */
-	function TitleController(title) {
+	function routerService($location) {
 		var _this = this;
 		
 		/**
-		 * Returns the title of the document.
+		 * TODO: comment
 		 */
-		_this.get = function() {
-			return title.get();
+		_this.redirect = function(route) {
+			$location.path(route);
 		};
 	}
 })();

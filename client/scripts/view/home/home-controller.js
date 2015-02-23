@@ -19,8 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.home',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.home').controller('HomeViewController', HomeViewController);
+	
+	/**
+	 * TODO: comment
+	 */
+	function HomeViewController() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTemplateUrl = function() {
+			return 'templates/view/home.html';
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return '';
+		};
+	}
 })();

@@ -19,12 +19,31 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.account',
-		'app.authentication',
-		'app.medication',
-		'app.utility'
-	]);
+	angular.module('app.layout').service('layout', layoutService);
+	
+	/**
+	 * TODO: comment
+	 */
+	function layoutService() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		var controller;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getController = function() {
+			return controller;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.setController = function(newController) {
+			controller = newController;
+		};
+	}
 })();

@@ -19,25 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.authentication').service('authentication', [
-		'server',
-		authenticationService
-	]);
+	angular.module('app.layout.error').controller('ErrorLayoutController', ErrorLayoutController);
 	
 	/**
 	 * TODO: comment
 	 */
-	function authenticationService(server) {
+	function ErrorLayoutController() {
 		var _this = this;
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.getState = function() {
-			return server.sendHttpRequest({
-				url: '/authentication/get-state',
-				httpMethod: 'POST'
-			});
+		_this.getTemplateUrl = function() {
+			return 'templates/layout/error.html';
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return 'Error';
 		};
 	}
 })();

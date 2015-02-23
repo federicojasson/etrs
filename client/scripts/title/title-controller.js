@@ -19,14 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').controller('TitleController', TitleController);
+	angular.module('app.title').controller('TitleController', [
+		'title',
+		TitleController
+	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function TitleController() {
+	function TitleController(title) {
 		var _this = this;
 		
-		// TODO: implement
+		/**
+		 * Returns the title of the document.
+		 */
+		_this.get = function() {
+			return title.get();
+		};
 	}
 })();

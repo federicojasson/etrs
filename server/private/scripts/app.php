@@ -177,7 +177,7 @@ function serveInternalRequest($url, $httpMethod) {
 	
 	// Defines the services
 	$services = [
-		'POST' => [
+		'MOCK' => [
 			'/session/delete-expired',
 			'/user/delete'
 		]

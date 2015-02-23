@@ -19,54 +19,38 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.title').service('title', [
-		'appAcronym',
-		titleService
-	]);
+	angular.module('app.error').service('error', errorService);
 	
 	/**
-	 * This service offers functions to handle the title of the document.
+	 * TODO: comment
 	 */
-	function titleService(appAcronym) {
+	function errorService() {
 		var _this = this;
 		
 		/**
-		 * The title of the document.
+		 * TODO: comment
 		 */
-		var _title;
+		var error = null;
 		
 		/**
-		 * Returns the title of the document.
+		 * TODO: comment
 		 */
 		_this.get = function() {
-			return _title;
+			return error;
 		};
 		
 		/**
-		 * Sets the title of the document. It automatically appends the acronym
-		 * of the application at the end of the title, so it must not be
-		 * included.
-		 * 
-		 * Receives the title to be set.
+		 * TODO: comment
 		 */
-		_this.set = function(title) {
-			if (title.length > 0) {
-				// The title is not empty
-				// Appends a dash
-				title += ' - ';
-			}
-			
-			// Appends the acronym of the application
-			title += appAcronym;
-			
-			// Sets the title
-			_title = title;
+		_this.occurred = function() {
+			return error !== null;
 		};
 		
-		// Performs initialization tasks
-		(function() {
-			// Sets an empty title
-			_this.set('');
-		})();
+		/**
+		 * TODO: comment
+		 */
+		_this.set = function(newError) {
+			error = newError;
+		};
 	}
 })();

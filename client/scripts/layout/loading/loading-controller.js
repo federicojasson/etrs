@@ -19,37 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.medication').service('medication', [
-		'server',
-		medicationService
-	]);
+	angular.module('app.layout.loading').controller('LoadingLayoutController', LoadingLayoutController);
 	
 	/**
 	 * TODO: comment
 	 */
-	function medicationService(server) {
+	function LoadingLayoutController() {
 		var _this = this;
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.create = function(input) {
-			return server.sendHttpRequest({
-				url: '/medication/create',
-				httpMethod: 'POST',
-				input: input
-			});
+		_this.getTemplateUrl = function() {
+			return 'templates/layout/loading.html';
 		};
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.delete = function(input) {
-			return server.sendHttpRequest({
-				url: '/medication/delete',
-				httpMethod: 'POST',
-				input: input
-			});
+		_this.getTitle = function() {
+			return 'Cargando...';
 		};
 	}
 })();

@@ -19,50 +19,50 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.server').service('server', [
-		'$resource',
-		serverService
+	angular.module('app.view').directive('view', [
+		'$controller',
+		'title',
+		'view',
+		viewDirective
 	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function serverService($resource) {
-		var _this = this;
+	function viewDirective($controller, title, view) {
+		// Returns the directive's parameters
+		return getParameters();
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.sendHttpRequest = function(parameters) {
-			// Extracts the parameters
-			var url = parameters.url;
-			var httpMethod = parameters.httpMethod;
-			var input = parameters.input;
-			
-			// Initializes the input if is undefined
-			input = (angular.isDefined(input))? input : {};
-			
-			// Initializes the input objects (only one will be actually used)
-			var urlInput = {};
-			var bodyInput = {};
-			
-			if (httpMethod === 'GET') {
-				// The input is sent as a query string
-				urlInput = input;
-			} else {
-				// The input is sent in the body of the request
-				bodyInput = input;
-			}
-			
-			// Sends the request
-			var deferredTask = $resource('server' + url, urlInput, {
-				request: {
-					method: httpMethod
-				}
-			}).request(bodyInput);
-			
-			// Returns the promise of the deferred task
-			return deferredTask.$promise;
-		};
+		function getParameters() {
+			return {
+				restrict: 'A',
+				scope: {},
+				template: '<span ng-include="view.getTemplateUrl()"></span>',
+				link: registerControllerListener
+			};
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		function registerControllerListener(scope) {
+			// Listens for changes in the controller
+			scope.$watch(view.getController, function(controller) {
+				// Instantiates the controller
+				var instance = $controller(controller);
+				
+				// Listens for changes in the title made by the controller
+				scope.$watch(instance.getTitle, function(newTitle) {
+					// Sets the title of the document
+					title.set(newTitle);
+				});
+				
+				// Binds the controller to the scope
+				scope.view = instance;
+			});
+		}
 	}
 })();

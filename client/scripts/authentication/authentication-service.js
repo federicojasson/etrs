@@ -30,6 +30,45 @@
 	function authenticationService(server) {
 		var _this = this;
 		
-		// TODO: implement
+		/**
+		 * TODO: comment
+		 */
+		var ready = true;
+		
+		/**
+		 * TODO: comment
+		 */
+		var signedInUser = null;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getSignedInUser = function() {
+			return signedInUser;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getState = function() {
+			// TODO: implement
+			/*signedInUser = {
+				role: 'ad'
+			};*/
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isReady = function() {
+			return ready;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isUserSignedIn = function() {
+			return signedInUser !== null;
+		};
 	}
 })();

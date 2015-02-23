@@ -34,12 +34,9 @@
 		 */
 		function Server(services) {
 			// Registers the services
-			for (var httpMethod in services) {
-				var urls = services[httpMethod];
-				for (var i = 0; i < urls.length; i++) {
-					var url = urls[i];
-					registerService(url, httpMethod);
-				}
+			for (var i = 0; i < services.length; i++) {
+				var service = services[i];
+				registerService(service.url, service.httpMethod);
 			}
 		}
 		
@@ -78,7 +75,7 @@
 				var child = object[fragment];
 				
 				// Initializes the child if is undefined
-				object[fragment] = (angular.isUndefined(child))? {} : child;
+				object[fragment] = (angular.isDefined(child))? child : {};
 				
 				// Sets the child as the current object
 				object = object[fragment];
@@ -90,22 +87,22 @@
 		 */
 		function sendHttpRequest(url, httpMethod, input) {
 			// Initializes the input if is undefined
-			input = (angular.isUndefined(input))? {} : input;
+			input = (angular.isDefined(input))? input : {};
 			
 			// Initializes the input objects (only one will be actually used)
-			var urlInput = {};
+			var queryStringInput = {};
 			var bodyInput = {};
 			
 			if (httpMethod === 'GET') {
 				// The input must be sent as a query string
-				urlInput = input;
+				queryStringInput = input;
 			} else {
 				// The input must be sent in the body of the request
 				bodyInput = input;
 			}
 			
 			// Sends the request
-			var deferredTask = $resource('server' + url, urlInput, {
+			var deferredTask = $resource('server' + url, queryStringInput, {
 				request: {
 					method: httpMethod
 				}

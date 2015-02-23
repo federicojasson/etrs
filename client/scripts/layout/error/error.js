@@ -19,36 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.account').service('account', [
-		'server',
-		accountService
-	]);
-	
-	/**
-	 * TODO: comment
-	 */
-	function accountService(server) {
-		var _this = this;
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.signIn = function(input) {
-			return server.sendHttpRequest({
-				url: '/account/sign-in',
-				httpMethod: 'POST',
-				input: input
-			});
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.signOut = function() {
-			return server.sendHttpRequest({
-				url: '/account/sign-out',
-				httpMethod: 'POST'
-			});
-		};
-	}
+	angular.module('app.layout.error', []);
 })();

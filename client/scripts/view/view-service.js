@@ -19,8 +19,31 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.home',
-		'app.view.signIn'
-	]);
+	angular.module('app.view').service('view', viewService);
+	
+	/**
+	 * TODO: comment
+	 */
+	function viewService() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		var controller;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getController = function() {
+			return controller;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.setController = function(newController) {
+			controller = newController;
+		};
+	}
 })();

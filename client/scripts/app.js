@@ -23,6 +23,7 @@
 		'ngResource',
 		'ui.router',
 		'app.authentication',
+		'app.error',
 		'app.layout',
 		'app.router',
 		'app.server',
