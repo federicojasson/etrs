@@ -34,20 +34,17 @@
 		 */
 		function Server(services) {
 			// Adds the services
-			for (var httpMethod in services) { if (! services.hasOwnProperty(httpMethod)) continue;
-				var urls = services[httpMethod];
-				for (var i = 0; i < urls.length; i++) {
-					addService(urls[i], httpMethod);
-				}
+			for (var i = 0; i < services.length; i++) {
+				addService(services[i]);
 			}
 		}
 		
 		/**
 		 * TODO: comment
 		 */
-		function addService(url, httpMethod) {
-			// Prepends the HTTP method in lowercase to the URL
-			var string = httpMethod.toLowerCase() + url;
+		function addService(url) {
+			// Removes the leading slash
+			var string = url.substr(1);
 			
 			// Gets the string fragments separated by slashes
 			var fragments = string.split('/');
@@ -67,7 +64,7 @@
 					
 					// Initializes a function for the service
 					object[fragment] = function(input) {
-						return sendHttpRequest(url, httpMethod, input);
+						return sendHttpPostRequest(url, input);
 					};
 					
 					return;
@@ -87,28 +84,16 @@
 		/**
 		 * TODO: comment
 		 */
-		function sendHttpRequest(url, httpMethod, input) {
+		function sendHttpPostRequest(url, input) {
 			// Initializes the input if is undefined
 			input = (angular.isDefined(input)) ? input : {};
 			
-			// Initializes the input objects (only one will be actually used)
-			var queryStringInput = {};
-			var bodyInput = {};
-			
-			if (httpMethod === 'GET') {
-				// The input must be sent as a query string
-				queryStringInput = input;
-			} else {
-				// The input must be sent in the body of the request
-				bodyInput = input;
-			}
-			
 			// Sends the request
-			var deferredTask = $resource('server' + url, queryStringInput, {
+			var deferredTask = $resource('server' + url, {}, {
 				request: {
-					method: httpMethod
+					method: 'POST'
 				}
-			}).request(bodyInput);
+			}).request(input);
 			
 			// Returns the promise of the deferred task
 			return deferredTask.$promise;

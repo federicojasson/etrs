@@ -29,11 +29,11 @@
 	 */
 	function config(navigationProvider) {
 		// Gets the menus
-		var menusByUserRole = getMenus();
+		var userRoleMenus = getMenus();
 		
 		// Registers the menus
-		for (var userRole in menusByUserRole) { if (! menusByUserRole.hasOwnProperty(userRole)) continue;
-			var menus = menusByUserRole[userRole];
+		for (var userRole in userRoleMenus) { if (! userRoleMenus.hasOwnProperty(userRole)) continue;
+			var menus = userRoleMenus[userRole];
 			for (var i = 0; i < menus.length; i++) {
 				navigationProvider.registerMenu(menus[i], userRole);
 			}

@@ -18,24 +18,39 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+namespace App\Service\Account;
+
 /**
- * This script executes a cron job.
- * 
- * Description:
- * Deletes the expired sessions.
- * 
- * Execution:
- * php -f delete-expired-sessions.php
- * 
- * Recommended execution frequency:
- * Once an hour.
+ * TODO: comment
  */
-
-// Defines the root directory
-define('DIRECTORY_ROOT', __DIR__ . '/../../..');
-
-// Includes the application
-require_once DIRECTORY_ROOT . '/private/scripts/app.php';
-
-// Executes the cron job
-executeCronJob('/session/delete-expired');
+class SignOut extends \App\Service\ExternalService {
+	
+	/**
+	 * Executes the service.
+	 */
+	protected function execute() {
+		global $app;
+		
+		// Signs out the user from the system
+		$app->authentication->signOutUser();
+	}
+	
+	/**
+	 * Determines whether the input is valid.
+	 */
+	protected function isInputValid() {
+		// The service has no input
+		return true;
+	}
+	
+	/**
+	 * Determines whether the user is authorized to use the service.
+	 */
+	protected function isUserAuthorized() {
+		global $app;
+		
+		// The service is available only to signed-in users
+		return $app->authentication->isUserSignedIn();
+	}
+	
+}

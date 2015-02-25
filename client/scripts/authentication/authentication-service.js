@@ -54,7 +54,7 @@
 		_this.getState = function() {
 			ready = false;
 			
-			server.post.authentication.getState().then(function(response) {
+			server.authentication.getState().then(function(response) {
 				if (! response.signedIn) {
 					// The user is not signed in
 					signedInUser = null;

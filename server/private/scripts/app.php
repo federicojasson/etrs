@@ -49,9 +49,9 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 /**
  * Executes a cron job.
  * 
- * Receives the URL and the HTTP method of the requested service.
+ * Receives the URL of the requested service.
  */
-function executeCronJob($url, $httpMethod) {
+function executeCronJob($url) {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
 		
@@ -63,15 +63,15 @@ function executeCronJob($url, $httpMethod) {
 	}
 	
 	// Serves the internal request
-	serveInternalRequest($url, $httpMethod);
+	serveInternalRequest($url);
 }
 
 /**
  * Executes a maintenance job.
  * 
- * Receives the URL and the HTTP method of the requested service.
+ * Receives the URL of the requested service.
  */
-function executeMaintenanceJob($url, $httpMethod) {
+function executeMaintenanceJob($url) {
 	if (OPERATION_MODE !== OPERATION_MODE_MAINTENANCE) {
 		// The system is not under maintenance
 		
@@ -83,7 +83,7 @@ function executeMaintenanceJob($url, $httpMethod) {
 	}
 	
 	// Serves the internal request
-	serveInternalRequest($url, $httpMethod);
+	serveInternalRequest($url);
 }
 
 /**
@@ -170,16 +170,14 @@ function runApp($middlewares) {
 function serveExternalRequest() {
 	// Defines the services
 	$services = [
-		'POST' => [
-			'/account/sign-in',
-			'/account/sign-out',
-			'/authentication/get-state',
-			'/medication/create',
-			'/medication/delete',
-			'/medication/edit',
-			'/medication/get',
-			'/medication/search'
-		]
+		'/account/sign-in',
+		'/account/sign-out',
+		'/authentication/get-state',
+		'/medication/create',
+		'/medication/delete',
+		'/medication/edit',
+		'/medication/get',
+		'/medication/search'
 	];
 	
 	// Initializes the middlewares
@@ -198,21 +196,19 @@ function serveExternalRequest() {
 /**
  * Serves an internal request.
  * 
- * Receives the URL and the HTTP method of the requested service.
+ * Receives the URL of the requested service.
  */
-function serveInternalRequest($url, $httpMethod) {
+function serveInternalRequest($url) {
 	// Mocks the environment to simulate an HTTP request
 	\Slim\Environment::mock([
 		'PATH_INFO' => $url,
-		'REQUEST_METHOD' => $httpMethod
+		'REQUEST_METHOD' => 'POST'
 	]);
 	
 	// Defines the services
 	$services = [
-		'MOCK' => [
-			'/session/delete-expired',
-			'/user/delete'
-		]
+		'/session/delete-expired',
+		'/user/delete'
 	];
 	
 	// Initializes the middlewares

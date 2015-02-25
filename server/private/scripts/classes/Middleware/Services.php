@@ -53,11 +53,11 @@ class Services extends \Slim\Middleware {
 	/**
 	 * Returns the fully-qualified class name of a service.
 	 * 
-	 * Receives the URL and the HTTP method of the service.
+	 * Receives the URL of the service.
 	 */
-	private function getServiceFullyQualifiedClassName($url, $httpMethod) {
-		// Prepends the HTTP method in lowercase to the URL
-		$string = strtolower($httpMethod) . $url;
+	private function getServiceFullyQualifiedClassName($url) {
+		// Removes the leading slash
+		$string = substr($url, 1);
 		
 		// Gets the string fragments separated by slashes
 		$fragments = explode('/', $string);
@@ -77,19 +77,16 @@ class Services extends \Slim\Middleware {
 	/**
 	 * Registers a service.
 	 * 
-	 * Receives the URL and the HTTP method of the service.
+	 * Receives the URL of the service.
 	 */
-	private function registerService($url, $httpMethod) {
+	private function registerService($url) {
 		global $app;
 		
 		// Gets the fully-qualified class name of the service
-		$class = $this->getServiceFullyQualifiedClassName($url, $httpMethod);
+		$class = $this->getServiceFullyQualifiedClassName($url);
 		
 		// Registers a route for the service
-		$route = $app->map($url, new $class);
-		
-		// Sets the HTTP method through which the service must be invoked
-		$route->via($httpMethod);
+		$app->post($url, new $class);
 	}
 	
 	/**
@@ -99,10 +96,8 @@ class Services extends \Slim\Middleware {
 	 */
 	private function registerServices($services) {
 		// Registers the services
-		foreach ($services as $httpMethod => $urls) {
-			foreach ($urls as $url) {
-				$this->registerService($url, $httpMethod);
-			}
+		foreach ($services as $url) {
+			$this->registerService($url);
 		}
 	}
 	

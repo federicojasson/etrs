@@ -32,26 +32,21 @@
 		var services = getServices();
 		
 		// Registers the services
-		for (var httpMethod in services) { if (! services.hasOwnProperty(httpMethod)) continue;
-			var urls = services[httpMethod];
-			for (var i = 0; i < urls.length; i++) {
-				serverProvider.registerService(urls[i], httpMethod);
-			}
+		for (var i = 0; i < services.length; i++) {
+			serverProvider.registerService(services[i]);
 		}
 		
 		/**
 		 * TODO: comment
 		 */
 		function getServices() {
-			return {
-				POST: [
-					'/account/sign-in',
-					'/account/sign-out',
-					'/authentication/get-state',
-					'/medication/create',
-					'/medication/delete'
-				]
-			};
+			return [
+				'/account/sign-in',
+				'/account/sign-out',
+				'/authentication/get-state',
+				'/medication/create',
+				'/medication/delete'
+			];
 		}
 	}
 })();
