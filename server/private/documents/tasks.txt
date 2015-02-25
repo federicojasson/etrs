@@ -1,0 +1,2 @@
+- Implement GET, PUT and DELETE services.
+- Implement HTTP caching: http://docs.slimframework.com/#HTTP-Caching-Overview

@@ -64,6 +64,7 @@
 				}
 				
 				// TODO: get user
+				ready = true;
 			}, function(response) {
 				// The server responded with an error
 				error.report(response);
