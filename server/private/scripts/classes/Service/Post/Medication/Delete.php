@@ -36,14 +36,16 @@ class Delete extends \App\Service\ExternalService {
 		
 		// Gets the input
 		$id = $this->getInput('id', 'hex2bin');
+		$version = $this->getInput('version');
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($app, $id) {
+		$app->data->transactional(function($entityManager) use ($app, $id, $version) {
 			// Gets the medication
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			
 			// Asserts conditions
-			$app->assertor->medicationFound($medication);
+			$app->assertor->entityFound($medication);
+			$app->assertor->validEntityVersion($medication, $version);
 			
 			// Deletes the medication
 			$medication->delete();
@@ -64,6 +66,11 @@ class Delete extends \App\Service\ExternalService {
 		// Defines the JSON descriptor
 		$jsonDescriptor = new ObjectDescriptor([
 			'id' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'version' => new ValueDescriptor(function($input) {
 				// TODO: implement
 				return true;
 			})

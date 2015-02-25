@@ -214,12 +214,26 @@ class User {
 	protected $salt;
 	
 	/**
+	 * @Version
+	 * 
+	 * @Column(
+	 *		name = "version",
+	 *		type = "integer",
+	 *		nullable = false,
+	 *		options = {
+	 *			"unsigned": true
+	 *		}
+	 * )
+	 */
+	protected $version;
+	
+	/**
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
 		// Sets default values
-		$this->creator = null;
 		$this->lastEditionDateTime = null;
+		$this->creator = null;
 	}
 
 	/**

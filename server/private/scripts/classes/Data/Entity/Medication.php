@@ -135,13 +135,27 @@ class Medication {
 	protected $name;
 	
 	/**
+	 * @Version
+	 * 
+	 * @Column(
+	 *		name = "version",
+	 *		type = "integer",
+	 *		nullable = false,
+	 *		options = {
+	 *			"unsigned": true
+	 *		}
+	 * )
+	 */
+	protected $version;
+	
+	/**
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
 		// Sets default values
-		$this->creator = null;
-		$this->deleted = false;
 		$this->lastEditionDateTime = null;
+		$this->deleted = false;
+		$this->creator = null;
 		$this->lastEditor = null;
 	}
 	

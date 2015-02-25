@@ -78,7 +78,7 @@ abstract class ExternalService extends Service {
 		}
 		
 		if (! is_null($filter)) {
-			// A filter was received
+			// A filter has been received
 			// Filters the value
 			$value = call_user_func($filter, $value);
 		}

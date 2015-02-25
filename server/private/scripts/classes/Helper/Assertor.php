@@ -28,20 +28,29 @@ class Assertor {
 	/**
 	 * TODO: comment
 	 */
-	public function medicationFound($medication) {
-		$this->entityFound($medication, CODE_NON_EXISTENT_MEDICATION);
+	public function entityFound($entity) {
+		global $app;
+		
+		if (is_null($entity)) {
+			// The entity has not been found
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_NOT_FOUND, CODE_NON_EXISTENT_ENTITY);
+		}
 	}
 	
 	/**
 	 * TODO: comment
 	 */
-	private function entityFound($entity, $code) {
+	public function validEntityVersion($entity, $version) {
 		global $app;
 		
-		if (is_null($entity)) {
-			// The entity was not found
+		try {
+			// Acquires a lock on the entity
+			$app->data->lock($entity, \Doctrine\DBAL\LockMode::OPTIMISTIC, $version);
+		} catch (\Doctrine\ORM\OptimisticLockException $exception) {
+			// The entity's version is invalid
 			// Halts the execution
-			$app->server->haltExecution(HTTP_STATUS_NOT_FOUND, $code);
+			$app->server->haltExecution(HTTP_STATUS_CONFLICT, CODE_INVALID_ENTITY_VERSION);
 		}
 	}
 	

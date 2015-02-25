@@ -36,6 +36,7 @@ class Edit extends \App\Service\ExternalService {
 		
 		// Gets the input
 		$id = $this->getInput('id', 'hex2bin');
+		$version = $this->getInput('version');
 		$name = $this->getInput('name', 'trimAndShrink');
 		
 		// Gets the current date-time
@@ -45,12 +46,13 @@ class Edit extends \App\Service\ExternalService {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($app, $id, $currentDateTime, $name, $signedInUser) {
+		$app->data->transactional(function($entityManager) use ($app, $id, $version, $currentDateTime, $name, $signedInUser) {
 			// Gets the medication
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			
 			// Asserts conditions
-			$app->assertor->medicationFound($medication);
+			$app->assertor->entityFound($medication);
+			$app->assertor->validEntityVersion($medication, $version);
 			
 			// Edits the medication
 			$medication->setLastEditionDateTime($currentDateTime);
@@ -73,6 +75,11 @@ class Edit extends \App\Service\ExternalService {
 		// Defines the JSON descriptor
 		$jsonDescriptor = new ObjectDescriptor([
 			'id' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'version' => new ValueDescriptor(function($input) {
 				// TODO: implement
 				return true;
 			}),

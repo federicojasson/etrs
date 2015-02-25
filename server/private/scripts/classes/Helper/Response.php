@@ -35,7 +35,7 @@ class Response extends \Slim\Http\Response {
 	 */
 	public function body($body = null) {
 		if (! is_null($body)) {
-			// A body was received
+			// A body has been received
 			// Sets the body
 			$this->setBody($body);
 		}

@@ -44,7 +44,7 @@ class SignIn extends \App\Service\ExternalService {
 		$this->setOutput('authenticated', $authenticated);
 		
 		if (! $authenticated) {
-			// The user was not authenticated
+			// The user has not been authenticated
 			return;
 		}
 		
