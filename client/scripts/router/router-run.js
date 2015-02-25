@@ -35,18 +35,18 @@
 	 */
 	function run($rootScope, $state, authentication, error, layout, router, view) {
 		// Listens for state transitions
-		$rootScope.$on('$stateChangeSuccess', setLayoutAndView);
+		$rootScope.$on('$stateChangeSuccess', updateViewAndLayout);
 		
 		// Listens for changes in the authentication service
-		$rootScope.$watch(authentication.isReady, setLayoutAndView);
+		$rootScope.$watch(authentication.isReady, updateViewAndLayout);
 		
 		// Listens for changes in the error service
-		$rootScope.$watch(error.occurred, setLayoutAndView);
+		$rootScope.$watch(error.occurred, updateViewAndLayout);
 		
 		/**
 		 * TODO: comment
 		 */
-		function setLayout() {
+		function updateLayout() {
 			// Determines what controller must be loaded
 			var controller;
 			if (error.occurred()) {
@@ -70,23 +70,7 @@
 		/**
 		 * TODO: comment
 		 */
-		function setLayoutAndView() {
-			if (angular.isUndefined($state.current.controllers)) {
-				// The route has not been established yet
-				return;
-			}
-			
-			// Sets the layout
-			setLayout();
-			
-			// Sets the view
-			setView();
-		}
-		
-		/**
-		 * TODO: comment
-		 */
-		function setView() {
+		function updateView() {
 			if (! authentication.isReady()) {
 				// The authentication service is not ready
 				return;
@@ -119,6 +103,22 @@
 			
 			// Sets the controller
 			view.setController(controller);
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		function updateViewAndLayout() {
+			if (angular.isUndefined($state.current.controllers)) {
+				// The route has not been established yet
+				return;
+			}
+			
+			// Updates the view
+			updateView();
+			
+			// Updates the layout
+			updateLayout();
 		}
 	}
 })();
