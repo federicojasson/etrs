@@ -135,7 +135,7 @@ class Medication {
 	protected $name;
 	
 	/**
-	 * Creates an instance of the class.
+	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
 		// Sets default values
@@ -143,6 +143,14 @@ class Medication {
 		$this->deleted = false;
 		$this->lastEditionDateTime = null;
 		$this->lastEditor = null;
+	}
+	
+	/**
+	 * Deletes the medication.
+	 */
+	public function delete() {
+		// TODO: implement well
+		$this->deleted = $deleted;
 	}
 	
 	/**
@@ -218,15 +226,6 @@ class Medication {
 	 */
 	public function setCreator($user) {
 		$this->creator = $user;
-	}
-	
-	/**
-	 * Sets whether it is deleted.
-	 * 
-	 * Receives an indicator of whether it is deleted.
-	 */
-	public function setDeleted($deleted) {
-		$this->deleted = $deleted;
 	}
 	
 	/**

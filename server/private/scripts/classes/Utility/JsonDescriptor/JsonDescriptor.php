@@ -47,7 +47,7 @@ abstract class JsonDescriptor {
 	protected $definition;
 	
 	/**
-	 * Creates an instance of the class.
+	 * Initializes an instance of the class.
 	 * 
 	 * Receives the definition.
 	 */

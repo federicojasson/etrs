@@ -31,7 +31,7 @@ class Data {
 	private $entityManager;
 	
 	/**
-	 * Creates an instance of the class.
+	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
 		// TODO: clean code

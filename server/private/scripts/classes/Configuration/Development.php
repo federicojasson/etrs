@@ -21,15 +21,55 @@
 namespace App\Configuration;
 
 /**
- * This class sets the development-mode configuration.
+ * This class represents the development-mode configuration.
  */
-class Development {
+class Development extends Configuration {
 	
 	/**
-	 * Invokes the configuration.
+	 * TODO: comment
 	 */
-	public function __invoke() {
-		// TODO: implement
+	protected function getCookieSettings() {
+		// TODO: check and test cookies settings
+		return [
+			'cookies.cipher' => MCRYPT_RIJNDAEL_256,
+			'cookies.cipher_mode' => MCRYPT_MODE_CBC,
+			'cookies.domain' => null,
+			'cookies.encrypt' => true,
+			'cookies.httponly' => true,
+			'cookies.lifetime' => '20 minutes',
+			'cookies.path' => '/',
+			'cookies.secret_key' => 'CHANGE_ME',
+			'cookies.secure' => true
+		];
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	protected function getLogSettings() {
+		// Opens the log file
+		$path = DIRECTORY_LOGS . '/debug.log';
+		$file = fopen($path, 'a');
+		
+		// Initializes the log writer
+		$logWriter = new \Slim\LogWriter($file);
+		
+		return [
+			'log.enabled' => true,
+			'log.level' => \Slim\Log::DEBUG,
+			'log.writer' => $logWriter
+		];
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	protected function getMiscellaneousSettings() {
+		return [
+			'debug' => true,
+			'http.version' => '1.1',
+			'routes.case_sensitive' => true
+		];
 	}
 	
 }

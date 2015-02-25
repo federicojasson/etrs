@@ -51,7 +51,7 @@
 		function registerControllerListener(scope) {
 			// Listens for changes in the controller
 			scope.$watch(layout.getController, function(controller) {
-				// Instantiates the controller
+				// Initializes the controller
 				var instance = $controller(controller);
 				
 				// Listens for changes in the title made by the controller

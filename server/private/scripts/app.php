@@ -24,6 +24,7 @@
  */
 
 // Defines the directories
+define('DIRECTORY_LOGS', DIRECTORY_ROOT . '/private/logs');
 define('DIRECTORY_PARAMETERS', DIRECTORY_ROOT . '/private/parameters');
 define('DIRECTORY_SCRIPTS', DIRECTORY_ROOT . '/private/scripts');
 define('DIRECTORY_VENDORS', DIRECTORY_ROOT . '/private/vendors');
@@ -184,8 +185,8 @@ function serveExternalRequest() {
 	// Initializes the middlewares
 	$middlewares = [
 		new \App\Middleware\Session(),
-		new \App\Middleware\Configurations(),
 		new \App\Middleware\Services($services),
+		new \App\Middleware\Configurations(),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()
 	];
@@ -216,8 +217,8 @@ function serveInternalRequest($url, $httpMethod) {
 	
 	// Initializes the middlewares
 	$middlewares = [
-		new \App\Middleware\Configurations(),
 		new \App\Middleware\Services($services),
+		new \App\Middleware\Configurations(),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()
 	];

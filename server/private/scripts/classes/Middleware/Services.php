@@ -31,7 +31,7 @@ class Services extends \Slim\Middleware {
 	private $services;
 	
 	/**
-	 * Creates an instance of the class.
+	 * Initializes an instance of the class.
 	 * 
 	 * Receives the services to be registered.
 	 */

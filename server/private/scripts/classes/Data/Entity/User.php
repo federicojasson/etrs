@@ -214,7 +214,7 @@ class User {
 	protected $salt;
 	
 	/**
-	 * Creates an instance of the class.
+	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
 		// Sets default values

@@ -31,7 +31,7 @@ class Helpers extends \Slim\Middleware {
 	private $helpers;
 	
 	/**
-	 * Creates an instance of the class.
+	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
 		// Defines the helpers to be registered

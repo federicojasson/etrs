@@ -42,9 +42,13 @@ class ErrorHandlers extends \Slim\Middleware {
 	private function registerErrorHandlers() {
 		global $app;
 		
+		// Initializes the error handlers
+		$errorHandler = new \App\ErrorHandler\ErrorHandler();
+		$notFoundHandler = new \App\ErrorHandler\NotFoundHandler();
+		
 		// Registers the error handlers
-		$app->error(new \App\ErrorHandler\ErrorHandler());
-		$app->notFound(new \App\ErrorHandler\NotFoundHandler());
+		$app->error($errorHandler);
+		$app->notFound($notFoundHandler);
 	}
 	
 }

@@ -31,18 +31,18 @@ class Parameters {
 	private $parameters;
 	
 	/**
-	 * The paths of the parameters files.
+	 * The paths of the parameter files.
 	 */
 	private $paths;
 	
 	/**
-	 * Creates an instance of the class.
+	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
 		// Initializes the parameters collection
 		$this->parameters = [];
 		
-		// Defines the paths of the parameters files
+		// Defines the paths of the parameter files
 		$this->paths = [
 			'dbms' => DIRECTORY_PARAMETERS . '/dbms.json'
 		];
@@ -57,10 +57,10 @@ class Parameters {
 		if (! array_key_exists($name, $this->parameters)) {
 			// The parameters have not been loaded yet
 			
-			// Gets the path of the parameters file
+			// Gets the path of the parameter file
 			$path = $this->paths[$name];
 
-			// Reads the parameters file
+			// Reads the parameter file
 			$this->parameters[$name] = readJsonFile($path);
 		}
 		

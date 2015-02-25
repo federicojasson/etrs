@@ -23,11 +23,7 @@ namespace App\Service;
 /**
  * This class represents a service.
  * 
- * Subclasses must implement the execute method. For security reasons, every
- * service has to implement, also, the isInputValid method to validate the input
- * and the isUserAuthorized method to check if the user is authorized to use the
- * service. This is a measure to help the developer not to forget to do these
- * tasks.
+ * Subclasses must implement the execute method.
  */
 abstract class Service {
 	

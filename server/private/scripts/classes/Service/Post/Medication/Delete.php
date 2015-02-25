@@ -31,8 +31,8 @@ class Delete extends \App\Service\ExternalService {
 	protected function execute() {
 		global $app;
 		
-		// TODO: get input somehow
-		$id = '41421421';
+		// Gets the input
+		$id = $this->getInput('id', 'hex2bin');
 		
 		// Executes a transaction
 		$app->data->transactional(function($entityManager) use ($id) {
@@ -45,7 +45,7 @@ class Delete extends \App\Service\ExternalService {
 			$app->assertor->medicationFound($medication);
 			
 			// Deletes the medication
-			$medication->setDeleted(true); // TODO: should be done somewhere else? (what if another entity trigger something else)
+			$medication->delete();
 			$entityManager->merge($medication);
 		});
 	}

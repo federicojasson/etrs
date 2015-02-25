@@ -21,15 +21,51 @@
 namespace App\Configuration;
 
 /**
- * This class sets the maintenance-mode configuration.
+ * This class represents the maintenance-mode configuration.
  */
-class Maintenance {
+class Maintenance extends Configuration {
 	
 	/**
-	 * Invokes the configuration.
+	 * TODO: comment
 	 */
-	public function __invoke() {
-		// TODO: implement
+	protected function getCookieSettings() {
+		// TODO: check and test cookies settings
+		return [
+			'cookies.cipher' => MCRYPT_RIJNDAEL_256,
+			'cookies.cipher_mode' => MCRYPT_MODE_CBC,
+			'cookies.domain' => null,
+			'cookies.encrypt' => true,
+			'cookies.httponly' => true,
+			'cookies.lifetime' => '20 minutes',
+			'cookies.path' => '/',
+			'cookies.secret_key' => 'CHANGE_ME',
+			'cookies.secure' => true
+		];
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	protected function getLogSettings() {
+		// Initializes the log writer
+		$logWriter = new \App\Utility\LogWriter\DatabaseLogWriter();
+		
+		return [
+			'log.enabled' => true,
+			'log.level' => \Slim\Log::INFO,
+			'log.writer' => $logWriter
+		];
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	protected function getMiscellaneousSettings() {
+		return [
+			'debug' => false,
+			'http.version' => '1.1',
+			'routes.case_sensitive' => true
+		];
 	}
 	
 }

@@ -26,13 +26,14 @@ namespace App\Helper;
 class Session {
 	
 	/**
-	 * Creates an instance of the class.
+	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
 		// TODO: clean code
 		ini_set('session.hash_function', 'sha256');
 		ini_set('session.hash_bits_per_character', 4);
-		session_set_save_handler(new \App\Utility\SessionHandler\DatabaseSessionHandler());
+		$sessionHandler = new \App\Utility\SessionHandler\DatabaseSessionHandler();
+		session_set_save_handler($sessionHandler);
 		
 		session_start();
 		

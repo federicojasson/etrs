@@ -18,35 +18,46 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Helper;
+namespace App\Configuration;
 
 /**
- * This class extends the Slim's Request class.
+ * This class represents a configuration.
+ * 
+ * Subclasses must implement the getCookieSettings, getLogSettings and
+ * getMiscellaneousSettings methods.
  */
-class Request extends \Slim\Http\Request {
+abstract class Configuration {
 	
 	/**
-	 * Initializes an instance of the class.
+	 * Invokes the configuration.
 	 */
-	public function __construct() {
+	public function __invoke() {
 		global $app;
 		
-		// Invokes the parent's constructor
-		parent::__construct($app->environment);
+		// Gets the settings
+		$logSettings = $this->getLogSettings();
+		$cookieSettings = $this->getCookieSettings();
+		$miscellaneousSettings = $this->getMiscellaneousSettings();
+		
+		// Applies the settings
+		$app->config($logSettings);
+		$app->config($cookieSettings);
+		$app->config($miscellaneousSettings);
 	}
 	
 	/**
-	 * Determines whether it is a data request.
+	 * TODO: comment
 	 */
-	public function isDataRequest() {
-		return $this->getMediaType() === 'multipart/form-data';
-	}
+	protected abstract function getCookieSettings();
 	
 	/**
-	 * Determines whether it is a JSON request.
+	 * TODO: comment
 	 */
-	public function isJsonRequest() {
-		return $this->getMediaType() === 'application/json';
-	}
+	protected abstract function getLogSettings();
+	
+	/**
+	 * TODO: comment
+	 */
+	protected abstract function getMiscellaneousSettings();
 	
 }
