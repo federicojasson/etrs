@@ -20,6 +20,9 @@
 
 namespace App\Service\Post\Medication;
 
+use App\Utility\JsonDescriptor\ObjectDescriptor;
+use App\Utility\JsonDescriptor\ValueDescriptor;
+
 /**
  * TODO: comment
  */
@@ -46,7 +49,6 @@ class Delete extends \App\Service\ExternalService {
 			
 			// Deletes the medication
 			$medication->delete();
-			$entityManager->merge($medication);
 		});
 	}
 	

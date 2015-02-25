@@ -124,7 +124,6 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 				// Edits the session
 				$session->setLastAccessDateTime($currentDateTime);
 				$session->setData($data);
-				$entityManager->merge($session);
 			}
 		});
 		

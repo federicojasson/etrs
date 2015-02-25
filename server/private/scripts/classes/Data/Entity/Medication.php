@@ -149,8 +149,7 @@ class Medication {
 	 * Deletes the medication.
 	 */
 	public function delete() {
-		// TODO: implement well
-		$this->deleted = $deleted;
+		$this->deleted = true;
 	}
 	
 	/**
