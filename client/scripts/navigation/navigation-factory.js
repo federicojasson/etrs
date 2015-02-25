@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.navigation').factory('Navigation', NavigationFactory);
+	angular.module('app.navigation').factory('Navigation', [
+		'authentication',
+		NavigationFactory
+	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function NavigationFactory() {
+	function NavigationFactory(authentication) {
 		/**
 		 * TODO: comment
 		 */
@@ -40,8 +43,12 @@
 		/**
 		 * TOOD: comment
 		 */
-		Navigation.prototype.getMenus = function(userRole) {
-			return this.menus[userRole];
+		Navigation.prototype.getMenus = function() {
+			// Gets the signed in user
+			var signedInUser = authentication.getSignedInUser();
+			
+			// Returns the menus corresponding to the signed in user's role
+			return this.menus[signedInUser.role];
 		};
 		
 		return Navigation;

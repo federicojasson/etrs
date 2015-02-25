@@ -3,7 +3,7 @@ TODO: ready layout
 <span ng-controller="AuthenticationController as authentication">
 	<span ng-if="authentication.isUserSignedIn()">
 		<span ng-controller="NavigationController as navigation">
-			<div ng-repeat="menu in navigation.getMenus(authentication.getSignedInUser().role)">
+			<div ng-repeat="menu in navigation.getMenus()">
 				<div>
 					{{ menu.name }}
 				</div>

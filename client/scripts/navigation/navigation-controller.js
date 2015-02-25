@@ -33,8 +33,8 @@
 		/**
 		 * TODO: comment
 		 */
-		_this.getMenus = function(userRole) {
-			return navigation.getMenus(userRole);
+		_this.getMenus = function() {
+			return navigation.getMenus();
 		};
 	}
 })();
