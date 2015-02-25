@@ -36,10 +36,10 @@ class AccessValidator {
 			return inArray(USER_ROLE_ANONYMOUS, $authorizedUserRoles);
 		}
 		
-		// Gets the signed in user
+		// Gets the signed-in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
-		// Checks if the signed in user's role is authorized
+		// Checks if the signed-in user's role is authorized
 		return inArray($signedInUser->getRole(), $authorizedUserRoles);
 	}
 	

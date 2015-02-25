@@ -49,7 +49,7 @@ class SignOut extends \App\Service\ExternalService {
 	protected function isUserAuthorized() {
 		global $app;
 		
-		// The service is available only to signed in users
+		// The service is available only to signed-in users
 		return $app->authentication->isUserSignedIn();
 	}
 	

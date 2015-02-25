@@ -31,10 +31,10 @@ class Authentication {
 	public function getSignedInUser() {
 		global $app;
 		
-		// Gets the signed in user's ID
+		// Gets the signed-in user's ID
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
-		// Returns the signed in user
+		// Returns the signed-in user
 		return $app->data->getReference('App\Data\Entity\User', $id); // TODO: use find() instead? check existence?
 	}
 	
@@ -73,7 +73,7 @@ class Authentication {
 	public function signOutUser() {
 		global $app;
 		
-		// Gets the signed in user's ID
+		// Gets the signed-in user's ID
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
 		// Clears the session's data entry that stores the user

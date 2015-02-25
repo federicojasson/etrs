@@ -44,10 +44,10 @@
 		 * TOOD: comment
 		 */
 		Navigation.prototype.getMenus = function() {
-			// Gets the signed in user
+			// Gets the signed-in user
 			var signedInUser = authentication.getSignedInUser();
 			
-			// Returns the menus corresponding to the signed in user's role
+			// Returns the menus corresponding to the signed-in user's role
 			return this.menus[signedInUser.role];
 		};
 		

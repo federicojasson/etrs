@@ -40,7 +40,7 @@ class Create extends \App\Service\ExternalService {
 		// Gets the current date-time
 		$currentDateTime = $app->server->getCurrentDateTime();
 		
-		// Gets the signed in user
+		// Gets the signed-in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Executes a transaction

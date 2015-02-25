@@ -88,7 +88,7 @@ class SignIn extends \App\Service\ExternalService {
 	protected function isUserAuthorized() {
 		global $app;
 		
-		// The service is available only to not signed in users
+		// The service is available only to non-signed-in users
 		return ! $app->authentication->isUserSignedIn();
 	}
 	

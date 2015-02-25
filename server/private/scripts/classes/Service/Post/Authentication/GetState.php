@@ -42,7 +42,7 @@ class GetState extends \App\Service\ExternalService {
 			return;
 		}
 		
-		// Gets the signed in user
+		// Gets the signed-in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Sets an output
