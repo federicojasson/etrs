@@ -54,16 +54,38 @@ class Delete extends \App\Service\ExternalService {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
-		return true;
+		global $app;
+		
+		if (! $app->request->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Defines the JSON descriptor
+		$jsonDescriptor = new ObjectDescriptor([
+			'id' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			})
+		]);
+		
+		// Validates the JSON input
+		return $this->isValidJsonInput($jsonDescriptor);
 	}
 	
 	/**
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
-		return true;
+		global $app;
+		
+		// Defines the authorized user roles
+		$authorizedUserRoles = [
+			USER_ROLE_ADMINISTRATOR
+		];
+		
+		// Validates the access
+		return $app->accessValidator->validateAccess($authorizedUserRoles);
 	}
 	
 }

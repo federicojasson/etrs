@@ -23,6 +23,15 @@
  */
 
 /**
+ * Determines whether a certain element is present in an array.
+ * 
+ * Receives the element and the array.
+ */
+function inArray($element, $array) {
+	return in_array($element, $array, true);
+}
+
+/**
  * Determines whether an array is sequential.
  * 
  * Receives the array.

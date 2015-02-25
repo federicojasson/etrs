@@ -177,7 +177,6 @@ function serveExternalRequest() {
 			'/medication/delete',
 			'/medication/edit',
 			'/medication/get',
-			'/medication/get-all',
 			'/medication/search'
 		]
 	];

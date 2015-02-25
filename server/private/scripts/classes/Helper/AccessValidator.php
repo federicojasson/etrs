@@ -18,49 +18,29 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Post\Medication;
+namespace App\Helper;
 
 /**
  * TODO: comment
  */
-class Get extends \App\Service\ExternalService {
+class AccessValidator {
 	
 	/**
-	 * Executes the service.
+	 * TODO: comment
 	 */
-	protected function execute() {
-		// TODO: implement
-	}
-	
-	/**
-	 * Determines whether the input is valid.
-	 */
-	protected function isInputValid() {
+	public function validateAccess($authorizedUserRoles) {
 		global $app;
 		
-		if (! $app->request->isJsonRequest()) {
-			// It is not a JSON request
-			return false;
+		if (! $app->authentication->isUserSignedIn()) {
+			// The user is not signed in
+			return inArray(USER_ROLE_ANONYMOUS, $authorizedUserRoles);
 		}
 		
-		// Defines the JSON descriptor
-		$jsonDescriptor = new ObjectDescriptor([
-			'id' => new ValueDescriptor(function($input) {
-				// TODO: implement
-				return true;
-			})
-		]);
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
 		
-		// Validates the JSON input
-		return $this->isValidJsonInput($jsonDescriptor);
-	}
-	
-	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected function isUserAuthorized() {
-		// TODO: implement
-		return true;
+		// Checks if the signed in user's role is authorized
+		return inArray($signedInUser->getRole(), $authorizedUserRoles);
 	}
 	
 }

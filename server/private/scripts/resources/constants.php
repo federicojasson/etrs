@@ -52,3 +52,8 @@ define('OPERATION_MODE_PRODUCTION', 'production');
 
 define('SESSION_DATA_IP_ADDRESS', 'ip_address');
 define('SESSION_DATA_USER', 'user');
+
+define('USER_ROLE_ADMINISTRATOR', 'ad');
+define('USER_ROLE_ANONYMOUS', '__');
+define('USER_ROLE_DOCTOR', 'dr');
+define('USER_ROLE_OPERATOR', 'op');
