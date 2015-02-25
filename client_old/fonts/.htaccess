@@ -1,2 +1,2 @@
-# Sets the MIME type for OpenType fonts
+# Sets the media type for OpenType fonts
 AddType font/otf .otf
