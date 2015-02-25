@@ -19,17 +19,31 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.navigation').factory('Navigation', NavigationFactory);
+	
+	/**
+	 * TODO: comment
+	 */
+	function NavigationFactory() {
+		/**
+		 * TODO: comment
+		 */
+		function Navigation(menus) {
+			this.menus = menus;
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		Navigation.prototype.menus = [];
+		
+		/**
+		 * TOOD: comment
+		 */
+		Navigation.prototype.getMenus = function(userRole) {
+			return this.menus[userRole];
+		};
+		
+		return Navigation;
+	}
 })();

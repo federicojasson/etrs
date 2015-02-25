@@ -19,17 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.view.createMedication').controller('CreateMedicationViewController', CreateMedicationViewController);
+	
+	/**
+	 * TODO: comment
+	 */
+	function CreateMedicationViewController() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTemplateUrl = function() {
+			return 'templates/view/create-medication.html';
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return 'Ingresar medicación';
+		};
+	}
 })();

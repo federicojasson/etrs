@@ -19,17 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.navigation').controller('NavigationController', [
+		'navigation',
+		NavigationController
 	]);
+	
+	/**
+	 * TODO: comment
+	 */
+	function NavigationController(navigation) {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getMenus = function(userRole) {
+			return navigation.getMenus(userRole);
+		};
+	}
 })();

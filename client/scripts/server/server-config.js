@@ -34,15 +34,8 @@
 		// Registers the services
 		for (var httpMethod in services) { if (! services.hasOwnProperty(httpMethod)) continue;
 			var urls = services[httpMethod];
-			
 			for (var i = 0; i < urls.length; i++) {
-				var url = urls[i];
-				
-				// Registers the service
-				serverProvider.registerService({
-					url: url,
-					httpMethod: httpMethod
-				});
+				serverProvider.registerService(urls[i], httpMethod);
 			}
 		}
 		

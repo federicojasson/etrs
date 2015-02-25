@@ -31,7 +31,7 @@
 	 */
 	function config($locationProvider, $stateProvider, $urlRouterProvider) {
 		// Enables the HTML5 history API
-		$locationProvider.html5Mode(true);
+		//$locationProvider.html5Mode(true); TODO: weird bug (slashes are encoded in url)
 		
 		// Sets the default route
 		$urlRouterProvider.otherwise('/');
@@ -69,6 +69,22 @@
 					url: '/sign-in',
 					controllers: {
 						__: 'SignInViewController'
+					}
+				},
+				
+				manageMedications: {
+					url: '/manage-medications',
+					controllers: {
+						__: 'SignInViewController',
+						ad: 'ManageMedicationsViewController'
+					}
+				},
+				
+				createMedication: {
+					url: '/create-medication',
+					controllers: {
+						__: 'SignInViewController',
+						ad: 'CreateMedicationViewController'
 					}
 				}
 			};

@@ -30,7 +30,7 @@
 		/**
 		 * TODO: comment
 		 */
-		var controller;
+		var controller = '';
 		
 		/**
 		 * TODO: comment

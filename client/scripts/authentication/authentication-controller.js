@@ -19,17 +19,29 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.authentication').controller('AuthenticationController', [
+		'authentication',
+		AuthenticationController
 	]);
+	
+	/**
+	 * TODO: comment
+	 */
+	function AuthenticationController(authentication) {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getSignedInUser = function() {
+			return authentication.getSignedInUser();
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isUserSignedIn = function() {
+			return authentication.isUserSignedIn();
+		};
+	}
 })();

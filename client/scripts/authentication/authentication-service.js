@@ -52,9 +52,9 @@
 		 */
 		_this.getState = function() {
 			// TODO: implement
-			/*signedInUser = {
+			signedInUser = {
 				role: 'ad'
-			};*/
+			};
 		};
 		
 		/**

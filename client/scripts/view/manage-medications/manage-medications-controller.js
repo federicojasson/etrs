@@ -19,17 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.view.manageMedications').controller('ManageMedicationsViewController', ManageMedicationsViewController);
+	
+	/**
+	 * TODO: comment
+	 */
+	function ManageMedicationsViewController() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTemplateUrl = function() {
+			return 'templates/view/manage-medications.html';
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return 'Administrar medicaciones';
+		};
+	}
 })();

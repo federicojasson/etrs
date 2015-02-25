@@ -1,3 +1,20 @@
 TODO: ready layout
 
-<span view></span>
+<span ng-controller="AuthenticationController as authentication">
+	<span ng-if="authentication.isUserSignedIn()">
+		<span ng-controller="NavigationController as navigation">
+			<div ng-repeat="menu in navigation.getMenus(authentication.getSignedInUser().role)">
+				<div>
+					{{ menu.name }}
+				</div>
+				<div ng-repeat="menuItem in menu.items">
+					<div>
+						<a ng-href="#{{ menuItem.url }}">{{ menuItem.name }}</a>
+					</div>
+				</div>
+			</div>
+		</span>
+	</span>
+	
+	<span view></span>
+</span>

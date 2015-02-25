@@ -33,17 +33,19 @@
 		 * TODO: comment
 		 */
 		function Server(services) {
-			// Registers the services
-			for (var i = 0; i < services.length; i++) {
-				var service = services[i];
-				registerService(service.url, service.httpMethod);
+			// Adds the services
+			for (var httpMethod in services) { if (! services.hasOwnProperty(httpMethod)) continue;
+				var urls = services[httpMethod];
+				for (var i = 0; i < urls.length; i++) {
+					addService(urls[i], httpMethod);
+				}
 			}
 		}
 		
 		/**
 		 * TODO: comment
 		 */
-		function registerService(url, httpMethod) {
+		function addService(url, httpMethod) {
 			// Prepends the HTTP method in lowercase to the URL
 			var string = httpMethod.toLowerCase() + url;
 			

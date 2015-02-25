@@ -19,31 +19,64 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout').service('layout', layoutService);
+	angular.module('app.navigation').config([
+		'navigationProvider',
+		config
+	]);
 	
 	/**
 	 * TODO: comment
 	 */
-	function layoutService() {
-		var _this = this;
+	function config(navigationProvider) {
+		// Gets the menus
+		var menusByUserRole = getMenus();
+		
+		// Registers the menus
+		for (var userRole in menusByUserRole) { if (! menusByUserRole.hasOwnProperty(userRole)) continue;
+			var menus = menusByUserRole[userRole];
+			for (var i = 0; i < menus.length; i++) {
+				navigationProvider.registerMenu(menus[i], userRole);
+			}
+		}
 		
 		/**
 		 * TODO: comment
 		 */
-		var controller = '';
+		function getMenuItems() {
+			return {
+				manageMedications: {
+					name: 'Administrar',
+					url: '/manage-medications'
+				},
+				
+				createMedication: {
+					name: 'Ingresar',
+					url: '/create-medication'
+				}
+			};
+		}
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.getController = function() {
-			return controller;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.setController = function(newController) {
-			controller = newController;
-		};
+		function getMenus() {
+			// Gets the menu items
+			var menuItems = getMenuItems();
+			
+			return {
+				ad: [
+					{
+						name: 'Medicaciones',
+						items: [
+							menuItems.manageMedications,
+							menuItems.createMedication
+						]
+					}
+				],
+				
+				dr: [],
+				op: []
+			};
+		}
 	}
 })();

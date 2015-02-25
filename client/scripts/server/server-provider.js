@@ -30,7 +30,7 @@
 		/**
 		 * TODO: comment
 		 */
-		var services = [];
+		var services = {};
 		
 		/**
 		 * TODO: comment
@@ -45,8 +45,14 @@
 		/**
 		 * TODO: comment
 		 */
-		_this.registerService = function(service) {
-			services.push(service);
+		_this.registerService = function(url, httpMethod) {
+			if (! services.hasOwnProperty(httpMethod)) {
+				// TODO: comment
+				services[httpMethod] = [];
+			}
+			
+			// TODO: comment
+			services[httpMethod].push(url);
 		};
 	}
 })();
