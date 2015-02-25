@@ -44,7 +44,7 @@
 			// Removes the whitespaces
 			string = string.replace(/ /g, '');
 			
-			// Returns the string in camelCase
+			// Converts the first character to lowercase
 			return string.charAt(0).toLowerCase() + string.slice(1);
 		};
 	}

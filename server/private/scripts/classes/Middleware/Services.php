@@ -70,7 +70,7 @@ class Services extends \Slim\Middleware {
 		// Defines the namespace of the services
 		$namespace = 'App\Service\\';
 		
-		// Returns the fully-qualified class name of the service
+		// Builds the fully-qualified class name of the service
 		return $namespace . implode('\\', $fragments);
 	}
 	

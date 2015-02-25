@@ -33,7 +33,7 @@ class RandomIdGenerator extends \Doctrine\ORM\Id\AbstractIdGenerator {
 	public function generate(\Doctrine\ORM\EntityManager $entityManager, $entity) {
 		global $app;
 		
-		// Returns a random ID
+		// Generates a random ID
 		return $app->cryptography->generateRandomId();
 	}
 	

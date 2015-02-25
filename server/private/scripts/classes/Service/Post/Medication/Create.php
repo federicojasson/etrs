@@ -31,8 +31,8 @@ class Create extends \App\Service\ExternalService {
 	protected function execute() {
 		global $app;
 		
-		// TODO: get input somehow
-		$name = 'NOMBRE';
+		// Gets the input
+		$name = $this->getInput('name', 'trimAndShrink');
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($name) {
@@ -61,8 +61,23 @@ class Create extends \App\Service\ExternalService {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
-		return true;
+		global $app;
+		
+		if (! $app->request->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Defines the JSON descriptor
+		$jsonDescriptor = new ObjectDescriptor([
+			'name' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			})
+		]);
+		
+		// Validates the JSON input
+		return $this->isValidJsonInput($jsonDescriptor);
 	}
 	
 	/**

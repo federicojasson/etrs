@@ -52,7 +52,7 @@ function readJsonFile($path) {
 	// Gets the content of the file
 	$content = file_get_contents($path);
 	
-	// Returns the decoded content
+	// Decodes the content
 	return json_decode($content, true);
 }
 
@@ -68,6 +68,19 @@ function toPascalCase($string) {
 	// Converts the first character of each word to uppercase
 	$string = ucwords($string);
 	
-	// Returns the string in PascalCase
+	// Removes the whitespaces
 	return str_replace(' ', '', $string);
+}
+
+/**
+ * Trims a string and removes duplicate whitespaces.
+ * 
+ * Receives the string.
+ */
+function trimAndShrink($string) {
+	// Removes duplicate whitespaces
+	$string = preg_replace('/[ ]+/', ' ', $string);
+	
+	// Trims the string
+	return trim($string, ' ');
 }

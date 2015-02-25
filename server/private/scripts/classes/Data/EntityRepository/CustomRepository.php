@@ -29,13 +29,13 @@ class CustomRepository extends \Doctrine\ORM\EntityRepository {
 	 * TODO: comment
 	 */
 	public function findNonDeleted($id) {
-		// Defines the criteria
+		// Defines a criteria
 		$criteria = [
 			'id' => $id,
 			'deleted' => false
 		];
 		
-		// Returns the entity found
+		// Finds the entity matching the criteria
 		return $this->findOneBy($criteria);
 	}
 	
