@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.authentication').service('authentication', [
+		'error',
 		'server',
 		authenticationService
 	]);
@@ -27,7 +28,7 @@
 	/**
 	 * TODO: comment
 	 */
-	function authenticationService(server) {
+	function authenticationService(error, server) {
 		var _this = this;
 		
 		/**
@@ -51,6 +52,23 @@
 		 * TODO: comment
 		 */
 		_this.getState = function() {
+			ready = false;
+			
+			server.post.authentication.getState().then(function(response) {
+				if (! response.signedIn) {
+					// The user is not signed in
+					signedInUser = null;
+					
+					ready = true;
+					return;
+				}
+				
+				// TODO: get user
+			}, function(response) {
+				// The server responded with an error
+				error.report(response);
+			});
+			
 			// TODO: implement
 			signedInUser = {
 				role: 'ad'

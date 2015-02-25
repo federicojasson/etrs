@@ -19,43 +19,19 @@
 'use strict';
 
 (function() {
-	angular.module('app.error').service('error', [
-		'Error',
-		errorService
-	]);
+	angular.module('app.error').factory('Error', ErrorFactory);
 	
 	/**
 	 * TODO: comment
 	 */
-	function errorService(Error) {
-		var _this = this;
-		
+	function ErrorFactory() {
 		/**
 		 * TODO: comment
 		 */
-		var error = null;
+		function Error(response) {
+			// TODO: implement
+		}
 		
-		/**
-		 * TODO: comment
-		 */
-		_this.get = function() {
-			return error;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.occurred = function() {
-			return error !== null;
-		};
-		
-		/**
-		 * TODO: comment
-		 * 
-		 * Receives the server's error response.
-		 */
-		_this.report = function(response) {
-			error = new Error(response);
-		};
+		return Error;
 	}
 })();
