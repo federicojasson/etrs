@@ -116,6 +116,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 				
 				// Creates the session
 				$session->setId($id);
+				$session->setCreationDateTime($currentDateTime);
 				$session->setLastAccessDateTime($currentDateTime);
 				$session->setData($data);
 				$entityManager->persist($session);

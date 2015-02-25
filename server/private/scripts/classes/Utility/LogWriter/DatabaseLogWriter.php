@@ -58,15 +58,19 @@ class DatabaseLogWriter {
 	public function write($message, $level) {
 		global $app;
 		
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
+		
 		// Maps the level to the corresponding value used in the database
 		$level = $this->levelMapping[$level];
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($level, $message) {
+		$app->data->transactional(function($entityManager) use ($currentDateTime, $level, $message) {
 			// Initializes the log
 			$log = new \App\Data\Entity\Log();
 			
 			// Creates the log
+			$log->setCreationDateTime($currentDateTime);
 			$log->setLevel($level);
 			$log->setMessage($message);
 			$entityManager->persist($log);

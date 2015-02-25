@@ -123,20 +123,12 @@ class Log {
 	}
 
 	/**
-	 * Sets the current date-time as the creation date-time.
+	 * Sets the creation date-time.
 	 * 
-	 * Annotations:
-	 * 
-	 * @PrePersist
+	 * Receives the date-time to be set.
 	 */
-	public function setCreationDateTime() {
-		global $app;
-		
-		// Gets the current date-time
-		$currentDateTime = $app->server->getCurrentDateTime();
-		
-		// Sets the creation date-time
-		$this->creationDateTime = $currentDateTime;
+	public function setCreationDateTime($dateTime) {
+		$this->creationDateTime = $dateTime;
 	}
 	
 	/**

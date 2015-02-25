@@ -32,7 +32,31 @@ class Edit extends \App\Service\ExternalService {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Gets the input
+		$id = $this->getInput('id', 'hex2bin');
+		$name = $this->getInput('name', 'trimAndShrink');
+		
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($app, $id, $currentDateTime, $name, $signedInUser) {
+			// Gets the medication
+			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
+			
+			// Asserts conditions
+			$app->assertor->medicationFound($medication);
+			
+			// Edits the medication
+			$medication->setLastEditionDateTime($currentDateTime);
+			$medication->setName($name);
+			$medication->setLastEditor($signedInUser);
+		});
 	}
 	
 	/**

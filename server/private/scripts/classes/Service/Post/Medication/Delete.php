@@ -38,13 +38,11 @@ class Delete extends \App\Service\ExternalService {
 		$id = $this->getInput('id', 'hex2bin');
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($id) {
-			global $app;
-			
+		$app->data->transactional(function($entityManager) use ($app, $id) {
 			// Gets the medication
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			
-			// Asserts conditions of the medication
+			// Asserts conditions
 			$app->assertor->medicationFound($medication);
 			
 			// Deletes the medication

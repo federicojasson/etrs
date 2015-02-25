@@ -37,17 +37,19 @@ class Create extends \App\Service\ExternalService {
 		// Gets the input
 		$name = $this->getInput('name', 'trimAndShrink');
 		
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
+		
+		// Gets the signed in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($name) {
-			global $app;
-			
-			// Gets the signed in user
-			$signedInUser = $app->authentication->getSignedInUser();
-			
+		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $name, $signedInUser) {
 			// Initializes the medication
 			$medication = new \App\Data\Entity\Medication();
 			
 			// Creates the medication
+			$medication->setCreationDateTime($currentDateTime);
 			$medication->setName($name);
 			$medication->setCreator($signedInUser);
 			$entityManager->persist($medication);
