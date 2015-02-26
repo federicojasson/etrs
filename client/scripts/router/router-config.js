@@ -72,6 +72,20 @@
 					}
 				},
 				
+				forgotPassword: {
+					url: '/forgot-password',
+					controllers: {
+						__: 'ForgotPasswordViewController'
+					}
+				},
+				
+				resetPassword: {
+					url: '/reset-password/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
+					controllers: {
+						__: 'ResetPasswordViewController'
+					}
+				},
+				
 				manageMedications: {
 					url: '/manage-medications',
 					controllers: {

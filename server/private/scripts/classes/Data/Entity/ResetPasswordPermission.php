@@ -21,14 +21,14 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a log from the database.
+ * This class represents a reset-password permission from the database.
  * 
  * Annotations:
  * 
  * @Entity(repositoryClass = "App\Data\EntityRepository\CustomRepository")
- * @Table(name = "logs")
+ * @Table(name = "reset_password_permissions")
  */
-class Log {
+class ResetPasswordPermission {
 	
 	/**
 	 * The creation date-time.
@@ -65,87 +65,71 @@ class Log {
 	protected $id;
 	
 	/**
-	 * The level.
+	 * The key-stretching iterations.
 	 * 
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "level",
-	 *		type = "smallint",
+	 *		name = "key_stretching_iterations",
+	 *		type = "integer",
 	 *		nullable = false,
 	 *		options = {
 	 *			"unsigned": true
 	 *		}
 	 *	)
 	 */
-	protected $level;
+	protected $keyStretchingIterations;
 	
 	/**
-	 * The message.
+	 * The password hash.
 	 * 
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "message",
-	 *		type = "string",
-	 *		nullable = false
+	 *		name = "password_hash",
+	 *		type = "binary_string",
+	 *		length = 64,
+	 *		nullable = false,
+	 *		options = {
+	 *			"fixed": true
+	 *		}
 	 *	)
 	 */
-	protected $message;
+	protected $passwordHash;
 	
 	/**
-	 * Returns the creation date-time.
-	 */
-	public function getCreationDateTime() {
-		return $this->creationDateTime;
-	}
-	
-	/**
-	 * Returns the ID.
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * Returns the level.
-	 */
-	public function getLevel() {
-		return $this->level;
-	}
-	
-	/**
-	 * Returns the message.
-	 */
-	public function getMessage() {
-		return $this->message;
-	}
-
-	/**
-	 * Sets the creation date-time.
+	 * The salt.
 	 * 
-	 * Receives the date-time to be set.
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "salt",
+	 *		type = "binary_string",
+	 *		length = 64,
+	 *		nullable = false,
+	 *		options = {
+	 *			"fixed": true
+	 *		}
+	 *	)
 	 */
-	public function setCreationDateTime($dateTime) {
-		$this->creationDateTime = $dateTime;
-	}
+	protected $salt;
 	
 	/**
-	 * Sets the level.
+	 * The user.
 	 * 
-	 * Receives the level to be set.
+	 * Annotations:
+	 * 
+	 * @ManyToOne(targetEntity = "User")
+	 * 
+	 * @JoinColumn(
+	 *		name = "user",
+	 *		referencedColumnName = "id",
+	 *		nullable = false,
+	 *		onDelete = "RESTRICT"
+	 *	)
 	 */
-	public function setLevel($level) {
-		$this->level = $level;
-	}
+	protected $user;
 	
-	/**
-	 * Sets the message.
-	 * 
-	 * Receives the message to be set.
-	 */
-	public function setMessage($message) {
-		$this->message = $message;
-	}
+	// TODO: getter and setters
 	
 }

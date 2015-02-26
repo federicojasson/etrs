@@ -177,7 +177,8 @@ function serveExternalRequest() {
 		'/medication/delete',
 		'/medication/edit',
 		'/medication/get',
-		'/medication/search'
+		'/medication/search',
+		'/permission/reset-password/request'
 	];
 	
 	// Initializes the middlewares

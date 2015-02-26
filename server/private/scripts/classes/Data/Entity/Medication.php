@@ -27,7 +27,6 @@ namespace App\Data\Entity;
  * 
  * @Entity(repositoryClass = "App\Data\EntityRepository\CustomRepository")
  * @Table(name = "medications")
- * @HasLifecycleCallbacks
  */
 class Medication {
 	

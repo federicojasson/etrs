@@ -19,12 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.createMedication',
-		'app.view.forgotPassword',
-		'app.view.home',
-		'app.view.manageMedications',
-		'app.view.resetPassword',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.forgotPassword').controller('ForgotPasswordViewController', ForgotPasswordViewController);
+	
+	/**
+	 * TODO: comment
+	 */
+	function ForgotPasswordViewController() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTemplateUrl = function() {
+			return 'templates/view/forgot-password.html';
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return '¿Olvidó su contraseña?';
+		};
+	}
 })();
