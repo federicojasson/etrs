@@ -63,7 +63,10 @@ abstract class Service {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the value of an output entry.
+	 * 
+	 * Receives the entry's key, the value to be set and, optionally, a filter
+	 * to be applied to the value before setting it.
 	 */
 	protected function setOutput($key, $value, $filter = null) {
 		if (! is_array($this->output)) {

@@ -21,36 +21,42 @@
 namespace App\Helper;
 
 /**
- * TODO: comment
+ * This class offers assertion methods to check different conditions.
  */
 class Assertor {
 	
 	/**
-	 * TODO: comment
+	 * Checks if an entity exists.
+	 * 
+	 * Receives the entity.
 	 */
-	public function entityFound($entity) {
+	public function entityExists($entity) {
 		global $app;
 		
+		// TODO: perform search here somehow?
+		
 		if (is_null($entity)) {
-			// The entity has not been found
+			// The entity doesn't exist
 			// Halts the execution
 			$app->server->haltExecution(HTTP_STATUS_NOT_FOUND, CODE_NON_EXISTENT_ENTITY);
 		}
 	}
 	
 	/**
-	 * TODO: comment
+	 * Checks if the version of an entity is updated.
+	 * 
+	 * Receives the entity and the version to check.
 	 */
-	public function validEntityVersion($entity, $version) {
+	public function entityVersionUpdated($entity, $version) {
 		global $app;
 		
 		try {
 			// Acquires a lock on the entity
 			$app->data->lock($entity, \Doctrine\DBAL\LockMode::OPTIMISTIC, $version);
 		} catch (\Doctrine\ORM\OptimisticLockException $exception) {
-			// The entity's version is invalid
+			// The entity's version is outdated
 			// Halts the execution
-			$app->server->haltExecution(HTTP_STATUS_CONFLICT, CODE_INVALID_ENTITY_VERSION);
+			$app->server->haltExecution(HTTP_STATUS_CONFLICT, CODE_OUTDATED_ENTITY_VERSION);
 		}
 	}
 	

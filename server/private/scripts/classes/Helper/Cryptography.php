@@ -33,13 +33,19 @@ class Cryptography {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Computes the hash of a new password. Returns an array containing the
+	 * computed hash, the salt used and the number of iterations that were
+	 * applied in the key stretching.
+	 * 
+	 * The method should be used to compute a password hash for the first time.
+	 * 
+	 * Receives the password.
 	 */
 	public function hashNewPassword($password) {
 		// Generates a salt
 		$salt = $this->generateRandomBytesSequence(LENGTH_SALT);
 		
-		// Defines the number of iterations for the key stretching
+		// Defines the number of iterations to be applied in the key stretching
 		$keyStretchingIterations = KEY_STRETCHING_ITERATIONS;
 		
 		// Computes the hash of the password
@@ -49,7 +55,13 @@ class Cryptography {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Computes the hash of a password.
+	 * 
+	 * The method should be used to compute a password hash to compare it with
+	 * one previously obtained.
+	 * 
+	 * Receives the password, the salt and the number of iterations to be
+	 * applied in the key stretching.
 	 */
 	public function hashPassword($password, $salt, $keyStretchingIterations) {
 		// Applies SHA-512 and the PBKDF2 key derivation function

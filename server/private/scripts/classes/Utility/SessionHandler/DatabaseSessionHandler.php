@@ -21,12 +21,14 @@
 namespace App\Utility\SessionHandler;
 
 /**
- * TODO: comment
+ * This class handles the session persistence in the database.
+ * 
+ * Implements the SessionHandlerInterface interface.
  */
 class DatabaseSessionHandler implements \SessionHandlerInterface {
 
 	/**
-	 * TODO: comment
+	 * Closes the session. Returns whether the operation succeeded.
 	 */
 	public function close() {
 		// There is nothing to do
@@ -34,7 +36,9 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * TODO: comment
+	 * Destroys a session. Returns whether the operation succeeded.
+	 * 
+	 * Receives the session's ID.
 	 */
 	public function destroy($id) {
 		global $app;
@@ -55,7 +59,10 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * TODO: comment
+	 * Performs a garbage-collection to destroy expired sessions. Returns
+	 * whether the operation succeeded.
+	 * 
+	 * Receives the maximum inactivity time of a session (in seconds).
 	 */
 	public function gc($maximumInactivityTime) {
 		// There is nothing to do
@@ -63,7 +70,10 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * TODO: comment
+	 * Opens a session. Returns whether the operation succeeded.
+	 * 
+	 * Receives the path where to save the session (for those cases where direct
+	 * file management is necessary) and the session's name.
 	 */
 	public function open($path, $name) {
 		// There is nothing to do
@@ -71,7 +81,9 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * TODO: comment
+	 * Reads a session's data.
+	 * 
+	 * Receives the session's ID.
 	 */
 	public function read($id) {
 		global $app;
@@ -92,7 +104,9 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * TODO: comment
+	 * Writes a session's data. Returns whether the operation succeeded.
+	 * 
+	 * Receives the session's ID and data.
 	 */
 	public function write($id, $data) {
 		global $app;

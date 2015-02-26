@@ -97,7 +97,7 @@ class Create extends \App\Service\ExternalService {
 		];
 		
 		// Validates the access
-		return $app->accessValidator->validateAccess($authorizedUserRoles);
+		return $app->accessValidator->isValidAccess($authorizedUserRoles);
 	}
 	
 }

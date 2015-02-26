@@ -44,8 +44,8 @@ class Delete extends \App\Service\ExternalService {
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			
 			// Asserts conditions
-			$app->assertor->entityFound($medication);
-			$app->assertor->validEntityVersion($medication, $version);
+			$app->assertor->entityExists($medication);
+			$app->assertor->entityVersionUpdated($medication, $version);
 			
 			// Deletes the medication
 			$medication->delete();
@@ -92,7 +92,7 @@ class Delete extends \App\Service\ExternalService {
 		];
 		
 		// Validates the access
-		return $app->accessValidator->validateAccess($authorizedUserRoles);
+		return $app->accessValidator->isValidAccess($authorizedUserRoles);
 	}
 	
 }

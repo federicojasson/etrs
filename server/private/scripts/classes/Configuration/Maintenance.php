@@ -26,7 +26,7 @@ namespace App\Configuration;
 class Maintenance extends Configuration {
 	
 	/**
-	 * TODO: comment
+	 * Returns the cookie settings.
 	 */
 	protected function getCookieSettings() {
 		// TODO: check and test cookies settings
@@ -44,7 +44,7 @@ class Maintenance extends Configuration {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the log settings.
 	 */
 	protected function getLogSettings() {
 		// Initializes the log writer
@@ -58,7 +58,7 @@ class Maintenance extends Configuration {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns miscellaneous settings.
 	 */
 	protected function getMiscellaneousSettings() {
 		return [

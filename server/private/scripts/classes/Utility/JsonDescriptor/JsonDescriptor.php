@@ -56,7 +56,9 @@ abstract class JsonDescriptor {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Determines whether an input is valid.
+	 * 
+	 * Receives the input.
 	 */
 	public abstract function isValidInput($input);
 	

@@ -78,7 +78,7 @@ class Data {
 			$cache = new \Doctrine\Common\Cache\ApcCache;
 		}
 		
-		\Doctrine\DBAL\Types\Type::addType('binary_string', 'App\Data\Type\BinaryString');
+		\Doctrine\DBAL\Types\Type::addType('automatic_binary', 'App\Data\Type\AutomaticBinary');
 		
 		$config = new \Doctrine\ORM\Configuration;
 		$config->setMetadataCacheImpl($cache);

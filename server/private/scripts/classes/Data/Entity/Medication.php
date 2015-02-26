@@ -82,7 +82,7 @@ class Medication {
 	 * 
 	 * @Column(
 	 *		name = "id",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 16,
 	 *		nullable = false,
 	 *		options = {

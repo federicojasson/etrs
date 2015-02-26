@@ -60,7 +60,10 @@ abstract class ExternalService extends Service {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the value of an input entry.
+	 * 
+	 * Receives the entry's key and, optionally, a filter to be applied to the
+	 * value before returning it.
 	 */
 	protected function getInput($key, $filter = null) {
 		global $app;

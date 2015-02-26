@@ -21,14 +21,16 @@
 namespace App\Helper;
 
 /**
- * TODO: comment
+ * This class offers access-validation methods.
  */
 class AccessValidator {
 	
 	/**
-	 * TODO: comment
+	 * Determines whether the access is valid.
+	 * 
+	 * Receives the user roles authorized to access.
 	 */
-	public function validateAccess($authorizedUserRoles) {
+	public function isAccessValid($authorizedUserRoles) {
 		global $app;
 		
 		if (! $app->authentication->isUserSignedIn()) {

@@ -93,7 +93,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name = "gender",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 1,
 	 *		nullable = false,
 	 *		options = {
@@ -112,7 +112,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name = "id",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 32,
 	 *		nullable = false
 	 *	)
@@ -168,7 +168,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name = "password_hash",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 64,
 	 *		nullable = false,
 	 *		options = {
@@ -185,7 +185,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name = "role",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 2,
 	 *		nullable = false,
 	 *		options = {
@@ -202,7 +202,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name = "salt",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 64,
 	 *		nullable = false,
 	 *		options = {

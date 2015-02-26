@@ -21,12 +21,14 @@
 namespace App\Utility\JsonDescriptor;
 
 /**
- * TODO: comment
+ * This class represents a JSON array descriptor.
  */
 class ArrayDescriptor extends JsonDescriptor {
 	
 	/**
-	 * TODO: comment
+	 * Determines whether an input is valid.
+	 * 
+	 * Receives the input.
 	 */
 	public function isValidInput($input) {
 		if (! is_array($input)) {

@@ -23,7 +23,7 @@
  */
 
 /**
- * TODO: comment
+ * Converts a date-time to string.
  * 
  * Receives the date-time.
  */
@@ -32,14 +32,13 @@ function dateTimeToString($dateTime) {
 }
 
 /**
- * Filters the value of an array.
+ * Filters the value of an array entry.
  * 
- * Receives a reference to the array, the key associated with the value and a
- * filter.
+ * Receives a reference to the array, the entry's key and the filter.
  */
 function filterArrayValue(&$array, $key, $filter) {
 	if (! isset($array[$key])) {
-		// The key is not defined in the array
+		// The entry doesn't exist
 		return;
 	}
 	
@@ -48,7 +47,7 @@ function filterArrayValue(&$array, $key, $filter) {
 }
 
 /**
- * Determines whether a certain value is present in an array.
+ * Determines whether an array contains an entry with a certain value.
  * 
  * Receives the array and the value.
  */

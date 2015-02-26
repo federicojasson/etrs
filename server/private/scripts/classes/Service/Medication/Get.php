@@ -43,7 +43,7 @@ class Get extends \App\Service\ExternalService {
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			
 			// Asserts conditions
-			$app->assertor->entityFound($medication);
+			$app->assertor->entityExists($medication);
 			
 			// Gets the accessible fields
 			// TODO: use access validator

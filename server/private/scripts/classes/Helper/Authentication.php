@@ -21,12 +21,12 @@
 namespace App\Helper;
 
 /**
- * This class TODO: comment
+ * This class manages the authentication state.
  */
 class Authentication {
 	
 	/**
-	 * TODO: comment
+	 * Returns the signed-in user.
 	 */
 	public function getSignedInUser() {
 		global $app;
@@ -35,7 +35,7 @@ class Authentication {
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
 		// Returns the signed-in user
-		return $app->data->getReference('App\Data\Entity\User', $id); // TODO: use find() instead? check existence?
+		return $app->data->getReference('App\Data\Entity\User', $id);
 	}
 	
 	/**
@@ -49,7 +49,9 @@ class Authentication {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Signs in a user in the system.
+	 * 
+	 * Receives the user's ID.
 	 */
 	public function signInUser($id) {
 		global $app;
@@ -68,7 +70,7 @@ class Authentication {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Signs out the user from the system.
 	 */
 	public function signOutUser() {
 		global $app;

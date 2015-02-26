@@ -21,12 +21,14 @@
 namespace App\Helper;
 
 /**
- * This class TODO: comment
+ * This class offers authentication methods.
  */
 class Authenticator {
 	
 	/**
-	 * TODO: comment
+	 * Authenticates a user by password.
+	 * 
+	 * Receives the user's ID and password.
 	 */
 	public function authenticateUserByPassword($id, $password) {
 		global $app;

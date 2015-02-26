@@ -54,7 +54,7 @@ class ResetPasswordPermission {
 	 * 
 	 * @Column(
 	 *		name = "id",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 16,
 	 *		nullable = false,
 	 *		options = {
@@ -87,7 +87,7 @@ class ResetPasswordPermission {
 	 * 
 	 * @Column(
 	 *		name = "password_hash",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 64,
 	 *		nullable = false,
 	 *		options = {
@@ -104,7 +104,7 @@ class ResetPasswordPermission {
 	 * 
 	 * @Column(
 	 *		name = "salt",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 64,
 	 *		nullable = false,
 	 *		options = {

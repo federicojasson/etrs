@@ -65,7 +65,7 @@ class Session {
 	 * 
 	 * @Column(
 	 *		name = "id",
-	 *		type = "binary_string",
+	 *		type = "automatic_binary",
 	 *		length = 32,
 	 *		nullable = false,
 	 *		options = {

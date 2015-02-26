@@ -18,27 +18,11 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Data\EntityRepository;
+namespace App\Helper;
 
 /**
- * This class provides custom methods to retrieve data from the database.
+ * This class offers input-validation methods.
  */
-class CustomRepository extends \Doctrine\ORM\EntityRepository {
-	
-	/**
-	 * Returns a non-deleted entity. If none is found, null is returned.
-	 * 
-	 * Receives the entity's ID.
-	 */
-	public function findNonDeleted($id) {
-		// Defines a criteria
-		$criteria = [
-			'id' => $id,
-			'deleted' => false
-		];
-		
-		// Finds the entity matching the criteria
-		return $this->findOneBy($criteria);
-	}
-	
+class InputValidator {
+	// TODO: implement
 }

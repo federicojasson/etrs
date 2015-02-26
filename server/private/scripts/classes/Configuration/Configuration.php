@@ -35,28 +35,28 @@ abstract class Configuration {
 		global $app;
 		
 		// Gets the settings
-		$logSettings = $this->getLogSettings();
 		$cookieSettings = $this->getCookieSettings();
+		$logSettings = $this->getLogSettings();
 		$miscellaneousSettings = $this->getMiscellaneousSettings();
 		
 		// Applies the settings
-		$app->config($logSettings);
 		$app->config($cookieSettings);
+		$app->config($logSettings);
 		$app->config($miscellaneousSettings);
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the cookie settings.
 	 */
 	protected abstract function getCookieSettings();
 	
 	/**
-	 * TODO: comment
+	 * Returns the log settings.
 	 */
 	protected abstract function getLogSettings();
 	
 	/**
-	 * TODO: comment
+	 * Returns miscellaneous settings.
 	 */
 	protected abstract function getMiscellaneousSettings();
 	

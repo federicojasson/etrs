@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class TODO: comment
+ * This class offers methods to obtain parameters used by the application.
  */
 class Parameters {
 	
@@ -49,9 +49,9 @@ class Parameters {
 	}
 	
 	/**
-	 * Returns a set of parameters according to the requested property.
+	 * Returns a set of parameters.
 	 * 
-	 * Receives the name of the property.
+	 * Receives the name of the set.
 	 */
 	public function __get($name) {
 		if (! array_key_exists($name, $this->parameters)) {

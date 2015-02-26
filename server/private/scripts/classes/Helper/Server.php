@@ -68,7 +68,10 @@ class Server {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Halts the execution of the application and responds to the client with a
+	 * certain code.
+	 * 
+	 * Receives the HTTP status and the code to be set.
 	 */
 	public function haltExecution($httpStatus, $code) {
 		global $app;
