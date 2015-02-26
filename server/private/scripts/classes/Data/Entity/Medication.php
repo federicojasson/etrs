@@ -135,6 +135,8 @@ class Medication {
 	protected $name;
 	
 	/**
+	 * The version.
+	 * 
 	 * @Version
 	 * 
 	 * @Column(
@@ -160,7 +162,7 @@ class Medication {
 	}
 	
 	/**
-	 * Deletes the medication.
+	 * Deletes the entity.
 	 */
 	public function delete() {
 		$this->deleted = true;
@@ -213,6 +215,30 @@ class Medication {
 	 */
 	public function isDeleted() {
 		return $this->deleted;
+	}
+	
+	/**
+	 * Serializes the entity.
+	 * 
+	 * Receives the fields that must be included.
+	 */
+	public function serialize($fields) {
+		// Initializes the serialized entity
+		$serializedEntity = [];
+		
+		// Copies the fields to be included
+		foreach ($fields as $field) {
+			$serializedEntity[$field] = $this->$field;
+		}
+		
+		// Filters the fields
+		filterArrayValue($serializedEntity, 'id', 'bin2hex');
+		filterArrayValue($serializedEntity, 'creationDateTime', 'dateTimeToString');
+		filterArrayValue($serializedEntity, 'lastEditionDateTime', 'dateTimeToString');
+		filterArrayValue($serializedEntity, 'creator', [ $this->creator, 'getId' ]);
+		filterArrayValue($serializedEntity, 'lastEditor', [ $this->lastEditor, 'getId' ]);
+		
+		return $serializedEntity;
 	}
 	
 	/**

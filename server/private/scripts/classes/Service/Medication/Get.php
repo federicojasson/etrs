@@ -32,7 +32,38 @@ class Get extends \App\Service\ExternalService {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Gets the input
+		$id = $this->getInput('id', 'hex2bin');
+		
+		// Executes a transaction
+		$medication = $app->data->transactional(function($entityManager) use ($app, $id) {
+			// Gets the medication
+			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
+			
+			// Asserts conditions
+			$app->assertor->entityFound($medication);
+			
+			// Gets the accessible fields
+			// TODO: use access validator
+			$fields = [
+				'id',
+				'version',
+				'creationDateTime',
+				'lastEditionDateTime',
+				'deleted',
+				'name',
+				'creator',
+				'lastEditor'
+			];
+			
+			// Serializes the medication
+			return $medication->serialize($fields);
+		});
+		
+		// Sets the output
+		$this->replaceOutput($medication);
 	}
 	
 	/**

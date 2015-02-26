@@ -43,16 +43,16 @@ abstract class ExternalService extends Service {
 		// Initializes the input
 		$this->input = $app->request->getBody();
 		
-		if (! $this->isUserAuthorized()) {
-			// The user is not authorized to use the service
-			// Halts the execution
-			$app->server->haltExecution(HTTP_STATUS_FORBIDDEN, CODE_UNAUTHORIZED_USER);
-		}
-		
 		if (! $this->isInputValid()) {
 			// The input is invalid
 			// Halts the execution
 			$app->server->haltExecution(HTTP_STATUS_BAD_REQUEST, CODE_INVALID_INPUT);
+		}
+		
+		if (! $this->isUserAuthorized()) {
+			// The user is not authorized to use the service
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_FORBIDDEN, CODE_UNAUTHORIZED_USER);
 		}
 		
 		// Invokes the parent's function

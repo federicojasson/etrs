@@ -33,14 +33,14 @@ class AccessValidator {
 		
 		if (! $app->authentication->isUserSignedIn()) {
 			// The user is not signed in
-			return inArray(USER_ROLE_ANONYMOUS, $authorizedUserRoles);
+			return inArray($authorizedUserRoles, USER_ROLE_ANONYMOUS);
 		}
 		
 		// Gets the signed-in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Checks if the signed-in user's role is authorized
-		return inArray($signedInUser->getRole(), $authorizedUserRoles);
+		return inArray($authorizedUserRoles, $signedInUser->getRole());
 	}
 	
 }

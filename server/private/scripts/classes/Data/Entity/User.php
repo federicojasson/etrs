@@ -214,6 +214,8 @@ class User {
 	protected $salt;
 	
 	/**
+	 * The version.
+	 * 
 	 * @Version
 	 * 
 	 * @Column(

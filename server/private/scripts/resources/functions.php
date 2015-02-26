@@ -23,12 +23,37 @@
  */
 
 /**
- * Determines whether a certain element is present in an array.
+ * TODO: comment
  * 
- * Receives the element and the array.
+ * Receives the date-time.
  */
-function inArray($element, $array) {
-	return in_array($element, $array, true);
+function dateTimeToString($dateTime) {
+	return $dateTime->format('Y-m-d H:i:s');
+}
+
+/**
+ * Filters the value of an array.
+ * 
+ * Receives a reference to the array, the key associated with the value and a
+ * filter.
+ */
+function filterArrayValue(&$array, $key, $filter) {
+	if (! isset($array[$key])) {
+		// The key is not defined in the array
+		return;
+	}
+	
+	// Filters the value
+	$array[$key] = call_user_func($filter, $array[$key]);
+}
+
+/**
+ * Determines whether a certain value is present in an array.
+ * 
+ * Receives the array and the value.
+ */
+function inArray($array, $value) {
+	return in_array($value, $array, true);
 }
 
 /**
