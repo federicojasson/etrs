@@ -40,6 +40,11 @@
 	src: url(fonts/OpenSans-Bold.ttf) format('truetype');
 }
 
+body {
+	color: #333333;
+	font-family: "Open Sans", sans-serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
 	color: #888888;
 	font-family: "Bebas Neue", sans-serif;
@@ -68,4 +73,24 @@ legend {
 	font-family: "Bebas Neue", sans-serif;
 	font-size: 1.8em;
 	letter-spacing: 2px;
+}
+
+.navbar-logo-image {
+	background-image: url(images/navbar-logo.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 48px;
+	width: 80px;
+}
+
+.navbar-logo-image:hover {
+	background-position: 0px -48px;
+}
+
+.navbar-logo-text {
+	color: #666666;
+	font-family: "Bebas Neue", sans-serif;
+	font-size: 1.8em;
+	line-height: 52px;
+	padding-left: 16px;
 }

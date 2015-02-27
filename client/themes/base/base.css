@@ -6,6 +6,11 @@
  * and how to apply and follow the GNU GPL, see <http://www.gnu.org/licenses/>.
  */
 
+pre {
+	white-space: pre-line;
+	word-break: normal;
+}
+
 textarea {
 	resize: none;
 }
@@ -26,6 +31,18 @@ textarea {
 
 .loading-text {
 	text-align: center;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.navbar-logo-image {}
+
+.navbar-logo-text {
+	float: left;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
