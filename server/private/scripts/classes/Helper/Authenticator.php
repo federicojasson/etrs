@@ -26,6 +26,26 @@ namespace App\Helper;
 class Authenticator {
 	
 	/**
+	 * Authenticates a user by email address.
+	 * 
+	 * Receives the user's ID and email address.
+	 */
+	public function authenticateUserByEmailAddress($id, $emailAddress) {
+		global $app;
+		
+		// Gets the user
+		$user = $app->data->getRepository('App\Data\Entity\User')->find($id);
+		
+		if (is_null($user)) {
+			// The user doesn't exist
+			return false;
+		}
+		
+		// Compares the email addresses
+		return $emailAddress === $user->getEmailAddress();
+	}
+	
+	/**
 	 * Authenticates a user by password.
 	 * 
 	 * Receives the user's ID and password.

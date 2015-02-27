@@ -71,7 +71,7 @@ class Server {
 	 * Halts the execution of the application and responds to the client with a
 	 * certain code.
 	 * 
-	 * Receives the HTTP status and the code to be set.
+	 * Receives the HTTP status and the code.
 	 */
 	public function haltExecution($httpStatus, $code) {
 		global $app;

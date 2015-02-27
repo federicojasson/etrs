@@ -38,7 +38,7 @@ class Request extends \App\Service\ExternalService {
 		$credentials = $this->getInput('credentials');
 		
 		// Authenticates the user
-		$authenticated = $app->authenticator->authenticateUserByEmailAddress($credentials['id'], $credentials['emailAddress']); // TODO
+		$authenticated = $app->authenticator->authenticateUserByEmailAddress($credentials['id'], $credentials['emailAddress']);
 		
 		// Sets an output
 		$this->setOutput('authenticated', $authenticated);
@@ -48,21 +48,43 @@ class Request extends \App\Service\ExternalService {
 			return;
 		}
 		
-		// TODO: implement
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
+		
+		// Generates a random password
+		$password = $app->cryptography->generateRandomPassword();
+		
+		// Computes the hash of the password
+		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
+		
+		// Gets the user
+		$user = $app->data->getReference('App\Data\Entity\User', $credentials['id']);
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) {
-			// TODO: implement
-			
+		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $passwordHash, $salt, $keyStretchingIterations, $user) {
 			// Initializes the reset-password permission
 			$resetPasswordPermission = new \App\Data\Entity\ResetPasswordPermission();
 			
 			// Creates the reset-password permission
-			// TODO: add fields
+			$resetPasswordPermission->setCreationDateTime($currentDateTime);
+			$resetPasswordPermission->setPasswordHash($passwordHash);
+			$resetPasswordPermission->setSalt($salt);
+			$resetPasswordPermission->setKeyStretchingIterations($keyStretchingIterations);
+			$resetPasswordPermission->setUser($user);
 			$entityManager->persist($resetPasswordPermission);
+			
+			// Returns the reset-password permission's ID
+			return $resetPasswordPermission->getId();
 		});
 		
-		// TODO: send email somewhere
+		// Initializes the recipient of the email
+		$recipient = [
+			'name' => $user->getFirstName() . ' ' . $user->getLastName(),
+			'emailAddress' => $user->getEmailAddress()
+		];
+		
+		// Sends a reset-password email
+		$app->emails->sendResetPasswordEmail($recipient, $id, $password);
 	}
 	
 	/**

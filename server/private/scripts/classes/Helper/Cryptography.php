@@ -33,6 +33,13 @@ class Cryptography {
 	}
 	
 	/**
+	 * Generates a random password.
+	 */
+	public function generateRandomPassword() {
+		return $this->generateRandomBytesSequence(LENGTH_RANDOM_PASSWORD);
+	}
+	
+	/**
 	 * Computes the hash of a new password. Returns an array containing the
 	 * computed hash, the salt used and the number of iterations that were
 	 * applied in the key stretching.

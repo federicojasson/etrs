@@ -93,16 +93,18 @@ class Data {
 		} else {
 			$config->setAutoGenerateProxyClasses(false);
 		}
-
-		$parameters = $app->parameters->dbms;
+		
+		// Gets the DBMS parameters
+		$dbms = $app->parameters->dbms;
+		
 		$connectionOptions = array(
 			'driver' => 'pdo_mysql',
-			'host' => $parameters['host'],
-			'port' => $parameters['port'],
-			'dbname' => $parameters['database'],
-			'charset' => $parameters['charset'],
-			'user' => $parameters['username'],
-			'password' => $parameters['password']
+			'host' => $dbms['host'],
+			'port' => $dbms['port'],
+			'dbname' => $dbms['database'],
+			'charset' => $dbms['charset'],
+			'user' => $dbms['username'],
+			'password' => $dbms['password']
 		);
 
 		$entityManager = \Doctrine\ORM\EntityManager::create($connectionOptions, $config);

@@ -1,0 +1,9 @@
+{
+	"TODO:": "define final parameters",
+	
+	"host": "",
+	"port": 0,
+	"protocol": "tls",
+	"username": "",
+	"password": ""
+}

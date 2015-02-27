@@ -44,7 +44,9 @@ class Parameters {
 		
 		// Defines the paths of the parameter files
 		$this->paths = [
-			'dbms' => DIRECTORY_PARAMETERS . '/dbms.json'
+			'dbms' => DIRECTORY_PARAMETERS . '/dbms.json',
+			'server' => DIRECTORY_PARAMETERS . '/server.json',
+			'smtp' => DIRECTORY_PARAMETERS . '/smtp.json'
 		];
 	}
 	

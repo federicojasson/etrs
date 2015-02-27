@@ -24,6 +24,7 @@
  */
 
 // Defines the directories
+define('DIRECTORY_EMAILS', DIRECTORY_ROOT . '/private/emails');
 define('DIRECTORY_LOGS', DIRECTORY_ROOT . '/private/logs');
 define('DIRECTORY_PARAMETERS', DIRECTORY_ROOT . '/private/parameters');
 define('DIRECTORY_SCRIPTS', DIRECTORY_ROOT . '/private/scripts');
@@ -178,7 +179,8 @@ function serveExternalRequest() {
 		'/medication/edit',
 		'/medication/get',
 		'/medication/search',
-		'/permission/reset-password/request'
+		'/permission/reset-password/request',
+		'/permission/sign-up/request'
 	];
 	
 	// Initializes the middlewares
