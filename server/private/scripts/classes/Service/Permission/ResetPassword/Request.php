@@ -62,6 +62,15 @@ class Request extends \App\Service\ExternalService {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $passwordHash, $salt, $keyStretchingIterations, $user) {
+			// Deletes the reset-password permissions associated with the user
+			$entityManager->createQueryBuilder()
+				->delete('App\Data\Entity\ResetPasswordPermission', 'resetPasswordPermission')
+				->where('resetPasswordPermission.user = :user')
+				->setParameter('user', $user)
+				->setMaxResults(1)
+				->getQuery()
+				->getResult();
+			
 			// Initializes the reset-password permission
 			$resetPasswordPermission = new \App\Data\Entity\ResetPasswordPermission();
 			

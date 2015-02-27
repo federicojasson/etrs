@@ -61,7 +61,7 @@ class Emails {
 		$alternativeBody = readTemplateFile($alternativePath, $mapping);
 		
 		// Creates the email
-		$email = $this->createEmailFromWebServer($recipient, $subject, $body, $alternativeBody);
+		$email = $this->createEmailFromServer($recipient, $subject, $body, $alternativeBody);
 		
 		// Sends the email
 		$this->sendEmail($email);
@@ -102,7 +102,7 @@ class Emails {
 		$alternativeBody = readTemplateFile($alternativePath, $mapping);
 		
 		// Creates the email
-		$email = $this->createEmailFromWebServer($recipient, $subject, $body, $alternativeBody);
+		$email = $this->createEmailFromServer($recipient, $subject, $body, $alternativeBody);
 		
 		// Sends the email
 		$this->sendEmail($email);
