@@ -36,7 +36,7 @@ class ObjectDescriptor extends JsonDescriptor {
 			return false;
 		}
 		
-		// Validates the object's properties
+		// Validates the properties of the object
 		foreach ($this->definition as $property => $jsonDescriptor) {
 			if (! array_key_exists($property, $input)) {
 				// The property is not defined in the object

@@ -30,14 +30,14 @@ namespace App\Utility\JsonDescriptor;
  * definition indicates the way the validation is carried out:
  * 
  * - Arrays: a JsonDescriptor instance is used, which describes the expected
- *   structure of all the array's elements.
+ *   structure of all the elements of the array.
  * 
  * - Objects: an associative array is used, whose values are JsonDescriptor
  *   instances that describe the expected structure of each object property.
  * 
  * - Values: a function is used, which receives the value and it validates it.
  * 
- * Subclasses must implement the isValidInput function.
+ * Subclasses must implement the isValidInput method.
  */
 abstract class JsonDescriptor {
 	

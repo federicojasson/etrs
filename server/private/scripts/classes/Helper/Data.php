@@ -26,7 +26,7 @@ namespace App\Helper;
 class Data {
 	
 	/**
-	 * TODO: comment
+	 * The entity manager.
 	 */
 	private $entityManager;
 	
@@ -34,70 +34,109 @@ class Data {
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
-		// TODO: clean code
-		$this->entityManager = $this->initialize();
+		// Initializes the entity manager
+		$this->entityManager = $this->getEntityManager();
+		
+		// Registers custom types
+		\Doctrine\DBAL\Types\Type::addType('automatic_binary', 'App\Data\Type\AutomaticBinary');
 	}
 	
 	/**
-	 * TODO: comment
+	 * Invokes a method in the entity manager.
+	 * 
+	 * Receives the name of the method and the arguments to be passed to it.
 	 */
 	public function __call($name, $arguments) {
 		if (! $this->entityManager->isOpen()) {
+			// The entity manager has been closed
 			return;
 		}
 		
-		// TODO: order and comment
+		// Invokes the method in the entity manager
 		return call_user_func_array([ $this->entityManager, $name ], $arguments);
 	}
 	
 	/**
-	 * TODO: comment
+	 * Executes a transaction.
+	 * 
+	 * Receives a closure to be executed transactionally.
 	 */
 	public function transactional($closure) {
-		// TODO: order and comment
-		$return = null;
+		// Initializes the result
+		$result = null;
 		
-		$this->__call('transactional', [ function($entityManager) use ($closure, &$return) {
-			$return = call_user_func($closure, $entityManager);
-		} ]);
+		// Initializes the transaction
+		$transaction = function($entityManager) use ($closure, &$result) {
+			// Invokes the closure
+			$result = call_user_func($closure, $entityManager);
+		};
 		
-		return $return;
+		// Executes the transaction
+		$this->__call('transactional', [ $transaction ]);
+		
+		return $result;
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the configuration.
 	 */
-	private function initialize() {
+	private function getConfiguration() {
 		global $app;
 		
-		// TODO: clean code: use operation mode
-		$applicationMode = 'development';
-		if ($applicationMode === 'development') {
-			$cache = new \Doctrine\Common\Cache\ArrayCache;
+		// Defines the necessary directories
+		$entityDirectory = DIRECTORY_SCRIPTS . '/classes/Data/Entity';
+		$proxyDirectory = DIRECTORY_SCRIPTS . '/classes/Data/Proxy';
+		
+		// Initializes the configuration
+		$configuration = new \Doctrine\ORM\Configuration();
+		
+		// Initializes the metadata driver
+		$metadataDriver = $configuration->newDefaultAnnotationDriver($entityDirectory);
+		
+		// Gets the operation mode
+		$operationMode = $app->getMode();
+		
+		// Applies different settings according to the operation mode
+		if ($operationMode === OPERATION_MODE_DEVELOPMENT) {
+			// The system is in development
+			
+			// Defines the proxy-regeneration mode
+			$proxyRegenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS;
+			
+			// Initializes the cache
+			$cache = new \Doctrine\Common\Cache\ArrayCache();
 		} else {
-			$cache = new \Doctrine\Common\Cache\ApcCache;
+			// The system is not in development
+			
+			// Defines the proxy-regeneration mode
+			$proxyRegenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_NEVER;
+			
+			// Initializes the cache
+			$cache = new \Doctrine\Common\Cache\ApcCache();
 		}
 		
-		\Doctrine\DBAL\Types\Type::addType('automatic_binary', 'App\Data\Type\AutomaticBinary');
+		// Applies different settings
+		$configuration->setAutoGenerateProxyClasses($proxyRegenerationMode);
+		$configuration->setMetadataCacheImpl($cache);
+		$configuration->setMetadataDriverImpl($metadataDriver);
+		$configuration->setProxyDir($proxyDirectory);
+		$configuration->setProxyNamespace('App\Data\Proxy');
+		$configuration->setQueryCacheImpl($cache);
 		
-		$config = new \Doctrine\ORM\Configuration;
-		$config->setMetadataCacheImpl($cache);
-		$driverImpl = $config->newDefaultAnnotationDriver(DIRECTORY_SCRIPTS . '/classes/Data/Entity');
-		$config->setMetadataDriverImpl($driverImpl);
-		$config->setQueryCacheImpl($cache);
-		$config->setProxyDir(DIRECTORY_SCRIPTS . '/classes/Data/Proxy');
-		$config->setProxyNamespace('App\Data\Proxy');
-
-		if ($applicationMode === 'development') {
-			$config->setAutoGenerateProxyClasses(true);
-		} else {
-			$config->setAutoGenerateProxyClasses(false);
-		}
+		return $configuration;
+	}
+	
+	/**
+	 * Returns the entity manager.
+	 */
+	private function getEntityManager() {
+		global $app;
 		
 		// Gets the DBMS parameters
 		$dbms = $app->parameters->dbms;
 		
-		$connectionOptions = array(
+		// Defines the connection parameters
+		$connection = [
 			'driver' => 'pdo_mysql',
 			'host' => $dbms['host'],
 			'port' => $dbms['port'],
@@ -105,11 +144,16 @@ class Data {
 			'charset' => $dbms['charset'],
 			'user' => $dbms['username'],
 			'password' => $dbms['password']
-		);
-
-		$entityManager = \Doctrine\ORM\EntityManager::create($connectionOptions, $config);
-		$connection = $entityManager->getConnection();
-		$connection->setTransactionIsolation(\Doctrine\DBAL\Connection::TRANSACTION_SERIALIZABLE);
+		];
+		
+		// Gets the configuration
+		$configuration = $this->getConfiguration();
+		
+		// Initializes the entity manager
+		$entityManager = \Doctrine\ORM\EntityManager::create($connection, $configuration);
+		
+		// Sets the transaction isolation level
+		$entityManager->getConnection()->setTransactionIsolation(\Doctrine\DBAL\Connection::TRANSACTION_SERIALIZABLE);
 		
 		return $entityManager;
 	}

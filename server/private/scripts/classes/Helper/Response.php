@@ -29,7 +29,7 @@ class Response extends \Slim\Http\Response {
 	 * Returns, and optionally sets, the body.
 	 * 
 	 * The method redefines a deprecated version, and uses getBody and setBody
-	 * instead. This is necessary because the Slim's code still uses it.
+	 * instead. This is necessary because the Slim's source code still uses it.
 	 * 
 	 * Receives, optionally, the body to be set.
 	 */
@@ -60,7 +60,7 @@ class Response extends \Slim\Http\Response {
 			$this->headers->set('Content-Type', 'application/json');
 		}
 		
-		// Invokes the parent's function
+		// Invokes the parent's method
 		parent::setBody($body);
 	}
 	

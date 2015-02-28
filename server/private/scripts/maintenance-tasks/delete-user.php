@@ -18,41 +18,22 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Utility\JsonDescriptor;
-
 /**
- * This class represents a JSON array descriptor.
+ * This script executes a maintenance task.
+ * 
+ * Description:
+ * Deletes a user.
+ * 
+ * Execution:
+ * php -f delete-user.php -- <id>
+ * <id>: the ID of the user to be deleted.
  */
-class ArrayDescriptor extends JsonDescriptor {
-	
-	/**
-	 * Determines whether an input is valid.
-	 * 
-	 * Receives the input.
-	 */
-	public function isValidInput($input) {
-		if (! is_array($input)) {
-			// The input is not an array
-			return false;
-		}
-		
-		if (! isArraySequential($input)) {
-			// The array is not sequential
-			return false;
-		}
-		
-		// Validates the elements of the array
-		foreach ($input as $element) {
-			// Validates the element recursively
-			$valid = $this->definition->isValidInput($element);
-			
-			if (! $valid) {
-				// The element is invalid
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-}
+
+// Defines the root directory
+define('DIRECTORY_ROOT', __DIR__ . '/../../..');
+
+// Includes the application
+require_once DIRECTORY_ROOT . '/private/scripts/app.php';
+
+// Executes the maintenance task
+executeMaintenanceTask('/user/delete');

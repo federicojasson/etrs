@@ -39,7 +39,7 @@ abstract class InternalService extends Service {
 			$app->server->haltExecution(HTTP_STATUS_BAD_REQUEST, CODE_INVALID_INPUT);
 		}
 		
-		// Invokes the parent's function
+		// Invokes the parent's method
 		parent::__invoke();
 	}
 	

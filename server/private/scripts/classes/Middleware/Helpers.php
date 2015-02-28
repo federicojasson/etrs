@@ -74,7 +74,7 @@ class Helpers extends \Slim\Middleware {
 		
 		// Registers a singleton initializer for the helper
 		$app->container->singleton($name, function() use ($class) {
-			return new $class;
+			return new $class();
 		});
 	}
 	

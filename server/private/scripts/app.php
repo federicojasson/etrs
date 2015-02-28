@@ -48,31 +48,11 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 //define('OPERATION_MODE', OPERATION_MODE_PRODUCTION);
 
 /**
- * Executes a cron job.
+ * Executes a maintenance task.
  * 
  * Receives the URL of the requested service.
  */
-function executeCronJob($url) {
-	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
-		// The system is under maintenance
-		
-		// Shows an informative message
-		echo 'The system is under maintenance';
-		
-		// Exits the application
-		exit();
-	}
-	
-	// Serves the internal request
-	serveInternalRequest($url);
-}
-
-/**
- * Executes a maintenance job.
- * 
- * Receives the URL of the requested service.
- */
-function executeMaintenanceJob($url) {
+function executeMaintenanceTask($url) {
 	if (OPERATION_MODE !== OPERATION_MODE_MAINTENANCE) {
 		// The system is not under maintenance
 		
@@ -88,9 +68,29 @@ function executeMaintenanceJob($url) {
 }
 
 /**
- * Executes a server job.
+ * Executes a scheduled task.
+ * 
+ * Receives the URL of the requested service.
  */
-function executeServerJob() {
+function executeScheduledTask($url) {
+	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
+		// The system is under maintenance
+		
+		// Shows an informative message
+		echo 'The system is under maintenance';
+		
+		// Exits the application
+		exit();
+	}
+	
+	// Serves the internal request
+	serveInternalRequest($url);
+}
+
+/**
+ * Executes a server task.
+ */
+function executeServerTask() {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
 		

@@ -72,8 +72,8 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 	/**
 	 * Opens a session. Returns whether the operation succeeded.
 	 * 
-	 * Receives the path where to save the session (for those cases where direct
-	 * file management is necessary) and the session's name.
+	 * Receives the path where to save the session (for those cases in which
+	 * direct file management is necessary) and the session's name.
 	 */
 	public function open($path, $name) {
 		// There is nothing to do

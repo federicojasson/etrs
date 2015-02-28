@@ -21,7 +21,7 @@
 namespace App\Data\Type;
 
 /**
- * This class represents a binary data type.
+ * This class represents a binary type.
  * 
  * The primary difference with the native binary type is that this type
  * automatically reads the obtained binary resource when the value is converted
@@ -35,7 +35,7 @@ class AutomaticBinary extends \Doctrine\DBAL\Types\BinaryType {
 	 * Receives the value and the database plataform.
 	 */
 	public function convertToPHPValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform) {
-		// Invokes the parent's function
+		// Invokes the parent's method
 		$value = parent::convertToPHPValue($value, $platform);
 		
 		if (is_resource($value)) {

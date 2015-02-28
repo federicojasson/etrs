@@ -18,41 +18,24 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Utility\JsonDescriptor;
-
 /**
- * This class represents a JSON array descriptor.
+ * This script executes a scheduled task.
+ * 
+ * Description:
+ * Deletes the expired sessions.
+ * 
+ * Execution:
+ * php -f delete-expired-sessions.php
+ * 
+ * Recommended execution frequency:
+ * Once an hour.
  */
-class ArrayDescriptor extends JsonDescriptor {
-	
-	/**
-	 * Determines whether an input is valid.
-	 * 
-	 * Receives the input.
-	 */
-	public function isValidInput($input) {
-		if (! is_array($input)) {
-			// The input is not an array
-			return false;
-		}
-		
-		if (! isArraySequential($input)) {
-			// The array is not sequential
-			return false;
-		}
-		
-		// Validates the elements of the array
-		foreach ($input as $element) {
-			// Validates the element recursively
-			$valid = $this->definition->isValidInput($element);
-			
-			if (! $valid) {
-				// The element is invalid
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-}
+
+// Defines the root directory
+define('DIRECTORY_ROOT', __DIR__ . '/../../..');
+
+// Includes the application
+require_once DIRECTORY_ROOT . '/private/scripts/app.php';
+
+// Executes the scheduled task
+executeScheduledTask('/session/delete-expired');

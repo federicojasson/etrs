@@ -55,7 +55,7 @@ abstract class ExternalService extends Service {
 			$app->server->haltExecution(HTTP_STATUS_FORBIDDEN, CODE_UNAUTHORIZED_USER);
 		}
 		
-		// Invokes the parent's function
+		// Invokes the parent's method
 		parent::__invoke();
 	}
 	

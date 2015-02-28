@@ -63,7 +63,7 @@ class Configurations extends \Slim\Middleware {
 		
 		// Checks the available configurations and sets the appropriate one
 		foreach ($configurations as $operationMode => $class) {
-			$app->configureMode($operationMode, new $class);
+			$app->configureMode($operationMode, new $class());
 		}
 	}
 	

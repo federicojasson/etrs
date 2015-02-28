@@ -37,7 +37,7 @@ class Emails {
 		// Gets the server parameters
 		$server = $app->parameters->server;
 		
-		// Builds the email's subject
+		// Builds the subject
 		$subject = $server['name'] . ' - Restablecer contraseña';
 		
 		// Builds a URL to reset the password
@@ -52,11 +52,11 @@ class Emails {
 			':url' => $url
 		];
 		
-		// Builds the email's body
+		// Builds the body
 		$path = DIRECTORY_EMAILS . '/reset-password-email.html';
 		$body = readTemplateFile($path, $mapping);
 		
-		// Builds the email's alternative body
+		// Builds the alternative body
 		$alternativePath = DIRECTORY_EMAILS . '/reset-password-email.txt';
 		$alternativeBody = readTemplateFile($alternativePath, $mapping);
 		
@@ -78,7 +78,7 @@ class Emails {
 		// Gets the server parameters
 		$server = $app->parameters->server;
 		
-		// Builds the email's subject
+		// Builds the subject
 		$subject = $server['name'] . ' - Invitación';
 		
 		// Builds a URL to sign up
@@ -93,11 +93,11 @@ class Emails {
 			':url' => $url
 		];
 		
-		// Builds the email's body
+		// Builds the body
 		$path = DIRECTORY_EMAILS . '/sign-up-email.html';
 		$body = readTemplateFile($path, $mapping);
 		
-		// Builds the email's alternative body
+		// Builds the alternative body
 		$alternativePath = DIRECTORY_EMAILS . '/sign-up-email.txt';
 		$alternativeBody = readTemplateFile($alternativePath, $mapping);
 		
