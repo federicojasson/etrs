@@ -19,50 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.view').directive('view', [
-		'$controller',
-		'title',
-		'view',
-		viewDirective
-	]);
+	angular.module('app.layout.site').controller('SiteLayoutController', SiteLayoutController);
 	
 	/**
 	 * TODO: comment
 	 */
-	function viewDirective($controller, title, view) {
-		// Returns the directive's parameters
-		return getParameters();
+	function SiteLayoutController() {
+		var _this = this;
 		
 		/**
 		 * TODO: comment
 		 */
-		function getParameters() {
-			return {
-				restrict: 'A',
-				scope: {},
-				template: '<div ng-include="view.getTemplateUrl()"></div>',
-				link: registerControllerListener
-			};
-		}
+		_this.getTemplateUrl = function() {
+			return 'app/layout/site/site.html';
+		};
 		
 		/**
 		 * TODO: comment
 		 */
-		function registerControllerListener(scope) {
-			// Listens for changes in the controller
-			scope.$watch(view.getController, function(controller) {
-				// Initializes the controller
-				var instance = $controller(controller);
-				
-				// Listens for changes in the title made by the controller
-				scope.$watch(instance.getTitle, function(newTitle) {
-					// Sets the title of the document
-					title.set(newTitle);
-				});
-				
-				// Binds the controller to the scope
-				scope.view = instance;
-			});
-		}
+		_this.getTitle = function() {
+			return '';
+		};
 	}
 })();

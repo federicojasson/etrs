@@ -40,7 +40,7 @@
 			return {
 				restrict: 'A',
 				scope: {},
-				template: '<span ng-include="layout.getTemplateUrl()"></span>',
+				template: '<div ng-include="layout.getTemplateUrl()"></div>',
 				link: registerControllerListener
 			};
 		}

@@ -1,0 +1,61 @@
+<nav class="navbar navbar-static-top">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+				<div class="navbar-header">
+					<a class="navbar-brand navbar-logo-image" href="#/"></a>
+					<span class="navbar-logo-text">Eye Tracking Record System TODO: use constant?</span>
+				</div>
+
+				<div class="collapse navbar-collapse navbar-right">
+					TODO: bar
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+			<div class="content-container" view></div>
+			
+			<hr>
+			
+			<div class="row">
+				<div class="col-sm-6 col-xs-6">
+					<a class="footer-logo-image" href="#/"></a>
+				</div>
+				
+				<div class="col-sm-6 col-xs-6">
+					TODO: footer-menu
+				</div>
+			</div>
+			
+			<hr>
+			
+			<div class="copyright-text">
+				ETRS - Eye Tracking Record System |
+				Copyright © 2015 Federico Jasson
+			</div>
+		</div>
+	</div>
+</div>
+
+TODO: que hacer con esto?
+<span ng-controller="AuthenticationController as authentication">
+	<span ng-if="authentication.isUserSignedIn()">
+		<span ng-controller="NavigationController as navigation">
+			<div ng-repeat="menu in navigation.getMenus()">
+				<div>
+					{{ menu.name }}
+				</div>
+				<div ng-repeat="menuItem in menu.items">
+					<div>
+						<a ng-href="#{{ menuItem.url }}">{{ menuItem.name }}</a>
+					</div>
+				</div>
+			</div>
+		</span>
+	</span>
+</span>

@@ -56,7 +56,7 @@
 				// No error occurred
 				if (authentication.isReady()) {
 					// The authentication service is ready
-					controller = 'ReadyLayoutController';
+					controller = 'SiteLayoutController';
 				} else {
 					// The authentication service is not ready
 					controller = 'LoadingLayoutController';

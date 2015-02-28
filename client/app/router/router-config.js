@@ -44,7 +44,7 @@
 			var definition = states[name];
 			
 			// Sets a template that includes the layout
-			definition.template = '<span layout></span>';
+			definition.template = '<div layout></div>';
 			
 			// Registers the state
 			$stateProvider.state(name, definition);
