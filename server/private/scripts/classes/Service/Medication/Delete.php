@@ -38,8 +38,11 @@ class Delete extends \App\Service\ExternalService {
 		$id = $this->getInput('id', 'hex2bin');
 		$version = $this->getInput('version');
 		
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
+		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($app, $id, $version) {
+		$app->data->transactional(function($entityManager) use ($app, $id, $version, $currentDateTime) {
 			// Gets the medication
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			
@@ -48,6 +51,7 @@ class Delete extends \App\Service\ExternalService {
 			$app->assertor->entityVersionUpdated($medication, $version);
 			
 			// Deletes the medication
+			$medication->setDeletionDateTime($currentDateTime);
 			$medication->delete();
 		});
 	}
@@ -77,7 +81,7 @@ class Delete extends \App\Service\ExternalService {
 		]);
 		
 		// Validates the JSON input
-		return $this->isValidJsonInput($jsonDescriptor);
+		return $this->isJsonInputValid($jsonDescriptor);
 	}
 	
 	/**
@@ -92,7 +96,7 @@ class Delete extends \App\Service\ExternalService {
 		];
 		
 		// Validates the access
-		return $app->accessValidator->isValidAccess($authorizedUserRoles);
+		return $app->accessValidator->isAccessValid($authorizedUserRoles);
 	}
 	
 }

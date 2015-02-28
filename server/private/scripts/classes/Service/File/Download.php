@@ -18,15 +18,12 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Medication;
-
-use App\Utility\JsonDescriptor\ObjectDescriptor;
-use App\Utility\JsonDescriptor\ValueDescriptor;
+namespace App\Service\File;
 
 /**
  * TODO: comment
  */
-class Create extends \App\Service\ExternalService {
+class Download extends \App\Service\ExternalService {
 	
 	/**
 	 * Executes the service.
@@ -35,31 +32,24 @@ class Create extends \App\Service\ExternalService {
 		global $app;
 		
 		// Gets the input
-		$name = $this->getInput('name', 'trimAndShrink');
-		
-		// Gets the current date-time
-		$currentDateTime = $app->server->getCurrentDateTime();
-		
-		// Gets the signed-in user
-		$signedInUser = $app->authentication->getSignedInUser();
+		$id = $this->getInput('id', 'hex2bin');
+		$version = $this->getInput('version');
 		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $name, $signedInUser) {
-			// Initializes the medication
-			$medication = new \App\Data\Entity\Medication();
+		$file = $app->data->transactional(function($entityManager) use ($app, $id, $version) {
+			// Gets the file
+			$file = $entityManager->getRepository('App\Data\Entity\File')->findNonDeleted($id);
 			
-			// Creates the medication
-			$medication->setCreationDateTime($currentDateTime);
-			$medication->setName($name);
-			$medication->setCreator($signedInUser);
-			$entityManager->persist($medication);
+			// Asserts conditions
+			$app->assertor->entityExists($file);
+			$app->assertor->entityVersionUpdated($file, $version);
 			
-			// Returns the medication's ID
-			return $medication->getId();
+			// Returns the file
+			return $file;
 		});
 		
-		// Sets an output
-		$this->setOutput('id', $id, 'bin2hex');
+		// Downloads the file
+		$app->files->download($file);
 	}
 	
 	/**
@@ -75,7 +65,12 @@ class Create extends \App\Service\ExternalService {
 		
 		// Defines the JSON descriptor
 		$jsonDescriptor = new ObjectDescriptor([
-			'name' => new ValueDescriptor(function($input) {
+			'id' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'version' => new ValueDescriptor(function($input) {
 				// TODO: implement
 				return true;
 			})
@@ -93,7 +88,9 @@ class Create extends \App\Service\ExternalService {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			USER_ROLE_ADMINISTRATOR
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
 		];
 		
 		// Validates the access

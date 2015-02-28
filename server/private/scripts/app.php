@@ -174,6 +174,8 @@ function serveExternalRequest() {
 		'/account/sign-in',
 		'/account/sign-out',
 		'/authentication/get-state',
+		'/file/download',
+		'/file/upload',
 		'/medication/create',
 		'/medication/delete',
 		'/medication/edit',

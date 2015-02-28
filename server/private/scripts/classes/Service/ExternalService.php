@@ -90,23 +90,25 @@ abstract class ExternalService extends Service {
 	}
 	
 	/**
+	 * TODO: comment
+	 */
+	protected function isDataInputValid() {
+		// TODO: implement
+	}
+	
+	/**
 	 * Determines whether the input is valid.
 	 */
 	protected abstract function isInputValid();
 	
 	/**
-	 * Determines whether the user is authorized to use the service.
-	 */
-	protected abstract function isUserAuthorized();
-	
-	/**
-	 * Determines whether the input is a valid JSON input.
+	 * Determines whether the JSON input is valid.
 	 * 
 	 * If the input is valid, it is replaced by a decoded version.
 	 * 
 	 * Receives the descriptor of the expected JSON input.
 	 */
-	protected function isValidJsonInput($jsonDescriptor) {
+	protected function isJsonInputValid($jsonDescriptor) {
 		// Decodes the input
 		$input = json_decode($this->input, true);
 		
@@ -125,5 +127,10 @@ abstract class ExternalService extends Service {
 		
 		return true;
 	}
+	
+	/**
+	 * Determines whether the user is authorized to use the service.
+	 */
+	protected abstract function isUserAuthorized();
 	
 }

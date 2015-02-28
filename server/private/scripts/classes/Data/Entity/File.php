@@ -21,14 +21,14 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a medication from the database.
+ * This class represents a file from the database.
  * 
  * Annotations:
  * 
  * @Entity(repositoryClass = "App\Data\EntityRepository\CustomRepository")
- * @Table(name = "medications")
+ * @Table(name = "files")
  */
-class Medication {
+class File {
 	
 	/**
 	 * The creation date-time.
@@ -82,6 +82,23 @@ class Medication {
 	 *	)
 	 */
 	protected $deletionDateTime;
+	
+	/**
+	 * The hash.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "hash",
+	 *		type = "automatic_binary",
+	 *		length = 16,
+	 *		nullable = false,
+	 *		options = {
+	 *			"fixed": true
+	 *		}
+	 *	)
+	 */
+	protected $hash;
 	
 	/**
 	 * The ID.
@@ -139,7 +156,7 @@ class Medication {
 	 * @Column(
 	 *		name = "name",
 	 *		type = "string",
-	 *		length = 128,
+	 *		length = 256,
 	 *		nullable = false
 	 *	)
 	 */
@@ -202,6 +219,13 @@ class Medication {
 	}
 	
 	/**
+	 * Returns the hash.
+	 */
+	public function getHash() {
+		return $this->hash;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {
@@ -237,30 +261,6 @@ class Medication {
 	}
 	
 	/**
-	 * Serializes the entity.
-	 * 
-	 * Receives the fields that must be included.
-	 */
-	public function serialize($fields) {
-		// Initializes the serialized entity
-		$serializedEntity = [];
-		
-		// Copies the fields to be included
-		foreach ($fields as $field) {
-			$serializedEntity[$field] = $this->$field;
-		}
-		
-		// Filters the fields
-		filterArrayValue($serializedEntity, 'id', 'bin2hex');
-		filterArrayValue($serializedEntity, 'creationDateTime', 'dateTimeToString');
-		filterArrayValue($serializedEntity, 'lastEditionDateTime', 'dateTimeToString');
-		filterArrayValue($serializedEntity, 'creator', [ $this->creator, 'getId' ]);
-		filterArrayValue($serializedEntity, 'lastEditor', [ $this->lastEditor, 'getId' ]);
-		
-		return $serializedEntity;
-	}
-	
-	/**
 	 * Sets the creation date-time.
 	 * 
 	 * Receives the date-time to be set.
@@ -285,6 +285,15 @@ class Medication {
 	 */
 	public function setDeletionDateTime($dateTime) {
 		$this->deletionDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the hash.
+	 * 
+	 * Receives the hash to be set.
+	 */
+	public function setHash($hash) {
+		$this->hash = $hash;
 	}
 	
 	/**

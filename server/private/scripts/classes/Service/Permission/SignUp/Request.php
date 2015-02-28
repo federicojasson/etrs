@@ -65,7 +65,7 @@ class Request extends \App\Service\ExternalService {
 		];
 		
 		// Validates the access
-		return $app->accessValidator->isValidAccess($authorizedUserRoles);
+		return $app->accessValidator->isAccessValid($authorizedUserRoles);
 	}
 	
 }

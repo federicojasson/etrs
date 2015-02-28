@@ -18,15 +18,12 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Medication;
-
-use App\Utility\JsonDescriptor\ObjectDescriptor;
-use App\Utility\JsonDescriptor\ValueDescriptor;
+namespace App\Service\File;
 
 /**
  * TODO: comment
  */
-class Create extends \App\Service\ExternalService {
+class Upload extends \App\Service\ExternalService {
 	
 	/**
 	 * Executes the service.
@@ -35,27 +32,32 @@ class Create extends \App\Service\ExternalService {
 		global $app;
 		
 		// Gets the input
-		$name = $this->getInput('name', 'trimAndShrink');
+		$name = $this->getInput('name');
+		$path = $this->getInput('path');
 		
 		// Gets the current date-time
 		$currentDateTime = $app->server->getCurrentDateTime();
+		
+		// Uploads the file
+		$hash = $app->files->upload(); // TODO: implement
 		
 		// Gets the signed-in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $name, $signedInUser) {
-			// Initializes the medication
-			$medication = new \App\Data\Entity\Medication();
+		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $hash, $name, $signedInUser) {
+			// Initializes the file
+			$file = new \App\Data\Entity\File();
 			
-			// Creates the medication
-			$medication->setCreationDateTime($currentDateTime);
-			$medication->setName($name);
-			$medication->setCreator($signedInUser);
-			$entityManager->persist($medication);
+			// Creates the file
+			$file->setCreationDateTime($currentDateTime);
+			$file->setHash($hash);
+			$file->setName($name);
+			$file->setCreator($signedInUser);
+			$entityManager->persist($file);
 			
-			// Returns the medication's ID
-			return $medication->getId();
+			// Returns the file's ID
+			return $file->getId();
 		});
 		
 		// Sets an output
@@ -68,21 +70,13 @@ class Create extends \App\Service\ExternalService {
 	protected function isInputValid() {
 		global $app;
 		
-		if (! $app->request->isJsonRequest()) {
-			// It is not a JSON request
+		if (! $app->request->isDataRequest()) {
+			// It is not a data request
 			return false;
 		}
 		
-		// Defines the JSON descriptor
-		$jsonDescriptor = new ObjectDescriptor([
-			'name' => new ValueDescriptor(function($input) {
-				// TODO: implement
-				return true;
-			})
-		]);
-		
-		// Validates the JSON input
-		return $this->isJsonInputValid($jsonDescriptor);
+		// Validates the data input
+		return $this->isDataInputValid();
 	}
 	
 	/**
@@ -93,7 +87,8 @@ class Create extends \App\Service\ExternalService {
 		
 		// Defines the authorized user roles
 		$authorizedUserRoles = [
-			USER_ROLE_ADMINISTRATOR
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_OPERATOR
 		];
 		
 		// Validates the access

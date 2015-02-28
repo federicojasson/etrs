@@ -79,7 +79,7 @@ class SignIn extends \App\Service\ExternalService {
 		]);
 		
 		// Validates the JSON input
-		return $this->isValidJsonInput($jsonDescriptor);
+		return $this->isJsonInputValid($jsonDescriptor);
 	}
 	
 	/**
