@@ -40,6 +40,16 @@ class Cryptography {
 	}
 	
 	/**
+	 * Computes the hash of a file.
+	 * 
+	 * Receives the file's path.
+	 */
+	public function hashFile($path) {
+		// Applies MD5
+		return md5_file($path, true);
+	}
+	
+	/**
 	 * Computes the hash of a new password. Returns an array containing the
 	 * computed hash, the salt used and the number of iterations that were
 	 * applied in the key stretching.

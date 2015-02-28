@@ -47,7 +47,7 @@ class Production extends Configuration {
 	 * Returns the log settings.
 	 */
 	protected function getLogSettings() {
-		// Initializes the log writer
+		// Initializes a log writer
 		$logWriter = new \App\Utility\LogWriter\DatabaseLogWriter();
 		
 		return [

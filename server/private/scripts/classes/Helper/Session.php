@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class TODO: comment
+ * This class offers session-related functionalities.
  */
 class Session {
 	
@@ -29,47 +29,58 @@ class Session {
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
-		// TODO: clean code
+		// Configures the ID generation
 		ini_set('session.hash_function', 'sha256');
 		ini_set('session.hash_bits_per_character', 4);
+		
+		// Initializes a session handler
 		$sessionHandler = new \App\Utility\SessionHandler\DatabaseSessionHandler();
+		
+		// Sets the session handler
 		session_set_save_handler($sessionHandler);
 		
+		// Starts the session
 		session_start();
-		
-		// TODO: log IP address
 	}
 	
 	/**
-	 * TODO: comment
+	 * Clears a data entry.
+	 * 
+	 * Receives the entry's key.
 	 */
 	public function clearData($key) {
 		unset($_SESSION[$key]);
 	}
 	
 	/**
-	 * TODO: comment
+	 * Determines whether the session contains a certain data entry.
+	 * 
+	 * Receives the entry's key.
 	 */
 	public function containsData($key) {
 		return array_key_exists($key, $_SESSION);
 	}
 	
 	/**
-	 * TODO: comment
+	 * Returns the value of a data entry.
+	 * 
+	 * Receives the entry's key.
 	 */
 	public function getData($key) {
 		return $_SESSION[$key];
 	}
 	
 	/**
-	 * TODO: comment
+	 * Regenerates the session's ID.
 	 */
 	public function regenerateId() {
 		session_regenerate_id(true);
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets the value of a data entry.
+	 * 
+	 * Receives the entry's key and the value to be set.
 	 */
 	public function setData($key, $value) {
 		$_SESSION[$key] = $value;
