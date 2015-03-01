@@ -33,13 +33,13 @@ class Upload extends \App\Service\ExternalService {
 		
 		// Gets the input
 		$name = $this->getInput('name');
-		$path = $this->getInput('path');
+		$temporaryPath = $this->getInput('temporaryPath');
 		
 		// Gets the current date-time
 		$currentDateTime = $app->server->getCurrentDateTime();
 		
 		// Uploads the file
-		$hash = $app->files->upload(); // TODO: implement
+		$hash = $app->files->upload(); // TODO: how to get ID?
 		
 		// Gets the signed-in user
 		$signedInUser = $app->authentication->getSignedInUser();

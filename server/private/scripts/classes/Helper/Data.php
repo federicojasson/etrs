@@ -109,11 +109,8 @@ class Data {
 		// Initializes the metadata driver
 		$metadataDriver = $configuration->newDefaultAnnotationDriver($entityDirectory);
 		
-		// Gets the operation mode
-		$operationMode = $app->getMode();
-		
 		// Applies different settings according to the operation mode
-		if ($operationMode === OPERATION_MODE_DEVELOPMENT) {
+		if ($app->getMode() === OPERATION_MODE_DEVELOPMENT) {
 			// The system is in development
 			
 			// Defines the proxy-generation mode

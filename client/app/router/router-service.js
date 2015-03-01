@@ -33,8 +33,8 @@
 		/**
 		 * TODO: comment
 		 */
-		_this.redirect = function(route) {
-			$location.path(route);
+		_this.redirect = function(url) {
+			$location.path(url);
 		};
 	}
 })();

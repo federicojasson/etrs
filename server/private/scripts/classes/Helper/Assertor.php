@@ -60,4 +60,64 @@ class Assertor {
 		}
 	}
 	
+	/**
+	 * Checks if a file doesn't exist.
+	 * 
+	 * Receives the file's path.
+	 */
+	public function fileDoesNotExist($path) {
+		global $app;
+		
+		if (file_exists($path)) {
+			// The file exists
+			
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' already exists.');
+			
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_INTERNAL_SERVER_ERROR, CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
+	 * Checks if a file exists.
+	 * 
+	 * Receives the file's path.
+	 */
+	public function fileExists($path) {
+		global $app;
+		
+		if (! file_exists($path)) {
+			// The file doesn't exist
+			
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' has not been found.');
+			
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_INTERNAL_SERVER_ERROR, CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
+	 * Checks if a file is not corrupted.
+	 * 
+	 * Receives the file and its path.
+	 */
+	public function fileNotCorrupted($file, $path) {
+		global $app;
+		
+		// Computes the hash of the file
+		$hash = $app->cryptography->hashFile($path);
+		
+		if ($hash !== $file->getHash()) {
+			// The file has been corrupted
+			
+			// Logs the event
+			$app->log->alert('The file ' . $path . ' has been corrupted.');
+			
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_INTERNAL_SERVER_ERROR, CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
 }

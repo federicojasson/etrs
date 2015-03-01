@@ -85,7 +85,7 @@ class Services extends \Slim\Middleware {
 		// Gets the fully-qualified class name of the service
 		$class = $this->getServiceFullyQualifiedClassName($url);
 		
-		// Registers a route for the service
+		// Registers a URL for the service
 		$app->post($url, new $class());
 	}
 	

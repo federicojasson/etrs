@@ -25,6 +25,7 @@
 
 // Defines the directories
 define('DIRECTORY_EMAILS', DIRECTORY_ROOT . '/private/emails');
+define('DIRECTORY_FILES', DIRECTORY_ROOT . '/private/files');
 define('DIRECTORY_LOGS', DIRECTORY_ROOT . '/private/logs');
 define('DIRECTORY_PARAMETERS', DIRECTORY_ROOT . '/private/parameters');
 define('DIRECTORY_SCRIPTS', DIRECTORY_ROOT . '/private/scripts');
@@ -99,9 +100,11 @@ function executeServerTask() {
 			'code' => CODE_SYSTEM_UNDER_MAINTENANCE
 		];
 		
-		// Sends the response with the appropriate headers
+		// Sets the appropriate headers
 		http_response_code(HTTP_STATUS_SERVICE_UNAVAILABLE);
 		header('Content-Type: application/json');
+		
+		// Sends the response
 		echo json_encode($response);
 		
 		// Exits the application
