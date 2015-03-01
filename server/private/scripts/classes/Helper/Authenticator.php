@@ -26,9 +26,61 @@ namespace App\Helper;
 class Authenticator {
 	
 	/**
+	 * Authenticates a reset-password permission by password.
+	 * 
+	 * Receives the reset-password permission's ID and the password.
+	 */
+	public function authenticateResetPasswordPermissionByPassword($id, $password) {
+		global $app;
+		
+		// Gets the reset-password permission
+		$resetPasswordPermission = $app->data->getRepository('App\Data\Entity\ResetPasswordPermission')->find($id);
+		
+		if (is_null($resetPasswordPermission)) {
+			// The reset-password permission doesn't exist
+			
+			// Computes the hash of the password to cause a deliberate delay
+			// that avoids disclosing the fact that the reset-password
+			// permission doesn't exist
+			$app->cryptography->hashNewPassword($password);
+			
+			return false;
+		}
+		
+		// Determines whether the password is correct
+		return $this->isPasswordCorrect($resetPasswordPermission, $password);
+	}
+	
+	/**
+	 * Authenticates a sign-up permission by password.
+	 * 
+	 * Receives the sign-up permission's ID and the password.
+	 */
+	public function authenticateSignUpPermissionByPassword($id, $password) {
+		global $app;
+		
+		// Gets the sign-up permission
+		$signUpPermission = $app->data->getRepository('App\Data\Entity\SignUpPermission')->find($id);
+		
+		if (is_null($signUpPermission)) {
+			// The sign-up permission doesn't exist
+			
+			// Computes the hash of the password to cause a deliberate delay
+			// that avoids disclosing the fact that the sign-up permission
+			// doesn't exist
+			$app->cryptography->hashNewPassword($password);
+			
+			return false;
+		}
+		
+		// Determines whether the password is correct
+		return $this->isPasswordCorrect($signUpPermission, $password);
+	}
+	
+	/**
 	 * Authenticates a user by email address.
 	 * 
-	 * Receives the user's ID and email address.
+	 * Receives the user's ID and the email address.
 	 */
 	public function authenticateUserByEmailAddress($id, $emailAddress) {
 		global $app;
@@ -48,7 +100,7 @@ class Authenticator {
 	/**
 	 * Authenticates a user by password.
 	 * 
-	 * Receives the user's ID and password.
+	 * Receives the user's ID and the password.
 	 */
 	public function authenticateUserByPassword($id, $password) {
 		global $app;
@@ -66,11 +118,23 @@ class Authenticator {
 			return false;
 		}
 		
+		// Determines whether the password is correct
+		return $this->isPasswordCorrect($user, $password);
+	}
+	
+	/**
+	 * Determines whether a password matches that of a certain entity.
+	 * 
+	 * Receives the entity and the password.
+	 */
+	private function isPasswordCorrect($entity, $password) {
+		global $app;
+		
 		// Computes the hash of the password
-		$passwordHash = $app->cryptography->hashPassword($password, $user->getSalt(), $user->getKeyStretchingIterations());
+		$passwordHash = $app->cryptography->hashPassword($password, $entity->getSalt(), $entity->getKeyStretchingIterations());
 		
 		// Compares the password hashes
-		return $passwordHash === $user->getPasswordHash();
+		return $passwordHash === $entity->getPasswordHash();
 	}
 	
 }

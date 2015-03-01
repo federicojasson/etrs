@@ -117,7 +117,7 @@ abstract class ExternalService extends Service {
 			return false;
 		}
 		
-		if (! $jsonDescriptor->isValidInput($input)) {
+		if (! $jsonDescriptor->isInputValid($input)) {
 			// The input is invalid
 			return false;
 		}

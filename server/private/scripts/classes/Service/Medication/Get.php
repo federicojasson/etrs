@@ -46,7 +46,7 @@ class Get extends \App\Service\ExternalService {
 			$app->assertor->entityExists($medication);
 			
 			// Gets the accessible fields
-			// TODO: use access validator
+			// TODO: use access helper
 			$fields = [
 				'id',
 				'version',
@@ -85,7 +85,7 @@ class Get extends \App\Service\ExternalService {
 			})
 		]);
 		
-		// Validates the JSON input
+		// Determines whether the JSON input is valid
 		return $this->isJsonInputValid($jsonDescriptor);
 	}
 	

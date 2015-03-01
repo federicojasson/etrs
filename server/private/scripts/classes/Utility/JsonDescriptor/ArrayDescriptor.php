@@ -30,7 +30,7 @@ class ArrayDescriptor extends JsonDescriptor {
 	 * 
 	 * Receives the input.
 	 */
-	public function isValidInput($input) {
+	public function isInputValid($input) {
 		if (! is_array($input)) {
 			// The input is not an array
 			return false;
@@ -44,7 +44,7 @@ class ArrayDescriptor extends JsonDescriptor {
 		// Validates the elements of the array
 		foreach ($input as $element) {
 			// Validates the element recursively
-			$valid = $this->definition->isValidInput($element);
+			$valid = $this->definition->isInputValid($element);
 			
 			if (! $valid) {
 				// The element is invalid

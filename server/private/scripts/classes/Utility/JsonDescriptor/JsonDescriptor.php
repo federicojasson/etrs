@@ -37,7 +37,7 @@ namespace App\Utility\JsonDescriptor;
  * 
  * - Values: a function is used, which receives the value and it validates it.
  * 
- * Subclasses must implement the isValidInput method.
+ * Subclasses must implement the isInputValid method.
  */
 abstract class JsonDescriptor {
 	
@@ -60,6 +60,6 @@ abstract class JsonDescriptor {
 	 * 
 	 * Receives the input.
 	 */
-	public abstract function isValidInput($input);
+	public abstract function isInputValid($input);
 	
 }

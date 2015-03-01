@@ -18,41 +18,31 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Utility\JsonDescriptor;
+namespace App\Helper;
 
 /**
- * This class represents a JSON object descriptor.
+ * This class offers access-related functionalities.
  */
-class ObjectDescriptor extends JsonDescriptor {
+class Access {
 	
 	/**
-	 * Determines whether an input is valid.
+	 * Determines whether the user is authorized.
 	 * 
-	 * Receives the input.
+	 * Receives the user roles authorized to access.
 	 */
-	public function isInputValid($input) {
-		if (! is_array($input)) {
-			// The input is not an array
-			return false;
+	public function isUserAuthorized($authorizedUserRoles) {
+		global $app;
+		
+		if (! $app->authentication->isUserSignedIn()) {
+			// The user is not signed in
+			return inArray($authorizedUserRoles, USER_ROLE_ANONYMOUS);
 		}
 		
-		// Validates the properties of the object
-		foreach ($this->definition as $property => $jsonDescriptor) {
-			if (! array_key_exists($property, $input)) {
-				// The property is not defined in the object
-				return false;
-			}
-			
-			// Validates the property recursively
-			$valid = $jsonDescriptor->isInputValid($input[$property]);
-			
-			if (! $valid) {
-				// The property is invalid
-				return false;
-			}
-		}
+		// Gets the signed-in user
+		$signedInUser = $app->authentication->getSignedInUser();
 		
-		return true;
+		// Determines whether the signed-in user's role is authorized
+		return inArray($authorizedUserRoles, $signedInUser->getRole());
 	}
 	
 }

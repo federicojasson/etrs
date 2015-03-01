@@ -18,7 +18,7 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Account;
+namespace App\Service\Permission\ResetPassword;
 
 use App\Utility\JsonDescriptor\ObjectDescriptor;
 use App\Utility\JsonDescriptor\ValueDescriptor;
@@ -26,7 +26,7 @@ use App\Utility\JsonDescriptor\ValueDescriptor;
 /**
  * TODO: comment
  */
-class SignIn extends \App\Service\ExternalService {
+class Authenticate extends \App\Service\ExternalService {
 	
 	/**
 	 * Executes the service.
@@ -37,19 +37,11 @@ class SignIn extends \App\Service\ExternalService {
 		// Gets the input
 		$credentials = $this->getInput('credentials');
 		
-		// Authenticates the user
-		$authenticated = $app->authenticator->authenticateUserByPassword($credentials['id'], $credentials['password']);
+		// Authenticates the reset-password permission
+		$authenticated = $app->authenticator->authenticateResetPasswordPermissionByPassword($credentials['id'], $credentials['password']);
 		
 		// Sets an output
 		$this->setOutput('authenticated', $authenticated);
-		
-		if (! $authenticated) {
-			// The user has not been authenticated
-			return;
-		}
-		
-		// Signs in the user in the system
-		$app->authentication->signInUser($credentials['id']);
 	}
 	
 	/**

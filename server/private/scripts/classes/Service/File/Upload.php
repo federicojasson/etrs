@@ -75,7 +75,7 @@ class Upload extends \App\Service\ExternalService {
 			return false;
 		}
 		
-		// Validates the data input
+		// Determines whether the data input is valid
 		return $this->isDataInputValid();
 	}
 	
@@ -91,8 +91,8 @@ class Upload extends \App\Service\ExternalService {
 			USER_ROLE_OPERATOR
 		];
 		
-		// Validates the access
-		return $app->accessValidator->isAccessValid($authorizedUserRoles);
+		// Determines whether the user is authorized
+		return $app->access->isUserAuthorized($authorizedUserRoles);
 	}
 	
 }

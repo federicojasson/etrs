@@ -76,7 +76,7 @@ class Download extends \App\Service\ExternalService {
 			})
 		]);
 		
-		// Validates the JSON input
+		// Determines whether the JSON input is valid
 		return $this->isJsonInputValid($jsonDescriptor);
 	}
 	
@@ -93,8 +93,8 @@ class Download extends \App\Service\ExternalService {
 			USER_ROLE_OPERATOR
 		];
 		
-		// Validates the access
-		return $app->accessValidator->isAccessValid($authorizedUserRoles);
+		// Determines whether the user is authorized
+		return $app->access->isUserAuthorized($authorizedUserRoles);
 	}
 	
 }

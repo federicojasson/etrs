@@ -1,3 +1,4 @@
+- Doubt: remove associations when medication (or other entity) is deleted?
 - Check input validation process.
 - Automate current date-time use.
 - Check when to use @ManyToMany, @OneToOne and @ManyToOne.
@@ -10,3 +11,7 @@
 - Check /* and /**.
 - Check that all files contain license.
 - Test http://codebutler.com/firesheep and attempt session hijacking.
+- Documentar database schema.
+- Documentar API.
+- Doubt: check if the entity is expired before accepting it (session, permissions, etc)?
+- Idea: allow to ban users. A "banned" column can be added and the access helper can check for this before authorizing the access.

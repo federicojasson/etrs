@@ -30,7 +30,7 @@ class ValueDescriptor extends JsonDescriptor {
 	 * 
 	 * Receives the input.
 	 */
-	public function isValidInput($input) {
+	public function isInputValid($input) {
 		if (is_array($input)) {
 			// The input is an array
 			return false;

@@ -34,12 +34,51 @@ class Request extends \App\Service\ExternalService {
 	protected function execute() {
 		global $app;
 		
-		// TODO: implement
+		// Gets the input
+		$credentials = $this->getInput('credentials');
+		$recipient = $this->getInput('recipient');
+		$userRole = $this->getInput('userRole');
 		
-		// Initializes the recipient of the email
-		$recipient = [
-			// TODO: implement
-		];
+		// Gets the signed-in user
+		$signedInUser = $app->authentication->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($signedInUser->getId(), $credentials['password']);
+		
+		// Sets an output
+		$this->setOutput('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user has not been authenticated
+			return;
+		}
+		
+		// Gets the current date-time
+		$currentDateTime = $app->server->getCurrentDateTime();
+		
+		// Generates a random password
+		$password = $app->cryptography->generateRandomPassword();
+		
+		// Computes the hash of the password
+		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
+		
+		// Executes a transaction
+		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $passwordHash, $salt, $keyStretchingIterations, $userRole, $signedInUser) {
+			// Initializes the sign-up permission
+			$signUpPermission = new \App\Data\Entity\SignUpPermission();
+			
+			// Creates the sign-up permission
+			$signUpPermission->setCreationDateTime($currentDateTime);
+			$signUpPermission->setPasswordHash($passwordHash);
+			$signUpPermission->setSalt($salt);
+			$signUpPermission->setKeyStretchingIterations($keyStretchingIterations);
+			$signUpPermission->setUserRole($userRole);
+			$signUpPermission->setCreator($signedInUser);
+			$entityManager->persist($signUpPermission);
+			
+			// Returns the sign-up permission's ID
+			return $signUpPermission->getId();
+		});
 		
 		// Sends a sign-up email
 		$app->emails->sendSignUpEmail($recipient, $id, $password);
@@ -49,8 +88,42 @@ class Request extends \App\Service\ExternalService {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
-		return true;
+		global $app;
+		
+		if (! $app->request->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Defines the JSON descriptor
+		$jsonDescriptor = new ObjectDescriptor([
+			'credentials' => new ObjectDescriptor([
+				'password' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				})
+			]),
+			
+			'recipient' => new ObjectDescriptor([
+				'name' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				}),
+				
+				'emailAddress' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				})
+			]),
+			
+			'userRole' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			})
+		]);
+		
+		// Determines whether the JSON input is valid
+		return $this->isJsonInputValid($jsonDescriptor);
 	}
 	
 	/**
@@ -64,8 +137,8 @@ class Request extends \App\Service\ExternalService {
 			USER_ROLE_ADMINISTRATOR
 		];
 		
-		// Validates the access
-		return $app->accessValidator->isAccessValid($authorizedUserRoles);
+		// Determines whether the user is authorized
+		return $app->access->isUserAuthorized($authorizedUserRoles);
 	}
 	
 }

@@ -90,7 +90,7 @@ class Edit extends \App\Service\ExternalService {
 			})
 		]);
 		
-		// Validates the JSON input
+		// Determines whether the JSON input is valid
 		return $this->isJsonInputValid($jsonDescriptor);
 	}
 	
@@ -105,8 +105,8 @@ class Edit extends \App\Service\ExternalService {
 			USER_ROLE_ADMINISTRATOR
 		];
 		
-		// Validates the access
-		return $app->accessValidator->isAccessValid($authorizedUserRoles);
+		// Determines whether the user is authorized
+		return $app->access->isUserAuthorized($authorizedUserRoles);
 	}
 	
 }

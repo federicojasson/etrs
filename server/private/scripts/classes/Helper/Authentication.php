@@ -44,7 +44,7 @@ class Authentication {
 	public function isUserSignedIn() {
 		global $app;
 		
-		// Checks if the session contains a data entry to store the user
+		// Determines whether the session contains a data entry for the user
 		return $app->session->containsData(SESSION_DATA_USER);
 	}
 	
@@ -59,7 +59,7 @@ class Authentication {
 		// Regenerates the session's ID
 		$app->session->regenerateId();
 		
-		// Sets a data entry in the session to store the user
+		// Sets a data entry in the session for the user
 		$app->session->setData(SESSION_DATA_USER, $id);
 		
 		// Gets the IP address of the client
@@ -78,7 +78,7 @@ class Authentication {
 		// Gets the signed-in user's ID
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
-		// Clears the session's data entry that stores the user
+		// Clears the session's data entry used for the user
 		$app->session->clearData(SESSION_DATA_USER);
 		
 		// Regenerates the session's ID
