@@ -47,8 +47,12 @@ class Maintenance extends Configuration {
 	 * Returns the log settings.
 	 */
 	protected function getLogSettings() {
+		// Opens the log file
+		$path = DIRECTORY_LOGS . '/maintenance.log';
+		$file = fopen($path, 'a');
+		
 		// Initializes a log writer
-		$logWriter = new \App\Utility\LogWriter\DatabaseLogWriter();
+		$logWriter = new \Slim\LogWriter($file);
 		
 		return [
 			'log.enabled' => true,

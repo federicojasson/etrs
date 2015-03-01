@@ -57,6 +57,22 @@ class Data {
 	}
 	
 	/**
+	 * Executes a command.
+	 * 
+	 * Receives the command and the input and output settings.
+	 */
+	public function executeCommand($command, $inputSettings, $outputSettings) {
+		// Initializes the helper set
+		$helperSet = \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($this->entityManager);
+		
+		// Sets the helper set
+		$command->setHelperSet($helperSet);
+		
+		// Executes the command
+		$command->run($inputSettings, $outputSettings);
+	}
+	
+	/**
 	 * Executes a transaction.
 	 * 
 	 * Receives a closure to be executed transactionally.
@@ -100,23 +116,23 @@ class Data {
 		if ($operationMode === OPERATION_MODE_DEVELOPMENT) {
 			// The system is in development
 			
-			// Defines the proxy-regeneration mode
-			$proxyRegenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS;
+			// Defines the proxy-generation mode
+			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS;
 			
 			// Initializes the cache
 			$cache = new \Doctrine\Common\Cache\ArrayCache();
 		} else {
 			// The system is not in development
 			
-			// Defines the proxy-regeneration mode
-			$proxyRegenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_NEVER;
+			// Defines the proxy-generation mode
+			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_NEVER;
 			
 			// Initializes the cache
 			$cache = new \Doctrine\Common\Cache\ApcCache();
 		}
 		
 		// Applies different settings
-		$configuration->setAutoGenerateProxyClasses($proxyRegenerationMode);
+		$configuration->setAutoGenerateProxyClasses($proxyGenerationMode);
 		$configuration->setMetadataCacheImpl($cache);
 		$configuration->setMetadataDriverImpl($metadataDriver);
 		$configuration->setProxyDir($proxyDirectory);

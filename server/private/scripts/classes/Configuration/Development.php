@@ -48,7 +48,7 @@ class Development extends Configuration {
 	 */
 	protected function getLogSettings() {
 		// Opens the log file
-		$path = DIRECTORY_LOGS . '/debug.log';
+		$path = DIRECTORY_LOGS . '/development.log';
 		$file = fopen($path, 'a');
 		
 		// Initializes a log writer

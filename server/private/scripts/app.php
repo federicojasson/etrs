@@ -212,6 +212,8 @@ function serveInternalRequest($url) {
 	
 	// Defines the services
 	$services = [
+		'/data/check-settings',
+		'/data/generate-proxies',
 		'/session/delete-expired',
 		'/user/delete'
 	];
