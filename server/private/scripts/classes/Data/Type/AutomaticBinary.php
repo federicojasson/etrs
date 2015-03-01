@@ -30,7 +30,7 @@ namespace App\Data\Type;
 class AutomaticBinary extends \Doctrine\DBAL\Types\BinaryType {
 	
 	/**
-     * Converts a value from its database representation to its PHP counterpart.
+	 * Converts a value from its database representation to its PHP counterpart.
 	 * 
 	 * Receives the value and the database plataform.
 	 */

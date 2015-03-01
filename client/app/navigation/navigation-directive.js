@@ -19,18 +19,24 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.navigation').directive('navigation', navigationDirective);
+	
+	/**
+	 * TODO: comment
+	 */
+	function navigationDirective() {
+		// Returns the directive's parameters
+		return getParameters();
+		
+		/**
+		 * TODO: comment
+		 */
+		function getParameters() {
+			return {
+				restrict: 'A',
+				scope: {},
+				templateUrl: 'app/navigation/navigation.html'
+			};
+		}
+	}
 })();

@@ -56,6 +56,20 @@ legend {
 	font-size: 2em;
 }
 
+.btn:focus {
+	outline: none !important;
+}
+
+.btn.btn-lg.text-uppercase {
+	font-size: 1em;
+	line-height: 1.7;
+}
+
+.btn.text-uppercase {
+	font-size: 0.9em;
+	line-height: 1.6;
+}
+
 .content-container {
 	padding-bottom: 32px;
 	padding-top: 8px;
@@ -116,4 +130,18 @@ legend {
 	font-size: 1.8em;
 	line-height: 52px;
 	padding-left: 16px;
+}
+
+.signed-in-user-link {
+	color: #888888;
+}
+
+.signed-in-user-link:focus {
+	color: #888888;
+	text-decoration: none;
+}
+
+.signed-in-user-link:hover {
+	color: #333333;
+	text-decoration: none;
 }

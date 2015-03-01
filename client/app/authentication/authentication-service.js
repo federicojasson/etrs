@@ -52,7 +52,13 @@
 		 * TODO: comment
 		 */
 		_this.getState = function() {
-			ready = false;
+			// TODO: test
+			signedInUser = {
+				id: 'admin',
+				role: 'ad'
+			};
+			
+			/*ready = false;
 			
 			// TODO: comment
 			server.authentication.getState().then(function(response) {
@@ -68,7 +74,7 @@
 			}, function(response) {
 				// The server responded with an error
 				error.report(response);
-			});
+			});*/
 		};
 		
 		/**

@@ -71,6 +71,14 @@
 							menuItems.manageMedications,
 							menuItems.createMedication
 						]
+					},
+					
+					{
+						name: 'Medicaciones',
+						items: [
+							menuItems.manageMedications,
+							menuItems.createMedication
+						]
 					}
 				],
 				

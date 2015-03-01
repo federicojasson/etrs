@@ -1,61 +1,94 @@
-<nav class="navbar navbar-static-top">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-				<div class="navbar-header">
-					<a class="navbar-brand navbar-logo-image" href="#/"></a>
-					<span class="navbar-logo-text">Eye Tracking Record System TODO: use constant?</span>
-				</div>
+<div ng-controller="AuthenticationController as authentication">
+	<nav class="navbar navbar-static-top">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<div class="navbar-header">
+						<a href="#/" class="navbar-brand navbar-logo-image"></a>
+						<span class="navbar-logo-text">
+							Eye Tracking Record System TODO: use constant?
+						</span>
+					</div>
 
-				<div class="collapse navbar-collapse navbar-right">
-					TODO: bar
+					<div class="collapse navbar-collapse navbar-right">
+						<div ng-if="authentication.isUserSignedIn()">
+							<div dropdown class="btn-group navbar-btn">
+								<a href="#/" class="btn btn-link signed-in-user-link">
+									TODO: filter name and link
+								</a>
+
+								<button dropdown-toggle type="button" class="btn btn-link dropdown-toggle signed-in-user-link">
+									<span class="caret"></span>
+									<span class="sr-only">Dropdown</span>
+								</button>
+
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a href="#/">Información de la cuenta (TODO)</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="#/">Cerrar sesión (TODO)</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						
+						<div ng-if="! authentication.isUserSignedIn()">
+							<a href="#/sign-in" class="btn btn-primary navbar-btn text-uppercase">
+								Iniciar sesión
+							</a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</nav>
+	</nav>
 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-			<div class="content-container" view></div>
-			
-			<hr>
-			
-			<div class="row">
-				<div class="col-sm-6 col-xs-6">
-					<a class="footer-logo-image" href="#/"></a>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="content-container">
+					<div ng-if="authentication.isUserSignedIn()">
+						<div class="row">
+							<div class="col-sm-3">
+								<div navigation></div>
+							</div>
+
+							<div class="col-sm-9">
+								<div view></div>
+							</div>
+						</div>
+					</div>
+					
+					<div ng-if="! authentication.isUserSignedIn()">
+						<div class="row">
+							<div class="col-sm-12">
+								<div view></div>
+							</div>
+						</div>
+					</div>
 				</div>
-				
-				<div class="col-sm-6 col-xs-6">
-					TODO: footer-menu
+
+				<hr>
+
+				<div class="row">
+					<div class="col-sm-6">
+						<a href="#/" class="footer-logo-image"></a>
+					</div>
+
+					<div class="col-sm-6">
+						TODO: footer-menu
+					</div>
 				</div>
-			</div>
-			
-			<hr>
-			
-			<div class="copyright-text">
-				ETRS - Eye Tracking Record System |
-				Copyright &copy; 2015 Federico Jasson
+
+				<hr>
+
+				<div class="copyright-text">
+					ETRS - Eye Tracking Record System |
+					Copyright &copy; 2015 Federico Jasson
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-TODO: que hacer con esto?
-<span ng-controller="AuthenticationController as authentication">
-	<span ng-if="authentication.isUserSignedIn()">
-		<span ng-controller="NavigationController as navigation">
-			<div ng-repeat="menu in navigation.getMenus()">
-				<div>
-					{{ menu.name }}
-				</div>
-				<div ng-repeat="menuItem in menu.items">
-					<div>
-						<a ng-href="#{{ menuItem.url }}">{{ menuItem.name }}</a>
-					</div>
-				</div>
-			</div>
-		</span>
-	</span>
-</span>
