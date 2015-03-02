@@ -48,6 +48,9 @@ class Request extends \App\Service\ExternalService {
 			return;
 		}
 		
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
+		
 		// Gets the current date-time
 		$currentDateTime = $app->server->getCurrentDateTime();
 		
@@ -61,7 +64,7 @@ class Request extends \App\Service\ExternalService {
 		$user = $app->data->getReference('App\Data\Entity\User', $credentials['id']);
 		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $passwordHash, $salt, $keyStretchingIterations, $user) {
+		$app->data->transactional(function($entityManager) use ($id, $currentDateTime, $passwordHash, $salt, $keyStretchingIterations, $user) {
 			// Deletes the reset-password permissions associated with the user
 			$entityManager->createQueryBuilder()
 				->delete('App\Data\Entity\ResetPasswordPermission', 'resetPasswordPermission')
@@ -75,15 +78,13 @@ class Request extends \App\Service\ExternalService {
 			$resetPasswordPermission = new \App\Data\Entity\ResetPasswordPermission();
 			
 			// Creates the reset-password permission
+			$resetPasswordPermission->setId($id);
 			$resetPasswordPermission->setCreationDateTime($currentDateTime);
 			$resetPasswordPermission->setPasswordHash($passwordHash);
 			$resetPasswordPermission->setSalt($salt);
 			$resetPasswordPermission->setKeyStretchingIterations($keyStretchingIterations);
 			$resetPasswordPermission->setUser($user);
 			$entityManager->persist($resetPasswordPermission);
-			
-			// Returns the reset-password permission's ID
-			return $resetPasswordPermission->getId();
 		});
 		
 		// Initializes the recipient of the email

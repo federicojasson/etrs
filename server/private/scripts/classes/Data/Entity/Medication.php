@@ -89,8 +89,6 @@ class Medication {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * @GeneratedValue(strategy = "CUSTOM")
-	 * @CustomIdGenerator(class = "App\Data\Utility\RandomIdGenerator")
 	 * 
 	 * @Column(
 	 *		name = "id",
@@ -285,6 +283,15 @@ class Medication {
 	 */
 	public function setDeletionDateTime($dateTime) {
 		$this->deletionDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
 	}
 	
 	/**

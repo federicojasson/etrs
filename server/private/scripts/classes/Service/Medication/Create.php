@@ -37,6 +37,9 @@ class Create extends \App\Service\ExternalService {
 		// Gets the input
 		$name = $this->getInput('name', 'trimAndShrink');
 		
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
+		
 		// Gets the current date-time
 		$currentDateTime = $app->server->getCurrentDateTime();
 		
@@ -44,18 +47,16 @@ class Create extends \App\Service\ExternalService {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $name, $signedInUser) {
+		$app->data->transactional(function($entityManager) use ($id, $currentDateTime, $name, $signedInUser) {
 			// Initializes the medication
 			$medication = new \App\Data\Entity\Medication();
 			
 			// Creates the medication
+			$medication->setId($id);
 			$medication->setCreationDateTime($currentDateTime);
 			$medication->setName($name);
 			$medication->setCreator($signedInUser);
 			$entityManager->persist($medication);
-			
-			// Returns the medication's ID
-			return $medication->getId();
 		});
 		
 		// Sets an output

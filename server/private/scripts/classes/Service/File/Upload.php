@@ -35,29 +35,30 @@ class Upload extends \App\Service\ExternalService {
 		$name = $this->getInput('name');
 		$temporaryPath = $this->getInput('temporaryPath');
 		
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
+		
 		// Gets the current date-time
 		$currentDateTime = $app->server->getCurrentDateTime();
 		
 		// Uploads the file
-		$hash = $app->files->upload(); // TODO: how to get ID?
+		$hash = $app->files->upload($id, $temporaryPath);
 		
 		// Gets the signed-in user
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($currentDateTime, $hash, $name, $signedInUser) {
+		$app->data->transactional(function($entityManager) use ($id, $currentDateTime, $hash, $name, $signedInUser) {
 			// Initializes the file
 			$file = new \App\Data\Entity\File();
 			
 			// Creates the file
+			$file->setId($id);
 			$file->setCreationDateTime($currentDateTime);
 			$file->setHash($hash);
 			$file->setName($name);
 			$file->setCreator($signedInUser);
 			$entityManager->persist($file);
-			
-			// Returns the file's ID
-			return $file->getId();
 		});
 		
 		// Sets an output

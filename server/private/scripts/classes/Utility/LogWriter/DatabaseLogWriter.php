@@ -58,6 +58,9 @@ class DatabaseLogWriter {
 	public function write($message, $level) {
 		global $app;
 		
+		// Generates a random ID
+		$id = $app->cryptography->generateRandomId();
+		
 		// Gets the current date-time
 		$currentDateTime = $app->server->getCurrentDateTime();
 		
@@ -65,11 +68,12 @@ class DatabaseLogWriter {
 		$level = $this->levelMapping[$level];
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($currentDateTime, $level, $message) {
+		$app->data->transactional(function($entityManager) use ($id, $currentDateTime, $level, $message) {
 			// Initializes the log
 			$log = new \App\Data\Entity\Log();
 			
 			// Creates the log
+			$log->setId($id);
 			$log->setCreationDateTime($currentDateTime);
 			$log->setLevel($level);
 			$log->setMessage($message);

@@ -38,7 +38,7 @@ class Emails {
 		$server = $app->parameters->server;
 		
 		// Defines the subject
-		$subject = 'ETRS - Restablecer contraseña';
+		$subject = 'Restablecimiento de contraseña';
 		
 		// Defines a placeholder mapping
 		$mapping = [
@@ -75,7 +75,7 @@ class Emails {
 		$server = $app->parameters->server;
 		
 		// Defines the subject
-		$subject = 'ETRS - Invitación';
+		$subject = 'Invitación';
 		
 		// Defines a placeholder mapping
 		$mapping = [

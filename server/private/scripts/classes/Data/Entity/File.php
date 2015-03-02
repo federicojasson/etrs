@@ -106,8 +106,6 @@ class File {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * @GeneratedValue(strategy = "CUSTOM")
-	 * @CustomIdGenerator(class = "App\Data\Utility\RandomIdGenerator")
 	 * 
 	 * @Column(
 	 *		name = "id",
@@ -294,6 +292,15 @@ class File {
 	 */
 	public function setHash($hash) {
 		$this->hash = $hash;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
 	}
 	
 	/**

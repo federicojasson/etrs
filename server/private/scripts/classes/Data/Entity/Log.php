@@ -49,8 +49,6 @@ class Log {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * @GeneratedValue(strategy = "CUSTOM")
-	 * @CustomIdGenerator(class = "App\Data\Utility\RandomIdGenerator")
 	 * 
 	 * @Column(
 	 *		name = "id",
@@ -128,6 +126,15 @@ class Log {
 	 */
 	public function setCreationDateTime($dateTime) {
 		$this->creationDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
 	}
 	
 	/**

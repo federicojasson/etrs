@@ -64,8 +64,6 @@ class SignUpPermission {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * @GeneratedValue(strategy = "CUSTOM")
-	 * @CustomIdGenerator(class = "App\Data\Utility\RandomIdGenerator")
 	 * 
 	 * @Column(
 	 *		name = "id",
@@ -211,6 +209,15 @@ class SignUpPermission {
 	 */
 	public function setCreator($user) {
 		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
 	}
 	
 	/**
