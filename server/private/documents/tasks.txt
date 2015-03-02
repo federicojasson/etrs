@@ -1,3 +1,5 @@
+- Define h1, h2, h3, h4, h5 and h6 font sizes.
+- Write installation document.
 - Automate current date-time use.
 - Test email styles.
 - Doubt: remove associations when medication (or other entity) is deleted?
@@ -16,3 +18,5 @@
 - Documentar API.
 - Doubt: check if the entity is expired before accepting it (session, permissions, etc)?
 - Idea: allow to ban users. A "banned" column can be added and the access helper can check for this before authorizing the access.
+- Register domain.
+- Buy SSL/TLS certificate.

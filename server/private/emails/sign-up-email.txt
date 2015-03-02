@@ -5,7 +5,7 @@ ETRS - Eye Tracking Record System
 
 Tenemos el agrado de saludarlo y comunicarle que ha sido invitado a registrarse en ETRS.
 
-Registrarse: :domain/account/sign-up/:id/:password
+Registrarse: https://:domain/#/account/sign-up/:id/:password
 
 Ante cualquier duda, comuníquese con :emailAddress.
 

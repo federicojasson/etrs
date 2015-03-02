@@ -30,6 +30,13 @@ class DeleteExpired extends \App\Service\InternalService {
 	 */
 	protected function execute() {
 		// TODO: implement
+		
+		// TODO: testing emails
+		global $app;
+		$app->emails->sendResetPasswordEmail([
+			'name' => 'Federico Jasson',
+			'emailAddress' => 'federicojasson+Testing@gmail.com'
+		], hex2bin('0123456789abcdef0123456789abcdef'), hex2bin('0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'));
 	}
 	
 	/**
@@ -37,6 +44,7 @@ class DeleteExpired extends \App\Service\InternalService {
 	 */
 	protected function isInputValid() {
 		// TODO: implement
+		return true;
 	}
 	
 }

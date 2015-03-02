@@ -1,6 +1,6 @@
 {
 	"TODO:": "define final parameters",
 	
-	"domain": "localhost/etrs",
-	"emailAddress": ""
+	"domain": "www.example.com",
+	"emailAddress": "etrs@etrs.com.ar"
 }
