@@ -37,7 +37,7 @@ class Data {
 		// Initializes the entity manager
 		$this->entityManager = $this->getEntityManager();
 		
-		// Registers custom types
+		// Registers a custom type
 		\Doctrine\DBAL\Types\Type::addType('automatic_binary', 'App\Data\Type\AutomaticBinary');
 	}
 	
