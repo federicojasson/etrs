@@ -1,3 +1,4 @@
+- Test email styles.
 - Doubt: remove associations when medication (or other entity) is deleted?
 - Check input validation process.
 - Automate current date-time use.
