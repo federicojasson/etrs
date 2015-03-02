@@ -37,19 +37,15 @@ class Emails {
 		// Gets the server parameters
 		$server = $app->parameters->server;
 		
-		// Builds the subject
-		$subject = $server['name'] . ' - Restablecer contraseña';
-		
-		// Builds a URL to reset the password
-		$url = '';
-		$url .= $server['domain'];
-		$url .= '/reset-password';
-		$url .= '/' . bin2hex($id);
-		$url .= '/' . bin2hex($password);
+		// Defines the subject
+		$subject = 'ETRS - Restablecer contraseña';
 		
 		// Defines a placeholder mapping
 		$mapping = [
-			':url' => $url
+			':domain' => $server['domain'],
+			':emailAddress' => $server['emailAddress'],
+			':id' => bin2hex($id),
+			':password' => bin2hex($password)
 		];
 		
 		// Builds the body
@@ -78,19 +74,15 @@ class Emails {
 		// Gets the server parameters
 		$server = $app->parameters->server;
 		
-		// Builds the subject
-		$subject = $server['name'] . ' - Invitación';
-		
-		// Builds a URL to sign up
-		$url = '';
-		$url .= $server['domain'];
-		$url .= '/sign-up';
-		$url .= '/' . bin2hex($id);
-		$url .= '/' . bin2hex($password);
+		// Defines the subject
+		$subject = 'ETRS - Invitación';
 		
 		// Defines a placeholder mapping
 		$mapping = [
-			':url' => $url
+			':domain' => $server['domain'],
+			':emailAddress' => $server['emailAddress'],
+			':id' => bin2hex($id),
+			':password' => bin2hex($password)
 		];
 		
 		// Builds the body
@@ -159,7 +151,7 @@ class Emails {
 		
 		// Initializes the sender of the email
 		$sender = [
-			'name' => $server['name'],
+			'name' => 'ETRS',
 			'emailAddress' => $server['emailAddress']
 		];
 		

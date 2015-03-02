@@ -1,2 +1,16 @@
-TODO: sign-up-email.txt
-:url
+ETRS - Eye Tracking Record System
+---------------------------------
+
+Tenemos el agrado de saludarlo y comunicarle que ha sido invitado a registrarse en ETRS.
+
+Registrarse: :domain/account/sign-up/:id/:password
+
+Ante cualquier duda, comuníquese con :emailAddress.
+
+Lo saluda atentamente,
+El equipo de ETRS
+:domain
+
+---------------------------------
+Si cree que recibió este correo electrónico por error, comuníquese con :emailAddress.
+Por favor, no responda este mensaje.
