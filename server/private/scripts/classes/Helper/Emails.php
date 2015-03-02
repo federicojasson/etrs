@@ -156,7 +156,16 @@ class Emails {
 		];
 		
 		// Creates the email
-		return $this->createEmail($sender, $recipient, $subject, $body, $alternativeBody);
+		$email = $this->createEmail($sender, $recipient, $subject, $body, $alternativeBody);
+		
+		// Reads the logo image
+		$path = DIRECTORY_EMAILS . '/logo.png';
+		$logoImage = file_get_contents($path);
+		
+		// Embeds the logo image
+		$email->addStringEmbeddedImage($logoImage, 'logo.png');
+		
+		return $email;
 	}
 	
 	/**
