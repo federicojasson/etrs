@@ -21,7 +21,7 @@
 namespace App\ErrorHandler;
 
 /**
- * This class handles errors.
+ * Handles errors.
  */
 class ErrorHandler {
 	

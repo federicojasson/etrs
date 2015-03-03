@@ -21,7 +21,7 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a session from the database.
+ * Represents a session from the database.
  * 
  * Annotations:
  * 

@@ -21,7 +21,7 @@
 namespace App\Data\Type;
 
 /**
- * This class represents a binary type.
+ * Represents a binary type.
  * 
  * The primary difference with the native binary type is that this type
  * automatically reads the obtained binary resource when the value is converted

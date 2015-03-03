@@ -21,7 +21,7 @@
 namespace App\Service;
 
 /**
- * This class represents an internal service.
+ * Represents an internal service.
  * 
  * Subclasses must implement the isInputValid method to validate the input.
  */

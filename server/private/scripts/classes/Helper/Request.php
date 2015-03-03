@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class extends the Slim's Request class.
+ * Extends the functionality of the Slim's Request class.
  */
 class Request extends \Slim\Http\Request {
 	

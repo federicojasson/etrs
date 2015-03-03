@@ -21,7 +21,7 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a reset-password permission from the database.
+ * Represents a reset-password permission from the database.
  * 
  * Annotations:
  * 

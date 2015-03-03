@@ -21,7 +21,7 @@
 namespace App\ErrorHandler;
 
 /**
- * This class handles situations where the requested service is not found.
+ * Handles situations where the requested service is not found.
  */
 class NotFoundHandler {
 	

@@ -21,7 +21,7 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a user from the database.
+ * Represents a user from the database.
  * 
  * Annotations:
  * 

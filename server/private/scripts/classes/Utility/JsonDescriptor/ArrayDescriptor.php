@@ -21,7 +21,7 @@
 namespace App\Utility\JsonDescriptor;
 
 /**
- * This class represents a JSON array descriptor.
+ * Represents a JSON array descriptor.
  */
 class ArrayDescriptor extends JsonDescriptor {
 	

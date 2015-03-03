@@ -21,7 +21,7 @@
 namespace App\Utility\JsonDescriptor;
 
 /**
- * This class represents a JSON descriptor.
+ * Represents a JSON descriptor.
  * 
  * Instances can be used in combination to define the expected structure of a
  * JSON input and subsequently validating it.

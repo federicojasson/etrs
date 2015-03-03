@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class manages the authentication state.
+ * Manages the authentication state.
  */
 class Authentication {
 	

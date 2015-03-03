@@ -21,7 +21,7 @@
 namespace App\Configuration;
 
 /**
- * This class represents the production-mode configuration.
+ * Represents the production-mode configuration.
  */
 class Production extends Configuration {
 	

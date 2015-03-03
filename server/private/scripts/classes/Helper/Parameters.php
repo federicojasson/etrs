@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class offers methods to obtain parameters used by the application.
+ * Offers methods to obtain parameters used by the application.
  */
 class Parameters {
 	

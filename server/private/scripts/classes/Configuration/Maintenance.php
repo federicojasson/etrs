@@ -21,7 +21,7 @@
 namespace App\Configuration;
 
 /**
- * This class represents the maintenance-mode configuration.
+ * Represents the maintenance-mode configuration.
  */
 class Maintenance extends Configuration {
 	

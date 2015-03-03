@@ -21,7 +21,7 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a medication from the database.
+ * Represents a medication from the database.
  * 
  * Annotations:
  * 

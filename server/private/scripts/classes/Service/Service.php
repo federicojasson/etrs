@@ -21,7 +21,7 @@
 namespace App\Service;
 
 /**
- * This class represents a service.
+ * Represents a service.
  * 
  * Subclasses must implement the execute method.
  */

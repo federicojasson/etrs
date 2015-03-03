@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class offers data-related functionalities.
+ * Offers data-related functionalities.
  */
 class Data {
 	

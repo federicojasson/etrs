@@ -21,7 +21,7 @@
 namespace App\Configuration;
 
 /**
- * This class represents the development-mode configuration.
+ * Represents the development-mode configuration.
  */
 class Development extends Configuration {
 	

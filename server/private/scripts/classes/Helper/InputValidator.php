@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class offers input-validation methods.
+ * Offers input-validation methods.
  */
 class InputValidator {
 	// TODO: implement

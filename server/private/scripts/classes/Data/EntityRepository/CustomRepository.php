@@ -21,7 +21,7 @@
 namespace App\Data\EntityRepository;
 
 /**
- * This class provides custom methods to retrieve data from the database.
+ * Provides custom methods to retrieve data from the database.
  */
 class CustomRepository extends \Doctrine\ORM\EntityRepository {
 	

@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class offers server-related functionalities.
+ * Offers server-related functionalities.
  */
 class Server {
 	

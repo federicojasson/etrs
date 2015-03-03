@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class offers assertion methods to check different conditions.
+ * Offers assertion methods to check different conditions.
  */
 class Assertor {
 	

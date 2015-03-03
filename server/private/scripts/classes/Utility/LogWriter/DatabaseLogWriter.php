@@ -21,7 +21,7 @@
 namespace App\Utility\LogWriter;
 
 /**
- * This class allows to write logs in the database.
+ * Allows to write logs in the database.
  */
 class DatabaseLogWriter {
 	

@@ -21,7 +21,7 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a sign-up permission from the database.
+ * Represents a sign-up permission from the database.
  * 
  * Annotations:
  * 

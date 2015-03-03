@@ -21,7 +21,7 @@
 namespace App\Configuration;
 
 /**
- * This class represents a configuration.
+ * Represents a configuration.
  * 
  * Subclasses must implement the getCookieSettings, getLogSettings and
  * getMiscellaneousSettings methods.

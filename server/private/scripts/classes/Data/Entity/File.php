@@ -21,7 +21,7 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a file from the database.
+ * Represents a file from the database.
  * 
  * Annotations:
  * 

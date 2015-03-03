@@ -21,7 +21,7 @@
 namespace App\Service;
 
 /**
- * This class represents an external service.
+ * Represents an external service.
  * 
  * Subclasses must implement the isInputValid method to validate the input and
  * the isUserAuthorized method to check if the user is authorized to use the

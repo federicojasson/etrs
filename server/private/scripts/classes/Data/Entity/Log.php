@@ -21,7 +21,7 @@
 namespace App\Data\Entity;
 
 /**
- * This class represents a log from the database.
+ * Represents a log from the database.
  * 
  * Annotations:
  * 

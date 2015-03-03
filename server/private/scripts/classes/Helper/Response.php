@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class extends the Slim's Response class.
+ * Extends the functionality of the Slim's Response class.
  */
 class Response extends \Slim\Http\Response {
 	

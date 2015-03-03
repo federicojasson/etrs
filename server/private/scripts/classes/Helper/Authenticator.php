@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * This class offers authentication methods.
+ * Offers authentication methods.
  */
 class Authenticator {
 	
