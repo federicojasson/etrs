@@ -70,7 +70,7 @@
 		var _this = this;
 		
 		/**
-		 * Adds a service to the interface.
+		 * Adds a service.
 		 * 
 		 * Receives the URL of the service.
 		 */
