@@ -19,46 +19,31 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').service('title', titleService);
+	angular.module('app.utility').service('utility', utilityService);
 	
 	/**
-	 * Manages the title of the site.
+	 * Offers utility functions.
 	 */
-	function titleService() {
+	function utilityService() {
 		var _this = this;
 		
 		/**
-		 * The title of the site.
-		 */
-		var title = '';
-		
-		/**
-		 * Returns the title of the site.
-		 */
-		_this.get = function() {
-			return title;
-		};
-		
-		/**
-		 * Sets the title of the site.
+		 * Converts a string from spinal-case to camelCase.
 		 * 
-		 * The function appends the acronym of the application at the end of the
-		 * title, so this must not be included.
-		 * 
-		 * Receives the title to be set.
+		 * Receives the string.
 		 */
-		_this.set = function(newTitle) {
-			if (newTitle.length > 0) {
-				// The title is not empty
-				// Appends a dash
-				newTitle += ' - ';
-			}
+		_this.toCamelCase = function(string) {
+			// Replaces the dashes with whitespaces
+			string = string.replace(/-/g, ' ');
+
+			// Converts the first character of each word, except the first one,
+			// to uppercase
+			string = string.replace(/ [a-z]/g, function(character) {
+				return character.toUpperCase();
+			});
 			
-			// Appends the acronym of the application
-			newTitle += 'ETRS';
-			
-			// Sets the title
-			title = newTitle;
+			// Removes the whitespaces
+			return string.replace(/ /g, '');
 		};
 	}
 })();

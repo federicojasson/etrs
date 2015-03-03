@@ -19,18 +19,21 @@
 'use strict';
 
 (function() {
-	angular.module('app.authentication').service('authentication', authenticationService);
+	angular.module('app.authentication').service('authentication', [
+		'server',
+		authenticationService
+	]);
 	
 	/**
 	 * Manages the authentication state.
 	 */
-	function authenticationService() {
+	function authenticationService(server) {
 		var _this = this;
 		
 		/**
 		 * Indicates whether the authentication state is being refreshed.
 		 */
-		var refreshing = null;
+		var refreshing = false;
 		
 		/**
 		 * The signed-in user.

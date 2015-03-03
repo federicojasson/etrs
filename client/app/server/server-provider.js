@@ -22,62 +22,115 @@
 	angular.module('app.server').provider('server', serverProvider);
 	
 	/**
-	 * Exposes the server API.
-	 * 
-	 * All requests to the server should be done through the provided interface.
+	 * Responsible for initializing the server service.
 	 */
 	function serverProvider() {
 		var _this = this;
 		
 		/**
-		 * Initializes the service.
+		 * The registered services.
+		 */
+		var services = [];
+		
+		/**
+		 * Initializes the server service.
 		 */
 		_this.$get = [
 			'$resource',
-			construct
+			'utility',
+			function($resource, utility) {
+				// Initializes the server service
+				var server = new serverService($resource, utility, services);
+				
+				// Adds the services
+				for (var i = 0; i < services.length; i++) {
+					server.addService(services[i]);
+				}
+				
+				return server;
+			}
 		];
 		
 		/**
 		 * Registers a service.
 		 * 
-		 * Receives the URL of the service.
+		 * Receives the service.
 		 */
-		_this.registerService = function(url) {
-			// TODO: implement
+		_this.registerService = function(service) {
+			services.push(service);
 		};
 	}
 	
 	/**
-	 * TODO: comment
+	 * Exposes the server API.
+	 * 
+	 * All requests to the server should be done through the provided interface.
 	 */
-	function construct($resource) {// TODO: rename
+	function serverService($resource, utility) {
+		var _this = this;
+		
 		/**
-		 * TODO: comment
+		 * Adds a service to the interface.
+		 * 
+		 * Receives the URL of the service.
 		 */
-		function Server() {
-			// TODO: implement
-		}
+		_this.addService = function(url) {
+			// Removes the leading slash
+			var string = url.substr(1);
+
+			// Gets the string fragments separated by slashes
+			var fragments = string.split('/');
+
+			// Converts the fragments to camelCase
+			for (var i = 0; i < fragments.length; i++) {
+				fragments[i] = utility.toCamelCase(fragments[i]);
+			}
+			
+			// Creates the necessary properties and functions
+			var object = _this;
+			for (var i = 0; i < fragments.length; i++) {
+				var fragment = fragments[i];
+
+				if (i === fragments.length - 1) {
+					// It is the last fragment
+
+					// Creates a function for the service
+					object[fragment] = function(input) {
+						return sendRequest(url, input);
+					};
+
+					return;
+				}
+
+				// Gets the child of the object corresponding to the fragment
+				var child = object[fragment];
+
+				// Initializes the child if is undefined
+				object[fragment] = (angular.isDefined(child)) ? child : {};
+
+				// Sets the child as the current object
+				object = object[fragment];
+			}
+		};
 		
 		/**
 		 * Sends a request to the server.
 		 * 
-		 * Receives the URL of the service and, optionally, the input to be
-		 * sent.
+		 * Receives the URL of the requested service and, optionally, the input
+		 * to be sent.
 		 */
 		function sendRequest(url, input) {
 			// Initializes the input if is undefined
 			input = (angular.isDefined(input)) ? input : {};
-			
+
 			// Builds the definitive URL
 			url = 'server' + url;
-			
-			// Sends the request
+
+			// Sends the request to the server
 			var deferredTask = $resource(url).save(input);
-			
+
 			// Returns the promise of the deferred task
 			return deferredTask.$promise;
 		}
-		
-		return Server;
 	}
 })();
