@@ -29,7 +29,7 @@ namespace App\Configuration;
 abstract class Configuration {
 	
 	/**
-	 * Invokes the configuration.
+	 * Applies the configuration.
 	 */
 	public function __invoke() {
 		global $app;

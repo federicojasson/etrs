@@ -21,12 +21,12 @@
 namespace App\ErrorHandler;
 
 /**
- * Handles errors.
+ * Responsible for handling general errors.
  */
 class ErrorHandler {
 	
 	/**
-	 * Invokes the error handler.
+	 * Handles an error.
 	 * 
 	 * Receives the exception that contains the information about the error.
 	 */

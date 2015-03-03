@@ -19,12 +19,79 @@
 'use strict';
 
 (function() {
-	angular.module('app.router').config(config);
+	angular.module('app.router').config([
+		'$locationProvider',
+		'$stateProvider',
+		'$urlRouterProvider',
+		config
+	]);
 	
 	/**
 	 * Configures the module.
 	 */
-	function config() {
-		// TODO: implement
+	function config($locationProvider, $stateProvider, $urlRouterProvider) {
+		// Enables the HTML5 history API
+		//$locationProvider.html5Mode(true); TODO: weird bug (slashes are encoded in url)
+		
+		// Sets the default URL
+		$urlRouterProvider.otherwise('/');
+		
+		// Gets the states
+		var states = getStates();
+		
+		// Registers the states
+		for (var i = 0; i < states.length; i++) {
+			var state = states[i];
+			
+			// Sets the URL of the layout's template
+			state.templateUrl = 'app/layout/layout.html';
+			
+			// Registers the state
+			$stateProvider.state(state);
+		}
+		
+		/**
+		 * Returns the states to be registered.
+		 */
+		function getStates() {
+			return [
+				{
+					name: 'account.signIn',
+					url: '/account/sign-in',
+					controllers: {
+						__: 'ViewAccountSignInController'
+					}
+				},
+				
+				{
+					name: 'home',
+					url: '/',
+					controllers: {
+						__: 'ViewAccountSignInController',
+						ad: 'ViewHomeController',
+						dr: 'ViewHomeController',
+						op: 'ViewHomeController'
+					}
+				},
+				
+				{
+					name: 'medication.management',
+					url: '/medication/management',
+					controllers: {
+						__: 'ViewAccountSignInController',
+						ad: 'ViewMedicationManagementController'
+					}
+				},
+				
+				{
+					name: 'medication.new',
+					url: '/medication/new',
+					controllers: {
+						__: 'ViewAccountSignInController',
+						ad: 'ViewMedicationNewController'
+					}
+				}
+			];
+		}
 	}
 })();

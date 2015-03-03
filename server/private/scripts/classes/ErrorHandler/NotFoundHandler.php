@@ -21,12 +21,13 @@
 namespace App\ErrorHandler;
 
 /**
- * Handles situations where the requested service is not found.
+ * Responsible for handling errors produced by the request of undefined
+ * services.
  */
 class NotFoundHandler {
 	
 	/**
-	 * Invokes the error handler.
+	 * Handles an error.
 	 */
 	public function __invoke() {
 		global $app;
