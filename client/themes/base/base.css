@@ -6,6 +6,10 @@
  * and how to apply and follow the GNU GPL, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * This style sheet defines the base theme for the site.
+ */
+
 pre {
 	white-space: pre-line;
 	word-break: normal;

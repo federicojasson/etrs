@@ -19,22 +19,49 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').controller('TitleController', [
-		'title',
-		TitleController
+	angular.module('app.title').service('title', [
+		'appAcronym',
+		titleService
 	]);
 	
 	/**
-	 * Offers means to access the title of the site.
+	 * TODO: comment
 	 */
-	function TitleController(title) {
+	function titleService(appAcronym) {
 		var _this = this;
 		
 		/**
-		 * Returns the title of the site.
+		 * The title of the document.
+		 */
+		var title = '';
+		
+		/**
+		 * Returns the title of the document.
 		 */
 		_this.get = function() {
-			return title.get();
+			return title;
+		};
+		
+		/**
+		 * Sets the title of the document.
+		 * 
+		 * The function appends the acronym of the application at the end of the
+		 * title, so it must not be included.
+		 * 
+		 * Receives the title to be set.
+		 */
+		_this.set = function(newTitle) {
+			if (newTitle.length > 0) {
+				// The new title is not empty
+				// Appends a dash
+				newTitle += ' - ';
+			}
+			
+			// Appends the acronym of the application
+			newTitle += appAcronym;
+			
+			// Sets the title
+			title = newTitle;
 		};
 	}
 })();

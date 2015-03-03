@@ -20,8 +20,6 @@
 
 (function() {
 	angular.module('app.layout', [
-		'app.layout.error',
-		'app.layout.loading',
-		'app.layout.site'
+		'app.layout.error'
 	]);
 })();

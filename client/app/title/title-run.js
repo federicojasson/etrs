@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * TODO: comment
+	 * Performs initialization tasks.
 	 */
 	function run(title) {
 		// Sets an empty title

@@ -19,46 +19,43 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').service('title', [
-		'appAcronym',
-		titleService
-	]);
+	angular.module('app.title').service('title', titleService);
 	
 	/**
-	 * TODO: comment
+	 * Offers means to manage the title of the site.
 	 */
-	function titleService(appAcronym) {
+	function titleService() {
 		var _this = this;
 		
 		/**
-		 * The title of the document.
+		 * The title of the site.
 		 */
 		var title = '';
 		
 		/**
-		 * Returns the title of the document.
+		 * Returns the title of the site.
 		 */
 		_this.get = function() {
 			return title;
 		};
 		
 		/**
-		 * Sets the title of the document.
+		 * Sets the title of the site.
 		 * 
 		 * The function appends the acronym of the application at the end of the
-		 * title, so it must not be included.
+		 * title, so this must not be included.
 		 * 
 		 * Receives the title to be set.
 		 */
 		_this.set = function(newTitle) {
 			if (newTitle.length > 0) {
-				// The new title is not empty
+				// The title is not empty
 				// Appends a dash
 				newTitle += ' - ';
 			}
 			
 			// Appends the acronym of the application
-			newTitle += appAcronym;
+			newTitle += 'ETRS';
 			
 			// Sets the title
 			title = newTitle;

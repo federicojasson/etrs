@@ -20,11 +20,12 @@
 
 (function() {
 	angular.module('app', [
+		'ngLocale',
 		'ngResource',
 		'ui.bootstrap',
 		'ui.router',
+		'app.action',
 		'app.authentication',
-		'app.error',
 		'app.layout',
 		'app.navigation',
 		'app.router',

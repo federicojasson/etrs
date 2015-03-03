@@ -19,8 +19,7 @@
  */
 
 /**
- * This script includes the scripts of the application and defines bootstrapping
- * functions.
+ * This script includes the application and defines bootstrapping functions.
  */
 
 // Defines the directories

@@ -20,11 +20,8 @@
 
 (function() {
 	angular.module('app.view', [
-		'app.view.createMedication',
-		'app.view.forgotPassword',
+		'app.view.account',
 		'app.view.home',
-		'app.view.manageMedications',
-		'app.view.resetPassword',
-		'app.view.signIn'
+		'app.view.medication'
 	]);
 })();

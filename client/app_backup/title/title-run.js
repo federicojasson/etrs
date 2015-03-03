@@ -19,22 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').controller('TitleController', [
+	angular.module('app.title').run([
 		'title',
-		TitleController
+		run
 	]);
 	
 	/**
-	 * Offers means to access the title of the site.
+	 * TODO: comment
 	 */
-	function TitleController(title) {
-		var _this = this;
-		
-		/**
-		 * Returns the title of the site.
-		 */
-		_this.get = function() {
-			return title.get();
-		};
+	function run(title) {
+		// Sets an empty title
+		title.set('');
 	}
 })();

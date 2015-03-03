@@ -19,22 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').controller('TitleController', [
-		'title',
-		TitleController
+	angular.module('app.view', [
+		'app.view.createMedication',
+		'app.view.forgotPassword',
+		'app.view.home',
+		'app.view.manageMedications',
+		'app.view.resetPassword',
+		'app.view.signIn'
 	]);
-	
-	/**
-	 * Offers means to access the title of the site.
-	 */
-	function TitleController(title) {
-		var _this = this;
-		
-		/**
-		 * Returns the title of the site.
-		 */
-		_this.get = function() {
-			return title.get();
-		};
-	}
 })();

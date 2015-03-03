@@ -19,22 +19,9 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').controller('TitleController', [
-		'title',
-		TitleController
+	angular.module('app.layout', [
+		'app.layout.error',
+		'app.layout.loading',
+		'app.layout.site'
 	]);
-	
-	/**
-	 * Offers means to access the title of the site.
-	 */
-	function TitleController(title) {
-		var _this = this;
-		
-		/**
-		 * Returns the title of the site.
-		 */
-		_this.get = function() {
-			return title.get();
-		};
-	}
 })();

@@ -25,13 +25,13 @@
 	]);
 	
 	/**
-	 * Offers means to access the title of the site.
+	 * TODO: comment
 	 */
 	function TitleController(title) {
 		var _this = this;
 		
 		/**
-		 * Returns the title of the site.
+		 * Returns the title of the document.
 		 */
 		_this.get = function() {
 			return title.get();

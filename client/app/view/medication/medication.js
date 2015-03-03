@@ -19,22 +19,8 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').controller('TitleController', [
-		'title',
-		TitleController
+	angular.module('app.view.medication', [
+		'app.view.medication.management',
+		'app.view.medication.new'
 	]);
-	
-	/**
-	 * Offers means to access the title of the site.
-	 */
-	function TitleController(title) {
-		var _this = this;
-		
-		/**
-		 * Returns the title of the site.
-		 */
-		_this.get = function() {
-			return title.get();
-		};
-	}
 })();
