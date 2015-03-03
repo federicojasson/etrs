@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * Registers the helpers.
+ * Responsible for registering the helpers.
  */
 class Helpers extends \Slim\Middleware {
 	

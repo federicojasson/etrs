@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * Applies the appropiate configuration.
+ * Responsible for applying the configuration.
  */
 class Configurations extends \Slim\Middleware {
 	

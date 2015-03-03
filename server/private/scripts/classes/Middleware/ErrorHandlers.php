@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * Registers the error handlers.
+ * Responsible for registering the error handlers.
  */
 class ErrorHandlers extends \Slim\Middleware {
 	

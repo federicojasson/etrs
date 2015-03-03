@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * Initializes the session.
+ * Responsible for initializing the session.
  */
 class Session extends \Slim\Middleware {
 	

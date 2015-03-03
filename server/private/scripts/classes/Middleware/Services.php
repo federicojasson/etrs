@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * Registers the services.
+ * Responsible for registering the services.
  */
 class Services extends \Slim\Middleware {
 	

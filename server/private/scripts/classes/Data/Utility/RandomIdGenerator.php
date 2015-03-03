@@ -21,7 +21,7 @@
 namespace App\Data\Utility;
 
 /**
- * Generates random IDs for database entities.
+ * Responsible for generating random IDs for database entities.
  */
 class RandomIdGenerator extends \Doctrine\ORM\Id\AbstractIdGenerator {
 	
