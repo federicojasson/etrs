@@ -27,6 +27,11 @@
 	function ViewMedicationManagementController() {
 		var _this = this;
 		
-		// TODO: implement
+		/**
+		 * TODO: comment
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/medication/management/management.html';
+		};
 	}
 })();

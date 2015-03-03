@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.view').directive('view', viewDirective);
+	angular.module('app.view').directive('view', [
+		'$controller',
+		'view',
+		viewDirective
+	]);
 	
 	/**
 	 * Includes the current view.
 	 */
-	function viewDirective() {
+	function viewDirective($controller, view) {
 		// Returns the settings of the directive
 		return getSettings();
 		
@@ -41,12 +45,21 @@
 		}
 		
 		/**
-		 * Registers a listener for the controller.
+		 * Registers a listener for the controller of the view.
 		 * 
 		 * Receives the scope of the directive.
 		 */
 		function registerControllerListener(scope) {
-			// TODO: implement
+			// Listens for changes in the controller of the view
+			scope.$watch(view.getController, function(controller) {
+				// Initializes the controller
+				var instance = $controller(controller);
+				
+				// TODO: register title listener here? otherwise assign controller directly to scope variable
+				
+				// Binds the controller to the scope of the directive
+				scope.view = instance;
+			});
 		}
 	}
 })();

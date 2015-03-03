@@ -19,19 +19,19 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.home').controller('ViewHomeController', ViewHomeController);
+	angular.module('app.layout.loading').controller('LayoutLoadingController', LayoutLoadingController);
 	
 	/**
-	 * Represents a view.
+	 * TODO: comment
 	 */
-	function ViewHomeController() {
+	function LayoutLoadingController() {
 		var _this = this;
 		
 		/**
 		 * TODO: comment
 		 */
 		_this.getTemplateUrl = function() {
-			return 'app/view/home/home.html';
+			return 'app/layout/loading/loading.html';
 		};
 	}
 })();

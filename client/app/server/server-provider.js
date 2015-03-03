@@ -40,7 +40,7 @@
 			'utility',
 			function($resource, utility) {
 				// Initializes the server service
-				var server = new serverService($resource, utility, services);
+				var server = new serverService($resource, utility);
 				
 				// Adds the services
 				for (var i = 0; i < services.length; i++) {

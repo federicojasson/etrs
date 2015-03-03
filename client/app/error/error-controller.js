@@ -30,6 +30,11 @@
 	function ErrorController(error) {
 		var _this = this;
 		
-		// TODO: implement
+		/**
+		 * Returns the error occurred.
+		 */
+		_this.get = function() {
+			return error.get();
+		};
 	}
 })();

@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout').directive('layout', layoutDirective);
+	angular.module('app.layout').directive('layout', [
+		'$controller',
+		'layout',
+		layoutDirective
+	]);
 	
 	/**
-	 * Includes the current view.
+	 * Includes the current layout.
 	 */
-	function layoutDirective() {
+	function layoutDirective($controller, layout) {
 		// Returns the settings of the directive
 		return getSettings();
 		
@@ -41,12 +45,21 @@
 		}
 		
 		/**
-		 * Registers a listener for the controller.
+		 * Registers a listener for the controller of the layout.
 		 * 
 		 * Receives the scope of the directive.
 		 */
 		function registerControllerListener(scope) {
-			// TODO: implement
+			// Listens for changes in the controller of the layout
+			scope.$watch(layout.getController, function(controller) {
+				// Initializes the controller
+				var instance = $controller(controller);
+				
+				// TODO: register title listener here? otherwise assign controller directly to scope variable
+				
+				// Binds the controller to the scope of the directive
+				scope.layout = instance;
+			});
 		}
 	}
 })();

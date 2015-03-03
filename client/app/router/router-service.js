@@ -19,19 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.home').controller('ViewHomeController', ViewHomeController);
+	angular.module('app.router').service('router', [
+		'$location',
+		routerService
+	]);
 	
 	/**
-	 * Represents a view.
+	 * TODO: comment
 	 */
-	function ViewHomeController() {
+	function routerService($location) {
 		var _this = this;
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.getTemplateUrl = function() {
-			return 'app/view/home/home.html';
+		_this.redirect = function(url) {
+			$location.path(url);
 		};
 	}
 })();

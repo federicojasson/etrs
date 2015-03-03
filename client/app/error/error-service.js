@@ -33,10 +33,26 @@
 		var error = null;
 		
 		/**
+		 * Returns the error occurred.
+		 */
+		_this.get = function() {
+			return error;
+		};
+		
+		/**
 		 * Determines whether an error occurred.
 		 */
 		_this.occurred = function() {
 			return error !== null;
+		};
+		
+		/**
+		 * Reports the occurrence of an error.
+		 * 
+		 * Receives the response of the server.
+		 */
+		_this.report = function(response) {
+			// TODO: implement (create error object)
 		};
 	}
 })();

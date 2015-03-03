@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.authentication').service('authentication', [
+		'error',
 		'server',
 		authenticationService
 	]);
@@ -27,18 +28,18 @@
 	/**
 	 * Manages the authentication state.
 	 */
-	function authenticationService(server) {
+	function authenticationService(error, server) {
 		var _this = this;
-		
-		/**
-		 * Indicates whether the authentication state is being refreshed.
-		 */
-		var refreshing = false;
 		
 		/**
 		 * The signed-in user.
 		 */
 		var signedInUser = null;
+		
+		/**
+		 * Indicates whether the authentication state is being refreshed.
+		 */
+		var stateRefreshing = false;
 		
 		/**
 		 * Returns the signed-in user.
@@ -50,8 +51,8 @@
 		/**
 		 * Determines whether the authentication state is being refreshed.
 		 */
-		_this.isRefreshing = function() {
-			return refreshing;
+		_this.isStateRefreshing = function() {
+			return stateRefreshing;
 		};
 		
 		/**
@@ -69,9 +70,28 @@
 		 * server.
 		 */
 		_this.refreshState = function() {
-			refreshing = true;
+			stateRefreshing = true;
 			
-			// TODO: implement
+			// Gets the authentication state
+			server.authentication.getState().then(function(output) {
+				if (! output.signedIn) {
+					// The user is not signed in
+					signedInUser = null;
+					
+					stateRefreshing = false;
+					return;
+				}
+				
+				// TODO: implement (get user)
+				signedInUser = {
+					id: 'admin',
+					role: 'ad'
+				};
+				stateRefreshing = false;
+			}, function(response) {
+				// The server responded with an error
+				error.report(response);
+			});
 		};
 	}
 })();

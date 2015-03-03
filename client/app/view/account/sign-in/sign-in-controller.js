@@ -27,6 +27,11 @@
 	function ViewAccountSignInController() {
 		var _this = this;
 		
-		// TODO: implement
+		/**
+		 * TODO: comment
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/account/sign-in/sign-in.html';
+		};
 	}
 })();

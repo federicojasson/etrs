@@ -19,19 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.home').controller('ViewHomeController', ViewHomeController);
+	angular.module('app.view').service('view', viewService);
 	
 	/**
-	 * Represents a view.
+	 * TODO: comment
 	 */
-	function ViewHomeController() {
+	function viewService() {
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * The controller of the view.
 		 */
-		_this.getTemplateUrl = function() {
-			return 'app/view/home/home.html';
+		var controller = '';
+		
+		/**
+		 * Returns the controller of the view.
+		 */
+		_this.getController = function() {
+			return controller;
+		};
+		
+		/**
+		 * Sets the controller of the view.
+		 * 
+		 * Receives the controller to be set.
+		 */
+		_this.setController = function(newController) {
+			controller = newController;
 		};
 	}
 })();

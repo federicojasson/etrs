@@ -19,19 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.home').controller('ViewHomeController', ViewHomeController);
-	
-	/**
-	 * Represents a view.
-	 */
-	function ViewHomeController() {
-		var _this = this;
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.getTemplateUrl = function() {
-			return 'app/view/home/home.html';
-		};
-	}
+	angular.module('app.layout.loading', []);
 })();
