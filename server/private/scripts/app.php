@@ -115,6 +115,40 @@ function executeServerTask() {
 }
 
 /**
+ * Returns the external services.
+ */
+function getExternalServices() {
+	return [
+		'/account/sign-in',
+		'/account/sign-out',
+		'/authentication/get-state',
+		'/file/download',
+		'/file/upload',
+		'/medication/create',
+		'/medication/delete',
+		'/medication/edit',
+		'/medication/get',
+		'/medication/search',
+		'/permission/reset-password/authenticate',
+		'/permission/reset-password/request',
+		'/permission/sign-up/authenticate',
+		'/permission/sign-up/request'
+	];
+}
+
+/**
+ * Returns the internal services.
+ */
+function getInternalServices() {
+	return [
+		'/data/check-settings',
+		'/data/generate-proxies',
+		'/session/delete-expired',
+		'/user/delete'
+	];
+}
+
+/**
  * Includes a class if the corresponding script exists.
  * 
  * Receives the fully-qualified class name.
@@ -171,28 +205,13 @@ function runApp($middlewares) {
  * Serves an external request.
  */
 function serveExternalRequest() {
-	// Defines the services
-	$services = [
-		'/account/sign-in',
-		'/account/sign-out',
-		'/authentication/get-state',
-		'/file/download',
-		'/file/upload',
-		'/medication/create',
-		'/medication/delete',
-		'/medication/edit',
-		'/medication/get',
-		'/medication/search',
-		'/permission/reset-password/authenticate',
-		'/permission/reset-password/request',
-		'/permission/sign-up/authenticate',
-		'/permission/sign-up/request'
-	];
+	// Gets the external services
+	$externalServices = getExternalServices();
 	
 	// Initializes the middlewares
 	$middlewares = [
 		new \App\Middleware\Session(),
-		new \App\Middleware\Services($services),
+		new \App\Middleware\Services($externalServices),
 		new \App\Middleware\Configurations(),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()
@@ -214,17 +233,12 @@ function serveInternalRequest($url) {
 		'REQUEST_METHOD' => 'POST'
 	]);
 	
-	// Defines the services
-	$services = [
-		'/data/check-settings',
-		'/data/generate-proxies',
-		'/session/delete-expired',
-		'/user/delete'
-	];
+	// Gets the internal services
+	$internalServices = getInternalServices();
 	
 	// Initializes the middlewares
 	$middlewares = [
-		new \App\Middleware\Services($services),
+		new \App\Middleware\Services($internalServices),
 		new \App\Middleware\Configurations(),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\ErrorHandlers()

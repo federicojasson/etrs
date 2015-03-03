@@ -30,6 +30,11 @@
 	function AuthenticationController(authentication) {
 		var _this = this;
 		
-		// TODO: implement
+		/**
+		 * Determines whether the user is signed in.
+		 */
+		_this.isUserSignedIn = function() {
+			return authentication.isUserSignedIn();
+		};
 	}
 })();

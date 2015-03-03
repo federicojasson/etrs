@@ -19,19 +19,17 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngLocale',
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.error').controller('ErrorController', [
+		'error',
+		ErrorController
 	]);
+	
+	/**
+	 * Offers means to access the error state.
+	 */
+	function ErrorController(error) {
+		var _this = this;
+		
+		// TODO: implement
+	}
 })();

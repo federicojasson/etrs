@@ -25,6 +25,21 @@
 	 * Configures the module.
 	 */
 	function config() {
-		// TODO: implement
+		// Gets the services
+		var services = getServices();
+		
+		// Registers the services
+		for (var i = 0; i < services.length; i++) {
+			// TODO: implement
+		}
+		
+		/**
+		 * Returns the services to be registered.
+		 */
+		function getServices() {
+			return [
+				// TODO: implement
+			];
+		}
 	}
 })();
