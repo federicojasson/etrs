@@ -19,16 +19,17 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').run([
-		'title',
-		run
+	angular.module('app.authentication').controller('AuthenticationController', [
+		'authentication',
+		AuthenticationController
 	]);
 	
 	/**
-	 * Performs module-initialization tasks.
+	 * Offers means to access the authentication state.
 	 */
-	function run(title) {
-		// Sets an empty title
-		title.set('');
+	function AuthenticationController(authentication) {
+		var _this = this;
+		
+		// TODO: implement
 	}
 })();

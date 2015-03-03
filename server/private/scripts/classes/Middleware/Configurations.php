@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * Sets the appropiate configuration.
+ * Applies the appropiate configuration.
  */
 class Configurations extends \Slim\Middleware {
 	
@@ -46,22 +46,22 @@ class Configurations extends \Slim\Middleware {
 	 * Calls the middleware.
 	 */
 	public function call() {
-		// Sets the configuration
-		$this->setConfiguration($this->configurations);
+		// Applies the configuration
+		$this->applyConfiguration($this->configurations);
 
 		// Calls the next middleware
 		$this->next->call();
 	}
 	
 	/**
-	 * Sets the appropriate configuration according to the operation mode.
+	 * Applies the appropriate configuration according to the operation mode.
 	 * 
 	 * Receives the configurations.
 	 */
-	private function setConfiguration($configurations) {
+	private function applyConfiguration($configurations) {
 		global $app;
 		
-		// Checks the available configurations and sets the appropriate one
+		// Checks the available configurations and applies the appropriate one
 		foreach ($configurations as $operationMode => $class) {
 			$app->configureMode($operationMode, new $class());
 		}

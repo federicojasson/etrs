@@ -19,16 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').run([
-		'title',
-		run
-	]);
+	angular.module('app.router').run(run);
 	
 	/**
 	 * Performs module-initialization tasks.
 	 */
-	function run(title) {
-		// Sets an empty title
-		title.set('');
+	function run() {
+		// TODO: implement
 	}
 })();

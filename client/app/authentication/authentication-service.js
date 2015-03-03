@@ -19,46 +19,56 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').service('title', titleService);
+	angular.module('app.authentication').service('authentication', authenticationService);
 	
 	/**
-	 * Manages the title of the site.
+	 * Manages the authentication state.
 	 */
-	function titleService() {
+	function authenticationService() {
 		var _this = this;
 		
 		/**
-		 * The title of the site.
+		 * Indicates whether the authentication state is being refreshed.
 		 */
-		var title = null;
+		var refreshing = null;
 		
 		/**
-		 * Returns the title of the site.
+		 * The signed-in user.
 		 */
-		_this.get = function() {
-			return title;
+		var signedInUser = null;
+		
+		/**
+		 * Returns the signed-in user.
+		 */
+		_this.getSignedInUser = function() {
+			return signedInUser;
 		};
 		
 		/**
-		 * Sets the title of the site.
-		 * 
-		 * The function appends the acronym of the application at the end of the
-		 * title, so this must not be included.
-		 * 
-		 * Receives the title to be set.
+		 * Determines whether the authentication state is being refreshed.
 		 */
-		_this.set = function(newTitle) {
-			if (newTitle.length > 0) {
-				// The title is not empty
-				// Appends a dash
-				newTitle += ' - ';
-			}
+		_this.isRefreshing = function() {
+			return refreshing;
+		};
+		
+		/**
+		 * Determines whether the user is signed in.
+		 */
+		_this.isUserSignedIn = function() {
+			return signedInUser !== null;
+		};
+		
+		/**
+		 * Refreshes the authentication state.
+		 * 
+		 * The function should be used whenever the authentication state
+		 * changes, in order to keep the application synchronized with the
+		 * server.
+		 */
+		_this.refreshState = function() {
+			refreshing = true;
 			
-			// Appends the acronym of the application
-			newTitle += 'ETRS';
-			
-			// Sets the title
-			title = newTitle;
+			// TODO: implement
 		};
 	}
 })();

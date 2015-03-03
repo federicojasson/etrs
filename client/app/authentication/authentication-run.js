@@ -19,16 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').run([
-		'title',
+	angular.module('app.authentication').run([
+		'authentication',
 		run
 	]);
 	
 	/**
 	 * Performs module-initialization tasks.
 	 */
-	function run(title) {
-		// Sets an empty title
-		title.set('');
+	function run(authentication) {
+		// Refreshes the authentication state
+		authentication.refreshState();
 	}
 })();

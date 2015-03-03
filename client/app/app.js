@@ -24,7 +24,6 @@
 		'ngResource',
 		'ui.bootstrap',
 		'ui.router',
-		'app.action',
 		'app.authentication',
 		'app.layout',
 		'app.navigation',

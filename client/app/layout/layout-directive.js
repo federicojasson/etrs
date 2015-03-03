@@ -19,16 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').run([
-		'title',
-		run
-	]);
+	angular.module('app.layout').directive('layout', layoutDirective);
 	
 	/**
-	 * Performs module-initialization tasks.
+	 * Includes the current view.
 	 */
-	function run(title) {
-		// Sets an empty title
-		title.set('');
+	function layoutDirective() {
+		// TODO: implement
 	}
 })();
