@@ -31,7 +31,7 @@ class Files {
 	public function download($file) {
 		global $app;
 		
-		// Gets the file's path
+		// Gets the path of the file
 		$path = $this->getFilePath($file->getId());
 		
 		// Asserts conditions
@@ -81,7 +81,7 @@ class Files {
 		// Gets the subdirectories
 		$subdirectories = str_split($id, 8);
 		
-		// Builds the file's path
+		// Builds the path of the file
 		$path = '';
 		$path .= DIRECTORY_FILES;
 		$path .= '/' . implode('/', $subdirectories);

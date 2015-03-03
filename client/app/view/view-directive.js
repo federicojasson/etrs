@@ -25,6 +25,28 @@
 	 * Includes the current view.
 	 */
 	function viewDirective() {
-		// TODO: implement
+		// Returns the settings of the directive
+		return getSettings();
+		
+		/**
+		 * Returns the settings of the directive.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'A',
+				scope: {},
+				templateUrl: 'app/view/view.html',
+				link: registerControllerListener
+			};
+		}
+		
+		/**
+		 * Registers a listener for the controller.
+		 * 
+		 * Receives the scope of the directive.
+		 */
+		function registerControllerListener(scope) {
+			// TODO: implement
+		}
 	}
 })();

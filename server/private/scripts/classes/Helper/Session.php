@@ -46,7 +46,7 @@ class Session {
 	/**
 	 * Clears a data entry.
 	 * 
-	 * Receives the entry's key.
+	 * Receives the key of the entry.
 	 */
 	public function clearData($key) {
 		unset($_SESSION[$key]);
@@ -55,7 +55,7 @@ class Session {
 	/**
 	 * Determines whether the session contains a certain data entry.
 	 * 
-	 * Receives the entry's key.
+	 * Receives the key of the entry.
 	 */
 	public function containsData($key) {
 		return array_key_exists($key, $_SESSION);
@@ -64,7 +64,7 @@ class Session {
 	/**
 	 * Returns the value of a data entry.
 	 * 
-	 * Receives the entry's key.
+	 * Receives the key of the entry.
 	 */
 	public function getData($key) {
 		return $_SESSION[$key];
@@ -80,7 +80,7 @@ class Session {
 	/**
 	 * Sets the value of a data entry.
 	 * 
-	 * Receives the entry's key and the value to be set.
+	 * Receives the key of the entry and the value to be set.
 	 */
 	public function setData($key, $value) {
 		$_SESSION[$key] = $value;

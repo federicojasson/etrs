@@ -27,7 +27,7 @@
 	]);
 	
 	/**
-	 * Configures the module.
+	 * Applies module-related configurations.
 	 */
 	function config($locationProvider, $stateProvider, $urlRouterProvider) {
 		// Enables the HTML5 history API
@@ -36,15 +36,15 @@
 		// Sets the default URL
 		$urlRouterProvider.otherwise('/');
 		
-		// Gets the states
+		// Gets the states to be registered
 		var states = getStates();
 		
 		// Registers the states
 		for (var i = 0; i < states.length; i++) {
 			var state = states[i];
 			
-			// Sets the URL of the layout's template
-			state.templateUrl = 'app/layout/layout.html';
+			// Sets a template that includes the layout
+			state.template = '<div layout></div>';
 			
 			// Registers the state
 			$stateProvider.state(state);

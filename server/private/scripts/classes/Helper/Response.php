@@ -60,7 +60,7 @@ class Response extends \Slim\Http\Response {
 			$this->headers->set('Content-Type', 'application/json');
 		}
 		
-		// Invokes the parent's method
+		// Invokes the homonym method in the parent
 		parent::setBody($body);
 	}
 	

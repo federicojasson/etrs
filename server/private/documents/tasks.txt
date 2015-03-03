@@ -11,8 +11,10 @@
 - Implement HTTP caching (if possible): http://docs.slimframework.com/#HTTP-Caching-Overview
 - Implement session hijacking detection method using the IP address.
 - Check warnings.
+- Check includes (index.html).
 - Check != and ==
 - Check /* and /**.
+- Check multiple blank lines: [\t]*\n[\t]*\n[\t]*\n
 - Check that all files contain license.
 - Test http://codebutler.com/firesheep and attempt session hijacking.
 - Documentar database schema.

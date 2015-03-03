@@ -31,7 +31,7 @@ class Request extends \Slim\Http\Request {
 	public function __construct() {
 		global $app;
 		
-		// Invokes the parent's constructor
+		// Invokes the homonym method in the parent
 		parent::__construct($app->environment);
 	}
 	

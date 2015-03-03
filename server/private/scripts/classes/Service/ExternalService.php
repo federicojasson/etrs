@@ -55,15 +55,15 @@ abstract class ExternalService extends Service {
 			$app->server->haltExecution(HTTP_STATUS_FORBIDDEN, CODE_UNAUTHORIZED_USER);
 		}
 		
-		// Invokes the parent's method
+		// Invokes the homonym method in the parent
 		parent::__invoke();
 	}
 	
 	/**
 	 * Returns the value of an input entry.
 	 * 
-	 * Receives the entry's key and, optionally, a filter to be applied to the
-	 * value before returning it.
+	 * Receives the key of the entry and, optionally, a filter to be applied to
+	 * the value before returning it.
 	 */
 	protected function getInput($key, $filter = null) {
 		global $app;

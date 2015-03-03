@@ -35,7 +35,7 @@ class AutomaticBinary extends \Doctrine\DBAL\Types\BinaryType {
 	 * Receives the value and the database plataform.
 	 */
 	public function convertToPHPValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform) {
-		// Invokes the parent's method
+		// Invokes the homonym method in the parent
 		$value = parent::convertToPHPValue($value, $platform);
 		
 		if (is_resource($value)) {

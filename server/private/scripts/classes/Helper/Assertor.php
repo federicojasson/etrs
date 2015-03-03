@@ -63,7 +63,7 @@ class Assertor {
 	/**
 	 * Checks if a file doesn't exist.
 	 * 
-	 * Receives the file's path.
+	 * Receives the path of the file.
 	 */
 	public function fileDoesNotExist($path) {
 		global $app;
@@ -82,7 +82,7 @@ class Assertor {
 	/**
 	 * Checks if a file exists.
 	 * 
-	 * Receives the file's path.
+	 * Receives the path of the file.
 	 */
 	public function fileExists($path) {
 		global $app;

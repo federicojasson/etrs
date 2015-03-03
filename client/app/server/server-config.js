@@ -19,18 +19,21 @@
 'use strict';
 
 (function() {
-	angular.module('app.server').config(config);
+	angular.module('app.server').config([
+		'serverProvider',
+		config
+	]);
 	
 	/**
-	 * Configures the module.
+	 * Applies module-related configurations.
 	 */
-	function config() {
-		// Gets the services
+	function config(serverProvider) {
+		// Gets the services to be registered
 		var services = getServices();
 		
 		// Registers the services
 		for (var i = 0; i < services.length; i++) {
-			// TODO: implement
+			serverProvider.registerService(services[i]);
 		}
 		
 		/**
@@ -38,7 +41,20 @@
 		 */
 		function getServices() {
 			return [
-				// TODO: implement
+				'/account/sign-in',
+				'/account/sign-out',
+				'/authentication/get-state',
+				'/file/download',
+				'/file/upload',
+				'/medication/create',
+				'/medication/delete',
+				'/medication/edit',
+				'/medication/get',
+				'/medication/search',
+				'/permission/reset-password/authenticate',
+				'/permission/reset-password/request',
+				'/permission/sign-up/authenticate',
+				'/permission/sign-up/request'
 			];
 		}
 	}

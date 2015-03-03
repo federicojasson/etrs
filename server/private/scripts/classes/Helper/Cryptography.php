@@ -42,7 +42,7 @@ class Cryptography {
 	/**
 	 * Computes the hash of a file.
 	 * 
-	 * Receives the file's path.
+	 * Receives the path of the file.
 	 */
 	public function hashFile($path) {
 		// Applies MD5

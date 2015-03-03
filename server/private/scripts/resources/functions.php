@@ -34,7 +34,7 @@ function dateTimeToString($dateTime) {
 /**
  * Filters the value of an array entry.
  * 
- * Receives a reference to the array, the entry's key and the filter.
+ * Receives a reference to the array, the key of the entry and the filter.
  */
 function filterArrayValue(&$array, $key, $filter) {
 	if (! isset($array[$key])) {
@@ -79,7 +79,7 @@ function isArraySequential($array) {
 /**
  * Reads and decodes the content of a JSON file.
  * 
- * Receives the file's path.
+ * Receives the path of the file.
  */
 function readJsonFile($path) {
 	// Gets the content of the file
@@ -92,8 +92,8 @@ function readJsonFile($path) {
 /**
  * Reads the content of a template file and replaces its placeholders.
  * 
- * Receives the file's path and a mapping containing placeholders as keys and
- * replacements as values.
+ * Receives the path of the file and a mapping containing placeholders as keys
+ * and replacements as values.
  */
 function readTemplateFile($path, $mapping) {
 	// Gets the content of the file
