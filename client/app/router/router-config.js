@@ -61,73 +61,89 @@
 				{
 					name: 'account',
 					url: '/account',
-					controllers: {
-						__: 'ViewAccountSignInController',
-						ad: 'ViewAccountController',
-						dr: 'ViewAccountController',
-						op: 'ViewAccountController'
+					data: {
+						views: {
+							__: 'ViewAccountSignInController',
+							ad: 'ViewAccountController',
+							dr: 'ViewAccountController',
+							op: 'ViewAccountController'
+						}
 					}
 				},
 				
 				{
 					name: 'account.resetPassword',
 					url: '/account/reset-password/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
-					controllers: {
-						__: 'ViewAccountResetPasswordController'
+					data: {
+						views: {
+							__: 'ViewAccountResetPasswordController'
+						}
 					}
 				},
 				
 				{
 					name: 'account.signIn',
 					url: '/account/sign-in',
-					controllers: {
-						__: 'ViewAccountSignInController'
+					data: {
+						views: {
+							__: 'ViewAccountSignInController'
+						}
 					}
 				},
 				
 				{
 					name: 'account.signUp',
 					url: '/account/sign-up/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
-					controllers: {
-						__: 'ViewAccountSignUpController'
+					data: {
+						views: {
+							__: 'ViewAccountSignUpController'
+						}
 					}
 				},
 				
 				{
 					name: 'home',
 					url: '/',
-					controllers: {
-						__: 'ViewAccountSignInController',
-						ad: 'ViewHomeController',
-						dr: 'ViewHomeController',
-						op: 'ViewHomeController'
+					data: {
+						views: {
+							__: 'ViewAccountSignInController',
+							ad: 'ViewHomeController',
+							dr: 'ViewHomeController',
+							op: 'ViewHomeController'
+						}
 					}
 				},
 				
 				{
 					name: 'medication',
 					url: '/medication/{id:[0-9A-Fa-f]{32}}',
-					controllers: {
-						__: 'ViewAccountSignInController',
-						ad: 'ViewMedicationController'
+					data: {
+						views: {
+							__: 'ViewAccountSignInController',
+							ad: 'ViewMedicationController'
+						}
 					}
 				},
 				
 				{
 					name: 'medication.create',
 					url: '/medication/create',
-					controllers: {
-						__: 'ViewAccountSignInController',
-						ad: 'ViewMedicationCreateController'
+					data: {
+						views: {
+							__: 'ViewAccountSignInController',
+							ad: 'ViewMedicationCreateController'
+						}
 					}
 				},
 				
 				{
 					name: 'medication.manage',
 					url: '/medication/manage',
-					controllers: {
-						__: 'ViewAccountSignInController',
-						ad: 'ViewMedicationManageController'
+					data: {
+						views: {
+							__: 'ViewAccountSignInController',
+							ad: 'ViewMedicationManageController'
+						}
 					}
 				}
 			];

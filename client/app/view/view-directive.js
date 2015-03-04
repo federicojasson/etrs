@@ -40,25 +40,25 @@
 				restrict: 'A',
 				scope: {},
 				templateUrl: 'app/view/view.html',
-				link: registerViewControllerListener
+				link: registerViewListener
 			};
 		}
 		
 		/**
-		 * Registers a listener for the controller of the view.
+		 * Registers a listener for the view.
 		 * 
 		 * Receives the scope of the directive.
 		 */
-		function registerViewControllerListener(scope) {
-			// Listens for changes in the controller of the view
-			scope.$watch(view.getController, function(controller) {
+		function registerViewListener(scope) {
+			// Listens for changes in the view
+			scope.$watch(view.get, function(view) {
 				// Initializes the controller
-				var instance = $controller(controller);
+				var controller = $controller(view);
 				
 				// TODO: register title listener here? otherwise assign controller directly to scope variable
 				
 				// Binds the controller to the scope of the directive
-				scope.view = instance;
+				scope.view = controller;
 			});
 		}
 	}

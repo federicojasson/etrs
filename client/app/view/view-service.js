@@ -19,33 +19,63 @@
 'use strict';
 
 (function() {
-	angular.module('app.view').service('view', viewService);
+	angular.module('app.view').service('view', [
+		'authentication',
+		'router',
+		viewService
+	]);
 	
 	/**
 	 * Manages the view.
 	 */
-	function viewService() {
+	function viewService(authentication, router) {
 		var _this = this;
 		
 		/**
-		 * The controller of the view.
+		 * The view.
 		 */
-		var controller = '';
+		var view = '';
 		
 		/**
-		 * Returns the controller of the view.
+		 * Returns the view.
 		 */
-		_this.getController = function() {
-			return controller;
+		_this.get = function() {
+			return view;
 		};
 		
 		/**
-		 * Sets the controller of the view.
+		 * Updates the view.
 		 * 
-		 * Receives the controller to be set.
+		 * Receives the views defined in the current route, ordered according to
+		 * user role.
 		 */
-		_this.setController = function(newController) {
-			controller = newController;
+		_this.update = function(views) {
+			if (authentication.isStateRefreshing()) {
+				// The authentication state is being refreshed
+				return;
+			}
+			
+			// Gets the user role
+			var userRole;
+			if (authentication.isUserSignedIn()) {
+				// The user is signed in
+				userRole = authentication.getSignedInUser().role;
+			} else {
+				// The user is not signed in
+				userRole = '__';
+			}
+			
+			if (! views.hasOwnProperty(userRole)) {
+				// There is no view defined for the user role
+				
+				// Redirects the user to the root URL
+				router.redirect('/');
+				
+				return;
+			}
+			
+			// Gets the view that must be loaded
+			view = views[userRole];
 		};
 	}
 })();

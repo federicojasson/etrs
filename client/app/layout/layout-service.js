@@ -19,33 +19,48 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout').service('layout', layoutService);
+	angular.module('app.layout').service('layout', [
+		'authentication',
+		'error',
+		layoutService
+	]);
 	
 	/**
 	 * Manages the layout.
 	 */
-	function layoutService() {
+	function layoutService(authentication, error) {
 		var _this = this;
 		
 		/**
-		 * The controller of the layout.
+		 * The layout.
 		 */
-		var controller = '';
+		var layout = '';
 		
 		/**
-		 * Returns the controller of the layout.
+		 * Returns the layout.
 		 */
-		_this.getController = function() {
-			return controller;
+		_this.get = function() {
+			return layout;
 		};
 		
 		/**
-		 * Sets the controller of the layout.
-		 * 
-		 * Receives the controller to be set.
+		 * Updates the layout.
 		 */
-		_this.setController = function(newController) {
-			controller = newController;
+		_this.update = function() {
+			// Gets the layout that must be loaded
+			if (error.occurred()) {
+				// An error has occurred
+				layout = 'LayoutErrorController';
+			} else {
+				// No error has occurred
+				if (authentication.isStateRefreshing()) {
+					// The authentication state is being refreshed
+					layout = 'LayoutLoadingController';
+				} else {
+					// The authentication state is not being refreshed
+					layout = 'LayoutReadyController';
+				}
+			}
 		};
 	}
 })();

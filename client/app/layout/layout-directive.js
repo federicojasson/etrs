@@ -40,25 +40,25 @@
 				restrict: 'A',
 				scope: {},
 				templateUrl: 'app/layout/layout.html',
-				link: registerLayoutControllerListener
+				link: registerLayoutListener
 			};
 		}
 		
 		/**
-		 * Registers a listener for the controller of the layout.
+		 * Registers a listener for the layout.
 		 * 
 		 * Receives the scope of the directive.
 		 */
-		function registerLayoutControllerListener(scope) {
-			// Listens for changes in the controller of the layout
-			scope.$watch(layout.getController, function(controller) {
+		function registerLayoutListener(scope) {
+			// Listens for changes in the layout
+			scope.$watch(layout.get, function(layout) {
 				// Initializes the controller
-				var instance = $controller(controller);
+				var controller = $controller(layout);
 				
 				// TODO: register title listener here? otherwise assign controller directly to scope variable
 				
 				// Binds the controller to the scope of the directive
-				scope.layout = instance;
+				scope.layout = controller;
 			});
 		}
 	}

@@ -25,7 +25,6 @@
 		'authentication',
 		'error',
 		'layout',
-		'router',
 		'view',
 		run
 	]);
@@ -33,7 +32,7 @@
 	/**
 	 * Performs module-initialization tasks.
 	 */
-	function run($rootScope, $state, authentication, error, layout, router, view) {
+	function run($rootScope, $state, authentication, error, layout, view) {
 		// Listens for state transitions
 		$rootScope.$on('$stateChangeSuccess', updateLayoutAndView);
 		
@@ -44,81 +43,22 @@
 		$rootScope.$watch(error.occurred, updateLayoutAndView);
 		
 		/**
-		 * Updates the layout.
-		 */
-		function updateLayout() {
-			// Determines what controller must be loaded for the layout
-			var controller;
-			if (error.occurred()) {
-				// An error has occurred
-				controller = 'LayoutErrorController';
-			} else {
-				// No error has occurred
-				if (authentication.isStateRefreshing()) {
-					// The authentication state is being refreshed
-					controller = 'LayoutLoadingController';
-				} else {
-					// The authentication state is not being refreshed
-					controller = 'LayoutReadyController';
-				}
-			}
-			
-			// Sets the controller of the layout
-			layout.setController(controller);
-		}
-		
-		/**
 		 * Updates the layout and the view.
 		 */
 		function updateLayoutAndView() {
-			if (angular.isUndefined($state.current.controllers)) {
+			// Gets the data of the current route
+			var data = $state.current.data;
+			
+			if (angular.isUndefined(data)) {
 				// The route has not been established yet
 				return;
 			}
 			
 			// Updates the layout
-			updateLayout();
+			layout.update();
 			
 			// Updates the view
-			updateView();
-		}
-		
-		/**
-		 * Updates the view.
-		 */
-		function updateView() {
-			if (authentication.isStateRefreshing()) {
-				// The authentication state is being refreshed
-				return;
-			}
-			
-			// Gets the user role
-			var userRole;
-			if (authentication.isUserSignedIn()) {
-				// The user is signed in
-				userRole = authentication.getSignedInUser().role;
-			} else {
-				// The user is not signed in
-				userRole = '__';
-			}
-			
-			// Gets the controllers of the current route
-			var controllers = $state.current.controllers;
-			
-			if (! controllers.hasOwnProperty(userRole)) {
-				// The user is not authorized to access the current route
-				
-				// Redirects the user to the root URL
-				router.redirect('/');
-				
-				return;
-			}
-			
-			// Gets the controller that must be loaded for the view
-			var controller = controllers[userRole];
-			
-			// Sets the controller of the view
-			view.setController(controller);
+			view.update(data.views);
 		}
 	}
 })();
