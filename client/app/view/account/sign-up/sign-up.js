@@ -19,9 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account', [
-		'app.view.account.resetPassword',
-		'app.view.account.signIn',
-		'app.view.account.signUp'
-	]);
+	angular.module('app.view.account.signUp', []);
 })();

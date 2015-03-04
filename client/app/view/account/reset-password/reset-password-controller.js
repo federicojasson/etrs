@@ -19,9 +19,19 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account', [
-		'app.view.account.resetPassword',
-		'app.view.account.signIn',
-		'app.view.account.signUp'
-	]);
+	angular.module('app.view.account.resetPassword').controller('ViewAccountResetPasswordController', ViewAccountResetPasswordController);
+	
+	/**
+	 * Represents a view.
+	 */
+	function ViewAccountResetPasswordController() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/account/reset-password/reset-password.html';
+		};
+	}
 })();

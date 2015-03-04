@@ -70,10 +70,26 @@
 				},
 				
 				{
+					name: 'account.resetPassword',
+					url: '/account/reset-password/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
+					controllers: {
+						__: 'ViewAccountResetPasswordController'
+					}
+				},
+				
+				{
 					name: 'account.signIn',
 					url: '/account/sign-in',
 					controllers: {
 						__: 'ViewAccountSignInController'
+					}
+				},
+				
+				{
+					name: 'account.signUp',
+					url: '/account/sign-up/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
+					controllers: {
+						__: 'ViewAccountSignUpController'
 					}
 				},
 				
