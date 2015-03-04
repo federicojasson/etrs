@@ -19,7 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account.signUp', [
-		'app.view.account.signUp.request'
-	]);
+	angular.module('app.view.account.signUp.request', []);
 })();

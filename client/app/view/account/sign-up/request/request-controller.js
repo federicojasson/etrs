@@ -19,7 +19,19 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account.signUp', [
-		'app.view.account.signUp.request'
-	]);
+	angular.module('app.view.account.signUp.request').controller('ViewAccountSignUpRequestController', ViewAccountSignUpRequestController);
+	
+	/**
+	 * Represents a view.
+	 */
+	function ViewAccountSignUpRequestController() {
+		var _this = this;
+		
+		/**
+		 * Returns the URL of the template.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/account/sign-up/request/request.html';
+		};
+	}
 })();

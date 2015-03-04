@@ -31,7 +31,7 @@
 	 */
 	function config($locationProvider, $stateProvider, $urlRouterProvider) {
 		// Enables the HTML5 history API
-		$locationProvider.html5Mode(true); //TODO: weird bug (slashes are encoded in url)
+		//$locationProvider.html5Mode(true); //TODO: weird bug (slashes are encoded in url)
 		
 		// Sets the default URL
 		$urlRouterProvider.otherwise('/');
@@ -82,6 +82,16 @@
 				},
 				
 				{
+					name: 'account.resetPassword.request',
+					url: '/account/reset-password',
+					data: {
+						views: {
+							__: 'ViewAccountResetPasswordRequestController'
+						}
+					}
+				},
+				
+				{
 					name: 'account.signIn',
 					url: '/account/sign-in',
 					data: {
@@ -97,6 +107,17 @@
 					data: {
 						views: {
 							__: 'ViewAccountSignUpController'
+						}
+					}
+				},
+				
+				{
+					name: 'account.signUp.request',
+					url: '/account/sign-up',
+					data: {
+						views: {
+							__: 'ViewAccountSignInController',
+							ad: 'ViewAccountSignUpRequestController'
 						}
 					}
 				},

@@ -19,7 +19,19 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account.signUp', [
-		'app.view.account.signUp.request'
-	]);
+	angular.module('app.view.account.resetPassword.request').controller('ViewAccountResetPasswordRequestController', ViewAccountResetPasswordRequestController);
+	
+	/**
+	 * Represents a view.
+	 */
+	function ViewAccountResetPasswordRequestController() {
+		var _this = this;
+		
+		/**
+		 * Returns the URL of the template.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/account/reset-password/request/request.html';
+		};
+	}
 })();

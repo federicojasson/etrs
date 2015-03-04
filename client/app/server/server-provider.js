@@ -106,10 +106,13 @@
 				var child = object[fragment];
 
 				// Initializes the child if is undefined
-				object[fragment] = (angular.isDefined(child)) ? child : {};
+				child = (angular.isDefined(child)) ? child : {};
+
+				// Sets the child of the object corresponding to the fragment
+				object[fragment] = child;
 
 				// Sets the child as the current object
-				object = object[fragment];
+				object = child;
 			}
 		};
 		

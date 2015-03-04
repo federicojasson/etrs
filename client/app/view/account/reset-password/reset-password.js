@@ -19,5 +19,7 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account.resetPassword', []);
+	angular.module('app.view.account.resetPassword', [
+		'app.view.account.resetPassword.request'
+	]);
 })();
