@@ -1,1 +1,7 @@
-<div ng-include="layout.getTemplateUrl()"></div>
+<div ng-if="layout.isReady()">
+	<div ng-include="layout.getTemplateUrl()"></div>
+</div>
+
+<div ng-if="! layout.isReady()">
+	TODO: cargando
+</div>

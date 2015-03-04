@@ -38,16 +38,23 @@
 		};
 		
 		/**
+		 * Determines whether it is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
 			// Sets the title of the site
-			title.set('Error');
+			title.set('Error'); // TODO: define final title
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the controller
+		// Initializes the layout
 		initialize();
 	}
 })();

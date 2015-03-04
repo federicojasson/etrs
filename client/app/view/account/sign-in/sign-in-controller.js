@@ -33,5 +33,12 @@
 		_this.getTemplateUrl = function() {
 			return 'app/view/account/sign-in/sign-in.html';
 		};
+		
+		/**
+		 * Determines whether it is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
 	}
 })();

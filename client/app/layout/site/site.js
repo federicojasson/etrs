@@ -19,5 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.loading', []);
+	angular.module('app.layout.site', []);
 })();

@@ -20,7 +20,6 @@
 
 (function() {
 	angular.module('app.layout').service('layout', [
-		'authentication',
 		'error',
 		layoutService
 	]);
@@ -28,7 +27,7 @@
 	/**
 	 * Manages the layout.
 	 */
-	function layoutService(authentication, error) {
+	function layoutService(error) {
 		var _this = this;
 		
 		/**
@@ -47,19 +46,12 @@
 		 * Updates the layout.
 		 */
 		_this.update = function() {
-			// Gets the layout that must be loaded
 			if (error.occurred()) {
 				// An error has occurred
 				layout = 'LayoutErrorController';
 			} else {
 				// No error has occurred
-				if (authentication.isStateRefreshing()) {
-					// The authentication state is being refreshed
-					layout = 'LayoutLoadingController';
-				} else {
-					// The authentication state is not being refreshed
-					layout = 'LayoutReadyController';
-				}
+				layout = 'LayoutSiteController';
 			}
 		};
 	}

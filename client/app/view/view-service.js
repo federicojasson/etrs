@@ -50,7 +50,7 @@
 		 * user role.
 		 */
 		_this.update = function(views) {
-			if (authentication.isStateRefreshing()) {
+			if (authentication.isStateRefreshing()) { // TODO: hacer este control?
 				// The authentication state is being refreshed
 				return;
 			}
@@ -74,7 +74,7 @@
 				return;
 			}
 			
-			// Gets the view that must be loaded
+			// Gets the view corresponding to the user role
 			view = views[userRole];
 		};
 	}

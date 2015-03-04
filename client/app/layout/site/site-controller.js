@@ -19,19 +19,29 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.loading').controller('LayoutLoadingController', LayoutLoadingController);
+	angular.module('app.layout.site').controller('LayoutSiteController', [
+		'authentication',
+		LayoutSiteController
+	]);
 	
 	/**
 	 * Represents a layout.
 	 */
-	function LayoutLoadingController() {
+	function LayoutSiteController(authentication) {
 		var _this = this;
 		
 		/**
 		 * Returns the URL of the template.
 		 */
 		_this.getTemplateUrl = function() {
-			return 'app/layout/loading/loading.html';
+			return 'app/layout/site/site.html';
+		};
+		
+		/**
+		 * Determines whether it is ready.
+		 */
+		_this.isReady = function() {
+			return ! authentication.isStateRefreshing();
 		};
 	}
 })();

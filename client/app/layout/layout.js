@@ -21,7 +21,6 @@
 (function() {
 	angular.module('app.layout', [
 		'app.layout.error',
-		'app.layout.loading',
-		'app.layout.ready'
+		'app.layout.site'
 	]);
 })();
