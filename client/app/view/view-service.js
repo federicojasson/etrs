@@ -22,7 +22,7 @@
 	angular.module('app.view').service('view', viewService);
 	
 	/**
-	 * TODO: comment
+	 * Manages the view.
 	 */
 	function viewService() {
 		var _this = this;

@@ -40,7 +40,7 @@
 				restrict: 'A',
 				scope: {},
 				templateUrl: 'app/view/view.html',
-				link: registerControllerListener
+				link: registerViewControllerListener
 			};
 		}
 		
@@ -49,7 +49,7 @@
 		 * 
 		 * Receives the scope of the directive.
 		 */
-		function registerControllerListener(scope) {
+		function registerViewControllerListener(scope) {
 			// Listens for changes in the controller of the view
 			scope.$watch(view.getController, function(controller) {
 				// Initializes the controller

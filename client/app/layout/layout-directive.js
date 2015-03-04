@@ -40,7 +40,7 @@
 				restrict: 'A',
 				scope: {},
 				templateUrl: 'app/layout/layout.html',
-				link: registerControllerListener
+				link: registerLayoutControllerListener
 			};
 		}
 		
@@ -49,7 +49,7 @@
 		 * 
 		 * Receives the scope of the directive.
 		 */
-		function registerControllerListener(scope) {
+		function registerLayoutControllerListener(scope) {
 			// Listens for changes in the controller of the layout
 			scope.$watch(layout.getController, function(controller) {
 				// Initializes the controller

@@ -31,7 +31,7 @@
 	 */
 	function config($locationProvider, $stateProvider, $urlRouterProvider) {
 		// Enables the HTML5 history API
-		//$locationProvider.html5Mode(true); TODO: weird bug (slashes are encoded in url)
+		$locationProvider.html5Mode(true); //TODO: weird bug (slashes are encoded in url)
 		
 		// Sets the default URL
 		$urlRouterProvider.otherwise('/');
@@ -43,7 +43,7 @@
 		for (var i = 0; i < states.length; i++) {
 			var state = states[i];
 			
-			// TODO: comment
+			// Prepends a circumflex accent to make the URL absolute
 			state.url = '^' + state.url;
 			
 			// Sets a template that includes the layout

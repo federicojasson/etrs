@@ -28,7 +28,7 @@
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * Returns the URL of the template.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/view/account/sign-up/sign-up.html';

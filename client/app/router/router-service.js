@@ -25,13 +25,15 @@
 	]);
 	
 	/**
-	 * TODO: comment
+	 * Offers routing-related functions.
 	 */
 	function routerService($location) {
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * Redirects the user to a certain URL.
+		 * 
+		 * Receives the URL.
 		 */
 		_this.redirect = function(url) {
 			$location.path(url);

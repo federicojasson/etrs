@@ -22,7 +22,7 @@
 	angular.module('app.layout').service('layout', layoutService);
 	
 	/**
-	 * TODO: comment
+	 * Manages the layout.
 	 */
 	function layoutService() {
 		var _this = this;

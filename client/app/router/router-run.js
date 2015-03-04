@@ -44,7 +44,7 @@
 		$rootScope.$watch(error.occurred, updateLayoutAndView);
 		
 		/**
-		 * TODO: comment
+		 * Updates the layout.
 		 */
 		function updateLayout() {
 			// Determines what controller must be loaded for the layout
@@ -68,7 +68,7 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Updates the layout and the view.
 		 */
 		function updateLayoutAndView() {
 			if (angular.isUndefined($state.current.controllers)) {
@@ -84,7 +84,7 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Updates the view.
 		 */
 		function updateView() {
 			if (authentication.isStateRefreshing()) {
