@@ -1,0 +1,128 @@
+/**
+ * ETRS - Eye Tracking Record System
+ * Copyright (C) 2015 Federico Jasson
+ * 
+ * Licensed under the GNU GPL version 3 license. For more information on this,
+ * and how to apply and follow the GNU GPL, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * This style sheet defines a light theme for the site.
+ */
+
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+body {
+	color: #333333;
+	font-family: "Open Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #888888;
+	font-family: "Fjalla One", sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+legend {
+	color: #888888;
+	font-family: "Fjalla One", sans-serif;
+	font-size: 1.8em;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.btn:focus {
+	outline: none !important;
+}
+
+.btn.btn-lg.text-uppercase {
+	font-size: 1em;
+	line-height: 1.7;
+}
+
+.btn.text-uppercase {
+	font-size: 0.9em;
+	line-height: 1.6;
+}
+
+.content-container {
+	padding-bottom: 32px;
+	padding-top: 8px;
+}
+
+.copyright-text {
+	color: #aaaaaa;
+	font-size: 0.8em;
+	margin: -12px 0px 48px 0px;
+}
+
+.footer-logo-image {
+	background-image: url(images/footer-logo.png);
+	background-position: 0px -72px;
+	background-repeat: no-repeat;
+	height: 72px;
+	width: 256px;
+}
+
+.footer-logo-image:hover {
+	background-position: 0px 0px;
+}
+
+.loading-image {
+	background-image: url(images/loading.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 30%;
+	margin: 0px auto 64px auto;
+	max-height: 256px;
+	max-width: 256px;
+	min-height: 128px;
+}
+
+.loading-text {
+	color: #aaaaaa;
+	font-family: "Fjalla One", sans-serif;
+	font-size: 1.6em;
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.navbar-logo-image {
+	background-image: url(images/navbar-logo.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 48px;
+	width: 80px;
+}
+
+.navbar-logo-image:hover {
+	background-position: 0px -48px;
+}
+
+.navbar-logo-text {
+	color: #666666;
+	font-family: "Fjalla One", sans-serif;
+	font-size: 1.6em;
+	font-weight: bold;
+	line-height: 50px;
+	margin-left: 16px;
+	text-transform: uppercase;
+}
+
+.signed-in-user-link {
+	color: #888888;
+}
+
+.signed-in-user-link:focus {
+	color: #888888;
+	text-decoration: none;
+}
+
+.signed-in-user-link:hover {
+	color: #333333;
+	text-decoration: none;
+}

@@ -15,22 +15,6 @@ pre {
 	word-break: normal;
 }
 
-textarea {
-	resize: none;
-}
-
-.content-container {}
-
-.copyright-text {
-	text-align: center;
-}
-
-.footer-logo-image {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
 .fully-centered {
 	display: table-cell;
 	vertical-align: middle;
@@ -42,29 +26,3 @@ textarea {
 	position: fixed;
 	width: 100%;
 }
-
-.loading-image {}
-
-.loading-text {
-	text-align: center;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	user-select: none;
-}
-
-.navbar-logo-image {}
-
-.navbar-logo-text {
-	float: left;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	user-select: none;
-}
-
-.signed-in-user-link {}

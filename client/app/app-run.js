@@ -30,7 +30,7 @@
 	 */
 	function run($timeout, error) {
 		$timeout(function() {
-			error.report('');
-		}, 2000);
+			//error.report('');
+		}, 0);
 	}
 })();
