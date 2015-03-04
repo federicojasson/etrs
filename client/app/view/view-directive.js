@@ -30,7 +30,7 @@
 	 */
 	function viewDirective($controller, view) {
 		/**
-		 * Returns the settings.
+		 * Returns the settings of the directive.
 		 */
 		function getSettings() {
 			return {
@@ -56,7 +56,7 @@
 		
 		// ---------------------------------------------------------------------
 		
-		// Returns the settings
+		// Returns the settings of the directive
 		return getSettings();
 	}
 })();
