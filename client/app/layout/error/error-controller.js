@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.error').controller('LayoutErrorController', LayoutErrorController);
+	angular.module('app.layout.error').controller('LayoutErrorController', [
+		'title',
+		LayoutErrorController
+	]);
 	
 	/**
 	 * Represents a layout.
 	 */
-	function LayoutErrorController() {
+	function LayoutErrorController(title) {
 		var _this = this;
 		
 		/**
@@ -33,5 +36,18 @@
 		_this.getTemplateUrl = function() {
 			return 'app/layout/error/error.html';
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Sets the title of the site
+			title.set('Error');
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();

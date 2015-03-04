@@ -28,14 +28,6 @@
 	 * Applies module-related configurations.
 	 */
 	function config(serverProvider) {
-		// Gets the services to be registered
-		var services = getServices();
-		
-		// Registers the services
-		for (var i = 0; i < services.length; i++) {
-			serverProvider.registerService(services[i]);
-		}
-		
 		/**
 		 * Returns the services to be registered.
 		 */
@@ -58,6 +50,16 @@
 				'/medication/get',
 				'/medication/search'
 			];
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the services to be registered
+		var services = getServices();
+		
+		// Registers the services
+		for (var i = 0; i < services.length; i++) {
+			serverProvider.registerService(services[i]);
 		}
 	}
 })();

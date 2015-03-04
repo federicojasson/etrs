@@ -30,29 +30,6 @@
 	 * Applies module-related configurations.
 	 */
 	function config($locationProvider, $stateProvider, $urlRouterProvider) {
-		// Enables the HTML5 history API
-		//$locationProvider.html5Mode(true); //TODO: weird bug (slashes are encoded in url)
-		
-		// Sets the URL of the default route
-		$urlRouterProvider.otherwise('/');
-		
-		// Gets the states to be registered
-		var states = getStates();
-		
-		// Registers the states
-		for (var i = 0; i < states.length; i++) {
-			var state = states[i];
-			
-			// Prepends a circumflex accent to make the URL absolute
-			state.url = '^' + state.url;
-			
-			// Sets a template that includes the layout
-			state.template = '<div layout></div>';
-			
-			// Registers the state
-			$stateProvider.state(state);
-		}
-		
 		/**
 		 * Returns the states to be registered.
 		 */
@@ -168,6 +145,31 @@
 					}
 				}
 			];
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Enables the HTML5 history API
+		//$locationProvider.html5Mode(true); //TODO: weird bug (slashes are encoded in url)
+		
+		// Sets the URL of the default route
+		$urlRouterProvider.otherwise('/');
+		
+		// Gets the states to be registered
+		var states = getStates();
+		
+		// Registers the states
+		for (var i = 0; i < states.length; i++) {
+			var state = states[i];
+			
+			// Prepends a circumflex accent to make the URL absolute
+			state.url = '^' + state.url;
+			
+			// Sets a template that includes the layout
+			state.template = '<div layout></div>';
+			
+			// Registers the state
+			$stateProvider.state(state);
 		}
 	}
 })();

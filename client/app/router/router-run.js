@@ -33,15 +33,6 @@
 	 * Performs module-initialization tasks.
 	 */
 	function run($rootScope, $state, authentication, error, layout, view) {
-		// Listens for state transitions
-		$rootScope.$on('$stateChangeSuccess', updateLayoutAndView);
-		
-		// Listens for changes in the authentication state
-		$rootScope.$watch(authentication.isStateRefreshing, updateLayoutAndView);
-		
-		// Listens for changes in the error state
-		$rootScope.$watch(error.occurred, updateLayoutAndView);
-		
 		/**
 		 * Updates the layout and the view.
 		 */
@@ -60,5 +51,16 @@
 			// Updates the view
 			view.update(data.views);
 		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Listens for state transitions
+		$rootScope.$on('$stateChangeSuccess', updateLayoutAndView);
+		
+		// Listens for changes in the authentication state
+		$rootScope.$watch(authentication.isStateRefreshing, updateLayoutAndView);
+		
+		// Listens for changes in the error state
+		$rootScope.$watch(error.occurred, updateLayoutAndView);
 	}
 })();

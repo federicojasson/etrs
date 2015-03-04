@@ -29,11 +29,8 @@
 	 * Includes the current view.
 	 */
 	function viewDirective($controller, view) {
-		// Returns the settings of the directive
-		return getSettings();
-		
 		/**
-		 * Returns the settings of the directive.
+		 * Returns the settings.
 		 */
 		function getSettings() {
 			return {
@@ -52,14 +49,14 @@
 		function registerViewListener(scope) {
 			// Listens for changes in the view
 			scope.$watch(view.get, function(view) {
-				// Initializes the controller
-				var controller = $controller(view);
-				
-				// TODO: register title listener here? otherwise assign controller directly to scope variable
-				
-				// Binds the controller to the scope of the directive
-				scope.view = controller;
+				// Binds the view to the scope
+				scope.view = $controller(view);
 			});
 		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Returns the settings
+		return getSettings();
 	}
 })();

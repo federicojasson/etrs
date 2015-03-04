@@ -29,11 +29,8 @@
 	 * Includes the current layout.
 	 */
 	function layoutDirective($controller, layout) {
-		// Returns the settings of the directive
-		return getSettings();
-		
 		/**
-		 * Returns the settings of the directive.
+		 * Returns the settings.
 		 */
 		function getSettings() {
 			return {
@@ -52,14 +49,14 @@
 		function registerLayoutListener(scope) {
 			// Listens for changes in the layout
 			scope.$watch(layout.get, function(layout) {
-				// Initializes the controller
-				var controller = $controller(layout);
-				
-				// TODO: register title listener here? otherwise assign controller directly to scope variable
-				
-				// Binds the controller to the scope of the directive
-				scope.layout = controller;
+				// Binds the layout to the scope
+				scope.layout = $controller(layout);
 			});
 		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Returns the settings
+		return getSettings();
 	}
 })();
