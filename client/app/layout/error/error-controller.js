@@ -22,7 +22,7 @@
 	angular.module('app.layout.error').controller('LayoutErrorController', LayoutErrorController);
 	
 	/**
-	 * TODO: comment
+	 * Represents a layout.
 	 */
 	function LayoutErrorController() {
 		var _this = this;

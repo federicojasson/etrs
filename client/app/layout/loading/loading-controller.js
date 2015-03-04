@@ -22,7 +22,7 @@
 	angular.module('app.layout.loading').controller('LayoutLoadingController', LayoutLoadingController);
 	
 	/**
-	 * TODO: comment
+	 * Represents a layout.
 	 */
 	function LayoutLoadingController() {
 		var _this = this;

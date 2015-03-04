@@ -43,6 +43,9 @@
 		for (var i = 0; i < states.length; i++) {
 			var state = states[i];
 			
+			// TODO: comment
+			state.url = '^' + state.url;
+			
 			// Sets a template that includes the layout
 			state.template = '<div layout></div>';
 			
@@ -55,6 +58,17 @@
 		 */
 		function getStates() {
 			return [
+				{
+					name: 'account',
+					url: '/account',
+					controllers: {
+						__: 'ViewAccountSignInController',
+						ad: 'ViewAccountController',
+						dr: 'ViewAccountController',
+						op: 'ViewAccountController'
+					}
+				},
+				
 				{
 					name: 'account.signIn',
 					url: '/account/sign-in',
@@ -75,20 +89,29 @@
 				},
 				
 				{
-					name: 'medication.management',
-					url: '/medication/management',
+					name: 'medication',
+					url: '/medication/{id:[0-9A-Fa-f]{32}}',
 					controllers: {
 						__: 'ViewAccountSignInController',
-						ad: 'ViewMedicationManagementController'
+						ad: 'ViewMedicationController'
 					}
 				},
 				
 				{
-					name: 'medication.new',
-					url: '/medication/new',
+					name: 'medication.create',
+					url: '/medication/create',
 					controllers: {
 						__: 'ViewAccountSignInController',
-						ad: 'ViewMedicationNewController'
+						ad: 'ViewMedicationCreateController'
+					}
+				},
+				
+				{
+					name: 'medication.manage',
+					url: '/medication/manage',
+					controllers: {
+						__: 'ViewAccountSignInController',
+						ad: 'ViewMedicationManageController'
 					}
 				}
 			];

@@ -19,19 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.ready').controller('LayoutReadyController', LayoutReadyController);
-	
-	/**
-	 * Represents a layout.
-	 */
-	function LayoutReadyController() {
-		var _this = this;
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.getTemplateUrl = function() {
-			return 'app/layout/ready/ready.html';
-		};
-	}
+	angular.module('app.view.medication.manage', []);
 })();

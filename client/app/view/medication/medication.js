@@ -20,7 +20,7 @@
 
 (function() {
 	angular.module('app.view.medication', [
-		'app.view.medication.management',
-		'app.view.medication.new'
+		'app.view.medication.create',
+		'app.view.medication.manage'
 	]);
 })();

@@ -19,19 +19,19 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.ready').controller('LayoutReadyController', LayoutReadyController);
+	angular.module('app.view.account').controller('ViewAccountController', ViewAccountController);
 	
 	/**
-	 * Represents a layout.
+	 * Represents a view.
 	 */
-	function LayoutReadyController() {
+	function ViewAccountController() {
 		var _this = this;
 		
 		/**
 		 * TODO: comment
 		 */
 		_this.getTemplateUrl = function() {
-			return 'app/layout/ready/ready.html';
+			return 'app/view/account/account.html';
 		};
 	}
 })();
