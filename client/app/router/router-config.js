@@ -33,7 +33,7 @@
 		// Enables the HTML5 history API
 		//$locationProvider.html5Mode(true); //TODO: weird bug (slashes are encoded in url)
 		
-		// Sets the default URL
+		// Sets the URL of the default route
 		$urlRouterProvider.otherwise('/');
 		
 		// Gets the states to be registered

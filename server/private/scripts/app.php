@@ -119,8 +119,14 @@ function executeServerTask() {
  */
 function getExternalServices() {
 	return [
+		'/account/reset-password',
+		'/account/reset-password/authenticate',
+		'/account/reset-password/request',
 		'/account/sign-in',
 		'/account/sign-out',
+		'/account/sign-up',
+		'/account/sign-up/authenticate',
+		'/account/sign-up/request',
 		'/authentication/get-state',
 		'/file/download',
 		'/file/upload',
@@ -128,11 +134,7 @@ function getExternalServices() {
 		'/medication/delete',
 		'/medication/edit',
 		'/medication/get',
-		'/medication/search',
-		'/permission/reset-password/authenticate',
-		'/permission/reset-password/request',
-		'/permission/sign-up/authenticate',
-		'/permission/sign-up/request'
+		'/medication/search'
 	];
 }
 

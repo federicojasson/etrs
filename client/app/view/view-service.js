@@ -68,7 +68,7 @@
 			if (! views.hasOwnProperty(userRole)) {
 				// There is no view defined for the user role
 				
-				// Redirects the user to the root URL
+				// Redirects the user to the home route
 				router.redirect('/');
 				
 				return;

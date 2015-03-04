@@ -31,9 +31,9 @@
 		var _this = this;
 		
 		/**
-		 * Redirects the user to a certain URL.
+		 * Redirects the user to a certain route.
 		 * 
-		 * Receives the URL.
+		 * Receives the URL of the route.
 		 */
 		_this.redirect = function(url) {
 			$location.path(url);
