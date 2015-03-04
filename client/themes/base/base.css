@@ -15,6 +15,23 @@ pre {
 	word-break: normal;
 }
 
+.content-container {
+	padding-bottom: 32px;
+	padding-top: 8px;
+}
+
+.copyright-text {
+	margin-bottom: 48px;
+	margin-top: -12px;
+	text-align: center;
+}
+
+.footer-logo-image {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .fully-centered {
 	display: table-cell;
 	vertical-align: middle;
@@ -25,4 +42,18 @@ pre {
 	height: 100%;
 	position: fixed;
 	width: 100%;
+}
+
+.navbar-logo-image {}
+
+.navbar-logo-text {
+	float: left;
+	line-height: 50px;
+	padding-left: 16px;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
