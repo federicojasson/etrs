@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.view').service('view', [
+		'$state',
 		'authentication',
 		'router',
 		viewService
@@ -28,7 +29,7 @@
 	/**
 	 * Manages the view.
 	 */
-	function viewService(authentication, router) {
+	function viewService($state, authentication, router) {
 		var _this = this;
 		
 		/**
@@ -45,12 +46,17 @@
 		
 		/**
 		 * Updates the view.
-		 * 
-		 * Receives the views defined in the current route, ordered according to
-		 * user role.
 		 */
-		_this.update = function(views) {
-			if (authentication.isStateRefreshing()) { // TODO: hacer este control?
+		_this.update = function() {
+			// Gets the data of the current route
+			var data = $state.current.data;
+			
+			if (angular.isUndefined(data)) {
+				// The route has not been established yet
+				return;
+			}
+			
+			if (authentication.isStateRefreshing()) {
 				// The authentication state is being refreshed
 				return;
 			}
@@ -64,6 +70,9 @@
 				// The user is not signed in
 				userRole = '__';
 			}
+			
+			// Gets the views defined in the current route
+			var views = data.views;
 			
 			if (! views.hasOwnProperty(userRole)) {
 				// There is no view defined for the user role

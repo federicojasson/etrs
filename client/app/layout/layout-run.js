@@ -19,48 +19,21 @@
 'use strict';
 
 (function() {
-	angular.module('app.router').run([
+	angular.module('app.layout').run([
 		'$rootScope',
-		'$state',
-		'authentication',
 		'error',
 		'layout',
-		'view',
 		run
 	]);
 	
 	/**
 	 * Performs module-initialization tasks.
 	 */
-	function run($rootScope, $state, authentication, error, layout, view) {
-		/**
-		 * Updates the layout and the view.
-		 */
-		function updateLayoutAndView() {
-			// Gets the data of the current route
-			var data = $state.current.data;
-			
-			if (angular.isUndefined(data)) {
-				// The route has not been established yet
-				return;
-			}
-			
+	function run($rootScope, error, layout) {
+		// Listens for changes in the error state
+		$rootScope.$watch(error.occurred, function() {
 			// Updates the layout
 			layout.update();
-			
-			// Updates the view
-			view.update(data.views);
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Listens for state transitions
-		$rootScope.$on('$stateChangeSuccess', updateLayoutAndView);
-		
-		// Listens for changes in the authentication state
-		$rootScope.$watch(authentication.isStateRefreshing, updateLayoutAndView);
-		
-		// Listens for changes in the error state
-		$rootScope.$watch(error.occurred, updateLayoutAndView);
+		});
 	}
 })();

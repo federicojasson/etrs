@@ -19,41 +19,27 @@
 'use strict';
 
 (function() {
-	angular.module('app.error').service('error', errorService);
+	angular.module('app.view').run([
+		'$rootScope',
+		'authentication',
+		'view',
+		run
+	]);
 	
 	/**
-	 * Manages the error state.
+	 * Performs module-initialization tasks.
 	 */
-	function errorService() {
-		var _this = this;
+	function run($rootScope, authentication, view) {
+		// Listens for state transitions
+		$rootScope.$on('$stateChangeSuccess', function() {
+			// Updates the view
+			view.update();
+		});
 		
-		/**
-		 * The error occurred.
-		 */
-		var error = null;
-		
-		/**
-		 * Returns the error occurred.
-		 */
-		_this.get = function() {
-			return error;
-		};
-		
-		/**
-		 * Determines whether an error occurred.
-		 */
-		_this.occurred = function() {
-			return error !== null;
-		};
-		
-		/**
-		 * Reports the occurrence of an error.
-		 * 
-		 * Receives the response of the server.
-		 */
-		_this.report = function(response) {
-			// TODO: implement (create error object)
-			error = '';
-		};
+		// Listens for changes in the authentication state
+		$rootScope.$watch(authentication.isStateRefreshing, function() {
+			// Updates the view
+			view.update();
+		});
 	}
 })();
