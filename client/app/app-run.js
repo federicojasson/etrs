@@ -22,15 +22,17 @@
 	angular.module('app').run([
 		'$timeout',
 		'error',
+		'title',
 		run
 	]);
 	
 	/**
 	 * TODO: test
 	 */
-	function run($timeout, error) {
+	function run($timeout, error, title) {
 		$timeout(function() {
 			//error.report('');
-		}, 0);
+			title.set('prueba');
+		}, 1000);
 	}
 })();

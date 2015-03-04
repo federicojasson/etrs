@@ -19,22 +19,42 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').controller('TitleController', [
+	angular.module('app.title').directive('title', [
 		'title',
-		TitleController
+		titleDirective
 	]);
 	
 	/**
-	 * Offers means to access the title of the site.
+	 * Shows the title of the site.
 	 */
-	function TitleController(title) {
-		var _this = this;
+	function titleDirective(title) {
+		/**
+		 * Returns the settings of the directive.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {},
+				link: registerTitleListener
+			};
+		}
 		
 		/**
-		 * Returns the title of the site.
+		 * Registers a listener for the title of the site.
+		 * 
+		 * Receives the scope of the directive and the element matched by it.
 		 */
-		_this.get = function() {
-			return title.get();
-		};
+		function registerTitleListener(scope, element) {
+			// Listens for changes in the title of the site
+			scope.$watch(title.get, function(title) {
+				// Shows the new title of the site
+				element.text(title);
+			});
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Returns the settings of the directive
+		return getSettings();
 	}
 })();

@@ -166,7 +166,7 @@
 			state.url = '^' + state.url;
 			
 			// Sets a template that includes the layout
-			state.template = '<div layout></div>';
+			state.template = '<layout></layout>';
 			
 			// Registers the state
 			$stateProvider.state(state);

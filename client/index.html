@@ -11,14 +11,11 @@
 		<link rel="stylesheet" href="themes/base/base.css">
 		<link rel="stylesheet" href="themes/light/light.css">
 		
-		<title
-			ng-controller="TitleController as title"
-			ng-bind="title.get()"
-		></title>
+		<title></title>
 	</head>
 	
 	<body>
-		<div ui-view></div>
+		<ui-view></ui-view>
 		
 		<!-- TODO: use minified angular version -->
 		<script src="vendors/angular/angular.js"></script>
@@ -53,7 +50,7 @@
 		<script src="app/server/server-config.js"></script>
 		<script src="app/server/server-provider.js"></script>
 		<script src="app/title/title.js"></script>
-		<script src="app/title/title-controller.js"></script>
+		<script src="app/title/title-directive.js"></script>
 		<script src="app/title/title-service.js"></script>
 		<script src="app/utility/utility.js"></script>
 		<script src="app/utility/utility-service.js"></script>

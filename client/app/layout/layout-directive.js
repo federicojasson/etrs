@@ -26,7 +26,7 @@
 	]);
 	
 	/**
-	 * Includes the current layout.
+	 * Includes the layout.
 	 */
 	function layoutDirective($controller, layout) {
 		/**
@@ -34,7 +34,7 @@
 		 */
 		function getSettings() {
 			return {
-				restrict: 'A',
+				restrict: 'E',
 				scope: {},
 				templateUrl: 'app/layout/layout.html',
 				link: registerLayoutListener
@@ -49,7 +49,7 @@
 		function registerLayoutListener(scope) {
 			// Listens for changes in the layout
 			scope.$watch(layout.get, function(layout) {
-				// Binds the layout to the scope
+				// Binds the new layout to the scope
 				scope.layout = $controller(layout);
 			});
 		}

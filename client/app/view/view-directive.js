@@ -26,7 +26,7 @@
 	]);
 	
 	/**
-	 * Includes the current view.
+	 * Includes the view.
 	 */
 	function viewDirective($controller, view) {
 		/**
@@ -34,7 +34,7 @@
 		 */
 		function getSettings() {
 			return {
-				restrict: 'A',
+				restrict: 'E',
 				scope: {},
 				templateUrl: 'app/view/view.html',
 				link: registerViewListener
@@ -49,7 +49,7 @@
 		function registerViewListener(scope) {
 			// Listens for changes in the view
 			scope.$watch(view.get, function(view) {
-				// Binds the view to the scope
+				// Binds the new view to the scope
 				scope.view = $controller(view);
 			});
 		}
