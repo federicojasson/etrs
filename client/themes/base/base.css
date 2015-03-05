@@ -26,6 +26,8 @@ pre {
 	text-align: center;
 }
 
+.email-image {}
+
 .footer-logo-image {
 	display: block;
 	margin-left: auto;
@@ -59,7 +61,7 @@ pre {
 	user-select: none;
 }
 
-.lock-image {}
+.locked-image {}
 
 .navbar-logo-image {}
 
@@ -74,3 +76,5 @@ pre {
 	-webkit-user-select: none;
 	user-select: none;
 }
+
+.unlocked-image {}

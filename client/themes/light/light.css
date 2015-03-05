@@ -68,6 +68,14 @@ legend {
 	font-size: 0.8em;
 }
 
+.email-image {
+	background-image: url(images/email.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
+}
+
 .footer-logo-image {
 	background-image: url(images/footer-logo.png);
 	background-position: 0px -72px;
@@ -106,8 +114,8 @@ legend {
 	text-transform: uppercase;
 }
 
-.lock-image {
-	background-image: url(images/lock.png);
+.locked-image {
+	background-image: url(images/locked.png);
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 	height: 256px;
@@ -132,4 +140,12 @@ legend {
 	font-size: 1.6em;
 	font-weight: bold;
 	text-transform: uppercase;
+}
+
+.unlocked-image {
+	background-image: url(images/unlocked.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
 }
