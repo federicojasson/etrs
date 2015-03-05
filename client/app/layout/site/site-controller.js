@@ -50,7 +50,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO: comment
+			// Binds the necessary resources to the scope
 			$scope.authentication = $controller('AuthenticationController');
 		}
 		

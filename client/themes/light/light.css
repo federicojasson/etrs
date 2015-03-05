@@ -55,6 +55,12 @@ legend {
 
 .btn {
 	font-size: 0.85em;
+	line-height: 18px;
+}
+
+.btn-lg {
+	font-size: 0.95em;
+	line-height: 18px;
 }
 
 .copyright-text {

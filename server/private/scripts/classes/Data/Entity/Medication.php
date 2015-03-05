@@ -172,7 +172,7 @@ class Medication {
 	}
 	
 	/**
-	 * Deletes the entity and others necessary according to the business-logic.
+	 * Deletes the entity.
 	 */
 	public function delete() {
 		$this->deleted = true;

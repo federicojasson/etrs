@@ -20,6 +20,8 @@
 
 (function() {
 	angular.module('app.layout.error').controller('LayoutErrorController', [
+		'$controller',
+		'$scope',
 		'title',
 		LayoutErrorController
 	]);
@@ -27,7 +29,7 @@
 	/**
 	 * Represents a layout.
 	 */
-	function LayoutErrorController(title) {
+	function LayoutErrorController($controller, $scope, title) {
 		var _this = this;
 		
 		/**
@@ -50,6 +52,9 @@
 		function initialize() {
 			// Sets the title of the site
 			title.set('Error'); // TODO: define final title
+			
+			// Binds the necessary resources to the scope
+			$scope.error = $controller('ErrorController');
 		}
 		
 		// ---------------------------------------------------------------------
