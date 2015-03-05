@@ -22,13 +22,14 @@
 	angular.module('app.layout').directive('layout', [
 		'$controller',
 		'layout',
+		'title',
 		layoutDirective
 	]);
 	
 	/**
 	 * Includes the layout.
 	 */
-	function layoutDirective($controller, layout) {
+	function layoutDirective($controller, layout, title) {
 		/**
 		 * Returns the settings of the directive.
 		 */
@@ -49,13 +50,32 @@
 		function registerLayoutListener(scope) {
 			// Listens for changes in the layout
 			scope.$watch(layout.get, function(layout) {
-				// Defines an object to inject the scope of the directive
+				// Defines an object to share the scope with the new layout
 				var locals = {
 					$scope: scope
 				};
 				
-				// Binds the new layout to the scope
-				scope.layout = $controller(layout, locals);
+				// TODO: comment and order (use one function)
+				var controller = $controller(layout, locals);
+				
+				scope.$watch(controller.getTitle, function() {
+					if (controller.isReady()) {
+						title.set(controller.getTitle());
+					} else {
+						title.set('Cargando...');
+					}
+				});
+				
+				scope.$watch(controller.isReady, function() {
+					if (controller.isReady()) {
+						title.set(controller.getTitle());
+					} else {
+						title.set('Cargando...');
+					}
+				});
+				
+				// Includes the new layout
+				scope.layout = controller;
 			});
 		}
 		

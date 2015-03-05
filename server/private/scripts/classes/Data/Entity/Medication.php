@@ -59,7 +59,7 @@ class Medication {
 	protected $creator;
 	
 	/**
-	 * Indicates whether it is deleted.
+	 * Indicates whether the entity is deleted.
 	 * 
 	 * Annotations:
 	 * 
@@ -228,7 +228,7 @@ class Medication {
 	}
 	
 	/**
-	 * Determines whether it is deleted.
+	 * Determines whether the entity is deleted.
 	 */
 	public function isDeleted() {
 		return $this->deleted;

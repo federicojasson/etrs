@@ -40,7 +40,14 @@
 		};
 		
 		/**
-		 * Determines whether it is ready.
+		 * Returns the title to be shown on the site when the layout is ready.
+		 */
+		_this.getTitle = function() {
+			return '';
+		};
+		
+		/**
+		 * Determines whether the layout is ready.
 		 */
 		_this.isReady = function() {
 			return ! authentication.isStateRefreshing();
@@ -50,7 +57,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Binds the necessary resources to the scope
+			// Includes the necessary resources
 			$scope.authentication = $controller('AuthenticationController');
 		}
 		

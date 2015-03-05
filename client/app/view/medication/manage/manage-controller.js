@@ -35,7 +35,14 @@
 		};
 		
 		/**
-		 * Determines whether it is ready.
+		 * Returns the title to be shown on the site when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return 'Medicaciones';
+		};
+		
+		/**
+		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
 			return true;

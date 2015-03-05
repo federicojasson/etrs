@@ -22,14 +22,13 @@
 	angular.module('app.layout.error').controller('LayoutErrorController', [
 		'$controller',
 		'$scope',
-		'title',
 		LayoutErrorController
 	]);
 	
 	/**
 	 * Represents a layout.
 	 */
-	function LayoutErrorController($controller, $scope, title) {
+	function LayoutErrorController($controller, $scope) {
 		var _this = this;
 		
 		/**
@@ -40,7 +39,14 @@
 		};
 		
 		/**
-		 * Determines whether it is ready.
+		 * Returns the title to be shown on the site when the layout is ready.
+		 */
+		_this.getTitle = function() {
+			return 'Error'; // TODO: define final title
+		};
+		
+		/**
+		 * Determines whether the layout is ready.
 		 */
 		_this.isReady = function() {
 			return true;
@@ -50,10 +56,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Sets the title of the site
-			title.set('Error'); // TODO: define final title
-			
-			// Binds the necessary resources to the scope
+			// Includes the necessary resources
 			$scope.error = $controller('ErrorController');
 		}
 		

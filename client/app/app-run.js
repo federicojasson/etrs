@@ -32,7 +32,7 @@
 	function run($timeout, error, title) {
 		$timeout(function() {
 			//error.report('');
-			title.set('prueba');
-		}, 1000);
+			//title.set('prueba');
+		}, 0);
 	}
 })();
