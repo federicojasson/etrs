@@ -70,6 +70,9 @@ class ResetPassword extends \App\Service\ExternalService {
 			$user->setPasswordHash($passwordHash);
 			$user->setSalt($salt);
 			$user->setKeyStretchingIterations($keyStretchingIterations);
+			
+			// Deletes the reset-password permission
+			$entityManager->remove($resetPasswordPermission);
 		});
 	}
 	

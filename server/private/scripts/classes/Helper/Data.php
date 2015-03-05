@@ -88,7 +88,7 @@ class Data {
 		};
 		
 		// Executes the transaction
-		$this->__call('transactional', [ $transaction ]);
+		$this->entityManager->transactional($transaction);
 		
 		return $result;
 	}

@@ -148,6 +148,13 @@ class SignUpPermission {
 	private $userRole;
 	
 	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {
@@ -173,6 +180,13 @@ class SignUpPermission {
 	 */
 	public function getSalt() {
 		return $this->salt;
+	}
+	
+	/**
+	 * Returns the user role.
+	 */
+	public function getUserRole() {
+		return $this->userRole;
 	}
 	
 	/**

@@ -300,6 +300,51 @@ class User {
 	}
 	
 	/**
+	 * Sets the creator.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setCreator($user) {
+		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets the email address.
+	 * 
+	 * Receives the email address to be set.
+	 */
+	public function setEmailAddress($emailAddress) {
+		$this->emailAddress = $emailAddress;
+	}
+	
+	/**
+	 * Sets the first name.
+	 * 
+	 * Receives the first name to be set.
+	 */
+	public function setFirstName($firstName) {
+		$this->firstName = $firstName;
+	}
+	
+	/**
+	 * Sets the gender.
+	 * 
+	 * Receives the gender to be set.
+	 */
+	public function setGender($gender) {
+		$this->gender = $gender;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
 	 * Sets the key-stretching iterations.
 	 * 
 	 * Receives the key-stretching iterations to be set.
@@ -319,12 +364,30 @@ class User {
 	}
 	
 	/**
+	 * Sets the last name.
+	 * 
+	 * Receives the last name to be set.
+	 */
+	public function setLastName($lastName) {
+		$this->lastName = $lastName;
+	}
+	
+	/**
 	 * Sets the password hash.
 	 * 
 	 * Receives the hash to be set.
 	 */
 	public function setPasswordHash($hash) {
 		$this->passwordHash = $hash;
+	}
+	
+	/**
+	 * Sets the role.
+	 * 
+	 * Receives the role to be set.
+	 */
+	public function setRole($role) {
+		$this->role = $role;
 	}
 	
 	/**

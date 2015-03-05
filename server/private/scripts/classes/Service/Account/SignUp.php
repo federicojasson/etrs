@@ -32,21 +32,137 @@ class SignUp extends \App\Service\ExternalService {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Gets inputs
+		// TODO: process input?
+		$credentials = $this->getInput('credentials', 'stringsToBinary');
+		$id = $this->getInput('id');
+		$password = $this->getInput('password');
+		$emailAddress = $this->getInput('emailAddress');
+		$firstName = $this->getInput('firstName');
+		$lastName = $this->getInput('lastName');
+		$gender = $this->getInput('gender');
+		
+		// Authenticates the sign-up permission
+		$authenticated = $app->authenticator->authenticateSignUpPermissionByPassword($credentials['id'], $credentials['password']);
+		
+		// Sets an output
+		$this->setOutput('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The sign-up permission has not been authenticated
+			return;
+		}
+		
+		// Computes the hash of the password
+		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($credentials, $id, $passwordHash, $salt, $keyStretchingIterations, $emailAddress, $firstName, $lastName, $gender) {
+			global $app;
+			
+			// Gets the sign-up permission
+			$signUpPermission = $entityManager->getReference('App\Data\Entity\SignUpPermission', $credentials['id']);
+			
+			// Gets the user
+			$user = $entityManager->getRepository('App\Data\Entity\User')->find($id);
+			
+			// Asserts conditions
+			$app->assertor->entityDoesNotExist($user);
+			
+			// Initializes the user
+			$user = new \App\Data\Entity\User();
+			
+			// Creates the user
+			$user->setId($id);
+			$user->setRole($signUpPermission->getUserRole());
+			$user->setPasswordHash($passwordHash);
+			$user->setSalt($salt);
+			$user->setKeyStretchingIterations($keyStretchingIterations);
+			$user->setEmailAddress($emailAddress);
+			$user->setFirstName($firstName);
+			$user->setLastName($lastName);
+			$user->setGender($gender);
+			$user->setCreator($signUpPermission->getCreator());
+			$entityManager->persist($user);
+			
+			// Deletes the sign-up permission
+			$entityManager->remove($signUpPermission);
+		});
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Defines a JSON descriptor
+		$jsonDescriptor = new ObjectDescriptor([
+			'credentials' => new ObjectDescriptor([
+				'id' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				}),
+				
+				'password' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				})
+			]),
+			
+			'id' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'password' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'emailAddress' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'firstName' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'lastName' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			}),
+			
+			'gender' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			})
+		]);
+		
+		// Gets the input
+		$input = $this->getCompleteInput();
+		
+		// Determines whether the input is valid
+		return $app->inputValidator->isJsonInputValid($input, $jsonDescriptor);
 	}
 	
 	/**
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		global $app;
+		
+		// The service is available only to non-signed-in users
+		return ! $app->authentication->isUserSignedIn();
 	}
 	
 }

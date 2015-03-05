@@ -27,6 +27,23 @@ namespace App\Helper;
 class Assertor {
 	
 	/**
+	 * Checks if an entity doesn't exist.
+	 * 
+	 * Receives the entity.
+	 */
+	public function entityDoesNotExist($entity) {
+		global $app;
+		
+		// TODO: perform search here somehow?
+		
+		if (! is_null($entity)) {
+			// The entity already exists
+			// Halts the execution
+			$app->server->haltExecution(HTTP_STATUS_CONFLICT, CODE_ALREADY_EXISTING_ENTITY);
+		}
+	}
+	
+	/**
 	 * Checks if an entity exists.
 	 * 
 	 * Receives the entity.

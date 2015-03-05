@@ -32,6 +32,7 @@ class Upload extends \App\Service\ExternalService {
 		global $app;
 		
 		// Gets inputs
+		// TODO: process inputs?
 		$name = $this->getInput('name');
 		$temporaryPath = $this->getInput('temporaryPath');
 		

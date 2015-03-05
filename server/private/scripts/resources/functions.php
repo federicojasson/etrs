@@ -126,6 +126,8 @@ function stringsToBinary($strings) {
 	foreach ($strings as &$string) {
 		$string = hex2bin($string);
 	}
+	
+	return $strings;
 }
 
 /**

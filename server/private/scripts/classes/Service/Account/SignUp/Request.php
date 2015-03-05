@@ -35,6 +35,7 @@ class Request extends \App\Service\ExternalService {
 		global $app;
 		
 		// Gets inputs
+		// TODO: process inputs?
 		$credentials = $this->getInput('credentials');
 		$recipient = $this->getInput('recipient');
 		$userRole = $this->getInput('userRole');
