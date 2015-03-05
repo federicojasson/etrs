@@ -119,6 +119,16 @@ function replacePlaceholders($string, $mapping) {
 }
 
 /**
+ * TODO: comment
+ */
+function stringsToBinary($strings) {
+	// Converts the strings to binary
+	foreach ($strings as &$string) {
+		$string = hex2bin($string);
+	}
+}
+
+/**
  * Converts a string from spinal-case to PascalCase.
  * 
  * Receives the string.

@@ -32,21 +32,93 @@ class ResetPassword extends \App\Service\ExternalService {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Gets inputs
+		$credentials = $this->getInput('credentials', 'stringsToBinary');
+		$password = $this->getInput('password');
+		
+		// Authenticates the reset-password permission
+		$authenticated = $app->authenticator->authenticateResetPasswordPermissionByPassword($credentials['id'], $credentials['password']);
+		
+		// Sets an output
+		$this->setOutput('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The reset-password permission has not been authenticated
+			return;
+		}
+		
+		// Computes the hash of the password
+		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($credentials, $passwordHash, $salt, $keyStretchingIterations) {
+			global $app;
+			
+			// Gets the reset-password permission
+			$resetPasswordPermission = $entityManager->getReference('App\Data\Entity\ResetPasswordPermission', $credentials['id']);
+			
+			// Gets the user
+			$user = $resetPasswordPermission->getUser();
+			
+			// Asserts conditions
+			$app->assertor->entityExists($user);
+			
+			// Edits the user
+			$user->setLastEditionDateTime();
+			$user->setPasswordHash($passwordHash);
+			$user->setSalt($salt);
+			$user->setKeyStretchingIterations($keyStretchingIterations);
+		});
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Defines a JSON descriptor
+		$jsonDescriptor = new ObjectDescriptor([
+			'credentials' => new ObjectDescriptor([
+				'id' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				}),
+				
+				'password' => new ValueDescriptor(function($input) {
+					// TODO: implement
+					return true;
+				})
+			]),
+			
+			'password' => new ValueDescriptor(function($input) {
+				// TODO: implement
+				return true;
+			})
+		]);
+		
+		// Gets the input
+		$input = $this->getCompleteInput();
+		
+		// Determines whether the input is valid
+		return $app->inputValidator->isJsonInputValid($input, $jsonDescriptor);
 	}
 	
 	/**
 	 * Determines whether the user is authorized to use the service.
 	 */
 	protected function isUserAuthorized() {
-		// TODO: implement
+		global $app;
+		
+		// The service is available only to non-signed-in users
+		return ! $app->authentication->isUserSignedIn();
 	}
 	
 }

@@ -35,7 +35,7 @@ class Authenticate extends \App\Service\ExternalService {
 		global $app;
 		
 		// Gets inputs
-		$credentials = $this->getInput('credentials');
+		$credentials = $this->getInput('credentials', 'stringsToBinary');
 		
 		// Authenticates the sign-up permission
 		$authenticated = $app->authenticator->authenticateSignUpPermissionByPassword($credentials['id'], $credentials['password']);

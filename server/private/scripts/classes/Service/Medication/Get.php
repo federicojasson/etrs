@@ -38,7 +38,9 @@ class Get extends \App\Service\ExternalService {
 		$id = $this->getInput('id', 'hex2bin');
 		
 		// Executes a transaction
-		$medication = $app->data->transactional(function($entityManager) use ($app, $id) {
+		$medication = $app->data->transactional(function($entityManager) use ($id) {
+			global $app;
+			
 			// Gets the medication
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			

@@ -235,7 +235,7 @@ class SignUpPermission {
 	 * 
 	 * Receives the user role to be set.
 	 */
-	public function setUser($userRole) {
+	public function setUserRole($userRole) {
 		$this->userRole = $userRole;
 	}
 	

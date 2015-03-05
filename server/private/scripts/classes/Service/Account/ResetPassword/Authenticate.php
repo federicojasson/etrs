@@ -35,7 +35,7 @@ class Authenticate extends \App\Service\ExternalService {
 		global $app;
 		
 		// Gets inputs
-		$credentials = $this->getInput('credentials');
+		$credentials = $this->getInput('credentials', 'stringsToBinary');
 		
 		// Authenticates the reset-password permission
 		$authenticated = $app->authenticator->authenticateResetPasswordPermissionByPassword($credentials['id'], $credentials['password']);

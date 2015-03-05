@@ -46,7 +46,9 @@ class Edit extends \App\Service\ExternalService {
 		$signedInUser = $app->authentication->getSignedInUser();
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($app, $id, $version, $currentDateTime, $name, $signedInUser) {
+		$app->data->transactional(function($entityManager) use ($id, $version, $currentDateTime, $name, $signedInUser) {
+			global $app;
+			
 			// Gets the medication
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			

@@ -160,6 +160,13 @@ class ResetPasswordPermission {
 	}
 	
 	/**
+	 * Returns the user.
+	 */
+	public function getUser() {
+		return $this->user;
+	}
+	
+	/**
 	 * Sets the current date-time as the creation date-time.
 	 * 
 	 * Annotations:

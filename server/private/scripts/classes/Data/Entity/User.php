@@ -299,4 +299,41 @@ class User {
 		$this->creationDateTime = $app->server->getCurrentDateTime();
 	}
 	
+	/**
+	 * Sets the key-stretching iterations.
+	 * 
+	 * Receives the key-stretching iterations to be set.
+	 */
+	public function setKeyStretchingIterations($keyStretchingIterations) {
+		$this->keyStretchingIterations = $keyStretchingIterations;
+	}
+	
+	/**
+	 * Sets the current date-time as the last-edition date-time.
+	 */
+	public function setLastEditionDateTime() {
+		global $app;
+		
+		// Sets the last-edition date-time
+		$this->lastEditionDateTime = $app->server->getCurrentDateTime();
+	}
+	
+	/**
+	 * Sets the password hash.
+	 * 
+	 * Receives the hash to be set.
+	 */
+	public function setPasswordHash($hash) {
+		$this->passwordHash = $hash;
+	}
+	
+	/**
+	 * Sets the salt.
+	 * 
+	 * Receives the salt to be set.
+	 */
+	public function setSalt($salt) {
+		$this->salt = $salt;
+	}
+	
 }
