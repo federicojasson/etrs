@@ -36,8 +36,11 @@ class ValueDescriptor extends JsonDescriptor {
 			return false;
 		}
 		
+		// Gets the definition
+		$definition = $this->getDefinition();
+		
 		// Determines whether the value is valid
-		return call_user_func($this->definition, $input);
+		return call_user_func($definition, $input);
 	}
 	
 }

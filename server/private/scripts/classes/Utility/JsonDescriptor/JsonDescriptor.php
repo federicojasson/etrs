@@ -44,7 +44,7 @@ abstract class JsonDescriptor {
 	/**
 	 * The definition.
 	 */
-	protected $definition;
+	private $definition;
 	
 	/**
 	 * Initializes an instance of the class.
@@ -61,5 +61,12 @@ abstract class JsonDescriptor {
 	 * Receives the input.
 	 */
 	public abstract function isInputValid($input);
+	
+	/**
+	 * Returns the definition.
+	 */
+	protected function getDefinition() {
+		return $this->definition;
+	}
 	
 }
