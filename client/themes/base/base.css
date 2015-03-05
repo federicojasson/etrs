@@ -44,12 +44,14 @@ pre {
 	width: 100%;
 }
 
+.lock-image {}
+
 .navbar-logo-image {}
 
 .navbar-logo-text {
 	float: left;
 	line-height: 50px;
-	padding-left: 16px;
+	padding-left: 12px;
 	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;

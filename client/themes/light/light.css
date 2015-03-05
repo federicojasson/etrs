@@ -26,31 +26,35 @@ h1, h2, h3, h4, h5, h6, legend {
 }
 
 h1 {
-	font-size: 2em;
-}
-
-h2 {
 	font-size: 1.9em;
 }
 
-h3 {
+h2 {
 	font-size: 1.8em;
 }
 
-h4 {
+h3 {
 	font-size: 1.7em;
 }
 
-h5 {
+h4 {
 	font-size: 1.6em;
 }
 
-h6 {
+h5 {
 	font-size: 1.5em;
 }
 
+h6 {
+	font-size: 1.4em;
+}
+
 legend {
-	font-size: 1.8em;
+	font-size: 1.6em;
+}
+
+.btn {
+	font-size: 0.85em;
 }
 
 .copyright-text {
@@ -68,6 +72,14 @@ legend {
 
 .footer-logo-image:hover {
 	background-position: 0px 0px;
+}
+
+.lock-image {
+	background-image: url(images/lock.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
 }
 
 .navbar-logo-image {

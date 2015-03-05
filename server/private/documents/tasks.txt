@@ -11,6 +11,7 @@
 - Implement HTTP caching (if possible): http://docs.slimframework.com/#HTTP-Caching-Overview
 - Implement session hijacking detection method using the IP address.
 - Check warnings.
+- Check double whitespaces.
 - Check includes (index.html).
 - Check != and ==
 - Check /* and /**.

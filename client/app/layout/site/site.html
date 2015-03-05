@@ -10,7 +10,15 @@
 				</div>
 				
 				<div class="collapse navbar-collapse navbar-right">
-					TODO
+					<div ng-if="authentication.isUserSignedIn()">
+						TODO
+					</div>
+					
+					<div ng-if="! authentication.isUserSignedIn()">
+						<a href="#/account/sign-in" class="btn btn-primary navbar-btn text-uppercase">
+							Iniciar sesión
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
