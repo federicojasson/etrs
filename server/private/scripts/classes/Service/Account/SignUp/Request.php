@@ -53,12 +53,6 @@ class Request extends \App\Service\ExternalService {
 			return;
 		}
 		
-		// Generates a random ID
-		$id = $app->cryptography->generateRandomId();
-		
-		// Gets the current date-time
-		$currentDateTime = $app->server->getCurrentDateTime();
-		
 		// Generates a random password
 		$password = $app->cryptography->generateRandomPassword();
 		
@@ -66,19 +60,19 @@ class Request extends \App\Service\ExternalService {
 		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($id, $currentDateTime, $passwordHash, $salt, $keyStretchingIterations, $userRole, $signedInUser) {
+		$id = $app->data->transactional(function($entityManager) use ($passwordHash, $salt, $keyStretchingIterations, $userRole) {
 			// Initializes the sign-up permission
 			$signUpPermission = new \App\Data\Entity\SignUpPermission();
 			
 			// Creates the sign-up permission
-			$signUpPermission->setId($id);
-			$signUpPermission->setCreationDateTime($currentDateTime);
 			$signUpPermission->setPasswordHash($passwordHash);
 			$signUpPermission->setSalt($salt);
 			$signUpPermission->setKeyStretchingIterations($keyStretchingIterations);
 			$signUpPermission->setUserRole($userRole);
-			$signUpPermission->setCreator($signedInUser);
 			$entityManager->persist($signUpPermission);
+			
+			// Returns the sign-up permission's ID
+			return $signUpPermission->getId();
 		});
 		
 		// Sends a sign-up email
