@@ -49,8 +49,13 @@
 		function registerLayoutListener(scope) {
 			// Listens for changes in the layout
 			scope.$watch(layout.get, function(layout) {
+				// TODO: comment
+				var locals = {
+					$scope: scope
+				};
+				
 				// Binds the new layout to the scope
-				scope.layout = $controller(layout);
+				scope.layout = $controller(layout, locals);
 			});
 		}
 		

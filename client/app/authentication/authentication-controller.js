@@ -31,6 +31,13 @@
 		var _this = this;
 		
 		/**
+		 * Returns the signed-in user.
+		 */
+		_this.getSignedInUser = function() {
+			return authentication.getSignedInUser();
+		};
+		
+		/**
 		 * Determines whether the user is signed in.
 		 */
 		_this.isUserSignedIn = function() {

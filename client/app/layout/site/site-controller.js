@@ -20,6 +20,8 @@
 
 (function() {
 	angular.module('app.layout.site').controller('LayoutSiteController', [
+		'$controller',
+		'$scope',
 		'authentication',
 		LayoutSiteController
 	]);
@@ -27,7 +29,7 @@
 	/**
 	 * Represents a layout.
 	 */
-	function LayoutSiteController(authentication) {
+	function LayoutSiteController($controller, $scope, authentication) {
 		var _this = this;
 		
 		/**
@@ -43,5 +45,18 @@
 		_this.isReady = function() {
 			return ! authentication.isStateRefreshing();
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// TODO: comment
+			$scope.authentication = $controller('AuthenticationController');
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the layout
+		initialize();
 	}
 })();

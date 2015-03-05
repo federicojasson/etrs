@@ -49,8 +49,13 @@
 		function registerViewListener(scope) {
 			// Listens for changes in the view
 			scope.$watch(view.get, function(view) {
+				// TODO: comment
+				var locals = {
+					$scope: scope
+				};
+				
 				// Binds the new view to the scope
-				scope.view = $controller(view);
+				scope.view = $controller(view, locals);
 			});
 		}
 		
