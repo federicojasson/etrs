@@ -49,7 +49,7 @@
 		function registerLayoutListener(scope) {
 			// Listens for changes in the layout
 			scope.$watch(layout.get, function(layout) {
-				// TODO: comment
+				// Defines an object to inject the scope of the directive
 				var locals = {
 					$scope: scope
 				};

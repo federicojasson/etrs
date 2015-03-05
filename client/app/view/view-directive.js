@@ -49,7 +49,7 @@
 		function registerViewListener(scope) {
 			// Listens for changes in the view
 			scope.$watch(view.get, function(view) {
-				// TODO: comment
+				// Defines an object to inject the scope of the directive
 				var locals = {
 					$scope: scope
 				};

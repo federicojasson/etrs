@@ -80,6 +80,11 @@ legend {
 	background-position: 0px 0px;
 }
 
+.input-lg {
+	font-size: 1.2em;
+	height: 40px;
+}
+
 .lock-image {
 	background-image: url(images/lock.png);
 	background-position: 0px 0px;
