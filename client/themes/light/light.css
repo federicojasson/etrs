@@ -85,6 +85,27 @@ legend {
 	height: 40px;
 }
 
+.loading-image {
+	background-image: url(images/loading.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 30%;
+	margin-bottom: 64px;
+	max-height: 256px;
+	max-width: 256px;
+	min-height: 128px;
+}
+
+.loading-text {
+	color: #aaaaaa;
+	font-family: "Fjalla One", sans-serif;
+	font-size: 1.6em;
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
 .lock-image {
 	background-image: url(images/lock.png);
 	background-position: 0px 0px;
