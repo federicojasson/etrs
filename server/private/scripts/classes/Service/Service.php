@@ -54,11 +54,11 @@ abstract class Service {
 	protected abstract function execute();
 	
 	/**
-	 * Replaces the output completely.
+	 * Sets the complete output.
 	 * 
 	 * Receives the output to be set.
 	 */
-	protected function replaceOutput($output) {
+	protected function setCompleteOutput($output) {
 		$this->output = $output;
 	}
 	

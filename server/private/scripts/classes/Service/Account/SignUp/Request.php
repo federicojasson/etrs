@@ -34,7 +34,7 @@ class Request extends \App\Service\ExternalService {
 	protected function execute() {
 		global $app;
 		
-		// Gets the input
+		// Gets inputs
 		$credentials = $this->getInput('credentials');
 		$recipient = $this->getInput('recipient');
 		$userRole = $this->getInput('userRole');
@@ -91,12 +91,12 @@ class Request extends \App\Service\ExternalService {
 	protected function isInputValid() {
 		global $app;
 		
-		if (! $app->request->isJsonRequest()) {
+		if (! $this->isJsonRequest()) {
 			// It is not a JSON request
 			return false;
 		}
 		
-		// Defines the JSON descriptor
+		// Defines a JSON descriptor
 		$jsonDescriptor = new ObjectDescriptor([
 			'credentials' => new ObjectDescriptor([
 				'password' => new ValueDescriptor(function($input) {
@@ -123,8 +123,11 @@ class Request extends \App\Service\ExternalService {
 			})
 		]);
 		
-		// Determines whether the JSON input is valid
-		return $this->isJsonInputValid($jsonDescriptor);
+		// Gets the input
+		$input = $this->getCompleteInput();
+		
+		// Determines whether the input is valid
+		return $app->inputValidator->isJsonInputValid($input, $jsonDescriptor);
 	}
 	
 	/**

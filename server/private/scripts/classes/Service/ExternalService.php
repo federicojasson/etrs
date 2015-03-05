@@ -60,6 +60,13 @@ abstract class ExternalService extends Service {
 	}
 	
 	/**
+	 * Returns the complete input.
+	 */
+	protected function getCompleteInput() {
+		return $this->input;
+	}
+	
+	/**
 	 * Returns the value of an input entry.
 	 * 
 	 * Receives the key of the entry and, optionally, a filter to be applied to

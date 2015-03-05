@@ -34,7 +34,7 @@ class Get extends \App\Service\ExternalService {
 	protected function execute() {
 		global $app;
 		
-		// Gets the input
+		// Gets inputs
 		$id = $this->getInput('id', 'hex2bin');
 		
 		// Executes a transaction
@@ -63,7 +63,7 @@ class Get extends \App\Service\ExternalService {
 		});
 		
 		// Sets the output
-		$this->replaceOutput($medication);
+		$this->setCompleteOutput($medication);
 	}
 	
 	/**
@@ -72,12 +72,12 @@ class Get extends \App\Service\ExternalService {
 	protected function isInputValid() {
 		global $app;
 		
-		if (! $app->request->isJsonRequest()) {
+		if (! $this->isJsonRequest()) {
 			// It is not a JSON request
 			return false;
 		}
 		
-		// Defines the JSON descriptor
+		// Defines a JSON descriptor
 		$jsonDescriptor = new ObjectDescriptor([
 			'id' => new ValueDescriptor(function($input) {
 				// TODO: implement
@@ -85,8 +85,11 @@ class Get extends \App\Service\ExternalService {
 			})
 		]);
 		
-		// Determines whether the JSON input is valid
-		return $this->isJsonInputValid($jsonDescriptor);
+		// Gets the input
+		$input = $this->getCompleteInput();
+		
+		// Determines whether the input is valid
+		return $app->inputValidator->isJsonInputValid($input, $jsonDescriptor);
 	}
 	
 	/**

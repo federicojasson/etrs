@@ -31,7 +31,7 @@ class Upload extends \App\Service\ExternalService {
 	protected function execute() {
 		global $app;
 		
-		// Gets the input
+		// Gets inputs
 		$name = $this->getInput('name');
 		$temporaryPath = $this->getInput('temporaryPath');
 		
@@ -71,13 +71,17 @@ class Upload extends \App\Service\ExternalService {
 	protected function isInputValid() {
 		global $app;
 		
-		if (! $app->request->isDataRequest()) {
+		if (! $this->isDataRequest()) {
 			// It is not a data request
 			return false;
 		}
 		
-		// Determines whether the data input is valid
-		return $this->isDataInputValid();
+		// Gets the input
+		$input = $this->getCompleteInput();
+		
+		// Determines whether the input is valid
+		// TODO: implement
+		return false;
 	}
 	
 	/**
