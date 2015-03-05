@@ -22,6 +22,7 @@ namespace App\Helper;
 
 /**
  * Offers file-related functionalities.
+ * TODO: check class
  */
 class Files {
 	
@@ -60,7 +61,7 @@ class Files {
 		$path = $this->getFilePath($id);
 		
 		// Asserts conditions
-		$app->assertor->fileDoesNotExist($path);
+		$app->assertor->fileDoesNotExist($path); // TODO: unnecesary?
 		
 		// Moves the file to its permanent location
 		$this->moveFile($temporaryPath, $path, 'move_uploaded_file');

@@ -159,11 +159,11 @@ class Emails {
 		$email = $this->createEmail($sender, $recipient, $subject, $body, $alternativeBody);
 		
 		// Reads the logo image
-		$path = DIRECTORY_EMAILS . '/logo.png';
+		$path = DIRECTORY_EMAILS . '/images/logo.png';
 		$logoImage = file_get_contents($path);
 		
 		// Embeds the logo image
-		$email->addStringEmbeddedImage($logoImage, 'logo.png');
+		$email->addStringEmbeddedImage($logoImage, 'images/logo.png');
 		
 		return $email;
 	}
