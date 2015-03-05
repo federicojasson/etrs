@@ -41,7 +41,7 @@ class Medication {
 	 *		nullable = false
 	 *	)
 	 */
-	protected $creationDateTime;
+	private $creationDateTime;
 	
 	/**
 	 * The creator.
@@ -56,7 +56,7 @@ class Medication {
 	 *		onDelete = "SET NULL"
 	 *	)
 	 */
-	protected $creator;
+	private $creator;
 	
 	/**
 	 * Indicates whether the entity is deleted.
@@ -69,7 +69,7 @@ class Medication {
 	 *		nullable = false
 	 *	)
 	 */
-	protected $deleted;
+	private $deleted;
 	
 	/**
 	 * The deletion date-time.
@@ -81,7 +81,7 @@ class Medication {
 	 *		type = "datetime"
 	 *	)
 	 */
-	protected $deletionDateTime;
+	private $deletionDateTime;
 	
 	/**
 	 * The ID.
@@ -100,7 +100,7 @@ class Medication {
 	 *		}
 	 *	)
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 * The last-edition date-time.
@@ -112,7 +112,7 @@ class Medication {
 	 *		type = "datetime"
 	 *	)
 	 */
-	protected $lastEditionDateTime;
+	private $lastEditionDateTime;
 	
 	/**
 	 * The last editor.
@@ -127,7 +127,7 @@ class Medication {
 	 *		onDelete = "SET NULL"
 	 *	)
 	 */
-	protected $lastEditor;
+	private $lastEditor;
 	
 	/**
 	 * The name.
@@ -141,7 +141,7 @@ class Medication {
 	 *		nullable = false
 	 *	)
 	 */
-	protected $name;
+	private $name;
 	
 	/**
 	 * The version.
@@ -157,7 +157,7 @@ class Medication {
 	 *		}
 	 * )
 	 */
-	protected $version;
+	private $version;
 	
 	/**
 	 * Initializes an instance of the class.
@@ -169,156 +169,6 @@ class Medication {
 		$this->deleted = false;
 		$this->creator = null;
 		$this->lastEditor = null;
-	}
-	
-	/**
-	 * Deletes the entity.
-	 */
-	public function delete() {
-		$this->deleted = true;
-	}
-	
-	/**
-	 * Returns the creation date-time.
-	 */
-	public function getCreationDateTime() {
-		return $this->creationDateTime;
-	}
-	
-	/**
-	 * Returns the creator.
-	 */
-	public function getCreator() {
-		return $this->creator;
-	}
-	
-	/**
-	 * Returns the deletion date-time.
-	 */
-	public function getDeletionDateTime() {
-		return $this->deletionDateTime;
-	}
-	
-	/**
-	 * Returns the ID.
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * Returns the last-edition date-time.
-	 */
-	public function getLastEditionDateTime() {
-		return $this->lastEditionDateTime;
-	}
-	
-	/**
-	 * Returns the last editor.
-	 */
-	public function getLastEditor() {
-		return $this->lastEditor;
-	}
-	
-	/**
-	 * Returns the name.
-	 */
-	public function getName() {
-		return $this->name;
-	}
-	
-	/**
-	 * Determines whether the entity is deleted.
-	 */
-	public function isDeleted() {
-		return $this->deleted;
-	}
-	
-	/**
-	 * Serializes the entity.
-	 * 
-	 * Receives the fields that must be included.
-	 */
-	public function serialize($fields) {
-		// Initializes the serialized entity
-		$serializedEntity = [];
-		
-		// Copies the fields to be included
-		foreach ($fields as $field) {
-			$serializedEntity[$field] = $this->$field;
-		}
-		
-		// Filters the fields
-		filterArrayValue($serializedEntity, 'id', 'bin2hex');
-		filterArrayValue($serializedEntity, 'creationDateTime', 'dateTimeToString');
-		filterArrayValue($serializedEntity, 'lastEditionDateTime', 'dateTimeToString');
-		filterArrayValue($serializedEntity, 'creator', [ $this->creator, 'getId' ]);
-		filterArrayValue($serializedEntity, 'lastEditor', [ $this->lastEditor, 'getId' ]);
-		
-		return $serializedEntity;
-	}
-	
-	/**
-	 * Sets the creation date-time.
-	 * 
-	 * Receives the date-time to be set.
-	 */
-	public function setCreationDateTime($dateTime) {
-		$this->creationDateTime = $dateTime;
-	}
-	
-	/**
-	 * Sets the creator.
-	 * 
-	 * Receives the user to be set.
-	 */
-	public function setCreator($user) {
-		$this->creator = $user;
-	}
-	
-	/**
-	 * Sets the deletion date-time.
-	 * 
-	 * Receives the date-time to be set.
-	 */
-	public function setDeletionDateTime($dateTime) {
-		$this->deletionDateTime = $dateTime;
-	}
-	
-	/**
-	 * Sets the ID.
-	 * 
-	 * Receives the ID to be set.
-	 */
-	public function setId($id) {
-		$this->id = $id;
-	}
-	
-	/**
-	 * Sets the last-edition date-time.
-	 * 
-	 * Receives the date-time to be set.
-	 */
-	public function setLastEditionDateTime($dateTime) {
-		$this->lastEditionDateTime = $dateTime;
-	}
-	
-	/**
-	 * Sets the last editor.
-	 * 
-	 * Receives the user to be set.
-	 */
-	public function setLastEditor($user) {
-		$this->lastEditor = $user;
-	}
-	
-	/**
-	 * Sets the name.
-	 * 
-	 * Receives the name to be set.
-	 */
-	public function setName($name) {
-		$this->name = $name;
 	}
 	
 }

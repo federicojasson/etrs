@@ -41,7 +41,7 @@ class Session {
 	 *		nullable = false
 	 *	)
 	 */
-	private $creationDateTime;
+	protected $creationDateTime;
 	
 	/**
 	 * The data.
@@ -54,7 +54,7 @@ class Session {
 	 *		nullable = false
 	 *	)
 	 */
-	private $data;
+	protected $data;
 	
 	/**
 	 * The ID.
@@ -73,7 +73,7 @@ class Session {
 	 *		}
 	 *	)
 	 */
-	private $id;
+	protected $id;
 	
 	/**
 	 * The last-access date-time.
@@ -86,6 +86,70 @@ class Session {
 	 *		nullable = false
 	 *	)
 	 */
-	private $lastAccessDateTime;
+	protected $lastAccessDateTime;
+	
+	/**
+	 * Returns the creation date-time.
+	 */
+	public function getCreationDateTime() {
+		return $this->creationDateTime;
+	}
+	
+	/**
+	 * Returns the data.
+	 */
+	public function getData() {
+		return $this->data;
+	}
+	
+	/**
+	 * Returns the ID.
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Returns the last-access date-time.
+	 */
+	public function getLastAccessDateTime() {
+		return $this->lastAccessDateTime;
+	}
+
+	/**
+	 * Sets the creation date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setCreationDateTime($dateTime) {
+		$this->creationDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the data.
+	 * 
+	 * Receives the data to be set.
+	 */
+	public function setData($data) {
+		$this->data = $data;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the last-access date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setLastAccessDateTime($dateTime) {
+		$this->lastAccessDateTime = $dateTime;
+	}
 	
 }

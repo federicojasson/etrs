@@ -41,7 +41,7 @@ class Log {
 	 *		nullable = false
 	 *	)
 	 */
-	protected $creationDateTime;
+	private $creationDateTime;
 	
 	/**
 	 * The ID.
@@ -60,7 +60,7 @@ class Log {
 	 *		}
 	 *	)
 	 */
-	protected $id;
+	private $id;
 	
 	/**
 	 * The level.
@@ -76,7 +76,7 @@ class Log {
 	 *		}
 	 *	)
 	 */
-	protected $level;
+	private $level;
 	
 	/**
 	 * The message.
@@ -89,70 +89,6 @@ class Log {
 	 *		nullable = false
 	 *	)
 	 */
-	protected $message;
-	
-	/**
-	 * Returns the creation date-time.
-	 */
-	public function getCreationDateTime() {
-		return $this->creationDateTime;
-	}
-	
-	/**
-	 * Returns the ID.
-	 */
-	public function getId() {
-		return $this->id;
-	}
-	
-	/**
-	 * Returns the level.
-	 */
-	public function getLevel() {
-		return $this->level;
-	}
-	
-	/**
-	 * Returns the message.
-	 */
-	public function getMessage() {
-		return $this->message;
-	}
-
-	/**
-	 * Sets the creation date-time.
-	 * 
-	 * Receives the date-time to be set.
-	 */
-	public function setCreationDateTime($dateTime) {
-		$this->creationDateTime = $dateTime;
-	}
-	
-	/**
-	 * Sets the ID.
-	 * 
-	 * Receives the ID to be set.
-	 */
-	public function setId($id) {
-		$this->id = $id;
-	}
-	
-	/**
-	 * Sets the level.
-	 * 
-	 * Receives the level to be set.
-	 */
-	public function setLevel($level) {
-		$this->level = $level;
-	}
-	
-	/**
-	 * Sets the message.
-	 * 
-	 * Receives the message to be set.
-	 */
-	public function setMessage($message) {
-		$this->message = $message;
-	}
+	private $message;
 	
 }

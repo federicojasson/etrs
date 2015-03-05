@@ -21,14 +21,14 @@
 namespace App\Data\Entity;
 
 /**
- * Represents a reset-password permission from the database.
+ * Represents a log from the database.
  * 
  * Annotations:
  * 
  * @Entity(repositoryClass = "App\Data\EntityRepository\CustomRepository")
- * @Table(name = "reset_password_permissions")
+ * @Table(name = "logs")
  */
-class ResetPasswordPermission {
+class Log {
 	
 	/**
 	 * The creation date-time.
@@ -41,7 +41,7 @@ class ResetPasswordPermission {
 	 *		nullable = false
 	 *	)
 	 */
-	private $creationDateTime;
+	protected $creationDateTime;
 	
 	/**
 	 * The ID.
@@ -60,72 +60,99 @@ class ResetPasswordPermission {
 	 *		}
 	 *	)
 	 */
-	private $id;
+	protected $id;
 	
 	/**
-	 * The key-stretching iterations.
+	 * The level.
 	 * 
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "key_stretching_iterations",
-	 *		type = "integer",
+	 *		name = "level",
+	 *		type = "smallint",
 	 *		nullable = false,
 	 *		options = {
 	 *			"unsigned": true
 	 *		}
 	 *	)
 	 */
-	private $keyStretchingIterations;
+	protected $level;
 	
 	/**
-	 * The password hash.
+	 * The message.
 	 * 
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "password_hash",
-	 *		type = "automatic_binary",
-	 *		length = 64,
-	 *		nullable = false,
-	 *		options = {
-	 *			"fixed": true
-	 *		}
+	 *		name = "message",
+	 *		type = "string",
+	 *		nullable = false
 	 *	)
 	 */
-	private $passwordHash;
+	protected $message;
 	
 	/**
-	 * The salt.
-	 * 
-	 * Annotations:
-	 * 
-	 * @Column(
-	 *		name = "salt",
-	 *		type = "automatic_binary",
-	 *		length = 64,
-	 *		nullable = false,
-	 *		options = {
-	 *			"fixed": true
-	 *		}
-	 *	)
+	 * Returns the creation date-time.
 	 */
-	private $salt;
+	public function getCreationDateTime() {
+		return $this->creationDateTime;
+	}
 	
 	/**
-	 * The user.
-	 * 
-	 * Annotations:
-	 * 
-	 * @ManyToOne(targetEntity = "User")
-	 * 
-	 * @JoinColumn(
-	 *		name = "user",
-	 *		referencedColumnName = "id",
-	 *		nullable = false,
-	 *		onDelete = "RESTRICT"
-	 *	)
+	 * Returns the ID.
 	 */
-	private $user;
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Returns the level.
+	 */
+	public function getLevel() {
+		return $this->level;
+	}
+	
+	/**
+	 * Returns the message.
+	 */
+	public function getMessage() {
+		return $this->message;
+	}
+
+	/**
+	 * Sets the creation date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setCreationDateTime($dateTime) {
+		$this->creationDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the level.
+	 * 
+	 * Receives the level to be set.
+	 */
+	public function setLevel($level) {
+		$this->level = $level;
+	}
+	
+	/**
+	 * Sets the message.
+	 * 
+	 * Receives the message to be set.
+	 */
+	public function setMessage($message) {
+		$this->message = $message;
+	}
 	
 }

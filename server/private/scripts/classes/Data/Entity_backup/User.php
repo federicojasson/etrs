@@ -41,7 +41,7 @@ class User {
 	 *		nullable = false
 	 *	)
 	 */
-	private $creationDateTime;
+	protected $creationDateTime;
 	
 	/**
 	 * The creator.
@@ -56,7 +56,7 @@ class User {
 	 *		onDelete = "SET NULL"
 	 *	)
 	 */
-	private $creator;
+	protected $creator;
 	
 	/**
 	 * The email address.
@@ -70,7 +70,7 @@ class User {
 	 *		nullable = false
 	 *	)
 	 */
-	private $emailAddress;
+	protected $emailAddress;
 	
 	/**
 	 * The first name.
@@ -84,7 +84,7 @@ class User {
 	 *		nullable = false
 	 *	)
 	 */
-	private $firstName;
+	protected $firstName;
 	
 	/**
 	 * The gender.
@@ -101,7 +101,7 @@ class User {
 	 *		}
 	 *	)
 	 */
-	private $gender;
+	protected $gender;
 	
 	/**
 	 * The ID.
@@ -117,7 +117,7 @@ class User {
 	 *		nullable = false
 	 *	)
 	 */
-	private $id;
+	protected $id;
 	
 	/**
 	 * The key-stretching iterations.
@@ -133,7 +133,7 @@ class User {
 	 *		}
 	 *	)
 	 */
-	private $keyStretchingIterations;
+	protected $keyStretchingIterations;
 	
 	/**
 	 * The last-edition date-time.
@@ -145,7 +145,7 @@ class User {
 	 *		type = "datetime"
 	 *	)
 	 */
-	private $lastEditionDateTime;
+	protected $lastEditionDateTime;
 	
 	/**
 	 * The last name.
@@ -159,7 +159,7 @@ class User {
 	 *		nullable = false
 	 *	)
 	 */
-	private $lastName;
+	protected $lastName;
 	
 	/**
 	 * The password hash.
@@ -176,7 +176,7 @@ class User {
 	 *		}
 	 *	)
 	 */
-	private $passwordHash;
+	protected $passwordHash;
 	
 	/**
 	 * The role.
@@ -193,7 +193,7 @@ class User {
 	 *		}
 	 *	)
 	 */
-	private $role;
+	protected $role;
 	
 	/**
 	 * The salt.
@@ -210,7 +210,7 @@ class User {
 	 *		}
 	 *	)
 	 */
-	private $salt;
+	protected $salt;
 	
 	/**
 	 * The version.
@@ -226,7 +226,7 @@ class User {
 	 *		}
 	 * )
 	 */
-	private $version;
+	protected $version;
 	
 	/**
 	 * Initializes an instance of the class.
@@ -235,6 +235,198 @@ class User {
 		// Sets default values
 		$this->lastEditionDateTime = null;
 		$this->creator = null;
+	}
+
+	/**
+	 * Returns the creation date-time.
+	 */
+	public function getCreationDateTime() {
+		return $this->creationDateTime;
+	}
+	
+	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
+	}
+	
+	/**
+	 * Returns the email address.
+	 */
+	public function getEmailAddress() {
+		return $this->emailAddress;
+	}
+	
+	/**
+	 * Returns the first name.
+	 */
+	public function getFirstName() {
+		return $this->firstName;
+	}
+	
+	/**
+	 * Returns the gender.
+	 */
+	public function getGender() {
+		return $this->gender;
+	}
+	
+	/**
+	 * Returns the ID.
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Returns the key-stretching iterations.
+	 */
+	public function getKeyStretchingIterations() {
+		return $this->keyStretchingIterations;
+	}
+	
+	/**
+	 * Returns the last-edition date-time.
+	 */
+	public function getLastEditionDateTime() {
+		return $this->lastEditionDateTime;
+	}
+	
+	/**
+	 * Returns the last name.
+	 */
+	public function getLastName() {
+		return $this->lastName;
+	}
+	
+	/**
+	 * Returns the password hash.
+	 */
+	public function getPasswordHash() {
+		return $this->passwordHash;
+	}
+	
+	/**
+	 * Returns the role.
+	 */
+	public function getRole() {
+		return $this->role;
+	}
+	
+	/**
+	 * Returns the salt.
+	 */
+	public function getSalt() {
+		return $this->salt;
+	}
+	
+	/**
+	 * Sets the creation date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setCreationDateTime($dateTime) {
+		$this->creationDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the creator.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setCreator($user) {
+		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets the email address.
+	 * 
+	 * Receives the email address to be set.
+	 */
+	public function setEmailAddress($emailAddress) {
+		$this->emailAddress = $emailAddress;
+	}
+	
+	/**
+	 * Sets the first name.
+	 * 
+	 * Receives the first name to be set.
+	 */
+	public function setFirstName($firstName) {
+		$this->firstName = $firstName;
+	}
+	
+	/**
+	 * Sets the gender.
+	 * 
+	 * Receives the gender to be set.
+	 */
+	public function setGender($gender) {
+		$this->gender = $gender;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the key-stretching iterations.
+	 * 
+	 * Receives the key-stretching iterations to be set.
+	 */
+	public function setKeyStretchingIterations($keyStretchingIterations) {
+		$this->keyStretchingIterations = $keyStretchingIterations;
+	}
+	
+	/**
+	 * Sets the last-edition date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setLastEditionDateTime($dateTime) {
+		$this->lastEditionDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the last name.
+	 * 
+	 * Receives the last name to be set.
+	 */
+	public function setLastName($lastName) {
+		$this->lastName = $lastName;
+	}
+	
+	/**
+	 * Sets the password hash.
+	 * 
+	 * Receives the hash to be set.
+	 */
+	public function setPasswordHash($hash) {
+		$this->passwordHash = $hash;
+	}
+	
+	/**
+	 * Sets the role.
+	 * 
+	 * Receives the role to be set.
+	 */
+	public function setRole($role) {
+		$this->role = $role;
+	}
+	
+	/**
+	 * Sets the salt.
+	 * 
+	 * Receives the salt to be set.
+	 */
+	public function setSalt($salt) {
+		$this->salt = $salt;
 	}
 	
 }

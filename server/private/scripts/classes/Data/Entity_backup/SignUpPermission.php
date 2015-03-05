@@ -41,7 +41,7 @@ class SignUpPermission {
 	 *		nullable = false
 	 *	)
 	 */
-	private $creationDateTime;
+	protected $creationDateTime;
 	
 	/**
 	 * The creator.
@@ -56,7 +56,7 @@ class SignUpPermission {
 	 *		onDelete = "SET NULL"
 	 *	)
 	 */
-	private $creator;
+	protected $creator;
 	
 	/**
 	 * The ID.
@@ -75,7 +75,7 @@ class SignUpPermission {
 	 *		}
 	 *	)
 	 */
-	private $id;
+	protected $id;
 	
 	/**
 	 * The key-stretching iterations.
@@ -91,7 +91,7 @@ class SignUpPermission {
 	 *		}
 	 *	)
 	 */
-	private $keyStretchingIterations;
+	protected $keyStretchingIterations;
 	
 	/**
 	 * The password hash.
@@ -108,7 +108,7 @@ class SignUpPermission {
 	 *		}
 	 *	)
 	 */
-	private $passwordHash;
+	protected $passwordHash;
 	
 	/**
 	 * The salt.
@@ -125,7 +125,7 @@ class SignUpPermission {
 	 *		}
 	 *	)
 	 */
-	private $salt;
+	protected $salt;
 	
 	/**
 	 * The user role.
@@ -142,6 +142,118 @@ class SignUpPermission {
 	 *		}
 	 *	)
 	 */
-	private $userRole;
+	protected $userRole;
+	
+	/**
+	 * Returns the creation date-time.
+	 */
+	public function getCreationDateTime() {
+		return $this->creationDateTime;
+	}
+	
+	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
+	}
+	
+	/**
+	 * Returns the ID.
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Returns the key-stretching iterations.
+	 */
+	public function getKeyStretchingIterations() {
+		return $this->keyStretchingIterations;
+	}
+	
+	/**
+	 * Returns the password hash.
+	 */
+	public function getPasswordHash() {
+		return $this->passwordHash;
+	}
+	
+	/**
+	 * Returns the salt.
+	 */
+	public function getSalt() {
+		return $this->salt;
+	}
+	
+	/**
+	 * Returns the user role.
+	 */
+	public function getUserRole() {
+		return $this->userRole;
+	}
+	
+	/**
+	 * Sets the creation date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setCreationDateTime($dateTime) {
+		$this->creationDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the creator.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setCreator($user) {
+		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the key-stretching iterations.
+	 * 
+	 * Receives the key-stretching iterations to be set.
+	 */
+	public function setKeyStretchingIterations($keyStretchingIterations) {
+		$this->keyStretchingIterations = $keyStretchingIterations;
+	}
+	
+	/**
+	 * Sets the password hash.
+	 * 
+	 * Receives the hash to be set.
+	 */
+	public function setPasswordHash($hash) {
+		$this->passwordHash = $hash;
+	}
+	
+	/**
+	 * Sets the salt.
+	 * 
+	 * Receives the salt to be set.
+	 */
+	public function setSalt($salt) {
+		$this->salt = $salt;
+	}
+	
+	/**
+	 * Sets the user role.
+	 * 
+	 * Receives the user role to be set.
+	 */
+	public function setUserRole($userRole) {
+		$this->userRole = $userRole;
+	}
 	
 }

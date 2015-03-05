@@ -41,7 +41,7 @@ class ResetPasswordPermission {
 	 *		nullable = false
 	 *	)
 	 */
-	private $creationDateTime;
+	protected $creationDateTime;
 	
 	/**
 	 * The ID.
@@ -60,7 +60,7 @@ class ResetPasswordPermission {
 	 *		}
 	 *	)
 	 */
-	private $id;
+	protected $id;
 	
 	/**
 	 * The key-stretching iterations.
@@ -76,7 +76,7 @@ class ResetPasswordPermission {
 	 *		}
 	 *	)
 	 */
-	private $keyStretchingIterations;
+	protected $keyStretchingIterations;
 	
 	/**
 	 * The password hash.
@@ -93,7 +93,7 @@ class ResetPasswordPermission {
 	 *		}
 	 *	)
 	 */
-	private $passwordHash;
+	protected $passwordHash;
 	
 	/**
 	 * The salt.
@@ -110,7 +110,7 @@ class ResetPasswordPermission {
 	 *		}
 	 *	)
 	 */
-	private $salt;
+	protected $salt;
 	
 	/**
 	 * The user.
@@ -126,6 +126,102 @@ class ResetPasswordPermission {
 	 *		onDelete = "RESTRICT"
 	 *	)
 	 */
-	private $user;
+	protected $user;
+	
+	/**
+	 * Returns the creation date-time.
+	 */
+	public function getCreationDateTime() {
+		return $this->creationDateTime;
+	}
+	
+	/**
+	 * Returns the ID.
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Returns the key-stretching iterations.
+	 */
+	public function getKeyStretchingIterations() {
+		return $this->keyStretchingIterations;
+	}
+	
+	/**
+	 * Returns the password hash.
+	 */
+	public function getPasswordHash() {
+		return $this->passwordHash;
+	}
+	
+	/**
+	 * Returns the salt.
+	 */
+	public function getSalt() {
+		return $this->salt;
+	}
+	
+	/**
+	 * Returns the user.
+	 */
+	public function getUser() {
+		return $this->user;
+	}
+	
+	/**
+	 * Sets the creation date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setCreationDateTime($dateTime) {
+		$this->creationDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the key-stretching iterations.
+	 * 
+	 * Receives the key-stretching iterations to be set.
+	 */
+	public function setKeyStretchingIterations($keyStretchingIterations) {
+		$this->keyStretchingIterations = $keyStretchingIterations;
+	}
+	
+	/**
+	 * Sets the password hash.
+	 * 
+	 * Receives the hash to be set.
+	 */
+	public function setPasswordHash($hash) {
+		$this->passwordHash = $hash;
+	}
+	
+	/**
+	 * Sets the salt.
+	 * 
+	 * Receives the salt to be set.
+	 */
+	public function setSalt($salt) {
+		$this->salt = $salt;
+	}
+	
+	/**
+	 * Sets the user.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setUser($user) {
+		$this->user = $user;
+	}
 	
 }

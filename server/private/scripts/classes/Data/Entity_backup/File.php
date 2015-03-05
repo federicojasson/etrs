@@ -41,7 +41,7 @@ class File {
 	 *		nullable = false
 	 *	)
 	 */
-	private $creationDateTime;
+	protected $creationDateTime;
 	
 	/**
 	 * The creator.
@@ -56,7 +56,7 @@ class File {
 	 *		onDelete = "SET NULL"
 	 *	)
 	 */
-	private $creator;
+	protected $creator;
 	
 	/**
 	 * Indicates whether the entity is deleted.
@@ -69,7 +69,7 @@ class File {
 	 *		nullable = false
 	 *	)
 	 */
-	private $deleted;
+	protected $deleted;
 	
 	/**
 	 * The deletion date-time.
@@ -81,7 +81,7 @@ class File {
 	 *		type = "datetime"
 	 *	)
 	 */
-	private $deletionDateTime;
+	protected $deletionDateTime;
 	
 	/**
 	 * The hash.
@@ -98,7 +98,7 @@ class File {
 	 *		}
 	 *	)
 	 */
-	private $hash;
+	protected $hash;
 	
 	/**
 	 * The ID.
@@ -117,7 +117,7 @@ class File {
 	 *		}
 	 *	)
 	 */
-	private $id;
+	protected $id;
 	
 	/**
 	 * The last-edition date-time.
@@ -129,7 +129,7 @@ class File {
 	 *		type = "datetime"
 	 *	)
 	 */
-	private $lastEditionDateTime;
+	protected $lastEditionDateTime;
 	
 	/**
 	 * The last editor.
@@ -144,7 +144,7 @@ class File {
 	 *		onDelete = "SET NULL"
 	 *	)
 	 */
-	private $lastEditor;
+	protected $lastEditor;
 	
 	/**
 	 * The name.
@@ -158,7 +158,7 @@ class File {
 	 *		nullable = false
 	 *	)
 	 */
-	private $name;
+	protected $name;
 	
 	/**
 	 * The version.
@@ -174,7 +174,7 @@ class File {
 	 *		}
 	 * )
 	 */
-	private $version;
+	protected $version;
 	
 	/**
 	 * Initializes an instance of the class.
@@ -186,6 +186,148 @@ class File {
 		$this->deleted = false;
 		$this->creator = null;
 		$this->lastEditor = null;
+	}
+	
+	/**
+	 * Deletes the entity.
+	 */
+	public function delete() {
+		$this->deleted = true;
+	}
+	
+	/**
+	 * Returns the creation date-time.
+	 */
+	public function getCreationDateTime() {
+		return $this->creationDateTime;
+	}
+	
+	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
+	}
+	
+	/**
+	 * Returns the deletion date-time.
+	 */
+	public function getDeletionDateTime() {
+		return $this->deletionDateTime;
+	}
+	
+	/**
+	 * Returns the hash.
+	 */
+	public function getHash() {
+		return $this->hash;
+	}
+	
+	/**
+	 * Returns the ID.
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
+	 * Returns the last-edition date-time.
+	 */
+	public function getLastEditionDateTime() {
+		return $this->lastEditionDateTime;
+	}
+	
+	/**
+	 * Returns the last editor.
+	 */
+	public function getLastEditor() {
+		return $this->lastEditor;
+	}
+	
+	/**
+	 * Returns the name.
+	 */
+	public function getName() {
+		return $this->name;
+	}
+	
+	/**
+	 * Determines whether the entity is deleted.
+	 */
+	public function isDeleted() {
+		return $this->deleted;
+	}
+	
+	/**
+	 * Sets the creation date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setCreationDateTime($dateTime) {
+		$this->creationDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the creator.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setCreator($user) {
+		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets the deletion date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setDeletionDateTime($dateTime) {
+		$this->deletionDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the hash.
+	 * 
+	 * Receives the hash to be set.
+	 */
+	public function setHash($hash) {
+		$this->hash = $hash;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the last-edition date-time.
+	 * 
+	 * Receives the date-time to be set.
+	 */
+	public function setLastEditionDateTime($dateTime) {
+		$this->lastEditionDateTime = $dateTime;
+	}
+	
+	/**
+	 * Sets the last editor.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setLastEditor($user) {
+		$this->lastEditor = $user;
+	}
+	
+	/**
+	 * Sets the name.
+	 * 
+	 * Receives the name to be set.
+	 */
+	public function setName($name) {
+		$this->name = $name;
 	}
 	
 }
