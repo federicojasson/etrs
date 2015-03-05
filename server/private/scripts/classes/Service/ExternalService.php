@@ -92,8 +92,17 @@ abstract class ExternalService extends Service {
 	/**
 	 * TODO: comment
 	 */
-	protected function isDataInputValid() {
-		// TODO: implement
+	protected function isDataRequest() {
+		global $app;
+		
+		if (! $app->request->isDataRequest()) {
+			// It is not a data request
+			return false;
+		}
+		
+		// TODO: process input
+		
+		return true;
 	}
 	
 	/**
@@ -102,28 +111,20 @@ abstract class ExternalService extends Service {
 	protected abstract function isInputValid();
 	
 	/**
-	 * Determines whether the JSON input is valid.
+	 * Determines whether it is a JSON request.
 	 * 
-	 * If the input is valid, it is replaced by a decoded version.
-	 * 
-	 * Receives the descriptor of the expected JSON input.
+	 * If it is a JSON request, the input is replaced by a decoded version.
 	 */
-	protected function isJsonInputValid($jsonDescriptor) {
+	protected function isJsonRequest() {
+		global $app;
+		
+		if (! $app->request->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
 		// Decodes the input
-		$input = json_decode($this->input, true);
-		
-		if (is_null($input)) {
-			// The input could not be decoded
-			return false;
-		}
-		
-		if (! $jsonDescriptor->isInputValid($input)) {
-			// The input is invalid
-			return false;
-		}
-		
-		// Replaces the input with the decoded version
-		$this->input = $input;
+		$this->input = json_decode($this->input, true);
 		
 		return true;
 	}

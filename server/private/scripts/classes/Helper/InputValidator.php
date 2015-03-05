@@ -24,5 +24,20 @@ namespace App\Helper;
  * Offers input-validation methods.
  */
 class InputValidator {
-	// TODO: implement
+	
+	/**
+	 * TODO: comment
+	 * 
+	 * Receives TODO: comment and the descriptor of the expected JSON input.
+	 */
+	public function isJsonInputValid($input, $jsonDescriptor) {
+		if (is_null($input)) {
+			// The input could not be decoded
+			return false;
+		}
+		
+		// Determines whether the input is valid
+		return $jsonDescriptor->isInputValid($input);
+	}
+	
 }

@@ -40,6 +40,7 @@ class Files {
 		$app->assertor->fileNotCorrupted($file, $path);
 		
 		// Sets the appropriate headers
+		// TODO: use response helper?
 		$app->response->headers->set('Content-Disposition', 'attachment; filename=' . $file->getName());
 		$app->response->headers->set('Content-Length', filesize($path));
 		$app->response->headers->set('Content-Type', 'application/octet-stream');

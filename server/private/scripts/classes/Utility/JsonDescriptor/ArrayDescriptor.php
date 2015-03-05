@@ -41,9 +41,9 @@ class ArrayDescriptor extends JsonDescriptor {
 			return false;
 		}
 		
-		// Validates the elements of the array
+		// Determines whether the elements of the array are valid
 		foreach ($input as $element) {
-			// Validates the element recursively
+			// Determines whether the element is valid
 			$valid = $this->definition->isInputValid($element);
 			
 			if (! $valid) {

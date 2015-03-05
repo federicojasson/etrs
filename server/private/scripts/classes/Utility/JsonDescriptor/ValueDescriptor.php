@@ -36,7 +36,7 @@ class ValueDescriptor extends JsonDescriptor {
 			return false;
 		}
 		
-		// Validates the value
+		// Determines whether the value is valid
 		return call_user_func($this->definition, $input);
 	}
 	
