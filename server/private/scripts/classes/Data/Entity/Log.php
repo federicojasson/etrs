@@ -25,8 +25,9 @@ namespace App\Data\Entity;
  * 
  * Annotations:
  * 
- * @Entity(repositoryClass = "App\Data\EntityRepository\CustomRepository")
+ * @Entity
  * @Table(name = "logs")
+ * @HasLifecycleCallbacks
  */
 class Log {
 	
@@ -49,6 +50,8 @@ class Log {
 	 * Annotations:
 	 * 
 	 * @Id
+	 * @GeneratedValue(strategy = "CUSTOM")
+	 * @CustomIdGenerator(class = "App\Data\Utility\RandomIdGenerator")
 	 * 
 	 * @Column(
 	 *		name = "id",
@@ -90,5 +93,37 @@ class Log {
 	 *	)
 	 */
 	private $message;
+	
+	/**
+	 * Sets the current date-time as the creation date-time.
+	 * 
+	 * Annotations:
+	 * 
+	 * @PrePersist
+	 */
+	public function setCreationDateTime() {
+		global $app;
+		
+		// Sets the creation date-time
+		$this->creationDateTime = $app->server->getCurrentDateTime();
+	}
+	
+	/**
+	 * Sets the level.
+	 * 
+	 * Receives the level to be set.
+	 */
+	public function setLevel($level) {
+		$this->level = $level;
+	}
+	
+	/**
+	 * Sets the message.
+	 * 
+	 * Receives the message to be set.
+	 */
+	public function setMessage($message) {
+		$this->message = $message;
+	}
 	
 }

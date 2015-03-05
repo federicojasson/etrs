@@ -25,8 +25,9 @@ namespace App\Data\Entity;
  * 
  * Annotations:
  * 
- * @Entity(repositoryClass = "App\Data\EntityRepository\CustomRepository")
+ * @Entity
  * @Table(name = "sessions")
+ * @HasLifecycleCallbacks
  */
 class Session {
 	
@@ -87,5 +88,59 @@ class Session {
 	 *	)
 	 */
 	private $lastAccessDateTime;
+	
+	/**
+	 * Returns the data.
+	 */
+	public function getData() {
+		return $this->data;
+	}
+	
+	/**
+	 * Sets the current date-time as the creation date-time.
+	 * 
+	 * Annotations:
+	 * 
+	 * @PrePersist
+	 */
+	public function setCreationDateTime() {
+		global $app;
+		
+		// Sets the creation date-time
+		$this->creationDateTime = $app->server->getCurrentDateTime();
+	}
+	
+	/**
+	 * Sets the data.
+	 * 
+	 * Receives the data to be set.
+	 */
+	public function setData($data) {
+		$this->data = $data;
+	}
+	
+	/**
+	 * Sets the ID.
+	 * 
+	 * Receives the ID to be set.
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the current date-time as the last-access date-time.
+	 * 
+	 * Annotations:
+	 * 
+	 * @PrePersist
+	 * @PreUpdate
+	 */
+	public function setLastAccessDateTime() {
+		global $app;
+		
+		// Sets the last-access date-time
+		$this->lastAccessDateTime = $app->server->getCurrentDateTime();
+	}
 	
 }

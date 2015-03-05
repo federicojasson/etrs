@@ -114,11 +114,8 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 		// Converts the ID to binary
 		$id = hex2bin($id);
 		
-		// Gets the current date-time
-		$currentDateTime = $app->server->getCurrentDateTime();
-		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($id, $currentDateTime, $data) {
+		$app->data->transactional(function($entityManager) use ($id, $data) {
 			// Gets the session
 			$session = $entityManager->getRepository('App\Data\Entity\Session')->find($id);
 			
@@ -130,14 +127,11 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 				
 				// Creates the session
 				$session->setId($id);
-				$session->setCreationDateTime($currentDateTime);
-				$session->setLastAccessDateTime($currentDateTime);
 				$session->setData($data);
 				$entityManager->persist($session);
 			} else {
 				// The session already exists
 				// Edits the session
-				$session->setLastAccessDateTime($currentDateTime);
 				$session->setData($data);
 			}
 		});
