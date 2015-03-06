@@ -132,6 +132,7 @@ class DatabaseSessionHandler implements \SessionHandlerInterface {
 			} else {
 				// The session already exists
 				// Edits the session
+				$session->setLastAccessDateTime();
 				$session->setData($data);
 			}
 		});

@@ -61,6 +61,9 @@ define('OPERATION_MODE_PRODUCTION', 'production');
 define('SESSION_DATA_IP_ADDRESS', 'ip_address');
 define('SESSION_DATA_USER', 'user');
 
+define('SESSION_MAXIMUM_AGE', 30); // Days
+define('SESSION_MAXIMUM_INACTIVITY_TIME', 48); // Hours
+
 define('USER_ROLE_ADMINISTRATOR', 'ad');
 define('USER_ROLE_ANONYMOUS', '__');
 define('USER_ROLE_DOCTOR', 'dr');

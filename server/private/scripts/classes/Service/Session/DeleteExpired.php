@@ -29,14 +29,35 @@ class DeleteExpired extends \App\Service\InternalService {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Calculates the age limit
+		$ageLimit = $app->server->getCurrentDateTime();
+		$ageLimit->modify('-' . SESSION_MAXIMUM_AGE . ' day');
+		
+		// Calculates the inactivity limit
+		$inactivityLimit = $app->server->getCurrentDateTime();
+		$inactivityLimit->modify('-' . SESSION_MAXIMUM_INACTIVITY_TIME . ' hour');
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($ageLimit, $inactivityLimit) {
+			// Deletes the expired sessions
+			$entityManager->createQueryBuilder()
+				->delete('App\Data\Entity\Session', 'e')
+				->where('e.creationDateTime < :ageLimit')
+				->orWhere('e.lastAccessDateTime < :inactivityLimit')
+				->setParameter('ageLimit', $ageLimit)
+				->setParameter('inactivityLimit', $inactivityLimit)
+				->getQuery()
+				->getResult();
+		});
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
-		// TODO: implement
+		// The service has no input
 		return true;
 	}
 	

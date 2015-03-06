@@ -134,7 +134,6 @@ class Session {
 	 * Annotations:
 	 * 
 	 * @PrePersist
-	 * @PreUpdate
 	 */
 	public function setLastAccessDateTime() {
 		global $app;
