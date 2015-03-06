@@ -14,6 +14,7 @@
 				
 				<div class="form-group">
 					<input
+						ng-model="action.account.signIn.input.credentials.id"
 						type="text"
 						placeholder="Nombre de usuario"
 						class="form-control input-lg"
@@ -24,6 +25,7 @@
 				
 				<div class="form-group">
 					<input
+						ng-model="action.account.signIn.input.credentials.password"
 						type="password"
 						placeholder="Contraseña"
 						class="form-control input-lg"
@@ -33,15 +35,18 @@
 				</div>
 			</fieldset>
 			
-			<button class="btn btn-default btn-lg pull-right text-uppercase">
-				Iniciar sesión
-			</button>
-		</div>
-		
-		<div class="text-right">
-			<a href="#/account/reset-password">
-				¿Olvidó su contraseña?
-			</a>
+			<div class="form-group">
+				<a href="#/account/reset-password" class="form-link pull-left">
+					¿Olvidó su contraseña?
+				</a>
+
+				<button
+					ng-click="action.account.signIn.execute()"
+					class="btn btn-default btn-lg pull-right text-uppercase"
+				>
+					Iniciar sesión
+				</button>
+			</div>
 		</div>
 	</div>
 </div>

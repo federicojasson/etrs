@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.action.account.signOut').factory('ActionAccountSignOut', [
+		'authentication',
 		'server',
 		ActionAccountSignOutFactory
 	]);
@@ -27,7 +28,7 @@
 	/**
 	 * Defines ActionAccountSignOut class.
 	 */
-	function ActionAccountSignOutFactory(server) {
+	function ActionAccountSignOutFactory(authentication, server) {
 		/**
 		 * Initializes an instance of the class.
 		 */
@@ -38,7 +39,10 @@
 		 */
 		ActionAccountSignOut.prototype.execute = function() {
 			// Signs out the user
-			server.account.signOut(); // TODO: .then
+			server.account.signOut().then(function() {
+				// Refreshes the authentication state
+				authentication.refreshState();
+			});
 		};
 		
 		// ---------------------------------------------------------------------

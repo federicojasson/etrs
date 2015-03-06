@@ -88,6 +88,10 @@ legend {
 	background-position: 0px 0px;
 }
 
+.form-link {
+	line-height: 40px;
+}
+
 .input-lg {
 	font-size: 1.2em;
 	height: 40px;

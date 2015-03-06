@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.action.account.signIn').factory('ActionAccountSignIn', [
+		'authentication',
 		'server',
 		ActionAccountSignInFactory
 	]);
@@ -27,7 +28,17 @@
 	/**
 	 * Defines ActionAccountSignIn class.
 	 */
-	function ActionAccountSignInFactory(server) {
+	function ActionAccountSignInFactory(authentication, server) {
+		/**
+		 * The input.
+		 */
+		ActionAccountSignIn.prototype.input = {
+			credentials: {
+				id: '',
+				password: ''
+			}
+		};
+		
 		/**
 		 * Initializes an instance of the class.
 		 */
@@ -38,10 +49,14 @@
 		 */
 		ActionAccountSignIn.prototype.execute = function() {
 			// Signs in the user
-			server.account.signIn({
-				// TODO: input
-			}).then(function(output) {
-				// TODO: implement
+			server.account.signIn(this.input).then(function(output) {
+				if (output.authenticated) {
+					// The user has been authenticated
+					// Refreshes the authentication state
+					authentication.refreshState();
+				}
+				
+				// TODO: do something if the user is not authenticated
 			});
 		};
 		

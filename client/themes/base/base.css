@@ -38,6 +38,8 @@ pre {
 	margin-right: auto;
 }
 
+.form-link {}
+
 .fully-centered {
 	display: table-cell;
 	vertical-align: middle;
