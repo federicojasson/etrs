@@ -19,18 +19,52 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.account.signUp.request').factory('ActionAccountSignUpRequest', ActionAccountSignUpRequestFactory);
+	angular.module('app.action.account.signUp.request').factory('ActionAccountSignUpRequest', [
+		'server',
+		ActionAccountSignUpRequestFactory
+	]);
 	
 	/**
-	 * Defines ActionAccountSignUpRequest class.
+	 * Defines the ActionAccountSignUpRequest class.
 	 */
-	function ActionAccountSignUpRequestFactory() {
+	function ActionAccountSignUpRequestFactory(server) {
+		/**
+		 * The input.
+		 */
+		ActionAccountSignUpRequest.prototype.input = {
+			credentials: {
+				password: ''
+			},
+			
+			recipient: {
+				name: '',
+				emailAddress: ''
+			},
+			
+			userRole: ''
+		};
+		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ActionAccountSignUpRequest() {
-			// TODO: implement
-		}
+		function ActionAccountSignUpRequest() {}
+		
+		/**
+		 * Executes the action.
+		 */
+		ActionAccountSignUpRequest.prototype.execute = function() {
+			// TODO: input validation
+			
+			// Requests a sign-up permission
+			server.account.signUp.request(this.input).then(function(output) {
+				if (output.authenticated) {
+					// The user has been authenticated
+					// TODO: do something if the user is authenticated (maybe show dialog?)
+				}
+				
+				// TODO: do something if the user is not authenticated
+			});
+		};
 		
 		// ---------------------------------------------------------------------
 		

@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Defines ActionAccountResetPasswordRequest class.
+	 * Defines the ActionAccountResetPasswordRequest class.
 	 */
 	function ActionAccountResetPasswordRequestFactory(server) {
 		/**
@@ -49,7 +49,7 @@
 		ActionAccountResetPasswordRequest.prototype.execute = function() {
 			// TODO: input validation
 			
-			// Sends a reset-password request
+			// Requests a reset-password permission
 			server.account.resetPassword.request(this.input).then(function(output) {
 				if (output.authenticated) {
 					// The user has been authenticated

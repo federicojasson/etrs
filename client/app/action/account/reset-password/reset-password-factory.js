@@ -19,18 +19,54 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.account.resetPassword').factory('ActionAccountResetPassword', ActionAccountResetPasswordFactory);
+	angular.module('app.action.account.resetPassword').factory('ActionAccountResetPassword', [
+		'server',
+		ActionAccountResetPasswordFactory
+	]);
 	
 	/**
-	 * Defines ActionAccountResetPassword class.
+	 * Defines the ActionAccountResetPassword class.
 	 */
-	function ActionAccountResetPasswordFactory() {
+	function ActionAccountResetPasswordFactory(server) {
+		/**
+		 * The input.
+		 */
+		ActionAccountResetPassword.prototype.input = {
+			credentials: {
+				id: '',
+				password: ''
+			},
+			
+			password: ''
+		};
+		
 		/**
 		 * Initializes an instance of the class.
+		 * 
+		 * Receives TODO: comment
 		 */
-		function ActionAccountResetPassword() {
-			// TODO: implement
+		function ActionAccountResetPassword(id, password) {
+			// TODO: comment
+			this.input.credentials.id = id;
+			this.input.credentials.password = password;
 		}
+		
+		/**
+		 * Executes the action.
+		 */
+		ActionAccountResetPassword.prototype.execute = function() {
+			// TODO: input validation
+			
+			// Resets the password
+			server.account.resetPassword(this.input).then(function(output) {
+				if (output.authenticated) {
+					// The reset-password permission has been authenticated
+					// TODO: do something (redirect it to sign in?)
+				}
+				
+				// TODO: do something if is not authenticated
+			});
+		};
 		
 		// ---------------------------------------------------------------------
 		

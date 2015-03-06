@@ -19,18 +19,54 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.account.signUp').factory('ActionAccountSignUp', ActionAccountSignUpFactory);
+	angular.module('app.action.account.signUp').factory('ActionAccountSignUp', [
+		'server',
+		ActionAccountSignUpFactory
+	]);
 	
 	/**
-	 * Defines ActionAccountSignUp class.
+	 * Defines the ActionAccountSignUp class.
 	 */
-	function ActionAccountSignUpFactory() {
+	function ActionAccountSignUpFactory(server) {
+		/**
+		 * The input.
+		 */
+		ActionAccountSignUp.prototype.input = {
+			credentials: {
+				id: '',
+				password: ''
+			}
+			
+			// TODO: define other inputs
+		};
+		
 		/**
 		 * Initializes an instance of the class.
+		 * 
+		 * Receives TODO: comment
 		 */
-		function ActionAccountSignUp() {
-			// TODO: implement
+		function ActionAccountSignUp(id, password) {
+			// TODO: comment
+			this.input.credentials.id = id;
+			this.input.credentials.password = password;
 		}
+		
+		/**
+		 * Executes the action.
+		 */
+		ActionAccountSignUp.prototype.execute = function() {
+			// TODO: input validation
+			
+			// Signs up the user
+			server.account.signUp(this.input).then(function(output) {
+				if (output.authenticated) {
+					// The sign-up permission has been authenticated
+					// TODO: do something (redirect it to sign in?)
+				}
+				
+				// TODO: do something if is not authenticated
+			});
+		};
 		
 		// ---------------------------------------------------------------------
 		

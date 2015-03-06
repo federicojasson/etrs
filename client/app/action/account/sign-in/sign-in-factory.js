@@ -26,7 +26,7 @@
 	]);
 	
 	/**
-	 * Defines ActionAccountSignIn class.
+	 * Defines the ActionAccountSignIn class.
 	 */
 	function ActionAccountSignInFactory(authentication, server) {
 		/**

@@ -26,7 +26,7 @@
 	]);
 	
 	/**
-	 * Defines ActionAccountSignOut class.
+	 * Defines the ActionAccountSignOut class.
 	 */
 	function ActionAccountSignOutFactory(authentication, server) {
 		/**

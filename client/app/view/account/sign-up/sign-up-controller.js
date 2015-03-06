@@ -56,10 +56,12 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// TODO: authenticate permission
+			
 			// Includes the necessary resources
 			$scope.action = {
 				account: {
-					signUp: new ActionAccountSignUp()
+					signUp: new ActionAccountSignUp() // TODO: send id and password of permission
 				}
 			};
 		}
