@@ -19,50 +19,14 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account.signUp').controller('ViewAccountSignUpController', [
-		'$controller',
-		'$scope',
-		ViewAccountSignUpController
-	]);
+	angular.module('app.form.account.resetPassword').controller('FormAccountResetPasswordController', FormAccountResetPasswordController);
 	
 	/**
-	 * Represents a view.
+	 * Represents a form.
 	 */
-	function ViewAccountSignUpController($controller, $scope) {
+	function FormAccountResetPasswordController() {
 		var _this = this;
 		
-		/**
-		 * Returns the URL of the template.
-		 */
-		_this.getTemplateUrl = function() {
-			return 'app/view/account/sign-up/sign-up.html';
-		};
-		
-		/**
-		 * Returns the title to be shown on the site when the view is ready.
-		 */
-		_this.getTitle = function() {
-			return 'Registrarse';
-		};
-		
-		/**
-		 * Determines whether the view is ready.
-		 */
-		_this.isReady = function() {
-			return true;
-		};
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Includes the necessary resources
-			$scope.form = $controller('FormAccountSignUpController');
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Initializes the view
-		initialize();
+		// TODO: implement
 	}
 })();

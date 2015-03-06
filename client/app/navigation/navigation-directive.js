@@ -19,50 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account.resetPassword.request').controller('ViewAccountResetPasswordRequestController', [
-		'$controller',
-		'$scope',
-		ViewAccountResetPasswordRequestController
-	]);
+	angular.module('app.navigation').directive('navigation', navigationDirective);
 	
 	/**
-	 * Represents a view.
+	 * Includes the TODO: comment
 	 */
-	function ViewAccountResetPasswordRequestController($controller, $scope) {
-		var _this = this;
-		
+	function navigationDirective() {
 		/**
-		 * Returns the URL of the template.
+		 * Returns the settings of the directive.
 		 */
-		_this.getTemplateUrl = function() {
-			return 'app/view/account/reset-password/request/request.html';
-		};
-		
-		/**
-		 * Returns the title to be shown on the site when the view is ready.
-		 */
-		_this.getTitle = function() {
-			return ''; // TODO: define title
-		};
-		
-		/**
-		 * Determines whether the view is ready.
-		 */
-		_this.isReady = function() {
-			return true;
-		};
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Includes the necessary resources
-			$scope.form = $controller('FormAccountResetPasswordRequestController');
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {},
+				templateUrl: 'app/navigation/navigation.html'
+			};
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the view
-		initialize();
+		// Returns the settings of the directive
+		return getSettings();
 	}
 })();

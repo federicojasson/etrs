@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account.resetPassword').controller('ViewAccountResetPasswordController', ViewAccountResetPasswordController);
+	angular.module('app.view.account.resetPassword').controller('ViewAccountResetPasswordController', [
+		'$controller',
+		'$scope',
+		ViewAccountResetPasswordController
+	]);
 	
 	/**
 	 * Represents a view.
 	 */
-	function ViewAccountResetPasswordController() {
+	function ViewAccountResetPasswordController($controller, $scope) {
 		var _this = this;
 		
 		/**
@@ -47,5 +51,18 @@
 		_this.isReady = function() {
 			return true;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Includes the necessary resources
+			$scope.form = $controller('FormAccountResetPasswordController');
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the view
+		initialize();
 	}
 })();

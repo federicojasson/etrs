@@ -53,12 +53,12 @@ legend {
 	font-size: 1.6em;
 }
 
-.btn {
+.btn.text-uppercase {
 	font-size: 0.85em;
 	line-height: 18px;
 }
 
-.btn-lg {
+.btn-lg.text-uppercase {
 	font-size: 0.95em;
 	line-height: 18px;
 }
@@ -120,6 +120,20 @@ legend {
 	background-repeat: no-repeat;
 	height: 256px;
 	width: 256px;
+}
+
+.navbar-link {
+	color: #888888;
+}
+
+.navbar-link:focus {
+	color: #888888;
+	text-decoration: none;
+}
+
+.navbar-link:hover {
+	color: #333333;
+	text-decoration: none;
 }
 
 .navbar-logo-image {

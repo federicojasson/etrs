@@ -85,7 +85,10 @@
 				// TODO: implement (get user)
 				signedInUser = {
 					id: 'admin',
-					role: 'ad'
+					role: 'ad',
+					firstName: 'Gabriel',
+					lastName: 'Rodríguez',
+					gender: 'm'
 				};
 				stateRefreshing = false;
 			}, function(response) {

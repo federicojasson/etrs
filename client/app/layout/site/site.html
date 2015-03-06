@@ -11,7 +11,22 @@
 				
 				<div class="collapse navbar-collapse navbar-right">
 					<div ng-if="authentication.isUserSignedIn()">
-						TODO
+						<div dropdown class="btn-group navbar-btn">
+							<a href="#/account" class="btn btn-link navbar-link">
+								TODO: filter name
+							</a>
+							
+							<button dropdown-toggle class="btn btn-link dropdown-toggle navbar-link">
+								<span class="caret"></span>
+								<span class="sr-only">Dropdown</span>
+							</button>
+							
+							<ul role="menu" class="dropdown-menu">
+								<li>
+									<a>Cerrar sesión (TODO)</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 					
 					<div ng-if="! authentication.isUserSignedIn()">
@@ -29,8 +44,21 @@
 	<div class="row">
 		<div class="col-sm-10 col-sm-offset-1">
 			<div class="content-container">
-				TODO: content
-				<view></view>
+				<div ng-if="authentication.isUserSignedIn()">
+					<div class="row">
+						<div class="col-sm-3">
+							<navigation></navigation>
+						</div>
+						
+						<div class="col-sm-9">
+							<view></view>
+						</div>
+					</div>
+				</div>
+				
+				<div ng-if="! authentication.isUserSignedIn()">
+					<view></view>
+				</div>
 			</div>
 			
 			<hr>

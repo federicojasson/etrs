@@ -19,20 +19,9 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngLocale',
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.form',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.form.account', [
+		'app.form.account.resetPassword',
+		'app.form.account.signIn',
+		'app.form.account.signUp'
 	]);
 })();

@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account.signUp.request').controller('ViewAccountSignUpRequestController', ViewAccountSignUpRequestController);
+	angular.module('app.view.account.signUp.request').controller('ViewAccountSignUpRequestController', [
+		'$controller',
+		'$scope',
+		ViewAccountSignUpRequestController
+	]);
 	
 	/**
 	 * Represents a view.
 	 */
-	function ViewAccountSignUpRequestController() {
+	function ViewAccountSignUpRequestController($controller, $scope) {
 		var _this = this;
 		
 		/**
@@ -47,5 +51,18 @@
 		_this.isReady = function() {
 			return true;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Includes the necessary resources
+			$scope.form = $controller('FormAccountSignUpRequestController');
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the view
+		initialize();
 	}
 })();
