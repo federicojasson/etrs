@@ -57,18 +57,18 @@ class Data {
 	}
 	
 	/**
-	 * Executes a command.
+	 * Runs a command.
 	 * 
 	 * Receives the command and the input and output settings.
 	 */
-	public function executeCommand($command, $inputSettings, $outputSettings) {
+	public function runCommand($command, $inputSettings, $outputSettings) {
 		// Initializes the helper set
 		$helperSet = \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($this->entityManager);
 		
 		// Sets the helper set
 		$command->setHelperSet($helperSet);
 		
-		// Executes the command
+		// Runs the command
 		$command->run($inputSettings, $outputSettings);
 	}
 	

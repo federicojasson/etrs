@@ -38,8 +38,8 @@ class GenerateProxies extends \App\Service\InternalService {
 		$inputSettings = new \Symfony\Component\Console\Input\ArrayInput([]);
 		$outputSettings = new \Symfony\Component\Console\Output\ConsoleOutput();
 		
-		// Executes the command
-		$app->data->executeCommand($command, $inputSettings, $outputSettings);
+		// Runs the command
+		$app->data->runCommand($command, $inputSettings, $outputSettings);
 	}
 	
 	/**

@@ -32,6 +32,13 @@
 			// TODO: implement
 		}
 		
+		/**
+		 * TODO: comment
+		 */
+		ActionAccountSignOut.prototype.do = function() {
+			console.log('entre');
+		};
+		
 		// ---------------------------------------------------------------------
 		
 		// Returns the class
