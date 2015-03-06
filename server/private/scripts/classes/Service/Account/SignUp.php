@@ -105,29 +105,24 @@ class SignUp extends \App\Service\ExternalService {
 		$jsonDescriptor = new ObjectDescriptor([
 			'credentials' => new ObjectDescriptor([
 				'id' => new ValueDescriptor(function($input) use ($app) {
-					// TODO: implement
-					return true;
+					return $app->inputValidator->isRandomId($input);
 				}),
 				
-				'password' => new ValueDescriptor(function($input) {
-					// TODO: implement
-					return true;
+				'password' => new ValueDescriptor(function($input) use ($app) {
+					return $app->inputValidator->isRandomPassword($input);
 				})
 			]),
 			
-			'id' => new ValueDescriptor(function($input) {
-				// TODO: implement
-				return true;
+			'id' => new ValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isUserId($input);
 			}),
 			
-			'password' => new ValueDescriptor(function($input) {
-				// TODO: implement
-				return true;
+			'password' => new ValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidPassword($input);
 			}),
 			
-			'emailAddress' => new ValueDescriptor(function($input) {
-				// TODO: implement
-				return true;
+			'emailAddress' => new ValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isEmailAddress($input);
 			}),
 			
 			'firstName' => new ValueDescriptor(function($input) {
@@ -140,17 +135,16 @@ class SignUp extends \App\Service\ExternalService {
 				return true;
 			}),
 			
-			'gender' => new ValueDescriptor(function($input) {
-				// TODO: implement
-				return true;
+			'gender' => new ValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isGender($input);
 			})
 		]);
 		
 		// Gets the input
 		$input = $this->getCompleteInput();
 		
-		// Determines whether the input is valid
-		return $app->inputValidator->isJsonInputValid($input, $jsonDescriptor);
+		// Determines whether the JSON input is valid
+		return $app->inputValidator->isValidJsonInput($input, $jsonDescriptor);
 	}
 	
 	/**

@@ -81,8 +81,8 @@ class SignIn extends \App\Service\ExternalService {
 		// Gets the input
 		$input = $this->getCompleteInput();
 		
-		// Determines whether the input is valid
-		return $app->inputValidator->isJsonInputValid($input, $jsonDescriptor);
+		// Determines whether the JSON input is valid
+		return $app->inputValidator->isValidJsonInput($input, $jsonDescriptor);
 	}
 	
 	/**

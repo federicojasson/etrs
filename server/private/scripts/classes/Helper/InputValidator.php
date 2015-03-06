@@ -26,11 +26,51 @@ namespace App\Helper;
 class InputValidator {
 	
 	/**
+	 * TODO: comment
+	 */
+	public function isEmailAddress($input) {
+		// TODO: implement
+		return true;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function isGender($input) {
+		// TODO: implement
+		return true;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function isRandomId($input) {
+		// TODO: implement
+		return true;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function isRandomPassword($input) {
+		// TODO: implement
+		return true;
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function isUserId($input) {
+		// TODO: implement
+		return true;
+	}
+	
+	/**
 	 * Determines whether an input respects a certain JSON structure.
 	 * 
 	 * Receives the input and the descriptor of the JSON structure.
 	 */
-	public function isJsonInputValid($input, $jsonDescriptor) {
+	public function isValidJsonInput($input, $jsonDescriptor) {
 		if (is_null($input)) {
 			// The input could not be decoded
 			return false;
@@ -38,6 +78,14 @@ class InputValidator {
 		
 		// Determines whether the input is valid
 		return $jsonDescriptor->isInputValid($input);
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	public function isValidPassword($input) {
+		// TODO: implement
+		return true;
 	}
 	
 }

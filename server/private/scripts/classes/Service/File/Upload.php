@@ -80,7 +80,7 @@ class Upload extends \App\Service\ExternalService {
 		// Gets the input
 		$input = $this->getCompleteInput();
 		
-		// Determines whether the input is valid
+		// Determines whether the JSON input is valid
 		// TODO: implement
 		return false;
 	}
