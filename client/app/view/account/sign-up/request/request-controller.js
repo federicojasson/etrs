@@ -20,15 +20,15 @@
 
 (function() {
 	angular.module('app.view.account.signUp.request').controller('ViewAccountSignUpRequestController', [
-		'$controller',
 		'$scope',
+		'ActionAccountSignUpRequest',
 		ViewAccountSignUpRequestController
 	]);
 	
 	/**
-	 * Represents a view.
+	 * Represents the account.signUp.request view.
 	 */
-	function ViewAccountSignUpRequestController($controller, $scope) {
+	function ViewAccountSignUpRequestController($scope, ActionAccountSignUpRequest) {
 		var _this = this;
 		
 		/**
@@ -57,7 +57,13 @@
 		 */
 		function initialize() {
 			// Includes the necessary resources
-			$scope.form = $controller('FormAccountSignUpRequestController');
+			$scope.action = {
+				account: {
+					signUp: {
+						request: new ActionAccountSignUpRequest()
+					}
+				}
+			};
 		}
 		
 		// ---------------------------------------------------------------------

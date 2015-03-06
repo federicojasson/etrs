@@ -22,7 +22,7 @@
 	angular.module('app.view.home').controller('ViewHomeController', ViewHomeController);
 	
 	/**
-	 * Represents a view.
+	 * Represents the home view.
 	 */
 	function ViewHomeController() {
 		var _this = this;

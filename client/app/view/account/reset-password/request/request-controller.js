@@ -20,15 +20,15 @@
 
 (function() {
 	angular.module('app.view.account.resetPassword.request').controller('ViewAccountResetPasswordRequestController', [
-		'$controller',
 		'$scope',
+		'ActionAccountResetPasswordRequest',
 		ViewAccountResetPasswordRequestController
 	]);
 	
 	/**
-	 * Represents a view.
+	 * Represents the account.resetPassword.request view.
 	 */
-	function ViewAccountResetPasswordRequestController($controller, $scope) {
+	function ViewAccountResetPasswordRequestController($scope, ActionAccountResetPasswordRequest) {
 		var _this = this;
 		
 		/**
@@ -57,7 +57,13 @@
 		 */
 		function initialize() {
 			// Includes the necessary resources
-			$scope.form = $controller('FormAccountResetPasswordRequestController');
+			$scope.action = {
+				account: {
+					resetPassword: {
+						request: new ActionAccountResetPasswordRequest()
+					}
+				}
+			};
 		}
 		
 		// ---------------------------------------------------------------------

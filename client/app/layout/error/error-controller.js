@@ -26,7 +26,7 @@
 	]);
 	
 	/**
-	 * Represents a layout.
+	 * Represents the error layout.
 	 */
 	function LayoutErrorController($controller, $scope) {
 		var _this = this;

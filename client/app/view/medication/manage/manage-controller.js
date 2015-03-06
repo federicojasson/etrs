@@ -22,7 +22,7 @@
 	angular.module('app.view.medication.manage').controller('ViewMedicationManageController', ViewMedicationManageController);
 	
 	/**
-	 * Represents a view.
+	 * Represents the medication.manage view.
 	 */
 	function ViewMedicationManageController() {
 		var _this = this;

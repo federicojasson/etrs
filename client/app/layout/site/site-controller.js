@@ -22,14 +22,15 @@
 	angular.module('app.layout.site').controller('LayoutSiteController', [
 		'$controller',
 		'$scope',
+		'ActionAccountSignOut',
 		'authentication',
 		LayoutSiteController
 	]);
 	
 	/**
-	 * Represents a layout.
+	 * Represents the site layout.
 	 */
-	function LayoutSiteController($controller, $scope, authentication) {
+	function LayoutSiteController($controller, $scope, ActionAccountSignOut, authentication) {
 		var _this = this;
 		
 		/**
@@ -57,8 +58,13 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary resources
+			// Includes the necessary resources TODO: reorder?
 			$scope.authentication = $controller('AuthenticationController');
+			$scope.action = {
+				account: {
+					signOut: new ActionAccountSignOut()
+				}
+			};
 		}
 		
 		// ---------------------------------------------------------------------

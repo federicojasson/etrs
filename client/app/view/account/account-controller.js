@@ -22,7 +22,7 @@
 	angular.module('app.view.account').controller('ViewAccountController', ViewAccountController);
 	
 	/**
-	 * Represents a view.
+	 * Represents the account view.
 	 */
 	function ViewAccountController() {
 		var _this = this;
