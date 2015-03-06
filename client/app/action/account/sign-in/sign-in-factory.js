@@ -48,6 +48,8 @@
 		 * Executes the action.
 		 */
 		ActionAccountSignIn.prototype.execute = function() {
+			// TODO: input validation
+			
 			// Signs in the user
 			server.account.signIn(this.input).then(function(output) {
 				if (output.authenticated) {

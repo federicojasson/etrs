@@ -19,18 +19,46 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.account.resetPassword.request').factory('ActionAccountResetPasswordRequest', ActionAccountResetPasswordRequestFactory);
+	angular.module('app.action.account.resetPassword.request').factory('ActionAccountResetPasswordRequest', [
+		'server',
+		ActionAccountResetPasswordRequestFactory
+	]);
 	
 	/**
 	 * Defines ActionAccountResetPasswordRequest class.
 	 */
-	function ActionAccountResetPasswordRequestFactory() {
+	function ActionAccountResetPasswordRequestFactory(server) {
+		/**
+		 * The input.
+		 */
+		ActionAccountResetPasswordRequest.prototype.input = {
+			credentials: {
+				id: '',
+				emailAddress: ''
+			}
+		};
+		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ActionAccountResetPasswordRequest() {
-			// TODO: implement
-		}
+		function ActionAccountResetPasswordRequest() {}
+		
+		/**
+		 * Executes the action.
+		 */
+		ActionAccountResetPasswordRequest.prototype.execute = function() {
+			// TODO: input validation
+			
+			// Sends a reset-password request
+			server.account.resetPassword.request(this.input).then(function(output) {
+				if (output.authenticated) {
+					// The user has been authenticated
+					// TODO: do something if the user is authenticated (maybe show dialog?)
+				}
+				
+				// TODO: do something if the user is not authenticated
+			});
+		};
 		
 		// ---------------------------------------------------------------------
 		
