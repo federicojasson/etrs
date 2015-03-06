@@ -53,9 +53,7 @@ class ResetPassword extends \App\Service\ExternalService {
 		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($credentials, $passwordHash, $salt, $keyStretchingIterations) {
-			global $app;
-			
+		$app->data->transactional(function($entityManager) use ($app, $credentials, $passwordHash, $salt, $keyStretchingIterations) {
 			// Gets the reset-password permission
 			$resetPasswordPermission = $entityManager->getReference('App\Data\Entity\ResetPasswordPermission', $credentials['id']);
 			

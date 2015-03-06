@@ -42,9 +42,7 @@ class Delete extends \App\Service\ExternalService {
 		$currentDateTime = $app->server->getCurrentDateTime();
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($id, $version, $currentDateTime) {
-			global $app;
-			
+		$app->data->transactional(function($entityManager) use ($app, $id, $version, $currentDateTime) {
 			// Gets the medication
 			$medication = $entityManager->getRepository('App\Data\Entity\Medication')->findNonDeleted($id);
 			

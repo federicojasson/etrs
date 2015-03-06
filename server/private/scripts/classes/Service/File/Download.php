@@ -36,9 +36,7 @@ class Download extends \App\Service\ExternalService {
 		$version = $this->getInput('version');
 		
 		// Executes a transaction
-		$file = $app->data->transactional(function($entityManager) use ($id, $version) {
-			global $app;
-			
+		$file = $app->data->transactional(function($entityManager) use ($app, $id, $version) {
 			// Gets the file
 			$file = $entityManager->getRepository('App\Data\Entity\File')->findNonDeleted($id);
 			

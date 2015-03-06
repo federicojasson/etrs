@@ -59,9 +59,7 @@ class SignUp extends \App\Service\ExternalService {
 		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($credentials, $id, $passwordHash, $salt, $keyStretchingIterations, $emailAddress, $firstName, $lastName, $gender) {
-			global $app;
-			
+		$app->data->transactional(function($entityManager) use ($app, $credentials, $id, $passwordHash, $salt, $keyStretchingIterations, $emailAddress, $firstName, $lastName, $gender) {
 			// Gets the sign-up permission
 			$signUpPermission = $entityManager->getReference('App\Data\Entity\SignUpPermission', $credentials['id']);
 			
@@ -106,7 +104,7 @@ class SignUp extends \App\Service\ExternalService {
 		// Defines a JSON descriptor
 		$jsonDescriptor = new ObjectDescriptor([
 			'credentials' => new ObjectDescriptor([
-				'id' => new ValueDescriptor(function($input) {
+				'id' => new ValueDescriptor(function($input) use ($app) {
 					// TODO: implement
 					return true;
 				}),

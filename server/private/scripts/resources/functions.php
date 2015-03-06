@@ -119,7 +119,9 @@ function replacePlaceholders($string, $mapping) {
 }
 
 /**
- * TODO: comment
+ * Converts a set of strings from hexadecimal to binary.
+ * 
+ * Receives the strings.
  */
 function stringsToBinary($strings) {
 	// Converts the strings to binary

@@ -26,9 +26,9 @@ namespace App\Helper;
 class InputValidator {
 	
 	/**
-	 * TODO: comment
+	 * Determines whether an input respects a certain JSON structure.
 	 * 
-	 * Receives TODO: comment and the descriptor of the expected JSON input.
+	 * Receives the input and the descriptor of the JSON structure.
 	 */
 	public function isJsonInputValid($input, $jsonDescriptor) {
 		if (is_null($input)) {
