@@ -20,7 +20,6 @@
 
 (function() {
 	angular.module('app.authentication').service('authentication', [
-		'error',
 		'server',
 		authenticationService
 	]);
@@ -28,7 +27,7 @@
 	/**
 	 * Manages the authentication state.
 	 */
-	function authenticationService(error, server) {
+	function authenticationService(server) {
 		var _this = this;
 		
 		/**
@@ -74,13 +73,13 @@
 			
 			// Gets the authentication state
 			server.authentication.getState().then(function(output) {
-				/*if (! output.signedIn) {
+				if (! output.signedIn) {
 					// The user is not signed in
 					signedInUser = null;
 					
 					stateRefreshing = false;
 					return;
-				}*/
+				}
 				
 				// TODO: implement (get user)
 				signedInUser = {
@@ -91,9 +90,6 @@
 					gender: 'm'
 				};
 				stateRefreshing = false;
-			}, function(response) {
-				// The server responded with an error
-				error.report(response);
 			});
 		};
 	}

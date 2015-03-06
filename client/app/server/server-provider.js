@@ -37,10 +37,11 @@
 		 */
 		_this.$get = [
 			'$resource',
+			'error',
 			'utility',
-			function($resource, utility) {
+			function($resource, error, utility) {
 				// Initializes the server service
-				var server = new serverService($resource, utility);
+				var server = new serverService($resource, error, utility);
 				
 				// Adds the services
 				for (var i = 0; i < services.length; i++) {
@@ -66,7 +67,7 @@
 	 * 
 	 * All requests to the server should be done through the provided interface.
 	 */
-	function serverService($resource, utility) {
+	function serverService($resource, error, utility) {
 		var _this = this;
 		
 		/**
@@ -132,8 +133,16 @@
 			// Sends the request to the server
 			var deferredTask = $resource(url).save(input);
 
-			// Returns the promise of the deferred task
-			return deferredTask.$promise;
+			// Gets the promise of the deferred task
+			var promise = deferredTask.$promise;
+			
+			// Defines an error callback
+			promise.catch(function(response) {
+				// The server responded with an error
+				error.report(response);
+			});
+			
+			return promise;
 		}
 	}
 })();

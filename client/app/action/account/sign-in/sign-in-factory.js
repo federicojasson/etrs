@@ -19,18 +19,31 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.account.signIn').factory('ActionAccountSignIn', ActionAccountSignInFactory);
+	angular.module('app.action.account.signIn').factory('ActionAccountSignIn', [
+		'server',
+		ActionAccountSignInFactory
+	]);
 	
 	/**
 	 * Defines ActionAccountSignIn class.
 	 */
-	function ActionAccountSignInFactory() {
+	function ActionAccountSignInFactory(server) {
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ActionAccountSignIn() {
-			// TODO: implement
-		}
+		function ActionAccountSignIn() {}
+		
+		/**
+		 * Executes the action.
+		 */
+		ActionAccountSignIn.prototype.execute = function() {
+			// Signs in the user
+			server.account.signIn({
+				// TODO: input
+			}).then(function(output) {
+				// TODO: implement
+			});
+		};
 		
 		// ---------------------------------------------------------------------
 		

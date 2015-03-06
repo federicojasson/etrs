@@ -48,7 +48,7 @@ class SignIn extends \App\Service\ExternalService {
 			return;
 		}
 		
-		// Signs in the user in the system
+		// Signs in the user
 		$app->authentication->signInUser($credentials['id']);
 	}
 	

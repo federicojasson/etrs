@@ -31,7 +31,7 @@ class SignOut extends \App\Service\ExternalService {
 	protected function execute() {
 		global $app;
 		
-		// Signs out the user from the system
+		// Signs out the user
 		$app->authentication->signOutUser();
 	}
 	

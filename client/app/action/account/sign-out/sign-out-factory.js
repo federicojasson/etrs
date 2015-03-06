@@ -19,24 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.account.signOut').factory('ActionAccountSignOut', ActionAccountSignOutFactory);
+	angular.module('app.action.account.signOut').factory('ActionAccountSignOut', [
+		'server',
+		ActionAccountSignOutFactory
+	]);
 	
 	/**
 	 * Defines ActionAccountSignOut class.
 	 */
-	function ActionAccountSignOutFactory() {
+	function ActionAccountSignOutFactory(server) {
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ActionAccountSignOut() {
-			// TODO: implement
-		}
+		function ActionAccountSignOut() {};
 		
 		/**
-		 * TODO: comment
+		 * Executes the action.
 		 */
-		ActionAccountSignOut.prototype.do = function() {
-			console.log('entre');
+		ActionAccountSignOut.prototype.execute = function() {
+			// Signs out the user
+			server.account.signOut(); // TODO: .then
 		};
 		
 		// ---------------------------------------------------------------------

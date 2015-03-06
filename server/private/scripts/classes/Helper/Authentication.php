@@ -49,7 +49,7 @@ class Authentication {
 	}
 	
 	/**
-	 * Signs in a user in the system.
+	 * Signs in a user.
 	 * 
 	 * Receives the user's ID.
 	 */
@@ -70,7 +70,7 @@ class Authentication {
 	}
 	
 	/**
-	 * Signs out the user from the system.
+	 * Signs out the user.
 	 */
 	public function signOutUser() {
 		global $app;
