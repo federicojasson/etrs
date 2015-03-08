@@ -1,3 +1,5 @@
+<!--TODO: error message -->
+
 <div class="row">
 	<div class="col-sm-3">
 		<div class="locked-image"></div>
@@ -5,48 +7,58 @@
 	
 	<div class="col-sm-7 col-sm-offset-2">
 		<div class="clearfix well">
-			<fieldset>
-				<legend>Iniciar sesión</legend>
-				
-				<div class="form-group">
-					Ingrese su nombre de usuario y su contraseña.
-				</div>
-				
-				<div class="form-group">
-					<input
-						ng-model="action.account.signIn.input.credentials.id"
-						type="text"
-						placeholder="Nombre de usuario"
-						class="form-control input-lg"
-					>
-					
-					<!--TODO: angular logic-->
-				</div>
-				
-				<div class="form-group">
-					<input
-						ng-model="action.account.signIn.input.credentials.password"
-						type="password"
-						placeholder="Contraseña"
-						class="form-control input-lg"
-					>
-					
-					<!--TODO: angular logic-->
-				</div>
-			</fieldset>
-			
-			<div class="form-group">
-				<a href="#/account/reset-password" class="form-link pull-left">
-					¿Olvidó su contraseña?
-				</a>
+			<form
+				ng-submit="action.account.signIn.execute()"
+				novalidate
+			>
+				<fieldset>
+					<legend>Iniciar sesión</legend>
 
-				<button
-					ng-click="action.account.signIn.execute()"
-					class="btn btn-default btn-lg pull-right text-uppercase"
-				>
-					Iniciar sesión
-				</button>
-			</div>
+					<div class="form-group">
+						Ingrese su nombre de usuario y su contraseña.
+					</div>
+
+					<div
+						ng-class="{ 'has-error': ! action.account.signIn.input.credentials.id.valid }"
+						class="form-group"
+					>
+						<input
+							ng-model="action.account.signIn.input.credentials.id.value"
+							popover="{{ action.account.signIn.input.credentials.id.message }}"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="text"
+							placeholder="Nombre de usuario"
+							class="form-control input-lg"
+						>
+					</div>
+
+					<div
+						ng-class="{ 'has-error': ! action.account.signIn.input.credentials.password.valid }"
+						class="form-group"
+					>
+						<input
+							ng-model="action.account.signIn.input.credentials.password.value"
+							popover="{{ action.account.signIn.input.credentials.password.message }}"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="password"
+							placeholder="Contraseña"
+							class="form-control input-lg"
+						>
+					</div>
+				</fieldset>
+
+				<div class="form-group">
+					<a href="#/account/reset-password" class="form-link pull-left">
+						¿Olvidó su contraseña?
+					</a>
+
+					<button type="submit" class="btn btn-default btn-lg pull-right text-uppercase">
+						Iniciar sesión
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

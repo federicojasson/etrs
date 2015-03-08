@@ -21,6 +21,8 @@
 (function() {
 	angular.module('app.action.account.signIn').factory('ActionAccountSignIn', [
 		'authentication',
+		'inputValidator',
+		'InputModel',
 		'server',
 		ActionAccountSignInFactory
 	]);
@@ -28,30 +30,51 @@
 	/**
 	 * Defines the ActionAccountSignIn class.
 	 */
-	function ActionAccountSignInFactory(authentication, server) {
+	function ActionAccountSignInFactory(authentication, inputValidator, InputModel, server) {
 		/**
 		 * The input.
 		 */
-		ActionAccountSignIn.prototype.input = {
-			credentials: {
-				id: '',
-				password: ''
-			}
-		};
+		ActionAccountSignIn.prototype.input;
 		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ActionAccountSignIn() {}
+		function ActionAccountSignIn() {
+			// Initializes the input
+			this.input = {
+				credentials: {
+					id: new InputModel(function() {
+						// TODO: implement
+						return true;
+					}),
+					
+					password: new InputModel(function() {
+						// TODO: implement
+						return true;
+					})
+				}
+			};
+		}
 		
 		/**
 		 * Executes the action.
 		 */
 		ActionAccountSignIn.prototype.execute = function() {
-			// TODO: input validation
+			if (! inputValidator.isInputValid(this.input)) {
+				// The input is invalid
+				return;
+			}
+			
+			// Defines the input to be sent to the server
+			var input = {
+				credentials: {
+					id: this.input.credentials.id.value,
+					password: this.input.credentials.password.value
+				}
+			};
 			
 			// Signs in the user
-			server.account.signIn(this.input).then(function(output) {
+			server.account.signIn(input).then(function(output) {
 				if (output.authenticated) {
 					// The user has been authenticated
 					// Refreshes the authentication state

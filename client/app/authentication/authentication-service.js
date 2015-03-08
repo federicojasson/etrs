@@ -64,7 +64,7 @@
 		/**
 		 * Refreshes the authentication state.
 		 * 
-		 * The function should be used whenever the authentication state
+		 * The function should be invoked whenever the authentication state
 		 * changes, in order to keep the application synchronized with the
 		 * server.
 		 */

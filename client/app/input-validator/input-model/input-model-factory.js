@@ -19,58 +19,56 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.account.resetPassword').factory('ActionAccountResetPassword', [
-		'server',
-		ActionAccountResetPasswordFactory
-	]);
+	angular.module('app.inputValidator.inputModel').factory('InputModel', InputModelFactory);
 	
 	/**
-	 * Defines the ActionAccountResetPassword class.
+	 * Defines the InputModel class.
 	 */
-	function ActionAccountResetPasswordFactory(server) {
+	function InputModelFactory() {
 		/**
-		 * The input.
+		 * The message that is shown when the validation fails.
 		 */
-		ActionAccountResetPassword.prototype.input = {
-			credentials: {
-				id: '',
-				password: ''
-			},
-			
-			password: ''
-		};
+		InputModel.prototype.message;
+		
+		/**
+		 * Indicates whether the input is valid.
+		 */
+		InputModel.prototype.valid;
+		
+		/**
+		 * The validator.
+		 */
+		InputModel.prototype.validator;
+		
+		/**
+		 * The value.
+		 */
+		InputModel.prototype.value;
 		
 		/**
 		 * Initializes an instance of the class.
 		 * 
-		 * Receives TODO: comment
+		 * Receives the validator.
 		 */
-		function ActionAccountResetPassword(id, password) {
-			// TODO: comment
-			this.input.credentials.id = id;
-			this.input.credentials.password = password;
+		function InputModel(validator) {
+			this.validator = validator;
+			
+			// Sets default values
+			this.message = '';
+			this.valid = true;
+			this.value = '';
 		}
 		
 		/**
-		 * Executes the action.
+		 * Validates the input.
 		 */
-		ActionAccountResetPassword.prototype.execute = function() {
-			// TODO: input validation
-			
-			// Resets the password of the user
-			server.account.resetPassword(this.input).then(function(output) {
-				if (output.authenticated) {
-					// The reset-password permission has been authenticated
-					// TODO: do something (redirect it to sign in?)
-				}
-				
-				// TODO: do something if is not authenticated
-			});
+		InputModel.prototype.validate = function() {
+			this.valid = this.validator();
 		};
 		
 		// ---------------------------------------------------------------------
 		
 		// Returns the class
-		return ActionAccountResetPassword;
+		return InputModel;
 	}
 })();
