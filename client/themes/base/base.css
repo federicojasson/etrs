@@ -19,6 +19,34 @@ pre {
 	word-break: normal;
 }
 
+.modal-body {
+	white-space: pre-line;
+	word-break: normal;
+}
+
+.modal-content {
+	position: absolute;
+	top: 50%;
+	-moz-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	width: 100%;
+}
+
+.modal-dialog {
+	bottom: 0px;
+	left: 0px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.modal-footer {
+	margin-top: 0px;
+	padding: 15px;
+}
+
 .content-container {
 	padding-bottom: 32px;
 	padding-top: 8px;
@@ -69,34 +97,6 @@ pre {
 }
 
 .locked-image {}
-
-.modal-body {
-	white-space: pre-line;
-	word-break: normal;
-}
-
-.modal-content {
-	position: absolute;
-	top: 50%;
-	-moz-transform: translate(0, -50%);
-	-ms-transform: translate(0, -50%);
-	-webkit-transform: translate(0, -50%);
-	transform: translate(0, -50%);
-	width: 100%;
-}
-
-.modal-dialog {
-	bottom: 0px;
-	left: 0px;
-	position: absolute;
-	right: 0px;
-	top: 0px;
-}
-
-.modal-footer {
-	margin-top: 0px;
-	padding: 15px;
-}
 
 .navbar-logo-image {}
 

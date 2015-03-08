@@ -1,15 +1,74 @@
 <div class="clearfix well">
-	<fieldset>
-		<legend>TODO: legend</legend>
+	<form
+		ng-submit="actions.account.signUp.request.execute(lock, checkOutput)"
+		novalidate
+	>
+		<fieldset>
+			<legend>Enviar invitación</legend>
+			
+			<div
+				ng-class="{ 'has-error': ! actions.account.signUp.request.input.userRole.valid }"
+				class="form-group"
+			>
+				<select class="form-control input-lg">
+					<option value="">Rol de usuario</option>
+					<option disabled>──────────────</option>
+					<option value="ad">Administrador</option>
+					<option value="dr">Doctor</option>
+					<option value="op">Operador</option>
+				</select>
+			</div>
+			
+			<div
+				ng-class="{ 'has-error': ! actions.account.signUp.request.input.recipient.name.valid }"
+				class="form-group"
+			>
+				<input
+					ng-model="actions.account.signUp.request.input.recipient.name.value"
+					popover="{{ actions.account.signUp.request.input.recipient.name.message }}"
+					popover-placement="left"
+					popover-trigger="focus"
+					type="text"
+					placeholder="Nombre y apellido"
+					class="form-control input-lg"
+				>
+			</div>
+			
+			<div
+				ng-class="{ 'has-error': ! actions.account.signUp.request.input.recipient.emailAddress.valid }"
+				class="form-group"
+			>
+				<input
+					ng-model="actions.account.signUp.request.input.recipient.emailAddress.value"
+					popover="{{ actions.account.signUp.request.input.recipient.emailAddress.message }}"
+					popover-placement="left"
+					popover-trigger="focus"
+					type="text"
+					placeholder="Dirección de correo electrónico"
+					class="form-control input-lg"
+				>
+			</div>
+			
+			<div
+				ng-class="{ 'has-error': ! actions.account.signUp.request.input.credentials.password.valid }"
+				class="form-group"
+			>
+				<input
+					ng-model="actions.account.signUp.request.input.credentials.password.value"
+					popover="{{ actions.account.signUp.request.input.credentials.password.message }}"
+					popover-placement="left"
+					popover-trigger="focus"
+					type="password"
+					placeholder="Contraseña"
+					class="form-control input-lg"
+				>
+			</div>
+		</fieldset>
 
-		TODO
-	</fieldset>
-
-	<div class="form-group">
-		<button class="btn btn-danger btn-lg pull-right">
-			TODO: boton nombre
-		</button>
-	</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-danger btn-lg pull-right">
+				Enviar invitación
+			</button>
+		</div>
+	</form>
 </div>
-
-TODO: request.html

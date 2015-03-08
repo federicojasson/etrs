@@ -61,11 +61,32 @@ legend {
 
 .btn-lg {
 	font-size: 0.95em;
+	line-height: 20px;
 }
 
 .btn-link {
 	font-size: 0.95em;
 	text-transform: none;
+}
+
+.input-lg, select.input-lg {
+	font-size: 1.2em;
+	height: 42px;
+	padding: 8px 16px;
+}
+
+.navbar-link {
+	color: #888888;
+}
+
+.navbar-link:focus {
+	color: #888888;
+	text-decoration: none;
+}
+
+.navbar-link:hover {
+	color: #333333;
+	text-decoration: none;
 }
 
 .copyright-text {
@@ -102,12 +123,7 @@ legend {
 }
 
 .form-link {
-	line-height: 40px;
-}
-
-.input-lg {
-	font-size: 1.2em;
-	height: 40px;
+	line-height: 42px;
 }
 
 .loading-image {
@@ -137,20 +153,6 @@ legend {
 	background-repeat: no-repeat;
 	height: 256px;
 	width: 256px;
-}
-
-.navbar-link {
-	color: #888888;
-}
-
-.navbar-link:focus {
-	color: #888888;
-	text-decoration: none;
-}
-
-.navbar-link:hover {
-	color: #333333;
-	text-decoration: none;
 }
 
 .navbar-logo-image {

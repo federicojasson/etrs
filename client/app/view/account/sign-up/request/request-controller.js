@@ -22,14 +22,21 @@
 	angular.module('app.view.account.signUp.request').controller('ViewAccountSignUpRequestController', [
 		'$scope',
 		'ActionAccountSignUpRequest',
+		'dialog',
+		'router',
 		ViewAccountSignUpRequestController
 	]);
 	
 	/**
 	 * Represents the account.signUp.request view.
 	 */
-	function ViewAccountSignUpRequestController($scope, ActionAccountSignUpRequest) {
+	function ViewAccountSignUpRequestController($scope, ActionAccountSignUpRequest, dialog, router) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the URL of the template.
@@ -42,15 +49,44 @@
 		 * Returns the title to be shown on the site when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return ''; // TODO: define title
+			return 'Enviar invitación';
 		};
 		
 		/**
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * TODO: comment
+		 */
+		function checkOutput(output) {
+			// Unlocks the view
+			ready = true;
+			
+			if (output.authenticated) {
+				// The user has been authenticated
+				// Shows an information dialog
+				dialog.showInformationDialog(
+					'Invitación enviada',
+					'Se ha enviado una invitación a la dirección de correo electrónico indicada.',
+					function() {
+						// Redirects the user to the home route
+						router.redirect('/');
+					}
+				);
+			} else {
+				// The user has not been authenticated
+				// Shows an information dialog
+				dialog.showInformationDialog(
+					'Error de autenticación',
+					'No fue posible autenticarlo.\n' +
+					'Reingrese su contraseña.'
+				);
+			}
+		}
 		
 		/**
 		 * Performs initialization tasks.
@@ -67,6 +103,15 @@
 			
 			// Includes the necessary resources
 			$scope.actions = actions;
+			$scope.checkOutput = checkOutput;
+			$scope.lock = lock;
+		}
+		
+		/**
+		 * Locks the view.
+		 */
+		function lock() {
+			ready = false;
 		}
 		
 		// ---------------------------------------------------------------------
