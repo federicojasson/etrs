@@ -77,7 +77,7 @@
 			// Invokes the start callback
 			startCallback();
 			
-			// Requests the reset-password permission
+			// Requests a reset-password permission
 			server.account.resetPassword.request(input).then(function(output) {
 				if (angular.isDefined(endCallback)) {
 					// Invokes the end callback

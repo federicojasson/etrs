@@ -20,6 +20,8 @@
 
 (function() {
 	angular.module('app.action.account.resetPassword').factory('ActionAccountResetPassword', [
+		'inputValidator',
+		'InputModel',
 		'server',
 		ActionAccountResetPasswordFactory
 	]);
@@ -27,44 +29,66 @@
 	/**
 	 * Defines the ActionAccountResetPassword class.
 	 */
-	function ActionAccountResetPasswordFactory(server) {
+	function ActionAccountResetPasswordFactory(inputValidator, InputModel, server) {
+		/**
+		 * TODO: comment
+		 */
+		ActionAccountResetPassword.prototype.credentials;
+
 		/**
 		 * The input.
 		 */
-		ActionAccountResetPassword.prototype.input = {
-			credentials: {
-				id: '',
-				password: ''
-			},
-			
-			password: ''
-		};
+		ActionAccountResetPassword.prototype.input;
 		
 		/**
 		 * Initializes an instance of the class.
 		 * 
 		 * Receives TODO: comment
 		 */
-		function ActionAccountResetPassword(id, password) {
-			// TODO: comment
-			this.input.credentials.id = id;
-			this.input.credentials.password = password;
+		function ActionAccountResetPassword(credentials) {
+			// Sets the credentials
+			this.credentials = credentials;
+			
+			// Initializes the input
+			this.input = {
+				password: new InputModel(function() {
+					// TODO: implement
+					return true;
+				}),
+				
+				passwordConfirmation: new InputModel(function() {
+					// TODO: implement
+					return true;
+				})
+			};
 		}
 		
 		/**
 		 * Executes the action.
+		 * 
+		 * Receives TODO: comment
 		 */
-		ActionAccountResetPassword.prototype.execute = function() {
-			// TODO: input validation
+		ActionAccountResetPassword.prototype.execute = function(startCallback, endCallback) {
+			if (! inputValidator.isInputValid(this.input)) {
+				// The input is invalid
+				return;
+			}
+			
+			// Defines the input to be sent to the server
+			var input = {
+				credentials: this.credentials,
+				password: this.input.password.value
+			};
+			
+			// Invokes the start callback
+			startCallback();
 			
 			// Resets the password of the user
-			server.account.resetPassword(this.input).then(function(output) {
-				if (output.authenticated) {
-					// The reset-password permission has been authenticated
-					// TODO: do something (redirect it to sign in?)
+			server.account.resetPassword(input).then(function(output) {
+				if (angular.isDefined(endCallback)) {
+					// Invokes the end callback
+					endCallback(output);
 				}
-				
-				// TODO: do something if is not authenticated
 			});
 		};
 		

@@ -95,7 +95,7 @@
 			// Invokes the start callback
 			startCallback();
 			
-			// Requests the sign-up permission
+			// Requests a sign-up permission
 			server.account.signUp.request(input).then(function(output) {
 				if (angular.isDefined(endCallback)) {
 					// Invokes the end callback
