@@ -69,6 +69,7 @@
 		 * server.
 		 */
 		_this.refreshState = function() {
+			// The refresh has started
 			stateRefreshing = true;
 			
 			// Gets the authentication state
@@ -77,7 +78,9 @@
 					// The user is not signed in
 					signedInUser = null;
 					
+					// The refresh has ended
 					stateRefreshing = false;
+					
 					return;
 				}
 				
@@ -89,6 +92,8 @@
 					lastName: 'Rodríguez',
 					gender: 'm'
 				};
+				
+				// The refresh has ended
 				stateRefreshing = false;
 			});
 		};

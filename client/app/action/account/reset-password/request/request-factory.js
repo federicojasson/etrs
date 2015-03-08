@@ -60,7 +60,7 @@
 		 * 
 		 * Receives TODO: comment
 		 */
-		ActionAccountResetPasswordRequest.prototype.execute = function(callback) {
+		ActionAccountResetPasswordRequest.prototype.execute = function(startCallback, endCallback) {
 			if (! inputValidator.isInputValid(this.input)) {
 				// The input is invalid
 				return;
@@ -74,11 +74,14 @@
 				}
 			};
 			
+			// Invokes the start callback
+			startCallback();
+			
 			// Requests the reset-password permission
 			server.account.resetPassword.request(input).then(function(output) {
-				if (angular.isDefined(callback)) {
-					// Invokes the callback
-					callback(output);
+				if (angular.isDefined(endCallback)) {
+					// Invokes the end callback
+					endCallback(output);
 				}
 			});
 		};

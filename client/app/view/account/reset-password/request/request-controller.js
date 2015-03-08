@@ -34,6 +34,11 @@
 		var _this = this;
 		
 		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
+		
+		/**
 		 * Returns the URL of the template.
 		 */
 		_this.getTemplateUrl = function() {
@@ -51,13 +56,16 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
 		
 		/**
 		 * TODO: comment
 		 */
-		function checkRequestResetPasswordPermissionOutput(output) {
+		function checkOutput(output) {
+			// Unlocks the view
+			ready = true;
+			
 			if (output.authenticated) {
 				// The user has been authenticated
 				// Shows an information dialog
@@ -97,7 +105,15 @@
 			
 			// Includes the necessary resources
 			$scope.actions = actions;
-			$scope.checkRequestResetPasswordPermissionOutput = checkRequestResetPasswordPermissionOutput;
+			$scope.checkOutput = checkOutput;
+			$scope.lock = lock;
+		}
+		
+		/**
+		 * Locks the view.
+		 */
+		function lock() {
+			ready = false;
 		}
 		
 		// ---------------------------------------------------------------------

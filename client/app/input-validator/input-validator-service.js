@@ -33,6 +33,7 @@
 		 * Receives the input.
 		 */
 		_this.isInputValid = function(input) {
+			// Initializes a flag to indicate whether the input is valid
 			var valid = true;
 			
 			// Determines whether the input is valid

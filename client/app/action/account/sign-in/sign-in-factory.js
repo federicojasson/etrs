@@ -61,7 +61,7 @@
 		 * 
 		 * Receives TODO: comment
 		 */
-		ActionAccountSignIn.prototype.execute = function(callback) {
+		ActionAccountSignIn.prototype.execute = function(startCallback, endCallback) {
 			if (! inputValidator.isInputValid(this.input)) {
 				// The input is invalid
 				return;
@@ -75,6 +75,9 @@
 				}
 			};
 			
+			// Invokes the start callback
+			startCallback();
+			
 			// Signs in the user
 			server.account.signIn(input).then(function(output) {
 				if (output.authenticated) {
@@ -83,9 +86,9 @@
 					authentication.refreshState();
 				}
 				
-				if (angular.isDefined(callback)) {
-					// Invokes the callback
-					callback(output);
+				if (angular.isDefined(endCallback)) {
+					// Invokes the end callback
+					endCallback(output);
 				}
 			});
 		};
