@@ -64,6 +64,7 @@
 			
 			// Defines the parameters of the dialog
 			var parameters = {
+				backdrop: 'static',
 				controller: 'DialogController',
 				controllerAs: 'dialog',
 				templateUrl: 'app/dialog/dialog.html'

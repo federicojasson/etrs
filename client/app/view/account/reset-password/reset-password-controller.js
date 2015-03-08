@@ -21,22 +21,24 @@
 (function() {
 	angular.module('app.view.account.resetPassword').controller('ViewAccountResetPasswordController', [
 		'$scope',
+		'$stateParams',
 		'ActionAccountResetPassword',
 		'dialog',
 		'router',
+		'server',
 		ViewAccountResetPasswordController
 	]);
 	
 	/**
 	 * Represents the account.resetPassword view.
 	 */
-	function ViewAccountResetPasswordController($scope, ActionAccountResetPassword, dialog, router) {
+	function ViewAccountResetPasswordController($scope, $stateParams, ActionAccountResetPassword, dialog, router, server) {
 		var _this = this;
 		
 		/**
 		 * Indicates whether the view is ready.
 		 */
-		var ready = true;
+		var ready = false;
 		
 		/**
 		 * Returns the URL of the template.
@@ -91,12 +93,31 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO: authenticate permission
+			// Defines the credentials
+			var credentials = {
+				id: $stateParams.id,
+				password: $stateParams.password
+			};
+			
+			// TODO: clean
+			server.account.resetPassword.authenticate({
+				credentials: credentials
+			}).then(function(output) {
+				if (output.authenticated) {
+					// The reset-password permission has been authenticated
+					// Unlocks the view
+					ready = true;
+				} else {
+					// The reset-password permission has not been authenticated
+					// Redirects the user to the home route
+					router.redirect('/');
+				}
+			});
 			
 			// Defines the actions to include
 			var actions = {
 				account: {
-					resetPassword: new ActionAccountResetPassword() // TODO: send id and password of permission
+					resetPassword: new ActionAccountResetPassword(credentials)
 				}
 			};
 			
