@@ -20,6 +20,8 @@
 
 (function() {
 	angular.module('app.action.account.resetPassword.request').factory('ActionAccountResetPasswordRequest', [
+		'inputValidator',
+		'InputModel',
 		'server',
 		ActionAccountResetPasswordRequestFactory
 	]);
@@ -27,36 +29,57 @@
 	/**
 	 * Defines the ActionAccountResetPasswordRequest class.
 	 */
-	function ActionAccountResetPasswordRequestFactory(server) {
+	function ActionAccountResetPasswordRequestFactory(inputValidator, InputModel, server) {
 		/**
 		 * The input.
 		 */
-		ActionAccountResetPasswordRequest.prototype.input = {
-			credentials: {
-				id: '',
-				emailAddress: ''
-			}
-		};
+		ActionAccountResetPasswordRequest.prototype.input;
 		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ActionAccountResetPasswordRequest() {}
+		function ActionAccountResetPasswordRequest() {
+			// Initializes the input
+			this.input = {
+				credentials: {
+					id: new InputModel(function() {
+						// TODO: implement
+						return true;
+					}),
+					
+					emailAddress: new InputModel(function() {
+						// TODO: implement
+						return true;
+					})
+				}
+			};
+		}
 		
 		/**
 		 * Executes the action.
+		 * 
+		 * Receives TODO: comment
 		 */
-		ActionAccountResetPasswordRequest.prototype.execute = function() {
-			// TODO: input validation
+		ActionAccountResetPasswordRequest.prototype.execute = function(callback) {
+			if (! inputValidator.isInputValid(this.input)) {
+				// The input is invalid
+				return;
+			}
 			
-			// Requests a reset-password permission
-			server.account.resetPassword.request(this.input).then(function(output) {
-				if (output.authenticated) {
-					// The user has been authenticated
-					// TODO: do something if the user is authenticated (maybe show dialog?)
+			// Defines the input to be sent to the server
+			var input = {
+				credentials: {
+					id: this.input.credentials.id.value,
+					emailAddress: this.input.credentials.emailAddress.value
 				}
-				
-				// TODO: do something if the user is not authenticated
+			};
+			
+			// Requests the reset-password permission
+			server.account.resetPassword.request(input).then(function(output) {
+				if (angular.isDefined(callback)) {
+					// Invokes the callback
+					callback(output);
+				}
 			});
 		};
 		

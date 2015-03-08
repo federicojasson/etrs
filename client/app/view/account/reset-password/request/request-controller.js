@@ -22,13 +22,15 @@
 	angular.module('app.view.account.resetPassword.request').controller('ViewAccountResetPasswordRequestController', [
 		'$scope',
 		'ActionAccountResetPasswordRequest',
+		'dialog',
+		'router',
 		ViewAccountResetPasswordRequestController
 	]);
 	
 	/**
 	 * Represents the account.resetPassword.request view.
 	 */
-	function ViewAccountResetPasswordRequestController($scope, ActionAccountResetPasswordRequest) {
+	function ViewAccountResetPasswordRequestController($scope, ActionAccountResetPasswordRequest, dialog, router) {
 		var _this = this;
 		
 		/**
@@ -42,7 +44,7 @@
 		 * Returns the title to be shown on the site when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return ''; // TODO: define title
+			return 'Restablecer contraseña';
 		};
 		
 		/**
@@ -51,6 +53,34 @@
 		_this.isReady = function() {
 			return true;
 		};
+		
+		/**
+		 * TODO: comment
+		 */
+		function checkRequestResetPasswordPermissionOutput(output) {
+			if (output.authenticated) {
+				// The user has been authenticated
+				// Shows an information dialog
+				dialog.showInformationDialog(
+					'Solicitud aceptada',
+					'Se ha enviado un correo electrónico a su casilla.\n' +
+					'Para continuar con el proceso, siga los pasos indicados en el mismo.',
+					function() {
+						// Redirects the user to the home route
+						router.redirect('/');
+					}
+				);
+			} else {
+				// The user has not been authenticated
+				// Shows an information dialog
+				dialog.showInformationDialog(
+					'Error de autenticación',
+					'No fue posible autenticarlo.\n' +
+					'Reingrese su nombre de usuario y su dirección de correo electrónico.\n' +
+					'Asegúrese de que la dirección proporcionada corresponda a la utilizada en ETRS.'
+				);
+			}
+		}
 		
 		/**
 		 * Performs initialization tasks.
@@ -67,6 +97,7 @@
 			
 			// Includes the necessary resources
 			$scope.actions = actions;
+			$scope.checkRequestResetPasswordPermissionOutput = checkRequestResetPasswordPermissionOutput;
 		}
 		
 		// ---------------------------------------------------------------------
