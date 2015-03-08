@@ -70,9 +70,9 @@
 				// The user has been authenticated
 				// Shows an information dialog
 				dialog.showInformationDialog(
-					'Solicitud aceptada',
+					'Correo electrónico enviado',
 					'Se ha enviado un correo electrónico a su casilla.\n' +
-					'Para continuar con el proceso, siga los pasos indicados en el mismo.',
+					'Para restablecer su contraseña, siga los pasos indicados en el mismo.',
 					function() {
 						// Redirects the user to the home route
 						router.redirect('/');
@@ -82,10 +82,10 @@
 				// The user has not been authenticated
 				// Shows an information dialog
 				dialog.showInformationDialog(
-					'Error de autenticación',
-					'No fue posible autenticarlo.\n' +
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
 					'Reingrese su nombre de usuario y su dirección de correo electrónico.\n' +
-					'Asegúrese de que la dirección proporcionada corresponda a la utilizada en ETRS.'
+					'Asegúrese de que la dirección proporcionada corresponda a la utilizada en el sistema.'
 				);
 			}
 		}

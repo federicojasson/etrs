@@ -4,19 +4,10 @@
 		novalidate
 	>
 		<fieldset>
-			<legend>Enviar invitación</legend>
+			<legend>Invitación</legend>
 			
-			<div
-				ng-class="{ 'has-error': ! actions.account.signUp.request.input.userRole.valid }"
-				class="form-group"
-			>
-				<select class="form-control input-lg">
-					<option value="">Rol de usuario</option>
-					<option disabled>──────────────</option>
-					<option value="ad">Administrador</option>
-					<option value="dr">Doctor</option>
-					<option value="op">Operador</option>
-				</select>
+			<div class="form-group">
+				Ingrese el nombre, el apellido y el correo electrónico del receptor de la invitación:
 			</div>
 			
 			<div
@@ -47,6 +38,31 @@
 					placeholder="Dirección de correo electrónico"
 					class="form-control input-lg"
 				>
+			</div>
+			
+			<div class="form-group">
+				Indique el rol que el usuario cumplirá en el sistema:
+			</div>
+			
+			<div
+				ng-class="{ 'has-error': ! actions.account.signUp.request.input.userRole.valid }"
+				class="form-group"
+			>
+				<select class="form-control input-lg">
+					<option value="">Rol de usuario</option>
+					<option disabled>──────────────</option>
+					<option value="ad">Administrador</option>
+					<option value="dr">Doctor</option>
+					<option value="op">Operador</option>
+				</select>
+			</div>
+		</fieldset>
+			
+		<fieldset>
+			<legend>Credenciales</legend>
+			
+			<div class="form-group">
+				Ingrese su contraseña:
 			</div>
 			
 			<div

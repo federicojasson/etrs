@@ -69,8 +69,8 @@
 				// The user has not been authenticated
 				// Shows an information dialog
 				dialog.showInformationDialog(
-					'Error de autenticación',
-					'No fue posible autenticarlo.\n' +
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
 					'Reingrese su nombre de usuario y su contraseña.'
 				);
 			}

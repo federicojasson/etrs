@@ -71,7 +71,7 @@
 				// Shows an information dialog
 				dialog.showInformationDialog(
 					'Invitación enviada',
-					'Se ha enviado una invitación a la dirección de correo electrónico indicada.',
+					'Se ha enviado una invitación a la casilla de correo electrónico indicada.',
 					function() {
 						// Redirects the user to the home route
 						router.redirect('/');
@@ -81,8 +81,8 @@
 				// The user has not been authenticated
 				// Shows an information dialog
 				dialog.showInformationDialog(
-					'Error de autenticación',
-					'No fue posible autenticarlo.\n' +
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
 					'Reingrese su contraseña.'
 				);
 			}
