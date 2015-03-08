@@ -22,14 +22,21 @@
 	angular.module('app.view.account.resetPassword').controller('ViewAccountResetPasswordController', [
 		'$scope',
 		'ActionAccountResetPassword',
+		'dialog',
+		'router',
 		ViewAccountResetPasswordController
 	]);
 	
 	/**
 	 * Represents the account.resetPassword view.
 	 */
-	function ViewAccountResetPasswordController($scope, ActionAccountResetPassword) {
+	function ViewAccountResetPasswordController($scope, ActionAccountResetPassword, dialog, router) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the URL of the template.
@@ -49,8 +56,36 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * TODO: comment
+		 */
+		function checkOutput(output) {
+			// Unlocks the view
+			ready = true;
+			
+			if (output.authenticated) {
+				// The reset-password permission has been authenticated
+				// Shows an information dialog
+				dialog.showInformationDialog(
+					'Contraseña restablecida',
+					'Su contraseña ha sido modificada.',
+					function() {
+						// Redirects the user to the home route
+						router.redirect('/');
+					}
+				);
+			} else {
+				// The reset-password permission has not been authenticated
+				// Shows an information dialog
+				dialog.showInformationDialog(
+					'Credenciales rechazadas',
+					'El permiso para restablecer su contraseña ha expirado.'
+				);
+			}
+		}
 		
 		/**
 		 * Performs initialization tasks.
@@ -67,6 +102,15 @@
 			
 			// Includes the necessary resources
 			$scope.actions = actions;
+			$scope.checkOutput = checkOutput;
+			$scope.lock = lock;
+		}
+		
+		/**
+		 * Locks the view.
+		 */
+		function lock() {
+			ready = false;
 		}
 		
 		// ---------------------------------------------------------------------

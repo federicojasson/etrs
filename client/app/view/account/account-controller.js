@@ -38,7 +38,7 @@
 		 * Returns the title to be shown on the site when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Cuenta de usuario';
+			return 'Cuenta de usuario'; // TODO: doubt: use username?
 		};
 		
 		/**
