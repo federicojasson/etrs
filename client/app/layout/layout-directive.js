@@ -37,8 +37,8 @@
 			return {
 				restrict: 'E',
 				scope: {},
-				templateUrl: 'app/layout/layout.html',
-				link: registerLayoutListener
+				link: registerLayoutListener,
+				templateUrl: 'app/layout/layout.html'
 			};
 		}
 		

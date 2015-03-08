@@ -1,0 +1,21 @@
+<div class="modal-header">
+	<button
+		ng-click="$close()"
+		class="close"
+	>
+		&times;
+	</button>
+	
+	<div class="dialog-title-text">{{ dialog.getTitle() }}</div>
+</div>
+
+<div class="modal-body">{{ dialog.getMessage() }}</div>
+
+<div class="modal-footer">
+	<button
+		ng-click="$close()"
+		class="btn btn-info"
+	>
+		Aceptar
+	</button>
+</div>

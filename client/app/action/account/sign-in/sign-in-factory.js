@@ -58,8 +58,10 @@
 		
 		/**
 		 * Executes the action.
+		 * 
+		 * Receives TODO: comment
 		 */
-		ActionAccountSignIn.prototype.execute = function() {
+		ActionAccountSignIn.prototype.execute = function(callback) {
 			if (! inputValidator.isInputValid(this.input)) {
 				// The input is invalid
 				return;
@@ -81,7 +83,10 @@
 					authentication.refreshState();
 				}
 				
-				// TODO: do something if the user is not authenticated
+				if (angular.isDefined(callback)) {
+					// Invokes the callback
+					callback(output);
+				}
 			});
 		};
 		

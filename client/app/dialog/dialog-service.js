@@ -19,57 +19,63 @@
 'use strict';
 
 (function() {
-	angular.module('app.inputValidator.inputModel').factory('InputModel', InputModelFactory);
+	angular.module('app.dialog').service('dialog', [
+		'$modal',
+		dialogService
+	]);
 	
 	/**
-	 * Defines the InputModel class.
+	 * TODO: comment
 	 */
-	function InputModelFactory() {
-		/**
-		 * The message that is shown when the validation fails.
-		 */
-		InputModel.prototype.message;
+	function dialogService($modal) {
+		var _this = this;
 		
 		/**
-		 * Indicates whether the input is valid.
+		 * TODO: comment
 		 */
-		InputModel.prototype.valid;
+		var message = '';
 		
 		/**
-		 * The validator.
+		 * TODO: comment
 		 */
-		InputModel.prototype.validator;
+		var title = '';
 		
 		/**
-		 * The value.
+		 * TODO: comment
 		 */
-		InputModel.prototype.value;
-		
-		/**
-		 * Initializes an instance of the class.
-		 * 
-		 * Receives the validator.
-		 */
-		function InputModel(validator) {
-			// Sets the validator
-			this.validator = validator;
-			
-			// Sets default values
-			this.message = '';
-			this.valid = true;
-			this.value = '';
-		}
-		
-		/**
-		 * Validates the input.
-		 */
-		InputModel.prototype.validate = function() {
-			this.valid = this.validator();
+		_this.getMessage = function() {
+			return message;
 		};
 		
-		// ---------------------------------------------------------------------
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return title;
+		};
 		
-		// Returns the class
-		return InputModel;
+		/**
+		 * TODO: comment
+		 */
+		_this.showInformationDialog = function(newTitle, newMessage, callback) {
+			// Sets the title and the message
+			title = newTitle;
+			message = newMessage;
+			
+			// Defines the parameters of the dialog
+			var parameters = {
+				controller: 'DialogController',
+				controllerAs: 'dialog',
+				templateUrl: 'app/dialog/dialog.html'
+			};
+			
+			// Shows the dialog
+			var promise = $modal.open(parameters).result;
+			
+			if (angular.isDefined(callback)) {
+				// Registers the callback
+				promise.then(callback, callback);
+			}
+		};
 	}
 })();

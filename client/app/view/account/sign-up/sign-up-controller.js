@@ -58,12 +58,15 @@
 		function initialize() {
 			// TODO: authenticate permission
 			
-			// Includes the necessary resources
-			$scope.action = {
+			// Defines the actions to include
+			var actions = {
 				account: {
 					signUp: new ActionAccountSignUp() // TODO: send id and password of permission
 				}
 			};
+			
+			// Includes the necessary resources
+			$scope.actions = actions;
 		}
 		
 		// ---------------------------------------------------------------------

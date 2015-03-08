@@ -58,13 +58,16 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary resources TODO: reorder?
-			$scope.authentication = $controller('AuthenticationController');
-			$scope.action = {
+			// Defines the actions to include
+			var actions = {
 				account: {
 					signOut: new ActionAccountSignOut()
 				}
 			};
+			
+			// Includes the necessary resources
+			$scope.actions = actions;
+			$scope.authentication = $controller('AuthenticationController');
 		}
 		
 		// ---------------------------------------------------------------------

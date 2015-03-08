@@ -131,12 +131,9 @@
 			url = 'server' + url;
 
 			// Sends the request to the server
-			var deferredTask = $resource(url).save(input);
-
-			// Gets the promise of the deferred task
-			var promise = deferredTask.$promise;
+			var promise = $resource(url).save(input).$promise;
 			
-			// Defines an error callback
+			// Registers an error callback
 			promise.catch(function(response) {
 				// The server responded with an error
 				error.report(response);

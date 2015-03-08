@@ -56,14 +56,17 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary resources
-			$scope.action = {
+			// Defines the actions to include
+			var actions = {
 				account: {
 					signUp: {
 						request: new ActionAccountSignUpRequest()
 					}
 				}
 			};
+			
+			// Includes the necessary resources
+			$scope.actions = actions;
 		}
 		
 		// ---------------------------------------------------------------------

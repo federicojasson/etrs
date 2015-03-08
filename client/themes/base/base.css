@@ -30,6 +30,8 @@ pre {
 	text-align: center;
 }
 
+.dialog-title-text {}
+
 .email-image {}
 
 .footer-logo-image {
@@ -59,7 +61,6 @@ pre {
 
 .loading-text {
 	text-align: center;
-	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-webkit-touch-callout: none;
@@ -69,13 +70,40 @@ pre {
 
 .locked-image {}
 
+.modal-body {
+	white-space: pre-line;
+	word-break: normal;
+}
+
+.modal-content {
+	position: absolute;
+	top: 50%;
+	-moz-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	width: 100%;
+}
+
+.modal-dialog {
+	bottom: 0px;
+	left: 0px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+
+.modal-footer {
+	margin-top: 0px;
+	padding: 15px;
+}
+
 .navbar-logo-image {}
 
 .navbar-logo-text {
 	float: left;
 	line-height: 50px;
 	padding-left: 12px;
-	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-webkit-touch-callout: none;

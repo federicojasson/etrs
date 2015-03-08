@@ -19,22 +19,29 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngLocale',
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.action',
-		'app.authentication',
-		'app.dialog',
-		'app.error',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigation',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.dialog').controller('DialogController', [
+		'dialog',
+		DialogController
 	]);
+	
+	/**
+	 * TODO: comment
+	 */
+	function DialogController(dialog) {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getMessage = function() {
+			return dialog.getMessage();
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getTitle = function() {
+			return dialog.getTitle();
+		};
+	}
 })();

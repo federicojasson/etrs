@@ -22,13 +22,14 @@
 	angular.module('app.view.account.signIn').controller('ViewAccountSignInController', [
 		'$scope',
 		'ActionAccountSignIn',
+		'dialog',
 		ViewAccountSignInController
 	]);
 	
 	/**
 	 * Represents the account.signIn view.
 	 */
-	function ViewAccountSignInController($scope, ActionAccountSignIn) {
+	function ViewAccountSignInController($scope, ActionAccountSignIn, dialog) {
 		var _this = this;
 		
 		/**
@@ -53,15 +54,34 @@
 		};
 		
 		/**
+		 * TODO: comment
+		 */
+		function checkSignInOutput(output) {
+			if (! output.authenticated) {
+				// The user has not been authenticated
+				// Shows an information dialog
+				dialog.showInformationDialog(
+					'Error de autenticación',
+					'No fue posible autenticarlo.\n' +
+					'Reingrese su nombre de usuario y su contraseña.'
+				);
+			}
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary resources
-			$scope.action = {
+			// Defines the actions to include
+			var actions = {
 				account: {
 					signIn: new ActionAccountSignIn()
 				}
 			};
+			
+			// Includes the necessary resources
+			$scope.actions = actions;
+			$scope.checkSignInOutput = checkSignInOutput;
 		}
 		
 		// ---------------------------------------------------------------------

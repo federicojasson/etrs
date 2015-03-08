@@ -53,19 +53,33 @@ legend {
 	font-size: 1.6em;
 }
 
-.btn.text-uppercase {
+.btn {
 	font-size: 0.85em;
 	line-height: 18px;
+	text-transform: uppercase;
 }
 
-.btn-lg.text-uppercase {
+.btn-lg {
 	font-size: 0.95em;
 	line-height: 18px;
+	text-transform: uppercase;
+}
+
+.btn-link {
+	text-transform: none;
 }
 
 .copyright-text {
 	color: #aaaaaa;
 	font-size: 0.8em;
+}
+
+.dialog-title-text {
+	color: #888888;
+	font-family: "Fjalla One", sans-serif;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .email-image {
