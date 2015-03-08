@@ -61,11 +61,10 @@ legend {
 
 .btn-lg {
 	font-size: 0.95em;
-	line-height: 18px;
-	text-transform: uppercase;
 }
 
 .btn-link {
+	font-size: 0.95em;
 	text-transform: none;
 }
 
