@@ -55,13 +55,13 @@
 					$scope: scope
 				});
 				
-				// Registers a listener for the controller of the current view
+				// Registers a listener for the state of the current view
 				scope.$watch(controller.getTitle, function() {
 					// Updates the title
 					updateTitle(controller);
 				});
 				
-				// Registers a listener for the controller of the current view
+				// Registers a listener for the state of the current view
 				scope.$watch(controller.isReady, function() {
 					// Updates the title
 					updateTitle(controller);

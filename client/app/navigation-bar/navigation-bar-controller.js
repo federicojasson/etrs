@@ -19,47 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app.navigationBar').config([
-		'navigationBarProvider',
-		config
+	angular.module('app.navigationBar').controller('NavigationBarController', [
+		'navigationBar',
+		NavigationBarController
 	]);
 	
 	/**
-	 * Configures the module.
+	 * Provides means to use the navigation-bar service.
 	 */
-	function config(navigationBarProvider) {
-		/**
-		 * Returns the menu items.
-		 */
-		function getMenuItems() {
-			return {};
-		}
+	function NavigationBarController(navigationBar) {
+		var _this = this;
 		
 		/**
-		 * Returns the menus.
+		 * TODO: comment
 		 */
-		function getMenus() {
-			// Gets the menu items
-			var menuItems = getMenuItems();
-			
-			return {
-				ad: [],
-				dr: [],
-				op: []
-			};
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Gets the menus
-		var menus = getMenus();
-		
-		// Registers the menus
-		for (var userRole in menus) { if (! menus.hasOwnProperty(userRole)) continue;
-			var userRoleMenus = menus[userRole];
-			for (var i = 0; i < userRoleMenus.length; i++) {
-				navigationBarProvider.registerMenu(userRoleMenus[i], userRole);
-			}
-		}
+		_this.getMenus = function() {
+			return navigationBar.getMenus();
+		};
 	}
 })();

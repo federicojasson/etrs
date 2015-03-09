@@ -25,6 +25,22 @@
 	 * Includes the navigation bar.
 	 */
 	function navigationBarDirective() {
-		// TODO: implement directive
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {},
+				controller: 'NavigationBarController',
+				controllerAs: 'navigationBar',
+				templateUrl: 'app/navigation-bar/navigation-bar.html'
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
 	}
 })();

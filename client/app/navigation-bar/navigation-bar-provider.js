@@ -18,6 +18,7 @@
 
 'use strict';
 
+// TODO: check all the file
 (function() {
 	angular.module('app.navigationBar').provider('navigationBar', navigationBarProvider);
 	
@@ -28,26 +29,67 @@
 		var _this = this;
 		
 		/**
-		 * Initializes the navigation-bar service.
+		 * The registered menus.
 		 */
-		_this.$get = function() {
-			// Initializes the navigation-bar service
-			var navigationBar = new navigationBarService();
-
-			// TODO: implement function
-
-			return navigationBar;
+		var menus = {
+			ad: [],
+			dr: [],
+			op: []
 		};
 		
-		// TODO: implement provider
+		/**
+		 * Initializes the navigation-bar service.
+		 */
+		_this.$get = [
+			'authentication',
+			function(authentication) {
+				// Initializes the navigation-bar service
+				var navigationBar = new navigationBarService(authentication);
+
+				// TODO: comment
+				navigationBar.setMenus(menus);
+
+				return navigationBar;
+			}
+		];
+		
+		/**
+		 * Registers a menu.
+		 * 
+		 * Receives TODO: comment
+		 */
+		_this.registerMenu = function(menu, userRole) {
+			menus[userRole].push(menu);
+		};
 	}
 	
 	/**
 	 * Manages the navigation-bar.
 	 */
-	function navigationBarService() {
+	function navigationBarService(authentication) {
 		var _this = this;
 		
-		// TODO: implement service
+		/**
+		 * TODO: comment
+		 */
+		var menus;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getMenus = function() {
+			// Gets the signed-in user's role
+			var userRole = authentication.getSignedInUser().role;
+			
+			// Returns the menus
+			return menus[userRole];
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.setMenus = function(newMenus) {
+			menus = newMenus;
+		};
 	}
 })();
