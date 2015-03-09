@@ -19,7 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.dialog', [
-		'app.dialog.dialog'
-	]);
+	angular.module('app.dialog', []);
 })();

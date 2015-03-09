@@ -28,6 +28,13 @@
 		var _this = this;
 		
 		/**
+		 * The descriptions of the errors.
+		 */
+		var descriptions = {
+			// TODO: write error descriptions
+		};
+		
+		/**
 		 * The occurred error.
 		 */
 		var error = null;
@@ -46,6 +53,27 @@
 			return error !== null;
 		};
 		
-		// TODO: implement service
+		/**
+		 * Reports an error.
+		 * 
+		 * Receives the response of the server.
+		 */
+		_this.report = function(response) {
+			// Builds the message
+			var message = 'Error ' + response.status;
+			
+			// Gets the code sent by the server
+			var code = response.data.code;
+			
+			// Builds the details
+			var details = '';
+			details += 'Código: ' + code + '\n';
+			details += '\n';
+			details += 'Descripción:\n';
+			details += descriptions[code];
+			
+			// Initializes the error
+			error = new Error(message, details);
+		};
 	}
 })();

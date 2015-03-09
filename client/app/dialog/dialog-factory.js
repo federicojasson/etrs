@@ -19,42 +19,41 @@
 'use strict';
 
 (function() {
-	angular.module('app.title').directive('title', [
-		'title',
-		titleDirective
-	]);
+	angular.module('app.dialog').factory('Dialog', DialogFactory);
 	
 	/**
-	 * Shows the current title.
+	 * Defines the Dialog class.
 	 */
-	function titleDirective(title) {
+	function DialogFactory() {
 		/**
-		 * Returns the settings.
+		 * The message.
 		 */
-		function getSettings() {
-			return {
-				restrict: 'E',
-				scope: {},
-				link: onLink
-			};
-		}
+		Dialog.prototype.message;
 		
 		/**
-		 * Invoked after the linking phase.
-		 * 
-		 * Receives the scope of the directive and the element matched by it.
+		 * The title.
 		 */
-		function onLink(scope, element) {
-			// Registers a listener for the title
-			scope.$watch(title.get, function(title) {
-				// Shows the current title
-				element.text(title);
-			});
+		Dialog.prototype.title;
+		
+		/**
+		 * The type.
+		 */
+		Dialog.prototype.type;
+		
+		/**
+		 * Initializes an instance of the class.
+		 * 
+		 * Receives the type, the title and the message.
+		 */
+		function Dialog(type, title, message) {
+			this.type = type;
+			this.title = title;
+			this.message = message;
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Returns the settings
-		return getSettings();
+		// Returns the class
+		return Dialog;
 	}
 })();

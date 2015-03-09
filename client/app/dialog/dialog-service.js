@@ -44,17 +44,40 @@
 		};
 		
 		/**
+		 * Opens a confirmation dialog.
+		 * 
+		 * Receives a title, a message and, optionally, a success callback to be
+		 * invoked when the dialog is closed and an error callback to be invoked
+		 * when the dialog is dismissed.
+		 */
+		_this.openConfirmation = function(title, message, successCallback, errorCallback) {
+			open('confirmation', title, message, successCallback, errorCallback);
+		};
+		
+		/**
 		 * Opens an information dialog.
 		 * 
 		 * Receives a title, a message and, optionally, a callback to be invoked
-		 * when the dialog is closed.
+		 * when the dialog is closed or dismissed.
 		 */
 		_this.openInformation = function(title, message, callback) {
-			// Initializes the callback if is undefined
-			callback = (angular.isDefined(callback)) ? callback : function() {};
+			open('information', title, message, callback, callback);
+		};
+		
+		/**
+		 * Opens a dialog.
+		 * 
+		 * Receives a title, a message and, optionally, a success callback to be
+		 * invoked when the dialog is closed and an error callback to be invoked
+		 * when the dialog is dismissed.
+		 */
+		function open(type, title, message, successCallback, errorCallback) {
+			// Initializes the callbacks if are undefined
+			successCallback = (angular.isDefined(successCallback)) ? successCallback : function() {};
+			errorCallback = (angular.isDefined(errorCallback)) ? errorCallback : function() {};
 			
 			// Initializes the dialog
-			dialog = new Dialog(title, message);
+			dialog = new Dialog(type, title, message);
 			
 			// Defines the parameters for the dialog
 			var parameters = {
@@ -65,7 +88,7 @@
 			};
 			
 			// Opens the dialog
-			$modal.open(parameters).result.then(callback, callback);
-		};
+			$modal.open(parameters).result.then(successCallback, errorCallback);
+		}
 	}
 })();

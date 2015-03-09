@@ -19,5 +19,35 @@
 'use strict';
 
 (function() {
-	angular.module('app.dialog.dialog', []);
+	angular.module('app.error').factory('Error', ErrorFactory);
+	
+	/**
+	 * Defines the Error class.
+	 */
+	function ErrorFactory() {
+		/**
+		 * The details.
+		 */
+		Error.prototype.details;
+		
+		/**
+		 * The message.
+		 */
+		Error.prototype.message;
+		
+		/**
+		 * Initializes an instance of the class.
+		 * 
+		 * Receives the message and the details.
+		 */
+		function Error(message, details) {
+			this.message = message;
+			this.details = details;
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Returns the class
+		return Error;
+	}
 })();
