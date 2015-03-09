@@ -37,6 +37,7 @@ class Delete extends \App\Service\InternalService {
 	 */
 	protected function isInputValid() {
 		// TODO: implement
+		return true;
 	}
 	
 }
