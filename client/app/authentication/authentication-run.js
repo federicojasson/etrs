@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Performs module-initialization tasks.
+	 * Performs initialization tasks.
 	 */
 	function run(authentication) {
 		// Refreshes the authentication state

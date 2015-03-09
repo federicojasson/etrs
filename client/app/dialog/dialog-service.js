@@ -21,48 +21,42 @@
 (function() {
 	angular.module('app.dialog').service('dialog', [
 		'$modal',
+		'Dialog',
 		dialogService
 	]);
 	
 	/**
-	 * TODO: comment
+	 * Manages the dialogs.
 	 */
-	function dialogService($modal) {
+	function dialogService($modal, Dialog) {
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * The current dialog.
 		 */
-		var message = '';
+		var dialog = null;
 		
 		/**
-		 * TODO: comment
+		 * Returns the current dialog.
 		 */
-		var title = '';
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.getMessage = function() {
-			return message;
+		_this.get = function() {
+			return dialog;
 		};
 		
 		/**
-		 * TODO: comment
+		 * Opens an information dialog.
+		 * 
+		 * Receives a title, a message and, optionally, a callback to be invoked
+		 * when the dialog is closed.
 		 */
-		_this.getTitle = function() {
-			return title;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.showInformationDialog = function(newTitle, newMessage, callback) {
-			// Sets the title and the message
-			title = newTitle;
-			message = newMessage;
+		_this.openInformation = function(title, message, callback) {
+			// Initializes the callback if is undefined
+			callback = (angular.isDefined(callback)) ? callback : function() {};
 			
-			// Defines the parameters of the dialog
+			// Initializes the dialog
+			dialog = new Dialog(title, message);
+			
+			// Defines the parameters for the dialog
 			var parameters = {
 				backdrop: 'static',
 				controller: 'DialogController',
@@ -70,13 +64,8 @@
 				templateUrl: 'app/dialog/dialog.html'
 			};
 			
-			// Shows the dialog
-			var promise = $modal.open(parameters).result;
-			
-			if (angular.isDefined(callback)) {
-				// Registers the callback
-				promise.then(callback, callback);
-			}
+			// Opens the dialog
+			$modal.open(parameters).result.then(callback, callback);
 		};
 	}
 })();

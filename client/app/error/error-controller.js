@@ -19,22 +19,14 @@
 'use strict';
 
 (function() {
-	angular.module('app.error').controller('ErrorController', [
-		'error',
-		ErrorController
-	]);
+	angular.module('app.error').controller('ErrorController', ErrorController);
 	
 	/**
-	 * Offers means to access the error state.
+	 * Provides means to use the error service.
 	 */
-	function ErrorController(error) {
+	function ErrorController() {
 		var _this = this;
 		
-		/**
-		 * Returns the error occurred.
-		 */
-		_this.get = function() {
-			return error.get();
-		};
+		// TODO: implement controller
 	}
 })();

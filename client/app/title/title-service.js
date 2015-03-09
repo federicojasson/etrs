@@ -22,43 +22,23 @@
 	angular.module('app.title').service('title', titleService);
 	
 	/**
-	 * Manages the title of the site.
+	 * Manages the title.
 	 */
 	function titleService() {
 		var _this = this;
 		
 		/**
-		 * The title of the site.
+		 * The current title.
 		 */
 		var title = '';
 		
 		/**
-		 * Returns the title of the site.
+		 * Returns the current title.
 		 */
 		_this.get = function() {
 			return title;
 		};
 		
-		/**
-		 * Sets the title of the site.
-		 * 
-		 * The function appends the acronym of the application at the end of the
-		 * title, so this must not be included.
-		 * 
-		 * Receives the title to be set.
-		 */
-		_this.set = function(newTitle) {
-			if (newTitle.length > 0) {
-				// The title is not empty
-				// Appends a dash
-				newTitle += ' - ';
-			}
-			
-			// Appends the acronym of the application
-			newTitle += 'ETRS';
-			
-			// Sets the title
-			title = newTitle;
-		};
+		// TODO: implement service
 	}
 })();

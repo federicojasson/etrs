@@ -19,7 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.inputValidator', [
-		'app.inputValidator.inputModel'
-	]);
+	angular.module('app.inputValidator', []);
 })();

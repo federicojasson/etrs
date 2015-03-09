@@ -27,16 +27,16 @@
 	]);
 	
 	/**
-	 * Performs module-initialization tasks.
+	 * Performs initialization tasks.
 	 */
 	function run($rootScope, authentication, view) {
-		// Listens for state transitions
+		// Registers a listener for state transitions
 		$rootScope.$on('$stateChangeSuccess', function() {
 			// Updates the view
 			view.update();
 		});
 		
-		// Listens for changes in the authentication state
+		// Registers a listener for the authentication state
 		$rootScope.$watch(authentication.isStateRefreshing, function() {
 			// Updates the view
 			view.update();

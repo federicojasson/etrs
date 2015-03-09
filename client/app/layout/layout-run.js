@@ -27,10 +27,10 @@
 	]);
 	
 	/**
-	 * Performs module-initialization tasks.
+	 * Performs initialization tasks.
 	 */
 	function run($rootScope, error, layout) {
-		// Listens for changes in the error state
+		// Registers a listener for errors
 		$rootScope.$watch(error.occurred, function() {
 			// Updates the layout
 			layout.update();

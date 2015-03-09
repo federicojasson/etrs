@@ -19,47 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.server').config([
-		'serverProvider',
-		config
-	]);
+	angular.module('app.server').config(config);
 	
 	/**
-	 * Applies module-related configurations.
+	 * Configures the module.
 	 */
-	function config(serverProvider) {
-		/**
-		 * Returns the services to be registered.
-		 */
-		function getServices() {
-			return [
-				'/account/reset-password',
-				'/account/reset-password/authenticate',
-				'/account/reset-password/request',
-				'/account/sign-in',
-				'/account/sign-out',
-				'/account/sign-up',
-				'/account/sign-up/authenticate',
-				'/account/sign-up/request',
-				'/authentication/get-state',
-				'/file/download',
-				'/file/upload',
-				'/medication/create',
-				'/medication/delete',
-				'/medication/edit',
-				'/medication/get',
-				'/medication/search'
-			];
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Gets the services to be registered
-		var services = getServices();
-		
-		// Registers the services
-		for (var i = 0; i < services.length; i++) {
-			serverProvider.registerService(services[i]);
-		}
+	function config() {
+		// TODO: implement config
 	}
 })();

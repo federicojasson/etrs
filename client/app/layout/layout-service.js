@@ -25,18 +25,18 @@
 	]);
 	
 	/**
-	 * Manages the layout.
+	 * Manages the layouts.
 	 */
 	function layoutService(error) {
 		var _this = this;
 		
 		/**
-		 * The layout.
+		 * The current layout.
 		 */
 		var layout = '';
 		
 		/**
-		 * Returns the layout.
+		 * Returns the current layout.
 		 */
 		_this.get = function() {
 			return layout;
@@ -48,10 +48,10 @@
 		_this.update = function() {
 			if (error.occurred()) {
 				// An error has occurred
-				layout = 'LayoutErrorController';
+				layout = 'ErrorLayoutController';
 			} else {
 				// No error has occurred
-				layout = 'LayoutSiteController';
+				layout = 'SiteLayoutController';
 			}
 		};
 	}

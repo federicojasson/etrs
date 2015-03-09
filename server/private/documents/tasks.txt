@@ -1,7 +1,8 @@
 - Doubt: remove associations when medication (or other entity) is deleted?
 - @Version: maintenance job to reset versions to 0
 
-- Check image names
+- Fix HTML5 API bug
+
 - Cambiar nombre de Action... a ...Action.
 - Cambiar nombre de View... a ...View.
 - Cambiar nombre de Layout... a ...Layout.

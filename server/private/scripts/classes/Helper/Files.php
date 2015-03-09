@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * Offers file-related functionalities.
+ * Provides file-related functionalities.
  * TODO: check class
  */
 class Files {

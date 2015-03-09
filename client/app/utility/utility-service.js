@@ -22,28 +22,11 @@
 	angular.module('app.utility').service('utility', utilityService);
 	
 	/**
-	 * Offers utility functions.
+	 * Provides utility functions.
 	 */
 	function utilityService() {
 		var _this = this;
 		
-		/**
-		 * Converts a string from spinal-case to camelCase.
-		 * 
-		 * Receives the string.
-		 */
-		_this.toCamelCase = function(string) {
-			// Replaces the dashes with whitespaces
-			string = string.replace(/-/g, ' ');
-
-			// Converts the first character of each word, except the first one,
-			// to uppercase
-			string = string.replace(/ [a-z]/g, function(character) {
-				return character.toUpperCase();
-			});
-			
-			// Removes the whitespaces
-			return string.replace(/ /g, '');
-		};
+		// TODO: implement service
 	}
 })();

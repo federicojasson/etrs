@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Offers means to access the authentication state.
+	 * Provides means to use the authentication service.
 	 */
 	function AuthenticationController(authentication) {
 		var _this = this;

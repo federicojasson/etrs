@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * Offers access-related functionalities.
+ * Provides access-related functionalities.
  */
 class Access {
 	

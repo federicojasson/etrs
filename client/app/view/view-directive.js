@@ -19,69 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.view').directive('view', [
-		'$controller',
-		'title',
-		'view',
-		viewDirective
-	]);
+	angular.module('app.view').directive('view', viewDirective);
 	
 	/**
-	 * Includes the view.
+	 * Includes the current view.
 	 */
-	function viewDirective($controller, title, view) {
-		/**
-		 * Returns the settings of the directive.
-		 */
-		function getSettings() {
-			return {
-				restrict: 'E',
-				scope: {},
-				link: registerViewListener,
-				templateUrl: 'app/view/view.html'
-			};
-		}
-		
-		/**
-		 * Registers a listener for the view.
-		 * 
-		 * Receives the scope of the directive.
-		 */
-		function registerViewListener(scope) {
-			// Listens for changes in the view
-			scope.$watch(view.get, function(view) {
-				// Defines an object to share the scope with the new view
-				var locals = {
-					$scope: scope
-				};
-				
-				// TODO: comment and order (use one function)
-				var controller = $controller(view, locals);
-				
-				scope.$watch(controller.getTitle, function() {
-					if (controller.isReady()) {
-						title.set(controller.getTitle());
-					} else {
-						title.set('Cargando...');
-					}
-				});
-				
-				scope.$watch(controller.isReady, function() {
-					if (controller.isReady()) {
-						title.set(controller.getTitle());
-					} else {
-						title.set('Cargando...');
-					}
-				});
-				
-				// Includes the new view
-				scope.view = controller;
-			});
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Returns the settings of the directive
-		return getSettings();
+	function viewDirective() {
+		// TODO: implement directive
 	}
 })();

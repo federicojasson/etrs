@@ -19,60 +19,14 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.site').controller('LayoutSiteController', [
-		'$controller',
-		'$scope',
-		'ActionAccountSignOut',
-		'authentication',
-		LayoutSiteController
-	]);
+	angular.module('app.layout.site').controller('SiteLayoutController', SiteLayoutController);
 	
 	/**
 	 * Represents the site layout.
 	 */
-	function LayoutSiteController($controller, $scope, ActionAccountSignOut, authentication) {
+	function SiteLayoutController() {
 		var _this = this;
 		
-		/**
-		 * Returns the URL of the template.
-		 */
-		_this.getTemplateUrl = function() {
-			return 'app/layout/site/site.html';
-		};
-		
-		/**
-		 * Returns the title to be shown on the site when the layout is ready.
-		 */
-		_this.getTitle = function() {
-			return '';
-		};
-		
-		/**
-		 * Determines whether the layout is ready.
-		 */
-		_this.isReady = function() {
-			return ! authentication.isStateRefreshing();
-		};
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Defines the actions to include
-			var actions = {
-				account: {
-					signOut: new ActionAccountSignOut()
-				}
-			};
-			
-			// Includes the necessary resources
-			$scope.actions = actions;
-			$scope.authentication = $controller('AuthenticationController');
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Initializes the layout
-		initialize();
+		// TODO: implement controller
 	}
 })();

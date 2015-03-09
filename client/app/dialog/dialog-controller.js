@@ -25,23 +25,16 @@
 	]);
 	
 	/**
-	 * TODO: comment
+	 * Provides means to use the dialog service.
 	 */
 	function DialogController(dialog) {
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * Returns the current dialog.
 		 */
-		_this.getMessage = function() {
-			return dialog.getMessage();
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.getTitle = function() {
-			return dialog.getTitle();
+		_this.get = function() {
+			return dialog.get();
 		};
 	}
 })();

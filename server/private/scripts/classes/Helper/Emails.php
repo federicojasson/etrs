@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * Offers email-related functionalities.
+ * Provides email-related functionalities.
  */
 class Emails {
 	

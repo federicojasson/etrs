@@ -22,18 +22,18 @@
 	angular.module('app.error').service('error', errorService);
 	
 	/**
-	 * Manages the error state.
+	 * Manages the errors.
 	 */
 	function errorService() {
 		var _this = this;
 		
 		/**
-		 * The error occurred.
+		 * The occurred error.
 		 */
 		var error = null;
 		
 		/**
-		 * Returns the error occurred.
+		 * Returns the occurred error.
 		 */
 		_this.get = function() {
 			return error;
@@ -46,14 +46,6 @@
 			return error !== null;
 		};
 		
-		/**
-		 * Reports the occurrence of an error.
-		 * 
-		 * Receives the response of the server.
-		 */
-		_this.report = function(response) {
-			// TODO: implement (create error object)
-			error = '';
-		};
+		// TODO: implement service
 	}
 })();

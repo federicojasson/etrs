@@ -27,120 +27,23 @@
 	]);
 	
 	/**
-	 * Applies module-related configurations.
+	 * Configures the module.
 	 */
 	function config($locationProvider, $stateProvider, $urlRouterProvider) {
 		/**
-		 * Returns the states to be registered.
+		 * Returns the states.
 		 */
 		function getStates() {
 			return [
-				{
-					name: 'account',
-					url: '/account',
-					data: {
-						views: {
-							__: 'ViewAccountSignInController',
-							ad: 'ViewAccountController',
-							dr: 'ViewAccountController',
-							op: 'ViewAccountController'
-						}
-					}
-				},
-				
-				{
-					name: 'account.resetPassword',
-					url: '/account/reset-password/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
-					data: {
-						views: {
-							__: 'ViewAccountResetPasswordController'
-						}
-					}
-				},
-				
-				{
-					name: 'account.resetPassword.request',
-					url: '/account/reset-password',
-					data: {
-						views: {
-							__: 'ViewAccountResetPasswordRequestController'
-						}
-					}
-				},
-				
-				{
-					name: 'account.signIn',
-					url: '/account/sign-in',
-					data: {
-						views: {
-							__: 'ViewAccountSignInController'
-						}
-					}
-				},
-				
-				{
-					name: 'account.signUp',
-					url: '/account/sign-up/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
-					data: {
-						views: {
-							__: 'ViewAccountSignUpController'
-						}
-					}
-				},
-				
-				{
-					name: 'account.signUp.request',
-					url: '/account/sign-up',
-					data: {
-						views: {
-							__: 'ViewAccountSignInController',
-							ad: 'ViewAccountSignUpRequestController'
-						}
-					}
-				},
-				
 				{
 					name: 'home',
 					url: '/',
 					data: {
 						views: {
-							__: 'ViewAccountSignInController',
-							ad: 'ViewHomeController',
-							dr: 'ViewHomeController',
-							op: 'ViewHomeController'
-						}
-					}
-				},
-				
-				{
-					name: 'medication',
-					url: '/medication/{id:[0-9A-Fa-f]{32}}',
-					data: {
-						views: {
-							__: 'ViewAccountSignInController',
-							ad: 'ViewMedicationController'
-						}
-					}
-				},
-				
-				{
-					name: 'medication.create',
-					url: '/medication/create',
-					data: {
-						views: {
-							__: 'ViewAccountSignInController',
-							ad: 'ViewMedicationCreateController'
-						}
-					}
-				},
-				
-				{
-					name: 'medication.manage',
-					url: '/medication/manage',
-					data: {
-						views: {
-							__: 'ViewAccountSignInController',
-							ad: 'ViewMedicationManageController'
+							__: 'SignInViewController',
+							ad: 'HomeViewController',
+							dr: 'HomeViewController',
+							op: 'HomeViewController'
 						}
 					}
 				}
@@ -150,22 +53,22 @@
 		// ---------------------------------------------------------------------
 		
 		// Enables the HTML5 history API
-		//$locationProvider.html5Mode(true); //TODO: weird bug (slashes are encoded in url)
+		$locationProvider.html5Mode(true);
 		
 		// Sets the URL of the default route
 		$urlRouterProvider.otherwise('/');
 		
-		// Gets the states to be registered
+		// Gets the states
 		var states = getStates();
 		
 		// Registers the states
 		for (var i = 0; i < states.length; i++) {
 			var state = states[i];
 			
-			// Prepends a circumflex accent to make the URL absolute
+			// Makes the URL absolute
 			state.url = '^' + state.url;
 			
-			// Sets a template that includes the layout
+			// Sets a template that includes the current layout
 			state.template = '<layout></layout>';
 			
 			// Registers the state

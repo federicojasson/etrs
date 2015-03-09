@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * Offers session-related functionalities.
+ * Provides session-related functionalities.
  */
 class Session {
 	

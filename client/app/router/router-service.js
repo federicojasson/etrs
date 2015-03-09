@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Offers routing-related functions.
+	 * Provides routing-related functionalities.
 	 */
 	function routerService($location) {
 		var _this = this;

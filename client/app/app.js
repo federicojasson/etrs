@@ -20,7 +20,6 @@
 
 (function() {
 	angular.module('app', [
-		'ngLocale',
 		'ngResource',
 		'ui.bootstrap',
 		'ui.router',
@@ -30,7 +29,7 @@
 		'app.error',
 		'app.inputValidator',
 		'app.layout',
-		'app.navigation',
+		'app.navigationBar',
 		'app.router',
 		'app.server',
 		'app.title',

@@ -20,8 +20,7 @@
 
 (function() {
 	angular.module('app.view', [
-		'app.view.account',
 		'app.view.home',
-		'app.view.medication'
+		'app.view.signIn'
 	]);
 })();

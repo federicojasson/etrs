@@ -25,36 +25,36 @@
 	]);
 	
 	/**
-	 * Shows the title of the site.
+	 * Shows the current title.
 	 */
 	function titleDirective(title) {
 		/**
-		 * Returns the settings of the directive.
+		 * Returns the settings.
 		 */
 		function getSettings() {
 			return {
 				restrict: 'E',
 				scope: {},
-				link: registerTitleListener
+				link: onLink
 			};
 		}
 		
 		/**
-		 * Registers a listener for the title of the site.
+		 * Invoked after the linking phase.
 		 * 
-		 * Receives the scope of the directive and the element matched by it.
+		 * Receives the scope and the element.
 		 */
-		function registerTitleListener(scope, element) {
-			// Listens for changes in the title of the site
+		function onLink(scope, element) {
+			// Registers a listener for the title
 			scope.$watch(title.get, function(title) {
-				// Shows the new title of the site
+				// Shows the current title
 				element.text(title);
 			});
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Returns the settings of the directive
+		// Returns the settings
 		return getSettings();
 	}
 })();

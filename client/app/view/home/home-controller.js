@@ -19,33 +19,14 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.home').controller('ViewHomeController', ViewHomeController);
+	angular.module('app.view.home').controller('HomeViewController', HomeViewController);
 	
 	/**
 	 * Represents the home view.
 	 */
-	function ViewHomeController() {
+	function HomeViewController() {
 		var _this = this;
 		
-		/**
-		 * Returns the URL of the template.
-		 */
-		_this.getTemplateUrl = function() {
-			return 'app/view/home/home.html';
-		};
-		
-		/**
-		 * Returns the title to be shown on the site when the view is ready.
-		 */
-		_this.getTitle = function() {
-			return '';
-		};
-		
-		/**
-		 * Determines whether the view is ready.
-		 */
-		_this.isReady = function() {
-			return true;
-		};
+		// TODO: implement controller
 	}
 })();

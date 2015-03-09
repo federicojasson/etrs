@@ -19,50 +19,14 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.error').controller('LayoutErrorController', [
-		'$controller',
-		'$scope',
-		LayoutErrorController
-	]);
+	angular.module('app.layout.error').controller('ErrorLayoutController', ErrorLayoutController);
 	
 	/**
 	 * Represents the error layout.
 	 */
-	function LayoutErrorController($controller, $scope) {
+	function ErrorLayoutController() {
 		var _this = this;
 		
-		/**
-		 * Returns the URL of the template.
-		 */
-		_this.getTemplateUrl = function() {
-			return 'app/layout/error/error.html';
-		};
-		
-		/**
-		 * Returns the title to be shown on the site when the layout is ready.
-		 */
-		_this.getTitle = function() {
-			return 'Error'; // TODO: define final title
-		};
-		
-		/**
-		 * Determines whether the layout is ready.
-		 */
-		_this.isReady = function() {
-			return true;
-		};
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Includes the necessary resources
-			$scope.error = $controller('ErrorController');
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Initializes the layout
-		initialize();
+		// TODO: implement controller
 	}
 })();

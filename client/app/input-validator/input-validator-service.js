@@ -22,40 +22,11 @@
 	angular.module('app.inputValidator').service('inputValidator', inputValidatorService);
 	
 	/**
-	 * Offers input-validation functions.
+	 * Provides input-validation functions.
 	 */
 	function inputValidatorService() {
 		var _this = this;
 		
-		/**
-		 * Determines whether the input of an action is valid.
-		 * 
-		 * Receives the input.
-		 */
-		_this.isInputValid = function(input) {
-			// Initializes a flag to indicate whether the input is valid
-			var valid = true;
-			
-			// Determines whether the input is valid
-			for (var property in input) { if (! input.hasOwnProperty(property)) continue;
-				var child = input[property];
-				
-				if (angular.isDefined(child.validate) && angular.isFunction(child.validate)) {
-					// The child is an input
-					
-					// Validates the input
-					child.validate();
-					
-					// Determines whether the input is valid
-					valid &= child.valid;
-				} else {
-					// The child is not an input
-					// Determines recursively whether the input is valid
-					valid &= _this.isInputValid(child);
-				}
-			}
-			
-			return valid;
-		};
+		// TODO: implement service
 	}
 })();

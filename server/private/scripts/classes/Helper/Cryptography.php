@@ -21,7 +21,7 @@
 namespace App\Helper;
 
 /**
- * Offers cryptography-related functionalities.
+ * Provides cryptography-related functionalities.
  */
 class Cryptography {
 	
