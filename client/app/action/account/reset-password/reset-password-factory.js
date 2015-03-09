@@ -31,7 +31,7 @@
 	 */
 	function ActionAccountResetPasswordFactory(inputValidator, InputModel, server) {
 		/**
-		 * TODO: comment
+		 * The credentials of the reset-password permission.
 		 */
 		ActionAccountResetPassword.prototype.credentials;
 
@@ -43,7 +43,7 @@
 		/**
 		 * Initializes an instance of the class.
 		 * 
-		 * Receives TODO: comment
+		 * Receives the credentials of the reset-password permission.
 		 */
 		function ActionAccountResetPassword(credentials) {
 			// Sets the credentials
@@ -52,12 +52,12 @@
 			// Initializes the input
 			this.input = {
 				password: new InputModel(function() {
-					// TODO: implement
+					// TODO: input validation
 					return true;
 				}),
 				
 				passwordConfirmation: new InputModel(function() {
-					// TODO: implement
+					// TODO: input validation
 					return true;
 				})
 			};
@@ -66,7 +66,8 @@
 		/**
 		 * Executes the action.
 		 * 
-		 * Receives TODO: comment
+		 * Receives a callback to be invoked at the start of the execution, and
+		 * another to be invoked at the end.
 		 */
 		ActionAccountResetPassword.prototype.execute = function(startCallback, endCallback) {
 			if (! inputValidator.isInputValid(this.input)) {

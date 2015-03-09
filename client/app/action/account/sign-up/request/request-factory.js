@@ -43,25 +43,25 @@
 			this.input = {
 				credentials: {
 					password: new InputModel(function() {
-						// TODO: implement
+						// TODO: input validation
 						return true;
 					})
 				},
 
 				recipient: {
 					name: new InputModel(function() {
-						// TODO: implement
+						// TODO: input validation
 						return true;
 					}),
 					
 					emailAddress: new InputModel(function() {
-						// TODO: implement
+						// TODO: input validation
 						return true;
 					})
 				},
 
 				userRole: new InputModel(function() {
-					// TODO: implement
+					// TODO: input validation
 					return true;
 				})
 			};
@@ -70,7 +70,8 @@
 		/**
 		 * Executes the action.
 		 * 
-		 * Receives TODO: comment
+		 * Receives a callback to be invoked at the start of the execution, and
+		 * another to be invoked at the end.
 		 */
 		ActionAccountSignUpRequest.prototype.execute = function(startCallback, endCallback) {
 			if (! inputValidator.isInputValid(this.input)) {
