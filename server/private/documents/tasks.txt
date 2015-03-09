@@ -1,8 +1,4 @@
-- Automate current date-time use.
 - Doubt: remove associations when medication (or other entity) is deleted?
-- Check if all methods are necessary in the entities.
-- Check when to use @ManyToMany, @OneToOne and @ManyToOne.
-- Set onDelete on every association: http://www.doctrine-project.org/jira/browse/DDC-409 http://www.doctrine-project.org/jira/browse/DDC-1628
 - @Version: maintenance job to reset versions to 0
 
 - Check image names
@@ -10,12 +6,7 @@
 - Cambiar nombre de View... a ...View.
 - Cambiar nombre de Layout... a ...Layout.
 - Cambiar nombre de acciones (no respetar jerarquía).
-- ¿Encapsular todas las llamadas al servidor en acciones? Ejemplo: GetAuthenticationState
 
-- Send welcome mail?
-- Write installation document.
-- Implement HTTP caching (if possible): http://docs.slimframework.com/#HTTP-Caching-Overview
-- Implement session hijacking detection method using the IP address.
 - Check warnings.
 - Check protected fields.
 - Check double whitespaces.
@@ -24,9 +15,13 @@
 - Check /* and /**.
 - Check multiple blank lines: [\t]*\n[\t]*\n[\t]*\n
 - Check that all files contain license.
+
+- Implement HTTP caching (if possible): http://docs.slimframework.com/#HTTP-Caching-Overview
+- Implement session hijacking detection method using the IP address.
 - Test http://codebutler.com/firesheep and attempt session hijacking.
+
+- Write installation document.
 - Documentar database schema.
 - Documentar API.
-- Idea: allow to ban users. A "banned" column can be added and the access helper can check for this before authorizing the access.
 - Register domain.
 - Buy SSL/TLS certificate.

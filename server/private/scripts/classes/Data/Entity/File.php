@@ -21,15 +21,15 @@
 namespace App\Data\Entity;
 
 /**
- * Represents a medication from the database.
+ * Represents a file from the database.
  * 
  * Annotations:
  * 
  * @Entity(repositoryClass = "App\Data\EntityRepository\CustomRepository")
- * @Table(name = "medications")
+ * @Table(name = "files")
  * @HasLifecycleCallbacks
  */
-class Medication {
+class File {
 	
 	/**
 	 * The creation date-time.
@@ -83,6 +83,23 @@ class Medication {
 	 *	)
 	 */
 	private $deletionDateTime;
+	
+	/**
+	 * The hash.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "hash",
+	 *		type = "automatic_binary",
+	 *		length = 16,
+	 *		nullable = false,
+	 *		options = {
+	 *			"fixed": true
+	 *		}
+	 *	)
+	 */
+	private $hash;
 	
 	/**
 	 * The ID.
@@ -140,7 +157,7 @@ class Medication {
 	 * @Column(
 	 *		name = "name",
 	 *		type = "string",
-	 *		length = 128,
+	 *		length = 192,
 	 *		nullable = false
 	 *	)
 	 */
@@ -209,6 +226,15 @@ class Medication {
 		
 		// Sets the creator
 		$this->creator = $app->authentication->getSignedInUser();
+	}
+	
+	/**
+	 * Sets the hash.
+	 * 
+	 * Receives the hash to be set.
+	 */
+	public function setHash($hash) {
+		$this->hash = $hash;
 	}
 	
 	/**
