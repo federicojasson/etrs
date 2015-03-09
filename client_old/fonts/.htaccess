@@ -1,2 +1,0 @@
-# Sets the media type for OpenType fonts
-AddType font/otf .otf

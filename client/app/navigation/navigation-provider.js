@@ -19,5 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.signIn', []);
+	angular.module('app.navigation').provider('navigation', navigationProvider);
+	
+	/**
+	 * Responsible for initializing the navigation service.
+	 */
+	function navigationProvider() {
+		var _this = this;
+		
+		/**
+		 * Initializes the navigation service.
+		 */
+		_this.$get = [
+			function() {
+				// Initializes the navigation service
+				var navigation = new navigationService();
+				
+				return navigation;
+			}
+		];
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	function navigationService() {
+		var _this = this;
+		
+		// TODO
+	}
 })();

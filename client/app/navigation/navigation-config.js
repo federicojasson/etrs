@@ -19,26 +19,51 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.manageMedications').controller('ManageMedicationsViewController', ManageMedicationsViewController);
+	angular.module('app.navigation').config([
+		'navigationProvider',
+		config
+	]);
 	
 	/**
-	 * TODO: comment
+	 * Applies module-related configurations.
 	 */
-	function ManageMedicationsViewController() {
-		var _this = this;
-		
+	function config(navigationProvider) {
 		/**
 		 * TODO: comment
 		 */
-		_this.getTemplateUrl = function() {
-			return 'app/view/manage-medications/manage-medications.html';
-		};
+		function getMenuItems() {
+			return {
+				// TODO
+			};
+		}
 		
 		/**
-		 * TODO: comment
+		 * Returns the menus to be registered.
 		 */
-		_this.getTitle = function() {
-			return 'Administrar medicaciones';
-		};
+		function getMenus() {
+			// Gets the menu items
+			var menuItems = getMenuItems();
+			
+			// TODO
+			return {
+				ad: [],
+				dr: [],
+				op: []
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the menus to be registered
+		var menus = getMenus();
+		
+		// Registers the menus
+		for (var userRole in menus) { if (! menus.hasOwnProperty(userRole)) continue;
+			// TODO
+			var userRoleMenus = menus[userRole];
+			for (var i = 0; i < userRoleMenus.length; i++) {
+				navigationProvider.registerMenu(userRoleMenus[i], userRole);
+			}
+		}
 	}
 })();
