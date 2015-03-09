@@ -1,1 +1,14 @@
-TODO: implement html
+<div ng-if="layout.isReady()">
+	<div ng-include="layout.getTemplateUrl()"></div>
+</div>
+
+<div ng-if="! layout.isReady()">
+	<div class="fully-centered-container">
+		<div class="fully-centered">
+			<div class="loading-image"></div>
+			<div class="loading-text">
+				Cargando...
+			</div>
+		</div>
+	</div>
+</div>

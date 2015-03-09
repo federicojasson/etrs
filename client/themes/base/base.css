@@ -9,3 +9,42 @@
 /**
  * This style sheet defines the base theme for the site.
  */
+
+.modal-content {
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.modal-footer {
+	margin-top: 0px;
+	padding: 15px;
+}
+
+.fully-centered {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.fully-centered-container {
+	display: table;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+}
+
+.loading-image {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.loading-text {
+	text-align: center;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
