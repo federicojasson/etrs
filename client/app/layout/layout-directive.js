@@ -19,12 +19,83 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout').directive('layout', layoutDirective);
+	angular.module('app.layout').directive('layout', [
+		'$controller',
+		'layout',
+		'title',
+		layoutDirective
+	]);
 	
 	/**
 	 * Includes the current layout.
 	 */
-	function layoutDirective() {
-		// TODO: implement directive
+	function layoutDirective($controller, layout, title) {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {},
+				link: onLink,
+				templateUrl: 'app/layout/layout.html'
+			};
+		}
+		
+		/**
+		 * Invoked after the linking phase.
+		 * 
+		 * Receives the scope of the directive.
+		 */
+		function onLink(scope) {
+			// Registers a listener for the layout
+			scope.$watch(layout.get, function(layout) {
+				// Initializes the layout
+				var controller = $controller(layout, {
+					$scope: scope
+				});
+				
+				// Registers a listener for the controller of the current layout
+				scope.$watch(controller.getTitle, function() {
+					// Updates the title
+					updateTitle(controller);
+				});
+				
+				// Registers a listener for the controller of the current layout
+				scope.$watch(controller.isReady, function() {
+					// Updates the title
+					updateTitle(controller);
+				});
+				
+				// Includes the current layout
+				scope.layout = controller;
+			});
+		}
+		
+		/**
+		 * Updates the title according to the state of the current layout.
+		 * 
+		 * Receives the controller of the current layout.
+		 */
+		function updateTitle(controller) {
+			// Gets the title to be set
+			var newTitle;
+			if (controller.isReady()) {
+				// The layout is ready
+				// Gets the title provided by the layout
+				newTitle = controller.getTitle();
+			} else {
+				// The layout is not ready
+				newTitle = 'Cargando...';
+			}
+			
+			// Sets the title
+			title.set(newTitle);
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
 	}
 })();

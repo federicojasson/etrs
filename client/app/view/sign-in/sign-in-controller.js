@@ -27,6 +27,25 @@
 	function SignInViewController() {
 		var _this = this;
 		
-		// TODO: implement controller
+		/**
+		 * Returns the URL of the template.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/sign-in/sign-in.html';
+		};
+		
+		/**
+		 * Returns the title to be set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return 'Iniciar sesión';
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
 	}
 })();

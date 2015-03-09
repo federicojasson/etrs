@@ -27,6 +27,23 @@
 	function utilityService() {
 		var _this = this;
 		
-		// TODO: implement service
+		/**
+		 * Converts a string from spinal-case to camelCase.
+		 * 
+		 * Receives the string.
+		 */
+		_this.spinalToCamelCase = function(string) {
+			// Replaces the dashes with whitespaces
+			string = string.replace(/-/g, ' ');
+
+			// Converts the first character of each word, except the first one,
+			// to uppercase
+			string = string.replace(/ [a-z]/g, function(character) {
+				return character.toUpperCase();
+			});
+			
+			// Removes the whitespaces
+			return string.replace(/ /g, '');
+		};
 	}
 })();

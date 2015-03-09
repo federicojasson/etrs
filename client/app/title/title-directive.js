@@ -54,7 +54,7 @@
 		
 		// ---------------------------------------------------------------------
 		
-		// Returns the settings
+		// Gets the settings
 		return getSettings();
 	}
 })();

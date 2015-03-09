@@ -19,12 +19,83 @@
 'use strict';
 
 (function() {
-	angular.module('app.view').directive('view', viewDirective);
+	angular.module('app.view').directive('view', [
+		'$controller',
+		'title',
+		'view',
+		viewDirective
+	]);
 	
 	/**
 	 * Includes the current view.
 	 */
-	function viewDirective() {
-		// TODO: implement directive
+	function viewDirective($controller, title, view) {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {},
+				link: onLink,
+				templateUrl: 'app/view/view.html'
+			};
+		}
+		
+		/**
+		 * Invoked after the linking phase.
+		 * 
+		 * Receives the scope of the directive.
+		 */
+		function onLink(scope) {
+			// Registers a listener for the view
+			scope.$watch(view.get, function(view) {
+				// Initializes the view
+				var controller = $controller(view, {
+					$scope: scope
+				});
+				
+				// Registers a listener for the controller of the current view
+				scope.$watch(controller.getTitle, function() {
+					// Updates the title
+					updateTitle(controller);
+				});
+				
+				// Registers a listener for the controller of the current view
+				scope.$watch(controller.isReady, function() {
+					// Updates the title
+					updateTitle(controller);
+				});
+				
+				// Includes the current view
+				scope.view = controller;
+			});
+		}
+		
+		/**
+		 * Updates the title according to the state of the current view.
+		 * 
+		 * Receives the controller of the current view.
+		 */
+		function updateTitle(controller) {
+			// Gets the title to be set
+			var newTitle;
+			if (controller.isReady()) {
+				// The view is ready
+				// Gets the title provided by the view
+				newTitle = controller.getTitle();
+			} else {
+				// The view is not ready
+				newTitle = 'Cargando...';
+			}
+			
+			// Sets the title
+			title.set(newTitle);
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
 	}
 })();

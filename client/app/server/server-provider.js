@@ -28,21 +28,38 @@
 		var _this = this;
 		
 		/**
+		 * The registered services.
+		 */
+		var services = [];
+		
+		/**
 		 * Initializes the server service.
 		 */
 		_this.$get = [
 			'$resource',
-			function($resource) {
+			'error',
+			'utility',
+			function($resource, error, utility) {
 				// Initializes the server service
-				var server = new serverService($resource);
+				var server = new serverService($resource, error, utility);
 				
-				// TODO: implement function
+				// Adds the services
+				for (var i = 0; i < services.length; i++) {
+					server.addService(services[i]);
+				}
 				
 				return server;
 			}
 		];
 		
-		// TODO: implement provider
+		/**
+		 * Registers a service.
+		 * 
+		 * Receives the service.
+		 */
+		_this.registerService = function(service) {
+			services.push(service);
+		};
 	}
 	
 	/**
@@ -50,9 +67,79 @@
 	 * 
 	 * All requests to the server should be done through the provided interface.
 	 */
-	function serverService() {
+	function serverService($resource, error, utility) {
 		var _this = this;
 		
-		// TODO: implement service
+		/**
+		 * Adds a service.
+		 * 
+		 * Receives the URL of the service.
+		 */
+		_this.addService = function(url) {
+			// Removes the leading slash
+			var string = url.substr(1);
+
+			// Gets the string fragments separated by slashes
+			var fragments = string.split('/');
+
+			// Converts the fragments from spinal-case to camelCase
+			for (var i = 0; i < fragments.length; i++) {
+				fragments[i] = utility.spinalToCamelCase(fragments[i]);
+			}
+			
+			// Creates the necessary properties and functions
+			var object = _this;
+			for (var i = 0; i < fragments.length; i++) {
+				var fragment = fragments[i];
+
+				if (i === fragments.length - 1) {
+					// It is the last fragment
+
+					// Creates a function for the service
+					object[fragment] = function(input) {
+						return sendRequest(url, input);
+					};
+
+					return;
+				}
+
+				// Gets the child of the object corresponding to the fragment
+				var child = object[fragment];
+
+				// Initializes the child if is undefined
+				child = (angular.isDefined(child)) ? child : {};
+
+				// Sets the child
+				object[fragment] = child;
+
+				// Sets the child as the current object
+				object = child;
+			}
+		};
+		
+		/**
+		 * Sends a request to the server.
+		 * 
+		 * Receives the URL of the requested service and, optionally, the input
+		 * to be sent.
+		 */
+		function sendRequest(url, input) {
+			// Initializes the input if is undefined
+			input = (angular.isDefined(input)) ? input : {};
+
+			// Builds the definitive URL
+			url = 'server' + url;
+
+			// Sends the request to the server
+			var promise = $resource(url).save(input).$promise;
+			
+			// Registers an error callback
+			promise.catch(function(response) {
+				// Reports the error
+				error.report(response);
+			});
+			
+			return promise;
+		}
 	}
 })();

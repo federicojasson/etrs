@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.authentication').service('authentication', authenticationService);
+	angular.module('app.authentication').service('authentication', [
+		'server',
+		authenticationService
+	]);
 	
 	/**
 	 * Manages the authentication state.
 	 */
-	function authenticationService() {
+	function authenticationService(server) {
 		var _this = this;
 		
 		/**
@@ -66,7 +69,31 @@
 		 * server.
 		 */
 		_this.refreshState = function() {
-			// TODO: implement function
+			// Sets the state-refreshing flag
+			stateRefreshing = true;
+			
+			// Gets the authentication state
+			server.authentication.getState().then(function(output) {
+				if (! output.signedIn) {
+					// The user is not signed in
+					signedInUser = null;
+					
+					// Sets the state-refreshing flag
+					stateRefreshing = false;
+					
+					return;
+				}
+				
+				// TODO: get user
+				signedInUser = {
+					id: 'admin',
+					role: 'ad',
+					firstName: 'Gabriel',
+					lastName: 'Rodríguez',
+					gender: 'm'
+				};
+				stateRefreshing = false;
+			});
 		};
 	}
 })();

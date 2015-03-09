@@ -39,6 +39,26 @@
 			return title;
 		};
 		
-		// TODO: implement service
+		/**
+		 * Sets the title.
+		 * 
+		 * The function appends the acronym of the application, so this must not
+		 * be included.
+		 * 
+		 * Receives the title to be set.
+		 */
+		_this.set = function(newTitle) {
+			if (newTitle.length > 0) {
+				// The title is not empty
+				// Appends a dash
+				newTitle += ' - ';
+			}
+			
+			// Appends the acronym of the application
+			newTitle += 'ETRS';
+			
+			// Sets the title
+			title = newTitle;
+		};
 	}
 })();

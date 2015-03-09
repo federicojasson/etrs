@@ -19,14 +19,51 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.site').controller('SiteLayoutController', SiteLayoutController);
+	angular.module('app.layout.site').controller('SiteLayoutController', [
+		'$controller',
+		'$scope',
+		'authentication',
+		SiteLayoutController
+	]);
 	
 	/**
 	 * Represents the site layout.
 	 */
-	function SiteLayoutController() {
+	function SiteLayoutController($controller, $scope, authentication) {
 		var _this = this;
 		
-		// TODO: implement controller
+		/**
+		 * Returns the URL of the template.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/layout/site/site.html';
+		};
+		
+		/**
+		 * Returns the title to be set when the layout is ready.
+		 */
+		_this.getTitle = function() {
+			return '';
+		};
+		
+		/**
+		 * Determines whether the layout is ready.
+		 */
+		_this.isReady = function() {
+			return ! authentication.isStateRefreshing();
+		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Includes the necessary resources
+			$scope.authentication = $controller('AuthenticationController');
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the layout
+		initialize();
 	}
 })();

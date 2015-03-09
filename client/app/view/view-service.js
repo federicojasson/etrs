@@ -19,12 +19,17 @@
 'use strict';
 
 (function() {
-	angular.module('app.view').service('view', viewService);
+	angular.module('app.view').service('view', [
+		'$state',
+		'authentication',
+		'router',
+		viewService
+	]);
 	
 	/**
 	 * Manages the views.
 	 */
-	function viewService() {
+	function viewService($state, authentication, router) {
 		var _this = this;
 		
 		/**
@@ -43,7 +48,43 @@
 		 * Updates the view.
 		 */
 		_this.update = function() {
-			// TODO: implement function
+			// Gets the data of the current route
+			var data = $state.current.data;
+			
+			if (angular.isUndefined(data)) {
+				// The route has not been established yet
+				return;
+			}
+			
+			if (authentication.isStateRefreshing()) {
+				// The authentication state is being refreshed
+				return;
+			}
+			
+			// Gets the user role
+			var userRole;
+			if (authentication.isUserSignedIn()) {
+				// The user is signed in
+				userRole = authentication.getSignedInUser().role;
+			} else {
+				// The user is not signed in
+				userRole = '__';
+			}
+			
+			// Gets the views defined in the current route
+			var views = data.views;
+			
+			if (! views.hasOwnProperty(userRole)) {
+				// There is no view defined for the user role
+				
+				// Redirects the user to the home route
+				router.redirect('/');
+				
+				return;
+			}
+			
+			// Gets the view corresponding to the user role
+			view = views[userRole];
 		};
 	}
 })();
