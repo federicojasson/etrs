@@ -51,6 +51,15 @@ pre {
 	margin-top: 0px;
 }
 
+.panel-heading {
+	padding: 0px;
+}
+
+.panel-title a {
+	display: block;
+	padding: 12px 16px;
+}
+
 
 /* Custom classes */
 
@@ -106,8 +115,16 @@ pre {
 .locked-image {}
 
 .navigation-bar-header-text {
-	margin-bottom: 16px;
+	margin-bottom: 8px;
 	padding: 8px;
 }
 
-.navigation-bar-menu-item-text {}
+.navigation-bar-menu-item-text {
+	margin-bottom: 8px;
+	margin-top: 8px;
+}
+
+.navigation-bar-menu-item-text a {
+	display: block;
+	padding: 8px 14px;
+}

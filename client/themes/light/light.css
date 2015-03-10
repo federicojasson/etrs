@@ -110,6 +110,21 @@ legend {
 	text-transform: uppercase;
 }
 
+.panel-title {
+	font-size: 1em;
+	text-transform: uppercase;
+}
+
+.panel-title a {
+	color: #666666;
+	text-decoration: none;
+}
+
+.panel-title a:focus, .panel-title a:hover {
+	background-color: #e7eeed;
+	color: #333333;
+}
+
 
 /* Custom classes */
 
@@ -168,4 +183,19 @@ legend {
 	text-transform: uppercase;
 }
 
-.navigation-bar-menu-item-text {}
+.navigation-bar-menu-item-text {
+	font-size: 0.85em;
+	text-transform: uppercase;
+}
+
+.navigation-bar-menu-item-text a {
+	border: 1px solid #e8e8e8;
+	color: #666666;
+	text-decoration: none;
+}
+
+.navigation-bar-menu-item-text a:hover {
+	background-color: #e0f9df;
+	border-color: #dddddd;
+	color: #333333;
+}
