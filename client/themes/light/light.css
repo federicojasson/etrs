@@ -60,7 +60,7 @@ legend {
 }
 
 .navbar-brand {
-	background-image: url(images/navbar-logo.png);
+	background-image: url(images/logo.png);
 	background-position: 0px 0px;
 	background-repeat: no-repeat;
 	height: 48px;
@@ -84,20 +84,20 @@ legend {
 	font-size: 0.8em;
 }
 
-.footer-logo-image {
-	background-image: url(images/footer-logo.png);
+.footer-image {
+	background-image: url(images/big-logo.png);
 	background-position: 0px -72px;
 	background-repeat: no-repeat;
 	height: 72px;
 	width: 256px;
 }
 
-.footer-logo-image:hover {
+.footer-image:hover {
 	background-position: 0px 0px;
 }
 
 .loading-image {
-	background-image: url(images/loading.gif);
+	background-image: url(images/spinner.gif);
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;
