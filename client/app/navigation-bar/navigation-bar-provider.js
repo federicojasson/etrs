@@ -72,7 +72,7 @@
 		/**
 		 * TODO: comment
 		 */
-		var menus;
+		var menus; // TODO: initialize?
 		
 		/**
 		 * TODO: comment
