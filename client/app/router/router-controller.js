@@ -31,7 +31,7 @@
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * Reloads the page.
 		 */
 		_this.reload = function() {
 			return router.reload();

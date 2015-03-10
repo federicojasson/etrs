@@ -41,7 +41,7 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Reloads the page.
 		 */
 		_this.reload = function() {
 			// TODO: should set href??? See: http://stackoverflow.com/questions/27618878/angular-ui-router-reloading-to-different-state-refresh-data
