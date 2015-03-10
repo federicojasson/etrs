@@ -34,18 +34,21 @@ pre {
 
 .modal-footer {
 	margin-top: 0px;
-	padding: 15px;
+	padding: 16px;
+}
+
+.navbar {
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 .navbar-text {
 	line-height: 48px;
 	margin-bottom: 0px;
 	margin-top: 0px;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	user-select: none;
 }
 
 
@@ -83,7 +86,7 @@ pre {
 }
 
 .icon-text {
-	margin-left: 6px;
+	margin-left: 8px;
 }
 
 .loading-image {
@@ -101,3 +104,10 @@ pre {
 }
 
 .locked-image {}
+
+.navigation-bar-header-text {
+	margin-bottom: 16px;
+	padding: 8px;
+}
+
+.navigation-bar-menu-item-text {}

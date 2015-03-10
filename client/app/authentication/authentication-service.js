@@ -73,7 +73,7 @@
 			
 			// Gets the authentication state
 			server.authentication.getState().then(function(output) {
-				if (! output.signedIn) {
+				/*if (! output.signedIn) {
 					// The user is not signed in
 					signedInUser = null;
 					
@@ -81,7 +81,7 @@
 					stateRefreshing = false;
 					
 					return;
-				}
+				}*/
 				
 				// TODO: get user
 				signedInUser = {

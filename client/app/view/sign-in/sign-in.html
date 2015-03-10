@@ -7,7 +7,13 @@
 		<div class="clearfix well">
 			<form ng-submit="action.signIn.execute()" novalidate>
 				<fieldset>
-					<legend>Credenciales</legend>
+					<legend>
+						<span class="glyphicon glyphicon-lock"></span>
+						
+						<span class="icon-text">
+							Credenciales
+						</span>
+					</legend>
 					
 					<div class="form-group">
 						Ingrese su nombre de usuario y su contraseña:
@@ -22,6 +28,7 @@
 						<input
 							ng-model="action.signIn.input.credentials.id.value"
 							popover="{{ action.signIn.input.credentials.id.message }}"
+							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
 							type="text"
@@ -39,6 +46,7 @@
 						<input
 							ng-model="action.signIn.input.credentials.password.value"
 							popover="{{ action.signIn.input.credentials.password.message }}"
+							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
 							type="password"

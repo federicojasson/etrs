@@ -30,11 +30,62 @@
 	function NavigationBarController(navigationBar) {
 		var _this = this;
 		
+		// TODO: use for mocking
+		var menuItems = {
+			hacer1: {
+				name: 'Hacer 1',
+				url: '/URL1',
+				description: 'Descripción 1 puede ser tan larga como esto? Tal vez dejarla más corta'
+			},
+
+			hacer2: {
+				name: 'Hacer 2',
+				url: '/URL2',
+				description: 'Descripción 2'
+			},
+
+			hacer3: {
+				name: 'Hacer 3',
+				url: '/URL3',
+				description: 'Descripción 3'
+			}
+		};
+		var menus = [
+			{
+				name: 'Entidad 1',
+				items: [
+					menuItems.hacer1,
+					menuItems.hacer2,
+					menuItems.hacer3
+				]
+			},
+
+			{
+				name: 'Entidad 2',
+				items: [
+					menuItems.hacer1,
+					menuItems.hacer2,
+					menuItems.hacer3
+				]
+			},
+
+			{
+				name: 'Entidad 3',
+				items: [
+					menuItems.hacer1,
+					menuItems.hacer2,
+					menuItems.hacer3
+				]
+			}
+		];
+		
 		/**
 		 * TODO: comment
 		 */
 		_this.getMenus = function() {
-			return navigationBar.getMenus();
+			//return navigationBar.getMenus();
+			// TODO: mocking
+			return menus;
 		};
 	}
 })();

@@ -4,11 +4,8 @@
 - Fix HTML5 API bug
 - Considerar usar controlador para las directivas (¿es posible? ¿es conveniente?)
 - Chequear qué módulos pueden considerarse como utilidades (utility module).
-
-- Cambiar nombre de Action... a ...Action.
-- Cambiar nombre de View... a ...View.
-- Cambiar nombre de Layout... a ...Layout.
-- Cambiar nombre de acciones (no respetar jerarquía).
+- Chequear que el estilo de los mails coincida con el del sitio final.
+- Chequear que no haya líneas HTML muy largas.
 
 - Check two-line comments. Regular expression: \/\/.*\n[\t]*\/\/
 - Check warnings.

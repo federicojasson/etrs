@@ -162,3 +162,10 @@ legend {
 	height: 256px;
 	width: 256px;
 }
+
+.navigation-bar-header-text {
+	font-size: 1.5em;
+	text-transform: uppercase;
+}
+
+.navigation-bar-menu-item-text {}
