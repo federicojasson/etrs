@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.signIn').controller('SignInViewController', SignInViewController);
+	angular.module('app.view.signIn').controller('SignInViewController', [
+		'$scope',
+		'SignInAction',
+		SignInViewController
+	]);
 	
 	/**
 	 * Represents the sign-in view.
 	 */
-	function SignInViewController() {
+	function SignInViewController($scope, SignInAction) {
 		var _this = this;
 		
 		/**
@@ -47,5 +51,23 @@
 		_this.isReady = function() {
 			return true;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Initializes the sign-in action
+			var signInAction = new SignInAction();
+			
+			// Includes the actions
+			$scope.action = {
+				signIn: signInAction.execute
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the view
+		initialize();
 	}
 })();

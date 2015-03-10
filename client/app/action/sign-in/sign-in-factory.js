@@ -19,7 +19,34 @@
 'use strict';
 
 (function() {
-	angular.module('app.inputValidator', [
-		'app.inputValidator.inputModel'
+	angular.module('app.action.signIn').factory('SignInAction', [
+		'server',
+		SignInActionFactory
 	]);
+	
+	/**
+	 * Defines the SignInAction class.
+	 */
+	function SignInActionFactory(server) {
+		/**
+		 * Initializes an instance of the class.
+		 */
+		function SignInAction() {}
+		
+		/**
+		 * Executes the action.
+		 */
+		SignInAction.prototype.execute = function() {
+			// TODO: validate input
+			
+			// Signs in the user
+			server.account.signIn(/* TODO: input */).then(function() {
+				// TODO: implement
+			});
+		};
+		
+		// ---------------------------------------------------------------------
+		
+		return SignInAction;
+	}
 })();

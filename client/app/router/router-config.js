@@ -35,6 +35,8 @@
 		 */
 		function getStates() {
 			return [
+				// TODO: define /account route
+				
 				{
 					name: 'home',
 					url: '/',
@@ -46,6 +48,16 @@
 							op: 'HomeViewController'
 						}
 					}
+				},
+				
+				{
+					name: 'signIn',
+					url: '/account/sign-in',
+					data: {
+						views: {
+							__: 'SignInViewController'
+						}
+					}
 				}
 			];
 		}
@@ -53,7 +65,7 @@
 		// ---------------------------------------------------------------------
 		
 		// Enables the HTML5 history API
-		$locationProvider.html5Mode(true);
+		//$locationProvider.html5Mode(true); TODO: fix bug HTML5 API
 		
 		// Sets the URL of the default route
 		$urlRouterProvider.otherwise('/');

@@ -127,3 +127,11 @@ legend {
 	letter-spacing: 2px;
 	text-transform: uppercase;
 }
+
+.locked-image {
+	background-image: url(images/closed-padlock.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
+}

@@ -19,7 +19,19 @@
 'use strict';
 
 (function() {
-	angular.module('app.inputValidator', [
-		'app.inputValidator.inputModel'
-	]);
+	angular.module('app.inputValidator.inputModel').factory('InputModel', InputModelFactory);
+	
+	/**
+	 * Defines the InputModel class.
+	 */
+	function InputModelFactory() {
+		/**
+		 * Initializes an instance of the class.
+		 */
+		function InputModel() {}
+		
+		// ---------------------------------------------------------------------
+		
+		return InputModel;
+	}
 })();
