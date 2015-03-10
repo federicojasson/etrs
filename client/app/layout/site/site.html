@@ -15,7 +15,10 @@
 						<div dropdown class="btn-group navbar-btn">
 							<a href="#/account" class="btn btn-default">
 								<span class="glyphicon glyphicon-user"></span>
-								{{ authentication.getSignedInUser() | honorificName }}
+								
+								<span class="icon-text">
+									{{ authentication.getSignedInUser() | honorificName }}
+								</span>
 							</a>
 
 							<button dropdown-toggle class="btn btn-default dropdown-toggle">
@@ -26,7 +29,10 @@
 								<li>
 									<a><!-- TODO: action -->
 										<span class="glyphicon glyphicon-lock"></span>
-										Cerrar sesión
+										
+										<span class="icon-text">
+											Cerrar sesión
+										</span>
 									</a>
 								</li>
 							</ul>
@@ -36,7 +42,10 @@
 					<div ng-if="! authentication.isUserSignedIn()">
 						<a href="#/account/sign-in" class="btn btn-primary navbar-btn">
 							<span class="glyphicon glyphicon-lock"></span>
-							Iniciar sesión
+							
+							<span class="icon-text">
+								Iniciar sesión
+							</span>
 						</a>
 					</div>
 				</div>

@@ -80,6 +80,10 @@ pre {
 	width: 100%;
 }
 
+.icon-text {
+	margin-left: 6px;
+}
+
 .loading-image {
 	margin-left: auto;
 	margin-right: auto;

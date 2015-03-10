@@ -2,6 +2,8 @@
 - @Version: maintenance job to reset versions to 0
 
 - Fix HTML5 API bug
+- Considerar usar controlador para las directivas (¿es posible? ¿es conveniente?)
+
 
 - Cambiar nombre de Action... a ...Action.
 - Cambiar nombre de View... a ...View.
