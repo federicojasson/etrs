@@ -19,7 +19,48 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.honorificName'
-	]);
+	angular.module('app.utility.honorificName').filter('honorificName', honorificNameFilter);
+	
+	/**
+	 * TODO: comment
+	 */
+	function honorificNameFilter() {
+		/**
+		 * TODO: comment
+		 */
+		function filter(user) {
+			// Gets the honorific title
+			var honorificTitle = getHonorificTitle(user);
+			
+			// Builds the honorific name
+			return honorificTitle + ' ' + user.lastName;
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		function getHonorificTitle(user) {
+			// TODO: comment
+			
+			var honorificTitle = '';
+			
+			if (user.role === 'dr') {
+				honorificTitle += 'Dr';
+			} else {
+				honorificTitle += 'Sr';
+			}
+			
+			if (user.gender === 'f') {
+				honorificTitle += 'a';
+			}
+			
+			honorificTitle += '.';
+			
+			return honorificTitle;
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		return filter;
+	}
 })();
