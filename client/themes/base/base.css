@@ -10,6 +10,15 @@
  * This style sheet defines the base theme for the site.
  */
 
+a {
+	cursor: pointer;
+}
+
+pre {
+	white-space: pre-line;
+	word-break: normal;
+}
+
 .modal-content {
 	-moz-user-select: none;
 	-ms-user-select: none;

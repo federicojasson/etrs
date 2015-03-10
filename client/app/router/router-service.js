@@ -21,13 +21,14 @@
 (function() {
 	angular.module('app.router').service('router', [
 		'$location',
+		'$window',
 		routerService
 	]);
 	
 	/**
 	 * Provides routing-related functionalities.
 	 */
-	function routerService($location) {
+	function routerService($location, $window) {
 		var _this = this;
 		
 		/**
@@ -37,6 +38,14 @@
 		 */
 		_this.redirect = function(url) {
 			$location.path(url);
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.reload = function() {
+			// TODO: should set href??? See: http://stackoverflow.com/questions/27618878/angular-ui-router-reloading-to-different-state-refresh-data
+			$window.location.reload();
 		};
 	}
 })();

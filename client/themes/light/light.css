@@ -13,6 +13,46 @@
 @import url(https://fonts.googleapis.com/css?family=Fjalla+One);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 
+body {
+	color: #333333;
+	font-family: "Open Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, legend {
+	color: #888888;
+	font-family: "Fjalla One", sans-serif;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+h1 {
+	font-size: 1.9em;
+}
+
+h2 {
+	font-size: 1.8em;
+}
+
+h3 {
+	font-size: 1.7em;
+}
+
+h4 {
+	font-size: 1.6em;
+}
+
+h5 {
+	font-size: 1.5em;
+}
+
+h6 {
+	font-size: 1.4em;
+}
+
+legend {
+	font-size: 1.6em;
+}
+
 .modal-header {
 	color: #888888;
 	font-size: 1.1em;

@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.error').service('error', errorService);
+	angular.module('app.error').service('error', [
+		'Error',
+		errorService
+	]);
 	
 	/**
 	 * Manages the errors.
 	 */
-	function errorService() {
+	function errorService(Error) {
 		var _this = this;
 		
 		/**
