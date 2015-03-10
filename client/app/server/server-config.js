@@ -33,6 +33,7 @@
 		 */
 		function getServices() {
 			return [
+				'/account/sign-out',
 				'/authentication/get-state'
 			];
 		}

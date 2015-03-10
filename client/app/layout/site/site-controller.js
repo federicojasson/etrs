@@ -22,6 +22,7 @@
 	angular.module('app.layout.site').controller('SiteLayoutController', [
 		'$controller',
 		'$scope',
+		'SignOutAction',
 		'authentication',
 		SiteLayoutController
 	]);
@@ -29,7 +30,7 @@
 	/**
 	 * Represents the site layout.
 	 */
-	function SiteLayoutController($controller, $scope, authentication) {
+	function SiteLayoutController($controller, $scope, SignOutAction, authentication) {
 		var _this = this;
 		
 		/**
@@ -57,8 +58,16 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary resources
+			// Includes the necessary controllers
 			$scope.authentication = $controller('AuthenticationController');
+			
+			// Initializes the sign-out action
+			var signOutAction = new SignOutAction();
+			
+			// Includes the actions
+			$scope.action = {
+				signOut: signOutAction.execute
+			};
 		}
 		
 		// ---------------------------------------------------------------------

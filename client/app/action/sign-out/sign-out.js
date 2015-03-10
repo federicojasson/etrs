@@ -19,7 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.action', [
-		'app.action.signOut'
-	]);
+	angular.module('app.action.signOut', []);
 })();

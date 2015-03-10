@@ -87,7 +87,7 @@
 				fragments[i] = utility.spinalToCamelCase(fragments[i]);
 			}
 			
-			// Creates the necessary properties and functions
+			// Creates the object hierarchy
 			var object = _this;
 			for (var i = 0; i < fragments.length; i++) {
 				var fragment = fragments[i];

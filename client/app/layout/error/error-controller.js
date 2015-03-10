@@ -57,7 +57,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary resources
+			// Includes the necessary controllers
 			$scope.error = $controller('ErrorController');
 			$scope.router = $controller('RouterController');
 		}

@@ -19,7 +19,34 @@
 'use strict';
 
 (function() {
-	angular.module('app.action', [
-		'app.action.signOut'
+	angular.module('app.action.signOut').factory('SignOutAction', [
+		'authentication',
+		'server',
+		SignOutActionFactory
 	]);
+	
+	/**
+	 * Defines the SignOutAction class.
+	 */
+	function SignOutActionFactory(authentication, server) {
+		/**
+		 * Initializes an instance of the class.
+		 */
+		function SignOutAction() {}
+		
+		/**
+		 * Executes the action.
+		 */
+		SignOutAction.prototype.execute = function() {
+			// Signs out the user
+			server.account.signOut().then(function() {
+				// Refreshes the authentication state
+				authentication.refreshState();
+			});
+		};
+		
+		// ---------------------------------------------------------------------
+		
+		return SignOutAction;
+	}
 })();
