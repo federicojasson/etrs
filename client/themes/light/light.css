@@ -10,8 +10,13 @@
  * This style sheet defines a light theme for the site.
  */
 
+/* Imports */
+
 @import url(https://fonts.googleapis.com/css?family=Fjalla+One);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+
+/* Elements */
 
 body {
 	color: #333333;
@@ -53,6 +58,9 @@ legend {
 	font-size: 1.6em;
 }
 
+
+/* Bootstrap's classes */
+
 .modal-header {
 	color: #888888;
 	font-size: 1.1em;
@@ -78,6 +86,9 @@ legend {
 	font-weight: bold;
 	text-transform: uppercase;
 }
+
+
+/* Custom classes */
 
 .copyright-text {
 	color: #aaaaaa;
