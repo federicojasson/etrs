@@ -36,6 +36,7 @@
 		function getStates() {
 			return [
 				// TODO: define /account route
+				// TODO: define /account/reset-password route
 				
 				{
 					name: 'home',
