@@ -1,2 +1,56 @@
-TODO: implement html
-<view></view>
+<nav class="navbar navbar-static-top">
+	<div class="navbar-header">
+		<a href="#/" class="navbar-brand"></a>
+	</div>
+
+	<div class="collapse navbar-collapse navbar-left navbar-text">
+		Eye Tracking Record System
+	</div>
+
+	<div class="collapse navbar-collapse navbar-right">
+		TODO
+	</div>
+</nav>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="content-container">
+				<div ng-if="authentication.isUserSignedIn()">
+					<div class="row">
+						<div class="col-sm-3">
+							<navigation-bar></navigation-bar>
+						</div>
+						
+						<div class="col-sm-9">
+							<view></view>
+						</div>
+					</div>
+				</div>
+				
+				<div ng-if="! authentication.isUserSignedIn()">
+					<view></view>
+				</div>
+			</div>
+			
+			<hr>
+			
+			<div class="row">
+				<div class="col-sm-6">
+					<a href="#/" class="footer-logo-image"></a>
+				</div>
+
+				<div class="col-sm-6">
+					TODO: footer-menu
+				</div>
+			</div>
+			
+			<hr>
+			
+			<div class="copyright-text">
+				ETRS - Eye Tracking Record System |
+				Copyright &copy; 2015 Federico Jasson
+			</div>
+		</div>
+	</div>
+</div>

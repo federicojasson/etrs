@@ -59,6 +59,43 @@ legend {
 	font-weight: bold;
 }
 
+.navbar-brand {
+	background-image: url(images/navbar-logo.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 48px;
+	width: 80px;
+}
+
+.navbar-brand:hover {
+	background-position: 0px -48px;
+}
+
+.navbar-text {
+	color: #666666;
+	font-family: "Fjalla One", sans-serif;
+	font-size: 1.6em;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.copyright-text {
+	color: #aaaaaa;
+	font-size: 0.8em;
+}
+
+.footer-logo-image {
+	background-image: url(images/footer-logo.png);
+	background-position: 0px -72px;
+	background-repeat: no-repeat;
+	height: 72px;
+	width: 256px;
+}
+
+.footer-logo-image:hover {
+	background-position: 0px 0px;
+}
+
 .loading-image {
 	background-image: url(images/loading.gif);
 	background-position: center center;

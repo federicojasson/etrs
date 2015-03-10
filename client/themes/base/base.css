@@ -32,6 +32,34 @@ pre {
 	padding: 15px;
 }
 
+.navbar-text {
+	line-height: 48px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.content-container {
+	padding-bottom: 32px;
+	padding-top: 8px;
+}
+
+.copyright-text {
+	margin-bottom: 48px;
+	margin-top: -12px;
+	text-align: center;
+}
+
+.footer-logo-image {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .fully-centered {
 	display: table-cell;
 	vertical-align: middle;
