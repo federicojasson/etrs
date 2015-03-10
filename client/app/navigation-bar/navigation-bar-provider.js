@@ -87,6 +87,8 @@
 		
 		/**
 		 * TODO: comment
+		 * 
+		 * Receives TODO: comment
 		 */
 		_this.setMenus = function(newMenus) {
 			menus = newMenus;

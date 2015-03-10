@@ -42,8 +42,8 @@
 		/**
 		 * Sets the title.
 		 * 
-		 * The function appends the acronym of the application, so this must not
-		 * be included.
+		 * It appends the acronym of the application, so this must not be
+		 * included.
 		 * 
 		 * Receives the title to be set.
 		 */

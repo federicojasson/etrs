@@ -61,6 +61,29 @@ legend {
 
 /* Bootstrap's classes */
 
+.btn {
+	font-size: 0.85em;
+	line-height: 18px;
+	text-transform: uppercase;
+}
+
+.btn-lg {
+	font-size: 0.95em;
+	line-height: 20px;
+}
+
+.dropdown-menu {
+	font-size: 0.85em;
+	line-height: 18px;
+	text-transform: uppercase;
+}
+
+.input-lg {
+	font-size: 1.2em;
+	height: 42px;
+	padding: 8px 16px;
+}
+
 .modal-header {
 	color: #888888;
 	font-size: 1.1em;
@@ -105,6 +128,10 @@ legend {
 
 .footer-image:hover {
 	background-position: 0px 0px;
+}
+
+.form-footer-link {
+	line-height: 42px;
 }
 
 .loading-image {

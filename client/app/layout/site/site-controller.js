@@ -66,7 +66,7 @@
 			
 			// Includes the actions
 			$scope.action = {
-				signOut: signOutAction.execute
+				signOut: signOutAction
 			};
 		}
 		

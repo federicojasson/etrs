@@ -68,6 +68,8 @@ pre {
 	margin-right: auto;
 }
 
+.form-footer-link {}
+
 .fully-centered {
 	display: table-cell;
 	vertical-align: middle;

@@ -26,9 +26,52 @@
 	 */
 	function InputModelFactory() {
 		/**
-		 * Initializes an instance of the class.
+		 * The message about the input.
+		 * 
+		 * It can be used to provide useful information in case the validation
+		 * fails.
 		 */
-		function InputModel() {}
+		InputModel.prototype.message;
+		
+		/**
+		 * Indicates whether the input is valid.
+		 */
+		InputModel.prototype.valid;
+		
+		/**
+		 * The validator.
+		 * 
+		 * Besides determining whether the input is valid, it should set the
+		 * appropriate message to describe why the validation failed.
+		 */
+		InputModel.prototype.validator;
+		
+		/**
+		 * The value.
+		 */
+		InputModel.prototype.value;
+		
+		/**
+		 * Initializes an instance of the class.
+		 * 
+		 * Receives the validator.
+		 */
+		function InputModel(validator) {
+			// Sets the validator
+			this.validator = validator;
+			
+			// Sets default values
+			this.message = '';
+			this.valid = true;
+			this.value = '';
+		}
+		
+		/**
+		 * Validates the input.
+		 */
+		InputModel.prototype.validate = function() {
+			this.valid = this.validator();
+		};
 		
 		// ---------------------------------------------------------------------
 		

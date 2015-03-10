@@ -20,6 +20,9 @@
 
 (function() {
 	angular.module('app.action.signIn').factory('SignInAction', [
+		'authentication',
+		'inputValidator',
+		'InputModel',
 		'server',
 		SignInActionFactory
 	]);
@@ -27,21 +30,56 @@
 	/**
 	 * Defines the SignInAction class.
 	 */
-	function SignInActionFactory(server) {
+	function SignInActionFactory(authentication, inputValidator, InputModel, server) {
+		/**
+		 * The input.
+		 */
+		SignInAction.prototype.input;
+		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function SignInAction() {}
+		function SignInAction() {
+			// Initializes the input
+			this.input = {
+				credentials: {
+					id: new InputModel(function() {
+						// TODO: implement validation
+						return true;
+					}),
+					
+					password: new InputModel(function() {
+						// TODO: implement validation
+						return true;
+					})
+				}
+			};
+		}
 		
 		/**
 		 * Executes the action.
 		 */
 		SignInAction.prototype.execute = function() {
-			// TODO: validate input
+			if (! inputValidator.isInputValid(this.input)) {
+				// The input is invalid
+				return;
+			}
+			
+			// Defines the input to be sent to the server
+			var input = {
+				credentials: {
+					id: this.input.credentials.id.value,
+					password: this.input.credentials.password.value
+				}
+			};
 			
 			// Signs in the user
-			server.account.signIn(/* TODO: input */).then(function() {
-				// TODO: implement
+			server.account.signIn(input).then(function(output) {
+				if (output.authenticated) {
+					// The user has been authenticated
+					// Refreshes the authentication state
+					authentication.refreshState();
+				}
 			});
 		};
 		

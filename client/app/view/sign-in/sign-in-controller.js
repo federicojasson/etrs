@@ -58,10 +58,11 @@
 		function initialize() {
 			// Initializes the sign-in action
 			var signInAction = new SignInAction();
+			// TODO: register callbacks
 			
 			// Includes the actions
 			$scope.action = {
-				signIn: signInAction.execute
+				signIn: signInAction
 			};
 		}
 		

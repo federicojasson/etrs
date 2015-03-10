@@ -3,13 +3,14 @@
 
 - Fix HTML5 API bug
 - Considerar usar controlador para las directivas (¿es posible? ¿es conveniente?)
-
+- Chequear qué módulos pueden considerarse como utilidades (utility module).
 
 - Cambiar nombre de Action... a ...Action.
 - Cambiar nombre de View... a ...View.
 - Cambiar nombre de Layout... a ...Layout.
 - Cambiar nombre de acciones (no respetar jerarquía).
 
+- Check two-line comments. Regular expression: \/\/.*\n[\t]*\/\/
 - Check warnings.
 - Check protected fields.
 - Check double whitespaces.

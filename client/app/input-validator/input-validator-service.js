@@ -27,6 +27,13 @@
 	function inputValidatorService() {
 		var _this = this;
 		
-		// TODO: implement service
+		/**
+		 * TODO: comment function
+		 * 
+		 * Receives TODO: comment
+		 */
+		_this.isInputValid = function(input) {
+			// TODO: implement function
+		};
 	}
 })();

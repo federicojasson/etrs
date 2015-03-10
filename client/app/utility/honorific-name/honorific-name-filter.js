@@ -22,11 +22,13 @@
 	angular.module('app.utility.honorificName').filter('honorificName', honorificNameFilter);
 	
 	/**
-	 * TODO: comment
+	 * Returns the honorific name of a user.
 	 */
 	function honorificNameFilter() {
 		/**
-		 * TODO: comment
+		 * Applies the filter.
+		 * 
+		 * Receives the user.
 		 */
 		function filter(user) {
 			// Gets the honorific title
@@ -37,23 +39,28 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Returns the honorific title of a user.
+		 * 
+		 * Receives the user.
 		 */
 		function getHonorificTitle(user) {
-			// TODO: comment
-			
+			// Initializes the honorific title
 			var honorificTitle = '';
 			
 			if (user.role === 'dr') {
+				// The user is a doctor
 				honorificTitle += 'Dr';
 			} else {
+				// The user is not a doctor
 				honorificTitle += 'Sr';
 			}
 			
 			if (user.gender === 'f') {
+				// The user is a woman
 				honorificTitle += 'a';
 			}
 			
+			// Appends a dot
 			honorificTitle += '.';
 			
 			return honorificTitle;
