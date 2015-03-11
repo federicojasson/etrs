@@ -34,6 +34,7 @@
 		function getServices() {
 			return [
 				'/account/reset-password',
+				'/account/reset-password/authenticate',
 				'/account/reset-password/request',
 				'/account/sign-in',
 				'/account/sign-out',

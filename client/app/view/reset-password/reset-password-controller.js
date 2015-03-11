@@ -21,16 +21,18 @@
 (function() {
 	angular.module('app.view.resetPassword').controller('ResetPasswordViewController', [
 		'$scope',
+		'$stateParams',
 		'ResetPasswordAction',
 		'dialog',
 		'router',
+		'server',
 		ResetPasswordViewController
 	]);
 	
 	/**
 	 * Represents the reset-password view.
 	 */
-	function ResetPasswordViewController($scope, ResetPasswordAction, dialog, router) {
+	function ResetPasswordViewController($scope, $stateParams, ResetPasswordAction, dialog, router, server) {
 		var _this = this;
 		
 		/**
@@ -58,6 +60,29 @@
 		_this.isReady = function() {
 			return ready;
 		};
+		
+		/**
+		 * TODO: comment
+		 */
+		function authenticateResetPasswordPermission(credentials) {
+			// Defines the input to be sent to the server
+			var input = {
+				credentials: credentials
+			};
+			
+			// Authenticates the reset-password permission
+			server.account.resetPassword.authenticate(input).then(function(output) {
+				if (output.authenticated) {
+					// The reset-password permission has been authenticated
+					// TODO: comment
+					ready = true;
+				} else {
+					// The reset-password permission has not been authenticated
+					// Redirects the user to the home route
+					router.redirect('/');
+				}
+			});
+		}
 		
 		/**
 		 * TODO: comment
@@ -107,10 +132,18 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO: credentials
+			// Initializes the credentials TODO: comment
+			var credentials = {
+				id: $stateParams.id,
+				password: $stateParams.password
+			};
+			
+			// Authenticates the reset-password permission
+			authenticateResetPasswordPermission(credentials);
 			
 			// Initializes the reset-password action
 			var resetPasswordAction = new ResetPasswordAction();
+			resetPasswordAction.credentials = credentials;
 			resetPasswordAction.notAuthenticatedCallback = decideName1;
 			resetPasswordAction.startCallback = decideName2;
 			resetPasswordAction.successCallback = decideName3;
