@@ -7,7 +7,8 @@
 - Chequear que el estilo de los mails coincida con el del sitio final.
 - Chequear que no haya líneas HTML muy largas.
 - Chequear cuándo pedir confirmación (dialog.openConfirmation).
-- ¿Enviar callbacks de acciones por constructor?
+- ¿Enviar callbacks de acciones por constructor? ¿Debería ser consistente esto en todas las clases?
+- URL vs state en href
 
 - Check two-line comments. Regular expression: \/\/.*\n[\t]*\/\/
 - Check warnings.

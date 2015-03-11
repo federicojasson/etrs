@@ -113,7 +113,7 @@
 				userRole: this.input.userRole.value
 			};
 			
-			// Requests the sign-up permission
+			// Requests a sign-up permission
 			server.account.signUp.request(input).then(function(output) {
 				if (! output.authenticated) {
 					// The user has not been authenticated

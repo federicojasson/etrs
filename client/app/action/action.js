@@ -22,6 +22,7 @@
 	angular.module('app.action', [
 		'app.action.requestResetPassword',
 		'app.action.requestSignUp',
+		'app.action.resetPassword',
 		'app.action.signIn',
 		'app.action.signOut'
 	]);
