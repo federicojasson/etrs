@@ -84,10 +84,17 @@ legend {
 	padding: 8px 16px;
 }
 
+.modal-footer {
+	background-color: #ffffff;
+}
+
 .modal-header {
+	background-color: #eeeeee;
 	color: #888888;
-	font-size: 1.1em;
+	font-size: 1em;
 	font-weight: bold;
+	letter-spacing: -0.4px;
+	text-transform: uppercase;
 }
 
 .navbar-brand {

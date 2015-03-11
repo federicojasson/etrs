@@ -55,6 +55,13 @@
 		};
 		
 		/**
+		 * TODO: comment
+		 */
+		function decideName() { // TODO: rename function
+			// TODO: implement
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -63,6 +70,7 @@
 			
 			// Initializes the sign-out action
 			var signOutAction = new SignOutAction();
+			signOutAction.registerStartCallback(decideName);
 			
 			// Includes the actions
 			$scope.action = {

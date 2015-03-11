@@ -37,9 +37,29 @@
 		SignInAction.prototype.input;
 		
 		/**
+		 * TODO: comment
+		 */
+		SignInAction.prototype.notAuthenticatedCallback;
+		
+		/**
+		 * TODO: comment
+		 */
+		SignInAction.prototype.startCallback;
+		
+		/**
+		 * TODO: comment
+		 */
+		SignInAction.prototype.successCallback;
+		
+		/**
 		 * Initializes an instance of the class.
 		 */
 		function SignInAction() {
+			// TODO: comment
+			this.notAuthenticatedCallback = function() {};
+			this.startCallback = function() {};
+			this.successCallback = function() {};
+			
 			// Initializes the input
 			this.input = {
 				credentials: {
@@ -65,6 +85,9 @@
 				return;
 			}
 			
+			// Invokes the start callback
+			this.startCallback();
+			
 			// Defines the input to be sent to the server
 			var input = {
 				credentials: {
@@ -75,12 +98,42 @@
 			
 			// Signs in the user
 			server.account.signIn(input).then(function(output) {
-				if (output.authenticated) {
-					// The user has been authenticated
-					// Refreshes the authentication state
-					authentication.refreshState();
+				if (! output.authenticated) {
+					// The user has not been authenticated
+					
+					// Invokes the not-authenticated callback
+					this.notAuthenticatedCallback();
+					
+					return;
 				}
-			});
+				
+				// Refreshes the authentication state
+				authentication.refreshState();
+				
+				// Invokes the success callback
+				this.successCallback();
+			}.bind(this));
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		SignInAction.prototype.registerNotAuthenticatedCallback = function(callback) {
+			this.notAuthenticatedCallback = callback;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		SignInAction.prototype.registerStartCallback = function(callback) {
+			this.startCallback = callback;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		SignInAction.prototype.registerSuccessCallback = function(callback) {
+			this.successCallback = callback;
 		};
 		
 		// ---------------------------------------------------------------------

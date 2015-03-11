@@ -30,19 +30,53 @@
 	 */
 	function SignOutActionFactory(authentication, server) {
 		/**
+		 * TODO: comment
+		 */
+		SignOutAction.prototype.startCallback;
+		
+		/**
+		 * TODO: comment
+		 */
+		SignOutAction.prototype.successCallback;
+		
+		/**
 		 * Initializes an instance of the class.
 		 */
-		function SignOutAction() {}
+		function SignOutAction() {
+			// TODO: comment
+			this.startCallback = function() {};
+			this.successCallback = function() {};
+		}
 		
 		/**
 		 * Executes the action.
 		 */
 		SignOutAction.prototype.execute = function() {
+			// Invokes the start callback
+			this.startCallback();
+			
 			// Signs out the user
 			server.account.signOut().then(function() {
 				// Refreshes the authentication state
 				authentication.refreshState();
-			});
+				
+				// Invokes the success callback
+				this.successCallback();
+			}.bind(this));
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		SignOutAction.prototype.registerStartCallback = function(callback) {
+			this.startCallback = callback;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		SignOutAction.prototype.registerSuccessCallback = function(callback) {
+			this.successCallback = callback;
 		};
 		
 		// ---------------------------------------------------------------------

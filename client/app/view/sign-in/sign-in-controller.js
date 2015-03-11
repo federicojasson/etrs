@@ -22,14 +22,20 @@
 	angular.module('app.view.signIn').controller('SignInViewController', [
 		'$scope',
 		'SignInAction',
+		'dialog',
 		SignInViewController
 	]);
 	
 	/**
 	 * Represents the sign-in view.
 	 */
-	function SignInViewController($scope, SignInAction) {
+	function SignInViewController($scope, SignInAction, dialog) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the URL of the template.
@@ -49,8 +55,31 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * TODO: comment
+		 */
+		function decideName1() { // TODO: rename function
+			// TODO: comment
+			ready = true;
+			
+			// Opens an information dialog
+			dialog.openInformation(
+				'Credenciales rechazadas',
+				'No fue posible autenticar su identidad.\n' +
+				'Reingrese su nombre de usuario y su contraseña.'
+			);
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		function decideName2() { // TODO: rename function
+			// TODO: comment
+			ready = false;
+		}
 		
 		/**
 		 * Performs initialization tasks.
@@ -58,7 +87,8 @@
 		function initialize() {
 			// Initializes the sign-in action
 			var signInAction = new SignInAction();
-			// TODO: register callbacks
+			signInAction.registerNotAuthenticatedCallback(decideName1);
+			signInAction.registerStartCallback(decideName2);
 			
 			// Includes the actions
 			$scope.action = {

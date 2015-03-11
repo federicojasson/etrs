@@ -34,6 +34,7 @@
 		 */
 		_this.isInputValid = function(input) {
 			// TODO: implement function
+			return true;
 		};
 	}
 })();
