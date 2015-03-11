@@ -115,27 +115,6 @@
 			}.bind(this));
 		};
 		
-		/**
-		 * TODO: comment
-		 */
-		SignInAction.prototype.registerNotAuthenticatedCallback = function(callback) {
-			this.notAuthenticatedCallback = callback;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		SignInAction.prototype.registerStartCallback = function(callback) {
-			this.startCallback = callback;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		SignInAction.prototype.registerSuccessCallback = function(callback) {
-			this.successCallback = callback;
-		};
-		
 		// ---------------------------------------------------------------------
 		
 		return SignInAction;

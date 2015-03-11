@@ -19,18 +19,18 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.requestResetPassword').controller('RequestResetPasswordViewController', [
+	angular.module('app.view.requestSignUp').controller('RequestSignUpViewController', [
 		'$scope',
-		'RequestResetPasswordAction',
+		'RequestSignUpAction',
 		'dialog',
 		'router',
-		RequestResetPasswordViewController
+		RequestSignUpViewController
 	]);
 	
 	/**
-	 * Represents the request-reset-password view.
+	 * Represents the request-sign-up view.
 	 */
-	function RequestResetPasswordViewController($scope, RequestResetPasswordAction, dialog, router) {
+	function RequestSignUpViewController($scope, RequestSignUpAction, dialog, router) {
 		var _this = this;
 		
 		/**
@@ -42,14 +42,14 @@
 		 * Returns the URL of the template.
 		 */
 		_this.getTemplateUrl = function() {
-			return 'app/view/request-reset-password/request-reset-password.html';
+			return 'app/view/request-sign-up/request-sign-up.html';
 		};
 		
 		/**
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Restablecer contraseña';
+			return 'Enviar invitación';
 		};
 		
 		/**
@@ -70,8 +70,7 @@
 			dialog.openInformation(
 				'Credenciales rechazadas',
 				'No fue posible autenticar su identidad.\n' +
-				'Reingrese su nombre de usuario y su dirección de correo electrónico.\n' +
-				'Asegúrese de que la dirección proporcionada corresponda a la utilizada en el sistema.'
+				'Reingrese su contraseña.'
 			);
 		}
 		
@@ -92,9 +91,8 @@
 			
 			// Opens an information dialog
 			dialog.openInformation(
-				'Correo electrónico enviado',
-				'Se ha enviado un correo electrónico a su casilla.\n' +
-				'Para restablecer su contraseña, siga los pasos indicados en el mismo.',
+				'Invitación enviada',
+				'Se ha enviado una invitación a la casilla de correo electrónico indicada.',
 				function() {
 					// Redirects the user to the home route
 					router.redirect('/');
@@ -106,15 +104,15 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the request-reset-password action
-			var requestResetPasswordAction = new RequestResetPasswordAction();
-			requestResetPasswordAction.notAuthenticatedCallback = decideName1;
-			requestResetPasswordAction.startCallback = decideName2;
-			requestResetPasswordAction.successCallback = decideName3;
+			// Initializes the request-sign-up action
+			var requestSignUpAction = new RequestSignUpAction();
+			requestSignUpAction.notAuthenticatedCallback = decideName1;
+			requestSignUpAction.startCallback = decideName2;
+			requestSignUpAction.successCallback = decideName3;
 			
 			// Includes the actions
 			$scope.action = {
-				requestResetPassword: requestResetPasswordAction
+				requestSignUp: requestSignUpAction
 			};
 		}
 		

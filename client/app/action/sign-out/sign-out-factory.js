@@ -65,20 +65,6 @@
 			}.bind(this));
 		};
 		
-		/**
-		 * TODO: comment
-		 */
-		SignOutAction.prototype.registerStartCallback = function(callback) {
-			this.startCallback = callback;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		SignOutAction.prototype.registerSuccessCallback = function(callback) {
-			this.successCallback = callback;
-		};
-		
 		// ---------------------------------------------------------------------
 		
 		return SignOutAction;

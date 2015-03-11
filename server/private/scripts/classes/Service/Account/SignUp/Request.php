@@ -101,7 +101,7 @@ class Request extends \App\Service\ExternalService {
 			]),
 			
 			'recipient' => new ObjectDescriptor([
-				'name' => new ValueDescriptor(function($input) {
+				'fullName' => new ValueDescriptor(function($input) {
 					// TODO: implement
 					return true;
 				}),

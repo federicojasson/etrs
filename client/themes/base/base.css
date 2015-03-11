@@ -58,6 +58,7 @@ pre {
 }
 
 .navbar {
+	margin-bottom: 0px;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-webkit-touch-callout: none;
@@ -102,7 +103,7 @@ pre {
 	margin-right: auto;
 }
 
-.form-footer-link {}
+.form-footer-text {}
 
 .fully-centered {
 	display: table-cell;
@@ -118,6 +119,10 @@ pre {
 
 .icon-text {
 	margin-left: 8px;
+}
+
+.isolated-paragraph {
+	margin-bottom: 32px;
 }
 
 .loading-image {

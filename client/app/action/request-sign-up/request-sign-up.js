@@ -19,10 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.action', [
-		'app.action.requestResetPassword',
-		'app.action.requestSignUp',
-		'app.action.signIn',
-		'app.action.signOut'
-	]);
+	angular.module('app.action.requestSignUp', []);
 })();

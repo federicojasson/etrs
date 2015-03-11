@@ -7,6 +7,7 @@
 - Chequear que el estilo de los mails coincida con el del sitio final.
 - Chequear que no haya líneas HTML muy largas.
 - Chequear cuándo pedir confirmación (dialog.openConfirmation).
+- ¿Enviar callbacks de acciones por constructor?
 
 - Check two-line comments. Regular expression: \/\/.*\n[\t]*\/\/
 - Check warnings.

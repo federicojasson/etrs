@@ -83,7 +83,7 @@ class Request extends \App\Service\ExternalService {
 		
 		// Initializes the recipient of the email
 		$recipient = [
-			'name' => $user->getFirstName() . ' ' . $user->getLastName(),
+			'fullName' => $user->getFirstName() . ' ' . $user->getLastName(),
 			'emailAddress' => $user->getEmailAddress()
 		];
 		

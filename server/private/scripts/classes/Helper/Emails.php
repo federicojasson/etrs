@@ -127,7 +127,7 @@ class Emails {
 		// Sets the data of the email
 		$email->From = $sender['emailAddress'];
 		$email->FromName = $sender['name'];
-		$email->addAddress($recipient['emailAddress'], $recipient['name']);
+		$email->addAddress($recipient['emailAddress'], $recipient['fullName']);
 		$email->Subject = $subject;
 		$email->isHTML();
 		$email->CharSet = 'UTF-8';

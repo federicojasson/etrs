@@ -72,6 +72,17 @@
 				},
 				
 				{
+					name: 'requestSignUp',
+					url: '/account/sign-up',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'RequestSignUpViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'signIn',
 					url: '/account/sign-in',
 					data: {

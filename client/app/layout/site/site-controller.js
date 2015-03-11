@@ -70,7 +70,7 @@
 			
 			// Initializes the sign-out action
 			var signOutAction = new SignOutAction();
-			signOutAction.registerStartCallback(decideName);
+			signOutAction.startCallback = decideName;
 			
 			// Includes the actions
 			$scope.action = {

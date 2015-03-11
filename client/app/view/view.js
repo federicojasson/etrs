@@ -23,6 +23,7 @@
 		'app.view.account',
 		'app.view.home',
 		'app.view.requestResetPassword',
+		'app.view.requestSignUp',
 		'app.view.signIn'
 	]);
 })();

@@ -87,8 +87,8 @@
 		function initialize() {
 			// Initializes the sign-in action
 			var signInAction = new SignInAction();
-			signInAction.registerNotAuthenticatedCallback(decideName1);
-			signInAction.registerStartCallback(decideName2);
+			signInAction.notAuthenticatedCallback = decideName1;
+			signInAction.startCallback = decideName2;
 			
 			// Includes the actions
 			$scope.action = {

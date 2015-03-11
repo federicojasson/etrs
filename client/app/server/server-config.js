@@ -36,6 +36,7 @@
 				'/account/reset-password/request',
 				'/account/sign-in',
 				'/account/sign-out',
+				'/account/sign-up/request',
 				'/authentication/get-state'
 			];
 		}

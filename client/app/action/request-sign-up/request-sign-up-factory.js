@@ -19,41 +19,41 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.requestResetPassword').factory('RequestResetPasswordAction', [
+	angular.module('app.action.requestSignUp').factory('RequestSignUpAction', [
 		'inputValidator',
 		'InputModel',
 		'server',
-		RequestResetPasswordActionFactory
+		RequestSignUpActionFactory
 	]);
 	
 	/**
-	 * Defines the RequestResetPasswordAction class.
+	 * Defines the RequestSignUpAction class.
 	 */
-	function RequestResetPasswordActionFactory(inputValidator, InputModel, server) {
+	function RequestSignUpActionFactory(inputValidator, InputModel, server) {
 		/**
 		 * The input.
 		 */
-		RequestResetPasswordAction.prototype.input;
+		RequestSignUpAction.prototype.input;
 		
 		/**
 		 * TODO: comment
 		 */
-		RequestResetPasswordAction.prototype.notAuthenticatedCallback;
+		RequestSignUpAction.prototype.notAuthenticatedCallback;
 		
 		/**
 		 * TODO: comment
 		 */
-		RequestResetPasswordAction.prototype.startCallback;
+		RequestSignUpAction.prototype.startCallback;
 		
 		/**
 		 * TODO: comment
 		 */
-		RequestResetPasswordAction.prototype.successCallback;
+		RequestSignUpAction.prototype.successCallback;
 		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function RequestResetPasswordAction() {
+		function RequestSignUpAction() {
 			// TODO: comment
 			this.notAuthenticatedCallback = function() {};
 			this.startCallback = function() {};
@@ -62,23 +62,35 @@
 			// Initializes the input
 			this.input = {
 				credentials: {
-					id: new InputModel(function() {
+					password: new InputModel(function() {
 						// TODO: implement validation
+						return true;
+					})
+				},
+
+				recipient: {
+					fullName: new InputModel(function() {
+						// TODO: input validation
 						return true;
 					}),
 					
 					emailAddress: new InputModel(function() {
-						// TODO: implement validation
+						// TODO: input validation
 						return true;
 					})
-				}
+				},
+
+				userRole: new InputModel(function() {
+					// TODO: input validation
+					return true;
+				})
 			};
 		}
 		
 		/**
 		 * Executes the action.
 		 */
-		RequestResetPasswordAction.prototype.execute = function() {
+		RequestSignUpAction.prototype.execute = function() {
 			if (! inputValidator.isInputValid(this.input)) {
 				// The input is invalid
 				return;
@@ -90,13 +102,19 @@
 			// Defines the input to be sent to the server
 			var input = {
 				credentials: {
-					id: this.input.credentials.id.value,
-					emailAddress: this.input.credentials.emailAddress.value
-				}
+					password: this.input.credentials.password.value
+				},
+
+				recipient: {
+					fullName: this.input.recipient.fullName.value,
+					emailAddress: this.input.recipient.emailAddress.value
+				},
+
+				userRole: this.input.userRole.value
 			};
 			
-			// Requests the reset-password permission
-			server.account.resetPassword.request(input).then(function(output) {
+			// Requests the sign-up permission
+			server.account.signUp.request(input).then(function(output) {
 				if (! output.authenticated) {
 					// The user has not been authenticated
 					
@@ -113,6 +131,6 @@
 		
 		// ---------------------------------------------------------------------
 		
-		return RequestResetPasswordAction;
+		return RequestSignUpAction;
 	}
 })();
