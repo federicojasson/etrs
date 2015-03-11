@@ -21,6 +21,7 @@
 (function() {
 	angular.module('app.view', [
 		'app.view.home',
+		'app.view.requestResetPassword',
 		'app.view.signIn'
 	]);
 })();

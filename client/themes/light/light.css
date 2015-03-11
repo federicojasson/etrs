@@ -140,6 +140,14 @@ legend {
 	font-size: 0.8em;
 }
 
+.email-image {
+	background-image: url(images/mailbox.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
+}
+
 .footer-image {
 	background-image: url(images/big-logo.png);
 	background-position: 0px -72px;

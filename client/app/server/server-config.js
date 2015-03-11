@@ -33,6 +33,7 @@
 		 */
 		function getServices() {
 			return [
+				'/account/reset-password/request',
 				'/account/sign-in',
 				'/account/sign-out',
 				'/authentication/get-state'

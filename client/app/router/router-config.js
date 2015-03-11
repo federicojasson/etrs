@@ -36,7 +36,6 @@
 		function getStates() {
 			return [
 				// TODO: define /account route
-				// TODO: define /account/reset-password route
 				
 				{
 					name: 'home',
@@ -47,6 +46,16 @@
 							ad: 'HomeViewController',
 							dr: 'HomeViewController',
 							op: 'HomeViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'requestResetPassword',
+					url: '/account/reset-password',
+					data: {
+						views: {
+							__: 'RequestResetPasswordViewController'
 						}
 					}
 				},

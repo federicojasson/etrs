@@ -182,7 +182,7 @@ function loadClass($class) {
 }
 
 /**
- * Registers a set of middlewares and runs the application.
+ * Adds a set of middlewares and runs the application.
  * 
  * Receives the middlewares.
  */
@@ -194,7 +194,7 @@ function runApp($middlewares) {
 		'mode' => OPERATION_MODE
 	]);
 
-	// Registers the middlewares
+	// Adds the middlewares
 	foreach ($middlewares as $middleware) {
 		$app->add($middleware);
 	}
