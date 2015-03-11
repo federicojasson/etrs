@@ -35,7 +35,18 @@
 		 */
 		function getStates() {
 			return [
-				// TODO: define /account route
+				{
+					name: 'account',
+					url: '/account',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'AccountViewController',
+							dr: 'AccountViewController',
+							op: 'AccountViewController'
+						}
+					}
+				},
 				
 				{
 					name: 'home',

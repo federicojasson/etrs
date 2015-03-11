@@ -19,10 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.home',
-		'app.view.requestResetPassword',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.account').controller('AccountViewController', AccountViewController);
+	
+	/**
+	 * Represents the account view.
+	 */
+	function AccountViewController() {
+		var _this = this;
+		
+		/**
+		 * Returns the URL of the template.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/account/account.html';
+		};
+		
+		/**
+		 * Returns the title to be set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return ''; // TODO: get user
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return true; // TODO: get user
+		};
+	}
 })();
