@@ -81,7 +81,7 @@ class Data {
 		// Initializes the result
 		$result = null;
 		
-		// Initializes the transaction
+		// Defines the transaction
 		$transaction = function($entityManager) use ($closure, &$result) {
 			// Invokes the closure
 			$result = call_user_func($closure, $entityManager);

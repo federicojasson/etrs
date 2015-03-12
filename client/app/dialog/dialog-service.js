@@ -79,7 +79,7 @@
 			// Initializes the dialog
 			dialog = new Dialog(type, title, message);
 			
-			// Defines the parameters for the dialog
+			// Defines the dialog parameters
 			var parameters = {
 				backdrop: 'static',
 				controller: 'DialogController',

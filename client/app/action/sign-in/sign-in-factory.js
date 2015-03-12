@@ -37,17 +37,23 @@
 		SignInAction.prototype.input;
 		
 		/**
-		 * TODO: comment
+		 * The not-authenticated callback.
+		 * 
+		 * It is invoked when the user is not authenticated.
 		 */
 		SignInAction.prototype.notAuthenticatedCallback;
 		
 		/**
-		 * TODO: comment
+		 * The start callback.
+		 * 
+		 * It is invoked at the start of the action.
 		 */
 		SignInAction.prototype.startCallback;
 		
 		/**
-		 * TODO: comment
+		 * The success callback.
+		 * 
+		 * It is invoked when the action is successful.
 		 */
 		SignInAction.prototype.successCallback;
 		
@@ -60,7 +66,7 @@
 			this.startCallback = function() {};
 			this.successCallback = function() {};
 			
-			// Initializes the input
+			// Defines the input
 			this.input = {
 				credentials: {
 					id: new InputModel(function() {

@@ -31,7 +31,7 @@
 	 */
 	function SignUpActionFactory(inputValidator, InputModel, server) {
 		/**
-		 * TODO: comment.
+		 * The credentials of the sign-up permission.
 		 */
 		SignUpAction.prototype.credentials;
 		
@@ -41,22 +41,30 @@
 		SignUpAction.prototype.input;
 		
 		/**
-		 * TODO: comment
+		 * The not-authenticated callback.
+		 * 
+		 * It is invoked when the sign-up permission is not authenticated.
 		 */
 		SignUpAction.prototype.notAuthenticatedCallback;
 		
 		/**
-		 * TODO: comment
+		 * The not-available callback.
+		 * 
+		 * It is invoked when the user ID is not available.
 		 */
 		SignUpAction.prototype.notAvailableCallback;
 		
 		/**
-		 * TODO: comment
+		 * The start callback.
+		 * 
+		 * It is invoked at the start of the action.
 		 */
 		SignUpAction.prototype.startCallback;
 		
 		/**
-		 * TODO: comment
+		 * The success callback.
+		 * 
+		 * It is invoked when the action is successful.
 		 */
 		SignUpAction.prototype.successCallback;
 		
@@ -70,7 +78,7 @@
 			this.startCallback = function() {};
 			this.successCallback = function() {};
 			
-			// Initializes the input
+			// Defines the input
 			this.input = {
 				id: new InputModel(function() {
 					// TODO: input validation

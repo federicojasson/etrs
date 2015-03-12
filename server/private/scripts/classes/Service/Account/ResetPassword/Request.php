@@ -81,7 +81,7 @@ class Request extends \App\Service\ExternalService {
 			return $resetPasswordPermission->getId();
 		});
 		
-		// Initializes the recipient of the email
+		// Defines the recipient of the email
 		$recipient = [
 			'fullName' => $user->getFirstName() . ' ' . $user->getLastName(),
 			'emailAddress' => $user->getEmailAddress()

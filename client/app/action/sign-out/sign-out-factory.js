@@ -30,12 +30,16 @@
 	 */
 	function SignOutActionFactory(authentication, server) {
 		/**
-		 * TODO: comment
+		 * The start callback.
+		 * 
+		 * It is invoked at the start of the action.
 		 */
 		SignOutAction.prototype.startCallback;
 		
 		/**
-		 * TODO: comment
+		 * The success callback.
+		 * 
+		 * It is invoked when the action is successful.
 		 */
 		SignOutAction.prototype.successCallback;
 		

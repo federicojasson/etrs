@@ -149,7 +149,7 @@ class Emails {
 		// Gets the server parameters
 		$server = $app->parameters->server;
 		
-		// Initializes the sender of the email
+		// Defines the sender of the email
 		$sender = [
 			'name' => 'ETRS',
 			'emailAddress' => $server['emailAddress']

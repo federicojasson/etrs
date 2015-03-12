@@ -135,7 +135,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the credentials TODO: comment
+			// Defines the credentials of the reset-password permission
 			var credentials = {
 				id: $stateParams.id,
 				password: $stateParams.password

@@ -153,7 +153,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the credentials TODO: comment
+			// Defines the credentials of the sign-up permission
 			var credentials = {
 				id: $stateParams.id,
 				password: $stateParams.password

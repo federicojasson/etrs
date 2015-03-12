@@ -31,7 +31,7 @@
 	 */
 	function ResetPasswordActionFactory(inputValidator, InputModel, server) {
 		/**
-		 * TODO: comment.
+		 * The credentials of the reset-password permission.
 		 */
 		ResetPasswordAction.prototype.credentials;
 		
@@ -41,17 +41,24 @@
 		ResetPasswordAction.prototype.input;
 		
 		/**
-		 * TODO: comment
+		 * The not-authenticated callback.
+		 * 
+		 * It is invoked when the reset-password permission is not
+		 * authenticated.
 		 */
 		ResetPasswordAction.prototype.notAuthenticatedCallback;
 		
 		/**
-		 * TODO: comment
+		 * The start callback.
+		 * 
+		 * It is invoked at the start of the action.
 		 */
 		ResetPasswordAction.prototype.startCallback;
 		
 		/**
-		 * TODO: comment
+		 * The success callback.
+		 * 
+		 * It is invoked when the action is successful.
 		 */
 		ResetPasswordAction.prototype.successCallback;
 		
@@ -64,7 +71,7 @@
 			this.startCallback = function() {};
 			this.successCallback = function() {};
 			
-			// Initializes the input
+			// Defines the input
 			this.input = {
 				password: new InputModel(function() {
 					// TODO: input validation
