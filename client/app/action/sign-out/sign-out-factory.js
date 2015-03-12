@@ -47,7 +47,7 @@
 		 * Initializes an instance of the class.
 		 */
 		function SignOutAction() {
-			// TODO: comment
+			// Initializes the callbacks
 			this.startCallback = function() {};
 			this.successCallback = function() {};
 		}

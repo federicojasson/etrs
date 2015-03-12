@@ -66,7 +66,7 @@
 		 * Initializes an instance of the class.
 		 */
 		function ResetPasswordAction() {
-			// TODO: comment
+			// Initializes the callbacks
 			this.notAuthenticatedCallback = function() {};
 			this.startCallback = function() {};
 			this.successCallback = function() {};

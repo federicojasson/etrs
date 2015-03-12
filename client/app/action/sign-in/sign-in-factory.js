@@ -61,7 +61,7 @@
 		 * Initializes an instance of the class.
 		 */
 		function SignInAction() {
-			// TODO: comment
+			// Initializes the callbacks
 			this.notAuthenticatedCallback = function() {};
 			this.startCallback = function() {};
 			this.successCallback = function() {};
