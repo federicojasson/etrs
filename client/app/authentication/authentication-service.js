@@ -68,7 +68,6 @@
 		 * order to keep the application synchronized with the server.
 		 */
 		_this.refreshState = function() {
-			// Sets the state-refreshing flag
 			stateRefreshing = true;
 			
 			// Gets the authentication state
@@ -77,9 +76,7 @@
 					// The user is not signed in
 					signedInUser = null;
 					
-					// Sets the state-refreshing flag
 					stateRefreshing = false;
-					
 					return;
 				}
 				

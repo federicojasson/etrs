@@ -33,8 +33,23 @@
 		 * Receives TODO: comment
 		 */
 		_this.isInputValid = function(input) {
-			// TODO: implement function
-			return true;
+			if (angular.isDefined(input.validate) && angular.isFunction(input.validate)) {
+				// The input is not an object
+				
+				// Validates the input
+				input.validate();
+				
+				// Determines whether the input is valid
+				return input.valid;
+			}
+			
+			// TODO: comment
+			var valid = true;
+			for (var property in input) { if (! input.hasOwnProperty(property)) continue;
+				valid &= _this.isInputValid(input[property]);
+			}
+			
+			return valid;
 		};
 	}
 })();
