@@ -63,10 +63,26 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Performs initialization tasks.
 		 */
-		function decideName1() { // TODO: rename function
-			// TODO: comment
+		function initialize() {
+			// Initializes the request-reset-password action
+			var requestResetPasswordAction = new RequestResetPasswordAction();
+			requestResetPasswordAction.notAuthenticatedCallback = onNotAuthenticated;
+			requestResetPasswordAction.startCallback = onStart;
+			requestResetPasswordAction.successCallback = onSuccess;
+			
+			// Includes the actions
+			$scope.action = {
+				requestResetPassword: requestResetPasswordAction
+			};
+		}
+		
+		/**
+		 * Invoked when the user is not authenticated during the execution of
+		 * the request-reset-password action.
+		 */
+		function onNotAuthenticated() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -80,18 +96,16 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked at the start of the request-reset-password action.
 		 */
-		function decideName2() { // TODO: rename function
-			// TODO: comment
+		function onStart() {
 			ready = false;
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked when the request-reset-password action is successful.
 		 */
-		function decideName3() { // TODO: rename function
-			// TODO: comment
+		function onSuccess() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -104,22 +118,6 @@
 					router.redirect('/');
 				}
 			);
-		}
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Initializes the request-reset-password action
-			var requestResetPasswordAction = new RequestResetPasswordAction();
-			requestResetPasswordAction.notAuthenticatedCallback = decideName1;
-			requestResetPasswordAction.startCallback = decideName2;
-			requestResetPasswordAction.successCallback = decideName3;
-			
-			// Includes the actions
-			$scope.action = {
-				requestResetPassword: requestResetPasswordAction
-			};
 		}
 		
 		// ---------------------------------------------------------------------

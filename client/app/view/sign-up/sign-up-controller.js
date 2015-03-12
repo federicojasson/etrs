@@ -65,7 +65,9 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Authenticates the sign-up permission.
+		 * 
+		 * Receives the credentials of the sign-up permission.
 		 */
 		function authenticateSignUpPermission(credentials) {
 			// Defines the input to be sent to the server
@@ -75,23 +77,51 @@
 			
 			// Authenticates the sign-up permission
 			server.account.signUp.authenticate(input).then(function(output) {
-				if (output.authenticated) {
-					// The sign-up permission has been authenticated
-					// TODO: comment
-					ready = true;
-				} else {
+				if (! output.authenticated) {
 					// The sign-up permission has not been authenticated
+					
 					// Redirects the user to the home route
 					router.redirect('/');
+					
+					return;
 				}
+				
+				ready = true;
 			});
 		}
 		
 		/**
-		 * TODO: comment
+		 * Performs initialization tasks.
 		 */
-		function decideName1() { // TODO: rename function
-			// TODO: comment
+		function initialize() {
+			// Defines the credentials of the sign-up permission
+			var credentials = {
+				id: $stateParams.id,
+				password: $stateParams.password
+			};
+			
+			// Initializes the sign-up action
+			var signUpAction = new SignUpAction();
+			signUpAction.credentials = credentials;
+			signUpAction.notAuthenticatedCallback = onNotAuthenticated;
+			signUpAction.notAvailableCallback = onNotAvailable;
+			signUpAction.startCallback = onStart;
+			signUpAction.successCallback = onSuccess;
+			
+			// Includes the actions
+			$scope.action = {
+				signUp: signUpAction
+			};
+			
+			// Authenticates the sign-up permission
+			authenticateSignUpPermission(credentials);
+		}
+		
+		/**
+		 * Invoked when the sign-up permission is not authenticated during the
+		 * execution of the sign-up action.
+		 */
+		function onNotAuthenticated() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -106,10 +136,10 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked when the user ID is not available during the execution of the
+		 * sign-up action.
 		 */
-		function decideName2() { // TODO: rename function
-			// TODO: comment
+		function onNotAvailable() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -121,18 +151,16 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked at the start of the sign-up action.
 		 */
-		function decideName3() { // TODO: rename function
-			// TODO: comment
+		function onStart() {
 			ready = false;
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked when the sign-up action is successful.
 		 */
-		function decideName4() { // TODO: rename function
-			// TODO: comment
+		function onSuccess() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -147,33 +175,6 @@
 					router.redirect('/');
 				}
 			);
-		}
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Defines the credentials of the sign-up permission
-			var credentials = {
-				id: $stateParams.id,
-				password: $stateParams.password
-			};
-			
-			// Authenticates the sign-up permission
-			authenticateSignUpPermission(credentials);
-			
-			// Initializes the sign-up action
-			var signUpAction = new SignUpAction();
-			signUpAction.credentials = credentials;
-			signUpAction.notAuthenticatedCallback = decideName1;
-			signUpAction.notAvailableCallback = decideName2;
-			signUpAction.startCallback = decideName3;
-			signUpAction.successCallback = decideName4;
-			
-			// Includes the actions
-			$scope.action = {
-				signUp: signUpAction
-			};
 		}
 		
 		// ---------------------------------------------------------------------

@@ -63,22 +63,6 @@
 		};
 		
 		/**
-		 * TODO: comment
-		 */
-		function decideName1() { // TODO: rename function
-			// TODO: comment
-			ready = false;
-		}
-		
-		/**
-		 * TODO: comment
-		 */
-		function decideName2() { // TODO: rename function
-			// TODO: comment
-			ready = true;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -87,13 +71,27 @@
 			
 			// Initializes the sign-out action
 			var signOutAction = new SignOutAction();
-			signOutAction.startCallback = decideName1;
-			signOutAction.successCallback = decideName2;
+			signOutAction.startCallback = onStart;
+			signOutAction.successCallback = onSuccess;
 			
 			// Includes the actions
 			$scope.action = {
 				signOut: signOutAction
 			};
+		}
+		
+		/**
+		 * Invoked at the start of the sign-out action.
+		 */
+		function onStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the sign-out action is successful.
+		 */
+		function onSuccess() {
+			ready = true;
 		}
 		
 		// ---------------------------------------------------------------------

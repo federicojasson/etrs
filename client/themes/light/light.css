@@ -84,6 +84,10 @@ legend {
 	padding: 8px 16px;
 }
 
+.modal-backdrop.in {
+	opacity: 0.75;
+}
+
 .modal-footer {
 	background-color: #ffffff;
 }

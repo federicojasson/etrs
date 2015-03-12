@@ -63,10 +63,26 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Performs initialization tasks.
 		 */
-		function decideName1() { // TODO: rename function
-			// TODO: comment
+		function initialize() {
+			// Initializes the request-sign-up action
+			var requestSignUpAction = new RequestSignUpAction();
+			requestSignUpAction.notAuthenticatedCallback = onNotAuthenticated;
+			requestSignUpAction.startCallback = onStart;
+			requestSignUpAction.successCallback = onSuccess;
+			
+			// Includes the actions
+			$scope.action = {
+				requestSignUp: requestSignUpAction
+			};
+		}
+		
+		/**
+		 * Invoked when the user is not authenticated during the execution of
+		 * the request-sign-up action.
+		 */
+		function onNotAuthenticated() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -79,18 +95,16 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked at the start of the request-sign-up action.
 		 */
-		function decideName2() { // TODO: rename function
-			// TODO: comment
+		function onStart() {
 			ready = false;
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked when the request-sign-up action is successful.
 		 */
-		function decideName3() { // TODO: rename function
-			// TODO: comment
+		function onSuccess() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -102,22 +116,6 @@
 					router.redirect('/');
 				}
 			);
-		}
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Initializes the request-sign-up action
-			var requestSignUpAction = new RequestSignUpAction();
-			requestSignUpAction.notAuthenticatedCallback = decideName1;
-			requestSignUpAction.startCallback = decideName2;
-			requestSignUpAction.successCallback = decideName3;
-			
-			// Includes the actions
-			$scope.action = {
-				requestSignUp: requestSignUpAction
-			};
 		}
 		
 		// ---------------------------------------------------------------------

@@ -80,7 +80,12 @@
 					return;
 				}
 				
-				// TODO: get user
+				// Gets the signed-in user
+				/*server.account.get().then(function(output) {
+					signedInUser = output;
+					stateRefreshing = false;
+				});*/
+				// TODO: uncomment
 				signedInUser = {
 					id: 'admin',
 					role: 'ad',

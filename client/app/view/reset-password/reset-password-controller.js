@@ -65,7 +65,9 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Authenticates the reset-password permission.
+		 * 
+		 * Receives the credentials of the reset-password permission.
 		 */
 		function authenticateResetPasswordPermission(credentials) {
 			// Defines the input to be sent to the server
@@ -75,23 +77,50 @@
 			
 			// Authenticates the reset-password permission
 			server.account.resetPassword.authenticate(input).then(function(output) {
-				if (output.authenticated) {
-					// The reset-password permission has been authenticated
-					// TODO: comment
-					ready = true;
-				} else {
+				if (! output.authenticated) {
 					// The reset-password permission has not been authenticated
+					
 					// Redirects the user to the home route
 					router.redirect('/');
+					
+					return;
 				}
+				
+				ready = true;
 			});
 		}
 		
 		/**
-		 * TODO: comment
+		 * Performs initialization tasks.
 		 */
-		function decideName1() { // TODO: rename function
-			// TODO: comment
+		function initialize() {
+			// Defines the credentials of the reset-password permission
+			var credentials = {
+				id: $stateParams.id,
+				password: $stateParams.password
+			};
+			
+			// Initializes the reset-password action
+			var resetPasswordAction = new ResetPasswordAction();
+			resetPasswordAction.credentials = credentials;
+			resetPasswordAction.notAuthenticatedCallback = onNotAuthenticated;
+			resetPasswordAction.startCallback = onStart;
+			resetPasswordAction.successCallback = onSuccess;
+			
+			// Includes the actions
+			$scope.action = {
+				resetPassword: resetPasswordAction
+			};
+			
+			// Authenticates the reset-password permission
+			authenticateResetPasswordPermission(credentials);
+		}
+		
+		/**
+		 * Invoked when the reset-password permission is not authenticated
+		 * during the execution of the reset-password action.
+		 */
+		function onNotAuthenticated() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -106,18 +135,16 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked at the start of the reset-password action.
 		 */
-		function decideName2() { // TODO: rename function
-			// TODO: comment
+		function onStart() {
 			ready = false;
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked when the reset-password action is successful.
 		 */
-		function decideName3() { // TODO: rename function
-			// TODO: comment
+		function onSuccess() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -129,32 +156,6 @@
 					router.redirect('/');
 				}
 			);
-		}
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Defines the credentials of the reset-password permission
-			var credentials = {
-				id: $stateParams.id,
-				password: $stateParams.password
-			};
-			
-			// Authenticates the reset-password permission
-			authenticateResetPasswordPermission(credentials);
-			
-			// Initializes the reset-password action
-			var resetPasswordAction = new ResetPasswordAction();
-			resetPasswordAction.credentials = credentials;
-			resetPasswordAction.notAuthenticatedCallback = decideName1;
-			resetPasswordAction.startCallback = decideName2;
-			resetPasswordAction.successCallback = decideName3;
-			
-			// Includes the actions
-			$scope.action = {
-				resetPassword: resetPasswordAction
-			};
 		}
 		
 		// ---------------------------------------------------------------------

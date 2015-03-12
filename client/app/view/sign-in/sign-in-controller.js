@@ -62,10 +62,26 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Performs initialization tasks.
 		 */
-		function decideName1() { // TODO: rename function
-			// TODO: comment
+		function initialize() {
+			// Initializes the sign-in action
+			var signInAction = new SignInAction();
+			signInAction.notAuthenticatedCallback = onNotAuthenticated;
+			signInAction.startCallback = onStart;
+			signInAction.successCallback = onSuccess;
+			
+			// Includes the actions
+			$scope.action = {
+				signIn: signInAction
+			};
+		}
+		
+		/**
+		 * Invoked when the user is not authenticated during the execution of
+		 * the sign-in action.
+		 */
+		function onNotAuthenticated() {
 			ready = true;
 			
 			// Opens an information dialog
@@ -78,26 +94,17 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked at the start of the sign-in action.
 		 */
-		function decideName2() { // TODO: rename function
-			// TODO: comment
+		function onStart() {
 			ready = false;
 		}
 		
 		/**
-		 * Performs initialization tasks.
+		 * Invoked when the sign-in action is successful.
 		 */
-		function initialize() {
-			// Initializes the sign-in action
-			var signInAction = new SignInAction();
-			signInAction.notAuthenticatedCallback = decideName1;
-			signInAction.startCallback = decideName2;
-			
-			// Includes the actions
-			$scope.action = {
-				signIn: signInAction
-			};
+		function onSuccess() {
+			ready = true;
 		}
 		
 		// ---------------------------------------------------------------------
