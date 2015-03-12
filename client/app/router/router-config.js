@@ -84,6 +84,17 @@
 				},
 				
 				{
+					name: 'newMedication',
+					url: '/medication/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewMedicationViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'requestResetPassword',
 					url: '/account/reset-password',
 					data: {

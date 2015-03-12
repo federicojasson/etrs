@@ -33,6 +33,18 @@
 		 */
 		function getMenuItems() {
 			return {
+				medications: {
+					name: 'Administrar',
+					url: '/medications',
+					description: '' // TODO
+				},
+				
+				newMedication: {
+					name: 'Ingresar', // TODO: Ingresar o Agregar o Nuevo?
+					url: '/medication/new',
+					description: '' // TODO
+				},
+				
 				signUp: {
 					name: 'Enviar invitación',
 					url: '/account/sign-up',
@@ -54,6 +66,14 @@
 						name: 'Usuarios',
 						items: [
 							menuItems.signUp
+						]
+					},
+					
+					{
+						name: 'Medicamentos',
+						items: [
+							menuItems.medications,
+							menuItems.newMedication
 						]
 					}
 				],

@@ -24,6 +24,7 @@
 		'app.view.home',
 		'app.view.medication',
 		'app.view.medications',
+		'app.view.newMedication',
 		'app.view.requestResetPassword',
 		'app.view.requestSignUp',
 		'app.view.resetPassword',

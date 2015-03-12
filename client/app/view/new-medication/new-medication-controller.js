@@ -19,42 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app.server').config([
-		'serverProvider',
-		config
-	]);
+	angular.module('app.view.newMedication').controller('NewMedicationViewController', NewMedicationViewController);
 	
 	/**
-	 * Configures the module.
+	 * Represents the new-medication view.
 	 */
-	function config(serverProvider) {
+	function NewMedicationViewController() {
+		var _this = this;
+		
 		/**
-		 * Returns the services.
+		 * Returns the URL of the template.
 		 */
-		function getServices() {
-			return [
-				'/account/edit',
-				'/account/get',
-				'/account/reset-password',
-				'/account/reset-password/authenticate',
-				'/account/reset-password/request',
-				'/account/sign-in',
-				'/account/sign-out',
-				'/account/sign-up',
-				'/account/sign-up/authenticate',
-				'/account/sign-up/request',
-				'/authentication/get-state'
-			];
-		}
+		_this.getTemplateUrl = function() {
+			return 'app/view/new-medication/new-medication.html';
+		};
 		
-		// ---------------------------------------------------------------------
+		/**
+		 * Returns the title to be set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return 'Nuevo medicamento';
+		};
 		
-		// Gets the services
-		var services = getServices();
-		
-		// Registers the services
-		for (var i = 0; i < services.length; i++) {
-			serverProvider.registerService(services[i]);
-		}
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
 	}
 })();
