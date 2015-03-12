@@ -40,7 +40,7 @@
 				},
 				
 				newMedication: {
-					name: 'Ingresar', // TODO: Ingresar o Agregar o Nuevo?
+					name: 'Nuevo',
 					url: '/medication/new',
 					description: '' // TODO
 				},
