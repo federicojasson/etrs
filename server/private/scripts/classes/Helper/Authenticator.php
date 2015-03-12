@@ -28,7 +28,7 @@ class Authenticator {
 	/**
 	 * Authenticates a reset-password permission by password.
 	 * 
-	 * Receives the reset-password permission's ID and the password.
+	 * Receives the reset-password permission's ID and password.
 	 */
 	public function authenticateResetPasswordPermissionByPassword($id, $password) {
 		global $app;
@@ -54,7 +54,7 @@ class Authenticator {
 	/**
 	 * Authenticates a sign-up permission by password.
 	 * 
-	 * Receives the sign-up permission's ID and the password.
+	 * Receives the sign-up permission's ID and password.
 	 */
 	public function authenticateSignUpPermissionByPassword($id, $password) {
 		global $app;
@@ -80,7 +80,7 @@ class Authenticator {
 	/**
 	 * Authenticates a user by email address.
 	 * 
-	 * Receives the user's ID and the email address.
+	 * Receives the user's ID and email address.
 	 */
 	public function authenticateUserByEmailAddress($id, $emailAddress) {
 		global $app;
@@ -100,7 +100,7 @@ class Authenticator {
 	/**
 	 * Authenticates a user by password.
 	 * 
-	 * Receives the user's ID and the password.
+	 * Receives the user's ID and password.
 	 */
 	public function authenticateUserByPassword($id, $password) {
 		global $app;

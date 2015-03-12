@@ -31,11 +31,6 @@
 	 */
 	function SignUpActionFactory(inputValidator, InputModel, server) {
 		/**
-		 * The credentials of the sign-up permission.
-		 */
-		SignUpAction.prototype.credentials;
-		
-		/**
 		 * The input.
 		 */
 		SignUpAction.prototype.input;
@@ -80,6 +75,11 @@
 			
 			// Defines the input
 			this.input = {
+				credentials: {
+					id: new InputModel(),
+					password: new InputModel()
+				},
+				
 				id: new InputModel(function() {
 					// TODO: input validation
 					return true;
@@ -131,7 +131,11 @@
 			
 			// Defines the input to be sent to the server
 			var input = {
-				credentials: this.credentials,
+				credentials: {
+					id: this.input.credentials.id.value,
+					password: this.input.credentials.password.value
+				},
+				
 				id: this.input.id.value,
 				emailAddress: this.input.emailAddress.value,
 				password: this.input.password.value,

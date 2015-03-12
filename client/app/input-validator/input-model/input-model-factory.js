@@ -54,9 +54,14 @@
 		/**
 		 * Initializes an instance of the class.
 		 * 
-		 * Receives the validator.
+		 * Receives, optionally, a validator.
 		 */
 		function InputModel(validator) {
+			// Initializes the validator if is undefined
+			validator = (angular.isDefined(validator)) ? validator : function() {
+				return true;
+			};
+			
 			// Sets the validator
 			this.validator = validator;
 			

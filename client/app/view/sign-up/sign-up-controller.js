@@ -67,12 +67,15 @@
 		/**
 		 * Authenticates the sign-up permission.
 		 * 
-		 * Receives the credentials of the sign-up permission.
+		 * Receives the sign-up permission's ID and password.
 		 */
-		function authenticateSignUpPermission(credentials) {
+		function authenticateSignUpPermission(id, password) {
 			// Defines the input to be sent to the server
 			var input = {
-				credentials: credentials
+				credentials: {
+					id: id,
+					password: password
+				}
 			};
 			
 			// Authenticates the sign-up permission
@@ -94,19 +97,18 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Defines the credentials of the sign-up permission
-			var credentials = {
-				id: $stateParams.id,
-				password: $stateParams.password
-			};
+			// Gets the URL parameters
+			var id = $stateParams.id;
+			var password = $stateParams.password;
 			
 			// Initializes the sign-up action
 			var signUpAction = new SignUpAction();
-			signUpAction.credentials = credentials;
 			signUpAction.notAuthenticatedCallback = onNotAuthenticated;
 			signUpAction.notAvailableCallback = onNotAvailable;
 			signUpAction.startCallback = onStart;
 			signUpAction.successCallback = onSuccess;
+			signUpAction.input.credentials.id.value = id;
+			signUpAction.input.credentials.password.value = password;
 			
 			// Includes the actions
 			$scope.action = {
@@ -114,7 +116,7 @@
 			};
 			
 			// Authenticates the sign-up permission
-			authenticateSignUpPermission(credentials);
+			authenticateSignUpPermission(id, password);
 		}
 		
 		/**

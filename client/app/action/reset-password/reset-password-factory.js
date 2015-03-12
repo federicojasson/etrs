@@ -31,11 +31,6 @@
 	 */
 	function ResetPasswordActionFactory(inputValidator, InputModel, server) {
 		/**
-		 * The credentials of the reset-password permission.
-		 */
-		ResetPasswordAction.prototype.credentials;
-		
-		/**
 		 * The input.
 		 */
 		ResetPasswordAction.prototype.input;
@@ -73,6 +68,11 @@
 			
 			// Defines the input
 			this.input = {
+				credentials: {
+					id: new InputModel(),
+					password: new InputModel()
+				},
+				
 				password: new InputModel(function() {
 					// TODO: input validation
 					return true;
@@ -99,7 +99,11 @@
 			
 			// Defines the input to be sent to the server
 			var input = {
-				credentials: this.credentials,
+				credentials: {
+					id: this.input.credentials.id.value,
+					password: this.input.credentials.password.value
+				},
+				
 				password: this.input.password.value
 			};
 			
