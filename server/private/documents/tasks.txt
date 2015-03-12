@@ -9,6 +9,8 @@
 - Chequear cuándo pedir confirmación (dialog.openConfirmation).
 - ¿Enviar callbacks de acciones por constructor? ¿Debería ser consistente esto en todas las clases?
 - URL vs state en href
+- Implement available response in /account/sign-up service
+- Chequear cuándo poner texto y header sobre formularios.
 
 - Check two-line comments. Regular expression: \/\/.*\n[\t]*\/\/
 - Check warnings.

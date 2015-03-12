@@ -38,8 +38,8 @@ class SignUp extends \App\Service\ExternalService {
 		// TODO: process input?
 		$credentials = $this->getInput('credentials', 'stringsToBinary');
 		$id = $this->getInput('id');
-		$password = $this->getInput('password');
 		$emailAddress = $this->getInput('emailAddress');
+		$password = $this->getInput('password');
 		$firstName = $this->getInput('firstName');
 		$lastName = $this->getInput('lastName');
 		$gender = $this->getInput('gender');
@@ -59,7 +59,7 @@ class SignUp extends \App\Service\ExternalService {
 		list($passwordHash, $salt, $keyStretchingIterations) = $app->cryptography->hashNewPassword($password);
 		
 		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($app, $credentials, $id, $passwordHash, $salt, $keyStretchingIterations, $emailAddress, $firstName, $lastName, $gender) {
+		$app->data->transactional(function($entityManager) use ($app, $credentials, $id, $emailAddress, $passwordHash, $salt, $keyStretchingIterations, $firstName, $lastName, $gender) {
 			// Gets the sign-up permission
 			$signUpPermission = $entityManager->getReference('App\Data\Entity\SignUpPermission', $credentials['id']);
 			
@@ -75,10 +75,10 @@ class SignUp extends \App\Service\ExternalService {
 			// Creates the user
 			$user->setId($id);
 			$user->setRole($signUpPermission->getUserRole());
+			$user->setEmailAddress($emailAddress);
 			$user->setPasswordHash($passwordHash);
 			$user->setSalt($salt);
 			$user->setKeyStretchingIterations($keyStretchingIterations);
-			$user->setEmailAddress($emailAddress);
 			$user->setFirstName($firstName);
 			$user->setLastName($lastName);
 			$user->setGender($gender);
@@ -117,12 +117,12 @@ class SignUp extends \App\Service\ExternalService {
 				return $app->inputValidator->isUserId($input);
 			}),
 			
-			'password' => new ValueDescriptor(function($input) use ($app) {
-				return $app->inputValidator->isValidPassword($input);
-			}),
-			
 			'emailAddress' => new ValueDescriptor(function($input) use ($app) {
 				return $app->inputValidator->isEmailAddress($input);
+			}),
+			
+			'password' => new ValueDescriptor(function($input) use ($app) {
+				return $app->inputValidator->isValidPassword($input);
 			}),
 			
 			'firstName' => new ValueDescriptor(function($input) {

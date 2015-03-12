@@ -19,37 +19,39 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.requestResetPassword').controller('RequestResetPasswordViewController', [
+	angular.module('app.view.signUp').controller('SignUpViewController', [
 		'$scope',
-		'RequestResetPasswordAction',
+		'$stateParams',
+		'SignUpAction',
 		'dialog',
 		'router',
-		RequestResetPasswordViewController
+		'server',
+		SignUpViewController
 	]);
 	
 	/**
-	 * Represents the request-reset-password view.
+	 * Represents the sign-up view.
 	 */
-	function RequestResetPasswordViewController($scope, RequestResetPasswordAction, dialog, router) {
+	function SignUpViewController($scope, $stateParams, SignUpAction, dialog, router, server) {
 		var _this = this;
 		
 		/**
 		 * Indicates whether the view is ready.
 		 */
-		var ready = true;
+		var ready = false;
 		
 		/**
 		 * Returns the URL of the template.
 		 */
 		_this.getTemplateUrl = function() {
-			return 'app/view/request-reset-password/request-reset-password.html';
+			return 'app/view/sign-up/sign-up.html';
 		};
 		
 		/**
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Restablecer contraseña';
+			return 'Registrarse';
 		};
 		
 		/**
@@ -62,6 +64,29 @@
 		/**
 		 * TODO: comment
 		 */
+		function authenticateSignUpPermission(credentials) {
+			// Defines the input to be sent to the server
+			var input = {
+				credentials: credentials
+			};
+			
+			// Authenticates the sign-up permission
+			server.account.signUp.authenticate(input).then(function(output) {
+				if (output.authenticated) {
+					// The sign-up permission has been authenticated
+					// TODO: comment
+					ready = true;
+				} else {
+					// The sign-up permission has not been authenticated
+					// Redirects the user to the home route
+					router.redirect('/');
+				}
+			});
+		}
+		
+		/**
+		 * TODO: comment
+		 */
 		function decideName1() { // TODO: rename function
 			// TODO: comment
 			ready = true;
@@ -69,10 +94,11 @@
 			// Opens an information dialog
 			dialog.openInformation(
 				'Credenciales rechazadas',
-				'No fue posible autenticar su identidad.\n' +
-				'\n' +
-				'Reingrese su nombre de usuario y su dirección de correo electrónico.\n' +
-				'Asegúrese de que la dirección proporcionada corresponda a la utilizada en el sistema.'
+				'El permiso para registrarse ha expirado.',
+				function() {
+					// Redirects the user to the home route
+					router.redirect('/');
+				}
 			);
 		}
 		
@@ -81,7 +107,14 @@
 		 */
 		function decideName2() { // TODO: rename function
 			// TODO: comment
-			ready = false;
+			ready = true;
+			
+			// Opens an information dialog
+			dialog.openInformation(
+				'Nombre de usuario no disponible',
+				'El nombre de usuario elegido ya se encuentra en uso.\n' +
+				'Ingrese otro.'
+			);
 		}
 		
 		/**
@@ -89,13 +122,23 @@
 		 */
 		function decideName3() { // TODO: rename function
 			// TODO: comment
+			ready = false;
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		function decideName4() { // TODO: rename function
+			// TODO: comment
 			ready = true;
 			
 			// Opens an information dialog
 			dialog.openInformation(
-				'Correo electrónico enviado',
-				'Se ha enviado un correo electrónico a su casilla.\n' +
-				'Para restablecer su contraseña, siga los pasos indicados en el mismo.',
+				'Usuario registrado',
+				'Su cuenta de usuario ha sido registrada.\n' +
+				'\n' +
+				'No revele nunca su contraseña.\n' +
+				'La seguridad de la información es responsabilidad de todos.',
 				function() {
 					// Redirects the user to the home route
 					router.redirect('/');
@@ -107,15 +150,26 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the request-reset-password action
-			var requestResetPasswordAction = new RequestResetPasswordAction();
-			requestResetPasswordAction.notAuthenticatedCallback = decideName1;
-			requestResetPasswordAction.startCallback = decideName2;
-			requestResetPasswordAction.successCallback = decideName3;
+			// Initializes the credentials TODO: comment
+			var credentials = {
+				id: $stateParams.id,
+				password: $stateParams.password
+			};
+			
+			// Authenticates the sign-up permission
+			authenticateSignUpPermission(credentials);
+			
+			// Initializes the sign-up action
+			var signUpAction = new SignUpAction();
+			signUpAction.credentials = credentials;
+			signUpAction.notAuthenticatedCallback = decideName1;
+			signUpAction.notAvailableCallback = decideName2;
+			signUpAction.startCallback = decideName3;
+			signUpAction.successCallback = decideName4;
 			
 			// Includes the actions
 			$scope.action = {
-				requestResetPassword: requestResetPasswordAction
+				signUp: signUpAction
 			};
 		}
 		

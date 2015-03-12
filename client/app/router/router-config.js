@@ -100,6 +100,16 @@
 							__: 'SignInViewController'
 						}
 					}
+				},
+				
+				{
+					name: 'signUp',
+					url: '/account/sign-up/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
+					data: {
+						views: {
+							__: 'SignUpViewController'
+						}
+					}
 				}
 			];
 		}

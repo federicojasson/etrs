@@ -19,60 +19,91 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.resetPassword').factory('ResetPasswordAction', [
+	angular.module('app.action.signUp').factory('SignUpAction', [
 		'inputValidator',
 		'InputModel',
 		'server',
-		ResetPasswordActionFactory
+		SignUpActionFactory
 	]);
 	
 	/**
-	 * Defines the ResetPasswordAction class.
+	 * Defines the SignUpAction class.
 	 */
-	function ResetPasswordActionFactory(inputValidator, InputModel, server) {
+	function SignUpActionFactory(inputValidator, InputModel, server) {
 		/**
 		 * TODO: comment.
 		 */
-		ResetPasswordAction.prototype.credentials;
+		SignUpAction.prototype.credentials;
 		
 		/**
 		 * The input.
 		 */
-		ResetPasswordAction.prototype.input;
+		SignUpAction.prototype.input;
 		
 		/**
 		 * TODO: comment
 		 */
-		ResetPasswordAction.prototype.notAuthenticatedCallback;
+		SignUpAction.prototype.notAuthenticatedCallback;
 		
 		/**
 		 * TODO: comment
 		 */
-		ResetPasswordAction.prototype.startCallback;
+		SignUpAction.prototype.notAvailableCallback;
 		
 		/**
 		 * TODO: comment
 		 */
-		ResetPasswordAction.prototype.successCallback;
+		SignUpAction.prototype.startCallback;
+		
+		/**
+		 * TODO: comment
+		 */
+		SignUpAction.prototype.successCallback;
 		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ResetPasswordAction() {
+		function SignUpAction() {
 			// TODO: comment
 			this.notAuthenticatedCallback = function() {};
+			this.notAvailableCallback = function() {};
 			this.startCallback = function() {};
 			this.successCallback = function() {};
 			
 			// Initializes the input
 			this.input = {
+				id: new InputModel(function() {
+					// TODO: input validation
+					return true;
+				}),
+				
+				emailAddress: new InputModel(function() {
+					// TODO: input validation
+					return true;
+				}),
+				
 				password: new InputModel(function() {
-					// TODO: implement validation
+					// TODO: input validation
 					return true;
 				}),
 				
 				passwordConfirmation: new InputModel(function() {
-					// TODO: implement validation
+					// TODO: input validation
+					return true;
+				}),
+				
+				firstName: new InputModel(function() {
+					// TODO: input validation
+					return true;
+				}),
+				
+				lastName: new InputModel(function() {
+					// TODO: input validation
+					return true;
+				}),
+				
+				gender: new InputModel(function() {
+					// TODO: input validation
 					return true;
 				})
 			};
@@ -81,7 +112,7 @@
 		/**
 		 * Executes the action.
 		 */
-		ResetPasswordAction.prototype.execute = function() {
+		SignUpAction.prototype.execute = function() {
 			if (! inputValidator.isInputValid(this.input)) {
 				// The input is invalid
 				return;
@@ -93,16 +124,30 @@
 			// Defines the input to be sent to the server
 			var input = {
 				credentials: this.credentials,
-				password: this.input.password.value
+				id: this.input.id.value,
+				emailAddress: this.input.emailAddress.value,
+				password: this.input.password.value,
+				firstName: this.input.firstName.value,
+				lastName: this.input.lastName.value,
+				gender: this.input.gender.value
 			};
 			
-			// Resets the user's password
-			server.account.resetPassword(input).then(function(output) {
+			// Signs up the user
+			server.account.signUp(input).then(function(output) {
 				if (! output.authenticated) {
-					// The reset-password permission has not been authenticated
+					// The sign-up permission has not been authenticated
 					
 					// Invokes the not-authenticated callback
 					this.notAuthenticatedCallback();
+					
+					return;
+				}
+				
+				if (! output.available) {
+					// The user ID is not available
+					
+					// Invokes the not-available callback
+					this.notAvailableCallback();
 					
 					return;
 				}
@@ -114,6 +159,6 @@
 		
 		// ---------------------------------------------------------------------
 		
-		return ResetPasswordAction;
+		return SignUpAction;
 	}
 })();

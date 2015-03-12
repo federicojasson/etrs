@@ -25,6 +25,7 @@
 		'app.view.requestResetPassword',
 		'app.view.requestSignUp',
 		'app.view.resetPassword',
-		'app.view.signIn'
+		'app.view.signIn',
+		'app.view.signUp'
 	]);
 })();

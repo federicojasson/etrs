@@ -24,6 +24,7 @@
 		'app.action.requestSignUp',
 		'app.action.resetPassword',
 		'app.action.signIn',
-		'app.action.signOut'
+		'app.action.signOut',
+		'app.action.signUp'
 	]);
 })();
