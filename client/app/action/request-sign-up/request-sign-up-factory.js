@@ -63,7 +63,7 @@
 			this.input = {
 				credentials: {
 					password: new InputModel(function() {
-						// TODO: implement validation
+						// TODO: input validation
 						return true;
 					})
 				},

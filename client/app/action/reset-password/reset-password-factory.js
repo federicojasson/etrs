@@ -67,12 +67,12 @@
 			// Initializes the input
 			this.input = {
 				password: new InputModel(function() {
-					// TODO: implement validation
+					// TODO: input validation
 					return true;
 				}),
 				
 				passwordConfirmation: new InputModel(function() {
-					// TODO: implement validation
+					// TODO: input validation
 					return true;
 				})
 			};

@@ -64,12 +64,12 @@
 			this.input = {
 				credentials: {
 					id: new InputModel(function() {
-						// TODO: implement validation
+						// TODO: input validation
 						return true;
 					}),
 					
 					password: new InputModel(function() {
-						// TODO: implement validation
+						// TODO: input validation
 						return true;
 					})
 				}

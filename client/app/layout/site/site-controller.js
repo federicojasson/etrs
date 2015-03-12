@@ -34,6 +34,14 @@
 		var _this = this;
 		
 		/**
+		 * Indicates whether the layout is ready, considering the local factors.
+		 * 
+		 * Since it considers only the local factors, it doesn't necessarily
+		 * determine on its own whether the layout is ready.
+		 */
+		var ready = true;
+		
+		/**
 		 * Returns the URL of the template.
 		 */
 		_this.getTemplateUrl = function() {
@@ -51,14 +59,23 @@
 		 * Determines whether the layout is ready.
 		 */
 		_this.isReady = function() {
-			return ! authentication.isStateRefreshing();
+			return ready && ! authentication.isStateRefreshing();
 		};
 		
 		/**
 		 * TODO: comment
 		 */
-		function decideName() { // TODO: rename function
-			// TODO: implement
+		function decideName1() { // TODO: rename function
+			// TODO: comment
+			ready = false;
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		function decideName2() { // TODO: rename function
+			// TODO: comment
+			ready = true;
 		}
 		
 		/**
@@ -70,7 +87,8 @@
 			
 			// Initializes the sign-out action
 			var signOutAction = new SignOutAction();
-			signOutAction.startCallback = decideName;
+			signOutAction.startCallback = decideName1;
+			signOutAction.successCallback = decideName2;
 			
 			// Includes the actions
 			$scope.action = {

@@ -36,7 +36,10 @@
 		var _this = this;
 		
 		/**
-		 * Indicates whether the view is ready.
+		 * Indicates whether the view is ready, considering the local factors.
+		 * 
+		 * Since it considers only the local factors, it doesn't necessarily
+		 * determine on its own whether the view is ready.
 		 */
 		var ready = false;
 		
