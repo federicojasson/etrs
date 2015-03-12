@@ -72,6 +72,10 @@ pre {
 	margin-top: 0px;
 }
 
+.panel-body {
+	padding: 0px;
+}
+
 .panel-heading {
 	padding: 0px;
 }
@@ -147,8 +151,7 @@ pre {
 }
 
 .navigation-bar-menu-item-text {
-	margin-bottom: 8px;
-	margin-top: 8px;
+	margin: 8px;
 }
 
 .navigation-bar-menu-item-text a {
