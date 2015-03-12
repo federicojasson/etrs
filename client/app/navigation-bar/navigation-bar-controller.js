@@ -36,12 +36,5 @@
 		_this.getMenus = function() {
 			return navigationBar.getMenus();
 		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.getSelectedMenu = function() {
-			return navigationBar.getSelectedMenu();
-		};
 	}
 })();

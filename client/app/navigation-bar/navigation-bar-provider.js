@@ -83,11 +83,6 @@
 		};
 		
 		/**
-		 * TODO: comment
-		 */
-		var selectedMenu = -1;
-		
-		/**
 		 * Adds a menu.
 		 * 
 		 * Receives the menu and the user role to which it corresponds.
@@ -105,13 +100,6 @@
 			
 			// Returns the menus
 			return menus[userRole];
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.getSelectedMenu = function() {
-			return selectedMenu;
 		};
 	}
 })();

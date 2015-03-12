@@ -10,7 +10,7 @@
 	<accordion-group
 		ng-repeat="menu in navigationBar.getMenus()"
 		heading="{{ menu.name }}"
-		is-open="navigationBar.getSelectedMenu() === $index"
+		is-open="menu.open"
 	>
 		<div ng-repeat="menuItem in menu.items" class="navigation-bar-menu-item-text">
 			<a
