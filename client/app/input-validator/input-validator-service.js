@@ -28,6 +28,22 @@
 		var _this = this;
 		
 		/**
+		 * TODO: comment
+		 */
+		_this.isEmailAddress = function(input) {
+			// TODO: implement
+			return true;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isGender = function(input) {
+			// TODO: implement
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is valid.
 		 * 
 		 * Receives the input, which can be an input model or an object. In the
@@ -51,6 +67,54 @@
 			}
 			
 			return valid;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isUserId = function(input) {
+			// TODO: implement
+			return true;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isUserRole = function(input) {
+			// TODO: implement
+			return true;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isValidPassword = function(input) {
+			// TODO: implement
+			return true;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isValidPasswordConfirmation = function(input, password) {
+			// TODO: implement
+			return true;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isValidString = function(input, minimumLength, maximumLength) {
+			// TODO: implement
+			return true;
+		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isValidText = function(input, minimumLength, maximumLength) {
+			// TODO: implement
+			return true;
 		};
 	}
 })();

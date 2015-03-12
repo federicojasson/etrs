@@ -81,38 +81,31 @@
 				},
 				
 				id: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isUserId(this);
 				}),
 				
 				emailAddress: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isEmailAddress(this);
 				}),
 				
 				password: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isValidPassword(this);
 				}),
 				
 				passwordConfirmation: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isValidPasswordConfirmation(this, password); // TODO: get password
 				}),
 				
 				firstName: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isValidText(this, 1, 48);
 				}),
 				
 				lastName: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isValidText(this, 1, 48);
 				}),
 				
 				gender: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isGender(this);
 				})
 			};
 		}

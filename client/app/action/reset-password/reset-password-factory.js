@@ -74,13 +74,11 @@
 				},
 				
 				password: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isValidPassword(this);
 				}),
 				
 				passwordConfirmation: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isValidPasswordConfirmation(this, password); // TODO: get password
 				})
 			};
 		}

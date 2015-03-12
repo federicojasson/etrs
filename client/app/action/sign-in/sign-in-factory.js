@@ -70,13 +70,11 @@
 			this.input = {
 				credentials: {
 					id: new InputModel(function() {
-						// TODO: input validation
-						return true;
+						return inputValidator.isValidString(this, 1);
 					}),
 					
 					password: new InputModel(function() {
-						// TODO: input validation
-						return true;
+						return inputValidator.isValidString(this, 1);
 					})
 				}
 			};

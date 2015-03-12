@@ -69,26 +69,22 @@
 			this.input = {
 				credentials: {
 					password: new InputModel(function() {
-						// TODO: input validation
-						return true;
+						return inputValidator.isValidString(this, 1);
 					})
 				},
 
 				recipient: {
 					fullName: new InputModel(function() {
-						// TODO: input validation
-						return true;
+						return inputValidator.isValidText(this, 0, 97);
 					}),
 					
 					emailAddress: new InputModel(function() {
-						// TODO: input validation
-						return true;
+						return inputValidator.isEmailAddress(this);
 					})
 				},
 
 				userRole: new InputModel(function() {
-					// TODO: input validation
-					return true;
+					return inputValidator.isUserRole(this);
 				})
 			};
 		}
