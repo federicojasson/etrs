@@ -19,15 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.home',
-		'app.view.medication',
-		'app.view.medications',
-		'app.view.requestResetPassword',
-		'app.view.requestSignUp',
-		'app.view.resetPassword',
-		'app.view.signIn',
-		'app.view.signUp'
-	]);
+	angular.module('app.view.medication').controller('MedicationViewController', MedicationViewController);
+	
+	/**
+	 * Represents the medication view.
+	 */
+	function MedicationViewController() {
+		var _this = this;
+		
+		/**
+		 * Returns the URL of the template.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/medication/medication.html';
+		};
+		
+		/**
+		 * Returns the title to be set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return ''; // TODO: medication name
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
+	}
 })();

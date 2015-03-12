@@ -62,6 +62,28 @@
 				},
 				
 				{
+					name: 'medication',
+					url: '/medication/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'MedicationViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'medications',
+					url: '/medications',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'MedicationsViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'requestResetPassword',
 					url: '/account/reset-password',
 					data: {
