@@ -12,6 +12,8 @@
 - Implement available response in /account/sign-up service
 - Chequear cuándo poner texto y header sobre formularios.
 
+- Corresponding vs According to
+- Define vs Initialize vs Build
 - Check two-line comments. Regular expression: \/\/.*\n[\t]*\/\/
 - Check warnings.
 - Check protected fields.

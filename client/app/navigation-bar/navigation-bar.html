@@ -7,14 +7,17 @@
 </div>
 
 <accordion>
-	<accordion-group ng-repeat="menu in navigationBar.getMenus()" heading="{{ menu.name }}">
+	<accordion-group
+		ng-repeat="menu in navigationBar.getMenus()"
+		heading="{{ menu.name }}"
+		is-open="navigationBar.getSelectedMenu() === $index"
+	>
 		<div ng-repeat="menuItem in menu.items" class="navigation-bar-menu-item-text">
 			<a
 				ng-href="#{{ menuItem.url }}"
 				popover="{{ menuItem.description }}"
 				popover-append-to-body="true"
 				popover-placement="right"
-				popover-popup-delay="750"
 				popover-trigger="mouseenter"
 			>
 				{{ menuItem.name }}

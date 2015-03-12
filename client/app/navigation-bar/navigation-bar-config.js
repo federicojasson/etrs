@@ -32,7 +32,13 @@
 		 * Returns the menu items.
 		 */
 		function getMenuItems() {
-			return {};
+			return {
+				signUp: {
+					name: 'Enviar invitación',
+					url: '/account/sign-up',
+					description: 'Invite a una persona a registrarse en ETRS'
+				}
+			};
 		}
 		
 		/**
@@ -43,7 +49,15 @@
 			var menuItems = getMenuItems();
 			
 			return {
-				ad: [],
+				ad: [
+					{
+						name: 'Usuarios',
+						items: [
+							menuItems.signUp
+						]
+					}
+				],
+				
 				dr: [],
 				op: []
 			};

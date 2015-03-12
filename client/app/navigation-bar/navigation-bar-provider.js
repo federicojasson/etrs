@@ -18,7 +18,6 @@
 
 'use strict';
 
-// TODO: check all the file
 (function() {
 	angular.module('app.navigationBar').provider('navigationBar', navigationBarProvider);
 	
@@ -46,8 +45,13 @@
 				// Initializes the navigation-bar service
 				var navigationBar = new navigationBarService(authentication);
 
-				// TODO: comment
-				navigationBar.setMenus(menus);
+				// Adds the menus
+				for (var userRole in menus) { if (! menus.hasOwnProperty(userRole)) continue;
+					var userRoleMenus = menus[userRole];
+					for (var i = 0; i < userRoleMenus.length; i++) {
+						navigationBar.addMenu(userRoleMenus[i], userRole);
+					}
+				}
 
 				return navigationBar;
 			}
@@ -56,7 +60,7 @@
 		/**
 		 * Registers a menu.
 		 * 
-		 * Receives TODO: comment
+		 * Receives the menu and the user role to which it corresponds.
 		 */
 		_this.registerMenu = function(menu, userRole) {
 			menus[userRole].push(menu);
@@ -70,12 +74,30 @@
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * The menus.
 		 */
-		var menus; // TODO: initialize?
+		var menus = {
+			ad: [],
+			dr: [],
+			op: []
+		};
 		
 		/**
 		 * TODO: comment
+		 */
+		var selectedMenu = -1;
+		
+		/**
+		 * Adds a menu.
+		 * 
+		 * Receives the menu and the user role to which it corresponds.
+		 */
+		_this.addMenu = function(menu, userRole) {
+			menus[userRole].push(menu);
+		};
+		
+		/**
+		 * Returns the menus corresponding to the signed-in user's role.
 		 */
 		_this.getMenus = function() {
 			// Gets the signed-in user's role
@@ -87,11 +109,9 @@
 		
 		/**
 		 * TODO: comment
-		 * 
-		 * Receives TODO: comment
 		 */
-		_this.setMenus = function(newMenus) {
-			menus = newMenus;
+		_this.getSelectedMenu = function() {
+			return selectedMenu;
 		};
 	}
 })();
