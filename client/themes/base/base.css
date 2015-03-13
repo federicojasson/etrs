@@ -129,10 +129,6 @@ textarea {
 	margin-left: 8px;
 }
 
-.isolated-paragraph {
-	margin-bottom: 32px;
-}
-
 .loading-image {
 	margin-left: auto;
 	margin-right: auto;
@@ -161,6 +157,10 @@ textarea {
 .navigation-bar-menu-item-text a {
 	display: block;
 	padding: 8px 14px;
+}
+
+.separate-paragraph {
+	margin-bottom: 32px;
 }
 
 .unlocked-image {}
