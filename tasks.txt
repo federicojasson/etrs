@@ -2,7 +2,7 @@
 Quick tasks
 ----------------------------
 
-- Fix HTML5 API bug.
+- Fix HTML5 history API bug.
 
 
 General code checks

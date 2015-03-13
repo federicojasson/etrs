@@ -19,12 +19,49 @@
 'use strict';
 
 (function() {
-	angular.module('app.router').config(config);
+	angular.module('app.router').config([
+		'$locationProvider',
+		'$stateProvider',
+		'$urlRouterProvider',
+		config
+	]);
 	
 	/**
-	 * Configures the module
+	 * Configures the module.
 	 */
-	function config() {
-		// TODO: implement config function
+	function config($locationProvider, $stateProvider, $urlRouterProvider) {
+		/**
+		 * Returns the states.
+		 */
+		function getStates() {
+			return [
+				// TODO: define states in here
+			];
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Enables the HTML5 history API
+		$locationProvider.html5Mode(true);
+		
+		// Sets the default URL
+		$urlRouterProvider.otherwise('/');
+		
+		// Gets the states
+		var states = getStates();
+		
+		// Registers the states
+		for (var i = 0; i < states.length; i++) {
+			var state = states[i];
+			
+			// Makes the URL absolute
+			state.url = '^' + state.url;
+			
+			// Sets a template that includes the current layout
+			state.template = '<layout></layout>';
+			
+			// Registers the state
+			$stateProvider.state(state);
+		}
 	}
 })();
