@@ -19,7 +19,9 @@ a {
 address {
 	clear: both;
 	float: left;
-	margin: 8px 0px 8px 16px;
+	margin-bottom: 8px;
+	margin-left: 16px;
+	margin-top: 8px;
 }
 
 pre {
@@ -96,6 +98,12 @@ textarea {
 
 
 /* Custom classes */
+
+.big-icon {}
+
+.big-icon-text {
+	margin-left: 16px;
+}
 
 .content-container {
 	padding-bottom: 32px;

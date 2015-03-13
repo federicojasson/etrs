@@ -19,7 +19,8 @@
 /* Elements */
 
 address {
-	background-color: #eeeeee;
+	background-color: #f2f2f2;
+	border: 1px solid #dddddd;
 	padding: 12px 16px;
 }
 
@@ -144,6 +145,10 @@ legend {
 
 
 /* Custom classes */
+
+.big-icon {
+	font-size: 2em;
+}
 
 .copyright-text {
 	color: #aaaaaa;
