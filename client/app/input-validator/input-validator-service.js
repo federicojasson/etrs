@@ -28,7 +28,9 @@
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * Determines whether an input is an email address.
+		 * 
+		 * Receives the input.
 		 */
 		_this.isEmailAddress = function(input) {
 			// TODO: implement
@@ -36,7 +38,9 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Determines whether an input is a gender.
+		 * 
+		 * Receives the input.
 		 */
 		_this.isGender = function(input) {
 			// TODO: implement
@@ -70,7 +74,9 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Determines whether an input is a user ID.
+		 * 
+		 * Receives the input.
 		 */
 		_this.isUserId = function(input) {
 			// TODO: implement
@@ -78,7 +84,9 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Determines whether an input is a user role.
+		 * 
+		 * Receives the input.
 		 */
 		_this.isUserRole = function(input) {
 			// TODO: implement
@@ -86,7 +94,9 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Determines whether an input is a valid password.
+		 * 
+		 * Receives the input.
 		 */
 		_this.isValidPassword = function(input) {
 			// TODO: implement
@@ -94,7 +104,9 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Determines whether an input is a valid password confirmation.
+		 * 
+		 * Receives the input and the password.
 		 */
 		_this.isValidPasswordConfirmation = function(input, password) {
 			// TODO: implement
