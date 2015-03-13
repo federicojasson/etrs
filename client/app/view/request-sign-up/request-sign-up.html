@@ -72,6 +72,10 @@
 			>
 				<select
 					ng-model="action.requestSignUp.input.userRole.value"
+					popover="{{ action.requestSignUp.input.userRole.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
 					class="form-control"
 				>
 					<option value="">Rol de usuario</option>

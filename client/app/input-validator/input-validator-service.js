@@ -43,7 +43,20 @@
 		 * Receives the input.
 		 */
 		_this.isGender = function(input) {
-			// TODO: implement
+			// Defines the genders
+			var genders = [
+				'f',
+				'm'
+			];
+			
+			if (genders.indexOf(input) === -1) {
+				// The input is not a gender
+				input.message = 'Seleccione el sexo';
+				return false;
+			}
+			
+			// The input is a gender
+			input.message = '';
 			return true;
 		};
 		
@@ -89,7 +102,21 @@
 		 * Receives the input.
 		 */
 		_this.isUserRole = function(input) {
-			// TODO: implement
+			// Defines the user roles
+			var userRoles = [
+				'ad',
+				'dr',
+				'op'
+			];
+			
+			if (userRoles.indexOf(input) === -1) {
+				// The input is not a user role
+				input.message = 'Seleccione el rol de usuario';
+				return false;
+			}
+			
+			// The input is a user role
+			input.message = '';
 			return true;
 		};
 		
