@@ -75,7 +75,7 @@
 
 				recipient: {
 					fullName: new InputModel(function() {
-						return inputValidator.isValidText(this, 0, 97);
+						return inputValidator.isValidString(this, 0, 97);
 					}),
 					
 					emailAddress: new InputModel(function() {

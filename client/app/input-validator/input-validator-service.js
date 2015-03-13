@@ -148,12 +148,15 @@
 		 * Receives the input and the password.
 		 */
 		_this.isValidPasswordConfirmation = function(input, password) {
-			// TODO: implement
-			return true;
+			// Compares the input with the password
+			return input.value === password;
 		};
 		
 		/**
-		 * TODO: comment
+		 * Determines whether an input is a valid string.
+		 * 
+		 * Receives the input, the minimum allowed length and, optionally, the
+		 * maximum allowed length.
 		 */
 		_this.isValidString = function(input, minimumLength, maximumLength) {
 			// Initializes the maximum length if is undefined
@@ -177,14 +180,6 @@
 			
 			// The input is a valid string
 			input.message = '';
-			return true;
-		};
-		
-		/**
-		 * TODO: comment
-		 */
-		_this.isValidText = function(input, minimumLength, maximumLength) {
-			// TODO: implement
 			return true;
 		};
 	}

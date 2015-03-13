@@ -42,7 +42,9 @@
 		 * The validator.
 		 * 
 		 * Besides determining whether the input is valid, it should set the
-		 * appropriate message to describe why the validation failed.
+		 * message. If the validation succeeds, it must set an empty string;
+		 * otherwise, it must set an appropriate message describing why the
+		 * validation failed.
 		 */
 		InputModel.prototype.validator;
 		

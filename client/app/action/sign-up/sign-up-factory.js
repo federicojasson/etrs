@@ -97,11 +97,11 @@
 				}.bind(this)),
 				
 				firstName: new InputModel(function() {
-					return inputValidator.isValidText(this, 1, 48);
+					return inputValidator.isValidString(this, 1, 48);
 				}),
 				
 				lastName: new InputModel(function() {
-					return inputValidator.isValidText(this, 1, 48);
+					return inputValidator.isValidString(this, 1, 48);
 				}),
 				
 				gender: new InputModel(function() {

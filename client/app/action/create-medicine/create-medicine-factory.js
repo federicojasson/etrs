@@ -60,7 +60,7 @@
 			// Defines the input
 			this.input = {
 				name: new InputModel(function() {
-					return inputValidator.isValidText(this, 1, 64);
+					return inputValidator.isValidString(this, 1, 64);
 				})
 			};
 		}

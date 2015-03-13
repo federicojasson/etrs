@@ -31,7 +31,7 @@
 		var _this = this;
 		
 		/**
-		 * The descriptions of the errors.
+		 * The error descriptions.
 		 */
 		var descriptions = {
 			// TODO: write error descriptions
@@ -50,7 +50,7 @@
 		};
 		
 		/**
-		 * Determines whether an error occurred.
+		 * Determines whether an error has occurred.
 		 */
 		_this.occurred = function() {
 			return error !== null;
