@@ -43,7 +43,8 @@
 				'/account/sign-up',
 				'/account/sign-up/authenticate',
 				'/account/sign-up/request',
-				'/authentication/get-state'
+				'/authentication/get-state',
+				'/medication/get'
 			];
 		}
 		

@@ -19,13 +19,30 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.medication').controller('MedicationViewController', MedicationViewController);
+	angular.module('app.view.medication').controller('MedicationViewController', [
+		'$stateParams',
+		'server',
+		MedicationViewController
+	]);
 	
 	/**
 	 * Represents the medication view.
 	 */
-	function MedicationViewController() {
+	function MedicationViewController($stateParams, server) {
 		var _this = this;
+		
+		/**
+		 * The medication.
+		 */
+		var medication = null;
+		
+		/**
+		 * Indicates whether the view is ready, considering the local factors.
+		 * 
+		 * Since it considers only the local factors, it doesn't necessarily
+		 * determine on its own whether the view is ready.
+		 */
+		var ready = false;
 		
 		/**
 		 * Returns the URL of the template.
@@ -38,14 +55,52 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return ''; // TODO: medication name
+			return medication.name;
 		};
 		
 		/**
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * Gets the medication.
+		 * 
+		 * Receives the medication's ID.
+		 */
+		function getMedication(id) {
+			// Defines the input to be sent to the server
+			var input = {
+				id: id
+			};
+			
+			// TODO: use data service
+			
+			// Gets the medication
+			server.medication.get(input).then(function(output) {
+				// Sets the medication
+				medication = output;
+				
+				ready = true;
+			});
+		}
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Gets the URL parameters
+			var id = $stateParams.id;
+			
+			// Gets the medication
+			getMedication(id);
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the view
+		initialize();
 	}
 })();

@@ -93,8 +93,8 @@
 				}),
 				
 				passwordConfirmation: new InputModel(function() {
-					return inputValidator.isValidPasswordConfirmation(this, password); // TODO: get password
-				}),
+					return inputValidator.isValidPasswordConfirmation(this.input.passwordConfirmation, this.input.password.value);
+				}.bind(this)),
 				
 				firstName: new InputModel(function() {
 					return inputValidator.isValidText(this, 1, 48);
