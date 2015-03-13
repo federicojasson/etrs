@@ -12,6 +12,7 @@
 - Implement available response in /account/sign-up service
 - Chequear cuándo poner texto y header sobre formularios.
 - Clean styles
+- Email parameter?
 
 - Corresponding vs According to
 - Define vs Initialize vs Build
