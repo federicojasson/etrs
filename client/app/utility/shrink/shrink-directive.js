@@ -19,41 +19,40 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility').service('utility', utilityService);
+	angular.module('app.utility.shrink').directive('shrink', [
+		'utility',
+		shrinkDirective
+	]);
 	
 	/**
-	 * Provides utility functions.
+	 * TODO: comment
 	 */
-	function utilityService() {
-		var _this = this;
+	function shrinkDirective(utility) {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				require: 'ngModel',
+				restrict: 'A',
+				scope: {},
+				link: onLink
+			};
+		}
 		
 		/**
-		 * TODO: comment
+		 * Invoked after the linking phase.
 		 * 
-		 * Receives the string.
+		 * Receives the scope of the directive and the element matched by it.
 		 */
-		_this.shrink = function(string) {
+		function onLink(scope, element, attributes, ngModel) {
 			// TODO: comment
-			return string.replace(/[ ]+/g, ' ');
-		};
+			ngModel.$parsers.push(utility.shrink);
+		}
 		
-		/**
-		 * Converts a string from spinal-case to camelCase.
-		 * 
-		 * Receives the string.
-		 */
-		_this.spinalToCamelCase = function(string) {
-			// Replaces the dashes with whitespaces
-			string = string.replace(/-/g, ' ');
-
-			// Converts the first character of each word, except the first one,
-			// to uppercase
-			string = string.replace(/ [a-z]/g, function(character) {
-				return character.toUpperCase();
-			});
-			
-			// Removes the whitespaces
-			return string.replace(/ /g, '');
-		};
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
 	}
 })();

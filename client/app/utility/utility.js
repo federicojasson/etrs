@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.utility', [
-		'app.utility.honorificName'
+		'app.utility.honorificName',
+		'app.utility.shrink'
 	]);
 })();
