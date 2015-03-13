@@ -33,5 +33,12 @@
 		_this.getAccount = function() {
 			// TODO: implement
 		};
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getMedicine = function() {
+			// TODO: implement
+		};
 	}
 })();

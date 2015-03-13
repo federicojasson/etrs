@@ -44,6 +44,8 @@
 				'/account/sign-up/authenticate',
 				'/account/sign-up/request',
 				'/authentication/get-state',
+				'/medicine/create',
+				'/medicine/edit',
 				'/medicine/get'
 			];
 		}

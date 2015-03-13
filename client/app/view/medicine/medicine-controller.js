@@ -21,6 +21,7 @@
 (function() {
 	angular.module('app.view.medicine').controller('MedicineViewController', [
 		'$stateParams',
+		'data',
 		'server',
 		MedicineViewController
 	]);
@@ -28,7 +29,7 @@
 	/**
 	 * Represents the medicine view.
 	 */
-	function MedicineViewController($stateParams, server) {
+	function MedicineViewController($stateParams, data, server) {
 		var _this = this;
 		
 		/**
@@ -71,18 +72,13 @@
 		 * Receives the medicine's ID.
 		 */
 		function getMedicine(id) {
-			// Defines the input to be sent to the server
-			var input = {
-				id: id
-			};
-			
-			// TODO: use data service
-			
+			// TODO: prepare data service?
+
 			// Gets the medicine
-			server.medicine.get(input).then(function(output) {
+			data.getMedicine(id).then(function(newMedicine) {
 				// Sets the medicine
-				medicine = output;
-				
+				medicine = newMedicine;
+
 				ready = true;
 			});
 		}

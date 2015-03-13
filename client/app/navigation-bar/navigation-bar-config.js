@@ -36,13 +36,13 @@
 				medicines: {
 					name: 'Administrar',
 					url: '/medicines',
-					description: '' // TODO
+					description: 'Administre los medicamentos del sistema'
 				},
 				
 				newMedicine: {
 					name: 'Nuevo',
 					url: '/medicine/new',
-					description: '' // TODO
+					description: 'Cree un nuevo medicamento'
 				},
 				
 				signUp: {
