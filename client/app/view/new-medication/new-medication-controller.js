@@ -19,13 +19,26 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.newMedication').controller('NewMedicationViewController', NewMedicationViewController);
+	angular.module('app.view.newMedication').controller('NewMedicationViewController', [
+		'$scope',
+		'CreateMedicationAction',
+		'router',
+		NewMedicationViewController
+	]);
 	
 	/**
 	 * Represents the new-medication view.
 	 */
-	function NewMedicationViewController() {
+	function NewMedicationViewController($scope, CreateMedicationAction, router) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready, considering the local factors.
+		 * 
+		 * Since it considers only the local factors, it doesn't necessarily
+		 * determine on its own whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the URL of the template.
@@ -45,7 +58,44 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Initializes the create-medication action
+			var createMedicationAction = new CreateMedicationAction();
+			createMedicationAction.startCallback = onStart;
+			createMedicationAction.successCallback = onSuccess;
+			
+			// Includes the actions
+			$scope.action = {
+				createMedication: createMedicationAction
+			};
+		}
+		
+		/**
+		 * Invoked at the start of the create-medication action.
+		 */
+		function onStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the create-medication action is successful.
+		 * 
+		 * Receives the created medication's ID.
+		 */
+		function onSuccess(id) {
+			// Redirects the user to the medication route
+			router.redirect('/medication/' + id);
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the view
+		initialize();
 	}
 })();

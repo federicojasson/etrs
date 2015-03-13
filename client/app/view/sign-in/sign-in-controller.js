@@ -69,7 +69,6 @@
 			var signInAction = new SignInAction();
 			signInAction.notAuthenticatedCallback = onNotAuthenticated;
 			signInAction.startCallback = onStart;
-			signInAction.successCallback = onSuccess;
 			
 			// Includes the actions
 			$scope.action = {
@@ -98,13 +97,6 @@
 		 */
 		function onStart() {
 			ready = false;
-		}
-		
-		/**
-		 * Invoked when the sign-in action is successful.
-		 */
-		function onSuccess() {
-			ready = true;
 		}
 		
 		// ---------------------------------------------------------------------
