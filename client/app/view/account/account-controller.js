@@ -20,6 +20,8 @@
 
 (function() {
 	angular.module('app.view.account').controller('AccountViewController', [
+		'$scope',
+		'EditAccountAction',
 		'authentication',
 		'fullNameFilter',
 		AccountViewController
@@ -28,7 +30,7 @@
 	/**
 	 * Represents the account view.
 	 */
-	function AccountViewController(authentication, fullNameFilter) {
+	function AccountViewController($scope, EditAccountAction, authentication, fullNameFilter) {
 		var _this = this;
 		
 		/**
@@ -68,7 +70,29 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO: initialize actions and callbacks
+			// Initializes the edit-account action
+			var editAccountAction = new EditAccountAction();
+			editAccountAction.startCallback = onStart;
+			editAccountAction.successCallback = onSuccess;
+			
+			// Includes the actions
+			$scope.action = {
+				editAccount: editAccountAction
+			};
+		}
+		
+		/**
+		 * Invoked at the start of the edit-account action.
+		 */
+		function onStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the edit-account action is successful.
+		 */
+		function onSuccess() {
+			ready = true;
 		}
 		
 		// ---------------------------------------------------------------------

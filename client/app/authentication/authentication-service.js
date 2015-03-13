@@ -65,8 +65,8 @@
 		/**
 		 * Refreshes the authentication state.
 		 * 
-		 * It should be invoked whenever the authentication state or the data of
-		 * the signed-in user change, in order to keep the application
+		 * It should be invoked whenever the authentication state changes or the
+		 * signed-in user is edited, in order to keep the application
 		 * synchronized with the server.
 		 */
 		_this.refreshState = function() {
