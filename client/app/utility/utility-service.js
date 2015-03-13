@@ -28,12 +28,11 @@
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * Removes the duplicate spaces from a string.
 		 * 
 		 * Receives the string.
 		 */
 		_this.shrink = function(string) {
-			// TODO: comment
 			return string.replace(/[ ]+/g, ' ');
 		};
 		
@@ -43,16 +42,16 @@
 		 * Receives the string.
 		 */
 		_this.spinalToCamelCase = function(string) {
-			// Replaces the dashes with whitespaces
+			// Replaces the dashes with spaces
 			string = string.replace(/-/g, ' ');
 
-			// Converts the first character of each word, except the first one,
-			// to uppercase
+			// Converts to uppercase the first character of each word except the
+			// first one
 			string = string.replace(/ [a-z]/g, function(character) {
 				return character.toUpperCase();
 			});
 			
-			// Removes the whitespaces
+			// Removes the spaces
 			return string.replace(/ /g, '');
 		};
 	}

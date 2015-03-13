@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.authentication').service('authentication', [
+		'data',
 		'server',
 		authenticationService
 	]);
@@ -27,7 +28,7 @@
 	/**
 	 * Manages the authentication state.
 	 */
-	function authenticationService(server) {
+	function authenticationService(data, server) {
 		var _this = this;
 		
 		/**
@@ -64,8 +65,9 @@
 		/**
 		 * Refreshes the authentication state.
 		 * 
-		 * It should be invoked whenever the authentication state changes, in
-		 * order to keep the application synchronized with the server.
+		 * It should be invoked whenever the authentication state or the data of
+		 * the signed-in user change, in order to keep the application
+		 * synchronized with the server.
 		 */
 		_this.refreshState = function() {
 			stateRefreshing = true;
@@ -80,12 +82,16 @@
 					return;
 				}
 				
-				// Gets the signed-in user
-				/*server.account.get().then(function(output) {
-					signedInUser = output;
+				// Gets the account
+				// TODO: uncomment
+				/*data.getAccount().then(function(account) {
+					// Sets the signed-in user
+					signedInUser = account;
+					
 					stateRefreshing = false;
 				});*/
-				// TODO: uncomment
+				
+				// TODO: remove this
 				signedInUser = {
 					id: 'admin',
 					role: 'ad',

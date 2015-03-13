@@ -19,22 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.action',
-		'app.authentication',
-		'app.data',
-		'app.dialog',
-		'app.error',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.data', []);
 })();
