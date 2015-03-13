@@ -33,15 +33,15 @@
 		 */
 		function getMenuItems() {
 			return {
-				medications: {
+				medicines: {
 					name: 'Administrar',
-					url: '/medications',
+					url: '/medicines',
 					description: '' // TODO
 				},
 				
-				newMedication: {
+				newMedicine: {
 					name: 'Nuevo',
-					url: '/medication/new',
+					url: '/medicine/new',
 					description: '' // TODO
 				},
 				
@@ -72,8 +72,8 @@
 					{
 						name: 'Medicamentos',
 						items: [
-							menuItems.medications,
-							menuItems.newMedication
+							menuItems.medicines,
+							menuItems.newMedicine
 						]
 					}
 				],

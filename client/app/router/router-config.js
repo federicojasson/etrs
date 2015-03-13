@@ -62,34 +62,34 @@
 				},
 				
 				{
-					name: 'medication',
-					url: '/medication/{id:[0-9A-Fa-f]{32}}',
+					name: 'medicine',
+					url: '/medicine/{id:[0-9A-Fa-f]{32}}',
 					data: {
 						views: {
 							__: 'SignInViewController',
-							ad: 'MedicationViewController'
+							ad: 'MedicineViewController'
 						}
 					}
 				},
 				
 				{
-					name: 'medications',
-					url: '/medications',
+					name: 'medicines',
+					url: '/medicines',
 					data: {
 						views: {
 							__: 'SignInViewController',
-							ad: 'MedicationsViewController'
+							ad: 'MedicinesViewController'
 						}
 					}
 				},
 				
 				{
-					name: 'newMedication',
-					url: '/medication/new',
+					name: 'newMedicine',
+					url: '/medicine/new',
 					data: {
 						views: {
 							__: 'SignInViewController',
-							ad: 'NewMedicationViewController'
+							ad: 'NewMedicineViewController'
 						}
 					}
 				},

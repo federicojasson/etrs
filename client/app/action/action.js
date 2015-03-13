@@ -20,7 +20,7 @@
 
 (function() {
 	angular.module('app.action', [
-		'app.action.createMedication',
+		'app.action.createMedicine',
 		'app.action.requestResetPassword',
 		'app.action.requestSignUp',
 		'app.action.resetPassword',

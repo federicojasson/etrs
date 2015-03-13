@@ -19,43 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.server').config([
-		'serverProvider',
-		config
-	]);
-	
-	/**
-	 * Configures the module.
-	 */
-	function config(serverProvider) {
-		/**
-		 * Returns the services.
-		 */
-		function getServices() {
-			return [
-				'/account/edit',
-				'/account/get',
-				'/account/reset-password',
-				'/account/reset-password/authenticate',
-				'/account/reset-password/request',
-				'/account/sign-in',
-				'/account/sign-out',
-				'/account/sign-up',
-				'/account/sign-up/authenticate',
-				'/account/sign-up/request',
-				'/authentication/get-state',
-				'/medicine/get'
-			];
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Gets the services
-		var services = getServices();
-		
-		// Registers the services
-		for (var i = 0; i < services.length; i++) {
-			serverProvider.registerService(services[i]);
-		}
-	}
+	angular.module('app.action.createMedicine', []);
 })();

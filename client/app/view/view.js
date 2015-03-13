@@ -22,9 +22,9 @@
 	angular.module('app.view', [
 		'app.view.account',
 		'app.view.home',
-		'app.view.medication',
-		'app.view.medications',
-		'app.view.newMedication',
+		'app.view.medicine',
+		'app.view.medicines',
+		'app.view.newMedicine',
 		'app.view.requestResetPassword',
 		'app.view.requestSignUp',
 		'app.view.resetPassword',
