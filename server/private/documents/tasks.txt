@@ -11,6 +11,7 @@
 - URL vs state en href
 - Implement available response in /account/sign-up service
 - Chequear cuándo poner texto y header sobre formularios.
+- Clean styles
 
 - Corresponding vs According to
 - Define vs Initialize vs Build

@@ -30,7 +30,6 @@
 		'app.inputValidator',
 		'app.layout',
 		'app.navigationBar',
-		'app.parameters',
 		'app.router',
 		'app.server',
 		'app.title',
