@@ -11,19 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/layout/site/site-controller.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/view/sign-up/sign-up-controller.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/action/create-medication/create-medication.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/action/sign-out/sign-out.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/view/reset-password/reset-password-controller.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/view/request-reset-password/request-reset-password-controller.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/view/sign-in/sign-in-controller.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/view/request-sign-up/request-sign-up-controller.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/action/action.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/view/medication/medication-controller.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/action/create-medication/create-medication-factory.js</file>
-            <file>file:/C:/xampp/htdocs/etrs/client/app/view/new-medication/new-medication-controller.js</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
