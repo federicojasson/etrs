@@ -1,9 +1,0 @@
-{
-	"TODO:": "define final parameters",
-	
-	"host": "smtp.gmail.com",
-	"port": 587,
-	"protocol": "tls",
-	"username": "",
-	"password": ""
-}

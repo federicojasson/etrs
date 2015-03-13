@@ -1,4 +1,4 @@
-# Disables the listing of directories in the whole directory tree
+# Disables the directory listing
 Options -Indexes
 
 # Enables the runtime rewriting engine
@@ -7,8 +7,8 @@ RewriteEngine on
 # Maps the root URL to the client application
 RewriteRule ^(/)?$ client/index.html [L]
 
-# Maps all URLs to the client application, except those prefixed with client/ or
-# server/
+# Maps all URLs to the client application except those prefixed with "client/"
+# or "server/"
 RewriteCond %{REQUEST_URI} !^client/(.*)$
 RewriteCond %{REQUEST_URI} !^server/(.*)$
 RewriteRule ^(.*)$ client/$1 [L]
