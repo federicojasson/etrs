@@ -33,7 +33,19 @@
 		 * Receives the input.
 		 */
 		_this.isEmailAddress = function(input) {
-			// TODO: implement
+			if (! _this.isValidString(input, 0, 254)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (! /(?!.*[ ])(?!.*@.*@)^.+@.+$/.test(input.value)) {
+				// The input is not an email address
+				input.message = 'Ingrese una dirección de correo electrónico válida';
+				return false;
+			}
+			
+			// The input is an email address
+			input.message = '';
 			return true;
 		};
 		
@@ -49,7 +61,7 @@
 				'm'
 			];
 			
-			if (genders.indexOf(input) === -1) {
+			if (genders.indexOf(input.value) === -1) {
 				// The input is not a gender
 				input.message = 'Seleccione el sexo';
 				return false;
@@ -109,7 +121,7 @@
 				'op'
 			];
 			
-			if (userRoles.indexOf(input) === -1) {
+			if (userRoles.indexOf(input.value) === -1) {
 				// The input is not a user role
 				input.message = 'Seleccione el rol de usuario';
 				return false;
@@ -144,7 +156,27 @@
 		 * TODO: comment
 		 */
 		_this.isValidString = function(input, minimumLength, maximumLength) {
-			// TODO: implement
+			// Initializes the maximum length if is undefined
+			maximumLength = (angular.isDefined(maximumLength)) ? maximumLength : input.value.length;
+			
+			if (input.value.length < minimumLength) {
+				// The input is too short
+				input.message = '';
+				input.message += 'Este campo debe tener al menos ' + minimumLength + ' ';
+				input.message += (minimumLength === 1) ? 'caracter' : 'caracteres';
+				return false;
+			}
+			
+			if (input.value.length > maximumLength) {
+				// The input is too long
+				input.message = '';
+				input.message += 'Este campo puede tener a lo sumo ' + maximumLength + ' ';
+				input.message += (maximumLength === 1) ? 'caracter' : 'caracteres';
+				return false;
+			}
+			
+			// The input is a valid string
+			input.message = '';
 			return true;
 		};
 		
