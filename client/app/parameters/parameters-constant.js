@@ -19,22 +19,9 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.action',
-		'app.authentication',
-		'app.dialog',
-		'app.error',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigationBar',
-		'app.parameters',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.parameters').constant('parameters', {
+		// TODO: define parameters
+		domain: 'localhost/etrs',
+		emailAddress: 'etrs@etrs.com.ar'
+	});
 })();

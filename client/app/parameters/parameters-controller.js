@@ -19,22 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.action',
-		'app.authentication',
-		'app.dialog',
-		'app.error',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigationBar',
-		'app.parameters',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.parameters').controller('ParametersController', [
+		'parameters',
+		ParametersController
 	]);
+	
+	/**
+	 * Provides means to use the TODO: comment
+	 */
+	function ParametersController(parameters) {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.get = function() {
+			return parameters;
+		};
+	}
 })();

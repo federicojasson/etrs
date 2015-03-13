@@ -1,27 +1,48 @@
-TODO: implement html
-
 <h1>Bienvenido a ETRS</h1>
 
 <p>
-	TODO: texto<br>
-	<br>
+	Bienvenido a <b>ETRS</b>.<br>
+	Esperamos que el sistema le resulte útil y lo emplee con responsabilidad.
+</p>
+
+<p>
+	<blockquote>Recuerde,
+		<br>
+		<strong>
+			La seguridad de la información es responsabilidad de todos.
+		</strong>
+	</blockquote>
 </p>
 
 <p class="separate-paragraph">
-	El equipo de ETRS
+	Lo saluda atentamente,<br>
+	El equipo de <b>ETRS</b><br>
+	<a href="#/">{{ parameters.get().domain }}</a>
 </p>
 
-<blockquote>
-	<em>
-		La seguridad de la información es responsabilidad de todos.
-	</em>
-</blockquote>
+<h2>Información de contacto</h2>
 
-<h2>Contacto</h2>
+<p class="separate-paragraph">
+	Ante cualquier duda, comuníquese con nosotros:
+</p>
 
-<address class="well">
-	Dirección de correo electrónico<br>
-	<a ng-href="mailto:{{ 'TODO: emailAddress here' }}">
-		{{ 'TODO: emailAddress here' }}
-	</a>
-</address>
+<p>
+	<address>
+		<b>Dirección de correo electrónico</b><br>
+		<a ng-href="mailto:{{ parameters.get().emailAddress }}">
+			{{ parameters.get().emailAddress }}
+		</a>
+	</address>
+
+	<address>
+		<b>Teléfonos</b><br>
+		TODO<br>
+	</address>
+
+	<address>
+		<b>Dirección</b><br>
+		Av. Alem 1253<br>
+		Bahía Blanca, Buenos Aires, Argentina<br>
+		C.P. 8000
+	</address>
+</p>

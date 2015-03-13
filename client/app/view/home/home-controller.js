@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.home').controller('HomeViewController', HomeViewController);
+	angular.module('app.view.home').controller('HomeViewController', [
+		'$controller',
+		'$scope',
+		HomeViewController
+	]);
 	
 	/**
 	 * Represents the home view.
 	 */
-	function HomeViewController() {
+	function HomeViewController($controller, $scope) {
 		var _this = this;
 		
 		/**
@@ -47,5 +51,18 @@
 		_this.isReady = function() {
 			return true;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Includes the necessary controllers
+			$scope.parameters = $controller('ParametersController');
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the view
+		initialize();
 	}
 })();
