@@ -19,10 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.router'
-	]);
+	angular.module('app.router').config(config);
+	
+	/**
+	 * Configures the module
+	 */
+	function config() {
+		// TODO: implement config function
+	}
 })();
