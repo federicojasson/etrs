@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * TODO: comment
+	 * Removes the duplicate spaces from an input.
 	 */
 	function shrinkDirective(utility) {
 		/**
@@ -43,11 +43,12 @@
 		/**
 		 * Invoked after the linking phase.
 		 * 
-		 * Receives the scope of the directive and the element matched by it.
+		 * Receives the scope of the directive, the element matched by it, its
+		 * attributes and the controller of the ng-model directive.
 		 */
-		function onLink(scope, element, attributes, ngModel) {
-			// TODO: comment
-			ngModel.$parsers.push(utility.shrink);
+		function onLink(scope, element, attributes, ngModelController) {
+			// Registers a parser to remove the duplicate spaces from the input
+			ngModelController.$parsers.push(utility.shrink);
 		}
 		
 		// ---------------------------------------------------------------------

@@ -82,24 +82,15 @@
 					return;
 				}
 				
+				// TODO: prepare data service?
+				
 				// Gets the account
-				// TODO: uncomment
-				/*data.getAccount().then(function(account) {
+				data.getAccount().then(function(account) {
 					// Sets the signed-in user
 					signedInUser = account;
 					
 					stateRefreshing = false;
-				});*/
-				
-				// TODO: remove this
-				signedInUser = {
-					id: 'admin',
-					role: 'ad',
-					firstName: 'Gabriel',
-					lastName: 'Rodríguez',
-					gender: 'm'
-				};
-				stateRefreshing = false;
+				});
 			});
 		};
 	}

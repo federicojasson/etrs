@@ -19,13 +19,25 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account').controller('AccountViewController', AccountViewController);
+	angular.module('app.view.account').controller('AccountViewController', [
+		'authentication',
+		'fullNameFilter',
+		AccountViewController
+	]);
 	
 	/**
 	 * Represents the account view.
 	 */
-	function AccountViewController() {
+	function AccountViewController(authentication, fullNameFilter) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready, considering the local factors.
+		 * 
+		 * Since it considers only the local factors, it doesn't necessarily
+		 * determine on its own whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the URL of the template.
@@ -38,14 +50,30 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return ''; // TODO: get user
+			// Gets the signed-in user
+			var signedInUser = authentication.getSignedInUser();
+			
+			// Gets the signed-in user's full name
+			return fullNameFilter(signedInUser);
 		};
 		
 		/**
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true; // TODO: get user
+			return ready;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// TODO: initialize actions and callbacks
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the view
+		initialize();
 	}
 })();
