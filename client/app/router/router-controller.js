@@ -19,33 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app.router').service('router', [
-		'$window',
-		'$state',
-		routerService
+	angular.module('app.router').controller('RouterController', [
+		'router',
+		RouterController
 	]);
 	
 	/**
-	 * Provides routing-related functionalities.
+	 * Provides means to use the router service.
 	 */
-	function routerService($window, $state) {
+	function RouterController(router) {
 		var _this = this;
-		
-		/**
-		 * Redirects the user to a certain route.
-		 * 
-		 * Receives the route's name.
-		 */
-		_this.redirect = function(name) {
-			$state.go(name);
-		};
 		
 		/**
 		 * Reloads the application.
 		 */
 		_this.reload = function() {
-			// TODO: should set href??? See: http://stackoverflow.com/questions/27618878/angular-ui-router-reloading-to-different-state-refresh-data
-			$window.location.reload();
+			router.reload();
 		};
 	}
 })();
