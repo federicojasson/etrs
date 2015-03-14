@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.error').service('error', errorService);
+	angular.module('app.error').service('error', [
+		'Error',
+		errorService
+	]);
 	
 	/**
 	 * Manages the errors.
 	 */
-	function errorService() {
+	function errorService(Error) {
 		var _this = this;
 		
 		/**
@@ -59,7 +62,21 @@
 		 * Receives the server response.
 		 */
 		_this.report = function(response) {
-			// TODO: implement error.report
+			// Builds the message
+			var message = 'Error ' + response.status;
+			
+			// Gets the error code
+			var code = response.data.code;
+			
+			// Builds the details
+			var details = '';
+			details += 'Código: ' + code + '\n';
+			details += '\n';
+			details += 'Descripción:\n';
+			details += descriptions[code];
+			
+			// Initializes the error
+			error = new Error(message, details);
 		};
 	}
 })();
