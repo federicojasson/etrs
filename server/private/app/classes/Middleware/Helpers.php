@@ -47,6 +47,7 @@ class Helpers extends \Slim\Middleware {
 	private function getHelpers() {
 		return [
 			// TODO: define helpers here
+			'response' => 'App\Helper\Response'
 		];
 	}
 	
