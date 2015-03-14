@@ -119,8 +119,11 @@ function runApp($middlewares) {
 		'mode' => OPERATION_MODE
 	]);
 	
+	// Reverses the order of the middlewares
+	$reversedMiddlewares = array_reverse($middlewares);
+	
 	// Adds the middlewares
-	foreach ($middlewares as $middleware) {
+	foreach ($reversedMiddlewares as $middleware) {
 		$app->add($middleware);
 	}
 	
@@ -135,6 +138,7 @@ function serveExternalRequest() {
 	// Initializes the necessary middlewares
 	$middlewares = [
 		// TODO: define middlewares here
+		new \App\Middleware\ErrorHandlers(),
 		new \App\Middleware\Helpers()
 	];
 	
