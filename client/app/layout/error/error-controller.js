@@ -59,6 +59,7 @@
 		function initialize() {
 			// Includes the necessary controllers
 			$scope.error = $controller('ErrorController');
+			$scope.router = $controller('RouterController');
 		}
 		
 		// ---------------------------------------------------------------------
