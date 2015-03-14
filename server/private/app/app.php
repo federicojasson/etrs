@@ -135,6 +135,7 @@ function serveExternalRequest() {
 	// Initializes the necessary middlewares
 	$middlewares = [
 		// TODO: define middlewares here
+		new \App\Middleware\Helpers()
 	];
 	
 	// Runs the application
