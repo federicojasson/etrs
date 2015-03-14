@@ -20,6 +20,8 @@
 
 (function() {
 	angular.module('app.layout.error').controller('ErrorLayoutController', [
+		'$controller',
+		'$scope',
 		'error',
 		ErrorLayoutController
 	]);
@@ -27,7 +29,7 @@
 	/**
 	 * Represents the error layout.
 	 */
-	function ErrorLayoutController(error) {
+	function ErrorLayoutController($controller, $scope, error) {
 		var _this = this;
 		
 		/**
@@ -50,5 +52,18 @@
 		_this.isReady = function() {
 			return true;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Includes the necessary controllers
+			$scope.error = $controller('ErrorController');
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the layout
+		initialize();
 	}
 })();
