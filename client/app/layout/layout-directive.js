@@ -21,13 +21,14 @@
 (function() {
 	angular.module('app.layout').directive('layout', [
 		'layout',
+		'title',
 		layoutDirective
 	]);
 	
 	/**
 	 * Includes the layout.
 	 */
-	function layoutDirective(layout) {
+	function layoutDirective(layout, title) {
 		/**
 		 * Returns the settings.
 		 */
@@ -53,11 +54,42 @@
 					$scope: scope
 				});
 				
-				// TODO: register title listener
+				// Registers a listener
+				scope.$watch(layoutController.getTitle, function() {
+					// Updates the title
+					updateTitle(layoutController);
+				});
+				
+				// Registers a listener
+				scope.$watch(layoutController.isReady, function() {
+					// Updates the title
+					updateTitle(layoutController);
+				});
 				
 				// Includes the current layout
 				scope.layout = layoutController;
 			});
+		}
+		
+		/**
+		 * Updates the title according to the state of the current layout.
+		 * 
+		 * Receives the layout's controller.
+		 */
+		function updateTitle(layoutController) {
+			var newTitle;
+			
+			if (layoutController.isReady()) {
+				// The layout is ready
+				// Gets the title provided by the layout
+				newTitle = layoutController.getTitle();
+			} else {
+				// The layout is not ready
+				newTitle = 'Cargando...';
+			}
+			
+			// Sets the title
+			title.set(newTitle);
 		}
 		
 		// ---------------------------------------------------------------------
