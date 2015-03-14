@@ -47,7 +47,7 @@
 		function onLink(scope, element) {
 			// Registers a listener
 			scope.$watch(title.get, function(newTitle) {
-				// Shows the title
+				// Shows the current title
 				element.text(newTitle);
 			});
 		}

@@ -48,14 +48,14 @@
 		function onLink(scope) {
 			// Registers a listener
 			scope.$watch(layout.get, function(newLayout) {
-				// Initializes the layout
+				// Initializes the current layout
 				var layoutController = $controller(newLayout, {
 					$scope: scope
 				});
 				
 				// TODO: register title listener
 				
-				// Includes the layout
+				// Includes the current layout
 				scope.layout = layoutController;
 			});
 		}
