@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.layout').directive('layout', [
+		'$controller',
 		'layout',
 		'title',
 		layoutDirective
@@ -28,7 +29,7 @@
 	/**
 	 * Includes the layout.
 	 */
-	function layoutDirective(layout, title) {
+	function layoutDirective($controller, layout, title) {
 		/**
 		 * Returns the settings.
 		 */

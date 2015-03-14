@@ -36,6 +36,19 @@
 		function getStates() {
 			return [
 				// TODO: define states in here
+				
+				{
+					name: 'home',
+					url: '/',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'HomeViewController',
+							dr: 'HomeViewController',
+							op: 'HomeViewController'
+						}
+					}
+				}
 			];
 		}
 		
