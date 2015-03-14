@@ -79,7 +79,7 @@
 				// There is no view defined for the user role
 				
 				// Redirects the user to the home route
-				router.redirect('/'); // TODO: use home
+				router.redirect('home');
 				
 				return;
 			}
