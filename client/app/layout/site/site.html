@@ -11,7 +11,43 @@
 				</div>
 				
 				<div class="collapse navbar-collapse navbar-right">
-					TODO
+					<div ng-if="authentication.isUserSignedIn()">
+						<div dropdown class="btn-group navbar-btn">
+							<a ui-sref="account" class="btn btn-default">
+								<span class="glyphicon glyphicon-user"></span>
+								
+								<span class="icon-text">
+									{{ authentication.getSignedInUser() | honorificName }}
+								</span>
+							</a>
+							
+							<button dropdown-toggle class="btn btn-default dropdown-toggle">
+								<span class="glyphicon glyphicon-cog"></span>
+							</button>
+							
+							<ul class="dropdown-menu">
+								<li>
+									<a ng-click="TODO">
+										<span class="glyphicon glyphicon-log-out"></span>
+										
+										<span class="icon-text">
+											Cerrar sesión
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div ng-if="! authentication.isUserSignedIn()">
+						<a ui-sref="signIn" class="btn btn-primary navbar-btn">
+							<span class="glyphicon glyphicon-log-in"></span>
+							
+							<span class="icon-text">
+								Iniciar sesión
+							</span>
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>

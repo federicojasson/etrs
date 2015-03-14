@@ -38,6 +38,19 @@
 				// TODO: define states in here
 				
 				{
+					name: 'account',
+					url: '/account',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'AccountViewController',
+							dr: 'AccountViewController',
+							op: 'AccountViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'home',
 					url: '/',
 					data: {
@@ -46,6 +59,16 @@
 							ad: 'HomeViewController',
 							dr: 'HomeViewController',
 							op: 'HomeViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'signIn',
+					url: '/account/sign-in',
+					data: {
+						views: {
+							__: 'SignInViewController'
 						}
 					}
 				}
