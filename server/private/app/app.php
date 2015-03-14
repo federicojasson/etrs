@@ -19,7 +19,7 @@
  */
 
 /**
- * This script includes the application and defines bootstrapping functions.
+ * This script includes the application and defines utility functions.
  */
 
 // Defines the directories
