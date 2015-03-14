@@ -19,42 +19,24 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout').directive('layout', [
-		'layout',
-		layoutDirective
-	]);
+	angular.module('app.layout').service('layout', layoutService);
 	
 	/**
-	 * Includes the current layout.
+	 * Manages the layouts.
 	 */
-	function layoutDirective(layout) {
-		/**
-		 * Returns the settings.
-		 */
-		function getSettings() {
-			return {
-				restrict: 'E',
-				scope: {},
-				link: onLink,
-				templateUrl: 'app/layout/layout.html'
-			};
-		}
+	function layoutService() {
+		var _this = this;
 		
 		/**
-		 * Invoked after the linking phase.
-		 * 
-		 * Receives the scope of the directive.
+		 * The current layout.
 		 */
-		function onLink(scope) {
-			// Registers a listener
-			scope.$watch(layout.get, function(newLayout) {
-				// TODO: implement onLink
-			});
-		}
+		var layout = '';
 		
-		// ---------------------------------------------------------------------
-		
-		// Gets the settings
-		return getSettings();
+		/**
+		 * Returns the current layout.
+		 */
+		_this.get = function() {
+			return layout;
+		};
 	}
 })();
