@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout').service('layout', layoutService);
+	angular.module('app.layout').service('layout', [
+		'error',
+		layoutService
+	]);
 	
 	/**
 	 * Manages the layouts.
 	 */
-	function layoutService() {
+	function layoutService(error) {
 		var _this = this;
 		
 		/**
@@ -37,6 +40,19 @@
 		 */
 		_this.get = function() {
 			return layout;
+		};
+		
+		/**
+		 * Updates the layout.
+		 */
+		_this.update = function() {
+			if (error.occurred()) {
+				// An error has occurred
+				layout = 'ErrorLayoutController';
+			} else {
+				// No error has occurred
+				layout = 'SiteLayoutController';
+			}
 		};
 	}
 })();

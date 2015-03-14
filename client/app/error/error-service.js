@@ -19,12 +19,47 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.error',
-		'app.layout',
-		'app.router'
-	]);
+	angular.module('app.error').service('error', errorService);
+	
+	/**
+	 * Manages the errors.
+	 */
+	function errorService() {
+		var _this = this;
+		
+		/**
+		 * The error descriptions.
+		 */
+		var descriptions = {
+			// TODO: define error descriptions here
+		};
+		
+		/**
+		 * The occurred error.
+		 */
+		var error = null;
+		
+		/**
+		 * Returns the occurred error.
+		 */
+		_this.get = function() {
+			return error;
+		};
+		
+		/**
+		 * Determines whether an error has occurred.
+		 */
+		_this.occurred = function() {
+			return error !== null;
+		};
+		
+		/**
+		 * Reports an error.
+		 * 
+		 * Receives the server response.
+		 */
+		_this.report = function(response) {
+			// TODO: implement error.report
+		};
+	}
 })();
