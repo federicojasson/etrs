@@ -19,14 +19,29 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.router',
-		'app.title'
+	angular.module('app.authentication').controller('AuthenticationController', [
+		'authentication',
+		AuthenticationController
 	]);
+	
+	/**
+	 * Provides means to use the authentication service.
+	 */
+	function AuthenticationController(authentication) {
+		var _this = this;
+		
+		/**
+		 * Returns the signed-in user.
+		 */
+		_this.getSignedInUser = function() {
+			return authentication.getSignedInUser();
+		};
+		
+		/**
+		 * Determines whether the user is signed in.
+		 */
+		_this.isUserSignedIn = function() {
+			return authentication.isUserSignedIn();
+		};
+	}
 })();
