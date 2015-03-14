@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.error').controller('ErrorLayoutController', ErrorLayoutController);
+	angular.module('app.layout.error').controller('ErrorLayoutController', [
+		'error',
+		ErrorLayoutController
+	]);
 	
 	/**
 	 * Represents the error layout.
 	 */
-	function ErrorLayoutController() {
+	function ErrorLayoutController(error) {
 		var _this = this;
 		
 		/**
@@ -34,6 +37,18 @@
 			return 'app/layout/error/error.html';
 		};
 		
-		// TODO: implement
+		/**
+		 * Returns the title to set when the layout is ready.
+		 */
+		_this.getTitle = function() {
+			return error.get().message;
+		};
+		
+		/**
+		 * Determines whether the layout is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
 	}
 })();

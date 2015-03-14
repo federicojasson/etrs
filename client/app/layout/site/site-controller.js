@@ -34,6 +34,18 @@
 			return 'app/layout/site/site.html';
 		};
 		
-		// TODO: implement
+		/**
+		 * Returns the title to set when the layout is ready.
+		 */
+		_this.getTitle = function() {
+			return '';
+		};
+		
+		/**
+		 * Determines whether the layout is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
 	}
 })();

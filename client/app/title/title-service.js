@@ -45,7 +45,7 @@
 		 * It appends the acronym of the application, so this should not be
 		 * included.
 		 * 
-		 * Receives the title to be set.
+		 * Receives the title to set.
 		 */
 		_this.set = function(newTitle) {
 			if (newTitle.length > 0) {
