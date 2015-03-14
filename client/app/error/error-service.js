@@ -32,6 +32,7 @@
 		 */
 		var descriptions = {
 			// TODO: define error descriptions here
+			SYSTEM_UNDER_MAINTENANCE: ''
 		};
 		
 		/**
