@@ -58,7 +58,21 @@
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="main-container">
-				TODO
+				<div ng-if="authentication.isUserSignedIn()">
+					<div class="row">
+						<div class="col-sm-4">
+							TODO: navigation bar here
+						</div>
+						
+						<div class="col-sm-8">
+							<view></view>
+						</div>
+					</div>
+				</div>
+				
+				<div ng-if="! authentication.isUserSignedIn()">
+					<view></view>
+				</div>
 			</div>
 			
 			<hr>

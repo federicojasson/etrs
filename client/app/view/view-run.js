@@ -19,16 +19,27 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.router',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.view').run([
+		'$rootScope',
+		'authentication',
+		'view',
+		run
 	]);
+	
+	/**
+	 * Performs initialization tasks.
+	 */
+	function run($rootScope, authentication, view) {
+		// Registers a listener
+		$rootScope.$on('$stateChangeSuccess', function() {
+			// Updates the view
+			view.update();
+		});
+		
+		// Registers a listener
+		$rootScope.$watch(authentication.isStateRefreshing, function() {
+			// Updates the view
+			view.update();
+		});
+	}
 })();

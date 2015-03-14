@@ -19,16 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.router',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.view', []);
 })();
