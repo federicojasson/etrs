@@ -38,7 +38,7 @@
 		 * Returns the title to set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return ''; // TODO
+			return '';
 		};
 		
 		/**
