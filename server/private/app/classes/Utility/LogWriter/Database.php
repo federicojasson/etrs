@@ -18,44 +18,11 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Configuration;
+namespace App\Utility\LogWriter;
 
 /**
- * Represents the production-mode configuration.
+ * TODO: comment
  */
-class Production extends Configuration {
-	
-	/**
-	 * Returns the cookie settings.
-	 */
-	protected function getCookieSettings() {
-		// TODO: cookie settings
-		return [];
-	}
-	
-	/**
-	 * Returns the logging settings.
-	 */
-	protected function getLoggingSettings() {
-		// Initializes a log writer
-		$logWriter = new \App\Utility\LogWriter\Database();
-		
-		return [
-			'log.enabled' => true,
-			'log.level' => \Slim\Log::INFO,
-			'log.writer' => $logWriter
-		];
-	}
-	
-	/**
-	 * Returns miscellaneous settings.
-	 */
-	protected function getMiscellaneousSettings() {
-		return [
-			'debug' => false,
-			'http.version' => '1.1',
-			'routes.case_sensitive' => true
-		];
-	}
-	
+class Database {
+	// TODO
 }
