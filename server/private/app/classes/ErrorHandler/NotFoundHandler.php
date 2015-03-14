@@ -29,7 +29,8 @@ class NotFoundHandler {
 	 * Handles an error.
 	 */
 	public function __invoke() {
-		// TODO
+		// Halts the application
+		haltApp(HTTP_STATUS_NOT_FOUND, ERROR_CODE_UNDEFINED_SERVICE);
 	}
 	
 }
