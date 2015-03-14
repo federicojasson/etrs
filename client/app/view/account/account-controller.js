@@ -19,9 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.home',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.account').controller('AccountViewController', AccountViewController);
+	
+	/**
+	 * Represents the account view.
+	 */
+	function AccountViewController() {
+		var _this = this;
+		
+		/**
+		 * Returns the template's URL.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/account/account.html';
+		};
+		
+		/**
+		 * Returns the title to set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return ''; // TODO
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
+	}
 })();

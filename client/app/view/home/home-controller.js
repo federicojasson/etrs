@@ -19,9 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.home',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.home').controller('HomeViewController', HomeViewController);
+	
+	/**
+	 * Represents the home view.
+	 */
+	function HomeViewController() {
+		var _this = this;
+		
+		/**
+		 * Returns the template's URL.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/home/home.html';
+		};
+		
+		/**
+		 * Returns the title to set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return ''; // TODO
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
+	}
 })();
