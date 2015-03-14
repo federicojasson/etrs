@@ -33,7 +33,8 @@
 		var descriptions = {
 			// TODO: define error descriptions here
 			SYSTEM_UNDER_MAINTENANCE: '',
-			UNDEFINED_SERVICE: ''
+			UNDEFINED_SERVICE: '',
+			UNEXPECTED_ERROR: ''
 		};
 		
 		/**

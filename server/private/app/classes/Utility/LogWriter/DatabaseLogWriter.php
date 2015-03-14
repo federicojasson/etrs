@@ -18,29 +18,11 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\ErrorHandler;
+namespace App\Utility\LogWriter;
 
 /**
- * Responsible for handling general errors.
+ * TODO: comment
  */
-class ErrorHandler {
-	
-	/**
-	 * Handles an error.
-	 * 
-	 * Receives an exception containing the information about the error.
-	 */
-	public function __invoke($exception) {
-		global $app;
-		
-		// Gets the exception's message
-		$message = $exception->getMessage();
-		
-		// Logs the event
-		$app->log->error('Unexpected error. Message: ' . $message);
-		
-		// Halts the application
-		haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_UNEXPECTED_ERROR);
-	}
-	
+class DatabaseLogWriter {
+	// TODO
 }
