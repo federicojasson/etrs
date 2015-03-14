@@ -22,6 +22,10 @@
  * This script defines global constants.
  */
 
+define('ERROR_CODE_SYSTEM_UNDER_MAINTENANCE', 'SYSTEM_UNDER_MAINTENANCE');
+
+define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
+
 define('OPERATION_MODE_DEVELOPMENT', 'development');
 define('OPERATION_MODE_MAINTENANCE', 'maintenance');
 define('OPERATION_MODE_PRODUCTION', 'production');

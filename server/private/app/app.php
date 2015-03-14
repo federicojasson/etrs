@@ -52,7 +52,27 @@ spl_autoload_register('loadClass');
  * Executes a server task.
  */
 function executeServerTask() {
-	// TODO
+	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
+		// The system is under maintenance
+		
+		// Defines the response
+		$response = [
+			'code' => ERROR_CODE_SYSTEM_UNDER_MAINTENANCE
+		];
+		
+		// Sets the appropriate headers
+		http_response_code(HTTP_STATUS_SERVICE_UNAVAILABLE);
+		header('Content-Type: application/json');
+		
+		// Sends the response
+		echo json_encode($response);
+		
+		// Exits the application
+		exit();
+	}
+	
+	// Serves the external request
+	serveExternalRequest();
 }
 
 /**
@@ -84,4 +104,39 @@ function loadClass($class) {
 		// Includes the script
 		require_once $path;
 	}
+}
+
+/**
+ * Runs the application.
+ * 
+ * Receives a set of middlewares to add for the execution.
+ */
+function runApp($middlewares) {
+	global $app;
+	
+	// Initializes the application
+	$app = new \Slim\Slim([
+		'mode' => OPERATION_MODE
+	]);
+	
+	// Adds the middlewares
+	foreach ($middlewares as $middleware) {
+		$app->add($middleware);
+	}
+	
+	// Runs the application
+	$app->run();
+}
+
+/**
+ * Serves an external request.
+ */
+function serveExternalRequest() {
+	// Initializes the necessary middlewares
+	$middlewares = [
+		// TODO: define middlewares here
+	];
+	
+	// Runs the application
+	runApp($middlewares);
 }
