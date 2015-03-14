@@ -54,21 +54,8 @@ spl_autoload_register('loadClass');
 function executeServerTask() {
 	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
 		// The system is under maintenance
-		
-		// Defines the response
-		$response = [
-			'code' => ERROR_CODE_SYSTEM_UNDER_MAINTENANCE
-		];
-		
-		// Sets the appropriate headers
-		http_response_code(HTTP_STATUS_SERVICE_UNAVAILABLE);
-		header('Content-Type: application/json');
-		
-		// Sends the response
-		echo json_encode($response);
-		
-		// Exits the application
-		exit();
+		// Halts the application
+		haltApp(HTTP_STATUS_SERVICE_UNAVAILABLE, ERROR_CODE_SYSTEM_UNDER_MAINTENANCE);
 	}
 	
 	// Serves the external request
