@@ -21,7 +21,7 @@
 namespace App\Middleware;
 
 /**
- * TODO: comment
+ * Responsible for applying the configuration.
  */
 class Configurations extends \Slim\Middleware {
 	
@@ -29,10 +29,29 @@ class Configurations extends \Slim\Middleware {
 	 * Calls the middleware.
 	 */
 	public function call() {
-		// TODO
+		global $app;
+		
+		// Gets the available configurations
+		$configurations = $this->getConfigurations();
+		
+		// Applies the appropriate configuration
+		foreach ($configurations as $operationMode => $class) {
+			$app->configureMode($operationMode, new $class());
+		}
 		
 		// Calls the next middleware
 		$this->next->call();
+	}
+	
+	/**
+	 * Returns the available configurations.
+	 */
+	private function getConfigurations() {
+		return [
+			OPERATION_MODE_DEVELOPMENT => 'App\Configuration\Development',
+			OPERATION_MODE_MAINTENANCE => 'App\Configuration\Maintenance',
+			OPERATION_MODE_PRODUCTION => 'App\Configuration\Production'
+		];
 	}
 	
 }
