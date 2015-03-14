@@ -76,6 +76,37 @@ function executeServerTask() {
 }
 
 /**
+ * Halts the application if is running and responds to the client with an error.
+ * 
+ * Receives the HTTP status to set and a code that indicates what caused the
+ * error.
+ */
+function haltApp($httpStatus, $errorCode) {
+	global $app;
+	
+	// Defines the response
+	$response = [
+		'code' => $errorCode
+	];
+	
+	if (isset($app)) {
+		// The application is running
+		// Halts the application
+		$app->halt($httpStatus, $response);
+	}
+	
+	// Sets the appropriate headers
+	http_response_code($httpStatus);
+	header('Content-Type: application/json');
+
+	// Sends the response
+	echo json_encode($response);
+
+	// Exits the application
+	exit();
+}
+
+/**
  * Includes a class of the application if the corresponding script exists.
  * 
  * Receives the fully-qualified class name.
