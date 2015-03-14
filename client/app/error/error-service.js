@@ -19,15 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.error').service('error', [
-		'Error',
-		errorService
-	]);
+	angular.module('app.error').service('error', errorService);
 	
 	/**
 	 * Manages the errors.
 	 */
-	function errorService(Error) {
+	function errorService() {
 		var _this = this;
 		
 		/**
@@ -76,7 +73,10 @@
 			details += descriptions[code];
 			
 			// Initializes the error
-			error = new Error(message, details);
+			error = {
+				message: message,
+				details: details
+			};
 		};
 	}
 })();
