@@ -51,24 +51,24 @@
 			// Registers a listener
 			scope.$watch(layout.get, function(newLayout) {
 				// Initializes the current layout's controller
-				var layoutController = $controller(newLayout, {
+				var controller = $controller(newLayout, {
 					$scope: scope
 				});
 				
 				// Registers a listener
-				scope.$watch(layoutController.getTitle, function() {
+				scope.$watch(controller.getTitle, function() {
 					// Updates the title
-					updateTitle(layoutController);
+					updateTitle(controller);
 				});
 				
 				// Registers a listener
-				scope.$watch(layoutController.isReady, function() {
+				scope.$watch(controller.isReady, function() {
 					// Updates the title
-					updateTitle(layoutController);
+					updateTitle(controller);
 				});
 				
 				// Includes the controller
-				scope.layout = layoutController;
+				scope.layout = controller;
 			});
 		}
 		
@@ -77,13 +77,13 @@
 		 * 
 		 * Receives the layout's controller.
 		 */
-		function updateTitle(layoutController) {
+		function updateTitle(controller) {
 			var newTitle;
 			
-			if (layoutController.isReady()) {
+			if (controller.isReady()) {
 				// The layout is ready
 				// Gets the title provided by the layout
-				newTitle = layoutController.getTitle();
+				newTitle = controller.getTitle();
 			} else {
 				// The layout is not ready
 				newTitle = 'Cargando...';
