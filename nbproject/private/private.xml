@@ -11,6 +11,17 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/classes/Configuration/Maintenance.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/app.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/classes/Configuration/Development.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/classes/Middleware/Configurations.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/classes/Middleware/ErrorHandlers.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/classes/Middleware/Helpers.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/classes/Configuration/Production.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/classes/ErrorHandler/NotFound.php</file>
+            <file>file:/C:/xampp/htdocs/etrs/client/app/navigation-bar/navigation-bar-provider.js</file>
+            <file>file:/C:/xampp/htdocs/etrs/server/private/app/classes/ErrorHandler/Error.php</file>
+        </group>
     </open-files>
 </project-private>

@@ -41,7 +41,7 @@ class Development extends Configuration {
 		$path = DIRECTORY_LOGS . '/development.log';
 		$file = fopen($path, 'a');
 		
-		// Initializes a log writer
+		// Initializes the log writer
 		$logWriter = new \Slim\LogWriter($file);
 		
 		return [

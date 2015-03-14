@@ -18,29 +18,29 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\ErrorHandler;
 
 /**
- * Responsible for registering the error handlers.
+ * Responsible for handling general errors.
  */
-class ErrorHandlers extends \Slim\Middleware {
+class Error {
 	
 	/**
-	 * Calls the middleware.
+	 * Handles an error.
+	 * 
+	 * Receives an exception containing the information about the error.
 	 */
-	public function call() {
+	public function __invoke($exception) {
 		global $app;
 		
-		// Initializes the error handlers
-		$error = new \App\ErrorHandler\Error();
-		$notFound = new \App\ErrorHandler\NotFound();
+		// Gets the exception's message
+		$message = $exception->getMessage();
 		
-		// Registers the error handlers
-		$app->error($error);
-		$app->notFound($notFound);
+		// Logs the event
+		$app->log->error('Unexpected error. Message: ' . $message);
 		
-		// Calls the next middleware
-		$this->next->call();
+		// Halts the application
+		haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_UNEXPECTED_ERROR);
 	}
 	
 }

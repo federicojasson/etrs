@@ -18,29 +18,19 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\ErrorHandler;
 
 /**
- * Responsible for registering the error handlers.
+ * Responsible for handling errors caused by the request of undefined services.
  */
-class ErrorHandlers extends \Slim\Middleware {
+class NotFound {
 	
 	/**
-	 * Calls the middleware.
+	 * Handles an error.
 	 */
-	public function call() {
-		global $app;
-		
-		// Initializes the error handlers
-		$error = new \App\ErrorHandler\Error();
-		$notFound = new \App\ErrorHandler\NotFound();
-		
-		// Registers the error handlers
-		$app->error($error);
-		$app->notFound($notFound);
-		
-		// Calls the next middleware
-		$this->next->call();
+	public function __invoke() {
+		// Halts the application
+		haltApp(HTTP_STATUS_NOT_FOUND, ERROR_CODE_UNDEFINED_SERVICE);
 	}
 	
 }
