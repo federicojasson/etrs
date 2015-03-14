@@ -19,17 +19,22 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.navigationBar').controller('NavigationBarController', [
+		'navigationBar',
+		NavigationBarController
 	]);
+	
+	/**
+	 * Provides means to use the navigation-bar service.
+	 */
+	function NavigationBarController(navigationBar) {
+		var _this = this;
+		
+		/**
+		 * Returns the menus corresponding to the signed-in user's role.
+		 */
+		_this.getMenus = function() {
+			return navigationBar.getMenus();
+		};
+	}
 })();

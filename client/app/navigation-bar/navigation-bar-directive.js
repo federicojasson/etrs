@@ -19,17 +19,28 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.authentication',
-		'app.error',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.navigationBar').directive('navigationBar', navigationBarDirective);
+	
+	/**
+	 * Includes the navigation bar.
+	 */
+	function navigationBarDirective() {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {},
+				controller: 'NavigationBarController',
+				controllerAs: 'navigationBar',
+				templateUrl: 'app/navigation-bar/navigation-bar.html'
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
+	}
 })();
