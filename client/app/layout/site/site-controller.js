@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.site').controller('SiteLayoutController', SiteLayoutController);
+	angular.module('app.layout.site').controller('SiteLayoutController', [
+		'$controller',
+		'$scope',
+		SiteLayoutController
+	]);
 	
 	/**
 	 * Represents the site layout.
 	 */
-	function SiteLayoutController() {
+	function SiteLayoutController($controller, $scope) {
 		var _this = this;
 		
 		/**
@@ -47,5 +51,18 @@
 		_this.isReady = function() {
 			return true;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Includes the necessary controllers
+			$scope.authentication = $controller('AuthenticationController');
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the layout
+		initialize();
 	}
 })();

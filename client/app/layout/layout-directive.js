@@ -50,7 +50,7 @@
 		function onLink(scope) {
 			// Registers a listener
 			scope.$watch(layout.get, function(newLayout) {
-				// Initializes the current layout
+				// Initializes the current layout's controller
 				var layoutController = $controller(newLayout, {
 					$scope: scope
 				});
@@ -67,7 +67,7 @@
 					updateTitle(layoutController);
 				});
 				
-				// Includes the current layout
+				// Includes the controller
 				scope.layout = layoutController;
 			});
 		}
