@@ -19,13 +19,42 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.error',
-		'app.layout',
-		'app.router',
-		'app.title'
+	angular.module('app.title').directive('title', [
+		'title',
+		titleDirective
 	]);
+	
+	/**
+	 * Shows the title.
+	 */
+	function titleDirective(title) {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {},
+				link: onLink
+			};
+		}
+		
+		/**
+		 * Invoked after the linking phase.
+		 * 
+		 * Receives the scope of the directive and the element matched by it.
+		 */
+		function onLink(scope, element) {
+			// Registers a listener
+			scope.$watch(title.get, function(newTitle) {
+				// Shows the title
+				element.text(newTitle);
+			});
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
+	}
 })();

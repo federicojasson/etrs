@@ -19,13 +19,46 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.error',
-		'app.layout',
-		'app.router',
-		'app.title'
-	]);
+	angular.module('app.title').service('title', titleService);
+	
+	/**
+	 * Manages the title.
+	 */
+	function titleService() {
+		var _this = this;
+		
+		/**
+		 * The current title.
+		 */
+		var title = '';
+		
+		/**
+		 * Returns the current title.
+		 */
+		_this.get = function() {
+			return title;
+		};
+		
+		/**
+		 * Sets the title.
+		 * 
+		 * It appends the acronym of the application, so this should not be
+		 * included.
+		 * 
+		 * Receives the title to be set.
+		 */
+		_this.set = function(newTitle) {
+			if (newTitle.length > 0) {
+				// The title is not empty
+				// Appends a dash
+				newTitle += ' - ';
+			}
+			
+			// Appends the acronym of the application
+			newTitle += 'ETRS';
+			
+			// Sets the title
+			title = newTitle;
+		};
+	}
 })();

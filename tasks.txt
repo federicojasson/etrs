@@ -15,6 +15,7 @@ General code checks
 - != and == instead of !== and ===, respectively.
 - /* instead of /**.
 - Multiple blank lines (regular expression: [\t]*\n[\t]*\n[\t]*\n).
+- Multiple inline comments (regular expression: \/\/.*\n[\t]*\/\/).
 - Include license in all files.
 
 
