@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Includes the current layout.
+	 * Includes the layout.
 	 */
 	function layoutDirective(layout) {
 		/**
@@ -48,7 +48,15 @@
 		function onLink(scope) {
 			// Registers a listener
 			scope.$watch(layout.get, function(newLayout) {
-				// TODO: implement onLink
+				// Initializes the layout
+				var layoutController = $controller(newLayout, {
+					$scope: scope
+				});
+				
+				// TODO: register title listener
+				
+				// Includes the layout
+				scope.layout = layoutController;
 			});
 		}
 		

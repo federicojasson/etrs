@@ -57,7 +57,7 @@
 			// Makes the URL absolute
 			state.url = '^' + state.url;
 			
-			// Sets a template that includes the current layout
+			// Sets a template that includes the layout
 			state.template = '<layout></layout>';
 			
 			// Registers the state
