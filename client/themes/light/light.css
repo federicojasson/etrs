@@ -22,6 +22,10 @@
 
 /* Custom classes */
 
+.copyright-text {}
+
+.footer-image {}
+
 .fully-centered {}
 
 .fully-centered-container {}
@@ -29,3 +33,5 @@
 .loading-image {}
 
 .loading-text {}
+
+.main-container {}
