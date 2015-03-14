@@ -19,11 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.layout',
-		'app.router'
-	]);
+	angular.module('app.layout', []);
 })();

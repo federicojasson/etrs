@@ -19,11 +19,36 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.layout',
-		'app.router'
-	]);
+	angular.module('app.layout').directive('layout', layoutDirective);
+	
+	/**
+	 * Includes the current layout.
+	 */
+	function layoutDirective() {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {},
+				link: onLink,
+				templateUrl: 'app/layout/layout.html'
+			};
+		}
+		
+		/**
+		 * Invoked after the linking phase.
+		 * 
+		 * Receives the scope of the directive.
+		 */
+		function onLink(scope) {
+			// TODO: implement onLink
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
+	}
 })();
