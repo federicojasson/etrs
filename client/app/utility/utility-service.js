@@ -19,32 +19,31 @@
 'use strict';
 
 (function() {
-	angular.module('app.router').service('router', [
-		'$window',
-		'$state',
-		routerService
-	]);
+	angular.module('app.utility').service('utility', utilityService);
 	
 	/**
-	 * Provides routing-related functionalities.
+	 * Provides utility functions.
 	 */
-	function routerService($window, $state) {
+	function utilityService() {
 		var _this = this;
 		
 		/**
-		 * Redirects the user to a certain route.
+		 * Converts a string from spinal-case to camelCase.
 		 * 
-		 * Receives the route's name.
+		 * Receives the string.
 		 */
-		_this.redirect = function(name) {
-			$state.go(name);
-		};
-		
-		/**
-		 * Reloads the application.
-		 */
-		_this.reload = function() {
-			$window.location.reload();
+		_this.spinalToCamelCase = function(string) {
+			// Replaces the dashes with spaces
+			string = string.replace(/-/g, ' ');
+
+			// Converts to uppercase the first character of each word except the
+			// first one
+			string = string.replace(/ [a-z]/g, function(character) {
+				return character.toUpperCase();
+			});
+			
+			// Removes the spaces
+			return string.replace(/ /g, '');
 		};
 	}
 })();
