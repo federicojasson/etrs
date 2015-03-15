@@ -22,9 +22,6 @@ namespace App\Configuration;
 
 /**
  * Represents a configuration.
- * 
- * Subclasses must implement the getCookieSettings, getLoggingSettings and
- * getMiscellaneousSettings methods.
  */
 abstract class Configuration {
 	
