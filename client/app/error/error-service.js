@@ -32,7 +32,9 @@
 		 */
 		var descriptions = {
 			// TODO: define error descriptions here
+			INVALID_INPUT: '',
 			SYSTEM_UNDER_MAINTENANCE: '',
+			UNAUTHORIZED_USER: '',
 			UNDEFINED_SERVICE: '',
 			UNEXPECTED_ERROR: ''
 		};
