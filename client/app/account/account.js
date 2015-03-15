@@ -19,50 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.site').controller('SiteLayoutController', [
-		'$controller',
-		'$scope',
-		SiteLayoutController
-	]);
-	
-	/**
-	 * Represents the site layout.
-	 */
-	function SiteLayoutController($controller, $scope) {
-		var _this = this;
-		
-		/**
-		 * Returns the template's URL.
-		 */
-		_this.getTemplateUrl = function() {
-			return 'app/layout/site/site.html';
-		};
-		
-		/**
-		 * Returns the title to set when the layout is ready.
-		 */
-		_this.getTitle = function() {
-			return '';
-		};
-		
-		/**
-		 * Determines whether the layout is ready.
-		 */
-		_this.isReady = function() {
-			return true;
-		};
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Includes the necessary controllers
-			$scope.account = $controller('AccountController');
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Initializes the layout
-		initialize();
-	}
+	angular.module('app.account', []);
 })();

@@ -40,10 +40,10 @@
 		 * Initializes the navigation-bar service.
 		 */
 		_this.$get = [
-			'authentication',
-			function(authentication) {
+			'account',
+			function(account) {
 				// Initializes the navigation-bar service
-				var navigationBar = new navigationBarService(authentication);
+				var navigationBar = new navigationBarService(account);
 
 				// Adds the menus
 				for (var userRole in menus) {
@@ -74,7 +74,7 @@
 	/**
 	 * Manages the navigation bar.
 	 */
-	function navigationBarService(authentication) {
+	function navigationBarService(account) {
 		var _this = this;
 		
 		/**
@@ -100,7 +100,7 @@
 		 */
 		_this.getMenus = function() {
 			// Gets the signed-in user's role
-			var userRole = authentication.getSignedInUser().role;
+			var userRole = account.getSignedInUser().role;
 			
 			// Gets the menus corresponding to the user role
 			return menus[userRole];

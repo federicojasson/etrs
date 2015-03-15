@@ -19,50 +19,29 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.site').controller('SiteLayoutController', [
-		'$controller',
-		'$scope',
-		SiteLayoutController
+	angular.module('app.account').controller('AccountController', [
+		'account',
+		AccountController
 	]);
 	
 	/**
-	 * Represents the site layout.
+	 * Provides means to use the account service.
 	 */
-	function SiteLayoutController($controller, $scope) {
+	function AccountController(account) {
 		var _this = this;
 		
 		/**
-		 * Returns the template's URL.
+		 * Returns the signed-in user.
 		 */
-		_this.getTemplateUrl = function() {
-			return 'app/layout/site/site.html';
+		_this.getSignedInUser = function() {
+			return account.getSignedInUser();
 		};
 		
 		/**
-		 * Returns the title to set when the layout is ready.
+		 * Determines whether the user is signed in.
 		 */
-		_this.getTitle = function() {
-			return '';
+		_this.isUserSignedIn = function() {
+			return account.isUserSignedIn();
 		};
-		
-		/**
-		 * Determines whether the layout is ready.
-		 */
-		_this.isReady = function() {
-			return true;
-		};
-		
-		/**
-		 * Performs initialization tasks.
-		 */
-		function initialize() {
-			// Includes the necessary controllers
-			$scope.account = $controller('AccountController');
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Initializes the layout
-		initialize();
 	}
 })();

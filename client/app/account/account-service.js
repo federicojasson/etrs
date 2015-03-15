@@ -19,50 +19,54 @@
 'use strict';
 
 (function() {
-	angular.module('app.layout.site').controller('SiteLayoutController', [
-		'$controller',
-		'$scope',
-		SiteLayoutController
-	]);
+	angular.module('app.account').service('account', accountService);
 	
 	/**
-	 * Represents the site layout.
+	 * Manages the account.
 	 */
-	function SiteLayoutController($controller, $scope) {
+	function accountService() {
 		var _this = this;
 		
 		/**
-		 * Returns the template's URL.
+		 * Indicates whether the account is being refreshed.
 		 */
-		_this.getTemplateUrl = function() {
-			return 'app/layout/site/site.html';
+		var beingRefreshed = false;
+		
+		/**
+		 * The signed-in user.
+		 */
+		var signedInUser = null;
+		
+		/**
+		 * Returns the signed-in user.
+		 */
+		_this.getSignedInUser = function() {
+			return signedInUser;
 		};
 		
 		/**
-		 * Returns the title to set when the layout is ready.
+		 * Determines whether the account is being refreshed.
 		 */
-		_this.getTitle = function() {
-			return '';
+		_this.isBeingRefreshed = function() {
+			return beingRefreshed;
 		};
 		
 		/**
-		 * Determines whether the layout is ready.
+		 * Determines whether the user is signed in.
 		 */
-		_this.isReady = function() {
-			return true;
+		_this.isUserSignedIn = function() {
+			return signedInUser !== null;
 		};
 		
 		/**
-		 * Performs initialization tasks.
+		 * Refreshes the account.
+		 * 
+		 * It should be invoked whenever the user is signed in, signed out or
+		 * edited, in order to keep the application synchronized with the
+		 * server.
 		 */
-		function initialize() {
-			// Includes the necessary controllers
-			$scope.account = $controller('AccountController');
-		}
-		
-		// ---------------------------------------------------------------------
-		
-		// Initializes the layout
-		initialize();
+		_this.refresh = function() {
+			// TODO: implement
+		};
 	}
 })();

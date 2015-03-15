@@ -21,7 +21,7 @@
 (function() {
 	angular.module('app.view').service('view', [
 		'$state',
-		'authentication',
+		'account',
 		'router',
 		viewService
 	]);
@@ -29,7 +29,7 @@
 	/**
 	 * Manages the views.
 	 */
-	function viewService($state, authentication, router) {
+	function viewService($state, account, router) {
 		var _this = this;
 		
 		/**
@@ -56,17 +56,17 @@
 				return;
 			}
 			
-			if (authentication.isStateRefreshing()) {
-				// The authentication state is being refreshed
+			if (account.isBeingRefreshed()) {
+				// The account is being refreshed
 				return;
 			}
 			
-			// Gets the user role according to the authentication state
+			// Gets the user role according to the signed-in user (if any)
 			var userRole;
-			if (authentication.isUserSignedIn()) {
+			if (account.isUserSignedIn()) {
 				// The user is signed in
 				// Gets the signed-in user's role
-				userRole = authentication.getSignedInUser().role;
+				userRole = account.getSignedInUser().role;
 			} else {
 				// The user is not signed in
 				userRole = '__';

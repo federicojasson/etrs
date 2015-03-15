@@ -21,7 +21,7 @@
 (function() {
 	angular.module('app.view').run([
 		'$rootScope',
-		'authentication',
+		'account',
 		'view',
 		run
 	]);
@@ -29,7 +29,7 @@
 	/**
 	 * Performs initialization tasks.
 	 */
-	function run($rootScope, authentication, view) {
+	function run($rootScope, account, view) {
 		// Registers a listener
 		$rootScope.$on('$stateChangeSuccess', function() {
 			// Updates the view
@@ -37,7 +37,7 @@
 		});
 		
 		// Registers a listener
-		$rootScope.$watch(authentication.isStateRefreshing, function() {
+		$rootScope.$watch(account.isBeingRefreshed, function() {
 			// Updates the view
 			view.update();
 		});

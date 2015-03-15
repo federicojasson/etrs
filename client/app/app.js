@@ -23,7 +23,7 @@
 		'ngResource',
 		'ui.bootstrap',
 		'ui.router',
-		'app.authentication',
+		'app.account',
 		'app.error',
 		'app.layout',
 		'app.navigationBar',
