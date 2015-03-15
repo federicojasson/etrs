@@ -18,38 +18,29 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Account;
+namespace App\Service;
 
 /**
- * Represents the /account/signed-in service.
+ * Represents an external service.
  */
-class SignedIn extends \App\Service\External {
+abstract class External extends Service  {
 	
 	/**
-	 * Executes the service.
+	 * The input.
 	 */
-	protected function execute() {
+	private $input;
+	
+	/**
+	 * Prepares and executes the service.
+	 */
+	public function __invoke() {
 		global $app;
 		
-		// Determines whether the user is signed in
-		$signedIn = $app->account->isUserSignedIn();
+		// Initializes the input
+		$this->input = $app->request->getBody();
 		
-		// Adds an output
-		$this->addOutput('signedIn', $signedIn);
+		// Invokes the homonym method in the parent
+		parent::__invoke();
 	}
 	
-	/**
-	 * Determines whether the input is valid.
-	 */
-	protected function isInputValid() {
-		return true;
-	}
-	
-	/**
-	 * Determines whether the user is authorized.
-	 */
-	protected function isUserAuthorized() {
-		return true;
-	}
-
 }

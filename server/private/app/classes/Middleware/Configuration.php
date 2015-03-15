@@ -18,38 +18,40 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Account;
+namespace App\Middleware;
 
 /**
- * Represents the /account/signed-in service.
+ * Responsible for applying the configuration.
  */
-class SignedIn extends \App\Service\External {
+class Configuration extends \Slim\Middleware {
 	
 	/**
-	 * Executes the service.
+	 * Calls the middleware.
 	 */
-	protected function execute() {
+	public function call() {
 		global $app;
 		
-		// Determines whether the user is signed in
-		$signedIn = $app->account->isUserSignedIn();
+		// Gets the configurations
+		$configurations = $this->getConfigurations();
 		
-		// Adds an output
-		$this->addOutput('signedIn', $signedIn);
+		// Applies the appropriate configuration
+		foreach ($configurations as $operationMode => $class) {
+			$app->configureMode($operationMode, new $class());
+		}
+		
+		// Calls the next middleware
+		$this->next->call();
 	}
 	
 	/**
-	 * Determines whether the input is valid.
+	 * Returns the configurations.
 	 */
-	protected function isInputValid() {
-		return true;
+	private function getConfigurations() {
+		return [
+			OPERATION_MODE_DEVELOPMENT => 'App\Configuration\Development',
+			OPERATION_MODE_MAINTENANCE => 'App\Configuration\Maintenance',
+			OPERATION_MODE_PRODUCTION => 'App\Configuration\Production'
+		];
 	}
 	
-	/**
-	 * Determines whether the user is authorized.
-	 */
-	protected function isUserAuthorized() {
-		return true;
-	}
-
 }

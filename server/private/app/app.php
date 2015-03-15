@@ -158,7 +158,7 @@ function serveExternalRequest() {
 		// TODO: define middlewares here
 		new \App\Middleware\ErrorHandlers(),
 		new \App\Middleware\Helpers(),
-		new \App\Middleware\Configurations(),
+		new \App\Middleware\Configuration(),
 		new \App\Middleware\ExternalServices()
 	];
 	
