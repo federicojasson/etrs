@@ -54,7 +54,7 @@ class Helpers extends \Slim\Middleware {
 	/**
 	 * Registers a helper.
 	 * 
-	 * Receives the helper's name and its fully-qualified class name.
+	 * Receives the helper's name and class.
 	 */
 	private function registerHelper($name, $class) {
 		global $app;

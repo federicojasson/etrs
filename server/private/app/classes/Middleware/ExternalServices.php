@@ -21,36 +21,16 @@
 namespace App\Middleware;
 
 /**
- * Responsible for applying configurations.
+ * Responsible for registering the external services.
  */
-class Configurations extends \Slim\Middleware {
+class ExternalServices extends Services {
 	
 	/**
-	 * Calls the middleware.
+	 * Returns the services.
 	 */
-	public function call() {
-		global $app;
-		
-		// Gets the available configurations
-		$configurations = $this->getConfigurations();
-		
-		// Applies the appropriate configuration
-		foreach ($configurations as $operationMode => $class) {
-			$app->configureMode($operationMode, new $class());
-		}
-		
-		// Calls the next middleware
-		$this->next->call();
-	}
-	
-	/**
-	 * Returns the available configurations.
-	 */
-	private function getConfigurations() {
+	protected function getServices() {
 		return [
-			OPERATION_MODE_DEVELOPMENT => 'App\Configuration\Development',
-			OPERATION_MODE_MAINTENANCE => 'App\Configuration\Maintenance',
-			OPERATION_MODE_PRODUCTION => 'App\Configuration\Production'
+			// TODO: define external services here
 		];
 	}
 	

@@ -36,8 +36,8 @@
 			// Replaces the dashes with spaces
 			string = string.replace(/-/g, ' ');
 
-			// Converts to uppercase the first character of each word except the
-			// first one
+			// Converts the first character of each word, except the first one,
+			// to uppercase
 			string = string.replace(/ [a-z]/g, function(character) {
 				return character.toUpperCase();
 			});

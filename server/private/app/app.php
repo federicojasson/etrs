@@ -96,7 +96,7 @@ function haltApp($httpStatus, $errorCode) {
 /**
  * Includes a class of the application if the corresponding script exists.
  * 
- * Receives the fully-qualified class name.
+ * Receives the class.
  */
 function loadClass($class) {
 	// Defines the application's namespace and gets its length
@@ -138,10 +138,10 @@ function runApp($middlewares) {
 	]);
 	
 	// Reverses the order of the middlewares
-	$reversedMiddlewares = array_reverse($middlewares);
+	$middlewares = array_reverse($middlewares);
 	
 	// Adds the middlewares
-	foreach ($reversedMiddlewares as $middleware) {
+	foreach ($middlewares as $middleware) {
 		$app->add($middleware);
 	}
 	
@@ -158,7 +158,8 @@ function serveExternalRequest() {
 		// TODO: define middlewares here
 		new \App\Middleware\ErrorHandlers(),
 		new \App\Middleware\Helpers(),
-		new \App\Middleware\Configurations()
+		new \App\Middleware\Configurations(),
+		new \App\Middleware\ExternalServices()
 	];
 	
 	// Runs the application

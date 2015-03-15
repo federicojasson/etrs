@@ -21,3 +21,19 @@
 /**
  * This script defines global functions.
  */
+
+/**
+ * Converts a string from spinal-case to PascalCase.
+ * 
+ * Receives the string.
+ */
+function spinalToPascalCase($string) {
+	// Replaces the dashes with spaces
+	$string = str_replace('-', ' ', $string);
+	
+	// Converts the first character of each word to uppercase
+	$string = ucwords($string);
+	
+	// Removes the spaces
+	return str_replace(' ', '', $string);
+}
