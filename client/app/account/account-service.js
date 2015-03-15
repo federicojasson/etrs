@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.account').service('account', accountService);
+	angular.module('app.account').service('account', [
+		'server',
+		accountService
+	]);
 	
 	/**
 	 * Manages the account.
 	 */
-	function accountService() {
+	function accountService(server) {
 		var _this = this;
 		
 		/**
@@ -66,7 +69,20 @@
 		 * server.
 		 */
 		_this.refresh = function() {
-			// TODO: implement
+			beingRefreshed = true;
+			
+			// Determines whether the user is signed in
+			server.account.signedIn().then(function(output) {
+				if (! output.signedIn) {
+					// The user is not signed in
+					signedInUser = null;
+					
+					beingRefreshed = false;
+					return;
+				}
+				
+				// TODO: get user
+			});
 		};
 	}
 })();
