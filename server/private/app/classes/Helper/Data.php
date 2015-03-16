@@ -78,6 +78,51 @@ class Data {
 	}
 	
 	/**
+	 * Returns the configuration.
+	 */
+	private function getConfiguration() {
+		global $app;
+		
+		// Defines the necessary directories
+		$entityDirectory = DIRECTORY_APP . '/classes/Data/Entity';
+		$proxyDirectory = DIRECTORY_APP . '/classes/Data/Proxy';
+		
+		// Initializes the configuration
+		$configuration = new \Doctrine\ORM\Configuration();
+		
+		// Initializes the metadata driver
+		$metadataDriver = $configuration->newDefaultAnnotationDriver($entityDirectory);
+		
+		if ($app->getMode() === OPERATION_MODE_DEVELOPMENT) {
+			// The system is in development
+			
+			// Initializes the proxy-generation mode
+			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS;
+			
+			// Initializes the cache
+			$cache = new \Doctrine\Common\Cache\ArrayCache();
+		} else {
+			// The system is in production or under maintenance
+			
+			// Initializes the proxy-generation mode
+			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_NEVER;
+			
+			// Initializes the cache
+			$cache = new \Doctrine\Common\Cache\ApcCache();
+		}
+		
+		// Applies different settings
+		$configuration->setAutoGenerateProxyClasses($proxyGenerationMode);
+		$configuration->setMetadataCacheImpl($cache);
+		$configuration->setMetadataDriverImpl($metadataDriver);
+		$configuration->setProxyDir($proxyDirectory);
+		$configuration->setProxyNamespace('App\Data\Proxy');
+		$configuration->setQueryCacheImpl($cache);
+		
+		return $configuration;
+	}
+	
+	/**
 	 * Returns the entity manager.
 	 */
 	private function getEntityManager() {
@@ -86,7 +131,27 @@ class Data {
 		// Gets the DBMS parameters
 		$dbms = $app->parameters->dbms;
 		
-		// TODO: implement
+		// Builds the connection
+		$connection = [
+			'driver' => 'pdo_mysql',
+			'host' => $dbms['host'],
+			'port' => $dbms['port'],
+			'dbname' => $dbms['database'],
+			'charset' => $dbms['charset'],
+			'user' => $dbms['username'],
+			'password' => $dbms['password']
+		];
+		
+		// Gets the configuration
+		$configuration = $this->getConfiguration();
+		
+		// Initializes the entity manager
+		$entityManager = \Doctrine\ORM\EntityManager::create($connection, $configuration);
+		
+		// Sets the transaction-isolation level
+		$entityManager->getConnection()->setTransactionIsolation(\Doctrine\DBAL\Connection::TRANSACTION_SERIALIZABLE);
+		
+		return $entityManager;
 	}
 	
 }
