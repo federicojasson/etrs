@@ -63,11 +63,8 @@ abstract class Services extends \Slim\Middleware {
 			$fragment = spinalToPascalCase($fragment);
 		}
 		
-		// Defines the services' namespace
-		$namespace = 'App\Service\\';
-		
 		// Builds the service's class
-		return $namespace . implode('\\', $fragments);
+		return 'App\Service\\' . implode('\\', $fragments);
 	}
 	
 	/**

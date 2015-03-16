@@ -71,7 +71,7 @@ function executeServerTask() {
 function haltApp($httpStatus, $errorCode) {
 	global $app;
 	
-	// Defines the response
+	// Builds the response
 	$response = [
 		'code' => $errorCode
 	];

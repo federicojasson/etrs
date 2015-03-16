@@ -57,6 +57,27 @@ class Data {
 	}
 	
 	/**
+	 * Executes a transaction.
+	 * 
+	 * Receives a closure to execute.
+	 */
+	public function transactional($closure) {
+		// Initializes the result
+		$result = null;
+		
+		// Builds the transaction
+		$transaction = function($entityManager) use ($closure, &$result) {
+			// Executes the closure
+			$result = call_user_func($closure, $entityManager);
+		};
+		
+		// Executes the transaction
+		$this->__call('transactional', [ $transaction ]);
+		
+		return $result;
+	}
+	
+	/**
 	 * Returns the entity manager.
 	 */
 	private function getEntityManager() {
