@@ -33,7 +33,7 @@
 		var services = [];
 		
 		/**
-		 * Initializes the server service.
+		 * Returns the server service.
 		 */
 		_this.$get = [
 			'$resource',

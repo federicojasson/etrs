@@ -37,7 +37,7 @@
 		};
 		
 		/**
-		 * Initializes the navigation-bar service.
+		 * Returns the navigation-bar service.
 		 */
 		_this.$get = [
 			'account',
