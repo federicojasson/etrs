@@ -43,4 +43,13 @@ class Session {
 		session_start();
 	}
 	
+	/**
+	 * Determines whether the session contains a certain data entry.
+	 * 
+	 * Receives the entry's key.
+	 */
+	public function containsData($key) {
+		return array_key_exists($key, $_SESSION);
+	}
+	
 }
