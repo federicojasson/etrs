@@ -1,0 +1,10 @@
+{
+	"TODO: define dbms parameters": "",
+	
+	"host": "localhost",
+	"port": "3306",
+	"database": "etrs",
+	"charset": "utf8",
+	"username": "etrs_admin",
+	"password": "password"
+}

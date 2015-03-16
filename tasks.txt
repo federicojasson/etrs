@@ -25,6 +25,7 @@ General code checks
 Release tasks
 ----------------------------
 
+- Change the password of the database users.
 - Register domain.
 - Buy SSL/TSL certificate.
 
