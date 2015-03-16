@@ -55,7 +55,7 @@ class Response extends \Slim\Http\Response {
 			// Encodes the body in JSON
 			$body = json_encode($body);
 			
-			// Sets the Content-Type header
+			// Sets the appropriate headers
 			$this->headers->set('Content-Type', 'application/json');
 		}
 		
