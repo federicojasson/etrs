@@ -18,31 +18,23 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Utility\LogWriter;
+namespace App\Data\IdGenerator;
 
 /**
- * Responsible for handling the persistence of the logs in the database.
+ * Responsible for generating random IDs for entities from the database.
  */
-class Database {
-	
+class Random extends \Doctrine\ORM\Id\AbstractIdGenerator {
+
 	/**
-	 * Writes a log.
+	 * Generates an entity's ID.
 	 * 
-	 * Receives the log's message and level.
+	 * Receives the entity manager and the entity.
 	 */
-	public function write($message, $level) {
+	public function generate(\Doctrine\ORM\EntityManager $entityManager, $entity) {
 		global $app;
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($level, $message) {
-			// Initializes the log
-			$log = new \App\Data\Entity\Log();
-			
-			// Creates the log
-			$log->setLevel($level);
-			$log->setMessage($message);
-			$entityManager->persist($log);
-		});
+		// Generates a random ID
+		return $app->cryptography->generateRandomId();
 	}
-	
+
 }
