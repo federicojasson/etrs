@@ -82,12 +82,15 @@ function haltApp($httpStatus, $errorCode) {
 		$app->halt($httpStatus, $response);
 	}
 	
+	// Encodes the response
+	$response = json_encode($response);
+	
 	// Sets the appropriate headers
 	http_response_code($httpStatus);
 	header('Content-Type: application/json');
 
 	// Sends the response
-	echo json_encode($response);
+	echo $response;
 
 	// Exits the application
 	exit();

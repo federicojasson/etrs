@@ -39,7 +39,7 @@ class BinaryData extends \Doctrine\DBAL\Types\BinaryType {
 		$value = parent::convertToPHPValue($value, $platform);
 		
 		if (! is_null($value)) {
-			// Reads the content of the resource
+			// Reads the contents of the resource
 			$value = stream_get_contents($value);
 		}
 		

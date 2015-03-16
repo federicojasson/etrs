@@ -44,16 +44,16 @@ class Data {
 	/**
 	 * Invokes a method in the entity manager if it is still open.
 	 * 
-	 * Receives the method's name and the arguments to pass to it.
+	 * Receives the method and the arguments to pass to it.
 	 */
-	public function __call($name, $arguments) {
+	public function __call($method, $arguments) {
 		if (! $this->entityManager->isOpen()) {
 			// The entity manager is closed
 			return null;
 		}
 		
 		// Invokes the method in the entity manager
-		return call_user_func_array([ $this->entityManager, $name ], $arguments);
+		return call_user_func_array([ $this->entityManager, $method ], $arguments);
 	}
 	
 	/**
@@ -81,6 +81,11 @@ class Data {
 	 * Returns the entity manager.
 	 */
 	private function getEntityManager() {
+		global $app;
+		
+		// Gets the DBMS parameters
+		$dbms = $app->parameters->dbms;
+		
 		// TODO: implement
 	}
 	

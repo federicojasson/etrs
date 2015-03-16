@@ -14,6 +14,7 @@ General code checks
 - Double semicolons.
 - File includes.
 - != and == instead of !== and ===, respectively.
+- if (!...) instead of if (! ...) (regular expression: ![^ ]).
 - /* instead of /**.
 - Multiple blank lines (regular expression: [\t]*\n[\t]*\n[\t]*\n).
 - Lack of blank lines in PHP (regular expression: \}\n[\t]*\}).

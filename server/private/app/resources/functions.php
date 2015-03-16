@@ -23,6 +23,19 @@
  */
 
 /**
+ * Reads the contents of a JSON file.
+ * 
+ * Receives the file's path.
+ */
+function readJsonFile($path) {
+	// Reads the contents of the file
+	$contents = file_get_contents($path);
+	
+	// Decodes the contents
+	return json_decode($contents, true);
+}
+
+/**
  * Converts a string from spinal-case to PascalCase.
  * 
  * Receives the string.

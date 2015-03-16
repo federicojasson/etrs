@@ -55,10 +55,10 @@ class Database implements \SessionHandlerInterface {
 	/**
 	 * Opens a session.
 	 * 
-	 * Receives the save path (for cases in which files are used) and the
-	 * session's name.
+	 * Receives the session directory (for cases in which files are used) and
+	 * the session's name.
 	 */
-	public function open($path, $name) {
+	public function open($directory, $name) {
 		return true;
 	}
 
