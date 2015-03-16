@@ -61,7 +61,7 @@ abstract class Service  {
 	/**
 	 * Adds an output.
 	 * 
-	 * Receives a key, a value and, optionally, a filter to apply to the value.
+	 * Receives a key, a value and, optionally, a filter for the value.
 	 */
 	protected function addOutput($key, $value, $filter = null) {
 		if (! is_array($this->output)) {
@@ -97,7 +97,7 @@ abstract class Service  {
 	/**
 	 * Sets the output.
 	 * 
-	 * Receives the output to set.
+	 * Receives the output to be set.
 	 */
 	protected function setOutput($output) {
 		$this->output = $output;

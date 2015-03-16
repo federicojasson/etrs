@@ -31,7 +31,7 @@ class Response extends \Slim\Http\Response {
 	 * The method redefines a deprecated version and invokes getBody and setBody
 	 * instead. This is necessary because Slim still uses it.
 	 * 
-	 * Receives, optionally, the body to set.
+	 * Receives, optionally, the body to be set.
 	 */
 	public function body($body = null) {
 		if (! is_null($body)) {
@@ -46,7 +46,7 @@ class Response extends \Slim\Http\Response {
 	/**
 	 * Sets the body.
 	 * 
-	 * Receives the body to set. If it is not a string, it encodes it.
+	 * Receives the body to be set. If it is not a string, it encodes it.
 	 */
 	public function setBody($body) {
 		if (! is_string($body)) {

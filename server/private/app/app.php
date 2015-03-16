@@ -65,7 +65,7 @@ function executeServerTask() {
 /**
  * Halts the application if is running and responds to the client with an error.
  * 
- * Receives the HTTP status to set and a code that indicates what caused the
+ * Receives the HTTP status to be set and a code that indicates what caused the
  * error.
  */
 function haltApp($httpStatus, $errorCode) {
@@ -130,7 +130,7 @@ function loadClass($class) {
 /**
  * Runs the application.
  * 
- * Receives a set of middlewares to add for the execution.
+ * Receives a set of middlewares to be added.
  */
 function runApp($middlewares) {
 	global $app;

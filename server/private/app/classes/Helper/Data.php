@@ -44,7 +44,7 @@ class Data {
 	/**
 	 * Invokes a method in the entity manager if it is still open.
 	 * 
-	 * Receives the method and the arguments to pass to it.
+	 * Receives the method and the arguments.
 	 */
 	public function __call($method, $arguments) {
 		if (! $this->entityManager->isOpen()) {
