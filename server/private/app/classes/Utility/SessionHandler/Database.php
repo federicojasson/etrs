@@ -72,7 +72,7 @@ class Database implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * Writes a session's data.
+	 * Writes a session.
 	 * 
 	 * Receives the session's ID and data.
 	 */

@@ -16,6 +16,7 @@ General code checks
 - != and == instead of !== and ===, respectively.
 - /* instead of /**.
 - Multiple blank lines (regular expression: [\t]*\n[\t]*\n[\t]*\n).
+- Lack of blank lines in PHP (regular expression: \}\n[\t]*\}).
 - Multiple inline comments (regular expression: \/\/.*\n[\t]*\/\/).
 - Include license in all files.
 

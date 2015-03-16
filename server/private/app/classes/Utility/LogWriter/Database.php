@@ -24,5 +24,25 @@ namespace App\Utility\LogWriter;
  * Manages the persistence of the logs in the database.
  */
 class Database {
-	// TODO
+	
+	/**
+	 * Writes a log.
+	 * 
+	 * Receives the log's message and level.
+	 */
+	public function write($message, $level) {
+		global $app;
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($level, $message) {
+			// Initializes the log
+			$log = new \App\Data\Entity\Log();
+			
+			// Creates the log
+			$log->setLevel($level);
+			$log->setMessage($message);
+			$entityManager->persist($log);
+		});
+	}
+	
 }
