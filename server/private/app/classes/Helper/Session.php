@@ -52,4 +52,11 @@ class Session {
 		return array_key_exists($key, $_SESSION);
 	}
 	
+	/**
+	 * Regenerates the session's ID.
+	 */
+	public function regenerateId() {
+		session_regenerate_id(true);
+	}
+	
 }
