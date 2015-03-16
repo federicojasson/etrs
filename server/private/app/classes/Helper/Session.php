@@ -18,44 +18,29 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Configuration;
+namespace App\Helper;
 
 /**
- * Represents the production-mode configuration.
+ * Manages the session.
  */
-class Production extends Configuration {
+class Session {
 	
 	/**
-	 * Returns the cookie settings.
+	 * Initializes an instance of the class.
 	 */
-	protected function getCookieSettings() {
-		// TODO: cookie settings
-		return [];
-	}
-	
-	/**
-	 * Returns the logging settings.
-	 */
-	protected function getLoggingSettings() {
-		// Initializes a log writer
-		$logWriter = new \App\Utility\LogWriter\Database();
+	public function __construct() {
+		// Configures the ID generation
+		ini_set('session.hash_function', 'sha256');
+		ini_set('session.hash_bits_per_character', 4);
 		
-		return [
-			'log.enabled' => true,
-			'log.level' => \Slim\Log::INFO,
-			'log.writer' => $logWriter
-		];
-	}
-	
-	/**
-	 * Returns miscellaneous settings.
-	 */
-	protected function getMiscellaneousSettings() {
-		return [
-			'debug' => false,
-			'http.version' => '1.1',
-			'routes.case_sensitive' => true
-		];
+		// Initializes a session handler
+		$sessionHandler = new \App\Utility\SessionHandler\Database();
+		
+		// Sets the session handler
+		session_set_save_handler($sessionHandler);
+		
+		// Starts the session
+		session_start();
 	}
 	
 }

@@ -41,7 +41,7 @@ class Maintenance extends Configuration {
 		$path = DIRECTORY_LOGS . '/maintenance.log';
 		$file = fopen($path, 'a');
 		
-		// Initializes the log writer
+		// Initializes a log writer
 		$logWriter = new \Slim\LogWriter($file);
 		
 		return [

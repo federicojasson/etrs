@@ -48,7 +48,8 @@ class Helpers extends \Slim\Middleware {
 		return [
 			// TODO: define helpers here
 			'account' => 'App\Helper\Account',
-			'response' => 'App\Helper\Response'
+			'response' => 'App\Helper\Response',
+			'session' => 'App\Helper\Session'
 		];
 	}
 	
