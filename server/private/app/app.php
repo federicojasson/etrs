@@ -159,7 +159,8 @@ function serveExternalRequest() {
 		new \App\Middleware\ErrorHandlers(),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\Configuration(),
-		new \App\Middleware\ExternalServices()
+		new \App\Middleware\ExternalServices(),
+		new \App\Middleware\Session()
 	];
 	
 	// Runs the application

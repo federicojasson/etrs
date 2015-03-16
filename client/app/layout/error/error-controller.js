@@ -64,7 +64,7 @@
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the layout
+		// Initializes the controller
 		initialize();
 	}
 })();
