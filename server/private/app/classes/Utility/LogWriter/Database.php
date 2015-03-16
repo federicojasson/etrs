@@ -21,7 +21,7 @@
 namespace App\Utility\LogWriter;
 
 /**
- * TODO: comment
+ * Manages the persistence of the logs in the database.
  */
 class Database {
 	// TODO

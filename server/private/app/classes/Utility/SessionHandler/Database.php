@@ -21,7 +21,7 @@
 namespace App\Utility\SessionHandler;
 
 /**
- * Manages the session persistence in the database.
+ * Manages the persistence of the sessions in the database.
  */
 class Database implements \SessionHandlerInterface {
 	
