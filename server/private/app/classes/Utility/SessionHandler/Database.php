@@ -38,7 +38,19 @@ class Database implements \SessionHandlerInterface {
 	 * Receives the session's ID.
 	 */
 	public function destroy($id) {
-		// TODO: implement
+		global $app;
+		
+		// Converts the ID from hexadecimal to binary
+		$id = hex2bin($id);
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($id) {
+			// Gets the session
+			$session = $entityManager->getReference('App\Data\Entity\Session', $id);
+			
+			// Deletes the session
+			$entityManager->remove($session);
+		});
 		
 		return true;
 	}
@@ -68,7 +80,21 @@ class Database implements \SessionHandlerInterface {
 	 * Receives the session's ID.
 	 */
 	public function read($id) {
-		// TODO: implement
+		global $app;
+		
+		// Converts the ID from hexadecimal to binary
+		$id = hex2bin($id);
+		
+		// Gets the session
+		$session = $app->data->getRepository('App\Data\Entity\Session')->find($id);
+		
+		if (is_null($session)) {
+			// The session doesn't exist
+			return '';
+		}
+		
+		// Gets the session's data
+		return $session->getData();
 	}
 
 	/**
@@ -77,8 +103,32 @@ class Database implements \SessionHandlerInterface {
 	 * Receives the session's ID and data.
 	 */
 	public function write($id, $data) {
-		// TODO: implement
+		global $app;
 		
+		// Converts the ID from hexadecimal to binary
+		$id = hex2bin($id);
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($id, $data) {
+			// Gets the session
+			$session = $entityManager->getRepository('App\Data\Entity\Session')->find($id);
+			
+			if (is_null($session)) {
+				// The session doesn't exist
+				
+				// Initializes the session
+				$session = new \App\Data\Entity\Session();
+				
+				// Creates the session
+				$session->setId($id);
+				$session->setData($data);
+			} else {
+				// The session exists
+				// Edits the session
+				$session->setLastAccessDateTime();
+				$session->setData();
+			}
+		});
 		
 		return true;
 	}

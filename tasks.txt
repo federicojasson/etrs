@@ -2,7 +2,8 @@
 Quick tasks
 ----------------------------
 
-- Implement a better file LogWriter.
+- Test session with the session object as instance attribute.
+- Implement a better file LogWriter (could write date-time and type of log).
 - Should function router.reload set the href?
   See: http://stackoverflow.com/questions/27618878/angular-ui-router-reloading-to-different-state-refresh-data
 
