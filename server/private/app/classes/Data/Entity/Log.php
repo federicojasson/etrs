@@ -32,6 +32,19 @@ namespace App\Data\Entity;
 class Log {
 	
 	/**
+	 * The creation date-time.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "creation_date_time",
+	 *		type = "datetime",
+	 *		nullable = false
+	 *	)
+	 */
+	private $creationDateTime;
+	
+	/**
 	 * The ID.
 	 * 
 	 * Annotations:
@@ -53,5 +66,63 @@ class Log {
 	 */
 	private $id;
 	
-	// TODO
+	/**
+	 * The level.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "level",
+	 *		type = "smallint",
+	 *		nullable = false,
+	 *		
+	 *		options = {
+	 *			"unsigned": true
+	 *		}
+	 *	)
+	 */
+	private $level;
+	
+	/**
+	 * The message.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name = "message",
+	 *		type = "text",
+	 *		nullable = false
+	 *	)
+	 */
+	private $message;
+	
+	/**
+	 * Sets the creation date-time.
+	 * 
+	 * Annotations:
+	 * 
+	 * @PrePersist
+	 */
+	public function setCreationDateTime() {
+		$this->creationDateTime = getCurrentDateTime();
+	}
+	
+	/**
+	 * Sets the level.
+	 * 
+	 * Receives the level to be set.
+	 */
+	public function setLevel($level) {
+		$this->level = $level;
+	}
+	
+	/**
+	 * Sets the message.
+	 * 
+	 * Receives the message to be set.
+	 */
+	public function setMessage($message) {
+		$this->message = $message;
+	}
+	
 }

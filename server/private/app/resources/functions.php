@@ -23,6 +23,17 @@
  */
 
 /**
+ * Returns the current date-time.
+ */
+function getCurrentDateTime() {
+	// Initializes the time zone (UTC for consistency)
+	$timeZone = new \DateTimeZone('UTC');
+	
+	// Initializes the current date-time
+	return new \DateTime(null, $timeZone);
+}
+
+/**
  * Reads the contents of a JSON file.
  * 
  * Receives the file's path.
