@@ -37,3 +37,5 @@ define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
 define('OPERATION_MODE_DEVELOPMENT', 'development');
 define('OPERATION_MODE_MAINTENANCE', 'maintenance');
 define('OPERATION_MODE_PRODUCTION', 'production');
+
+define('SESSION_DATA_USER', 'user');

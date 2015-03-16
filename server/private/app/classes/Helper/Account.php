@@ -29,8 +29,10 @@ class Account {
 	 * Determines whether the user is signed in.
 	 */
 	public function isUserSignedIn() {
-		// TODO
-		return false;
+		global $app;
+		
+		// Determines whether the session contains a user ID
+		return $app->session->containsData(SESSION_DATA_USER);
 	}
 	
 }
