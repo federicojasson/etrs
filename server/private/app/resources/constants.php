@@ -38,4 +38,6 @@ define('OPERATION_MODE_DEVELOPMENT', 'development');
 define('OPERATION_MODE_MAINTENANCE', 'maintenance');
 define('OPERATION_MODE_PRODUCTION', 'production');
 
+define('RANDOM_ID_LENGTH', 16); // Bytes
+
 define('SESSION_DATA_USER', 'user');
