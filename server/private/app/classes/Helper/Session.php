@@ -39,6 +39,9 @@ class Session {
 		// Sets the session handler
 		session_set_save_handler($sessionHandler);
 		
+		// Sets the session's name (the cookie's name)
+		session_name(SESSION_NAME);
+		
 		// Starts the session
 		session_start();
 	}

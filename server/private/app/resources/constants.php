@@ -41,3 +41,4 @@ define('OPERATION_MODE_PRODUCTION', 'production');
 define('RANDOM_ID_LENGTH', 16); // Bytes
 
 define('SESSION_DATA_USER', 'user');
+define('SESSION_NAME', 'id');

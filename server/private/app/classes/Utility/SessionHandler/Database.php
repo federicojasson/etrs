@@ -122,6 +122,7 @@ class Database implements \SessionHandlerInterface {
 				// Creates the session
 				$session->setId($id);
 				$session->setData($data);
+				$entityManager->persist($session);
 			} else {
 				// The session exists
 				// Edits the session
