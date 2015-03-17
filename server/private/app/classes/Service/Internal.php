@@ -34,8 +34,10 @@ abstract class Internal extends Service  {
 	 * Prepares and executes the service.
 	 */
 	public function __invoke() {
+		global $argv;
+		
 		// Initializes the input
-		$this->input = []; // TODO: HOW???
+		$this->input = array_slice($argv, 1);
 		
 		// Invokes the homonym method in the parent
 		parent::__invoke();
