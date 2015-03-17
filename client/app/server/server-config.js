@@ -34,6 +34,8 @@
 		function getServices() {
 			return [
 				// TODO: define services here
+				'/account/sign-out',
+				'/account/signed-in'
 			];
 		}
 		

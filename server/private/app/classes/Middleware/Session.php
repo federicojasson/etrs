@@ -34,8 +34,6 @@ class Session extends \Slim\Middleware {
 		// Initializes the session implicitly
 		$app->session;
 		
-		// TODO: implement: add IP address?
-		
 		// Calls the next middleware
 		$this->next->call();
 	}

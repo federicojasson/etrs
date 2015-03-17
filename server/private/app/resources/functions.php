@@ -23,6 +23,37 @@
  */
 
 /**
+ * Returns the client's IP address.
+ */
+function getClientIpAddress() {
+	// Gets the IP address
+	$ipAddress = $_SERVER['REMOTE_ADDR'];
+	
+	// Converts the IP address to its in_addr representation
+	$ipAddress = inet_pton($ipAddress);
+	
+	if ($ipAddress === false) {
+		// The IP address is invalid
+		return 'unknown';
+	}
+	
+	// Defines the IPv4-mapped IPv6 address prefix and gets its length
+	$prefix = hex2bin('00000000000000000000ffff');
+	$length = strlen($prefix);
+	
+	if ($prefix === substr($ipAddress, 0, $length)) {
+		// The IP address is an IPv4-mapped IPv6 address
+		// Removes the prefix
+		$ipAddress = substr($ipAddress, $length);
+	}
+	
+	// Converts the IP address back to a human-readable format
+	$ipAddress = inet_ntop($ipAddress);
+	
+	return $ipAddress;
+}
+
+/**
  * Returns the current date-time.
  */
 function getCurrentDateTime() {

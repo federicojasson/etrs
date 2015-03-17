@@ -18,43 +18,38 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Helper;
+namespace App\Service\Account;
 
 /**
- * Manages the account.
+ * Represents the /account/sign-out service.
  */
-class Account {
+class SignOut extends \App\Service\External {
 	
 	/**
-	 * Determines whether the user is signed in.
+	 * Executes the service.
 	 */
-	public function isUserSignedIn() {
+	protected function execute() {
 		global $app;
 		
-		// Determines whether the session contains a user ID
-		return $app->session->containsData(SESSION_DATA_USER);
+		// Signs out the user
+		$app->account->signOutUser();
 	}
 	
 	/**
-	 * Signs out the user.
+	 * Determines whether the input is valid.
 	 */
-	public function signOutUser() {
-		global $app;
-		
-		// Gets the signed-in user's ID
-		$id = $app->session->getData(SESSION_DATA_USER);
-		
-		// Clears the user ID
-		$app->session->clearData(SESSION_DATA_USER);
-		
-		// Regenerates the session's ID
-		$app->session->regenerateId();
-		
-		// Gets the client's IP address
-		$ipAddress = getClientIpAddress();
-		
-		// Logs the event
-		$app->log->info('The user "' . $id . '" has been signed out (IP address: ' . $ipAddress . ').');
+	protected function isInputValid() {
+		return true;
 	}
 	
+	/**
+	 * Determines whether the user is authorized.
+	 */
+	protected function isUserAuthorized() {
+		global $app;
+		
+		// Only signed-in users are authorized
+		return $app->account->isUserSignedIn();
+	}
+
 }

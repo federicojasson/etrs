@@ -31,6 +31,7 @@ class ExternalServices extends Services {
 	protected function getServices() {
 		return [
 			// TODO: define external services here
+			'/account/sign-out',
 			'/account/signed-in'
 		];
 	}
