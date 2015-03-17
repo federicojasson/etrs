@@ -18,22 +18,15 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
-
 /**
- * Responsible for registering the internal services.
+ * This script executes a maintenance task.
  */
-class InternalServices extends Services {
-	
-	/**
-	 * Returns the services.
-	 */
-	protected function getServices() {
-		return [
-			// TODO: define internal services here
-			'/data/check-configuration',
-			'/data/generate-proxies'
-		];
-	}
-	
-}
+
+// Defines the root directory
+define('DIRECTORY_ROOT', __DIR__ . '/../../..');
+
+// Includes the application
+require_once DIRECTORY_ROOT . '/private/app/app.php';
+
+// Executes the maintenance task
+executeMaintenanceTask('/data/check-configuration');

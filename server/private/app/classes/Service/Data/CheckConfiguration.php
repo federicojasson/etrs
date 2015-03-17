@@ -18,22 +18,35 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\Data;
 
 /**
- * Responsible for registering the internal services.
+ * Represents the /data/check-configuration service.
  */
-class InternalServices extends Services {
+class CheckConfiguration extends \App\Service\Internal {
 	
 	/**
-	 * Returns the services.
+	 * Executes the service.
 	 */
-	protected function getServices() {
-		return [
-			// TODO: define internal services here
-			'/data/check-configuration',
-			'/data/generate-proxies'
-		];
+	protected function execute() {
+		global $app;
+		
+		// Initializes the orm:ensure-production-settings command
+		$command = new \Doctrine\ORM\Tools\Console\Command\EnsureProductionSettingsCommand();
+		
+		// Initializes the input and output settings
+		$inputSettings = new \Symfony\Component\Console\Input\ArrayInput([]);
+		$outputSettings = new \Symfony\Component\Console\Output\ConsoleOutput();
+		
+		// Runs the command
+		$app->data->runCommand($command, $inputSettings, $outputSettings);
+	}
+	
+	/**
+	 * Determines whether the input is valid.
+	 */
+	protected function isInputValid() {
+		return true;
 	}
 	
 }
