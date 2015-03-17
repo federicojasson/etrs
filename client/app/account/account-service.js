@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.account').service('account', [
+		'data',
 		'server',
 		accountService
 	]);
@@ -27,7 +28,7 @@
 	/**
 	 * Manages the account.
 	 */
-	function accountService(server) {
+	function accountService(data, server) {
 		var _this = this;
 		
 		/**
@@ -81,7 +82,13 @@
 					return;
 				}
 				
-				// TODO: get user
+				// Gets the signed-in user
+				data.getSignedInUser().then(function(user) {
+					// Sets the signed-in user
+					signedInUser = user;
+					
+					beingRefreshed = false;
+				});
 			});
 		};
 	}

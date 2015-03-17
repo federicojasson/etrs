@@ -19,19 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.account',
-		'app.data',
-		'app.error',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.data').service('data', [
+		'$q',
+		dataService
 	]);
+	
+	/**
+	 * Provides data-related functionalities.
+	 */
+	function dataService($q) {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getSignedInUser = function() {
+			// TODO: implement (remove mocking)
+			
+			var deferredTask = $q.defer();
+			
+			deferredTask.resolve({
+				role: 'ad',
+				firstName: 'Usuario',
+				lastName: 'Administrador',
+				gender: 'm'
+			});
+			
+			return deferredTask.promise;
+		};
+	}
 })();
