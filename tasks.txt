@@ -28,6 +28,7 @@ General code checks
 Release tasks
 ----------------------------
 
+- Configure the cron-job table.
 - Configure the DBMS cache.
 - Change the password of database users.
 - Register domain.
