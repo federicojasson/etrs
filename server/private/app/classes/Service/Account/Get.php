@@ -18,24 +18,35 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\Account;
 
 /**
- * Responsible for registering the external services.
+ * Represents the /account/get service.
  */
-class ExternalServices extends Services {
+class Get extends \App\Service\External {
 	
 	/**
-	 * Returns the services.
+	 * Executes the service.
 	 */
-	protected function getServices() {
-		return [
-			// TODO: define external services here
-			'/account/get',
-			'/account/sign-in',
-			'/account/sign-out',
-			'/account/signed-in'
-		];
+	protected function execute() {
+		// TODO
 	}
 	
+	/**
+	 * Determines whether the input is valid.
+	 */
+	protected function isInputValid() {
+		return true;
+	}
+	
+	/**
+	 * Determines whether the user is authorized.
+	 */
+	protected function isUserAuthorized() {
+		global $app;
+		
+		// Only signed-in users are authorized
+		return $app->account->isUserSignedIn();
+	}
+
 }
