@@ -22,14 +22,20 @@
 	angular.module('app.layout.site').controller('SiteLayoutController', [
 		'$controller',
 		'$scope',
+		'SignOutAction',
 		SiteLayoutController
 	]);
 	
 	/**
 	 * Represents the site layout.
 	 */
-	function SiteLayoutController($controller, $scope) {
+	function SiteLayoutController($controller, $scope, SignOutAction) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the layout is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the template's URL.
@@ -49,7 +55,7 @@
 		 * Determines whether the layout is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
 		
 		/**
@@ -58,6 +64,28 @@
 		function initialize() {
 			// Includes the necessary controllers
 			$scope.account = $controller('AccountController');
+			
+			// Initializes the sign-out action
+			var signOutAction = new SignOutAction();
+			signOutAction.startCallback = onSignOutStart;
+			signOutAction.successCallback = onSignOutSuccess;
+			
+			// Includes the actions
+			$scope.signOutAction = signOutAction;
+		}
+		
+		/**
+		 * Invoked at the start of the sign-out action.
+		 */
+		function onSignOutStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the sign-out action is successful.
+		 */
+		function onSignOutSuccess() {
+			ready = true; // TODO: try not to do this (is it necessary?)
 		}
 		
 		// ---------------------------------------------------------------------
