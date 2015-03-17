@@ -22,6 +22,7 @@
 	angular.module('app.layout.site').controller('SiteLayoutController', [
 		'$controller',
 		'$scope',
+		'account',
 		'SignOutAction',
 		SiteLayoutController
 	]);
@@ -29,7 +30,7 @@
 	/**
 	 * Represents the site layout.
 	 */
-	function SiteLayoutController($controller, $scope, SignOutAction) {
+	function SiteLayoutController($controller, $scope, account, SignOutAction) {
 		var _this = this;
 		
 		/**
@@ -55,6 +56,11 @@
 		 * Determines whether the layout is ready.
 		 */
 		_this.isReady = function() {
+			if (account.isBeingRefreshed()) {
+				// The account is being refreshed
+				return false;
+			}
+			
 			return ready;
 		};
 		
