@@ -65,6 +65,22 @@ function executeMaintenanceTask($url) {
 }
 
 /**
+ * Executes a scheduled task.
+ * 
+ * Receives the requested service's URL.
+ */
+function executeScheduledTask($url) {
+	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
+		// The system is under maintenance
+		// Exits the application
+		exit('The system is under maintenance.');
+	}
+	
+	// Serves the internal request
+	serveInternalRequest($url);
+}
+
+/**
  * Executes a server task.
  */
 function executeServerTask() {

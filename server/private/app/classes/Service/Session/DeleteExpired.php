@@ -18,33 +18,24 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service;
+namespace App\Service\Session;
 
 /**
- * Represents an internal service.
+ * Represents the /session/delete-expired service.
  */
-abstract class Internal extends Service  {
+class DeleteExpired extends \App\Service\Internal {
 	
 	/**
-	 * The input.
+	 * Executes the service.
 	 */
-	private $input;
-	
-	/**
-	 * Prepares and executes the service.
-	 */
-	public function __invoke() {
-		// Initializes the input
-		$this->input = []; // TODO: HOW???
-		
-		// Invokes the homonym method in the parent
-		parent::__invoke();
+	protected function execute() {
+		// TODO
 	}
 	
 	/**
-	 * Determines whether the user is authorized.
+	 * Determines whether the input is valid.
 	 */
-	protected function isUserAuthorized() {
+	protected function isInputValid() {
 		return true;
 	}
 	

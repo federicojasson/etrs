@@ -18,34 +18,15 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service;
-
 /**
- * Represents an internal service.
+ * This script executes a scheduled task.
  */
-abstract class Internal extends Service  {
-	
-	/**
-	 * The input.
-	 */
-	private $input;
-	
-	/**
-	 * Prepares and executes the service.
-	 */
-	public function __invoke() {
-		// Initializes the input
-		$this->input = []; // TODO: HOW???
-		
-		// Invokes the homonym method in the parent
-		parent::__invoke();
-	}
-	
-	/**
-	 * Determines whether the user is authorized.
-	 */
-	protected function isUserAuthorized() {
-		return true;
-	}
-	
-}
+
+// Defines the root directory
+define('DIRECTORY_ROOT', __DIR__ . '/../../..');
+
+// Includes the application
+require_once DIRECTORY_ROOT . '/private/app/app.php';
+
+// Executes the scheduled task
+executeScheduledTask('/session/delete-expired');
