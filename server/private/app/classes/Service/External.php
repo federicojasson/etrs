@@ -43,4 +43,26 @@ abstract class External extends Service  {
 		parent::__invoke();
 	}
 	
+	/**
+	 * Determines whether the received request is a JSON request.
+	 * 
+	 * If it is a JSON request, the input is decoded.
+	 */
+	protected function isJsonRequest() {
+		global $app;
+		
+		// Gets the request's media type
+		$mediaType = $app->request->getMediaType();
+		
+		if ($mediaType !== 'application/json') {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Decodes the input
+		$this->input = json_decode($this->input, true);
+		
+		return true;
+	}
+	
 }
