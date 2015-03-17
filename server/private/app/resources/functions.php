@@ -65,6 +65,13 @@ function getCurrentDateTime() {
 }
 
 /**
+ * TODO: comment
+ */
+function isArraySequential($array) {
+	// TODO: implement
+}
+
+/**
  * Reads the contents of a JSON file.
  * 
  * Receives the file's path.
