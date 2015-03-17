@@ -29,7 +29,17 @@ class GenerateProxies extends \App\Service\Internal {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: implement
+		global $app;
+		
+		// Initializes the orm:generate-proxies command
+		$command = new \Doctrine\ORM\Tools\Console\Command\GenerateProxiesCommand();
+		
+		// Initializes the input and output settings
+		$inputSettings = new \Symfony\Component\Console\Input\ArrayInput([]);
+		$outputSettings = new \Symfony\Component\Console\Output\ConsoleOutput();
+		
+		// Runs the command
+		$app->data->runCommand($command, $inputSettings, $outputSettings);
 	}
 	
 	/**
