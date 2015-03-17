@@ -94,7 +94,7 @@ class Data {
 		$metadataDriver = $configuration->newDefaultAnnotationDriver($entityDirectory);
 		
 		if ($app->getMode() === OPERATION_MODE_DEVELOPMENT) {
-			// The system is in development
+			// The system is under development
 			
 			// Initializes the proxy-generation mode
 			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS;
@@ -102,7 +102,7 @@ class Data {
 			// Initializes the cache
 			$cache = new \Doctrine\Common\Cache\ArrayCache();
 		} else {
-			// The system is in production or under maintenance
+			// The system is not under development
 			
 			// Initializes the proxy-generation mode
 			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_NEVER;

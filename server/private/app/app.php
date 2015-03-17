@@ -49,6 +49,22 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 spl_autoload_register('loadClass');
 
 /**
+ * Executes a maintenance task.
+ * 
+ * Receives the requested service's URL.
+ */
+function executeMaintenanceTask($url) {
+	if (OPERATION_MODE !== OPERATION_MODE_MAINTENANCE) {
+		// The system is not under maintenance
+		// Exits the application
+		exit('The system is not under maintenance.');
+	}
+	
+	// Serves the internal request
+	serveInternalRequest($url);
+}
+
+/**
  * Executes a server task.
  */
 function executeServerTask() {
@@ -158,12 +174,35 @@ function runApp($middlewares) {
 function serveExternalRequest() {
 	// Initializes the necessary middlewares
 	$middlewares = [
-		// TODO: define middlewares here
 		new \App\Middleware\ErrorHandlers(),
 		new \App\Middleware\Helpers(),
 		new \App\Middleware\Configuration(),
 		new \App\Middleware\ExternalServices(),
 		new \App\Middleware\Session()
+	];
+	
+	// Runs the application
+	runApp($middlewares);
+}
+
+/**
+ * Serves an internal request.
+ * 
+ * Receives the requested service's URL.
+ */
+function serveInternalRequest($url) {
+	// Mocks the environment to simulate an HTTP request
+	\Slim\Environment::mock([
+		'PATH_INFO' => $url,
+		'REQUEST_METHOD' => 'POST'
+	]);
+	
+	// Initializes the necessary middlewares
+	$middlewares = [
+		new \App\Middleware\ErrorHandlers(),
+		new \App\Middleware\Helpers(),
+		new \App\Middleware\Configuration(),
+		new \App\Middleware\InternalServices()
 	];
 	
 	// Runs the application
