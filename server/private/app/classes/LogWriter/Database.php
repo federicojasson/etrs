@@ -18,44 +18,31 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Configuration;
+namespace App\LogWriter;
 
 /**
- * Represents the production-mode configuration.
+ * Responsible for handling the persistence of the logs in the database.
  */
-class Production extends Configuration {
+class Database {
 	
 	/**
-	 * Returns the cookie settings.
+	 * Writes a log.
+	 * 
+	 * Receives the log's message and level.
 	 */
-	protected function getCookieSettings() {
-		// TODO: cookie settings
-		return [];
-	}
-	
-	/**
-	 * Returns the logging settings.
-	 */
-	protected function getLoggingSettings() {
-		// Initializes a log writer
-		$logWriter = new \App\LogWriter\Database();
+	public function write($message, $level) {
+		global $app;
 		
-		return [
-			'log.enabled' => true,
-			'log.level' => \Slim\Log::INFO,
-			'log.writer' => $logWriter
-		];
-	}
-	
-	/**
-	 * Returns miscellaneous settings.
-	 */
-	protected function getMiscellaneousSettings() {
-		return [
-			'debug' => false,
-			'http.version' => '1.1',
-			'routes.case_sensitive' => true
-		];
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($level, $message) {
+			// Initializes the log
+			$log = new \App\Data\Entity\Log();
+			
+			// Creates the log
+			$log->setLevel($level);
+			$log->setMessage($message);
+			$entityManager->persist($log);
+		});
 	}
 	
 }

@@ -34,7 +34,7 @@ class Session {
 		ini_set('session.hash_bits_per_character', 4);
 		
 		// Initializes a session handler
-		$sessionHandler = new \App\Utility\SessionHandler\Database();
+		$sessionHandler = new \App\SessionHandler\Database();
 		
 		// Sets the session handler
 		session_set_save_handler($sessionHandler);

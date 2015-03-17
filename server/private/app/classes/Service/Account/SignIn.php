@@ -36,6 +36,11 @@ class SignIn extends \App\Service\External {
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
 		// TODO
 	}
 	
