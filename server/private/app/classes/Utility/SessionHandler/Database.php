@@ -127,7 +127,7 @@ class Database implements \SessionHandlerInterface {
 				// The session exists
 				// Edits the session
 				$session->setLastAccessDateTime();
-				$session->setData();
+				$session->setData($data);
 			}
 		});
 		
