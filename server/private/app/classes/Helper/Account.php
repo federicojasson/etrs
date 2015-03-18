@@ -36,12 +36,33 @@ class Account {
 	}
 	
 	/**
+	 * Signs in a user.
+	 * 
+	 * Receives the user's ID.
+	 */
+	public function signInUser($id) {
+		global $app;
+		
+		// Regenerates the session's ID
+		$app->session->regenerateId();
+		
+		// Sets the user ID
+		$app->session->setData(SESSION_DATA_USER, $id);
+		
+		// Gets the client's IP address
+		$ipAddress = getClientIpAddress();
+		
+		// Logs the event
+		$app->log->info('The user "' . $id . '" has been signed in (IP address: ' . $ipAddress . ').');
+	}
+	
+	/**
 	 * Signs out the user.
 	 */
 	public function signOutUser() {
 		global $app;
 		
-		// Gets the signed-in user's ID
+		// Gets the user ID
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
 		// Clears the user ID

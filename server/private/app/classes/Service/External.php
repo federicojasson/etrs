@@ -44,6 +44,13 @@ abstract class External extends Service  {
 	}
 	
 	/**
+	 * Returns the input.
+	 */
+	protected function getInput() {
+		return $this->input;
+	}
+	
+	/**
 	 * Determines whether the received request is a JSON request.
 	 * 
 	 * If it is a JSON request, the input is decoded.

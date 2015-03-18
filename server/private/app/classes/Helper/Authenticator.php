@@ -21,23 +21,15 @@
 namespace App\Helper;
 
 /**
- * Provides input-validation methods.
+ * TODO: comment
  */
-class InputValidator {
+class Authenticator {
 	
 	/**
-	 * Determines whether a JSON input is valid.
-	 * 
-	 * Receives the input and a JSON input validator.
+	 * TODO: comment
 	 */
-	public function isJsonInputValid($input, $jsonInputValidator) {
-		if (is_null($input)) {
-			// The input could not be decoded
-			return false;
-		}
-		
-		// Determines whether the input is valid
-		return $jsonInputValidator->isInputValid($input);
+	public function authenticateUserByPassword($id, $password) {
+		// TODO
 	}
 	
 }

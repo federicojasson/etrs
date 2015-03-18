@@ -29,19 +29,55 @@ class SignIn extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// TODO: comment
+		$credentials;// TODO: get somehow
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($credentials['id'], $credentials['password']);
+		
+		// Adds an output
+		$this->addOutput('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user has not been authenticated
+			return;
+		}
+		
+		// Signs in the user
+		$app->account->signInUser($credentials['id']);
 	}
 	
 	/**
 	 * Determines whether the input is valid.
 	 */
 	protected function isInputValid() {
+		global $app;
+		
 		if (! $this->isJsonRequest()) {
 			// It is not a JSON request
 			return false;
 		}
 		
-		// TODO
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'credentials' => new \App\InputValidator\Json\JsonObject([
+				'id' => new \App\InputValidator\Json\JsonValue(function($input) {
+					// TODO: implement
+				}),
+				
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) {
+					// TODO: implement
+				})
+			])
+		]);
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Determines whether the input is valid
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 	/**

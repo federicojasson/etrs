@@ -80,4 +80,13 @@ class Session {
 		session_regenerate_id(true);
 	}
 	
+	/**
+	 * Sets a data entry's value.
+	 * 
+	 * Receives the entry's key and the value to be set.
+	 */
+	public function setData($key, $value) {
+		$_SESSION[$key] = $value;
+	}
+	
 }
