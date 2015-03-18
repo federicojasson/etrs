@@ -86,7 +86,7 @@
 				newTitle = controller.getTitle();
 			} else {
 				// The layout is not ready
-				newTitle = 'Cargando...';
+				newTitle = 'Cargando…';
 			}
 			
 			// Sets the title
