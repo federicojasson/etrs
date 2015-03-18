@@ -21,15 +21,48 @@
 namespace App\Helper;
 
 /**
- * TODO: comment
+ * Provides authentication methods.
  */
 class Authenticator {
 	
 	/**
-	 * TODO: comment
+	 * Authenticates a user by password.
+	 * 
+	 * Receives the user's ID and password.
 	 */
 	public function authenticateUserByPassword($id, $password) {
-		// TODO
+		global $app;
+		
+		// Gets the user
+		$user = $app->data->getRepository('App\Data\Entity\User')->find($id);
+		
+		if (is_null($user)) {
+			// The user doesn't exist
+			
+			// Computes the password's hash to cause a deliberate delay in order
+			// not to disclose that the user doesn't exist
+			$app->cryptography->computeNewPasswordHash($password);
+			
+			return false;
+		}
+		
+		// Determines whether the password is correct
+		return $this->isPasswordCorrect($user, $password);
+	}
+	
+	/**
+	 * Determines whether a password matches that of an entity.
+	 * 
+	 * Receives the entity and the password.
+	 */
+	private function isPasswordCorrect($entity, $password) {
+		global $app;
+		
+		// Computes the password's hash
+		$hash = $app->cryptography->computePasswordHash($password, $entity->getSalt(), $entity->getKeyStretchingIterations());
+		
+		// Compares the hashes
+		return $hash === $entity->getPasswordHash();
 	}
 	
 }

@@ -26,6 +26,40 @@ namespace App\Helper;
 class Cryptography {
 	
 	/**
+	 * Computes a password's hash. It returns an array containing the hash, the
+	 * used salt and the applied key-stretching iterations.
+	 * 
+	 * It should be used to compute a hash for the first time.
+	 * 
+	 * Receives the password.
+	 */
+	public function computeNewPasswordHash($password) {
+		// Generates a salt
+		$salt = $this->generateRandomBytes(SALT_LENGTH);
+		
+		// Defines the key-stretching iterations
+		$keyStretchingIterations = KEY_STRETCHING_ITERATIONS;
+		
+		// Computes the password's hash
+		$hash = $this->computePasswordHash($password, $salt, $keyStretchingIterations);
+		
+		return [ $hash, $salt, $keyStretchingIterations ];
+	}
+	
+	/**
+	 * Computes a password's hash.
+	 * 
+	 * It should be used to compute a hash and then compare it with another one
+	 * previously obtained.
+	 * 
+	 * Receives the password, the salt and the key-stretching iterations.
+	 */
+	public function computePasswordHash($password, $salt, $keyStretchingIterations) {
+		// Applies SHA-512 and the PBKDF2 key-derivation function
+		return hash_pbkdf2('sha512', $password, $salt, $keyStretchingIterations, 0, true);
+	}
+	
+	/**
 	 * Generates a random ID.
 	 */
 	public function generateRandomId() {

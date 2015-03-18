@@ -238,6 +238,27 @@ class User {
 	private $version;
 	
 	/**
+	 * Returns the key-stretching iterations.
+	 */
+	public function getKeyStretchingIterations() {
+		return $this->keyStretchingIterations;
+	}
+	
+	/**
+	 * Returns the password's hash.
+	 */
+	public function getPasswordHash() {
+		return $this->passwordHash;
+	}
+	
+	/**
+	 * Returns the salt.
+	 */
+	public function getSalt() {
+		return $this->salt;
+	}
+	
+	/**
 	 * Sets the creation date-time.
 	 * 
 	 * Annotations:

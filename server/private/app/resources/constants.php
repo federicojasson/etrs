@@ -34,11 +34,15 @@ define('HTTP_STATUS_INTERNAL_SERVER_ERROR', 500);
 define('HTTP_STATUS_NOT_FOUND', 404);
 define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
 
+define('KEY_STRETCHING_ITERATIONS', 64000);
+
 define('OPERATION_MODE_DEVELOPMENT', 'development');
 define('OPERATION_MODE_MAINTENANCE', 'maintenance');
 define('OPERATION_MODE_PRODUCTION', 'production');
 
 define('RANDOM_ID_LENGTH', 16); // Bytes
+
+define('SALT_LENGTH', 64); // Bytes
 
 define('SESSION_DATA_USER', 'user');
 define('SESSION_MAXIMUM_AGE', 30); // Days
