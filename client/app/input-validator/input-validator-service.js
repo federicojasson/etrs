@@ -19,21 +19,19 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.account',
-		'app.action',
-		'app.data',
-		'app.error',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.inputValidator').service('inputValidator', inputValidatorService);
+	
+	/**
+	 * Provides input-validation functions.
+	 */
+	function inputValidatorService() {
+		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.isInputValid = function(input) {
+			// TODO
+		};
+	}
 })();

@@ -22,7 +22,7 @@
 	angular.module('app.action.signIn').factory('SignInAction', [
 		'account',
 		'inputValidator',
-		'InputValidator',
+		'Input',
 		'server',
 		SignInActionFactory
 	]);
@@ -30,7 +30,7 @@
 	/**
 	 * Defines the SignInAction class.
 	 */
-	function SignInActionFactory(account, inputValidator, InputValidator, server) { // TODO: rename InputValidator
+	function SignInActionFactory(account, inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -63,11 +63,11 @@
 			// Initializes the input
 			this.input = {
 				credentials: {
-					id: new InputValidator(function() {
+					id: new Input(function() {
 						// TODO: implement
 					}),
 					
-					password: new InputValidator(function() {
+					password: new Input(function() {
 						// TODO: implement
 					})
 				}

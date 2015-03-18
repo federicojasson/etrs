@@ -19,21 +19,7 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.bootstrap',
-		'ui.router',
-		'app.account',
-		'app.action',
-		'app.data',
-		'app.error',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
+	angular.module('app.inputValidator', [
+		'app.inputValidator.input'
 	]);
 })();
