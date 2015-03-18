@@ -21,7 +21,7 @@
 namespace App\InputValidator\Json;
 
 /**
- * TODO: comment
+ * Responsible for validating JSON arrays.
  */
 class JsonArray extends Json  {
 	
@@ -44,9 +44,9 @@ class JsonArray extends Json  {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// TODO: comment
+		// Determines whether the JSON array's elements are valid
 		foreach ($input as $element) {
-			// TODO: comment
+			// Determines whether the element is valid
 			$valid = $definition->isInputValid($element);
 			
 			if (! $valid) {

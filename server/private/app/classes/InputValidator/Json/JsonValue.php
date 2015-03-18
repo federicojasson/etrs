@@ -21,7 +21,7 @@
 namespace App\InputValidator\Json;
 
 /**
- * TODO: comment
+ * Responsible for validating JSON values.
  */
 class JsonValue extends Json  {
 	
@@ -39,7 +39,7 @@ class JsonValue extends Json  {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// TODO: comment
+		// Determines whether the JSON value is valid
 		return call_user_func($definition, $input);
 	}
 	

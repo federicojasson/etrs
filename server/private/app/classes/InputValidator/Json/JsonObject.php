@@ -21,7 +21,7 @@
 namespace App\InputValidator\Json;
 
 /**
- * TODO: comment
+ * Responsible for validating JSON objects.
  */
 class JsonObject extends Json  {
 	
@@ -39,14 +39,14 @@ class JsonObject extends Json  {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// TODO: comment
+		// Determines whether the JSON object's properties are valid
 		foreach ($definition as $property => $jsonInputValidator) {
 			if (! array_key_exists($property, $input)) {
-				// The property is not defined in the object
+				// The property is not defined in the JSON object
 				return false;
 			}
 			
-			// TODO: comment
+			// Determines whether the property is valid
 			$valid = $jsonInputValidator->isInputValid($input[$property]);
 			
 			if (! $valid) {
