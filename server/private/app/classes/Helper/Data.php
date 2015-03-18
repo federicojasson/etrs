@@ -139,16 +139,15 @@ class Data {
 	}
 	
 	/**
-	 * Returns the entity manager.
+	 * Returns the connection.
 	 */
-	private function getEntityManager() {
+	private function getConnection() {
 		global $app;
 		
 		// Gets the DBMS parameters
 		$dbms = $app->parameters->dbms;
 		
-		// Builds the connection
-		$connection = [
+		return [
 			'driver' => 'pdo_mysql',
 			'host' => $dbms['host'],
 			'port' => $dbms['port'],
@@ -157,6 +156,14 @@ class Data {
 			'user' => $dbms['username'],
 			'password' => $dbms['password']
 		];
+	}
+	
+	/**
+	 * Returns the entity manager.
+	 */
+	private function getEntityManager() {
+		// Gets the connection
+		$connection = $this->getConnection();
 		
 		// Gets the configuration
 		$configuration = $this->getConfiguration();
