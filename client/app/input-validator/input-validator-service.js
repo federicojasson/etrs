@@ -28,10 +28,34 @@
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * Determines whether an input is valid.
+		 * 
+		 * Receives the input, which can be an Input instance or an object. In
+		 * the latter case, the object's properties are validated recursively.
 		 */
 		_this.isInputValid = function(input) {
-			// TODO
+			if (angular.isDefined(input.validate) && angular.isFunction(input.validate)) {
+				// The input is an Input instance
+				
+				// Validates the input
+				input.validate();
+				
+				// Determines whether the input is valid
+				return input.valid;
+			}
+			
+			// Validates the object's properties
+			var valid = true;
+			for (var property in input) {
+				if (! input.hasOwnProperty(property)) {
+					continue;
+				}
+				
+				// Validates the property
+				valid &= _this.isInputValid(input[property]);
+			}
+			
+			return valid;
 		};
 	}
 })();
