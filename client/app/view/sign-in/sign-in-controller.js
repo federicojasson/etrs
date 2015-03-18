@@ -19,13 +19,23 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.signIn').controller('SignInViewController', SignInViewController);
+	angular.module('app.view.signIn').controller('SignInViewController', [
+		'$scope',
+		'SignInAction',
+		'dialog',
+		SignInViewController
+	]);
 	
 	/**
 	 * Represents the sign-in view.
 	 */
-	function SignInViewController() {
+	function SignInViewController($scope, SignInAction, dialog) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the template's URL.
@@ -45,7 +55,56 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Initializes the sign-in action
+			var signInAction = new SignInAction();
+			signInAction.notAuthenticatedCallback = onSignInNotAuthenticated;
+			signInAction.startCallback = onSignInStart;
+			signInAction.successCallback = onSignInSuccess;
+			
+			// Includes the actions
+			$scope.signInAction = signInAction;
+		}
+		
+		/**
+		 * Invoked when the user is not authenticated during the execution of
+		 * the sign-in action.
+		 */
+		function onSignInNotAuthenticated() {
+			ready = true;
+			
+			// Opens an information dialog
+			dialog.openInformation(
+				'Credenciales rechazadas',
+				'No fue posible autenticar su identidad.\n' +
+				'\n' +
+				'Reingrese su nombre de usuario y su contraseña.'
+			);
+		}
+		
+		/**
+		 * Invoked at the start of the sign-in action.
+		 */
+		function onSignInStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the sign-in action is successful.
+		 */
+		function onSignInSuccess() {
+			ready = true; // TODO: try not to do this (is it necessary?)
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();

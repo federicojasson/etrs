@@ -120,8 +120,7 @@
 		/**
 		 * Sends a request to the server.
 		 * 
-		 * Receives the requested service's URL and, optionally, the input to
-		 * send.
+		 * Receives the requested service's URL and, optionally, the input.
 		 */
 		function sendRequest(url, input) {
 			// Initializes the input if is undefined

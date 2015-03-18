@@ -5,7 +5,7 @@
 	
 	<div class="col-sm-7 col-sm-offset-2">
 		<div class="clearfix well">
-			<form ng-submit="TODO" novalidate>
+			<form ng-submit="signInAction.execute()" novalidate>
 				<fieldset>
 					<legend>
 						<span class="glyphicon glyphicon-lock"></span>
@@ -59,8 +59,7 @@
 				</fieldset>
 				
 				<div class="form-group">
-					TODO: text height
-					<a ui-sref="TODO" class="pull-left">
+					<a ui-sref="TODO" class="btn-lg btn-link pull-left">
 						¿Olvidó su contraseña?
 					</a>
 					
