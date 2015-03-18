@@ -64,6 +64,18 @@
 		};
 		
 		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				backdrop: 'static',
+				controller: 'DialogController',
+				controllerAs: 'dialog',
+				templateUrl: 'app/dialog/dialog.html'
+			};
+		}
+		
+		/**
 		 * Opens a dialog.
 		 * 
 		 * Receives the type, the title, the message and, optionally, a callback
@@ -80,8 +92,11 @@
 				message: message
 			};
 			
+			// Gets the settings
+			var settings = getSettings();
+			
 			// Opens the dialog
-			$modal.open(/*TODO: parameters*/).result.then(closedCallback, dismissedCallback);
+			$modal.open(settings).result.then(closedCallback, dismissedCallback);
 		}
 	}
 })();
