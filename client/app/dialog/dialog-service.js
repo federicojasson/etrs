@@ -19,14 +19,69 @@
 'use strict';
 
 (function() {
-	angular.module('app.dialog').service('dialog', dialogService);
+	angular.module('app.dialog').service('dialog', [
+		'$modal',
+		dialogService
+	]);
 	
 	/**
-	 * TODO: comment
+	 * Manages the dialogs.
 	 */
-	function dialogService() {
+	function dialogService($modal) {
 		var _this = this;
 		
-		// TODO
+		/**
+		 * The open dialog.
+		 */
+		var dialog = null;
+		
+		/**
+		 * Returns the open dialog.
+		 */
+		_this.get = function() {
+			return dialog;
+		};
+		
+		/**
+		 * Opens a confirmation dialog.
+		 * 
+		 * Receives the title, the message and, optionally, a callback to be
+		 * invoked when the dialog is closed and another one to be invoked when
+		 * it is dismissed.
+		 */
+		_this.openConfirmation = function(title, message, closedCallback, dismissedCallback) {
+			open('confirmation', title, message, closedCallback, dismissedCallback);
+		};
+		
+		/**
+		 * Opens an information dialog.
+		 * 
+		 * Receives the title, the message and, optionally, a callback to be
+		 * invoked when the dialog is closed or dismissed.
+		 */
+		_this.openInformation = function(title, message, callback) {
+			open('information', title, message, callback, callback);
+		};
+		
+		/**
+		 * Opens a dialog.
+		 * 
+		 * Receives the type, the title, the message and, optionally, a callback
+		 * to be invoked when the dialog is closed and another one to be invoked
+		 * when it is dismissed.
+		 */
+		function open(type, title, message, closedCallback, dismissedCallback) {
+			// TODO: initialize callbacks? necessary?
+			
+			// Initializes the dialog
+			dialog = {
+				type: type,
+				title: title,
+				message: message
+			};
+			
+			// Opens the dialog
+			$modal.open(/*TODO: parameters*/).result.then(closedCallback, dismissedCallback);
+		}
 	}
 })();

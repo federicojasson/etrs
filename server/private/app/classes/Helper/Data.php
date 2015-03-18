@@ -75,7 +75,7 @@ class Data {
 	/**
 	 * Executes a transaction.
 	 * 
-	 * Receives a closure to execute.
+	 * Receives a closure to be executed.
 	 */
 	public function transactional($closure) {
 		// Initializes the result

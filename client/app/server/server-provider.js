@@ -106,11 +106,8 @@
 				// Gets the child of the object corresponding to the fragment
 				var child = object[fragment];
 				
-				if (angular.isUndefined(child)) {
-					// The child is undefined
-					// Initializes the child
-					child = object[fragment] = {};
-				}
+				// Initializes the child if is undefined
+				child = object[fragment] = (angular.isDefined(child)) ? child : {};
 
 				// Sets the child as the current object
 				object = child;
@@ -123,7 +120,7 @@
 		 * Receives the requested service's URL and, optionally, the input.
 		 */
 		function sendRequest(url, input) {
-			// Initializes the input if is undefined
+			// Initializes the input if is undefined TODO: necessary?
 			input = (angular.isDefined(input)) ? input : {};
 
 			// Builds the definitive URL
