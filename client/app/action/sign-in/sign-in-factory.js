@@ -64,11 +64,11 @@
 			this.input = {
 				credentials: {
 					id: new Input(function() {
-						// TODO: implement
+						return inputValidator.isValidString(this, 1);
 					}),
 					
 					password: new Input(function() {
-						// TODO: implement
+						return inputValidator.isValidString(this, 1);
 					})
 				}
 			};

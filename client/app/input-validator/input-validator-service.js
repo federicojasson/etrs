@@ -57,5 +57,39 @@
 			
 			return valid;
 		};
+		
+		/**
+		 * Determines whether an input is a valid string.
+		 * 
+		 * Receives the input, the minimum allowed length and, optionally, the
+		 * maximum.
+		 */
+		_this.isValidString = function(input, minimumLength, maximumLength) {
+			// Gets the input's length
+			var length = input.value.length;
+			
+			// Initializes the maximum length if is undefined
+			maximumLength = (angular.isDefined(maximumLength))? $maximumLength : length;
+			
+			if (length < minimumLength) {
+				// The input is too short
+				input.message = '';
+				input.message += 'Este campo debe tener al menos ' + minimumLength + ' ';
+				input.message += (minimumLength === 1)? 'caracter' : 'caracteres';
+				return false;
+			}
+			
+			if (length > maximumLength) {
+				// The input is too long
+				input.message = '';
+				input.message += 'Este campo puede tener a lo sumo ' + maximumLength + ' ';
+				input.message += (maximumLength === 1)? 'caracter' : 'caracteres';
+				return false;
+			}
+			
+			// The input is a valid string
+			input.message = '';
+			return true;
+		};
 	}
 })();

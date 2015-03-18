@@ -120,11 +120,11 @@
 		 * Receives the requested service's URL and, optionally, the input.
 		 */
 		function sendRequest(url, input) {
-			// Initializes the input if is undefined TODO: necessary?
-			input = (angular.isDefined(input))? input : {};
-
 			// Builds the definitive URL
 			url = 'server' + url;
+			
+			// Initializes the input if is undefined TODO: necessary?
+			input = (angular.isDefined(input))? input : {};
 
 			// Sends the request
 			var promise = $resource(url).save(input).$promise;
