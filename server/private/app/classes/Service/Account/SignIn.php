@@ -37,8 +37,8 @@ class SignIn extends \App\Service\External {
 		// Authenticates the user
 		$authenticated = $app->authenticator->authenticateUserByPassword($credentials['id'], $credentials['password']);
 		
-		// Adds an output
-		$this->addOutput('authenticated', $authenticated);
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
 		
 		if (! $authenticated) {
 			// The user has not been authenticated

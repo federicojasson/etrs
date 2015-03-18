@@ -34,8 +34,8 @@ class SignedIn extends \App\Service\External {
 		// Determines whether the user is signed in
 		$signedIn = $app->account->isUserSignedIn();
 		
-		// Adds an output
-		$this->addOutput('signedIn', $signedIn);
+		// Sets an output
+		$this->setOutputValue('signedIn', $signedIn);
 	}
 	
 	/**

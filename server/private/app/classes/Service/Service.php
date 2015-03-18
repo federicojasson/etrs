@@ -59,27 +59,6 @@ abstract class Service  {
 	}
 	
 	/**
-	 * Adds an output.
-	 * 
-	 * Receives a key, a value and, optionally, a filter for the value.
-	 */
-	protected function addOutput($key, $value, $filter = null) {
-		if (! is_array($this->output)) {
-			// The output is not an array
-			// Reinitializes the output
-			$this->output = [];
-		}
-		
-		if (! is_null($filter)) {
-			// Applies the filter
-			$value = call_user_func($filter, $value);
-		}
-		
-		// Adds the output
-		$this->output[$key] = $value;
-	}
-	
-	/**
 	 * Executes the service.
 	 */
 	protected abstract function execute();
@@ -101,6 +80,28 @@ abstract class Service  {
 	 */
 	protected function setOutput($output) {
 		$this->output = $output;
+	}
+	
+	/**
+	 * Sets an output's value.
+	 * 
+	 * Receives the output's key, the value to be set and, optionally, a filter
+	 * for the value.
+	 */
+	protected function setOutputValue($key, $value, $filter = null) {
+		if (! is_array($this->output)) {
+			// The output is not an array
+			// Reinitializes the output
+			$this->output = [];
+		}
+		
+		if (! is_null($filter)) {
+			// Applies the filter
+			$value = call_user_func($filter, $value);
+		}
+		
+		// Sets the value
+		$this->output[$key] = $value;
 	}
 	
 }
