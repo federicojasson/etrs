@@ -50,6 +50,7 @@ class Helpers extends \Slim\Middleware {
 			'account' => 'App\Helper\Account',
 			'cryptography' => 'App\Helper\Cryptography',
 			'data' => 'App\Helper\Data',
+			'inputValidator' => 'App\Helper\InputValidator',
 			'parameters' => 'App\Helper\Parameters',
 			'response' => 'App\Helper\Response',
 			'session' => 'App\Helper\Session'

@@ -18,44 +18,24 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\InputValidator\Json;
+namespace App\Helper;
 
 /**
  * TODO: comment
  */
-class JsonObject extends Json  {
+class InputValidator {
 	
 	/**
-	 * Determines whether an input is valid.
-	 * 
-	 * Receives the input.
+	 * TODO: comment
 	 */
-	public function isInputValid($input) {
-		if (is_array($input)) {
-			// The input is not an array
+	public function isJsonInputValid($input, $jsonInputValidator) {
+		if (is_null($input)) {
+			// The input could not be decoded
 			return false;
 		}
 		
-		// Gets the definition
-		$definition = $this->getDefinition();
-		
 		// TODO: comment
-		foreach ($definition as $property => $jsonInputValidator) {
-			if (! array_key_exists($property, $input)) {
-				// The property is not defined in the object
-				return false;
-			}
-			
-			// TODO: comment
-			$valid = $jsonInputValidator->isInputValid($input[$property]);
-			
-			if (! $valid) {
-				// The property is invalid
-				return false;
-			}
-		}
-		
-		return true;
+		return $jsonInputValidator->isInputValid($input);
 	}
 	
 }
