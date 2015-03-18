@@ -63,12 +63,12 @@ class SignIn extends \App\Service\External {
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'credentials' => new \App\InputValidator\Json\JsonObject([
-				'id' => new \App\InputValidator\Json\JsonValue(function($input) {
-					// TODO: implement
+				'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isValidString($input, 1);
 				}),
 				
-				'password' => new \App\InputValidator\Json\JsonValue(function($input) {
-					// TODO: implement
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isValidString($input, 1);
 				})
 			])
 		]);

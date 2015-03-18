@@ -40,4 +40,26 @@ class InputValidator {
 		return $jsonInputValidator->isInputValid($input);
 	}
 	
+	/**
+	 * Determines whether an input is a valid string.
+	 * 
+	 * Receives the input, the minimum allowed length and, optionally, the
+	 * maximum.
+	 */
+	public function isValidString($input, $minimumLength, $maximumLength = null) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Gets the input's length
+		$length = mb_strlen($input, 'UTF-8');
+		
+		// Initializes the maximum length if is null
+		$maximumLength = (! is_null($maximumLength))? $maximumLength : $length;
+		
+		// Determines whether the input's length is in the allowed range
+		return $length >= $minimumLength && $length <= $maximumLength;
+	}
+	
 }
