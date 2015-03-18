@@ -26,7 +26,7 @@ namespace App\Data\Entity;
  * Annotations:
  * 
  * @Entity
- * @Table(name = "users")
+ * @Table(name="users")
  * @HasLifecycleCallbacks
  */
 class User {
@@ -37,9 +37,9 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "creation_date_time",
-	 *		type = "datetime",
-	 *		nullable = false
+	 *		name="creation_date_time",
+	 *		type="datetime",
+	 *		nullable=false
 	 *	)
 	 */
 	private $creationDateTime;
@@ -49,12 +49,12 @@ class User {
 	 * 
 	 * Annotations:
 	 * 
-	 * @ManyToOne(targetEntity = "User")
+	 * @ManyToOne(targetEntity="User")
 	 * 
 	 * @JoinColumn(
-	 *		name = "creator",
-	 *		referencedColumnName = "id",
-	 *		onDelete = "SET NULL"
+	 *		name="creator",
+	 *		referencedColumnName="id",
+	 *		onDelete="SET NULL"
 	 *	)
 	 */
 	private $creator;
@@ -65,10 +65,10 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "email_address",
-	 *		type = "string",
-	 *		length = 254,
-	 *		nullable = false
+	 *		name="email_address",
+	 *		type="string",
+	 *		length=254,
+	 *		nullable=false
 	 *	)
 	 */
 	private $emailAddress;
@@ -79,10 +79,10 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "first_name",
-	 *		type = "string",
-	 *		length = 48,
-	 *		nullable = false
+	 *		name="first_name",
+	 *		type="string",
+	 *		length=48,
+	 *		nullable=false
 	 *	)
 	 */
 	private $firstName;
@@ -93,12 +93,12 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "gender",
-	 *		type = "binary_data",
-	 *		length = 1,
-	 *		nullable = false,
+	 *		name="gender",
+	 *		type="binary_data",
+	 *		length=1,
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"fixed": true
 	 *		}
 	 *	)
@@ -113,10 +113,10 @@ class User {
 	 * @Id
 	 * 
 	 * @Column(
-	 *		name = "id",
-	 *		type = "binary_data",
-	 *		length = 32,
-	 *		nullable = false
+	 *		name="id",
+	 *		type="binary_data",
+	 *		length=32,
+	 *		nullable=false
 	 *	)
 	 */
 	private $id;
@@ -127,11 +127,11 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "key_stretching_iterations",
-	 *		type = "integer",
-	 *		nullable = false,
+	 *		name="key_stretching_iterations",
+	 *		type="integer",
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"unsigned": true
 	 *		}
 	 *	)
@@ -144,8 +144,8 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "last_edition_date_time",
-	 *		type = "datetime"
+	 *		name="last_edition_date_time",
+	 *		type="datetime"
 	 *	)
 	 */
 	private $lastEditionDateTime;
@@ -156,10 +156,10 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "last_name",
-	 *		type = "string",
-	 *		length = 48,
-	 *		nullable = false
+	 *		name="last_name",
+	 *		type="string",
+	 *		length=48,
+	 *		nullable=false
 	 *	)
 	 */
 	private $lastName;
@@ -170,12 +170,12 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "password_hash",
-	 *		type = "binary_data",
-	 *		length = 64,
-	 *		nullable = false,
+	 *		name="password_hash",
+	 *		type="binary_data",
+	 *		length=64,
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"fixed": true
 	 *		}
 	 *	)
@@ -188,12 +188,12 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "role",
-	 *		type = "binary_data",
-	 *		length = 2,
-	 *		nullable = false,
+	 *		name="role",
+	 *		type="binary_data",
+	 *		length=2,
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"fixed": true
 	 *		}
 	 *	)
@@ -206,12 +206,12 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "salt",
-	 *		type = "binary_data",
-	 *		length = 64,
-	 *		nullable = false,
+	 *		name="salt",
+	 *		type="binary_data",
+	 *		length=64,
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"fixed": true
 	 *		}
 	 *	)
@@ -226,11 +226,11 @@ class User {
 	 * @Version
 	 * 
 	 * @Column(
-	 *		name = "version",
-	 *		type = "integer",
-	 *		nullable = false,
+	 *		name="version",
+	 *		type="integer",
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"unsigned": true
 	 *		}
 	 *	)

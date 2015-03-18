@@ -26,7 +26,7 @@ namespace App\Data\Entity;
  * Annotations:
  * 
  * @Entity
- * @Table(name = "sessions")
+ * @Table(name="sessions")
  * @HasLifecycleCallbacks
  */
 class Session {
@@ -37,9 +37,9 @@ class Session {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "creation_date_time",
-	 *		type = "datetime",
-	 *		nullable = false
+	 *		name="creation_date_time",
+	 *		type="datetime",
+	 *		nullable=false
 	 *	)
 	 */
 	private $creationDateTime;
@@ -50,9 +50,9 @@ class Session {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "data",
-	 *		type = "text",
-	 *		nullable = false
+	 *		name="data",
+	 *		type="text",
+	 *		nullable=false
 	 *	)
 	 */
 	private $data;
@@ -65,12 +65,12 @@ class Session {
 	 * @Id
 	 * 
 	 * @Column(
-	 *		name = "id",
-	 *		type = "binary_data",
-	 *		length = 32,
-	 *		nullable = false,
+	 *		name="id",
+	 *		type="binary_data",
+	 *		length=32,
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"fixed": true
 	 *		}
 	 *	)
@@ -83,9 +83,9 @@ class Session {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "last_access_date_time",
-	 *		type = "datetime",
-	 *		nullable = false
+	 *		name="last_access_date_time",
+	 *		type="datetime",
+	 *		nullable=false
 	 *	)
 	 */
 	private $lastAccessDateTime;

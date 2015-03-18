@@ -26,7 +26,7 @@ namespace App\Data\Entity;
  * Annotations:
  * 
  * @Entity
- * @Table(name = "logs")
+ * @Table(name="logs")
  * @HasLifecycleCallbacks
  */
 class Log {
@@ -37,9 +37,9 @@ class Log {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "creation_date_time",
-	 *		type = "datetime",
-	 *		nullable = false
+	 *		name="creation_date_time",
+	 *		type="datetime",
+	 *		nullable=false
 	 *	)
 	 */
 	private $creationDateTime;
@@ -50,16 +50,16 @@ class Log {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * @GeneratedValue(strategy = "CUSTOM")
-	 * @CustomIdGenerator(class = "App\Data\IdGenerator\Random")
+	 * @GeneratedValue(strategy="CUSTOM")
+	 * @CustomIdGenerator(class="App\Data\IdGenerator\Random")
 	 * 
 	 * @Column(
-	 *		name = "id",
-	 *		type = "binary_data",
-	 *		length = 16,
-	 *		nullable = false,
+	 *		name="id",
+	 *		type="binary_data",
+	 *		length=16,
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"fixed": true
 	 *		}
 	 *	)
@@ -72,11 +72,11 @@ class Log {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "level",
-	 *		type = "smallint",
-	 *		nullable = false,
+	 *		name="level",
+	 *		type="smallint",
+	 *		nullable=false,
 	 *		
-	 *		options = {
+	 *		options={
 	 *			"unsigned": true
 	 *		}
 	 *	)
@@ -89,9 +89,9 @@ class Log {
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name = "message",
-	 *		type = "text",
-	 *		nullable = false
+	 *		name="message",
+	 *		type="text",
+	 *		nullable=false
 	 *	)
 	 */
 	private $message;
