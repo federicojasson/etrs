@@ -1,0 +1,29 @@
+<div class="modal-header">
+	<button ng-click="$dismiss()" class="close">
+		×
+	</button>
+	
+	{{ dialog.get().title }}
+</div>
+
+<div class="modal-body">
+	<pre>{{ dialog.get().message }}</pre>
+</div>
+
+<div class="modal-footer">
+	<div ng-if="dialog.get().type === 'confirmation'">
+		<button ng-click="$close()" class="btn btn-danger">
+			Confirmar
+		</button>
+		
+		<button ng-click="$dismiss()" class="btn btn-default">
+			Cancelar
+		</button>
+	</div>
+	
+	<div ng-if="dialog.get().type === 'information'">
+		<button ng-click="$close()" class="btn btn-default">
+			Aceptar
+		</button>
+	</div>
+</div>
