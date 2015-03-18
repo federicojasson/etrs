@@ -51,6 +51,28 @@ abstract class External extends Service  {
 	}
 	
 	/**
+	 * Returns an input's value.
+	 * 
+	 * Receives the input's key and, optionally, a filter for the value.
+	 */
+	protected function getInputValue($key, $filter = null) {
+		// Gets the value
+		$value = $this->input[$key];
+		
+		if (is_null($value)) {
+			// The value is null
+			return null;
+		}
+		
+		if (! is_null($filter)) {
+			// Applies the filter
+			$value = call_user_func($filter, $value);
+		}
+		
+		return $value;
+	}
+	
+	/**
 	 * Determines whether the received request is a JSON request.
 	 * 
 	 * If it is a JSON request, the input is decoded.
