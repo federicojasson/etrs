@@ -65,10 +65,24 @@ function getCurrentDateTime() {
 }
 
 /**
- * TODO: comment
+ * Determines whether an array is sequential.
+ * 
+ * Receives the array.
  */
 function isArraySequential($array) {
-	// TODO: implement
+	// Gets the array's length
+	$length = count($array);
+	
+	if ($length === 0) {
+		// The array is empty
+		return true;
+	}
+	
+	// Initializes an array containing the sequential indices
+	$indices = range(0, $length - 1);
+	
+	// Compares the array's keys with the indices
+	return array_keys($array) === $indices;
 }
 
 /**
