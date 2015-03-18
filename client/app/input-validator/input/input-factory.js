@@ -26,11 +26,55 @@
 	 */
 	function InputFactory() {
 		/**
-		 * Initializes an instance of the class.
+		 * The message.
 		 */
-		function Input() {
-			// TODO
+		Input.prototype.message;
+		
+		/**
+		 * Indicates whether the input is valid.
+		 */
+		Input.prototype.valid;
+		
+		/**
+		 * The validator.
+		 * 
+		 * Besides determining whether the input is valid, it should set the
+		 * message. If the validation fails, it must set a description of the
+		 * cause; otherwise, it must set an empty string.
+		 */
+		Input.prototype.validator;
+		
+		/**
+		 * The value.
+		 */
+		Input.prototype.value;
+		
+		/**
+		 * Initializes an instance of the class.
+		 * 
+		 * Receives, optionally, a validator.
+		 */
+		function Input(validator) {
+			// Initializes the validator if is undefined
+			validator = (angular.isDefined(validator))? validator : function() {
+				return true;
+			};
+			
+			// Sets the validator
+			this.validator = validator;
+			
+			// Sets default values
+			this.message = '';
+			this.valid = true;
+			this.value = '';
 		}
+		
+		/**
+		 * Validates the input.
+		 */
+		Input.prototype.validate = function() {
+			this.valid = this.validator();
+		};
 		
 		// ---------------------------------------------------------------------
 		

@@ -107,7 +107,7 @@
 				var child = object[fragment];
 				
 				// Initializes the child if is undefined
-				child = object[fragment] = (angular.isDefined(child)) ? child : {};
+				child = object[fragment] = (angular.isDefined(child))? child : {};
 
 				// Sets the child as the current object
 				object = child;
@@ -121,7 +121,7 @@
 		 */
 		function sendRequest(url, input) {
 			// Initializes the input if is undefined TODO: necessary?
-			input = (angular.isDefined(input)) ? input : {};
+			input = (angular.isDefined(input))? input : {};
 
 			// Builds the definitive URL
 			url = 'server' + url;
