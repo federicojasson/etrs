@@ -39,7 +39,7 @@ class JsonValue extends Json  {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// Determines whether the JSON value is valid
+		// Validates the JSON value
 		return call_user_func($definition, $input);
 	}
 	

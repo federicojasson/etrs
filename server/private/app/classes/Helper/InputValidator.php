@@ -36,7 +36,7 @@ class InputValidator {
 			return false;
 		}
 		
-		// Determines whether the input is valid
+		// Validates the input
 		return $jsonInputValidator->isInputValid($input);
 	}
 	

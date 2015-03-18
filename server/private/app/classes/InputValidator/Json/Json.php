@@ -26,13 +26,13 @@ namespace App\InputValidator\Json;
  * A JSON structure can be an array, an object or a value. For each type, a
  * definition determines the way the validation is carried out:
  * 
- * - Arrays: a JSON input validator is used, that determines how to validate all
- *   the array's elements.
+ * - Arrays: a JSON input validator is used, which determines how to validate
+ *   all the array's elements.
  * 
  * - Objects: an associative array is used, whose values are JSON input
  *   validators that determine how to validate each property of the object.
  * 
- * - Values: a function is used, that receives and validates the value.
+ * - Values: a function is used, which receives and validates the value.
  */
 abstract class Json  {
 	

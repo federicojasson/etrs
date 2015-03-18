@@ -81,8 +81,8 @@ function isArraySequential($array) {
 	// Initializes an array containing the sequential indices
 	$indices = range(0, $length - 1);
 	
-	// Compares the array's keys with the indices
-	return array_keys($array) === $indices;
+	// Compares the indices with the array's keys
+	return $indices === array_keys($array);
 }
 
 /**

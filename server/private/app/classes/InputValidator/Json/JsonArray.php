@@ -44,9 +44,9 @@ class JsonArray extends Json  {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// Determines whether the JSON array's elements are valid
+		// Validates the JSON array's elements
 		foreach ($input as $element) {
-			// Determines whether the element is valid
+			// Validates the element
 			$valid = $definition->isInputValid($element);
 			
 			if (! $valid) {

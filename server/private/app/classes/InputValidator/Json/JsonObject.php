@@ -39,14 +39,14 @@ class JsonObject extends Json  {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// Determines whether the JSON object's properties are valid
+		// Validates the JSON object's properties
 		foreach ($definition as $property => $jsonInputValidator) {
 			if (! array_key_exists($property, $input)) {
 				// The property is not defined in the JSON object
 				return false;
 			}
 			
-			// Determines whether the property is valid
+			// Validates the property
 			$valid = $jsonInputValidator->isInputValid($input[$property]);
 			
 			if (! $valid) {

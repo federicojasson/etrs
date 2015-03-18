@@ -165,7 +165,7 @@ class User {
 	private $lastName;
 	
 	/**
-	 * The password hash.
+	 * The password's hash.
 	 * 
 	 * Annotations:
 	 * 
