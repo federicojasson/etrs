@@ -32,7 +32,7 @@ class Create extends \App\Service\External {
 		global $app;
 		
 		// Gets inputs
-		$name = $this->getInputValue('name'); // TODO: apply filter
+		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user
 		$signedInUser = $app->account->getSignedInUser();

@@ -113,3 +113,16 @@ function spinalToPascalCase($string) {
 	// Removes the spaces
 	return str_replace(' ', '', $string);
 }
+
+/**
+ * Trims and shrinks a string.
+ * 
+ * Receives the string.
+ */
+function trimAndShrink($string) {
+	// Shrinks the string
+	$string = preg_replace('/ +/', ' ', $string);
+	
+	// Trims the string
+	return trim($string, ' ');
+}
