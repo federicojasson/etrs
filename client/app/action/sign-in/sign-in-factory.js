@@ -55,7 +55,6 @@
 		 * Initializes an instance of the class.
 		 */
 		function SignInAction() {
-			// Initializes the callbacks
 			this.notAuthenticatedCallback = function() {};
 			this.startCallback = function() {};
 			this.successCallback = function() {};

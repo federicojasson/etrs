@@ -34,7 +34,7 @@ class Data {
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
-		// Initializes the entity manager
+		// Gets the entity manager
 		$this->entityManager = $this->getEntityManager();
 		
 		// Adds custom types

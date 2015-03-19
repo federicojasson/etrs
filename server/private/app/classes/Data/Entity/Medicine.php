@@ -170,7 +170,6 @@ class Medicine {
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
-		// TODO: comment?
 		$this->deleted = false;
 	}
 	

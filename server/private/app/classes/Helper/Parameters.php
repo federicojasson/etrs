@@ -39,10 +39,9 @@ class Parameters {
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
-		// Initializes the parameters
 		$this->parameters = [];
 		
-		// Initializes the paths
+		// Gets the paths
 		$this->paths = $this->getPaths();
 	}
 	

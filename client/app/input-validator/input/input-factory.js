@@ -55,6 +55,10 @@
 		 * Receives, optionally, a validator.
 		 */
 		function Input(validator) {
+			this.message = '';
+			this.valid = true;
+			this.value = '';
+			
 			// Initializes the validator if is undefined
 			validator = (angular.isDefined(validator))? validator : function() {
 				return true;
@@ -62,11 +66,7 @@
 			
 			// Sets the validator
 			this.validator = validator;
-			
-			// Sets default values
-			this.message = '';
-			this.valid = true;
-			this.value = '';
+
 		}
 		
 		/**

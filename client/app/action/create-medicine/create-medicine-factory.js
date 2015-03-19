@@ -49,7 +49,6 @@
 		 * Initializes an instance of the class.
 		 */
 		function CreateMedicineAction() {
-			// Initializes the callbacks
 			this.startCallback = function() {};
 			this.successCallback = function() {};
 			
