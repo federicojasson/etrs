@@ -19,9 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.action', [
-		'app.action.createMedicine',
-		'app.action.signIn',
-		'app.action.signOut'
-	]);
+	angular.module('app.action.createMedicine', []);
 })();
