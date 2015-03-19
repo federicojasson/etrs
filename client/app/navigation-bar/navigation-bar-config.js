@@ -34,9 +34,9 @@
 		function getMenuItems() {
 			return {
 				newMedicine: {
-					name: 'Nuevo', // TODO
+					name: 'Nuevo',
 					state: 'newMedicine',
-					description: '' // TODO
+					description: 'Cree un nuevo medicamento'
 				}
 				
 				// TODO: define menu items here
