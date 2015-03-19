@@ -26,6 +26,19 @@ namespace App\Helper;
 class Account {
 	
 	/**
+	 * Returns the signed-in user.
+	 */
+	public function getSignedInUser() {
+		global $app;
+		
+		// TODO: comment
+		$id = $app->session->getData(SESSION_DATA_USER);
+		
+		// TODO: comment
+		return $app->data->getReference('App\Data\Entity\User', $id);
+	}
+	
+	/**
 	 * Determines whether the user is signed in.
 	 */
 	public function isUserSignedIn() {

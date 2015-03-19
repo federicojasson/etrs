@@ -34,13 +34,17 @@ class Create extends \App\Service\External {
 		// Gets inputs
 		$name = $this->getInputValue('name'); // TODO: apply filter
 		
+		// Gets the signed-in user
+		$signedInUser = $app->account->getSignedInUser();
+		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($name) {
+		$id = $app->data->transactional(function($entityManager) use ($name, $signedInUser) {
 			// Initializes the medicine
 			$medicine = new \App\Data\Entity\Medicine();
 			
 			// Creates the medicine
-			// TODO: sets
+			$medicine->setName($name);
+			$medicine->setCreator($signedInUser);
 			$entityManager->persist($medicine);
 			
 			return $medicine->getId();
