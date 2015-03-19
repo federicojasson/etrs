@@ -31,7 +31,7 @@ class SignIn extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the input
+		// Gets inputs
 		$credentials = $this->getInputValue('credentials');
 		
 		// Authenticates the user

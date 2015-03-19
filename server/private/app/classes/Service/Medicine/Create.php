@@ -29,7 +29,25 @@ class Create extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets inputs
+		$name = $this->getInputValue('name'); // TODO: apply filter
+		
+		// Executes a transaction
+		$id = $app->data->transactional(function($entityManager) use ($name) {
+			// Initializes the medicine
+			$medicine = new \App\Data\Entity\Medicine();
+			
+			// Creates the medicine
+			// TODO: sets
+			$entityManager->persist($medicine);
+			
+			return $medicine->getId();
+		});
+		
+		// Sets an output
+		$this->setOutputValue('id', $id, 'bin2hex');
 	}
 	
 	/**
