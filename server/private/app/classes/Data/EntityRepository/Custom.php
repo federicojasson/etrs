@@ -21,7 +21,7 @@
 namespace App\Data\EntityRepository;
 
 /**
- * TODO: comment
+ * Represents a repository for entities with custom methods to retrieve data.
  */
 class Custom extends \Doctrine\ORM\EntityRepository {
 	
@@ -31,13 +31,13 @@ class Custom extends \Doctrine\ORM\EntityRepository {
 	 * Receives the entity's ID.
 	 */
 	public function findNonDeleted($id) {
-		// TODO: comment
+		// Builds a set of criteria
 		$criteria = [
 			'id' => $id,
 			'deleted' => false
 		];
 		
-		// TODO: comment
+		// Gets the entity
 		return $this->findOneBy($criteria);
 	}
 	
