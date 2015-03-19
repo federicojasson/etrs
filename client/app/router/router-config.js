@@ -64,6 +64,17 @@
 				},
 				
 				{
+					name: 'medicine',
+					url: '/medicine/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'MedicineViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'newMedicine',
 					url: '/medicine/new',
 					data: {

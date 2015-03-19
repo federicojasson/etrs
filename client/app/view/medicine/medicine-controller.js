@@ -19,11 +19,33 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.home',
-		'app.view.medicine',
-		'app.view.newMedicine',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.medicine').controller('MedicineViewController', MedicineViewController);
+	
+	/**
+	 * Represents the medicine view.
+	 */
+	function MedicineViewController() {
+		var _this = this;
+		
+		/**
+		 * Returns the template's URL.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/medicine/medicine.html';
+		};
+		
+		/**
+		 * Returns the title to set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return ''; // TODO
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return true;
+		};
+	}
 })();
