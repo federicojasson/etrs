@@ -19,13 +19,23 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.newMedicine').controller('NewMedicineViewController', NewMedicineViewController);
+	angular.module('app.view.newMedicine').controller('NewMedicineViewController', [
+		'$scope',
+		'CreateMedicineAction',
+		'router',
+		NewMedicineViewController
+	]);
 	
 	/**
 	 * Represents the new-medicine view.
 	 */
-	function NewMedicineViewController() {
+	function NewMedicineViewController($scope, CreateMedicineAction, router) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the template's URL.
@@ -45,7 +55,44 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Initializes the create-medicine action
+			var createMedicineAction = new CreateMedicineAction();
+			createMedicineAction.startCallback = onCreateMedicineStart;
+			createMedicineAction.successCallback = onCreateMedicineSuccess;
+			
+			// Includes the actions
+			$scope.createMedicineAction = createMedicineAction;
+		}
+		
+		/**
+		 * Invoked at the start of the create-medicine action.
+		 */
+		function onCreateMedicineStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the create-medicine action is successful.
+		 * 
+		 * Receives the new medicine's ID.
+		 */
+		function onCreateMedicineSuccess(id) {
+			// Redirects the user to the medicine route
+			router.redirect('medicine', {
+				id: id
+			});
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();
