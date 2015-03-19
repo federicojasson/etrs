@@ -26,10 +26,23 @@ namespace App\Helper;
 class AccessValidator {
 	
 	/**
-	 * TODO: comment
+	 * Determines whether the user is authorized.
+	 * 
+	 * Receives the user roles authorized to access.
 	 */
 	public function isUserAuthorized($authorizedUserRoles) {
-		// TODO
+		global $app;
+		
+		if (! $app->account->isUserSignedIn()) {
+			// The user is not signed in
+			return false;
+		}
+		
+		// Gets the signed-in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Determines whether the signed-in user's role is authorized
+		return in_array($signedInUser->getRole(), $authorizedUserRoles, true);
 	}
 	
 }

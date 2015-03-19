@@ -48,3 +48,7 @@ define('SESSION_DATA_USER', 'user');
 define('SESSION_MAXIMUM_AGE', 30); // Days
 define('SESSION_MAXIMUM_INACTIVITY_TIME', 48); // Hours
 define('SESSION_NAME', 'id');
+
+define('USER_ROLE_ADMINISTRATOR', 'ad');
+define('USER_ROLE_DOCTOR', 'dr');
+define('USER_ROLE_OPERATOR', 'op');

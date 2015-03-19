@@ -252,6 +252,13 @@ class User {
 	}
 	
 	/**
+	 * Returns the role.
+	 */
+	public function getRole() {
+		return $this->role;
+	}
+	
+	/**
 	 * Returns the salt.
 	 */
 	public function getSalt() {
