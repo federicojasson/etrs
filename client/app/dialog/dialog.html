@@ -6,9 +6,7 @@
 	{{ dialog.get().title }}
 </div>
 
-<div class="modal-body">
-	<pre>{{ dialog.get().message }}</pre>
-</div>
+<div class="modal-body">{{ dialog.get().message }}</div>
 
 <div class="modal-footer">
 	<div ng-if="dialog.get().type === 'confirmation'">
