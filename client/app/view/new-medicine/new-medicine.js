@@ -19,10 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.home',
-		'app.view.newMedicine',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.newMedicine', []);
 })();
