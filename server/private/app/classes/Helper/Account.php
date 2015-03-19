@@ -31,10 +31,10 @@ class Account {
 	public function getSignedInUser() {
 		global $app;
 		
-		// TODO: comment
+		// Gets the user ID
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
-		// TODO: comment
+		// Gets the user
 		return $app->data->getReference('App\Data\Entity\User', $id);
 	}
 	

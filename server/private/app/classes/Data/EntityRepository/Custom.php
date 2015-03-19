@@ -26,7 +26,9 @@ namespace App\Data\EntityRepository;
 class Custom extends \Doctrine\ORM\EntityRepository {
 	
 	/**
-	 * TODO: comment
+	 * Returns a non-deleted entity.
+	 * 
+	 * Receives the entity's ID.
 	 */
 	public function findNonDeleted($id) {
 		// TODO: comment
