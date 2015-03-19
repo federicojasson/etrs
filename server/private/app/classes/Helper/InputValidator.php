@@ -41,6 +41,36 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a valid line.
+	 * 
+	 * An input is considered a valid line if it contains only printable
+	 * characters and is a valid string after trimming it and shrinking it.
+	 * 
+	 * Receives the input, the minimum allowed length and, optionally, the
+	 * maximum.
+	 */
+	public function isValidLine($input, $minimumLength, $maximumLength = null) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		if (preg_match('/\p{Cc}/', $input)) {
+			// The input contains control characters
+			return false;
+		}
+		
+		// Trims and shrinks the input
+		$input = trimAndShrink($input);
+		
+		// Gets the input's length
+		$length = mb_strlen($input, 'UTF-8');
+		
+		// Determines whether the length is in the specified range
+		return inRange($length, $minimumLength, $maximumLength);
+	}
+	
+	/**
 	 * Determines whether an input is a valid string.
 	 * 
 	 * Receives the input, the minimum allowed length and, optionally, the
@@ -55,11 +85,8 @@ class InputValidator {
 		// Gets the input's length
 		$length = mb_strlen($input, 'UTF-8');
 		
-		// Initializes the maximum length if is null
-		$maximumLength = (! is_null($maximumLength))? $maximumLength : $length;
-		
-		// Determines whether the input's length is in the allowed range
-		return $length >= $minimumLength && $length <= $maximumLength;
+		// Determines whether the length is in the specified range
+		return inRange($length, $minimumLength, $maximumLength);
 	}
 	
 }

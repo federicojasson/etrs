@@ -65,6 +65,19 @@ function getCurrentDateTime() {
 }
 
 /**
+ * Determines whether a value is in a certain range.
+ * 
+ * Receives the value, the lower bound and, optionally, the upper.
+ */
+function inRange($value, $lowerBound, $upperBound = null) {
+	// Initializes the upper bound if is null
+	$upperBound = (! is_null($upperBound))? $upperBound : $value;
+	
+	// Determines whether the value is in the specified range
+	return $value >= $lowerBound && $value <= $upperBound;
+}
+
+/**
  * Determines whether an array is sequential.
  * 
  * Receives the array.

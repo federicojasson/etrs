@@ -67,8 +67,8 @@ class Create extends \App\Service\External {
 		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'name' => new \App\InputValidator\Json\JsonValue(function($input) {
-				// TODO
+			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidLine($input, 1, 64);
 			})
 		]);
 		
