@@ -33,6 +33,12 @@
 		 */
 		function getMenuItems() {
 			return {
+				newMedicine: {
+					name: 'Nuevo', // TODO
+					state: 'newMedicine',
+					description: '' // TODO
+				}
+				
 				// TODO: define menu items here
 			};
 		}
@@ -46,7 +52,15 @@
 			
 			return {
 				// TODO: define menus here
-				ad: [],
+				ad: [
+					{
+						name: 'Medicamentos',
+						items: [
+							menuItems.newMedicine
+						]
+					}
+				],
+				
 				dr: [],
 				op: []
 			};

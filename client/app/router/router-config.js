@@ -64,6 +64,17 @@
 				},
 				
 				{
+					name: 'newMedicine',
+					url: '/medicine/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewMedicineViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'signIn',
 					url: '/account/sign-in',
 					data: {
