@@ -31,7 +31,7 @@ class JsonArray extends Json  {
 	 * Receives the input.
 	 */
 	public function isInputValid($input) {
-		if (is_array($input)) {
+		if (! is_array($input)) {
 			// The input is not an array
 			return false;
 		}
