@@ -122,9 +122,6 @@
 		function sendRequest(url, input) {
 			// Builds the definitive URL
 			url = 'server' + url;
-			
-			// Initializes the input if is undefined TODO: necessary?
-			input = (angular.isDefined(input))? input : {};
 
 			// Sends the request
 			var promise = $resource(url).save(input).$promise;

@@ -83,8 +83,6 @@
 		 * when it is dismissed.
 		 */
 		function open(type, title, message, closedCallback, dismissedCallback) {
-			// TODO: initialize callbacks? necessary?
-			
 			// Initializes the dialog
 			dialog = {
 				type: type,

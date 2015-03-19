@@ -69,7 +69,7 @@
 			var length = input.value.length;
 			
 			// Initializes the maximum length if is undefined
-			maximumLength = (angular.isDefined(maximumLength))? $maximumLength : length;
+			maximumLength = (angular.isDefined(maximumLength))? maximumLength : length;
 			
 			if (length < minimumLength) {
 				// The input is too short

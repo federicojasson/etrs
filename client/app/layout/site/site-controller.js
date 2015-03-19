@@ -91,7 +91,7 @@
 		 * Invoked when the sign-out action is successful.
 		 */
 		function onSignOutSuccess() {
-			ready = true; // TODO: try not to do this (is it necessary?)
+			ready = true;
 		}
 		
 		// ---------------------------------------------------------------------
