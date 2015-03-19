@@ -1,1 +1,31 @@
-TODO: navigation-bar.html
+<div>
+	<span class="glyphicon glyphicon-th-list"></span>
+
+	<span class="icon-text">
+		Menú
+	</span>
+</div>
+
+<accordion>
+	<accordion-group
+		ng-repeat="menu in navigationBar.getMenus()"
+		heading="{{ menu.name }}"
+		is-open="menu.open"
+	>
+		<div ng-repeat="menuItem in menu.items"><!-- TODO: menuItem or item? -->
+			<a
+				ui-sref="{{ menuItem.state }}"
+				popover="{{ menuItem.description }}"
+				popover-append-to-body="true"
+				popover-placement="right"
+				popover-trigger="mouseenter"
+			>
+				<span class="glyphicon glyphicon-chevron-right"></span>
+
+				<span class="icon-text">
+					{{ menuItem.name }}
+				</span>
+			</a>
+		</div>
+	</accordion-group>
+</accordion>

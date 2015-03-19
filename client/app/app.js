@@ -21,8 +21,8 @@
 (function() {
 	angular.module('app', [
 		'ngResource',
-		'ui.bootstrap',
 		'ui.router',
+		'ui.bootstrap',
 		'app.account',
 		'app.action',
 		'app.data',
