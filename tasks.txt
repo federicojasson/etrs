@@ -2,7 +2,8 @@
 Quick tasks
 ----------------------------
 
-- Text diff: medicine
+- Text diff: medicine.
+- Try new Function instead of function() {}.
 
 - Check if find() uses the cache (log every SQL query: mysqld --general-log=1 --general-log-file="mysql_query.log").
 - Check if null values returned by find() are cached.
