@@ -49,26 +49,26 @@
 		 */
 		function onLink(scope) {
 			// Registers a listener
-			scope.$watch(layout.get, function(newLayout) {
+			scope.$watch(layout.get, function(currentLayout) {
 				// Initializes the current layout's controller
-				var layoutController = $controller(newLayout, {
+				var currentLayoutController = $controller(currentLayout, {
 					$scope: scope
 				});
 				
 				// Registers a listener
-				scope.$watch(layoutController.getTitle, function() {
+				scope.$watch(currentLayoutController.getTitle, function() {
 					// Updates the title
-					updateTitle(layoutController);
+					updateTitle(currentLayoutController);
 				});
 				
 				// Registers a listener
-				scope.$watch(layoutController.isReady, function() {
+				scope.$watch(currentLayoutController.isReady, function() {
 					// Updates the title
-					updateTitle(layoutController);
+					updateTitle(currentLayoutController);
 				});
 				
 				// Includes the controller
-				scope.layout = layoutController;
+				scope.layout = currentLayoutController;
 			});
 		}
 		
@@ -77,13 +77,13 @@
 		 * 
 		 * Receives the current layout's controller.
 		 */
-		function updateTitle(layoutController) {
+		function updateTitle(currentLayoutController) {
 			var newTitle;
 			
-			if (layoutController.isReady()) {
+			if (currentLayoutController.isReady()) {
 				// The layout is ready
 				// Gets the title provided by the layout
-				newTitle = layoutController.getTitle();
+				newTitle = currentLayoutController.getTitle();
 			} else {
 				// The layout is not ready
 				newTitle = 'Cargando…';

@@ -49,26 +49,26 @@
 		 */
 		function onLink(scope) {
 			// Registers a listener
-			scope.$watch(view.get, function(newView) {
+			scope.$watch(view.get, function(currentView) {
 				// Initializes the current view's controller
-				var viewController = $controller(newView, {
+				var currentViewController = $controller(currentView, {
 					$scope: scope
 				});
 				
 				// Registers a listener
-				scope.$watch(viewController.getTitle, function() {
+				scope.$watch(currentViewController.getTitle, function() {
 					// Updates the title
-					updateTitle(viewController);
+					updateTitle(currentViewController);
 				});
 				
 				// Registers a listener
-				scope.$watch(viewController.isReady, function() {
+				scope.$watch(currentViewController.isReady, function() {
 					// Updates the title
-					updateTitle(viewController);
+					updateTitle(currentViewController);
 				});
 				
 				// Includes the controller
-				scope.view = viewController;
+				scope.view = currentViewController;
 			});
 		}
 		
@@ -77,13 +77,13 @@
 		 * 
 		 * Receives the current view's controller.
 		 */
-		function updateTitle(viewController) {
+		function updateTitle(currentViewController) {
 			var newTitle;
 			
-			if (viewController.isReady()) {
+			if (currentViewController.isReady()) {
 				// The view is ready
 				// Gets the title provided by the view
-				newTitle = viewController.getTitle();
+				newTitle = currentViewController.getTitle();
 			} else {
 				// The view is not ready
 				newTitle = 'Cargando…';
