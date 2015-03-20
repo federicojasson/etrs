@@ -46,7 +46,7 @@ class Edit extends \App\Service\External {
 			
 			// Asserts different conditions
 			$app->assertion->entityExists($medicine);
-			$app->assertion->entityVersionUpdated($medicine, $version);
+			$app->assertion->entityUpdated($medicine, $version);
 			
 			// Edits the medicine
 			$medicine->setLastEditionDateTime();

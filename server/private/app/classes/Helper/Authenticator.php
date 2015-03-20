@@ -28,7 +28,7 @@ class Authenticator {
 	/**
 	 * Authenticates a user by password.
 	 * 
-	 * Receives the user's ID and password.
+	 * Receives the user's ID and the alleged password.
 	 */
 	public function authenticateUserByPassword($id, $password) {
 		global $app;
@@ -53,7 +53,7 @@ class Authenticator {
 	/**
 	 * Determines whether a password matches that of an entity.
 	 * 
-	 * Receives the entity and the password.
+	 * Receives the entity and the alleged password.
 	 */
 	private function isPasswordCorrect($entity, $password) {
 		global $app;
