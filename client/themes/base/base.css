@@ -12,21 +12,45 @@
 
 /* Elements */
 
+a {
+	cursor: pointer;
+}
+
+address {}
+
+pre {
+	white-space: pre-line;
+	word-break: normal;
+}
+
+
 /* Bootstrap's classes */
 
 /* Custom classes */
 
-.copyright-text {}
+.copyright-text {
+	text-align: center;
+}
 
 .email-image {}
 
 .footer-image {}
 
-.fully-centered {}
+.fully-centered {
+	display: table-cell;
+	vertical-align: middle;
+}
 
-.fully-centered-container {}
+.fully-centered-container {
+	display: table;
+	height: 100%;
+	position: fixed;
+	width: 100%;
+}
 
 .icon-text {}
+
+.large-icon + .icon-text {}
 
 .large-icon {}
 
