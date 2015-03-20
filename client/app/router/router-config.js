@@ -86,6 +86,16 @@
 				},
 				
 				{
+					name: 'requestPasswordReset',
+					url: '/account/reset-password',
+					data: {
+						views: {
+							__: 'RequestPasswordResetViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'signIn',
 					url: '/account/sign-in',
 					data: {

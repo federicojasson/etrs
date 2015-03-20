@@ -19,12 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.home',
-		'app.view.medicine',
-		'app.view.newMedicine',
-		'app.view.requestPasswordReset',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.requestPasswordReset', []);
 })();
