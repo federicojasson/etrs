@@ -127,7 +127,7 @@ class Data {
 			$cache = new \Doctrine\Common\Cache\ApcCache();
 		}
 		
-		// Applies different settings
+		// Applies settings
 		$configuration->setAutoGenerateProxyClasses($proxyGenerationMode);
 		$configuration->setMetadataCacheImpl($cache);
 		$configuration->setMetadataDriverImpl($metadataDriver);

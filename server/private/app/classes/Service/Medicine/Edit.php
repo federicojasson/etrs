@@ -44,7 +44,7 @@ class Edit extends \App\Service\External {
 			// Gets the medicine
 			$medicine = $entityManager->getRepository('App\Data\Entity\Medicine')->find($id);
 			
-			// Asserts different conditions
+			// Asserts conditions
 			$app->assertion->entityExists($medicine);
 			$app->assertion->entityUpdated($medicine, $version);
 			
