@@ -55,6 +55,11 @@ textarea {
 	text-align: center;
 }
 
+.dialog-text {
+	white-space: pre-line;
+	word-break: normal;
+}
+
 .email-image {}
 
 .footer-image {}
