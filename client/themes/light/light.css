@@ -93,7 +93,10 @@ h1, h2, h3, h4, h5, h6, legend {
 	font-size: 2.2em;
 }
 
-.copyright-text {}
+.copyright-text {
+	color: #aaaaaa;
+	font-size: 0.8em;
+}
 
 .dialog-icon {
 	font-size: 2.2em;

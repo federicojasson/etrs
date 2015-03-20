@@ -51,7 +51,6 @@ h1, h2, h3, h4, h5, h6, legend {}
 .modal {
 	-moz-user-select: none;
 	-ms-user-select: none;
-	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	user-select: none;
 }
@@ -81,7 +80,6 @@ h1, h2, h3, h4, h5, h6, legend {}
 .navbar {
 	-moz-user-select: none;
 	-ms-user-select: none;
-	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	user-select: none;
 }
@@ -126,7 +124,6 @@ h1, h2, h3, h4, h5, h6, legend {}
 	text-align: center;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	user-select: none;
 }
