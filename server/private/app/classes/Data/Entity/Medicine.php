@@ -202,6 +202,22 @@ class Medicine {
 	}
 	
 	/**
+	 * Sets the last-edition date-time.
+	 */
+	public function setLastEditionDateTime() {
+		$this->lastEditionDateTime = getCurrentDateTime();
+	}
+	
+	/**
+	 * Sets the last editor.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setLastEditor($user) {
+		$this->lastEditor = $user;
+	}
+	
+	/**
 	 * Sets the name.
 	 * 
 	 * Receives the name to be set.
