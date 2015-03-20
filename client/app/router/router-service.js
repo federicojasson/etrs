@@ -34,7 +34,7 @@
 		/**
 		 * Redirects the user to a certain route.
 		 * 
-		 * Receives the route's name and, optionally, its parameters.
+		 * Receives the route's name and, optionally, the parameters.
 		 */
 		_this.redirect = function(name, parameters) {
 			$state.go(name, parameters);

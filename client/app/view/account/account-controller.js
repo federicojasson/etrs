@@ -38,7 +38,7 @@
 		 * Returns the title to set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Cuenta de usuario';
+			return 'Cuenta de usuario'; // TODO: or full name?
 		};
 		
 		/**

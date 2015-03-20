@@ -19,13 +19,29 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.medicine').controller('MedicineViewController', MedicineViewController);
+	angular.module('app.view.medicine').controller('MedicineViewController', [
+		'$scope',
+		'$stateParams',
+		'EditMedicineAction',
+		'data',
+		MedicineViewController
+	]);
 	
 	/**
 	 * Represents the medicine view.
 	 */
-	function MedicineViewController() {
+	function MedicineViewController($scope, $stateParams, EditMedicineAction, data) {
 		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		var medicine = null;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = false;
 		
 		/**
 		 * Returns the template's URL.
@@ -38,14 +54,62 @@
 		 * Returns the title to set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return ''; // TODO
+			return medicine.name;
 		};
 		
 		/**
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * TODO: comment
+		 */
+		function getMedicine(id) { // TODO: get or load?
+			// Gets the medicine
+			data.getMedicine(id).then(function(loadedMedicine) {
+				medicine = loadedMedicine;
+			});
+		}
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Gets the URL parameters
+			var id = $stateParams.id;
+			
+			// Initializes the edit-medicine action
+			var editMedicineAction = new EditMedicineAction();
+			editMedicineAction.startCallback = onEditMedicineStart;
+			editMedicineAction.successCallback = onEditMedicineSuccess;
+			
+			// Includes the actions
+			$scope.editMedicineAction = editMedicineAction;
+			
+			// Gets the medicine
+			getMedicine(id);
+		}
+		
+		/**
+		 * Invoked at the start of the edit-medicine action.
+		 */
+		function onEditMedicineStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the edit-medicine action is successful.
+		 */
+		function onEditMedicineSuccess() {
+			ready = true;
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();
