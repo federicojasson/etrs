@@ -18,6 +18,8 @@ a {
 
 address {}
 
+body {}
+
 pre {
 	white-space: pre-line;
 	word-break: normal;
@@ -52,7 +54,9 @@ pre {
 
 .large-icon + .icon-text {}
 
-.large-icon {}
+.large-icon {
+	font-size: 2.2em;
+}
 
 .loading-image {}
 
