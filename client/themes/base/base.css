@@ -53,9 +53,13 @@ textarea {
 
 /* Custom classes */
 
+.address-icon {}
+
 .copyright-text {
 	text-align: center;
 }
+
+.dialog-icon {}
 
 .dialog-text {
 	white-space: pre-line;
@@ -79,12 +83,6 @@ textarea {
 }
 
 .icon-text {}
-
-.large-icon + .icon-text {}
-
-.large-icon {
-	font-size: 2.2em;
-}
 
 .loading-image {}
 

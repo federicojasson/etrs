@@ -7,16 +7,16 @@
 </div>
 
 <div class="modal-body">
-	<div
+	<span
 		ng-class="{
 			'glyphicon-question-sign': dialog.get().type === 'confirmation',
 			'glyphicon-info-sign': dialog.get().type === 'information'
 		}"
 		
-		class="glyphicon large-icon"
-	></div>
+		class="dialog-icon glyphicon"
+	></span>
 	
-	<div class="dialog-text icon-text">{{ dialog.get().message }}</div>
+	<span class="dialog-text icon-text">{{ dialog.get().message }}</span>
 </div>
 
 <div class="modal-footer">
