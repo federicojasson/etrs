@@ -82,6 +82,8 @@
 					return;
 				}
 				
+				// TODO: prepare data service?
+				
 				// Gets the signed-in user
 				data.getSignedInUser().then(function(loadedUser) {
 					// Sets the signed-in user

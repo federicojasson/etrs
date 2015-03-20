@@ -34,7 +34,7 @@
 		var _this = this;
 		
 		/**
-		 * TODO: comment
+		 * The medicine.
 		 */
 		var medicine = null;
 		
@@ -54,7 +54,7 @@
 		 * Returns the title to set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return medicine.name;
+			return medicine.name; // TODO: can't use it directly (why?)
 		};
 		
 		/**
@@ -68,9 +68,14 @@
 		 * TODO: comment
 		 */
 		function getMedicine(id) { // TODO: get or load?
+			// TODO: prepare data service?
+			
 			// Gets the medicine
 			data.getMedicine(id).then(function(loadedMedicine) {
+				// Sets the medicine
 				medicine = loadedMedicine;
+				
+				ready = true;
 			});
 		}
 		

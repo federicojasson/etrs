@@ -21,14 +21,34 @@
 (function() {
 	angular.module('app.data').service('data', [
 		'$q',
+		'$timeout',
 		dataService
 	]);
 	
 	/**
 	 * Provides data-related functionalities.
 	 */
-	function dataService($q) {
+	function dataService($q, $timeout) {
 		var _this = this;
+		
+		/**
+		 * TODO: comment
+		 */
+		_this.getMedicine = function(id) {
+			// TODO: implement (remove mocking)
+			
+			var deferredTask = $q.defer();
+			
+			$timeout(function() {
+				deferredTask.resolve({
+					id: id,
+					version: 0,
+					name: 'Levotiroxina'
+				});
+			}, 500);
+			
+			return deferredTask.promise;
+		};
 		
 		/**
 		 * TODO: comment
@@ -38,12 +58,14 @@
 			
 			var deferredTask = $q.defer();
 			
-			deferredTask.resolve({
-				role: 'ad',
-				firstName: 'Usuario',
-				lastName: 'Administrador',
-				gender: 'm'
-			});
+			$timeout(function() {
+				deferredTask.resolve({
+					role: 'ad',
+					firstName: 'Usuario',
+					lastName: 'Administrador',
+					gender: 'm'
+				});
+			}, 0);
 			
 			return deferredTask.promise;
 		};
