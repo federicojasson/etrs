@@ -41,6 +41,37 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a random ID.
+	 * 
+	 * Receives the input.
+	 */
+	public function isRandomId($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Determines whether the input matches a regular expression
+		return preg_match('/^[0-9A-Fa-f]{' . RANDOM_ID_LENGTH . '}$/', $input);
+	}
+	
+	/**
+	 * Determines whether an input is a valid integer.
+	 * 
+	 * Receives the input, the minimum allowed value and, optionally, the
+	 * maximum.
+	 */
+	public function isValidInteger($input, $minimumValue, $maximumValue = null) {
+		if (! is_integer($input)) {
+			// The input is not an integer
+			return false;
+		}
+		
+		// Determines whether the value is in the specified range
+		return inRange($input, $minimumValue, $maximumValue);
+	}
+	
+	/**
 	 * Determines whether an input is a valid line.
 	 * 
 	 * An input is considered a valid line if it contains only printable
