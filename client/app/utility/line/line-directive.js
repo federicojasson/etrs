@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * TODO: comment
+	 * Parses an input to make it a valid line.
 	 */
 	function lineDirective(utility) {
 		/**
