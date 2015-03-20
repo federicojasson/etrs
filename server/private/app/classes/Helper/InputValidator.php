@@ -52,7 +52,7 @@ class InputValidator {
 		}
 		
 		// Determines whether the input matches a regular expression
-		return preg_match('/^[0-9A-Fa-f]{' . RANDOM_ID_LENGTH . '}$/', $input);
+		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_ID_LENGTH . '}$/', $input);
 	}
 	
 	/**
