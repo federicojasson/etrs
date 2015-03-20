@@ -54,9 +54,9 @@ class DeleteExpired extends \App\Service\Internal {
 	}
 	
 	/**
-	 * Determines whether the input is valid.
+	 * Determines whether the request is valid.
 	 */
-	protected function isInputValid() {
+	protected function isRequestValid() {
 		return true;
 	}
 	

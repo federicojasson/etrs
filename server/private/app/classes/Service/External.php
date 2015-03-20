@@ -73,7 +73,7 @@ abstract class External extends Service  {
 	}
 	
 	/**
-	 * Determines whether the received request is a JSON request.
+	 * Determines whether the request is a JSON request.
 	 * 
 	 * If it is a JSON request, the input is decoded.
 	 */

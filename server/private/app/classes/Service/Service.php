@@ -36,10 +36,10 @@ abstract class Service  {
 	public function __invoke() {
 		global $app;
 		
-		if (! $this->isInputValid()) {
-			// The input is invalid
+		if (! $this->isRequestValid()) {
+			// The request is invalid
 			// Halts the application
-			haltApp(HTTP_STATUS_BAD_REQUEST, ERROR_CODE_INVALID_INPUT);
+			haltApp(HTTP_STATUS_BAD_REQUEST, ERROR_CODE_INVALID_REQUEST);
 		}
 		
 		if (! $this->isUserAuthorized()) {
@@ -64,9 +64,9 @@ abstract class Service  {
 	protected abstract function execute();
 	
 	/**
-	 * Determines whether the input is valid.
+	 * Determines whether the request is valid.
 	 */
-	protected abstract function isInputValid();
+	protected abstract function isRequestValid();
 	
 	/**
 	 * Determines whether the user is authorized.

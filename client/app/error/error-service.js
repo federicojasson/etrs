@@ -32,7 +32,7 @@
 		 */
 		var descriptions = {
 			// TODO: define error descriptions here
-			INVALID_INPUT: '',
+			INVALID_REQUEST: '',
 			NON_EXISTENT_ENTITY: '',
 			OUTDATED_ENTITY: '',
 			SYSTEM_UNDER_MAINTENANCE: '',

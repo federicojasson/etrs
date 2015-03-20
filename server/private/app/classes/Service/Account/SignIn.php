@@ -50,9 +50,9 @@ class SignIn extends \App\Service\External {
 	}
 	
 	/**
-	 * Determines whether the input is valid.
+	 * Determines whether the request is valid.
 	 */
-	protected function isInputValid() {
+	protected function isRequestValid() {
 		global $app;
 		
 		if (! $this->isJsonRequest()) {
