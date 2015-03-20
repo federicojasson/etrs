@@ -39,7 +39,8 @@
 				'/account/sign-out',
 				'/account/signed-in',
 				'/medicine/create',
-				'/medicine/edit'
+				'/medicine/edit',
+				'/medicine/get'
 			];
 		}
 		
