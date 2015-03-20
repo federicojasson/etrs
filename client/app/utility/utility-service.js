@@ -33,7 +33,7 @@
 		 * Receives the string.
 		 */
 		_this.removeControlCharacters = function(string) {
-			// TODO
+			return string.replace(/TODO/, '');
 		};
 		
 		/**
