@@ -72,6 +72,14 @@ h1, h2, h3, h4, h5, h6, legend {
 
 .modal {}
 
+.modal-backdrop.in {
+	opacity: 0.75;
+}
+
+.modal-content {}
+
+.modal-dialog {}
+
 .modal-footer {
 	padding: 12px 20px;
 }

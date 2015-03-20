@@ -56,6 +56,26 @@ h1, h2, h3, h4, h5, h6, legend {}
 	user-select: none;
 }
 
+.modal-backdrop.in {}
+
+.modal-content {
+	position: absolute;
+	top: 50%;
+	-moz-transform: translate(0, -50%);
+	-ms-transform: translate(0, -50%);
+	-webkit-transform: translate(0, -50%);
+	transform: translate(0, -50%);
+	width: 100%;
+}
+
+.modal-dialog {
+	bottom: 0%;
+	left: 0%;
+	position: absolute;
+	right: 0%;
+	top: 0%;
+}
+
 .modal-footer {}
 
 .navbar {
