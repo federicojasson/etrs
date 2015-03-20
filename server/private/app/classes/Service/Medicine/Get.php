@@ -29,7 +29,25 @@ class Get extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets inputs
+		$id = $this->getInputValue('id', 'hex2bin');
+		
+		// Executes a transaction
+		$medicine = $app->data->transactional(function($entityManager) use ($app, $id) {
+			// Gets the medicine
+			$medicine = $entityManager->getRepository('App\Data\Entity\Medicine')->find($id);
+
+			// Asserts conditions
+			$app->assertion->entityExists($medicine);
+
+			// TODO: filter somehow
+			return $medicine;
+		});
+		
+		// Sets the output
+		$this->setOutput($medicine);
 	}
 	
 	/**
