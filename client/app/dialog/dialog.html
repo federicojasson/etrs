@@ -6,8 +6,18 @@
 	{{ dialog.get().title }}
 </div>
 
-<!-- TODO: add big icon in body -->
-<div class="modal-body">{{ dialog.get().message }}</div>
+<div class="modal-body">
+	<div
+		ng-class="{
+			'glyphicon-question-sign': dialog.get().type === 'confirmation',
+			'glyphicon-info-sign': dialog.get().type === 'information'
+		}"
+		
+		class="glyphicon large-icon"
+	></div>
+	
+	<div class="icon-text">{{ dialog.get().message }}</div>
+</div>
 
 <div class="modal-footer">
 	<div ng-if="dialog.get().type === 'confirmation'">
