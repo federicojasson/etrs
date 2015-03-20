@@ -20,6 +20,20 @@ address {}
 
 body {}
 
+h1 {}
+
+h2 {}
+
+h3 {}
+
+h4 {}
+
+h5 {}
+
+h6 {}
+
+legend {}
+
 pre {
 	white-space: pre-line;
 	word-break: normal;
@@ -28,6 +42,8 @@ pre {
 textarea {
 	resize: vertical;
 }
+
+h1, h2, h3, h4, h5, h6, legend {}
 
 
 /* Bootstrap's classes */
