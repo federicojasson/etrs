@@ -35,6 +35,10 @@ textarea {}
 
 .modal {}
 
+.modal-footer {
+	padding: 12px 20px;
+}
+
 .navbar {}
 
 

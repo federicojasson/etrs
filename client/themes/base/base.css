@@ -40,6 +40,8 @@ textarea {
 	user-select: none;
 }
 
+.modal-footer {}
+
 .navbar {
 	-moz-user-select: none;
 	-ms-user-select: none;
