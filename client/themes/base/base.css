@@ -25,6 +25,10 @@ pre {
 	word-break: normal;
 }
 
+textarea {
+	resize: vertical;
+}
+
 
 /* Bootstrap's classes */
 
