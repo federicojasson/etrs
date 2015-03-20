@@ -29,7 +29,30 @@ class Edit extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets inputs
+		$id = $this->getInputValue('id', 'hex2bin');
+		$version = $this->getInputValue('version');
+		$name = $this->getInputValue('name', 'trimAndShrink');
+		
+		// Gets the signed-in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($app, $id, $version, $name, $signedInUser) {
+			// Gets the medicine
+			$medicine = $entityManager->getReference('App\Data\Entity\Medicine', $id);
+			
+			// Asserts different conditions
+			$app->assertion->entityExists($medicine);
+			$app->assertion->entityVersionUpdated($medicine, $version);
+			
+			// Edits the medicine
+			$medicine->setLastEditionDateTime();
+			$medicine->setName($name);
+			$medicine->setLastEditor($signedInUser);
+		});
 	}
 	
 	/**

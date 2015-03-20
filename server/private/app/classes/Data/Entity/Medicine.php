@@ -22,6 +22,7 @@ namespace App\Data\Entity;
 
 /**
  * Represents a medicine from the database.
+ * TODO: add "deletor/deleter" field?
  * 
  * Annotations:
  * 
