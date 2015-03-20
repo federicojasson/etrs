@@ -55,7 +55,7 @@
 			// Initializes the input
 			this.input = {
 				name: new Input(function() {
-					// TODO: implement
+					return inputValidator.isValidString(this, 1, 64);
 				})
 			};
 		}

@@ -19,8 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.honorificName',
-		'app.utility.line'
-	]);
+	angular.module('app.utility.line', []);
 })();

@@ -19,49 +19,42 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility').service('utility', utilityService);
+	angular.module('app.utility.line').directive('line', [
+		'utility',
+		lineDirective
+	]);
 	
 	/**
-	 * Provides utility functions.
+	 * TODO: comment
 	 */
-	function utilityService() {
-		var _this = this;
+	function lineDirective(utility) {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				require: 'ngModel',
+				restrict: 'A',
+				scope: {},
+				link: onLink
+			};
+		}
 		
 		/**
-		 * Removes the control characters of a string.
+		 * Invoked after the linking phase.
 		 * 
-		 * Receives the string.
+		 * Receives the scope of the directive, the element matched by it, its
+		 * attributes and the ng-model controller.
 		 */
-		_this.removeControlCharacters = function(string) {
-			// TODO
-		};
+		function onLink(scope, element, attributes, ngModelController) {
+			// Registers parsers
+			ngModelController.$parsers.push(utility.removeControlCharacters);
+			ngModelController.$parsers.push(utility.shrink);
+		}
 		
-		/**
-		 * Shrinks a string.
-		 * 
-		 * Receives the string.
-		 */
-		_this.shrink = function(string) {
-			return string.replace(/ +/g, ' ');
-		};
+		// ---------------------------------------------------------------------
 		
-		/**
-		 * Converts a string from spinal-case to camelCase.
-		 * 
-		 * Receives the string.
-		 */
-		_this.spinalToCamelCase = function(string) {
-			// Replaces the dashes with spaces
-			string = string.replace(/-/g, ' ');
-
-			// Converts the first character of each word, except the first one,
-			// to uppercase
-			string = string.replace(/ [a-z]/g, function(character) {
-				return character.toUpperCase();
-			});
-			
-			// Removes the spaces
-			return string.replace(/ /g, '');
-		};
+		// Gets the settings
+		return getSettings();
 	}
 })();

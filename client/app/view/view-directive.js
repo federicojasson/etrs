@@ -51,39 +51,39 @@
 			// Registers a listener
 			scope.$watch(view.get, function(newView) {
 				// Initializes the current view's controller
-				var controller = $controller(newView, {
+				var viewController = $controller(newView, {
 					$scope: scope
 				});
 				
 				// Registers a listener
-				scope.$watch(controller.getTitle, function() {
+				scope.$watch(viewController.getTitle, function() {
 					// Updates the title
-					updateTitle(controller);
+					updateTitle(viewController);
 				});
 				
 				// Registers a listener
-				scope.$watch(controller.isReady, function() {
+				scope.$watch(viewController.isReady, function() {
 					// Updates the title
-					updateTitle(controller);
+					updateTitle(viewController);
 				});
 				
 				// Includes the controller
-				scope.view = controller;
+				scope.view = viewController;
 			});
 		}
 		
 		/**
 		 * Updates the title according to the state of the current view.
 		 * 
-		 * Receives the view's controller.
+		 * Receives the current view's controller.
 		 */
-		function updateTitle(controller) {
+		function updateTitle(viewController) {
 			var newTitle;
 			
-			if (controller.isReady()) {
+			if (viewController.isReady()) {
 				// The view is ready
 				// Gets the title provided by the view
-				newTitle = controller.getTitle();
+				newTitle = viewController.getTitle();
 			} else {
 				// The view is not ready
 				newTitle = 'Cargando…';
