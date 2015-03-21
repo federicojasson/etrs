@@ -114,9 +114,26 @@ h1, h2, h3, h4, h5, h6, legend {
 
 .icon-text {}
 
-.loading-image {}
+.loading-image {
+	background-image: url(images/spinner.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 30%;
+	margin-bottom: 64px;
+	max-height: 256px;
+	max-width: 256px;
+	min-height: 128px;
+}
 
-.loading-text {}
+.loading-text {
+	color: #aaaaaa;
+	font-family: "Fjalla One", sans-serif;
+	font-size: 1.6em;
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
 
 .locked-image {}
 

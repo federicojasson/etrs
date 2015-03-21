@@ -118,7 +118,10 @@ h1, h2, h3, h4, h5, h6, legend {}
 
 .icon-text {}
 
-.loading-image {}
+.loading-image {
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .loading-text {
 	text-align: center;
