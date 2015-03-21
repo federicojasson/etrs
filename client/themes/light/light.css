@@ -82,6 +82,13 @@ h1, h2, h3, h4, h5, h6, legend {
 
 .modal-footer {}
 
+.modal-header {
+	background-color: #eeeeee;
+	color: #888888;
+	letter-spacing: -0.4px;
+	text-transform: uppercase;
+}
+
 .navbar {}
 
 .navbar-brand {

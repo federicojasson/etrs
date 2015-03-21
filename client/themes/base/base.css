@@ -81,6 +81,8 @@ h1, h2, h3, h4, h5, h6, legend {}
 	padding: 12px 20px;
 }
 
+.modal-header {}
+
 .navbar {
 	cursor: default;
 	min-height: 48px;
