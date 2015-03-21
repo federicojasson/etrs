@@ -54,7 +54,7 @@
 		 * Returns the title to set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return medicine.name; // TODO: can't use it directly (why?)
+			return medicine.name;
 		};
 		
 		/**

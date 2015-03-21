@@ -56,12 +56,6 @@
 				});
 				
 				// Registers a listener
-				scope.$watch(currentLayoutController.getTitle, function() {
-					// Updates the title
-					updateTitle(currentLayoutController);
-				});
-				
-				// Registers a listener
 				scope.$watch(currentLayoutController.isReady, function() {
 					// Updates the title
 					updateTitle(currentLayoutController);

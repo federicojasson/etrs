@@ -56,12 +56,6 @@
 				});
 				
 				// Registers a listener
-				scope.$watch(currentViewController.getTitle, function() {
-					// Updates the title
-					updateTitle(currentViewController);
-				});
-				
-				// Registers a listener
 				scope.$watch(currentViewController.isReady, function() {
 					// Updates the title
 					updateTitle(currentViewController);
