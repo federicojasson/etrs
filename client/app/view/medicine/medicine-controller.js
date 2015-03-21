@@ -94,6 +94,9 @@
 				// Sets the medicine
 				medicine = loadedMedicine;
 				
+				// Includes the medicine
+				$scope.medicine = medicine;
+				
 				// Includes the actions
 				includeEditMedicineAction();
 				
