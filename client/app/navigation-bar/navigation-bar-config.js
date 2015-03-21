@@ -33,6 +33,12 @@
 		 */
 		function getMenuItems() {
 			return {
+				medicines: {
+					name: 'Administrar',
+					state: 'medicines',
+					description: 'Administre los medicamentos'
+				},
+				
 				newMedicine: {
 					name: 'Nuevo',
 					state: 'newMedicine',
@@ -56,6 +62,7 @@
 					{
 						name: 'Medicamentos',
 						items: [
+							menuItems.medicines,
 							menuItems.newMedicine
 						]
 					}
