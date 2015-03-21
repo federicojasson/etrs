@@ -188,7 +188,7 @@ function runApp($middlewares) {
  * Serves an external request.
  */
 function serveExternalRequest() {
-	// Initializes the necessary middlewares
+	// Initializes the middlewares
 	$middlewares = [
 		new \App\Middleware\ErrorHandlers(),
 		new \App\Middleware\Helpers(),
@@ -213,7 +213,7 @@ function serveInternalRequest($url) {
 		'REQUEST_METHOD' => 'POST'
 	]);
 	
-	// Initializes the necessary middlewares
+	// Initializes the middlewares
 	$middlewares = [
 		new \App\Middleware\ErrorHandlers(),
 		new \App\Middleware\Helpers(),

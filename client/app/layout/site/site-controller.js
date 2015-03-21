@@ -68,7 +68,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary controllers
+			// Includes the controllers
 			$scope.account = $controller('AccountController');
 			
 			// Initializes the sign-out action
