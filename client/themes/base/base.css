@@ -49,6 +49,7 @@ h1, h2, h3, h4, h5, h6, legend {}
 /* Bootstrap's classes */
 
 .modal {
+	cursor: default;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-webkit-user-select: none;
@@ -78,11 +79,16 @@ h1, h2, h3, h4, h5, h6, legend {}
 .modal-footer {}
 
 .navbar {
+	cursor: default;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
 }
+
+.navbar-brand {}
+
+.navbar-brand:hover {}
 
 
 /* Custom classes */
@@ -124,6 +130,7 @@ h1, h2, h3, h4, h5, h6, legend {}
 }
 
 .loading-text {
+	cursor: default;
 	text-align: center;
 	-moz-user-select: none;
 	-ms-user-select: none;
