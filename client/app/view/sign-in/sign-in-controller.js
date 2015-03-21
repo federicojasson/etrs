@@ -59,16 +59,24 @@
 		};
 		
 		/**
+		 * Includes the sign-in action.
+		 */
+		function includeSignInAction() {
+			// Initializes the action
+			var action = new SignInAction();
+			action.notAuthenticatedCallback = onSignInNotAuthenticated;
+			action.startCallback = onSignInStart;
+			
+			// Includes the action
+			$scope.signInAction = action;
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the sign-in action
-			var signInAction = new SignInAction();
-			signInAction.notAuthenticatedCallback = onSignInNotAuthenticated;
-			signInAction.startCallback = onSignInStart;
-			
 			// Includes the actions
-			$scope.signInAction = signInAction;
+			includeSignInAction();
 		}
 		
 		/**
