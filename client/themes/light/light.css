@@ -98,6 +98,11 @@ h1, h2, h3, h4, h5, h6, legend {
 	background-position: 0px -48px;
 }
 
+.navbar-btn {
+	margin-bottom: 7px;
+	margin-top: 7px;
+}
+
 .navbar-text {
 	color: #666666;
 	font-family: "Fjalla One", sans-serif;
