@@ -104,6 +104,8 @@ h1, h2, h3, h4, h5, h6, legend {}
 .address-icon {}
 
 .copyright-text {
+	margin-bottom: 48px;
+	margin-top: -12px;
 	text-align: center;
 }
 
@@ -148,4 +150,7 @@ h1, h2, h3, h4, h5, h6, legend {}
 
 .locked-image {}
 
-.main-container {}
+.main-container {
+	padding-bottom: 32px;
+	padding-top: 8px;
+}
