@@ -65,18 +65,19 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Includes the edit-medicine action.
 		 */
-		function getMedicine(id) { // TODO: get or load?
-			// TODO: prepare data service?
+		function includeEditMedicineAction() {
+			// Initializes the action
+			var action = new EditMedicineAction();
+			action.input.id.value = medicine.id;
+			action.input.version.value = medicine.version;
+			action.input.name.value = medicine.name;
+			action.startCallback = onEditMedicineStart;
+			action.successCallback = onEditMedicineSuccess;
 			
-			// Gets the medicine
-			data.getMedicine(id).then(function(loadedMedicine) {
-				// Sets the medicine
-				medicine = loadedMedicine;
-				
-				ready = true;
-			});
+			// Includes the action
+			$scope.editMedicineAction = action;
 		}
 		
 		/**
@@ -86,16 +87,18 @@
 			// Gets the URL parameters
 			var id = $stateParams.id;
 			
-			// Initializes the edit-medicine action
-			var editMedicineAction = new EditMedicineAction();
-			editMedicineAction.startCallback = onEditMedicineStart;
-			editMedicineAction.successCallback = onEditMedicineSuccess;
-			
-			// Includes the actions
-			$scope.editMedicineAction = editMedicineAction;
+			// TODO: prepare data service?
 			
 			// Gets the medicine
-			getMedicine(id);
+			data.getMedicine(id).then(function(loadedMedicine) {
+				// Sets the medicine
+				medicine = loadedMedicine;
+				
+				// Includes the actions
+				includeEditMedicineAction();
+				
+				ready = true;
+			});
 		}
 		
 		/**
