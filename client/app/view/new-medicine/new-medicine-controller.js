@@ -59,16 +59,24 @@
 		};
 		
 		/**
+		 * Includes the create-medicine action.
+		 */
+		function includeCreateMedicineAction() {
+			// Initializes the action
+			var action = new CreateMedicineAction();
+			action.startCallback = onCreateMedicineStart;
+			action.successCallback = onCreateMedicineSuccess;
+			
+			// Includes the action
+			$scope.createMedicineAction = action;
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the create-medicine action
-			var createMedicineAction = new CreateMedicineAction();
-			createMedicineAction.startCallback = onCreateMedicineStart;
-			createMedicineAction.successCallback = onCreateMedicineSuccess;
-			
 			// Includes the actions
-			$scope.createMedicineAction = createMedicineAction;
+			includeCreateMedicineAction();
 		}
 		
 		/**
