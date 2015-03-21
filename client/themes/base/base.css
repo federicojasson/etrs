@@ -48,6 +48,12 @@ h1, h2, h3, h4, h5, h6, legend {}
 
 /* Bootstrap's classes */
 
+.btn {}
+
+.btn-lg {}
+
+.btn-link {}
+
 .modal {
 	cursor: default;
 	-moz-user-select: none;
@@ -95,8 +101,6 @@ h1, h2, h3, h4, h5, h6, legend {}
 .navbar-brand {}
 
 .navbar-brand:hover {}
-
-.navbar-btn {}
 
 .navbar-text {}
 
