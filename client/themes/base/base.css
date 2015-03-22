@@ -16,7 +16,10 @@ a {
 	cursor: pointer;
 }
 
-address {}
+address {
+	clear: both;
+	float: left;
+}
 
 body {}
 
