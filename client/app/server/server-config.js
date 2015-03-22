@@ -41,6 +41,7 @@
 				'/medicine/create',
 				'/medicine/edit',
 				'/medicine/get',
+				'/permission/password-reset/authenticate',
 				'/permission/password-reset/request'
 			];
 		}
