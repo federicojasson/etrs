@@ -18,24 +18,25 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\Data;
 
 /**
- * Responsible for registering the internal services.
+ * Represents the /data/reset-versions service.
  */
-class InternalServices extends Services {
+class ResetVersions extends \App\Service\Internal {
 	
 	/**
-	 * Returns the services.
+	 * Executes the service.
 	 */
-	protected function getServices() {
-		return [
-			// TODO: define internal services here
-			'/data/check-configuration',
-			'/data/generate-proxies',
-			'/data/reset-versions',
-			'/session/delete-expired'
-		];
+	protected function execute() {
+		// TODO: reset-versions
+	}
+	
+	/**
+	 * Determines whether the request is valid.
+	 */
+	protected function isRequestValid() {
+		return true;
 	}
 	
 }
