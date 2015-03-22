@@ -36,7 +36,31 @@ class Authenticate extends \App\Service\External {
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'credentials' => new \App\InputValidator\Json\JsonObject([
+				'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				}),
+				
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isRandomPassword($input);
+				})
+			])
+		]);
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Validates the input
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 	/**
