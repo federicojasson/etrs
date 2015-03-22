@@ -12,7 +12,7 @@
 		heading="{{ menu.name }}"
 		is-open="menu.open"
 	>
-		<div ng-repeat="menuItem in menu.items">
+		<div ng-repeat="menuItem in menu.items" class="menu-item">
 			<a
 				ui-sref="{{ menuItem.state }}"
 				popover="{{ menuItem.description }}"

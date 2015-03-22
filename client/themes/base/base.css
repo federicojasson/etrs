@@ -130,6 +130,21 @@ h1, h2, h3, h4, h5, h6, legend {}
 	margin-top: 0px;
 }
 
+.panel-body {
+	padding: 0px;
+}
+
+.panel-heading {
+	padding: 0px;
+}
+
+.panel-title a {
+	display: block;
+	padding: 6px 12px;
+}
+
+.panel-title a:focus, .panel-title a:hover {}
+
 
 /* Custom classes */
 
@@ -195,12 +210,12 @@ h1, h2, h3, h4, h5, h6, legend {}
 
 .address-icon + .icon-text {
 	display: block;
-	margin-left: 50px;
+	margin-left: 54px;
 }
 
 .dialog-icon + .icon-text {
 	display: block;
-	margin-left: 50px;
+	margin-left: 54px;
 }
 
 .loading-image {
@@ -238,3 +253,10 @@ h1, h2, h3, h4, h5, h6, legend {}
 	padding-bottom: 32px;
 	padding-top: 8px;
 }
+
+.menu-item a {
+	display: block;
+	padding: 8px;
+}
+
+.menu-item a:focus, .menu-item a:hover {}
