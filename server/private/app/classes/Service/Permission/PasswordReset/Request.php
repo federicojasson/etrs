@@ -86,7 +86,10 @@ class Request extends \App\Service\External {
 		];
 		
 		// Sends a password-reset email
-		$app->email->sendPasswordReset($recipient, $id, $password);
+		$delivered = $app->email->sendPasswordReset($recipient, $id, $password);
+		
+		// Asserts conditions
+		$app->assertion->emailDelivered($delivered);
 	}
 	
 	/**

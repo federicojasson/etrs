@@ -115,7 +115,7 @@ class Email {
 			$message = $exception->getMessage();
 			
 			// Logs the event
-			$app->log->error('Email undelivered. Message: ' . $message);
+			$app->log->error('Undelivered email. Message: ' . $message);
 			
 			return false;
 		}

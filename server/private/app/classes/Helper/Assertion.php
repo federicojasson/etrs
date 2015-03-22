@@ -26,6 +26,19 @@ namespace App\Helper;
 class Assertion {
 	
 	/**
+	 * Asserts whether an email has been delivered.
+	 * 
+	 * Receives an indicator of whether the email has been delivered.
+	 */
+	public function emailDelivered($delivered) {
+		if (! $delivered) {
+			// The email could not be delivered
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_UNDELIVERED_EMAIL);
+		}
+	}
+	
+	/**
 	 * Asserts whether an entity exists.
 	 * 
 	 * Receives the entity.
