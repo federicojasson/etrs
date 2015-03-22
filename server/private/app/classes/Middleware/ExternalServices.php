@@ -39,7 +39,9 @@ class ExternalServices extends Services {
 			'/medicine/edit',
 			'/medicine/get',
 			'/permission/password-reset/authenticate',
-			'/permission/password-reset/request'
+			'/permission/password-reset/request',
+			'/permission/sign-up/authenticate',
+			'/permission/sign-up/request'
 		];
 	}
 	

@@ -51,6 +51,31 @@ class Authenticator {
 	}
 	
 	/**
+	 * Authenticates a sign-up permission by password.
+	 * 
+	 * Receives the sign-up permission's ID and the alleged password.
+	 */
+	public function authenticateSignUpPermissionByPassword($id, $password) {
+		global $app;
+		
+		// Gets the sign-up permission
+		$signUpPermission = $app->data->getRepository('App\Data\Entity\SignUpPermission')->find($id);
+		
+		if (is_null($signUpPermission)) {
+			// The sign-up permission doesn't exist
+			
+			// Computes the password's hash to cause a deliberate delay in order
+			// not to disclose that the sign-up permission doesn't exist
+			$app->cryptography->computeNewPasswordHash($password);
+			
+			return false;
+		}
+		
+		// Determines whether the password is correct
+		return $this->isPasswordCorrect($signUpPermission, $password);
+	}
+	
+	/**
 	 * Authenticates a user by email address.
 	 * 
 	 * Receives the user's ID and the alleged email address.
