@@ -45,6 +45,8 @@ define('OPERATION_MODE_PRODUCTION', 'production');
 
 define('RANDOM_ID_LENGTH', 16); // Bytes
 
+define('RANDOM_PASSWORD_LENGTH', 128); // Bytes
+
 define('SALT_LENGTH', 64); // Bytes
 
 define('SESSION_DATA_USER', 'user');

@@ -67,6 +67,13 @@ class Cryptography {
 	}
 	
 	/**
+	 * Generates a random password.
+	 */
+	public function generateRandomPassword() {
+		return $this->generateRandomBytes(RANDOM_PASSWORD_LENGTH);
+	}
+	
+	/**
 	 * Generates random bytes.
 	 * 
 	 * Receives the expected length of the generated sequence (in bytes).

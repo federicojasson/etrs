@@ -45,24 +45,40 @@ class Request extends \App\Service\External {
 			return;
 		}
 		
+		// Generates a random password
+		$password = $app->cryptography->generateRandomPassword();
+		
+		// Computes the password's hash
+		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
+		
+		// Gets the user
+		$user = $app->data->getReference('App\Data\Entity\User', $credentials['id']);
+		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) {
+		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $user) {
+			// Deletes any password-reset permission associated with the user
+			$entityManager->createQueryBuilder()
+				->delete('App\Data\Entity\PasswordResetPermission', 'p')
+				->where('p.user = :user')
+				->setParameter('user', $user)
+				->getQuery()
+				->getResult();
+			
 			// Initializes the password-reset permission
 			$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();
 			
 			// Creates the password-reset permission
-			// TODO: sets
-			$passwordResetPermission->setPasswordHash();
-			$passwordResetPermission->setSalt();
-			$passwordResetPermission->setKeyStretchingIterations();
-			$passwordResetPermission->setUser();
+			$passwordResetPermission->setPasswordHash($hash);
+			$passwordResetPermission->setSalt($salt);
+			$passwordResetPermission->setKeyStretchingIterations($keyStretchingIterations);
+			$passwordResetPermission->setUser($user);
 			$entityManager->persist($passwordResetPermission);
 			
 			// Gets the password-reset permission's ID
 			return $passwordResetPermission->getId();
 		});
 		
-		// TODO
+		// TODO: email
 	}
 	
 	/**
