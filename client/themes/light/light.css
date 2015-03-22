@@ -89,6 +89,12 @@ h1, h2, h3, h4, h5, h6, legend {
 	text-transform: inherit;
 }
 
+.dropdown-menu {
+	font-size: 0.85em;
+	line-height: 18px;
+	text-transform: uppercase;
+}
+
 .modal {}
 
 .modal-backdrop.in {
@@ -165,7 +171,9 @@ h1, h2, h3, h4, h5, h6, legend {
 
 .fully-centered-container {}
 
-.icon-text {}
+.icon-text {
+	margin-left: 8px;
+}
 
 .loading-image {
 	background-image: url(images/spinner.gif);
