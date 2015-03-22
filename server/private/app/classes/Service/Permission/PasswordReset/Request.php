@@ -45,6 +45,23 @@ class Request extends \App\Service\External {
 			return;
 		}
 		
+		// Executes a transaction
+		$id = $app->data->transactional(function($entityManager) {
+			// Initializes the password-reset permission
+			$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();
+			
+			// Creates the password-reset permission
+			// TODO: sets
+			$passwordResetPermission->setPasswordHash();
+			$passwordResetPermission->setSalt();
+			$passwordResetPermission->setKeyStretchingIterations();
+			$passwordResetPermission->setUser();
+			$entityManager->persist($passwordResetPermission);
+			
+			// Gets the password-reset permission's ID
+			return $passwordResetPermission->getId();
+		});
+		
 		// TODO
 	}
 	

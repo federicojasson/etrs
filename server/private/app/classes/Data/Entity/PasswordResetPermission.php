@@ -136,6 +136,13 @@ class PasswordResetPermission {
 	private $user;
 	
 	/**
+	 * Returns the ID.
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
 	 * Sets the creation date-time.
 	 * 
 	 * Annotations:
@@ -144,6 +151,42 @@ class PasswordResetPermission {
 	 */
 	public function setCreationDateTime() {
 		$this->creationDateTime = getCurrentDateTime();
+	}
+	
+	/**
+	 * Sets the key-stretching iterations.
+	 * 
+	 * Receives the key-stretching iterations to be set.
+	 */
+	public function setKeyStretchingIterations($keyStretchingIterations) {
+		$this->keyStretchingIterations = $keyStretchingIterations;
+	}
+	
+	/**
+	 * Sets the password's hash.
+	 * 
+	 * Receives the hash to be set.
+	 */
+	public function setPasswordHash($hash) {
+		$this->passwordHash = $hash;
+	}
+	
+	/**
+	 * Sets the salt.
+	 * 
+	 * Receives the salt to be set.
+	 */
+	public function setSalt($salt) {
+		$this->salt = $salt;
+	}
+	
+	/**
+	 * Sets the user.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setUser($user) {
+		$this->user = $user;
 	}
 	
 }

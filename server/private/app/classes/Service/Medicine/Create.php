@@ -47,6 +47,7 @@ class Create extends \App\Service\External {
 			$medicine->setCreator($signedInUser);
 			$entityManager->persist($medicine);
 			
+			// Gets the medicine's ID
 			return $medicine->getId();
 		});
 		
