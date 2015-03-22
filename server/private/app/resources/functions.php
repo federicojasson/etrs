@@ -22,6 +22,22 @@
  * This script defines global functions.
  */
 
+/*
+ * Creates an array filter.
+ * 
+ * Receives a filter for the elements.
+ */
+function createArrayFilter($filter) {
+	return function($array) use ($filter) {
+		// Applies the filter to the array's elements
+		foreach ($array as &$element) {
+			$element = call_user_func($filter, $element);
+		}
+
+		return $array;
+	};
+}
+
 /**
  * Returns the client's IP address.
  */
@@ -62,20 +78,6 @@ function getCurrentDateTime() {
 	
 	// Initializes the current date-time
 	return new \DateTime(null, $timeZone);
-}
-
-/**
- * Applies the hex2bin function to all the elements of an array.
- * 
- * Receives the array.
- */
-function hex2binArray($array) {
-	// Applies the hex2bin function to the array's elements
-	foreach ($array as &$element) {
-		$element = hex2bin($element);
-	}
-	
-	return $array;
 }
 
 /**

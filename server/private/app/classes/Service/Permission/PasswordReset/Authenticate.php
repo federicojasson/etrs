@@ -32,7 +32,7 @@ class Authenticate extends \App\Service\External {
 		global $app;
 		
 		// Gets the inputs
-		$credentials = $this->getInputValue('credentials', 'hex2binArray');
+		$credentials = $this->getInputValue('credentials', createArrayFilter('hex2bin'));
 		
 		// Authenticates the password-reset permission
 		$authenticated = $app->authenticator->authenticatePasswordResetPermissionByPassword($credentials['id'], $credentials['password']);
