@@ -57,6 +57,7 @@ class Request extends \App\Service\External {
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $user) {
 			// Deletes any password-reset permission associated with the user
+			// TODO: how to use LIMIT
 			$entityManager->createQueryBuilder()
 				->delete('App\Data\Entity\PasswordResetPermission', 'p')
 				->where('p.user = :user')
@@ -78,7 +79,14 @@ class Request extends \App\Service\External {
 			return $passwordResetPermission->getId();
 		});
 		
-		// TODO: email
+		// Builds an email recipient
+		$recipient = [
+			'fullName' => $user->getFirstName() . ' ' . $user->getLastName(),
+			'emailAddress' => $user->getEmailAddress()
+		];
+		
+		// Sends a password-reset email
+		$app->email->sendPasswordReset($recipient, $id, $password);
 	}
 	
 	/**
