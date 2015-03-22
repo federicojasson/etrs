@@ -37,6 +37,14 @@ class Request extends \App\Service\External {
 		// Authenticates the user
 		$authenticated = $app->authenticator->authenticateUserByEmailAddress($credentials['id'], $credentials['emailAddress']);
 		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user has not been authenticated
+			return;
+		}
+		
 		// TODO
 	}
 	
