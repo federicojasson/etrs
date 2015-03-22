@@ -26,6 +26,15 @@ namespace App\Helper;
 class InputValidator {
 	
 	/**
+	 * Determines whether an input is an email address.
+	 * 
+	 * Receives the input.
+	 */
+	public function isEmailAddress($input) {
+		// TODO
+	}
+	
+	/**
 	 * Determines whether a JSON input is valid.
 	 * 
 	 * Receives the input and a JSON input validator.
@@ -68,6 +77,15 @@ class InputValidator {
 		
 		// Determines whether the input matches a regular expression
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_PASSWORD_LENGTH . '}$/', $input);
+	}
+	
+	/**
+	 * Determines whether an input is a user role.
+	 * 
+	 * Receives the input.
+	 */
+	public function isUserRole($input) {
+		// TODO
 	}
 	
 	/**
