@@ -19,9 +19,24 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.fullName',
-		'app.utility.honorificName',
-		'app.utility.line'
-	]);
+	angular.module('app.utility.fullName').filter('fullName', fullNameFilter);
+	
+	/**
+	 * Returns a person's full name.
+	 */
+	function fullNameFilter() {
+		/**
+		 * Applies the filter.
+		 * 
+		 * Receives the person.
+		 */
+		function filter(person) {
+			// Builds the full name
+			return person.firstName + ' ' + person.lastName;
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		return filter;
+	}
 })();
