@@ -94,6 +94,10 @@ h1, h2, h3, h4, h5, h6, legend {
 	text-transform: uppercase;
 }
 
+.input-lg {
+	font-size: 1.2em;
+}
+
 .modal {}
 
 .modal-backdrop.in {
