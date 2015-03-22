@@ -90,7 +90,6 @@
 			dialog.openInformation(
 				'Credenciales rechazadas',
 				'No fue posible autenticar su identidad.\n' +
-				'\n' +
 				'Reingrese su nombre de usuario y su contraseña.'
 			);
 		}

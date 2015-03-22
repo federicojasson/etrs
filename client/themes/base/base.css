@@ -48,13 +48,22 @@ h1, h2, h3, h4, h5, h6, legend {}
 
 /* Bootstrap's classes */
 
-.btn {}
+.btn {
+	line-height: 18px;
+}
 
-.btn-lg {}
+.btn-lg {
+	line-height: 28px;
+}
 
-.btn-link {}
+.btn-link {
+	margin: 10px 4px;
+	padding: 0px;
+}
 
-.dropdown-menu {}
+.dropdown-menu {
+	line-height: 18px;
+}
 
 .modal {
 	cursor: default;
@@ -100,16 +109,31 @@ h1, h2, h3, h4, h5, h6, legend {}
 	user-select: none;
 }
 
-.navbar-brand {}
+.navbar-brand {
+	background-image: url(images/logo.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	height: 48px;
+	width: 80px;
+}
 
-.navbar-brand:hover {}
+.navbar-brand:hover {
+	background-position: 0px -48px;
+}
 
-.navbar-text {}
+.navbar-text {
+	line-height: 48px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
 
 
 /* Custom classes */
 
-.address-icon {}
+.address-icon {
+	float: left;
+	font-size: 2.2em;
+}
 
 .copyright-text {
 	margin-bottom: 48px;
@@ -117,14 +141,23 @@ h1, h2, h3, h4, h5, h6, legend {}
 	text-align: center;
 }
 
-.dialog-icon {}
+.dialog-icon {
+	float: left;
+	font-size: 2.2em;
+}
 
 .dialog-text {
 	white-space: pre-line;
 	word-break: normal;
 }
 
-.email-image {}
+.email-image {
+	background-image: url(images/mailbox.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
+}
 
 .footer-image {}
 
@@ -140,11 +173,32 @@ h1, h2, h3, h4, h5, h6, legend {}
 	width: 100%;
 }
 
-.icon-text {}
+.icon-text {
+	margin-left: 8px;
+}
+
+.address-icon + .icon-text {
+	display: block;
+	margin-left: 50px;
+}
+
+.dialog-icon + .icon-text {
+	display: block;
+	margin-left: 50px;
+}
 
 .loading-image {
+	background-image: url(images/spinner.gif);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 30%;
+	margin-bottom: 64px;
 	margin-left: auto;
 	margin-right: auto;
+	max-height: 256px;
+	max-width: 256px;
+	min-height: 128px;
 }
 
 .loading-text {
@@ -156,7 +210,13 @@ h1, h2, h3, h4, h5, h6, legend {}
 	user-select: none;
 }
 
-.locked-image {}
+.locked-image {
+	background-image: url(images/closed-padlock.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 256px;
+	width: 256px;
+}
 
 .main-container {
 	padding-bottom: 32px;

@@ -26,6 +26,7 @@ General code checks
 - Lack of blank lines in PHP (regular expression: \}\n[\t]*\}).
 - Multiple inline comments (regular expression: \/\/.*\n[\t]*\/\/).
 - Include license in all files.
+- CSS all properties.
 
 
 Release tasks

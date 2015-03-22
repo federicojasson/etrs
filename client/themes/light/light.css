@@ -72,26 +72,21 @@ h1, h2, h3, h4, h5, h6, legend {
 
 .btn {
 	font-size: 0.85em;
-	line-height: 18px;
 	text-transform: uppercase;
 }
 
 .btn-lg {
 	font-size: 0.95em;
-	line-height: 28px;
 	text-transform: uppercase;
 }
 
 .btn-link {
 	font-size: inherit;
-	margin: 10px 4px;
-	padding: 0px;
 	text-transform: inherit;
 }
 
 .dropdown-menu {
 	font-size: 0.85em;
-	line-height: 18px;
 	text-transform: uppercase;
 }
 
@@ -116,54 +111,33 @@ h1, h2, h3, h4, h5, h6, legend {
 
 .navbar {}
 
-.navbar-brand {
-	background-image: url(images/logo.png);
-	background-position: 0px 0px;
-	background-repeat: no-repeat;
-	height: 48px;
-	width: 80px;
-}
+.navbar-brand {}
 
-.navbar-brand:hover {
-	background-position: 0px -48px;
-}
+.navbar-brand:hover {}
 
 .navbar-text {
 	color: #666666;
 	font-family: "Fjalla One", sans-serif;
 	font-size: 1.6em;
 	font-weight: bold;
-	line-height: 48px;
-	margin-bottom: 0px;
-	margin-top: 0px;
 	text-transform: uppercase;
 }
 
 
 /* Custom classes */
 
-.address-icon {
-	font-size: 2.2em;
-}
+.address-icon {}
 
 .copyright-text {
 	color: #aaaaaa;
 	font-size: 0.8em;
 }
 
-.dialog-icon {
-	font-size: 2.2em;
-}
+.dialog-icon {}
 
 .dialog-text {}
 
-.email-image {
-	background-image: url(images/mailbox.png);
-	background-position: center center;
-	background-repeat: no-repeat;
-	height: 256px;
-	width: 256px;
-}
+.email-image {}
 
 .footer-image {}
 
@@ -171,21 +145,13 @@ h1, h2, h3, h4, h5, h6, legend {
 
 .fully-centered-container {}
 
-.icon-text {
-	margin-left: 8px;
-}
+.icon-text {}
 
-.loading-image {
-	background-image: url(images/spinner.gif);
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: contain;
-	height: 30%;
-	margin-bottom: 64px;
-	max-height: 256px;
-	max-width: 256px;
-	min-height: 128px;
-}
+.address-icon + .icon-text {}
+
+.dialog-icon + .icon-text {}
+
+.loading-image {}
 
 .loading-text {
 	color: #aaaaaa;
@@ -196,12 +162,6 @@ h1, h2, h3, h4, h5, h6, legend {
 	text-transform: uppercase;
 }
 
-.locked-image {
-	background-image: url(images/closed-padlock.png);
-	background-position: center center;
-	background-repeat: no-repeat;
-	height: 256px;
-	width: 256px;
-}
+.locked-image {}
 
 .main-container {}
