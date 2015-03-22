@@ -27,7 +27,7 @@ namespace App\InputValidator\Json;
  * definition determines the way the validation is carried out:
  * 
  * - Arrays: a JSON input validator is used, which determines how to validate
- *   all the array's elements.
+ *   all the elements of the array.
  * 
  * - Objects: an associative array is used, whose values are JSON input
  *   validators that determine how to validate each property of the object.

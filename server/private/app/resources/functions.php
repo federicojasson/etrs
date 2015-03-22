@@ -65,6 +65,20 @@ function getCurrentDateTime() {
 }
 
 /**
+ * Applies the hex2bin function to all the elements of an array.
+ * 
+ * Receives the array.
+ */
+function hex2binArray($array) {
+	// Applies the hex2bin function to the array's elements
+	foreach ($array as &$element) {
+		$element = hex2bin($element);
+	}
+	
+	return $array;
+}
+
+/**
  * Determines whether a value is in a certain range.
  * 
  * Receives the value, the lower bound and, optionally, the upper.

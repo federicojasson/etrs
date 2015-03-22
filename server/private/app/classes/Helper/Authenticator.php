@@ -26,6 +26,31 @@ namespace App\Helper;
 class Authenticator {
 	
 	/**
+	 * Authenticates a password-reset permission by password.
+	 * 
+	 * Receives the password-reset permission's ID and the alleged password.
+	 */
+	public function authenticatePasswordResetPermissionByPassword($id, $password) {
+		global $app;
+		
+		// Gets the password-reset permission
+		$passwordResetPermission = $app->data->getRepository('App\Data\Entity\PasswordResetPermission')->find($id);
+		
+		if (is_null($passwordResetPermission)) {
+			// The password-reset permission doesn't exist
+			
+			// Computes the password's hash to cause a deliberate delay in order
+			// not to disclose that the password-reset permission doesn't exist
+			$app->cryptography->computeNewPasswordHash($password);
+			
+			return false;
+		}
+		
+		// Determines whether the password is correct
+		return $this->isPasswordCorrect($passwordResetPermission, $password);
+	}
+	
+	/**
 	 * Authenticates a user by email address.
 	 * 
 	 * Receives the user's ID and the alleged email address.

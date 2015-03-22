@@ -21,7 +21,7 @@
 namespace App\Service\Permission\PasswordReset;
 
 /**
- * Represents the /permission/password-reset/account service.
+ * Represents the /permission/password-reset/authenticate service.
  */
 class Authenticate extends \App\Service\External {
 	
@@ -29,7 +29,16 @@ class Authenticate extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$credentials = $this->getInputValue('credentials', 'hex2binArray');
+		
+		// Authenticates the password-reset permission
+		$authenticated = $app->authenticator->authenticatePasswordResetPermissionByPassword($credentials['id'], $credentials['password']);
+		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
 	}
 	
 	/**
