@@ -31,7 +31,13 @@ class InputValidator {
 	 * Receives the input.
 	 */
 	public function isEmailAddress($input) {
-		// TODO
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Determines whether the input matches a regular expression
+		return preg_match('/(?!.*\p{Cc})(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input);
 	}
 	
 	/**
@@ -85,7 +91,11 @@ class InputValidator {
 	 * Receives the input.
 	 */
 	public function isUserRole($input) {
-		// TODO
+		return inArray($input, [
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
+			USER_ROLE_OPERATOR
+		]);
 	}
 	
 	/**

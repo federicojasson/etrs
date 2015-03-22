@@ -81,6 +81,15 @@ function getCurrentDateTime() {
 }
 
 /**
+ * Determines whether an array contains a certain element.
+ * 
+ * Receives the element and the array.
+ */
+function inArray($element, $array) {
+	return in_array($element, $array, true);
+}
+
+/**
  * Determines whether a value is in a certain range.
  * 
  * Receives the value, the lower bound and, optionally, the upper.
