@@ -56,14 +56,17 @@ class Request extends \App\Service\External {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $user) {
-			// Deletes any password-reset permission associated with the user
-			// TODO: how to use LIMIT
-			$entityManager->createQueryBuilder()
-				->delete('App\Data\Entity\PasswordResetPermission', 'p')
-				->where('p.user = :user')
-				->setParameter('user', $user)
-				->getQuery()
-				->getResult();
+			// Deletes the user's password-reset permission (if any)
+			$entityManager->getConnection()
+				->prepare('
+					DELETE
+					FROM password_reset_permissions
+					WHERE user = :user
+					LIMIT 1
+				')
+				->execute([
+					'user' => $user->getId()
+				]);
 			
 			// Initializes the password-reset permission
 			$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();

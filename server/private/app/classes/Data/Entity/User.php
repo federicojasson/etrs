@@ -252,6 +252,13 @@ class User {
 	}
 	
 	/**
+	 * Returns the ID.
+	 */
+	public function getId() {
+		return $this->id;
+	}
+	
+	/**
 	 * Returns the key-stretching iterations.
 	 */
 	public function getKeyStretchingIterations() {
