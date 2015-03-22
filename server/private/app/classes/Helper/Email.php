@@ -24,5 +24,58 @@ namespace App\Helper;
  * Provides email-related functionalities.
  */
 class Email {
-	// TODO
+	
+	/**
+	 * Sends a password-reset email.
+	 * 
+	 * Receives the recipient and the password-reset permission's ID and
+	 * password.
+	 */
+	public function sendPasswordReset($recipient, $id, $password) {
+		// TODO: create $email
+		
+		return $this->send($email);
+	}
+	
+	/**
+	 * Creates an email.
+	 * 
+	 * Receives the sender, the recipient, the subject, the body in HTML and an
+	 * alternative body in plain-text.
+	 */
+	private function create($sender, $recipient, $subject, $body, $alternativeBody) {
+		global $app;
+		
+		// Gets the SMTP parameters
+		$smtp = $app->parameters->smtp;
+		
+		// TODO
+	}
+	
+	/**
+	 * Sends an email.
+	 * 
+	 * Receives the email.
+	 */
+	private function send($email) {
+		global $app;
+		
+		try {
+			// Sends the email
+			$email->send();
+			
+			return true;
+		} catch (\phpmailerException $exception) {
+			// The email could not be delivered
+			
+			// Gets the exception's message
+			$message = $exception->getMessage();
+			
+			// Logs the event
+			$app->log->error('Email undelivered. Message: ' . $message);
+			
+			return false;
+		}
+	}
+	
 }

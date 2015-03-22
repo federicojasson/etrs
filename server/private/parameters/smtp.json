@@ -1,0 +1,9 @@
+{
+	"TODO: define smtp parameters": "",
+	
+	"host": "smtp.gmail.com",
+	"port": "587",
+	"protocol": "tls",
+	"username": "",
+	"password": ""
+}
