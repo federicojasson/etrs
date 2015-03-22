@@ -245,10 +245,24 @@ class User {
 	}
 	
 	/**
+	 * Returns the first name.
+	 */
+	public function getFirstName() {
+		return $this->firstName;
+	}
+	
+	/**
 	 * Returns the key-stretching iterations.
 	 */
 	public function getKeyStretchingIterations() {
 		return $this->keyStretchingIterations;
+	}
+	
+	/**
+	 * Returns the last name.
+	 */
+	public function getLastName() {
+		return $this->lastName;
 	}
 	
 	/**
