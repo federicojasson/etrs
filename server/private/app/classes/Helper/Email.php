@@ -38,6 +38,17 @@ class Email {
 	}
 	
 	/**
+	 * Sends a sign-up email.
+	 * 
+	 * Receives the recipient and the sign-up permission's ID and password.
+	 */
+	public function sendSignUp($recipient, $id, $password) {
+		// TODO: create $email
+		
+		return $this->send($email);
+	}
+	
+	/**
 	 * Creates an email.
 	 * 
 	 * Receives the sender, the recipient, the subject, the body in HTML and an

@@ -29,7 +29,43 @@ class Request extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$credentials = $this->getInputValue('credentials');
+		$recipient;// TODO: get recipient
+		$userRole = $this->getInputValue('userRole');
+		
+		// Gets the signed-in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($signedInUser->getId(), $credentials['password']);
+		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user has not been authenticated
+			return;
+		}
+		
+		// Generates a random password
+		$password = $app->cryptography->generateRandomPassword();
+		
+		// Computes the password's hash
+		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
+		
+		// Executes a transaction
+		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations) {
+			// TODO
+		});
+		
+		// Sends a sign-up email
+		$delivered = $app->email->sendSignUp($recipient, $id, $password);
+		
+		// Asserts conditions
+		$app->assertion->emailDelivered($delivered);
 	}
 	
 	/**
