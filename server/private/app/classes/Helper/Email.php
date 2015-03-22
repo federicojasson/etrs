@@ -75,6 +75,27 @@ class Email {
 	}
 	
 	/**
+	 * Creates an email to be sent on behalf of the server.
+	 * 
+	 * Receives the recipient, the subject, the body in HTML and an alternative
+	 * body in plain-text.
+	 */
+	private function createFromServer($recipient, $subject, $body, $alternativeBody) {
+		// Builds the sender
+		$sender = [
+			'fullName' => 'ETRS',
+			'emailAddress' => '' // TODO
+		];
+		
+		// Creates the email
+		$email = $this->create($sender, $recipient, $subject, $body, $alternativeBody);
+		
+		// TODO: embed logo image?
+		
+		return $email;
+	}
+	
+	/**
 	 * Sends an email.
 	 * 
 	 * Receives the email.
