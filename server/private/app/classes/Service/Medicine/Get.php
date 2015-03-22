@@ -31,7 +31,7 @@ class Get extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets inputs
+		// Gets the inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		
 		// Executes a transaction

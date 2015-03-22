@@ -29,6 +29,14 @@ class Request extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
+		global $app;
+		
+		// Gets the inputs
+		$credentials = $this->getInputValue('credentials');
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByEmailAddress($credentials['id'], $credentials['emailAddress']);
+		
 		// TODO
 	}
 	

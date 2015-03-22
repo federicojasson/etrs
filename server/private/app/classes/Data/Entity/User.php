@@ -238,6 +238,13 @@ class User {
 	private $version;
 	
 	/**
+	 * Returns the email address.
+	 */
+	public function getEmailAddress() {
+		return $this->emailAddress;
+	}
+	
+	/**
 	 * Returns the key-stretching iterations.
 	 */
 	public function getKeyStretchingIterations() {
