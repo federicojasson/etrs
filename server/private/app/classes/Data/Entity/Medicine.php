@@ -22,7 +22,6 @@ namespace App\Data\Entity;
 
 /**
  * Represents a medicine from the database.
- * TODO: add "deletor/deleter" field?
  * 
  * Annotations:
  * 
@@ -72,6 +71,21 @@ class Medicine {
 	 *	)
 	 */
 	private $deleted;
+	
+	/**
+	 * The deleter.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToOne(targetEntity="User")
+	 * 
+	 * @JoinColumn(
+	 *		name="deleter",
+	 *		referencedColumnName="id",
+	 *		onDelete="SET NULL"
+	 *	)
+	 */
+	private $deleter;
 	
 	/**
 	 * The deletion date-time.
