@@ -127,12 +127,16 @@ class Data {
 			$cache = new \Doctrine\Common\Cache\ApcCache();
 		}
 		
-		// Applies settings
-		$configuration->setAutoGenerateProxyClasses($proxyGenerationMode);
+		// Applies metadata-related settings
 		$configuration->setMetadataCacheImpl($cache);
 		$configuration->setMetadataDriverImpl($metadataDriver);
+		
+		// Applies proxy-related settings
+		$configuration->setAutoGenerateProxyClasses($proxyGenerationMode);
 		$configuration->setProxyDir($proxyDirectory);
 		$configuration->setProxyNamespace('App\Data\Proxy');
+		
+		// Applies query-related settings
 		$configuration->setQueryCacheImpl($cache);
 		
 		return $configuration;
@@ -148,13 +152,13 @@ class Data {
 		$dbms = $app->parameters->dbms;
 		
 		return [
-			'driver' => 'pdo_mysql',
 			'host' => $dbms['host'],
 			'port' => $dbms['port'],
 			'dbname' => $dbms['database'],
 			'charset' => $dbms['charset'],
 			'user' => $dbms['username'],
-			'password' => $dbms['password']
+			'password' => $dbms['password'],
+			'driver' => 'pdo_mysql'
 		];
 	}
 	

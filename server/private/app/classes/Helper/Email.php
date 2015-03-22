@@ -49,7 +49,29 @@ class Email {
 		// Gets the SMTP parameters
 		$smtp = $app->parameters->smtp;
 		
-		// TODO
+		// Initializes the email
+		$email = new \PHPMailer(true);
+		
+		// Applies connection-related settings
+		$email->isSMTP();
+		$email->SMTPSecure = $smtp['protocol'];
+		$email->Host = $smtp['host'];
+		$email->Port = $smtp['port'];
+		$email->SMTPAuth = true;
+		$email->Username = $smtp['username'];
+		$email->Password = $smtp['password'];
+		
+		// Applies email-related settings
+		$email->FromName = $sender['fullName'];
+		$email->From = $sender['emailAddress'];
+		$email->addAddress($recipient['emailAddress'], $recipient['fullName']);
+		$email->Subject = $subject;
+		$email->CharSet = 'UTF-8';
+		$email->isHTML();
+		$email->Body = $body;
+		$email->AltBody = $alternativeBody;
+		
+		return $email;
 	}
 	
 	/**
