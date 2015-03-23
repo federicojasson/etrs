@@ -32,6 +32,7 @@ class ExternalServices extends Services {
 		return [
 			// TODO: define external services here
 			'/account/get',
+			'/account/reset-password',
 			'/account/sign-in',
 			'/account/sign-out',
 			'/account/signed-in',
