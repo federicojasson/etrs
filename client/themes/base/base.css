@@ -16,10 +16,7 @@ a {
 	cursor: pointer;
 }
 
-address {
-	clear: both;
-	float: left;
-}
+address {}
 
 body {}
 
@@ -161,18 +158,14 @@ h1, h2, h3, h4, h5, h6, legend {}
 
 /* Custom classes */
 
-.address-icon {
-	float: left;
-}
+.address-icon {}
 
 .copyright-text {
 	margin-bottom: 48px;
 	margin-top: -12px;
 }
 
-.dialog-icon {
-	float: left;
-}
+.dialog-icon {}
 
 .dialog-text {
 	white-space: pre-line;
