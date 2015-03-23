@@ -93,7 +93,7 @@
 			}
 			
 			// Opens a confirmation dialog
-			dialog.openInformation(
+			dialog.openConfirmation(
 				'Confirmar invitación',
 				'Está a punto de enviar una invitación a ' + this.input.recipient.emailAddress.value + '.\n' +
 				'¿Está seguro de que esa es la dirección de correo electrónico del invitado?',
@@ -125,8 +125,8 @@
 
 						// Invokes the success callback
 						this.successCallback();
-					}.bind(this)); // TODO: would it work here?
-				}
+					}.bind(this));
+				}.bind(this)
 			);
 		};
 		
