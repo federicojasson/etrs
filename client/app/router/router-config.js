@@ -51,6 +51,16 @@
 				},
 				
 				{
+					name: 'forgotPassword',
+					url: '/account/reset-password',
+					data: {
+						views: {
+							__: 'ForgotPasswordViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'home',
 					url: '/',
 					data: {
@@ -92,16 +102,6 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewMedicineViewController'
-						}
-					}
-				},
-				
-				{
-					name: 'requestPasswordReset',
-					url: '/account/reset-password',
-					data: {
-						views: {
-							__: 'RequestPasswordResetViewController'
 						}
 					}
 				},

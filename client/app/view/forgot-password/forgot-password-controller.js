@@ -19,19 +19,24 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.requestPasswordReset').controller('RequestPasswordResetViewController', RequestPasswordResetViewController);
+	angular.module('app.view.forgotPassword').controller('ForgotPasswordViewController', ForgotPasswordViewController);
 	
 	/**
-	 * Represents the request-password-reset view.
+	 * Represents the forgot-password view.
 	 */
-	function RequestPasswordResetViewController() {
+	function ForgotPasswordViewController() {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
-			return 'app/view/request-password-reset/request-password-reset.html';
+			return 'app/view/forgot-password/forgot-password.html';
 		};
 		
 		/**
@@ -45,7 +50,7 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
 	}
 })();

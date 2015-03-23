@@ -21,11 +21,11 @@
 (function() {
 	angular.module('app.view', [
 		'app.view.account',
+		'app.view.forgotPassword',
 		'app.view.home',
 		'app.view.medicine',
 		'app.view.medicines',
 		'app.view.newMedicine',
-		'app.view.requestPasswordReset',
 		'app.view.signIn'
 	]);
 })();

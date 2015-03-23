@@ -19,5 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.requestPasswordReset', []);
+	angular.module('app.view.forgotPassword', []);
 })();
