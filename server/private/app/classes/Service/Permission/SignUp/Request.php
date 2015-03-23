@@ -33,7 +33,7 @@ class Request extends \App\Service\External {
 		
 		// Gets the inputs
 		$credentials = $this->getInputValue('credentials');
-		$recipient;// TODO: get recipient
+		$recipient = $this->getInputValue('recipient');// TODO: filter recipient?
 		$userRole = $this->getInputValue('userRole');
 		
 		// Gets the signed-in user
@@ -57,8 +57,20 @@ class Request extends \App\Service\External {
 		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
 		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations) {
-			// TODO
+		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $userRole, $signedInUser) {
+			// Initializes the sign-up permission
+			$signUpPermission = new \App\Data\Entity\SignUpPermission();
+			
+			// Creates the sign-up permission
+			$signUpPermission->setPasswordHash($hash);
+			$signUpPermission->setSalt($salt);
+			$signUpPermission->setKeyStretchingIterations($keyStretchingIterations);
+			$signUpPermission->setUserRole($userRole);
+			$signUpPermission->setCreator($signedInUser);
+			$entityManager->persist($signUpPermission);
+			
+			// Gets the sign-up permission's ID
+			return $signUpPermission->getId();
 		});
 		
 		// Sends a sign-up email
