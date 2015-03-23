@@ -22,13 +22,15 @@
 	angular.module('app.view.forgotPassword').controller('ForgotPasswordViewController', [
 		'$scope',
 		'RequestPasswordResetAction',
+		'dialog',
+		'router',
 		ForgotPasswordViewController
 	]);
 	
 	/**
 	 * Represents the forgot-password view.
 	 */
-	function ForgotPasswordViewController($scope, RequestPasswordResetAction) {
+	function ForgotPasswordViewController($scope, RequestPasswordResetAction, dialog, router) {
 		var _this = this;
 		
 		/**
@@ -84,21 +86,40 @@
 		 * the request-password-reset action.
 		 */
 		function onRequestPasswordResetNotAuthenticated() {
-			// TODO
+			ready = true;
+			
+			// Opens an error dialog
+			dialog.openError(
+				'Credenciales rechazadas',
+				'No fue posible autenticar su identidad.\n' +
+				'Reingrese su nombre de usuario y su dirección de correo electrónico.\n' +
+				'Asegúrese de que la dirección proporcionada sea la utilizada en el sistema.'
+			);
 		}
 		
 		/**
 		 * Invoked at the start of the request-password-reset action.
 		 */
 		function onRequestPasswordResetStart() {
-			// TODO
+			ready = false;
 		}
 		
 		/**
 		 * Invoked when the request-password-reset action is successful.
 		 */
 		function onRequestPasswordResetSuccess() {
-			// TODO
+			ready = true;
+			
+			// Opens an information dialog
+			dialog.openInformation(
+				'Correo electrónico enviado',
+				'Se ha enviado un correo electrónico a su casilla.\n' +
+				'Para restablecer su contraseña, siga los pasos indicados en el mismo.',
+				function() {
+					// Redirects the user to the home route
+					router.redirect('home');
+				}
+			);
 		}
 		
 		// ---------------------------------------------------------------------
