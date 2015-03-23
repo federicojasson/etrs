@@ -101,6 +101,7 @@ class Request extends \App\Service\External {
 			
 			'recipient' => new \App\InputValidator\Json\JsonObject([
 				'fullName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return true;
 					// TODO: decide
 					//return $app->inputValidator->isValidString($input, 0, 97);
 					//return $app->inputValidator->isValidLine($input, 0, 97);

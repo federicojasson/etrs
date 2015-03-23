@@ -99,15 +99,12 @@ class Data {
 	private function getConfiguration() {
 		global $app;
 		
-		// Defines the necessary directories
-		$entityDirectory = DIRECTORY_APP . '/classes/Data/Entity';
-		$proxyDirectory = DIRECTORY_APP . '/classes/Data/Proxy';
-		
 		// Initializes the configuration
 		$configuration = new \Doctrine\ORM\Configuration();
 		
 		// Initializes the metadata driver
-		$metadataDriver = $configuration->newDefaultAnnotationDriver($entityDirectory);
+		$directory = DIRECTORY_APP . '/classes/Data/Entity';
+		$metadataDriver = $configuration->newDefaultAnnotationDriver($directory);
 		
 		if ($app->getMode() === OPERATION_MODE_DEVELOPMENT) {
 			// The system is under development
@@ -132,8 +129,9 @@ class Data {
 		$configuration->setMetadataDriverImpl($metadataDriver);
 		
 		// Applies proxy-related settings
+		$directory = DIRECTORY_APP . '/classes/Data/Proxy';
 		$configuration->setAutoGenerateProxyClasses($proxyGenerationMode);
-		$configuration->setProxyDir($proxyDirectory);
+		$configuration->setProxyDir($directory);
 		$configuration->setProxyNamespace('App\Data\Proxy');
 		
 		// Applies query-related settings

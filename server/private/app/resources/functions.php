@@ -137,6 +137,13 @@ function readJsonFile($path) {
 }
 
 /**
+ * TODO: comment
+ */
+function readTemplateFile() {
+	// TODO
+}
+
+/**
  * Converts a string from spinal-case to PascalCase.
  * 
  * Receives the string.

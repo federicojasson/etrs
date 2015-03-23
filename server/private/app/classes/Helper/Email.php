@@ -32,8 +32,27 @@ class Email {
 	 * password.
 	 */
 	public function sendPasswordReset($recipient, $id, $password) {
-		// TODO: create $email
+		// Defines the subject
+		$subject = 'Restablecimiento de contraseña';
 		
+		// Builds a placeholder mapping
+		$placeholderMapping = [
+			'id' => bin2hex($id),
+			'password' => bin2hex($password)
+		];
+		
+		// Builds the body
+		$path = DIRECTORY_EMAILS . '/password-reset.html';
+		$body = readTemplateFile($path, $placeholderMapping);
+		
+		// Builds the alternative body
+		$path = DIRECTORY_EMAILS . '/password-reset.txt';
+		$alternativeBody = readTemplateFile($path, $placeholderMapping);
+		
+		// Creates the email
+		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
+		
+		// Sends the email
 		return $this->send($email);
 	}
 	
@@ -43,8 +62,27 @@ class Email {
 	 * Receives the recipient and the sign-up permission's ID and password.
 	 */
 	public function sendSignUp($recipient, $id, $password) {
-		// TODO: create $email
+		// Defines the subject
+		$subject = 'Invitación';
 		
+		// Builds a placeholder mapping
+		$placeholderMapping = [
+			'id' => bin2hex($id),
+			'password' => bin2hex($password)
+		];
+		
+		// Builds the body
+		$path = DIRECTORY_EMAILS . '/sign-up.html';
+		$body = readTemplateFile($path, $placeholderMapping);
+		
+		// Builds the alternative body
+		$path = DIRECTORY_EMAILS . '/sign-up.txt';
+		$alternativeBody = readTemplateFile($path, $placeholderMapping);
+		
+		// Creates the email
+		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
+		
+		// Sends the email
 		return $this->send($email);
 	}
 	
@@ -91,7 +129,7 @@ class Email {
 	 * Receives the recipient, the subject, the body in HTML and an alternative
 	 * body in plain-text.
 	 */
-	private function createFromServer($recipient, $subject, $body, $alternativeBody) {
+	private function createOnServerBehalf($recipient, $subject, $body, $alternativeBody) {
 		// Builds the sender
 		$sender = [
 			'fullName' => 'ETRS',
