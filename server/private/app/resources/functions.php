@@ -161,7 +161,7 @@ function replacePlaceholders($string, $mapping) {
 	$placeholders = array_keys($mapping);
 	$replacements = array_values($mapping);
 	
-	// Prepends a colon to each placeholder
+	// Prepends a colon to the placeholders
 	foreach ($placeholders as &$placeholder) {
 		$placeholder = ':' . $placeholder;
 	}
