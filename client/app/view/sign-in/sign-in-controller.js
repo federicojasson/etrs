@@ -86,8 +86,8 @@
 		function onSignInNotAuthenticated() {
 			ready = true;
 			
-			// Opens an information dialog
-			dialog.openInformation(
+			// Opens an error dialog
+			dialog.openError(
 				'Credenciales rechazadas',
 				'No fue posible autenticar su identidad.\n' +
 				'Reingrese su nombre de usuario y su contraseña.'

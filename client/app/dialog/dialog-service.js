@@ -54,6 +54,16 @@
 		};
 		
 		/**
+		 * Opens an error dialog.
+		 * 
+		 * Receives the title, the message and, optionally, a callback to be
+		 * invoked when the dialog is closed or dismissed.
+		 */
+		_this.openError = function(title, message, callback) {
+			open('error', title, message, callback, callback);
+		};
+		
+		/**
 		 * Opens an information dialog.
 		 * 
 		 * Receives the title, the message and, optionally, a callback to be

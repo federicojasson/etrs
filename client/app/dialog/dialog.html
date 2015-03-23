@@ -10,6 +10,7 @@
 	<span
 		ng-class="{
 			'glyphicon-question-sign': dialog.get().type === 'confirmation',
+			'glyphicon-remove-sign': dialog.get().type === 'error',
 			'glyphicon-info-sign': dialog.get().type === 'information'
 		}"
 		
@@ -27,6 +28,12 @@
 		
 		<button ng-click="$dismiss()" class="btn btn-default">
 			Cancelar
+		</button>
+	</div>
+	
+	<div ng-if="dialog.get().type === 'error'">
+		<button ng-click="$close()" class="btn btn-default">
+			Aceptar
 		</button>
 	</div>
 	
