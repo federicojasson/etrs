@@ -52,7 +52,7 @@
 				
 				{
 					name: 'forgotPassword',
-					url: '/account/reset-password',
+					url: '/account/forgot-password',
 					data: {
 						views: {
 							__: 'ForgotPasswordViewController'
@@ -69,6 +69,17 @@
 							ad: 'HomeViewController',
 							dr: 'HomeViewController',
 							op: 'HomeViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'invitation',
+					url: '/account/invitation',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'InvitationViewController'
 						}
 					}
 				},

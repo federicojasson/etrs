@@ -19,14 +19,38 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.forgotPassword',
-		'app.view.home',
-		'app.view.invitation',
-		'app.view.medicine',
-		'app.view.medicines',
-		'app.view.newMedicine',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.invitation').controller('InvitationViewController', InvitationViewController);
+	
+	/**
+	 * Represents the invitation view.
+	 */
+	function InvitationViewController() {
+		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
+		
+		/**
+		 * Returns the template's URL.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/invitation/invitation.html';
+		};
+		
+		/**
+		 * Returns the title to set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return 'Enviar invitación';
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return ready;
+		};
+	}
 })();

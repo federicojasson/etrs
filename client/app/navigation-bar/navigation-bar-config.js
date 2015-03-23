@@ -33,6 +33,12 @@
 		 */
 		function getMenuItems() {
 			return {
+				invitation: {
+					name: 'Enviar invitación',
+					state: 'invitation',
+					description: 'Invite a una persona a unirse a ETRS'
+				},
+				
 				medicines: {
 					name: 'Administrar',
 					state: 'medicines',
@@ -59,6 +65,13 @@
 			return {
 				// TODO: define menus here
 				ad: [
+					{
+						name: 'Usuarios',
+						items: [
+							menuItems.invitation
+						]
+					},
+					
 					{
 						name: 'Medicamentos',
 						items: [
