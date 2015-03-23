@@ -52,13 +52,11 @@ class PasswordResetPermission {
 	 * @Id
 	 * @GeneratedValue(strategy="CUSTOM")
 	 * @CustomIdGenerator(class="App\Data\IdGenerator\Random")
-	 * 
 	 * @Column(
 	 *		name="id",
 	 *		type="binary_data",
 	 *		length=16,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -75,7 +73,6 @@ class PasswordResetPermission {
 	 *		name="key_stretching_iterations",
 	 *		type="integer",
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"unsigned": true
 	 *		}
@@ -93,7 +90,6 @@ class PasswordResetPermission {
 	 *		type="binary_data",
 	 *		length=64,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -111,7 +107,6 @@ class PasswordResetPermission {
 	 *		type="binary_data",
 	 *		length=64,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -125,7 +120,6 @@ class PasswordResetPermission {
 	 * Annotations:
 	 * 
 	 * @OneToOne(targetEntity="User")
-	 * 
 	 * @JoinColumn(
 	 *		name="user",
 	 *		referencedColumnName="id",

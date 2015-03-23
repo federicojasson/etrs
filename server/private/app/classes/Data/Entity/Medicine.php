@@ -50,7 +50,6 @@ class Medicine {
 	 * Annotations:
 	 * 
 	 * @ManyToOne(targetEntity="User")
-	 * 
 	 * @JoinColumn(
 	 *		name="creator",
 	 *		referencedColumnName="id",
@@ -78,7 +77,6 @@ class Medicine {
 	 * Annotations:
 	 * 
 	 * @ManyToOne(targetEntity="User")
-	 * 
 	 * @JoinColumn(
 	 *		name="deleter",
 	 *		referencedColumnName="id",
@@ -107,13 +105,11 @@ class Medicine {
 	 * @Id
 	 * @GeneratedValue(strategy="CUSTOM")
 	 * @CustomIdGenerator(class="App\Data\IdGenerator\Random")
-	 * 
 	 * @Column(
 	 *		name="id",
 	 *		type="binary_data",
 	 *		length=16,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -139,7 +135,6 @@ class Medicine {
 	 * Annotations:
 	 * 
 	 * @ManyToOne(targetEntity="User")
-	 * 
 	 * @JoinColumn(
 	 *		name="last_editor",
 	 *		referencedColumnName="id",
@@ -168,12 +163,10 @@ class Medicine {
 	 * Annotations:
 	 * 
 	 * @Version
-	 * 
 	 * @Column(
 	 *		name="version",
 	 *		type="integer",
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"unsigned": true
 	 *		}

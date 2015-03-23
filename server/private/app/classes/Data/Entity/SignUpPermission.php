@@ -50,7 +50,6 @@ class SignUpPermission {
 	 * Annotations:
 	 * 
 	 * @ManyToOne(targetEntity="User")
-	 * 
 	 * @JoinColumn(
 	 *		name="creator",
 	 *		referencedColumnName="id",
@@ -67,13 +66,11 @@ class SignUpPermission {
 	 * @Id
 	 * @GeneratedValue(strategy="CUSTOM")
 	 * @CustomIdGenerator(class="App\Data\IdGenerator\Random")
-	 * 
 	 * @Column(
 	 *		name="id",
 	 *		type="binary_data",
 	 *		length=16,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -90,7 +87,6 @@ class SignUpPermission {
 	 *		name="key_stretching_iterations",
 	 *		type="integer",
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"unsigned": true
 	 *		}
@@ -108,7 +104,6 @@ class SignUpPermission {
 	 *		type="binary_data",
 	 *		length=64,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -126,7 +121,6 @@ class SignUpPermission {
 	 *		type="binary_data",
 	 *		length=64,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -144,7 +138,6 @@ class SignUpPermission {
 	 *		type="binary_data",
 	 *		length=2,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}

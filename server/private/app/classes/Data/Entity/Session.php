@@ -63,13 +63,11 @@ class Session {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * 
 	 * @Column(
 	 *		name="id",
 	 *		type="binary_data",
 	 *		length=32,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}

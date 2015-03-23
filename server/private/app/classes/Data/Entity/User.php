@@ -50,7 +50,6 @@ class User {
 	 * Annotations:
 	 * 
 	 * @ManyToOne(targetEntity="User")
-	 * 
 	 * @JoinColumn(
 	 *		name="creator",
 	 *		referencedColumnName="id",
@@ -97,7 +96,6 @@ class User {
 	 *		type="binary_data",
 	 *		length=1,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -111,7 +109,6 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * 
 	 * @Column(
 	 *		name="id",
 	 *		type="binary_data",
@@ -130,7 +127,6 @@ class User {
 	 *		name="key_stretching_iterations",
 	 *		type="integer",
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"unsigned": true
 	 *		}
@@ -174,7 +170,6 @@ class User {
 	 *		type="binary_data",
 	 *		length=64,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -192,7 +187,6 @@ class User {
 	 *		type="binary_data",
 	 *		length=2,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -210,7 +204,6 @@ class User {
 	 *		type="binary_data",
 	 *		length=64,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -224,12 +217,10 @@ class User {
 	 * Annotations:
 	 * 
 	 * @Version
-	 * 
 	 * @Column(
 	 *		name="version",
 	 *		type="integer",
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"unsigned": true
 	 *		}

@@ -52,13 +52,11 @@ class Log {
 	 * @Id
 	 * @GeneratedValue(strategy="CUSTOM")
 	 * @CustomIdGenerator(class="App\Data\IdGenerator\Random")
-	 * 
 	 * @Column(
 	 *		name="id",
 	 *		type="binary_data",
 	 *		length=16,
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"fixed": true
 	 *		}
@@ -75,7 +73,6 @@ class Log {
 	 *		name="level",
 	 *		type="smallint",
 	 *		nullable=false,
-	 *		
 	 *		options={
 	 *			"unsigned": true
 	 *		}
