@@ -133,7 +133,7 @@ class Email {
 		// Builds the sender
 		$sender = [
 			'fullName' => 'ETRS',
-			'emailAddress' => '' // TODO
+			'emailAddress' => 'etrs@etrs.com.ar' // TODO: define email here?
 		];
 		
 		// Creates the email

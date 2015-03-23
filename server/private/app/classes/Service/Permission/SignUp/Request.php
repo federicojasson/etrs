@@ -33,7 +33,8 @@ class Request extends \App\Service\External {
 		
 		// Gets the inputs
 		$credentials = $this->getInputValue('credentials');
-		$recipient = $this->getInputValue('recipient');// TODO: filter recipient?
+		$recipient = $this->getInputValue('recipient');
+		$recipient['fullName'] = trimAndShrink($recipient['fullName']);
 		$userRole = $this->getInputValue('userRole');
 		
 		// Gets the signed-in user
@@ -101,10 +102,7 @@ class Request extends \App\Service\External {
 			
 			'recipient' => new \App\InputValidator\Json\JsonObject([
 				'fullName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-					return true;
-					// TODO: decide
-					//return $app->inputValidator->isValidString($input, 0, 97);
-					//return $app->inputValidator->isValidLine($input, 0, 97);
+					return $app->inputValidator->isValidLine($input, 0, 97);
 				}),
 				
 				'emailAddress' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
