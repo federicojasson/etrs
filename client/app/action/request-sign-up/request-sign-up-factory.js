@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.action.requestSignUp').factory('RequestSignUpAction', [
+		'dialog',
 		'inputValidator',
 		'Input',
 		'server',
@@ -29,7 +30,7 @@
 	/**
 	 * Defines the RequestSignUpAction class.
 	 */
-	function RequestSignUpActionFactory(inputValidator, Input, server) {
+	function RequestSignUpActionFactory(dialog, inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -72,12 +73,12 @@
 					}),
 					
 					emailAddress: new Input(function() {
-						// TODO
+						return inputValidator.isEmailAddress(this);
 					})
 				},
 				
 				userRole: new Input(function() {
-					// TODO
+					return inputValidator.isUserRole(this);
 				})
 			};
 		}
@@ -91,36 +92,42 @@
 				return;
 			}
 			
-			// TODO: confirmation dialog
-			
-			// Invokes the start callback
-			this.startCallback();
-			
-			// Requests the sign up
-			server.permission.signUp.request({
-				credentials: {
-					password: this.input.credentials.password.value
-				},
-				
-				recipient: {
-					fullName: this.input.recipient.fullName.value,
-					emailAddress: this.input.recipient.emailAddress.value
-				},
-				
-				userRole: this.input.userRole.value
-			}).then(function(output) {
-				if (! output.authenticated) {
-					// The user has not been authenticated
-					
-					// Invokes the not-authenticated callback
-					this.notAuthenticatedCallback();
-					
-					return;
+			// Opens a confirmation dialog
+			dialog.openInformation(
+				'Confirmar invitación',
+				'Está a punto de enviar una invitación a ' + this.input.recipient.emailAddress.value + '.\n' +
+				'¿Está seguro de que esa es la dirección de correo electrónico del invitado?',
+				function() {
+					// Invokes the start callback
+					this.startCallback();
+
+					// Requests the sign up
+					server.permission.signUp.request({
+						credentials: {
+							password: this.input.credentials.password.value
+						},
+
+						recipient: {
+							fullName: this.input.recipient.fullName.value,
+							emailAddress: this.input.recipient.emailAddress.value
+						},
+
+						userRole: this.input.userRole.value
+					}).then(function(output) {
+						if (! output.authenticated) {
+							// The user has not been authenticated
+
+							// Invokes the not-authenticated callback
+							this.notAuthenticatedCallback();
+
+							return;
+						}
+
+						// Invokes the success callback
+						this.successCallback();
+					}.bind(this)); // TODO: would it work here?
 				}
-				
-				// Invokes the success callback
-				this.successCallback();
-			}.bind(this));
+			);
 		};
 		
 		// ---------------------------------------------------------------------

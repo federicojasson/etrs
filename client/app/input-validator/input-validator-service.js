@@ -28,6 +28,28 @@
 		var _this = this;
 		
 		/**
+		 * Determines whether an input is an email address.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isEmailAddress = function(input) {
+			if (! _this.isValidString(input, 1, 254)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (! /(?!.*\p{Cc})(?!.* )(?!.*@.*@)^.+@.+$/.test(input.value)) {
+				// The input is not an email address
+				input.message = 'La dirección de correo electrónico no es válida';
+				return false;
+			}
+			
+			// The input is an email address
+			input.message = '';
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is valid.
 		 * 
 		 * Receives the input, which can be an Input instance or an object. In
@@ -59,6 +81,23 @@
 		};
 		
 		/**
+		 * Determines whether an input is a user role.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isUserRole = function(input) {
+			if (input.value === '') {
+				// The input is not a user role
+				input.message = 'Seleccione el rol de usuario';
+				return false;
+			}
+			
+			// The input is a user role
+			input.message = '';
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is a valid string.
 		 * 
 		 * Receives the input, the minimum allowed length and, optionally, the
@@ -70,9 +109,15 @@
 			
 			if (length < minimumLength) {
 				// The input is too short
-				input.message = '';
-				input.message += 'Este campo debe tener al menos ' + minimumLength + ' ';
-				input.message += (minimumLength === 1)? 'caracter' : 'caracteres';
+				
+				if (length === 0) {
+					// The input is empty
+					input.message = 'Este campo es obligatorio';
+				} else {
+					// The input is not empty
+					input.message = 'Este campo debe tener al menos ' + minimumLength + ' caracteres';
+				}
+				
 				return false;
 			}
 			

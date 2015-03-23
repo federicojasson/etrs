@@ -1,1 +1,124 @@
-TODO: invitation.html
+<h1>TODO</h1>
+
+<p>
+	TODO
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="requestSignUpAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-envelope"></span>
+				
+				<span class="icon-text">
+					Invitación
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del invitado:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! requestSignUpAction.input.recipient.fullName.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="requestSignUpAction.input.recipient.fullName.value"
+					popover="{{ requestSignUpAction.input.recipient.fullName.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre y apellido (opcional)"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! requestSignUpAction.input.recipient.emailAddress.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="requestSignUpAction.input.recipient.emailAddress.value"
+					popover="{{ requestSignUpAction.input.recipient.emailAddress.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					type="text"
+					placeholder="Dirección de correo electrónico"
+					class="form-control"
+				>
+			</div>
+			
+			<div class="form-group">
+				Indique el rol que cumplirá el invitado en el sistema:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! requestSignUpAction.input.userRole.valid
+				}"
+				class="form-group"
+			>
+				<select
+					ng-model="requestSignUpAction.input.userRole.value"
+					popover="{{ requestSignUpAction.input.userRole.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					class="form-control"
+				>
+					<option value="">Rol de usuario</option>
+					<option disabled></option>
+					<option value="ad">Administrador</option>
+					<option value="dr">Doctor</option>
+					<option value="op">Operador</option>
+				</select>
+			</div>
+		</fieldset>
+		
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-lock"></span>
+				
+				<span class="icon-text">
+					Credenciales
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese su contraseña:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! requestSignUpAction.input.credentials.password.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="requestSignUpAction.input.credentials.password.value"
+					popover="{{ requestSignUpAction.input.credentials.password.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					type="password"
+					placeholder="Contraseña"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-danger pull-right">
+				Enviar invitación
+			</button>
+		</div>
+	</form>
+</div>
