@@ -90,7 +90,7 @@ class Email {
 	 * Creates an email.
 	 * 
 	 * Receives the sender, the recipient, the subject, the body in HTML and an
-	 * alternative body in plain-text.
+	 * alternative body in plain text.
 	 */
 	private function create($sender, $recipient, $subject, $body, $alternativeBody) {
 		global $app;
@@ -127,7 +127,7 @@ class Email {
 	 * Creates an email to be sent on behalf of the server.
 	 * 
 	 * Receives the recipient, the subject, the body in HTML and an alternative
-	 * body in plain-text.
+	 * body in plain text.
 	 */
 	private function createOnServerBehalf($recipient, $subject, $body, $alternativeBody) {
 		// Builds the sender
