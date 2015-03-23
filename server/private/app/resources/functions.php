@@ -81,7 +81,7 @@ function getCurrentDateTime() {
 }
 
 /**
- * Determines whether an array contains a certain element.
+ * Determines whether a certain element is present in an array.
  * 
  * Receives the element and the array.
  */

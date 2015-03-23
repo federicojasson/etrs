@@ -33,7 +33,7 @@ class Database implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * Destroys a session.
+	 * Deletes a session.
 	 * 
 	 * Receives the session's ID.
 	 */
@@ -56,7 +56,7 @@ class Database implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * Performs a garbage-collection to destroy inactive sessions.
+	 * Performs a garbage-collection to delete inactive sessions.
 	 * 
 	 * Receives a session's maximum inactivity time (in seconds).
 	 */
@@ -75,7 +75,7 @@ class Database implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * Reads a session's data.
+	 * Returns a session's data.
 	 * 
 	 * Receives the session's ID.
 	 */
@@ -98,7 +98,7 @@ class Database implements \SessionHandlerInterface {
 	}
 
 	/**
-	 * Writes a session.
+	 * Creates or edits a session.
 	 * 
 	 * Receives the session's ID and data.
 	 */
