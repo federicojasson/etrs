@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.forgotPassword').controller('ForgotPasswordViewController', ForgotPasswordViewController);
+	angular.module('app.view.forgotPassword').controller('ForgotPasswordViewController', [
+		'$scope',
+		'RequestPasswordResetAction',
+		ForgotPasswordViewController
+	]);
 	
 	/**
 	 * Represents the forgot-password view.
 	 */
-	function ForgotPasswordViewController() {
+	function ForgotPasswordViewController($scope, RequestPasswordResetAction) {
 		var _this = this;
 		
 		/**
@@ -52,5 +56,54 @@
 		_this.isReady = function() {
 			return ready;
 		};
+		
+		/**
+		 * Includes the request-password-reset action.
+		 */
+		function includeRequestPasswordResetAction() {
+			// Initializes the action
+			var action = new RequestPasswordResetAction();
+			action.notAuthenticatedCallback = onRequestPasswordResetNotAuthenticated;
+			action.startCallback = onRequestPasswordResetStart;
+			action.successCallback = onRequestPasswordResetSuccess;
+			
+			// Includes the action
+			$scope.requestPasswordResetAction = action;
+		}
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Includes the actions
+			includeRequestPasswordResetAction();
+		}
+		
+		/**
+		 * Invoked when the user is not authenticated during the execution of
+		 * the request-password-reset action.
+		 */
+		function onRequestPasswordResetNotAuthenticated() {
+			// TODO
+		}
+		
+		/**
+		 * Invoked at the start of the request-password-reset action.
+		 */
+		function onRequestPasswordResetStart() {
+			// TODO
+		}
+		
+		/**
+		 * Invoked when the request-password-reset action is successful.
+		 */
+		function onRequestPasswordResetSuccess() {
+			// TODO
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();
