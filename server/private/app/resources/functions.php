@@ -137,10 +137,37 @@ function readJsonFile($path) {
 }
 
 /**
- * TODO: comment
+ * Reads the contents of a template file and replaces its placeholders.
+ * 
+ * Receives the file's path and a mapping containing placeholders as keys and
+ * replacements as values.
  */
-function readTemplateFile() {
-	// TODO
+function readTemplateFile($path, $mapping) {
+	// Reads the contents of the file
+	$contents = file_get_contents($path);
+	
+	// Replaces the placeholders
+	return replacePlaceholders($contents, $mapping);
+}
+
+/**
+ * Given a string with placeholders, it replaces them with specific strings.
+ * 
+ * Receives the string and a mapping containing placeholders as keys and
+ * replacements as values.
+ */
+function replacePlaceholders($string, $mapping) {
+	// Gets the placeholders and the replacements in different arrays
+	$placeholders = array_keys($mapping);
+	$replacements = array_values($mapping);
+	
+	// Prepends a colon to each placeholder
+	foreach ($placeholders as &$placeholder) {
+		$placeholder = ':' . $placeholder;
+	}
+
+	// Replaces the placeholders
+	return str_replace($placeholders, $replacements, $string);
 }
 
 /**

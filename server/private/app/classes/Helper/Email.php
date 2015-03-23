@@ -36,18 +36,18 @@ class Email {
 		$subject = 'Restablecimiento de contraseña';
 		
 		// Builds a placeholder mapping
-		$placeholderMapping = [
+		$mapping = [
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
 		];
 		
 		// Builds the body
 		$path = DIRECTORY_EMAILS . '/password-reset.html';
-		$body = readTemplateFile($path, $placeholderMapping);
+		$body = readTemplateFile($path, $mapping);
 		
 		// Builds the alternative body
 		$path = DIRECTORY_EMAILS . '/password-reset.txt';
-		$alternativeBody = readTemplateFile($path, $placeholderMapping);
+		$alternativeBody = readTemplateFile($path, $mapping);
 		
 		// Creates the email
 		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
@@ -66,18 +66,18 @@ class Email {
 		$subject = 'Invitación';
 		
 		// Builds a placeholder mapping
-		$placeholderMapping = [
+		$mapping = [
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
 		];
 		
 		// Builds the body
 		$path = DIRECTORY_EMAILS . '/sign-up.html';
-		$body = readTemplateFile($path, $placeholderMapping);
+		$body = readTemplateFile($path, $mapping);
 		
 		// Builds the alternative body
 		$path = DIRECTORY_EMAILS . '/sign-up.txt';
-		$alternativeBody = readTemplateFile($path, $placeholderMapping);
+		$alternativeBody = readTemplateFile($path, $mapping);
 		
 		// Creates the email
 		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
