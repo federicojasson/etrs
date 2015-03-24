@@ -50,6 +50,23 @@
 		};
 		
 		/**
+		 * Determines whether an input is a gender.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isGender = function(input) {
+			if (input.value === '') {
+				// The input is not a gender
+				input.message = 'Seleccione el sexo';
+				return false;
+			}
+			
+			// The input is a gender
+			input.message = '';
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is valid.
 		 * 
 		 * Receives the input, which can be an Input instance or an object. In
@@ -78,6 +95,46 @@
 			}
 			
 			return valid;
+		};
+		
+		/**
+		 * Determines whether an input is a user ID.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isUserId = function(input) {
+			if (! _this.isValidString(input, 3, 32)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (! /^[.0-9A-Za-z]*$/.test(input.value)) {
+				// The input contains invalid characters
+				input.message = 'El nombre de usuario sólo puede tener letras, dígitos y puntos';
+				return false;
+			}
+			
+			if (/\.{2}/.test(input.value)) {
+				// The input contains consecutive dots
+				input.message = 'El nombre de usuario no puede tener puntos consecutivos';
+				return false;
+			}
+			
+			if (/^\..*$/.test(input.value)) {
+				// The input starts with a dot
+				input.message = 'El nombre de usuario no puede comenzar con un punto';
+				return false;
+			}
+			
+			if (/^.*\.$/.test(input.value)) {
+				// The input ends with a dot
+				input.message = 'El nombre de usuario no puede terminar con un punto';
+				return false;
+			}
+			
+			// The input is a user ID
+			input.message = '';
+			return true;
 		};
 		
 		/**
