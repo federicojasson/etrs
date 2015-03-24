@@ -117,18 +117,13 @@
 		 * the reset-password action.
 		 */
 		function onResetPasswordNotAuthenticated() {
-			ready = true;
-			
-			// TODO: redirect before?
+			// Redirects the user to the home route
+			router.redirect('home');
 			
 			// Opens an error dialog
 			dialog.openError(
 				'Credenciales rechazadas',
-				'El permiso para restablecer su contraseña ha expirado.',
-				function() {
-					// Redirects the user to the home route
-					router.redirect('home');
-				}
+				'El permiso para restablecer su contraseña ha expirado.'
 			);
 		}
 		
@@ -143,18 +138,13 @@
 		 * Invoked when the reset-password action is successful.
 		 */
 		function onResetPasswordSuccess() {
-			ready = true;
-			
-			// TODO: redirect before?
+			// Redirects the user to the home route
+			router.redirect('home');
 			
 			// Opens an information dialog
 			dialog.openInformation(
 				'Contraseña restablecida',
-				'Su contraseña ha sido modificada.',
-				function() {
-					// Redirects the user to the home route
-					router.redirect('home');
-				}
+				'Su contraseña ha sido modificada.'
 			);
 		}
 		

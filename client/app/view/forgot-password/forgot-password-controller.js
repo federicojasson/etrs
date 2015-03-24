@@ -108,19 +108,14 @@
 		 * Invoked when the request-password-reset action is successful.
 		 */
 		function onRequestPasswordResetSuccess() {
-			ready = true;
-			
-			// TODO: redirect before?
+			// Redirects the user to the home route
+			router.redirect('home');
 			
 			// Opens an information dialog
 			dialog.openInformation(
 				'Correo electrónico enviado',
 				'Se ha enviado un correo electrónico a su casilla.\n' +
-				'Para restablecer su contraseña, siga los pasos indicados en el mismo.',
-				function() {
-					// Redirects the user to the home route
-					router.redirect('home');
-				}
+				'Para restablecer su contraseña, siga los pasos indicados en el mismo.'
 			);
 		}
 		

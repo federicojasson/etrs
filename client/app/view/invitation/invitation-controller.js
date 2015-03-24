@@ -107,18 +107,13 @@
 		 * Invoked when the request-sign-up action is successful.
 		 */
 		function onRequestSignUpSuccess() {
-			ready = true;
-			
-			// TODO: redirect before?
+			// Redirects the user to the home route
+			router.redirect('home');
 			
 			// Opens an information dialog
 			dialog.openInformation(
 				'Invitación enviada',
-				'Se ha enviado una invitación a la casilla de correo electrónico indicada.',
-				function() {
-					// Redirects the user to the home route
-					router.redirect('home');
-				}
+				'Se ha enviado una invitación a la casilla de correo electrónico indicada.'
 			);
 		}
 		
