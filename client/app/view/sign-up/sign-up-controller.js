@@ -98,10 +98,8 @@
 				if (! output.authenticated) {
 					// The sign-up permission has not been authenticated
 					
-					// Redirects the user to the home route
-					router.redirect('home');
-					
-					// TODO: show dialog?
+					// Invokes the not-authenticated callback
+					onSignUpNotAuthenticated();
 					
 					return;
 				}
