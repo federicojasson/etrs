@@ -1,1 +1,177 @@
-TODO: sign-up.html
+<div class="row">
+	<div class="col-sm-3">
+		<div class="user-image"></div>
+	</div>
+	
+	<div class="col-sm-7 col-sm-offset-2">
+		<div class="clearfix well">
+			<form ng-submit="signUpAction.execute()" novalidate>
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-user"></span>
+						
+						<span class="icon-text">
+							Datos personales
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						Ingrese sus datos personales:
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! signUpAction.input.firstName.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="signUpAction.input.firstName.value"
+							popover="{{ signUpAction.input.firstName.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							line
+							type="text"
+							placeholder="Nombre"
+							class="form-control"
+						>
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! signUpAction.input.lastName.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="signUpAction.input.lastName.value"
+							popover="{{ signUpAction.input.lastName.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							line
+							type="text"
+							placeholder="Apellido"
+							class="form-control"
+						>
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! signUpAction.input.gender.valid
+						}"
+						class="form-group"
+					>
+						<select
+							ng-model="signUpAction.input.gender.value"
+							popover="{{ signUpAction.input.gender.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							class="form-control"
+						>
+							<option value="">Sexo</option>
+							<option disabled></option>
+							<option value="f">Mujer</option>
+							<option value="m">Hombre</option>
+						</select>
+					</div>
+				</fieldset>
+				
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-lock"></span>
+						
+						<span class="icon-text">
+							Credenciales
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						Ingrese un nombre de usuario, una dirección de correo
+						electrónico y una contraseña:
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! signUpAction.input.id.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="signUpAction.input.id.value"
+							popover="{{ signUpAction.input.id.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="text"
+							placeholder="Nombre de usuario"
+							class="form-control"
+						>
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! signUpAction.input.emailAddress.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="signUpAction.input.emailAddress.value"
+							popover="{{ signUpAction.input.emailAddress.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="text"
+							placeholder="Dirección de correo electrónico"
+							class="form-control"
+						>
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! signUpAction.input.password.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="signUpAction.input.password.value"
+							popover="{{ signUpAction.input.password.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="password"
+							placeholder="Contraseña"
+							class="form-control"
+						>
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! signUpAction.input.passwordConfirmation.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="signUpAction.input.passwordConfirmation.value"
+							popover="{{ signUpAction.input.passwordConfirmation.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="password"
+							placeholder="Confirmar contraseña"
+							class="form-control"
+						>
+					</div>
+				</fieldset>
+				
+				<div class="form-group">
+					<button type="submit" class="btn btn-success pull-right">
+						Registrarse
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
