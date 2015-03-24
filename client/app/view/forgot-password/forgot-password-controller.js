@@ -110,6 +110,8 @@
 		function onRequestPasswordResetSuccess() {
 			ready = true;
 			
+			// TODO: redirect before?
+			
 			// Opens an information dialog
 			dialog.openInformation(
 				'Correo electrónico enviado',
