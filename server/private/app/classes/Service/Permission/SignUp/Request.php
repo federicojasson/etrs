@@ -59,6 +59,8 @@ class Request extends \App\Service\External {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $userRole, $signedInUser) {
+			// TODO: delete by email address???
+			
 			// Initializes the sign-up permission
 			$signUpPermission = new \App\Data\Entity\SignUpPermission();
 			

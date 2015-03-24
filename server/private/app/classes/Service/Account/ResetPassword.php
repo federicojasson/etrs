@@ -29,7 +29,43 @@ class ResetPassword extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$credentials = $this->getInputValue('credentials', createArrayFilter('hex2bin'));
+		$password = $this->getInputValue('password');
+		
+		// Authenticates the password-reset permission
+		$authenticated = $app->authenticator->authenticatePasswordResetPermissionByPassword($credentials['id'], $credentials['password']);
+		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The password-reset permission has not been authenticated
+			return;
+		}
+		
+		// Computes the password's hash
+		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($credentials, $hash, $salt, $keyStretchingIterations) {
+			// Gets the password-reset permission
+			$passwordResetPermission = $entityManager->getReference('App\Data\Entity\PasswordResetPermission', $credentials['id']);
+			
+			// Gets the user
+			$user = $passwordResetPermission->getUser();
+			
+			// Edits the user
+			$user->setLastEditionDateTime();
+			$user->setPasswordHash($hash);
+			$user->setSalt($salt);
+			$user->setKeyStretchingIterations($keyStretchingIterations);
+			
+			// Deletes the password-reset permission
+			$entityManager->remove($passwordResetPermission);
+		});
 	}
 	
 	/**
