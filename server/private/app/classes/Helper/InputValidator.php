@@ -145,6 +145,21 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a valid password.
+	 * 
+	 * Receives the input.
+	 */
+	public function isValidPassword($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Determines whether the input matches a regular expression
+		return preg_match('/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.{8,})/', $input);
+	}
+	
+	/**
 	 * Determines whether an input is a valid string.
 	 * 
 	 * Receives the input, the minimum allowed length and, optionally, the

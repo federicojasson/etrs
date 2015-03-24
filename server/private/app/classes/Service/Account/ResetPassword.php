@@ -45,7 +45,19 @@ class ResetPassword extends \App\Service\External {
 		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			// TODO
+			'credentials' => new \App\InputValidator\Json\JsonObject([
+				'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				}),
+				
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isRandomPassword($input);
+				})
+			]),
+			
+			'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidPassword($input);
+			})
 		]);
 		
 		// Gets the input
