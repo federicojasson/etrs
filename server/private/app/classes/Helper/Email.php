@@ -87,6 +87,30 @@ class Email {
 	}
 	
 	/**
+	 * Sends a welcome email.
+	 * 
+	 * Receives the recipient.
+	 */
+	public function sendWelcome($recipient) {
+		// Defines the subject
+		$subject = 'Bienvenido';
+		
+		// Builds the body
+		$path = DIRECTORY_EMAILS . '/welcome.html';
+		$body = readTemplateFile($path, []);
+		
+		// Builds the alternative body
+		$path = DIRECTORY_EMAILS . '/welcome.txt';
+		$alternativeBody = readTemplateFile($path, []);
+		
+		// Creates the email
+		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
+		
+		// Sends the email
+		return $this->send($email);
+	}
+	
+	/**
 	 * Creates an email.
 	 * 
 	 * Receives the sender, the recipient, the subject, the body in HTML and an

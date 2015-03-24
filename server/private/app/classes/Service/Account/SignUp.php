@@ -29,7 +29,75 @@ class SignUp extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$credentials = $this->getInputValue('credentials', createArrayFilter('hex2bin'));
+		$id = $this->getInputValue('id');
+		$emailAddress = $this->getInputValue('emailAddress');
+		$password = $this->getInputValue('password');
+		$firstName = $this->getInputValue('firstName', 'trimAndShrink');
+		$lastName = $this->getInputValue('lastName', 'trimAndShrink');
+		$gender = $this->getInputValue('gender');
+		
+		// Authenticates the sign-up permission
+		$authenticated = $app->authenticator->authenticateSignUpPermissionByPassword($credentials['id'], $credentials['password']);
+		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The sign-up permission has not been authenticated
+			return;
+		}
+		
+		// Determines whether the user ID is available
+		$available = is_null($app->data->getRepository('App\Data\Entity\User')->find($id));
+		
+		// Sets an output
+		$this->setOutputValue('available', $available);
+		
+		if (! $available) {
+			// The user ID is not available
+			return;
+		}
+		
+		// Computes the password's hash
+		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($credentials, $id, $emailAddress, $hash, $salt, $keyStretchingIterations, $firstName, $lastName, $gender) {
+			// Gets the sign-up permission
+			$signUpPermission = $entityManager->getReference('App\Data\Entity\SignUpPermission', $credentials['id']);
+			
+			// Initializes the user
+			$user = new \App\Data\Entity\User();
+			
+			// Creates the user
+			$user->setId($id);
+			$user->setRole($signUpPermission->getUserRole());
+			$user->setEmailAddress($emailAddress);
+			$user->setPasswordHash($hash);
+			$user->setSalt($salt);
+			$user->setKeyStretchingIterations($keyStretchingIterations);
+			$user->setFirstName($firstName);
+			$user->setLastName($lastName);
+			$user->setGender($gender);
+			$user->setCreator($signUpPermission->getCreator());
+			$entityManager->persist($user);
+			
+			// Deletes the sign-up permission
+			$entityManager->remove($signUpPermission);
+		});
+		
+		// Builds an email recipient
+		$recipient = [
+			'fullName' => $firstName . ' ' . $lastName,
+			'emailAddress' => $emailAddress
+		];
+		
+		// Sends a welcome email
+		$app->email->sendWelcome($recipient);
 	}
 	
 	/**
