@@ -29,7 +29,26 @@ class ResetVersions extends \App\Service\Internal {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO: reset-versions
+		global $app;
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) {
+			// Resets the medicines' versions
+			$entityManager->createQueryBuilder()
+				->update('App\Data\Entity\Medicine', 'm')
+				->set('m.version', 0)
+				->getQuery()
+				->execute();
+			
+			// Resets the users' versions
+			$entityManager->createQueryBuilder()
+				->update('App\Data\Entity\User', 'u')
+				->set('u.version', 0)
+				->getQuery()
+				->execute();
+			
+			// TODO: reset-versions of all entities here
+		});
 	}
 	
 	/**

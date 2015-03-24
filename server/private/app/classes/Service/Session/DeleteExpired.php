@@ -49,7 +49,7 @@ class DeleteExpired extends \App\Service\Internal {
 				->setParameter('ageLimit', $ageLimit)
 				->setParameter('inactivityLimit', $inactivityLimit)
 				->getQuery()
-				->getResult();
+				->execute();
 		});
 	}
 	
