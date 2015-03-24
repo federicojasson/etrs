@@ -56,7 +56,7 @@ class Request extends \App\Service\External {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $user) {
-			// Deletes the user's password-reset permission (if any)
+			// Deletes any password-reset permission associated with the user
 			$entityManager->getConnection()
 				->prepare('
 					DELETE

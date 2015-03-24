@@ -58,8 +58,18 @@ class Request extends \App\Service\External {
 		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
 		
 		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $userRole, $signedInUser) {
-			// TODO: delete by email address???
+		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $userRole, $recipient, $signedInUser) {
+			// Deletes any sign-up permission associated with the email address
+			$entityManager->getConnection()
+				->prepare('
+					DELETE
+					FROM sign_up_permissions
+					WHERE email_address = :emailAddress
+					LIMIT 1
+				')
+				->execute([
+					'emailAddress' => $recipient['emailAddress']
+				]);
 			
 			// Initializes the sign-up permission
 			$signUpPermission = new \App\Data\Entity\SignUpPermission();
@@ -69,6 +79,7 @@ class Request extends \App\Service\External {
 			$signUpPermission->setSalt($salt);
 			$signUpPermission->setKeyStretchingIterations($keyStretchingIterations);
 			$signUpPermission->setUserRole($userRole);
+			$signUpPermission->setEmailAddress($recipient['emailAddress']);
 			$signUpPermission->setCreator($signedInUser);
 			$entityManager->persist($signUpPermission);
 			

@@ -59,6 +59,20 @@ class SignUpPermission {
 	private $creator;
 	
 	/**
+	 * The email address.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="email_address",
+	 *		type="string",
+	 *		length=254,
+	 *		nullable=false
+	 *	)
+	 */
+	private $emailAddress;
+	
+	/**
 	 * The ID.
 	 * 
 	 * Annotations:
@@ -205,6 +219,15 @@ class SignUpPermission {
 	 */
 	public function setCreator($user) {
 		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets the email address.
+	 * 
+	 * Receives the email address to be set.
+	 */
+	public function setEmailAddress($emailAddress) {
+		$this->emailAddress = $emailAddress;
 	}
 	
 	/**
