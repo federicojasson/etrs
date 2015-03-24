@@ -63,10 +63,14 @@
 		
 		/**
 		 * Includes the reset-password action.
+		 * 
+		 * Receives the password-reset permission's ID and password.
 		 */
-		function includeResetPasswordAction() {
+		function includeResetPasswordAction(id, password) {
 			// Initializes the action
 			var action = new ResetPasswordAction();
+			action.input.credentials.id.value = id;
+			action.input.credentials.password.value = password;
 			action.notAuthenticatedCallback = onResetPasswordNotAuthenticated;
 			action.startCallback = onResetPasswordStart;
 			action.successCallback = onResetPasswordSuccess;
@@ -102,7 +106,7 @@
 				}
 				
 				// Includes the actions
-				includeResetPasswordAction();
+				includeResetPasswordAction(id, password);
 				
 				ready = true;
 			});
