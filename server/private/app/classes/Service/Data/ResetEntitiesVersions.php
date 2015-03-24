@@ -21,9 +21,9 @@
 namespace App\Service\Data;
 
 /**
- * Represents the /data/reset-versions service.
+ * Represents the /data/reset-entities-versions service.
  */
-class ResetVersions extends \App\Service\Internal {
+class ResetEntitiesVersions extends \App\Service\Internal {
 	
 	/**
 	 * Executes the service.
@@ -47,7 +47,7 @@ class ResetVersions extends \App\Service\Internal {
 				->getQuery()
 				->execute();
 			
-			// TODO: reset-versions of all entities here
+			// TODO: reset versions of all entities here
 		});
 	}
 	

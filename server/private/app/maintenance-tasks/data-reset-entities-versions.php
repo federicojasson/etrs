@@ -29,4 +29,4 @@ define('DIRECTORY_ROOT', __DIR__ . '/../../..');
 require_once DIRECTORY_ROOT . '/private/app/app.php';
 
 // Executes the maintenance task
-executeMaintenanceTask('/data/reset-versions');
+executeMaintenanceTask('/data/reset-entities-versions');

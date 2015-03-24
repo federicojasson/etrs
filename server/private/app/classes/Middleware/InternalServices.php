@@ -33,7 +33,7 @@ class InternalServices extends Services {
 			// TODO: define internal services here
 			'/data/check-configuration',
 			'/data/generate-proxies',
-			'/data/reset-versions',
+			'/data/reset-entities-versions',
 			'/session/delete-expired'
 		];
 	}
