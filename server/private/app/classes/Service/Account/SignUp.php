@@ -45,7 +45,39 @@ class SignUp extends \App\Service\External {
 		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			// TODO
+			'credentials' => new \App\InputValidator\Json\JsonObject([
+				'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				}),
+				
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isRandomPassword($input);
+				})
+			]),
+			
+			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isUserId($input);
+			}),
+			
+			'emailAddress' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isEmailAddress($input);
+			}),
+			
+			'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidPassword($input);
+			}),
+			
+			'firstName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidLine($input, 1, 48);
+			}),
+			
+			'lastName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidLine($input, 1, 48);
+			}),
+			
+			'gender' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isGender($input);
+			})
 		]);
 		
 		// Gets the input

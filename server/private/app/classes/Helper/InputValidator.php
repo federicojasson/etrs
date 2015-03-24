@@ -41,6 +41,18 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a gender.
+	 * 
+	 * Receives the input.
+	 */
+	public function isGender($input) {
+		return inArray($input, [
+			GENDER_FEMALE,
+			GENDER_MALE
+		]);
+	}
+	
+	/**
 	 * Determines whether a JSON input is valid.
 	 * 
 	 * Receives the input and a JSON input validator.
@@ -83,6 +95,21 @@ class InputValidator {
 		
 		// Determines whether the input matches a regular expression
 		return preg_match('/^[0-9A-Fa-f]{' . 2 * RANDOM_PASSWORD_LENGTH . '}$/', $input);
+	}
+	
+	/**
+	 * Determines whether an input is a user ID.
+	 * 
+	 * Receives the input.
+	 */
+	public function isUserId($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Determines whether the input matches a regular expression
+		return preg_match('/(?!.*\.{2})(?!\.)(?!.*\.$)^[.0-9A-Za-z]{3,32}$/', $input);
 	}
 	
 	/**
@@ -156,7 +183,7 @@ class InputValidator {
 		}
 		
 		// Determines whether the input matches a regular expression
-		return preg_match('/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.{8,})/', $input);
+		return preg_match('/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])^.{8,}$/', $input);
 	}
 	
 	/**
