@@ -19,20 +19,20 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.resetPassword').controller('ResetPasswordViewController', [
+	angular.module('app.view.signUp').controller('SignUpViewController', [
 		'$scope',
 		'$stateParams',
-		'ResetPasswordAction',
+		'SignUpAction',
 		'dialog',
 		'router',
 		'server',
-		ResetPasswordViewController
+		SignUpViewController
 	]);
 	
 	/**
-	 * Represents the reset-password view.
+	 * Represents the sign-up view.
 	 */
-	function ResetPasswordViewController($scope, $stateParams, ResetPasswordAction, dialog, router, server) {
+	function SignUpViewController($scope, $stateParams, SignUpAction, dialog, router, server) {
 		var _this = this;
 		
 		/**
@@ -44,14 +44,14 @@
 		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
-			return 'app/view/reset-password/reset-password.html';
+			return 'app/view/sign-up/sign-up.html';
 		};
 		
 		/**
 		 * Returns the title to set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Restablecer contraseña';
+			return 'Registrarse';
 		};
 		
 		/**
@@ -62,21 +62,22 @@
 		};
 		
 		/**
-		 * Includes the reset-password action.
+		 * Includes the sign-up action.
 		 * 
-		 * Receives the password-reset permission's ID and password.
+		 * Receives the sign-up permission's ID and password.
 		 */
-		function includeResetPasswordAction(id, password) {
+		function includeSignUpAction(id, password) {
 			// Initializes the action
-			var action = new ResetPasswordAction();
+			var action = new SignUpAction();
 			action.input.credentials.id.value = id;
 			action.input.credentials.password.value = password;
-			action.notAuthenticatedCallback = onResetPasswordNotAuthenticated;
-			action.startCallback = onResetPasswordStart;
-			action.successCallback = onResetPasswordSuccess;
+			action.notAuthenticatedCallback = onSignUpNotAuthenticated;
+			action.notAvailableCallback = onSignUpNotAvailable;
+			action.startCallback = onSignUpStart;
+			action.successCallback = onSignUpSuccess;
 			
 			// Includes the action
-			$scope.resetPasswordAction = action;
+			$scope.signUpAction = action;
 		}
 		
 		/**
@@ -87,15 +88,15 @@
 			var id = $stateParams.id;
 			var password = $stateParams.password;
 			
-			// Authenticates the password-reset permission
-			server.permission.passwordReset.authenticate({
+			// Authenticates the sign-up permission
+			server.permission.signUp.authenticate({
 				credentials: {
 					id: id,
 					password: password
 				}
 			}).then(function(output) {
 				if (! output.authenticated) {
-					// The password-reset permission has not been authenticated
+					// The sign-up permission has not been authenticated
 					
 					// Redirects the user to the home route
 					router.redirect('home');
@@ -106,45 +107,63 @@
 				}
 				
 				// Includes the actions
-				includeResetPasswordAction(id, password);
+				includeSignUpAction(id, password);
 				
 				ready = true;
 			});
 		}
 		
 		/**
-		 * Invoked when the password-reset permission is not authenticated
-		 * during the execution of the reset-password action.
+		 * Invoked when the sign-up permission is not authenticated during the
+		 * execution of the sign-up action.
 		 */
-		function onResetPasswordNotAuthenticated() {
+		function onSignUpNotAuthenticated() {
 			// Redirects the user to the home route
 			router.redirect('home');
 			
 			// Opens an error dialog
 			dialog.openError(
 				'Credenciales rechazadas',
-				'El permiso para restablecer su contraseña ha expirado.'
+				'El permiso para registrarse ha expirado.'
 			);
 		}
 		
 		/**
-		 * Invoked at the start of the reset-password action.
+		 * Invoked when the user ID provided to the sign-up action is not
+		 * available.
 		 */
-		function onResetPasswordStart() {
+		function onSignUpNotAvailable() {
+			ready = true;
+			
+			// Opens an error dialog
+			dialog.openError(
+				'Nombre de usuario no disponible',
+				'El nombre de usuario elegido ya se encuentra en uso.\n' +
+				'Ingrese otro.'
+			);
+		}
+		
+		/**
+		 * Invoked at the start of the sign-up action.
+		 */
+		function onSignUpStart() {
 			ready = false;
 		}
 		
 		/**
-		 * Invoked when the reset-password action is successful.
+		 * Invoked when the sign-up action is successful.
 		 */
-		function onResetPasswordSuccess() {
+		function onSignUpSuccess() {
 			// Redirects the user to the home route
 			router.redirect('home');
 			
 			// Opens an information dialog
 			dialog.openInformation(
-				'Contraseña restablecida',
-				'Su contraseña ha sido modificada.'
+				'Cuenta de usuario creada',
+				'Su cuenta de usuario ha sido creada.\n' +
+				'No revele nunca su contraseña.\n' +
+				'\n' +
+				'La seguridad de la información es responsabilidad de todos.'
 			);
 		}
 		
