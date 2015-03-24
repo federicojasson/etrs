@@ -35,6 +35,7 @@ class ExternalServices extends Services {
 			'/account/reset-password',
 			'/account/sign-in',
 			'/account/sign-out',
+			'/account/sign-up',
 			'/account/signed-in',
 			'/medicine/create',
 			'/medicine/edit',
