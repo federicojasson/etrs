@@ -19,13 +19,27 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.account').controller('AccountViewController', AccountViewController);
+	angular.module('app.view.account').controller('AccountViewController', [
+		'data',
+		'fullNameFilter',
+		AccountViewController
+	]);
 	
 	/**
 	 * Represents the account view.
 	 */
-	function AccountViewController() {
+	function AccountViewController(data, fullNameFilter) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = false;
+		
+		/**
+		 * The signed-in user.
+		 */
+		var signedInUser = null;
 		
 		/**
 		 * Returns the template's URL.
@@ -38,14 +52,34 @@
 		 * Returns the title to set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Cuenta de usuario'; // TODO: or full name?
+			return fullNameFilter(signedInUser);
 		};
 		
 		/**
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// TODO: prepare data service?
+
+			// Gets the signed-in user
+			data.getSignedInUser().then(function(loadedUser) {
+				// Sets the signed-in user
+				signedInUser = loadedUser;
+				
+				ready = true;
+			});
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();

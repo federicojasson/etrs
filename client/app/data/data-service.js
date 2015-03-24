@@ -61,8 +61,8 @@
 			$timeout(function() {
 				deferredTask.resolve({
 					role: 'ad',
-					firstName: 'Usuario',
-					lastName: 'Administrador',
+					firstName: 'Federico',
+					lastName: 'Jasson',
 					gender: 'm'
 				});
 			}, 0);
