@@ -118,6 +118,16 @@
 				},
 				
 				{
+					name: 'resetPassword',
+					url: '/account/reset-password/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
+					data: {
+						views: {
+							__: 'ResetPasswordViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'signIn',
 					url: '/account/sign-in',
 					data: {

@@ -19,15 +19,38 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.forgotPassword',
-		'app.view.home',
-		'app.view.invitation',
-		'app.view.medicine',
-		'app.view.medicines',
-		'app.view.newMedicine',
-		'app.view.resetPassword',
-		'app.view.signIn'
-	]);
+	angular.module('app.view.resetPassword').controller('ResetPasswordViewController', ResetPasswordViewController);
+	
+	/**
+	 * Represents the reset-password view.
+	 */
+	function ResetPasswordViewController() {
+		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
+		
+		/**
+		 * Returns the template's URL.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/reset-password/reset-password.html';
+		};
+		
+		/**
+		 * Returns the title to set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return 'Restablecer contraseña';
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return ready;
+		};
+	}
 })();
