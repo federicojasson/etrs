@@ -43,6 +43,7 @@
 				'/medicine/create',
 				'/medicine/edit',
 				'/medicine/get',
+				'/medicine/search',
 				'/permission/password-reset/authenticate',
 				'/permission/password-reset/request',
 				'/permission/sign-up/authenticate',
