@@ -100,7 +100,7 @@ abstract class Service  {
 			$value = call_user_func($filter, $value);
 		}
 		
-		// Sets the output's value
+		// Sets the value
 		$this->output[$key] = $value;
 	}
 	

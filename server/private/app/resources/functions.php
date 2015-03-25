@@ -22,6 +22,16 @@
  * This script defines global functions.
  */
 
+/**
+ * Converts a string from camelCase to PascalCase.
+ * 
+ * Receives the string.
+ */
+function camelToPascalCase($string) {
+	// Converts the first character to uppercase
+	return ucfirst($string);
+}
+
 /*
  * Creates an array filter.
  * 

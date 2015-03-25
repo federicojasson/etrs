@@ -33,12 +33,25 @@ class Helpers extends \Slim\Middleware {
 		$helpers = $this->getHelpers();
 		
 		// Registers the helpers
-		foreach ($helpers as $name => $class) {
-			$this->registerHelper($name, $class);
+		foreach ($helpers as $helper) {
+			$this->registerHelper($helper);
 		}
 		
 		// Calls the next middleware
 		$this->next->call();
+	}
+	
+	/**
+	 * Returns a helper's class.
+	 * 
+	 * Receives the helper's name.
+	 */
+	private function getHelperClass($name) {
+		// Converts the name from camelCase to PascalCase
+		$name = camelToPascalCase($name);
+		
+		// Builds the class
+		return 'App\Helper\\' . $name;
 	}
 	
 	/**
@@ -47,27 +60,30 @@ class Helpers extends \Slim\Middleware {
 	private function getHelpers() {
 		return [
 			// TODO: define helpers here
-			'accessValidator' => 'App\Helper\AccessValidator',
-			'account' => 'App\Helper\Account',
-			'assertion' => 'App\Helper\Assertion',
-			'authenticator' => 'App\Helper\Authenticator',
-			'cryptography' => 'App\Helper\Cryptography',
-			'data' => 'App\Helper\Data',
-			'email' => 'App\Helper\Email',
-			'inputValidator' => 'App\Helper\InputValidator',
-			'parameters' => 'App\Helper\Parameters',
-			'response' => 'App\Helper\Response',
-			'session' => 'App\Helper\Session'
+			'accessValidator',
+			'account',
+			'assertion',
+			'authenticator',
+			'cryptography',
+			'data',
+			'email',
+			'inputValidator',
+			'parameters',
+			'response',
+			'session'
 		];
 	}
 	
 	/**
 	 * Registers a helper.
 	 * 
-	 * Receives the helper's name and class.
+	 * Receives the helper's name.
 	 */
-	private function registerHelper($name, $class) {
+	private function registerHelper($name) {
 		global $app;
+		
+		// Gets the helper's class
+		$class = $this->getHelperClass($name);
 		
 		// Registers a singleton initializer
 		$app->container->singleton($name, function() use ($class) {

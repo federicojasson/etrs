@@ -56,7 +56,7 @@ abstract class External extends Service  {
 	 * Receives the input's key and, optionally, a filter for the value.
 	 */
 	protected function getInputValue($key, $filter = null) {
-		// Gets the input's value
+		// Gets the value
 		$value = $this->input[$key];
 		
 		if (is_null($value)) {

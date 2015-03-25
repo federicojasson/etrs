@@ -29,14 +29,12 @@ class Configuration extends \Slim\Middleware {
 	 * Calls the middleware.
 	 */
 	public function call() {
-		global $app;
-		
-		// Gets the configurations
-		$configurations = $this->getConfigurations();
+		// Gets the operation modes
+		$operationModes = $this->getOperationModes();
 		
 		// Applies the appropriate configuration
-		foreach ($configurations as $operationMode => $class) {
-			$app->configureMode($operationMode, new $class());
+		foreach ($operationModes as $operationMode) {
+			$this->tryApplyConfiguration($operationMode);
 		}
 		
 		// Calls the next middleware
@@ -44,14 +42,44 @@ class Configuration extends \Slim\Middleware {
 	}
 	
 	/**
-	 * Returns the configurations.
+	 * Returns the class of the configuration corresponding to a certain
+	 * operation mode.
+	 * 
+	 * Receives the operation mode.
 	 */
-	private function getConfigurations() {
+	private function getConfigurationClass($operationMode) {
+		// Converts the operation mode from camelCase to PascalCase
+		$operationMode = camelToPascalCase($operationMode);
+		
+		// Builds the class
+		return 'App\Configuration\\' . $operationMode;
+	}
+	
+	/**
+	 * Returns the operation modes.
+	 */
+	private function getOperationModes() {
 		return [
-			OPERATION_MODE_DEVELOPMENT => 'App\Configuration\Development',
-			OPERATION_MODE_MAINTENANCE => 'App\Configuration\Maintenance',
-			OPERATION_MODE_PRODUCTION => 'App\Configuration\Production'
+			OPERATION_MODE_DEVELOPMENT,
+			OPERATION_MODE_MAINTENANCE,
+			OPERATION_MODE_PRODUCTION
 		];
+	}
+	
+	/**
+	 * Tries to apply the configuration corresponding to a certain operation
+	 * mode.
+	 * 
+	 * Receives the operation mode.
+	 */
+	private function tryApplyConfiguration($operationMode) {
+		global $app;
+		
+		// Gets the configuration's class
+		$class = $this->getConfigurationClass($operationMode);
+		
+		// Tries to apply the configuration
+		$app->configureMode($operationMode, new $class());
 	}
 	
 }
