@@ -32,6 +32,19 @@ function camelToPascalCase($string) {
 	return ucfirst($string);
 }
 
+/**
+ * Determines whether an array contains duplicate elements.
+ * 
+ * Receives the array.
+ */
+function containsDuplicates($array) {
+	// TODO: comment
+	$arrayWithoutDuplicates = array_unique($array);
+	
+	// TODO: comment
+	return count($array) !== count($arrayWithoutDuplicates);
+}
+
 /*
  * Creates an array filter.
  * 

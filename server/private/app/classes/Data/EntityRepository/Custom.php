@@ -31,14 +31,14 @@ class Custom extends \Doctrine\ORM\EntityRepository {
 	 * Receives the entity's ID.
 	 */
 	public function findNonDeleted($id) {
-		// Builds a set of criteria
-		$criteria = [
+		// Builds a search criteria
+		$searchCriteria = [
 			'id' => $id,
 			'deleted' => false
 		];
 		
 		// Gets the entity
-		return $this->findOneBy($criteria);
+		return $this->findOneBy($searchCriteria);
 	}
 	
 }

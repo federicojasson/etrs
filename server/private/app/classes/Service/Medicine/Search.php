@@ -32,6 +32,7 @@ class Search extends \App\Service\External {
 		global $app;
 		
 		// Gets the inputs
+		$expression = $this->getInputValue('expression', 'trimAndShrink');
 		//TODO
 		
 		// TODO: comment
@@ -72,14 +73,50 @@ class Search extends \App\Service\External {
 		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			// TODO
+			'expression' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidLine($input, 0, 128);
+			}),
+			
+			'sortingCriteria' => new \App\InputValidator\Json\JsonArray(
+				new \App\InputValidator\Json\JsonObject([
+					'field' => new \App\InputValidator\Json\JsonValue(function($input) {
+						return inArray($input, [
+							'creationDateTime',
+							'lastEditionDateTime',
+							'name',
+							'creator',
+							'lastEditor'
+						]);
+					}),
+
+					'direction' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+						return $app->inputValidator->isSortingDirection($input);
+					})
+				])
+			),
+			
+			'page' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidInteger($input, 1);
+			}),
+			
+			'resultsPerPage' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidInteger($input, 1);
+			})
 		]);
 		
 		// Gets the input
 		$input = $this->getInput();
 		
 		// Validates the input
-		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
+		$valid = $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
+		
+		if (! $valid) {
+			// TODO: comment
+			return false;
+		}
+		
+		// TODO: comment
+		return ! containsDuplicates(array_column($input['sortingCriteria'], 'field'));
 	}
 	
 	/**

@@ -98,6 +98,18 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a sorting direction.
+	 * 
+	 * Receives the input.
+	 */
+	public function isSortingDirection($input) {
+		return inArray($input, [
+			SORTING_DIRECTION_ASCENDING,
+			SORTING_DIRECTION_DESCENDING
+		]);
+	}
+	
+	/**
 	 * Determines whether an input is a user ID.
 	 * 
 	 * Receives the input.
