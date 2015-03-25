@@ -41,6 +41,7 @@
 				'/account/sign-up',
 				'/account/signed-in',
 				'/medicine/create',
+				'/medicine/delete',
 				'/medicine/edit',
 				'/medicine/get',
 				'/medicine/search',
