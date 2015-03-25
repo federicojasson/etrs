@@ -59,6 +59,7 @@ class Request extends \App\Service\External {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $userRole, $recipient, $signedInUser) {
+			// TODO: can UDF be used to add LIMIT 1?
 			// Deletes any sign-up permission associated with the email address
 			$entityManager->getConnection()
 				->prepare('

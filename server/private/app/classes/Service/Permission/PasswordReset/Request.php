@@ -56,6 +56,7 @@ class Request extends \App\Service\External {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $user) {
+			// TODO: can UDF be used to add LIMIT 1?
 			// Deletes any password-reset permission associated with the user
 			$entityManager->getConnection()
 				->prepare('

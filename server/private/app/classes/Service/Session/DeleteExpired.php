@@ -41,6 +41,7 @@ class DeleteExpired extends \App\Service\Internal {
 		
 		// Executes a transaction
 		$app->data->transactional(function($entityManager) use ($ageLimit, $inactivityLimit) {
+			// TODO: use UDF for date diff calculation
 			// Deletes the expired sessions
 			$entityManager->createQueryBuilder()
 				->delete('App\Data\Entity\Session', 's')
