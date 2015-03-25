@@ -216,6 +216,11 @@ textarea {}
 	color: #333333;
 }
 
+.menu-item.active a, .menu-item.active a:focus, .menu-item.active a:hover {
+	border-color: #bbbbbb;
+	font-weight: bold;
+}
+
 .navigation-bar-header {
 	font-size: 1.3em;
 	text-transform: uppercase;

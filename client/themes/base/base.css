@@ -263,6 +263,8 @@ textarea {
 
 .menu-item a:focus, .menu-item a:hover {}
 
+.menu-item.active a, .menu-item.active a:focus, .menu-item.active a:hover {}
+
 .navigation-bar-header {
 	margin-bottom: 8px;
 	padding: 8px;

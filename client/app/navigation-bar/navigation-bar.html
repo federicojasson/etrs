@@ -12,12 +12,17 @@
 		heading="{{ menu.name }}"
 		is-open="menu.open"
 	>
-		<div ng-repeat="menuItem in menu.items" class="menu-item">
+		<div
+			ng-repeat="menuItem in menu.items"
+			ui-sref-active="active"
+			class="menu-item"
+		>
 			<a
 				ui-sref="{{ menuItem.state }}"
 				popover="{{ menuItem.description }}"
 				popover-append-to-body="true"
 				popover-placement="right"
+				popover-popup-delay="500"
 				popover-trigger="mouseenter"
 			>
 				<span class="glyphicon glyphicon-chevron-right"></span>
