@@ -29,7 +29,34 @@ class Search extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		//TODO
+		
+		// TODO: comment
+		$results = $app->data->createQueryBuilder()
+			->select('m.id')
+			->from('Entity:Medicine', 'm')
+			->getQuery()
+			->setFirstResult(1) // TODO
+			->setMaxResults(1) // TODO
+			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
+			->setHint('SQL_CALC_FOUND_ROWS', true) // TODO: hint name
+			->getResult();
+		
+		// Sets an output
+		$this->setOutputValue('results', $results, createArrayFilter(function($result) {
+			return bin2hex($result['id']);
+		}));
+		
+		// TODO: comment
+		$statement = $app->data->getConnection()->prepare('SELECT FOUND_ROWS() AS foundRows');
+		$statement->execute();
+		$total = $statement->fetch()['foundRows'];
+		
+		// Sets an output
+		$this->setOutputValue('total', $total);
 	}
 	
 	/**
