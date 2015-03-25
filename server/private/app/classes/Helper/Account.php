@@ -35,7 +35,7 @@ class Account {
 		$id = $app->session->getData(SESSION_DATA_USER);
 		
 		// Gets the user
-		return $app->data->getReference('App\Data\Entity\User', $id);
+		return $app->data->getReference('Entity:User', $id);
 	}
 	
 	/**

@@ -46,7 +46,7 @@ class Database implements \SessionHandlerInterface {
 		// Executes a transaction
 		$app->data->transactional(function($entityManager) use ($id) {
 			// Gets the session
-			$session = $entityManager->getReference('App\Data\Entity\Session', $id);
+			$session = $entityManager->getReference('Entity:Session', $id);
 			
 			// Deletes the session
 			$entityManager->remove($session);
@@ -86,7 +86,7 @@ class Database implements \SessionHandlerInterface {
 		$id = hex2bin($id);
 		
 		// Gets the session
-		$session = $app->data->getRepository('App\Data\Entity\Session')->find($id);
+		$session = $app->data->getRepository('Entity:Session')->find($id);
 		
 		if (is_null($session)) {
 			// The session doesn't exist
@@ -111,7 +111,7 @@ class Database implements \SessionHandlerInterface {
 		// Executes a transaction
 		$app->data->transactional(function($entityManager) use ($id, $data) {
 			// Gets the session
-			$session = $entityManager->getRepository('App\Data\Entity\Session')->find($id);
+			$session = $entityManager->getRepository('Entity:Session')->find($id);
 			
 			if (is_null($session)) {
 				// The session doesn't exist

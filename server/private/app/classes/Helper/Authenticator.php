@@ -34,7 +34,7 @@ class Authenticator {
 		global $app;
 		
 		// Gets the password-reset permission
-		$passwordResetPermission = $app->data->getRepository('App\Data\Entity\PasswordResetPermission')->find($id);
+		$passwordResetPermission = $app->data->getRepository('Entity:PasswordResetPermission')->find($id);
 		
 		if (is_null($passwordResetPermission)) {
 			// The password-reset permission doesn't exist
@@ -59,7 +59,7 @@ class Authenticator {
 		global $app;
 		
 		// Gets the sign-up permission
-		$signUpPermission = $app->data->getRepository('App\Data\Entity\SignUpPermission')->find($id);
+		$signUpPermission = $app->data->getRepository('Entity:SignUpPermission')->find($id);
 		
 		if (is_null($signUpPermission)) {
 			// The sign-up permission doesn't exist
@@ -84,7 +84,7 @@ class Authenticator {
 		global $app;
 		
 		// Gets the user
-		$user = $app->data->getRepository('App\Data\Entity\User')->find($id);
+		$user = $app->data->getRepository('Entity:User')->find($id);
 		
 		if (is_null($user)) {
 			// The user doesn't exist
@@ -104,7 +104,7 @@ class Authenticator {
 		global $app;
 		
 		// Gets the user
-		$user = $app->data->getRepository('App\Data\Entity\User')->find($id);
+		$user = $app->data->getRepository('Entity:User')->find($id);
 		
 		if (is_null($user)) {
 			// The user doesn't exist

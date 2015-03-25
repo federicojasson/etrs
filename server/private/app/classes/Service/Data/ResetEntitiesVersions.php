@@ -35,14 +35,14 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 		$app->data->transactional(function($entityManager) {
 			// Resets the medicines' versions
 			$entityManager->createQueryBuilder()
-				->update('App\Data\Entity\Medicine', 'm')
+				->update('Entity:Medicine', 'm')
 				->set('m.version', 0)
 				->getQuery()
 				->execute();
 			
 			// Resets the users' versions
 			$entityManager->createQueryBuilder()
-				->update('App\Data\Entity\User', 'u')
+				->update('Entity:User', 'u')
 				->set('u.version', 0)
 				->getQuery()
 				->execute();

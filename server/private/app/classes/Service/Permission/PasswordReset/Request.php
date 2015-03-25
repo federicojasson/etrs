@@ -52,7 +52,7 @@ class Request extends \App\Service\External {
 		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
 		
 		// Gets the user
-		$user = $app->data->getReference('App\Data\Entity\User', $credentials['id']);
+		$user = $app->data->getReference('Entity:User', $credentials['id']);
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $user) {

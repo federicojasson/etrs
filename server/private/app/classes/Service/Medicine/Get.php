@@ -37,7 +37,7 @@ class Get extends \App\Service\External {
 		// Executes a transaction
 		$medicine = $app->data->transactional(function($entityManager) use ($app, $id) {
 			// Gets the medicine
-			$medicine = $entityManager->getRepository('App\Data\Entity\Medicine')->find($id);
+			$medicine = $entityManager->getRepository('Entity:Medicine')->find($id);
 
 			// Asserts conditions
 			$app->assertion->entityExists($medicine);

@@ -42,7 +42,7 @@ class Edit extends \App\Service\External {
 		// Executes a transaction
 		$app->data->transactional(function($entityManager) use ($app, $id, $version, $name, $signedInUser) {
 			// Gets the medicine
-			$medicine = $entityManager->getRepository('App\Data\Entity\Medicine')->find($id);
+			$medicine = $entityManager->getRepository('Entity:Medicine')->find($id);
 			
 			// Asserts conditions
 			$app->assertion->entityExists($medicine);

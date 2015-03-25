@@ -52,7 +52,7 @@ class SignUp extends \App\Service\External {
 		}
 		
 		// Determines whether the user ID is available
-		$available = is_null($app->data->getRepository('App\Data\Entity\User')->find($id));
+		$available = is_null($app->data->getRepository('Entity:User')->find($id));
 		
 		// Sets an output
 		$this->setOutputValue('available', $available);
@@ -68,7 +68,7 @@ class SignUp extends \App\Service\External {
 		// Executes a transaction
 		$app->data->transactional(function($entityManager) use ($credentials, $id, $emailAddress, $hash, $salt, $keyStretchingIterations, $firstName, $lastName, $gender) {
 			// Gets the sign-up permission
-			$signUpPermission = $entityManager->getReference('App\Data\Entity\SignUpPermission', $credentials['id']);
+			$signUpPermission = $entityManager->getReference('Entity:SignUpPermission', $credentials['id']);
 			
 			// Initializes the user
 			$user = new \App\Data\Entity\User();

@@ -99,32 +99,33 @@ class Data {
 	private function getConfiguration() {
 		global $app;
 		
-		// Initializes the configuration
-		$configuration = new \Doctrine\ORM\Configuration();
-		
-		// Initializes the metadata driver
-		$directory = DIRECTORY_APP . '/classes/Data/Entity';
-		$metadataDriver = $configuration->newDefaultAnnotationDriver($directory);
-		
 		if ($app->getMode() === OPERATION_MODE_DEVELOPMENT) {
 			// The system is under development
 			
-			// Initializes the proxy-generation mode
-			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS;
-			
 			// Initializes the cache
 			$cache = new \Doctrine\Common\Cache\ArrayCache();
+			
+			// Initializes the proxy-generation mode
+			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS;
 		} else {
 			// The system is not under development
 			
-			// Initializes the proxy-generation mode
-			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_NEVER;
-			
 			// Initializes the cache
 			$cache = new \Doctrine\Common\Cache\ApcCache();
+			
+			// Initializes the proxy-generation mode
+			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_NEVER;
 		}
 		
+		// Initializes the configuration
+		$configuration = new \Doctrine\ORM\Configuration();
+		
+		// Applies entity-related settings
+		$configuration->addEntityNamespace('Entity', 'App\Data\Entity');
+		
 		// Applies metadata-related settings
+		$directory = DIRECTORY_APP . '/classes/Data/Entity';
+		$metadataDriver = $configuration->newDefaultAnnotationDriver($directory);
 		$configuration->setMetadataCacheImpl($cache);
 		$configuration->setMetadataDriverImpl($metadataDriver);
 		

@@ -52,7 +52,7 @@ class ResetPassword extends \App\Service\External {
 		// Executes a transaction
 		$app->data->transactional(function($entityManager) use ($credentials, $hash, $salt, $keyStretchingIterations) {
 			// Gets the password-reset permission
-			$passwordResetPermission = $entityManager->getReference('App\Data\Entity\PasswordResetPermission', $credentials['id']);
+			$passwordResetPermission = $entityManager->getReference('Entity:PasswordResetPermission', $credentials['id']);
 			
 			// Gets the user
 			$user = $passwordResetPermission->getUser();
