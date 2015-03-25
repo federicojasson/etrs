@@ -4,6 +4,8 @@ Quick tasks
 
 - Improve navigation bar style.
 - Define DQL UDF (user-defined functions).
+- Remove unnecessary transactions. (Use query log).
+- Check queries code.
 
 - Check if find() uses the cache (log every SQL query: mysqld --general-log=1 --general-log-file="mysql_query.log").
 - Check if null values returned by find() are cached.
