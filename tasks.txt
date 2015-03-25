@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- readTemplateFile vs readTextFile + replacePlaceholders + readTemplateFile with optional mapping parameter.
 - Improve navigation bar style.
 - Define DQL UDF (user-defined functions).
 - Remove unnecessary transactions. (Use query log).
