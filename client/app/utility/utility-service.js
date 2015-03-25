@@ -37,6 +37,15 @@
 		};
 		
 		/**
+		 * Replaces the tabs of a string with spaces.
+		 * 
+		 * Receives the string.
+		 */
+		_this.replaceTabsWithSpaces = function(string) {
+			return string.replace(/\t/g, ' ');
+		};
+		
+		/**
 		 * Shrinks a string.
 		 * 
 		 * Receives the string.

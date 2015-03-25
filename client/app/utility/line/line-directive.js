@@ -48,6 +48,7 @@
 		 */
 		function onLink(scope, element, attributes, ngModelController) {
 			// Registers parsers
+			ngModelController.$parsers.push(utility.replaceTabsWithSpaces);
 			ngModelController.$parsers.push(utility.removeControlCharacters);
 			ngModelController.$parsers.push(utility.shrink);
 		}
