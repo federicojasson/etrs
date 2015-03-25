@@ -54,9 +54,9 @@
 		 * Initializes an instance of the class.
 		 */
 		function RequestPasswordResetAction() {
-			this.notAuthenticatedCallback = function() {};
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.notAuthenticatedCallback = new Function();
+			this.startCallback = new Function();
+			this.successCallback = new Function();
 			
 			// Initializes the input
 			this.input = {

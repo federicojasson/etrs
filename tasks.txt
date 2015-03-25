@@ -2,8 +2,6 @@
 Quick tasks
 ----------------------------
 
-- Text diff: medicine.
-- Try new Function instead of function() {}.
 - Improve navigation bar style.
 
 - Check if find() uses the cache (log every SQL query: mysqld --general-log=1 --general-log-file="mysql_query.log").

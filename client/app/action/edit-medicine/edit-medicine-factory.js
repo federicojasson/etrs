@@ -49,8 +49,8 @@
 		 * Initializes an instance of the class.
 		 */
 		function EditMedicineAction() {
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.successCallback = new Function();
 			
 			// Initializes the input
 			this.input = {

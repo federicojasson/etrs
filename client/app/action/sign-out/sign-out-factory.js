@@ -43,8 +43,8 @@
 		 * Initializes an instance of the class.
 		 */
 		function SignOutAction() {
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.successCallback = new Function();
 		}
 		
 		/**
