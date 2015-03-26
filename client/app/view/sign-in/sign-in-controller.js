@@ -45,7 +45,7 @@
 		};
 		
 		/**
-		 * Returns the title to set when the view is ready.
+		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
 			return 'Iniciar sesión';

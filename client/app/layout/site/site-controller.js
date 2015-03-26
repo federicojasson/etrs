@@ -46,7 +46,7 @@
 		};
 		
 		/**
-		 * Returns the title to set when the layout is ready.
+		 * Returns the title to be set when the layout is ready.
 		 */
 		_this.getTitle = function() {
 			return '';
