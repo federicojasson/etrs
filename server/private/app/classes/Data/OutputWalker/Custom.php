@@ -37,7 +37,7 @@ class Custom extends \Doctrine\ORM\Query\SqlWalker {
 		// Gets the query
 		$query = $this->getQuery();
 		
-		if ($query->getHint('SQL_CALC_FOUND_ROWS') === true) { // TODO: hint name
+		if ($query->getHint('hint.sqlCalcFoundRows') === true) {
 			// Appends the SQL_CALC_FOUND_ROWS modifier to the SELECT statement
 			$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
 		}

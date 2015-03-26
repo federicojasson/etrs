@@ -37,32 +37,30 @@ class Search extends \App\Service\External {
 		$page = $this->getInputValue('page');
 		$resultsPerPage = $this->getInputValue('resultsPerPage');
 		
+		// Initializes a query builder
 		$queryBuilder = $app->data->createQueryBuilder()
 			->select('m.id')
 			->from('Entity:Medicine', 'm');
 		
 		if (! is_null($expression)) {
-			// TODO: comment
+			// A full-text search must be performed
 			$queryBuilder
 				->where('MATCH(m.name) AGAINST(:expression BOOLEAN) > 0')
 				->setParameter('expression', $expression);
 		}
 		
-		// TODO: comment
+		// Sets the sorting criteria
 		foreach ($sortingCriteria as $sortingCriterion) {
-			// TODO: comments?
-			$field = $sortingCriterion['field'];
-			$direction = ($sortingCriterion['direction'] === SORTING_DIRECTION_ASCENDING)? 'ASC' : 'DESC'; // TODO: create function?
-			$queryBuilder->addOrderBy('m.' . $field, $direction);
+			$queryBuilder->addOrderBy('m.' . $sortingCriterion['field'], $sortingCriterion['direction']);
 		}
 		
-		// TODO: comment
+		// Searches the medicines
 		$results = $queryBuilder
 			->getQuery()
 			->setFirstResult($resultsPerPage * ($page - 1))
 			->setMaxResults($resultsPerPage)
 			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
-			->setHint('SQL_CALC_FOUND_ROWS', true) // TODO: hint name
+			->setHint('hint.sqlCalcFoundRows', true)
 			->getResult();
 		
 		// Sets an output
@@ -70,7 +68,7 @@ class Search extends \App\Service\External {
 			return bin2hex($result['id']);
 		}));
 		
-		// TODO: comment
+		// Gets the total number of results
 		$statement = $app->data->getConnection()->prepare('SELECT FOUND_ROWS() AS foundRows');
 		$statement->execute();
 		$total = $statement->fetch()['foundRows'];
@@ -134,12 +132,14 @@ class Search extends \App\Service\External {
 		$valid = $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 		
 		if (! $valid) {
-			// TODO: comment
+			// The input is invalid
 			return false;
 		}
 		
-		// TODO: comment
+		// Gets the sorting criteria
 		$sortingCriteria = $input['sortingCriteria'];
+		
+		// Determines whether the sorting fields are unique
 		return ! containsDuplicates(array_column($sortingCriteria, 'field'));
 	}
 	
