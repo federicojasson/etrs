@@ -38,7 +38,7 @@ class SignUpPermission {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="datetime",
+	 *		type="utc_datetime",
 	 *		nullable=false
 	 *	)
 	 */

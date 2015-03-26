@@ -38,7 +38,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="datetime",
+	 *		type="utc_datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -141,7 +141,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name="last_edition_date_time",
-	 *		type="datetime"
+	 *		type="utc_datetime"
 	 *	)
 	 */
 	private $lastEditionDateTime;

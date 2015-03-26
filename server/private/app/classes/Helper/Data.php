@@ -39,6 +39,7 @@ class Data {
 		
 		// Adds custom types
 		\Doctrine\DBAL\Types\Type::addType('binary_data', 'App\Data\Type\BinaryData');
+		\Doctrine\DBAL\Types\Type::addType('utc_datetime', 'App\Data\Type\UtcDateTime');
 	}
 	
 	/**

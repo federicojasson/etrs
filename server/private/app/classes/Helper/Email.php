@@ -49,7 +49,7 @@ class Email {
 		$path = DIRECTORY_EMAILS . '/password-reset.txt';
 		$alternativeBody = readTemplateFile($path, $mapping);
 		
-		// Creates the email
+		// Initializes the email
 		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
 		
 		// Sends the email
@@ -79,7 +79,7 @@ class Email {
 		$path = DIRECTORY_EMAILS . '/sign-up.txt';
 		$alternativeBody = readTemplateFile($path, $mapping);
 		
-		// Creates the email
+		// Initializes the email
 		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
 		
 		// Sends the email
@@ -103,7 +103,7 @@ class Email {
 		$path = DIRECTORY_EMAILS . '/welcome.txt';
 		$alternativeBody = readTemplateFile($path, []);
 		
-		// Creates the email
+		// Initializes the email
 		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
 		
 		// Sends the email
@@ -160,7 +160,7 @@ class Email {
 			'emailAddress' => 'etrs@etrs.com.ar' // TODO: define email here?
 		];
 		
-		// Creates the email
+		// Initializes the email
 		$email = $this->create($sender, $recipient, $subject, $body, $alternativeBody);
 		
 		// TODO: embed logo image?

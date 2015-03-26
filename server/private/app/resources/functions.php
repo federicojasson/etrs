@@ -140,10 +140,10 @@ function getClientIpAddress() {
  * Returns the current date-time.
  */
 function getCurrentDateTime() {
-	// Initializes the time zone (UTC for consistency)
+	// Initializes the time zone
 	$timeZone = new \DateTimeZone('UTC');
 	
-	// Initializes the current date-time
+	// Initializes the date-time
 	return new \DateTime(null, $timeZone);
 }
 

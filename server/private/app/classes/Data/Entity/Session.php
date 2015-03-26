@@ -38,7 +38,7 @@ class Session {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="datetime",
+	 *		type="utc_datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -82,7 +82,7 @@ class Session {
 	 * 
 	 * @Column(
 	 *		name="last_access_date_time",
-	 *		type="datetime",
+	 *		type="utc_datetime",
 	 *		nullable=false
 	 *	)
 	 */

@@ -21,13 +21,13 @@
 namespace App\Data\Type;
 
 /**
- * Represents a binary type.
+ * Represents a date-time type.
  * 
- * The primary difference with the native binary type is that it automatically
- * reads the obtained binary resource when the value is converted to its PHP
+ * The primary difference with the native date-time type is that it
+ * automatically sets the UTC time zone when the value is converted to its PHP
  * representation.
  */
-class BinaryData extends \Doctrine\DBAL\Types\BinaryType {
+class UtcDateTime extends \Doctrine\DBAL\Types\DateTimeType {
 	
 	/**
 	 * Converts a value from its database representation to its PHP equivalent.
@@ -35,35 +35,38 @@ class BinaryData extends \Doctrine\DBAL\Types\BinaryType {
 	 * Receives the value and the database platform.
 	 */
 	public function convertToPHPValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform) {
-		// Invokes the homonym method in the parent
-		$value = parent::convertToPHPValue($value, $platform);
-		
 		if (is_null($value)) {
 			// The value is null
 			return null;
 		}
 		
-		// Reads the contents of the resource
-		$contents = stream_get_contents($value);
-		
-		if ($contents === false) {
+		// Gets the format
+		$format = $platform->getDateTimeFormatString();
+
+		// Initializes the time zone
+		$timeZone = new \DateTimeZone('UTC');
+
+		// Initializes the date-time
+		$dateTime = \DateTime::createFromFormat($format, $value, $timeZone);
+
+		if ($dateTime === false) {
 			// The conversion failed
-			
+
 			// Gets the name
 			$name = $this->getName();
-			
+
 			// Throws an exception
-			throw \Doctrine\DBAL\Types\ConversionException::conversionFailed($value, $name);
+			throw \Doctrine\DBAL\Types\ConversionException::conversionFailedFormat($value, $name, $format);
 		}
 		
-		return $contents;
+		return $dateTime;
 	}
 	
 	/**
 	 * Returns the name.
 	 */
 	public function getName() {
-		return 'binary_data';
+		return 'utc_datetime';
 	}
 	
 }

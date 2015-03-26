@@ -38,7 +38,7 @@ class Medicine {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="datetime",
+	 *		type="utc_datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -92,7 +92,7 @@ class Medicine {
 	 * 
 	 * @Column(
 	 *		name="deletion_date_time",
-	 *		type="datetime"
+	 *		type="utc_datetime"
 	 *	)
 	 */
 	private $deletionDateTime;
@@ -124,7 +124,7 @@ class Medicine {
 	 * 
 	 * @Column(
 	 *		name="last_edition_date_time",
-	 *		type="datetime"
+	 *		type="utc_datetime"
 	 *	)
 	 */
 	private $lastEditionDateTime;
