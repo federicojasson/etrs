@@ -38,10 +38,10 @@ function camelToPascalCase($string) {
  * Receives the array.
  */
 function containsDuplicates($array) {
-	// TODO: comment
+	// Removes duplicate elements from the array
 	$arrayWithoutDuplicates = array_unique($array);
 	
-	// TODO: comment
+	// Compares the arrays' lengths
 	return count($array) !== count($arrayWithoutDuplicates);
 }
 
