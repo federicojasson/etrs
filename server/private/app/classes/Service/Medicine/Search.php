@@ -32,7 +32,7 @@ class Search extends \App\Service\External {
 		global $app;
 		
 		// Gets the inputs
-		$expression = $this->getInputValue('expression', 'trimAndShrink');
+		$expression = $this->getInputValue('expression', 'transliterateTrimAndShrink');
 		$sortingCriteria = $this->getInputValue('sortingCriteria');
 		$page = $this->getInputValue('page');
 		$resultsPerPage = $this->getInputValue('resultsPerPage');
@@ -41,10 +41,10 @@ class Search extends \App\Service\External {
 			->select('m.id')
 			->from('Entity:Medicine', 'm');
 		
-		if ($expression !== '') {
+		if (! is_null($expression)) {
 			// TODO: comment
-			$expression; // TODO: to boolean expression
-			
+			$expression = getBooleanExpression($expression);
+			global $app; $app->log->debug($expression);
 			// TODO: comment
 			$queryBuilder
 				->where('MATCH(m.name) AGAINST(:expression BOOLEAN) > 0')
@@ -96,7 +96,11 @@ class Search extends \App\Service\External {
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'expression' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-				return $app->inputValidator->isValidLine($input, 0, 128);
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isValidLine($input, 1, 128);
 			}),
 			
 			'sortingCriteria' => new \App\InputValidator\Json\JsonArray(

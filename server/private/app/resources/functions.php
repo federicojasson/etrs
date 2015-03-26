@@ -62,6 +62,14 @@ function createArrayFilter($filter) {
 }
 
 /**
+ * TODO: comment
+ */
+function getBooleanExpression($expression) {
+	// TODO
+	return $expression;
+}
+
+/**
  * Returns the client's IP address.
  */
 function getClientIpAddress() {
@@ -207,6 +215,20 @@ function spinalToPascalCase($string) {
 	
 	// Removes the spaces
 	return str_replace(' ', '', $string);
+}
+
+/**
+ * Transliterates, trims and shrinks a string.
+ * 
+ * Receives the string.
+ */
+function transliterateTrimAndShrink($string) {
+	// Transliterates the string
+	$string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
+	$string = preg_replace('/[^ 0-9A-Za-z]/', '', $string);
+	
+	// Trims and shrinks the string
+	return trimAndShrink($string);
 }
 
 /**
