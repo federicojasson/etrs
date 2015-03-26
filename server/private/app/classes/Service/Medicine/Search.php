@@ -40,12 +40,13 @@ class Search extends \App\Service\External {
 		// Initializes a query builder
 		$queryBuilder = $app->data->createQueryBuilder()
 			->select('m.id')
-			->from('Entity:Medicine', 'm');
+			->from('Entity:Medicine', 'm')
+			->where('m.deleted = false');
 		
 		if (! is_null($expression)) {
 			// A full-text search must be performed
 			$queryBuilder
-				->where('MATCH(m.name) AGAINST(:expression BOOLEAN) > 0')
+				->andWhere('MATCH(m.name) AGAINST(:expression BOOLEAN) > 0')
 				->setParameter('expression', $expression);
 		}
 		

@@ -29,7 +29,27 @@ class Delete extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$id = $this->getInputValue('id', 'hex2bin');
+		$version = $this->getInputValue('version');
+		
+		// Gets the signed-in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($app, $id, $version, $signedInUser) {
+			// Gets the medicine
+			$medicine = $entityManager->getRepository('Entity:Medicine')->findNonDeleted($id);
+			
+			// Asserts conditions
+			$app->assertion->entityExists($medicine);
+			$app->assertion->entityUpdated($medicine, $version);
+			
+			// Deletes the medicine
+			$medicine->delete($signedInUser); // TODO
+		});
 	}
 	
 	/**
