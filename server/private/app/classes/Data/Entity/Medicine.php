@@ -182,6 +182,17 @@ class Medicine {
 	}
 	
 	/**
+	 * Deletes the entity.
+	 * 
+	 * Receives the user to be set as the deleter.
+	 */
+	public function delete($user) {
+		$this->deletionDateTime = getCurrentDateTime();
+		$this->deleted = true;
+		$this->deleter = $user;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {

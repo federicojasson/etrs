@@ -48,7 +48,7 @@ class Delete extends \App\Service\External {
 			$app->assertion->entityUpdated($medicine, $version);
 			
 			// Deletes the medicine
-			$medicine->delete($signedInUser); // TODO
+			$medicine->delete($signedInUser);
 		});
 	}
 	
