@@ -62,6 +62,15 @@ function createArrayFilter($filter) {
 }
 
 /**
+ * Converts a date-time to string.
+ * 
+ * Receives the date-time.
+ */
+function dateTimeToString($dateTime) {
+	return $dateTime->format(\DateTime::ISO8601);
+}
+
+/**
  * Returns a boolean expression from a string.
  * 
  * A boolean expression is a sanitized version of the string that contains

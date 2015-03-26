@@ -200,6 +200,37 @@ class Medicine {
 	}
 	
 	/**
+	 * Serializes the entity.
+	 */
+	public function serialize() {
+		// TODO: clean?
+		$serialization = [];
+		
+		$serialization['id'] = bin2hex($this->id);
+		$serialization['version'] = $this->version;
+		$serialization['creationDateTime'] = dateTimeToString($this->creationDateTime);
+		
+		$serialization['lastEditionDateTime'] = null;
+		if (! is_null($this->lastEditionDateTime)) {
+			$serialization['lastEditionDateTime'] = dateTimeToString($this->lastEditionDateTime);
+		}
+		
+		$serialization['name'] = $this->name;
+		
+		$serialization['creator'] = null;
+		if (! is_null($this->creator)) {
+			$serialization['creator'] = $this->creator->getId();
+		}
+		
+		$serialization['lastEditor'] = null;
+		if (! is_null($this->lastEditor)) {
+			$serialization['lastEditor'] = $this->lastEditor->getId();
+		}
+		
+		return $serialization;
+	}
+	
+	/**
 	 * Sets the creation date-time.
 	 * 
 	 * Annotations:

@@ -41,9 +41,9 @@ class Get extends \App\Service\External {
 
 			// Asserts conditions
 			$app->assertion->entityExists($medicine);
-
-			// TODO: filter somehow
-			return $medicine;
+			
+			// Serializes the medicine
+			return $medicine->serialize();
 		});
 		
 		// Sets the output
