@@ -31,9 +31,7 @@ define('DIRECTORY_PARAMETERS', DIRECTORY_ROOT . '/private/parameters');
 define('DIRECTORY_VENDORS', DIRECTORY_ROOT . '/private/vendors');
 
 // Includes vendors
-require_once DIRECTORY_VENDORS . '/Doctrine2/autoload.php';
-require_once DIRECTORY_VENDORS . '/PHPMailer/PHPMailerAutoload.php';
-require_once DIRECTORY_VENDORS . '/Slim/Slim.php';
+require_once DIRECTORY_VENDORS . '/autoload.php';
 
 // Includes resources
 require_once DIRECTORY_APP . '/resources/constants.php';
@@ -44,8 +42,7 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 //define('OPERATION_MODE', OPERATION_MODE_MAINTENANCE);
 //define('OPERATION_MODE', OPERATION_MODE_PRODUCTION);
 
-// Registers class autoloaders
-\Slim\Slim::registerAutoloader();
+// Registers a class autoloader
 spl_autoload_register('loadClass');
 
 /**
