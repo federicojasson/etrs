@@ -47,7 +47,7 @@ class Search extends \App\Service\External {
 			
 			// TODO: comment
 			$queryBuilder
-				->where('MATCH(name) AGAINST(:expression IN BOOLEAN MODE)')
+				->where('MATCH(m.name) AGAINST(:expression BOOLEAN) > 0')
 				->setParameter('expression', $expression);
 		}
 		

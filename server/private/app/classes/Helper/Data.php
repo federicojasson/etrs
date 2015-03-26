@@ -138,6 +138,9 @@ class Data {
 		// Applies query-related settings
 		$configuration->setQueryCacheImpl($cache);
 		
+		// Adds custom functions
+		$configuration->addCustomNumericFunction('MATCH', 'DoctrineExtensions\Query\Mysql\MatchAgainst');
+		
 		return $configuration;
 	}
 	
