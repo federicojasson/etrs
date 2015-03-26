@@ -82,8 +82,8 @@ function getBooleanExpression($string) {
 	// Transliterates the string
 	$string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
 	
-	// Removes non-alphanumeric characters except spaces
-	$string = preg_replace('/[^ 0-9A-Za-z]/', '', $string);
+	// Replaces non-alphanumeric characters with spaces
+	$string = preg_replace('/[^ 0-9A-Za-z]/', ' ', $string);
 	
 	// Trims and shrinks the string
 	$string = trimAndShrink($string);
@@ -243,7 +243,7 @@ function replacePlaceholders($string, $mapping) {
  * Receives the string.
  */
 function spinalToPascalCase($string) {
-	// Replaces the dashes with spaces
+	// Replaces dashes with spaces
 	$string = str_replace('-', ' ', $string);
 	
 	// Converts the first character of each word to uppercase

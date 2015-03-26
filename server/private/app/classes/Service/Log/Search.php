@@ -29,21 +29,128 @@ class Search extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$expression = $this->getInputValue('expression', 'getBooleanExpression');
+		$sortingCriteria = $this->getInputValue('sortingCriteria');
+		$page = $this->getInputValue('page');
+		$resultsPerPage = $this->getInputValue('resultsPerPage');
+		
+		// Initializes a query builder
+		$queryBuilder = $app->data->createQueryBuilder()
+			->select('l.id')
+			->from('Entity:Log', 'l');
+		
+		if (! is_null($expression)) {
+			// A full-text search must be performed
+			$queryBuilder
+				->andWhere('MATCH(l.message) AGAINST(:expression BOOLEAN) > 0')
+				->setParameter('expression', $expression);
+		}
+		
+		// Sets the sorting criteria
+		foreach ($sortingCriteria as $sortingCriterion) {
+			$queryBuilder->addOrderBy('l.' . $sortingCriterion['field'], $sortingCriterion['direction']);
+		}
+		
+		// Searches the logs
+		$results = $queryBuilder
+			->getQuery()
+			->setFirstResult($resultsPerPage * ($page - 1))
+			->setMaxResults($resultsPerPage)
+			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
+			->setHint('hint.sqlCalcFoundRows', true)
+			->getResult();
+		
+		// Sets an output
+		$this->setOutputValue('results', $results, createArrayFilter(function($result) {
+			return bin2hex($result['id']);
+		}));
+		
+		// Gets the total number of results
+		$statement = $app->data->getConnection()->prepare('SELECT FOUND_ROWS() AS foundRows');
+		$statement->execute();
+		$total = $statement->fetch()['foundRows'];
+		
+		// Sets an output
+		$this->setOutputValue('total', $total);
 	}
 	
 	/**
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'expression' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				if (is_null($input)) {
+					return true;
+				}
+				
+				return $app->inputValidator->isValidLine($input, 0, 128);
+			}),
+			
+			'sortingCriteria' => new \App\InputValidator\Json\JsonArray(
+				new \App\InputValidator\Json\JsonObject([
+					'field' => new \App\InputValidator\Json\JsonValue(function($input) {
+						return inArray($input, [
+							'creationDateTime',
+							'level',
+							'message'
+						]);
+					}),
+
+					'direction' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+						return $app->inputValidator->isSortingDirection($input);
+					})
+				])
+			),
+			
+			'page' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidInteger($input, 1);
+			}),
+			
+			'resultsPerPage' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidInteger($input, 1);
+			})
+		]);
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Validates the input
+		$valid = $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
+		
+		if (! $valid) {
+			// The input is invalid
+			return false;
+		}
+		
+		// Gets the sorting criteria
+		$sortingCriteria = $input['sortingCriteria'];
+		
+		// Determines whether the sorting fields are unique
+		return ! containsDuplicates(array_column($sortingCriteria, 'field'));
 	}
 	
 	/**
 	 * Determines whether the user is authorized.
 	 */
 	protected function isUserAuthorized() {
-		// TODO
+		global $app;
+		
+		// Validates the access
+		return $app->accessValidator->isUserAuthorized([
+			USER_ROLE_ADMINISTRATOR
+		]);
 	}
 
 }

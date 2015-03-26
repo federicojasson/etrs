@@ -60,7 +60,7 @@
 		 * Receives the string.
 		 */
 		_this.spinalToCamelCase = function(string) {
-			// Replaces the dashes with spaces
+			// Replaces dashes with spaces
 			string = string.replace(/-/g, ' ');
 
 			// Converts the first character of each word, except the first one,
