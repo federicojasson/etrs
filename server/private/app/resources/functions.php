@@ -62,11 +62,38 @@ function createArrayFilter($filter) {
 }
 
 /**
- * TODO: comment
+ * Returns a boolean expression from a string.
+ * 
+ * A boolean expression is a sanitized version of the string that contains
+ * wildcard characters.
+ * 
+ * Receives the string.
  */
-function getBooleanExpression($expression) {
-	// TODO
-	return $expression;
+function getBooleanExpression($string) {
+	// Transliterates the string
+	$string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
+	
+	// Removes non-alphanumeric characters except spaces
+	$string = preg_replace('/[^ 0-9A-Za-z]/', '', $string);
+	
+	// Trims and shrinks the string
+	$string = trimAndShrink($string);
+	
+	if ($string === '') {
+		// The string is empty
+		return '';
+	}
+	
+	// Gets the words of the string
+	$words = explode(' ', $string);
+	
+	// Appends a wildcard character to the words
+	foreach ($words as &$word) {
+		$word .= '*';
+	}
+	
+	// Builds the boolean expression
+	return implode(' ', $words);
 }
 
 /**
@@ -215,20 +242,6 @@ function spinalToPascalCase($string) {
 	
 	// Removes the spaces
 	return str_replace(' ', '', $string);
-}
-
-/**
- * Transliterates, trims and shrinks a string.
- * 
- * Receives the string.
- */
-function transliterateTrimAndShrink($string) {
-	// Transliterates the string
-	$string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
-	$string = preg_replace('/[^ 0-9A-Za-z]/', '', $string);
-	
-	// Trims and shrinks the string
-	return trimAndShrink($string);
 }
 
 /**

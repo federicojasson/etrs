@@ -37,7 +37,7 @@ class InputValidator {
 		}
 		
 		// Determines whether the input matches a regular expression
-		return preg_match('/(?!.*\p{Cc})(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input);
+		return preg_match('/(?!.*[\x{0000}-\x{001f}])(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input);
 	}
 	
 	/**
@@ -168,7 +168,7 @@ class InputValidator {
 			return false;
 		}
 		
-		if (preg_match('/\p{Cc}/', $input)) {
+		if (preg_match('/[\x{0000}-\x{001f}]/', $input)) {
 			// The input contains control characters
 			return false;
 		}

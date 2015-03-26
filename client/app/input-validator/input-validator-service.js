@@ -38,7 +38,7 @@
 				return false;
 			}
 			
-			if (! /(?!.*\p{Cc})(?!.* )(?!.*@.*@)^.+@.+$/.test(input.value)) {
+			if (! /(?!.*[\u0000-\u001f])(?!.* )(?!.*@.*@)^.+@.+$/.test(input.value)) {
 				// The input is not an email address
 				input.message = 'La dirección de correo electrónico no es válida';
 				return false;

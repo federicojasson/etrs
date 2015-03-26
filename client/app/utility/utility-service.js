@@ -33,7 +33,7 @@
 		 * Receives the string.
 		 */
 		_this.removeControlCharacters = function(string) {
-			return string.replace(/[\u0000-\u001F]/g, '');
+			return string.replace(/[\u0000-\u001f]/g, '');
 		};
 		
 		/**
