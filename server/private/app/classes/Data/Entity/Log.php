@@ -97,8 +97,12 @@ class Log {
 	 * Serializes the entity.
 	 */
 	public function serialize() {
-		// TODO: clean?
+		// Initializes the serialization
 		$serialization = [];
+		
+		// Adds the appropriate fields
+		// The process only considers accessible fields and filters them
+		// according to their specific characteristics
 		
 		$serialization['id'] = bin2hex($this->id);
 		$serialization['creationDateTime'] = dateTimeToString($this->creationDateTime);

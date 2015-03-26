@@ -288,14 +288,18 @@ class User {
 	 * Serializes the entity.
 	 */
 	public function serialize() {
-		// TODO: clean?
+		// Initializes the serialization
 		$serialization = [];
+		
+		// Adds the appropriate fields
+		// The process only considers accessible fields and filters them
+		// according to their specific characteristics
 		
 		$serialization['id'] = $this->id;
 		$serialization['version'] = $this->version;
 		$serialization['creationDateTime'] = dateTimeToString($this->creationDateTime);
-		$serialization['lastEditionDateTime'] = null;
 		
+		$serialization['lastEditionDateTime'] = null;
 		if (! is_null($this->lastEditionDateTime)) {
 			$serialization['lastEditionDateTime'] = dateTimeToString($this->lastEditionDateTime);
 		}
