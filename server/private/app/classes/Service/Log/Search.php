@@ -18,37 +18,32 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\Log;
 
 /**
- * Responsible for registering the external services.
+ * Represents the /log/search service.
  */
-class ExternalServices extends Services {
+class Search extends \App\Service\External {
 	
 	/**
-	 * Returns the services.
+	 * Executes the service.
 	 */
-	protected function getServices() {
-		return [
-			// TODO: define external services here
-			'/account/get',
-			'/account/reset-password',
-			'/account/sign-in',
-			'/account/sign-out',
-			'/account/sign-up',
-			'/account/signed-in',
-			'/log/get',
-			'/log/search',
-			'/medicine/create',
-			'/medicine/delete',
-			'/medicine/edit',
-			'/medicine/get',
-			'/medicine/search',
-			'/permission/password-reset/authenticate',
-			'/permission/password-reset/request',
-			'/permission/sign-up/authenticate',
-			'/permission/sign-up/request'
-		];
+	protected function execute() {
+		// TODO
 	}
 	
+	/**
+	 * Determines whether the request is valid.
+	 */
+	protected function isRequestValid() {
+		// TODO
+	}
+	
+	/**
+	 * Determines whether the user is authorized.
+	 */
+	protected function isUserAuthorized() {
+		// TODO
+	}
+
 }

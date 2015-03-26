@@ -40,6 +40,8 @@
 				'/account/sign-out',
 				'/account/sign-up',
 				'/account/signed-in',
+				'/log/get',
+				'/log/search',
 				'/medicine/create',
 				'/medicine/delete',
 				'/medicine/edit',
