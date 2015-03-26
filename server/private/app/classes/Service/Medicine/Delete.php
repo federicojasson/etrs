@@ -45,7 +45,13 @@ class Delete extends \App\Service\External {
 		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			// TODO
+			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'version' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidInteger($input, 0);
+			})
 		]);
 		
 		// Gets the input
