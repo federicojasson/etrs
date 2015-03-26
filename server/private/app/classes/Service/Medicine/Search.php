@@ -33,15 +33,37 @@ class Search extends \App\Service\External {
 		
 		// Gets the inputs
 		$expression = $this->getInputValue('expression', 'trimAndShrink');
-		//TODO
+		$sortingCriteria = $this->getInputValue('sortingCriteria');
+		$page = $this->getInputValue('page');
+		$resultsPerPage = $this->getInputValue('resultsPerPage');
+		
+		$queryBuilder = $app->data->createQueryBuilder()
+			->select('m.id')
+			->from('Entity:Medicine', 'm');
+		
+		if ($expression !== '') {
+			// TODO: comment
+			$expression; // TODO: to boolean expression
+			
+			// TODO: comment
+			$queryBuilder
+				->where('MATCH(name) AGAINST(:expression IN BOOLEAN MODE)')
+				->setParameter('expression', $expression);
+		}
 		
 		// TODO: comment
-		$results = $app->data->createQueryBuilder()
-			->select('m.id')
-			->from('Entity:Medicine', 'm')
+		foreach ($sortingCriteria as $sortingCriterion) {
+			// TODO: comments?
+			$field = $sortingCriterion['field'];
+			$direction = ($sortingCriterion['direction'] === SORTING_DIRECTION_ASCENDING)? 'ASC' : 'DESC'; // TODO: create function?
+			$queryBuilder->addOrderBy('m.' . $field, $direction);
+		}
+		
+		// TODO: comment
+		$results = $queryBuilder
 			->getQuery()
-			->setFirstResult(1) // TODO
-			->setMaxResults(1) // TODO
+			->setFirstResult($resultsPerPage * ($page - 1))
+			->setMaxResults($resultsPerPage)
 			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
 			->setHint('SQL_CALC_FOUND_ROWS', true) // TODO: hint name
 			->getResult();
@@ -116,7 +138,8 @@ class Search extends \App\Service\External {
 		}
 		
 		// TODO: comment
-		return ! containsDuplicates(array_column($input['sortingCriteria'], 'field'));
+		$sortingCriteria = $input['sortingCriteria'];
+		return ! containsDuplicates(array_column($sortingCriteria, 'field'));
 	}
 	
 	/**
