@@ -29,21 +29,62 @@ class Get extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$id = $this->getInputValue('id', 'hex2bin');
+		
+		// Executes a transaction
+		$log = $app->data->transactional(function($entityManager) use ($app, $id) {
+			// Gets the log
+			$log = $entityManager->getRepository('Entity:Log')->find($id);
+
+			// Asserts conditions
+			$app->assertion->entityExists($log);
+			
+			// Serializes the log
+			return $log->serialize();
+		});
+		
+		// Sets the output
+		$this->setOutput($log);
 	}
 	
 	/**
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			})
+		]);
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Validates the input
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 	/**
 	 * Determines whether the user is authorized.
 	 */
 	protected function isUserAuthorized() {
-		// TODO
+		global $app;
+		
+		// Validates the access
+		return $app->accessValidator->isUserAuthorized([
+			USER_ROLE_ADMINISTRATOR
+		]);
 	}
 
 }

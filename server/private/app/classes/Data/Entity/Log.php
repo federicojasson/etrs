@@ -94,6 +94,21 @@ class Log {
 	private $message;
 	
 	/**
+	 * Serializes the entity.
+	 */
+	public function serialize() {
+		// TODO: clean?
+		$serialization = [];
+		
+		$serialization['id'] = bin2hex($this->id);
+		$serialization['creationDateTime'] = dateTimeToString($this->creationDateTime);
+		$serialization['level'] = $this->level;
+		$serialization['message'] = $this->message;
+		
+		return $serialization;
+	}
+	
+	/**
 	 * Sets the creation date-time.
 	 * 
 	 * Annotations:
