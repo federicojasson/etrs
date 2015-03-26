@@ -55,7 +55,7 @@ abstract class Services extends \Slim\Middleware {
 		// Removes the leading slash
 		$string = substr($url, 1);
 		
-		// Gets the string's fragments separated by slashes
+		// Gets the fragments of the string separated by slashes
 		$fragments = explode('/', $string);
 		
 		// Converts the fragments from spinal-case to PascalCase

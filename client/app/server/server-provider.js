@@ -79,7 +79,7 @@
 			// Removes the leading slash
 			var string = url.substr(1);
 
-			// Gets the string's fragments separated by slashes
+			// Gets the fragments of the string separated by slashes
 			var fragments = string.split('/');
 
 			// Converts the fragments from spinal-case to camelCase

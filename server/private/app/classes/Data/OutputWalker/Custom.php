@@ -21,22 +21,24 @@
 namespace App\Data\OutputWalker;
 
 /**
- * TODO: comment
+ * Responsible for generating a SQL statement from a DQL AST.
  */
 class Custom extends \Doctrine\ORM\Query\SqlWalker {
 
 	/**
-	 * TODO: comment
+	 * Returns the SQL fragment corresponding to a certain select clause.
+	 * 
+	 * Receives the select clause.
 	 */
 	public function walkSelectClause($selectClause) {
-		// TODO: comment
-		$sql = parent::walkSelectClause($selectClause); // TODO: rename?
+		// Invokes the homonym method in the parent
+		$sql = parent::walkSelectClause($selectClause);
 		
-		// TODO: comment
+		// Gets the query
 		$query = $this->getQuery();
 		
 		if ($query->getHint('SQL_CALC_FOUND_ROWS') === true) { // TODO: hint name
-			// TODO: comment
+			// Appends the SQL_CALC_FOUND_ROWS modifier to the SELECT statement
 			$sql = str_replace('SELECT', 'SELECT SQL_CALC_FOUND_ROWS', $sql);
 		}
 		
