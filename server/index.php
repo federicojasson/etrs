@@ -19,7 +19,7 @@
  */
 
 /**
- * This script executes a server task.
+ * This script executes an external task.
  */
 
 // Defines the root directory
@@ -28,5 +28,5 @@ define('DIRECTORY_ROOT', __DIR__);
 // Includes the application
 require_once DIRECTORY_ROOT . '/private/app/app.php';
 
-// Executes the server task
-executeServerTask();
+// Executes the external task
+executeExternalTask();

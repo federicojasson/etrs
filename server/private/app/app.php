@@ -46,6 +46,36 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 spl_autoload_register('loadClass');
 
 /**
+ * Executes an external task.
+ */
+function executeExternalTask() {
+	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
+		// The system is under maintenance
+		// Halts the application
+		haltApp(HTTP_STATUS_SERVICE_UNAVAILABLE, ERROR_CODE_SYSTEM_UNDER_MAINTENANCE);
+	}
+	
+	// Serves the external request
+	serveExternalRequest();
+}
+
+/**
+ * Executes an internal task.
+ * 
+ * Receives the requested service's URL.
+ */
+function executeInternalTask($url) {
+	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
+		// The system is under maintenance
+		// Exits the application
+		exit('The system is under maintenance.');
+	}
+	
+	// Serves the internal request
+	serveInternalRequest($url);
+}
+
+/**
  * Executes a maintenance task.
  * 
  * Receives the requested service's URL.
@@ -59,36 +89,6 @@ function executeMaintenanceTask($url) {
 	
 	// Serves the internal request
 	serveInternalRequest($url);
-}
-
-/**
- * Executes a scheduled task.
- * 
- * Receives the requested service's URL.
- */
-function executeScheduledTask($url) {
-	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
-		// The system is under maintenance
-		// Exits the application
-		exit('The system is under maintenance.');
-	}
-	
-	// Serves the internal request
-	serveInternalRequest($url);
-}
-
-/**
- * Executes a server task.
- */
-function executeServerTask() {
-	if (OPERATION_MODE === OPERATION_MODE_MAINTENANCE) {
-		// The system is under maintenance
-		// Halts the application
-		haltApp(HTTP_STATUS_SERVICE_UNAVAILABLE, ERROR_CODE_SYSTEM_UNDER_MAINTENANCE);
-	}
-	
-	// Serves the external request
-	serveExternalRequest();
 }
 
 /**

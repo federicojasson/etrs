@@ -19,7 +19,7 @@
  */
 
 /**
- * This script executes a scheduled task.
+ * This script executes an internal task.
  */
 
 // Defines the root directory
@@ -28,5 +28,5 @@ define('DIRECTORY_ROOT', __DIR__ . '/../../..');
 // Includes the application
 require_once DIRECTORY_ROOT . '/private/app/app.php';
 
-// Executes the scheduled task
-executeScheduledTask('/session/delete-expired');
+// Executes the internal task
+executeInternalTask('/session/delete-expired');
