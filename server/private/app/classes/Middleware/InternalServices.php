@@ -30,7 +30,7 @@ class InternalServices extends Services {
 	 */
 	protected function getServices() {
 		return [
-			// TODO: define internal services here
+			// DEFINEHERE: define internal services here
 			'/data/check-configuration',
 			'/data/generate-proxies',
 			'/data/reset-entities-versions',

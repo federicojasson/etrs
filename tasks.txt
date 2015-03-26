@@ -2,11 +2,13 @@
 Quick tasks
 ----------------------------
 
+- Check TODO and DEFINEHERE
 - readTemplateFile vs readTextFile + replacePlaceholders + readTemplateFile with optional mapping parameter.
 - Improve navigation bar style.
 - Define DQL UDF (user-defined functions).
 - Remove unnecessary transactions. (Use query log).
 - Check queries code.
+- Maintenance task: deleted old logs.
 
 - Check if find() uses the cache (log every SQL query: mysqld --general-log=1 --general-log-file="mysql_query.log").
 - Check if null values returned by find() are cached.

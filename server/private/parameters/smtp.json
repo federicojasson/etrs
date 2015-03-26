@@ -1,5 +1,5 @@
 {
-	"TODO: define smtp parameters": "",
+	"DEFINEHERE: define smtp parameters": "",
 	
 	"protocol": "tls",
 	"host": "smtp.gmail.com",

@@ -35,7 +35,7 @@
 		 */
 		function getStates() {
 			return [
-				// TODO: define states in here
+				// DEFINEHERE: define states in here
 				
 				{
 					name: 'account',

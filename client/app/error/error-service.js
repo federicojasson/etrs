@@ -31,7 +31,7 @@
 		 * The error descriptions.
 		 */
 		var descriptions = {
-			// TODO: define error descriptions here
+			// DEFINEHERE: define error descriptions here
 			INVALID_REQUEST: '',
 			NON_EXISTENT_ENTITY: '',
 			OUTDATED_ENTITY: '',

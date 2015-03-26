@@ -1,5 +1,5 @@
 {
-	"TODO: define dbms parameters": "",
+	"DEFINEHERE: define dbms parameters": "",
 	
 	"host": "localhost",
 	"port": "3306",

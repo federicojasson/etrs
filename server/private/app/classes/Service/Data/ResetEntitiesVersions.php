@@ -47,7 +47,7 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 				->getQuery()
 				->execute();
 			
-			// TODO: reset versions of all entities here
+			// DEFINEHERE: reset versions of all entities here
 		});
 	}
 	

@@ -59,7 +59,7 @@ class Helpers extends \Slim\Middleware {
 	 */
 	private function getHelpers() {
 		return [
-			// TODO: define helpers here
+			// DEFINEHERE: define helpers here
 			'accessValidator',
 			'account',
 			'assertion',

@@ -51,7 +51,7 @@
 					description: 'Cree un nuevo medicamento'
 				}
 				
-				// TODO: define menu items here
+				// DEFINEHERE: define menu items here
 			};
 		}
 		
@@ -63,7 +63,7 @@
 			var menuItems = getMenuItems();
 			
 			return {
-				// TODO: define menus here
+				// DEFINEHERE: define menus here
 				ad: [
 					{
 						name: 'Usuarios',

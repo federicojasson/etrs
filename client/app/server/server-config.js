@@ -33,7 +33,7 @@
 		 */
 		function getServices() {
 			return [
-				// TODO: define services here
+				// DEFINEHERE: define services here
 				'/account/get',
 				'/account/reset-password',
 				'/account/sign-in',
