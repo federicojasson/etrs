@@ -29,7 +29,19 @@ class Get extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the signed-in user
+		$signedInUser = $app->account->getSignedInUser();
+		
+		// Executes a transaction
+		$user = $app->data->transactional(function() use ($signedInUser) {
+			// Serializes the signed-in user
+			return $signedInUser->serialize();
+		});
+		
+		// Sets the output
+		$this->setOutput($user);
 	}
 	
 	/**

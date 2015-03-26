@@ -285,6 +285,36 @@ class User {
 	}
 	
 	/**
+	 * Serializes the entity.
+	 */
+	public function serialize() {
+		// TODO: clean?
+		$serialization = [];
+		
+		$serialization['id'] = $this->id;
+		$serialization['version'] = $this->version;
+		$serialization['creationDateTime'] = dateTimeToString($this->creationDateTime);
+		$serialization['lastEditionDateTime'] = null;
+		
+		if (! is_null($this->lastEditionDateTime)) {
+			$serialization['lastEditionDateTime'] = dateTimeToString($this->lastEditionDateTime);
+		}
+		
+		$serialization['role'] = $this->role;
+		$serialization['emailAddress'] = $this->emailAddress;
+		$serialization['firstName'] = $this->firstName;
+		$serialization['lastName'] = $this->lastName;
+		$serialization['gender'] = $this->gender;
+		
+		$serialization['creator'] = null;
+		if (! is_null($this->creator)) {
+			$serialization['creator'] = $this->creator->getId();
+		}
+		
+		return $serialization;
+	}
+	
+	/**
 	 * Sets the creation date-time.
 	 * 
 	 * Annotations:
