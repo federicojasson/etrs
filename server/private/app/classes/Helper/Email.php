@@ -37,6 +37,8 @@ class Email {
 		
 		// Builds a placeholder mapping
 		$mapping = [
+			'domain' => '', // TODO: domain
+			'emailAddress' => '', // TODO: email address
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
 		];
@@ -67,6 +69,8 @@ class Email {
 		
 		// Builds a placeholder mapping
 		$mapping = [
+			'domain' => '', // TODO: domain
+			'emailAddress' => '', // TODO: email address
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
 		];
@@ -95,13 +99,19 @@ class Email {
 		// Defines the subject
 		$subject = 'Bienvenido';
 		
+		// Builds a placeholder mapping
+		$mapping = [
+			'domain' => '', // TODO: domain
+			'emailAddress' => '' // TODO: email address
+		];
+		
 		// Builds the body
 		$path = DIRECTORY_EMAILS . '/welcome.html';
-		$body = readTemplateFile($path, []);
+		$body = readTemplateFile($path, $mapping);
 		
 		// Builds the alternative body
 		$path = DIRECTORY_EMAILS . '/welcome.txt';
-		$alternativeBody = readTemplateFile($path, []);
+		$alternativeBody = readTemplateFile($path, $mapping);
 		
 		// Initializes the email
 		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
