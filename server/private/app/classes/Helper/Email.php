@@ -101,8 +101,8 @@ class Email {
 		
 		// Builds a placeholder mapping
 		$mapping = [
-			'domain' => '', // TODO: domain
-			'emailAddress' => '' // TODO: email address
+			'domain' => 'localhost.etrs', // TODO: domain
+			'emailAddress' => 'admin@etrs.com.ar' // TODO: email address
 		];
 		
 		// Builds the body
@@ -173,7 +173,10 @@ class Email {
 		// Initializes the email
 		$email = $this->create($sender, $recipient, $subject, $body, $alternativeBody);
 		
-		// TODO: embed logo image?
+		// Embeds the logo
+		$path = DIRECTORY_EMAILS . '/images/logo.png';
+		$logo = file_get_contents($path);
+		$email->addStringEmbeddedImage($logo, 'logo');
 		
 		return $email;
 	}
