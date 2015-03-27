@@ -145,12 +145,22 @@ textarea {
 
 .address-icon {}
 
+.address-icon + .icon-text {
+	display: block;
+	margin-left: 54px;
+}
+
 .copyright-text {
 	margin-bottom: 48px;
 	margin-top: -12px;
 }
 
 .dialog-icon {}
+
+.dialog-icon + .icon-text {
+	display: block;
+	margin-left: 54px;
+}
 
 .dialog-text {
 	white-space: pre-line;
@@ -194,16 +204,6 @@ textarea {
 
 .icon-text {
 	margin-left: 8px;
-}
-
-.address-icon + .icon-text {
-	display: block;
-	margin-left: 54px;
-}
-
-.dialog-icon + .icon-text {
-	display: block;
-	margin-left: 54px;
 }
 
 .loading-image {

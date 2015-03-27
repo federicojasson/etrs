@@ -142,6 +142,8 @@ textarea {}
 	font-size: 2.2em;
 }
 
+.address-icon + .icon-text {}
+
 .copyright-text {
 	color: #aaaaaa;
 	font-size: 0.8em;
@@ -151,6 +153,8 @@ textarea {}
 	font-size: 2.2em;
 	margin-top: -4px;
 }
+
+.dialog-icon + .icon-text {}
 
 .dialog-text {}
 
@@ -165,10 +169,6 @@ textarea {}
 .fully-centered-container {}
 
 .icon-text {}
-
-.address-icon + .icon-text {}
-
-.dialog-icon + .icon-text {}
 
 .loading-image {}
 
