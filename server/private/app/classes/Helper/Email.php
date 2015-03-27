@@ -37,8 +37,8 @@ class Email {
 		
 		// Builds a placeholder mapping
 		$mapping = [
-			'domain' => '', // TODO: domain
-			'emailAddress' => '', // TODO: email address
+			'domain' => 'localhost.etrs', // TODO: domain
+			'emailAddress' => 'admin@etrs.com.ar', // TODO: email address
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
 		];
@@ -69,8 +69,8 @@ class Email {
 		
 		// Builds a placeholder mapping
 		$mapping = [
-			'domain' => '', // TODO: domain
-			'emailAddress' => '', // TODO: email address
+			'domain' => 'localhost.etrs', // TODO: domain
+			'emailAddress' => 'admin@etrs.com.ar', // TODO: email address
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
 		];
