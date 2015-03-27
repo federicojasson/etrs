@@ -140,6 +140,7 @@ class Data {
 		$configuration->setQueryCacheImpl($cache);
 		
 		// Adds custom functions
+		$configuration->addCustomDatetimeFunction('DATEADD', 'DoctrineExtensions\Query\Mysql\DateAdd');
 		$configuration->addCustomNumericFunction('MATCH', 'DoctrineExtensions\Query\Mysql\MatchAgainst');
 		
 		return $configuration;

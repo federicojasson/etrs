@@ -33,6 +33,7 @@ General code checks
 - Line comments without dots (regular expression: [\t]*\/\/.*[.].*).
 - Include license in all files.
 - CSS all properties.
+- Check that all PHP defined constants are used (directories defined too).
 
 
 Release tasks
