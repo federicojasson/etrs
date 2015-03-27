@@ -36,7 +36,7 @@
 				invitation: {
 					name: 'Enviar invitación',
 					state: 'invitation',
-					description: 'Invite a una persona a unirse a ETRS'
+					description: 'Invite a una persona a registrarse en ETRS'
 				},
 				
 				medicines: {
