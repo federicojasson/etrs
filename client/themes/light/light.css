@@ -135,22 +135,6 @@ textarea {}
 	text-transform: uppercase;
 }
 
-.panel-body {}
-
-.panel-heading {}
-
-.panel-title a {
-	color: #666666;
-	font-size: 0.85em;
-	text-decoration: none;
-	text-transform: uppercase;
-}
-
-.panel-title a:focus, .panel-title a:hover {
-	background-color: #e7eeed;
-	color: #333333;
-}
-
 
 /* Custom classes */
 
@@ -201,6 +185,22 @@ textarea {}
 
 .main-container {}
 
+.menu .panel-body {}
+
+.menu .panel-heading {}
+
+.menu .panel-title a {
+	color: #666666;
+	font-size: 0.85em;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.menu .panel-title a:focus, .menu .panel-title a:hover {
+	background-color: #e7eeed;
+	color: #333333;
+}
+
 .menu-item a {
 	border: 1px solid #e8e8e8;
 	color: #666666;
@@ -214,11 +214,6 @@ textarea {}
 	background-color: #e0f9df;
 	border-color: #dddddd;
 	color: #333333;
-}
-
-.menu-item.active a, .menu-item.active a:focus, .menu-item.active a:hover {
-	border-color: #bbbbbb;
-	font-weight: bold;
 }
 
 .navigation-bar-header {

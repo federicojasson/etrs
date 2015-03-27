@@ -9,12 +9,13 @@
 <accordion>
 	<accordion-group
 		ng-repeat="menu in navigationBar.getMenus()"
+		ui-sref-active="active"
 		heading="{{ menu.name }}"
 		is-open="menu.open"
+		class="menu"
 	>
 		<div
 			ng-repeat="menuItem in menu.items"
-			ui-sref-active="active"
 			class="menu-item"
 		>
 			<a
