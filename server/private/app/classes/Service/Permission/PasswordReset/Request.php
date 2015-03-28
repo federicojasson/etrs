@@ -56,18 +56,15 @@ class Request extends \App\Service\External {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $user) {
-			// TODO: can UDF be used to add LIMIT 1?
 			// Deletes any password-reset permission associated with the user
-			$entityManager->getConnection()
-				->prepare('
-					DELETE
-					FROM password_reset_permissions
-					WHERE user = :user
-					LIMIT 1
-				')
-				->execute([
-					'user' => $user->getId()
-				]);
+			$entityManager->createQueryBuilder()
+				->delete('Entity:PasswordResetPermission', 'prp')
+				->where('prp.user = :user')
+				->setParameter('user', $user)
+				->getQuery()
+				->setMaxResults(1)
+				->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
+				->execute();
 			
 			// Initializes the password-reset permission
 			$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();

@@ -59,18 +59,15 @@ class Request extends \App\Service\External {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $userRole, $recipient, $signedInUser) {
-			// TODO: can UDF be used to add LIMIT 1?
 			// Deletes any sign-up permission associated with the email address
-			$entityManager->getConnection()
-				->prepare('
-					DELETE
-					FROM sign_up_permissions
-					WHERE email_address = :emailAddress
-					LIMIT 1
-				')
-				->execute([
-					'emailAddress' => $recipient['emailAddress']
-				]);
+			$entityManager->createQueryBuilder()
+				->delete('Entity:SignUpPermission', 'sup')
+				->where('sup.emailAddress = :emailAddress')
+				->setParameter('emailAddress', $recipient['emailAddress'])
+				->getQuery()
+				->setMaxResults(1)
+				->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
+				->execute();
 			
 			// Initializes the sign-up permission
 			$signUpPermission = new \App\Data\Entity\SignUpPermission();
