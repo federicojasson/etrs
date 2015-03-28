@@ -32,13 +32,18 @@ class Email {
 	 * password.
 	 */
 	public function sendPasswordReset($recipient, $id, $password) {
+		global $app;
+		
 		// Defines the subject
 		$subject = 'Restablecimiento de contraseña';
 		
+		// Gets the server parameters
+		$server = $app->parameters->server;
+		
 		// Builds a placeholder mapping
 		$mapping = [
-			'domain' => 'localhost.etrs', // TODO: domain
-			'emailAddress' => 'admin@etrs.com.ar', // TODO: email address
+			'domain' => $server['domain'],
+			'emailAddress' => $server['emailAddress'],
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
 		];
@@ -64,13 +69,18 @@ class Email {
 	 * Receives the recipient and the sign-up permission's ID and password.
 	 */
 	public function sendSignUp($recipient, $id, $password) {
+		global $app;
+		
 		// Defines the subject
 		$subject = 'Invitación';
 		
+		// Gets the server parameters
+		$server = $app->parameters->server;
+		
 		// Builds a placeholder mapping
 		$mapping = [
-			'domain' => 'localhost.etrs', // TODO: domain
-			'emailAddress' => 'admin@etrs.com.ar', // TODO: email address
+			'domain' => $server['domain'],
+			'emailAddress' => $server['emailAddress'],
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
 		];
@@ -96,13 +106,18 @@ class Email {
 	 * Receives the recipient.
 	 */
 	public function sendWelcome($recipient) {
+		global $app;
+		
 		// Defines the subject
 		$subject = 'Bienvenido';
 		
+		// Gets the server parameters
+		$server = $app->parameters->server;
+		
 		// Builds a placeholder mapping
 		$mapping = [
-			'domain' => 'localhost.etrs', // TODO: domain
-			'emailAddress' => 'admin@etrs.com.ar' // TODO: email address
+			'domain' => $server['domain'],
+			'emailAddress' => $server['emailAddress']
 		];
 		
 		// Builds the body
@@ -129,11 +144,11 @@ class Email {
 	private function create($sender, $recipient, $subject, $body, $alternativeBody) {
 		global $app;
 		
-		// Gets the SMTP parameters
-		$smtp = $app->parameters->smtp;
-		
 		// Initializes the email
 		$email = new \PHPMailer(true);
+		
+		// Gets the SMTP parameters
+		$smtp = $app->parameters->smtp;
 		
 		// Applies connection-related settings
 		$email->isSMTP();
@@ -164,10 +179,15 @@ class Email {
 	 * body in plain text.
 	 */
 	private function createOnServerBehalf($recipient, $subject, $body, $alternativeBody) {
+		global $app;
+		
+		// Gets the server parameters
+		$server = $app->parameters->server;
+		
 		// Builds the sender
 		$sender = [
 			'fullName' => 'ETRS',
-			'emailAddress' => 'etrs@etrs.com.ar' // TODO: define email here?
+			'emailAddress' => $server['emailAddress']
 		];
 		
 		// Initializes the email

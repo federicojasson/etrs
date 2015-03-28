@@ -72,6 +72,7 @@ class Parameters {
 		return [
 			// DEFINEHERE: define parameter paths here
 			'dbms' => DIRECTORY_PARAMETERS . '/dbms.json',
+			'server' => DIRECTORY_PARAMETERS . '/server.json',
 			'smtp' => DIRECTORY_PARAMETERS . '/smtp.json'
 		];
 	}
