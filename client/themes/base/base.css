@@ -241,27 +241,39 @@ textarea {
 	padding-top: 8px;
 }
 
-.menu .panel-body {
+.menu.panel {}
+
+.menu.panel:hover {}
+
+.menu.panel .panel-body {
 	padding: 0px;
 }
 
-.menu .panel-heading {
+.menu.panel .panel-heading {
 	padding: 0px;
 }
 
-.menu .panel-title a {
+.menu.panel .panel-heading a {
 	display: block;
 	padding: 6px 12px;
 }
 
-.menu .panel-title a:focus, .menu .panel-title a:hover {}
+.menu.panel .panel-heading a:hover {}
+
+.menu.panel.open {}
+
+.menu.panel.open .panel-heading a {}
 
 .menu-item a {
 	display: block;
 	padding: 8px;
 }
 
-.menu-item a:focus, .menu-item a:hover {}
+.menu-item a:hover {}
+
+.menu-item a:active {}
+
+.menu-item.active a {}
 
 .navigation-bar-header {
 	margin-bottom: 8px;

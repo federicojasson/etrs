@@ -185,35 +185,61 @@ textarea {}
 
 .main-container {}
 
-.menu .panel-body {}
+.menu.panel {
+	border-color: #dddddd;
+	border-radius: 0px;
+}
 
-.menu .panel-heading {}
+.menu.panel:hover {
+	border-color: #4d7984;
+}
 
-.menu .panel-title a {
+.menu.panel .panel-body {}
+
+.menu.panel .panel-heading {}
+
+.menu.panel .panel-heading a {
+	background-color: #e7eeed;
 	color: #666666;
 	font-size: 0.85em;
 	text-decoration: none;
 	text-transform: uppercase;
 }
 
-.menu .panel-title a:focus, .menu .panel-title a:hover {
-	background-color: #e7eeed;
-	color: #333333;
+.menu.panel .panel-heading a:hover {
+	background-color: #4d7984;
+	color: #ffffff;
+}
+
+.menu.panel.open {
+	border-color: #4d7984;
+}
+
+.menu.panel.open .panel-heading a {
+	background-color: #4d7984;
+	color: #ffffff;
 }
 
 .menu-item a {
-	border: 1px solid #e8e8e8;
+	border: 1px solid transparent;
 	color: #666666;
 	font-size: 0.85em;
-	margin: 8px;
+	margin: 4px;
 	text-decoration: none;
 	text-transform: uppercase;
 }
 
-.menu-item a:focus, .menu-item a:hover {
-	background-color: #e0f9df;
+.menu-item a:hover {
 	border-color: #dddddd;
-	color: #333333;
+}
+
+.menu-item a:active {
+	border-color: #aaaaaa;
+}
+
+.menu-item.active a {
+	color: #000000;
+	font-weight: bold;
 }
 
 .navigation-bar-header {
