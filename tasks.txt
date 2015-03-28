@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- Pass maximum age and maximum inactivity time by parameter.
 - Check TODO and DEFINEHERE
 - readTemplateFile vs readTextFile + replacePlaceholders + readTemplateFile with optional mapping parameter.
 - Improve navigation bar style.

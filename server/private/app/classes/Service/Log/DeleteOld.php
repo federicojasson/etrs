@@ -18,25 +18,25 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\Log;
 
 /**
- * Responsible for registering the internal services.
+ * Represents the /log/delete-old service.
  */
-class InternalServices extends Services {
+class DeleteOld extends \App\Service\Internal {
 	
 	/**
-	 * Returns the services.
+	 * Executes the service.
 	 */
-	protected function getServices() {
-		return [
-			// DEFINEHERE: define internal services here
-			'/data/check-configuration',
-			'/data/generate-proxies',
-			'/data/reset-entities-versions',
-			'/log/delete-old',
-			'/session/delete-expired'
-		];
+	protected function execute() {
+		// TODO
+	}
+	
+	/**
+	 * Determines whether the request is valid.
+	 */
+	protected function isRequestValid() {
+		return true;
 	}
 	
 }
