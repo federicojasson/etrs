@@ -45,9 +45,9 @@ class Data {
 	/**
 	 * Invokes a method in the entity manager if it is still open.
 	 * 
-	 * Receives the method and the arguments.
+	 * Receives the method and, optionally, the arguments.
 	 */
-	public function __call($method, $arguments) {
+	public function __call($method, $arguments = []) {
 		if (! $this->entityManager->isOpen()) {
 			// The entity manager is closed
 			return null;
@@ -55,6 +55,18 @@ class Data {
 		
 		// Invokes the method in the entity manager
 		return call_user_func_array([ $this->entityManager, $method ], $arguments);
+	}
+	
+	/**
+	 * Returns the total number of rows found in the last executed query.
+	 */
+	public function getFoundRows() {
+		// Prepares and executes a statement
+		$statement = $this->__call('getConnection')->prepare('SELECT FOUND_ROWS() AS foundRows');
+		$statement->execute();
+		
+		// Fetches the results
+		return $statement->fetch()['foundRows'];
 	}
 	
 	/**

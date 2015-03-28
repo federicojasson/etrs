@@ -70,9 +70,7 @@ class Search extends \App\Service\External {
 		}));
 		
 		// Gets the total number of results
-		$statement = $app->data->getConnection()->prepare('SELECT FOUND_ROWS() AS foundRows');
-		$statement->execute();
-		$total = $statement->fetch()['foundRows'];
+		$total = $app->data->getFoundRows();
 		
 		// Sets an output
 		$this->setOutputValue('total', $total);
