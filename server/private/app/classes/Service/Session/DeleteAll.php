@@ -18,29 +18,25 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\Session;
 
 /**
- * Responsible for registering the internal services.
+ * Represents the /session/delete-all service.
  */
-class InternalServices extends Services {
+class DeleteAll extends \App\Service\Internal {
 	
 	/**
-	 * Returns the services.
+	 * Executes the service.
 	 */
-	protected function getServices() {
-		return [
-			// DEFINEHERE: define internal services here
-			'/data/check-configuration',
-			'/data/generate-proxies',
-			'/data/reset-entities-versions',
-			'/log/delete-old',
-			'/permission/password-reset/delete-expired',
-			'/permission/sign-up/delete-expired',
-			'/session/delete-all',
-			'/session/delete-expired',
-			'/user/delete'
-		];
+	protected function execute() {
+		// TODO
+	}
+	
+	/**
+	 * Determines whether the request is valid.
+	 */
+	protected function isRequestValid() {
+		return true;
 	}
 	
 }
