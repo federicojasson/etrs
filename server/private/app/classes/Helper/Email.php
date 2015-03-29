@@ -32,32 +32,14 @@ class Email {
 	 * password.
 	 */
 	public function sendPasswordReset($recipient, $id, $password) {
-		global $app;
-		
 		// Defines the subject
 		$subject = 'Restablecimiento de contraseña';
 		
-		// Gets the server parameters
-		$server = $app->parameters->server;
-		
-		// Builds a placeholder mapping
-		$mapping = [
-			'domain' => $server['domain'],
-			'emailAddress' => $server['emailAddress'],
+		// Initializes the email
+		$email = $this->createOnServerBehalf('passwordReset', $recipient, $subject, [
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
-		];
-		
-		// Builds the body
-		$path = DIRECTORY_EMAILS . '/password-reset.html';
-		$body = readTemplateFile($path, $mapping);
-		
-		// Builds the alternative body
-		$path = DIRECTORY_EMAILS . '/password-reset.txt';
-		$alternativeBody = readTemplateFile($path, $mapping);
-		
-		// Initializes the email
-		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
+		]);
 		
 		// Sends the email
 		return $this->send($email);
@@ -69,32 +51,14 @@ class Email {
 	 * Receives the recipient and the sign-up permission's ID and password.
 	 */
 	public function sendSignUp($recipient, $id, $password) {
-		global $app;
-		
 		// Defines the subject
 		$subject = 'Invitación';
 		
-		// Gets the server parameters
-		$server = $app->parameters->server;
-		
-		// Builds a placeholder mapping
-		$mapping = [
-			'domain' => $server['domain'],
-			'emailAddress' => $server['emailAddress'],
+		// Initializes the email
+		$email = $this->createOnServerBehalf('signUp', $recipient, $subject, [
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
-		];
-		
-		// Builds the body
-		$path = DIRECTORY_EMAILS . '/sign-up.html';
-		$body = readTemplateFile($path, $mapping);
-		
-		// Builds the alternative body
-		$path = DIRECTORY_EMAILS . '/sign-up.txt';
-		$alternativeBody = readTemplateFile($path, $mapping);
-		
-		// Initializes the email
-		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
+		]);
 		
 		// Sends the email
 		return $this->send($email);
@@ -106,30 +70,11 @@ class Email {
 	 * Receives the recipient.
 	 */
 	public function sendWelcome($recipient) {
-		global $app;
-		
 		// Defines the subject
 		$subject = 'Bienvenido';
 		
-		// Gets the server parameters
-		$server = $app->parameters->server;
-		
-		// Builds a placeholder mapping
-		$mapping = [
-			'domain' => $server['domain'],
-			'emailAddress' => $server['emailAddress']
-		];
-		
-		// Builds the body
-		$path = DIRECTORY_EMAILS . '/welcome.html';
-		$body = readTemplateFile($path, $mapping);
-		
-		// Builds the alternative body
-		$path = DIRECTORY_EMAILS . '/welcome.txt';
-		$alternativeBody = readTemplateFile($path, $mapping);
-		
 		// Initializes the email
-		$email = $this->createOnServerBehalf($recipient, $subject, $body, $alternativeBody);
+		$email = $this->createOnServerBehalf('welcome', $recipient, $subject);
 		
 		// Sends the email
 		return $this->send($email);
@@ -144,11 +89,11 @@ class Email {
 	private function create($sender, $recipient, $subject, $body, $alternativeBody) {
 		global $app;
 		
-		// Initializes the email
-		$email = new \PHPMailer(true);
-		
 		// Gets the SMTP parameters
 		$smtp = $app->parameters->smtp;
+		
+		// Initializes the email
+		$email = new \PHPMailer(true);
 		
 		// Applies connection-related settings
 		$email->isSMTP();
@@ -175,10 +120,11 @@ class Email {
 	/**
 	 * Creates an email to be sent on behalf of the server.
 	 * 
-	 * Receives the recipient, the subject, the body in HTML and an alternative
-	 * body in plain text.
+	 * Receives the type, the recipient, the subject and, optionally, a mapping
+	 * containing placeholders as keys and replacements as values, used to build
+	 * the body and the alternative body.
 	 */
-	private function createOnServerBehalf($recipient, $subject, $body, $alternativeBody) {
+	private function createOnServerBehalf($type, $recipient, $subject, $mapping = []) {
 		global $app;
 		
 		// Gets the server parameters
@@ -189,6 +135,21 @@ class Email {
 			'fullName' => 'ETRS',
 			'emailAddress' => $server['emailAddress']
 		];
+		
+		// Converts the type from camelCase to spinal-case
+		$type = camelToSpinalCase($type);
+		
+		// Adds placeholders to the mapping
+		$mapping['domain'] = $server['domain'];
+		$mapping['emailAddress'] = $server['emailAddress'];
+		
+		// Builds the body
+		$path = DIRECTORY_EMAILS . '/' . $type . '.html';
+		$body = readTemplateFile($path, $mapping);
+		
+		// Builds the alternative body
+		$path = DIRECTORY_EMAILS . '/' . $type . '.txt';
+		$alternativeBody = readTemplateFile($path, $mapping);
 		
 		// Initializes the email
 		$email = $this->create($sender, $recipient, $subject, $body, $alternativeBody);

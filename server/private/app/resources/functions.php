@@ -33,6 +33,26 @@ function camelToPascalCase($string) {
 }
 
 /**
+ * Converts a string from camelCase to spinal-case.
+ * 
+ * Receives the string.
+ */
+function camelToSpinalCase($string) {
+	// Performs a regular expression search
+	$matches = [];
+	preg_match_all('/[0-9]+|[A-Za-z][a-z]*/', $string, $matches);
+	$results = $matches[0];
+	
+	// Converts the first character of each result to lowercase
+	foreach ($results as &$result) {
+		$result = lcfirst($result);
+	}
+	
+	// Builds the spinal-case string
+	return implode('-', $results);
+}
+
+/**
  * Determines whether an array contains duplicate elements.
  * 
  * Receives the array.
