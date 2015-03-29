@@ -4,15 +4,11 @@ Quick tasks
 
 - Pass maximum age and maximum inactivity time by parameter.
 - Check TODO and DEFINEHERE
-- readTemplateFile vs readTextFile + replacePlaceholders + readTemplateFile with optional mapping parameter.
-- Improve navigation bar style.
 - Remove unnecessary transactions. (Use query log).
-- Check queries code.
-- Maintenance task: deleted old logs.
 - User\Search???
+- Check when to use lock mode.
 
 - Check if find() uses the cache (log every SQL query: mysqld --general-log=1 --general-log-file="mysql_query.log").
-- Check if null values returned by find() are cached.
 - Implement a better file LogWriter (could write date-time and type of log).
 - Should function router.reload set the href?
   See: http://stackoverflow.com/questions/27618878/angular-ui-router-reloading-to-different-state-refresh-data
