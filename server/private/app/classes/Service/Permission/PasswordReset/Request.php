@@ -66,10 +66,8 @@ class Request extends \App\Service\External {
 				->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
 				->execute();
 			
-			// Initializes the password-reset permission
-			$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();
-			
 			// Creates the password-reset permission
+			$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();
 			$passwordResetPermission->setPasswordHash($hash);
 			$passwordResetPermission->setSalt($salt);
 			$passwordResetPermission->setKeyStretchingIterations($keyStretchingIterations);

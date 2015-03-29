@@ -115,11 +115,8 @@ class Database implements \SessionHandlerInterface {
 			
 			if (is_null($session)) {
 				// The session doesn't exist
-				
-				// Initializes the session
-				$session = new \App\Data\Entity\Session();
-				
 				// Creates the session
+				$session = new \App\Data\Entity\Session();
 				$session->setId($id);
 				$session->setData($data);
 				$entityManager->persist($session);

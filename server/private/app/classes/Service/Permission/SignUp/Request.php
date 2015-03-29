@@ -69,10 +69,8 @@ class Request extends \App\Service\External {
 				->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
 				->execute();
 			
-			// Initializes the sign-up permission
-			$signUpPermission = new \App\Data\Entity\SignUpPermission();
-			
 			// Creates the sign-up permission
+			$signUpPermission = new \App\Data\Entity\SignUpPermission();
 			$signUpPermission->setPasswordHash($hash);
 			$signUpPermission->setSalt($salt);
 			$signUpPermission->setKeyStretchingIterations($keyStretchingIterations);
