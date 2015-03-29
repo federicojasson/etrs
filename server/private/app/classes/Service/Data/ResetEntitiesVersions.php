@@ -31,23 +31,23 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) {
-			// Resets the medicines' versions
-			$entityManager->createQueryBuilder()
-				->update('Entity:Medicine', 'm')
-				->set('m.version', 0)
-				->getQuery()
-				->execute();
-			
-			// Resets the users' versions
-			$entityManager->createQueryBuilder()
-				->update('Entity:User', 'u')
-				->set('u.version', 0)
-				->getQuery()
-				->execute();
-			
+		// Builds an array containing the versioned entities
+		$entities = [
+			'Medicine',
+			'User'
 			// DEFINEHERE: reset versions of all entities here
+		];
+		
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($entities) {
+			// Resets the entities' versions
+			foreach ($entities as $entity) {
+				$entityManager->createQueryBuilder()
+					->update('Entity:' . $entity, 'e')
+					->set('e.version', 0)
+					->getQuery()
+					->execute();
+			}
 		});
 	}
 	
