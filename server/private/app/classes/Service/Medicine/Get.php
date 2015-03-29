@@ -34,17 +34,14 @@ class Get extends \App\Service\External {
 		// Gets the inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		
-		// Executes a transaction
-		$medicine = $app->data->transactional(function($entityManager) use ($app, $id) {
-			// Gets the medicine
-			$medicine = $entityManager->getRepository('Entity:Medicine')->findNonDeleted($id);
+		// Gets the medicine
+		$medicine = $app->data->getRepository('Entity:Medicine')->findNonDeleted($id);
 
-			// Asserts conditions
-			$app->assertion->entityExists($medicine);
-			
-			// Serializes the medicine
-			return $medicine->serialize();
-		});
+		// Asserts conditions
+		$app->assertion->entityExists($medicine);
+
+		// Serializes the medicine
+		$medicine = $medicine->serialize();
 		
 		// Sets the output
 		$this->setOutput($medicine);

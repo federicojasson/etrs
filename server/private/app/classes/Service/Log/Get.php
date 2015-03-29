@@ -34,17 +34,14 @@ class Get extends \App\Service\External {
 		// Gets the inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		
-		// Executes a transaction
-		$log = $app->data->transactional(function($entityManager) use ($app, $id) {
-			// Gets the log
-			$log = $entityManager->getRepository('Entity:Log')->find($id);
+		// Gets the log
+		$log = $app->data->getRepository('Entity:Log')->find($id);
 
-			// Asserts conditions
-			$app->assertion->entityExists($log);
-			
-			// Serializes the log
-			return $log->serialize();
-		});
+		// Asserts conditions
+		$app->assertion->entityExists($log);
+
+		// Serializes the log
+		$log = $log->serialize();
 		
 		// Sets the output
 		$this->setOutput($log);

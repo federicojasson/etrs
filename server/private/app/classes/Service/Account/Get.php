@@ -34,14 +34,11 @@ class Get extends \App\Service\External {
 		// Gets the signed-in user
 		$signedInUser = $app->account->getSignedInUser();
 		
-		// Executes a transaction
-		$user = $app->data->transactional(function() use ($signedInUser) {
-			// Serializes the signed-in user
-			return $signedInUser->serialize();
-		});
+		// Serializes the signed-in user
+		$signedInUser = $signedInUser->serialize();
 		
 		// Sets the output
-		$this->setOutput($user);
+		$this->setOutput($signedInUser);
 	}
 	
 	/**

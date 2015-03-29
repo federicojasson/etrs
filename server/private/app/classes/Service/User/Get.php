@@ -34,17 +34,14 @@ class Get extends \App\Service\External {
 		// Gets the inputs
 		$id = $this->getInputValue('id');
 		
-		// Executes a transaction
-		$user = $app->data->transactional(function($entityManager) use ($app, $id) {
-			// Gets the user
-			$user = $entityManager->getRepository('Entity:User')->find($id);
+		// Gets the user
+		$user = $app->data->getRepository('Entity:User')->find($id);
 
-			// Asserts conditions
-			$app->assertion->entityExists($user);
-			
-			// Serializes the user
-			return $user->serialize();
-		});
+		// Asserts conditions
+		$app->assertion->entityExists($user);
+
+		// Serializes the user
+		$user = $user->serialize();
 		
 		// Sets the output
 		$this->setOutput($user);
