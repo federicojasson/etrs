@@ -39,10 +39,8 @@ class Create extends \App\Service\External {
 		
 		// Executes a transaction
 		$id = $app->data->transactional(function($entityManager) use ($name, $signedInUser) {
-			// Initializes the medicine
-			$medicine = new \App\Data\Entity\Medicine();
-			
 			// Creates the medicine
+			$medicine = new \App\Data\Entity\Medicine();
 			$medicine->setName($name);
 			$medicine->setCreator($signedInUser);
 			$entityManager->persist($medicine);
