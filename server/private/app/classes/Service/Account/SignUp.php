@@ -70,10 +70,8 @@ class SignUp extends \App\Service\External {
 			// Gets the sign-up permission
 			$signUpPermission = $entityManager->getReference('Entity:SignUpPermission', $credentials['id']);
 			
-			// Initializes the user
-			$user = new \App\Data\Entity\User();
-			
 			// Creates the user
+			$user = new \App\Data\Entity\User();
 			$user->setId($id);
 			$user->setRole($signUpPermission->getUserRole());
 			$user->setEmailAddress($emailAddress);
