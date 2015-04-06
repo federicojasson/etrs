@@ -31,19 +31,16 @@ class DeleteExpired extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) {
-			// Deletes the expired sessions
-			$entityManager->createQueryBuilder()
-				->delete('Entity:Session', 's')
-				->where('s.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'DAY\')')
-				->orWhere('s.lastAccessDateTime < DATEADD(:currentDateTime, (-:maximumInactivityTime), \'HOUR\')')
-				->setParameter('currentDateTime', getCurrentDateTime())
-				->setParameter('maximumAge', SESSION_MAXIMUM_AGE)
-				->setParameter('maximumInactivityTime', SESSION_MAXIMUM_INACTIVITY_TIME)
-				->getQuery()
-				->execute();
-		});
+		// Deletes the expired sessions
+		$app->data->createQueryBuilder()
+			->delete('Entity:Session', 's')
+			->where('s.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'DAY\')')
+			->orWhere('s.lastAccessDateTime < DATEADD(:currentDateTime, (-:maximumInactivityTime), \'HOUR\')')
+			->setParameter('currentDateTime', getCurrentDateTime())
+			->setParameter('maximumAge', SESSION_MAXIMUM_AGE)
+			->setParameter('maximumInactivityTime', SESSION_MAXIMUM_INACTIVITY_TIME)
+			->getQuery()
+			->execute();
 	}
 	
 	/**

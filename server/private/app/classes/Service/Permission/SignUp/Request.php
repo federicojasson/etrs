@@ -57,31 +57,28 @@ class Request extends \App\Service\External {
 		// Computes the password's hash
 		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
 		
-		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $userRole, $recipient, $signedInUser) {
-			// Deletes any sign-up permission associated with the email address
-			$entityManager->createQueryBuilder()
-				->delete('Entity:SignUpPermission', 'sup')
-				->where('sup.emailAddress = :emailAddress')
-				->setParameter('emailAddress', $recipient['emailAddress'])
-				->getQuery()
-				->setMaxResults(1)
-				->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
-				->execute();
-			
-			// Creates the sign-up permission
-			$signUpPermission = new \App\Data\Entity\SignUpPermission();
-			$signUpPermission->setPasswordHash($hash);
-			$signUpPermission->setSalt($salt);
-			$signUpPermission->setKeyStretchingIterations($keyStretchingIterations);
-			$signUpPermission->setUserRole($userRole);
-			$signUpPermission->setEmailAddress($recipient['emailAddress']);
-			$signUpPermission->setCreator($signedInUser);
-			$entityManager->persist($signUpPermission);
-			
-			// Gets the sign-up permission's ID
-			return $signUpPermission->getId();
-		});
+		// Deletes any sign-up permission associated with the email address
+		$app->data->createQueryBuilder()
+			->delete('Entity:SignUpPermission', 'sup')
+			->where('sup.emailAddress = :emailAddress')
+			->setParameter('emailAddress', $recipient['emailAddress'])
+			->getQuery()
+			->setMaxResults(1)
+			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
+			->execute();
+		
+		// Creates the sign-up permission
+		$signUpPermission = new \App\Data\Entity\SignUpPermission();
+		$signUpPermission->setPasswordHash($hash);
+		$signUpPermission->setSalt($salt);
+		$signUpPermission->setKeyStretchingIterations($keyStretchingIterations);
+		$signUpPermission->setUserRole($userRole);
+		$signUpPermission->setEmailAddress($recipient['emailAddress']);
+		$signUpPermission->setCreator($signedInUser);
+		$app->data->persist($signUpPermission);
+		
+		// Gets the sign-up permission's ID
+		$id = $signUpPermission->getId();
 		
 		// Sends a sign-up email
 		$delivered = $app->email->sendSignUp($recipient, $id, $password);

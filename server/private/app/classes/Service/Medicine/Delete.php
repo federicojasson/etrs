@@ -38,18 +38,16 @@ class Delete extends \App\Service\External {
 		// Gets the signed-in user
 		$signedInUser = $app->account->getSignedInUser();
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($app, $id, $version, $signedInUser) {
-			// Gets the medicine
-			$medicine = $entityManager->getRepository('Entity:Medicine')->findNonDeleted($id);
-			
-			// Asserts conditions
-			$app->assertion->entityExists($medicine);
-			$app->assertion->entityUpdated($medicine, $version);
-			
-			// Deletes the medicine
-			$medicine->delete($signedInUser);
-		});
+		// Gets the medicine
+		$medicine = $app->data->getRepository('Entity:Medicine')->findNonDeleted($id);
+		
+		// Asserts conditions
+		$app->assertion->entityExists($medicine);
+		$app->assertion->entityUpdated($medicine, $version);
+		
+		// Deletes the medicine
+		$medicine->delete($signedInUser);
+		$app->data->merge($medicine);
 	}
 	
 	/**

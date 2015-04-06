@@ -31,14 +31,11 @@ class DeleteAll extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) {
-			// Deletes all sessions
-			$entityManager->createQueryBuilder()
-				->delete('Entity:Session')
-				->getQuery()
-				->execute();
-		});
+		// Deletes all sessions
+		$app->data->createQueryBuilder()
+			->delete('Entity:Session')
+			->getQuery()
+			->execute();
 	}
 	
 	/**

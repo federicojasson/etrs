@@ -54,29 +54,26 @@ class Request extends \App\Service\External {
 		// Gets the user
 		$user = $app->data->getReference('Entity:User', $credentials['id']);
 		
-		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($hash, $salt, $keyStretchingIterations, $user) {
-			// Deletes any password-reset permission associated with the user
-			$entityManager->createQueryBuilder()
-				->delete('Entity:PasswordResetPermission', 'prp')
-				->where('prp.user = :user')
-				->setParameter('user', $user)
-				->getQuery()
-				->setMaxResults(1)
-				->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
-				->execute();
-			
-			// Creates the password-reset permission
-			$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();
-			$passwordResetPermission->setPasswordHash($hash);
-			$passwordResetPermission->setSalt($salt);
-			$passwordResetPermission->setKeyStretchingIterations($keyStretchingIterations);
-			$passwordResetPermission->setUser($user);
-			$entityManager->persist($passwordResetPermission);
-			
-			// Gets the password-reset permission's ID
-			return $passwordResetPermission->getId();
-		});
+		// Deletes any password-reset permission associated with the user
+		$app->data->createQueryBuilder()
+			->delete('Entity:PasswordResetPermission', 'prp')
+			->where('prp.user = :user')
+			->setParameter('user', $user)
+			->getQuery()
+			->setMaxResults(1)
+			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
+			->execute();
+		
+		// Creates the password-reset permission
+		$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();
+		$passwordResetPermission->setPasswordHash($hash);
+		$passwordResetPermission->setSalt($salt);
+		$passwordResetPermission->setKeyStretchingIterations($keyStretchingIterations);
+		$passwordResetPermission->setUser($user);
+		$app->data->persist($passwordResetPermission);
+		
+		// Gets the password-reset permission's ID
+		$id = $passwordResetPermission->getId();
 		
 		// Builds an email recipient
 		$recipient = [

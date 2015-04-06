@@ -37,17 +37,14 @@ class Create extends \App\Service\External {
 		// Gets the signed-in user
 		$signedInUser = $app->account->getSignedInUser();
 		
-		// Executes a transaction
-		$id = $app->data->transactional(function($entityManager) use ($name, $signedInUser) {
-			// Creates the medicine
-			$medicine = new \App\Data\Entity\Medicine();
-			$medicine->setName($name);
-			$medicine->setCreator($signedInUser);
-			$entityManager->persist($medicine);
-			
-			// Gets the medicine's ID
-			return $medicine->getId();
-		});
+		// Creates the medicine
+		$medicine = new \App\Data\Entity\Medicine();
+		$medicine->setName($name);
+		$medicine->setCreator($signedInUser);
+		$app->data->persist($medicine);
+		
+		// Gets the medicine's ID
+		$id = $medicine->getId();
 		
 		// Sets an output
 		$this->setOutputValue('id', $id, 'bin2hex');

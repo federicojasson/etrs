@@ -39,20 +39,18 @@ class Edit extends \App\Service\External {
 		// Gets the signed-in user
 		$signedInUser = $app->account->getSignedInUser();
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($app, $id, $version, $name, $signedInUser) {
-			// Gets the medicine
-			$medicine = $entityManager->getRepository('Entity:Medicine')->findNonDeleted($id);
-			
-			// Asserts conditions
-			$app->assertion->entityExists($medicine);
-			$app->assertion->entityUpdated($medicine, $version);
-			
-			// Edits the medicine
-			$medicine->setLastEditionDateTime();
-			$medicine->setName($name);
-			$medicine->setLastEditor($signedInUser);
-		});
+		// Gets the medicine
+		$medicine = $app->data->getRepository('Entity:Medicine')->findNonDeleted($id);
+		
+		// Asserts conditions
+		$app->assertion->entityExists($medicine);
+		$app->assertion->entityUpdated($medicine, $version);
+		
+		// Edits the medicine
+		$medicine->setLastEditionDateTime();
+		$medicine->setName($name);
+		$medicine->setLastEditor($signedInUser);
+		$app->data->merge($medicine);
 	}
 	
 	/**

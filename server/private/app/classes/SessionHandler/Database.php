@@ -43,14 +43,11 @@ class Database implements \SessionHandlerInterface {
 		// Converts the ID from hexadecimal to binary
 		$id = hex2bin($id);
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($id) {
-			// Gets the session
-			$session = $entityManager->getReference('Entity:Session', $id);
-			
-			// Deletes the session
-			$entityManager->remove($session);
-		});
+		// Gets the session
+		$session = $app->data->getReference('Entity:Session', $id);
+		
+		// Deletes the session
+		$app->data->remove($session);
 		
 		return true;
 	}
@@ -108,25 +105,23 @@ class Database implements \SessionHandlerInterface {
 		// Converts the ID from hexadecimal to binary
 		$id = hex2bin($id);
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($id, $data) {
-			// Gets the session
-			$session = $entityManager->getRepository('Entity:Session')->find($id);
-			
-			if (is_null($session)) {
-				// The session doesn't exist
-				// Creates the session
-				$session = new \App\Data\Entity\Session();
-				$session->setId($id);
-				$session->setData($data);
-				$entityManager->persist($session);
-			} else {
-				// The session exists
-				// Edits the session
-				$session->setLastAccessDateTime();
-				$session->setData($data);
-			}
-		});
+		// Gets the session
+		$session = $app->data->getRepository('Entity:Session')->find($id);
+		
+		if (is_null($session)) {
+			// The session doesn't exist
+			// Creates the session
+			$session = new \App\Data\Entity\Session();
+			$session->setId($id);
+			$session->setData($data);
+			$app->data->persist($session);
+		} else {
+			// The session exists
+			// Edits the session
+			$session->setLastAccessDateTime();
+			$session->setData($data);
+			$app->data->merge($session);
+		}
 		
 		return true;
 	}

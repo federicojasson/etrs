@@ -65,28 +65,25 @@ class SignUp extends \App\Service\External {
 		// Computes the password's hash
 		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($credentials, $id, $emailAddress, $hash, $salt, $keyStretchingIterations, $firstName, $lastName, $gender) {
-			// Gets the sign-up permission
-			$signUpPermission = $entityManager->getReference('Entity:SignUpPermission', $credentials['id']);
-			
-			// Creates the user
-			$user = new \App\Data\Entity\User();
-			$user->setId($id);
-			$user->setRole($signUpPermission->getUserRole());
-			$user->setEmailAddress($emailAddress);
-			$user->setPasswordHash($hash);
-			$user->setSalt($salt);
-			$user->setKeyStretchingIterations($keyStretchingIterations);
-			$user->setFirstName($firstName);
-			$user->setLastName($lastName);
-			$user->setGender($gender);
-			$user->setCreator($signUpPermission->getCreator());
-			$entityManager->persist($user);
-			
-			// Deletes the sign-up permission
-			$entityManager->remove($signUpPermission);
-		});
+		// Gets the sign-up permission
+		$signUpPermission = $app->data->getReference('Entity:SignUpPermission', $credentials['id']);
+
+		// Creates the user
+		$user = new \App\Data\Entity\User();
+		$user->setId($id);
+		$user->setRole($signUpPermission->getUserRole());
+		$user->setEmailAddress($emailAddress);
+		$user->setPasswordHash($hash);
+		$user->setSalt($salt);
+		$user->setKeyStretchingIterations($keyStretchingIterations);
+		$user->setFirstName($firstName);
+		$user->setLastName($lastName);
+		$user->setGender($gender);
+		$user->setCreator($signUpPermission->getCreator());
+		$app->data->persist($user);
+
+		// Deletes the sign-up permission
+		$app->data->remove($signUpPermission);
 		
 		// Builds an email recipient
 		$recipient = [

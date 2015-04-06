@@ -29,6 +29,8 @@ class Session {
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
+		global $app;
+		
 		// Configures the ID generation
 		ini_set('session.hash_function', 'sha256');
 		ini_set('session.hash_bits_per_character', 4);
@@ -37,13 +39,19 @@ class Session {
 		$sessionHandler = new \App\SessionHandler\Database();
 		
 		// Sets the session handler
-		session_set_save_handler($sessionHandler);
+		session_set_save_handler($sessionHandler, false);
 		
 		// Sets the session's name
 		session_name(SESSION_NAME);
 		
 		// Starts the session
 		session_start();
+		
+		// Registers a hook
+		$app->hook('slim.after.router', function() {
+			// Ends the session
+			session_write_close();
+		}, HOOK_PRIORITY_SESSION);
 	}
 	
 	/**

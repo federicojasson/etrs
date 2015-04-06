@@ -33,14 +33,11 @@ class Database {
 	public function write($message, $level) {
 		global $app;
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($level, $message) {
-			// Creates the log
-			$log = new \App\Data\Entity\Log();
-			$log->setLevel($level);
-			$log->setMessage($message);
-			$entityManager->persist($log);
-		});
+		// Creates the log
+		$log = new \App\Data\Entity\Log();
+		$log->setLevel($level);
+		$log->setMessage($message);
+		$app->data->persist($log);
 	}
 	
 }

@@ -34,12 +34,20 @@ class Data {
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
+		global $app;
+		
 		// Gets the entity manager
 		$this->entityManager = $this->getEntityManager();
 		
 		// Adds custom types
 		\Doctrine\DBAL\Types\Type::addType('binary_data', 'App\Data\Type\BinaryData');
 		\Doctrine\DBAL\Types\Type::addType('utc_datetime', 'App\Data\Type\UtcDateTime');
+		
+		// Registers a hook
+		$app->hook('slim.after.router', function() {
+			// Commits the data changes
+			$this->entityManager->flush();
+		}, HOOK_PRIORITY_DATA);
 	}
 	
 	/**
@@ -83,27 +91,6 @@ class Data {
 		
 		// Runs the command
 		$command->run($inputSettings, $outputSettings);
-	}
-	
-	/**
-	 * Executes a transaction.
-	 * 
-	 * Receives a closure to be executed.
-	 */
-	public function transactional($closure) {
-		// Initializes the result
-		$result = null;
-		
-		// Builds the transaction
-		$transaction = function($entityManager) use ($closure, &$result) {
-			// Executes the closure
-			$result = call_user_func($closure, $entityManager);
-		};
-		
-		// Executes the transaction
-		$this->__call('transactional', [ $transaction ]);
-		
-		return $result;
 	}
 	
 	/**

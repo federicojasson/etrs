@@ -49,23 +49,21 @@ class ResetPassword extends \App\Service\External {
 		// Computes the password's hash
 		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
 		
-		// Executes a transaction
-		$app->data->transactional(function($entityManager) use ($credentials, $hash, $salt, $keyStretchingIterations) {
-			// Gets the password-reset permission
-			$passwordResetPermission = $entityManager->getReference('Entity:PasswordResetPermission', $credentials['id']);
-			
-			// Gets the user
-			$user = $passwordResetPermission->getUser();
-			
-			// Edits the user
-			$user->setLastEditionDateTime();
-			$user->setPasswordHash($hash);
-			$user->setSalt($salt);
-			$user->setKeyStretchingIterations($keyStretchingIterations);
-			
-			// Deletes the password-reset permission
-			$entityManager->remove($passwordResetPermission);
-		});
+		// Gets the password-reset permission
+		$passwordResetPermission = $app->data->getReference('Entity:PasswordResetPermission', $credentials['id']);
+
+		// Gets the user
+		$user = $passwordResetPermission->getUser();
+
+		// Edits the user
+		$user->setLastEditionDateTime();
+		$user->setPasswordHash($hash);
+		$user->setSalt($salt);
+		$user->setKeyStretchingIterations($keyStretchingIterations);
+		$app->data->merge($user);
+
+		// Deletes the password-reset permission
+		$app->data->remove($passwordResetPermission);
 	}
 	
 	/**
