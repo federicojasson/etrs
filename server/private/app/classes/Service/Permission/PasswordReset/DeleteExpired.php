@@ -29,7 +29,16 @@ class DeleteExpired extends \App\Service\Internal {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Deletes the expired password-reset permissions
+		$app->data->createQueryBuilder()
+			->delete('Entity:PasswordResetPermission', 'prp')
+			->where('prp.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'MINUTE\')')
+			->setParameter('currentDateTime', getCurrentDateTime())
+			->setParameter('maximumAge', PASSWORD_RESET_PERMISSION_MAXIMUM_AGE)
+			->getQuery()
+			->execute();
 	}
 	
 	/**

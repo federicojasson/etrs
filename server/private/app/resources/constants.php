@@ -50,6 +50,8 @@ define('OPERATION_MODE_DEVELOPMENT', 'development');
 define('OPERATION_MODE_MAINTENANCE', 'maintenance');
 define('OPERATION_MODE_PRODUCTION', 'production');
 
+define('PASSWORD_RESET_PERMISSION_MAXIMUM_AGE', 120); // Minutes
+
 define('RANDOM_ID_LENGTH', 16); // Bytes
 
 define('RANDOM_PASSWORD_LENGTH', 128); // Bytes
