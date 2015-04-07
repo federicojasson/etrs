@@ -63,6 +63,8 @@ define('SESSION_MAXIMUM_AGE', 30); // Days
 define('SESSION_MAXIMUM_INACTIVITY_TIME', 48); // Hours
 define('SESSION_NAME', 'id');
 
+define('SIGN_UP_PERMISSION_MAXIMUM_AGE', 48); // Hours
+
 define('SORTING_DIRECTION_ASCENDING', 'asc');
 define('SORTING_DIRECTION_DESCENDING', 'desc');
 

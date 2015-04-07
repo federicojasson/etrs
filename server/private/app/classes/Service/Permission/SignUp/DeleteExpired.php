@@ -29,7 +29,16 @@ class DeleteExpired extends \App\Service\Internal {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Deletes the expired sign-up permissions
+		$app->data->createQueryBuilder()
+			->delete('Entity:SignUpPermission', 'sup')
+			->where('sup.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'HOUR\')')
+			->setParameter('currentDateTime', getCurrentDateTime())
+			->setParameter('maximumAge', SIGN_UP_PERMISSION_MAXIMUM_AGE)
+			->getQuery()
+			->execute();
 	}
 	
 	/**
