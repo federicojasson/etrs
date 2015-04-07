@@ -200,6 +200,13 @@ class Medicine {
 	}
 	
 	/**
+	 * Determines whether the entity is deleted.
+	 */
+	public function isDeleted() {
+		return $this->deleted;
+	}
+	
+	/**
 	 * Serializes the entity.
 	 */
 	public function serialize() {
