@@ -31,17 +31,17 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// Builds an array containing the versioned entities
-		$entities = [
+		// Builds an array containing the types of the versioned entities
+		$types = [
 			'Medicine',
 			'User'
 			// DEFINEHERE: reset versions of all entities here
 		];
 		
 		// Resets the entities' versions
-		foreach ($entities as $entity) {
+		foreach ($types as $type) {
 			$app->data->createQueryBuilder()
-				->update('Entity:' . $entity, 'e')
+				->update('Entity:' . $type, 'e')
 				->set('e.version', 0)
 				->getQuery()
 				->execute();

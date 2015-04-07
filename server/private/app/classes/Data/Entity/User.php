@@ -292,7 +292,7 @@ class User {
 		$serialization = [];
 		
 		// Adds the appropriate fields
-		// The process only considers accessible fields and filters them
+		// The process only considers accessible fields and it filters them
 		// according to their specific characteristics
 		
 		$serialization['id'] = $this->id;

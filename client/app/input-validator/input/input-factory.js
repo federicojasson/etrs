@@ -66,7 +66,6 @@
 			
 			// Sets the validator
 			this.validator = validator;
-
 		}
 		
 		/**
