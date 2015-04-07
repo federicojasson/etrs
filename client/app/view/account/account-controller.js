@@ -75,7 +75,7 @@
 				User: [
 					'creator'
 				]
-			});
+			}, 1);
 			
 			// Gets the user
 			data.getUser(id).then(function(loadedUser) {

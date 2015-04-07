@@ -69,8 +69,6 @@
 	
 	/**
 	 * Provides data-related functionalities.
-	 * 
-	 * TODO: what about depth when loading data?
 	 */
 	function dataService($injector, $q, server, utility) {
 		var _this = this;
@@ -89,6 +87,11 @@
 		var cache = {};
 		
 		/**
+		 * TODO: comment
+		 */
+		var maximumDepth = 0;
+		
+		/**
 		 * The types.
 		 */
 		var types = {};
@@ -99,20 +102,23 @@
 		 * Receives the type and its unserializer.
 		 */
 		_this.addType = function(type, unserializer) {
+			// TODO: comment here?
+			cache[type] = [];
+			
 			// TODO: comment here? necessary?
 			types[type] = unserializer;
 			
 			// TODO: comment
 			_this['get' + type] = function(id) {
 				// TODO
-				return getEntity(type, id);
+				return getEntity(type, id, 0);
 			};
 		};
 		
 		/**
 		 * TODO: comment
 		 */
-		_this.getAssociation = function(type, association, id) {
+		_this.getAssociation = function(type0, type1, field, id, depth) { // TODO: rename types
 			// TODO: comments
 			
 			var deferredTask = $q.defer();
@@ -122,25 +128,37 @@
 				return deferredTask.promise;
 			}
 			
-			if (! associations.hasOwnProperty(type) || associations[type].indexOf(association) === -1) {
+			if (depth > maximumDepth) {
 				deferredTask.resolve(id);
 				return deferredTask.promise;
 			}
 			
-			return getEntity(type, id);
+			if (! associations.hasOwnProperty(type0) || associations[type0].indexOf(field) === -1) {
+				deferredTask.resolve(id);
+				return deferredTask.promise;
+			}
+			
+			return getEntity(type1, id, depth);
 		};
 		
 		/**
 		 * Resets the service.
 		 * 
 		 * Receives, optionally, the associations to be set.
+		 * TODO: comment
 		 */
-		_this.reset = function(newAssociations) {
+		_this.reset = function(newAssociations, newMaximumDepth) {
 			// Initializes the associations if are undefined
 			newAssociations = (angular.isDefined(newAssociations))? newAssociations : {};
 			
+			// Initializes the maximum depth if is undefined
+			newMaximumDepth = (angular.isDefined(newMaximumDepth))? newMaximumDepth : 0;
+			
 			// Sets the associations
 			associations = newAssociations;
+			
+			// Sets the maximum depth
+			maximumDepth = newMaximumDepth;
 			
 			// Resets the cache
 			cache = {};
@@ -160,24 +178,30 @@
 		 * unnecessary queries to the server.
 		 * 
 		 * Receives the type and the entity's ID.
+		 * TODO: comment
 		 */
-		function getEntity(type, id) {
+		function getEntity(type, id, depth) {
 			// TODO: comments
 			
 			var deferredTask = $q.defer();
 			
-			var cachedEntity = cache[type][id];
+			var cachedEntity = cache[type][id]; // TODO: rename
 			
 			if (angular.isDefined(cachedEntity)) {
-				deferredTask.resolve(cachedEntity);
-			} else {
-				var promise = loadEntity(type, id);
-				
-				promise.then(function(entity) {
-					cache[type][id] = entity;
-					deferredTask.resolve(entity);
-				});
+				console.log('cache hit: ' + type + ' - ' + id);
+				return cachedEntity;
 			}
+			
+			depth++;
+			
+			var promise = loadEntity(type, id, depth);
+			
+			// TODO: comment
+			cache[type][id] = promise;
+			
+			promise.then(function(entity) {
+				deferredTask.resolve(entity);
+			});
 			
 			return deferredTask.promise;
 		}
@@ -186,17 +210,20 @@
 		 * Loads an entity.
 		 * 
 		 * Receives the type and the entity's ID.
+		 * TODO: comment
 		 */
-		function loadEntity(type, id) {
+		function loadEntity(type, id, depth) {
 			// TODO: comment?
 			var deferredTask = $q.defer();
+			
+			console.log('loading ' + type + ' - ' + id);
 			
 			// Gets the entity
 			server[utility.pascalToCamelCase(type)].get({
 				id: id
 			}).then(function(output) {
 				// Unserializes the entity
-				return $injector.invoke(types[type])(output);
+				return $injector.invoke(types[type])(output, depth);
 			}).then(function(entity) {
 				// TODO: comment?
 				deferredTask.resolve(entity);

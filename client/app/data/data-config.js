@@ -37,8 +37,27 @@
 					'$q',
 					'data',
 					function($q, data) {
-						return function(medicine) {
-							// TODO
+						return function(medicine, depth) {
+							// TODO: comments
+
+							var deferredTask = $q.defer();
+
+							var creator = medicine.creator;
+							var lastEditor = medicine.lastEditor;
+							
+							var promises = {
+								creator: data.getAssociation('Medicine', 'User', 'creator', creator, depth),
+								lastEditor: data.getAssociation('Medicine', 'User', 'lastEditor', lastEditor, depth)
+							};
+
+							$q.all(promises).then(function(values) {
+								medicine.creator = values.creator;
+								medicine.lastEditor = values.lastEditor;
+
+								deferredTask.resolve(medicine);
+							});
+
+							return deferredTask.promise;
 						};
 					}
 				],
@@ -47,7 +66,7 @@
 					'$q',
 					'data',
 					function($q, data) {
-						return function(user) {
+						return function(user, depth) {
 							// TODO: comments
 
 							var deferredTask = $q.defer();
@@ -55,7 +74,7 @@
 							var creator = user.creator;
 
 							var promises = {
-								creator: data.getAssociation('User', 'creator', creator)
+								creator: data.getAssociation('User', 'User', 'creator', creator, depth)
 							};
 
 							$q.all(promises).then(function(values) {

@@ -93,7 +93,7 @@
 					'creator',
 					'lastEditor'
 				]
-			});
+			}, 1);
 			
 			// Gets the medicine
 			data.getMedicine(id).then(function(loadedMedicine) {
