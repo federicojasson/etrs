@@ -66,8 +66,11 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO: prepare data service?
-
+			// Resets the data service
+			data.reset([
+				'User'
+			]);
+			
 			// Gets the signed-in user
 			data.getSignedInUser().then(function(loadedUser) {
 				// Sets the signed-in user

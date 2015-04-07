@@ -28,6 +28,16 @@
 		var _this = this;
 		
 		/**
+		 * Converts a string from PascalCase to camelCase.
+		 * 
+		 * Receives the string.
+		 */
+		_this.pascalToCamelCase = function(string) {
+			// Converts the first character to lowercase
+			return string.substring(0, 1).toLowerCase() + string.substring(1);
+		};
+		
+		/**
 		 * Removes the control characters of a string.
 		 * 
 		 * Receives the string.

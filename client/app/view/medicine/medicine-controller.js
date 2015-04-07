@@ -87,7 +87,10 @@
 			// Gets the URL parameters
 			var id = $stateParams.id;
 			
-			// TODO: prepare data service?
+			// Resets the data service
+			data.reset([
+				'Medicine'
+			]);
 			
 			// Gets the medicine
 			data.getMedicine(id).then(function(loadedMedicine) {

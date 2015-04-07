@@ -82,7 +82,10 @@
 					return;
 				}
 				
-				// TODO: prepare data service?
+				// Resets the data service
+				data.reset([
+					'User'
+				]);
 				
 				// Gets the signed-in user
 				data.getSignedInUser().then(function(loadedUser) {
