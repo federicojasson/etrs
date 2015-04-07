@@ -44,6 +44,28 @@ abstract class Internal extends Service  {
 	}
 	
 	/**
+	 * Returns an input's value.
+	 * 
+	 * Receives the input's index and, optionally, a filter for the value.
+	 */
+	protected function getInputValue($index, $filter = null) {
+		// Gets the value
+		$value = $this->input[$index];
+		
+		if (is_null($value)) {
+			// The value is null
+			return null;
+		}
+		
+		if (! is_null($filter)) {
+			// Applies the filter
+			$value = call_user_func($filter, $value);
+		}
+		
+		return $value;
+	}
+	
+	/**
 	 * Determines whether the user is authorized.
 	 */
 	protected function isUserAuthorized() {

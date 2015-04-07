@@ -31,6 +31,8 @@ class DeleteAll extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
+		// TODO: ask for confirmation
+		
 		// Deletes all sessions
 		$app->data->createQueryBuilder()
 			->delete('Entity:Session')

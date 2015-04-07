@@ -31,6 +31,8 @@ class DeleteExpired extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
+		// TODO: ask for confirmation
+		
 		// Deletes the expired sign-up permissions
 		$app->data->createQueryBuilder()
 			->delete('Entity:SignUpPermission', 'sup')

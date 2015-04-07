@@ -31,6 +31,8 @@ class DeleteOld extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
+		// TODO: ask for confirmation
+		
 		// Deletes old logs
 		$app->data->createQueryBuilder()
 			->delete('Entity:Log', 'l')

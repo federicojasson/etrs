@@ -31,6 +31,8 @@ class DeleteExpired extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
+		// TODO: ask for confirmation
+		
 		// Deletes the expired password-reset permissions
 		$app->data->createQueryBuilder()
 			->delete('Entity:PasswordResetPermission', 'prp')

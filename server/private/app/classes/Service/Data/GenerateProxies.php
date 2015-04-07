@@ -31,6 +31,8 @@ class GenerateProxies extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
+		// TODO: ask for confirmation
+		
 		// Initializes the orm:generate-proxies command
 		$command = new \Doctrine\ORM\Tools\Console\Command\GenerateProxiesCommand();
 		

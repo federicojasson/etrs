@@ -29,7 +29,32 @@ class Delete extends \App\Service\Internal {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$id = $this->getInputValue(0);
+		
+		// Gets the user
+		$user = $app->data->getRepository('Entity:User')->find($id);
+
+		// Asserts conditions
+		$app->assertion->entityExists($user);
+		
+		// TODO: check if there is at least one administrator after the operation?
+		// TODO: ask for confirmation
+		
+		// Deletes any password-reset permission associated with the user
+		$app->data->createQueryBuilder()
+			->delete('Entity:PasswordResetPermission', 'prp')
+			->where('prp.user = :user')
+			->setParameter('user', $user)
+			->getQuery()
+			->setMaxResults(1)
+			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
+			->execute();
+		
+		// Deletes the user
+		$app->data->remove($user);
 	}
 	
 	/**
@@ -37,6 +62,7 @@ class Delete extends \App\Service\Internal {
 	 */
 	protected function isRequestValid() {
 		// TODO
+		return true;
 	}
 	
 }
