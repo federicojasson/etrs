@@ -32,15 +32,42 @@
 		 * Returns the types.
 		 */
 		function getTypes() {
-			// TODO: test
 			return {
-				Medicine: function(medicine) {
-					return medicine;
-				},
+				Medicine: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(medicine) {
+							// TODO
+						};
+					}
+				],
 				
-				User: function(user) {
-					return user;
-				}
+				User: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(user) {
+							// TODO: comments
+
+							var deferredTask = $q.defer();
+
+							var creator = user.creator;
+
+							var promises = {
+								creator: data.getAssociation('User', 'creator', creator)
+							};
+
+							$q.all(promises).then(function(values) {
+								user.creator = values.creator;
+
+								deferredTask.resolve(user);
+							});
+
+							return deferredTask.promise;
+						};
+					}
+				]
 			};
 		}
 		
