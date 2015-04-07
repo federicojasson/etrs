@@ -46,6 +46,8 @@ define('HTTP_STATUS_SERVICE_UNAVAILABLE', 503);
 
 define('KEY_STRETCHING_ITERATIONS', 64000);
 
+define('LOG_MAXIMUM_AGE', 12); // Months
+
 define('OPERATION_MODE_DEVELOPMENT', 'development');
 define('OPERATION_MODE_MAINTENANCE', 'maintenance');
 define('OPERATION_MODE_PRODUCTION', 'production');

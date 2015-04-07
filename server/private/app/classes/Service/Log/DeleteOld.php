@@ -29,7 +29,16 @@ class DeleteOld extends \App\Service\Internal {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Deletes old logs
+		$app->data->createQueryBuilder()
+			->delete('Entity:Log', 'l')
+			->where('l.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'MONTH\')')
+			->setParameter('currentDateTime', getCurrentDateTime())
+			->setParameter('maximumAge', LOG_MAXIMUM_AGE)
+			->getQuery()
+			->execute();
 	}
 	
 	/**
