@@ -6,6 +6,7 @@ Quick tasks
 - Pass maximum age and maximum inactivity time by parameter?
 - Check TODO and DEFINEHERE
 - User\Search???
+- Create script for routine maintenance tasks.
 
 - Implement a better file LogWriter (could write date-time and type of log).
 - Should function router.reload set the href?
