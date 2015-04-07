@@ -83,9 +83,7 @@
 				}
 				
 				// Resets the data service
-				data.reset([
-					'User'
-				]);
+				data.reset();
 				
 				// Gets the user
 				data.getUser(output.id).then(function(loadedUser) {

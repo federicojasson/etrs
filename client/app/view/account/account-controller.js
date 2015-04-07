@@ -71,9 +71,11 @@
 			var id = account.getSignedInUser().id;
 			
 			// Resets the data service
-			data.reset([
-				'User'
-			]);
+			data.reset({
+				User: [
+					'creator'
+				]
+			});
 			
 			// Gets the user
 			data.getUser(id).then(function(loadedUser) {
