@@ -179,6 +179,9 @@ function runApp($middlewares) {
 	
 	// Runs the application
 	$app->run();
+	
+	// Exits the application
+	exit();
 }
 
 /**
