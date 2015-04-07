@@ -36,22 +36,6 @@
 		var _this = this;
 		
 		/**
-		 * TODO: remove
-		 */
-		_this.getSignedInUser = function() {
-			var deferredTask = $q.defer();
-			
-			deferredTask.resolve({
-				role: 'ad',
-				firstName: 'Federico',
-				lastName: 'Jasson',
-				gender: 'm'
-			});
-
-			return deferredTask.promise;
-		};
-		
-		/**
 		 * The cache.
 		 */
 		var cache = {};

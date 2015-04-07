@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.view.account').controller('AccountViewController', [
+		'account',
 		'data',
 		'fullNameFilter',
 		AccountViewController
@@ -28,7 +29,7 @@
 	/**
 	 * Represents the account view.
 	 */
-	function AccountViewController(data, fullNameFilter) {
+	function AccountViewController(account, data, fullNameFilter) {
 		var _this = this;
 		
 		/**
@@ -66,13 +67,16 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Gets the signed-in user's ID
+			var id = account.getSignedInUser().id;
+			
 			// Resets the data service
 			data.reset([
 				'User'
 			]);
 			
-			// Gets the signed-in user
-			data.getSignedInUser().then(function(loadedUser) {
+			// Gets the user
+			data.getUser(id).then(function(loadedUser) {
 				// Sets the signed-in user
 				signedInUser = loadedUser;
 				

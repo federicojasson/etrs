@@ -78,12 +78,8 @@ class Get extends \App\Service\External {
 	protected function isUserAuthorized() {
 		global $app;
 		
-		// Validates the access
-		return $app->accessValidator->isUserAuthorized([
-			USER_ROLE_ADMINISTRATOR,
-			USER_ROLE_DOCTOR,
-			USER_ROLE_OPERATOR
-		]);
+		// Only signed-in users are authorized
+		return $app->account->isUserSignedIn();
 	}
 
 }

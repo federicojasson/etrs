@@ -87,8 +87,8 @@
 					'User'
 				]);
 				
-				// Gets the signed-in user
-				data.getSignedInUser().then(function(loadedUser) {
+				// Gets the user
+				data.getUser(output.id).then(function(loadedUser) {
 					// Sets the signed-in user
 					signedInUser = loadedUser;
 					
