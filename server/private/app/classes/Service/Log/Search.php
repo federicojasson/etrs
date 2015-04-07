@@ -43,7 +43,7 @@ class Search extends \App\Service\External {
 			->from('Entity:Log', 'l');
 		
 		if (! is_null($expression)) {
-			// A full-text search must be performed
+			// A full-text search is to be performed
 			$queryBuilder
 				->andWhere('MATCH(l.message) AGAINST(:expression BOOLEAN) > 0')
 				->setParameter('expression', $expression);

@@ -44,7 +44,7 @@ class Search extends \App\Service\External {
 			->where('m.deleted = false');
 		
 		if (! is_null($expression)) {
-			// A full-text search must be performed
+			// A full-text search is to be performed
 			$queryBuilder
 				->andWhere('MATCH(m.name) AGAINST(:expression BOOLEAN) > 0')
 				->setParameter('expression', $expression);

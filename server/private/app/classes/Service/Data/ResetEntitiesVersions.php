@@ -31,7 +31,7 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// Builds an array containing the types of the versioned entities
+		// Builds an array containing the versioned types
 		$types = [
 			'Medicine',
 			'User'
