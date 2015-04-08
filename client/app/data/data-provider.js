@@ -76,8 +76,8 @@
 		/**
 		 * The associations.
 		 * 
-		 * When loading an entity, it determines what references must be loaded
-		 * as well.
+		 * When loading an entity, it determines which references should be
+		 * expanded.
 		 */
 		var associations = {};
 		
@@ -87,7 +87,11 @@
 		var cache = {};
 		
 		/**
-		 * TODO: comment
+		 * The maximum depth.
+		 * 
+		 * It determines how many levels of references should be expanded. A
+		 * 0-value indicates that no references should be expanded. A negative
+		 * value indicates no depth limit.
 		 */
 		var maximumDepth = 0;
 		
@@ -102,74 +106,87 @@
 		 * Receives the type and its unserializer.
 		 */
 		_this.addType = function(type, unserializer) {
-			// TODO: comment here?
 			cache[type] = [];
-			
-			// TODO: comment here? necessary?
 			types[type] = unserializer;
 			
-			// TODO: comment
+			// Creates a getter for the type
 			_this['get' + type] = function(id) {
-				// TODO
 				return getEntity(type, id, 0);
 			};
 		};
 		
 		/**
-		 * TODO: comment
+		 * Gets a reference.
+		 * 
+		 * Receives the type, the type of the reference, the field and the
+		 * current depth.
 		 */
-		_this.getAssociation = function(type0, type1, field, id, depth) { // TODO: rename types
-			// TODO: comments
-			
-			var deferredTask = $q.defer();
-			
-			if (id === null) {
-				deferredTask.resolve(null);
-				return deferredTask.promise;
-			}
-			
-			if (depth > maximumDepth) {
+		_this.getReference = function(type, referenceType, field, id, depth) {
+			if (depth > maximumDepth || id === null || ! expandReference(type, field)) {
+				// The reference should not be expanded
+				
+				// Initializes a deferred task
+				var deferredTask = $q.defer();
+				
+				// Resolves the deferred task
 				deferredTask.resolve(id);
+				
+				// Gets the promise of the deferred task
 				return deferredTask.promise;
 			}
 			
-			if (! associations.hasOwnProperty(type0) || associations[type0].indexOf(field) === -1) {
-				deferredTask.resolve(id);
-				return deferredTask.promise;
-			}
-			
-			return getEntity(type1, id, depth);
+			// Gets the entity
+			return getEntity(referenceType, id, depth);
 		};
 		
 		/**
 		 * Resets the service.
 		 * 
-		 * Receives, optionally, the associations to be set.
-		 * TODO: comment
+		 * Receives, optionally, the maximum depth and the associations to be
+		 * set.
 		 */
-		_this.reset = function(newAssociations, newMaximumDepth) {
-			// Initializes the associations if are undefined
-			newAssociations = (angular.isDefined(newAssociations))? newAssociations : {};
-			
-			// Initializes the maximum depth if is undefined
-			newMaximumDepth = (angular.isDefined(newMaximumDepth))? newMaximumDepth : 0;
-			
-			// Sets the associations
-			associations = newAssociations;
-			
-			// Sets the maximum depth
-			maximumDepth = newMaximumDepth;
-			
+		_this.reset = function(newMaximumDepth, newAssociations) {
 			// Resets the cache
 			cache = {};
 			for (var type in types) {
 				if (! types.hasOwnProperty(type)) {
 					continue;
 				}
-
+				
 				cache[type] = {};
 			}
+			
+			// Initializes the maximum depth if is undefined
+			newMaximumDepth = (angular.isDefined(newMaximumDepth))? newMaximumDepth : 0;
+			
+			// Sets the maximum depth
+			maximumDepth = newMaximumDepth;
+			
+			// Initializes the associations if are undefined
+			newAssociations = (angular.isDefined(newAssociations))? newAssociations : {};
+			
+			// Sets the associations
+			associations = newAssociations;
 		};
+		
+		/**
+		 * Determines whether a reference should be expanded.
+		 * 
+		 * Receives the type and the field.
+		 */
+		function expandReference(type, field) {
+			if (! associations.hasOwnProperty(type)) {
+				// The type should not be expanded
+				return false;
+			}
+			
+			if (associations[type].indexOf(field) === -1) {
+				// The field should not be expanded
+				return false;
+			}
+			
+			return true;
+		}
 		
 		/**
 		 * Gets an entity.
@@ -177,60 +194,36 @@
 		 * It searches the entity in the cache before loading it to avoid
 		 * unnecessary queries to the server.
 		 * 
-		 * Receives the type and the entity's ID.
-		 * TODO: comment
+		 * Receives the type, the entity's ID and the current depth.
 		 */
 		function getEntity(type, id, depth) {
-			// TODO: comments
-			
-			var deferredTask = $q.defer();
-			
-			var cachedEntity = cache[type][id]; // TODO: rename
-			
-			if (angular.isDefined(cachedEntity)) {
-				console.log('cache hit: ' + type + ' - ' + id);
-				return cachedEntity;
+			if (angular.isUndefined(cache[type][id])) {
+				// The entity has not been loaded yet
+				
+				// Increases the depth
+				depth++;
+
+				// Loads the entity
+				cache[type][id] = loadEntity(type, id, depth);
 			}
 			
-			depth++;
-			
-			var promise = loadEntity(type, id, depth);
-			
-			// TODO: comment
-			cache[type][id] = promise;
-			
-			promise.then(function(entity) {
-				deferredTask.resolve(entity);
-			});
-			
-			return deferredTask.promise;
+			// Gets the promise of the entity stored in the cache
+			return cache[type][id];
 		}
 		
 		/**
 		 * Loads an entity.
 		 * 
-		 * Receives the type and the entity's ID.
-		 * TODO: comment
+		 * Receives the type, the entity's ID and the current depth.
 		 */
 		function loadEntity(type, id, depth) {
-			// TODO: comment?
-			var deferredTask = $q.defer();
-			
-			console.log('loading ' + type + ' - ' + id);
-			
 			// Gets the entity
-			server[utility.pascalToCamelCase(type)].get({
+			return server[utility.pascalToCamelCase(type)].get({
 				id: id
 			}).then(function(output) {
 				// Unserializes the entity
 				return $injector.invoke(types[type])(output, depth);
-			}).then(function(entity) {
-				// TODO: comment?
-				deferredTask.resolve(entity);
 			});
-			
-			// TODO: comment?
-			return deferredTask.promise;
 		}
 	}
 })();

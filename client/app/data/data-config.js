@@ -38,25 +38,26 @@
 					'data',
 					function($q, data) {
 						return function(medicine, depth) {
-							// TODO: comments
-
+							// Initializes a deferred task
 							var deferredTask = $q.defer();
-
-							var creator = medicine.creator;
-							var lastEditor = medicine.lastEditor;
 							
-							var promises = {
-								creator: data.getAssociation('Medicine', 'User', 'creator', creator, depth),
-								lastEditor: data.getAssociation('Medicine', 'User', 'lastEditor', lastEditor, depth)
-							};
-
-							$q.all(promises).then(function(values) {
+							// Gets the references
+							var creatorPromise = data.getReference('Medicine', 'User', 'creator', medicine.creator, depth);
+							var lastEditorPromise = data.getReference('Medicine', 'User', 'lastEditor', medicine.lastEditor, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
 								medicine.creator = values.creator;
 								medicine.lastEditor = values.lastEditor;
-
+								
+								// Resolves the deferred task
 								deferredTask.resolve(medicine);
 							});
-
+							
+							// Gets the promise of the deferred task
 							return deferredTask.promise;
 						};
 					}
@@ -67,22 +68,23 @@
 					'data',
 					function($q, data) {
 						return function(user, depth) {
-							// TODO: comments
-
+							// Initializes a deferred task
 							var deferredTask = $q.defer();
-
-							var creator = user.creator;
-
-							var promises = {
-								creator: data.getAssociation('User', 'User', 'creator', creator, depth)
-							};
-
-							$q.all(promises).then(function(values) {
+							
+							// Gets the references
+							var creatorPromise = data.getReference('User', 'User', 'creator', user.creator, depth);
+							
+							$q.all({
+								creator: creatorPromise
+							}).then(function(values) {
+								// Sets the references
 								user.creator = values.creator;
-
+								
+								// Resolves the deferred task
 								deferredTask.resolve(user);
 							});
-
+							
+							// Gets the promise of the deferred task
 							return deferredTask.promise;
 						};
 					}

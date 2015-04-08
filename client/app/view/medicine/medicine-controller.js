@@ -88,12 +88,12 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset({
+			data.reset(1, {
 				Medicine: [
 					'creator',
 					'lastEditor'
 				]
-			}, 1);
+			});
 			
 			// Gets the medicine
 			data.getMedicine(id).then(function(loadedMedicine) {
