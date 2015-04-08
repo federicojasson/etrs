@@ -19,17 +19,50 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.forgotPassword',
-		'app.view.home',
-		'app.view.invitation',
-		'app.view.logs',
-		'app.view.medicine',
-		'app.view.medicines',
-		'app.view.newMedicine',
-		'app.view.resetPassword',
-		'app.view.signIn',
-		'app.view.signUp'
-	]);
+	angular.module('app.view.logs').controller('LogsViewController', LogsViewController);
+	
+	/**
+	 * Represents the logs view.
+	 */
+	function LogsViewController() {
+		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
+		
+		/**
+		 * Returns the template's URL.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/logs/logs.html';
+		};
+		
+		/**
+		 * Returns the title to be set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return 'Registros';
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return ready;
+		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// TODO
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
+	}
 })();

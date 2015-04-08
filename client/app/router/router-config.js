@@ -85,6 +85,17 @@
 				},
 				
 				{
+					name: 'logs',
+					url: '/logs',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'LogsViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'medicine',
 					url: '/medicine/{id:[0-9A-Fa-f]{32}}',
 					data: {

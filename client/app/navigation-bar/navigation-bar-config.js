@@ -39,6 +39,12 @@
 					description: 'Invite a una persona a registrarse en ETRS'
 				},
 				
+				logs: {
+					name: 'Ver',
+					state: 'logs',
+					description: 'Vea los registros del sistema' // TODO: dudosa descripción
+				},
+				
 				medicines: {
 					name: 'Administrar',
 					state: 'medicines',
@@ -77,6 +83,13 @@
 						items: [
 							menuItems.medicines,
 							menuItems.newMedicine
+						]
+					},
+					
+					{
+						name: 'Registros',
+						items: [
+							menuItems.logs
 						]
 					}
 				],
