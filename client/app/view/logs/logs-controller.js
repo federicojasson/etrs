@@ -19,12 +19,16 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.logs').controller('LogsViewController', LogsViewController);
+	angular.module('app.view.logs').controller('LogsViewController', [
+		'$scope',
+		'SearchLogsAction',
+		LogsViewController
+	]);
 	
 	/**
 	 * Represents the logs view.
 	 */
-	function LogsViewController() {
+	function LogsViewController($scope, SearchLogsAction) {
 		var _this = this;
 		
 		/**
@@ -54,9 +58,37 @@
 		};
 		
 		/**
+		 * Includes the search-logs action.
+		 */
+		function includeSearchLogsAction() {
+			// Initializes the action
+			var action = new SearchLogsAction();
+			action.startCallback = onSearchLogsStart;
+			action.successCallback = onSearchLogsSuccess;
+			
+			// Includes the action
+			$scope.searchLogsAction = action;
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Includes the actions
+			includeSearchLogsAction();
+		}
+		
+		/**
+		 * Invoked at the start of the search-logs action.
+		 */
+		function onSearchLogsStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the search-logs action is successful.
+		 */
+		function onSearchLogsSuccess() {
 			// TODO
 		}
 		
