@@ -42,8 +42,8 @@ class Delete extends \App\Service\Internal {
 		
 		// TODO: check if there is at least one administrator after the operation?
 		
-		// Confirms the action
-		confirmAction('You are about to delete the user "' . $id . '".');
+		// Confirms the task
+		confirmTask('You are about to delete the user "' . $id . '".');
 		
 		// Deletes any password-reset permission associated with the user
 		$app->data->createQueryBuilder()

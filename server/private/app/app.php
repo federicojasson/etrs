@@ -46,23 +46,26 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 spl_autoload_register('loadClass');
 
 /**
- * Confirms an action.
+ * Confirms a task.
  * 
  * Receives a message to show to the user.
  */
-function confirmAction($message) {
-	// TODO: comment and order
+function confirmTask($message) {
+	// Shows a message to the user
 	echo $message . PHP_EOL;
 	echo 'Continue? [y/N]' . PHP_EOL;
 	ob_flush();
 	
+	// Opens the stdin
 	$stdin = fopen('php://stdin', 'r');
+	
+	// Reads the user's response
 	$response = strtolower(fgetc($stdin));
 	
 	if ($response !== 'y') {
-		// The action has been canceled
+		// The task has been canceled
 		// Exits the application
-		exit('The action has been canceled.');
+		exit('The task has been canceled.');
 	}
 }
 
