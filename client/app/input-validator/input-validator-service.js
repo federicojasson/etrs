@@ -73,7 +73,7 @@
 		 * the latter case, the object's properties are validated recursively.
 		 */
 		_this.isInputValid = function(input) {
-			if (angular.isDefined(input.validate) && angular.isFunction(input.validate)) {
+			if (isInputInstance(input)) {
 				// The input is an Input instance
 				
 				// Validates the input
@@ -244,5 +244,24 @@
 			input.message = '';
 			return true;
 		};
+		
+		/**
+		 * Determines whether an input is an Input instance.
+		 * 
+		 * Receives the input.
+		 */
+		function isInputInstance(input) {
+			if (angular.isUndefined(input.validate)) {
+				// The input doesn't have a validate property
+				return false;
+			}
+			
+			if (! angular.isFunction(input.validate)) {
+				// The validate property is not a function
+				return false;
+			}
+			
+			return true;
+		}
 	}
 })();

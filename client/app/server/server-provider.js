@@ -126,7 +126,6 @@
 			// Sends the request
 			var promise = $resource(url).save(input).$promise;
 			
-			// Registers an error callback
 			promise.catch(function(response) {
 				// Reports the error
 				error.report(response);
