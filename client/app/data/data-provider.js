@@ -118,8 +118,8 @@
 		/**
 		 * Gets a reference.
 		 * 
-		 * Receives the type, the type of the reference, the field and the
-		 * current depth.
+		 * Receives the type, the type of the reference, the field, the entity's
+		 * ID and the current depth.
 		 */
 		_this.getReference = function(type, referenceType, field, id, depth) {
 			if (depth > maximumDepth || id === null || ! expandReference(type, field)) {
