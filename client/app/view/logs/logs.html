@@ -1,17 +1,75 @@
-TODO: logs.html
+<h1>Registros</h1>
 
-<div class="form-group has-feedback">
-	<input
-		ng-model="TODO"
-		popover="{{ TODO }}"
-		popover-append-to-body="true"
-		popover-placement="left"
-		popover-trigger="focus"
-		line
-		type="text"
-		placeholder="Buscar"
-		class="form-control rounded-corners"
-	>
-	
-	<span class="form-control-feedback glyphicon glyphicon-search"></span>
+<p>
+	TODO: text
+</p>
+
+<div class="row">
+	<div class="col-sm-5 col-sm-offset-7">
+		<div class="form-group has-feedback">
+			<input
+				ng-model="TODO"
+				popover="{{ TODO }}"
+				popover-append-to-body="true"
+				popover-placement="left"
+				popover-trigger="focus"
+				line
+				type="text"
+				placeholder="Buscar"
+				class="form-control rounded-corners"
+			>
+
+			<span class="form-control-feedback glyphicon glyphicon-search"></span>
+		</div>
+	</div>
 </div>
+
+<table class="table table-hover">
+	<thead>
+		<!-- None, up or down arrow according to the sorting criteria -->
+		<tr>
+			<th class="col-sm-3">
+				Fecha y hora
+			</th>
+			
+			<th class="col-sm-2">
+				Nivel
+			</th>
+			
+			<th class="col-sm-7">
+				Mensaje
+			</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<!-- TODO: generate rows dynamically -->
+		<tr>
+			<td>
+				Dato 1
+			</td>
+			
+			<td>
+				Dato 2
+			</td>
+			
+			<td>
+				Dato 3
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+				Dato 1
+			</td>
+			
+			<td>
+				Dato 2
+			</td>
+			
+			<td>
+				Dato 3
+			</td>
+		</tr>
+	</tbody>
+</table>
