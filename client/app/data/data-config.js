@@ -33,6 +33,22 @@
 		 */
 		function getTypes() {
 			return {
+				Log: [
+					'$q',
+					function($q) {
+						return function(log, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Resolves the deferred task
+							deferredTask.resolve(log);
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				Medicine: [
 					'$q',
 					'data',
