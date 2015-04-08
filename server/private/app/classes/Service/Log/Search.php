@@ -86,6 +86,9 @@ class Search extends \App\Service\External {
 			return false;
 		}
 		
+		// Gets the input
+		$input = $this->getInput();
+		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'expression' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
@@ -120,9 +123,6 @@ class Search extends \App\Service\External {
 				return $app->inputValidator->isValidInteger($input, 1);
 			})
 		]);
-		
-		// Gets the input
-		$input = $this->getInput();
 		
 		// Validates the input
 		$valid = $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);

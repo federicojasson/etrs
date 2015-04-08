@@ -64,6 +64,9 @@ class Edit extends \App\Service\External {
 			return false;
 		}
 		
+		// Gets the input
+		$input = $this->getInput();
+		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
@@ -78,9 +81,6 @@ class Edit extends \App\Service\External {
 				return $app->inputValidator->isValidLine($input, 1, 64);
 			})
 		]);
-		
-		// Gets the input
-		$input = $this->getInput();
 		
 		// Validates the input
 		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);

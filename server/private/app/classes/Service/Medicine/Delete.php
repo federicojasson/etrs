@@ -61,6 +61,9 @@ class Delete extends \App\Service\External {
 			return false;
 		}
 		
+		// Gets the input
+		$input = $this->getInput();
+		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
@@ -71,9 +74,6 @@ class Delete extends \App\Service\External {
 				return $app->inputValidator->isValidInteger($input, 0);
 			})
 		]);
-		
-		// Gets the input
-		$input = $this->getInput();
 		
 		// Validates the input
 		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);

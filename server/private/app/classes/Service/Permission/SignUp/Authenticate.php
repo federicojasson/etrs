@@ -52,6 +52,9 @@ class Authenticate extends \App\Service\External {
 			return false;
 		}
 		
+		// Gets the input
+		$input = $this->getInput();
+		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'credentials' => new \App\InputValidator\Json\JsonObject([
@@ -64,9 +67,6 @@ class Authenticate extends \App\Service\External {
 				})
 			])
 		]);
-		
-		// Gets the input
-		$input = $this->getInput();
 		
 		// Validates the input
 		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
