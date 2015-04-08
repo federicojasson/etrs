@@ -8,7 +8,8 @@ Quick tasks
 - User\Search???
 - Create script for routine maintenance tasks.
 
-- Implement a better file LogWriter (could write date-time and type of log).
+- Use class that extends DateTime instead of global functions.
+- Should add a service to delete text logs (development and maintenance)?
 - Should function router.reload set the href?
   See: http://stackoverflow.com/questions/27618878/angular-ui-router-reloading-to-different-state-refresh-data
 

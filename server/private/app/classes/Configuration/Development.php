@@ -37,12 +37,9 @@ class Development extends Configuration {
 	 * Returns the logging settings.
 	 */
 	protected function getLoggingSettings() {
-		// Opens the log file
-		$path = DIRECTORY_LOGS . '/development.log';
-		$file = fopen($path, 'a');
-		
 		// Initializes a log writer
-		$logWriter = new \Slim\LogWriter($file);
+		$path = DIRECTORY_LOGS . '/development.log';
+		$logWriter = new \App\LogWriter\File($path);
 		
 		return [
 			'log.enabled' => true,

@@ -84,10 +84,10 @@ function createArrayFilter($filter) {
 /**
  * Converts a date-time to string.
  * 
- * Receives the date-time.
+ * Receives the date-time and, optionally, TODO.
  */
-function dateTimeToString($dateTime) {
-	return $dateTime->format(\DateTime::ISO8601);
+function dateTimeToString($dateTime, $format = \DateTime::ISO8601) {
+	return $dateTime->format($format);
 }
 
 /**
