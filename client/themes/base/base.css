@@ -82,7 +82,11 @@ select.form-control {
 	padding: 0px 8px;
 }
 
-.form-control ~ .form-control-feedback {
+.form-control-feedback {}
+
+.has-feedback .form-control-feedback {
+	height: 32px;
+	line-height: 32px;
 	top: 0px;
 }
 

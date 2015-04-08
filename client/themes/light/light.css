@@ -102,7 +102,11 @@ textarea {}
 
 select.form-control {}
 
-.form-control ~ .form-control-feedback {}
+.form-control-feedback {
+	color: #999999;
+}
+
+.has-feedback .form-control-feedback {}
 
 .input-lg {
 	font-size: 1.2em;
