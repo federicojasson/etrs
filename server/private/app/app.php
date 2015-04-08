@@ -46,6 +46,27 @@ define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 spl_autoload_register('loadClass');
 
 /**
+ * Confirms an action.
+ * 
+ * Receives a message to show to the user.
+ */
+function confirmAction($message) {
+	// TODO: comment and order
+	echo $message . PHP_EOL;
+	echo 'Continue? [y/N]' . PHP_EOL;
+	ob_flush();
+	
+	$stdin = fopen('php://stdin', 'r');
+	$response = strtolower(fgetc($stdin));
+	
+	if ($response !== 'y') {
+		// The action has been canceled
+		// Exits the application
+		exit('The action has been canceled.');
+	}
+}
+
+/**
  * Executes an external task.
  */
 function executeExternalTask() {
