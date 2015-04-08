@@ -82,6 +82,10 @@ select.form-control {
 	padding: 0px 8px;
 }
 
+.form-control ~ .form-control-feedback {
+	top: 0px;
+}
+
 .input-lg {
 	height: 40px;
 }
@@ -286,6 +290,10 @@ select.form-control {
 .navigation-bar-header {
 	margin-bottom: 8px;
 	padding: 8px;
+}
+
+.rounded-corners {
+	border-radius: 12px;
 }
 
 .unlocked-image {

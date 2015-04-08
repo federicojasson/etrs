@@ -102,6 +102,8 @@ textarea {}
 
 select.form-control {}
 
+.form-control ~ .form-control-feedback {}
+
 .input-lg {
 	font-size: 1.2em;
 }
@@ -255,6 +257,8 @@ select.form-control {}
 	margin-bottom: 24px;
 	text-transform: uppercase;
 }
+
+.rounded-corners {}
 
 .unlocked-image {}
 

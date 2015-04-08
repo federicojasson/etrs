@@ -1,1 +1,17 @@
 TODO: logs.html
+
+<div class="form-group has-feedback">
+	<input
+		ng-model="TODO"
+		popover="{{ TODO }}"
+		popover-append-to-body="true"
+		popover-placement="left"
+		popover-trigger="focus"
+		line
+		type="text"
+		placeholder="Buscar"
+		class="form-control rounded-corners"
+	>
+	
+	<span class="form-control-feedback glyphicon glyphicon-search"></span>
+</div>
