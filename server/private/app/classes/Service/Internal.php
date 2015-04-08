@@ -44,6 +44,13 @@ abstract class Internal extends Service {
 	}
 	
 	/**
+	 * Returns the input.
+	 */
+	protected function getInput() {
+		return $this->input;
+	}
+	
+	/**
 	 * Returns an input's value.
 	 * 
 	 * Receives the input's index and, optionally, a filter for the value.
@@ -51,11 +58,6 @@ abstract class Internal extends Service {
 	protected function getInputValue($index, $filter = null) {
 		// Gets the value
 		$value = $this->input[$index];
-		
-		if (is_null($value)) {
-			// The value is null
-			return null;
-		}
 		
 		if (! is_null($filter)) {
 			// Applies the filter

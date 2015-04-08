@@ -61,8 +61,20 @@ class Delete extends \App\Service\Internal {
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
-		return true;
+		global $app;
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Builds a command-line input validator
+		$commandLineInputValidator = new \App\InputValidator\CommandLine([
+			function($input) use ($app) {
+				return $app->inputValidator->isUserId($input);
+			}
+		]);
+		
+		// Validates the input
+		return $app->inputValidator->isCommandLineInputValid($input, $commandLineInputValidator);
 	}
 	
 }

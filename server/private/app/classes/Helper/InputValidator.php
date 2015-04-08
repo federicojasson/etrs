@@ -26,6 +26,15 @@ namespace App\Helper;
 class InputValidator {
 	
 	/**
+	 * Determines whether a command-line input is valid.
+	 * 
+	 * Receives the input and a command-line input validator.
+	 */
+	public function isCommandLineInputValid($input, $commandLineInputValidator) {
+		return $commandLineInputValidator->isInputValid($input);
+	}
+	
+	/**
 	 * Determines whether an input is an email address.
 	 * 
 	 * Receives the input.
