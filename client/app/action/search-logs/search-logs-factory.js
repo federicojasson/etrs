@@ -54,7 +54,17 @@
 			
 			// Initializes the input
 			this.input = {
-				// TODO
+				expression: new Input(function() {
+					if (this.value === null) {
+						return true;
+					}
+					
+					return inputValidator.isValidString(this, 0, 128);
+				}),
+				
+				sortingCriteria: new Input(),
+				page: new Input(),
+				resultsPerPage: new Input()
 			};
 		}
 		
@@ -72,7 +82,10 @@
 			
 			// Searches the logs
 			server.log.search({
-				// TODO: input
+				expression: this.input.expression.value,
+				sortingCriteria: this.input.sortingCriteria.value,
+				page: this.input.page.value,
+				resultsPerPage: this.input.resultsPerPage.value
 			}).then(function(output) {
 				// Invokes the success callback
 				this.successCallback(output.results, output.total);

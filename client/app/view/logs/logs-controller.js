@@ -22,13 +22,14 @@
 	angular.module('app.view.logs').controller('LogsViewController', [
 		'$scope',
 		'SearchLogsAction',
+		'data',
 		LogsViewController
 	]);
 	
 	/**
 	 * Represents the logs view.
 	 */
-	function LogsViewController($scope, SearchLogsAction) {
+	function LogsViewController($scope, SearchLogsAction, data) {
 		var _this = this;
 		
 		/**
@@ -63,6 +64,9 @@
 		function includeSearchLogsAction() {
 			// Initializes the action
 			var action = new SearchLogsAction();
+			action.input.sortingCriteria.value = [];
+			action.input.page.value = 1; // TODO: remove from here
+			action.input.resultsPerPage.value = 20;
 			action.startCallback = onSearchLogsStart;
 			action.successCallback = onSearchLogsSuccess;
 			
