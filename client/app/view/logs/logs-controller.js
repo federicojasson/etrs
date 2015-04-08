@@ -87,8 +87,10 @@
 		
 		/**
 		 * Invoked when the search-logs action is successful.
+		 * 
+		 * Receives the results and the total number of results.
 		 */
-		function onSearchLogsSuccess() {
+		function onSearchLogsSuccess(results, total) {
 			// TODO
 		}
 		
