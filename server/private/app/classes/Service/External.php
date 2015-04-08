@@ -23,7 +23,7 @@ namespace App\Service;
 /**
  * Represents an external service.
  */
-abstract class External extends Service  {
+abstract class External extends Service {
 	
 	/**
 	 * The input.

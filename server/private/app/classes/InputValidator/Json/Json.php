@@ -34,7 +34,7 @@ namespace App\InputValidator\Json;
  * 
  * - Values: a function is used, which receives and validates the value.
  */
-abstract class Json  {
+abstract class Json {
 	
 	/**
 	 * The definition.

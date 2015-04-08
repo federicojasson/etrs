@@ -23,7 +23,7 @@ namespace App\Service;
 /**
  * Represents a service.
  */
-abstract class Service  {
+abstract class Service {
 	
 	/**
 	 * The output.
