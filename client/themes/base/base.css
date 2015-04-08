@@ -74,6 +74,14 @@ textarea {
 	line-height: 18px;
 }
 
+.form-control {
+	height: 32px;
+}
+
+select.form-control {
+	padding: 0px 8px;
+}
+
 .input-lg {
 	height: 40px;
 }

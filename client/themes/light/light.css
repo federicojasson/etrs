@@ -98,6 +98,10 @@ textarea {}
 	text-transform: uppercase;
 }
 
+.form-control {}
+
+select.form-control {}
+
 .input-lg {
 	font-size: 1.2em;
 }
