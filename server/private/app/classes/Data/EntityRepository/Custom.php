@@ -43,6 +43,8 @@ class Custom extends \Doctrine\ORM\EntityRepository {
 			// The entity is deleted
 			return null;
 		}
+		
+		return $entity;
 	}
 	
 }
