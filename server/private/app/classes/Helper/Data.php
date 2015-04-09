@@ -106,7 +106,7 @@ class Data {
 			$cache = new \Doctrine\Common\Cache\ArrayCache();
 			
 			// Initializes the proxy-generation mode
-			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS;
+			$proxyGenerationMode = \Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_EVAL;
 		} else {
 			// The system is not under development
 			
