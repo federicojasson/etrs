@@ -19,15 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.line').directive('line', [
-		'utility',
-		lineDirective
-	]);
+	angular.module('app.utility.nullIfEmpty').directive('nullIfEmpty', nullIfEmptyDirective);
 	
 	/**
-	 * Parses an input to make it a valid line.
+	 * TODO: comment
 	 */
-	function lineDirective(utility) {
+	function nullIfEmptyDirective() {
 		/**
 		 * Returns the settings.
 		 */
@@ -35,7 +32,7 @@
 			return {
 				require: 'ngModel',
 				restrict: 'A',
-				priority: 0,
+				priority: 1,
 				link: onLink
 			};
 		}
@@ -47,10 +44,32 @@
 		 * attributes and the ng-model controller.
 		 */
 		function onLink(scope, element, attributes, ngModelController) {
-			// Registers parsers
-			ngModelController.$parsers.push(utility.replaceTabsWithSpaces);
-			ngModelController.$parsers.push(utility.removeControlCharacters);
-			ngModelController.$parsers.push(utility.shrink);
+			// TODO: comments
+			
+			ngModelController.$formatters.push(function(TODO) {
+				if (TODO === null) {
+					return '';
+				}
+				
+				return TODO;
+			});
+			
+			ngModelController.$parsers.push(function(input) {
+				if (input === '') {
+					return null;
+				}
+				
+				return input;
+			});
+			
+			/*var isEmpty = ngModelController.$isEmpty;
+			ngModelController.$isEmpty = function(value) {
+				if (value === null) {
+					return false;
+				}
+				
+				return isEmpty(value);
+			};*/
 		}
 		
 		// ---------------------------------------------------------------------

@@ -19,11 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.fullName',
-		'app.utility.honorificName',
-		'app.utility.levelName',
-		'app.utility.line',
-		'app.utility.nullIfEmpty'
-	]);
+	angular.module('app.utility.nullIfEmpty', []);
 })();
