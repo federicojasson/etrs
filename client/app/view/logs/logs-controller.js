@@ -35,7 +35,7 @@
 		/**
 		 * Indicates whether the view is ready.
 		 */
-		var ready = false;
+		var ready = true;
 		
 		/**
 		 * Returns the template's URL.
@@ -90,7 +90,7 @@
 		 * Invoked at the start of the search-logs action.
 		 */
 		function onSearchLogsStart() {
-			ready = false;
+			$scope.searching = true;
 		}
 		
 		/**
@@ -104,11 +104,13 @@
 			// Resets the data service
 			data.reset();
 			
-			// TODO: comments
-			
+			// Gets the logs
 			data.getLogArray(results).then(function(loadedLogs) {
+				// Includes the logs
 				$scope.logs = loadedLogs; // TODO: initialize empty array somewhere else?
-				ready = true;
+				
+				// TODO: comment
+				$scope.searching = false;
 			});
 		}
 		

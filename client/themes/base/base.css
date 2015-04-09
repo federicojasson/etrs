@@ -300,6 +300,16 @@ select.form-control {
 	border-radius: 12px;
 }
 
+.searching-text {
+	cursor: default;
+	margin-bottom: 48px;
+	margin-top: 48px;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
 .unlocked-image {
 	background-image: url(images/open-padlock.png);
 	background-position: center center;
