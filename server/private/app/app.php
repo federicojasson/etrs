@@ -48,6 +48,9 @@ spl_autoload_register('loadClass');
 /**
  * Confirms a task.
  * 
+ * It should be used only for internal tasks, since it reads the stdin to
+ * interact with the user.
+ * 
  * Receives a message to show to the user.
  */
 function confirmTask($message) {
