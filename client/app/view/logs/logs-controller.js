@@ -20,7 +20,6 @@
 
 (function() {
 	angular.module('app.view.logs').controller('LogsViewController', [
-		'$q',
 		'$scope',
 		'SearchLogsAction',
 		'data',
@@ -30,7 +29,7 @@
 	/**
 	 * Represents the logs view.
 	 */
-	function LogsViewController($q, $scope, SearchLogsAction, data) {
+	function LogsViewController($scope, SearchLogsAction, data) {
 		var _this = this;
 		
 		/**
@@ -98,15 +97,12 @@
 		function onSearchLogsSuccess(results, total) {
 			// TODO: do something with total
 			
-			// TODO: comment and order
+			// Resets the data service
+			data.reset();
 			
-			var promises = [];
+			// TODO: comments
 			
-			for (var i = 0; i < results.length; i++) {
-				promises[i] = data.getLog(results[i]);
-			}
-			
-			$q.all(promises).then(function(values) {
+			data.getLogArray(results).then(function(loadedLogs) {
 				// TODO: assign to array of logs
 				ready = true;
 			});

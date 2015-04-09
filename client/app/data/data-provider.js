@@ -109,9 +109,14 @@
 			cache[type] = [];
 			types[type] = unserializer;
 			
-			// Creates a getter for the type
+			// Creates getters for the type
+			
 			_this['get' + type] = function(id) {
 				return getEntity(type, id, 0);
+			};
+			
+			_this['get' + type + 'Array'] = function(ids) {
+				return getEntityArray(type, ids, 0);
 			};
 		};
 		
@@ -122,6 +127,9 @@
 		 * ID and the current depth.
 		 */
 		_this.getReference = function(type, referenceType, field, id, depth) {
+			// Increases the depth
+			depth++;
+			
 			if (depth > maximumDepth || id === null || ! expandReference(type, field)) {
 				// The reference should not be expanded
 				
@@ -199,16 +207,36 @@
 		function getEntity(type, id, depth) {
 			if (angular.isUndefined(cache[type][id])) {
 				// The entity has not been loaded yet
-				
-				// Increases the depth
-				depth++;
-
 				// Loads the entity
 				cache[type][id] = loadEntity(type, id, depth);
 			}
 			
 			// Gets the promise of the entity stored in the cache
 			return cache[type][id];
+		}
+		
+		/**
+		 * TODO: comment
+		 */
+		function getEntityArray(type, ids, depth) {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// TODO: comment and order (maybe rename promises)
+			
+			var promises = [];
+			
+			for (var i = 0; i < ids.length; i++) {
+				promises[i] = getEntity(type, ids[i], depth);
+			}
+			
+			$q.all(promises).then(function(values) {
+				// Resolves the deferred task
+				deferredTask.resolve(values);
+			});
+
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
 		}
 		
 		/**
