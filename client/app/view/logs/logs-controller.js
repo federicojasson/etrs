@@ -35,7 +35,7 @@
 		/**
 		 * Indicates whether the view is ready.
 		 */
-		var ready = true;
+		var ready = false;
 		
 		/**
 		 * Returns the template's URL.
@@ -64,6 +64,7 @@
 		function includeSearchLogsAction() {
 			// Initializes the action
 			var action = new SearchLogsAction();
+			action.input.expression.value = null;
 			action.input.sortingCriteria.value = [];
 			action.input.page.value = 1; // TODO: remove from here
 			action.input.resultsPerPage.value = 20;
@@ -72,6 +73,9 @@
 			
 			// Includes the action
 			$scope.searchLogsAction = action;
+			
+			// Executes the action
+			action.execute();
 		}
 		
 		/**
