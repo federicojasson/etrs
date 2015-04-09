@@ -103,7 +103,7 @@
 			// TODO: comments
 			
 			data.getLogArray(results).then(function(loadedLogs) {
-				// TODO: assign to array of logs
+				$scope.logs = loadedLogs; // TODO: initialize empty array somewhere else?
 				ready = true;
 			});
 		}

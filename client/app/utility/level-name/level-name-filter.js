@@ -19,10 +19,43 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.fullName',
-		'app.utility.honorificName',
-		'app.utility.levelName',
-		'app.utility.line'
-	]);
+	angular.module('app.utility.levelName').filter('levelName', levelNameFilter);
+	
+	/**
+	 * Returns the name of a log's level.
+	 */
+	function levelNameFilter() {
+		/**
+		 * Applies the filter.
+		 * 
+		 * Receives the log.
+		 */
+		function filter(log) {
+			// Gets the level names
+			var levelNames = getLevelNames();
+			
+			// Gets the name of the log's level
+			return levelNames[log.level];
+		}
+		
+		/**
+		 * Returns the level names.
+		 */
+		function getLevelNames() {
+			return {
+				1: 'EMERGENCY',
+				2: 'ALERT',
+				3: 'CRITICAL',
+				4: 'ERROR',
+				5: 'WARNING',
+				6: 'NOTICE',
+				7: 'INFORMATION',
+				8: 'DEBUG'
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		return filter;
+	}
 })();
