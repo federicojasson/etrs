@@ -1,1 +1,48 @@
-TODO: edit-medicine.html
+<h1>{{ medicine.name }}</h1>
+
+<p>
+	TODO: text?
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editMedicineAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Medicamento
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del medicamento:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editMedicineAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editMedicineAction.input.name.value"
+					popover="{{ editMedicineAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning pull-right">
+				Editar medicamento
+			</button>
+		</div>
+	</form>
+</div>

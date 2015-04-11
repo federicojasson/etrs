@@ -51,6 +51,17 @@
 				},
 				
 				{
+					name: 'editMedicine',
+					url: '/medicine/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditMedicineViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'forgotPassword',
 					url: '/account/forgot-password',
 					data: {

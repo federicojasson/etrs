@@ -19,18 +19,30 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.editMedicine').controller('EditMedicineViewController', EditMedicineViewController);
+	angular.module('app.view.editMedicine').controller('EditMedicineViewController', [
+		'$scope',
+		'$stateParams',
+		'EditMedicineAction',
+		'data',
+		'router',
+		EditMedicineViewController
+	]);
 	
 	/**
 	 * Represents the edit-medicine view.
 	 */
-	function EditMedicineViewController() {
+	function EditMedicineViewController($scope, $stateParams, EditMedicineAction, data, router) {
 		var _this = this;
+		
+		/**
+		 * The medicine.
+		 */
+		var medicine = null;
 		
 		/**
 		 * Indicates whether the view is ready.
 		 */
-		var ready = true;
+		var ready = false;
 		
 		/**
 		 * Returns the template's URL.
@@ -43,7 +55,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return ''; // TODO
+			return medicine.name;
 		};
 		
 		/**
@@ -52,5 +64,68 @@
 		_this.isReady = function() {
 			return ready;
 		};
+		
+		/**
+		 * Includes the edit-medicine action.
+		 */
+		function includeEditMedicineAction() {
+			// Initializes the action
+			var action = new EditMedicineAction();
+			action.input.id.value = medicine.id;
+			action.input.version.value = medicine.version;
+			action.input.name.value = medicine.name;
+			action.startCallback = onEditMedicineStart;
+			action.successCallback = onEditMedicineSuccess;
+			
+			// Includes the action
+			$scope.editMedicineAction = action;
+		}
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Gets the URL parameters
+			var id = $stateParams.id;
+			
+			// Resets the data service
+			data.reset();
+			
+			// Gets the medicine
+			data.getMedicine(id).then(function(loadedMedicine) {
+				// Sets the medicine
+				medicine = loadedMedicine;
+				
+				// Includes the medicine
+				$scope.medicine = medicine;
+				
+				// Includes the actions
+				includeEditMedicineAction();
+				
+				ready = true;
+			});
+		}
+		
+		/**
+		 * Invoked at the start of the edit-medicine action.
+		 */
+		function onEditMedicineStart() {
+			ready = false;
+		}
+		
+		/**
+		 * Invoked when the edit-medicine action is successful.
+		 */
+		function onEditMedicineSuccess() {
+			// Redirects the user to the medicine route
+			router.redirect('medicine', {
+				id: medicine.id
+			});
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();
