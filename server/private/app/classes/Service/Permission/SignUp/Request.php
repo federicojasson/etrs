@@ -38,10 +38,10 @@ class Request extends \App\Service\External {
 		$userRole = $this->getInputValue('userRole');
 		
 		// Gets the signed-in user
-		$signedInUser = $app->account->getSignedInUser();
+		$user = $app->account->getSignedInUser();
 		
 		// Authenticates the user
-		$authenticated = $app->authenticator->authenticateUserByPassword($signedInUser->getId(), $credentials['password']);
+		$authenticated = $app->authenticator->authenticateUserByPassword($user->getId(), $credentials['password']);
 		
 		// Sets an output
 		$this->setOutputValue('authenticated', $authenticated);
@@ -74,7 +74,7 @@ class Request extends \App\Service\External {
 		$signUpPermission->setKeyStretchingIterations($keyStretchingIterations);
 		$signUpPermission->setUserRole($userRole);
 		$signUpPermission->setEmailAddress($recipient['emailAddress']);
-		$signUpPermission->setCreator($signedInUser);
+		$signUpPermission->setCreator($user);
 		$app->data->persist($signUpPermission);
 		
 		// Gets the sign-up permission's ID

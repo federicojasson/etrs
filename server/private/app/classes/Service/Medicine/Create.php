@@ -35,12 +35,12 @@ class Create extends \App\Service\External {
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user
-		$signedInUser = $app->account->getSignedInUser();
+		$user = $app->account->getSignedInUser();
 		
 		// Creates the medicine
 		$medicine = new \App\Data\Entity\Medicine();
 		$medicine->setName($name);
-		$medicine->setCreator($signedInUser);
+		$medicine->setCreator($user);
 		$app->data->persist($medicine);
 		
 		// Gets the medicine's ID

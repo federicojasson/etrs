@@ -36,7 +36,7 @@ class Delete extends \App\Service\External {
 		$version = $this->getInputValue('version');
 		
 		// Gets the signed-in user
-		$signedInUser = $app->account->getSignedInUser();
+		$user = $app->account->getSignedInUser();
 		
 		// Gets the medicine
 		$medicine = $app->data->getRepository('Entity:Medicine')->findNonDeleted($id);
@@ -46,7 +46,7 @@ class Delete extends \App\Service\External {
 		$app->assertion->entityUpdated($medicine, $version);
 		
 		// Deletes the medicine
-		$medicine->delete($signedInUser);
+		$medicine->delete($user);
 		$app->data->merge($medicine);
 	}
 	

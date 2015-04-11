@@ -37,7 +37,7 @@ class Edit extends \App\Service\External {
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user
-		$signedInUser = $app->account->getSignedInUser();
+		$user = $app->account->getSignedInUser();
 		
 		// Gets the medicine
 		$medicine = $app->data->getRepository('Entity:Medicine')->findNonDeleted($id);
@@ -49,7 +49,7 @@ class Edit extends \App\Service\External {
 		// Edits the medicine
 		$medicine->setLastEditionDateTime();
 		$medicine->setName($name);
-		$medicine->setLastEditor($signedInUser);
+		$medicine->setLastEditor($user);
 		$app->data->merge($medicine);
 	}
 	

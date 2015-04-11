@@ -43,10 +43,10 @@ class SignedIn extends \App\Service\External {
 		}
 		
 		// Gets the signed-in user
-		$signedInUser = $app->account->getSignedInUser();
+		$user = $app->account->getSignedInUser();
 		
 		// Gets the signed-in user's ID
-		$id = $signedInUser->getId();
+		$id = $user->getId();
 		
 		// Sets an output
 		$this->setOutputValue('id', $id);
