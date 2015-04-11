@@ -29,21 +29,89 @@ class Edit extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$credentials = $this->getInputValue('credentials');
+		$emailAddress = $this->getInputValue('emailAddress');
+		$firstName = $this->getInputValue('firstName', 'trimAndShrink');
+		$lastName = $this->getInputValue('lastName', 'trimAndShrink');
+		$gender = $this->getInputValue('gender');
+		
+		// Gets the signed-in user
+		$user = $app->account->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($user->getId(), $credentials['password']);
+		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user has not been authenticated
+			return;
+		}
+		
+		// Edits the user
+		$user->setLastEditionDateTime();
+		$user->setEmailAddress($emailAddress);
+		$user->setFirstName($firstName);
+		$user->setLastName($lastName);
+		$user->setGender($gender);
+		$app->data->merge($user);
 	}
 	
 	/**
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'credentials' => new \App\InputValidator\Json\JsonObject([
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isValidString($input, 1);
+				})
+			]),
+			
+			'emailAddress' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isEmailAddress($input);
+			}),
+			
+			'firstName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidLine($input, 1, 48);
+			}),
+			
+			'lastName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidLine($input, 1, 48);
+			}),
+			
+			'gender' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isGender($input);
+			})
+		]);
+		
+		// Validates the input
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 	/**
 	 * Determines whether the user is authorized.
 	 */
 	protected function isUserAuthorized() {
-		// TODO
+		global $app;
+		
+		// Only signed-in users are authorized
+		return $app->account->isUserSignedIn();
 	}
 
 }
