@@ -42,7 +42,7 @@ class File extends \Slim\LogWriter {
 		// TODO
 		$file = fopen($path, 'a');
 		
-		// Invokes the homonym method in the parent TODO: comment okay?
+		// Invokes the homonym method in the parent
 		parent::__construct($file);
 	}
 	
