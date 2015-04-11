@@ -191,8 +191,6 @@ function loadClass($class) {
 function runApp($middlewares) {
 	global $app;
 	
-	date_default_timezone_set('UTC'); // TODO: move from here
-	
 	// Initializes the application
 	$app = new \Slim\Slim([
 		'mode' => OPERATION_MODE

@@ -31,12 +31,15 @@ abstract class Configuration {
 	public function __invoke() {
 		global $app;
 		
-		// Gets the settings
+		// Applies common settings
+		$this->applyCommonSettings();
+		
+		// Gets particular settings
 		$cookieSettings = $this->getCookieSettings();
 		$loggingSettings = $this->getLoggingSettings();
 		$miscellaneousSettings = $this->getMiscellaneousSettings();
 		
-		// Applies the settings
+		// Applies the particular settings
 		$app->config($cookieSettings);
 		$app->config($loggingSettings);
 		$app->config($miscellaneousSettings);
@@ -56,5 +59,13 @@ abstract class Configuration {
 	 * Returns miscellaneous settings.
 	 */
 	protected abstract function getMiscellaneousSettings();
+	
+	/**
+	 * Applies settings common to all configurations.
+	 */
+	private function applyCommonSettings() {
+		// Sets the default time zone
+		date_default_timezone_set('UTC');
+	}
 	
 }
