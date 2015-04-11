@@ -26,20 +26,20 @@ namespace App\LogWriter;
 class File extends \Slim\LogWriter {
 	
 	/**
-	 * TODO
+	 * The level names.
 	 */
-	private $TODO;
+	private $levelNames;
 	
 	/**
 	 * Initializes an instance of the class.
 	 * 
-	 * TODO: comment
+	 * Receives the log file's path.
 	 */
 	public function __construct($path) {
-		// Gets the TODO
-		$this->TODO = $this->getTODO();
+		// Gets the level names
+		$this->levelNames = $this->getLevelNames();
 		
-		// TODO
+		// Opens the log file
 		$file = fopen($path, 'a');
 		
 		// Invokes the homonym method in the parent
@@ -56,12 +56,12 @@ class File extends \Slim\LogWriter {
 		$currentDateTime = \App\DateTime\Custom::createCurrent();
 		
 		// TODO: comment
-		$TODO = $this->TODO[$level];
+		$levelName = $this->levelNames[$level];
 		
 		// Builds the line
 		$line = '';
 		$line .= $currentDateTime->format('Y-m-d H:i:s') . ' ';
-		$line .= str_pad($TODO, 11) . ' - ';
+		$line .= str_pad($levelName, 11) . ' - ';
 		$line .= $message;
 		
 		// Invokes the homonym method in the parent
@@ -69,9 +69,9 @@ class File extends \Slim\LogWriter {
 	}
 	
 	/**
-	 * Returns TODO
+	 * Returns the level names.
 	 */
-	private function getTODO() { // TODO: rename
+	private function getLevelNames() {
 		return [
 			\Slim\Log::EMERGENCY => 'EMERGENCY',
 			\Slim\Log::ALERT => 'ALERT',
