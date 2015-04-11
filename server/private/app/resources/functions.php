@@ -65,7 +65,7 @@ function containsDuplicates($array) {
 	return count($array) !== count($arrayWithoutDuplicates);
 }
 
-/*
+/**
  * Creates an array filter.
  * 
  * Receives a filter for the elements.
