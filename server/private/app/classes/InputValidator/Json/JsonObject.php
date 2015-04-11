@@ -23,7 +23,7 @@ namespace App\InputValidator\Json;
 /**
  * Responsible for validating JSON objects.
  */
-class JsonObject extends Json {
+class JsonObject extends JsonStructure {
 	
 	/**
 	 * Determines whether an input is valid.
