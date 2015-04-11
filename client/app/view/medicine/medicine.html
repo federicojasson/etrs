@@ -1,3 +1,21 @@
 <h1>{{ medicine.name }}</h1>
 
-TODO: medicine.html
+<p>
+	TODO: text?
+</p>
+
+TODO: improve style
+
+Nombre: {{ medicine.name }}<br>
+<br>
+Creación:<br>
+{{ medicine.creationDateTime }}<br>
+<span ng-if="medicine.creator !== null">
+	Por {{ medicine.creator | fullName }}<br>
+</span>
+<br>
+Última edición:<br>
+{{ medicine.lastEditionDateTime }}<br>
+<span ng-if="medicine.lastEditor !== null">
+	Por {{ medicine.lastEditor | fullName }}<br>
+</span>
