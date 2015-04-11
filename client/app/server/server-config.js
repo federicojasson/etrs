@@ -34,6 +34,7 @@
 		function getServices() {
 			return [
 				// DEFINEHERE: define services here
+				'/account/change-password',
 				'/account/reset-password',
 				'/account/sign-in',
 				'/account/sign-out',
