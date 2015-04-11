@@ -39,6 +39,14 @@ class JsonObject extends Json {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
+		// TODO: comment
+		$count = count($definition);
+		
+		if ($count !== count($input)) {
+			// TODO: comment
+			return false;
+		}
+		
 		// Validates the JSON object's properties
 		foreach ($definition as $property => $jsonInputValidator) {
 			if (! array_key_exists($property, $input)) {
