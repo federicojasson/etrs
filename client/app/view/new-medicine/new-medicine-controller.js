@@ -59,43 +59,35 @@
 		};
 		
 		/**
-		 * Includes the create-medicine action.
-		 */
-		function includeCreateMedicineAction() {
-			// Initializes the action
-			var action = new CreateMedicineAction();
-			action.startCallback = onCreateMedicineStart;
-			action.successCallback = onCreateMedicineSuccess;
-			
-			// Includes the action
-			$scope.createMedicineAction = action;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the actions
-			includeCreateMedicineAction();
+			// Initializes the actions
+			initializeCreateMedicineAction();
 		}
 		
 		/**
-		 * Invoked at the start of the create-medicine action.
+		 * Initializes the create-medicine action.
 		 */
-		function onCreateMedicineStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the create-medicine action is successful.
-		 * 
-		 * Receives the new medicine's ID.
-		 */
-		function onCreateMedicineSuccess(id) {
-			// Redirects the user to the medicine route
-			router.redirect('medicine', {
-				id: id
-			});
+		function initializeCreateMedicineAction() {
+			// Initializes the action
+			var action = new CreateMedicineAction();
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function(id) {
+				// Redirects the user to the medicine route
+				router.redirect('medicine', {
+					id: id
+				});
+			};
+			
+			// Includes the action
+			$scope.createMedicineAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
