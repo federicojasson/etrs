@@ -35,6 +35,7 @@
 			return [
 				// DEFINEHERE: define services here
 				'/account/change-password',
+				'/account/edit',
 				'/account/reset-password',
 				'/account/sign-in',
 				'/account/sign-out',

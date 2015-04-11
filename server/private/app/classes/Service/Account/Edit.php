@@ -18,39 +18,32 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\Account;
 
 /**
- * Responsible for registering the external services.
+ * Represents the /account/edit service.
  */
-class ExternalServices extends Services {
+class Edit extends \App\Service\External {
 	
 	/**
-	 * Returns the services.
+	 * Executes the service.
 	 */
-	protected function getServices() {
-		return [
-			// DEFINEHERE: define external services here
-			'/account/change-password',
-			'/account/edit',
-			'/account/reset-password',
-			'/account/sign-in',
-			'/account/sign-out',
-			'/account/sign-up',
-			'/account/signed-in',
-			'/log/get',
-			'/log/search',
-			'/medicine/create',
-			'/medicine/delete',
-			'/medicine/edit',
-			'/medicine/get',
-			'/medicine/search',
-			'/permission/password-reset/authenticate',
-			'/permission/password-reset/request',
-			'/permission/sign-up/authenticate',
-			'/permission/sign-up/request',
-			'/user/get'
-		];
+	protected function execute() {
+		// TODO
 	}
 	
+	/**
+	 * Determines whether the request is valid.
+	 */
+	protected function isRequestValid() {
+		// TODO
+	}
+	
+	/**
+	 * Determines whether the user is authorized.
+	 */
+	protected function isUserAuthorized() {
+		// TODO
+	}
+
 }
