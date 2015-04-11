@@ -38,7 +38,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="utc_datetime",
+	 *		type="datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -141,7 +141,7 @@ class User {
 	 * 
 	 * @Column(
 	 *		name="last_edition_date_time",
-	 *		type="utc_datetime"
+	 *		type="datetime"
 	 *	)
 	 */
 	private $lastEditionDateTime;
@@ -297,11 +297,11 @@ class User {
 		
 		$serialization['id'] = $this->id;
 		$serialization['version'] = $this->version;
-		$serialization['creationDateTime'] = $this->creationDateTime->format();
+		$serialization['creationDateTime'] = $this->creationDateTime->format(\DateTime::ISO8601);
 		
 		$serialization['lastEditionDateTime'] = null;
 		if (! is_null($this->lastEditionDateTime)) {
-			$serialization['lastEditionDateTime'] = $this->lastEditionDateTime->format();
+			$serialization['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
 		}
 		
 		$serialization['role'] = $this->role;
@@ -326,7 +326,7 @@ class User {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = new \App\DateTime\Custom();
+		$this->creationDateTime = new \DateTime();
 	}
 	
 	/**
@@ -387,7 +387,7 @@ class User {
 	 * Sets the last-edition date-time.
 	 */
 	public function setLastEditionDateTime() {
-		$this->lastEditionDateTime = new \App\DateTime\Custom();
+		$this->lastEditionDateTime = new \DateTime();
 	}
 	
 	/**

@@ -53,7 +53,7 @@ class File extends \Slim\LogWriter {
 	 */
 	public function write($message, $level) {
 		// Gets the current date-time
-		$currentDateTime = new \App\DateTime\Custom();
+		$currentDateTime = new \DateTime();
 		
 		// TODO: comment
 		$levelName = $this->levelNames[$level];

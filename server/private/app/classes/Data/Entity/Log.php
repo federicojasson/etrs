@@ -38,7 +38,7 @@ class Log {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="utc_datetime",
+	 *		type="datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -105,7 +105,7 @@ class Log {
 		// according to their specific characteristics
 		
 		$serialization['id'] = bin2hex($this->id);
-		$serialization['creationDateTime'] = $this->creationDateTime->format();
+		$serialization['creationDateTime'] = $this->creationDateTime->format(\DateTime::ISO8601);
 		$serialization['level'] = $this->level;
 		$serialization['message'] = $this->message;
 		
@@ -120,7 +120,7 @@ class Log {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = new \App\DateTime\Custom();
+		$this->creationDateTime = new \DateTime();
 	}
 	
 	/**

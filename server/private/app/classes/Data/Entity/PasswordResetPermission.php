@@ -38,7 +38,7 @@ class PasswordResetPermission {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="utc_datetime",
+	 *		type="datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -172,7 +172,7 @@ class PasswordResetPermission {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = new \App\DateTime\Custom();
+		$this->creationDateTime = new \DateTime();
 	}
 	
 	/**

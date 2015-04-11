@@ -38,7 +38,7 @@ class Session {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="utc_datetime",
+	 *		type="datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -82,7 +82,7 @@ class Session {
 	 * 
 	 * @Column(
 	 *		name="last_access_date_time",
-	 *		type="utc_datetime",
+	 *		type="datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -103,7 +103,7 @@ class Session {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = new \App\DateTime\Custom();
+		$this->creationDateTime = new \DateTime();
 	}
 	
 	/**
@@ -132,7 +132,7 @@ class Session {
 	 * @PrePersist
 	 */
 	public function setLastAccessDateTime() {
-		$this->lastAccessDateTime = new \App\DateTime\Custom();
+		$this->lastAccessDateTime = new \DateTime();
 	}
 	
 }

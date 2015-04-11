@@ -34,7 +34,7 @@ class DeleteOld extends \App\Service\Internal {
 		// TODO: ask for confirmation
 		
 		// Gets the current date-time
-		$currentDateTime = new \App\DateTime\Custom();
+		$currentDateTime = new \DateTime();
 		
 		// Deletes old logs
 		$app->data->createQueryBuilder()

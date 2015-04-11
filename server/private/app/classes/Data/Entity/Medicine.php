@@ -38,7 +38,7 @@ class Medicine {
 	 * 
 	 * @Column(
 	 *		name="creation_date_time",
-	 *		type="utc_datetime",
+	 *		type="datetime",
 	 *		nullable=false
 	 *	)
 	 */
@@ -92,7 +92,7 @@ class Medicine {
 	 * 
 	 * @Column(
 	 *		name="deletion_date_time",
-	 *		type="utc_datetime"
+	 *		type="datetime"
 	 *	)
 	 */
 	private $deletionDateTime;
@@ -124,7 +124,7 @@ class Medicine {
 	 * 
 	 * @Column(
 	 *		name="last_edition_date_time",
-	 *		type="utc_datetime"
+	 *		type="datetime"
 	 *	)
 	 */
 	private $lastEditionDateTime;
@@ -187,7 +187,7 @@ class Medicine {
 	 * Receives the user to be set as the deleter.
 	 */
 	public function delete($user) {
-		$this->deletionDateTime = new \App\DateTime\Custom();
+		$this->deletionDateTime = new \DateTime();
 		$this->deleted = true;
 		$this->deleter = $user;
 	}
@@ -219,11 +219,11 @@ class Medicine {
 		
 		$serialization['id'] = bin2hex($this->id);
 		$serialization['version'] = $this->version;
-		$serialization['creationDateTime'] = $this->creationDateTime->format();
+		$serialization['creationDateTime'] = $this->creationDateTime->format(\DateTime::ISO8601);
 		
 		$serialization['lastEditionDateTime'] = null;
 		if (! is_null($this->lastEditionDateTime)) {
-			$serialization['lastEditionDateTime'] = $this->lastEditionDateTime->format();
+			$serialization['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
 		}
 		
 		$serialization['name'] = $this->name;
@@ -249,7 +249,7 @@ class Medicine {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = new \App\DateTime\Custom();
+		$this->creationDateTime = new \DateTime();
 	}
 	
 	/**
@@ -265,7 +265,7 @@ class Medicine {
 	 * Sets the last-edition date-time.
 	 */
 	public function setLastEditionDateTime() {
-		$this->lastEditionDateTime = new \App\DateTime\Custom();
+		$this->lastEditionDateTime = new \DateTime();
 	}
 	
 	/**
