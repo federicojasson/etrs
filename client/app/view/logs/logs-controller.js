@@ -82,6 +82,9 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// TODO
+			$scope.logs = [];
+			
 			// Includes the actions
 			includeSearchLogsAction();
 		}
@@ -99,7 +102,8 @@
 		 * Receives the results and the total number of results.
 		 */
 		function onSearchLogsSuccess(results, total) {
-			// TODO: do something with total
+			// TODO: comment
+			$scope.total = total;
 			
 			// Resets the data service
 			data.reset();
@@ -107,7 +111,7 @@
 			// Gets the logs
 			data.getLogArray(results).then(function(loadedLogs) {
 				// Includes the logs
-				$scope.logs = loadedLogs; // TODO: initialize empty array somewhere else?
+				$scope.logs = loadedLogs;
 				
 				// TODO: comment
 				$scope.searching = false;

@@ -260,6 +260,10 @@ select.form-control {}
 	text-transform: uppercase;
 }
 
+.no-results-text {
+	color: #aaaaaa;
+}
+
 .rounded-corners {}
 
 .searching-text {

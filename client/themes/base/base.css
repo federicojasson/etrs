@@ -296,6 +296,11 @@ select.form-control {
 	padding: 8px;
 }
 
+.no-results-text {
+	margin-bottom: 48px;
+	margin-top: 48px;
+}
+
 .rounded-corners {
 	border-radius: 12px;
 }
