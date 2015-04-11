@@ -19,18 +19,38 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.editMedicine',
-		'app.view.forgotPassword',
-		'app.view.home',
-		'app.view.invitation',
-		'app.view.logs',
-		'app.view.medicine',
-		'app.view.medicines',
-		'app.view.newMedicine',
-		'app.view.resetPassword',
-		'app.view.signIn',
-		'app.view.signUp'
-	]);
+	angular.module('app.view.editMedicine').controller('EditMedicineViewController', EditMedicineViewController);
+	
+	/**
+	 * Represents the edit-medicine view.
+	 */
+	function EditMedicineViewController() {
+		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
+		
+		/**
+		 * Returns the template's URL.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/edit-medicine/edit-medicine.html';
+		};
+		
+		/**
+		 * Returns the title to be set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return ''; // TODO
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return ready;
+		};
+	}
 })();
