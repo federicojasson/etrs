@@ -39,8 +39,8 @@
 		 * The validator.
 		 * 
 		 * Besides determining whether the input is valid, it should set the
-		 * message. If the validation fails, it must set a description of the
-		 * cause; otherwise, it must set an empty string.
+		 * message. If the validation fails, an explanation should be set;
+		 * otherwise, it should set an empty string.
 		 */
 		Input.prototype.validator;
 		

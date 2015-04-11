@@ -21,7 +21,10 @@
 namespace App\InputValidator\CommandLine;
 
 /**
- * TODO: comment
+ * Responsible for validating fixed command-line arguments.
+ * 
+ * "Fixed" here means that the arguments must be received in a predetermined
+ * order.
  */
 class FixedArguments {
 	
@@ -45,21 +48,21 @@ class FixedArguments {
 	 * Receives the input.
 	 */
 	public function isInputValid($input) {
-		// TODO: comment
+		// Gets the definition's length
 		$count = count($this->definition);
 		
 		if ($count !== count($input)) {
-			// TODO: comment
+			// The input's length doesn't match that of the definition
 			return false;
 		}
 		
-		// TODO: comment
+		// Validates the command-line arguments
 		for ($i = 0; $i < $count; $i++) {
-			// TODO: comment
+			// Validates the argument
 			$valid = call_user_func($this->definition[$i], $input[$i]);
 			
 			if (! $valid) {
-				// TODO: comment
+				// The argument is invalid
 				return false;
 			}
 		}

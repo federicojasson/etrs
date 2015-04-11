@@ -21,7 +21,7 @@
 namespace App\LogWriter;
 
 /**
- * TODO: comment
+ * Responsible for handling the persistence of the logs in a file.
  */
 class File extends \Slim\LogWriter {
 	
@@ -55,7 +55,7 @@ class File extends \Slim\LogWriter {
 		// Gets the current date-time
 		$currentDateTime = new \DateTime();
 		
-		// TODO: comment
+		// Gets the level name
 		$levelName = $this->levelNames[$level];
 		
 		// Builds the line

@@ -34,7 +34,7 @@
 			// Gets the level names
 			var levelNames = getLevelNames();
 			
-			// Gets the name of the log's level
+			// Gets the level name
 			return levelNames[log.level];
 		}
 		

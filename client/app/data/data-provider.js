@@ -76,7 +76,7 @@
 		/**
 		 * The associations.
 		 * 
-		 * When loading an entity, it determines which references should be
+		 * When loading an entity, it determines which references must be
 		 * expanded.
 		 */
 		var associations = {};
@@ -89,8 +89,8 @@
 		/**
 		 * The maximum depth.
 		 * 
-		 * It determines how many levels of references should be expanded. A
-		 * 0-value indicates that no references should be expanded. A negative
+		 * It determines how many levels of references have to be expanded. A
+		 * 0-value indicates that no references must be expanded. A negative
 		 * value indicates no depth limit.
 		 */
 		var maximumDepth = 0;
@@ -131,7 +131,7 @@
 			depth++;
 			
 			if (depth > maximumDepth || id === null || ! expandReference(type, field)) {
-				// The reference should not be expanded
+				// The reference must not be expanded
 				
 				// Initializes a deferred task
 				var deferredTask = $q.defer();
@@ -178,18 +178,18 @@
 		};
 		
 		/**
-		 * Determines whether a reference should be expanded.
+		 * Determines whether a reference must be expanded.
 		 * 
 		 * Receives the type and the field.
 		 */
 		function expandReference(type, field) {
 			if (! associations.hasOwnProperty(type)) {
-				// The type should not be expanded
+				// The type must not be expanded
 				return false;
 			}
 			
 			if (associations[type].indexOf(field) === -1) {
-				// The field should not be expanded
+				// The field must not be expanded
 				return false;
 			}
 			

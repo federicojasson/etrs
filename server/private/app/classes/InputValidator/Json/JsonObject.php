@@ -39,11 +39,11 @@ class JsonObject extends JsonStructure {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// TODO: comment
+		// Gets the definition's length
 		$count = count($definition);
 		
 		if ($count !== count($input)) {
-			// TODO: comment
+			// The input's length doesn't match that of the definition
 			return false;
 		}
 		
