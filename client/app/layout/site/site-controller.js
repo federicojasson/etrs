@@ -65,41 +65,35 @@
 		};
 		
 		/**
-		 * Includes the sign-out action.
-		 */
-		function includeSignOutAction() {
-			// Initializes the action
-			var action = new SignOutAction();
-			action.startCallback = onSignOutStart;
-			action.successCallback = onSignOutSuccess;
-			
-			// Includes the action
-			$scope.signOutAction = action;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
 			// Includes the controllers
 			$scope.account = $controller('AccountController');
 			
-			// Includes the actions
-			includeSignOutAction();
+			// Initializes the actions
+			initializeSignOutAction();
 		}
 		
 		/**
-		 * Invoked at the start of the sign-out action.
+		 * Initializes the sign-out action.
 		 */
-		function onSignOutStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the sign-out action is successful.
-		 */
-		function onSignOutSuccess() {
-			ready = true;
+		function initializeSignOutAction() {
+			// Initializes the action
+			var action = new SignOutAction();
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				ready = true;
+			};
+			
+			// Includes the action
+			$scope.signOutAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
