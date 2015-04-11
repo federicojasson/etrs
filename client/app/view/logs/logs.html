@@ -8,7 +8,6 @@
 	<div class="col-sm-5 col-sm-offset-7">
 		<div class="form-group has-feedback">
 			<form ng-submit="searchLogsAction.execute()" novalidate>
-				<!-- TODO: nullify if empty -->
 				<input
 					ng-model="searchLogsAction.input.expression.value"
 					popover="{{ searchLogsAction.input.expression.message }}"
