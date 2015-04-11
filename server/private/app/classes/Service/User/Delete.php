@@ -69,7 +69,7 @@ class Delete extends \App\Service\Internal {
 		$input = $this->getInput();
 		
 		// Builds a command-line input validator
-		$commandLineInputValidator = new \App\InputValidator\CommandLine([
+		$commandLineInputValidator = new \App\InputValidator\CommandLine\FixedArguments([
 			function($input) use ($app) {
 				return $app->inputValidator->isUserId($input);
 			}

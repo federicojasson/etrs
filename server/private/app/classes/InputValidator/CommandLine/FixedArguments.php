@@ -18,12 +18,12 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\InputValidator;
+namespace App\InputValidator\CommandLine;
 
 /**
  * TODO: comment
  */
-class CommandLine {
+class FixedArguments {
 	
 	/**
 	 * The definition.
