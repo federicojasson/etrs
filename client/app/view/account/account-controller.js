@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.view.account').controller('AccountViewController', [
+		'$scope',
 		'account',
 		'data',
 		'fullNameFilter',
@@ -29,18 +30,13 @@
 	/**
 	 * Represents the account view.
 	 */
-	function AccountViewController(account, data, fullNameFilter) {
+	function AccountViewController($scope, account, data, fullNameFilter) {
 		var _this = this;
 		
 		/**
 		 * Indicates whether the view is ready.
 		 */
 		var ready = false;
-		
-		/**
-		 * The signed-in user.
-		 */
-		var signedInUser = null;
 		
 		/**
 		 * Returns the template's URL.
@@ -53,7 +49,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return fullNameFilter(signedInUser);
+			return fullNameFilter($scope.user);
 		};
 		
 		/**
@@ -79,8 +75,8 @@
 			
 			// Gets the user
 			data.getUser(id).then(function(loadedUser) {
-				// Sets the signed-in user
-				signedInUser = loadedUser;
+				// Includes the user
+				$scope.user = loadedUser;
 				
 				ready = true;
 			});
