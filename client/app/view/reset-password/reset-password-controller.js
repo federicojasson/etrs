@@ -62,24 +62,6 @@
 		};
 		
 		/**
-		 * Includes the reset-password action.
-		 * 
-		 * Receives the password-reset permission's ID and password.
-		 */
-		function includeResetPasswordAction(id, password) {
-			// Initializes the action
-			var action = new ResetPasswordAction();
-			action.input.credentials.id.value = id;
-			action.input.credentials.password.value = password;
-			action.notAuthenticatedCallback = onResetPasswordNotAuthenticated;
-			action.startCallback = onResetPasswordStart;
-			action.successCallback = onResetPasswordSuccess;
-			
-			// Includes the action
-			$scope.resetPasswordAction = action;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -97,53 +79,68 @@
 				if (! output.authenticated) {
 					// The password-reset permission has not been authenticated
 					
-					// Invokes the not-authenticated callback
-					onResetPasswordNotAuthenticated();
+					// Redirects the user to the home route
+					router.redirect('home');
+
+					// Opens an error dialog
+					dialog.openError(
+						'Credenciales rechazadas',
+						'El permiso para restablecer su contraseña ha sido rechazado.'
+					);
 					
 					return;
 				}
 				
-				// Includes the actions
-				includeResetPasswordAction(id, password);
+				// Initializes the actions
+				initializeResetPasswordAction(id, password);
 				
 				ready = true;
 			});
 		}
 		
 		/**
-		 * Invoked when the password-reset permission is not authenticated
-		 * during the execution of the reset-password action.
+		 * Initializes the reset-password action.
+		 * 
+		 * Receives the password-reset permission's ID and password.
 		 */
-		function onResetPasswordNotAuthenticated() {
-			// Redirects the user to the home route
-			router.redirect('home');
+		function initializeResetPasswordAction(id, password) {
+			// Initializes the action
+			var action = new ResetPasswordAction();
 			
-			// Opens an error dialog
-			dialog.openError(
-				'Credenciales rechazadas',
-				'El permiso para restablecer su contraseña ha expirado.'
-			);
-		}
-		
-		/**
-		 * Invoked at the start of the reset-password action.
-		 */
-		function onResetPasswordStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the reset-password action is successful.
-		 */
-		function onResetPasswordSuccess() {
-			// Redirects the user to the home route
-			router.redirect('home');
+			// Sets inputs' initial values
+			action.input.credentials.id.value = id;
+			action.input.credentials.password.value = password;
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Contraseña restablecida',
-				'Su contraseña ha sido modificada.'
-			);
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.notAuthenticatedCallback = function() {
+				// Redirects the user to the home route
+				router.redirect('home');
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'El permiso para restablecer su contraseña ha expirado.'
+				);
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the home route
+				router.redirect('home');
+				
+				// Opens an information dialog
+				dialog.openInformation(
+					'Contraseña restablecida',
+					'Su contraseña ha sido modificada.'
+				);
+			};
+			
+			// Includes the action
+			$scope.resetPasswordAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
