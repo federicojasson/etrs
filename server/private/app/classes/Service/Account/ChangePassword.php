@@ -29,21 +29,76 @@ class ChangePassword extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets the inputs
+		$credentials = $this->getInputValue('credentials');
+		$password = $this->getInputValue('password');
+		
+		// Gets the signed-in user
+		$user = $app->account->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($user->getId(), $credentials['password']);
+		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user has not been authenticated
+			return;
+		}
+		
+		// Computes the password's hash
+		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
+		
+		// Edits the user
+		$user->setLastEditionDateTime();
+		$user->setPasswordHash($hash);
+		$user->setSalt($salt);
+		$user->setKeyStretchingIterations($keyStretchingIterations);
+		$app->data->merge($user);
 	}
 	
 	/**
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'credentials' => new \App\InputValidator\Json\JsonObject([
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isValidString($input, 1);
+				})
+			]),
+			
+			'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidPassword($input);
+			})
+		]);
+		
+		// Validates the input
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 	/**
 	 * Determines whether the user is authorized.
 	 */
 	protected function isUserAuthorized() {
-		// TODO
+		global $app;
+		
+		// Only signed-in users are authorized
+		return $app->account->isUserSignedIn();
 	}
 
 }
