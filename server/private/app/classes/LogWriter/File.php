@@ -53,14 +53,14 @@ class File extends \Slim\LogWriter {
 	 */
 	public function write($message, $level) {
 		// Gets the current date-time
-		$currentDateTime = getCurrentDateTime();
+		$currentDateTime = \App\DateTime\Custom::createCurrent();
 		
 		// TODO: comment
 		$TODO = $this->TODO[$level];
 		
 		// Builds the line
 		$line = '';
-		$line .= dateTimeToString($currentDateTime, 'Y-m-d H:i:s') . ' ';
+		$line .= $currentDateTime->format('Y-m-d H:i:s') . ' ';
 		$line .= str_pad($TODO, 11) . ' - ';
 		$line .= $message;
 		

@@ -21,6 +21,8 @@
 namespace App\Data\Type;
 
 /**
+ * TODO: change comments and rename
+ * 
  * Represents a date-time type.
  * 
  * The primary difference with the native date-time type is that it
@@ -35,31 +37,19 @@ class UtcDateTime extends \Doctrine\DBAL\Types\DateTimeType {
 	 * Receives the value and the database platform.
 	 */
 	public function convertToPHPValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform) {
+		// Invokes the homonym method in the parent
+		$value = parent::convertToPHPValue($value, $platform);
+		
 		if (is_null($value)) {
 			// The value is null
 			return null;
 		}
 		
-		// Gets the format
-		$format = $platform->getDateTimeFormatString();
-
-		// Initializes the time zone
-		$timeZone = new \DateTimeZone('UTC');
-
-		// Initializes the date-time
-		$dateTime = \DateTime::createFromFormat($format, $value, $timeZone);
-
-		if ($dateTime === false) {
-			// The conversion failed
-
-			// Gets the name
-			$name = $this->getName();
-
-			// Throws an exception
-			throw \Doctrine\DBAL\Types\ConversionException::conversionFailedFormat($value, $name, $format);
-		}
+		// TODO: comment
+		$TODOrename = $value->format(\DateTime::ISO8601);
 		
-		return $dateTime;
+		// Initializes the date-time
+		return new \App\DateTime\Custom($TODOrename);
 	}
 	
 	/**

@@ -33,11 +33,14 @@ class DeleteExpired extends \App\Service\Internal {
 		
 		// TODO: ask for confirmation
 		
+		// Gets the current date-time
+		$currentDateTime = \App\DateTime\Custom::createCurrent();
+		
 		// Deletes the expired password-reset permissions
 		$app->data->createQueryBuilder()
 			->delete('Entity:PasswordResetPermission', 'prp')
 			->where('prp.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'MINUTE\')')
-			->setParameter('currentDateTime', getCurrentDateTime())
+			->setParameter('currentDateTime', $currentDateTime)
 			->setParameter('maximumAge', PASSWORD_RESET_PERMISSION_MAXIMUM_AGE)
 			->getQuery()
 			->execute();

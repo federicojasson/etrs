@@ -187,7 +187,7 @@ class Medicine {
 	 * Receives the user to be set as the deleter.
 	 */
 	public function delete($user) {
-		$this->deletionDateTime = getCurrentDateTime();
+		$this->deletionDateTime = \App\DateTime\Custom::createCurrent();
 		$this->deleted = true;
 		$this->deleter = $user;
 	}
@@ -219,11 +219,11 @@ class Medicine {
 		
 		$serialization['id'] = bin2hex($this->id);
 		$serialization['version'] = $this->version;
-		$serialization['creationDateTime'] = dateTimeToString($this->creationDateTime);
+		$serialization['creationDateTime'] = $this->creationDateTime->format();
 		
 		$serialization['lastEditionDateTime'] = null;
 		if (! is_null($this->lastEditionDateTime)) {
-			$serialization['lastEditionDateTime'] = dateTimeToString($this->lastEditionDateTime);
+			$serialization['lastEditionDateTime'] = $this->lastEditionDateTime->format();
 		}
 		
 		$serialization['name'] = $this->name;
@@ -249,7 +249,7 @@ class Medicine {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = getCurrentDateTime();
+		$this->creationDateTime = \App\DateTime\Custom::createCurrent();
 	}
 	
 	/**
@@ -265,7 +265,7 @@ class Medicine {
 	 * Sets the last-edition date-time.
 	 */
 	public function setLastEditionDateTime() {
-		$this->lastEditionDateTime = getCurrentDateTime();
+		$this->lastEditionDateTime = \App\DateTime\Custom::createCurrent();
 	}
 	
 	/**

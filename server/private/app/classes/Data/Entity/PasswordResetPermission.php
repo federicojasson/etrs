@@ -172,7 +172,7 @@ class PasswordResetPermission {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = getCurrentDateTime();
+		$this->creationDateTime = \App\DateTime\Custom::createCurrent();
 	}
 	
 	/**

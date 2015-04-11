@@ -33,11 +33,14 @@ class DeleteExpired extends \App\Service\Internal {
 		
 		// TODO: ask for confirmation
 		
+		// Gets the current date-time
+		$currentDateTime = \App\DateTime\Custom::createCurrent();
+		
 		// Deletes the expired sign-up permissions
 		$app->data->createQueryBuilder()
 			->delete('Entity:SignUpPermission', 'sup')
 			->where('sup.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'HOUR\')')
-			->setParameter('currentDateTime', getCurrentDateTime())
+			->setParameter('currentDateTime', $currentDateTime)
 			->setParameter('maximumAge', SIGN_UP_PERMISSION_MAXIMUM_AGE)
 			->getQuery()
 			->execute();

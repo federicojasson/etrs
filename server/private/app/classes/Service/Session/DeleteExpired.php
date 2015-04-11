@@ -33,12 +33,15 @@ class DeleteExpired extends \App\Service\Internal {
 		
 		// TODO: ask for confirmation
 		
+		// Gets the current date-time
+		$currentDateTime = \App\DateTime\Custom::createCurrent();
+		
 		// Deletes the expired sessions
 		$app->data->createQueryBuilder()
 			->delete('Entity:Session', 's')
 			->where('s.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'DAY\')')
 			->orWhere('s.lastAccessDateTime < DATEADD(:currentDateTime, (-:maximumInactivityTime), \'HOUR\')')
-			->setParameter('currentDateTime', getCurrentDateTime())
+			->setParameter('currentDateTime', $currentDateTime)
 			->setParameter('maximumAge', SESSION_MAXIMUM_AGE)
 			->setParameter('maximumInactivityTime', SESSION_MAXIMUM_INACTIVITY_TIME)
 			->getQuery()

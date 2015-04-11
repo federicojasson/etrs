@@ -82,15 +82,6 @@ function createArrayFilter($filter) {
 }
 
 /**
- * Converts a date-time to string.
- * 
- * Receives the date-time and, optionally, TODO.
- */
-function dateTimeToString($dateTime, $format = \DateTime::ISO8601) {
-	return $dateTime->format($format);
-}
-
-/**
  * Returns a boolean expression from a string.
  * 
  * A boolean expression is a sanitized version of the string that contains
@@ -154,17 +145,6 @@ function getClientIpAddress() {
 	$ipAddress = inet_ntop($ipAddress);
 	
 	return $ipAddress;
-}
-
-/**
- * Returns the current date-time.
- */
-function getCurrentDateTime() {
-	// Initializes the time zone
-	$timeZone = new \DateTimeZone('UTC');
-	
-	// Initializes the date-time
-	return new \DateTime(null, $timeZone);
 }
 
 /**

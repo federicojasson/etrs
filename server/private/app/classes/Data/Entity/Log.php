@@ -105,7 +105,7 @@ class Log {
 		// according to their specific characteristics
 		
 		$serialization['id'] = bin2hex($this->id);
-		$serialization['creationDateTime'] = dateTimeToString($this->creationDateTime);
+		$serialization['creationDateTime'] = $this->creationDateTime->format();
 		$serialization['level'] = $this->level;
 		$serialization['message'] = $this->message;
 		
@@ -120,7 +120,7 @@ class Log {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = getCurrentDateTime();
+		$this->creationDateTime = \App\DateTime\Custom::createCurrent();
 	}
 	
 	/**

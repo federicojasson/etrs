@@ -18,39 +18,27 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Log;
+namespace App\DateTime;
 
 /**
- * Represents the /log/delete-old service.
+ * TODO: comment
  */
-class DeleteOld extends \App\Service\Internal {
+class Custom extends \DateTime {
 	
 	/**
-	 * Executes the service.
+	 * TODO: comment
 	 */
-	protected function execute() {
-		global $app;
-		
-		// TODO: ask for confirmation
-		
-		// Gets the current date-time
-		$currentDateTime = \App\DateTime\Custom::createCurrent();
-		
-		// Deletes old logs
-		$app->data->createQueryBuilder()
-			->delete('Entity:Log', 'l')
-			->where('l.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'MONTH\')')
-			->setParameter('currentDateTime', $currentDateTime)
-			->setParameter('maximumAge', LOG_MAXIMUM_AGE)
-			->getQuery()
-			->execute();
+	public static function createCurrent($timeZone = null) {
+		// TODO: comments
+		return new self(null, $timeZone);
 	}
 	
 	/**
-	 * Determines whether the request is valid.
+	 * TODO: comment
 	 */
-	protected function isRequestValid() {
-		return true;
+	public function format($format = self::ISO8601) {
+		// Invokes the homonym method in the parent
+		return parent::format($format);
 	}
 	
 }
