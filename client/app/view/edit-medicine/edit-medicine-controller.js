@@ -35,11 +35,6 @@
 		var _this = this;
 		
 		/**
-		 * The medicine.
-		 */
-		var medicine = null;
-		
-		/**
 		 * Indicates whether the view is ready.
 		 */
 		var ready = false;
@@ -55,7 +50,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return medicine.name;
+			return $scope.medicine.name;
 		};
 		
 		/**
@@ -64,22 +59,6 @@
 		_this.isReady = function() {
 			return ready;
 		};
-		
-		/**
-		 * Includes the edit-medicine action.
-		 */
-		function includeEditMedicineAction() {
-			// Initializes the action
-			var action = new EditMedicineAction();
-			action.input.id.value = medicine.id;
-			action.input.version.value = medicine.version;
-			action.input.name.value = medicine.name;
-			action.startCallback = onEditMedicineStart;
-			action.successCallback = onEditMedicineSuccess;
-			
-			// Includes the action
-			$scope.editMedicineAction = action;
-		}
 		
 		/**
 		 * Performs initialization tasks.
@@ -93,34 +72,45 @@
 			
 			// Gets the medicine
 			data.getMedicine(id).then(function(loadedMedicine) {
-				// Sets the medicine
-				medicine = loadedMedicine;
-				
 				// Includes the medicine
-				$scope.medicine = medicine;
+				$scope.medicine = loadedMedicine;
 				
-				// Includes the actions
-				includeEditMedicineAction();
+				// Initializes the actions
+				initializeEditMedicineAction(loadedMedicine);
 				
 				ready = true;
 			});
 		}
 		
 		/**
-		 * Invoked at the start of the edit-medicine action.
+		 * Initializes the edit-medicine action.
+		 * 
+		 * Receives the medicine.
 		 */
-		function onEditMedicineStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the edit-medicine action is successful.
-		 */
-		function onEditMedicineSuccess() {
-			// Redirects the user to the medicine route
-			router.redirect('medicine', {
-				id: medicine.id
-			});
+		function initializeEditMedicineAction(medicine) {
+			// Initializes the action
+			var action = new EditMedicineAction();
+			
+			// Sets the inputs' initial values
+			action.input.id.value = medicine.id;
+			action.input.version.value = medicine.version;
+			action.input.name.value = medicine.name;
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the medicine route
+				router.redirect('medicine', {
+					id: medicine.id
+				});
+			};
+			
+			// Includes the action
+			$scope.editMedicineAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
