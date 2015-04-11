@@ -60,61 +60,50 @@
 		};
 		
 		/**
-		 * Includes the request-sign-up action.
-		 */
-		function includeRequestSignUpAction() {
-			// Initializes the action
-			var action = new RequestSignUpAction();
-			action.notAuthenticatedCallback = onRequestSignUpNotAuthenticated;
-			action.startCallback = onRequestSignUpStart;
-			action.successCallback = onRequestSignUpSuccess;
-			
-			// Includes the action
-			$scope.requestSignUpAction = action;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the actions
-			includeRequestSignUpAction();
+			// Initializes the actions
+			initializeRequestSignUpAction();
 		}
 		
 		/**
-		 * Invoked when the user is not authenticated during the execution of
-		 * the request-sign-up action.
+		 * Initializes the request-sign-up action.
 		 */
-		function onRequestSignUpNotAuthenticated() {
-			ready = true;
+		function initializeRequestSignUpAction() {
+			// Initializes the action
+			var action = new RequestSignUpAction();
 			
-			// Opens an error dialog
-			dialog.openError(
-				'Credenciales rechazadas',
-				'No fue posible autenticar su identidad.\n' +
-				'Reingrese su contraseña.'
-			);
-		}
-		
-		/**
-		 * Invoked at the start of the request-sign-up action.
-		 */
-		function onRequestSignUpStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the request-sign-up action is successful.
-		 */
-		function onRequestSignUpSuccess() {
-			// Redirects the user to the home route
-			router.redirect('home');
+			// Registers the callbacks
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Invitación enviada',
-				'Se ha enviado una invitación a la casilla de correo electrónico indicada.'
-			);
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.notAuthenticatedCallback = function() {
+				ready = true;
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
+					'Reingrese su contraseña.'
+				);
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the home route
+				router.redirect('home');
+				
+				// Opens an information dialog
+				dialog.openInformation(
+					'Invitación enviada',
+					'Se ha enviado una invitación a la casilla de correo electrónico indicada.'
+				);
+			};
+			
+			// Includes the action
+			$scope.requestSignUpAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
