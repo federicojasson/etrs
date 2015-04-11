@@ -33,11 +33,6 @@
 		var _this = this;
 		
 		/**
-		 * The medicine.
-		 */
-		var medicine = null;
-		
-		/**
 		 * Indicates whether the view is ready.
 		 */
 		var ready = false;
@@ -53,7 +48,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return medicine.name;
+			return $scope.medicine.name;
 		};
 		
 		/**
@@ -80,11 +75,8 @@
 			
 			// Gets the medicine
 			data.getMedicine(id).then(function(loadedMedicine) {
-				// Sets the medicine
-				medicine = loadedMedicine;
-				
 				// Includes the medicine
-				$scope.medicine = medicine;
+				$scope.medicine = loadedMedicine;
 				
 				ready = true;
 			});
