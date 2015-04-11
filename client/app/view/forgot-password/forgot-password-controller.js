@@ -60,63 +60,52 @@
 		};
 		
 		/**
-		 * Includes the request-password-reset action.
-		 */
-		function includeRequestPasswordResetAction() {
-			// Initializes the action
-			var action = new RequestPasswordResetAction();
-			action.notAuthenticatedCallback = onRequestPasswordResetNotAuthenticated;
-			action.startCallback = onRequestPasswordResetStart;
-			action.successCallback = onRequestPasswordResetSuccess;
-			
-			// Includes the action
-			$scope.requestPasswordResetAction = action;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the actions
-			includeRequestPasswordResetAction();
+			// Initializes the actions
+			initializeRequestPasswordResetAction();
 		}
 		
 		/**
-		 * Invoked when the user is not authenticated during the execution of
-		 * the request-password-reset action.
+		 * Initializes the request-password-reset action.
 		 */
-		function onRequestPasswordResetNotAuthenticated() {
-			ready = true;
+		function initializeRequestPasswordResetAction() {
+			// Initializes the action
+			var action = new RequestPasswordResetAction();
 			
-			// Opens an error dialog
-			dialog.openError(
-				'Credenciales rechazadas',
-				'No fue posible autenticar su identidad.\n' +
-				'Reingrese su nombre de usuario y su dirección de correo electrónico.\n' +
-				'Asegúrese de que la dirección proporcionada sea la utilizada en el sistema.'
-			);
-		}
-		
-		/**
-		 * Invoked at the start of the request-password-reset action.
-		 */
-		function onRequestPasswordResetStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the request-password-reset action is successful.
-		 */
-		function onRequestPasswordResetSuccess() {
-			// Redirects the user to the home route
-			router.redirect('home');
+			// Registers the callbacks
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Correo electrónico enviado',
-				'Se ha enviado un correo electrónico a su casilla.\n' +
-				'Para restablecer su contraseña, siga los pasos indicados en el mismo.'
-			);
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.notAuthenticatedCallback = function() {
+				ready = true;
+
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
+					'Reingrese su nombre de usuario y su dirección de correo electrónico.\n' +
+					'Asegúrese de que la dirección proporcionada sea la utilizada en el sistema.'
+				);
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the home route
+				router.redirect('home');
+
+				// Opens an information dialog
+				dialog.openInformation(
+					'Correo electrónico enviado',
+					'Se ha enviado un correo electrónico a su casilla.\n' +
+					'Para restablecer su contraseña, siga los pasos indicados en el mismo.'
+				);
+			};
+			
+			// Includes the action
+			$scope.requestPasswordResetAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
