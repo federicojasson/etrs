@@ -41,7 +41,7 @@ class AccessValidator {
 		// Gets the signed-in user
 		$user = $app->account->getSignedInUser();
 		
-		// Determines whether the signed-in user's role is authorized
+		// Determines whether the user's role is authorized
 		return inArray($user->getRole(), $authorizedUserRoles);
 	}
 	
