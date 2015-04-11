@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Parses an input to make it a valid line.
+	 * Processes an input to make it a valid line.
 	 */
 	function lineDirective(utility) {
 		/**
@@ -47,10 +47,17 @@
 		 * attributes and the ng-model controller.
 		 */
 		function onLink(scope, element, attributes, ngModelController) {
-			// Registers parsers
-			ngModelController.$parsers.push(utility.replaceTabsWithSpaces);
-			ngModelController.$parsers.push(utility.removeControlCharacters);
-			ngModelController.$parsers.push(utility.shrink);
+			// Registers a parser
+			ngModelController.$parsers.push(function(value) {
+				// Replaces the tabs with spaces
+				value = value.replace(/\t/g, ' ');
+				
+				// Removes the control characters
+				value = value.replace(/[\u0000-\u001f]/g, '');
+				
+				// Trims and shrinks the value
+				return utility.trimAndShrink(value);
+			});
 		}
 		
 		// ---------------------------------------------------------------------

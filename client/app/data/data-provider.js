@@ -216,16 +216,16 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Gets a set of entities.
+		 * 
+		 * Receives the type, the entities' IDs and the current depth.
 		 */
 		function getEntityArray(type, ids, depth) {
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
-			// TODO: comment and order (maybe rename promises)
-			
+			// Gets the entities
 			var promises = [];
-			
 			for (var i = 0; i < ids.length; i++) {
 				promises[i] = getEntity(type, ids[i], depth);
 			}

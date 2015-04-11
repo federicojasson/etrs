@@ -22,7 +22,7 @@
 	angular.module('app.utility.nullIfEmpty').directive('nullIfEmpty', nullIfEmptyDirective);
 	
 	/**
-	 * TODO: comment
+	 * Processes an input to treat empty values as null.
 	 */
 	function nullIfEmptyDirective() {
 		/**
@@ -44,32 +44,25 @@
 		 * attributes and the ng-model controller.
 		 */
 		function onLink(scope, element, attributes, ngModelController) {
-			// TODO: comments
-			
-			ngModelController.$formatters.push(function(TODO) {
-				if (TODO === null) {
+			// Registers a formatter
+			ngModelController.$formatters.push(function(value) {
+				if (value === null) {
+					// The value is null
 					return '';
 				}
 				
-				return TODO;
+				return value;
 			});
 			
-			ngModelController.$parsers.push(function(input) {
-				if (input === '') {
+			// Registers a parser
+			ngModelController.$parsers.push(function(value) {
+				if (value === '') {
+					// The value is empty
 					return null;
 				}
 				
-				return input;
+				return value;
 			});
-			
-			/*var isEmpty = ngModelController.$isEmpty;
-			ngModelController.$isEmpty = function(value) {
-				if (value === null) {
-					return false;
-				}
-				
-				return isEmpty(value);
-			};*/
 		}
 		
 		// ---------------------------------------------------------------------

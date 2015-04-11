@@ -38,33 +38,6 @@
 		};
 		
 		/**
-		 * Removes the control characters of a string.
-		 * 
-		 * Receives the string.
-		 */
-		_this.removeControlCharacters = function(string) {
-			return string.replace(/[\u0000-\u001f]/g, '');
-		};
-		
-		/**
-		 * Replaces the tabs of a string with spaces.
-		 * 
-		 * Receives the string.
-		 */
-		_this.replaceTabsWithSpaces = function(string) {
-			return string.replace(/\t/g, ' ');
-		};
-		
-		/**
-		 * Shrinks a string.
-		 * 
-		 * Receives the string.
-		 */
-		_this.shrink = function(string) {
-			return string.replace(/ +/g, ' ');
-		};
-		
-		/**
 		 * Converts a string from spinal-case to camelCase.
 		 * 
 		 * Receives the string.
@@ -81,6 +54,19 @@
 			
 			// Removes the spaces
 			return string.replace(/ /g, '');
+		};
+		
+		/**
+		 * Trims and shrinks a string.
+		 * 
+		 * Receives the string.
+		 */
+		_this.trimAndShrink = function(string) {
+			// Trims the string
+			string = string.trim();
+			
+			// Shrinks the string
+			return string.replace(/ +/g, ' ');
 		};
 	}
 })();

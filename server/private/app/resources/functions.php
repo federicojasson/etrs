@@ -259,9 +259,9 @@ function spinalToPascalCase($string) {
  * Receives the string.
  */
 function trimAndShrink($string) {
-	// Shrinks the string
-	$string = preg_replace('/ +/', ' ', $string);
-	
 	// Trims the string
-	return trim($string, ' ');
+	$string = trim($string, ' ');
+	
+	// Shrinks the string
+	return preg_replace('/ +/', ' ', $string);
 }

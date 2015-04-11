@@ -42,7 +42,7 @@
 				logs: {
 					name: 'Ver',
 					state: 'logs',
-					description: 'Vea los registros del sistema' // TODO: dudosa descripción
+					description: 'Vea los registros del sistema'
 				},
 				
 				medicines: {
