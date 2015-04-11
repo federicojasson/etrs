@@ -22,7 +22,6 @@
 	angular.module('app.view.medicine').controller('MedicineViewController', [
 		'$scope',
 		'$stateParams',
-		'EditMedicineAction',
 		'data',
 		MedicineViewController
 	]);
@@ -30,7 +29,7 @@
 	/**
 	 * Represents the medicine view.
 	 */
-	function MedicineViewController($scope, $stateParams, EditMedicineAction, data) {
+	function MedicineViewController($scope, $stateParams, data) {
 		var _this = this;
 		
 		/**
@@ -65,22 +64,6 @@
 		};
 		
 		/**
-		 * Includes the edit-medicine action.
-		 */
-		function includeEditMedicineAction() {
-			// Initializes the action
-			var action = new EditMedicineAction();
-			action.input.id.value = medicine.id;
-			action.input.version.value = medicine.version;
-			action.input.name.value = medicine.name;
-			action.startCallback = onEditMedicineStart;
-			action.successCallback = onEditMedicineSuccess;
-			
-			// Includes the action
-			$scope.editMedicineAction = action;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -103,25 +86,8 @@
 				// Includes the medicine
 				$scope.medicine = medicine;
 				
-				// Includes the actions
-				includeEditMedicineAction();
-				
 				ready = true;
 			});
-		}
-		
-		/**
-		 * Invoked at the start of the edit-medicine action.
-		 */
-		function onEditMedicineStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the edit-medicine action is successful.
-		 */
-		function onEditMedicineSuccess() {
-			ready = true;
 		}
 		
 		// ---------------------------------------------------------------------
