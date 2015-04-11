@@ -187,7 +187,7 @@ class Medicine {
 	 * Receives the user to be set as the deleter.
 	 */
 	public function delete($user) {
-		$this->deletionDateTime = \App\DateTime\Custom::createCurrent();
+		$this->deletionDateTime = new \App\DateTime\Custom();
 		$this->deleted = true;
 		$this->deleter = $user;
 	}
@@ -249,7 +249,7 @@ class Medicine {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = \App\DateTime\Custom::createCurrent();
+		$this->creationDateTime = new \App\DateTime\Custom();
 	}
 	
 	/**
@@ -265,7 +265,7 @@ class Medicine {
 	 * Sets the last-edition date-time.
 	 */
 	public function setLastEditionDateTime() {
-		$this->lastEditionDateTime = \App\DateTime\Custom::createCurrent();
+		$this->lastEditionDateTime = new \App\DateTime\Custom();
 	}
 	
 	/**

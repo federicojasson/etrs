@@ -326,7 +326,7 @@ class User {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = \App\DateTime\Custom::createCurrent();
+		$this->creationDateTime = new \App\DateTime\Custom();
 	}
 	
 	/**
@@ -387,7 +387,7 @@ class User {
 	 * Sets the last-edition date-time.
 	 */
 	public function setLastEditionDateTime() {
-		$this->lastEditionDateTime = \App\DateTime\Custom::createCurrent();
+		$this->lastEditionDateTime = new \App\DateTime\Custom();
 	}
 	
 	/**

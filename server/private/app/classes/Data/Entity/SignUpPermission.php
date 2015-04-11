@@ -209,7 +209,7 @@ class SignUpPermission {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = \App\DateTime\Custom::createCurrent();
+		$this->creationDateTime = new \App\DateTime\Custom();
 	}
 	
 	/**

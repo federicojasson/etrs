@@ -103,7 +103,7 @@ class Session {
 	 * @PrePersist
 	 */
 	public function setCreationDateTime() {
-		$this->creationDateTime = \App\DateTime\Custom::createCurrent();
+		$this->creationDateTime = new \App\DateTime\Custom();
 	}
 	
 	/**
@@ -132,7 +132,7 @@ class Session {
 	 * @PrePersist
 	 */
 	public function setLastAccessDateTime() {
-		$this->lastAccessDateTime = \App\DateTime\Custom::createCurrent();
+		$this->lastAccessDateTime = new \App\DateTime\Custom();
 	}
 	
 }

@@ -28,14 +28,6 @@ class Custom extends \DateTime {
 	/**
 	 * TODO: comment
 	 */
-	public static function createCurrent($timeZone = null) {
-		// TODO: comments
-		return new self(null, $timeZone);
-	}
-	
-	/**
-	 * TODO: comment
-	 */
 	public function format($format = self::ISO8601) {
 		// Invokes the homonym method in the parent
 		return parent::format($format);
