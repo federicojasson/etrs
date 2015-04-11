@@ -7,10 +7,7 @@ Quick tasks
 - Check TODO and DEFINEHERE
 - User\Search???
 - Create script for routine maintenance tasks.
-
 - Should add a service to delete text logs (development and maintenance)?
-- Should function router.reload set the href?
-  See: http://stackoverflow.com/questions/27618878/angular-ui-router-reloading-to-different-state-refresh-data
 
 
 General code checks
