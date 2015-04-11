@@ -32,6 +32,7 @@ General code checks
 Release tasks
 ----------------------------
 
+- Check PHP and MySQL versions in which the system was tested.
 - Configure the cron-job table.
 - Configure the DBMS cache.
 - Change the password of database users.
