@@ -59,46 +59,39 @@
 		};
 		
 		/**
-		 * Includes the sign-in action.
-		 */
-		function includeSignInAction() {
-			// Initializes the action
-			var action = new SignInAction();
-			action.notAuthenticatedCallback = onSignInNotAuthenticated;
-			action.startCallback = onSignInStart;
-			
-			// Includes the action
-			$scope.signInAction = action;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the actions
-			includeSignInAction();
+			// Initializes the actions
+			initializeSignInAction();
 		}
 		
 		/**
-		 * Invoked when the user is not authenticated during the execution of
-		 * the sign-in action.
+		 * Initializes the sign-in action.
 		 */
-		function onSignInNotAuthenticated() {
-			ready = true;
+		function initializeSignInAction() {
+			// Initializes the action
+			var action = new SignInAction();
 			
-			// Opens an error dialog
-			dialog.openError(
-				'Credenciales rechazadas',
-				'No fue posible autenticar su identidad.\n' +
-				'Reingrese su nombre de usuario y su contraseña.'
-			);
-		}
-		
-		/**
-		 * Invoked at the start of the sign-in action.
-		 */
-		function onSignInStart() {
-			ready = false;
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.notAuthenticatedCallback = function() {
+				ready = true;
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
+					'Reingrese su nombre de usuario y su contraseña.'
+				);
+			};
+			
+			// Includes the action
+			$scope.signInAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
