@@ -86,6 +86,10 @@
 				dirty = false;
 			};
 			
+			$scope.TODOtest3 = function(field) {
+				console.log('entre');
+			};
+			
 			// Includes the logs
 			$scope.logs = [];
 			
