@@ -87,7 +87,12 @@
 			};
 			
 			$scope.TODOtest3 = function(field) {
-				console.log('entre');
+				// TODO: just a test
+				$scope.searchLogsAction.input.sortingCriteria.value[0] = {
+					field: field,
+					direction: 'asc'
+				};
+				$scope.searchLogsAction.execute();
 			};
 			
 			// Includes the logs
