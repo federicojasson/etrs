@@ -7,22 +7,22 @@
 <div class="row">
 	<div class="col-sm-5 col-sm-offset-7">
 		<div class="form-group has-feedback">
-			<form ng-submit="searchLogsAction.execute()" novalidate>
-				<input
-					ng-model="searchLogsAction.input.expression.value"
-					popover="{{ searchLogsAction.input.expression.message }}"
-					popover-append-to-body="true"
-					popover-placement="left"
-					popover-trigger="focus"
-					line
-					null-if-empty
-					type="text"
-					placeholder="Buscar"
-					class="form-control rounded-corners"
-				>
+			<input
+				ng-change="TODOtest()"
+				ng-keyup="$event.keyCode == 13 && TODOtest2()"
+				ng-model="searchLogsAction.input.expression.value"
+				popover="{{ searchLogsAction.input.expression.message }}"
+				popover-append-to-body="true"
+				popover-placement="left"
+				popover-trigger="focus"
+				line
+				null-if-empty
+				type="text"
+				placeholder="Buscar"
+				class="form-control rounded-corners"
+			>
 
-				<span class="form-control-feedback glyphicon glyphicon-search"></span>
-			</form>
+			<span class="form-control-feedback glyphicon glyphicon-search"></span>
 		</div>
 	</div>
 </div>
