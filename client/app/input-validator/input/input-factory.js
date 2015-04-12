@@ -55,9 +55,9 @@
 		 * Receives, optionally, a validator.
 		 */
 		function Input(validator) {
-			this.message = '';
-			this.valid = true;
 			this.value = '';
+			this.valid = true;
+			this.message = '';
 			
 			// Initializes the validator if is undefined
 			validator = (angular.isDefined(validator))? validator : function() {

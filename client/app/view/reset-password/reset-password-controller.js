@@ -107,7 +107,7 @@
 			// Initializes the action
 			var action = new ResetPasswordAction();
 			
-			// Sets the inputs' initial values
+			// Sets inputs' initial values
 			action.input.credentials.id.value = id;
 			action.input.credentials.password.value = password;
 			
@@ -135,7 +135,7 @@
 				// Opens an information dialog
 				dialog.openInformation(
 					'Contraseña restablecida',
-					'Su contraseña ha sido modificada.'
+					'Su contraseña ha sido restablecida.'
 				);
 			};
 			

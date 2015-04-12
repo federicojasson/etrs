@@ -81,6 +81,10 @@
 			};
 			
 			action.notAuthenticatedCallback = function() {
+				// Resets inputs' values
+				action.input.credentials.id.value = '';
+				action.input.credentials.emailAddress.value = '';
+				
 				// Opens an error dialog
 				dialog.openError(
 					'Credenciales rechazadas',
@@ -99,7 +103,7 @@
 				// Opens an information dialog
 				dialog.openInformation(
 					'Correo electrónico enviado',
-					'Se ha enviado un correo electrónico a su casilla.\n' +
+					'Se ha enviado un correo electrónico a ' + action.input.credentials.emailAddress.value + '.\n' +
 					'Para restablecer su contraseña, siga los pasos indicados en el mismo.'
 				);
 			};

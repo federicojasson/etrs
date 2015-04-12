@@ -81,6 +81,10 @@
 			};
 			
 			action.notAuthenticatedCallback = function() {
+				// Resets inputs' values
+				action.input.credentials.id.value = '';
+				action.input.credentials.password.value = '';
+				
 				// Opens an error dialog
 				dialog.openError(
 					'Credenciales rechazadas',

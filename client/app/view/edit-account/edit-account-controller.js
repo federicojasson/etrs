@@ -19,18 +19,27 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.editAccount').controller('EditAccountViewController', EditAccountViewController);
+	angular.module('app.view.editAccount').controller('EditAccountViewController', [
+		'$scope',
+		'account',
+		'EditAccountAction',
+		'data',
+		'dialog',
+		'router',
+		'fullNameFilter',
+		EditAccountViewController
+	]);
 	
 	/**
 	 * Represents the edit-account view.
 	 */
-	function EditAccountViewController() {
+	function EditAccountViewController($scope, account, EditAccountAction, data, dialog, router, fullNameFilter) {
 		var _this = this;
 		
 		/**
 		 * Indicates whether the view is ready.
 		 */
-		var ready = true;
+		var ready = false;
 		
 		/**
 		 * Returns the template's URL.
@@ -43,7 +52,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return ''; // TODO
+			return fullNameFilter($scope.user);
 		};
 		
 		/**
@@ -57,7 +66,70 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO
+
+			// Gets the signed-in user's ID
+			var id = account.getSignedInUser().id;
+			
+			// Resets the data service
+			data.reset();
+			
+			// Gets the user
+			data.getUser(id).then(function(user) {
+				// Includes the user
+				$scope.user = user;
+				
+				// Initializes the actions
+				initializeEditAccountAction(user);
+				
+				ready = true;
+			});
+		}
+		
+		/**
+		 * Initializes the edit-account action.
+		 * 
+		 * Receives the user.
+		 */
+		function initializeEditAccountAction(user) {
+			// Initializes the action
+			var action = new EditAccountAction();
+			
+			// Sets inputs' initial values
+			action.input.emailAddress.value = user.emailAddress;
+			action.input.firstName.value = user.firstName;
+			action.input.lastName.value = user.lastName;
+			action.input.gender.value = user.gender;
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.notAuthenticatedCallback = function() {
+				// Resets inputs' values
+				action.input.credentials.password.value = '';
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
+					'Reingrese su contraseña.'
+				);
+				
+				ready = true;
+			};
+			
+			action.successCallback = function() {
+				// Refreshes the account
+				account.refresh();
+				
+				// Redirects the user to the account route
+				router.redirect('account');
+			};
+			
+			// Includes the action
+			$scope.editAccountAction = action;
 		}
 		
 		// ---------------------------------------------------------------------

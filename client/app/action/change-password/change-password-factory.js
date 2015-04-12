@@ -19,41 +19,41 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.resetPassword').factory('ResetPasswordAction', [
+	angular.module('app.action.changePassword').factory('ChangePasswordAction', [
 		'inputValidator',
 		'Input',
 		'server',
-		ResetPasswordActionFactory
+		ChangePasswordActionFactory
 	]);
 	
 	/**
-	 * Defines the ResetPasswordAction class.
+	 * Defines the ChangePasswordAction class.
 	 */
-	function ResetPasswordActionFactory(inputValidator, Input, server) {
+	function ChangePasswordActionFactory(inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
-		ResetPasswordAction.prototype.input;
+		ChangePasswordAction.prototype.input;
 		
 		/**
 		 * The not-authenticated callback.
 		 */
-		ResetPasswordAction.prototype.notAuthenticatedCallback;
+		ChangePasswordAction.prototype.notAuthenticatedCallback;
 		
 		/**
 		 * The start callback.
 		 */
-		ResetPasswordAction.prototype.startCallback;
+		ChangePasswordAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
 		 */
-		ResetPasswordAction.prototype.successCallback;
+		ChangePasswordAction.prototype.successCallback;
 		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ResetPasswordAction() {
+		function ChangePasswordAction() {
 			this.startCallback = new Function();
 			this.notAuthenticatedCallback = new Function();
 			this.successCallback = new Function();
@@ -61,8 +61,9 @@
 			// Initializes the input
 			this.input = {
 				credentials: {
-					id: new Input(),
-					password: new Input()
+					password: new Input(function() {
+						return inputValidator.isValidString(this, 1);
+					})
 				},
 				
 				password: new Input(function() {
@@ -78,7 +79,7 @@
 		/**
 		 * Executes the action.
 		 */
-		ResetPasswordAction.prototype.execute = function() {
+		ChangePasswordAction.prototype.execute = function() {
 			if (! inputValidator.isInputValid(this.input)) {
 				// The input is invalid
 				return;
@@ -86,25 +87,24 @@
 			
 			// Invokes the start callback
 			this.startCallback();
-			
-			// Resets the user's password
-			server.account.resetPassword({
+
+			// Changes the user's password
+			server.account.changePassword({
 				credentials: {
-					id: this.input.credentials.id.value,
 					password: this.input.credentials.password.value
 				},
-				
+
 				password: this.input.password.value
 			}).then(function(output) {
 				if (! output.authenticated) {
-					// The password-reset permission has not been authenticated
-					
+					// The user has not been authenticated
+
 					// Invokes the not-authenticated callback
 					this.notAuthenticatedCallback();
-					
+
 					return;
 				}
-				
+
 				// Invokes the success callback
 				this.successCallback();
 			}.bind(this));
@@ -112,6 +112,6 @@
 		
 		// ---------------------------------------------------------------------
 		
-		return ResetPasswordAction;
+		return ChangePasswordAction;
 	}
 })();

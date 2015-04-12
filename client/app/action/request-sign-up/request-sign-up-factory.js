@@ -55,8 +55,8 @@
 		 * Initializes an instance of the class.
 		 */
 		function RequestSignUpAction() {
-			this.notAuthenticatedCallback = new Function();
 			this.startCallback = new Function();
+			this.notAuthenticatedCallback = new Function();
 			this.successCallback = new Function();
 			
 			// Initializes the input

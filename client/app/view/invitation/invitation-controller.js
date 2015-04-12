@@ -81,6 +81,9 @@
 			};
 			
 			action.notAuthenticatedCallback = function() {
+				// Resets inputs' values
+				action.input.credentials.password.value = '';
+				
 				// Opens an error dialog
 				dialog.openError(
 					'Credenciales rechazadas',
@@ -98,7 +101,7 @@
 				// Opens an information dialog
 				dialog.openInformation(
 					'Invitación enviada',
-					'Se ha enviado una invitación a la casilla de correo electrónico indicada.'
+					'Se ha enviado una invitación a ' + action.input.recipient.emailAddress.value + '.'
 				);
 			};
 			

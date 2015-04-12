@@ -19,12 +19,18 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.changePassword').controller('ChangePasswordViewController', ChangePasswordViewController);
+	angular.module('app.view.changePassword').controller('ChangePasswordViewController', [
+		'$scope',
+		'ChangePasswordAction',
+		'dialog',
+		'router',
+		ChangePasswordViewController
+	]);
 	
 	/**
 	 * Represents the change-password view.
 	 */
-	function ChangePasswordViewController() {
+	function ChangePasswordViewController($scope, ChangePasswordAction, dialog, router) {
 		var _this = this;
 		
 		/**
@@ -57,7 +63,50 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO
+			// Initializes the actions
+			initializeChangePasswordAction();
+		}
+		
+		/**
+		 * Initializes the change-password action.
+		 */
+		function initializeChangePasswordAction() {
+			// Initializes the action
+			var action = new ChangePasswordAction();
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.notAuthenticatedCallback = function() {
+				// Resets inputs' values
+				action.input.credentials.password.value = '';
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
+					'Reingrese su contraseña.'
+				);
+				
+				ready = true;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the account route
+				router.redirect('account');
+				
+				// Opens an information dialog
+				dialog.openInformation(
+					'Contraseña cambiada',
+					'Su contraseña ha sido cambiada.'
+				);
+			};
+			
+			// Includes the action
+			$scope.changePasswordAction = action;
 		}
 		
 		// ---------------------------------------------------------------------

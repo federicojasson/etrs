@@ -115,7 +115,7 @@
 			// Initializes the action
 			var action = new SearchLogsAction();
 			
-			// Sets the inputs' initial values
+			// Sets inputs' initial values
 			action.input.expression.value = null;
 			action.input.sortingCriteria.value = [];
 			action.input.page.value = 1;

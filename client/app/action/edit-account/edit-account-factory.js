@@ -19,41 +19,41 @@
 'use strict';
 
 (function() {
-	angular.module('app.action.resetPassword').factory('ResetPasswordAction', [
+	angular.module('app.action.editAccount').factory('EditAccountAction', [
 		'inputValidator',
 		'Input',
 		'server',
-		ResetPasswordActionFactory
+		EditAccountActionFactory
 	]);
 	
 	/**
-	 * Defines the ResetPasswordAction class.
+	 * Defines the EditAccountAction class.
 	 */
-	function ResetPasswordActionFactory(inputValidator, Input, server) {
+	function EditAccountActionFactory(inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
-		ResetPasswordAction.prototype.input;
+		EditAccountAction.prototype.input;
 		
 		/**
 		 * The not-authenticated callback.
 		 */
-		ResetPasswordAction.prototype.notAuthenticatedCallback;
+		EditAccountAction.prototype.notAuthenticatedCallback;
 		
 		/**
 		 * The start callback.
 		 */
-		ResetPasswordAction.prototype.startCallback;
+		EditAccountAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
 		 */
-		ResetPasswordAction.prototype.successCallback;
+		EditAccountAction.prototype.successCallback;
 		
 		/**
 		 * Initializes an instance of the class.
 		 */
-		function ResetPasswordAction() {
+		function EditAccountAction() {
 			this.startCallback = new Function();
 			this.notAuthenticatedCallback = new Function();
 			this.successCallback = new Function();
@@ -61,24 +61,33 @@
 			// Initializes the input
 			this.input = {
 				credentials: {
-					id: new Input(),
-					password: new Input()
+					password: new Input(function() {
+						return inputValidator.isValidString(this, 1);
+					})
 				},
 				
-				password: new Input(function() {
-					return inputValidator.isValidPassword(this);
+				emailAddress: new Input(function() {
+					return inputValidator.isEmailAddress(this);
 				}),
 				
-				passwordConfirmation: new Input(function() {
-					return inputValidator.isValidPasswordConfirmation(this.input.passwordConfirmation, this.input.password.value);
-				}.bind(this))
+				firstName: new Input(function() {
+					return inputValidator.isValidString(this, 1, 48);
+				}),
+				
+				lastName: new Input(function() {
+					return inputValidator.isValidString(this, 1, 48);
+				}),
+				
+				gender: new Input(function() {
+					return inputValidator.isGender(this);
+				})
 			};
 		}
 		
 		/**
 		 * Executes the action.
 		 */
-		ResetPasswordAction.prototype.execute = function() {
+		EditAccountAction.prototype.execute = function() {
 			if (! inputValidator.isInputValid(this.input)) {
 				// The input is invalid
 				return;
@@ -87,24 +96,26 @@
 			// Invokes the start callback
 			this.startCallback();
 			
-			// Resets the user's password
-			server.account.resetPassword({
+			// Edits the account
+			server.account.edit({
 				credentials: {
-					id: this.input.credentials.id.value,
 					password: this.input.credentials.password.value
 				},
 				
-				password: this.input.password.value
+				emailAddress: this.input.emailAddress.value,
+				firstName: this.input.firstName.value,
+				lastName: this.input.lastName.value,
+				gender: this.input.gender.value
 			}).then(function(output) {
 				if (! output.authenticated) {
-					// The password-reset permission has not been authenticated
-					
+					// The user has not been authenticated
+
 					// Invokes the not-authenticated callback
 					this.notAuthenticatedCallback();
-					
+
 					return;
 				}
-				
+
 				// Invokes the success callback
 				this.successCallback();
 			}.bind(this));
@@ -112,6 +123,6 @@
 		
 		// ---------------------------------------------------------------------
 		
-		return ResetPasswordAction;
+		return EditAccountAction;
 	}
 })();
