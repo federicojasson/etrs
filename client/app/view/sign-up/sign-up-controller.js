@@ -145,8 +145,8 @@
 				
 				// Opens an information dialog
 				dialog.openInformation(
-					'Cuenta de usuario creada',
-					'Su cuenta de usuario ha sido creada.\n' +
+					'Cuenta creada',
+					'Su cuenta ha sido creada.\n' +
 					'No revele nunca su contraseña.\n' +
 					'\n' +
 					'La seguridad de la información es responsabilidad de todos.'
