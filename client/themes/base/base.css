@@ -292,7 +292,8 @@ select.form-control {
 .menu-item.active a {}
 
 .navigation-bar-header {
-	margin-bottom: 8px;
+	margin-bottom: 5px;
+	margin-top: 10px;
 	padding: 8px;
 }
 
