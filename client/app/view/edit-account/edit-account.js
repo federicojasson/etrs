@@ -19,20 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.changePassword',
-		'app.view.editAccount',
-		'app.view.editMedicine',
-		'app.view.forgotPassword',
-		'app.view.home',
-		'app.view.invitation',
-		'app.view.logs',
-		'app.view.medicine',
-		'app.view.medicines',
-		'app.view.newMedicine',
-		'app.view.resetPassword',
-		'app.view.signIn',
-		'app.view.signUp'
-	]);
+	angular.module('app.view.editAccount', []);
 })();

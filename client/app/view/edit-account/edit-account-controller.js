@@ -19,20 +19,50 @@
 'use strict';
 
 (function() {
-	angular.module('app.view', [
-		'app.view.account',
-		'app.view.changePassword',
-		'app.view.editAccount',
-		'app.view.editMedicine',
-		'app.view.forgotPassword',
-		'app.view.home',
-		'app.view.invitation',
-		'app.view.logs',
-		'app.view.medicine',
-		'app.view.medicines',
-		'app.view.newMedicine',
-		'app.view.resetPassword',
-		'app.view.signIn',
-		'app.view.signUp'
-	]);
+	angular.module('app.view.editAccount').controller('EditAccountViewController', EditAccountViewController);
+	
+	/**
+	 * Represents the edit-account view.
+	 */
+	function EditAccountViewController() {
+		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
+		
+		/**
+		 * Returns the template's URL.
+		 */
+		_this.getTemplateUrl = function() {
+			return 'app/view/edit-account/edit-account.html';
+		};
+		
+		/**
+		 * Returns the title to be set when the view is ready.
+		 */
+		_this.getTitle = function() {
+			return ''; // TODO
+		};
+		
+		/**
+		 * Determines whether the view is ready.
+		 */
+		_this.isReady = function() {
+			return ready;
+		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// TODO
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
+	}
 })();

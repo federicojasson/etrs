@@ -64,6 +64,19 @@
 				},
 				
 				{
+					name: 'editAccount',
+					url: '/account/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditAccountViewController',
+							dr: 'EditAccountViewController',
+							op: 'EditAccountViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editMedicine',
 					url: '/medicine/{id:[0-9A-Fa-f]{32}}/edit',
 					data: {
