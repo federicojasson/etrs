@@ -8,6 +8,7 @@ Quick tasks
 - User\Search???
 - Create script for routine maintenance tasks.
 - Should add a service to delete text logs (development and maintenance)?
+- Canceling AJAX requests on route change: http://www.bennadel.com/blog/2616-aborting-ajax-requests-using-http-and-angularjs.htm
 
 
 General code checks
