@@ -59,63 +59,62 @@
 		};
 		
 		/**
-		 * Includes the search-logs action.
-		 */
-		function includeSearchLogsAction() {
-			// Initializes the action
-			var action = new SearchLogsAction();
-			action.input.expression.value = null;
-			action.input.sortingCriteria.value = [];
-			action.input.page.value = 1; // TODO: remove from here
-			action.input.resultsPerPage.value = 20;
-			action.startCallback = onSearchLogsStart;
-			action.successCallback = onSearchLogsSuccess;
-			
-			// Includes the action
-			$scope.searchLogsAction = action;
-			
-			// Executes the action
-			action.execute();
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO
+			// Includes the logs
 			$scope.logs = [];
 			
-			// Includes the actions
-			includeSearchLogsAction();
+			// Includes the total number of results
+			$scope.total = 0;
+			
+			// Includes auxiliary variables
+			$scope.searching = false;
+			
+			// Initializes the actions
+			initializeSearchLogsAction();
 		}
 		
 		/**
-		 * Invoked at the start of the search-logs action.
+		 * Initializes the search-logs action.
 		 */
-		function onSearchLogsStart() {
-			$scope.searching = true;
-		}
-		
-		/**
-		 * Invoked when the search-logs action is successful.
-		 * 
-		 * Receives the results and the total number of results.
-		 */
-		function onSearchLogsSuccess(results, total) {
-			// TODO: comment
-			$scope.total = total;
+		function initializeSearchLogsAction() {
+			// Initializes the action
+			var action = new SearchLogsAction();
 			
-			// Resets the data service
-			data.reset();
+			// Sets the inputs' initial values
+			action.input.expression.value = null;
+			action.input.sortingCriteria.value = [];
+			action.input.page.value = 1;
+			action.input.resultsPerPage.value = 20;
 			
-			// Gets the logs
-			data.getLogArray(results).then(function(loadedLogs) {
-				// Includes the logs
-				$scope.logs = loadedLogs;
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				$scope.searching = true;
+			};
+			
+			action.successCallback = function(results, total) {
+				// Refreshes the total number of results
+				$scope.total = total;
 				
-				// TODO: comment
-				$scope.searching = false;
-			});
+				// Resets the data service
+				data.reset();
+				
+				// Gets the logs
+				data.getLogArray(results).then(function(logs) {
+					// Refreshes the logs
+					$scope.logs = logs;
+					
+					$scope.searching = false;
+				});
+			};
+			
+			// Executes the action
+			action.execute();
+			
+			// Includes the action
+			$scope.searchLogsAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
