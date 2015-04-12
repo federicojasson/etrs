@@ -51,6 +51,19 @@
 				},
 				
 				{
+					name: 'changePassword',
+					url: '/account/change-password',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ChangePasswordViewController',
+							dr: 'ChangePasswordViewController',
+							op: 'ChangePasswordViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editMedicine',
 					url: '/medicine/{id:[0-9A-Fa-f]{32}}/edit',
 					data: {
