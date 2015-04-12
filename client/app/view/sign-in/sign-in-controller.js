@@ -21,6 +21,7 @@
 (function() {
 	angular.module('app.view.signIn').controller('SignInViewController', [
 		'$scope',
+		'account',
 		'SignInAction',
 		'dialog',
 		SignInViewController
@@ -29,7 +30,7 @@
 	/**
 	 * Represents the sign-in view.
 	 */
-	function SignInViewController($scope, SignInAction, dialog) {
+	function SignInViewController($scope, account, SignInAction, dialog) {
 		var _this = this;
 		
 		/**
@@ -80,14 +81,19 @@
 			};
 			
 			action.notAuthenticatedCallback = function() {
-				ready = true;
-				
 				// Opens an error dialog
 				dialog.openError(
 					'Credenciales rechazadas',
 					'No fue posible autenticar su identidad.\n' +
 					'Reingrese su nombre de usuario y su contraseña.'
 				);
+				
+				ready = true;
+			};
+			
+			action.successCallback = function() {
+				// Refreshes the account
+				account.refresh();
 			};
 			
 			// Includes the action

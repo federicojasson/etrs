@@ -20,7 +20,6 @@
 
 (function() {
 	angular.module('app.action.signIn').factory('SignInAction', [
-		'account',
 		'inputValidator',
 		'Input',
 		'server',
@@ -30,7 +29,7 @@
 	/**
 	 * Defines the SignInAction class.
 	 */
-	function SignInActionFactory(account, inputValidator, Input, server) {
+	function SignInActionFactory(inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -100,9 +99,6 @@
 					
 					return;
 				}
-				
-				// Refreshes the account
-				account.refresh();
 				
 				// Invokes the success callback
 				this.successCallback();

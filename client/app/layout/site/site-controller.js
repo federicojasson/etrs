@@ -89,6 +89,9 @@
 			};
 			
 			action.successCallback = function() {
+				// Refreshes the account
+				account.refresh();
+				
 				ready = true;
 			};
 			

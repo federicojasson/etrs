@@ -107,7 +107,7 @@
 			// Initializes the action
 			var action = new SignUpAction();
 			
-			// Sets inputs' initial values
+			// Sets the inputs' initial values
 			action.input.credentials.id.value = id;
 			action.input.credentials.password.value = password;
 			
@@ -129,14 +129,14 @@
 			};
 			
 			action.notAvailableCallback = function() {
-				ready = true;
-				
 				// Opens an error dialog
 				dialog.openError(
 					'Nombre de usuario no disponible',
 					'El nombre de usuario elegido ya se encuentra en uso.\n' +
 					'Ingrese otro.'
 				);
+				
+				ready = true;
 			};
 			
 			action.successCallback = function() {

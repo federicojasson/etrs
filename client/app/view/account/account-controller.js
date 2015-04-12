@@ -74,9 +74,9 @@
 			});
 			
 			// Gets the user
-			data.getUser(id).then(function(loadedUser) {
+			data.getUser(id).then(function(user) {
 				// Includes the user
-				$scope.user = loadedUser;
+				$scope.user = user;
 				
 				ready = true;
 			});

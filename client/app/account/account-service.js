@@ -86,9 +86,9 @@
 				data.reset();
 				
 				// Gets the user
-				data.getUser(output.id).then(function(loadedUser) {
+				data.getUser(output.id).then(function(user) {
 					// Sets the signed-in user
-					signedInUser = loadedUser;
+					signedInUser = user;
 					
 					beingRefreshed = false;
 				});

@@ -81,8 +81,6 @@
 			};
 			
 			action.notAuthenticatedCallback = function() {
-				ready = true;
-
 				// Opens an error dialog
 				dialog.openError(
 					'Credenciales rechazadas',
@@ -90,6 +88,8 @@
 					'Reingrese su nombre de usuario y su dirección de correo electrónico.\n' +
 					'Asegúrese de que la dirección proporcionada sea la utilizada en el sistema.'
 				);
+				
+				ready = true;
 			};
 			
 			action.successCallback = function() {

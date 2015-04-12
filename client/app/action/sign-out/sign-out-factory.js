@@ -20,7 +20,6 @@
 
 (function() {
 	angular.module('app.action.signOut').factory('SignOutAction', [
-		'account',
 		'server',
 		SignOutActionFactory
 	]);
@@ -28,7 +27,7 @@
 	/**
 	 * Defines the SignOutAction class.
 	 */
-	function SignOutActionFactory(account, server) {
+	function SignOutActionFactory(server) {
 		/**
 		 * The start callback.
 		 */
@@ -56,9 +55,6 @@
 			
 			// Signs out the user
 			server.account.signOut().then(function() {
-				// Refreshes the account
-				account.refresh();
-				
 				// Invokes the success callback
 				this.successCallback();
 			}.bind(this));

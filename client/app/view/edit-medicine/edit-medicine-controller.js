@@ -71,12 +71,12 @@
 			data.reset();
 			
 			// Gets the medicine
-			data.getMedicine(id).then(function(loadedMedicine) {
+			data.getMedicine(id).then(function(medicine) {
 				// Includes the medicine
-				$scope.medicine = loadedMedicine;
+				$scope.medicine = medicine;
 				
 				// Initializes the actions
-				initializeEditMedicineAction(loadedMedicine);
+				initializeEditMedicineAction(medicine);
 				
 				ready = true;
 			});
@@ -91,7 +91,7 @@
 			// Initializes the action
 			var action = new EditMedicineAction();
 			
-			// Sets inputs' initial values
+			// Sets the inputs' initial values
 			action.input.id.value = medicine.id;
 			action.input.version.value = medicine.version;
 			action.input.name.value = medicine.name;

@@ -74,9 +74,9 @@
 			});
 			
 			// Gets the medicine
-			data.getMedicine(id).then(function(loadedMedicine) {
+			data.getMedicine(id).then(function(medicine) {
 				// Includes the medicine
-				$scope.medicine = loadedMedicine;
+				$scope.medicine = medicine;
 				
 				ready = true;
 			});

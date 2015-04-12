@@ -107,7 +107,7 @@
 			// Initializes the action
 			var action = new ResetPasswordAction();
 			
-			// Sets inputs' initial values
+			// Sets the inputs' initial values
 			action.input.credentials.id.value = id;
 			action.input.credentials.password.value = password;
 			
