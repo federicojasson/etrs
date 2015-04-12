@@ -62,25 +62,6 @@
 		};
 		
 		/**
-		 * Includes the sign-up action.
-		 * 
-		 * Receives the sign-up permission's ID and password.
-		 */
-		function includeSignUpAction(id, password) {
-			// Initializes the action
-			var action = new SignUpAction();
-			action.input.credentials.id.value = id;
-			action.input.credentials.password.value = password;
-			action.notAuthenticatedCallback = onSignUpNotAuthenticated;
-			action.notAvailableCallback = onSignUpNotAvailable;
-			action.startCallback = onSignUpStart;
-			action.successCallback = onSignUpSuccess;
-			
-			// Includes the action
-			$scope.signUpAction = action;
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -98,71 +79,82 @@
 				if (! output.authenticated) {
 					// The sign-up permission has not been authenticated
 					
-					// Invokes the not-authenticated callback
-					onSignUpNotAuthenticated();
+					// Redirects the user to the home route
+					router.redirect('home');
+					
+					// Opens an error dialog
+					dialog.openError(
+						'Credenciales rechazadas',
+						'El permiso para registrarse ha sido rechazado.'
+					);
 					
 					return;
 				}
 				
-				// Includes the actions
-				includeSignUpAction(id, password);
+				// Initializes the actions
+				initializeSignUpAction(id, password);
 				
 				ready = true;
 			});
 		}
 		
 		/**
-		 * Invoked when the sign-up permission is not authenticated during the
-		 * execution of the sign-up action.
+		 * Initializes the sign-up action.
+		 * 
+		 * Receives the sign-up permission's ID and password.
 		 */
-		function onSignUpNotAuthenticated() {
-			// Redirects the user to the home route
-			router.redirect('home');
+		function initializeSignUpAction(id, password) {
+			// Initializes the action
+			var action = new SignUpAction();
 			
-			// Opens an error dialog
-			dialog.openError(
-				'Credenciales rechazadas',
-				'El permiso para registrarse ha expirado.'
-			);
-		}
-		
-		/**
-		 * Invoked when the user ID provided to the sign-up action is not
-		 * available.
-		 */
-		function onSignUpNotAvailable() {
-			ready = true;
+			// Sets inputs' initial values
+			action.input.credentials.id.value = id;
+			action.input.credentials.password.value = password;
 			
-			// Opens an error dialog
-			dialog.openError(
-				'Nombre de usuario no disponible',
-				'El nombre de usuario elegido ya se encuentra en uso.\n' +
-				'Ingrese otro.'
-			);
-		}
-		
-		/**
-		 * Invoked at the start of the sign-up action.
-		 */
-		function onSignUpStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the sign-up action is successful.
-		 */
-		function onSignUpSuccess() {
-			// Redirects the user to the home route
-			router.redirect('home');
+			// Registers the callbacks
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Cuenta de usuario creada',
-				'Su cuenta de usuario ha sido creada.\n' +
-				'No revele nunca su contraseña.\n' +
-				'\n' +
-				'La seguridad de la información es responsabilidad de todos.'
-			);
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.notAuthenticatedCallback = function() {
+				// Redirects the user to the home route
+				router.redirect('home');
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'El permiso para registrarse ha expirado.'
+				);
+			};
+			
+			action.notAvailableCallback = function() {
+				ready = true;
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Nombre de usuario no disponible',
+					'El nombre de usuario elegido ya se encuentra en uso.\n' +
+					'Ingrese otro.'
+				);
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the home route
+				router.redirect('home');
+				
+				// Opens an information dialog
+				dialog.openInformation(
+					'Cuenta de usuario creada',
+					'Su cuenta de usuario ha sido creada.\n' +
+					'No revele nunca su contraseña.\n' +
+					'\n' +
+					'La seguridad de la información es responsabilidad de todos.'
+				);
+			};
+			
+			// Includes the action
+			$scope.signUpAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
