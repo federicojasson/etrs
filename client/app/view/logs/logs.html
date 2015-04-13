@@ -6,7 +6,12 @@
 
 <div class="row">
 	<div class="col-sm-5 col-sm-offset-7">
-		<div class="form-group has-feedback">
+		<div
+			ng-class="{
+				'has-error': ! searchLogsAction.input.expression.valid
+			}"
+			class="form-group has-feedback"
+		>
 			<input
 				ng-change="searchHandler.scheduleSearch(750)"
 				ng-keyup="$event.keyCode == 13 && searchHandler.search()"
@@ -21,42 +26,13 @@
 				placeholder="Buscar"
 				class="form-control rounded-corners"
 			>
-
+			
 			<span class="form-control-feedback glyphicon glyphicon-search"></span>
 		</div>
 	</div>
 </div>
 
-<div ng-if="logs.length === 0">
-	<div ng-if="searching">
-		<div class="searching-text text-center">
-			Buscando…
-		</div>
-	</div>
-	
-	<div ng-if="! searching">
-		<div class="no-results-text text-center">
-			La búsqueda no obtuvo ningún resultado
-		</div>
-	</div>
-</div>
-
-<div ng-if="logs.length > 0">
-	<div class="text-center">
-		<pagination
-			ng-change="searchLogsAction.execute()"
-			ng-model="searchLogsAction.input.page.value"
-			items-per-page="searchLogsAction.input.resultsPerPage.value"
-			total-items="total"
-			max-size="10"
-			boundary-links="true"
-			previous-text="‹"
-			next-text="›"
-			first-text="«"
-			last-text="»"
-		></pagination>
-	</div>
-	
+<div ng-if="searchLogsAction.input.expression.valid">
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -68,12 +44,12 @@
 						}"
 						class="glyphicon"
 					></span>
-
+					
 					<span class="icon-text">
 						Fecha y hora
 					</span>
 				</th>
-
+				
 				<th ng-click="searchHandler.toggleSortingDirection('level')" class="col-sm-2">
 					<span
 						ng-class="{
@@ -82,12 +58,12 @@
 						}"
 						class="glyphicon"
 					></span>
-
+					
 					<span class="icon-text">
 						Nivel
 					</span>
 				</th>
-
+				
 				<th ng-click="searchHandler.toggleSortingDirection('message')" class="col-sm-8">
 					<span
 						ng-class="{
@@ -96,24 +72,24 @@
 						}"
 						class="glyphicon"
 					></span>
-
+					
 					<span class="icon-text">
 						Mensaje
 					</span>
 				</th>
 			</tr>
 		</thead>
-
-		<tbody ng-if="! searching">
+		
+		<tbody>
 			<tr ng-repeat="log in logs">
 				<td>
 					{{ log.creationDateTime | date: 'dd/MM/yyyy HH:mm:ss' }}
 				</td>
-
+				
 				<td>
 					{{ log | levelName }}
 				</td>
-
+				
 				<td>
 					{{ log.message }}
 				</td>
@@ -127,18 +103,28 @@
 		</div>
 	</div>
 	
-	<div class="text-center">
-		<pagination
-			ng-change="searchLogsAction.execute()"
-			ng-model="searchLogsAction.input.page.value"
-			items-per-page="searchLogsAction.input.resultsPerPage.value"
-			total-items="total"
-			max-size="10"
-			boundary-links="true"
-			previous-text="‹"
-			next-text="›"
-			first-text="«"
-			last-text="»"
-		></pagination>
+	<div ng-if="! searching">
+		<div ng-if="logs.length === 0">
+			<div class="no-results-text text-center">
+				La búsqueda no obtuvo ningún resultado
+			</div>
+		</div>
+		
+		<div ng-if="total > 0">
+			<div class="text-center">
+				<pagination
+					ng-change="searchLogsAction.execute()"
+					ng-model="searchLogsAction.input.page.value"
+					items-per-page="searchLogsAction.input.resultsPerPage.value"
+					total-items="total"
+					max-size="10"
+					boundary-links="true"
+					previous-text="‹"
+					next-text="›"
+					first-text="«"
+					last-text="»"
+				></pagination>
+			</div>
+		</div>
 	</div>
 </div>

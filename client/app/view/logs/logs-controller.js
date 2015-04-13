@@ -111,6 +111,9 @@
 			// Registers the callbacks
 			
 			action.startCallback = function() {
+				// Refreshes the logs
+				$scope.logs = [];
+				
 				$scope.searching = true;
 			};
 			

@@ -98,6 +98,23 @@
 		};
 		
 		/**
+		 * Determines whether an input is null.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isNull = function(input) {
+			if (input.value !== null) {
+				// The input is not null
+				input.message = 'Valor no nulo';
+				return false;
+			}
+			
+			// The input is null
+			input.message = '';
+			return true;
+		}
+		
+		/**
 		 * Determines whether an input is a user ID.
 		 * 
 		 * Receives the input.
