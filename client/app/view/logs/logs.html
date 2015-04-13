@@ -8,8 +8,8 @@
 	<div class="col-sm-5 col-sm-offset-7">
 		<div class="form-group has-feedback">
 			<input
-				ng-change="TODOtest()"
-				ng-keyup="$event.keyCode == 13 && TODOtest2()"
+				ng-change="searchHandler.notifyExpressionChange()"
+				ng-keyup="$event.keyCode == 13 && searchHandler.search()"
 				ng-model="searchLogsAction.input.expression.value"
 				popover="{{ searchLogsAction.input.expression.message }}"
 				popover-append-to-body="true"
@@ -60,11 +60,11 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th ng-click="sortingCriteriaHandler.toggle('creationDateTime')" class="col-sm-2">
+				<th ng-click="searchHandler.toggleSortingDirection('creationDateTime')" class="col-sm-2">
 					<span
 						ng-class="{
-							'glyphicon-chevron-down': sortingCriteriaHandler.get('creationDateTime') === 'asc',
-							'glyphicon-chevron-up': sortingCriteriaHandler.get('creationDateTime') === 'desc'
+							'glyphicon-chevron-down': searchHandler.getSortingDirection('creationDateTime') === 'asc',
+							'glyphicon-chevron-up': searchHandler.getSortingDirection('creationDateTime') === 'desc'
 						}"
 						class="glyphicon"
 					></span>
@@ -74,11 +74,11 @@
 					</span>
 				</th>
 
-				<th ng-click="sortingCriteriaHandler.toggle('level')" class="col-sm-2">
+				<th ng-click="searchHandler.toggleSortingDirection('level')" class="col-sm-2">
 					<span
 						ng-class="{
-							'glyphicon-chevron-down': sortingCriteriaHandler.get('level') === 'asc',
-							'glyphicon-chevron-up': sortingCriteriaHandler.get('level') === 'desc'
+							'glyphicon-chevron-down': searchHandler.getSortingDirection('level') === 'asc',
+							'glyphicon-chevron-up': searchHandler.getSortingDirection('level') === 'desc'
 						}"
 						class="glyphicon"
 					></span>
@@ -88,11 +88,11 @@
 					</span>
 				</th>
 
-				<th ng-click="sortingCriteriaHandler.toggle('message')" class="col-sm-8">
+				<th ng-click="searchHandler.toggleSortingDirection('message')" class="col-sm-8">
 					<span
 						ng-class="{
-							'glyphicon-chevron-down': sortingCriteriaHandler.get('message') === 'asc',
-							'glyphicon-chevron-up': sortingCriteriaHandler.get('message') === 'desc'
+							'glyphicon-chevron-down': searchHandler.getSortingDirection('message') === 'asc',
+							'glyphicon-chevron-up': searchHandler.getSortingDirection('message') === 'desc'
 						}"
 						class="glyphicon"
 					></span>

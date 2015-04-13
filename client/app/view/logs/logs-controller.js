@@ -21,17 +21,16 @@
 (function() {
 	angular.module('app.view.logs').controller('LogsViewController', [
 		'$scope',
-		'$timeout', // TODO: remember to clean http://www.bennadel.com/blog/2548-don-t-forget-to-cancel-timeout-timers-in-your-destroy-events-in-angularjs.htm
 		'SearchLogsAction',
 		'data',
-		'SortingCriteriaHandler',
+		'SearchHandler',
 		LogsViewController
 	]);
 	
 	/**
 	 * Represents the logs view.
 	 */
-	function LogsViewController($scope, $timeout, SearchLogsAction, data, SortingCriteriaHandler) {
+	function LogsViewController($scope, SearchLogsAction, data, SearchHandler) {
 		var _this = this;
 		
 		/**
@@ -64,29 +63,6 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// TODO: order
-			var dirty = false;
-			var promise;
-			$scope.TODOtest = function() {
-				dirty = true;
-				$timeout.cancel(promise);
-				
-				promise = $timeout(function() {
-					$scope.searchLogsAction.input.page.value = 1;
-					$scope.searchLogsAction.execute();
-					dirty = false;
-				}, 750);
-			};
-			
-			$scope.TODOtest2 = function() {
-				$timeout.cancel(promise);
-				if (dirty) {
-					$scope.searchLogsAction.input.page.value = 1;
-				}
-				$scope.searchLogsAction.execute();
-				dirty = false;
-			};
-			
 			// Includes the logs
 			$scope.logs = [];
 			
@@ -138,8 +114,8 @@
 			// Executes the action
 			action.execute();
 			
-			// Includes a sorting-criteria handler
-			$scope.sortingCriteriaHandler = new SortingCriteriaHandler(action);
+			// Includes a search handler
+			$scope.searchHandler = new SearchHandler(action);
 			
 			// Includes the action
 			$scope.searchLogsAction = action;

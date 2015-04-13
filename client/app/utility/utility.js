@@ -25,6 +25,6 @@
 		'app.utility.levelName',
 		'app.utility.line',
 		'app.utility.nullIfEmpty',
-		'app.utility.sortingCriteriaHandler'
+		'app.utility.searchHandler'
 	]);
 })();
