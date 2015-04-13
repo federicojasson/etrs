@@ -6,6 +6,10 @@
 
 <div class="row">
 	<div class="col-sm-5 col-sm-offset-7">
+		<button ng-click="searchHandler.clearExpression()">
+			TODO Reset
+		</button>
+		
 		<div
 			ng-class="{
 				'has-error': ! searchLogsAction.input.expression.valid

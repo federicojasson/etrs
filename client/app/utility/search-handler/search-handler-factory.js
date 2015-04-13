@@ -31,7 +31,7 @@
 		/**
 		 * The action that performs the search.
 		 * 
-		 * It must have the page and sortingCriteria inputs.
+		 * It must have the expression, sortingCriteria and page inputs.
 		 */
 		SearchHandler.prototype.action;
 		
@@ -67,6 +67,17 @@
 			
 			// Nullifies the search promise
 			this.searchPromise = null;
+		};
+		
+		/**
+		 * Clears the expression.
+		 */
+		SearchHandler.prototype.clearExpression = function() {
+			// Sets a null expression
+			this.action.input.expression.value = null;
+			
+			// Performs a search
+			this.search();
 		};
 		
 		/**
