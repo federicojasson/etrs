@@ -24,6 +24,7 @@
 		'app.view.changePassword',
 		'app.view.editAccount',
 		'app.view.editMedicine',
+		'app.view.editTreatment',
 		'app.view.forgotPassword',
 		'app.view.home',
 		'app.view.invitation',
@@ -31,8 +32,11 @@
 		'app.view.medicine',
 		'app.view.medicines',
 		'app.view.newMedicine',
+		'app.view.newTreatment',
 		'app.view.resetPassword',
 		'app.view.signIn',
-		'app.view.signUp'
+		'app.view.signUp',
+		'app.view.treatment',
+		'app.view.treatments'
 	]);
 })();

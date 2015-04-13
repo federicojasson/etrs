@@ -1,0 +1,166 @@
+<h1>Tratamientos</h1>
+
+<p>
+	TODO: text
+</p>
+
+<div class="row">
+	<div class="col-sm-5 col-sm-offset-7">
+		<div
+			ng-class="{
+				'has-error': ! searchTreatmentsAction.input.expression.valid
+			}"
+			class="form-group has-feedback"
+		>
+			<div
+				ng-class="{
+					'input-group': searchTreatmentsAction.input.expression.value !== null
+				}"
+				class="rounded-corners"
+			>
+				<span ng-if="searchTreatmentsAction.input.expression.value !== null" class="input-group-btn">
+					<button ng-click="searchHandler.clearExpression()" class="btn btn-default">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+				
+				<input
+					ng-change="searchHandler.scheduleSearch(750)"
+					ng-keyup="$event.keyCode == 13 && searchHandler.search()"
+					ng-model="searchTreatmentsAction.input.expression.value"
+					popover="{{ searchTreatmentsAction.input.expression.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					null-if-empty
+					type="text"
+					placeholder="Buscar"
+					class="form-control rounded-corners"
+				>
+			</div>
+			
+			<span class="form-control-feedback glyphicon glyphicon-search"></span>
+		</div>
+	</div>
+</div>
+
+<div ng-if="searchTreatmentsAction.input.expression.valid">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="col-sm-1 text-center">
+					Eliminar
+				</th>
+				
+				<th class="col-sm-1 text-center">
+					Editar
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-4">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('name') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('name') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Nombre
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('creationDateTime')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('creationDateTime') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('creationDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Creación
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('lastEditionDateTime')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Última edición
+					</span>
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<!-- TODO: link to treatment state -->
+			<tr ng-repeat="treatment in treatments">
+				<td class="text-center">
+					<!--TODO-->
+					<span class="glyphicon glyphicon-remove"></span>
+				</td>
+				
+				<td class="text-center">
+					<a ui-sref="editTreatment({ id: treatment.id })">
+						<span class="glyphicon glyphicon-edit"></span>
+					</a>
+				</td>
+				
+				<td>
+					{{ treatment.name }}
+				</td>
+				
+				<td>
+					{{ treatment.creationDateTime | date: 'longDate' }}
+				</td>
+				
+				<td>
+					{{ treatment.lastEditionDateTime | date: 'longDate' }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
+		</div>
+	</div>
+	
+	<div ng-if="! searching">
+		<div ng-if="treatments.length === 0">
+			<div class="no-results-text text-center">
+				La búsqueda no obtuvo ningún resultado
+			</div>
+		</div>
+		
+		<div ng-if="total > 0">
+			<div class="text-center">
+				<pagination
+					ng-change="searchTreatmentsAction.execute()"
+					ng-model="searchTreatmentsAction.input.page.value"
+					items-per-page="searchTreatmentsAction.input.resultsPerPage.value"
+					total-items="total"
+					max-size="10"
+					boundary-links="true"
+					previous-text="‹"
+					next-text="›"
+					first-text="«"
+					last-text="»"
+				></pagination>
+			</div>
+		</div>
+	</div>
+</div>

@@ -52,6 +52,11 @@
 				'/permission/password-reset/request',
 				'/permission/sign-up/authenticate',
 				'/permission/sign-up/request',
+				'/treatment/create',
+				'/treatment/delete',
+				'/treatment/edit',
+				'/treatment/get',
+				'/treatment/search',
 				'/user/get'
 			];
 		}

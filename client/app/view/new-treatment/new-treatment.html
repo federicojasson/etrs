@@ -1,0 +1,53 @@
+<h1>Nuevo tratamiento</h1>
+
+<p>
+	El siguiente formulario permite crear un nuevo tratamiento.<br>
+	<br>
+	<strong>
+		Una vez creado, el tratamiento aparecerá como opción en los formularios
+		correspondientes.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createTreatmentAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Tratamiento
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del tratamiento:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createTreatmentAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createTreatmentAction.input.name.value"
+					popover="{{ createTreatmentAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-success pull-right">
+				Crear tratamiento
+			</button>
+		</div>
+	</form>
+</div>

@@ -79,6 +79,36 @@
 					}
 				],
 				
+				Treatment: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(treatment, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('Treatment', 'User', 'creator', treatment.creator, depth);
+							var lastEditorPromise = data.getReference('Treatment', 'User', 'lastEditor', treatment.lastEditor, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
+								treatment.creator = values.creator;
+								treatment.lastEditor = values.lastEditor;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(treatment);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				User: [
 					'$q',
 					'data',

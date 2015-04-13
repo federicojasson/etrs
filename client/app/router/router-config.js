@@ -88,6 +88,17 @@
 				},
 				
 				{
+					name: 'editTreatment',
+					url: '/treatment/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditTreatmentViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'forgotPassword',
 					url: '/account/forgot-password',
 					data: {
@@ -166,6 +177,17 @@
 				},
 				
 				{
+					name: 'newTreatment',
+					url: '/treatment/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewTreatmentViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'resetPassword',
 					url: '/account/reset-password/{id:[0-9A-Fa-f]{32}}/{password:[0-9A-Fa-f]{256}}',
 					data: {
@@ -191,6 +213,28 @@
 					data: {
 						views: {
 							__: 'SignUpViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'treatment',
+					url: '/treatment/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'TreatmentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'treatments',
+					url: '/treatments',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'TreatmentsViewController'
 						}
 					}
 				}

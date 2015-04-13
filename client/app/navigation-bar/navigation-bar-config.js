@@ -55,6 +55,18 @@
 					name: 'Nuevo',
 					state: 'newMedicine',
 					description: 'Cree un nuevo medicamento'
+				},
+				
+				newTreatment: {
+					name: 'Nuevo',
+					state: 'newTreatment',
+					description: 'Cree un nuevo tratamiento'
+				},
+				
+				treatments: {
+					name: 'Administrar',
+					state: 'treatments',
+					description: 'Administre los tratamientos'
 				}
 				
 				// DEFINEHERE: define menu items here
@@ -83,6 +95,14 @@
 						items: [
 							menuItems.medicines,
 							menuItems.newMedicine
+						]
+					},
+					
+					{
+						name: 'Tratamientos',
+						items: [
+							menuItems.treatments,
+							menuItems.newTreatment
 						]
 					},
 					

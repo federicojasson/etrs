@@ -1,0 +1,48 @@
+<h1>{{ treatment.name }}</h1>
+
+<p>
+	TODO: text?
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editTreatmentAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Tratamiento
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del tratamiento:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editTreatmentAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editTreatmentAction.input.name.value"
+					popover="{{ editTreatmentAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning pull-right">
+				TODO: texto
+			</button>
+		</div>
+	</form>
+</div>

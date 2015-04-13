@@ -19,21 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.action', [
-		'app.action.changePassword',
-		'app.action.createMedicine',
-		'app.action.createTreatment',
-		'app.action.editAccount',
-		'app.action.editMedicine',
-		'app.action.editTreatment',
-		'app.action.requestPasswordReset',
-		'app.action.requestSignUp',
-		'app.action.resetPassword',
-		'app.action.searchLogs',
-		'app.action.searchMedicines',
-		'app.action.searchTreatments',
-		'app.action.signIn',
-		'app.action.signOut',
-		'app.action.signUp'
-	]);
+	angular.module('app.view.newTreatment', []);
 })();
