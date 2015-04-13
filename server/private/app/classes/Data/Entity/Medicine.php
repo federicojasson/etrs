@@ -210,35 +210,34 @@ class Medicine {
 	 * Serializes the entity.
 	 */
 	public function serialize() {
-		// Initializes the serialization
-		$serialization = [];
+		$serialized = [];
 		
 		// Adds the appropriate fields
 		// The process only considers accessible fields and it filters them
 		// according to their specific characteristics
 		
-		$serialization['id'] = bin2hex($this->id);
-		$serialization['version'] = $this->version;
-		$serialization['creationDateTime'] = $this->creationDateTime->format(\DateTime::ISO8601);
+		$serialized['id'] = bin2hex($this->id);
+		$serialized['version'] = $this->version;
+		$serialized['creationDateTime'] = $this->creationDateTime->format(\DateTime::ISO8601);
 		
-		$serialization['lastEditionDateTime'] = null;
+		$serialized['lastEditionDateTime'] = null;
 		if (! is_null($this->lastEditionDateTime)) {
-			$serialization['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
+			$serialized['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
 		}
 		
-		$serialization['name'] = $this->name;
+		$serialized['name'] = $this->name;
 		
-		$serialization['creator'] = null;
+		$serialized['creator'] = null;
 		if (! is_null($this->creator)) {
-			$serialization['creator'] = $this->creator->getId();
+			$serialized['creator'] = $this->creator->getId();
 		}
 		
-		$serialization['lastEditor'] = null;
+		$serialized['lastEditor'] = null;
 		if (! is_null($this->lastEditor)) {
-			$serialization['lastEditor'] = $this->lastEditor->getId();
+			$serialized['lastEditor'] = $this->lastEditor->getId();
 		}
 		
-		return $serialization;
+		return $serialized;
 	}
 	
 	/**

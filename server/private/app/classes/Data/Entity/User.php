@@ -288,34 +288,33 @@ class User {
 	 * Serializes the entity.
 	 */
 	public function serialize() {
-		// Initializes the serialization
-		$serialization = [];
+		$serialized = [];
 		
 		// Adds the appropriate fields
 		// The process only considers accessible fields and it filters them
 		// according to their specific characteristics
 		
-		$serialization['id'] = $this->id;
-		$serialization['version'] = $this->version;
-		$serialization['creationDateTime'] = $this->creationDateTime->format(\DateTime::ISO8601);
+		$serialized['id'] = $this->id;
+		$serialized['version'] = $this->version;
+		$serialized['creationDateTime'] = $this->creationDateTime->format(\DateTime::ISO8601);
 		
-		$serialization['lastEditionDateTime'] = null;
+		$serialized['lastEditionDateTime'] = null;
 		if (! is_null($this->lastEditionDateTime)) {
-			$serialization['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
+			$serialized['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
 		}
 		
-		$serialization['role'] = $this->role;
-		$serialization['emailAddress'] = $this->emailAddress;
-		$serialization['firstName'] = $this->firstName;
-		$serialization['lastName'] = $this->lastName;
-		$serialization['gender'] = $this->gender;
+		$serialized['role'] = $this->role;
+		$serialized['emailAddress'] = $this->emailAddress;
+		$serialized['firstName'] = $this->firstName;
+		$serialized['lastName'] = $this->lastName;
+		$serialized['gender'] = $this->gender;
 		
-		$serialization['creator'] = null;
+		$serialized['creator'] = null;
 		if (! is_null($this->creator)) {
-			$serialization['creator'] = $this->creator->getId();
+			$serialized['creator'] = $this->creator->getId();
 		}
 		
-		return $serialization;
+		return $serialized;
 	}
 	
 	/**
