@@ -8,7 +8,7 @@
 	<div class="col-sm-5 col-sm-offset-7">
 		<div class="form-group has-feedback">
 			<input
-				ng-change="searchHandler.notifyExpressionChange()"
+				ng-change="searchHandler.scheduleSearch(750)"
 				ng-keyup="$event.keyCode == 13 && searchHandler.search()"
 				ng-model="searchLogsAction.input.expression.value"
 				popover="{{ searchLogsAction.input.expression.message }}"

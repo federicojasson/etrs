@@ -36,12 +36,14 @@
 		SearchHandler.prototype.action;
 		
 		/**
-		 * TODO: comment
+		 * The search promise.
+		 * 
+		 * It is initialized when a search is scheduled.
 		 */
 		SearchHandler.prototype.searchPromise;
 		
 		/**
-		 * TODO: comment
+		 * Holds the sorting criteria in a convenient structure.
 		 */
 		SearchHandler.prototype.sortingCriteria;
 		
@@ -57,20 +59,32 @@
 		}
 		
 		/**
-		 * TODO: comment
+		 * Cancels the scheduled search.
+		 */
+		SearchHandler.prototype.cancelScheduledSearch = function() {
+			// Cancels the search promise (if any)
+			$timeout.cancel(this.searchPromise);
+			
+			// Nullifies the search promise
+			this.searchPromise = null;
+		};
+		
+		/**
+		 * Computes the sorting criteria.
 		 */
 		SearchHandler.prototype.computeSortingCriteria = function() {
-			// TODO: comments
-			
 			var sortingCriteria = [];
 			
+			// Adds the criteria
 			for (var field in this.sortingCriteria) {
 				if (! this.sortingCriteria.hasOwnProperty(field)) {
 					continue;
 				}
 				
+				// Gets the direction of the field
 				var direction = this.sortingCriteria[field];
 				
+				// Adds the criterion
 				sortingCriteria.push({
 					field: field,
 					direction: direction
@@ -81,58 +95,68 @@
 		};
 		
 		/**
-		 * TODO: comment
+		 * Returns the sorting direction corresponding to a field.
+		 * 
+		 * Receives the field.
 		 */
 		SearchHandler.prototype.getSortingDirection = function(field) {
 			return this.sortingCriteria[field];
 		};
 		
 		/**
-		 * TODO: comment
+		 * Schedules a search to be performed after some delay.
+		 * 
+		 * Receives the delay.
 		 */
-		SearchHandler.prototype.notifyExpressionChange = function() {
-			// TODO: comments
+		SearchHandler.prototype.scheduleSearch = function(delay) {
+			// Cancels the scheduled search
+			this.cancelScheduledSearch();
 			
-			if (this.searchPromise !== null) {
-				$timeout.cancel(this.searchPromise);
-			}
-			
-			this.searchPromise = $timeout(this.search.bind(this), 750);
+			// Schedules a new search
+			this.searchPromise = $timeout(this.search.bind(this), delay);
 		};
 		
 		/**
-		 * TODO: comment
+		 * Performs a search.
 		 */
 		SearchHandler.prototype.search = function() {
-			// TODO: comments
-			
 			if (this.searchPromise !== null) {
-				$timeout.cancel(this.searchPromise);
-				this.searchPromise = null;
-				
+				// There is a scheduled search
+				// Sets the first page
 				this.action.input.page.value = 1;
 			}
 			
+			// Cancels the scheduled search
+			this.cancelScheduledSearch();
+			
+			// Executes the action
 			this.action.execute();
 		};
 		
 		/**
-		 * TODO: comment
+		 * Toggles the sorting direction corresponding to a field.
+		 * 
+		 * Receives the field.
 		 */
 		SearchHandler.prototype.toggleSortingDirection = function(field) {
-			// TODO: comments
-			
+			// Toggles the direction of the field according to its current state
 			if (! this.sortingCriteria.hasOwnProperty(field)) {
+				// There is no direction
 				this.sortingCriteria[field] = 'asc';
 			} else {
 				if (this.sortingCriteria[field] === 'asc') {
+					// The direction is ascending
 					this.sortingCriteria[field] = 'desc';
 				} else {
+					// The direction is descending
 					delete this.sortingCriteria[field];
 				}
 			}
 			
+			// Sets the new sorting criteria
 			this.action.input.sortingCriteria.value = this.computeSortingCriteria();
+			
+			// Performs a search
 			this.search();
 		};
 		

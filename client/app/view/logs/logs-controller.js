@@ -87,7 +87,7 @@
 			action.input.expression.value = null;
 			action.input.sortingCriteria.value = [];
 			action.input.page.value = 1;
-			action.input.resultsPerPage.value = 5;
+			action.input.resultsPerPage.value = 10;
 			
 			// Registers the callbacks
 			
