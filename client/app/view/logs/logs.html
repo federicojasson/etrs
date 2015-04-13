@@ -51,10 +51,11 @@
 			<tr>
 				<th ng-click="searchHandler.toggleSortingDirection('creationDateTime')" class="col-sm-2">
 					<span
-						ng-class="{
-							'glyphicon-chevron-down': searchHandler.getSortingDirection('creationDateTime') === 'asc',
-							'glyphicon-chevron-up': searchHandler.getSortingDirection('creationDateTime') === 'desc'
-						}"
+						ng-class="
+							searchHandler.getSortingDirection('creationDateTime') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('creationDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
 						class="glyphicon"
 					></span>
 					
@@ -65,10 +66,11 @@
 				
 				<th ng-click="searchHandler.toggleSortingDirection('level')" class="col-sm-2">
 					<span
-						ng-class="{
-							'glyphicon-chevron-down': searchHandler.getSortingDirection('level') === 'asc',
-							'glyphicon-chevron-up': searchHandler.getSortingDirection('level') === 'desc'
-						}"
+						ng-class="
+							searchHandler.getSortingDirection('level') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('level') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
 						class="glyphicon"
 					></span>
 					
@@ -79,10 +81,11 @@
 				
 				<th ng-click="searchHandler.toggleSortingDirection('message')" class="col-sm-8">
 					<span
-						ng-class="{
-							'glyphicon-chevron-down': searchHandler.getSortingDirection('message') === 'asc',
-							'glyphicon-chevron-up': searchHandler.getSortingDirection('message') === 'desc'
-						}"
+						ng-class="
+							searchHandler.getSortingDirection('message') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('message') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
 						class="glyphicon"
 					></span>
 					

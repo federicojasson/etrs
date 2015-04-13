@@ -32,7 +32,7 @@ body {
 	font-size: 140%;
 }
 
-fieldset ~ fieldset {}
+fieldset + fieldset {}
 
 h1 {
 	font-size: 1.9em;
@@ -191,6 +191,8 @@ select.form-control {}
 .fully-centered-container {}
 
 .icon-text {}
+
+.no-icon + .icon-text {}
 
 .loading-image {}
 

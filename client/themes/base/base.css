@@ -20,7 +20,7 @@ address {}
 
 body {}
 
-fieldset ~ fieldset {
+fieldset + fieldset {
 	margin-top: 15px;
 }
 
@@ -241,6 +241,10 @@ select.form-control {
 
 .icon-text {
 	margin-left: 8px;
+}
+
+.no-icon + .icon-text {
+	margin-left: 0px;
 }
 
 .loading-image {
