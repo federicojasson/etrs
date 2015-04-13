@@ -86,15 +86,6 @@
 				dirty = false;
 			};
 			
-			$scope.TODOtest3 = function(field) {
-				// TODO: just a test
-				$scope.searchLogsAction.input.sortingCriteria.value[0] = {
-					field: field,
-					direction: 'asc'
-				};
-				$scope.searchLogsAction.execute();
-			};
-			
 			// Includes the logs
 			$scope.logs = [];
 			
@@ -106,6 +97,8 @@
 			
 			// Initializes the actions
 			initializeSearchLogsAction();
+			
+			$scope.TODOtest3 = new TestClass($scope.searchLogsAction);
 		}
 		
 		/**
@@ -155,4 +148,51 @@
 		// Initializes the controller
 		initialize();
 	}
+	
+	// TODO: order
+	function TestClass(action) {
+		this.action = action;
+		this.fields = {};
+	}
+	
+	TestClass.prototype.action;
+	TestClass.prototype.fields;
+	
+	TestClass.prototype.update = function(field) {
+		if (! this.fields.hasOwnProperty(field)) {
+			this.fields[field] = null;
+		}
+		
+		var nextValues = [ null, 'asc', 'desc' ];
+		var nextValue = nextValues[(nextValues.indexOf(this.fields[field]) + 1) % 3];
+		this.fields[field] = nextValue;
+		
+		this.action.input.sortingCriteria.value = this.process();
+		this.action.execute();
+	};
+	
+	TestClass.prototype.get = function(field) {
+		return this.fields[field];
+	};
+	
+	TestClass.prototype.process = function() {
+		var criteria = [];
+		
+		for (var field in this.fields) {
+			if (! this.fields.hasOwnProperty(field)) {
+				continue;
+			}
+			
+			var direction = this.fields[field];
+			
+			if (direction !== null) {
+				criteria.push({
+					field: field,
+					direction: direction
+				});
+			}
+		}
+		
+		return criteria;
+	};
 })();

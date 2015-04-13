@@ -68,6 +68,8 @@ th {
 	user-select: none;
 }
 
+th:hover {}
+
 
 /* Bootstrap's classes */
 

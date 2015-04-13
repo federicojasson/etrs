@@ -27,6 +27,20 @@
 	</div>
 </div>
 
+<div ng-if="logs.length === 0">
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
+		</div>
+	</div>
+	
+	<div ng-if="! searching">
+		<div class="no-results-text text-center">
+			La búsqueda no obtuvo ningún resultado
+		</div>
+	</div>
+</div>
+
 <div ng-if="logs.length > 0">
 	<div class="text-center">
 		<pagination
@@ -42,59 +56,77 @@
 			last-text="»"
 		></pagination>
 	</div>
-</div>
+	
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th ng-click="TODOtest3.update('creationDateTime')" class="col-sm-2">
+					<span
+						ng-class="{
+							'glyphicon-chevron-down': TODOtest3.get('creationDateTime') === 'asc',
+							'glyphicon-chevron-up': TODOtest3.get('creationDateTime') === 'desc'
+						}"
+						class="glyphicon"
+					></span>
 
-<div ng-if="searching">
-	<div class="searching-text text-center">
-		Buscando…
-	</div>
-</div>
+					<span class="icon-text">
+						Fecha y hora
+					</span>
+				</th>
 
-<div ng-if="! searching">
-	<div ng-if="logs.length === 0">
-		<div class="no-results-text text-center">
-			La búsqueda no obtuvo ningún resultado
+				<th ng-click="TODOtest3.update('level')" class="col-sm-2">
+					<span
+						ng-class="{
+							'glyphicon-chevron-down': TODOtest3.get('level') === 'asc',
+							'glyphicon-chevron-up': TODOtest3.get('level') === 'desc'
+						}"
+						class="glyphicon"
+					></span>
+
+					<span class="icon-text">
+						Nivel
+					</span>
+				</th>
+
+				<th ng-click="TODOtest3.update('message')" class="col-sm-8">
+					<span
+						ng-class="{
+							'glyphicon-chevron-down': TODOtest3.get('message') === 'asc',
+							'glyphicon-chevron-up': TODOtest3.get('message') === 'desc'
+						}"
+						class="glyphicon"
+					></span>
+
+					<span class="icon-text">
+						Mensaje
+					</span>
+				</th>
+			</tr>
+		</thead>
+
+		<tbody ng-if="! searching">
+			<tr ng-repeat="log in logs">
+				<td>
+					{{ log.creationDateTime | date: 'dd/MM/yyyy HH:mm:ss' }}
+				</td>
+
+				<td>
+					{{ log | levelName }}
+				</td>
+
+				<td>
+					{{ log.message }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
 		</div>
 	</div>
-
-	<div ng-if="logs.length > 0">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th ng-click="TODOtest3('creationDateTime')" class="col-sm-2">
-						Fecha y hora
-					</th>
-
-					<th ng-click="TODOtest3('level')" class="col-sm-2">
-						Nivel
-					</th>
-
-					<th ng-click="TODOtest3('message')" class="col-sm-8">
-						Mensaje
-					</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr ng-repeat="log in logs">
-					<td>
-						{{ log.creationDateTime | date: 'dd/MM/yyyy HH:mm:ss' }}
-					</td>
-
-					<td>
-						{{ log | levelName }}
-					</td>
-
-					<td>
-						{{ log.message }}
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
-
-<div ng-if="logs.length > 0">
+	
 	<div class="text-center">
 		<pagination
 			ng-change="searchLogsAction.execute()"
