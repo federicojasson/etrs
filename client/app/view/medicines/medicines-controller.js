@@ -19,13 +19,24 @@
 'use strict';
 
 (function() {
-	angular.module('app.view.medicines').controller('MedicinesViewController', MedicinesViewController);
+	angular.module('app.view.medicines').controller('MedicinesViewController', [
+		'$scope',
+		'SearchMedicinesAction',
+		'data',
+		'SearchHandler',
+		MedicinesViewController
+	]);
 	
 	/**
 	 * Represents the medicines view.
 	 */
-	function MedicinesViewController() {
+	function MedicinesViewController($scope, SearchMedicinesAction, data, SearchHandler) {
 		var _this = this;
+		
+		/**
+		 * Indicates whether the view is ready.
+		 */
+		var ready = true;
 		
 		/**
 		 * Returns the template's URL.
@@ -45,7 +56,96 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return true;
+			return ready;
 		};
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Includes the medicines
+			$scope.medicines = [];
+			
+			// Includes the total number of results
+			$scope.total = 0;
+			
+			// Includes auxiliary variables
+			$scope.searching = false;
+			
+			// Initializes the actions
+			initializeSearchMedicinesAction();
+		}
+		
+		/**
+		 * Initializes the search handler.
+		 * 
+		 * Receives the action.
+		 */
+		function initializeSearchHandler(action) {
+			// Initializes the search handler
+			var searchHandler = new SearchHandler(action);
+			
+			// Registers a listener
+			$scope.$on('$destroy', function() {
+				// Cancels the scheduled search
+				searchHandler.cancelScheduledSearch();
+			});
+			
+			// Includes the search handler
+			$scope.searchHandler = searchHandler;
+		}
+		
+		/**
+		 * Initializes the search-medicines action.
+		 */
+		function initializeSearchMedicinesAction() {
+			// Initializes the action
+			var action = new SearchMedicinesAction();
+			
+			// Sets inputs' initial values
+			action.input.expression.value = null;
+			action.input.sortingCriteria.value = [];
+			action.input.page.value = 1;
+			action.input.resultsPerPage.value = 10;
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				// Refreshes the medicines
+				$scope.medicines = [];
+				
+				$scope.searching = true;
+			};
+			
+			action.successCallback = function(results, total) {
+				// Refreshes the total number of results
+				$scope.total = total;
+				
+				// Resets the data service
+				data.reset();
+				
+				// Gets the medicines
+				data.getMedicineArray(results).then(function(medicines) {
+					// Refreshes the medicines
+					$scope.medicines = medicines;
+					
+					$scope.searching = false;
+				});
+			};
+			
+			// Executes the action
+			action.execute();
+			
+			// Includes the action
+			$scope.searchMedicinesAction = action;
+			
+			// Initializes the search handler
+			initializeSearchHandler(action);
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();
