@@ -118,6 +118,8 @@ select.form-control {}
 
 .has-feedback .form-control-feedback {}
 
+.input-group-btn {}
+
 .input-lg {
 	font-size: 1.2em;
 }
@@ -275,6 +277,10 @@ select.form-control {}
 }
 
 .rounded-corners {}
+
+.rounded-corners input:last-child {}
+
+.rounded-corners .input-group-btn:first-child .btn {}
 
 .searching-text {
 	color: #aaaaaa;

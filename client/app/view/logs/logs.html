@@ -6,30 +6,39 @@
 
 <div class="row">
 	<div class="col-sm-5 col-sm-offset-7">
-		<button ng-click="searchHandler.clearExpression()">
-			TODO Reset
-		</button>
-		
 		<div
 			ng-class="{
 				'has-error': ! searchLogsAction.input.expression.valid
 			}"
 			class="form-group has-feedback"
 		>
-			<input
-				ng-change="searchHandler.scheduleSearch(750)"
-				ng-keyup="$event.keyCode == 13 && searchHandler.search()"
-				ng-model="searchLogsAction.input.expression.value"
-				popover="{{ searchLogsAction.input.expression.message }}"
-				popover-append-to-body="true"
-				popover-placement="left"
-				popover-trigger="focus"
-				line
-				null-if-empty
-				type="text"
-				placeholder="Buscar"
-				class="form-control rounded-corners"
+			<div
+				ng-class="{
+					'input-group': searchLogsAction.input.expression.value !== null
+				}"
+				class="rounded-corners"
 			>
+				<span ng-if="searchLogsAction.input.expression.value !== null" class="input-group-btn">
+					<button ng-click="searchHandler.clearExpression()" class="btn btn-default">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+				
+				<input
+					ng-change="searchHandler.scheduleSearch(750)"
+					ng-keyup="$event.keyCode == 13 && searchHandler.search()"
+					ng-model="searchLogsAction.input.expression.value"
+					popover="{{ searchLogsAction.input.expression.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					null-if-empty
+					type="text"
+					placeholder="Buscar"
+					class="form-control rounded-corners"
+				>
+			</div>
 			
 			<span class="form-control-feedback glyphicon glyphicon-search"></span>
 		</div>

@@ -104,6 +104,11 @@ select.form-control {
 	height: 32px;
 	line-height: 32px;
 	top: 0px;
+	z-index: 100;
+}
+
+.input-group-btn {
+	font-size: 1em;
 }
 
 .input-lg {
@@ -320,6 +325,17 @@ select.form-control {
 
 .rounded-corners {
 	border-radius: 12px;
+}
+
+.rounded-corners input:last-child {
+	border-bottom-right-radius: 12px;
+	border-top-right-radius: 12px;
+}
+
+.rounded-corners .input-group-btn:first-child .btn {
+	border-bottom-left-radius: 12px;
+	border-top-left-radius: 12px;
+	outline: none;
 }
 
 .searching-text {
