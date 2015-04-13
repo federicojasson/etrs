@@ -48,11 +48,11 @@
 		 * Updates the view.
 		 */
 		_this.update = function() {
-			// Gets the data of the current route
-			var data = $state.current.data;
+			// Gets the current route
+			var route = $state.current;
 			
-			if (angular.isUndefined(data)) {
-				// The route has not been established yet
+			if (route.name === '') {
+				// A valid route has not been established yet
 				return;
 			}
 			
@@ -73,7 +73,7 @@
 			}
 			
 			// Gets the views defined in the current route
-			var views = data.views;
+			var views = route.data.views;
 			
 			if (! views.hasOwnProperty(userRole)) {
 				// There is no view defined for the user role
