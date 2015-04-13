@@ -77,6 +77,25 @@
 		}
 		
 		/**
+		 * Initializes the search handler.
+		 * 
+		 * Receives the action.
+		 */
+		function initializeSearchHandler(action) {
+			// Initializes the search handler
+			var searchHandler = new SearchHandler(action);
+			
+			// Registers a listener
+			$scope.$on('$destroy', function() {
+				// Cancels the scheduled search
+				searchHandler.cancelScheduledSearch();
+			});
+			
+			// Includes the search handler
+			$scope.searchHandler = searchHandler;
+		}
+		
+		/**
 		 * Initializes the search-logs action.
 		 */
 		function initializeSearchLogsAction() {
@@ -114,11 +133,11 @@
 			// Executes the action
 			action.execute();
 			
-			// Includes a search handler
-			$scope.searchHandler = new SearchHandler(action);
-			
 			// Includes the action
 			$scope.searchLogsAction = action;
+			
+			// Initializes the search handler
+			initializeSearchHandler(action);
 		}
 		
 		// ---------------------------------------------------------------------

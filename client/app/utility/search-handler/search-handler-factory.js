@@ -20,7 +20,7 @@
 
 (function() {
 	angular.module('app.utility.searchHandler').factory('SearchHandler', [
-		'$timeout',// TODO: remember to clean http://www.bennadel.com/blog/2548-don-t-forget-to-cancel-timeout-timers-in-your-destroy-events-in-angularjs.htm
+		'$timeout',
 		SearchHandlerFactory
 	]);
 	
