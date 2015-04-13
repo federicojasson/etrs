@@ -48,11 +48,11 @@
 		 * Updates the view.
 		 */
 		_this.update = function() {
-			// Gets the current route
-			var route = $state.current;
+			// Gets the current state
+			var state = $state.current;
 			
-			if (route.name === '') {
-				// A valid route has not been established yet
+			if (state.name === '') {
+				// A valid state has not been established yet
 				return;
 			}
 			
@@ -72,13 +72,13 @@
 				userRole = '__';
 			}
 			
-			// Gets the views defined in the current route
-			var views = route.data.views;
+			// Gets the views defined in the current state
+			var views = state.data.views;
 			
 			if (! views.hasOwnProperty(userRole)) {
 				// There is no view defined for the user role
 				
-				// Redirects the user to the home route
+				// Redirects the user to the home state
 				router.redirect('home');
 				
 				return;

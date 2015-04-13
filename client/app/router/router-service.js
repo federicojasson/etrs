@@ -32,9 +32,9 @@
 		var _this = this;
 		
 		/**
-		 * Redirects the user to a certain route.
+		 * Redirects the user to a certain state.
 		 * 
-		 * Receives the route's name and, optionally, the parameters.
+		 * Receives the state's name and, optionally, the parameters.
 		 */
 		_this.redirect = function(name, parameters) {
 			$state.go(name, parameters);

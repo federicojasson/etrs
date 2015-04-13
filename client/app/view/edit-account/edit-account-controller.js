@@ -124,7 +124,7 @@
 				// Refreshes the account
 				account.refresh();
 				
-				// Redirects the user to the account route
+				// Redirects the user to the account state
 				router.redirect('account');
 			};
 			

@@ -80,7 +80,7 @@
 			};
 			
 			action.successCallback = function(id) {
-				// Redirects the user to the medicine route
+				// Redirects the user to the medicine state
 				router.redirect('medicine', {
 					id: id
 				});

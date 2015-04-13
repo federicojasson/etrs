@@ -79,7 +79,7 @@
 				if (! output.authenticated) {
 					// The sign-up permission has not been authenticated
 					
-					// Redirects the user to the home route
+					// Redirects the user to the home state
 					router.redirect('home');
 					
 					// Opens an error dialog
@@ -118,7 +118,7 @@
 			};
 			
 			action.notAuthenticatedCallback = function() {
-				// Redirects the user to the home route
+				// Redirects the user to the home state
 				router.redirect('home');
 				
 				// Opens an error dialog
@@ -143,7 +143,7 @@
 			};
 			
 			action.successCallback = function() {
-				// Redirects the user to the home route
+				// Redirects the user to the home state
 				router.redirect('home');
 				
 				// Opens an information dialog

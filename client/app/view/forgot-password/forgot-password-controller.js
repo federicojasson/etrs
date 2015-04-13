@@ -97,7 +97,7 @@
 			};
 			
 			action.successCallback = function() {
-				// Redirects the user to the home route
+				// Redirects the user to the home state
 				router.redirect('home');
 
 				// Opens an information dialog
