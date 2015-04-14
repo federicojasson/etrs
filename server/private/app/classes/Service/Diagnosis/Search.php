@@ -39,20 +39,20 @@ class Search extends \App\Service\External {
 		
 		// Initializes a query builder
 		$queryBuilder = $app->data->createQueryBuilder()
-			->select('m.id')
-			->from('Entity:Diagnosis', 'm')
-			->where('m.deleted = false');
+			->select('d.id')
+			->from('Entity:Diagnosis', 'd')
+			->where('d.deleted = false');
 		
 		if (! is_null($expression)) {
 			// A full-text search is to be performed
 			$queryBuilder
-				->andWhere('MATCH(m.name) AGAINST(:expression BOOLEAN) > 0')
+				->andWhere('MATCH(d.name) AGAINST(:expression BOOLEAN) > 0')
 				->setParameter('expression', $expression);
 		}
 		
 		// Sets the sorting criteria
 		foreach ($sortingCriteria as $sortingCriterion) {
-			$queryBuilder->addOrderBy('m.' . $sortingCriterion['field'], $sortingCriterion['direction']);
+			$queryBuilder->addOrderBy('d.' . $sortingCriterion['field'], $sortingCriterion['direction']);
 		}
 		
 		// Searches the diagnoses
