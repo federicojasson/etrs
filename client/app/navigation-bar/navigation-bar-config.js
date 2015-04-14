@@ -33,6 +33,12 @@
 		 */
 		function getMenuItems() {
 			return {
+				diagnoses: {
+					name: 'Administrar',
+					state: 'diagnoses',
+					description: 'Administre los diagnósticos'
+				},
+				
 				invitation: {
 					name: 'Enviar invitación',
 					state: 'invitation',
@@ -49,6 +55,12 @@
 					name: 'Administrar',
 					state: 'medicines',
 					description: 'Administre los medicamentos'
+				},
+				
+				newDiagnosis: {
+					name: 'Nuevo',
+					state: 'newDiagnosis',
+					description: 'Cree un nuevo diagnóstico'
 				},
 				
 				newMedicine: {
@@ -95,6 +107,14 @@
 						items: [
 							menuItems.medicines,
 							menuItems.newMedicine
+						]
+					},
+					
+					{
+						name: 'Diagnósticos',
+						items: [
+							menuItems.diagnoses,
+							menuItems.newDiagnosis
 						]
 					},
 					

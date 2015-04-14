@@ -22,7 +22,10 @@
 	angular.module('app.view', [
 		'app.view.account',
 		'app.view.changePassword',
+		'app.view.diagnoses',
+		'app.view.diagnosis',
 		'app.view.editAccount',
+		'app.view.editDiagnosis',
 		'app.view.editMedicine',
 		'app.view.editTreatment',
 		'app.view.forgotPassword',
@@ -31,6 +34,7 @@
 		'app.view.logs',
 		'app.view.medicine',
 		'app.view.medicines',
+		'app.view.newDiagnosis',
 		'app.view.newMedicine',
 		'app.view.newTreatment',
 		'app.view.resetPassword',

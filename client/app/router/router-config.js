@@ -64,6 +64,28 @@
 				},
 				
 				{
+					name: 'diagnoses',
+					url: '/diagnoses',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'DiagnosesViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'diagnosis',
+					url: '/diagnosis/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'DiagnosisViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editAccount',
 					url: '/account/edit',
 					data: {
@@ -72,6 +94,17 @@
 							ad: 'EditAccountViewController',
 							dr: 'EditAccountViewController',
 							op: 'EditAccountViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editDiagnosis',
+					url: '/diagnosis/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditDiagnosisViewController'
 						}
 					}
 				},
@@ -161,6 +194,17 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'MedicinesViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newDiagnosis',
+					url: '/diagnosis/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewDiagnosisViewController'
 						}
 					}
 				},

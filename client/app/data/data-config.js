@@ -33,6 +33,36 @@
 		 */
 		function getTypes() {
 			return {
+				Diagnosis: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(diagnosis, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('Diagnosis', 'User', 'creator', diagnosis.creator, depth);
+							var lastEditorPromise = data.getReference('Diagnosis', 'User', 'lastEditor', diagnosis.lastEditor, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
+								diagnosis.creator = values.creator;
+								diagnosis.lastEditor = values.lastEditor;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(diagnosis);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				Log: [
 					'$q',
 					function($q) {

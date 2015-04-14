@@ -1,0 +1,166 @@
+<h1>Diagnósticos</h1>
+
+<p>
+	TODO: text
+</p>
+
+<div class="row">
+	<div class="col-sm-5 col-sm-offset-7">
+		<div
+			ng-class="{
+				'has-error': ! searchDiagnosesAction.input.expression.valid
+			}"
+			class="form-group has-feedback"
+		>
+			<div
+				ng-class="{
+					'input-group': searchDiagnosesAction.input.expression.value !== null
+				}"
+				class="rounded-corners"
+			>
+				<span ng-if="searchDiagnosesAction.input.expression.value !== null" class="input-group-btn">
+					<button ng-click="searchHandler.clearExpression()" class="btn btn-default">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+				
+				<input
+					ng-change="searchHandler.scheduleSearch(750)"
+					ng-keyup="$event.keyCode == 13 && searchHandler.search()"
+					ng-model="searchDiagnosesAction.input.expression.value"
+					popover="{{ searchDiagnosesAction.input.expression.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					null-if-empty
+					type="text"
+					placeholder="Buscar"
+					class="form-control rounded-corners"
+				>
+			</div>
+			
+			<span class="form-control-feedback glyphicon glyphicon-search"></span>
+		</div>
+	</div>
+</div>
+
+<div ng-if="searchDiagnosesAction.input.expression.valid">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="col-sm-1 text-center">
+					Eliminar
+				</th>
+				
+				<th class="col-sm-1 text-center">
+					Editar
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-4">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('name') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('name') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Nombre
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('creationDateTime')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('creationDateTime') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('creationDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Creación
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('lastEditionDateTime')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Última edición
+					</span>
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<!-- TODO: link to diagnosis state -->
+			<tr ng-repeat="diagnosis in diagnoses">
+				<td class="text-center">
+					<!--TODO-->
+					<span class="glyphicon glyphicon-remove"></span>
+				</td>
+				
+				<td class="text-center">
+					<a ui-sref="editDiagnosis({ id: diagnosis.id })">
+						<span class="glyphicon glyphicon-edit"></span>
+					</a>
+				</td>
+				
+				<td>
+					{{ diagnosis.name }}
+				</td>
+				
+				<td>
+					{{ diagnosis.creationDateTime | date: 'longDate' }}
+				</td>
+				
+				<td>
+					{{ diagnosis.lastEditionDateTime | date: 'longDate' }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
+		</div>
+	</div>
+	
+	<div ng-if="! searching">
+		<div ng-if="diagnoses.length === 0">
+			<div class="no-results-text text-center">
+				La búsqueda no obtuvo ningún resultado
+			</div>
+		</div>
+		
+		<div ng-if="total > 0">
+			<div class="text-center">
+				<pagination
+					ng-change="searchDiagnosesAction.execute()"
+					ng-model="searchDiagnosesAction.input.page.value"
+					items-per-page="searchDiagnosesAction.input.resultsPerPage.value"
+					total-items="total"
+					max-size="10"
+					boundary-links="true"
+					previous-text="‹"
+					next-text="›"
+					first-text="«"
+					last-text="»"
+				></pagination>
+			</div>
+		</div>
+	</div>
+</div>
