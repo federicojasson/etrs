@@ -33,6 +33,12 @@
 		 */
 		function getMenuItems() {
 			return {
+				clinicalImpressions: {
+					name: 'Administrar',
+					state: 'clinicalImpressions',
+					description: 'Administre las impresiones clínicas'
+				},
+				
 				diagnoses: {
 					name: 'Administrar',
 					state: 'diagnoses',
@@ -55,6 +61,12 @@
 					name: 'Administrar',
 					state: 'medicines',
 					description: 'Administre los medicamentos'
+				},
+				
+				newClinicalImpression: {
+					name: 'Nueva',
+					state: 'newClinicalImpression',
+					description: 'Cree una nueva impresión clínica'
 				},
 				
 				newDiagnosis: {
@@ -107,6 +119,14 @@
 						items: [
 							menuItems.medicines,
 							menuItems.newMedicine
+						]
+					},
+					
+					{
+						name: 'Impresiones clínicas',
+						items: [
+							menuItems.clinicalImpressions,
+							menuItems.newClinicalImpression
 						]
 					},
 					

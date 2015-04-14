@@ -1,0 +1,48 @@
+<h1>{{ clinicalImpression.name }}</h1>
+
+<p>
+	TODO: text?
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editClinicalImpressionAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Impresión clínica
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos de la impresión clínica:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editClinicalImpressionAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editClinicalImpressionAction.input.name.value"
+					popover="{{ editClinicalImpressionAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning pull-right">
+				Editar impresión clínica
+			</button>
+		</div>
+	</form>
+</div>

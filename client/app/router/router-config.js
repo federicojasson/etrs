@@ -64,6 +64,28 @@
 				},
 				
 				{
+					name: 'clinicalImpression',
+					url: '/clinical-impression/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ClinicalImpressionViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'clinicalImpressions',
+					url: '/clinical-impressions',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ClinicalImpressionsViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'diagnoses',
 					url: '/diagnoses',
 					data: {
@@ -94,6 +116,17 @@
 							ad: 'EditAccountViewController',
 							dr: 'EditAccountViewController',
 							op: 'EditAccountViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editClinicalImpression',
+					url: '/clinical-impression/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditClinicalImpressionViewController'
 						}
 					}
 				},
@@ -194,6 +227,17 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'MedicinesViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newClinicalImpression',
+					url: '/clinical-impression/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewClinicalImpressionViewController'
 						}
 					}
 				},
