@@ -5,7 +5,17 @@
 </p>
 
 <div class="row">
-	<div class="col-sm-5 col-sm-offset-7">
+	<div class="col-sm-7">
+		<a ui-sref="newMedicine" class="btn btn-success">
+			<span class="glyphicon glyphicon-plus"></span>
+			
+			<span class="icon-text">
+				Nuevo
+			</span>
+		</a>
+	</div>
+	
+	<div class="col-sm-5">
 		<div
 			ng-class="{
 				'has-error': ! searchMedicinesAction.input.expression.valid
