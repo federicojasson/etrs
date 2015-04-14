@@ -35,6 +35,7 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 		
 		// Builds an array containing the versioned types
 		$types = [
+			'Diagnosis',
 			'Medicine',
 			'Treatment',
 			'User'
