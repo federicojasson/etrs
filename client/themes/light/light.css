@@ -75,10 +75,20 @@ h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {}
 
 pre {}
 
+td a {
+	color: #333333;
+}
+
+td a:hover {
+	color: #4d7984;
+	text-decoration: none;
+}
+
 textarea {}
 
 th {
 	background-color: #efefef;
+	color: #333333;
 }
 
 th[ng-click] {}
