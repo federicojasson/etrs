@@ -61,14 +61,18 @@ textarea {
 }
 
 th {
-	cursor: pointer;
+	cursor: default;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
 }
 
-th:hover {}
+th[ng-click] {
+	cursor: pointer;
+}
+
+th[ng-click]:hover {}
 
 
 /* Bootstrap's classes */

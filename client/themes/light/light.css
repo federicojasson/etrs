@@ -81,7 +81,9 @@ th {
 	background-color: #efefef;
 }
 
-th:hover {
+th[ng-click] {}
+
+th[ng-click]:hover {
 	background-color: #dfdfdf;
 }
 
