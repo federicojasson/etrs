@@ -187,6 +187,20 @@ select.form-control {
 	margin-top: 0px;
 }
 
+.pagination li a {}
+
+.pagination li a:focus {
+	outline: none;
+}
+
+.pagination li a:hover {}
+
+.pagination li.active a {}
+
+.pagination li.active a:focus {}
+
+.pagination li.active a:hover {}
+
 
 /* Custom classes */
 
@@ -293,8 +307,6 @@ select.form-control {
 }
 
 .menu.panel {}
-
-.menu.panel:hover {}
 
 .menu.panel .panel-body {
 	padding: 0px;
