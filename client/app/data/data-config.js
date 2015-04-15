@@ -109,6 +109,36 @@
 					}
 				],
 				
+				MedicalAntecedent: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(medicalAntecedent, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('MedicalAntecedent', 'User', 'creator', medicalAntecedent.creator, depth);
+							var lastEditorPromise = data.getReference('MedicalAntecedent', 'User', 'lastEditor', medicalAntecedent.lastEditor, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
+								medicalAntecedent.creator = values.creator;
+								medicalAntecedent.lastEditor = values.lastEditor;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(medicalAntecedent);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				Medicine: [
 					'$q',
 					'data',

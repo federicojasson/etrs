@@ -143,6 +143,17 @@
 				},
 				
 				{
+					name: 'editMedicalAntecedent',
+					url: '/medical-antecedent/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditMedicalAntecedentViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editMedicine',
 					url: '/medicine/{id:[0-9A-Fa-f]{32}}/edit',
 					data: {
@@ -210,6 +221,28 @@
 				},
 				
 				{
+					name: 'medicalAntecedent',
+					url: '/medical-antecedent/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'MedicalAntecedentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'medicalAntecedents',
+					url: '/medical-antecedents',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'MedicalAntecedentsViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'medicine',
 					url: '/medicine/{id:[0-9A-Fa-f]{32}}',
 					data: {
@@ -249,6 +282,17 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewDiagnosisViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newMedicalAntecedent',
+					url: '/medical-antecedent/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewMedicalAntecedentViewController'
 						}
 					}
 				},

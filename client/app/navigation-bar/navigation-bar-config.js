@@ -57,6 +57,12 @@
 					description: 'Vea los registros del sistema'
 				},
 				
+				medicalAntecedents: {
+					name: 'Administrar',
+					state: 'medicalAntecedents',
+					description: 'Administre los antecedentes médicos'
+				},
+				
 				medicines: {
 					name: 'Administrar',
 					state: 'medicines',
@@ -73,6 +79,12 @@
 					name: 'Nuevo',
 					state: 'newDiagnosis',
 					description: 'Cree un nuevo diagnóstico'
+				},
+				
+				newMedicalAntecedent: {
+					name: 'Nuevo',
+					state: 'newMedicalAntecedent',
+					description: 'Cree un nuevo antecedente médico'
 				},
 				
 				newMedicine: {
@@ -111,6 +123,14 @@
 						name: 'Usuarios',
 						items: [
 							menuItems.invitation
+						]
+					},
+					
+					{
+						name: 'Antecedentes médicos',
+						items: [
+							menuItems.medicalAntecedents,
+							menuItems.newMedicalAntecedent
 						]
 					},
 					

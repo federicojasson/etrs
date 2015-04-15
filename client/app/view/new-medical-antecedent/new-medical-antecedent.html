@@ -1,0 +1,53 @@
+<h1>Nuevo antecedente médico</h1>
+
+<p>
+	El siguiente formulario permite crear un nuevo antecedente médico.<br>
+	<br>
+	<strong>
+		Una vez creado, el antecedente médico aparecerá como opción en los
+		formularios correspondientes.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createMedicalAntecedentAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Antecedente médico
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del antecedente médico:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createMedicalAntecedentAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createMedicalAntecedentAction.input.name.value"
+					popover="{{ createMedicalAntecedentAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-success pull-right">
+				Crear antecedente médico
+			</button>
+		</div>
+	</form>
+</div>
