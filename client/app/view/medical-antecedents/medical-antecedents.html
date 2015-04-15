@@ -170,22 +170,21 @@
 				La búsqueda no obtuvo ningún resultado
 			</div>
 		</div>
-		
-		<div ng-if="total > 0">
-			<div class="text-center">
-				<pagination
-					ng-change="searchMedicalAntecedentsAction.execute()"
-					ng-model="searchMedicalAntecedentsAction.input.page.value"
-					items-per-page="searchMedicalAntecedentsAction.input.resultsPerPage.value"
-					total-items="total"
-					max-size="10"
-					boundary-links="true"
-					previous-text="‹"
-					next-text="›"
-					first-text="«"
-					last-text="»"
-				></pagination>
-			</div>
-		</div>
+	</div>
+	
+	<div class="text-center">
+		<pagination
+			ng-change="searchHandler.search()"
+			ng-if="total / searchMedicalAntecedentsAction.input.resultsPerPage.value > 1"
+			ng-model="searchMedicalAntecedentsAction.input.page.value"
+			items-per-page="searchMedicalAntecedentsAction.input.resultsPerPage.value"
+			total-items="total"
+			max-size="10"
+			boundary-links="true"
+			previous-text="‹"
+			next-text="›"
+			first-text="«"
+			last-text="»"
+		></pagination>
 	</div>
 </div>

@@ -125,22 +125,21 @@
 				La búsqueda no obtuvo ningún resultado
 			</div>
 		</div>
-		
-		<div ng-if="total > 0">
-			<div class="text-center">
-				<pagination
-					ng-change="searchLogsAction.execute()"
-					ng-model="searchLogsAction.input.page.value"
-					items-per-page="searchLogsAction.input.resultsPerPage.value"
-					total-items="total"
-					max-size="10"
-					boundary-links="true"
-					previous-text="‹"
-					next-text="›"
-					first-text="«"
-					last-text="»"
-				></pagination>
-			</div>
-		</div>
+	</div>
+	
+	<div class="text-center">
+		<pagination
+			ng-change="searchHandler.search()"
+			ng-if="total / searchLogsAction.input.resultsPerPage.value > 1"
+			ng-model="searchLogsAction.input.page.value"
+			items-per-page="searchLogsAction.input.resultsPerPage.value"
+			total-items="total"
+			max-size="10"
+			boundary-links="true"
+			previous-text="‹"
+			next-text="›"
+			first-text="«"
+			last-text="»"
+		></pagination>
 	</div>
 </div>

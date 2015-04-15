@@ -76,8 +76,8 @@
 			// Sets a null expression
 			this.action.input.expression.value = null;
 			
-			// Performs a search
-			this.search();
+			// Schedules a search
+			this.scheduleSearch();
 		};
 		
 		/**
@@ -117,7 +117,7 @@
 		/**
 		 * Schedules a search to be performed after some delay.
 		 * 
-		 * Receives the delay.
+		 * Receives, optionally, the delay.
 		 */
 		SearchHandler.prototype.scheduleSearch = function(delay) {
 			// Cancels the scheduled search
