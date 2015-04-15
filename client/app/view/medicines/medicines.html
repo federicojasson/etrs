@@ -65,6 +65,10 @@
 		<thead>
 			<tr>
 				<th class="col-sm-1 text-center">
+					Detalles
+				</th>
+				
+				<th class="col-sm-1 text-center">
 					Eliminar
 				</th>
 				
@@ -72,7 +76,7 @@
 					Editar
 				</th>
 				
-				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-4">
+				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-3">
 					<span
 						ng-class="
 							searchHandler.getSortingDirection('name') === 'asc'? 'glyphicon-chevron-down' :
@@ -120,8 +124,13 @@
 		</thead>
 		
 		<tbody>
-			<!-- TODO: link to medicine state -->
 			<tr ng-repeat="medicine in medicines">
+				<td class="text-center">
+					<a ui-sref="medicine({ id: medicine.id })">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</td>
+				
 				<td class="text-center">
 					<!--TODO-->
 					<span class="glyphicon glyphicon-remove"></span>
@@ -129,7 +138,7 @@
 				
 				<td class="text-center">
 					<a ui-sref="editMedicine({ id: medicine.id })">
-						<span class="glyphicon glyphicon-edit"></span>
+						<span class="glyphicon glyphicon-pencil"></span>
 					</a>
 				</td>
 				
