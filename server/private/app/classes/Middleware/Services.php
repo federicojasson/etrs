@@ -58,11 +58,8 @@ abstract class Services extends \Slim\Middleware {
 		// Gets the fragments of the string separated by slashes
 		$fragments = explode('/', $string);
 		
-		// TODO: use array filter?
 		// Converts the fragments from spinal-case to PascalCase
-		foreach ($fragments as &$fragment) {
-			$fragment = spinalToPascalCase($fragment);
-		}
+		$fragments = filterArray($fragments, 'spinalToPascalCase');
 		
 		// Builds the class
 		return 'App\Service\\' . implode('\\', $fragments);

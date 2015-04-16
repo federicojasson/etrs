@@ -43,11 +43,8 @@ function camelToSpinalCase($string) {
 	preg_match_all('/[0-9]+|[A-Za-z][a-z]*/', $string, $matches);
 	$results = $matches[0];
 	
-	// TODO: use array filter?
 	// Converts the first character of each result to lowercase
-	foreach ($results as &$result) {
-		$result = lcfirst($result);
-	}
+	$results = filterArray($results, 'lcfirst');
 	
 	// Builds the spinal-case string
 	return implode('-', $results);
@@ -83,6 +80,19 @@ function createArrayFilter($filter) {
 }
 
 /**
+ * Applies a filter to an array's elements.
+ * 
+ * Receives the array and a filter for the elements.
+ */
+function filterArray($array, $filter) {
+	// Initializes an array filter
+	$arrayFilter = createArrayFilter($filter);
+	
+	// Applies the array filter
+	return call_user_func($arrayFilter, $array);
+}
+
+/**
  * Returns a boolean expression from a string.
  * 
  * A boolean expression is a sanitized version of the string that contains
@@ -108,11 +118,10 @@ function getBooleanExpression($string) {
 	// Gets the words of the string
 	$words = explode(' ', $string);
 	
-	// TODO: use array filter?
 	// Appends a wildcard character to the words
-	foreach ($words as &$word) {
-		$word .= '*';
-	}
+	$words = filterArray($words, function($word) {
+		return $word . '*';
+	});
 	
 	// Builds the boolean expression
 	return implode(' ', $words);
@@ -230,11 +239,10 @@ function replacePlaceholders($string, $mapping) {
 	$placeholders = array_keys($mapping);
 	$replacements = array_values($mapping);
 	
-	// TODO: use array filter?
 	// Prepends a colon to the placeholders
-	foreach ($placeholders as &$placeholder) {
-		$placeholder = ':' . $placeholder;
-	}
+	$placeholders = filterArray($placeholders, function($placeholder) {
+		return ':' . $placeholder;
+	});
 
 	// Replaces the placeholders
 	return str_replace($placeholders, $replacements, $string);
