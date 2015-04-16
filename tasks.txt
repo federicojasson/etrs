@@ -10,6 +10,7 @@ Quick tasks
 - Should add a service to delete text logs (development and maintenance)?
 - Canceling AJAX requests on route change: http://www.bennadel.com/blog/2616-aborting-ajax-requests-using-http-and-angularjs.htm
 - Rename scheduleSearch function.
+- Function to apply filter to array.
 - Check ng-if directives.
 - Check ui-sref with parameters.
 
