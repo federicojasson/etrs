@@ -43,6 +43,7 @@ function camelToSpinalCase($string) {
 	preg_match_all('/[0-9]+|[A-Za-z][a-z]*/', $string, $matches);
 	$results = $matches[0];
 	
+	// TODO: use array filter?
 	// Converts the first character of each result to lowercase
 	foreach ($results as &$result) {
 		$result = lcfirst($result);
@@ -107,6 +108,7 @@ function getBooleanExpression($string) {
 	// Gets the words of the string
 	$words = explode(' ', $string);
 	
+	// TODO: use array filter?
 	// Appends a wildcard character to the words
 	foreach ($words as &$word) {
 		$word .= '*';
@@ -228,6 +230,7 @@ function replacePlaceholders($string, $mapping) {
 	$placeholders = array_keys($mapping);
 	$replacements = array_values($mapping);
 	
+	// TODO: use array filter?
 	// Prepends a colon to the placeholders
 	foreach ($placeholders as &$placeholder) {
 		$placeholder = ':' . $placeholder;
