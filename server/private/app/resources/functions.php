@@ -281,6 +281,24 @@ function spinalToPascalCase($string) {
 }
 
 /**
+ * Converts a string to boolean.
+ * 
+ * Receives the string.
+ */
+function stringToBoolean($string) {
+	return ($string === 'false')? false : true;
+}
+
+/**
+ * Converts a string to integer.
+ * 
+ * Receives the string.
+ */
+function stringToInteger($string) {
+	return (int) $string;
+}
+
+/**
  * Trims and shrinks a string.
  * 
  * Receives the string.
