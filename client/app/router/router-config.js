@@ -143,6 +143,17 @@
 				},
 				
 				{
+					name: 'editImagingTest',
+					url: '/imaging-test/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditImagingTestViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editLaboratoryTest',
 					url: '/laboratory-test/{id:[0-9A-Fa-f]{32}}/edit',
 					data: {
@@ -205,6 +216,28 @@
 							ad: 'HomeViewController',
 							dr: 'HomeViewController',
 							op: 'HomeViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'imagingTest',
+					url: '/imaging-test/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ImagingTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'imagingTests',
+					url: '/imaging-tests',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ImagingTestsViewController'
 						}
 					}
 				},
@@ -315,6 +348,17 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewDiagnosisViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newImagingTest',
+					url: '/imaging-test/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewImagingTestViewController'
 						}
 					}
 				},

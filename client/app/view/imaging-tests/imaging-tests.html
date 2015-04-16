@@ -1,0 +1,190 @@
+<h1>Exámenes de imágenes</h1>
+
+<p>
+	Esta sección le permite administrar los exámenes de imágenes del sistema.<br>
+	<br>
+	<strong>
+		Eliminar un examen de imágenes provocará la alteración de todas las
+		entidades del sistema asociadas al mismo.
+	</strong>
+</p>
+
+<div class="row">
+	<div class="col-sm-7">
+		<a ui-sref="newImagingTest" class="btn btn-success">
+			<span class="glyphicon glyphicon-plus"></span>
+			
+			<span class="icon-text">
+				Nuevo
+			</span>
+		</a>
+	</div>
+	
+	<div class="col-sm-5">
+		<div
+			ng-class="{
+				'has-error': ! searchImagingTestsAction.input.expression.valid
+			}"
+			class="form-group has-feedback"
+		>
+			<div
+				ng-class="{
+					'input-group': searchImagingTestsAction.input.expression.value !== null
+				}"
+				class="rounded-corners"
+			>
+				<span ng-if="searchImagingTestsAction.input.expression.value !== null" class="input-group-btn">
+					<button ng-click="searchHandler.clearExpression()" class="btn btn-default">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+				
+				<input
+					ng-change="searchHandler.scheduleSearch(750)"
+					ng-keyup="$event.keyCode == 13 && searchHandler.search()"
+					ng-model="searchImagingTestsAction.input.expression.value"
+					popover="{{ searchImagingTestsAction.input.expression.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					null-if-empty
+					type="text"
+					placeholder="Buscar"
+					class="form-control rounded-corners"
+				>
+			</div>
+			
+			<span class="form-control-feedback glyphicon glyphicon-search"></span>
+		</div>
+	</div>
+</div>
+
+<div ng-if="searchImagingTestsAction.input.expression.valid">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="col-sm-1 text-center">
+					Detalles
+				</th>
+				
+				<th class="col-sm-1 text-center">
+					Eliminar
+				</th>
+				
+				<th class="col-sm-1 text-center">
+					Editar
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('name') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('name') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Nombre
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('creationDateTime')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('creationDateTime') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('creationDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Creación
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('lastEditionDateTime')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Última edición
+					</span>
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat="imagingTest in imagingTests">
+				<td class="text-center">
+					<a ui-sref="imagingTest({ id: imagingTest.id })">
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</td>
+				
+				<td class="text-center">
+					<a ng-click="TODO">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
+				</td>
+				
+				<td class="text-center">
+					<a ui-sref="editImagingTest({ id: imagingTest.id })">
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+				</td>
+				
+				<td>
+					{{ imagingTest.name }}
+				</td>
+				
+				<td>
+					{{ imagingTest.creationDateTime | date: 'longDate' }}
+				</td>
+				
+				<td>
+					{{ imagingTest.lastEditionDateTime | date: 'longDate' }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
+		</div>
+	</div>
+	
+	<div ng-if="! searching">
+		<div ng-if="imagingTests.length === 0">
+			<div class="no-results-text text-center">
+				La búsqueda no obtuvo ningún resultado
+			</div>
+		</div>
+	</div>
+	
+	<div class="text-center">
+		<pagination
+			ng-change="searchHandler.search()"
+			ng-if="total / searchImagingTestsAction.input.resultsPerPage.value > 1"
+			ng-model="searchImagingTestsAction.input.page.value"
+			items-per-page="searchImagingTestsAction.input.resultsPerPage.value"
+			total-items="total"
+			max-size="10"
+			boundary-links="true"
+			previous-text="‹"
+			next-text="›"
+			first-text="«"
+			last-text="»"
+		></pagination>
+	</div>
+</div>

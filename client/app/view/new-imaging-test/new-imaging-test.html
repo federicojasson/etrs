@@ -1,0 +1,72 @@
+<h1>Nuevo examen de imágenes</h1>
+
+<p>
+	El siguiente formulario le permite crear un nuevo examen de imágenes.<br>
+	<br>
+	<strong>
+		Una vez creado, el examen de imágenes aparecerá como opción en los
+		formularios correspondientes.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createImagingTestAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Examen de imágenes
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del examen de imágenes:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createImagingTestAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createImagingTestAction.input.name.value"
+					popover="{{ createImagingTestAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createImagingTestAction.input.dataTypeDefinition.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createImagingTestAction.input.dataTypeDefinition.value"
+					popover="{{ createImagingTestAction.input.dataTypeDefinition.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Definición del tipo de dato"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-success pull-right">
+				Crear examen de imágenes
+			</button>
+		</div>
+	</form>
+</div>

@@ -45,6 +45,12 @@
 					description: 'Administre los diagnósticos'
 				},
 				
+				imagingTests: {
+					name: 'Administrar',
+					state: 'imagingTests',
+					description: 'Administre los exámenes de imágenes'
+				},
+				
 				invitation: {
 					name: 'Enviar invitación',
 					state: 'invitation',
@@ -85,6 +91,12 @@
 					name: 'Nuevo',
 					state: 'newDiagnosis',
 					description: 'Cree un nuevo diagnóstico'
+				},
+				
+				newImagingTest: {
+					name: 'Nuevo',
+					state: 'newImagingTest',
+					description: 'Cree un nuevo examen de imágenes'
 				},
 				
 				newLaboratoryTest: {
@@ -167,6 +179,14 @@
 						items: [
 							menuItems.laboratoryTests,
 							menuItems.newLaboratoryTest
+						]
+					},
+					
+					{
+						name: 'Exámenes de imágenes',
+						items: [
+							menuItems.imagingTests,
+							menuItems.newImagingTest
 						]
 					},
 					

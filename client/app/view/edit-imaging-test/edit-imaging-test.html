@@ -1,0 +1,72 @@
+<h1>{{ imagingTest.name }}</h1>
+
+<p>
+	El siguiente formulario le permite editar un examen de imágenes.<br>
+	<br>
+	<strong>
+		Los cambios realizados en el examen de imágenes se verán reflejados
+		automáticamente en todo el sistema.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editImagingTestAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Examen de imágenes
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del examen de imágenes:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editImagingTestAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editImagingTestAction.input.name.value"
+					popover="{{ editImagingTestAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editImagingTestAction.input.dataTypeDefinition.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editImagingTestAction.input.dataTypeDefinition.value"
+					popover="{{ editImagingTestAction.input.dataTypeDefinition.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Definición del tipo de dato"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning pull-right">
+				Editar examen de imágenes
+			</button>
+		</div>
+	</form>
+</div>
