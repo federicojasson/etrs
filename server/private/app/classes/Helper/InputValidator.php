@@ -40,7 +40,7 @@ class InputValidator {
 	 * Receives the input.
 	 */
 	public function isDataTypeDefinition($input) {
-		if (! $this->isValidLine($input, 0, 1024)) { // TODO: 0 or 1????
+		if (! $this->isValidLine($input, 0, 1024)) {
 			// The input is not a valid line
 			return false;
 		}
@@ -68,7 +68,7 @@ class InputValidator {
 		}
 		
 		// Determines whether the input matches a regular expression
-		return preg_match('/(?!.*[\x{0000}-\x{001f}])(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input); // TODO: 0 or 1????
+		return preg_match('/(?!.*[\x{0000}-\x{001f}])(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input);
 	}
 	
 	/**
