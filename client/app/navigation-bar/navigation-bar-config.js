@@ -51,6 +51,12 @@
 					description: 'Invite a una persona a registrarse en ETRS'
 				},
 				
+				laboratoryTests: {
+					name: 'Administrar',
+					state: 'laboratoryTests',
+					description: 'Administre los exámenes de laboratorio'
+				},
+				
 				logs: {
 					name: 'Ver',
 					state: 'logs',
@@ -79,6 +85,12 @@
 					name: 'Nuevo',
 					state: 'newDiagnosis',
 					description: 'Cree un nuevo diagnóstico'
+				},
+				
+				newLaboratoryTest: {
+					name: 'Nuevo',
+					state: 'newLaboratoryTest',
+					description: 'Cree un nuevo examen de laboratorio'
 				},
 				
 				newMedicalAntecedent: {
@@ -147,6 +159,14 @@
 						items: [
 							menuItems.clinicalImpressions,
 							menuItems.newClinicalImpression
+						]
+					},
+					
+					{
+						name: 'Exámenes de laboratorio',
+						items: [
+							menuItems.laboratoryTests,
+							menuItems.newLaboratoryTest
 						]
 					},
 					

@@ -1,0 +1,72 @@
+<h1>Nuevo examen de laboratorio</h1>
+
+<p>
+	El siguiente formulario le permite crear un nuevo examen de laboratorio.<br>
+	<br>
+	<strong>
+		Una vez creado, el examen de laboratorio aparecerá como opción en los
+		formularios correspondientes.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createLaboratoryTestAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Examen de laboratorio
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del examen de laboratorio:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createLaboratoryTestAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createLaboratoryTestAction.input.name.value"
+					popover="{{ createLaboratoryTestAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createLaboratoryTestAction.input.dataTypeDefinition.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createLaboratoryTestAction.input.dataTypeDefinition.value"
+					popover="{{ createLaboratoryTestAction.input.dataTypeDefinition.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Definición del tipo de dato"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-success pull-right">
+				Crear examen de laboratorio
+			</button>
+		</div>
+	</form>
+</div>

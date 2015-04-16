@@ -143,6 +143,17 @@
 				},
 				
 				{
+					name: 'editLaboratoryTest',
+					url: '/laboratory-test/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditLaboratoryTestViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editMedicalAntecedent',
 					url: '/medical-antecedent/{id:[0-9A-Fa-f]{32}}/edit',
 					data: {
@@ -205,6 +216,28 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'InvitationViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'laboratoryTest',
+					url: '/laboratory-test/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'LaboratoryTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'laboratoryTests',
+					url: '/laboratory-tests',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'LaboratoryTestsViewController'
 						}
 					}
 				},
@@ -282,6 +315,17 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewDiagnosisViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newLaboratoryTest',
+					url: '/laboratory-test/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewLaboratoryTestViewController'
 						}
 					}
 				},

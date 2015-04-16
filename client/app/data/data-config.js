@@ -93,6 +93,36 @@
 					}
 				],
 				
+				LaboratoryTest: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(laboratoryTest, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('LaboratoryTest', 'User', 'creator', laboratoryTest.creator, depth);
+							var lastEditorPromise = data.getReference('LaboratoryTest', 'User', 'lastEditor', laboratoryTest.lastEditor, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
+								laboratoryTest.creator = values.creator;
+								laboratoryTest.lastEditor = values.lastEditor;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(laboratoryTest);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				Log: [
 					'$q',
 					function($q) {

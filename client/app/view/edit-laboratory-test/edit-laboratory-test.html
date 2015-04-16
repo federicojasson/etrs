@@ -1,0 +1,72 @@
+<h1>{{ laboratoryTest.name }}</h1>
+
+<p>
+	El siguiente formulario le permite editar un examen de laboratorio.<br>
+	<br>
+	<strong>
+		Los cambios realizados en el examen de laboratorio se verán reflejados
+		automáticamente en todo el sistema.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editLaboratoryTestAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Examen de laboratorio
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del examen de laboratorio:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editLaboratoryTestAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editLaboratoryTestAction.input.name.value"
+					popover="{{ editLaboratoryTestAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editLaboratoryTestAction.input.dataTypeDefinition.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editLaboratoryTestAction.input.dataTypeDefinition.value"
+					popover="{{ editLaboratoryTestAction.input.dataTypeDefinition.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Definición del tipo de dato"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning pull-right">
+				Editar examen de laboratorio
+			</button>
+		</div>
+	</form>
+</div>
