@@ -180,7 +180,7 @@ class InputValidator {
 			return false;
 		}
 		
-		// Determines whether the value is in the specified range
+		// Determines whether the input is in the specified range
 		return inRange($input, $minimumValue, $maximumValue);
 	}
 	
