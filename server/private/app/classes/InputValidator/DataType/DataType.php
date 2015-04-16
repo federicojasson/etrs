@@ -21,7 +21,7 @@
 namespace App\InputValidator\DataType;
 
 /**
- * TODO: comment
+ * Responsible for validating values of a certain data type.
  */
 abstract class DataType {
 	
