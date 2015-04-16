@@ -40,7 +40,20 @@ class InputValidator {
 	 * Receives the input.
 	 */
 	public function isDataTypeDefinition($input) {
-		// TODO
+		if (! $this->isValidLine($input, 0, 1024)) { // TODO: 0 or 1????
+			// The input is not a valid line
+			return false;
+		}
+		
+		try {
+			// Initializes a data-type input validator
+			\App\InputValidator\DataType\Factory::create($input);
+			
+			return true;
+		} catch (\App\InputValidator\DataType\InvalidDefinitionException $exception) {
+			// The definition is invalid
+			return false;
+		}
 	}
 	
 	/**
