@@ -37,6 +37,7 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 		$types = [
 			'ClinicalImpression',
 			'Diagnosis',
+			'LaboratoryTest',
 			'MedicalAntecedent',
 			'Medicine',
 			'Treatment',
