@@ -35,6 +35,15 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a data-type definition.
+	 * 
+	 * Receives the input.
+	 */
+	public function isDataTypeDefinition($input) {
+		// TODO
+	}
+	
+	/**
 	 * Determines whether an input is an email address.
 	 * 
 	 * Receives the input.
