@@ -178,10 +178,10 @@ class PasswordResetPermission {
 	/**
 	 * Sets the key-stretching iterations.
 	 * 
-	 * Receives the key-stretching iterations to be set.
+	 * Receives the iterations to be set.
 	 */
-	public function setKeyStretchingIterations($keyStretchingIterations) {
-		$this->keyStretchingIterations = $keyStretchingIterations;
+	public function setKeyStretchingIterations($iterations) {
+		$this->keyStretchingIterations = $iterations;
 	}
 	
 	/**
