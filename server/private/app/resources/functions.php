@@ -202,6 +202,15 @@ function isArraySequential($array) {
 }
 
 /**
+ * Determines whether a string represents an integer.
+ * 
+ * Receives the string.
+ */
+function isStringAnInteger($string) {
+	return (string) (int) $string === $string;
+}
+
+/**
  * Reads the contents of a JSON file.
  * 
  * Receives the file's path.
