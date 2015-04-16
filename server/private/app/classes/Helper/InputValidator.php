@@ -55,7 +55,7 @@ class InputValidator {
 		}
 		
 		// Determines whether the input matches a regular expression
-		return preg_match('/(?!.*[\x{0000}-\x{001f}])(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input);
+		return preg_match('/(?!.*[\x{0000}-\x{001f}])(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input); // TODO: 0 or 1????
 	}
 	
 	/**

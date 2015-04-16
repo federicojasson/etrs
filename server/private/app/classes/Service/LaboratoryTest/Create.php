@@ -32,7 +32,7 @@ class Create extends \App\Service\External {
 		global $app;
 		
 		// Gets inputs
-		$dataTypeDefinition = $this->getInputValue('dataTypeDefinition'); // TODO: filter
+		$dataTypeDefinition = $this->getInputValue('dataTypeDefinition', 'trimAndShrink');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user

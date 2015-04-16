@@ -34,7 +34,7 @@ class Edit extends \App\Service\External {
 		// Gets inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
-		$dataTypeDefinition = $this->getInputValue('dataTypeDefinition'); // TODO: filter
+		$dataTypeDefinition = $this->getInputValue('dataTypeDefinition', 'trimAndShrink');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user
