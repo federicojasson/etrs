@@ -28,6 +28,15 @@
 		var _this = this;
 		
 		/**
+		 * Determines whether an input is a data-type definition.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isDataTypeDefinition = function(input) {
+			// TODO: implement
+		};
+		
+		/**
 		 * Determines whether an input is an email address.
 		 * 
 		 * Receives the input.
