@@ -279,12 +279,12 @@ class SignUpPermission extends \App\Data\Entity\SignUpPermission implements \Doc
     /**
      * {@inheritDoc}
      */
-    public function setKeyStretchingIterations($keyStretchingIterations)
+    public function setKeyStretchingIterations($iterations)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setKeyStretchingIterations', array($keyStretchingIterations));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setKeyStretchingIterations', array($iterations));
 
-        return parent::setKeyStretchingIterations($keyStretchingIterations);
+        return parent::setKeyStretchingIterations($iterations);
     }
 
     /**

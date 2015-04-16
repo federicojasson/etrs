@@ -246,12 +246,12 @@ class PasswordResetPermission extends \App\Data\Entity\PasswordResetPermission i
     /**
      * {@inheritDoc}
      */
-    public function setKeyStretchingIterations($keyStretchingIterations)
+    public function setKeyStretchingIterations($iterations)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setKeyStretchingIterations', array($keyStretchingIterations));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setKeyStretchingIterations', array($iterations));
 
-        return parent::setKeyStretchingIterations($keyStretchingIterations);
+        return parent::setKeyStretchingIterations($iterations);
     }
 
     /**
