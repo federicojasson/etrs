@@ -31,7 +31,7 @@ class Edit extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$credentials = $this->getInputValue('credentials');
 		$emailAddress = $this->getInputValue('emailAddress');
 		$firstName = $this->getInputValue('firstName', 'trimAndShrink');

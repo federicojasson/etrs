@@ -31,7 +31,7 @@ class Create extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user

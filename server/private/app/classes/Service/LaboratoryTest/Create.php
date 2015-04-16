@@ -31,7 +31,7 @@ class Create extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$dataTypeDefinition = $this->getInputValue('dataTypeDefinition'); // TODO: filter
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		

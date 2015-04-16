@@ -31,7 +31,7 @@ class Search extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$expression = $this->getInputValue('expression', 'getBooleanExpression');
 		$sortingCriteria = $this->getInputValue('sortingCriteria');
 		$page = $this->getInputValue('page');

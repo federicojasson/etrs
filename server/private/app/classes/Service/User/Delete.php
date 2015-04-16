@@ -31,7 +31,7 @@ class Delete extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$id = $this->getInputValue(0);
 		
 		// Gets the user

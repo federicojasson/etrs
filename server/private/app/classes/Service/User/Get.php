@@ -31,7 +31,7 @@ class Get extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$id = $this->getInputValue('id');
 		
 		// Gets the user

@@ -31,7 +31,7 @@ class ResetPassword extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$credentials = $this->getInputValue('credentials', createArrayFilter('hex2bin'));
 		$password = $this->getInputValue('password');
 		

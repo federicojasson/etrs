@@ -31,7 +31,7 @@ class ChangePassword extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$credentials = $this->getInputValue('credentials');
 		$password = $this->getInputValue('password');
 		

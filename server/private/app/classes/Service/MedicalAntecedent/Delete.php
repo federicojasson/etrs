@@ -31,7 +31,7 @@ class Delete extends \App\Service\External {
 	protected function execute() {
 		global $app;
 		
-		// Gets the inputs
+		// Gets inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
 		
