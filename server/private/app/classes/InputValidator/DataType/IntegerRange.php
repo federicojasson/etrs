@@ -21,7 +21,7 @@
 namespace App\InputValidator\DataType;
 
 /**
- * Responsible for validating values of the integer_range data-type.
+ * Responsible for validating values of the integer_range data type.
  */
 class IntegerRange extends DataType {
 	

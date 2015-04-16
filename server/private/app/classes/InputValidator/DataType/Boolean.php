@@ -21,7 +21,7 @@
 namespace App\InputValidator\DataType;
 
 /**
- * Responsible for validating values of the boolean data-type.
+ * Responsible for validating values of the boolean data type.
  */
 class Boolean extends DataType {
 	

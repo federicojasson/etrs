@@ -21,6 +21,6 @@
 namespace App\InputValidator\DataType;
 
 /**
- * Represents an error produced by an invalid DataType definition.
+ * Represents an error produced by an invalid data-type definition.
  */
 class InvalidDefinitionException extends \Exception {}

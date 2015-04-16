@@ -21,7 +21,7 @@
 namespace App\InputValidator\DataType;
 
 /**
- * Responsible for validating values of the integer_fix_values data-type.
+ * Responsible for validating values of the integer_fix_values data type.
  */
 class IntegerFixValues extends DataType {
 	
