@@ -241,6 +241,22 @@ function replacePlaceholders($string, $mapping) {
 }
 
 /**
+ * Converts a string from snake_case to PascalCase.
+ * 
+ * Receives the string.
+ */
+function snakeToPascalCase($string) {
+	// Replaces underscores with spaces
+	$string = str_replace('_', ' ', $string);
+	
+	// Converts the first character of each word to uppercase
+	$string = ucwords($string);
+	
+	// Removes the spaces
+	return str_replace(' ', '', $string);
+}
+
+/**
  * Converts a string from spinal-case to PascalCase.
  * 
  * Receives the string.
