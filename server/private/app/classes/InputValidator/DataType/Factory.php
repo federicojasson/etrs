@@ -37,12 +37,12 @@ namespace App\InputValidator\DataType;
  * The following rules must be followed:
  * 
  * - The fields must be separated by semicolons (;).
- * - The fields must consist of exactly 2 subfields, separated by colons (:).
  * - The data type must be one of the predefined.
  * - The definition fields must be of the form <label>: <value>. Each label must
- *   be a non-empty unique string and each value a non-empty string.
+ *   be a unique non-empty string and each value a non-empty string.
  * 
- * Following are described the predefined data types and their requirements:
+ * Following are described the predefined data types and their specific
+ * requirements:
  * 
  * - boolean
  *   It must have exactly 2 definition fields and the values "false" and "true"
@@ -94,10 +94,10 @@ class Factory {
 	 * Receives the fields.
 	 */
 	private static function getDataType($fields) {
-		// TODO
-		
+		// Gets the data type
 		$dataType = $fields[0];
 		
+		// Builds an array containing the data types
 		$dataTypes = [
 			DATA_TYPE_BOOLEAN,
 			DATA_TYPE_INTEGER_FIX_VALUES,
@@ -105,6 +105,7 @@ class Factory {
 		];
 		
 		if (! inArray($dataType, $dataTypes)) {
+			// The data type is invalid
 			throw new InvalidDefinitionException('Invalid data type.');
 		}
 		
@@ -130,27 +131,33 @@ class Factory {
 	 * Receives the fields.
 	 */
 	private static function getDefinition($fields) {
-		// TODO: comments
-		
 		$definition = [];
 		
+		// Adds all fields, except the first one, to the definition
 		$count = count($fields);
 		for ($i = 1; $i < $count; $i++) {
 			$field = $fields[$i];
+			
+			// Gets the subfields
 			$subfields = self::getSubfields($field);
 			
+			// Gets the label and value
 			$label = $subfields[0];
 			$value = $subfields[1];
 			
 			if (array_key_exists($label, $definition)) {
+				// There is a duplicate label
 				throw new InvalidDefinitionException('Duplicate label.');
 			}
 			
+			// Adds the field to the definition
 			$definition[$label] = $value;
 		}
 		
+		// Gets the data type
 		$dataType = $fields[0];
 		
+		// Processes the definition according to the data type
 		switch ($dataType) {
 			case DATA_TYPE_BOOLEAN: {
 				return self::processBooleanDefinition($definition);
@@ -172,12 +179,11 @@ class Factory {
 	 * Receives the formatted definition.
 	 */
 	private static function getFields($formattedDefinition) {
-		// TODO: comments
-		
+		// Gets the fields
 		$fields = explode(';', $formattedDefinition);
-		$filter = createArrayFilter('trimAndShrink');
 		
-		return call_user_func($filter, $fields);
+		// Trims and shrinks the fields
+		return filterArray($fields, 'trimAndShrink');
 	}
 	
 	/**
@@ -186,27 +192,30 @@ class Factory {
 	 * Receives the field.
 	 */
 	private static function getSubfields($field) {
-		// TODO: comments
-		
+		// Gets the subfields
 		$subfields = explode(':', $field);
 		
 		if (count($subfields) !== 2) {
+			// The field format is invalid
 			throw new InvalidDefinitionException('Invalid field format.');
 		}
 		
-		$filter = createArrayFilter('trimAndShrink');
+		// Trims and shrinks the subfields
+		$subfields = filterArray($subfields, 'trimAndShrink');
 		
-		$subfields = call_user_func($filter, $subfields);
-		
+		// Gets the label
 		$label = $subfields[0];
 		
 		if ($label === '') {
+			// The label is not specified
 			throw new InvalidDefinitionException('Label not specified.');
 		}
 		
+		// Gets the value
 		$value = $subfields[1];
 		
 		if ($value === '') {
+			// The value is not specified
 			throw new InvalidDefinitionException('Value not specified.');
 		}
 		
@@ -214,88 +223,97 @@ class Factory {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Processes a definition of the boolean data type.
 	 * 
 	 * Receives the definition.
 	 */
 	private static function processBooleanDefinition($definition) {
-		// TODO: comments
-		
-		if (count($definition) !== 2) {
-			throw new InvalidDefinitionException(); // TODO: message
+		if (count($definition) > 2) {
+			// There are too many fields defined
+			throw new InvalidDefinitionException('Too many fields defined.');
 		}
 		
 		if (! inArray('false', $definition)) {
-			throw new InvalidDefinitionException(); // TODO: message
+			// The "false" value is not defined
+			throw new InvalidDefinitionException('"false" value not defined.');
 		}
 		
 		if (! inArray('true', $definition)) {
-			throw new InvalidDefinitionException(); // TODO: message
+			// The "true" value is not defined
+			throw new InvalidDefinitionException('"true" value not defined.');
 		}
 		
-		$filter = createArrayFilter('toBoolean'); // TODO: implement
-		
-		return call_user_func($filter, $definition);
+		// Converts the values from string to boolean
+		return filterArray($definition, 'stringToBoolean');
 	}
 	
 	/**
-	 * TODO: comment
+	 * Processes a definition of the integer_fix_values data type.
 	 * 
 	 * Receives the definition.
 	 */
 	private static function processIntegerFixValuesDefinition($definition) {
-		// TODO: comments
-		
 		if (count($definition) === 0) {
-			throw new InvalidDefinitionException(); // TODO: message
+			// There are no fields defined
+			throw new InvalidDefinitionException('No fields defined.');
 		}
 		
+		// Checks if the values represent integers
 		foreach ($definition as $value) {
-			// TODO check if is string integer
+			if (! isStringAnInteger($value)) {
+				// The value doesn't represent an integer
+				throw new InvalidDefinitionException('Non-integer value.');
+			}
 		}
 		
 		if (containsDuplicates($definition)) {
-			throw new InvalidDefinitionException(); // TODO: message
+			// There is a duplicate value
+			throw new InvalidDefinitionException('Duplicate value.');
 		}
 		
-		$filter = createArrayFilter('toInteger'); // TODO: implement
-		
-		return call_user_func($filter, $definition);
+		// Converts the values from string to integer
+		return filterArray($definition, 'stringToInteger');
 	}
 	
 	/**
-	 * TODO: comment
+	 * Processes a definition of the integer_range data type.
 	 * 
 	 * Receives the definition.
 	 */
 	private static function processIntegerRangeDefinition($definition) {
-		// TODO: comments
-		
-		if (count($definition) !== 2) {
-			throw new InvalidDefinitionException(); // TODO: message
+		if (count($definition) > 2) {
+			// There are too many fields defined
+			throw new InvalidDefinitionException('Too many fields defined.');
 		}
 		
 		if (! array_key_exists('min', $definition)) {
-			throw new InvalidDefinitionException(); // TODO: message
+			// The "min" label is not defined
+			throw new InvalidDefinitionException('"min" label not defined.');
 		}
 		
 		if (! array_key_exists('max', $definition)) {
-			throw new InvalidDefinitionException(); // TODO: message
+			// The "max" label is not defined
+			throw new InvalidDefinitionException('"max" label not defined.');
 		}
 		
+		// Checks if the values represent integers
 		foreach ($definition as $value) {
-			// TODO check if is string integer
+			if (! isStringAnInteger($value)) {
+				// The value doesn't represent an integer
+				throw new InvalidDefinitionException('Non-integer value.');
+			}
 		}
 		
-		$filter = createArrayFilter('toInteger'); // TODO: implement
+		// Converts the values from string to integer
+		$definition = filterArray($definition, 'stringToInteger');
 		
-		$definition = call_user_func($filter, $definition);
-		
+		// Gets the minimum and maximum allowed values
 		$minimumValue = $definition['min'];
 		$maximumValue = $definition['max'];
 		
 		if ($maximumValue < $minimumValue) {
-			throw new InvalidDefinitionException(); // TODO: message
+			// The maximum allowed value is lower than the minimum
+			throw new InvalidDefinitionException('Maximum value lower than the minimum.');
 		}
 		
 		return $definition;
