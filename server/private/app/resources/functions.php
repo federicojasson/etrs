@@ -299,6 +299,15 @@ function stringToBoolean($string) {
 }
 
 /**
+ * Converts a string to date.
+ * 
+ * Receives the string.
+ */
+function stringToDate($string) {
+	return \DateTime::createFromFormat('Y-m-d', $string);
+}
+
+/**
  * Converts a string to integer.
  * 
  * Receives the string.
