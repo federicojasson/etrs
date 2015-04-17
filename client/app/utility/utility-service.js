@@ -57,6 +57,15 @@
 		};
 		
 		/**
+		 * Converts a string to integer.
+		 * 
+		 * Receives the string.
+		 */
+		_this.stringToInteger = function(string) {
+			return parseInt(string, 10);
+		};
+		
+		/**
 		 * Trims and shrinks a string.
 		 * 
 		 * Receives the string.
