@@ -129,10 +129,22 @@
 					description: 'Cree un nuevo medicamento'
 				},
 				
+				newPatient: {
+					name: 'Nuevo',
+					state: 'newPatient',
+					description: 'Cree un nuevo paciente'
+				},
+				
 				newTreatment: {
 					name: 'Nuevo',
 					state: 'newTreatment',
 					description: 'Cree un nuevo tratamiento'
+				},
+				
+				patients: {
+					name: 'Buscar',
+					state: 'patients',
+					description: 'Busque pacientes en el sistema'
 				},
 				
 				treatments: {
@@ -156,9 +168,10 @@
 				// DEFINEHERE: define menus here
 				ad: [
 					{
-						name: 'Usuarios',
+						name: 'Pacientes',
 						items: [
-							menuItems.invitation
+							menuItems.patients,
+							menuItems.newPatient
 						]
 					},
 					
@@ -227,6 +240,13 @@
 					},
 					
 					{
+						name: 'Usuarios',
+						items: [
+							menuItems.invitation
+						]
+					},
+					
+					{
 						name: 'Registros',
 						items: [
 							menuItems.logs
@@ -234,8 +254,24 @@
 					}
 				],
 				
-				dr: [],
-				op: []
+				dr: [
+					{
+						name: 'Pacientes',
+						items: [
+							menuItems.patients,
+							menuItems.newPatient
+						]
+					}
+				],
+				
+				op: [
+					{
+						name: 'Pacientes',
+						items: [
+							menuItems.patients
+						]
+					}
+				]
 			};
 		}
 		

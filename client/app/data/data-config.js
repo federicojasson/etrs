@@ -259,6 +259,36 @@
 					}
 				],
 				
+				Patient: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(patient, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('Patient', 'User', 'creator', patient.creator, depth);
+							var lastEditorPromise = data.getReference('Patient', 'User', 'lastEditor', patient.lastEditor, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
+								patient.creator = values.creator;
+								patient.lastEditor = values.lastEditor;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(patient);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				Treatment: [
 					'$q',
 					'data',

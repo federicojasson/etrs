@@ -220,6 +220,18 @@
 				},
 				
 				{
+					name: 'editPatient',
+					url: '/patient/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditPatientViewController',
+							dr: 'EditPatientViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editTreatment',
 					url: '/treatment/{id:[0-9A-Fa-f]{32}}/edit',
 					data: {
@@ -441,12 +453,50 @@
 				},
 				
 				{
+					name: 'newPatient',
+					url: '/patient/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewPatientViewController',
+							dr: 'NewPatientViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'newTreatment',
 					url: '/treatment/new',
 					data: {
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewTreatmentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'patient',
+					url: '/patient/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'PatientViewController',
+							dr: 'PatientViewController',
+							op: 'PatientViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'patients',
+					url: '/patients',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'PatientsViewController',
+							dr: 'PatientsViewController',
+							op: 'PatientsViewController'
 						}
 					}
 				},

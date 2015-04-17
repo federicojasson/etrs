@@ -1,0 +1,179 @@
+<h1>Buscar pacientes</h1>
+
+<p>
+	Esta sección le permite buscar pacientes en el sistema.
+</p>
+
+<div
+	ng-class="{
+		'has-error': ! searchPatientsAction.input.expression.valid
+	}"
+	class="form-group has-feedback"
+>
+	<div
+		ng-class="{
+			'input-group-lg': searchPatientsAction.input.expression.value !== null
+		}"
+		class="rounded-corners"
+	>
+		<span ng-if="searchPatientsAction.input.expression.value !== null" class="input-group-btn">
+			<button ng-click="searchHandler.clearExpression()" class="btn btn-default">
+				<span class="glyphicon glyphicon-remove"></span>
+			</button>
+		</span>
+
+		<input
+			ng-change="searchHandler.scheduleSearch(750)"
+			ng-keyup="$event.keyCode == 13 && searchHandler.search()"
+			ng-model="searchPatientsAction.input.expression.value"
+			popover="{{ searchPatientsAction.input.expression.message }}"
+			popover-append-to-body="true"
+			popover-placement="left"
+			popover-trigger="focus"
+			line
+			null-if-empty
+			type="text"
+			placeholder="Buscar"
+			class="form-control input-lg rounded-corners"
+		>
+	</div>
+	
+	<span class="form-control-feedback glyphicon glyphicon-search"></span>
+</div>
+
+<div ng-if="searchPatientsAction.input.expression.valid">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th ng-click="searchHandler.toggleSortingDirection('firstName')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('firstName') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('firstName') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Nombre
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('lastName')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('lastName') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('lastName') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Apellido
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('gender')" class="col-sm-2">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('gender') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('gender') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Sexo
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('birthDate')" class="col-sm-1">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('birthDate') === 'asc'? 'glyphicon-chevron-up' :
+							searchHandler.getSortingDirection('birthDate') === 'desc'? 'glyphicon-chevron-down' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Edad
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('yearsOfEducation')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('yearsOfEducation') === 'asc'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('yearsOfEducation') === 'desc'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Años de educación
+					</span>
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat="patient in patients">
+				<td>
+					{{ patient.firstName }}
+				</td>
+				
+				<td>
+					{{ patient.lastName }}
+				</td>
+				
+				<td>
+					{{ patient.gender }}
+				</td>
+				
+				<td>
+					{{ patient.birthDate }}
+				</td>
+				
+				<td>
+					{{ patient.yearsOfEducation }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
+		</div>
+	</div>
+	
+	<div ng-if="! searching">
+		<div ng-if="patients.length === 0">
+			<div class="no-results-text text-center">
+				La búsqueda no obtuvo ningún resultado
+			</div>
+		</div>
+	</div>
+	
+	<div class="text-center">
+		<pagination
+			ng-change="searchHandler.search()"
+			ng-if="total / searchPatientsAction.input.resultsPerPage.value > 1"
+			ng-model="searchPatientsAction.input.page.value"
+			items-per-page="searchPatientsAction.input.resultsPerPage.value"
+			total-items="total"
+			max-size="10"
+			boundary-links="true"
+			previous-text="‹"
+			next-text="›"
+			first-text="«"
+			last-text="»"
+		></pagination>
+	</div>
+</div>
