@@ -16,7 +16,7 @@ Quick tasks
 - SMALLINT(...) ---> Unsigned should be one less column.
 - Check numeric input validation: maximum value (consider database type).
 - Entities: setFirstName and setLastName ---> Should received $name instead?
-- Removed ready variable from entities views.
+- Removed ready variable from entities views (when delete is implemented).
 
 
 General code checks
