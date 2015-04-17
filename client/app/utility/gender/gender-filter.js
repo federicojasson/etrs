@@ -19,14 +19,23 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.fullName',
-		'app.utility.gender',
-		'app.utility.honorificName',
-		'app.utility.integer',
-		'app.utility.levelName',
-		'app.utility.line',
-		'app.utility.nullIfEmpty',
-		'app.utility.searchHandler'
-	]);
+	angular.module('app.utility.gender').filter('gender', genderFilter);
+	
+	/**
+	 * Returns a person's gender.
+	 */
+	function genderFilter() {
+		/**
+		 * Applies the filter.
+		 * 
+		 * Receives the person.
+		 */
+		function filter(person) {
+			return (person.gender === 'f')? 'Mujer' : 'Hombre';
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		return filter;
+	}
 })();
