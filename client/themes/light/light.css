@@ -140,6 +140,8 @@ select.form-control {}
 	font-size: 1.2em;
 }
 
+.has-feedback .input-lg {}
+
 .input-group-lg .input-lg {}
 
 .modal {}

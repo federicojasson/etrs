@@ -134,6 +134,10 @@ select.form-control {
 	height: 40px;
 }
 
+.has-feedback .input-lg {
+	padding-right: 42.5px;
+}
+
 .input-group-lg .input-lg {
 	height: 40px;
 }
