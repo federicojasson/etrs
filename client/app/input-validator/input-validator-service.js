@@ -181,6 +181,45 @@
 		};
 		
 		/**
+		 * Determines whether an input is a valid integer.
+		 * 
+		 * Receives the input, the minimum allowed value and, optionally, the
+		 * maximum.
+		 */
+		_this.isValidInteger = function(input, minimumValue, maximumValue) {
+			if (input.value === '') {
+				// The input is empty
+				input.message = 'Este campo es obligatorio';
+				return false;
+			}
+			
+			if (isNaN(input.value)) {
+				// The input is not a number
+				input.message = 'Ingrese un valor numérico';
+				return false;
+			}
+			
+			if (input.value < minimumValue) {
+				// The input is too low
+				input.message = 'El valor de este campo debe ser mayor o igual que ' + maximumValue;
+				return false;
+			}
+			
+			// Initializes the maximum value if is undefined
+			maximumValue = (angular.isDefined(maximumValue))? maximumValue : input.value;
+			
+			if (input.value > maximumValue) {
+				// The input is too high
+				input.message = 'El valor de este campo debe ser menor o igual que ' + maximumValue;
+				return false;
+			}
+			
+			// The input is a valid integer
+			input.message = '';
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is a valid password.
 		 * 
 		 * Receives the input.
