@@ -49,7 +49,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Buscar pacientes';
+			return 'Pacientes';
 		};
 		
 		/**
