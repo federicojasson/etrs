@@ -57,6 +57,32 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a date.
+	 * 
+	 * Receives the input.
+	 */
+	public function isDate($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		$matches = [];
+		if (! preg_match('/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/', $input, $matches)) {
+			// The input doesn't match the regular expression
+			return false;
+		}
+		
+		// Gets the year, the month and the day
+		$year = $matches[1];
+		$month = $matches[2];
+		$day = $matches[3];
+		
+		// Checks if the date is valid according to the calendar
+		return checkdate($month, $day, $year);
+	}
+	
+	/**
 	 * Determines whether an input is an email address.
 	 * 
 	 * Receives the input.
