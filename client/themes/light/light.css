@@ -105,6 +105,8 @@ th[ng-click]:hover {
 	text-transform: uppercase;
 }
 
+.input-group-lg .input-group-btn .btn {}
+
 .btn-lg {
 	font-size: 0.95em;
 	text-transform: uppercase;
@@ -130,11 +132,15 @@ select.form-control {}
 
 .has-feedback .form-control-feedback {}
 
+.has-feedback .form-control-feedback.lg {}
+
 .input-group-btn {}
 
 .input-lg {
 	font-size: 1.2em;
 }
+
+.input-group-lg .input-lg {}
 
 .modal {}
 

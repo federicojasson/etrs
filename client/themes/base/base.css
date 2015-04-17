@@ -87,6 +87,10 @@ th[ng-click]:hover {}
 	line-height: 18px;
 }
 
+.input-group-lg .input-group-btn .btn {
+	height: 40px;
+}
+
 .btn-lg {
 	line-height: 18px;
 }
@@ -117,11 +121,20 @@ select.form-control {
 	z-index: 100;
 }
 
+.has-feedback .form-control-feedback.lg {
+	height: 40px;
+	line-height: 40px;
+}
+
 .input-group-btn {
 	font-size: inherit;
 }
 
 .input-lg {
+	height: 40px;
+}
+
+.input-group-lg .input-lg {
 	height: 40px;
 }
 
