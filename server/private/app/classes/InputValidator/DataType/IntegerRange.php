@@ -39,7 +39,7 @@ class IntegerRange extends DataType {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// Gets the minimum and maximum allowed values
+		// Gets the minimum and maximum values
 		$minimumValue = $definition['min'];
 		$maximumValue = $definition['max'];
 		

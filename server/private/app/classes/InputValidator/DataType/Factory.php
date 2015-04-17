@@ -307,12 +307,12 @@ class Factory {
 		// Converts the values from string to integer
 		$definition = filterArray($definition, 'stringToInteger');
 		
-		// Gets the minimum and maximum allowed values
+		// Gets the minimum and maximum values
 		$minimumValue = $definition['min'];
 		$maximumValue = $definition['max'];
 		
 		if ($maximumValue < $minimumValue) {
-			// The maximum allowed value is lower than the minimum
+			// The maximum value is lower than the minimum
 			throw new InvalidDefinitionException('Maximum value lower than the minimum.');
 		}
 		

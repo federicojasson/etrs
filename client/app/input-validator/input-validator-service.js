@@ -121,7 +121,7 @@
 			// The input is null
 			input.message = '';
 			return true;
-		}
+		};
 		
 		/**
 		 * Determines whether an input is a user ID.
