@@ -63,6 +63,36 @@
 					}
 				],
 				
+				CognitiveTest: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(cognitiveTest, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('CognitiveTest', 'User', 'creator', cognitiveTest.creator, depth);
+							var lastEditorPromise = data.getReference('CognitiveTest', 'User', 'lastEditor', cognitiveTest.lastEditor, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
+								cognitiveTest.creator = values.creator;
+								cognitiveTest.lastEditor = values.lastEditor;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(cognitiveTest);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				Diagnosis: [
 					'$q',
 					'data',

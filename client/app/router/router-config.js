@@ -86,6 +86,28 @@
 				},
 				
 				{
+					name: 'cognitiveTest',
+					url: '/cognitive-test/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'CognitiveTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'cognitiveTests',
+					url: '/cognitive-tests',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'CognitiveTestsViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'diagnoses',
 					url: '/diagnoses',
 					data: {
@@ -127,6 +149,17 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'EditClinicalImpressionViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editCognitiveTest',
+					url: '/cognitive-test/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditCognitiveTestViewController'
 						}
 					}
 				},
@@ -337,6 +370,17 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewClinicalImpressionViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newCognitiveTest',
+					url: '/cognitive-test/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewCognitiveTestViewController'
 						}
 					}
 				},

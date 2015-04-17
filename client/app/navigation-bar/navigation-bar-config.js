@@ -39,6 +39,12 @@
 					description: 'Administre las impresiones clínicas'
 				},
 				
+				cognitiveTests: {
+					name: 'Administrar',
+					state: 'cognitiveTests',
+					description: 'Administre los exámenes cognitivos'
+				},
+				
 				diagnoses: {
 					name: 'Administrar',
 					state: 'diagnoses',
@@ -85,6 +91,12 @@
 					name: 'Nueva',
 					state: 'newClinicalImpression',
 					description: 'Cree una nueva impresión clínica'
+				},
+				
+				newCognitiveTest: {
+					name: 'Nuevo',
+					state: 'newCognitiveTest',
+					description: 'Cree un nuevo examen cognitivo'
 				},
 				
 				newDiagnosis: {
@@ -187,6 +199,14 @@
 						items: [
 							menuItems.imagingTests,
 							menuItems.newImagingTest
+						]
+					},
+					
+					{
+						name: 'Exámenes cognitivos',
+						items: [
+							menuItems.cognitiveTests,
+							menuItems.newCognitiveTest
 						]
 					},
 					

@@ -22,6 +22,7 @@
 	angular.module('app.action', [
 		'app.action.changePassword',
 		'app.action.createClinicalImpression',
+		'app.action.createCognitiveTest',
 		'app.action.createDiagnosis',
 		'app.action.createImagingTest',
 		'app.action.createLaboratoryTest',
@@ -30,6 +31,7 @@
 		'app.action.createTreatment',
 		'app.action.editAccount',
 		'app.action.editClinicalImpression',
+		'app.action.editCognitiveTest',
 		'app.action.editDiagnosis',
 		'app.action.editImagingTest',
 		'app.action.editLaboratoryTest',
@@ -40,6 +42,7 @@
 		'app.action.requestSignUp',
 		'app.action.resetPassword',
 		'app.action.searchClinicalImpressions',
+		'app.action.searchCognitiveTests',
 		'app.action.searchDiagnoses',
 		'app.action.searchImagingTests',
 		'app.action.searchLaboratoryTests',
