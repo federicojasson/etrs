@@ -41,14 +41,9 @@ class Search extends \App\Service\External {
 		$queryBuilder = $app->data->createQueryBuilder()
 			->select('p.id')
 			->from('Entity:Patient', 'p')
-			->where('p.deleted = false');
-		
-		if (! is_null($expression)) {
-			// A full-text search is to be performed
-			$queryBuilder
-				->andWhere('MATCH(p.firstName, p.lastName) AGAINST(:expression BOOLEAN) > 0')
-				->setParameter('expression', $expression);
-		}
+			->where('p.deleted = false')
+			->andWhere('MATCH(p.firstName, p.lastName) AGAINST(:expression BOOLEAN) > 0')
+			->setParameter('expression', $expression);
 		
 		// Sets the sorting criteria
 		foreach ($sortingCriteria as $sortingCriterion) {
@@ -93,10 +88,6 @@ class Search extends \App\Service\External {
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'expression' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-				if (is_null($input)) {
-					return true;
-				}
-				
 				return $app->inputValidator->isValidLine($input, 0, 128);
 			}),
 			
