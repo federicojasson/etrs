@@ -42,6 +42,7 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 			'LaboratoryTest',
 			'MedicalAntecedent',
 			'Medicine',
+			'Patient',
 			'Treatment',
 			'User'
 			// DEFINEHERE: reset versions of all entities here
