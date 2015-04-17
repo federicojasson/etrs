@@ -22,7 +22,7 @@
 	angular.module('app.utility.nullIfEmpty').directive('nullIfEmpty', nullIfEmptyDirective);
 	
 	/**
-	 * Processes an input to treat empty values as null.
+	 * Processes an input and treats empty values as null.
 	 */
 	function nullIfEmptyDirective() {
 		/**
