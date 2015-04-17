@@ -66,7 +66,9 @@
 					return inputValidator.isGender(this);
 				}),
 				
-				birthDate: new Input(),
+				birthDate: new Input(function() {
+					return inputValidator.isDate(this);
+				}),
 				
 				yearsOfEducation: new Input(function() {
 					return inputValidator.isValidInteger(this, 0, 100);

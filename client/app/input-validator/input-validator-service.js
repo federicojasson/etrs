@@ -37,6 +37,23 @@
 		};
 		
 		/**
+		 * Determines whether an input is a date.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isDate = function(input) {
+			if (input.value === '') {
+				// The input is not a date
+				input.message = 'Seleccione una fecha';
+				return false;
+			}
+			
+			// The input is a date
+			input.message = '';
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is an email address.
 		 * 
 		 * Receives the input.
