@@ -62,7 +62,7 @@
 		 * Receives the string.
 		 */
 		_this.stringToInteger = function(string) {
-			return parseInt(string, 10);
+			return parseInt(Number(string), 10);
 		};
 		
 		/**
