@@ -36,6 +36,11 @@
 		SearchPatientsAction.prototype.input;
 		
 		/**
+		 * The null-expression callback.
+		 */
+		SearchPatientsAction.prototype.nullExpressionCallback;
+		
+		/**
 		 * The start callback.
 		 */
 		SearchPatientsAction.prototype.startCallback;
@@ -68,6 +73,15 @@
 		 * Executes the action.
 		 */
 		SearchPatientsAction.prototype.execute = function() {
+			if (this.input.expression.value === null) {
+				// The expression is null
+				
+				// Invokes the null-expression callback
+				this.nullExpressionCallback();
+				
+				return;
+			}
+			
 			if (! inputValidator.isInputValid(this.input)) {
 				// The input is invalid
 				return;

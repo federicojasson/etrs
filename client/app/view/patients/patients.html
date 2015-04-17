@@ -4,44 +4,53 @@
 	Esta sección le permite buscar pacientes en el sistema.
 </p>
 
-<div
-	ng-class="{
-		'has-error': ! searchPatientsAction.input.expression.valid
-	}"
-	class="form-group has-feedback"
->
+<div class="row">
 	<div
 		ng-class="{
-			'input-group input-group-lg': searchPatientsAction.input.expression.value !== null
+			'col-sm-8 col-sm-offset-2 top-margin': wasNullExpression,
+			'col-sm-6': ! wasNullExpression
 		}"
-		class="rounded-corners"
 	>
-		<span ng-if="searchPatientsAction.input.expression.value !== null" class="input-group-btn">
-			<button ng-click="searchHandler.clearExpression()" class="btn btn-default">
-				<span class="glyphicon glyphicon-remove"></span>
-			</button>
-		</span>
-
-		<input
-			ng-change="searchHandler.scheduleSearch(750)"
-			ng-keyup="$event.keyCode == 13 && searchHandler.search()"
-			ng-model="searchPatientsAction.input.expression.value"
-			popover="{{ searchPatientsAction.input.expression.message }}"
-			popover-append-to-body="true"
-			popover-placement="left"
-			popover-trigger="focus"
-			line
-			null-if-empty
-			type="text"
-			placeholder="Buscar"
-			class="form-control input-lg rounded-corners"
+		<div
+			ng-class="{
+				'has-error': ! searchPatientsAction.input.expression.valid
+			}"
+			class="form-group has-feedback"
 		>
+			<div
+				ng-class="{
+					'input-group input-group-lg': searchPatientsAction.input.expression.value !== null
+				}"
+				class="rounded-corners"
+			>
+				<span ng-if="searchPatientsAction.input.expression.value !== null" class="input-group-btn">
+					<button ng-click="searchHandler.clearExpression()" class="btn btn-default">
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+
+				<input
+					ng-change="searchHandler.scheduleSearch(750)"
+					ng-keyup="$event.keyCode == 13 && searchHandler.search()"
+					ng-model="searchPatientsAction.input.expression.value"
+					popover="{{ searchPatientsAction.input.expression.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					null-if-empty
+					type="text"
+					placeholder="Buscar"
+					class="form-control input-lg rounded-corners"
+				>
+			</div>
+
+			<span class="form-control-feedback glyphicon glyphicon-search lg"></span>
+		</div>
 	</div>
-	
-	<span class="form-control-feedback glyphicon glyphicon-search lg"></span>
 </div>
 
-<div ng-if="searchPatientsAction.input.expression.valid">
+<div ng-if="searchPatientsAction.input.expression.valid && ! wasNullExpression">
 	<table class="table table-hover">
 		<thead>
 			<tr>

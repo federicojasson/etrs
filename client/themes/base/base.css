@@ -387,6 +387,10 @@ select.form-control {
 	user-select: none;
 }
 
+.top-margin {
+	margin-top: 48px;
+}
+
 .unlocked-image {
 	background-image: url(images/open-padlock.png);
 	background-position: center center;

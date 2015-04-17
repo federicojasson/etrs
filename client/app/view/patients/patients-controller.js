@@ -71,6 +71,7 @@
 			
 			// Includes auxiliary variables
 			$scope.searching = false;
+			$scope.wasNullExpression = true;
 			
 			// Initializes the actions
 			initializeSearchPatientsAction();
@@ -110,11 +111,22 @@
 			
 			// Registers the callbacks
 			
+			action.nullExpressionCallback = function() {
+				// Refreshes the patients
+				$scope.patients = [];
+				
+				// Refreshes the total number of results
+				$scope.total = 0;
+				
+				$scope.wasNullExpression = true;
+			};
+			
 			action.startCallback = function() {
 				// Refreshes the patients
 				$scope.patients = [];
 				
 				$scope.searching = true;
+				$scope.wasNullExpression = false;
 			};
 			
 			action.successCallback = function(results, total) {
