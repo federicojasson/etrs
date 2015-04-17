@@ -171,7 +171,7 @@
 		_this.isUserRole = function(input) {
 			if (input.value === '') {
 				// The input is not a user role
-				input.message = 'Seleccione el rol de usuario';
+				input.message = 'Seleccione un rol de usuario';
 				return false;
 			}
 			
