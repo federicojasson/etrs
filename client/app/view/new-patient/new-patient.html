@@ -86,13 +86,14 @@
 			>
 				<div class="input-group">
 					<input
-						ng-model="createPatientAction.input.birthDate.value"
 						popover="{{ createPatientAction.input.birthDate.message }}"
 						popover-append-to-body="true"
 						popover-placement="left"
 						popover-trigger="focus"
 						type="text"
 						placeholder="Fecha de nacimiento"
+						value="{{ createPatientAction.input.birthDate.value | date: 'longDate' }}"
+						readonly
 						class="form-control"
 					>
 					
