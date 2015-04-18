@@ -19,16 +19,44 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.age',
-		'app.utility.date',
-		'app.utility.fullName',
-		'app.utility.gender',
-		'app.utility.honorificName',
-		'app.utility.integer',
-		'app.utility.levelName',
-		'app.utility.line',
-		'app.utility.nullIfEmpty',
-		'app.utility.searchHandler'
+	angular.module('app.utility.date').run([
+		'$http',
+		'dateFilter',
+		run
 	]);
+	
+	/**
+	 * Performs initialization tasks.
+	 */
+	function run($http, dateFilter) {
+		// TODO: order and comment
+		
+		function func(value) {
+			if (angular.isArray(value)) {
+				for (var i; i < value.length; i++) {
+					value[i] = func(value[i]);
+				}
+			}
+			
+			if (angular.isObject(value)) {
+				for (var prop in value) {
+					if (! value.hasOwnProperty(prop)) {
+						continue;
+					}
+					
+					value[prop] = func(value[prop]);
+				}
+			}
+			
+			if (value instanceof Date) {
+				return dateFilter(value, 'yyyy-MM-dd');
+			}
+			
+			return value;
+		}
+		
+		$http.defaults.transformRequest.unshift(function(requestData) {
+			return func(requestData);
+		});
+	}
 })();
