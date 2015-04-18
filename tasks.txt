@@ -13,7 +13,6 @@ Quick tasks
 - Check ng-if directives.
 - Check ui-sref with parameters.
 - Add explanation of data-type definition in the views.
-- SMALLINT(...) ---> Unsigned should be one less column.
 - Check numeric input validation: maximum value (consider database type).
 - Entities: setFirstName and setLastName ---> Should received $name instead?
 - Removed ready variable from entities views (when delete is implemented).
