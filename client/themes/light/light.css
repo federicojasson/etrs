@@ -215,6 +215,8 @@ select.form-control {}
 
 .address-icon + .icon-text {}
 
+.calendar table {}
+
 .copyright-text {
 	color: #aaaaaa;
 	font-size: 0.8em;

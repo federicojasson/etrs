@@ -228,6 +228,10 @@ select.form-control {
 	margin-left: 54px;
 }
 
+.calendar {
+	padding: 16px;
+}
+
 .copyright-text {
 	margin-bottom: 48px;
 	margin-top: -12px;

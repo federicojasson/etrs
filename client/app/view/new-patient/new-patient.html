@@ -85,23 +85,6 @@
 				class="form-group"
 			>
 				<div class="input-group">
-					<span class="input-group-btn">
-						<div dropdown class="btn-group">
-							<button dropdown-toggle class="btn btn-default dropdown-toggle">
-								<span class="glyphicon glyphicon-calendar"></span>
-							</button>
-
-							<div ng-click="$event.stopPropagation()" class="dropdown-menu">
-								<datepicker
-									ng-model="createPatientAction.input.birthDate.value"
-									datepicker-mode="'year'"
-									show-weeks="false"
-									starting-day="1"
-								></datepicker>
-							</div>
-						</div>
-					</span>
-					
 					<input
 						ng-model="createPatientAction.input.birthDate.value"
 						popover="{{ createPatientAction.input.birthDate.message }}"
@@ -112,6 +95,23 @@
 						placeholder="Fecha de nacimiento"
 						class="form-control"
 					>
+					
+					<span class="input-group-btn">
+						<div dropdown class="btn-group">
+							<button dropdown-toggle class="btn btn-default dropdown-toggle">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</button>
+
+							<div ng-click="$event.stopPropagation()" class="calendar dropdown-menu pull-right">
+								<datepicker
+									ng-model="createPatientAction.input.birthDate.value"
+									datepicker-mode="'year'"
+									show-weeks="false"
+									starting-day="1"
+								></datepicker>
+							</div>
+						</div>
+					</span>
 				</div>
 			</div>
 			
