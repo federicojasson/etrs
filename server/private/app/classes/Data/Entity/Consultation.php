@@ -21,40 +21,29 @@
 namespace App\Data\Entity;
 
 /**
- * Represents a patient from the database.
+ * Represents a consultation from the database.
  * 
  * Annotations:
  * 
  * @Entity(repositoryClass="App\Data\EntityRepository\Custom")
- * @Table(name="patients")
+ * @Table(name="consultations")
  * @HasLifecycleCallbacks
  */
-class Patient {
+class Consultation {
 	
 	/**
-	 * The birth date.
+	 * The clinical impression.
 	 * 
 	 * Annotations:
 	 * 
-	 * @Column(
-	 *		name="birth_date",
-	 *		type="date",
-	 *		nullable=false
+	 * @ManyToOne(targetEntity="ClinicalImpression")
+	 * @JoinColumn(
+	 *		name="clinical_impression",
+	 *		referencedColumnName="id",
+	 *		onDelete="SET NULL"
 	 *	)
 	 */
-	private $birthDate;
-	
-	/**
-	 * The consultations.
-	 * 
-	 * Annotations:
-	 * 
-	 * @OneToMany(
-	 *		targetEntity="Consultation",
-	 *		mappedBy="patient"
-	 *	)
-	 */
-	private $consultations;
+	private $clinicalImpression;
 	
 	/**
 	 * The creation date-time.
@@ -82,6 +71,19 @@ class Patient {
 	 *	)
 	 */
 	private $creator;
+	
+	/**
+	 * The date.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="date",
+	 *		type="date",
+	 *		nullable=false
+	 *	)
+	 */
+	private $date;
 	
 	/**
 	 * Indicates whether the entity is deleted.
@@ -123,35 +125,18 @@ class Patient {
 	private $deletionDateTime;
 	
 	/**
-	 * The first name.
+	 * The diagnosis.
 	 * 
 	 * Annotations:
 	 * 
-	 * @Column(
-	 *		name="first_name",
-	 *		type="string",
-	 *		length=48,
-	 *		nullable=false
+	 * @ManyToOne(targetEntity="Diagnosis")
+	 * @JoinColumn(
+	 *		name="diagnosis",
+	 *		referencedColumnName="id",
+	 *		onDelete="SET NULL"
 	 *	)
 	 */
-	private $firstName;
-	
-	/**
-	 * The gender.
-	 * 
-	 * Annotations:
-	 * 
-	 * @Column(
-	 *		name="gender",
-	 *		type="binary_data",
-	 *		length=1,
-	 *		nullable=false,
-	 *		options={
-	 *			"fixed": true
-	 *		}
-	 *	)
-	 */
-	private $gender;
+	private $diagnosis;
 	
 	/**
 	 * The ID.
@@ -200,18 +185,18 @@ class Patient {
 	private $lastEditor;
 	
 	/**
-	 * The last name.
+	 * The patient.
 	 * 
 	 * Annotations:
 	 * 
-	 * @Column(
-	 *		name="last_name",
-	 *		type="string",
-	 *		length=48,
-	 *		nullable=false
+	 * @ManyToOne(targetEntity="Patient")
+	 * @JoinColumn(
+	 *		name="patient",
+	 *		referencedColumnName="id",
+	 *		onDelete="RESTRICT"
 	 *	)
 	 */
-	private $lastName;
+	private $patient;
 	
 	/**
 	 * The version.
@@ -231,22 +216,6 @@ class Patient {
 	private $version;
 	
 	/**
-	 * The years of education.
-	 * 
-	 * Annotations:
-	 * 
-	 * @Column(
-	 *		name="years_of_education",
-	 *		type="smallint",
-	 *		nullable=false,
-	 *		options={
-	 *			"unsigned": true
-	 *		}
-	 *	)
-	 */
-	private $yearsOfEducation;
-	
-	/**
 	 * Initializes an instance of the class.
 	 */
 	public function __construct() {
@@ -262,11 +231,6 @@ class Patient {
 		$this->deletionDateTime = new \DateTime();
 		$this->deleted = true;
 		$this->deleter = $user;
-		
-		// Deletes the consultations
-		foreach ($this->consultations as $consultation) {
-			$consultation->delete($user);
-		}
 	}
 	
 	/**
@@ -302,11 +266,7 @@ class Patient {
 			$serialized['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
 		}
 		
-		$serialized['firstName'] = $this->firstName;
-		$serialized['lastName'] = $this->lastName;
-		$serialized['gender'] = $this->gender;
-		$serialized['birthDate'] = $this->birthDate->format('Y-m-d');
-		$serialized['yearsOfEducation'] = $this->yearsOfEducation;
+		$serialized['date'] = $this->date->format('Y-m-d');
 		
 		$serialized['creator'] = null;
 		if (! is_null($this->creator)) {
@@ -318,21 +278,19 @@ class Patient {
 			$serialized['lastEditor'] = $this->lastEditor->getId();
 		}
 		
-		$serialized['consultations'] = [];
-		foreach ($this->consultations as $consultation) {
-			$serialized['consultations'][] = bin2hex($consultation->getId());
+		$serialized['patient'] = bin2hex($this->patient->getId());
+		
+		$serialized['clinicalImpression'] = null;
+		if (! is_null($this->clinicalImpression) && ! $this->clinicalImpression->isDeleted()) {
+			$serialized['clinicalImpression'] = bin2hex($this->clinicalImpression->getId());
+		}
+		
+		$serialized['diagnosis'] = null;
+		if (! is_null($this->diagnosis) && ! $this->diagnosis->isDeleted()) {
+			$serialized['diagnosis'] = bin2hex($this->diagnosis->getId());
 		}
 		
 		return $serialized;
-	}
-	
-	/**
-	 * Sets the birth date.
-	 * 
-	 * Receives the date to be set.
-	 */
-	public function setBirthDate($date) {
-		$this->birthDate = $date;
 	}
 	
 	/**
@@ -356,24 +314,6 @@ class Patient {
 	}
 	
 	/**
-	 * Sets the first name.
-	 * 
-	 * Receives the first name to be set.
-	 */
-	public function setFirstName($firstName) {
-		$this->firstName = $firstName;
-	}
-	
-	/**
-	 * Sets the gender.
-	 * 
-	 * Receives the gender to be set.
-	 */
-	public function setGender($gender) {
-		$this->gender = $gender;
-	}
-	
-	/**
 	 * Sets the last-edition date-time.
 	 */
 	public function setLastEditionDateTime() {
@@ -387,24 +327,6 @@ class Patient {
 	 */
 	public function setLastEditor($user) {
 		$this->lastEditor = $user;
-	}
-	
-	/**
-	 * Sets the last name.
-	 * 
-	 * Receives the last name to be set.
-	 */
-	public function setLastName($lastName) {
-		$this->lastName = $lastName;
-	}
-	
-	/**
-	 * Sets the years of education.
-	 * 
-	 * Receives the years to be set.
-	 */
-	public function setYearsOfEducation($years) {
-		$this->yearsOfEducation = $years;
 	}
 	
 }

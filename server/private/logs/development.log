@@ -1,0 +1,22 @@
+2015-04-19 04:04:59 ERROR       - exception 'ErrorException' with message 'Missing argument 1 for App\Data\Entity\Consultation::delete(), called in C:\xampp\htdocs\etrs\server\private\app\classes\Data\Entity\Patient.php on line 268 and defined' in C:\xampp\htdocs\etrs\server\private\app\classes\Data\Entity\Consultation.php:230
+Stack trace:
+#0 C:\xampp\htdocs\etrs\server\private\app\classes\Data\Entity\Consultation.php(230): Slim\Slim::handleErrors(2, 'Missing argumen...', 'C:\\xampp\\htdocs...', 230, Array)
+#1 C:\xampp\htdocs\etrs\server\private\app\classes\Data\Entity\Patient.php(268): App\Data\Entity\Consultation->delete()
+#2 C:\xampp\htdocs\etrs\server\private\app\classes\Service\Patient\Delete.php(49): App\Data\Entity\Patient->delete(Object(App\Data\Proxy\__CG__\App\Data\Entity\User))
+#3 C:\xampp\htdocs\etrs\server\private\app\classes\Service\Service.php(55): App\Service\Patient\Delete->execute()
+#4 C:\xampp\htdocs\etrs\server\private\app\classes\Service\External.php(43): App\Service\Service->__invoke()
+#5 [internal function]: App\Service\External->__invoke()
+#6 C:\xampp\htdocs\etrs\server\private\vendors\slim\slim\Slim\Route.php(468): call_user_func_array(Object(App\Service\Patient\Delete), Array)
+#7 C:\xampp\htdocs\etrs\server\private\vendors\slim\slim\Slim\Slim.php(1357): Slim\Route->dispatch()
+#8 C:\xampp\htdocs\etrs\server\private\app\classes\Middleware\Session.php(38): Slim\Slim->call()
+#9 C:\xampp\htdocs\etrs\server\private\app\classes\Middleware\Services.php(41): App\Middleware\Session->call()
+#10 C:\xampp\htdocs\etrs\server\private\app\classes\Middleware\Configuration.php(41): App\Middleware\Services->call()
+#11 C:\xampp\htdocs\etrs\server\private\app\classes\Middleware\Helpers.php(41): App\Middleware\Configuration->call()
+#12 C:\xampp\htdocs\etrs\server\private\app\classes\Middleware\ErrorHandlers.php(43): App\Middleware\Helpers->call()
+#13 C:\xampp\htdocs\etrs\server\private\vendors\slim\slim\Slim\Middleware\PrettyExceptions.php(67): App\Middleware\ErrorHandlers->call()
+#14 C:\xampp\htdocs\etrs\server\private\vendors\slim\slim\Slim\Slim.php(1302): Slim\Middleware\PrettyExceptions->call()
+#15 C:\xampp\htdocs\etrs\server\private\app\app.php(208): Slim\Slim->run()
+#16 C:\xampp\htdocs\etrs\server\private\app\app.php(228): runApp(Array)
+#17 C:\xampp\htdocs\etrs\server\private\app\app.php(86): serveExternalRequest()
+#18 C:\xampp\htdocs\etrs\server\index.php(32): executeExternalTask()
+#19 {main}
