@@ -5,6 +5,7 @@ Quick tasks
 - Check what constants can be parameters.
 - Pass maximum age and maximum inactivity time by parameter?
 - Check TODO and DEFINEHERE
+- Consultation\Search???
 - User\Search???
 - Create script for routine maintenance tasks.
 - Should add a service to delete text logs (development and maintenance)?
@@ -16,6 +17,7 @@ Quick tasks
 - Check numeric input validation: maximum value (consider database type).
 - Entities: setFirstName and setLastName ---> Should received $name instead?
 - Removed ready variable from entities views (when delete is implemented).
+- Add inverse relation for user (for password-reset permission) and change deletion way?
 
 
 General code checks
