@@ -18,53 +18,38 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Service\Data;
+namespace App\Service\File;
 
 /**
- * Represents the /data/reset-entities-versions service.
+ * Represents the /file/upload service.
  */
-class ResetEntitiesVersions extends \App\Service\Internal {
+class Upload extends \App\Service\External {
 	
 	/**
 	 * Executes the service.
 	 */
 	protected function execute() {
-		global $app;
-		
-		// TODO: ask for confirmation
-		
-		// Builds an array containing the versioned types
-		$types = [
-			'ClinicalImpression',
-			'CognitiveTest',
-			'Consultation',
-			'Diagnosis',
-			'File',
-			'ImagingTest',
-			'LaboratoryTest',
-			'MedicalAntecedent',
-			'Medicine',
-			'Patient',
-			'Treatment',
-			'User'
-			// DEFINEHERE: reset versions of all entities here
-		];
-		
-		// Resets the entities' versions
-		foreach ($types as $type) {
-			$app->data->createQueryBuilder()
-				->update('Entity:' . $type, 'e')
-				->set('e.version', 0)
-				->getQuery()
-				->execute();
-		}
+		// TODO
 	}
 	
 	/**
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		return true;
+		// TODO
 	}
 	
+	/**
+	 * Determines whether the user is authorized.
+	 */
+	protected function isUserAuthorized() {
+		global $app;
+		
+		// Validates the access
+		return $app->accessValidator->isUserAuthorized([
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_OPERATOR
+		]);
+	}
+
 }
