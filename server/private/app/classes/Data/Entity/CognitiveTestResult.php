@@ -40,6 +40,7 @@ class CognitiveTestResult {
 	 * @JoinColumn(
 	 *		name="cognitive_test",
 	 *		referencedColumnName="id",
+	 *		nullable=false,
 	 *		onDelete="RESTRICT"
 	 *	)
 	 */
@@ -55,6 +56,7 @@ class CognitiveTestResult {
 	 * @JoinColumn(
 	 *		name="consultation",
 	 *		referencedColumnName="id",
+	 *		nullable=false,
 	 *		onDelete="RESTRICT"
 	 *	)
 	 */

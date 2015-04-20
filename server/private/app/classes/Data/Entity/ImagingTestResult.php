@@ -40,6 +40,7 @@ class ImagingTestResult {
 	 * @JoinColumn(
 	 *		name="consultation",
 	 *		referencedColumnName="id",
+	 *		nullable=false,
 	 *		onDelete="RESTRICT"
 	 *	)
 	 */
@@ -55,6 +56,7 @@ class ImagingTestResult {
 	 * @JoinColumn(
 	 *		name="imaging_test",
 	 *		referencedColumnName="id",
+	 *		nullable=false,
 	 *		onDelete="RESTRICT"
 	 *	)
 	 */

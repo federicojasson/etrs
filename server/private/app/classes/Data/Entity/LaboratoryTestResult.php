@@ -40,6 +40,7 @@ class LaboratoryTestResult {
 	 * @JoinColumn(
 	 *		name="consultation",
 	 *		referencedColumnName="id",
+	 *		nullable=false,
 	 *		onDelete="RESTRICT"
 	 *	)
 	 */
@@ -55,6 +56,7 @@ class LaboratoryTestResult {
 	 * @JoinColumn(
 	 *		name="laboratory_test",
 	 *		referencedColumnName="id",
+	 *		nullable=false,
 	 *		onDelete="RESTRICT"
 	 *	)
 	 */
