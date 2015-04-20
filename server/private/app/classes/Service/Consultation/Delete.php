@@ -29,21 +29,67 @@ class Delete extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets inputs
+		$id = $this->getInputValue('id', 'hex2bin');
+		$version = $this->getInputValue('version');
+		
+		// Gets the signed-in user
+		$user = $app->account->getSignedInUser();
+		
+		// Gets the consultation
+		$consultation = $app->data->getRepository('Entity:Consultation')->findNonDeleted($id);
+		
+		// Asserts conditions
+		$app->assertion->entityExists($consultation);
+		$app->assertion->entityUpdated($consultation, $version);
+		
+		// Deletes the consultation
+		$consultation->delete($user);
+		$app->data->merge($consultation);
 	}
 	
 	/**
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'version' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidInteger($input, 0);
+			})
+		]);
+		
+		// Validates the input
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 	/**
 	 * Determines whether the user is authorized.
 	 */
 	protected function isUserAuthorized() {
-		// TODO
+		global $app;
+		
+		// Validates the access
+		return $app->accessValidator->isUserAuthorized([
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR
+		]);
 	}
 
 }
