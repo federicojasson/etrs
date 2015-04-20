@@ -155,6 +155,19 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether a sorting criteria is valid.
+	 * 
+	 * Receives the sorting criteria.
+	 */
+	public function isSortingCriteriaValid($sortingCriteria) {
+		// Gets the fields
+		$fields = array_column($sortingCriteria, 'field');
+		
+		// Determines whether the fields are unique
+		return ! containsDuplicates($fields);
+	}
+	
+	/**
 	 * Determines whether an input is a sorting direction.
 	 * 
 	 * Receives the input.

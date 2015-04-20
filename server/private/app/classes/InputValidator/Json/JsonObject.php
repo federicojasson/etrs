@@ -54,10 +54,7 @@ class JsonObject extends JsonStructure {
 				return false;
 			}
 			
-			// Validates the property
-			$valid = $jsonInputValidator->isInputValid($input[$property]);
-			
-			if (! $valid) {
+			if (! $jsonInputValidator->isInputValid($input[$property])) {
 				// The property is invalid
 				return false;
 			}

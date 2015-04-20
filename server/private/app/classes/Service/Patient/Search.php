@@ -122,19 +122,16 @@ class Search extends \App\Service\External {
 			})
 		]);
 		
-		// Validates the input
-		$valid = $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
-		
-		if (! $valid) {
+		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
 			// The input is invalid
 			return false;
 		}
 		
-		// Gets the sorting criteria
-		$sortingCriteria = $input['sortingCriteria'];
+		// Gets inputs
+		$sortingCriteria = $this->getInputValue('sortingCriteria');
 		
-		// Determines whether the sorting fields are unique
-		return ! containsDuplicates(array_column($sortingCriteria, 'field'));
+		// Validates the sorting criteria
+		return $app->inputValidator->isSortingCriteriaValid($sortingCriteria);
 	}
 	
 	/**

@@ -92,11 +92,7 @@ class Search extends \App\Service\External {
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'expression' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-				if (is_null($input)) {
-					return true;
-				}
-				
-				return $app->inputValidator->isValidLine($input, 0, 128);
+				return is_null($input) || $app->inputValidator->isValidLine($input, 0, 128);
 			}),
 			
 			'sortingCriteria' => new \App\InputValidator\Json\JsonArray(
@@ -124,19 +120,16 @@ class Search extends \App\Service\External {
 			})
 		]);
 		
-		// Validates the input
-		$valid = $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
-		
-		if (! $valid) {
+		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
 			// The input is invalid
 			return false;
 		}
 		
-		// Gets the sorting criteria
-		$sortingCriteria = $input['sortingCriteria'];
+		// Gets inputs
+		$sortingCriteria = $this->getInputValue('sortingCriteria');
 		
-		// Determines whether the sorting fields are unique
-		return ! containsDuplicates(array_column($sortingCriteria, 'field'));
+		// Validates the sorting criteria
+		return $app->inputValidator->isSortingCriteriaValid($sortingCriteria);
 	}
 	
 	/**

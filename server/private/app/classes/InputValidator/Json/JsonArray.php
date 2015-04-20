@@ -46,10 +46,7 @@ class JsonArray extends JsonStructure {
 		
 		// Validates the JSON array's elements
 		foreach ($input as $element) {
-			// Validates the element
-			$valid = $definition->isInputValid($element);
-			
-			if (! $valid) {
+			if (! $definition->isInputValid($element)) {
 				// The element is invalid
 				return false;
 			}

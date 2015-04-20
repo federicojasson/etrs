@@ -58,10 +58,7 @@ class FixedArguments {
 		
 		// Validates the command-line arguments
 		for ($i = 0; $i < $count; $i++) {
-			// Validates the argument
-			$valid = call_user_func($this->definition[$i], $input[$i]);
-			
-			if (! $valid) {
+			if (! call_user_func($this->definition[$i], $input[$i])) {
 				// The argument is invalid
 				return false;
 			}
