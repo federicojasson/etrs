@@ -46,6 +46,59 @@ class Consultation {
 	private $clinicalImpression;
 	
 	/**
+	 * The cognitive-test results.
+	 * 
+	 * Annotations:
+	 * 
+	 * @OneToMany(
+	 *		targetEntity="CognitiveTestResult",
+	 *		mappedBy="consultation"
+	 *	)
+	 */
+	private $cognitiveTestResults;
+	
+	/**
+	 * The comments.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="comments",
+	 *		type="text",
+	 *		nullable=false
+	 *	)
+	 */
+	private $comments;
+	
+	/**
+	 * The concomitant medicines.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToMany(targetEntity="Medicine")
+	 * @JoinTable(
+	 *		name="concomitant_medicines",
+	 *		joinColumns={
+	 *			@JoinColumn(
+	 *				name="consultation",
+	 *				referencedColumnName="id",
+	 *				nullable=false,
+	 *				onDelete="RESTRICT"
+	 *			)
+	 *		},
+	 *		inverseJoinColumns={
+	 *			@JoinColumn(
+	 *				name="medicine",
+	 *				referencedColumnName="id",
+	 *				nullable=false,
+	 *				onDelete="RESTRICT"
+	 *			)
+	 *		}
+	 *	)
+	 */
+	private $concomitantMedicines;
+	
+	/**
 	 * The creation date-time.
 	 * 
 	 * Annotations:
@@ -159,6 +212,30 @@ class Consultation {
 	private $id;
 	
 	/**
+	 * The imaging-test results.
+	 * 
+	 * Annotations:
+	 * 
+	 * @OneToMany(
+	 *		targetEntity="ImagingTestResult",
+	 *		mappedBy="consultation"
+	 *	)
+	 */
+	private $imagingTestResults;
+	
+	/**
+	 * The laboratory-test results.
+	 * 
+	 * Annotations:
+	 * 
+	 * @OneToMany(
+	 *		targetEntity="LaboratoryTestResult",
+	 *		mappedBy="consultation"
+	 *	)
+	 */
+	private $laboratoryTestResults;
+	
+	/**
 	 * The last-edition date-time.
 	 * 
 	 * Annotations:
@@ -193,10 +270,80 @@ class Consultation {
 	 * @JoinColumn(
 	 *		name="patient",
 	 *		referencedColumnName="id",
+	 *		nullable=false,
 	 *		onDelete="RESTRICT"
 	 *	)
 	 */
 	private $patient;
+	
+	/**
+	 * The patient's medical antecedents.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToMany(targetEntity="MedicalAntecedent")
+	 * @JoinTable(
+	 *		name="patient_medical_antecedents",
+	 *		joinColumns={
+	 *			@JoinColumn(
+	 *				name="consultation",
+	 *				referencedColumnName="id",
+	 *				nullable=false,
+	 *				onDelete="RESTRICT"
+	 *			)
+	 *		},
+	 *		inverseJoinColumns={
+	 *			@JoinColumn(
+	 *				name="medical_antecedent",
+	 *				referencedColumnName="id",
+	 *				nullable=false,
+	 *				onDelete="RESTRICT"
+	 *			)
+	 *		}
+	 *	)
+	 */
+	private $patientMedicalAntecedents;
+	
+	/**
+	 * The prescribed treatments.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToMany(targetEntity="Treatment")
+	 * @JoinTable(
+	 *		name="prescribed_treatments",
+	 *		joinColumns={
+	 *			@JoinColumn(
+	 *				name="consultation",
+	 *				referencedColumnName="id",
+	 *				nullable=false,
+	 *				onDelete="RESTRICT"
+	 *			)
+	 *		},
+	 *		inverseJoinColumns={
+	 *			@JoinColumn(
+	 *				name="treatment",
+	 *				referencedColumnName="id",
+	 *				nullable=false,
+	 *				onDelete="RESTRICT"
+	 *			)
+	 *		}
+	 *	)
+	 */
+	private $prescribedTreatments;
+	
+	/**
+	 * The presenting problem.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="presenting_problem",
+	 *		type="text",
+	 *		nullable=false
+	 *	)
+	 */
+	private $presentingProblem;
 	
 	/**
 	 * The version.
@@ -267,6 +414,8 @@ class Consultation {
 		}
 		
 		$serialized['date'] = $this->date->format('Y-m-d');
+		$serialized['presentingProblem'] = $this->presentingProblem;
+		$serialized['comments'] = $this->comments;
 		
 		$serialized['creator'] = null;
 		if (! is_null($this->creator)) {
@@ -281,16 +430,86 @@ class Consultation {
 		$serialized['patient'] = bin2hex($this->patient->getId());
 		
 		$serialized['clinicalImpression'] = null;
-		if (! is_null($this->clinicalImpression) && ! $this->clinicalImpression->isDeleted()) {
-			$serialized['clinicalImpression'] = bin2hex($this->clinicalImpression->getId());
+		if (! is_null($this->clinicalImpression)) {
+			if (! $this->clinicalImpression->isDeleted()) {
+				$serialized['clinicalImpression'] = bin2hex($this->clinicalImpression->getId());
+			}
 		}
 		
 		$serialized['diagnosis'] = null;
-		if (! is_null($this->diagnosis) && ! $this->diagnosis->isDeleted()) {
-			$serialized['diagnosis'] = bin2hex($this->diagnosis->getId());
+		if (! is_null($this->diagnosis)) {
+			if (! $this->diagnosis->isDeleted()) {
+				$serialized['diagnosis'] = bin2hex($this->diagnosis->getId());
+			}
+		}
+		
+		$serialized['patientMedicalAntecedents'] = [];
+		foreach ($this->patientMedicalAntecedents as $medicalAntecedent) {
+			if (! $medicalAntecedent->isDeleted()) {
+				$serialized['patientMedicalAntecedents'][] = bin2hex($medicalAntecedent->getId());
+			}
+		}
+		
+		$serialized['concomitantMedicines'] = [];
+		foreach ($this->concomitantMedicines as $medicine) {
+			if (! $medicine->isDeleted()) {
+				$serialized['concomitantMedicines'][] = bin2hex($medicine->getId());
+			}
+		}
+		
+		$serialized['laboratoryTestResults'] = [];
+		foreach ($this->laboratoryTestResults as $laboratoryTestResult) {
+			$laboratoryTest = $laboratoryTestResult->getLaboratoryTest();
+			
+			if (! $laboratoryTest->isDeleted()) {
+				$serialized['laboratoryTestResults'][bin2hex($laboratoryTest->getId())] = $laboratoryTestResult->getValue();
+			}
+		}
+		
+		$serialized['imagingTestResults'] = [];
+		foreach ($this->imagingTestResults as $imagingTestResult) {
+			$imagingTest = $imagingTestResult->getImagingTest();
+			
+			if (! $imagingTest->isDeleted()) {
+				$serialized['imagingTestResults'][bin2hex($imagingTest->getId())] = $imagingTestResult->getValue();
+			}
+		}
+		
+		$serialized['cognitiveTestResults'] = [];
+		foreach ($this->cognitiveTestResults as $cognitiveTestResult) {
+			$cognitiveTest = $cognitiveTestResult->getCognitiveTest();
+			
+			if (! $cognitiveTest->isDeleted()) {
+				$serialized['cognitiveTestResults'][bin2hex($cognitiveTest->getId())] = $cognitiveTestResult->getValue();
+			}
+		}
+		
+		$serialized['prescribedTreatments'] = [];
+		foreach ($this->prescribedTreatments as $treatment) {
+			if (! $treatment->isDeleted()) {
+				$serialized['prescribedTreatments'][] = bin2hex($treatment->getId());
+			}
 		}
 		
 		return $serialized;
+	}
+	
+	/**
+	 * Sets the clinical impression.
+	 * 
+	 * Receives the clinical impression to be set.
+	 */
+	public function setClinicalImpression($clinicalImpression) {
+		$this->clinicalImpression = $clinicalImpression;
+	}
+	
+	/**
+	 * Sets the comments.
+	 * 
+	 * Receives the comments to be set.
+	 */
+	public function setComments($comments) {
+		$this->comments = $comments;
 	}
 	
 	/**
@@ -314,6 +533,24 @@ class Consultation {
 	}
 	
 	/**
+	 * Sets the date.
+	 * 
+	 * Receives the date to be set.
+	 */
+	public function setDate($date) {
+		$this->date = $date;
+	}
+	
+	/**
+	 * Sets the diagnosis.
+	 * 
+	 * Receives the diagnosis to be set.
+	 */
+	public function setDiagnosis($diagnosis) {
+		$this->diagnosis = $diagnosis;
+	}
+	
+	/**
 	 * Sets the last-edition date-time.
 	 */
 	public function setLastEditionDateTime() {
@@ -327,6 +564,24 @@ class Consultation {
 	 */
 	public function setLastEditor($user) {
 		$this->lastEditor = $user;
+	}
+	
+	/**
+	 * Sets the patient.
+	 * 
+	 * Receives the patient to be set.
+	 */
+	public function setPatient($patient) {
+		$this->patient = $patient;
+	}
+	
+	/**
+	 * Sets the presenting problem.
+	 * 
+	 * Receives the presenting problem to be set.
+	 */
+	public function setPresentingProblem($presentingProblem) {
+		$this->presentingProblem = $presentingProblem;
 	}
 	
 }
