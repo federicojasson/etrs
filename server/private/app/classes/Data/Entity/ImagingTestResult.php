@@ -36,7 +36,10 @@ class ImagingTestResult {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * @ManyToOne(targetEntity="Consultation")
+	 * @ManyToOne(
+	 *		targetEntity="Consultation",
+	 *		inversedBy="imagingTestResults"
+	 *	)
 	 * @JoinColumn(
 	 *		name="consultation",
 	 *		referencedColumnName="id",

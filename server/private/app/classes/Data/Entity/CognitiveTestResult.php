@@ -52,7 +52,10 @@ class CognitiveTestResult {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * @ManyToOne(targetEntity="Consultation")
+	 * @ManyToOne(
+	 *		targetEntity="Consultation",
+	 *		inversedBy="cognitiveTestResults"
+	 *	)
 	 * @JoinColumn(
 	 *		name="consultation",
 	 *		referencedColumnName="id",

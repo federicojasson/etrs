@@ -36,7 +36,10 @@ class LaboratoryTestResult {
 	 * Annotations:
 	 * 
 	 * @Id
-	 * @ManyToOne(targetEntity="Consultation")
+	 * @ManyToOne(
+	 *		targetEntity="Consultation",
+	 *		inversedBy="laboratoryTestResults"
+	 *	)
 	 * @JoinColumn(
 	 *		name="consultation",
 	 *		referencedColumnName="id",

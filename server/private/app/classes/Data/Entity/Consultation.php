@@ -266,7 +266,10 @@ class Consultation {
 	 * 
 	 * Annotations:
 	 * 
-	 * @ManyToOne(targetEntity="Patient")
+	 * @ManyToOne(
+	 *		targetEntity="Patient",
+	 *		inversedBy="consultations"
+	 *	)
 	 * @JoinColumn(
 	 *		name="patient",
 	 *		referencedColumnName="id",
