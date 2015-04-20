@@ -36,16 +36,16 @@ abstract class Service {
 	public function __invoke() {
 		global $app;
 		
-		if (! $this->isRequestValid()) {
-			// The request is invalid
-			// Halts the application
-			haltApp(HTTP_STATUS_BAD_REQUEST, ERROR_CODE_INVALID_REQUEST);
-		}
-		
 		if (! $this->isUserAuthorized()) {
 			// The user is unauthorized
 			// Halts the application
 			haltApp(HTTP_STATUS_FORBIDDEN, ERROR_CODE_UNAUTHORIZED_USER);
+		}
+		
+		if (! $this->isRequestValid()) {
+			// The request is invalid
+			// Halts the application
+			haltApp(HTTP_STATUS_BAD_REQUEST, ERROR_CODE_INVALID_REQUEST);
 		}
 		
 		// Initializes the output
