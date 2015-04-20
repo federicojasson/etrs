@@ -70,26 +70,18 @@ function containsDuplicates($array) {
  */
 function createArrayFilter($filter) {
 	return function($array) use ($filter) {
-		// Applies the filter to the array's elements
-		foreach ($array as &$element) {
-			$element = call_user_func($filter, $element);
-		}
-
-		return $array;
+		// Applies the filter
+		return filterArray($array, $filter);
 	};
 }
 
 /**
- * Applies a filter to an array's elements.
+ * Applies a filter to the elements of an array.
  * 
  * Receives the array and a filter for the elements.
  */
 function filterArray($array, $filter) {
-	// Initializes an array filter
-	$arrayFilter = createArrayFilter($filter);
-	
-	// Applies the array filter
-	return call_user_func($arrayFilter, $array);
+	return array_map($filter, $array);
 }
 
 /**
