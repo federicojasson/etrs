@@ -207,6 +207,13 @@ class LaboratoryTest {
 	}
 	
 	/**
+	 * Returns the data-type definition.
+	 */
+	public function getDataTypeDefinition() {
+		return $this->dataTypeDefinition;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {
