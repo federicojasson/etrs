@@ -48,8 +48,6 @@
 				return false;
 			}
 			
-			// The input is a date
-			input.message = '';
 			return true;
 		};
 		
@@ -70,8 +68,6 @@
 				return false;
 			}
 			
-			// The input is an email address
-			input.message = '';
 			return true;
 		};
 		
@@ -83,12 +79,10 @@
 		_this.isGender = function(input) {
 			if (input.value === '') {
 				// The input is not a gender
-				input.message = 'Seleccione el sexo';
+				input.message = 'Seleccione un sexo';
 				return false;
 			}
 			
-			// The input is a gender
-			input.message = '';
 			return true;
 		};
 		
@@ -101,6 +95,9 @@
 		_this.isInputValid = function(input) {
 			if (isInputInstance(input)) {
 				// The input is an Input instance
+				
+				// Resets the input's message
+				input.message = '';
 				
 				// Validates the input
 				input.validate();
@@ -121,23 +118,6 @@
 			}
 			
 			return valid;
-		};
-		
-		/**
-		 * Determines whether an input is null.
-		 * 
-		 * Receives the input.
-		 */
-		_this.isNull = function(input) {
-			if (input.value !== null) {
-				// The input is not null
-				input.message = 'Valor no nulo';
-				return false;
-			}
-			
-			// The input is null
-			input.message = '';
-			return true;
 		};
 		
 		/**
@@ -175,8 +155,6 @@
 				return false;
 			}
 			
-			// The input is a user ID
-			input.message = '';
 			return true;
 		};
 		
@@ -192,8 +170,6 @@
 				return false;
 			}
 			
-			// The input is a user role
-			input.message = '';
 			return true;
 		};
 		
@@ -231,8 +207,6 @@
 				return false;
 			}
 			
-			// The input is a valid integer
-			input.message = '';
 			return true;
 		};
 		
@@ -265,8 +239,6 @@
 				return false;
 			}
 			
-			// The input is a valid password
-			input.message = '';
 			return true;
 		};
 		
@@ -282,8 +254,6 @@
 				return false;
 			}
 			
-			// The input is a valid password confirmation
-			input.message = '';
 			return true;
 		};
 		
@@ -322,8 +292,6 @@
 				return false;
 			}
 			
-			// The input is a valid string
-			input.message = '';
 			return true;
 		};
 		

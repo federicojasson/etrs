@@ -55,7 +55,7 @@
 			// Initializes the input
 			this.input = {
 				expression: new Input(function() {
-					return inputValidator.isNull(this) || inputValidator.isValidString(this, 0, 128);
+					return this.value === null || inputValidator.isValidString(this, 0, 128);
 				}),
 				
 				sortingCriteria: new Input(),
