@@ -263,9 +263,12 @@ class Patient {
 		$this->deleted = true;
 		$this->deleter = $user;
 		
-		// Deletes the consultations
+		// Deletes the non-deleted consultations
 		foreach ($this->consultations as $consultation) {
-			$consultation->delete($user);
+			if (! $consultation->isDeleted()) {
+				// The consultation is not deleted
+				$consultation->delete($user);
+			}
 		}
 	}
 	
@@ -320,7 +323,9 @@ class Patient {
 		
 		$serialized['consultations'] = [];
 		foreach ($this->consultations as $consultation) {
-			$serialized['consultations'][] = bin2hex($consultation->getId());
+			if (! $consultation->isDeleted()) {
+				$serialized['consultations'][] = bin2hex($consultation->getId());
+			}
 		}
 		
 		return $serialized;
