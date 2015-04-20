@@ -67,6 +67,7 @@ class Helpers extends \Slim\Middleware {
 			'cryptography',
 			'data',
 			'email',
+			'file',
 			'inputValidator',
 			'parameters',
 			'response',
