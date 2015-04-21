@@ -41,7 +41,7 @@
 				
 				<input
 					ng-change="searchHandler.scheduleSearch(750)"
-					ng-keyup="$event.keyCode == 13 && searchHandler.search()"
+					ng-keyup="$event.keyCode === 13 && searchHandler.search()"
 					ng-model="searchTreatmentsAction.input.expression.value"
 					popover="{{ searchTreatmentsAction.input.expression.message }}"
 					popover-append-to-body="true"
