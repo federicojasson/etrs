@@ -230,6 +230,8 @@ class Edit extends \App\Service\External {
 		$imagingTestResults = $this->getInputValue('imagingTestResults', [ $this, 'filterImagingTestResults' ]);
 		$cognitiveTestResults = $this->getInputValue('cognitiveTestResults', [ $this, 'filterCognitiveTestResults' ]);
 		
+		// TODO: check duplicates on others
+		
 		if (! $app->inputValidator->areLaboratoryTestResultsValid($laboratoryTestResults)) {
 			// The laboratory-test results are invalid
 			return false;

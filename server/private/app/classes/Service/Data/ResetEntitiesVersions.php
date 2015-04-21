@@ -39,6 +39,7 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 			'CognitiveTest',
 			'Consultation',
 			'Diagnosis',
+			'Experiment',
 			'File',
 			'ImagingTest',
 			'LaboratoryTest',
