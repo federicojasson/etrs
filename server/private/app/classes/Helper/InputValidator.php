@@ -26,30 +26,42 @@ namespace App\Helper;
 class InputValidator {
 	
 	/**
-	 * Determines whether a set of cognitive-test results is valid.
+	 * Determines whether a set of test results is valid.
 	 * 
-	 * Receives the cognitive-test results.
+	 * Receives the test results and the type of the test entity.
 	 */
-	public function areCognitiveTestResultsValid($cognitiveTestResults) {
-		return $this->areTestResultsValid('CognitiveTest', $cognitiveTestResults);
-	}
-	
-	/**
-	 * Determines whether a set of imaging-test results is valid.
-	 * 
-	 * Receives the imaging-test results.
-	 */
-	public function areImagingTestResultsValid($imagingTestResults) {
-		return $this->areTestResultsValid('ImagingTest', $imagingTestResults);
-	}
-	
-	/**
-	 * Determines whether a set of laboratory-test results is valid.
-	 * 
-	 * Receives the laboratory-test results.
-	 */
-	public function areLaboratoryTestResultsValid($laboratoryTestResults) {
-		return $this->areTestResultsValid('LaboratoryTest', $laboratoryTestResults);
+	public function areTestResultsValid($testResults, $type) {
+		global $app;
+		
+		// Converts the type from PascalCase to camelCase
+		$testsField = pascalToCamelCase($type);
+		
+		// Gets the tests
+		$tests = array_column($testResults, $testsField);
+		
+		if (containsDuplicates($tests)) {
+			// The tests are not unique
+			return false;
+		}
+		
+		// Validates the values
+		foreach ($testResults as $testResult) {
+			// Gets the test
+			$test = $app->data->getRepository('Entity:' . $type)->findNonDeleted($testResult[$testsField]);
+			
+			// Asserts conditions
+			$app->assertion->entityExists($test);
+			
+			// Initializes a data-type input validator
+			$dataTypeInputValidator = \App\InputValidator\DataType\Factory::create($test->getDataTypeDefinition());
+			
+			if (! $dataTypeInputValidator->isInputValid($testResult['value'])) {
+				// The value is invalid
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -312,45 +324,6 @@ class InputValidator {
 		
 		// Determines whether the length is in the specified range
 		return inRange($length, $minimumLength, $maximumLength);
-	}
-	
-	/**
-	 * Determines whether a set of test results is valid.
-	 * 
-	 * Receives the type of the test entity and the test results.
-	 */
-	private function areTestResultsValid($type, $testResults) {
-		global $app;
-		
-		// Converts the type from PascalCase to camelCase
-		$testsField = pascalToCamelCase($type);
-		
-		// Gets the tests
-		$tests = array_column($testResults, $testsField);
-		
-		if (containsDuplicates($tests)) {
-			// The tests are not unique
-			return false;
-		}
-		
-		// Validates the values
-		foreach ($testResults as $testResult) {
-			// Gets the test
-			$test = $app->data->getRepository('Entity:' . $type)->findNonDeleted($testResult[$testsField]);
-			
-			// Asserts conditions
-			$app->assertion->entityExists($test);
-			
-			// Initializes a data-type input validator
-			$dataTypeInputValidator = \App\InputValidator\DataType\Factory::create($test->getDataTypeDefinition());
-			
-			if (! $dataTypeInputValidator->isInputValid($testResult['value'])) {
-				// The value is invalid
-				return false;
-			}
-		}
-		
-		return true;
 	}
 	
 }

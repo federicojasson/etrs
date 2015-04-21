@@ -97,10 +97,20 @@ class Edit extends \App\Service\External {
 			)
 		]);
 		
-		// TODO: check duplicates on files
+		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
+			// The input is invalid
+			return false;
+		}
 		
-		// Validates the input
-		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
+		// Gets inputs
+		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
+		
+		if (containsDuplicates($files)) {
+			// The files are invalid
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**

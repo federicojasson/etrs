@@ -226,24 +226,40 @@ class Edit extends \App\Service\External {
 		}
 		
 		// Gets inputs
+		$medicalAntecedents = $this->getInputValue('medicalAntecedents', createArrayFilter('hex2bin'));
+		$medicines = $this->getInputValue('medicines', createArrayFilter('hex2bin'));
 		$laboratoryTestResults = $this->getInputValue('laboratoryTestResults', [ $this, 'filterLaboratoryTestResults' ]);
 		$imagingTestResults = $this->getInputValue('imagingTestResults', [ $this, 'filterImagingTestResults' ]);
 		$cognitiveTestResults = $this->getInputValue('cognitiveTestResults', [ $this, 'filterCognitiveTestResults' ]);
+		$treatments = $this->getInputValue('treatments', createArrayFilter('hex2bin'));
 		
-		// TODO: check duplicates on others
+		if (containsDuplicates($medicalAntecedents)) {
+			// The medical antecedents are invalid
+			return false;
+		}
 		
-		if (! $app->inputValidator->areLaboratoryTestResultsValid($laboratoryTestResults)) {
+		if (containsDuplicates($medicines)) {
+			// The medicines are invalid
+			return false;
+		}
+		
+		if (! $app->inputValidator->areTestResultsValid($laboratoryTestResults, 'LaboratoryTest')) {
 			// The laboratory-test results are invalid
 			return false;
 		}
 		
-		if (! $app->inputValidator->areImagingTestResultsValid($imagingTestResults)) {
+		if (! $app->inputValidator->areTestResultsValid($imagingTestResults, 'ImagingTest')) {
 			// The imaging-test results are invalid
 			return false;
 		}
 		
-		if (! $app->inputValidator->areCognitiveTestResultsValid($cognitiveTestResults)) {
+		if (! $app->inputValidator->areTestResultsValid($cognitiveTestResults, 'CognitiveTest')) {
 			// The cognitive-test results are invalid
+			return false;
+		}
+		
+		if (containsDuplicates($treatments)) {
+			// The treatments are invalid
 			return false;
 		}
 		
