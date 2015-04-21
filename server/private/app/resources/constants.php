@@ -22,10 +22,13 @@
  * This script defines global constants.
  */
 
+define('APACHE_ENVIRONMENT_VARIABLE_ETRS_SUBREQUEST', 'etrs_subrequest');
+
 define('DATA_TYPE_BOOLEAN', 'boolean');
 define('DATA_TYPE_INTEGER_FIX_VALUES', 'integer_fix_values');
 define('DATA_TYPE_INTEGER_RANGE', 'integer_range');
 
+define('ERROR_CODE_FILE_SYSTEM_ERROR', 'FILE_SYSTEM_ERROR');
 define('ERROR_CODE_INVALID_REQUEST', 'INVALID_REQUEST');
 define('ERROR_CODE_NON_EXISTENT_ENTITY', 'NON_EXISTENT_ENTITY');
 define('ERROR_CODE_OUTDATED_ENTITY', 'OUTDATED_ENTITY');

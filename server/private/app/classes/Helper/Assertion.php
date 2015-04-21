@@ -69,4 +69,30 @@ class Assertion {
 		}
 	}
 	
+	/**
+	 * Asserts whether a file doesn't exist.
+	 * 
+	 * Receives an indicator of whether the file exists.
+	 */
+	public function fileDoesNotExist($exists) {
+		if ($exists) {
+			// The file exists
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
+	 * Asserts whether a file exists.
+	 * 
+	 * Receives an indicator of whether the file exists.
+	 */
+	public function fileExists($exists) {
+		if (! $exists) {
+			// The file doesn't exist
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
 }

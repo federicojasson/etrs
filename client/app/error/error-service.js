@@ -32,6 +32,7 @@
 		 */
 		var descriptions = {
 			// DEFINEHERE: define error descriptions here
+			FILE_SYSTEM_ERROR: '',
 			INVALID_REQUEST: '',
 			NON_EXISTENT_ENTITY: '',
 			OUTDATED_ENTITY: '',
