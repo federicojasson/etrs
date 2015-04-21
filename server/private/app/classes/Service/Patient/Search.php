@@ -51,7 +51,7 @@ class Search extends \App\Service\External {
 		}
 		
 		// Searches the patients
-		$results = $queryBuilder
+		$patients = $queryBuilder
 			->getQuery()
 			->setFirstResult($resultsPerPage * ($page - 1))
 			->setMaxResults($resultsPerPage)
@@ -60,8 +60,8 @@ class Search extends \App\Service\External {
 			->getResult();
 		
 		// Sets an output
-		$this->setOutputValue('results', $results, createArrayFilter(function($result) {
-			return bin2hex($result['id']);
+		$this->setOutputValue('results', $patients, createArrayFilter(function($patient) {
+			return bin2hex($patient['id']);
 		}));
 		
 		// Gets the total number of results

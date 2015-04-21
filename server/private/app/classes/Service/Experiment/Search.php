@@ -56,7 +56,7 @@ class Search extends \App\Service\External {
 		}
 		
 		// Searches the experiments
-		$results = $queryBuilder
+		$experiments = $queryBuilder
 			->getQuery()
 			->setFirstResult($resultsPerPage * ($page - 1))
 			->setMaxResults($resultsPerPage)
@@ -65,8 +65,8 @@ class Search extends \App\Service\External {
 			->getResult();
 		
 		// Sets an output
-		$this->setOutputValue('results', $results, createArrayFilter(function($result) {
-			return bin2hex($result['id']);
+		$this->setOutputValue('results', $experiments, createArrayFilter(function($experiment) {
+			return bin2hex($experiment['id']);
 		}));
 		
 		// Gets the total number of results

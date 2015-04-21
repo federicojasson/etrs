@@ -72,7 +72,7 @@ class Data {
 		$statement = $this->__call('getConnection')->prepare('SELECT FOUND_ROWS() AS foundRows');
 		$statement->execute();
 		
-		// Fetches the results
+		// Fetches the result
 		return $statement->fetch()['foundRows'];
 	}
 	

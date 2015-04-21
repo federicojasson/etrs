@@ -41,13 +41,13 @@ function camelToSpinalCase($string) {
 	// Performs a regular expression search
 	$matches = [];
 	preg_match_all('/[0-9]+|[A-Za-z][a-z]*/', $string, $matches);
-	$results = $matches[0];
+	$terms = $matches[0];
 	
-	// Converts the first character of each result to lowercase
-	$results = filterArray($results, 'lcfirst');
+	// Converts the first character of each term to lowercase
+	$terms = filterArray($terms, 'lcfirst');
 	
 	// Builds the spinal-case string
-	return implode('-', $results);
+	return implode('-', $terms);
 }
 
 /**
