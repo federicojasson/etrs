@@ -2,7 +2,6 @@
 Quick tasks
 ----------------------------
 
-- GetAll services.
 - Check what constants can be parameters.
 - Pass maximum age and maximum inactivity time by parameter?
 - Check TODO and DEFINEHERE
