@@ -26,6 +26,19 @@ namespace App\Helper;
 class Assertion {
 	
 	/**
+	 * Asserts whether a directory has been created.
+	 * 
+	 * Receives an indicator of whether the directory has been created.
+	 */
+	public function directoryCreated($created) {
+		if (! $created) {
+			// The directory could not be created
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
 	 * Asserts whether an email has been delivered.
 	 * 
 	 * Receives an indicator of whether the email has been delivered.
@@ -70,6 +83,19 @@ class Assertion {
 	}
 	
 	/**
+	 * Asserts whether a file's access permissions have been set.
+	 * 
+	 * Receives an indicator of whether the access permissions have been set.
+	 */
+	public function fileAccessPermissionsSet($set) {
+		if (! $set) {
+			// The access permissions could not be set
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
 	 * Asserts whether a file doesn't exist.
 	 * 
 	 * Receives an indicator of whether the file exists.
@@ -90,6 +116,45 @@ class Assertion {
 	public function fileExists($exists) {
 		if (! $exists) {
 			// The file doesn't exist
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
+	 * Asserts whether a file has been moved.
+	 * 
+	 * Receives an indicator of whether the file has been moved.
+	 */
+	public function fileMoved($moved) {
+		if (! $moved) {
+			// The file could not be moved
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
+	 * Asserts whether a file is not corrupted.
+	 * 
+	 * Receives an indicator of whether the file is corrupted.
+	 */
+	public function fileNotCorrupted($corrupted) {
+		if ($corrupted) {
+			// The file is corrupted
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
+	 * Asserts whether a file has been uploaded.
+	 * 
+	 * Receives an indicator of whether the file has been uploaded.
+	 */
+	public function fileUploaded($uploaded) {
+		if (! $uploaded) {
+			// The file has not been uploaded
 			// Halts the application
 			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
 		}
