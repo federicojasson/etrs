@@ -35,6 +35,7 @@ class GetAll extends \App\Service\External {
 		$experiments = $app->data->createQueryBuilder()
 			->select('e.id')
 			->from('Entity:Experiment', 'e')
+			->addOrderBy('e.name', 'asc')
 			->getQuery()
 			->getResult();
 		
