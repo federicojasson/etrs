@@ -36,6 +36,7 @@ class Edit extends \App\Service\External {
 		$version = $this->getInputValue('version');
 		$commandLine = $this->getInputValue('commandLine'); // TODO: filter?
 		$name = $this->getInputValue('name', 'trimAndShrink');
+		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
 		
 		// Gets the signed-in user
 		$user = $app->account->getSignedInUser();
@@ -53,6 +54,8 @@ class Edit extends \App\Service\External {
 		$experiment->setName($name);
 		$experiment->setLastEditor($user);
 		$app->data->merge($experiment);
+		
+		// TODO: check existence and add associations
 	}
 	
 	/**
@@ -85,8 +88,16 @@ class Edit extends \App\Service\External {
 			
 			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 				return $app->inputValidator->isValidLine($input, 1, 64);
-			})
+			}),
+			
+			'files' => new \App\InputValidator\Json\JsonArray(
+				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			)
 		]);
+		
+		// TODO: check duplicates on files
 		
 		// Validates the input
 		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);

@@ -82,7 +82,7 @@ class Edit extends \App\Service\External {
 		$consultation->setDiagnosis($diagnosis);
 		$app->data->merge($consultation);
 		
-		// TODO
+		// TODO: check existence and add associations
 	}
 	
 	/**

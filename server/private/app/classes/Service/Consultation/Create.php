@@ -87,7 +87,7 @@ class Create extends \App\Service\External {
 		// Sets an output
 		$this->setOutputValue('id', $id, 'bin2hex');
 		
-		// TODO
+		// TODO: check existence and add associations
 	}
 	
 	/**
