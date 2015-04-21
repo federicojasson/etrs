@@ -25,6 +25,17 @@ namespace App\Helper;
  */
 class Cryptography {
 	
+	
+	/**
+	 * Computes a file's hash.
+	 * 
+	 * Receives the file's path.
+	 */
+	public function computeFileHash($path) {
+		// Applies MD5
+		return md5_file($path, true);
+	}
+	
 	/**
 	 * Computes a password's hash. It returns an array containing the hash, the
 	 * used salt and the applied key-stretching iterations.
