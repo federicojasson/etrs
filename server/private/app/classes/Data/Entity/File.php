@@ -210,6 +210,13 @@ class File {
 	}
 	
 	/**
+	 * Returns the hash.
+	 */
+	public function getHash() {
+		return $this->hash;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {
