@@ -68,8 +68,6 @@ class Factory {
 	 * Creates a data-type input validator.
 	 * 
 	 * Receives a formatted definition.
-	 * 
-	 * Throws an exception if the creation fails.
 	 */
 	public static function create($formattedDefinition) {
 		// Gets the fields

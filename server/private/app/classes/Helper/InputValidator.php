@@ -105,7 +105,7 @@ class InputValidator {
 		$month = $matches[2];
 		$day = $matches[3];
 		
-		// Checks if the date is valid according to the calendar
+		// Determines whether the date is valid according to the calendar
 		return checkdate($month, $day, $year);
 	}
 	

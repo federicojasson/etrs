@@ -33,8 +33,6 @@ class BinaryData extends \Doctrine\DBAL\Types\BinaryType {
 	 * Converts a value from its database representation to its PHP equivalent.
 	 * 
 	 * Receives the value and the database platform.
-	 * 
-	 * Throws an exception if the conversion fails.
 	 */
 	public function convertToPHPValue($value, \Doctrine\DBAL\Platforms\AbstractPlatform $platform) {
 		// Invokes the homonym method in the parent

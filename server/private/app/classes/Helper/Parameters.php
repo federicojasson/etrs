@@ -54,7 +54,7 @@ class Parameters {
 		if (! array_key_exists($name, $this->parameters)) {
 			// The parameters have not been loaded yet
 			
-			// Gets the parameters file's path
+			// Gets the path
 			$path = $this->paths[$name];
 			
 			// Reads the parameters file

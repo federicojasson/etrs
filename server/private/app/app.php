@@ -171,7 +171,7 @@ function loadClass($class) {
 		return;
 	}
 	
-	// Builds the script's path
+	// Builds the path
 	$path = '';
 	$path .= DIRECTORY_APP . '/classes';
 	$path .= '/' . str_replace('\\', '/', $suffix) . '.php';
