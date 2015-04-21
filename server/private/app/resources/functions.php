@@ -76,7 +76,7 @@ function createArrayFilter($filter) {
 }
 
 /**
- * Applies a filter to the elements of an array.
+ * Applies a filter to an array's elements.
  * 
  * Receives the array and a filter for the elements.
  */
