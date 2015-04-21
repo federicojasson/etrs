@@ -39,12 +39,12 @@ class Edit extends \App\Service\External {
 		$comments = $this->getInputValue('comments');
 		$clinicalImpression = $this->getInputValue('clinicalImpression', 'hex2bin');
 		$diagnosis = $this->getInputValue('diagnosis', 'hex2bin');
-		$patientMedicalAntecedents = $this->getInputValue('patientMedicalAntecedents', createArrayFilter('hex2bin'));
-		$concomitantMedicines = $this->getInputValue('concomitantMedicines', createArrayFilter('hex2bin'));
+		$medicalAntecedents = $this->getInputValue('medicalAntecedents', createArrayFilter('hex2bin'));
+		$medicines = $this->getInputValue('medicines', createArrayFilter('hex2bin'));
 		$laboratoryTestResults = $this->getInputValue('laboratoryTestResults', [ $this, 'filterLaboratoryTestResults' ]);
 		$imagingTestResults = $this->getInputValue('imagingTestResults', [ $this, 'filterImagingTestResults' ]);
 		$cognitiveTestResults = $this->getInputValue('cognitiveTestResults', [ $this, 'filterCognitiveTestResults' ]);
-		$prescribedTreatments = $this->getInputValue('prescribedTreatments', createArrayFilter('hex2bin'));
+		$treatments = $this->getInputValue('treatments', createArrayFilter('hex2bin'));
 		
 		// Gets the signed-in user
 		$user = $app->account->getSignedInUser();
@@ -165,13 +165,13 @@ class Edit extends \App\Service\External {
 				return is_null($input) || $app->inputValidator->isRandomId($input);
 			}),
 			
-			'patientMedicalAntecedents' => new \App\InputValidator\Json\JsonArray(
+			'medicalAntecedents' => new \App\InputValidator\Json\JsonArray(
 				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})
 			),
 			
-			'concomitantMedicines' => new \App\InputValidator\Json\JsonArray(
+			'medicines' => new \App\InputValidator\Json\JsonArray(
 				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})
@@ -213,7 +213,7 @@ class Edit extends \App\Service\External {
 				])
 			),
 			
-			'prescribedTreatments' => new \App\InputValidator\Json\JsonArray(
+			'treatments' => new \App\InputValidator\Json\JsonArray(
 				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})

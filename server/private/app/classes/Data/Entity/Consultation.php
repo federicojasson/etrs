@@ -71,34 +71,6 @@ class Consultation {
 	private $comments;
 	
 	/**
-	 * The concomitant medicines.
-	 * 
-	 * Annotations:
-	 * 
-	 * @ManyToMany(targetEntity="Medicine")
-	 * @JoinTable(
-	 *		name="concomitant_medicines",
-	 *		joinColumns={
-	 *			@JoinColumn(
-	 *				name="consultation",
-	 *				referencedColumnName="id",
-	 *				nullable=false,
-	 *				onDelete="RESTRICT"
-	 *			)
-	 *		},
-	 *		inverseJoinColumns={
-	 *			@JoinColumn(
-	 *				name="medicine",
-	 *				referencedColumnName="id",
-	 *				nullable=false,
-	 *				onDelete="RESTRICT"
-	 *			)
-	 *		}
-	 *	)
-	 */
-	private $concomitantMedicines;
-	
-	/**
 	 * The creation date-time.
 	 * 
 	 * Annotations:
@@ -262,31 +234,13 @@ class Consultation {
 	private $lastEditor;
 	
 	/**
-	 * The patient.
-	 * 
-	 * Annotations:
-	 * 
-	 * @ManyToOne(
-	 *		targetEntity="Patient",
-	 *		inversedBy="consultations"
-	 *	)
-	 * @JoinColumn(
-	 *		name="patient",
-	 *		referencedColumnName="id",
-	 *		nullable=false,
-	 *		onDelete="RESTRICT"
-	 *	)
-	 */
-	private $patient;
-	
-	/**
-	 * The patient's medical antecedents.
+	 * The medical antecedents.
 	 * 
 	 * Annotations:
 	 * 
 	 * @ManyToMany(targetEntity="MedicalAntecedent")
 	 * @JoinTable(
-	 *		name="patient_medical_antecedents",
+	 *		name="consultations_medical_antecedents",
 	 *		joinColumns={
 	 *			@JoinColumn(
 	 *				name="consultation",
@@ -305,16 +259,75 @@ class Consultation {
 	 *		}
 	 *	)
 	 */
-	private $patientMedicalAntecedents;
+	private $medicalAntecedents;
 	
 	/**
-	 * The prescribed treatments.
+	 * The medicines.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToMany(targetEntity="Medicine")
+	 * @JoinTable(
+	 *		name="consultations_medicines",
+	 *		joinColumns={
+	 *			@JoinColumn(
+	 *				name="consultation",
+	 *				referencedColumnName="id",
+	 *				nullable=false,
+	 *				onDelete="RESTRICT"
+	 *			)
+	 *		},
+	 *		inverseJoinColumns={
+	 *			@JoinColumn(
+	 *				name="medicine",
+	 *				referencedColumnName="id",
+	 *				nullable=false,
+	 *				onDelete="RESTRICT"
+	 *			)
+	 *		}
+	 *	)
+	 */
+	private $medicines;
+	
+	/**
+	 * The patient.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToOne(
+	 *		targetEntity="Patient",
+	 *		inversedBy="consultations"
+	 *	)
+	 * @JoinColumn(
+	 *		name="patient",
+	 *		referencedColumnName="id",
+	 *		nullable=false,
+	 *		onDelete="RESTRICT"
+	 *	)
+	 */
+	private $patient;
+	
+	/**
+	 * The presenting problem.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="presenting_problem",
+	 *		type="text",
+	 *		nullable=false
+	 *	)
+	 */
+	private $presentingProblem;
+	
+	/**
+	 * The treatments.
 	 * 
 	 * Annotations:
 	 * 
 	 * @ManyToMany(targetEntity="Treatment")
 	 * @JoinTable(
-	 *		name="prescribed_treatments",
+	 *		name="consultations_treatments",
 	 *		joinColumns={
 	 *			@JoinColumn(
 	 *				name="consultation",
@@ -333,20 +346,7 @@ class Consultation {
 	 *		}
 	 *	)
 	 */
-	private $prescribedTreatments;
-	
-	/**
-	 * The presenting problem.
-	 * 
-	 * Annotations:
-	 * 
-	 * @Column(
-	 *		name="presenting_problem",
-	 *		type="text",
-	 *		nullable=false
-	 *	)
-	 */
-	private $presentingProblem;
+	private $treatments;
 	
 	/**
 	 * The version.
@@ -446,17 +446,17 @@ class Consultation {
 			}
 		}
 		
-		$serialized['patientMedicalAntecedents'] = [];
-		foreach ($this->patientMedicalAntecedents as $medicalAntecedent) {
+		$serialized['medicalAntecedents'] = [];
+		foreach ($this->medicalAntecedents as $medicalAntecedent) {
 			if (! $medicalAntecedent->isDeleted()) {
-				$serialized['patientMedicalAntecedents'][] = bin2hex($medicalAntecedent->getId());
+				$serialized['medicalAntecedents'][] = bin2hex($medicalAntecedent->getId());
 			}
 		}
 		
-		$serialized['concomitantMedicines'] = [];
-		foreach ($this->concomitantMedicines as $medicine) {
+		$serialized['medicines'] = [];
+		foreach ($this->medicines as $medicine) {
 			if (! $medicine->isDeleted()) {
-				$serialized['concomitantMedicines'][] = bin2hex($medicine->getId());
+				$serialized['medicines'][] = bin2hex($medicine->getId());
 			}
 		}
 		
@@ -487,10 +487,10 @@ class Consultation {
 			}
 		}
 		
-		$serialized['prescribedTreatments'] = [];
-		foreach ($this->prescribedTreatments as $treatment) {
+		$serialized['treatments'] = [];
+		foreach ($this->treatments as $treatment) {
 			if (! $treatment->isDeleted()) {
-				$serialized['prescribedTreatments'][] = bin2hex($treatment->getId());
+				$serialized['treatments'][] = bin2hex($treatment->getId());
 			}
 		}
 		

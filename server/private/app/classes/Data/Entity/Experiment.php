@@ -118,7 +118,7 @@ class Experiment {
 	 * 
 	 * @ManyToMany(targetEntity="File")
 	 * @JoinTable(
-	 *		name="experiment_files",
+	 *		name="experiments_files",
 	 *		joinColumns={
 	 *			@JoinColumn(
 	 *				name="experiment",
