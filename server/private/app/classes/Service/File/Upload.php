@@ -29,7 +29,33 @@ class Upload extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets inputs
+		$name = $this->getInputValue('name'); // TODO: filter?
+		$temporaryPath = $this->getInputValue('temporaryPath');
+		
+		// Gets the signed-in user
+		$user = $app->account->getSignedInUser();
+		
+		// Computes the file's hash
+		$hash = $app->cryptography->computeFileHash($temporaryPath);
+		
+		// Creates the file
+		$file = new \App\Data\Entity\File();
+		$file->setHash($hash);
+		$file->setName($name);
+		$file->setCreator($user);
+		$app->data->persist($file);
+		
+		// Gets the file's ID
+		$id = $file->getId();
+		
+		// Sets an output
+		$this->setOutputValue('id', $id, 'bin2hex');
+		
+		// Uploads the file
+		$app->file->upload($id, $temporaryPath);
 	}
 	
 	/**

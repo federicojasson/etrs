@@ -29,7 +29,19 @@ class Download extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets inputs
+		$id = $this->getInputValue('id', 'hex2bin');
+		
+		// Gets the file
+		$file = $app->data->getRepository('Entity:File')->findNonDeleted($id);
+
+		// Asserts conditions
+		$app->assertion->entityExists($file);
+		
+		// Downloads the file
+		$app->file->download($file->getId(), $file->getHash(), $file->getName());
 	}
 	
 	/**
