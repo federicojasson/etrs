@@ -1,4 +1,2 @@
-# Denies all access not made by the server application
-Order Deny,Allow
+# Denies all access
 Deny from all
-Allow from env=etrs_subrequest

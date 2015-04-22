@@ -54,6 +54,11 @@ class File {
 		// Gets the size
 		$size = filesize($path);
 		
+		// Builds the URL
+		$url = '';
+		$url .= '/server';
+		$url .= substr($path, strlen(DIRECTORY_ROOT));
+		
 		// Sets the appropriate headers
 		$app->response->headers->set('Content-Type', 'application/octet-stream');
 		$app->response->headers->set('Content-Length', $size);
@@ -63,7 +68,7 @@ class File {
 		apache_setenv(APACHE_ENVIRONMENT_VARIABLE_ETRS_SUBREQUEST, 1);
 		
 		// Initiates the download
-		virtual($path);
+		virtual($url);
 	}
 	
 	/**

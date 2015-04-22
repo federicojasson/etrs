@@ -3,7 +3,6 @@ Quick tasks
 ----------------------------
 
 - Use DIRECTORY_SEPARATOR constant.
-- Move .htaccess for subrequests to files directory (and try if it works).
 - Request password for some services (e.g. create an experiment).
 - Check what constants can be parameters.
 - Pass maximum age and maximum inactivity time by parameter?

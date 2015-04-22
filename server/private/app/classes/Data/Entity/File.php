@@ -224,6 +224,13 @@ class File {
 	}
 	
 	/**
+	 * Returns the name.
+	 */
+	public function getName() {
+		return $this->name;
+	}
+	
+	/**
 	 * Determines whether the entity is deleted.
 	 */
 	public function isDeleted() {
