@@ -47,7 +47,7 @@ class Create extends \App\Service\External {
 		// Gets the experiment
 		$experiment = $app->data->getRepository('Entity:Experiment')->findNonDeleted($experiment);
 		
-		// Gets the TODO: comment
+		// Gets the input
 		$input = $app->data->getRepository('Entity:File')->findNonDeleted($input);
 		
 		// Asserts conditions

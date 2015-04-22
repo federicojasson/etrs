@@ -394,10 +394,11 @@ class Consultation {
 		$this->deleted = true;
 		$this->deleter = $user;
 		
-		// Deletes the non-deleted studies
+		// Deletes the appropriate associated entities
+		// The process only considers entities that have not been deleted yet
+		
 		foreach ($this->studies as $study) {
 			if (! $study->isDeleted()) {
-				// The study is not deleted
 				$study->delete($user);
 			}
 		}

@@ -263,10 +263,11 @@ class Patient {
 		$this->deleted = true;
 		$this->deleter = $user;
 		
-		// Deletes the non-deleted consultations
+		// Deletes the appropriate associated entities
+		// The process only considers entities that have not been deleted yet
+		
 		foreach ($this->consultations as $consultation) {
 			if (! $consultation->isDeleted()) {
-				// The consultation is not deleted
 				$consultation->delete($user);
 			}
 		}

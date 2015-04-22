@@ -300,7 +300,8 @@ class Study {
 		$this->deleted = true;
 		$this->deleter = $user;
 		
-		// TODO: comments
+		// Deletes the appropriate associated entities
+		// The process only considers entities that have not been deleted yet
 		
 		if (! $this->input->isDeleted()) {
 			$this->input->delete($user);
@@ -312,10 +313,8 @@ class Study {
 			}
 		}
 		
-		// Deletes the non-deleted files
 		foreach ($this->files as $file) {
 			if (! $file->isDeleted()) {
-				// The file is not deleted
 				$file->delete($user);
 			}
 		}

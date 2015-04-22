@@ -245,18 +245,17 @@ class Experiment {
 		$this->deleted = true;
 		$this->deleter = $user;
 		
-		// Deletes the non-deleted files
+		// Deletes the appropriate associated entities
+		// The process only considers entities that have not been deleted yet
+		
 		foreach ($this->files as $file) {
 			if (! $file->isDeleted()) {
-				// The file is not deleted
 				$file->delete($user);
 			}
 		}
 		
-		// Deletes the non-deleted studies
 		foreach ($this->studies as $study) {
 			if (! $study->isDeleted()) {
-				// The study is not deleted
 				$study->delete($user);
 			}
 		}
