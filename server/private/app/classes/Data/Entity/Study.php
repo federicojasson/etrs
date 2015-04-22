@@ -21,29 +21,46 @@
 namespace App\Data\Entity;
 
 /**
- * Represents an experiment from the database.
+ * Represents a study from the database.
  * 
  * Annotations:
  * 
  * @Entity(repositoryClass="App\Data\EntityRepository\Custom")
- * @Table(name="experiments")
+ * @Table(name="studies")
  * @HasLifecycleCallbacks
  */
-class Experiment {
-
+class Study {
+	
 	/**
-	 * The command line.
+	 * The comments.
 	 * 
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name="command_line",
-	 *		type="string",
-	 *		length=512,
+	 *		name="comments",
+	 *		type="text",
 	 *		nullable=false
 	 *	)
 	 */
-	private $commandLine;
+	private $comments;
+	
+	/**
+	 * The consultation.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToOne(
+	 *		targetEntity="Consultation",
+	 *		inversedBy="studies"
+	 *	)
+	 * @JoinColumn(
+	 *		name="consultation",
+	 *		referencedColumnName="id",
+	 *		nullable=false,
+	 *		onDelete="RESTRICT"
+	 *	)
+	 */
+	private $consultation;
 	
 	/**
 	 * The creation date-time.
@@ -112,16 +129,34 @@ class Experiment {
 	private $deletionDateTime;
 	
 	/**
+	 * The experiment.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToOne(
+	 *		targetEntity="Experiment",
+	 *		inversedBy="studies"
+	 *	)
+	 * @JoinColumn(
+	 *		name="experiment",
+	 *		referencedColumnName="id",
+	 *		nullable=false,
+	 *		onDelete="RESTRICT"
+	 *	)
+	 */
+	private $experiment;
+	
+	/**
 	 * The files.
 	 * 
 	 * Annotations:
 	 * 
 	 * @ManyToMany(targetEntity="File")
 	 * @JoinTable(
-	 *		name="experiments_files",
+	 *		name="studies_files",
 	 *		joinColumns={
 	 *			@JoinColumn(
-	 *				name="experiment",
+	 *				name="study",
 	 *				referencedColumnName="id",
 	 *				nullable=false,
 	 *				onDelete="RESTRICT"
@@ -160,6 +195,21 @@ class Experiment {
 	private $id;
 	
 	/**
+	 * The input.
+	 * 
+	 * Annotations:
+	 * 
+	 * @OneToOne(targetEntity="File")
+	 * @JoinColumn(
+	 *		name="input",
+	 *		referencedColumnName="id",
+	 *		nullable=false,
+	 *		onDelete="RESTRICT"
+	 *	)
+	 */
+	private $input;
+	
+	/**
 	 * The last-edition date-time.
 	 * 
 	 * Annotations:
@@ -186,30 +236,34 @@ class Experiment {
 	private $lastEditor;
 	
 	/**
-	 * The name.
+	 * The output.
+	 * 
+	 * Annotations:
+	 * 
+	 * @OneToOne(targetEntity="File")
+	 * @JoinColumn(
+	 *		name="output",
+	 *		referencedColumnName="id",
+	 *		onDelete="SET NULL"
+	 *	)
+	 */
+	private $output;
+	
+	/**
+	 * The state.
 	 * 
 	 * Annotations:
 	 * 
 	 * @Column(
-	 *		name="name",
-	 *		type="string",
-	 *		length=64,
-	 *		nullable=false
+	 *		name="state",
+	 *		type="smallint",
+	 *		nullable=false,
+	 *		options={
+	 *			"unsigned": true
+	 *		}
 	 *	)
 	 */
-	private $name;
-	
-	/**
-	 * The studies.
-	 * 
-	 * Annotations:
-	 * 
-	 * @OneToMany(
-	 *		targetEntity="Study",
-	 *		mappedBy="experiment"
-	 *	)
-	 */
-	private $studies;
+	private $state;
 	
 	/**
 	 * The version.
@@ -233,6 +287,7 @@ class Experiment {
 	 */
 	public function __construct() {
 		$this->deleted = false;
+		$this->state = STUDY_STATE_PENDING;
 	}
 	
 	/**
@@ -245,19 +300,23 @@ class Experiment {
 		$this->deleted = true;
 		$this->deleter = $user;
 		
+		// TODO: comments
+		
+		if (! $this->input->isDeleted()) {
+			$this->input->delete($user);
+		}
+		
+		if (! is_null($this->output)) {
+			if (! $this->output->isDeleted()) {
+				$this->output->delete($user);
+			}
+		}
+		
 		// Deletes the non-deleted files
 		foreach ($this->files as $file) {
 			if (! $file->isDeleted()) {
 				// The file is not deleted
 				$file->delete($user);
-			}
-		}
-		
-		// Deletes the non-deleted studies
-		foreach ($this->studies as $study) {
-			if (! $study->isDeleted()) {
-				// The study is not deleted
-				$study->delete($user);
 			}
 		}
 	}
@@ -295,8 +354,8 @@ class Experiment {
 			$serialized['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
 		}
 		
-		$serialized['commandLine'] = $this->commandLine;
-		$serialized['name'] = $this->name;
+		$serialized['state'] = $this->state;
+		$serialized['comments'] = $this->comments;
 		
 		$serialized['creator'] = null;
 		if (! is_null($this->creator)) {
@@ -308,6 +367,21 @@ class Experiment {
 			$serialized['lastEditor'] = $this->lastEditor->getId();
 		}
 		
+		$serialized['consultation'] = bin2hex($this->consultation->getId());
+		$serialized['experiment'] = bin2hex($this->experiment->getId());
+		
+		$serialized['input'] = null;
+		if (! $this->input->isDeleted()) {
+			$serialized['input'] = bin2hex($this->input->getId());
+		}
+		
+		$serialized['output'] = null;
+		if (! is_null($this->output)) {
+			if (! $this->output->isDeleted()) {
+				$serialized['output'] = bin2hex($this->output->getId());
+			}
+		}
+		
 		$serialized['files'] = [];
 		foreach ($this->files as $file) {
 			if (! $file->isDeleted()) {
@@ -316,15 +390,6 @@ class Experiment {
 		}
 		
 		return $serialized;
-	}
-	
-	/**
-	 * Sets the command line.
-	 * 
-	 * Receives the command line to be set.
-	 */
-	public function setCommandLine($commandLine) {
-		$this->commandLine = $commandLine;
 	}
 	
 	/**
@@ -361,15 +426,6 @@ class Experiment {
 	 */
 	public function setLastEditor($user) {
 		$this->lastEditor = $user;
-	}
-	
-	/**
-	 * Sets the name.
-	 * 
-	 * Receives the name to be set.
-	 */
-	public function setName($name) {
-		$this->name = $name;
 	}
 	
 }

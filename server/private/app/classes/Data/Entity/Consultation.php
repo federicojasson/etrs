@@ -321,6 +321,18 @@ class Consultation {
 	private $presentingProblem;
 	
 	/**
+	 * The studies.
+	 * 
+	 * Annotations:
+	 * 
+	 * @OneToMany(
+	 *		targetEntity="Study",
+	 *		mappedBy="consultation"
+	 *	)
+	 */
+	private $studies;
+	
+	/**
 	 * The treatments.
 	 * 
 	 * Annotations:
@@ -381,6 +393,14 @@ class Consultation {
 		$this->deletionDateTime = new \DateTime();
 		$this->deleted = true;
 		$this->deleter = $user;
+		
+		// Deletes the non-deleted studies
+		foreach ($this->studies as $study) {
+			if (! $study->isDeleted()) {
+				// The study is not deleted
+				$study->delete($user);
+			}
+		}
 	}
 	
 	/**
@@ -491,6 +511,13 @@ class Consultation {
 		foreach ($this->treatments as $treatment) {
 			if (! $treatment->isDeleted()) {
 				$serialized['treatments'][] = bin2hex($treatment->getId());
+			}
+		}
+		
+		$serialized['studies'] = [];
+		foreach ($this->studies as $study) {
+			if (! $study->isDeleted()) {
+				$serialized['studies'][] = bin2hex($study->getId());
 			}
 		}
 		
