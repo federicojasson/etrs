@@ -393,6 +393,24 @@ class Study {
 	}
 	
 	/**
+	 * Sets the comments.
+	 * 
+	 * Receives the comments to be set.
+	 */
+	public function setComments($comments) {
+		$this->comments = $comments;
+	}
+	
+	/**
+	 * Sets the consultation.
+	 * 
+	 * Receives the consultation to be set.
+	 */
+	public function setConsultation($consultation) {
+		$this->consultation = $consultation;
+	}
+	
+	/**
 	 * Sets the creation date-time.
 	 * 
 	 * Annotations:
@@ -410,6 +428,24 @@ class Study {
 	 */
 	public function setCreator($user) {
 		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets the experiment.
+	 * 
+	 * Receives the experiment to be set.
+	 */
+	public function setExperiment($experiment) {
+		$this->experiment = $experiment;
+	}
+	
+	/**
+	 * Sets the input.
+	 * 
+	 * Receives the file to be set.
+	 */
+	public function setInput($file) {
+		$this->input = $file;
 	}
 	
 	/**

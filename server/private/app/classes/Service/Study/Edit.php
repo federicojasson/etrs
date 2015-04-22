@@ -29,21 +29,95 @@ class Edit extends \App\Service\External {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Gets inputs
+		$id = $this->getInputValue('id', 'hex2bin');
+		$version = $this->getInputValue('version');
+		$comments = $this->getInputValue('comments');
+		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
+		
+		// Gets the signed-in user
+		$user = $app->account->getSignedInUser();
+		
+		// Gets the study
+		$study = $app->data->getRepository('Entity:Study')->findNonDeleted($id);
+		
+		// Asserts conditions
+		$app->assertion->entityExists($study);
+		$app->assertion->entityUpdated($study, $version);
+		
+		// Edits the study
+		$study->setLastEditionDateTime();
+		$study->setCommens($comments);
+		$study->setLastEditor($user);
+		$app->data->merge($study);
+		
+		// TODO: check existence and add associations
 	}
 	
 	/**
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
+		global $app;
+		
+		if (! $this->isJsonRequest()) {
+			// It is not a JSON request
+			return false;
+		}
+		
+		// Gets the input
+		$input = $this->getInput();
+		
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isRandomId($input);
+			}),
+			
+			'version' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidInteger($input, 0);
+			}),
+			
+			'comments' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidString($input, 0, 1024);
+			}),
+			
+			'files' => new \App\InputValidator\Json\JsonArray(
+				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isRandomId($input);
+				})
+			)
+		]);
+		
+		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
+			// The input is invalid
+			return false;
+		}
+		
+		// Gets inputs
+		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
+		
+		if (containsDuplicates($files)) {
+			// The files are invalid
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**
 	 * Determines whether the user is authorized.
 	 */
 	protected function isUserAuthorized() {
-		// TODO
+		global $app;
+		
+		// Validates the access
+		return $app->accessValidator->isUserAuthorized([
+			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_OPERATOR
+		]);
 	}
 
 }
