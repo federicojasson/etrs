@@ -119,7 +119,10 @@ class PasswordResetPermission {
 	 * 
 	 * Annotations:
 	 * 
-	 * @OneToOne(targetEntity="User")
+	 * @OneToOne(
+	 *		targetEntity="User",
+	 *		inversedBy="passwordResetPermission"
+	 *	)
 	 * @JoinColumn(
 	 *		name="user",
 	 *		referencedColumnName="id",

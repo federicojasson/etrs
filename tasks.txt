@@ -17,7 +17,6 @@ Quick tasks
 - Check numeric input validation: maximum value (consider database type).
 - Entities: setFirstName and setLastName ---> Should received $name instead?
 - Removed ready variable from entities views (when delete is implemented).
-- Add inverse relation for user (for password-reset permission) and change deletion way?
 
 
 General code checks

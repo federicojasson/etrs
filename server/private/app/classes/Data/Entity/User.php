@@ -178,6 +178,18 @@ class User {
 	private $passwordHash;
 	
 	/**
+	 * The password-reset permission.
+	 * 
+	 * Annotations:
+	 * 
+	 * @OneToOne(
+	 *		targetEntity="PasswordResetPermission",
+	 *		mappedBy="user"
+	 *	)
+	 */
+	private $passwordResetPermission;
+	
+	/**
 	 * The role.
 	 * 
 	 * Annotations:
@@ -268,6 +280,13 @@ class User {
 	 */
 	public function getPasswordHash() {
 		return $this->passwordHash;
+	}
+	
+	/**
+	 * Returns the password-reset permission.
+	 */
+	public function getPasswordResetPermission() {
+		return $this->passwordResetPermission;
 	}
 	
 	/**

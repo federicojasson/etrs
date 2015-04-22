@@ -54,15 +54,13 @@ class Request extends \App\Service\External {
 		// Gets the user
 		$user = $app->data->getReference('Entity:User', $credentials['id']);
 		
-		// Deletes any password-reset permission associated with the user
-		$app->data->createQueryBuilder()
-			->delete('Entity:PasswordResetPermission', 'prp')
-			->where('prp.user = :user')
-			->setParameter('user', $user)
-			->getQuery()
-			->setMaxResults(1)
-			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
-			->execute();
+		// Gets the password-reset permission associated with the user
+		$passwordResetPermission = $user->getPasswordResetPermission();
+		
+		if (! is_null($passwordResetPermission)) {
+			// Deletes the password-reset permission
+			$app->data->remove($passwordResetPermission);
+		}
 		
 		// Creates the password-reset permission
 		$passwordResetPermission = new \App\Data\Entity\PasswordResetPermission();
