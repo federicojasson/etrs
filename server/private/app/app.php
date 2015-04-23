@@ -61,11 +61,8 @@ function confirmTask($message) {
 	echo 'Continue? [y/N]' . PHP_EOL;
 	ob_flush();
 	
-	// Opens the stdin
-	$stdin = fopen('php://stdin', 'r');
-	
 	// Reads the user's response
-	$response = strtolower(fgetc($stdin));
+	$response = strtolower(fgetc(STDIN));
 	
 	if ($response !== 'y') {
 		// The task has been canceled
