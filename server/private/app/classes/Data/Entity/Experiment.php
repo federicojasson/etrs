@@ -262,6 +262,13 @@ class Experiment {
 	}
 	
 	/**
+	 * Returns the command line.
+	 */
+	public function getCommandLine() {
+		return $this->commandLine;
+	}
+	
+	/**
 	 * Returns the files.
 	 */
 	public function getFiles() {

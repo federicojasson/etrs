@@ -96,6 +96,19 @@ class Assertion {
 	}
 	
 	/**
+	 * Asserts whether a file has been copied.
+	 * 
+	 * Receives an indicator of whether the file has been copied.
+	 */
+	public function fileCopied($copied) {
+		if (! $copied) {
+			// The file could not be copied
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
 	 * Asserts whether a file doesn't exist.
 	 * 
 	 * Receives an indicator of whether the file exists.

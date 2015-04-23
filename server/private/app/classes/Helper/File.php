@@ -22,6 +22,7 @@ namespace App\Helper;
 
 /**
  * Provides file-related functionalities.
+ * TODO: check
  */
 class File {
 	
@@ -31,25 +32,62 @@ class File {
 	 * Receives the file's ID and temporary path.
 	 */
 	public function admit($id, $temporaryPath) {
-		global $app;
-		
 		// Gets the path
 		$path = $this->getPath($id);
 		
-		// Determines whether the file already exists
-		$exists = file_exists($path);
-		
-		if ($exists) {
-			// The file already exists
-			// Logs the event
-			$app->log->critical('The file ' . $path . ' already exists.');
-		}
-		
-		// Asserts conditions
-		$app->assertion->fileDoesNotExist($exists);
+		// Checks the non-existence
+		$this->checkNonExistence($path);
 		
 		// Moves the file
 		$this->move($temporaryPath, $path);
+	}
+	
+	/**
+	 * Checks a file's existence.
+	 * 
+	 * Receives the file's path.
+	 */
+	public function checkExistence($path) {
+		global $app;
+		
+		// Determines whether the file exists
+		$exists = file_exists($path);
+		
+		if (! $exists) {
+			// The file doesn't exist
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' doesn\'t exist.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->fileExists($exists);
+	}
+	
+	/**
+	 * Copies a file.
+	 * 
+	 * Receives the source and destination paths.
+	 */
+	public function copy($sourcePath, $destinationPath) {
+		global $app;
+		
+		// Creates the destination directory
+		$this->createDirectory($destinationPath);
+		
+		// Copies the file
+		$copied = copy($sourcePath, $destinationPath);
+		
+		if (! $copied) {
+			// The file could not be copied
+			// Logs the event
+			$app->log->critical('The file ' . $sourcePath . ' could not be copied to ' . $destinationPath . '.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->fileCopied($copied);
+		
+		// Sets the access permissions
+		$this->setAccessPermissions($destinationPath, 777); // TODO: define access permissions (constant?)
 	}
 	
 	/**
@@ -63,17 +101,8 @@ class File {
 		// Gets the path
 		$path = $this->getPath($id);
 		
-		// Determines whether the file exists
-		$exists = file_exists($path);
-		
-		if (! $exists) {
-			// The file doesn't exist
-			// Logs the event
-			$app->log->critical('The file ' . $path . ' doesn\'t exist.');
-		}
-		
-		// Asserts conditions
-		$app->assertion->fileExists($exists);
+		// Checks the existence
+		$this->checkExistence($path);
 		
 		// Checks the integrity
 		$this->checkIntegrity($path, $hash);
@@ -96,6 +125,23 @@ class File {
 		
 		// Initiates the download
 		virtual($url);
+	}
+	
+	/**
+	 * Returns a file's path.
+	 * 
+	 * Receives the file's ID.
+	 */
+	public function getPath($id) {
+		// Converts the ID from binary to hexadecimal
+		$id = bin2hex($id);
+		
+		// Builds the path
+		$path = '';
+		$path .= DIRECTORY_FILES;
+		$path .= '/' . implode('/', str_split($id, 4)) . '/' . $id;
+		
+		return $path;
 	}
 	
 	/**
@@ -147,6 +193,27 @@ class File {
 	}
 	
 	/**
+	 * Checks a file's non-existence.
+	 * 
+	 * Receives the file's path.
+	 */
+	private function checkNonExistence($path) {
+		global $app;
+		
+		// Determines whether the file already exists
+		$exists = file_exists($path);
+		
+		if ($exists) {
+			// The file already exists
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' already exists.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->fileDoesNotExist($exists);
+	}
+	
+	/**
 	 * Creates a file's directory if it doesn't exist.
 	 * 
 	 * Receives the file's path.
@@ -163,7 +230,7 @@ class File {
 		}
 		
 		// Creates the directory
-		$created = mdkir($directory, '', true); // TODO: define access permissions (constant?)
+		$created = mkdir($directory, 777, true); // TODO: define access permissions (constant?)
 		
 		if (! $created) {
 			// The directory could not be created
@@ -173,23 +240,6 @@ class File {
 		
 		// Asserts conditions
 		$app->assertion->directoryCreated($created);
-	}
-	
-	/**
-	 * Returns a file's path.
-	 * 
-	 * Receives the file's ID.
-	 */
-	private function getPath($id) {
-		// Converts the ID from binary to hexadecimal
-		$id = bin2hex($id);
-		
-		// Builds the path
-		$path = '';
-		$path .= DIRECTORY_FILES;
-		$path .= '/' . implode('/', str_split($id, 4)) . '/' . $id;
-		
-		return $path;
 	}
 	
 	/**
@@ -216,7 +266,7 @@ class File {
 		$app->assertion->fileMoved($moved);
 		
 		// Sets the access permissions
-		$this->setAccessPermissions($destinationPath, ''); // TODO: define access permissions (constant?)
+		$this->setAccessPermissions($destinationPath, 777); // TODO: define access permissions (constant?)
 	}
 	
 	/**
