@@ -31,7 +31,13 @@ class DeleteExpired extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// TODO: ask for confirmation
+		// Acquires a lock
+		$lockAcquired = $app->lock->acquire('session-delete-expired');
+		
+		if (! $lockAcquired) {
+			// The lock could not be acquired
+			return;
+		}
 		
 		// Gets the current date-time
 		$currentDateTime = new \DateTime();
