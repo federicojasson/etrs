@@ -23,21 +23,21 @@
  */
 
 // Defines the directories
-define('DIRECTORY_APP', DIRECTORY_ROOT . '/private/app');
-define('DIRECTORY_EMAILS', DIRECTORY_ROOT . '/private/emails');
-define('DIRECTORY_FILES', DIRECTORY_ROOT . '/private/files');
-define('DIRECTORY_LOCKS', DIRECTORY_ROOT . '/private/locks');
-define('DIRECTORY_LOGS', DIRECTORY_ROOT . '/private/logs');
-define('DIRECTORY_PARAMETERS', DIRECTORY_ROOT . '/private/parameters');
-define('DIRECTORY_SANDBOX', DIRECTORY_ROOT . '/private/sandbox');
-define('DIRECTORY_VENDORS', DIRECTORY_ROOT . '/private/vendors');
+define('DIRECTORY_APP', DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'app');
+define('DIRECTORY_EMAILS', DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'emails');
+define('DIRECTORY_FILES', DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'files');
+define('DIRECTORY_LOCKS', DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'locks');
+define('DIRECTORY_LOGS', DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'logs');
+define('DIRECTORY_PARAMETERS', DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'parameters');
+define('DIRECTORY_SANDBOX', DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'sandbox');
+define('DIRECTORY_VENDORS', DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'vendors');
 
 // Includes vendors
-require_once DIRECTORY_VENDORS . '/autoload.php';
+require_once DIRECTORY_VENDORS . DIRECTORY_SEPARATOR . 'autoload.php';
 
 // Includes resources
-require_once DIRECTORY_APP . '/resources/constants.php';
-require_once DIRECTORY_APP . '/resources/functions.php';
+require_once DIRECTORY_APP . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'constants.php';
+require_once DIRECTORY_APP . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'functions.php';
 
 // Defines the operation mode
 define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
@@ -171,9 +171,7 @@ function loadClass($class) {
 	}
 	
 	// Builds the path
-	$path = '';
-	$path .= DIRECTORY_APP . '/classes';
-	$path .= '/' . str_replace('\\', '/', $suffix) . '.php';
+	$path = buildPath(DIRECTORY_APP, 'classes', explode('\\', $suffix . '.php'));
 	
 	if (file_exists($path)) {
 		// The script exists

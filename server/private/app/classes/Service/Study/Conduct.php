@@ -137,11 +137,13 @@ class Conduct extends \App\Service\Internal {
 		// Adds the destination paths for the experiment's files
 		$destinationPaths = [];
 		foreach ($experiment->getFiles() as $file) {
-			$destinationPaths[$file->getId()] = $directory . '/' . $file->getName();
+			$destinationPath = buildPath($directory, $file->getName());
+			$destinationPaths[$file->getId()] = $destinationPath;
 		}
 		
 		// Adds the destination path for the input
-		$destinationPaths[$input->getId()] = $directory . '/input/' . $input->getName();
+		$destinationPath = buildPath($directory, 'input', $input->getName());
+		$destinationPaths[$input->getId()] = $destinationPath;
 		
 		// Copies the files to the sandbox
 		foreach ($destinationPaths as $id => $destinationPath) {
@@ -173,7 +175,7 @@ class Conduct extends \App\Service\Internal {
 	private function executeExperiment($directory, $experiment, $input) {
 		// Builds the definitive command line
 		$commandLine = replacePlaceholders($experiment->getCommandLine(), [
-			'input' => 'input/' . $input->getName()
+			'input' => buildPath('input', $input->getName())
 		]);
 		
 		// Saves the current working directory
@@ -201,10 +203,7 @@ class Conduct extends \App\Service\Internal {
 		$name = STUDY_OUTPUT_NAME;
 		
 		// Builds the temporary path
-		$temporaryPath = '';
-		$temporaryPath .= $directory;
-		$temporaryPath .= '/output';
-		$temporaryPath .= '/' . $name;
+		$temporaryPath = buildPath($directory, 'output', $name);
 		
 		// Checks the file's existence
 		$app->file->checkExistence($temporaryPath);

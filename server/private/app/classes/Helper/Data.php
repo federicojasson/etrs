@@ -123,13 +123,13 @@ class Data {
 		$configuration->addEntityNamespace('Entity', 'App\Data\Entity');
 		
 		// Applies metadata-related settings
-		$directory = DIRECTORY_APP . '/classes/Data/Entity';
+		$directory = buildPath(DIRECTORY_APP, 'classes', 'Data', 'Entity');
 		$metadataDriver = $configuration->newDefaultAnnotationDriver($directory);
 		$configuration->setMetadataCacheImpl($cache);
 		$configuration->setMetadataDriverImpl($metadataDriver);
 		
 		// Applies proxy-related settings
-		$directory = DIRECTORY_APP . '/classes/Data/Proxy';
+		$directory = buildPath(DIRECTORY_APP, 'classes', 'Data', 'Proxy');
 		$configuration->setAutoGenerateProxyClasses($proxyGenerationMode);
 		$configuration->setProxyDir($directory);
 		$configuration->setProxyNamespace('App\Data\Proxy');

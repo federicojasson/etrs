@@ -240,9 +240,7 @@ class File {
 		$id = bin2hex($id);
 		
 		// Builds the path
-		$path = '';
-		$path .= DIRECTORY_FILES;
-		$path .= '/' . implode('/', str_split($id, 4)) . '/' . $id;
+		$path = buildPath(DIRECTORY_FILES, str_split($id, 4), $id);
 		
 		return $path;
 	}

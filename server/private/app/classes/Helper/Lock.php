@@ -33,10 +33,8 @@ class Lock {
 	public function acquire($name) {
 		global $app;
 		
-		// Gets the path
-		$path = $this->getPath($name);
-		
 		// Opens the lock file
+		$path = buildPath(DIRECTORY_LOCKS, $name . '.lock');
 		$file = fopen($path, 'c');
 		
 		// Acquires the lock
@@ -52,20 +50,6 @@ class Lock {
 		}
 		
 		return $lockAcquired;
-	}
-	
-	/**
-	 * Returns a lock file's path.
-	 * 
-	 * Receives the lock's name.
-	 */
-	private function getPath($name) {
-		// Builds the path
-		$path = '';
-		$path .= DIRECTORY_LOCKS;
-		$path .= '/' . $name . '.lock';
-		
-		return $path;
 	}
 	
 }

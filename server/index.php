@@ -26,7 +26,7 @@
 define('DIRECTORY_ROOT', __DIR__);
 
 // Includes the application
-require_once DIRECTORY_ROOT . '/private/app/app.php';
+require_once DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'app.php';
 
 // Executes the external task
 executeExternalTask();

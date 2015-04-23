@@ -71,9 +71,9 @@ class Parameters {
 	private function getPaths() {
 		return [
 			// DEFINEHERE: define parameter paths here
-			'dbms' => DIRECTORY_PARAMETERS . '/dbms.json',
-			'server' => DIRECTORY_PARAMETERS . '/server.json',
-			'smtp' => DIRECTORY_PARAMETERS . '/smtp.json'
+			'dbms' => buildPath(DIRECTORY_PARAMETERS, 'dbms.json'),
+			'server' => buildPath(DIRECTORY_PARAMETERS, 'server.json'),
+			'smtp' => buildPath(DIRECTORY_PARAMETERS, 'smtp.json')
 		];
 	}
 	

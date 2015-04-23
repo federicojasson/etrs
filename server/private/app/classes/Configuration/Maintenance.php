@@ -38,7 +38,7 @@ class Maintenance extends Configuration {
 	 */
 	protected function getLoggingSettings() {
 		// Initializes a log writer
-		$path = DIRECTORY_LOGS . '/maintenance.log';
+		$path = buildPath(DIRECTORY_LOGS, 'maintenance.log');
 		$logWriter = new \App\LogWriter\File($path);
 		
 		return [

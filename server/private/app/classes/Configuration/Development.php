@@ -38,7 +38,7 @@ class Development extends Configuration {
 	 */
 	protected function getLoggingSettings() {
 		// Initializes a log writer
-		$path = DIRECTORY_LOGS . '/development.log';
+		$path = buildPath(DIRECTORY_LOGS, 'development.log');
 		$logWriter = new \App\LogWriter\File($path);
 		
 		return [

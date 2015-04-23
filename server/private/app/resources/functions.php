@@ -23,6 +23,28 @@
  */
 
 /**
+ * Builds a path.
+ * 
+ * Receives path's fragments.
+ */
+function buildPath() {
+	// Gets the fragments
+	$fragments = func_get_args();
+	
+	// Builds the path of each fragment
+	$fragments = filterArray($fragments, function($fragment) {
+		if (is_array($fragment)) {
+			$fragment = call_user_func_array('buildPath', $fragment);
+		}
+		
+		return $fragment;
+	});
+	
+	// Builds the path
+	return implode(DIRECTORY_SEPARATOR, $fragments);
+}
+
+/**
  * Converts a string from camelCase to PascalCase.
  * 
  * Receives the string.

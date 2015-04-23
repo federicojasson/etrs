@@ -23,10 +23,10 @@
  */
 
 // Defines the root directory
-define('DIRECTORY_ROOT', __DIR__ . '/../../..');
+define('DIRECTORY_ROOT', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
 
 // Includes the application
-require_once DIRECTORY_ROOT . '/private/app/app.php';
+require_once DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'app.php';
 
 // Executes the internal task
 executeInternalTask('/study/conduct');

@@ -144,18 +144,18 @@ class Email {
 		$mapping['emailAddress'] = $server['emailAddress'];
 		
 		// Builds the body
-		$path = DIRECTORY_EMAILS . '/' . $type . '.html';
+		$path = buildPath(DIRECTORY_EMAILS, $type . '.html');
 		$body = readTemplateFile($path, $mapping);
 		
 		// Builds the alternative body
-		$path = DIRECTORY_EMAILS . '/' . $type . '.txt';
+		$path = buildPath(DIRECTORY_EMAILS, $type . '.txt');
 		$alternativeBody = readTemplateFile($path, $mapping);
 		
 		// Initializes the email
 		$email = $this->create($sender, $recipient, $subject, $body, $alternativeBody);
 		
 		// Embeds the logo
-		$path = DIRECTORY_EMAILS . '/images/logo.png';
+		$path = buildPath(DIRECTORY_EMAILS, 'images', 'logo.png');
 		$logo = file_get_contents($path);
 		$email->addStringEmbeddedImage($logo, 'logo');
 		
