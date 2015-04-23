@@ -2,6 +2,9 @@
 Quick tasks
 ----------------------------
 
+- setLastEditionDateTime in ResetPassword and ChangePassword?
+- Use realpath when logging paths?
+- Rename User::creator to inviter.
 - Use DIRECTORY_SEPARATOR constant.
 - Request password for some services (e.g. create an experiment).
 - Check what constants can be parameters.
