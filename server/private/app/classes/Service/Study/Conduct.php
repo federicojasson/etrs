@@ -96,60 +96,91 @@ class Conduct extends \App\Service\Internal {
 	 * Receives the study.
 	 */
 	private function conductStudy($study) {
-		global $app;
-		
 		try {
 			// TODO: comment and order
 			
+			$directory = DIRECTORY_SANDBOX;
 			$experiment = $study->getExperiment();
 			$input = $study->getInput();
-
-			$commandLine = replacePlaceholders($experiment->getCommandLine(), [
-				'input' => 'input/' . $input->getName()
-			]);
 			
-			$directory = DIRECTORY_SANDBOX;
-			
-			$files = [];
-			foreach ($experiment->getFiles() as $file) {
-				$sourcePath = $app->file->getPath($file->getId());
-				$destinationPath = $directory . '/' . $file->getName();
-				$files[$sourcePath] = $destinationPath;
-			}
-			
-			$files[$app->file->getPath($input->getId())] = $directory . '/input/' . $input->getName();
-			
-			foreach ($files as $sourcePath => $destinationPath) {
-				$app->file->copy($sourcePath, $destinationPath);
-			}
-			
-			$workingDirectory = getcwd();
-			chdir($directory);
-			exec($commandLine);
-			chdir($workingDirectory);
-
-			$name = 'report.pdf'; // TODO
-			$temporaryPath = $directory . '/output/' . $name;
-
-			$app->file->checkExistence($temporaryPath);
-
-			$hash = $app->cryptography->computeFileHash($temporaryPath);
-
-			$output = new \App\Data\Entity\File();
-			$output->setHash($hash);
-			$output->setName($name);
-			$output->setCreator($study->getCreator());
-			$app->data->persist($output);
-
-			$id = $output->getId();
-
-			$app->file->admit($id, $temporaryPath);
-
-			$study->setOutput($output);
-			$app->data->merge($study);
+			$this->createSandbox($directory, $experiment, $input);
+			$this->executeExperiment($directory, $experiment, $input);
+			$this->processOutput($directory, $study);
 		} finally {
-			// TODO: destroy sandbox always (finally block?)
+			$this->destroySandbox($directory);
 		}
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	private function createSandbox($directory, $experiment, $input) {
+		// TODO: comment and order
+		global $app;
+		
+		$files = [];
+		foreach ($experiment->getFiles() as $file) {
+			$sourcePath = $app->file->getPath($file->getId());
+			$destinationPath = $directory . '/' . $file->getName();
+			$files[$sourcePath] = $destinationPath;
+		}
+		
+		$files[$app->file->getPath($input->getId())] = $directory . '/input/' . $input->getName();
+		
+		foreach ($files as $sourcePath => $destinationPath) {
+			$app->file->copy($sourcePath, $destinationPath);
+		}
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	private function destroySandbox($directory) {
+		// TODO
+	}
+	
+	/**
+	 * TODO: comemnt
+	 */
+	private function executeExperiment($directory, $experiment, $input) {
+		// TODO: comment and order
+		
+		$commandLine = replacePlaceholders($experiment->getCommandLine(), [
+			'input' => 'input/' . $input->getName()
+		]);
+		
+		$workingDirectory = getcwd();
+		chdir($directory);
+		exec($commandLine);
+		chdir($workingDirectory);
+	}
+	
+	/**
+	 * TODO: comment
+	 */
+	private function processOutput($directory, $study) {
+		global $app;
+		// TODO: comment and order
+		
+		$name = 'report.pdf'; // TODO
+		$temporaryPath = $directory . '/output/' . $name;
+		
+		$app->file->checkExistence($temporaryPath);
+		
+		$hash = $app->cryptography->computeFileHash($temporaryPath);
+		
+		$output = new \App\Data\Entity\File();
+		$output->setHash($hash);
+		$output->setName($name);
+		$output->setCreator($study->getCreator());
+		$app->data->persist($output);
+		
+		$id = $output->getId();
+		
+		$app->file->admit($id, $temporaryPath);
+		
+		$study->setOutput($output);
+		$app->data->merge($study);
 	}
 	
 }
