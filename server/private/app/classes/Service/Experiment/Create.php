@@ -32,7 +32,7 @@ class Create extends \App\Service\External {
 		global $app;
 		
 		// Gets inputs
-		$commandLine = $this->getInputValue('commandLine'); // TODO: filter?
+		$commandLine = $this->getInputValue('commandLine', 'trimAndShrink');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
 		
@@ -72,7 +72,7 @@ class Create extends \App\Service\External {
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
 			'commandLine' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-				// TODO
+				return $app->inputValidator->isCommandLine($input);
 			}),
 			
 			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {

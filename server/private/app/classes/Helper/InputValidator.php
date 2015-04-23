@@ -65,6 +65,21 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a command line.
+	 * 
+	 * Receives the input.
+	 */
+	public function isCommandLine($input) {
+		if (! $this->isValidLine($input, 0, 512)) {
+			// The input is not a valid line
+			return false;
+		}
+		
+		// Determines whether the input contains the "input" placeholder
+		return strpos($input, ':input') !== false;
+	}
+	
+	/**
 	 * Determines whether a command-line input is valid.
 	 * 
 	 * Receives the input and a command-line input validator.

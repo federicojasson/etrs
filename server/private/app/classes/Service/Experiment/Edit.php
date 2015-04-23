@@ -34,7 +34,7 @@ class Edit extends \App\Service\External {
 		// Gets inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
-		$commandLine = $this->getInputValue('commandLine'); // TODO: filter?
+		$commandLine = $this->getInputValue('commandLine', 'trimAndShrink');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
 		
@@ -83,7 +83,7 @@ class Edit extends \App\Service\External {
 			}),
 			
 			'commandLine' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-				// TODO
+				return $app->inputValidator->isCommandLine($input);
 			}),
 			
 			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
