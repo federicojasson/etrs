@@ -22,7 +22,6 @@ namespace App\Helper;
 
 /**
  * Provides file-related functionalities.
- * TODO: check
  */
 class File {
 	
@@ -35,7 +34,7 @@ class File {
 		// Gets the path
 		$path = $this->getPath($id);
 		
-		// Checks the non-existence
+		// Checks the file's non-existence
 		$this->checkNonExistence($path);
 		
 		// Moves the file
@@ -71,7 +70,7 @@ class File {
 	public function checkIntegrity($path, $hash) {
 		global $app;
 		
-		// Computes the hash
+		// Computes the file's hash
 		$currentHash = $app->cryptography->computeFileHash($path);
 		
 		// Compares the hashes
@@ -131,7 +130,7 @@ class File {
 		// Asserts conditions
 		$app->assertion->fileCopied($copied);
 		
-		// Sets the access permissions
+		// Sets the file's access permissions
 		$this->setAccessPermissions($destinationPath, 0777); // TODO: define access permissions (constant?)
 	}
 	
@@ -175,13 +174,13 @@ class File {
 		// Gets the path
 		$path = $this->getPath($id);
 		
-		// Checks the existence
+		// Checks the file's existence
 		$this->checkExistence($path);
 		
-		// Checks the integrity
+		// Checks the file's integrity
 		$this->checkIntegrity($path, $hash);
 		
-		// Gets the size
+		// Gets the file's size
 		$size = filesize($path);
 		
 		// Builds the URL
@@ -241,7 +240,7 @@ class File {
 		// Asserts conditions
 		$app->assertion->fileMoved($moved);
 		
-		// Sets the access permissions
+		// Sets the file's access permissions
 		$this->setAccessPermissions($destinationPath, 0777); // TODO: define access permissions (constant?)
 	}
 	
@@ -253,7 +252,7 @@ class File {
 	public function setAccessPermissions($path, $accessPermissions) {
 		global $app;
 		
-		// Sets the access permissions
+		// Sets the file's access permissions
 		$set = chmod($path, $accessPermissions);
 		
 		if (! $set) {

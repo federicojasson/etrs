@@ -96,23 +96,43 @@ class Conduct extends \App\Service\Internal {
 	 * Receives the study.
 	 */
 	private function conductStudy($study) {
+		global $app;
+		
 		try {
-			// TODO: comment and order
-			
+			// Builds the directory
 			$directory = DIRECTORY_SANDBOX;
+			
+			// Gets the study's creator
+			$creator = $study->getCreator();
+			
+			// Gets the study's experiment
 			$experiment = $study->getExperiment();
+			
+			// Gets the study's input
 			$input = $study->getInput();
 			
+			// Creates the sandbox
 			$this->createSandbox($directory, $experiment, $input);
+			
+			// Executes the experiment
 			$this->executeExperiment($directory, $experiment, $input);
-			$this->processOutput($directory, $study);
+			
+			// Processes the output of the experiment
+			$output = $this->processExperimentOutput($directory, $creator);
+			
+			// Edits the study
+			$study->setOutput($output);
+			$app->data->merge($study);
 		} finally {
+			// Destroys the sandbox
 			$this->destroySandbox($directory);
 		}
 	}
 	
 	/**
-	 * TODO: comment
+	 * Creates a sandbox.
+	 * 
+	 * Receives the sandbox's directory, the experiment and the input.
 	 */
 	private function createSandbox($directory, $experiment, $input) {
 		// TODO: comment and order
@@ -133,14 +153,18 @@ class Conduct extends \App\Service\Internal {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Destroys a sandbox.
+	 * 
+	 * Receives the sandbox's directory.
 	 */
 	private function destroySandbox($directory) {
 		// TODO
 	}
 	
 	/**
-	 * TODO: comemnt
+	 * Executes an experiment.
+	 * 
+	 * Receives the sandbox's directory, the experiment and the input.
 	 */
 	private function executeExperiment($directory, $experiment, $input) {
 		// TODO: comment and order
@@ -156,31 +180,42 @@ class Conduct extends \App\Service\Internal {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Processes the output of an experiment.
+	 * 
+	 * Receives the sandbox's directory and the user to be set as the creator.
 	 */
-	private function processOutput($directory, $study) {
+	private function processExperimentOutput($directory, $user) {
 		global $app;
-		// TODO: comment and order
 		
-		$name = 'report.pdf'; // TODO
-		$temporaryPath = $directory . '/output/' . $name;
+		// Builds the name
+		$name = STUDY_OUTPUT_NAME;
 		
+		// Builds the temporary path
+		$temporaryPath = '';
+		$temporaryPath .= $directory;
+		$temporaryPath .= '/output';
+		$temporaryPath .= '/' . $name;
+		
+		// Checks the file's existence
 		$app->file->checkExistence($temporaryPath);
 		
+		// Computes the file's hash
 		$hash = $app->cryptography->computeFileHash($temporaryPath);
 		
-		$output = new \App\Data\Entity\File();
-		$output->setHash($hash);
-		$output->setName($name);
-		$output->setCreator($study->getCreator());
-		$app->data->persist($output);
+		// Creates the file
+		$file = new \App\Data\Entity\File();
+		$file->setHash($hash);
+		$file->setName($name);
+		$file->setCreator($user);
+		$app->data->persist($file);
 		
-		$id = $output->getId();
+		// Gets the file's ID
+		$id = $file->getId();
 		
+		// Admits the file
 		$app->file->admit($id, $temporaryPath);
 		
-		$study->setOutput($output);
-		$app->data->merge($study);
+		return $file;
 	}
 	
 }

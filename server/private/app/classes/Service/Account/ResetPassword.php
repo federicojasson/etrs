@@ -52,7 +52,7 @@ class ResetPassword extends \App\Service\External {
 		// Gets the password-reset permission
 		$passwordResetPermission = $app->data->getReference('Entity:PasswordResetPermission', $credentials['id']);
 
-		// Gets the user
+		// Gets the password-reset permission's user
 		$user = $passwordResetPermission->getUser();
 
 		// Edits the user

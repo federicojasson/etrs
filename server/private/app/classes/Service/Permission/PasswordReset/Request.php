@@ -54,7 +54,7 @@ class Request extends \App\Service\External {
 		// Gets the user
 		$user = $app->data->getReference('Entity:User', $credentials['id']);
 		
-		// Gets the password-reset permission associated with the user
+		// Gets the user's password-reset permission
 		$passwordResetPermission = $user->getPasswordResetPermission();
 		
 		if (! is_null($passwordResetPermission)) {

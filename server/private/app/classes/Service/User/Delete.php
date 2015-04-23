@@ -45,7 +45,7 @@ class Delete extends \App\Service\Internal {
 		// Confirms the task
 		confirmTask('You are about to delete the user "' . $id . '".');
 		
-		// Gets the password-reset permission associated with the user
+		// Gets the user's password-reset permission
 		$passwordResetPermission = $user->getPasswordResetPermission();
 		
 		if (! is_null($passwordResetPermission)) {
