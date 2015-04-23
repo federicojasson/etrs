@@ -262,6 +262,13 @@ class Experiment {
 	}
 	
 	/**
+	 * Returns the files.
+	 */
+	public function getFiles() {
+		return $this->files;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {

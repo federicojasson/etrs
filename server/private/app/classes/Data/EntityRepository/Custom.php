@@ -26,12 +26,12 @@ namespace App\Data\EntityRepository;
 class Custom extends \Doctrine\ORM\EntityRepository {
 	
 	/**
-	 * Returns a non-deleted entity.
+	 * Finds a non-deleted entity.
 	 * 
 	 * Receives the entity's ID.
 	 */
 	public function findNonDeleted($id) {
-		// Gets the entity
+		// Finds the entity
 		$entity = $this->find($id);
 		
 		if (is_null($entity)) {
@@ -45,6 +45,20 @@ class Custom extends \Doctrine\ORM\EntityRepository {
 		}
 		
 		return $entity;
+	}
+	
+	/**
+	 * Finds non-deleted entities by a set of criteria.
+	 * 
+	 * Receives the criteria and, optionally, an order-by criteria, a limit and
+	 * an offset.
+	 */
+	public function findNonDeletedBy($criteria, $orderBy = null, $limit = null, $offset = null) {
+		// Adds a criterion
+		$criteria['deleted'] = false;
+		
+		// Finds the entities
+		return $this->findBy($criteria, $orderBy, $limit, $offset);
 	}
 	
 }

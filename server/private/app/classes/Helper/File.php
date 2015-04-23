@@ -26,6 +26,33 @@ namespace App\Helper;
 class File {
 	
 	/**
+	 * Admits a file.
+	 * 
+	 * Receives the file's ID and temporary path.
+	 */
+	public function admit($id, $temporaryPath) {
+		global $app;
+		
+		// Gets the path
+		$path = $this->getPath($id);
+		
+		// Determines whether the file already exists
+		$exists = file_exists($path);
+		
+		if ($exists) {
+			// The file already exists
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' already exists.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->fileDoesNotExist($exists);
+		
+		// Moves the file
+		$this->move($temporaryPath, $path);
+	}
+	
+	/**
 	 * Downloads a file.
 	 * 
 	 * Receives the file's ID, hash and name.
@@ -91,23 +118,8 @@ class File {
 		// Asserts conditions
 		$app->assertion->fileUploaded($uploaded);
 		
-		// Gets the path
-		$path = $this->getPath($id);
-		
-		// Determines whether the file already exists
-		$exists = file_exists($path);
-		
-		if ($exists) {
-			// The file already exists
-			// Logs the event
-			$app->log->critical('The file ' . $path . ' already exists.');
-		}
-		
-		// Asserts conditions
-		$app->assertion->fileDoesNotExist($exists);
-		
-		// Moves the file
-		$this->move($temporaryPath, $path);
+		// Admits the file
+		$this->admit($id, $temporaryPath);
 	}
 	
 	/**

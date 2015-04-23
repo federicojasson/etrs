@@ -77,7 +77,10 @@ define('SIGN_UP_PERMISSION_MAXIMUM_AGE', 48); // Hours
 define('SORTING_DIRECTION_ASCENDING', 'asc');
 define('SORTING_DIRECTION_DESCENDING', 'desc');
 
+define('STUDY_STATE_CONDUCTING', 1);
+define('STUDY_STATE_FAILURE', 3);
 define('STUDY_STATE_PENDING', 0);
+define('STUDY_STATE_SUCCESS', 2);
 
 define('USER_ROLE_ADMINISTRATOR', 'ad');
 define('USER_ROLE_DOCTOR', 'dr');

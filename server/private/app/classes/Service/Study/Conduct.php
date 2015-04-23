@@ -29,7 +29,58 @@ class Conduct extends \App\Service\Internal {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Acquires a lock
+		$lockAcquired = $app->lock->acquire('study-conduct');
+		
+		if (! $lockAcquired) {
+			// The lock could not be acquired
+			return;
+		}
+		
+		// Gets the oldest pending study
+		$studies = $app->data->getRepository('Entity:Study')->findNonDeletedBy([
+			'state' => STUDY_STATE_PENDING
+		], [
+			'creationDateTime' => 'asc'
+		], 1);
+		
+		if (count($studies) === 0) {
+			// No pending study has been found
+			return;
+		}
+		
+		// Gets the study
+		$study = $studies[0];
+		
+		// Edits the study
+		$study->setState(STUDY_STATE_CONDUCTING);
+		$app->data->merge($study);
+
+		// Commits the data changes
+		$app->data->flush();
+		
+		try {
+			// Conducts the study
+			$this->conductStudy($study);
+			
+			// Edits the study
+			$study->setState(STUDY_STATE_SUCCESS);
+			$app->data->merge($study);
+		} catch (\Exception $exception) {
+			// The operation failed
+			
+			// Edits the study
+			$study->setState(STUDY_STATE_FAILURE);
+			$app->data->merge($study);
+			
+			// Rethrows the exception
+			throw $exception;
+		} finally {
+			// Commits the data changes
+			$app->data->flush();
+		}
 	}
 	
 	/**
@@ -37,6 +88,15 @@ class Conduct extends \App\Service\Internal {
 	 */
 	protected function isRequestValid() {
 		return true;
+	}
+	
+	/**
+	 * Conducts a study.
+	 * 
+	 * Receives the study.
+	 */
+	private function conductStudy($study) {
+		// TODO
 	}
 	
 }

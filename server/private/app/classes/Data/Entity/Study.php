@@ -321,10 +321,31 @@ class Study {
 	}
 	
 	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
+	}
+	
+	/**
+	 * Returns the experiment.
+	 */
+	public function getExperiment() {
+		return $this->experiment;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {
 		return $this->id;
+	}
+	
+	/**
+	 * Returns the input.
+	 */
+	public function getInput() {
+		return $this->input;
 	}
 	
 	/**
@@ -461,6 +482,24 @@ class Study {
 	 */
 	public function setLastEditor($user) {
 		$this->lastEditor = $user;
+	}
+	
+	/**
+	 * Sets the output.
+	 * 
+	 * Receives the file to be set.
+	 */
+	public function setOutput($file) {
+		$this->output = $file;
+	}
+	
+	/**
+	 * Sets the state.
+	 * 
+	 * Receives the state to be set.
+	 */
+	public function setState($state) {
+		$this->state = $state;
 	}
 	
 }

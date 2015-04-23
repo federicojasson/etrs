@@ -26,8 +26,10 @@
 define('DIRECTORY_APP', DIRECTORY_ROOT . '/private/app');
 define('DIRECTORY_EMAILS', DIRECTORY_ROOT . '/private/emails');
 define('DIRECTORY_FILES', DIRECTORY_ROOT . '/private/files');
+define('DIRECTORY_LOCKS', DIRECTORY_ROOT . '/private/locks');
 define('DIRECTORY_LOGS', DIRECTORY_ROOT . '/private/logs');
 define('DIRECTORY_PARAMETERS', DIRECTORY_ROOT . '/private/parameters');
+define('DIRECTORY_SANDBOX', DIRECTORY_ROOT . '/private/sandbox');
 define('DIRECTORY_VENDORS', DIRECTORY_ROOT . '/private/vendors');
 
 // Includes vendors
