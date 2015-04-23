@@ -45,20 +45,6 @@ class User {
 	private $creationDateTime;
 	
 	/**
-	 * The creator.
-	 * 
-	 * Annotations:
-	 * 
-	 * @ManyToOne(targetEntity="User")
-	 * @JoinColumn(
-	 *		name="creator",
-	 *		referencedColumnName="id",
-	 *		onDelete="SET NULL"
-	 *	)
-	 */
-	private $creator;
-	
-	/**
 	 * The email address.
 	 * 
 	 * Annotations:
@@ -117,6 +103,20 @@ class User {
 	 *	)
 	 */
 	private $id;
+	
+	/**
+	 * The inviter.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToOne(targetEntity="User")
+	 * @JoinColumn(
+	 *		name="inviter",
+	 *		referencedColumnName="id",
+	 *		onDelete="SET NULL"
+	 *	)
+	 */
+	private $inviter;
 	
 	/**
 	 * The key-stretching iterations.
@@ -328,9 +328,9 @@ class User {
 		$serialized['lastName'] = $this->lastName;
 		$serialized['gender'] = $this->gender;
 		
-		$serialized['creator'] = null;
-		if (! is_null($this->creator)) {
-			$serialized['creator'] = $this->creator->getId();
+		$serialized['inviter'] = null;
+		if (! is_null($this->inviter)) {
+			$serialized['inviter'] = $this->inviter->getId();
 		}
 		
 		return $serialized;
@@ -345,15 +345,6 @@ class User {
 	 */
 	public function setCreationDateTime() {
 		$this->creationDateTime = new \DateTime();
-	}
-	
-	/**
-	 * Sets the creator.
-	 * 
-	 * Receives the user to be set.
-	 */
-	public function setCreator($user) {
-		$this->creator = $user;
 	}
 	
 	/**
@@ -390,6 +381,15 @@ class User {
 	 */
 	public function setId($id) {
 		$this->id = $id;
+	}
+	
+	/**
+	 * Sets the inviter.
+	 * 
+	 * Receives the user to be set.
+	 */
+	public function setInviter($user) {
+		$this->inviter = $user;
 	}
 	
 	/**

@@ -79,7 +79,7 @@ class SignUp extends \App\Service\External {
 		$user->setFirstName($firstName);
 		$user->setLastName($lastName);
 		$user->setGender($gender);
-		$user->setCreator($signUpPermission->getCreator());
+		$user->setInviter($signUpPermission->getCreator());
 		$app->data->persist($user);
 
 		// Deletes the sign-up permission

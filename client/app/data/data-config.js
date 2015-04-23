@@ -328,13 +328,13 @@
 							var deferredTask = $q.defer();
 							
 							// Gets the references
-							var creatorPromise = data.getReference('User', 'User', 'creator', user.creator, depth);
+							var inviterPromise = data.getReference('User', 'User', 'inviter', user.inviter, depth);
 							
 							$q.all({
-								creator: creatorPromise
+								inviter: inviterPromise
 							}).then(function(values) {
 								// Sets the references
-								user.creator = values.creator;
+								user.inviter = values.inviter;
 								
 								// Resolves the deferred task
 								deferredTask.resolve(user);

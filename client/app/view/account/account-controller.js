@@ -69,7 +69,7 @@
 			// Resets the data service
 			data.reset(1, {
 				User: [
-					'creator'
+					'inviter'
 				]
 			});
 			
