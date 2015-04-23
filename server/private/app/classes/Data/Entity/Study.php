@@ -321,13 +321,6 @@ class Study {
 	}
 	
 	/**
-	 * Returns the creator.
-	 */
-	public function getCreator() {
-		return $this->creator;
-	}
-	
-	/**
 	 * Returns the experiment.
 	 */
 	public function getExperiment() {

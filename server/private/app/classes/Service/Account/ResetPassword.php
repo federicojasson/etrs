@@ -56,7 +56,6 @@ class ResetPassword extends \App\Service\External {
 		$user = $passwordResetPermission->getUser();
 
 		// Edits the user
-		$user->setLastEditionDateTime();
 		$user->setPasswordHash($hash);
 		$user->setSalt($salt);
 		$user->setKeyStretchingIterations($keyStretchingIterations);

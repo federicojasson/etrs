@@ -2,10 +2,7 @@
 Quick tasks
 ----------------------------
 
-- setLastEditionDateTime in ResetPassword and ChangePassword?
-- Use realpath when logging paths?
 - Use DIRECTORY_SEPARATOR constant.
-- Request password for some services (e.g. create an experiment).
 - Check what constants can be parameters.
 - Pass maximum age and maximum inactivity time by parameter?
 - Check TODO and DEFINEHERE

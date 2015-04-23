@@ -32,12 +32,24 @@ class Create extends \App\Service\External {
 		global $app;
 		
 		// Gets inputs
+		$credentials = $this->getInputValue('credentials');
 		$commandLine = $this->getInputValue('commandLine', 'trimAndShrink');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
 		
 		// Gets the signed-in user
 		$user = $app->account->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($user->getId(), $credentials['password']);
+		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user has not been authenticated
+			return;
+		}
 		
 		// Creates the experiment
 		$experiment = new \App\Data\Entity\Experiment();
@@ -71,6 +83,12 @@ class Create extends \App\Service\External {
 		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'credentials' => new \App\InputValidator\Json\JsonObject([
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isValidString($input, 1);
+				})
+			]),
+			
 			'commandLine' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 				return $app->inputValidator->isCommandLine($input);
 			}),

@@ -102,9 +102,6 @@ class Conduct extends \App\Service\Internal {
 			// Builds the directory
 			$directory = DIRECTORY_SANDBOX;
 			
-			// Gets the study's creator
-			$creator = $study->getCreator();
-			
 			// Gets the study's experiment
 			$experiment = $study->getExperiment();
 			
@@ -118,7 +115,7 @@ class Conduct extends \App\Service\Internal {
 			$this->executeExperiment($directory, $experiment, $input);
 			
 			// Processes the output of the experiment
-			$output = $this->processExperimentOutput($directory, $creator);
+			$output = $this->processExperimentOutput($directory);
 			
 			// Edits the study
 			$study->setOutput($output);
@@ -195,9 +192,9 @@ class Conduct extends \App\Service\Internal {
 	/**
 	 * Processes the output of an experiment.
 	 * 
-	 * Receives the sandbox's directory and the user to be set as the creator.
+	 * Receives the sandbox's directory.
 	 */
-	private function processExperimentOutput($directory, $user) {
+	private function processExperimentOutput($directory) {
 		global $app;
 		
 		// Builds the name
@@ -219,7 +216,6 @@ class Conduct extends \App\Service\Internal {
 		$file = new \App\Data\Entity\File();
 		$file->setHash($hash);
 		$file->setName($name);
-		$file->setCreator($user);
 		$app->data->persist($file);
 		
 		// Gets the file's ID

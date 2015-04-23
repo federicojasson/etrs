@@ -53,7 +53,6 @@ class ChangePassword extends \App\Service\External {
 		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
 		
 		// Edits the user
-		$user->setLastEditionDateTime();
 		$user->setPasswordHash($hash);
 		$user->setSalt($salt);
 		$user->setKeyStretchingIterations($keyStretchingIterations);

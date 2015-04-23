@@ -32,14 +32,25 @@ class Edit extends \App\Service\External {
 		global $app;
 		
 		// Gets inputs
+		$credentials = $this->getInputValue('credentials');
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
 		$commandLine = $this->getInputValue('commandLine', 'trimAndShrink');
 		$name = $this->getInputValue('name', 'trimAndShrink');
-		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
 		
 		// Gets the signed-in user
 		$user = $app->account->getSignedInUser();
+		
+		// Authenticates the user
+		$authenticated = $app->authenticator->authenticateUserByPassword($user->getId(), $credentials['password']);
+		
+		// Sets an output
+		$this->setOutputValue('authenticated', $authenticated);
+		
+		if (! $authenticated) {
+			// The user has not been authenticated
+			return;
+		}
 		
 		// Gets the experiment
 		$experiment = $app->data->getRepository('Entity:Experiment')->findNonDeleted($id);
@@ -54,8 +65,6 @@ class Edit extends \App\Service\External {
 		$experiment->setName($name);
 		$experiment->setLastEditor($user);
 		$app->data->merge($experiment);
-		
-		// TODO: check existence and add associations
 	}
 	
 	/**
@@ -74,6 +83,12 @@ class Edit extends \App\Service\External {
 		
 		// Builds a JSON input validator
 		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'credentials' => new \App\InputValidator\Json\JsonObject([
+				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					return $app->inputValidator->isValidString($input, 1);
+				})
+			]),
+			
 			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
 			}),
@@ -88,29 +103,11 @@ class Edit extends \App\Service\External {
 			
 			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 				return $app->inputValidator->isValidLine($input, 1, 64);
-			}),
-			
-			'files' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-					return $app->inputValidator->isRandomId($input);
-				})
-			)
+			})
 		]);
 		
-		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
-			// The input is invalid
-			return false;
-		}
-		
-		// Gets inputs
-		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
-		
-		if (containsDuplicates($files)) {
-			// The files are invalid
-			return false;
-		}
-		
-		return true;
+		// Validates the input
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 	/**
