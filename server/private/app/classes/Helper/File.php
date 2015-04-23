@@ -108,6 +108,36 @@ class File {
 	}
 	
 	/**
+	 * Clears a directory.
+	 * 
+	 * Receives the directory.
+	 */
+	public function clearDirectory($directory) {
+		// Initializes a directory iterator
+		$iterator = new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS);
+		$files = new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST);
+		
+		// Removes the files
+		foreach ($files as $file) {
+			if ($file->isDir()) {
+				// The file is a directory
+				
+				// Gets the subdirectory
+				$subdirectory = $file->getRealPath();
+				
+				// Clears the subdirectory
+				$this->clearDirectory($subdirectory);
+				
+				// Removes the subdirectory
+				rmdir($subdirectory);
+			} else {
+				// Removes the file
+				unlink($file->getRealPath());
+			}
+		}
+	}
+	
+	/**
 	 * Copies a file.
 	 * 
 	 * Receives the source and destination paths.

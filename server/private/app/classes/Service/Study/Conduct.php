@@ -135,20 +135,24 @@ class Conduct extends \App\Service\Internal {
 	 * Receives the sandbox's directory, the experiment and the input.
 	 */
 	private function createSandbox($directory, $experiment, $input) {
-		// TODO: comment and order
 		global $app;
 		
-		$files = [];
+		// Adds the destination paths for the experiment's files
+		$destinationPaths = [];
 		foreach ($experiment->getFiles() as $file) {
-			$sourcePath = $app->file->getPath($file->getId());
-			$destinationPath = $directory . '/' . $file->getName();
-			$files[$sourcePath] = $destinationPath;
+			$destinationPaths[$file->getId()] = $directory . '/' . $file->getName();
 		}
 		
-		$files[$app->file->getPath($input->getId())] = $directory . '/input/' . $input->getName();
+		// Adds the destination path for the input
+		$destinationPaths[$input->getId()] = $directory . '/input/' . $input->getName();
 		
-		foreach ($files as $sourcePath => $destinationPath) {
-			$app->file->copy($sourcePath, $destinationPath);
+		// Copies the files to the sandbox
+		foreach ($destinationPaths as $id => $destinationPath) {
+			// Gets the path
+			$path = $app->file->getPath($id);
+			
+			// Copies the file
+			$app->file->copy($path, $destinationPath);
 		}
 	}
 	
@@ -158,7 +162,10 @@ class Conduct extends \App\Service\Internal {
 	 * Receives the sandbox's directory.
 	 */
 	private function destroySandbox($directory) {
-		// TODO
+		global $app;
+		
+		// Clears the directory
+		$app->file->clearDirectory($directory);
 	}
 	
 	/**
@@ -167,15 +174,21 @@ class Conduct extends \App\Service\Internal {
 	 * Receives the sandbox's directory, the experiment and the input.
 	 */
 	private function executeExperiment($directory, $experiment, $input) {
-		// TODO: comment and order
-		
+		// Builds the definitive command line
 		$commandLine = replacePlaceholders($experiment->getCommandLine(), [
 			'input' => 'input/' . $input->getName()
 		]);
 		
+		// Saves the current working directory
 		$workingDirectory = getcwd();
+		
+		// Sets the directory as the working directory
 		chdir($directory);
+		
+		// Executes the command line
 		exec($commandLine);
+		
+		// Restores the working directory
 		chdir($workingDirectory);
 	}
 	
