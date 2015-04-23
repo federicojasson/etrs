@@ -64,6 +64,51 @@ class File {
 	}
 	
 	/**
+	 * Checks a file's integrity.
+	 * 
+	 * Receives the file's path and hash.
+	 */
+	public function checkIntegrity($path, $hash) {
+		global $app;
+		
+		// Computes the hash
+		$currentHash = $app->cryptography->computeFileHash($path);
+		
+		// Compares the hashes
+		$corrupted = $hash !== $currentHash;
+		
+		if ($corrupted) {
+			// The file is corrupted
+			// Logs the event
+			$app->log->alert('The file ' . $path . ' is corrupted.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->fileNotCorrupted($corrupted);
+	}
+	
+	/**
+	 * Checks a file's non-existence.
+	 * 
+	 * Receives the file's path.
+	 */
+	public function checkNonExistence($path) {
+		global $app;
+		
+		// Determines whether the file already exists
+		$exists = file_exists($path);
+		
+		if ($exists) {
+			// The file already exists
+			// Logs the event
+			$app->log->critical('The file ' . $path . ' already exists.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->fileDoesNotExist($exists);
+	}
+	
+	/**
 	 * Copies a file.
 	 * 
 	 * Receives the source and destination paths.
@@ -87,7 +132,36 @@ class File {
 		$app->assertion->fileCopied($copied);
 		
 		// Sets the access permissions
-		$this->setAccessPermissions($destinationPath, 777); // TODO: define access permissions (constant?)
+		$this->setAccessPermissions($destinationPath, 0777); // TODO: define access permissions (constant?)
+	}
+	
+	/**
+	 * Creates a file's directory if it doesn't exist.
+	 * 
+	 * Receives the file's path.
+	 */
+	public function createDirectory($path) {
+		global $app;
+		
+		// Gets the directory
+		$directory = dirname($path);
+		
+		if (is_dir($directory)) {
+			// The directory already exists
+			return;
+		}
+		
+		// Creates the directory
+		$created = mkdir($directory, 0777, true); // TODO: define access permissions (constant?)
+		
+		if (! $created) {
+			// The directory could not be created
+			// Logs the event
+			$app->log->critical('The directory ' . $directory . ' could not be created.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->directoryCreated($created);
 	}
 	
 	/**
@@ -145,6 +219,54 @@ class File {
 	}
 	
 	/**
+	 * Moves a file.
+	 * 
+	 * Receives the source and destination paths.
+	 */
+	public function move($sourcePath, $destinationPath) {
+		global $app;
+		
+		// Creates the destination directory
+		$this->createDirectory($destinationPath);
+		
+		// Moves the file
+		$moved = rename($sourcePath, $destinationPath);
+		
+		if (! $moved) {
+			// The file could not be moved
+			// Logs the event
+			$app->log->critical('The file ' . $sourcePath . ' could not be moved to ' . $destinationPath . '.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->fileMoved($moved);
+		
+		// Sets the access permissions
+		$this->setAccessPermissions($destinationPath, 0777); // TODO: define access permissions (constant?)
+	}
+	
+	/**
+	 * Sets a file's access permissions.
+	 * 
+	 * Receives the file's path and the access permissions to be set.
+	 */
+	public function setAccessPermissions($path, $accessPermissions) {
+		global $app;
+		
+		// Sets the access permissions
+		$set = chmod($path, $accessPermissions);
+		
+		if (! $set) {
+			// The access permissions could not be set
+			// Logs the event
+			$app->log->critical('The access permissions of the file ' . $path . ' could not be set.');
+		}
+		
+		// Asserts conditions
+		$app->assertion->fileAccessPermissionsSet($set);
+	}
+	
+	/**
 	 * Uploads a file.
 	 * 
 	 * Receives the file's ID and temporary path.
@@ -166,128 +288,6 @@ class File {
 		
 		// Admits the file
 		$this->admit($id, $temporaryPath);
-	}
-	
-	/**
-	 * Checks a file's integrity.
-	 * 
-	 * Receives the file's path and hash.
-	 */
-	private function checkIntegrity($path, $hash) {
-		global $app;
-		
-		// Computes the hash
-		$currentHash = $app->cryptography->computeFileHash($path);
-		
-		// Compares the hashes
-		$corrupted = $hash !== $currentHash;
-		
-		if ($corrupted) {
-			// The file is corrupted
-			// Logs the event
-			$app->log->alert('The file ' . $path . ' is corrupted.');
-		}
-		
-		// Asserts conditions
-		$app->assertion->fileNotCorrupted($corrupted);
-	}
-	
-	/**
-	 * Checks a file's non-existence.
-	 * 
-	 * Receives the file's path.
-	 */
-	private function checkNonExistence($path) {
-		global $app;
-		
-		// Determines whether the file already exists
-		$exists = file_exists($path);
-		
-		if ($exists) {
-			// The file already exists
-			// Logs the event
-			$app->log->critical('The file ' . $path . ' already exists.');
-		}
-		
-		// Asserts conditions
-		$app->assertion->fileDoesNotExist($exists);
-	}
-	
-	/**
-	 * Creates a file's directory if it doesn't exist.
-	 * 
-	 * Receives the file's path.
-	 */
-	private function createDirectory($path) {
-		global $app;
-		
-		// Gets the directory
-		$directory = dirname($path);
-		
-		if (is_dir($directory)) {
-			// The directory already exists
-			return;
-		}
-		
-		// Creates the directory
-		$created = mkdir($directory, 777, true); // TODO: define access permissions (constant?)
-		
-		if (! $created) {
-			// The directory could not be created
-			// Logs the event
-			$app->log->critical('The directory ' . $directory . ' could not be created.');
-		}
-		
-		// Asserts conditions
-		$app->assertion->directoryCreated($created);
-	}
-	
-	/**
-	 * Moves a file.
-	 * 
-	 * Receives the source and destination paths.
-	 */
-	private function move($sourcePath, $destinationPath) {
-		global $app;
-		
-		// Creates the destination directory
-		$this->createDirectory($destinationPath);
-		
-		// Moves the file
-		$moved = rename($sourcePath, $destinationPath);
-		
-		if (! $moved) {
-			// The file could not be moved
-			// Logs the event
-			$app->log->critical('The file ' . $sourcePath . ' could not be moved to ' . $destinationPath . '.');
-		}
-		
-		// Asserts conditions
-		$app->assertion->fileMoved($moved);
-		
-		// Sets the access permissions
-		$this->setAccessPermissions($destinationPath, 777); // TODO: define access permissions (constant?)
-	}
-	
-	/**
-	 * Sets a file's access permissions.
-	 * 
-	 * Receives the file's path and the access permissions to be set.
-	 */
-	private function setAccessPermissions($path, $accessPermissions) {
-		global $app;
-		
-		// Sets the access permissions
-		$set = chmod($path, $accessPermissions);
-		
-		if (! $set) {
-			// The access permissions could not be set
-			// Logs the event
-			$app->log->critical('The access permissions of the file ' . $path . ' could not be set.');
-		}
-		
-		// Asserts conditions
-		$app->assertion->fileAccessPermissionsSet($set);
 	}
 	
 }
