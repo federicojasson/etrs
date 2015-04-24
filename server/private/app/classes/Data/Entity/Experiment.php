@@ -234,7 +234,6 @@ class Experiment {
 	public function __construct() {
 		$this->deleted = false;
 		$this->files = new \Doctrine\Common\Collections\ArrayCollection();
-		// TODO: initialize $this->studies?
 	}
 	
 	/**
@@ -244,8 +243,6 @@ class Experiment {
 	 */
 	public function addFile($file) {
 		$this->files->add($file);
-		
-		// TODO: comment
 		$file->associate();
 	}
 	

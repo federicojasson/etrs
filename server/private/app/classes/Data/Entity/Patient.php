@@ -251,7 +251,6 @@ class Patient {
 	 */
 	public function __construct() {
 		$this->deleted = false;
-		// TODO: initialize $this->consultations?
 	}
 	
 	/**
