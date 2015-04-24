@@ -32,6 +32,19 @@ namespace App\Data\Entity;
 class File {
 	
 	/**
+	 * Indicates whether the entity is associated.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="associated",
+	 *		type="boolean",
+	 *		nullable=false
+	 *	)
+	 */
+	private $associated;
+	
+	/**
 	 * The creation date-time.
 	 * 
 	 * Annotations:
@@ -196,6 +209,14 @@ class File {
 	 */
 	public function __construct() {
 		$this->deleted = false;
+		$this->associated = false;
+	}
+	
+	/**
+	 * Associates the entity.
+	 */
+	public function associate() {
+		$this->associated = true;
 	}
 	
 	/**
@@ -207,6 +228,13 @@ class File {
 		$this->deletionDateTime = new \DateTime();
 		$this->deleted = true;
 		$this->deleter = $user;
+	}
+	
+	/**
+	 * Disassociate the entity.
+	 */
+	public function disassociate() {
+		$this->associated = false;
 	}
 	
 	/**

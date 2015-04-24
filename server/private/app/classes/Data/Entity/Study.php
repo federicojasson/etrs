@@ -298,6 +298,9 @@ class Study {
 	 */
 	public function addFile($file) {
 		$this->files->add($file);
+		
+		// TODO: comment
+		$file->associate();
 	}
 	
 	/**
@@ -380,6 +383,7 @@ class Study {
 		
 		// TODO: comment?
 		$file->delete($this->lastEditor);
+		$file->disassociate();
 	}
 	
 	/**
@@ -487,6 +491,9 @@ class Study {
 	 */
 	public function setInput($file) {
 		$this->input = $file;
+		
+		// TODO: comment
+		$file->associate();
 	}
 	
 	/**
@@ -512,6 +519,9 @@ class Study {
 	 */
 	public function setOutput($file) {
 		$this->output = $file;
+		
+		// TODO: comment
+		$file->associate();
 	}
 	
 	/**

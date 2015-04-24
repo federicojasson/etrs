@@ -244,6 +244,9 @@ class Experiment {
 	 */
 	public function addFile($file) {
 		$this->files->add($file);
+		
+		// TODO: comment
+		$file->associate();
 	}
 	
 	/**
