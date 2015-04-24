@@ -52,7 +52,8 @@ class Consultation {
 	 * 
 	 * @OneToMany(
 	 *		targetEntity="CognitiveTestResult",
-	 *		mappedBy="consultation"
+	 *		mappedBy="consultation",
+	 *		orphanRemoval=true
 	 *	)
 	 */
 	private $cognitiveTestResults;
@@ -190,7 +191,8 @@ class Consultation {
 	 * 
 	 * @OneToMany(
 	 *		targetEntity="ImagingTestResult",
-	 *		mappedBy="consultation"
+	 *		mappedBy="consultation",
+	 *		orphanRemoval=true
 	 *	)
 	 */
 	private $imagingTestResults;
@@ -202,7 +204,8 @@ class Consultation {
 	 * 
 	 * @OneToMany(
 	 *		targetEntity="LaboratoryTestResult",
-	 *		mappedBy="consultation"
+	 *		mappedBy="consultation",
+	 *		orphanRemoval=true
 	 *	)
 	 */
 	private $laboratoryTestResults;
@@ -382,6 +385,66 @@ class Consultation {
 	 */
 	public function __construct() {
 		$this->deleted = false;
+		$this->medicalAntecedents = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->medicines = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->laboratoryTestResults = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->imagingTestResults = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->cognitiveTestResults = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->treatments = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+	
+	/**
+	 * Adds a cognitive-test result.
+	 * 
+	 * Receives the cognitive-test result to be added.
+	 */
+	public function addCognitiveTestResult($cognitiveTestResult) {
+		$this->cognitiveTestResults->add($cognitiveTestResult);
+	}
+	
+	/**
+	 * Adds an imaging-test result.
+	 * 
+	 * Receives the imaging-test result to be added.
+	 */
+	public function addImagingTestResult($imagingTestResult) {
+		$this->imagingTestResults->add($imagingTestResult);
+	}
+	
+	/**
+	 * Adds a laboratory-test result.
+	 * 
+	 * Receives the laboratory-test result to be added.
+	 */
+	public function addLaboratoryTestResult($laboratoryTestResult) {
+		$this->laboratoryTestResults->add($laboratoryTestResult);
+	}
+	
+	/**
+	 * Adds a medical antecedent.
+	 * 
+	 * Receives the medical antecedent to be added.
+	 */
+	public function addMedicalAntecedent($medicalAntecedent) {
+		$this->medicalAntecedents->add($medicalAntecedent);
+	}
+	
+	/**
+	 * Adds a medicine.
+	 * 
+	 * Receives the medicine to be added.
+	 */
+	public function addMedicine($medicine) {
+		$this->medicines->add($medicine);
+	}
+	
+	/**
+	 * Adds a treatment.
+	 * 
+	 * Receives the treatment to be added.
+	 */
+	public function addTreatment($treatment) {
+		$this->treatments->add($treatment);
 	}
 	
 	/**
@@ -405,6 +468,24 @@ class Consultation {
 	}
 	
 	/**
+	 * Returns the cognitive-test results.
+	 */
+	public function getCognitiveTestResults() {
+		$cognitiveTestResults = [];
+		
+		// TODO: comments?
+		foreach ($this->cognitiveTestResults as $cognitiveTestResult) {
+			$cognitiveTest = $cognitiveTestResult->getCognitiveTest();
+			
+			if (! $cognitiveTest->isDeleted()) {
+				$cognitiveTestResults[] = $cognitiveTestResult;
+			}
+		}
+		
+		return $cognitiveTestResults;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {
@@ -412,10 +493,148 @@ class Consultation {
 	}
 	
 	/**
+	 * Returns the imaging-test results.
+	 */
+	public function getImagingTestResults() {
+		$imagingTestResults = [];
+		
+		// TODO: comments?
+		foreach ($this->imagingTestResults as $imagingTestResult) {
+			$imagingTest = $imagingTestResult->getImagingTest();
+			
+			if (! $imagingTest->isDeleted()) {
+				$imagingTestResults[] = $imagingTestResult;
+			}
+		}
+		
+		return $imagingTestResults;
+	}
+	
+	/**
+	 * Returns the laboratory-test results.
+	 */
+	public function getLaboratoryTestResults() {
+		$laboratoryTestResults = [];
+		
+		// TODO: comments?
+		foreach ($this->laboratoryTestResults as $laboratoryTestResult) {
+			$laboratoryTest = $laboratoryTestResult->getLaboratoryTest();
+			
+			if (! $laboratoryTest->isDeleted()) {
+				$laboratoryTestResults[] = $laboratoryTestResult;
+			}
+		}
+		
+		return $laboratoryTestResults;
+	}
+	
+	/**
+	 * Returns the medical antecedents.
+	 */
+	public function getMedicalAntecedents() {
+		$medicalAntecedents = [];
+		
+		// TODO: comments?
+		foreach ($this->medicalAntecedents as $medicalAntecedent) {
+			if (! $medicalAntecedent->isDeleted()) {
+				$medicalAntecedents[] = $medicalAntecedent;
+			}
+		}
+		
+		return $medicalAntecedents;
+	}
+	
+	/**
+	 * Returns the medicines.
+	 */
+	public function getMedicines() {
+		$medicines = [];
+		
+		// TODO: comments?
+		foreach ($this->medicines as $medicine) {
+			if (! $medicine->isDeleted()) {
+				$medicines[] = $medicine;
+			}
+		}
+		
+		return $medicines;
+	}
+	
+	/**
+	 * Returns the treatments.
+	 */
+	public function getTreatments() {
+		$treatments = [];
+		
+		// TODO: comments?
+		foreach ($this->treatments as $treatment) {
+			if (! $treatment->isDeleted()) {
+				$treatments[] = $treatment;
+			}
+		}
+		
+		return $treatments;
+	}
+	
+	/**
 	 * Determines whether the entity is deleted.
 	 */
 	public function isDeleted() {
 		return $this->deleted;
+	}
+	
+	/**
+	 * Removes a cognitive-test result.
+	 * 
+	 * Receives the cognitive-test result to be removed.
+	 */
+	public function removeCognitiveTestResult($cognitiveTestResult) {
+		$this->cognitiveTestResults->removeElement($cognitiveTestResult);
+	}
+	
+	/**
+	 * Removes an imaging-test result.
+	 * 
+	 * Receives the imaging-test result to be removed.
+	 */
+	public function removeImagingTestResult($imagingTestResult) {
+		$this->imagingTestResults->removeElement($imagingTestResult);
+	}
+	
+	/**
+	 * Removes a laboratory-test result.
+	 * 
+	 * Receives the laboratory-test result to be removed.
+	 */
+	public function removeLaboratoryTestResult($laboratoryTestResult) {
+		$this->laboratoryTestResults->removeElement($laboratoryTestResult);
+	}
+	
+	/**
+	 * Removes a medical antecedent.
+	 * 
+	 * Receives the medical antecedent to be removed.
+	 */
+	public function removeMedicalAntecedent($medicalAntecedent) {
+		$this->medicalAntecedents->removeElement($medicalAntecedent);
+	}
+	
+	/**
+	 * Removes a medicine.
+	 * 
+	 * Receives the medicine to be removed.
+	 */
+	public function removeMedicine($medicine) {
+		$this->medicines->removeElement($medicine);
+	}
+	
+	/**
+	 * Removes a treatment.
+	 * 
+	 * Receives the treatment to be removed.
+	 */
+	public function removeTreatment($treatment) {
+		$this->treatments->removeElement($treatment);
 	}
 	
 	/**
