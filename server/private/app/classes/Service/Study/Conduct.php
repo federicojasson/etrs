@@ -134,14 +134,14 @@ class Conduct extends \App\Service\Internal {
 	private function createSandbox($directory, $experiment, $input) {
 		global $app;
 		
-		// Adds the destination paths for the experiment's files
+		// Adds the destination paths of the experiment's files
 		$destinationPaths = [];
 		foreach ($experiment->getFiles() as $file) {
 			$destinationPath = buildPath($directory, $file->getName());
 			$destinationPaths[$file->getId()] = $destinationPath;
 		}
 		
-		// Adds the destination path for the input
+		// Adds the destination path of the input
 		$destinationPath = buildPath($directory, 'input', $input->getName());
 		$destinationPaths[$input->getId()] = $destinationPath;
 		
