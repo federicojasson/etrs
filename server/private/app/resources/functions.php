@@ -225,16 +225,6 @@ function isStringAnInteger($string) {
 }
 
 /**
- * Converts a string from PascalCase to camelCase.
- * 
- * Receives the string.
- */
-function pascalToCamelCase($string) {
-	// Converts the first character to lowercase
-	return lcfirst($string);
-}
-
-/**
  * Reads the contents of a JSON file.
  * 
  * Receives the file's path.

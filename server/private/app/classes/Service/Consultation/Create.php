@@ -23,7 +23,7 @@ namespace App\Service\Consultation;
 /**
  * Represents the /consultation/create service.
  */
-class Create extends \App\Service\External {
+class Create extends CreateEdit {
 	
 	/**
 	 * Executes the service.
@@ -87,43 +87,13 @@ class Create extends \App\Service\External {
 		// Sets an output
 		$this->setOutputValue('id', $id, 'bin2hex');
 		
-		// TODO: check existence and add associations
-	}
-	
-	/**
-	 * Applies a filter to a set of cognitive-test results.
-	 * 
-	 * Receives the cognitive-test results.
-	 */
-	protected function filterCognitiveTestResults($cognitiveTestResults) {
-		return filterArray($cognitiveTestResults, function($cognitiveTestResult) {
-			$cognitiveTestResult['cognitiveTest'] = hex2bin($cognitiveTestResult['cognitiveTest']);
-			return $cognitiveTestResult;
-		});
-	}
-	
-	/**
-	 * Applies a filter to a set of imaging-test results.
-	 * 
-	 * Receives the imaging-test results.
-	 */
-	protected function filterImagingTestResults($imagingTestResults) {
-		return filterArray($imagingTestResults, function($imagingTestResult) {
-			$imagingTestResult['imagingTest'] = hex2bin($imagingTestResult['imagingTest']);
-			return $imagingTestResult;
-		});
-	}
-	
-	/**
-	 * Applies a filter to a set of laboratory-test results.
-	 * 
-	 * Receives the laboratory-test results.
-	 */
-	protected function filterLaboratoryTestResults($laboratoryTestResults) {
-		return filterArray($laboratoryTestResults, function($laboratoryTestResult) {
-			$laboratoryTestResult['laboratoryTest'] = hex2bin($laboratoryTestResult['laboratoryTest']);
-			return $laboratoryTestResult;
-		});
+		// Sets the associated entities
+		$this->setMedicalAntecedents($consultation, $medicalAntecedents);
+		$this->setMedicines($consultation, $medicines);
+		$this->setLaboratoryTestResults($consultation, $laboratoryTestResults);
+		$this->setImagingTestResults($consultation, $imagingTestResults);
+		$this->setCognitiveTestResults($consultation, $cognitiveTestResults);
+		$this->setTreatments($consultation, $treatments);
 	}
 	
 	/**

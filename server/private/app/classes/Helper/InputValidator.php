@@ -33,11 +33,8 @@ class InputValidator {
 	public function areTestResultsValid($testResults, $type) {
 		global $app;
 		
-		// Converts the type from PascalCase to camelCase
-		$testsField = pascalToCamelCase($type);
-		
 		// Gets the tests
-		$tests = array_column($testResults, $testsField);
+		$tests = array_keys($testResults);
 		
 		if (containsDuplicates($tests)) {
 			// The tests are not unique
@@ -45,9 +42,9 @@ class InputValidator {
 		}
 		
 		// Validates the values
-		foreach ($testResults as $testResult) {
+		foreach ($testResults as $test => $value) {
 			// Gets the test
-			$test = $app->data->getRepository('Entity:' . $type)->findNonDeleted($testResult[$testsField]);
+			$test = $app->data->getRepository('Entity:' . $type)->findNonDeleted($test);
 			
 			// Asserts conditions
 			$app->assertion->entityExists($test);
@@ -55,7 +52,7 @@ class InputValidator {
 			// Initializes a data-type input validator
 			$dataTypeInputValidator = \App\InputValidator\DataType\Factory::create($test->getDataTypeDefinition());
 			
-			if (! $dataTypeInputValidator->isInputValid($testResult['value'])) {
+			if (! $dataTypeInputValidator->isInputValid($value)) {
 				// The value is invalid
 				return false;
 			}
