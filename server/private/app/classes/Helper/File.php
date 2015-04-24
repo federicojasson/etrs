@@ -161,7 +161,7 @@ class File {
 		$app->assertion->fileCopied($copied);
 		
 		// Sets the file's access permissions
-		$this->setAccessPermissions($destinationPath, 0777); // TODO: define access permissions (constant?)
+		$this->setAccessPermissions($destinationPath, 0700); // -rwx------
 	}
 	
 	/**
@@ -181,7 +181,7 @@ class File {
 		}
 		
 		// Creates the directory
-		$created = mkdir($directory, 0777, true); // TODO: define access permissions (constant?)
+		$created = mkdir($directory, 0700, true); // -rwx------
 		
 		if (! $created) {
 			// The directory could not be created
@@ -269,7 +269,7 @@ class File {
 		$app->assertion->fileMoved($moved);
 		
 		// Sets the file's access permissions
-		$this->setAccessPermissions($destinationPath, 0777); // TODO: define access permissions (constant?)
+		$this->setAccessPermissions($destinationPath, 0700); // -rwx------
 	}
 	
 	/**
