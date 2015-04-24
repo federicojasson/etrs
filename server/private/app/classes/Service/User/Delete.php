@@ -40,8 +40,6 @@ class Delete extends \App\Service\Internal {
 		// Asserts conditions
 		$app->assertion->entityExists($user);
 		
-		// TODO: check if there is at least one administrator after the operation?
-		
 		// Confirms the task
 		confirmTask('You are about to delete the user "' . $id . '".');
 		
