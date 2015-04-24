@@ -23,7 +23,7 @@ namespace App\Service\Study;
 /**
  * Represents the /study/create service.
  */
-class Create extends \App\Service\External {
+class Create extends CreateEdit {
 	
 	/**
 	 * Executes the service.
@@ -70,7 +70,8 @@ class Create extends \App\Service\External {
 		// Sets an output
 		$this->setOutputValue('id', $id, 'bin2hex');
 		
-		// TODO: check existence and add associations
+		// Sets the associated entities
+		$this->setFiles($study, $files);
 	}
 	
 	/**

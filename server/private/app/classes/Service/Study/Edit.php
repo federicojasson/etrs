@@ -23,7 +23,7 @@ namespace App\Service\Study;
 /**
  * Represents the /study/edit service.
  */
-class Edit extends \App\Service\External {
+class Edit extends CreateEdit {
 	
 	/**
 	 * Executes the service.
@@ -53,7 +53,8 @@ class Edit extends \App\Service\External {
 		$study->setLastEditor($user);
 		$app->data->merge($study);
 		
-		// TODO: check existence and add associations
+		// Sets the associated entities
+		$this->setFiles($study, $files);
 	}
 	
 	/**
