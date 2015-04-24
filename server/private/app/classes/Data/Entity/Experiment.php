@@ -233,8 +233,17 @@ class Experiment {
 	 */
 	public function __construct() {
 		$this->deleted = false;
+		$this->files = new \Doctrine\Common\Collections\ArrayCollection();
 		// TODO: initialize $this->studies?
-		// TODO: initialize $this->files?
+	}
+	
+	/**
+	 * Adds a file.
+	 * 
+	 * Receives the file to be added.
+	 */
+	public function addFile($file) {
+		$this->files->add($file);
 	}
 	
 	/**

@@ -64,7 +64,8 @@ class Create extends \App\Service\External {
 		// Sets an output
 		$this->setOutputValue('id', $id, 'bin2hex');
 		
-		// TODO: check existence and add associations
+		// Sets the associated entities
+		$this->setFiles($experiment, $files);
 	}
 	
 	/**
@@ -130,6 +131,21 @@ class Create extends \App\Service\External {
 		return $app->accessValidator->isUserAuthorized([
 			USER_ROLE_ADMINISTRATOR
 		]);
+	}
+	
+	/**
+	 * TODO: comments
+	 */
+	private function setFiles($experiment, $files) {
+		global $app;
+		
+		// TODO: comments
+		
+		foreach ($files as $file) {
+			$file = $app->data->getRepository('Entity:File')->findNonDeleted($file);
+			$app->assertion->entityExists($file);
+			$experiment->addFile($file);
+		}
 	}
 
 }
