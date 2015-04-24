@@ -185,10 +185,12 @@ abstract class CreateEdit extends \App\Service\External {
 		// TODO: comments
 		
 		foreach ($consultation->getMedicalAntecedents() as $medicalAntecedent) {
-			if (array_key_exists($medicalAntecedent, $medicalAntecedents)) {
-				unset($medicalAntecedents[$medicalAntecedent]);
-			} else {
+			$index = searchInArray($medicalAntecedent->getId(), $medicalAntecedents);
+			
+			if ($index === false) {
 				$consultation->removeMedicalAntecedent($medicalAntecedent);
+			} else {
+				removeFromArray($medicalAntecedents, $index);
 			}
 		}
 		
@@ -208,10 +210,12 @@ abstract class CreateEdit extends \App\Service\External {
 		// TODO: comments
 		
 		foreach ($consultation->getMedicines() as $medicine) {
-			if (array_key_exists($medicine, $medicines)) {
-				unset($medicines[$medicine]);
-			} else {
+			$index = searchInArray($medicine->getId(), $medicines);
+			
+			if ($index === false) {
 				$consultation->removeMedicine($medicine);
+			} else {
+				removeFromArray($medicines, $index);
 			}
 		}
 		
@@ -231,12 +235,12 @@ abstract class CreateEdit extends \App\Service\External {
 		// TODO: comments
 		
 		foreach ($consultation->getTreatments() as $treatment) {
-			$id = $treatment->getId();
+			$index = searchInArray($treatment->getId(), $treatments);
 			
-			if (array_key_exists($id, $treatments)) {
-				unset($treatments[$id]);
-			} else {
+			if ($index === false) {
 				$consultation->removeTreatment($treatment);
+			} else {
+				removeFromArray($treatments, $index);
 			}
 		}
 		

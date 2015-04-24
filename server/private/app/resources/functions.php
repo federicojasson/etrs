@@ -252,6 +252,15 @@ function readTemplateFile($path, $mapping) {
 }
 
 /**
+ * Removes an array's element.
+ * 
+ * Receives the array and the element's index.
+ */
+function removeFromArray(&$array, $index) {
+	array_splice($array, $index, 1);
+}
+
+/**
  * Given a string with placeholders, it replaces them with specific strings.
  * 
  * Receives the string and a mapping containing placeholders as keys and
@@ -269,6 +278,15 @@ function replacePlaceholders($string, $mapping) {
 
 	// Replaces the placeholders
 	return str_replace($placeholders, $replacements, $string);
+}
+
+/**
+ * Searches an array's element.
+ * 
+ * Receives the element and the array.
+ */
+function searchInArray($element, $array) {
+	return array_search($element, $array, true);
 }
 
 /**
