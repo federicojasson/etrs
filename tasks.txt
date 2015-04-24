@@ -19,6 +19,13 @@ Quick tasks
 - Entities: setFirstName and setLastName ---> Should received $name instead?
 - Removed ready variable from entities views (when delete is implemented).
 - Internal task to remove non-associated files (permanently and physically).
+- Test uploading .php files and try to execute them on file downloading.
+
+
+Open issues
+----------------------------
+
+- How to make the experiments' command line safe.
 
 
 General code checks
@@ -45,8 +52,19 @@ Release tasks
 
 - Check PHP and MySQL versions in which the system was tested.
 - Configure the cron-job table.
-- Configure the DBMS cache.
 - Change the password of database users.
+- Check if APC cache is installed.
+- Configure httpd.conf:
+	ServerTokens ProductOnly
+	ServerSignature Off
+- Configure php.ini:
+	upload_max_filesize=1G
+	post_max_size=1G
+	expose_php=Off
+- Configure my.ini (DBMS cache):
+	query_cache_limit = 64K
+	query_cache_size = 20MB
+	query_cache_type = 1
 - Register domain.
 - Buy SSL/TSL certificate.
 
