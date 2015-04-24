@@ -31,7 +31,12 @@ class DeleteOld extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// TODO: ask for confirmation
+		// Confirms the task
+		$message = '';
+		$message .= 'You are about to delete logs older than ' . LOG_MAXIMUM_AGE . ' ';
+		$message .= (LOG_MAXIMUM_AGE === 1)? 'month' : 'months';
+		$message .= '.';
+		confirmTask($message);
 		
 		// Gets the current date-time
 		$currentDateTime = new \DateTime();

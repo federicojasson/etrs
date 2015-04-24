@@ -31,7 +31,8 @@ class DeleteAll extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// TODO: ask for confirmation
+		// Confirms the task
+		confirmTask('You are about to delete all sessions.');
 		
 		// Deletes all sessions
 		$app->data->createQueryBuilder()

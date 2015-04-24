@@ -31,7 +31,8 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 	protected function execute() {
 		global $app;
 		
-		// TODO: ask for confirmation
+		// Confirms the task
+		confirmTask('You are about to reset the versions of all entities.');
 		
 		// Builds an array containing the versioned types
 		$types = [
