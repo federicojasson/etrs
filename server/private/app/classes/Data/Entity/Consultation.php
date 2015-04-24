@@ -391,6 +391,7 @@ class Consultation {
 		$this->imagingTestResults = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->cognitiveTestResults = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->treatments = new \Doctrine\Common\Collections\ArrayCollection();
+		// TODO: initialize $this->studies?
 	}
 	
 	/**

@@ -233,6 +233,8 @@ class Experiment {
 	 */
 	public function __construct() {
 		$this->deleted = false;
+		// TODO: initialize $this->studies?
+		// TODO: initialize $this->files?
 	}
 	
 	/**
