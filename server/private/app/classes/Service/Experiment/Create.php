@@ -142,7 +142,7 @@ class Create extends \App\Service\External {
 		// TODO: comments
 		
 		foreach ($files as $file) {
-			$file = $app->data->getRepository('Entity:File')->findNonDeleted($file);
+			$file = $app->data->getRepository('Entity:File')->findNonDeletedNonAssociated($file);
 			$app->assertion->entityExists($file);
 			$experiment->addFile($file);
 		}

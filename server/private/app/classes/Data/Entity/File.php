@@ -259,6 +259,13 @@ class File {
 	}
 	
 	/**
+	 * Determines whether the entity is associated.
+	 */
+	public function isAssociated() {
+		return $this->associated;
+	}
+	
+	/**
 	 * Determines whether the entity is deleted.
 	 */
 	public function isDeleted() {

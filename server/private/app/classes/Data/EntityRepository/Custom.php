@@ -61,4 +61,26 @@ class Custom extends \Doctrine\ORM\EntityRepository {
 		return $this->findBy($criteria, $orderBy, $limit, $offset);
 	}
 	
+	/**
+	 * Finds a non-deleted-and-non-associated entity.
+	 * 
+	 * Receives the entity's ID.
+	 */
+	public function findNonDeletedNonAssociated($id) {
+		// Finds the entity
+		$entity = $this->findNonDeleted($id);
+		
+		if (is_null($entity)) {
+			// The entity doesn't exist
+			return null;
+		}
+		
+		if ($entity->isAssociated()) {
+			// The entity is associated
+			return null;
+		}
+		
+		return $entity;
+	}
+	
 }

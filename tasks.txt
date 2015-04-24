@@ -20,22 +20,6 @@ Quick tasks
 - Removed ready variable from entities views (when delete is implemented).
 - Internal task to remove non-associated files (permanently and physically).
 
-- Solve unused files uploading problem.
-- Solve file indirect-deletion problem.
-	
-	Description:
-	- A file is associated twice (for example, for an experiment and for a study).
-	- One of the associations is deleted and, hence, the file is also deleted.
-	- The other association loses the file as well.
-	- The problem can be especially dangerous for a study's input (which is a required field.)
-	
-	Possible solution:
-	- When a file reference is received, check that it isn't already associated with another entity. [Preferred]
-	- Use different entities for files that have different roles (StudyFile, ExperimentFile, etc.).
-	  Disadvantages:
-		- It would require different (and repetitive) services for each file type.
-		- There can be ID collisions in the files directory.
-
 
 General code checks
 ----------------------------

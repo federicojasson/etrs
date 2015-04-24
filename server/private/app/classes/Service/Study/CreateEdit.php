@@ -45,7 +45,7 @@ abstract class CreateEdit extends \App\Service\External {
 		}
 		
 		foreach ($files as $file) {
-			$file = $app->data->getRepository('Entity:File')->findNonDeleted($file);
+			$file = $app->data->getRepository('Entity:File')->findNonDeletedNonAssociated($file);
 			$app->assertion->entityExists($file);
 			$study->addFile($file);
 		}
