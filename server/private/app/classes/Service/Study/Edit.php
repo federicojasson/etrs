@@ -49,7 +49,7 @@ class Edit extends \App\Service\External {
 		
 		// Edits the study
 		$study->setLastEditionDateTime();
-		$study->setCommens($comments);
+		$study->setComments($comments);
 		$study->setLastEditor($user);
 		$app->data->merge($study);
 		

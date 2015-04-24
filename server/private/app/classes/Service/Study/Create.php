@@ -57,7 +57,7 @@ class Create extends \App\Service\External {
 		
 		// Creates the study
 		$study = new \App\Data\Entity\Study();
-		$study->setCommens($comments);
+		$study->setComments($comments);
 		$study->setCreator($user);
 		$study->setConsultation($consultation);
 		$study->setExperiment($experiment);
