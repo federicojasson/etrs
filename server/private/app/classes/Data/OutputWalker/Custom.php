@@ -24,32 +24,6 @@ namespace App\Data\OutputWalker;
  * Responsible for generating SQL statements from DQL ASTs.
  */
 class Custom extends \Doctrine\ORM\Query\SqlWalker {
-
-	/**
-	 * Returns the SQL corresponding to a certain delete statement.
-	 * 
-	 * Receives the delete statement.
-	 */
-	public function walkDeleteStatement(\Doctrine\ORM\Query\AST\DeleteStatement $deleteStatement) {
-		// Invokes the homonym method in the parent
-		$sql = parent::walkDeleteStatement($deleteStatement);
-		
-		// Gets the query
-		$query = $this->getQuery();
-		
-		// Gets the limit
-		$limit = $query->getMaxResults();
-
-		if (! is_null($limit)) {
-			// Gets the platform
-			$platform = $this->getConnection()->getDatabasePlatform();
-			
-			// Adds the limit clause
-			$sql = $platform->modifyLimitQuery($sql, $limit, null);
-		}
-		
-		return $sql;
-	}
 	
 	/**
 	 * Returns the SQL fragment corresponding to a certain select clause.

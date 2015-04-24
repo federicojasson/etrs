@@ -53,14 +53,17 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 			// DEFINEHERE: reset versions of all entities here
 		];
 		
-		// Resets the entities' versions
-		foreach ($types as $type) {
-			$app->data->createQueryBuilder()
-				->update('Entity:' . $type, 'e')
-				->set('e.version', 0)
-				->getQuery()
-				->execute();
-		}
+		// Executes a transaction
+		$app->data->transactional(function($entityManager) use ($types) {
+			// Resets the entities' versions
+			foreach ($types as $type) {
+				$entityManager->createQueryBuilder()
+					->update('Entity:' . $type, 'e')
+					->set('e.version', 0)
+					->getQuery()
+					->execute();
+			}
+		});
 	}
 	
 	/**

@@ -57,15 +57,20 @@ class Request extends \App\Service\External {
 		// Computes the password's hash
 		list($hash, $salt, $keyStretchingIterations) = $app->cryptography->computeNewPasswordHash($password);
 		
-		// Deletes any sign-up permission associated with the email address
-		$app->data->createQueryBuilder()
-			->delete('Entity:SignUpPermission', 'sup')
-			->where('sup.emailAddress = :emailAddress')
-			->setParameter('emailAddress', $recipient['emailAddress'])
-			->getQuery()
-			->setMaxResults(1)
-			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
-			->execute();
+		// Gets the sign-up permission associated with the email address
+		$signUpPermissions = $app->data->getRepository('Entity:SignUpPermission')->findBy([
+			'emailAddress' => $recipient['emailAddress']
+		], null, 1);
+		
+		if (count($signUpPermissions) > 0) {
+			// A sign-up permission has been found
+			
+			// Gets the sign-up permission
+			$signUpPermission = $signUpPermissions[0];
+			
+			// Deletes the sign-up permission
+			$app->data->remove($signUpPermission);
+		}
 		
 		// Creates the sign-up permission
 		$signUpPermission = new \App\Data\Entity\SignUpPermission();
