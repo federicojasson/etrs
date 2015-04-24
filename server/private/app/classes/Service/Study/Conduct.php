@@ -199,8 +199,8 @@ class Conduct extends \App\Service\Internal {
 	private function processExperimentOutput($directory) {
 		global $app;
 		
-		// Builds the name
-		$name = STUDY_OUTPUT_NAME;
+		// Defines the name
+		$name = 'Reporte.pdf';
 		
 		// Builds the temporary path
 		$temporaryPath = buildPath($directory, 'output', $name);
