@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * ETRS - Eye Tracking Record System
+ * Copyright (C) 2015 Federico Jasson
+ * 
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ * 
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ * 
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+namespace App\Service\Study;
+
+/**
+ * Provides functionalities shared by the /study/create and /study/edit
+ * services.
+ */
+abstract class CreateEdit extends \App\Service\External {
+	
+	/**
+	 * TODO: comments
+	 */
+	protected function setFiles($study, $files) {
+		global $app;
+		
+		// TODO: comments
+		
+		foreach ($study->getFiles() as $file) {
+			$index = searchInArray($file->getId(), $files);
+			
+			if ($index === false) {
+				$study->removeFile($file);
+			} else {
+				removeFromArray($files, $index);
+			}
+		}
+		
+		foreach ($files as $file) {
+			$file = $app->data->getRepository('Entity:File')->findNonDeleted($file);
+			$app->assertion->entityExists($file);
+			$study->addFile($file);
+		}
+	}
+
+}

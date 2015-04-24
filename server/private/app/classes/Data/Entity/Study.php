@@ -288,6 +288,16 @@ class Study {
 	public function __construct() {
 		$this->deleted = false;
 		$this->state = STUDY_STATE_PENDING;
+		$this->files = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+	
+	/**
+	 * Adds a file.
+	 * 
+	 * Receives the file to be added.
+	 */
+	public function addFile($file) {
+		$this->files->add($file);
 	}
 	
 	/**
@@ -324,6 +334,22 @@ class Study {
 	}
 	
 	/**
+	 * Returns the files.
+	 */
+	public function getFiles() {
+		$files = [];
+		
+		// TODO: comments?
+		foreach ($this->files as $file) {
+			if (! $file->isDeleted()) {
+				$files[] = $file;
+			}
+		}
+		
+		return $files;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {
@@ -342,6 +368,18 @@ class Study {
 	 */
 	public function isDeleted() {
 		return $this->deleted;
+	}
+	
+	/**
+	 * Removes a file.
+	 * 
+	 * Receives the file to be removed.
+	 */
+	public function removeFile($file) {
+		$this->files->removeElement($file);
+		
+		// TODO: comment?
+		$file->delete($this->lastEditor);
 	}
 	
 	/**
