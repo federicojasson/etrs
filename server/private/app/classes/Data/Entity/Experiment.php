@@ -249,9 +249,7 @@ class Experiment {
 		// The process only considers entities that have not been deleted yet
 		
 		foreach ($this->files as $file) {
-			if (! $file->isDeleted()) {
-				$file->delete($user);
-			}
+			$file->delete($user);
 		}
 		
 		foreach ($this->studies as $study) {
@@ -323,9 +321,7 @@ class Experiment {
 		
 		$serialized['files'] = [];
 		foreach ($this->files as $file) {
-			if (! $file->isDeleted()) {
-				$serialized['files'][] = bin2hex($file->getId());
-			}
+			$serialized['files'][] = bin2hex($file->getId());
 		}
 		
 		return $serialized;

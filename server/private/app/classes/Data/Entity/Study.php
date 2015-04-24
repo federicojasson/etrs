@@ -303,14 +303,10 @@ class Study {
 		// Deletes the appropriate associated entities
 		// The process only considers entities that have not been deleted yet
 		
-		if (! $this->input->isDeleted()) {
-			$this->input->delete($user);
-		}
+		$this->input->delete($user);
 		
 		if (! is_null($this->output)) {
-			if (! $this->output->isDeleted()) {
-				$this->output->delete($user);
-			}
+			$this->output->delete($user);
 		}
 		
 		foreach ($this->files as $file) {
@@ -382,17 +378,11 @@ class Study {
 		
 		$serialized['consultation'] = bin2hex($this->consultation->getId());
 		$serialized['experiment'] = bin2hex($this->experiment->getId());
-		
-		$serialized['input'] = null;
-		if (! $this->input->isDeleted()) {
-			$serialized['input'] = bin2hex($this->input->getId());
-		}
+		$serialized['input'] = bin2hex($this->input->getId());
 		
 		$serialized['output'] = null;
 		if (! is_null($this->output)) {
-			if (! $this->output->isDeleted()) {
-				$serialized['output'] = bin2hex($this->output->getId());
-			}
+			$serialized['output'] = bin2hex($this->output->getId());
 		}
 		
 		$serialized['files'] = [];
