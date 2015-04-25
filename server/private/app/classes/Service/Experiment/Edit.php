@@ -35,7 +35,6 @@ class Edit extends \App\Service\External {
 		$credentials = $this->getInputValue('credentials');
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
-		$commandLine = $this->getInputValue('commandLine', 'trimAndShrink');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user
@@ -61,7 +60,6 @@ class Edit extends \App\Service\External {
 		
 		// Edits the experiment
 		$experiment->setLastEditionDateTime();
-		$experiment->setCommandLine($commandLine);
 		$experiment->setName($name);
 		$experiment->setLastEditor($user);
 		$app->data->merge($experiment);
@@ -95,10 +93,6 @@ class Edit extends \App\Service\External {
 			
 			'version' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 0);
-			}),
-			
-			'commandLine' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-				return $app->inputValidator->isCommandLine($input);
 			}),
 			
 			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
