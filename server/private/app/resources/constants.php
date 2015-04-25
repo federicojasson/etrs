@@ -82,6 +82,8 @@ define('STUDY_STATE_FAILURE', 3);
 define('STUDY_STATE_PENDING', 0);
 define('STUDY_STATE_SUCCESS', 2);
 
+define('UPLOADED_FILE_INPUT_NAME', 'name');
+
 define('USER_ROLE_ADMINISTRATOR', 'ad');
 define('USER_ROLE_DOCTOR', 'dr');
 define('USER_ROLE_OPERATOR', 'op');

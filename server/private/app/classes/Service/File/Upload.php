@@ -62,7 +62,18 @@ class Upload extends \App\Service\External {
 	 * Determines whether the request is valid.
 	 */
 	protected function isRequestValid() {
-		// TODO
+		global $app;
+		
+		if (! $this->isFormDataRequest()) {
+			// It is not a form-data request
+			return false;
+		}
+		
+		// Gets the input
+		$input = $this->getInput();
+		// TODO: validate name?
+		
+		return true;
 	}
 	
 	/**

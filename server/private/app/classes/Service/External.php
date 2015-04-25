@@ -73,6 +73,48 @@ abstract class External extends Service {
 	}
 	
 	/**
+	 * Determines whether the request is a form-data request.
+	 * 
+	 * If it is a form-data request and no error has occurred, the information
+	 * about the file is set as the input.
+	 */
+	protected function isFormDataRequest() {
+		global $app;
+		
+		// Gets the request's media type
+		$mediaType = $app->request->getMediaType();
+		
+		if ($mediaType !== 'multipart/form-data') {
+			// It is not a form-data request
+			return false;
+		}
+		
+		// Defines the name of the uploaded file's input
+		$uploadedFileInputName = UPLOADED_FILE_INPUT_NAME;
+		
+		if (! isset($_FILES[$uploadedFileInputName])) {
+			// The file has not been received
+			return false;
+		}
+		
+		// Gets the information about the file
+		$file = $_FILES[$uploadedFileInputName];
+		
+		if ($file['error'] !== UPLOAD_ERR_OK) {
+			// An error has occurred
+			return false;
+		}
+		
+		// Sets the input
+		$this->input = [
+			'name' => $file['name'],
+			'temporaryPath' => $file['tmp_name']
+		];
+		
+		return true;
+	}
+	
+	/**
 	 * Determines whether the request is a JSON request.
 	 * 
 	 * If it is a JSON request, the input is decoded.
