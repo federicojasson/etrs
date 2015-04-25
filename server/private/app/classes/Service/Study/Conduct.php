@@ -99,7 +99,7 @@ class Conduct extends \App\Service\Internal {
 		global $app;
 		
 		try {
-			// Builds the directory
+			// Defines the directory
 			$directory = DIRECTORY_SANDBOX;
 			
 			// Gets the study's experiment
