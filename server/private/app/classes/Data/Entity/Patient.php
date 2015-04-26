@@ -273,11 +273,31 @@ class Patient {
 		// Deletes the appropriate associated entities
 		// The process only considers entities that have not been deleted yet
 		
+		foreach ($this->getConsultations() as $consultation) {
+			$consultation->delete($user);
+		}
+	}
+	
+	/**
+	 * Returns the consultations.
+	 */
+	public function getConsultations() {
+		$consultations = [];
+		
 		foreach ($this->consultations as $consultation) {
 			if (! $consultation->isDeleted()) {
-				$consultation->delete($user);
+				$consultations[] = $consultation;
 			}
 		}
+		
+		return $consultations;
+	}
+	
+	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
 	}
 	
 	/**
@@ -285,6 +305,13 @@ class Patient {
 	 */
 	public function getId() {
 		return $this->id;
+	}
+	
+	/**
+	 * Returns the last editor.
+	 */
+	public function getLastEditor() {
+		return $this->lastEditor;
 	}
 	
 	/**
@@ -320,21 +347,16 @@ class Patient {
 		$serialized['yearsOfEducation'] = $this->yearsOfEducation;
 		
 		$serialized['creator'] = null;
-		if (! is_null($this->creator)) {
-			$serialized['creator'] = $this->creator->getId();
+		if (! is_null($this->getCreator())) {
+			$serialized['creator'] = (string) $this->getCreator();
 		}
 		
 		$serialized['lastEditor'] = null;
-		if (! is_null($this->lastEditor)) {
-			$serialized['lastEditor'] = $this->lastEditor->getId();
+		if (! is_null($this->getLastEditor())) {
+			$serialized['lastEditor'] = (string) $this->getLastEditor();
 		}
 		
-		$serialized['consultations'] = [];
-		foreach ($this->consultations as $consultation) {
-			if (! $consultation->isDeleted()) {
-				$serialized['consultations'][] = bin2hex($consultation->getId());
-			}
-		}
+		$serialized['consultations'] = filterArray($this->getConsultations(), 'toString');
 		
 		return $serialized;
 	}

@@ -266,14 +266,12 @@ class Experiment {
 		// Deletes the appropriate associated entities
 		// The process only considers entities that have not been deleted yet
 		
-		foreach ($this->files as $file) {
+		foreach ($this->getFiles() as $file) {
 			$file->delete($user);
 		}
 		
-		foreach ($this->studies as $study) {
-			if (! $study->isDeleted()) {
-				$study->delete($user);
-			}
+		foreach ($this->getStudies() as $study) {
+			$study->delete($user);
 		}
 	}
 	
@@ -282,6 +280,13 @@ class Experiment {
 	 */
 	public function getCommandLine() {
 		return $this->commandLine;
+	}
+	
+	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
 	}
 	
 	/**
@@ -296,6 +301,28 @@ class Experiment {
 	 */
 	public function getId() {
 		return $this->id;
+	}
+	
+	/**
+	 * Returns the last editor.
+	 */
+	public function getLastEditor() {
+		return $this->lastEditor;
+	}
+	
+	/**
+	 * Returns the studies.
+	 */
+	public function getStudies() {
+		$studies = [];
+		
+		foreach ($this->studies as $study) {
+			if (! $study->isDeleted()) {
+				$studies[] = $study;
+			}
+		}
+		
+		return $studies;
 	}
 	
 	/**
@@ -328,19 +355,16 @@ class Experiment {
 		$serialized['name'] = $this->name;
 		
 		$serialized['creator'] = null;
-		if (! is_null($this->creator)) {
-			$serialized['creator'] = $this->creator->getId();
+		if (! is_null($this->getCreator())) {
+			$serialized['creator'] = (string) $this->getCreator();
 		}
 		
 		$serialized['lastEditor'] = null;
-		if (! is_null($this->lastEditor)) {
-			$serialized['lastEditor'] = $this->lastEditor->getId();
+		if (! is_null($this->getLastEditor())) {
+			$serialized['lastEditor'] = (string) $this->getLastEditor();
 		}
 		
-		$serialized['files'] = [];
-		foreach ($this->files as $file) {
-			$serialized['files'][] = bin2hex($file->getId());
-		}
+		$serialized['files'] = filterArray($this->getFiles(), 'toString');
 		
 		return $serialized;
 	}

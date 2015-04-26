@@ -83,6 +83,10 @@ class ImagingTestResult {
 	 * Returns the imaging test.
 	 */
 	public function getImagingTest() {
+		if ($this->imagingTest->isDeleted()) {
+			return null;
+		}
+		
 		return $this->imagingTest;
 	}
 	

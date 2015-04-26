@@ -269,6 +269,13 @@ class User {
 	}
 	
 	/**
+	 * Returns the inviter.
+	 */
+	public function getInviter() {
+		return $this->inviter;
+	}
+	
+	/**
 	 * Returns the key-stretching iterations.
 	 */
 	public function getKeyStretchingIterations() {
@@ -336,8 +343,8 @@ class User {
 		$serialized['gender'] = $this->gender;
 		
 		$serialized['inviter'] = null;
-		if (! is_null($this->inviter)) {
-			$serialized['inviter'] = $this->inviter->getId();
+		if (! is_null($this->getInviter())) {
+			$serialized['inviter'] = (string) $this->getInviter();
 		}
 		
 		return $serialized;

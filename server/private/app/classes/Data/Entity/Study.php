@@ -321,17 +321,29 @@ class Study {
 		// Deletes the appropriate associated entities
 		// The process only considers entities that have not been deleted yet
 		
-		$this->input->delete($user);
+		$this->getInput()->delete($user);
 		
-		if (! is_null($this->output)) {
-			$this->output->delete($user);
+		if (! is_null($this->getOutput())) {
+			$this->getOutput()->delete($user);
 		}
 		
-		foreach ($this->files as $file) {
-			if (! $file->isDeleted()) {
-				$file->delete($user);
-			}
+		foreach ($this->getFiles() as $file) {
+			$file->delete($user);
 		}
+	}
+	
+	/**
+	 * Returns the consultation.
+	 */
+	public function getConsultation() {
+		return $this->consultation;
+	}
+	
+	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
 	}
 	
 	/**
@@ -347,7 +359,6 @@ class Study {
 	public function getFiles() {
 		$files = [];
 		
-		// TODO: comments?
 		foreach ($this->files as $file) {
 			if (! $file->isDeleted()) {
 				$files[] = $file;
@@ -372,6 +383,20 @@ class Study {
 	}
 	
 	/**
+	 * Returns the last editor.
+	 */
+	public function getLastEditor() {
+		return $this->lastEditor;
+	}
+	
+	/**
+	 * Returns the output.
+	 */
+	public function getOutput() {
+		return $this->output;
+	}
+	
+	/**
 	 * Determines whether the entity is deleted.
 	 */
 	public function isDeleted() {
@@ -385,7 +410,7 @@ class Study {
 	 */
 	public function removeFile($file) {
 		$this->files->removeElement($file);
-		$file->delete($this->lastEditor);
+		$file->delete($this->getLastEditor());
 		$file->disassociate();
 	}
 	
@@ -412,30 +437,25 @@ class Study {
 		$serialized['comments'] = $this->comments;
 		
 		$serialized['creator'] = null;
-		if (! is_null($this->creator)) {
-			$serialized['creator'] = $this->creator->getId();
+		if (! is_null($this->getCreator())) {
+			$serialized['creator'] = (string) $this->getCreator();
 		}
 		
 		$serialized['lastEditor'] = null;
-		if (! is_null($this->lastEditor)) {
-			$serialized['lastEditor'] = $this->lastEditor->getId();
+		if (! is_null($this->getLastEditor())) {
+			$serialized['lastEditor'] = (string) $this->getLastEditor();
 		}
 		
-		$serialized['consultation'] = bin2hex($this->consultation->getId());
-		$serialized['experiment'] = bin2hex($this->experiment->getId());
-		$serialized['input'] = bin2hex($this->input->getId());
+		$serialized['consultation'] = (string) $this->getConsultation();
+		$serialized['experiment'] = (string) $this->getExperiment();
+		$serialized['input'] = (string) $this->getInput();
 		
 		$serialized['output'] = null;
-		if (! is_null($this->output)) {
-			$serialized['output'] = bin2hex($this->output->getId());
+		if (! is_null($this->getOutput())) {
+			$serialized['output'] = (string) $this->getOutput();
 		}
 		
-		$serialized['files'] = [];
-		foreach ($this->files as $file) {
-			if (! $file->isDeleted()) {
-				$serialized['files'][] = bin2hex($file->getId());
-			}
-		}
+		$serialized['files'] = filterArray($this->getFiles(), 'toString');
 		
 		return $serialized;
 	}

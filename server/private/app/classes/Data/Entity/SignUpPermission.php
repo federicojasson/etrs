@@ -160,13 +160,6 @@ class SignUpPermission {
 	private $userRole;
 	
 	/**
-	 * Returns a string representation of the entity.
-	 */
-	public function __toString() {
-		return bin2hex($this->id);
-	}
-	
-	/**
 	 * Returns the creator.
 	 */
 	public function getCreator() {

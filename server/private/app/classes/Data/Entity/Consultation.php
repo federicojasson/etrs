@@ -467,11 +467,24 @@ class Consultation {
 		// Deletes the appropriate associated entities
 		// The process only considers entities that have not been deleted yet
 		
-		foreach ($this->studies as $study) {
-			if (! $study->isDeleted()) {
-				$study->delete($user);
-			}
+		foreach ($this->getStudies() as $study) {
+			$study->delete($user);
 		}
+	}
+	
+	/**
+	 * Returns the clinical impression.
+	 */
+	public function getClinicalImpression() {
+		if (is_null($this->clinicalImpression)) {
+			return null;
+		}
+		
+		if ($this->clinicalImpression->isDeleted()) {
+			return null;
+		}
+		
+		return $this->clinicalImpression;
 	}
 	
 	/**
@@ -480,16 +493,37 @@ class Consultation {
 	public function getCognitiveTestResults() {
 		$cognitiveTestResults = [];
 		
-		// TODO: comments?
 		foreach ($this->cognitiveTestResults as $cognitiveTestResult) {
 			$cognitiveTest = $cognitiveTestResult->getCognitiveTest();
 			
-			if (! $cognitiveTest->isDeleted()) {
+			if (! is_null($cognitiveTest)) {
 				$cognitiveTestResults[] = $cognitiveTestResult;
 			}
 		}
 		
 		return $cognitiveTestResults;
+	}
+	
+	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
+	}
+	
+	/**
+	 * Returns the diagnosis.
+	 */
+	public function getDiagnosis() {
+		if (is_null($this->diagnosis)) {
+			return null;
+		}
+		
+		if ($this->diagnosis->isDeleted()) {
+			return null;
+		}
+		
+		return $this->diagnosis;
 	}
 	
 	/**
@@ -505,11 +539,10 @@ class Consultation {
 	public function getImagingTestResults() {
 		$imagingTestResults = [];
 		
-		// TODO: comments?
 		foreach ($this->imagingTestResults as $imagingTestResult) {
 			$imagingTest = $imagingTestResult->getImagingTest();
 			
-			if (! $imagingTest->isDeleted()) {
+			if (! is_null($imagingTest)) {
 				$imagingTestResults[] = $imagingTestResult;
 			}
 		}
@@ -523,11 +556,10 @@ class Consultation {
 	public function getLaboratoryTestResults() {
 		$laboratoryTestResults = [];
 		
-		// TODO: comments?
 		foreach ($this->laboratoryTestResults as $laboratoryTestResult) {
 			$laboratoryTest = $laboratoryTestResult->getLaboratoryTest();
 			
-			if (! $laboratoryTest->isDeleted()) {
+			if (! is_null($laboratoryTest)) {
 				$laboratoryTestResults[] = $laboratoryTestResult;
 			}
 		}
@@ -536,12 +568,18 @@ class Consultation {
 	}
 	
 	/**
+	 * Returns the last editor.
+	 */
+	public function getLastEditor() {
+		return $this->lastEditor;
+	}
+	
+	/**
 	 * Returns the medical antecedents.
 	 */
 	public function getMedicalAntecedents() {
 		$medicalAntecedents = [];
 		
-		// TODO: comments?
 		foreach ($this->medicalAntecedents as $medicalAntecedent) {
 			if (! $medicalAntecedent->isDeleted()) {
 				$medicalAntecedents[] = $medicalAntecedent;
@@ -557,7 +595,6 @@ class Consultation {
 	public function getMedicines() {
 		$medicines = [];
 		
-		// TODO: comments?
 		foreach ($this->medicines as $medicine) {
 			if (! $medicine->isDeleted()) {
 				$medicines[] = $medicine;
@@ -568,12 +605,33 @@ class Consultation {
 	}
 	
 	/**
+	 * Returns the patient.
+	 */
+	public function getPatient() {
+		return $this->patient;
+	}
+	
+	/**
+	 * Returns the studies.
+	 */
+	public function getStudies() {
+		$studies = [];
+		
+		foreach ($this->studies as $study) {
+			if (! $study->isDeleted()) {
+				$studies[] = $study;
+			}
+		}
+		
+		return $studies;
+	}
+	
+	/**
 	 * Returns the treatments.
 	 */
 	public function getTreatments() {
 		$treatments = [];
 		
-		// TODO: comments?
 		foreach ($this->treatments as $treatment) {
 			if (! $treatment->isDeleted()) {
 				$treatments[] = $treatment;
@@ -668,85 +726,50 @@ class Consultation {
 		$serialized['comments'] = $this->comments;
 		
 		$serialized['creator'] = null;
-		if (! is_null($this->creator)) {
-			$serialized['creator'] = $this->creator->getId();
+		if (! is_null($this->getCreator())) {
+			$serialized['creator'] = (string) $this->getCreator();
 		}
 		
 		$serialized['lastEditor'] = null;
-		if (! is_null($this->lastEditor)) {
-			$serialized['lastEditor'] = $this->lastEditor->getId();
+		if (! is_null($this->getLastEditor())) {
+			$serialized['lastEditor'] = (string) $this->getLastEditor();
 		}
 		
-		$serialized['patient'] = bin2hex($this->patient->getId());
+		$serialized['patient'] = (string) $this->getPatient();
 		
 		$serialized['clinicalImpression'] = null;
-		if (! is_null($this->clinicalImpression)) {
-			if (! $this->clinicalImpression->isDeleted()) {
-				$serialized['clinicalImpression'] = bin2hex($this->clinicalImpression->getId());
-			}
+		if (! is_null($this->getClinicalImpression())) {
+			$serialized['clinicalImpression'] = (string) $this->getClinicalImpression();
 		}
 		
 		$serialized['diagnosis'] = null;
-		if (! is_null($this->diagnosis)) {
-			if (! $this->diagnosis->isDeleted()) {
-				$serialized['diagnosis'] = bin2hex($this->diagnosis->getId());
-			}
+		if (! is_null($this->getDiagnosis())) {
+			$serialized['diagnosis'] = (string) $this->getDiagnosis();
 		}
 		
-		$serialized['medicalAntecedents'] = [];
-		foreach ($this->medicalAntecedents as $medicalAntecedent) {
-			if (! $medicalAntecedent->isDeleted()) {
-				$serialized['medicalAntecedents'][] = bin2hex($medicalAntecedent->getId());
-			}
-		}
-		
-		$serialized['medicines'] = [];
-		foreach ($this->medicines as $medicine) {
-			if (! $medicine->isDeleted()) {
-				$serialized['medicines'][] = bin2hex($medicine->getId());
-			}
-		}
+		$serialized['medicalAntecedents'] = filterArray($this->getMedicalAntecedents(), 'toString');
+		$serialized['medicines'] = filterArray($this->getMedicines(), 'toString');
 		
 		$serialized['laboratoryTestResults'] = [];
-		foreach ($this->laboratoryTestResults as $laboratoryTestResult) {
-			$laboratoryTest = $laboratoryTestResult->getLaboratoryTest();
-			
-			if (! $laboratoryTest->isDeleted()) {
-				$serialized['laboratoryTestResults'][bin2hex($laboratoryTest->getId())] = $laboratoryTestResult->getValue();
-			}
+		foreach ($this->getLaboratoryTestResults() as $laboratoryTestResult) {
+			$laboratoryTest = (string) $laboratoryTestResult->getLaboratoryTest();
+			$serialized['laboratoryTestResults'][$laboratoryTest] = $laboratoryTestResult->getValue();
 		}
 		
 		$serialized['imagingTestResults'] = [];
-		foreach ($this->imagingTestResults as $imagingTestResult) {
-			$imagingTest = $imagingTestResult->getImagingTest();
-			
-			if (! $imagingTest->isDeleted()) {
-				$serialized['imagingTestResults'][bin2hex($imagingTest->getId())] = $imagingTestResult->getValue();
-			}
+		foreach ($this->getImagingTestResults() as $imagingTestResult) {
+			$imagingTest = (string) $imagingTestResult->getImagingTest();
+			$serialized['imagingTestResults'][$imagingTest] = $imagingTestResult->getValue();
 		}
 		
 		$serialized['cognitiveTestResults'] = [];
-		foreach ($this->cognitiveTestResults as $cognitiveTestResult) {
-			$cognitiveTest = $cognitiveTestResult->getCognitiveTest();
-			
-			if (! $cognitiveTest->isDeleted()) {
-				$serialized['cognitiveTestResults'][bin2hex($cognitiveTest->getId())] = $cognitiveTestResult->getValue();
-			}
+		foreach ($this->getCognitiveTestResults() as $cognitiveTestResult) {
+			$cognitiveTest = (string) $cognitiveTestResult->getCognitiveTest();
+			$serialized['cognitiveTestResults'][$cognitiveTest] = $cognitiveTestResult->getValue();
 		}
 		
-		$serialized['treatments'] = [];
-		foreach ($this->treatments as $treatment) {
-			if (! $treatment->isDeleted()) {
-				$serialized['treatments'][] = bin2hex($treatment->getId());
-			}
-		}
-		
-		$serialized['studies'] = [];
-		foreach ($this->studies as $study) {
-			if (! $study->isDeleted()) {
-				$serialized['studies'][] = bin2hex($study->getId());
-			}
-		}
+		$serialized['treatments'] = filterArray($this->getTreatments(), 'toString');
+		$serialized['studies'] = filterArray($this->getStudies(), 'toString');
 		
 		return $serialized;
 	}

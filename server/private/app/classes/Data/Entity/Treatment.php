@@ -200,10 +200,24 @@ class Treatment {
 	}
 	
 	/**
+	 * Returns the creator.
+	 */
+	public function getCreator() {
+		return $this->creator;
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {
 		return $this->id;
+	}
+	
+	/**
+	 * Returns the last editor.
+	 */
+	public function getLastEditor() {
+		return $this->lastEditor;
 	}
 	
 	/**
@@ -235,13 +249,13 @@ class Treatment {
 		$serialized['name'] = $this->name;
 		
 		$serialized['creator'] = null;
-		if (! is_null($this->creator)) {
-			$serialized['creator'] = $this->creator->getId();
+		if (! is_null($this->getCreator())) {
+			$serialized['creator'] = (string) $this->getCreator();
 		}
 		
 		$serialized['lastEditor'] = null;
-		if (! is_null($this->lastEditor)) {
-			$serialized['lastEditor'] = $this->lastEditor->getId();
+		if (! is_null($this->getLastEditor())) {
+			$serialized['lastEditor'] = (string) $this->getLastEditor();
 		}
 		
 		return $serialized;

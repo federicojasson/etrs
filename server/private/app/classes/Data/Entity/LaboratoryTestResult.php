@@ -83,6 +83,10 @@ class LaboratoryTestResult {
 	 * Returns the laboratory test.
 	 */
 	public function getLaboratoryTest() {
+		if ($this->laboratoryTest->isDeleted()) {
+			return null;
+		}
+		
 		return $this->laboratoryTest;
 	}
 	

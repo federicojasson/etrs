@@ -83,6 +83,10 @@ class CognitiveTestResult {
 	 * Returns the cognitive test.
 	 */
 	public function getCognitiveTest() {
+		if ($this->cognitiveTest->isDeleted()) {
+			return null;
+		}
+		
 		return $this->cognitiveTest;
 	}
 	

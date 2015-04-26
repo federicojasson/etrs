@@ -89,13 +89,6 @@ class Session {
 	private $lastAccessDateTime;
 	
 	/**
-	 * Returns a string representation of the entity.
-	 */
-	public function __toString() {
-		return bin2hex($this->id);
-	}
-	
-	/**
 	 * Returns the data.
 	 */
 	public function getData() {
