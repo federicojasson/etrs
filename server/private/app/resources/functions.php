@@ -340,12 +340,21 @@ function stringToDate($string) {
 }
 
 /**
- * Converts a string to integer.
+ * Converts a variable to integer.
  * 
- * Receives the string.
+ * Receives the variable.
  */
-function stringToInteger($string) {
-	return (int) $string;
+function toInteger($variable) {
+	return (int) $variable;
+}
+
+/**
+ * Converts a variable to string.
+ * 
+ * Receives the variable.
+ */
+function toString($variable) {
+	return (string) $variable;
 }
 
 /**
