@@ -201,6 +201,9 @@ class File {
 	public function download($id, $hash, $name) {
 		global $app;
 		
+		// Gets the server parameters
+		$server = $app->parameters->server;
+		
 		// Gets the path
 		$path = $this->getPath($id);
 		
@@ -215,7 +218,7 @@ class File {
 		
 		// Builds the URL
 		$url = '';
-		$url .= '/server';
+		$url .= $server['path'];
 		$url .= substr($path, strlen(DIRECTORY_ROOT));
 		
 		// Sets the appropriate headers
