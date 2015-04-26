@@ -108,7 +108,7 @@ abstract class CreateEdit extends \App\Service\External {
 		// Adds the cognitive-test results
 		foreach ($cognitiveTestResults as $cognitiveTest => $value) {
 			// Gets the cognitive test
-			$cognitiveTest = $app->data->getRepository('Entity:CognitiveTest')->findNonDeleted($cognitiveTest);
+			$cognitiveTest = $app->data->getReference('Entity:CognitiveTest', $cognitiveTest);
 			
 			// Creates the cognitive-test result
 			$cognitiveTestResult = new \App\Data\Entity\CognitiveTestResult();
@@ -150,7 +150,7 @@ abstract class CreateEdit extends \App\Service\External {
 		// Adds the imaging-test results
 		foreach ($imagingTestResults as $imagingTest => $value) {
 			// Gets the imaging test
-			$imagingTest = $app->data->getRepository('Entity:ImagingTest')->findNonDeleted($imagingTest);
+			$imagingTest = $app->data->getReference('Entity:ImagingTest', $imagingTest);
 			
 			// Creates the imaging-test result
 			$imagingTestResult = new \App\Data\Entity\ImagingTestResult();
@@ -192,7 +192,7 @@ abstract class CreateEdit extends \App\Service\External {
 		// Adds the laboratory-test results
 		foreach ($laboratoryTestResults as $laboratoryTest => $value) {
 			// Gets the laboratory test
-			$laboratoryTest = $app->data->getRepository('Entity:LaboratoryTest')->findNonDeleted($laboratoryTest);
+			$laboratoryTest = $app->data->getReference('Entity:LaboratoryTest', $laboratoryTest);
 			
 			// Creates the laboratory-test result
 			$laboratoryTestResult = new \App\Data\Entity\LaboratoryTestResult();
