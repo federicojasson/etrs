@@ -29,7 +29,44 @@ class DeleteExpired extends \App\Service\Internal {
 	 * Executes the service.
 	 */
 	protected function execute() {
-		// TODO
+		global $app;
+		
+		// Acquires a lock
+		$lockAcquired = $app->lock->acquire('file-delete-expired');
+		
+		if (! $lockAcquired) {
+			// The lock could not be acquired
+			return;
+		}
+		
+		// Gets the current date-time
+		$currentDateTime = new \DateTime();
+		
+		// Gets the expired files
+		$queryBuilder = $app->data->createQueryBuilder();
+		$files = $queryBuilder
+			->select('f.id')
+			->from('Entity:File', 'f')
+			->where('f.associated = false')
+			->andWhere($queryBuilder->expr()->orX(
+				'f.deleted = true',
+				'f.creationDateTime < DATEADD(:currentDateTime, (-:maximumAge), \'HOUR\')'
+			))
+			->setParameter('currentDateTime', $currentDateTime)
+			->setParameter('maximumAge', FILE_MAXIMUM_AGE)
+			->getQuery()
+			->getResult();
+		
+		// Deletes the files
+		foreach ($files as $file) {
+			// Gets the file
+			$file = $app->data->getReference('Entity:File', $file['id']);
+			
+			// Deletes the file
+			$app->data->remove($file);
+		}
+		
+		// TODO: remove files
 	}
 	
 	/**
