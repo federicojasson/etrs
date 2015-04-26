@@ -65,7 +65,7 @@ class Create extends \App\Service\External {
 		$this->setOutputValue('id', $id, 'bin2hex');
 		
 		// Sets the associated entities
-		$this->setFiles($experiment, $files);
+		$this->setExperimentFiles($experiment, $files);
 	}
 	
 	/**
@@ -138,7 +138,7 @@ class Create extends \App\Service\External {
 	 * 
 	 * Receives the experiment and the files.
 	 */
-	private function setFiles($experiment, $files) {
+	private function setExperimentFiles($experiment, $files) {
 		global $app;
 		
 		// Adds the files

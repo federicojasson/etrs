@@ -54,7 +54,7 @@ class Edit extends CreateEdit {
 		$app->data->merge($study);
 		
 		// Sets the associated entities
-		$this->setFiles($study, $files);
+		$this->setStudyFiles($study, $files);
 	}
 	
 	/**

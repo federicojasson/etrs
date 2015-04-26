@@ -71,7 +71,7 @@ class Create extends CreateEdit {
 		$this->setOutputValue('id', $id, 'bin2hex');
 		
 		// Sets the associated entities
-		$this->setFiles($study, $files);
+		$this->setStudyFiles($study, $files);
 	}
 	
 	/**

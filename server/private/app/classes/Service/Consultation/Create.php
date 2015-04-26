@@ -88,12 +88,12 @@ class Create extends CreateEdit {
 		$this->setOutputValue('id', $id, 'bin2hex');
 		
 		// Sets the associated entities
-		$this->setMedicalAntecedents($consultation, $medicalAntecedents);
-		$this->setMedicines($consultation, $medicines);
-		$this->setLaboratoryTestResults($consultation, $laboratoryTestResults);
-		$this->setImagingTestResults($consultation, $imagingTestResults);
-		$this->setCognitiveTestResults($consultation, $cognitiveTestResults);
-		$this->setTreatments($consultation, $treatments);
+		$this->setConsultationMedicalAntecedents($consultation, $medicalAntecedents);
+		$this->setConsultationMedicines($consultation, $medicines);
+		$this->setConsultationLaboratoryTestResults($consultation, $laboratoryTestResults);
+		$this->setConsultationImagingTestResults($consultation, $imagingTestResults);
+		$this->setConsultationCognitiveTestResults($consultation, $cognitiveTestResults);
+		$this->setConsultationTreatments($consultation, $treatments);
 	}
 	
 	/**

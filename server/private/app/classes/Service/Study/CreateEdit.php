@@ -31,7 +31,7 @@ abstract class CreateEdit extends \App\Service\External {
 	 * 
 	 * Receives the study and the files.
 	 */
-	protected function setFiles($study, $files) {
+	protected function setStudyFiles($study, $files) {
 		global $app;
 		
 		// Removes the files that have not been received

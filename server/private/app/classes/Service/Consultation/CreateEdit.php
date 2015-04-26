@@ -85,7 +85,7 @@ abstract class CreateEdit extends \App\Service\External {
 	 * 
 	 * Receives the consultation and the cognitive-test results.
 	 */
-	protected function setCognitiveTestResults($consultation, $cognitiveTestResults) {
+	protected function setConsultationCognitiveTestResults($consultation, $cognitiveTestResults) {
 		global $app;
 		
 		// Removes the cognitive-test results corresponding to cognitive tests
@@ -127,7 +127,7 @@ abstract class CreateEdit extends \App\Service\External {
 	 * 
 	 * Receives the consultation and the imaging-test results.
 	 */
-	protected function setImagingTestResults($consultation, $imagingTestResults) {
+	protected function setConsultationImagingTestResults($consultation, $imagingTestResults) {
 		global $app;
 		
 		// Removes the imaging-test results corresponding to imaging tests that
@@ -169,7 +169,7 @@ abstract class CreateEdit extends \App\Service\External {
 	 * 
 	 * Receives the consultation and the laboratory-test results.
 	 */
-	protected function setLaboratoryTestResults($consultation, $laboratoryTestResults) {
+	protected function setConsultationLaboratoryTestResults($consultation, $laboratoryTestResults) {
 		global $app;
 		
 		// Removes the laboratory-test results corresponding to laboratory tests
@@ -211,7 +211,7 @@ abstract class CreateEdit extends \App\Service\External {
 	 * 
 	 * Receives the consultation and the medical antecedents.
 	 */
-	protected function setMedicalAntecedents($consultation, $medicalAntecedents) {
+	protected function setConsultationMedicalAntecedents($consultation, $medicalAntecedents) {
 		global $app;
 		
 		// Removes the medical antecedents that have not been received
@@ -247,7 +247,7 @@ abstract class CreateEdit extends \App\Service\External {
 	 * 
 	 * Receives the consultation and the medicines.
 	 */
-	protected function setMedicines($consultation, $medicines) {
+	protected function setConsultationMedicines($consultation, $medicines) {
 		global $app;
 		
 		// Removes the medicines that have not been received
@@ -283,7 +283,7 @@ abstract class CreateEdit extends \App\Service\External {
 	 * 
 	 * Receives the consultation and the treatments.
 	 */
-	protected function setTreatments($consultation, $treatments) {
+	protected function setConsultationTreatments($consultation, $treatments) {
 		global $app;
 		
 		// Removes the treatments that have not been received
