@@ -27,26 +27,37 @@ namespace App\Service\Study;
 abstract class CreateEdit extends \App\Service\External {
 	
 	/**
-	 * TODO: comments
+	 * Sets a study's files.
+	 * 
+	 * Receives the study and the files.
 	 */
 	protected function setFiles($study, $files) {
 		global $app;
 		
-		// TODO: comments
-		
+		// Removes the files that have not been received
 		foreach ($study->getFiles() as $file) {
+			// Searches the file
 			$index = searchInArray($file->getId(), $files);
 			
 			if ($index === false) {
+				// The file has not been received
+				// Removes the file
 				$study->removeFile($file);
 			} else {
+				// The file has been received
 				removeFromArray($files, $index);
 			}
 		}
 		
+		// Adds the files
 		foreach ($files as $file) {
+			// Gets the file
 			$file = $app->data->getRepository('Entity:File')->findNonDeletedNonAssociated($file);
+			
+			// Asserts conditions
 			$app->assertion->entityExists($file);
+			
+			// Adds the file
 			$study->addFile($file);
 		}
 	}

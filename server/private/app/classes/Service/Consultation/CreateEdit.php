@@ -81,172 +81,235 @@ abstract class CreateEdit extends \App\Service\External {
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets a consultation's cognitive-test results.
+	 * 
+	 * Receives the consultation and the cognitive-test results.
 	 */
 	protected function setCognitiveTestResults($consultation, $cognitiveTestResults) {
 		global $app;
 		
-		// TODO: comments
-		
+		// Removes the cognitive-test results corresponding to cognitive tests
+		// that have not been received
 		foreach ($consultation->getCognitiveTestResults() as $cognitiveTestResult) {
+			// Gets the cognitive test's ID
 			$id = $cognitiveTestResult->getCognitiveTest()->getId();
 			
 			if (array_key_exists($id, $cognitiveTestResults)) {
+				// The cognitive test has been received
 				$cognitiveTestResult->setValue($cognitiveTestResults[$id]);
 				unset($cognitiveTestResults[$id]);
 			} else {
+				// The cognitive test has not been received
+				// Removes the cognitive test
 				$consultation->removeCognitiveTestResult($cognitiveTestResult);
 			}
 		}
 		
+		// Adds the cognitive-test results
 		foreach ($cognitiveTestResults as $cognitiveTest => $value) {
+			// Gets the cognitive test
 			$cognitiveTest = $app->data->getRepository('Entity:CognitiveTest')->findNonDeleted($cognitiveTest);
 			
+			// Creates the cognitive-test result
 			$cognitiveTestResult = new \App\Data\Entity\CognitiveTestResult();
 			$cognitiveTestResult->setConsultation($consultation);
 			$cognitiveTestResult->setCognitiveTest($cognitiveTest);
 			$cognitiveTestResult->setValue($value);
 			$app->data->persist($cognitiveTestResult);
 			
+			// Adds the cognitive-test result
 			$consultation->addCognitiveTestResult($cognitiveTestResult);
 		}
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets a consultation's imaging-test results.
+	 * 
+	 * Receives the consultation and the imaging-test results.
 	 */
 	protected function setImagingTestResults($consultation, $imagingTestResults) {
 		global $app;
 		
-		// TODO: comments
-		
+		// Removes the imaging-test results corresponding to imaging tests that
+		// have not been received
 		foreach ($consultation->getImagingTestResults() as $imagingTestResult) {
+			// Gets the imaging test's ID
 			$id = $imagingTestResult->getImagingTest()->getId();
 			
 			if (array_key_exists($id, $imagingTestResults)) {
+				// The imaging test has been received
 				$imagingTestResult->setValue($imagingTestResults[$id]);
 				unset($imagingTestResults[$id]);
 			} else {
+				// The imaging test has not been received
+				// Removes the imaging test
 				$consultation->removeImagingTestResult($imagingTestResult);
 			}
 		}
 		
+		// Adds the imaging-test results
 		foreach ($imagingTestResults as $imagingTest => $value) {
+			// Gets the imaging test
 			$imagingTest = $app->data->getRepository('Entity:ImagingTest')->findNonDeleted($imagingTest);
 			
+			// Creates the imaging-test result
 			$imagingTestResult = new \App\Data\Entity\ImagingTestResult();
 			$imagingTestResult->setConsultation($consultation);
 			$imagingTestResult->setImagingTest($imagingTest);
 			$imagingTestResult->setValue($value);
 			$app->data->persist($imagingTestResult);
 			
+			// Adds the imaging-test result
 			$consultation->addImagingTestResult($imagingTestResult);
 		}
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets a consultation's laboratory-test results.
+	 * 
+	 * Receives the consultation and the laboratory-test results.
 	 */
 	protected function setLaboratoryTestResults($consultation, $laboratoryTestResults) {
 		global $app;
 		
-		// TODO: comments
-		
+		// Removes the laboratory-test results corresponding to laboratory tests
+		// that have not been received
 		foreach ($consultation->getLaboratoryTestResults() as $laboratoryTestResult) {
+			// Gets the laboratory test's ID
 			$id = $laboratoryTestResult->getLaboratoryTest()->getId();
 			
 			if (array_key_exists($id, $laboratoryTestResults)) {
+				// The laboratory test has been received
 				$laboratoryTestResult->setValue($laboratoryTestResults[$id]);
 				unset($laboratoryTestResults[$id]);
 			} else {
+				// The laboratory test has not been received
+				// Removes the laboratory test
 				$consultation->removeLaboratoryTestResult($laboratoryTestResult);
 			}
 		}
 		
+		// Adds the laboratory-test results
 		foreach ($laboratoryTestResults as $laboratoryTest => $value) {
+			// Gets the laboratory test
 			$laboratoryTest = $app->data->getRepository('Entity:LaboratoryTest')->findNonDeleted($laboratoryTest);
 			
+			// Creates the laboratory-test result
 			$laboratoryTestResult = new \App\Data\Entity\LaboratoryTestResult();
 			$laboratoryTestResult->setConsultation($consultation);
 			$laboratoryTestResult->setLaboratoryTest($laboratoryTest);
 			$laboratoryTestResult->setValue($value);
 			$app->data->persist($laboratoryTestResult);
 			
+			// Adds the laboratory-test result
 			$consultation->addLaboratoryTestResult($laboratoryTestResult);
 		}
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets a consultation's medical antecedents.
+	 * 
+	 * Receives the consultation and the medical antecedents.
 	 */
 	protected function setMedicalAntecedents($consultation, $medicalAntecedents) {
 		global $app;
 		
-		// TODO: comments
-		
+		// Removes the medical antecedents that have not been received
 		foreach ($consultation->getMedicalAntecedents() as $medicalAntecedent) {
+			// Searches the medical antecedent
 			$index = searchInArray($medicalAntecedent->getId(), $medicalAntecedents);
 			
 			if ($index === false) {
+				// The medical antecedent has not been received
+				// Removes the medical antecedent
 				$consultation->removeMedicalAntecedent($medicalAntecedent);
 			} else {
+				// The medical antecedent has been received
 				removeFromArray($medicalAntecedents, $index);
 			}
 		}
 		
+		// Adds the medical antecedents
 		foreach ($medicalAntecedents as $medicalAntecedent) {
+			// Gets the medical antecedent
 			$medicalAntecedent = $app->data->getRepository('Entity:MedicalAntecedent')->findNonDeleted($medicalAntecedent);
+			
+			// Asserts conditions
 			$app->assertion->entityExists($medicalAntecedent);
+			
+			// Adds the medical antecedent
 			$consultation->addMedicalAntecedent($medicalAntecedent);
 		}
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets a consultation's medicines.
+	 * 
+	 * Receives the consultation and the medicines.
 	 */
 	protected function setMedicines($consultation, $medicines) {
 		global $app;
 		
-		// TODO: comments
-		
+		// Removes the medicines that have not been received
 		foreach ($consultation->getMedicines() as $medicine) {
+			// Searches the medicine
 			$index = searchInArray($medicine->getId(), $medicines);
 			
 			if ($index === false) {
+				// The medicine has not been received
+				// Removes the medicine
 				$consultation->removeMedicine($medicine);
 			} else {
+				// The medicine has been received
 				removeFromArray($medicines, $index);
 			}
 		}
 		
+		// Adds the medicines
 		foreach ($medicines as $medicine) {
+			// Gets the medicine
 			$medicine = $app->data->getRepository('Entity:Medicine')->findNonDeleted($medicine);
+			
+			// Asserts conditions
 			$app->assertion->entityExists($medicine);
+			
+			// Adds the medicine
 			$consultation->addMedicine($medicine);
 		}
 	}
 	
 	/**
-	 * TODO: comment
+	 * Sets a consultation's treatments.
+	 * 
+	 * Receives the consultation and the treatments.
 	 */
 	protected function setTreatments($consultation, $treatments) {
 		global $app;
 		
-		// TODO: comments
-		
+		// Removes the treatments that have not been received
 		foreach ($consultation->getTreatments() as $treatment) {
+			// Searches the treatment
 			$index = searchInArray($treatment->getId(), $treatments);
 			
 			if ($index === false) {
+				// The treatment has not been received
+				// Removes the treatment
 				$consultation->removeTreatment($treatment);
 			} else {
+				// The treatment has been received
 				removeFromArray($treatments, $index);
 			}
 		}
 		
+		// Adds the treatments
 		foreach ($treatments as $treatment) {
+			// Gets the treatment
 			$treatment = $app->data->getRepository('Entity:Treatment')->findNonDeleted($treatment);
+			
+			// Asserts conditions
 			$app->assertion->entityExists($treatment);
+			
+			// Adds the treatment
 			$consultation->addTreatment($treatment);
 		}
 	}

@@ -134,16 +134,22 @@ class Create extends \App\Service\External {
 	}
 	
 	/**
-	 * TODO: comments
+	 * Sets an experiment's files.
+	 * 
+	 * Receives the experiment and the files.
 	 */
 	private function setFiles($experiment, $files) {
 		global $app;
 		
-		// TODO: comments
-		
+		// Adds the files
 		foreach ($files as $file) {
+			// Gets the file
 			$file = $app->data->getRepository('Entity:File')->findNonDeletedNonAssociated($file);
+			
+			// Asserts conditions
 			$app->assertion->entityExists($file);
+			
+			// Adds the file
 			$experiment->addFile($file);
 		}
 	}
