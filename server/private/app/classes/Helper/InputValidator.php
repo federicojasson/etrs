@@ -26,6 +26,19 @@ namespace App\Helper;
 class InputValidator {
 	
 	/**
+	 * Determines whether a set of sorting criteria are valid.
+	 * 
+	 * Receives the sorting criteria.
+	 */
+	public function areSortingCriteriaValid($sortingCriteria) {
+		// Gets the fields
+		$fields = array_column($sortingCriteria, 'field');
+		
+		// Determines whether the fields are unique
+		return ! containsDuplicates($fields);
+	}
+	
+	/**
 	 * Determines whether a set of test results is valid.
 	 * 
 	 * Receives the test results and the type of the test entity.
@@ -206,16 +219,16 @@ class InputValidator {
 	}
 	
 	/**
-	 * Determines whether a sorting criteria is valid.
+	 * Determines whether a search offset is valid.
 	 * 
-	 * Receives the sorting criteria.
+	 * Receives the page and the results per page.
 	 */
-	public function isSortingCriteriaValid($sortingCriteria) {
-		// Gets the fields
-		$fields = array_column($sortingCriteria, 'field');
+	public function isSearchOffsetValid($page, $resultsPerPage) {
+		// Calculates the offset
+		$offset = calculateSearchOffset($page, $resultsPerPage);
 		
-		// Determines whether the fields are unique
-		return ! containsDuplicates($fields);
+		// Determines whether the offset is a valid integer
+		return $this->isValidInteger($offset, 0);
 	}
 	
 	/**

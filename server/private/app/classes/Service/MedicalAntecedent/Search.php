@@ -58,7 +58,7 @@ class Search extends \App\Service\External {
 		// Searches the medical antecedents
 		$medicalAntecedents = $queryBuilder
 			->getQuery()
-			->setFirstResult($resultsPerPage * ($page - 1))
+			->setFirstResult(calculateSearchOffset($page, $resultsPerPage))
 			->setMaxResults($resultsPerPage)
 			->setHint(\Doctrine\ORM\Query::HINT_CUSTOM_OUTPUT_WALKER, 'App\Data\OutputWalker\Custom')
 			->setHint('hint.sqlCalcFoundRows', true)
@@ -130,9 +130,20 @@ class Search extends \App\Service\External {
 		
 		// Gets inputs
 		$sortingCriteria = $this->getInputValue('sortingCriteria');
+		$page = $this->getInputValue('page');
+		$resultsPerPage = $this->getInputValue('resultsPerPage');
 		
-		// Validates the sorting criteria
-		return $app->inputValidator->isSortingCriteriaValid($sortingCriteria);
+		if (! $app->inputValidator->areSortingCriteriaValid($sortingCriteria)) {
+			// The sorting criteria are invalid
+			return false;
+		}
+		
+		if (! $app->inputValidator->isSearchOffsetValid($page, $resultsPerPage)) {
+			// The search offset is invalid
+			return false;
+		}
+		
+		return true;
 	}
 	
 	/**

@@ -45,6 +45,15 @@ function buildPath() {
 }
 
 /**
+ * Calculates a search offset.
+ * 
+ * Receives the page and the results per page.
+ */
+function calculateSearchOffset($page, $resultsPerPage) {
+	return $resultsPerPage * ($page - 1);
+}
+
+/**
  * Converts a string from camelCase to PascalCase.
  * 
  * Receives the string.
