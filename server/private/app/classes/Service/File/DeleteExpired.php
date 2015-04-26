@@ -18,30 +18,25 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
+namespace App\Service\File;
 
 /**
- * Responsible for registering the internal services.
+ * Represents the /file/delete-expired service.
  */
-class InternalServices extends Services {
+class DeleteExpired extends \App\Service\Internal {
 	
 	/**
-	 * Returns the services.
+	 * Executes the service.
 	 */
-	protected function getServices() {
-		return [
-			'/data/check-configuration',
-			'/data/generate-proxies',
-			'/data/reset-entities-versions',
-			'/file/delete-expired',
-			'/log/delete-old',
-			'/permission/password-reset/delete-expired',
-			'/permission/sign-up/delete-expired',
-			'/session/delete-all',
-			'/session/delete-expired',
-			'/study/conduct',
-			'/user/delete'
-		];
+	protected function execute() {
+		// TODO
+	}
+	
+	/**
+	 * Determines whether the request is valid.
+	 */
+	protected function isRequestValid() {
+		return true;
 	}
 	
 }

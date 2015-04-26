@@ -18,30 +18,15 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\Middleware;
-
 /**
- * Responsible for registering the internal services.
+ * This script executes an internal task.
  */
-class InternalServices extends Services {
-	
-	/**
-	 * Returns the services.
-	 */
-	protected function getServices() {
-		return [
-			'/data/check-configuration',
-			'/data/generate-proxies',
-			'/data/reset-entities-versions',
-			'/file/delete-expired',
-			'/log/delete-old',
-			'/permission/password-reset/delete-expired',
-			'/permission/sign-up/delete-expired',
-			'/session/delete-all',
-			'/session/delete-expired',
-			'/study/conduct',
-			'/user/delete'
-		];
-	}
-	
-}
+
+// Defines the root directory
+define('DIRECTORY_ROOT', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..');
+
+// Includes the application
+require_once DIRECTORY_ROOT . DIRECTORY_SEPARATOR . 'private' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'app.php';
+
+// Executes the internal task
+executeInternalTask('/file/delete-expired');
