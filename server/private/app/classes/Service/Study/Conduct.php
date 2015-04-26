@@ -175,7 +175,7 @@ class Conduct extends \App\Service\Internal {
 	private function executeExperiment($directory, $experiment, $input) {
 		// Builds the definitive command line
 		$commandLine = replacePlaceholders($experiment->getCommandLine(), [
-			'input' => buildPath('input', $input->getName())
+			'input' => '"' . buildPath('input', $input->getName()) . '"'
 		]);
 		
 		// Saves the current working directory
