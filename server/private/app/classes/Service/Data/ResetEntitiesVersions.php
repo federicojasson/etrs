@@ -50,7 +50,6 @@ class ResetEntitiesVersions extends \App\Service\Internal {
 			'Study',
 			'Treatment',
 			'User'
-			// DEFINEHERE: reset versions of all entities here
 		];
 		
 		// Executes a transaction

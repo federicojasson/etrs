@@ -30,7 +30,6 @@ class ExternalServices extends Services {
 	 */
 	protected function getServices() {
 		return [
-			// DEFINEHERE: define external services here
 			'/account/change-password',
 			'/account/edit',
 			'/account/reset-password',

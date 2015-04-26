@@ -33,7 +33,6 @@
 		 */
 		function getServices() {
 			return [
-				// DEFINEHERE: define services here
 				'/account/change-password',
 				'/account/edit',
 				'/account/reset-password',
