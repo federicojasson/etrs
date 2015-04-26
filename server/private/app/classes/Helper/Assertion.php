@@ -161,6 +161,19 @@ class Assertion {
 	}
 	
 	/**
+	 * Asserts whether a file has been removed.
+	 * 
+	 * Receives an indicator of whether the file has been removed.
+	 */
+	public function fileRemoved($removed) {
+		if (! $removed) {
+			// The file could not be removed
+			// Halts the application
+			haltApp(HTTP_STATUS_INTERNAL_SERVER_ERROR, ERROR_CODE_FILE_SYSTEM_ERROR);
+		}
+	}
+	
+	/**
 	 * Asserts whether a file has been uploaded.
 	 * 
 	 * Receives an indicator of whether the file has been uploaded.

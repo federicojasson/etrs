@@ -66,7 +66,10 @@ class DeleteExpired extends \App\Service\Internal {
 			$app->data->remove($file);
 		}
 		
-		// TODO: remove files
+		// Removes the files
+		foreach ($files as $file) {
+			$app->file->remove($file['id']);
+		}
 	}
 	
 	/**

@@ -16,7 +16,6 @@ Quick tasks
 - Add explanation of data-type definition in the views.
 - Add explanation of others (e.g. command-line).
 - Removed ready variable from entities views (when delete is implemented).
-- Internal task to remove non-associated files (permanently and physically).
 - Test uploading .php files and try to execute them on file downloading.
 
 

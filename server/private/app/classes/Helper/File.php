@@ -276,6 +276,34 @@ class File {
 	}
 	
 	/**
+	 * Removes a file.
+	 * 
+	 * Receives the file's ID.
+	 */
+	public function remove($id) {
+		global $app;
+		
+		// Gets the path
+		$path = $this->getPath($id);
+		
+		if (file_exists($path)) {
+			// The file exists
+			
+			// Removes the file
+			$removed = unlink($path);
+		
+			if (! $removed) {
+				// The file could not be removed
+				// Logs the event
+				$app->log->critical('The file ' . $path . ' could not be removed.');
+			}
+
+			// Asserts conditions
+			$app->assertion->fileRemoved($removed);
+		}
+	}
+	
+	/**
 	 * Sets a file's access permissions.
 	 * 
 	 * Receives the file's path and the access permissions to be set.
