@@ -1,4 +1,4 @@
-# Disables the directory listing
+# Disables the listing of directories
 Options -Indexes
 
 # Enables the runtime rewriting engine

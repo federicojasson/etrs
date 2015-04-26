@@ -2,3 +2,8 @@
 Order Deny,Allow
 Deny from all
 Allow from env=etrs_subrequest
+
+# Disables the execution of scripts
+<Files *>
+	SetHandler default-handler
+</Files>
