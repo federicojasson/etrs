@@ -292,6 +292,10 @@ select.form-control {
 	margin-left: 0px;
 }
 
+.isolated-content {
+	margin-top: 48px;
+}
+
 .loading-image {
 	background-image: url(images/spinner.gif);
 	background-position: center center;
@@ -304,6 +308,10 @@ select.form-control {
 	max-height: 256px;
 	max-width: 256px;
 	min-height: 128px;
+}
+
+.loading-image.view {
+	margin-top: 64px;
 }
 
 .loading-text {
@@ -393,10 +401,6 @@ select.form-control {
 	-ms-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
-}
-
-.top-margin {
-	margin-top: 48px;
 }
 
 .unlocked-image {

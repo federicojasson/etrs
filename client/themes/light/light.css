@@ -245,7 +245,11 @@ select.form-control {}
 
 .no-icon + .icon-text {}
 
+.isolated-content {}
+
 .loading-image {}
+
+.loading-image.view {}
 
 .loading-text {
 	color: #aaaaaa;
@@ -339,8 +343,6 @@ select.form-control {}
 	letter-spacing: 2px;
 	text-transform: uppercase;
 }
-
-.top-margin {}
 
 .unlocked-image {}
 
