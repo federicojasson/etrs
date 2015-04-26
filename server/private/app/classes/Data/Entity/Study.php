@@ -292,6 +292,13 @@ class Study {
 	}
 	
 	/**
+	 * Returns a string representation of the entity.
+	 */
+	public function __toString() {
+		return bin2hex($this->id);
+	}
+	
+	/**
 	 * Adds a file.
 	 * 
 	 * Receives the file to be added.

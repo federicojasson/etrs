@@ -394,6 +394,13 @@ class Consultation {
 	}
 	
 	/**
+	 * Returns a string representation of the entity.
+	 */
+	public function __toString() {
+		return bin2hex($this->id);
+	}
+	
+	/**
 	 * Adds a cognitive-test result.
 	 * 
 	 * Receives the cognitive-test result to be added.

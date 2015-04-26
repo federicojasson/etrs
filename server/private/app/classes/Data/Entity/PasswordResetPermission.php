@@ -133,6 +133,13 @@ class PasswordResetPermission {
 	private $user;
 	
 	/**
+	 * Returns a string representation of the entity.
+	 */
+	public function __toString() {
+		return bin2hex($this->id);
+	}
+	
+	/**
 	 * Returns the ID.
 	 */
 	public function getId() {

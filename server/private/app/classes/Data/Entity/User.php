@@ -241,6 +241,13 @@ class User {
 	private $version;
 	
 	/**
+	 * Returns a string representation of the entity.
+	 */
+	public function __toString() {
+		return $this->id;
+	}
+	
+	/**
 	 * Returns the email address.
 	 */
 	public function getEmailAddress() {

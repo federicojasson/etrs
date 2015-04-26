@@ -196,6 +196,13 @@ class LaboratoryTest {
 	}
 	
 	/**
+	 * Returns a string representation of the entity.
+	 */
+	public function __toString() {
+		return bin2hex($this->id);
+	}
+	
+	/**
 	 * Deletes the entity.
 	 * 
 	 * Receives the user to be set as the deleter.

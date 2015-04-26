@@ -94,6 +94,13 @@ class Log {
 	private $message;
 	
 	/**
+	 * Returns a string representation of the entity.
+	 */
+	public function __toString() {
+		return bin2hex($this->id);
+	}
+	
+	/**
 	 * Serializes the entity.
 	 */
 	public function serialize() {
