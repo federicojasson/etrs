@@ -87,7 +87,7 @@ function camelToSpinalCase($string) {
  * Receives the array.
  */
 function containsDuplicates($array) {
-	// Removes duplicate elements from the array
+	// Removes duplicate elements
 	$arrayWithoutDuplicates = array_unique($array);
 	
 	// Compares the arrays' lengths

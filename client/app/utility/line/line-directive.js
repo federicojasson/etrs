@@ -49,7 +49,7 @@
 		function onLink(scope, element, attributes, ngModelController) {
 			// Registers a parser
 			ngModelController.$parsers.push(function(value) {
-				// Replaces the tabs with spaces
+				// Replaces tabs with spaces
 				value = value.replace(/\t/g, ' ');
 				
 				// Removes the control characters
