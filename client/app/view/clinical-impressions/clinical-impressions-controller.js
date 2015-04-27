@@ -21,8 +21,10 @@
 (function() {
 	angular.module('app.view.clinicalImpressions').controller('ClinicalImpressionsViewController', [
 		'$scope',
+		'DeleteClinicalImpressionAction',
 		'SearchClinicalImpressionsAction',
 		'data',
+		'utility',
 		'SearchHandler',
 		ClinicalImpressionsViewController
 	]);
@@ -30,7 +32,7 @@
 	/**
 	 * Represents the clinical-impressions view.
 	 */
-	function ClinicalImpressionsViewController($scope, SearchClinicalImpressionsAction, data, SearchHandler) {
+	function ClinicalImpressionsViewController($scope, DeleteClinicalImpressionAction, SearchClinicalImpressionsAction, data, utility, SearchHandler) {
 		var _this = this;
 		
 		/**
@@ -60,6 +62,30 @@
 		};
 		
 		/**
+		 * Deletes a clinical impresion.
+		 * 
+		 * Receives the clinical impresion.
+		 */
+		function deleteClinicalImpression(clinicalImpression) {
+			// Initializes the action
+			var action = new DeleteClinicalImpressionAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = clinicalImpression.id;
+			action.input.version.value = clinicalImpression.version;
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				// Removes the clinical impresion
+				utility.removeFromArray(clinicalImpression, $scope.clinicalImpressions);
+			};
+			
+			// Executes the action
+			action.execute();
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -71,6 +97,9 @@
 			
 			// Includes auxiliary variables
 			$scope.searching = false;
+			
+			// Includes auxiliary functions
+			$scope.deleteClinicalImpression = deleteClinicalImpression;
 			
 			// Initializes the actions
 			initializeSearchClinicalImpressionsAction();

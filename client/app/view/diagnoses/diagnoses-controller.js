@@ -21,8 +21,10 @@
 (function() {
 	angular.module('app.view.diagnoses').controller('DiagnosesViewController', [
 		'$scope',
+		'DeleteDiagnosisAction',
 		'SearchDiagnosesAction',
 		'data',
+		'utility',
 		'SearchHandler',
 		DiagnosesViewController
 	]);
@@ -30,7 +32,7 @@
 	/**
 	 * Represents the diagnoses view.
 	 */
-	function DiagnosesViewController($scope, SearchDiagnosesAction, data, SearchHandler) {
+	function DiagnosesViewController($scope, DeleteDiagnosisAction, SearchDiagnosesAction, data, utility, SearchHandler) {
 		var _this = this;
 		
 		/**
@@ -60,6 +62,30 @@
 		};
 		
 		/**
+		 * Deletes a diagnosis.
+		 * 
+		 * Receives the diagnosis.
+		 */
+		function deleteDiagnosis(diagnosis) {
+			// Initializes the action
+			var action = new DeleteDiagnosisAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = diagnosis.id;
+			action.input.version.value = diagnosis.version;
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				// Removes the diagnosis
+				utility.removeFromArray(diagnosis, $scope.diagnoses);
+			};
+			
+			// Executes the action
+			action.execute();
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -71,6 +97,9 @@
 			
 			// Includes auxiliary variables
 			$scope.searching = false;
+			
+			// Includes auxiliary functions
+			$scope.deleteDiagnosis = deleteDiagnosis;
 			
 			// Initializes the actions
 			initializeSearchDiagnosesAction();

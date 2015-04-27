@@ -21,8 +21,10 @@
 (function() {
 	angular.module('app.view.cognitiveTests').controller('CognitiveTestsViewController', [
 		'$scope',
+		'DeleteCognitiveTestAction',
 		'SearchCognitiveTestsAction',
 		'data',
+		'utility',
 		'SearchHandler',
 		CognitiveTestsViewController
 	]);
@@ -30,7 +32,7 @@
 	/**
 	 * Represents the cognitive-tests view.
 	 */
-	function CognitiveTestsViewController($scope, SearchCognitiveTestsAction, data, SearchHandler) {
+	function CognitiveTestsViewController($scope, DeleteCognitiveTestAction, SearchCognitiveTestsAction, data, utility, SearchHandler) {
 		var _this = this;
 		
 		/**
@@ -60,6 +62,30 @@
 		};
 		
 		/**
+		 * Deletes a cognitive test.
+		 * 
+		 * Receives the cognitive test.
+		 */
+		function deleteCognitiveTest(cognitiveTest) {
+			// Initializes the action
+			var action = new DeleteCognitiveTestAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = cognitiveTest.id;
+			action.input.version.value = cognitiveTest.version;
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				// Removes the cognitive test
+				utility.removeFromArray(cognitiveTest, $scope.cognitiveTests);
+			};
+			
+			// Executes the action
+			action.execute();
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -71,6 +97,9 @@
 			
 			// Includes auxiliary variables
 			$scope.searching = false;
+			
+			// Includes auxiliary functions
+			$scope.deleteCognitiveTest = deleteCognitiveTest;
 			
 			// Initializes the actions
 			initializeSearchCognitiveTestsAction();

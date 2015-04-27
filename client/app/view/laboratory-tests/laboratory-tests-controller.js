@@ -21,8 +21,10 @@
 (function() {
 	angular.module('app.view.laboratoryTests').controller('LaboratoryTestsViewController', [
 		'$scope',
+		'DeleteLaboratoryTestAction',
 		'SearchLaboratoryTestsAction',
 		'data',
+		'utility',
 		'SearchHandler',
 		LaboratoryTestsViewController
 	]);
@@ -30,7 +32,7 @@
 	/**
 	 * Represents the laboratory-tests view.
 	 */
-	function LaboratoryTestsViewController($scope, SearchLaboratoryTestsAction, data, SearchHandler) {
+	function LaboratoryTestsViewController($scope, DeleteLaboratoryTestAction, SearchLaboratoryTestsAction, data, utility, SearchHandler) {
 		var _this = this;
 		
 		/**
@@ -60,6 +62,30 @@
 		};
 		
 		/**
+		 * Deletes a laboratory test.
+		 * 
+		 * Receives the laboratory test.
+		 */
+		function deleteLaboratoryTest(laboratoryTest) {
+			// Initializes the action
+			var action = new DeleteLaboratoryTestAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = laboratoryTest.id;
+			action.input.version.value = laboratoryTest.version;
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				// Removes the laboratory test
+				utility.removeFromArray(laboratoryTest, $scope.laboratoryTests);
+			};
+			
+			// Executes the action
+			action.execute();
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -71,6 +97,9 @@
 			
 			// Includes auxiliary variables
 			$scope.searching = false;
+			
+			// Includes auxiliary functions
+			$scope.deleteLaboratoryTest = deleteLaboratoryTest;
 			
 			// Initializes the actions
 			initializeSearchLaboratoryTestsAction();

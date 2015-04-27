@@ -21,8 +21,10 @@
 (function() {
 	angular.module('app.view.imagingTests').controller('ImagingTestsViewController', [
 		'$scope',
+		'DeleteImagingTestAction',
 		'SearchImagingTestsAction',
 		'data',
+		'utility',
 		'SearchHandler',
 		ImagingTestsViewController
 	]);
@@ -30,7 +32,7 @@
 	/**
 	 * Represents the imaging-tests view.
 	 */
-	function ImagingTestsViewController($scope, SearchImagingTestsAction, data, SearchHandler) {
+	function ImagingTestsViewController($scope, DeleteImagingTestAction, SearchImagingTestsAction, data, utility, SearchHandler) {
 		var _this = this;
 		
 		/**
@@ -60,6 +62,30 @@
 		};
 		
 		/**
+		 * Deletes an imaging test.
+		 * 
+		 * Receives the imaging test.
+		 */
+		function deleteImagingTest(imagingTest) {
+			// Initializes the action
+			var action = new DeleteImagingTestAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = imagingTest.id;
+			action.input.version.value = imagingTest.version;
+			
+			// Registers the callbacks
+			
+			action.startCallback = function() {
+				// Removes the imaging test
+				utility.removeFromArray(imagingTest, $scope.imagingTests);
+			};
+			
+			// Executes the action
+			action.execute();
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -71,6 +97,9 @@
 			
 			// Includes auxiliary variables
 			$scope.searching = false;
+			
+			// Includes auxiliary functions
+			$scope.deleteImagingTest = deleteImagingTest;
 			
 			// Initializes the actions
 			initializeSearchImagingTestsAction();
