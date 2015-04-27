@@ -346,7 +346,7 @@ function spinalToPascalCase($string) {
  * Receives the string.
  */
 function stringToBoolean($string) {
-	return ($string === 'false')? false : true;
+	return $string === 'true';
 }
 
 /**
