@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.action.deleteTreatment').factory('DeleteTreatmentAction', [
+		'dialog',
 		'inputValidator',
 		'Input',
 		'server',
@@ -29,7 +30,7 @@
 	/**
 	 * Defines the DeleteTreatmentAction class.
 	 */
-	function DeleteTreatmentActionFactory(inputValidator, Input, server) {
+	function DeleteTreatmentActionFactory(dialog, inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -68,19 +69,24 @@
 				return;
 			}
 			
-			// TODO: confirmation
-			
-			// Invokes the start callback
-			this.startCallback();
-			
-			// Deletes the treatment
-			server.treatment.delete({
-				id: this.input.id.value,
-				version: this.input.version.value
-			}).then(function() {
-				// Invokes the success callback
-				this.successCallback();
-			}.bind(this));
+			// Opens a confirmation dialog
+			dialog.openConfirmation(
+				'Confirmar eliminación',
+				'¿Está seguro que desea eliminar el tratamiento?',
+				function() {
+					// Invokes the start callback
+					this.startCallback();
+
+					// Deletes the treatment
+					server.treatment.delete({
+						id: this.input.id.value,
+						version: this.input.version.value
+					}).then(function() {
+						// Invokes the success callback
+						this.successCallback();
+					}.bind(this));
+				}.bind(this)
+			);
 		};
 		
 		// ---------------------------------------------------------------------
