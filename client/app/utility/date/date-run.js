@@ -29,34 +29,47 @@
 	 * Performs initialization tasks.
 	 */
 	function run($http, dateFilter) {
-		// TODO: order and comment
-		
-		function func(value) {
+		/**
+		 * Applies a filter to the dates present in a value.
+		 * 
+		 * Receives the value, which can be anything: an array, an object, a
+		 * date, etc. In the first two cases, the filter is applied recursively.
+		 */
+		function filterDates(value) {
 			if (angular.isArray(value)) {
+				// The value is an array
+				// Applies the filter to the array's elements
 				for (var i; i < value.length; i++) {
-					value[i] = func(value[i]);
+					value[i] = filterDates(value[i]);
 				}
 			}
 			
 			if (angular.isObject(value)) {
-				for (var prop in value) {
-					if (! value.hasOwnProperty(prop)) {
+				// The value is an object
+				// Applies the filter to the object's properties
+				for (var property in value) {
+					if (! value.hasOwnProperty(property)) {
 						continue;
 					}
 					
-					value[prop] = func(value[prop]);
+					value[property] = filterDates(value[property]);
 				}
 			}
 			
 			if (value instanceof Date) {
-				return dateFilter(value, 'yyyy-MM-dd');
+				// The value is a date
+				// Applies the filter
+				value = dateFilter(value, 'yyyy-MM-dd');
 			}
 			
 			return value;
 		}
 		
-		$http.defaults.transformRequest.unshift(function(requestData) {
-			return func(requestData);
+		// ---------------------------------------------------------------------
+		
+		// Registers a request interceptor
+		$http.defaults.transformRequest.unshift(function(data) {
+			return filterDates(data);
 		});
 	}
 })();

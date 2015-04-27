@@ -113,7 +113,6 @@
 					continue;
 				}
 				
-				// Validates the property
 				valid &= _this.isInputValid(input[property]);
 			}
 			
