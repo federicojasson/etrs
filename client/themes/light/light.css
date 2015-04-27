@@ -117,6 +117,8 @@ th[ng-click]:hover {
 	text-transform: inherit;
 }
 
+.close {}
+
 .dropdown-menu {
 	font-size: 0.85em;
 	text-transform: uppercase;
