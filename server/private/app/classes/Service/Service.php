@@ -26,6 +26,11 @@ namespace App\Service;
 abstract class Service {
 	
 	/**
+	 * The input.
+	 */
+	private $input;
+	
+	/**
 	 * The output.
 	 */
 	private $output;
@@ -64,6 +69,35 @@ abstract class Service {
 	protected abstract function execute();
 	
 	/**
+	 * Returns the input.
+	 */
+	protected function getInput() {
+		return $this->input;
+	}
+	
+	/**
+	 * Returns an input's value.
+	 * 
+	 * Receives the input's key and, optionally, a filter for the value.
+	 */
+	protected function getInputValue($key, $filter = null) {
+		// Gets the value
+		$value = $this->input[$key];
+		
+		if (is_null($value)) {
+			// The value is null
+			return null;
+		}
+		
+		if (! is_null($filter)) {
+			// Applies the filter
+			$value = call_user_func($filter, $value);
+		}
+		
+		return $value;
+	}
+	
+	/**
 	 * Determines whether the request is valid.
 	 */
 	protected abstract function isRequestValid();
@@ -72,6 +106,15 @@ abstract class Service {
 	 * Determines whether the user is authorized.
 	 */
 	protected abstract function isUserAuthorized();
+	
+	/**
+	 * Sets the input.
+	 * 
+	 * Receives the input to be set.
+	 */
+	protected function setInput($input) {
+		$this->input = $input;
+	}
 	
 	/**
 	 * Sets the output.
@@ -95,7 +138,7 @@ abstract class Service {
 			$this->output = [];
 		}
 		
-		if (! is_null($filter)) {
+		if (! is_null($value) && ! is_null($filter)) {
 			// Applies the filter
 			$value = call_user_func($filter, $value);
 		}

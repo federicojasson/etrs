@@ -26,50 +26,19 @@ namespace App\Service;
 abstract class External extends Service {
 	
 	/**
-	 * The input.
-	 */
-	private $input;
-	
-	/**
 	 * Prepares and executes the service.
 	 */
 	public function __invoke() {
 		global $app;
 		
 		// Initializes the input
-		$this->input = $app->request->getBody();
+		$input = $app->request->getBody();
+		
+		// Sets the input
+		$this->setInput($input);
 		
 		// Invokes the homonym method in the parent
 		parent::__invoke();
-	}
-	
-	/**
-	 * Returns the input.
-	 */
-	protected function getInput() {
-		return $this->input;
-	}
-	
-	/**
-	 * Returns an input's value.
-	 * 
-	 * Receives the input's key and, optionally, a filter for the value.
-	 */
-	protected function getInputValue($key, $filter = null) {
-		// Gets the value
-		$value = $this->input[$key];
-		
-		if (is_null($value)) {
-			// The value is null
-			return null;
-		}
-		
-		if (! is_null($filter)) {
-			// Applies the filter
-			$value = call_user_func($filter, $value);
-		}
-		
-		return $value;
 	}
 	
 	/**
@@ -106,10 +75,10 @@ abstract class External extends Service {
 		}
 		
 		// Sets the input
-		$this->input = [
+		$this->setInput([
 			'name' => $file['name'],
 			'temporaryPath' => $file['tmp_name']
-		];
+		]);
 		
 		return true;
 	}
@@ -131,7 +100,10 @@ abstract class External extends Service {
 		}
 		
 		// Decodes the input
-		$this->input = json_decode($this->input, true);
+		$input = json_decode($this->getInput(), true);
+		
+		// Sets the input
+		$this->setInput($input);
 		
 		return true;
 	}

@@ -26,45 +26,19 @@ namespace App\Service;
 abstract class Internal extends Service {
 	
 	/**
-	 * The input.
-	 */
-	private $input;
-	
-	/**
 	 * Prepares and executes the service.
 	 */
 	public function __invoke() {
 		global $argv;
 		
 		// Initializes the input
-		$this->input = array_slice($argv, 1);
+		$input = array_slice($argv, 1);
+		
+		// Sets the input
+		$this->setInput($input);
 		
 		// Invokes the homonym method in the parent
 		parent::__invoke();
-	}
-	
-	/**
-	 * Returns the input.
-	 */
-	protected function getInput() {
-		return $this->input;
-	}
-	
-	/**
-	 * Returns an input's value.
-	 * 
-	 * Receives the input's index and, optionally, a filter for the value.
-	 */
-	protected function getInputValue($index, $filter = null) {
-		// Gets the value
-		$value = $this->input[$index];
-		
-		if (! is_null($filter)) {
-			// Applies the filter
-			$value = call_user_func($filter, $value);
-		}
-		
-		return $value;
 	}
 	
 	/**
