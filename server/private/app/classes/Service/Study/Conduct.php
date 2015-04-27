@@ -200,7 +200,7 @@ class Conduct extends \App\Service\Internal {
 		global $app;
 		
 		// Defines the name
-		$name = 'Reporte.pdf';
+		$name = FILE_OUTPUT_NAME;
 		
 		// Builds the temporary path
 		$temporaryPath = buildPath($directory, 'output', $name);

@@ -76,7 +76,7 @@ function buildFileName($string) {
 	
 	if ($string === '') {
 		// The string is empty
-		return 'Archivo sin nombre';
+		return FILE_UNNAMED_NAME;
 	}
 	
 	return $string;
