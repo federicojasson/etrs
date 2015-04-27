@@ -114,7 +114,8 @@ class ExternalServices extends Services {
 			'/treatment/get',
 			'/treatment/get-all',
 			'/treatment/search',
-			'/user/get'
+			'/user/get',
+			'/user/search'
 		];
 	}
 	
