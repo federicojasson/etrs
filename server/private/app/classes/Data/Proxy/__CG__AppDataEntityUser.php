@@ -64,10 +64,10 @@ class User extends \App\Data\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'emailAddress', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'firstName', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'gender', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'keyStretchingIterations', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'lastName', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'passwordHash', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'role', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'salt', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'version');
+            return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'emailAddress', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'firstName', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'gender', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'inviter', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'keyStretchingIterations', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'lastName', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'passwordHash', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'passwordResetPermission', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'role', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'salt', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'version');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'emailAddress', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'firstName', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'gender', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'keyStretchingIterations', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'lastName', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'passwordHash', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'role', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'salt', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'version');
+        return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'emailAddress', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'firstName', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'gender', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'inviter', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'keyStretchingIterations', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'lastName', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'passwordHash', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'passwordResetPermission', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'role', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'salt', '' . "\0" . 'App\\Data\\Entity\\User' . "\0" . 'version');
     }
 
     /**
@@ -176,6 +176,17 @@ class User extends \App\Data\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function __toString()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', array());
+
+        return parent::__toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getEmailAddress()
     {
 
@@ -213,6 +224,17 @@ class User extends \App\Data\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getInviter()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInviter', array());
+
+        return parent::getInviter();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getKeyStretchingIterations()
     {
 
@@ -241,6 +263,17 @@ class User extends \App\Data\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPasswordHash', array());
 
         return parent::getPasswordHash();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPasswordResetPermission()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPasswordResetPermission', array());
+
+        return parent::getPasswordResetPermission();
     }
 
     /**
@@ -290,17 +323,6 @@ class User extends \App\Data\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setCreator($user)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreator', array($user));
-
-        return parent::setCreator($user);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setEmailAddress($emailAddress)
     {
 
@@ -340,6 +362,17 @@ class User extends \App\Data\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setId', array($id));
 
         return parent::setId($id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setInviter($user)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setInviter', array($user));
+
+        return parent::setInviter($user);
     }
 
     /**

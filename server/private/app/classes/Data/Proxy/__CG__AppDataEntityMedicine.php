@@ -176,12 +176,34 @@ class Medicine extends \App\Data\Entity\Medicine implements \Doctrine\ORM\Proxy\
     /**
      * {@inheritDoc}
      */
+    public function __toString()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', array());
+
+        return parent::__toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function delete($user)
     {
 
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'delete', array($user));
 
         return parent::delete($user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCreator()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreator', array());
+
+        return parent::getCreator();
     }
 
     /**
@@ -197,6 +219,17 @@ class Medicine extends \App\Data\Entity\Medicine implements \Doctrine\ORM\Proxy\
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
 
         return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLastEditor()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLastEditor', array());
+
+        return parent::getLastEditor();
     }
 
     /**
