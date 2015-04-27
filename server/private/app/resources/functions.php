@@ -23,6 +23,41 @@
  */
 
 /**
+ * Builds a boolean expression from a string.
+ * 
+ * A boolean expression is a sanitized version of the string that contains
+ * wildcard characters.
+ * 
+ * Receives the string.
+ */
+function buildBooleanExpression($string) {
+	// Transliterates the string
+	$string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
+	
+	// Replaces non-alphanumeric characters with spaces
+	$string = preg_replace('/[^ 0-9A-Za-z]/', ' ', $string);
+	
+	// Trims and shrinks the string
+	$string = trimAndShrink($string);
+	
+	if ($string === '') {
+		// The string is empty
+		return '';
+	}
+	
+	// Gets the words of the string
+	$words = explode(' ', $string);
+	
+	// Appends a wildcard character to the words
+	$words = filterArray($words, function($word) {
+		return $word . '*';
+	});
+	
+	// Builds the boolean expression
+	return implode(' ', $words);
+}
+
+/**
  * Builds a path.
  * 
  * Receives path's fragments.
@@ -97,7 +132,7 @@ function camelToSpinalCase($string) {
  * Receives the array.
  */
 function containsDuplicates($array) {
-	// Removes duplicate elements
+	// Removes the duplicate elements
 	$arrayWithoutDuplicates = array_unique($array);
 	
 	// Compares the arrays' lengths
@@ -123,41 +158,6 @@ function createArrayFilter($filter) {
  */
 function filterArray($array, $filter) {
 	return array_map($filter, $array);
-}
-
-/**
- * Returns a boolean expression from a string.
- * 
- * A boolean expression is a sanitized version of the string that contains
- * wildcard characters.
- * 
- * Receives the string.
- */
-function getBooleanExpression($string) {
-	// Transliterates the string
-	$string = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $string);
-	
-	// Replaces non-alphanumeric characters with spaces
-	$string = preg_replace('/[^ 0-9A-Za-z]/', ' ', $string);
-	
-	// Trims and shrinks the string
-	$string = trimAndShrink($string);
-	
-	if ($string === '') {
-		// The string is empty
-		return '';
-	}
-	
-	// Gets the words of the string
-	$words = explode(' ', $string);
-	
-	// Appends a wildcard character to the words
-	$words = filterArray($words, function($word) {
-		return $word . '*';
-	});
-	
-	// Builds the boolean expression
-	return implode(' ', $words);
 }
 
 /**

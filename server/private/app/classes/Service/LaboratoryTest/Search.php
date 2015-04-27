@@ -32,7 +32,7 @@ class Search extends \App\Service\External {
 		global $app;
 		
 		// Gets inputs
-		$expression = $this->getInputValue('expression', 'getBooleanExpression');
+		$expression = $this->getInputValue('expression', 'buildBooleanExpression');
 		$sortingCriteria = $this->getInputValue('sortingCriteria');
 		$page = $this->getInputValue('page');
 		$resultsPerPage = $this->getInputValue('resultsPerPage');
