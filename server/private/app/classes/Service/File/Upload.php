@@ -32,7 +32,7 @@ class Upload extends \App\Service\External {
 		global $app;
 		
 		// Gets inputs
-		$name = $this->getInputValue('name'); // TODO: filter?
+		$name = $this->getInputValue('name', 'buildFileName');
 		$temporaryPath = $this->getInputValue('temporaryPath');
 		
 		// Gets the signed-in user
@@ -69,9 +69,13 @@ class Upload extends \App\Service\External {
 			return false;
 		}
 		
-		// Gets the input
-		$input = $this->getInput();
-		// TODO: validate name?
+		// Gets inputs
+		$name = $this->getInputValue('name');
+		
+		if (! $app->inputValidator->isValidString($name, 0, 128)) {
+			// The name is invalid
+			return false;
+		}
 		
 		return true;
 	}

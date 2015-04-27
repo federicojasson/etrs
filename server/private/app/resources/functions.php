@@ -58,6 +58,31 @@ function buildBooleanExpression($string) {
 }
 
 /**
+ * Builds a file name from a string.
+ * 
+ * A file name is a sanitized version of the string.
+ * 
+ * Receives the string.
+ */
+function buildFileName($string) {
+	// Removes the control characters
+	$string = preg_replace('/[\x{0000}-\x{001f}]/', ' ', $string);
+	
+	// Removes the forbidden characters
+	$string = preg_replace('/["*\/:<>?\\\|]/', '', $string);
+	
+	// Trims and shrinks the string
+	$string = trimAndShrink($string);
+	
+	if ($string === '') {
+		// The string is empty
+		return 'Archivo sin nombre';
+	}
+	
+	return $string;
+}
+
+/**
  * Builds a path.
  * 
  * Receives path's fragments.
