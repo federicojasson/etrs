@@ -218,7 +218,7 @@ class File {
 		
 		// Builds the URL
 		$url = '';
-		$url .= $server['path'];
+		$url .= '/server';
 		$url .= buildUrl(substr($path, strlen(DIRECTORY_ROOT)));
 		
 		// Sets the appropriate headers

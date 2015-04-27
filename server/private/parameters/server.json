@@ -1,7 +1,6 @@
 {
 	"DEFINEHERE: define server parameters": "",
 	
-	"path": "/server",
 	"domain": "localhost.etrs",
 	"emailAddress": "etrs@mailinator.com"
 }

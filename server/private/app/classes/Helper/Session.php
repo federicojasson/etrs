@@ -40,7 +40,7 @@ class Session {
 		
 		// Configures the session cookie
 		ini_set('session.cookie_lifetime', SESSION_MAXIMUM_AGE * 24 * 60 * 60);
-		ini_set('session.cookie_path', $server['path']);
+		ini_set('session.cookie_path', '/server');
 		ini_set('session.cookie_domain', $server['domain']);
 		ini_set('session.cookie_secure', true);
 		ini_set('session.cookie_httponly', true);
