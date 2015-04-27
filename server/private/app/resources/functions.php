@@ -296,11 +296,11 @@ function readTemplateFile($path, $mapping) {
 }
 
 /**
- * Removes an array's element.
+ * Removes an array's element by index.
  * 
- * Receives the array and the element's index.
+ * Receives the index and the array.
  */
-function removeFromArray(&$array, $index) {
+function removeFromArrayByIndex($index, &$array) {
 	array_splice($array, $index, 1);
 }
 

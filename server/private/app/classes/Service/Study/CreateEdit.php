@@ -45,7 +45,7 @@ abstract class CreateEdit extends \App\Service\External {
 				$study->removeFile($file);
 			} else {
 				// The file has been received
-				removeFromArray($files, $index);
+				removeFromArrayByIndex($index, $files);
 			}
 		}
 		

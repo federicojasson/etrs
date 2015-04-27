@@ -225,7 +225,7 @@ abstract class CreateEdit extends \App\Service\External {
 				$consultation->removeMedicalAntecedent($medicalAntecedent);
 			} else {
 				// The medical antecedent has been received
-				removeFromArray($medicalAntecedents, $index);
+				removeFromArrayByIndex($index, $medicalAntecedents);
 			}
 		}
 		
@@ -261,7 +261,7 @@ abstract class CreateEdit extends \App\Service\External {
 				$consultation->removeMedicine($medicine);
 			} else {
 				// The medicine has been received
-				removeFromArray($medicines, $index);
+				removeFromArrayByIndex($index, $medicines);
 			}
 		}
 		
@@ -297,7 +297,7 @@ abstract class CreateEdit extends \App\Service\External {
 				$consultation->removeTreatment($treatment);
 			} else {
 				// The treatment has been received
-				removeFromArray($treatments, $index);
+				removeFromArrayByIndex($index, $treatments);
 			}
 		}
 		
