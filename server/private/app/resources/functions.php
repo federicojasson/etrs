@@ -45,6 +45,16 @@ function buildPath() {
 }
 
 /**
+ * Builds a URL from a path.
+ * 
+ * Receives the path.
+ */
+function buildUrl($path) {
+	// Replaces directory separators with slashes
+	return str_replace(DIRECTORY_SEPARATOR, '/', $path);
+}
+
+/**
  * Calculates a search offset.
  * 
  * Receives the page and the results per page.

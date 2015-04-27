@@ -219,7 +219,7 @@ class File {
 		// Builds the URL
 		$url = '';
 		$url .= $server['path'];
-		$url .= substr($path, strlen(DIRECTORY_ROOT));
+		$url .= buildUrl(substr($path, strlen(DIRECTORY_ROOT)));
 		
 		// Sets the appropriate headers
 		$app->response->headers->set('Content-Type', 'application/octet-stream');
