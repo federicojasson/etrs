@@ -83,7 +83,43 @@
 				</select>
 			</div>
 			
-			<!-- TODO: birth date -->
+			<div
+				ng-class="{
+					'has-error': ! editPatientAction.input.birthDate.valid
+				}"
+				class="form-group"
+			>
+				<div class="input-group">
+					<input
+						popover="{{ editPatientAction.input.birthDate.message }}"
+						popover-append-to-body="true"
+						popover-placement="left"
+						popover-trigger="focus"
+						type="text"
+						placeholder="Fecha de nacimiento"
+						value="{{ editPatientAction.input.birthDate.value | date: 'longDate' }}"
+						readonly
+						class="form-control"
+					>
+					
+					<span class="input-group-btn">
+						<div dropdown class="btn-group">
+							<button dropdown-toggle class="btn btn-default dropdown-toggle">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</button>
+
+							<div ng-click="$event.stopPropagation()" class="calendar dropdown-menu pull-right">
+								<datepicker
+									ng-model="editPatientAction.input.birthDate.value"
+									datepicker-mode="'year'"
+									show-weeks="false"
+									starting-day="1"
+								></datepicker>
+							</div>
+						</div>
+					</span>
+				</div>
+			</div>
 			
 			<div
 				ng-class="{
