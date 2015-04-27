@@ -38,6 +38,52 @@
 		};
 		
 		/**
+		 * Removes an array's element.
+		 * 
+		 * Receives the element and the array.
+		 */
+		_this.removeFromArray = function(element, array) {
+			// Searches the element
+			var index = _this.searchInArray(element, array);
+			
+			if (index !== -1) {
+				// Removes the element
+				_this.removeFromArrayByIndex(index, array);
+			}
+		};
+		
+		/**
+		 * Removes an array's element by index.
+		 * 
+		 * Receives the index and the array.
+		 */
+		_this.removeFromArrayByIndex = function(index, array) {
+			array.splice(index, 1);
+		};
+		
+		/**
+		 * Searches an array's element.
+		 * 
+		 * Receives the element and the array.
+		 */
+		_this.searchInArray = function(element, array) {
+			if (Array.prototype.indexOf) {
+				// The indexOf function is defined
+				return array.indexOf(element);
+			}
+			
+			// Searches the element
+			for (var i = 0; i < array.length; i++) {
+				if (array[i] === element) {
+					// The element has been found
+					return i;
+				}
+			}
+			
+			return -1;
+		};
+		
+		/**
 		 * Converts a string from spinal-case to camelCase.
 		 * 
 		 * Receives the string.

@@ -30,6 +30,7 @@
 		'app.action.createMedicine',
 		'app.action.createPatient',
 		'app.action.createTreatment',
+		'app.action.deleteTreatment',
 		'app.action.editAccount',
 		'app.action.editClinicalImpression',
 		'app.action.editCognitiveTest',
