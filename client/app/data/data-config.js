@@ -96,24 +96,50 @@
 				Consultation: [
 					'$q',
 					'data',
-					function($q, data) {
+					'utility',
+					function($q, data, utility) {
 						return function(consultation, depth) {
+							// Filters the appropriate fields
+							consultation.date = utility.stringToDate(consultation.date);
+							
 							// Initializes a deferred task
 							var deferredTask = $q.defer();
 							
 							// Gets the references
 							var creatorPromise = data.getReference('Consultation', 'User', 'creator', consultation.creator, depth);
 							var lastEditorPromise = data.getReference('Consultation', 'User', 'lastEditor', consultation.lastEditor, depth);
-							
-							// TODO: load other fields
+							var patientPromise = data.getReference('Consultation', 'Patient', 'patient', consultation.patient, depth);
+							var clinicalImpressionPromise = data.getReference('Consultation', 'ClinicalImpression', 'clinicalImpression', consultation.clinicalImpression, depth);
+							var diagnosisPromise = data.getReference('Consultation', 'Diagnosis', 'diagnosis', consultation.diagnosis, depth);
+							var medicalAntecedentsPromise = data.getReferences('Consultation', 'MedicalAntecedent', 'medicalAntecedents', consultation.medicalAntecedents, depth);
+							var medicinesPromise = data.getReferences('Consultation', 'Medicine', 'medicines', consultation.medicines, depth);
+							// TODO
+							var treatmentsPromise = data.getReferences('Consultation', 'Treatment', 'treatments', consultation.treatments, depth);
+							var studiesPromise = data.getReferences('Consultation', 'Study', 'studies', consultation.studies, depth);
 							
 							$q.all({
 								creator: creatorPromise,
-								lastEditor: lastEditorPromise
+								lastEditor: lastEditorPromise,
+								patient: patientPromise,
+								clinicalImpression: clinicalImpressionPromise,
+								diagnosis: diagnosisPromise,
+								medicalAntecedents: medicalAntecedentsPromise,
+								medicines: medicinesPromise,
+								// TODO
+								treatments: treatmentsPromise,
+								studies: studiesPromise
 							}).then(function(values) {
 								// Sets the references
 								consultation.creator = values.creator;
 								consultation.lastEditor = values.lastEditor;
+								consultation.patient = values.patient;
+								consultation.clinicalImpression = values.clinicalImpression;
+								consultation.diagnosis = values.diagnosis;
+								consultation.medicalAntecedents = values.medicalAntecedents;
+								consultation.medicines = values.medicines;
+								// TODO
+								consultation.treatments = values.treatments;
+								consultation.studies = values.studies;
 								
 								// Resolves the deferred task
 								deferredTask.resolve(consultation);
@@ -180,6 +206,36 @@
 								
 								// Resolves the deferred task
 								deferredTask.resolve(experiment);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
+				File: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(file, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('File', 'User', 'creator', file.creator, depth);
+							var lastEditorPromise = data.getReference('File', 'User', 'lastEditor', file.lastEditor, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
+								file.creator = values.creator;
+								file.lastEditor = values.lastEditor;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(file);
 							});
 							
 							// Gets the promise of the deferred task
@@ -353,6 +409,51 @@
 								
 								// Resolves the deferred task
 								deferredTask.resolve(patient);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
+				Study: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(study, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('Study', 'User', 'creator', study.creator, depth);
+							var lastEditorPromise = data.getReference('Study', 'User', 'lastEditor', study.lastEditor, depth);
+							var consultationPromise = data.getReference('Study', 'Consultation', 'consultation', study.consultation, depth);
+							var experimentPromise = data.getReference('Study', 'Experiment', 'experiment', study.experiment, depth);
+							var inputPromise = data.getReference('Study', 'File', 'input', study.input, depth);
+							var outputPromise = data.getReference('Study', 'File', 'output', study.output, depth);
+							var filesPromise = data.getReferences('Study', 'File', 'files', study.files, depth);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise,
+								consultation: consultationPromise,
+								experiment: experimentPromise,
+								input: inputPromise,
+								output: outputPromise,
+								files: filesPromise
+							}).then(function(values) {
+								// Sets the references
+								study.creator = values.creator;
+								study.lastEditor = values.lastEditor;
+								study.consultation = values.consultation;
+								study.experiment = values.experiment;
+								study.input = values.input;
+								study.output = values.output;
+								study.files = values.files;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(study);
 							});
 							
 							// Gets the promise of the deferred task
