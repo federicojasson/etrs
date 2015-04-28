@@ -155,6 +155,45 @@
 					}
 				],
 				
+				Experiment: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(experiment, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('Experiment', 'User', 'creator', experiment.creator, depth);
+							var lastEditorPromise = data.getReference('Experiment', 'User', 'lastEditor', experiment.lastEditor, depth);
+							
+							// TODO: reorder
+							var TODOrename = [];
+							for (var i = 0; i < experiment.files.length; i++) {
+								TODOrename[i] = data.getReference('Experiment', 'File', 'files', experiment.files[i], depth);
+							}
+							var filesPromise = $q.all(TODOrename);
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise,
+								files: filesPromise
+							}).then(function(values) {
+								// Sets the references
+								experiment.creator = values.creator;
+								experiment.lastEditor = values.lastEditor;
+								experiment.files = values.files;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(experiment);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				ImagingTest: [
 					'$q',
 					'data',

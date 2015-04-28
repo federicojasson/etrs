@@ -51,6 +51,12 @@
 					description: 'Administre los diagnósticos'
 				},
 				
+				experiments: {
+					name: 'Administrar',
+					state: 'experiments',
+					description: 'Administre los experimentos'
+				},
+				
 				imagingTests: {
 					name: 'Administrar',
 					state: 'imagingTests',
@@ -103,6 +109,12 @@
 					name: 'Nuevo',
 					state: 'newDiagnosis',
 					description: 'Cree un nuevo diagnóstico'
+				},
+				
+				newExperiment: {
+					name: 'Nuevo',
+					state: 'newExperiment',
+					description: 'Cree un nuevo experimento'
 				},
 				
 				newImagingTest: {
@@ -242,6 +254,14 @@
 						items: [
 							menuItems.treatments,
 							menuItems.newTreatment
+						]
+					},
+					
+					{
+						name: 'Experimentos',
+						items: [
+							menuItems.experiments,
+							menuItems.newExperiment
 						]
 					},
 					

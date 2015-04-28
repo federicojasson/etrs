@@ -176,6 +176,17 @@
 				},
 				
 				{
+					name: 'editExperiment',
+					url: '/experiment/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditExperimentViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editImagingTest',
 					url: '/imaging-test/{id:[0-9A-Fa-f]{32}}/edit',
 					data: {
@@ -238,6 +249,28 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'EditTreatmentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'experiment',
+					url: '/experiment/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ExperimentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'experiments',
+					url: '/experiments',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ExperimentsViewController'
 						}
 					}
 				},
@@ -404,6 +437,17 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewDiagnosisViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newExperiment',
+					url: '/experiment/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewExperimentViewController'
 						}
 					}
 				},
