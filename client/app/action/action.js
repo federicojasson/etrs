@@ -29,6 +29,7 @@
 		'app.action.createMedicalAntecedent',
 		'app.action.createMedicine',
 		'app.action.createPatient',
+		'app.action.createTreatment',
 		'app.action.deleteClinicalImpression',
 		'app.action.deleteCognitiveTest',
 		'app.action.deleteDiagnosis',
