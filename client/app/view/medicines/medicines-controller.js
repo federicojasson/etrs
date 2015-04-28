@@ -36,11 +36,6 @@
 		var _this = this;
 		
 		/**
-		 * Indicates whether the view is ready.
-		 */
-		var ready = true;
-		
-		/**
 		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
@@ -58,7 +53,7 @@
 		 * Determines whether the view is ready.
 		 */
 		_this.isReady = function() {
-			return ready;
+			return true;
 		};
 		
 		/**
