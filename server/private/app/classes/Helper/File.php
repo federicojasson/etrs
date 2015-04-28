@@ -131,6 +131,7 @@ class File {
 				// Removes the subdirectory
 				rmdir($subdirectory);
 			} else {
+				// The file is not a directory
 				// Removes the file
 				unlink($file->getRealPath());
 			}

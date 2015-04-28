@@ -155,6 +155,7 @@
 				// There is no direction
 				this.sortingCriteria[field] = 'asc';
 			} else {
+				// There is a direction
 				if (this.sortingCriteria[field] === 'asc') {
 					// The direction is ascending
 					this.sortingCriteria[field] = 'desc';
