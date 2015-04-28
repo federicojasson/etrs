@@ -60,6 +60,7 @@
 		'app.action.searchMedicines',
 		'app.action.searchPatients',
 		'app.action.searchTreatments',
+		'app.action.searchUsers',
 		'app.action.signIn',
 		'app.action.signOut',
 		'app.action.signUp'

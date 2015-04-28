@@ -551,6 +551,17 @@
 							ad: 'TreatmentsViewController'
 						}
 					}
+				},
+				
+				{
+					name: 'users',
+					url: '/users',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'UsersViewController'
+						}
+					}
 				}
 			];
 		}

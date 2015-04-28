@@ -151,6 +151,12 @@
 					name: 'Administrar',
 					state: 'treatments',
 					description: 'Administre los tratamientos'
+				},
+				
+				users: {
+					name: 'Buscar',
+					state: 'users',
+					description: 'Busque usuarios en el sistema'
 				}
 				
 				// DEFINEHERE: define menu items here
@@ -242,6 +248,7 @@
 					{
 						name: 'Usuarios',
 						items: [
+							menuItems.users,
 							menuItems.invitation
 						]
 					},

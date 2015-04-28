@@ -19,56 +19,40 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.honorificName').filter('honorificName', honorificNameFilter);
+	angular.module('app.utility.role').filter('role', roleFilter);
 	
 	/**
-	 * Returns a user's honorific name.
+	 * Returns a user's role.
 	 */
-	function honorificNameFilter() {
+	function roleFilter() {
 		/**
 		 * Applies the filter.
 		 * 
 		 * Receives the user.
 		 */
 		function filter(user) {
-			// Gets the honorific title
-			var honorificTitle = getHonorificTitle(user);
+			// Gets the roles
+			var roles = getRoles();
 			
-			// Builds the honorific name
-			return honorificTitle + ' ' + user.lastName;
-		}
-		
-		/**
-		 * Returns a user's honorific title.
-		 * 
-		 * Receives the user.
-		 */
-		function getHonorificTitle(user) {
-			// Gets the honorific titles
-			var honorificTitles = getHonorificTitles();
-			
-			// Gets the honorific title
-			var honorificTitle = honorificTitles[user.role];
+			// Gets the role
+			var role = roles[user.role];
 			
 			if (user.gender === 'f') {
 				// The user is a woman
-				honorificTitle += 'a';
+				role += 'a';
 			}
 			
-			// Appends a dot
-			honorificTitle += '.';
-			
-			return honorificTitle;
+			return role;
 		}
 		
 		/**
-		 * Returns the honorific titles.
+		 * Returns the roles.
 		 */
-		function getHonorificTitles() {
+		function getRoles() {
 			return {
-				'ad': 'Sr',
-				'dr': 'Dr',
-				'op': 'Sr'
+				'ad': 'Administrador',
+				'dr': 'Doctor',
+				'op': 'Operador'
 			};
 		}
 		

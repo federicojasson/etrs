@@ -65,6 +65,7 @@
 		'app.view.signIn',
 		'app.view.signUp',
 		'app.view.treatment',
-		'app.view.treatments'
+		'app.view.treatments',
+		'app.view.users'
 	]);
 })();
