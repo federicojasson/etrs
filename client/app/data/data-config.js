@@ -48,10 +48,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								clinicalImpression.creator = values.creator;
-								clinicalImpression.lastEditor = values.lastEditor;
+								setEntityReferences(clinicalImpression, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(clinicalImpression);
@@ -78,10 +77,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								cognitiveTest.creator = values.creator;
-								cognitiveTest.lastEditor = values.lastEditor;
+								setEntityReferences(cognitiveTest, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(cognitiveTest);
@@ -102,6 +100,25 @@
 							// Filters the appropriate fields
 							consultation.date = utility.stringToDate(consultation.date);
 							
+							// TODO: comment
+							var getTestResults = function(type, referenceType, field, testResults, depth) {
+								// TODO: reorder
+								var testResultPromises = [];
+								for (var testResult in testResults) {
+									if (! testResults.hasOwnProperty(testResult)) {
+										continue;
+									}
+									
+									var testField = utility.pascalToCamelCase(referenceType);
+									var testResultPromise = {};
+									testResultPromise[testField] = data.getReference(type, referenceType, field, testResult[testField], depth);
+									testResultPromise['value'] = $q.when(testResult.value);
+									testResultPromises.push($q.all(testResultPromise));
+								}
+								
+								return $q.all(testResultPromises);
+							};
+							
 							// Initializes a deferred task
 							var deferredTask = $q.defer();
 							
@@ -113,7 +130,9 @@
 							var diagnosisPromise = data.getReference('Consultation', 'Diagnosis', 'diagnosis', consultation.diagnosis, depth);
 							var medicalAntecedentsPromise = data.getReferences('Consultation', 'MedicalAntecedent', 'medicalAntecedents', consultation.medicalAntecedents, depth);
 							var medicinesPromise = data.getReferences('Consultation', 'Medicine', 'medicines', consultation.medicines, depth);
-							// TODO
+							var laboratoryTestResultsPromise = getTestResults('Consultation', 'LaboratoryTest', 'laboratoryTestResults', consultation.laboratoryTestResults, depth);
+							var imagingTestResultsPromise = getTestResults('Consultation', 'ImagingTest', 'imagingTestResults', consultation.imagingTestResults, depth);
+							var cognitiveTestResultsPromise = getTestResults('Consultation', 'CognitiveTest', 'cognitiveTestResults', consultation.cognitiveTestResults, depth);
 							var treatmentsPromise = data.getReferences('Consultation', 'Treatment', 'treatments', consultation.treatments, depth);
 							var studiesPromise = data.getReferences('Consultation', 'Study', 'studies', consultation.studies, depth);
 							
@@ -125,21 +144,14 @@
 								diagnosis: diagnosisPromise,
 								medicalAntecedents: medicalAntecedentsPromise,
 								medicines: medicinesPromise,
-								// TODO
+								laboratoryTestResults: laboratoryTestResultsPromise,
+								imagingTestResults: imagingTestResultsPromise,
+								cognitiveTestResults: cognitiveTestResultsPromise,
 								treatments: treatmentsPromise,
 								studies: studiesPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								consultation.creator = values.creator;
-								consultation.lastEditor = values.lastEditor;
-								consultation.patient = values.patient;
-								consultation.clinicalImpression = values.clinicalImpression;
-								consultation.diagnosis = values.diagnosis;
-								consultation.medicalAntecedents = values.medicalAntecedents;
-								consultation.medicines = values.medicines;
-								// TODO
-								consultation.treatments = values.treatments;
-								consultation.studies = values.studies;
+								setEntityReferences(consultation, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(consultation);
@@ -166,10 +178,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								diagnosis.creator = values.creator;
-								diagnosis.lastEditor = values.lastEditor;
+								setEntityReferences(diagnosis, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(diagnosis);
@@ -198,11 +209,9 @@
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise,
 								files: filesPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								experiment.creator = values.creator;
-								experiment.lastEditor = values.lastEditor;
-								experiment.files = values.files;
+								setEntityReferences(experiment, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(experiment);
@@ -229,10 +238,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								file.creator = values.creator;
-								file.lastEditor = values.lastEditor;
+								setEntityReferences(file, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(file);
@@ -259,10 +267,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								imagingTest.creator = values.creator;
-								imagingTest.lastEditor = values.lastEditor;
+								setEntityReferences(imagingTest, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(imagingTest);
@@ -289,10 +296,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								laboratoryTest.creator = values.creator;
-								laboratoryTest.lastEditor = values.lastEditor;
+								setEntityReferences(laboratoryTest, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(laboratoryTest);
@@ -335,10 +341,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								medicalAntecedent.creator = values.creator;
-								medicalAntecedent.lastEditor = values.lastEditor;
+								setEntityReferences(medicalAntecedent, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(medicalAntecedent);
@@ -365,10 +370,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								medicine.creator = values.creator;
-								medicine.lastEditor = values.lastEditor;
+								setEntityReferences(medicine, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(medicine);
@@ -401,11 +405,9 @@
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise,
 								consultations: consultationsPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								patient.creator = values.creator;
-								patient.lastEditor = values.lastEditor;
-								patient.consultations = values.consultations;
+								setEntityReferences(patient, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(patient);
@@ -442,15 +444,9 @@
 								input: inputPromise,
 								output: outputPromise,
 								files: filesPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								study.creator = values.creator;
-								study.lastEditor = values.lastEditor;
-								study.consultation = values.consultation;
-								study.experiment = values.experiment;
-								study.input = values.input;
-								study.output = values.output;
-								study.files = values.files;
+								setEntityReferences(study, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(study);
@@ -477,10 +473,9 @@
 							$q.all({
 								creator: creatorPromise,
 								lastEditor: lastEditorPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								treatment.creator = values.creator;
-								treatment.lastEditor = values.lastEditor;
+								setEntityReferences(treatment, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(treatment);
@@ -505,9 +500,9 @@
 							
 							$q.all({
 								inviter: inviterPromise
-							}).then(function(values) {
+							}).then(function(references) {
 								// Sets the references
-								user.inviter = values.inviter;
+								setEntityReferences(user, references);
 								
 								// Resolves the deferred task
 								deferredTask.resolve(user);
@@ -519,6 +514,22 @@
 					}
 				]
 			};
+		}
+		
+		/**
+		 * Sets an entity's references.
+		 * 
+		 * Receives the entity and the references.
+		 */
+		function setEntityReferences(entity, references) {
+			// Sets the references
+			for (var field in references) {
+				if (! references.hasOwnProperty(field)) {
+					continue;
+				}
+				
+				entity[field] = references[field];
+			}
 		}
 		
 		// ---------------------------------------------------------------------
