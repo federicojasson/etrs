@@ -268,6 +268,18 @@
 				},
 				
 				{
+					name: 'editStudy',
+					url: '/study/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditStudyViewController',
+							op: 'EditStudyViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'editTreatment',
 					url: '/treatment/{id:[0-9A-Fa-f]{32}}/edit',
 					data: {
@@ -546,6 +558,18 @@
 				},
 				
 				{
+					name: 'newStudy',
+					url: '/{id:[0-9A-Fa-f]{32}}/study/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewStudyViewController',
+							op: 'NewStudyViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'newTreatment',
 					url: '/treatment/new',
 					data: {
@@ -608,6 +632,19 @@
 					data: {
 						views: {
 							__: 'SignUpViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'study',
+					url: '/study/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'StudyViewController',
+							dr: 'StudyViewController',
+							op: 'StudyViewController'
 						}
 					}
 				},
