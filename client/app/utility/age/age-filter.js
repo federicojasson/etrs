@@ -57,8 +57,7 @@
 			var currentTime = Date.now();
 			
 			// Gets the Unix time corresponding to the birth date
-			var birthDate = new Date(person.birthDate);
-			var birthTime = birthDate.getTime();
+			var birthTime = person.birthDate.getTime();
 			
 			// Computes a date resulting from the difference of the two times
 			var differenceDate = new Date(currentTime - birthTime);

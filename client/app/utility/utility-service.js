@@ -103,6 +103,21 @@
 		};
 		
 		/**
+		 * Converts a string to date.
+		 * 
+		 * Receives the string.
+		 */
+		_this.stringToDate = function(string) {
+			// Gets the year, the month and the day
+			var year = string.substring(0, 4);
+			var month = string.substring(5, 7) - 1;
+			var day = string.substring(8, 10);
+			
+			// Initializes the date
+			return new Date(year, month, day);
+		};
+		
+		/**
 		 * Converts a string to integer.
 		 * 
 		 * Receives the string.

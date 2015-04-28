@@ -262,8 +262,12 @@
 				Patient: [
 					'$q',
 					'data',
-					function($q, data) {
+					'utility',
+					function($q, data, utility) {
 						return function(patient, depth) {
+							// Filters the appropriate fields
+							patient.birthDate = utility.stringToDate(patient.birthDate);
+							
 							// Initializes a deferred task
 							var deferredTask = $q.defer();
 							
