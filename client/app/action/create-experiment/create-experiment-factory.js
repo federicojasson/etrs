@@ -55,6 +55,7 @@
 		 */
 		function CreateExperimentAction() {
 			this.startCallback = new Function();
+			this.notAuthenticatedCallback = new Function();
 			this.successCallback = new Function();
 			
 			// Initializes the input
