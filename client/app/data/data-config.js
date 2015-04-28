@@ -103,13 +103,10 @@
 							// TODO: comment
 							var getTestResults = function(type, referenceType, field, testResults, depth) {
 								// TODO: reorder
+								var testField = utility.pascalToCamelCase(referenceType);
 								var testResultPromises = [];
-								for (var testResult in testResults) {
-									if (! testResults.hasOwnProperty(testResult)) {
-										continue;
-									}
-									
-									var testField = utility.pascalToCamelCase(referenceType);
+								for (var i = 0; i < testResults.length; i++) {
+									var testResult = testResults[i];
 									var testResultPromise = {};
 									testResultPromise[testField] = data.getReference(type, referenceType, field, testResult[testField], depth);
 									testResultPromise['value'] = $q.when(testResult.value);
