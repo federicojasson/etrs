@@ -70,7 +70,8 @@
 			data.reset(1, {
 				Patient: [
 					'creator',
-					'lastEditor'
+					'lastEditor',
+					'consultations'
 				]
 			});
 			

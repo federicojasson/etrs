@@ -93,6 +93,38 @@
 					}
 				],
 				
+				Consultation: [
+					'$q',
+					'data',
+					function($q, data) {
+						return function(consultation, depth) {
+							// Initializes a deferred task
+							var deferredTask = $q.defer();
+							
+							// Gets the references
+							var creatorPromise = data.getReference('Consultation', 'User', 'creator', consultation.creator, depth);
+							var lastEditorPromise = data.getReference('Consultation', 'User', 'lastEditor', consultation.lastEditor, depth);
+							
+							// TODO: load other fields
+							
+							$q.all({
+								creator: creatorPromise,
+								lastEditor: lastEditorPromise
+							}).then(function(values) {
+								// Sets the references
+								consultation.creator = values.creator;
+								consultation.lastEditor = values.lastEditor;
+								
+								// Resolves the deferred task
+								deferredTask.resolve(consultation);
+							});
+							
+							// Gets the promise of the deferred task
+							return deferredTask.promise;
+						};
+					}
+				],
+				
 				Diagnosis: [
 					'$q',
 					'data',
@@ -186,7 +218,7 @@
 				Log: [
 					'$q',
 					function($q) {
-						return function(log, depth) {
+						return function(log) {
 							// Initializes a deferred task
 							var deferredTask = $q.defer();
 							
@@ -275,13 +307,22 @@
 							var creatorPromise = data.getReference('Patient', 'User', 'creator', patient.creator, depth);
 							var lastEditorPromise = data.getReference('Patient', 'User', 'lastEditor', patient.lastEditor, depth);
 							
+							// TODO: reorder
+							var TODOrename = [];
+							for (var i = 0; i < patient.consultations.length; i++) {
+								TODOrename[i] = data.getReference('Patient', 'Consultation', 'consultations', patient.consultations[i], depth);
+							}
+							var consultationsPromise = $q.all(TODOrename);
+							
 							$q.all({
 								creator: creatorPromise,
-								lastEditor: lastEditorPromise
+								lastEditor: lastEditorPromise,
+								consultations: consultationsPromise
 							}).then(function(values) {
 								// Sets the references
 								patient.creator = values.creator;
 								patient.lastEditor = values.lastEditor;
+								patient.consultations = values.consultations;
 								
 								// Resolves the deferred task
 								deferredTask.resolve(patient);
