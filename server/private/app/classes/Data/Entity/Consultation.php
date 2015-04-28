@@ -750,23 +750,26 @@ class Consultation {
 		$serialized['medicalAntecedents'] = filterArray($this->getMedicalAntecedents(), 'toString');
 		$serialized['medicines'] = filterArray($this->getMedicines(), 'toString');
 		
-		$serialized['laboratoryTestResults'] = [];
-		foreach ($this->getLaboratoryTestResults() as $laboratoryTestResult) {
-			$laboratoryTest = (string) $laboratoryTestResult->getLaboratoryTest();
-			$serialized['laboratoryTestResults'][$laboratoryTest] = $laboratoryTestResult->getValue();
-		}
+		$serialized['laboratoryTestResults'] = filterArray($this->getLaboratoryTestResults(), function($laboratoryTestResult) {
+			return [
+				'laboratoryTest' => (string) $laboratoryTestResult->getLaboratoryTest(),
+				'value' => $laboratoryTestResult->getValue()
+			];
+		});
 		
-		$serialized['imagingTestResults'] = [];
-		foreach ($this->getImagingTestResults() as $imagingTestResult) {
-			$imagingTest = (string) $imagingTestResult->getImagingTest();
-			$serialized['imagingTestResults'][$imagingTest] = $imagingTestResult->getValue();
-		}
+		$serialized['imagingTestResults'] = filterArray($this->getImagingTestResults(), function($imagingTestResult) {
+			return [
+				'imagingTest' => (string) $imagingTestResult->getImagingTest(),
+				'value' => $imagingTestResult->getValue()
+			];
+		});
 		
-		$serialized['cognitiveTestResults'] = [];
-		foreach ($this->getCognitiveTestResults() as $cognitiveTestResult) {
-			$cognitiveTest = (string) $cognitiveTestResult->getCognitiveTest();
-			$serialized['cognitiveTestResults'][$cognitiveTest] = $cognitiveTestResult->getValue();
-		}
+		$serialized['cognitiveTestResults'] = filterArray($this->getCognitiveTestResults(), function($cognitiveTestResult) {
+			return [
+				'cognitiveTest' => (string) $cognitiveTestResult->getCognitiveTest(),
+				'value' => $cognitiveTestResult->getValue()
+			];
+		});
 		
 		$serialized['treatments'] = filterArray($this->getTreatments(), 'toString');
 		$serialized['studies'] = filterArray($this->getStudies(), 'toString');
