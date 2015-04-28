@@ -39,7 +39,7 @@
 			if (angular.isArray(value)) {
 				// The value is an array
 				// Applies the filter to the array's elements
-				for (var i; i < value.length; i++) {
+				for (var i = 0; i < value.length; i++) {
 					value[i] = filterDates(value[i]);
 				}
 			}
