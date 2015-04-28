@@ -35,7 +35,7 @@ class Email {
 		// Defines the subject
 		$subject = 'Restablecimiento de contraseña';
 		
-		// Initializes the email
+		// Creates the email
 		$email = $this->createOnServerBehalf('passwordReset', $recipient, $subject, [
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
@@ -54,7 +54,7 @@ class Email {
 		// Defines the subject
 		$subject = 'Invitación';
 		
-		// Initializes the email
+		// Creates the email
 		$email = $this->createOnServerBehalf('signUp', $recipient, $subject, [
 			'id' => bin2hex($id),
 			'password' => bin2hex($password)
@@ -73,7 +73,7 @@ class Email {
 		// Defines the subject
 		$subject = 'Bienvenido';
 		
-		// Initializes the email
+		// Creates the email
 		$email = $this->createOnServerBehalf('welcome', $recipient, $subject);
 		
 		// Sends the email
@@ -151,7 +151,7 @@ class Email {
 		$path = buildPath(DIRECTORY_EMAILS, $type . '.txt');
 		$alternativeBody = readTemplateFile($path, $mapping);
 		
-		// Initializes the email
+		// Creates the email
 		$email = $this->create($sender, $recipient, $subject, $body, $alternativeBody);
 		
 		// Embeds the logo

@@ -82,7 +82,7 @@ class Data {
 	 * Receives the command and the input and output settings.
 	 */
 	public function runCommand($command, $inputSettings, $outputSettings) {
-		// Initializes the helper set
+		// Creates the helper set
 		$helperSet = \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($this->entityManager);
 		
 		// Sets the helper set
@@ -174,7 +174,7 @@ class Data {
 		// Gets the configuration
 		$configuration = $this->getConfiguration();
 		
-		// Initializes the entity manager
+		// Creates the entity manager
 		$entityManager = \Doctrine\ORM\EntityManager::create($connection, $configuration);
 		
 		// Sets the transaction-isolation level

@@ -62,7 +62,7 @@ class InputValidator {
 			// Asserts conditions
 			$app->assertion->entityExists($test);
 			
-			// Initializes a data-type input validator
+			// Creates a data-type input validator
 			$dataTypeInputValidator = \App\InputValidator\DataType\Factory::create($test->getDataTypeDefinition());
 			
 			if (! $dataTypeInputValidator->isInputValid($value)) {
@@ -110,7 +110,7 @@ class InputValidator {
 		}
 		
 		try {
-			// Initializes a data-type input validator
+			// Creates a data-type input validator
 			\App\InputValidator\DataType\Factory::create($input);
 			
 			return true;
