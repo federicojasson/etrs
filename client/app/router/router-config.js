@@ -108,6 +108,19 @@
 				},
 				
 				{
+					name: 'consultation',
+					url: '/consultation/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ConsultationViewController',
+							dr: 'ConsultationViewController',
+							op: 'ConsultationViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'diagnoses',
 					url: '/diagnoses',
 					data: {
@@ -160,6 +173,18 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'EditCognitiveTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editConsultation',
+					url: '/consultation/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditConsultationViewController',
+							dr: 'EditConsultationViewController'
 						}
 					}
 				},
@@ -426,6 +451,18 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewCognitiveTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newConsultation',
+					url: '/{id:[0-9A-Fa-f]{32}}/consultation/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewConsultationViewController',
+							dr: 'NewConsultationViewController'
 						}
 					}
 				},
