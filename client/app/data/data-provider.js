@@ -116,7 +116,7 @@
 			};
 			
 			_this['get' + type + 'Array'] = function(ids) {
-				return getEntityArray(type, ids, 0);
+				return getEntities(type, ids, 0);
 			};
 		};
 		
@@ -130,21 +130,33 @@
 			// Increases the depth
 			depth++;
 			
+			var promise;
 			if (depth > maximumDepth || id === null || ! expandReference(type, field)) {
 				// The reference must not be expanded
-				
-				// Initializes a deferred task
-				var deferredTask = $q.defer();
-				
-				// Resolves the deferred task
-				deferredTask.resolve(id);
-				
-				// Gets the promise of the deferred task
-				return deferredTask.promise;
+				promise = id;
+			} else {
+				// The reference must be expanded
+				// Gets the entity
+				promise = getEntity(referenceType, id, depth);
 			}
 			
-			// Gets the entity
-			return getEntity(referenceType, id, depth);
+			return $q.when(promise);
+		};
+		
+		/**
+		 * Gets a set of references.
+		 * 
+		 * Receives the type, the type of the references, the field, the
+		 * entities' IDs and the current depth.
+		 */
+		_this.getReferences = function(type, referencesType, field, ids, depth) {
+			// Gets the references
+			var promises = [];
+			for (var i = 0; i < ids.length; i++) {
+				promises[i] = _this.getReference(type, referencesType, field, ids[i], depth);
+			}
+			
+			return $q.all(promises);
 		};
 		
 		/**
@@ -197,6 +209,21 @@
 		}
 		
 		/**
+		 * Gets a set of entities.
+		 * 
+		 * Receives the type, the entities' IDs and the current depth.
+		 */
+		function getEntities(type, ids, depth) {
+			// Gets the entities
+			var promises = [];
+			for (var i = 0; i < ids.length; i++) {
+				promises[i] = getEntity(type, ids[i], depth);
+			}
+			
+			return $q.all(promises);
+		}
+		
+		/**
 		 * Gets an entity.
 		 * 
 		 * It searches the entity in the cache before loading it to avoid
@@ -213,30 +240,6 @@
 			
 			// Gets the promise of the entity stored in the cache
 			return cache[type][id];
-		}
-		
-		/**
-		 * Gets a set of entities.
-		 * 
-		 * Receives the type, the entities' IDs and the current depth.
-		 */
-		function getEntityArray(type, ids, depth) {
-			// Initializes a deferred task
-			var deferredTask = $q.defer();
-			
-			// Gets the entities
-			var promises = [];
-			for (var i = 0; i < ids.length; i++) {
-				promises[i] = getEntity(type, ids[i], depth);
-			}
-			
-			$q.all(promises).then(function(values) {
-				// Resolves the deferred task
-				deferredTask.resolve(values);
-			});
-
-			// Gets the promise of the deferred task
-			return deferredTask.promise;
 		}
 		
 		/**

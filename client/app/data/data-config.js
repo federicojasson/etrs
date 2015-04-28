@@ -166,13 +166,7 @@
 							// Gets the references
 							var creatorPromise = data.getReference('Experiment', 'User', 'creator', experiment.creator, depth);
 							var lastEditorPromise = data.getReference('Experiment', 'User', 'lastEditor', experiment.lastEditor, depth);
-							
-							// TODO: reorder
-							var TODOrename = [];
-							for (var i = 0; i < experiment.files.length; i++) {
-								TODOrename[i] = data.getReference('Experiment', 'File', 'files', experiment.files[i], depth);
-							}
-							var filesPromise = $q.all(TODOrename);
+							var filesPromise = data.getReferences('Experiment', 'File', 'files', experiment.files, depth);
 							
 							$q.all({
 								creator: creatorPromise,
@@ -345,13 +339,7 @@
 							// Gets the references
 							var creatorPromise = data.getReference('Patient', 'User', 'creator', patient.creator, depth);
 							var lastEditorPromise = data.getReference('Patient', 'User', 'lastEditor', patient.lastEditor, depth);
-							
-							// TODO: reorder
-							var TODOrename = [];
-							for (var i = 0; i < patient.consultations.length; i++) {
-								TODOrename[i] = data.getReference('Patient', 'Consultation', 'consultations', patient.consultations[i], depth);
-							}
-							var consultationsPromise = $q.all(TODOrename);
+							var consultationsPromise = data.getReferences('Patient', 'Consultation', 'consultations', patient.consultations, depth);
 							
 							$q.all({
 								creator: creatorPromise,
