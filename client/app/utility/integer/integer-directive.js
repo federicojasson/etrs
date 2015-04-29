@@ -35,7 +35,6 @@
 			return {
 				require: 'ngModel',
 				restrict: 'A',
-				priority: 0,
 				link: onLink
 			};
 		}
