@@ -202,9 +202,6 @@ class File {
 	public function download($id, $hash, $name) {
 		global $app;
 		
-		// Gets the server parameters
-		$server = $app->parameters->server;
-		
 		// Gets the path
 		$path = $this->getPath($id);
 		
