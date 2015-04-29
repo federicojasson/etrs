@@ -227,8 +227,11 @@ class File {
 		// Sets an Apache environment variable to allow the download
 		apache_setenv(APACHE_ENVIRONMENT_VARIABLE_ETRS_SUBREQUEST, 1);
 		
-		// Initiates the download
-		virtual($url);
+		// Registers a hook
+		$app->hook('slim.after', function() use ($url) {
+			// Initiates the download
+			virtual($url);
+		}, HOOK_PRIORITY_FILE);
 	}
 	
 	/**

@@ -47,6 +47,8 @@ define('GENDER_FEMALE', 'f');
 define('GENDER_MALE', 'm');
 
 define('HOOK_PRIORITY_DATA', 2);
+define('HOOK_PRIORITY_FILE', 4);
+define('HOOK_PRIORITY_LOCK', 3);
 define('HOOK_PRIORITY_SESSION', 1);
 
 define('HTTP_STATUS_BAD_REQUEST', 400);

@@ -46,7 +46,7 @@ class Lock {
 			$app->hook('slim.after', function() use ($file) {
 				// Releases the lock
 				flock($file, LOCK_UN);
-			});
+			}, HOOK_PRIORITY_LOCK);
 		}
 		
 		return $lockAcquired;
