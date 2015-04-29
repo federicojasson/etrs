@@ -69,15 +69,22 @@ class Upload extends \App\Service\External {
 			return false;
 		}
 		
-		// Gets inputs
-		$name = $this->getInputValue('name');
+		// Gets the input
+		$input = $this->getInput();
 		
-		if (! $app->inputValidator->isValidString($name, 0, 128)) {
-			// The name is invalid
-			return false;
-		}
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isValidString($input, 0, 128);
+			}),
+			
+			'temporaryPath' => new \App\InputValidator\Json\JsonValue(function() {
+				return true;
+			})
+		]);
 		
-		return true;
+		// Validates the input
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 	/**

@@ -64,15 +64,15 @@ class Delete extends \App\Service\Internal {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a command-line input validator
-		$commandLineInputValidator = new \App\InputValidator\CommandLine\FixedArguments([
-			function($input) use ($app) {
+		// Builds a JSON input validator
+		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
+			0 => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 				return $app->inputValidator->isUserId($input);
-			}
+			})
 		]);
 		
 		// Validates the input
-		return $app->inputValidator->isCommandLineInputValid($input, $commandLineInputValidator);
+		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
 	}
 	
 }
