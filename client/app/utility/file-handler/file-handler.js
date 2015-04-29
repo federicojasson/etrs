@@ -19,18 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.age',
-		'app.utility.date',
-		'app.utility.fileHandler',
-		'app.utility.fullName',
-		'app.utility.gender',
-		'app.utility.honorificName',
-		'app.utility.integer',
-		'app.utility.levelName',
-		'app.utility.line',
-		'app.utility.nullIfEmpty',
-		'app.utility.role',
-		'app.utility.searchHandler'
-	]);
+	angular.module('app.utility.fileHandler', []);
 })();

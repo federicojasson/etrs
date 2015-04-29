@@ -1,0 +1,22 @@
+<!-- TODO: file-handler.html -->
+
+<div>
+	<div class="pull-left">
+		TODO: imagen
+	</div>
+	
+	<div class="pull-left">
+		<div>
+			{{ file.name }}
+		</div>
+		
+		<div>
+			{{ file.hash }}
+		</div>
+	</div>
+</div>
+
+<form action="/server/file/download" method="POST">
+	<input type="hidden" name="id" value="{{ file.id }}">
+	<button type="submit" class="btn btn-link">Descargar</button>
+</form>
