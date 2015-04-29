@@ -100,16 +100,22 @@
 							// Filters the appropriate fields
 							consultation.date = utility.stringToDate(consultation.date);
 							
-							// TODO: comment
+							// Defines a function to get test results
 							var getTestResults = function(type, referenceType, field, testResults, depth) {
-								// TODO: reorder
+								// Gets the test field
 								var testField = utility.pascalToCamelCase(referenceType);
+								
+								// Gets the test results
 								var testResultPromises = [];
 								for (var i = 0; i < testResults.length; i++) {
 									var testResult = testResults[i];
+									
+									// Gets the test result
 									var testResultPromise = {};
 									testResultPromise[testField] = data.getReference(type, referenceType, field, testResult[testField], depth);
 									testResultPromise['value'] = $q.when(testResult.value);
+									
+									// Adds the promise of the test result
 									testResultPromises.push($q.all(testResultPromise));
 								}
 								
