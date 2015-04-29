@@ -1,1 +1,76 @@
-TODO: edit-experiment.html
+<h1>{{ experiment.name }}</h1>
+
+<p>
+	El siguiente formulario le permite editar un experimento.<br>
+	<br>
+	<strong>
+		Los cambios realizados en el experimento se verán reflejados
+		automáticamente en todo el sistema.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editExperimentAction.execute()" novalidate>
+		<div class="row">
+			<div class="col-sm-6">
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-floppy-save"></span>
+
+						<span class="icon-text">
+							Experimento
+						</span>
+					</legend>
+
+					<div class="form-group">
+						Ingrese los datos del experimento:
+					</div>
+
+					<div
+						ng-class="{
+							'has-error': ! editExperimentAction.input.name.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="editExperimentAction.input.name.value"
+							popover="{{ editExperimentAction.input.name.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							line
+							type="text"
+							placeholder="Nombre"
+							class="form-control"
+						>
+					</div>
+				</fieldset>
+
+				<div class="form-group">
+					<button type="submit" class="btn btn-warning pull-right">
+						Editar experimento
+					</button>
+				</div>
+			</div>
+			
+			<div class="col-sm-6">
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-folder-open"></span>
+
+						<span class="icon-text">
+							Archivos
+						</span>
+					</legend>
+				</fieldset>
+				
+				<div class="form-group">
+					<file-handler
+						ng-repeat="file in experiment.files"
+						file="file"
+					></file-handler>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
