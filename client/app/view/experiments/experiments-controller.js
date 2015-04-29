@@ -66,7 +66,8 @@
 			var action = new DeleteExperimentAction();
 			
 			// Sets inputs' initial values
-			// TODO
+			action.input.id.value = experiment.id;
+			action.input.version.value = experiment.version;
 			
 			// Registers the callbacks
 			

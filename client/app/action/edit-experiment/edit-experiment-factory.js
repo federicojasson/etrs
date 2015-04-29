@@ -54,7 +54,12 @@
 			
 			// Initializes the input
 			this.input = {
-				// TODO
+				id: new Input(),
+				version: new Input(),
+				
+				name: new Input(function() {
+					return inputValidator.isValidString(this, 1, 64);
+				})
 			};
 		}
 		
@@ -72,7 +77,9 @@
 			
 			// Edits the experiment
 			server.experiment.edit({
-				// TODO
+				id: this.input.id.value,
+				version: this.input.version.value,
+				name: this.input.name.value
 			}).then(function() {
 				// Invokes the success callback
 				this.successCallback();

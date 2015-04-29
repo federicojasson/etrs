@@ -92,7 +92,9 @@
 			var action = new EditExperimentAction();
 			
 			// Sets inputs' initial values
-			// TODO
+			action.input.id.value = experiment.id;
+			action.input.version.value = experiment.version;
+			action.input.name.value = experiment.name;
 			
 			// Registers the callbacks
 			

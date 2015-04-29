@@ -55,7 +55,8 @@
 			
 			// Initializes the input
 			this.input = {
-				// TODO
+				id: new Input(),
+				version: new Input()
 			};
 		}
 		
@@ -78,7 +79,8 @@
 
 					// Deletes the experiment
 					server.experiment.delete({
-						// TODO
+						id: this.input.id.value,
+						version: this.input.version.value
 					}).then(function() {
 						// Invokes the success callback
 						this.successCallback();
