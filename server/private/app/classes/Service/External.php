@@ -108,4 +108,29 @@ abstract class External extends Service {
 		return true;
 	}
 	
+	/**
+	 * Determines whether the request is an x-www-form-urlencoded request.
+	 * 
+	 * If it is an x-www-form-urlencoded request, the input is decoded.
+	 */
+	protected function isXWwwFormUrlencodedRequest() {
+		global $app;
+		
+		// Gets the request's media type
+		$mediaType = $app->request->getMediaType();
+		
+		if ($mediaType !== 'application/x-www-form-urlencoded') {
+			// It is not an x-www-form-urlencoded request
+			return false;
+		}
+		
+		// Decodes the input
+		$input = $app->request->params();
+		
+		// Sets the input
+		$this->setInput($input);
+		
+		return true;
+	}
+	
 }

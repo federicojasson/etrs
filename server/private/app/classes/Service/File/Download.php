@@ -50,8 +50,8 @@ class Download extends \App\Service\External {
 	protected function isRequestValid() {
 		global $app;
 		
-		if (! $this->isJsonRequest()) {
-			// It is not a JSON request
+		if (! $this->isXWwwFormUrlencodedRequest()) {
+			// It is not an x-www-form-urlencoded request
 			return false;
 		}
 		
