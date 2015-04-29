@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- JSON input validator can be used to validate other inputs. Rename it.
 - Create script for routine maintenance tasks.
 
 - Canceling AJAX requests on route change: http://www.bennadel.com/blog/2616-aborting-ajax-requests-using-http-and-angularjs.htm
