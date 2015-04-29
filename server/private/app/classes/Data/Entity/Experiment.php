@@ -293,7 +293,7 @@ class Experiment {
 	 * Returns the files.
 	 */
 	public function getFiles() {
-		return $this->files;
+		return $this->files->toArray();
 	}
 	
 	/**
