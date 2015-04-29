@@ -126,7 +126,11 @@
 		<tbody>
 			<tr ng-repeat="imagingTest in imagingTests">
 				<td class="text-center">
-					<a ui-sref="imagingTest({ id: imagingTest.id })">
+					<a
+						ui-sref="imagingTest({
+							id: imagingTest.id
+						})"
+					>
 						<span class="glyphicon glyphicon-share-alt"></span>
 					</a>
 				</td>
@@ -138,7 +142,11 @@
 				</td>
 				
 				<td class="text-center">
-					<a ui-sref="editImagingTest({ id: imagingTest.id })">
+					<a
+						ui-sref="editImagingTest({
+							id: imagingTest.id
+						})"
+					>
 						<span class="glyphicon glyphicon-pencil"></span>
 					</a>
 				</td>

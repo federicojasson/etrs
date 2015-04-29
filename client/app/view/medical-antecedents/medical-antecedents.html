@@ -126,7 +126,11 @@
 		<tbody>
 			<tr ng-repeat="medicalAntecedent in medicalAntecedents">
 				<td class="text-center">
-					<a ui-sref="medicalAntecedent({ id: medicalAntecedent.id })">
+					<a
+						ui-sref="medicalAntecedent({
+							id: medicalAntecedent.id
+						})"
+					>
 						<span class="glyphicon glyphicon-share-alt"></span>
 					</a>
 				</td>
@@ -138,7 +142,11 @@
 				</td>
 				
 				<td class="text-center">
-					<a ui-sref="editMedicalAntecedent({ id: medicalAntecedent.id })">
+					<a
+						ui-sref="editMedicalAntecedent({
+							id: medicalAntecedent.id
+						})"
+					>
 						<span class="glyphicon glyphicon-pencil"></span>
 					</a>
 				</td>

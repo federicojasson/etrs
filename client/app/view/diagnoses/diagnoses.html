@@ -126,7 +126,11 @@
 		<tbody>
 			<tr ng-repeat="diagnosis in diagnoses">
 				<td class="text-center">
-					<a ui-sref="diagnosis({ id: diagnosis.id })">
+					<a
+						ui-sref="diagnosis({
+							id: diagnosis.id
+						})"
+					>
 						<span class="glyphicon glyphicon-share-alt"></span>
 					</a>
 				</td>
@@ -138,7 +142,11 @@
 				</td>
 				
 				<td class="text-center">
-					<a ui-sref="editDiagnosis({ id: diagnosis.id })">
+					<a
+						ui-sref="editDiagnosis({
+							id: diagnosis.id
+						})"
+					>
 						<span class="glyphicon glyphicon-pencil"></span>
 					</a>
 				</td>

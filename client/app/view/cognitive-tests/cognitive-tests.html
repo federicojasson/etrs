@@ -126,7 +126,11 @@
 		<tbody>
 			<tr ng-repeat="cognitiveTest in cognitiveTests">
 				<td class="text-center">
-					<a ui-sref="cognitiveTest({ id: cognitiveTest.id })">
+					<a
+						ui-sref="cognitiveTest({
+							id: cognitiveTest.id
+						})"
+					>
 						<span class="glyphicon glyphicon-share-alt"></span>
 					</a>
 				</td>
@@ -138,7 +142,11 @@
 				</td>
 				
 				<td class="text-center">
-					<a ui-sref="editCognitiveTest({ id: cognitiveTest.id })">
+					<a
+						ui-sref="editCognitiveTest({
+							id: cognitiveTest.id
+						})"
+					>
 						<span class="glyphicon glyphicon-pencil"></span>
 					</a>
 				</td>

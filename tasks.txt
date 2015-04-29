@@ -7,7 +7,6 @@ Quick tasks
 
 - Canceling AJAX requests on route change: http://www.bennadel.com/blog/2616-aborting-ajax-requests-using-http-and-angularjs.htm
 - Check ng-if directives.
-- Check ui-sref with parameters.
 - Add explanation of data-type definition in the views.
 - Add explanation of others (e.g. command-line).
 - Check TODO and DEFINEHERE
