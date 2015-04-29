@@ -76,6 +76,7 @@
 		'app.view.study',
 		'app.view.treatment',
 		'app.view.treatments',
+		'app.view.user',
 		'app.view.users'
 	]);
 })();

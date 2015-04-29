@@ -672,6 +672,19 @@
 				},
 				
 				{
+					name: 'user',
+					url: '/user/{id:(?!.*\\.{2})(?!\\.)(?!.*\\.$)[.0-9A-Za-z]{3,32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'UserViewController',
+							dr: 'UserViewController',
+							op: 'UserViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'users',
 					url: '/users',
 					data: {
