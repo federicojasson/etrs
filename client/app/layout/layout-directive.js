@@ -37,7 +37,7 @@
 			return {
 				restrict: 'E',
 				scope: {},
-				link: onLink,
+				link: onPostLink,
 				templateUrl: 'app/layout/layout.html'
 			};
 		}
@@ -47,7 +47,7 @@
 		 * 
 		 * Receives the scope of the directive.
 		 */
-		function onLink(scope) {
+		function onPostLink(scope) {
 			// Registers a listener
 			scope.$watch(layout.get, function(currentLayout) {
 				// Initializes the current layout's controller

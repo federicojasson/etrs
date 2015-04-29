@@ -35,7 +35,7 @@
 			return {
 				require: 'ngModel',
 				restrict: 'A',
-				link: onLink
+				link: onPostLink
 			};
 		}
 		
@@ -45,7 +45,7 @@
 		 * Receives the scope of the directive, the element matched by it, its
 		 * attributes and the ng-model controller.
 		 */
-		function onLink(scope, element, attributes, ngModelController) {
+		function onPostLink(scope, element, attributes, ngModelController) {
 			// Registers a parser
 			ngModelController.$parsers.push(function(value) {
 				// Converts the value from string to integer

@@ -33,7 +33,7 @@
 				require: 'ngModel',
 				restrict: 'A',
 				priority: 1,
-				link: onLink
+				link: onPostLink
 			};
 		}
 		
@@ -43,7 +43,7 @@
 		 * Receives the scope of the directive, the element matched by it, its
 		 * attributes and the ng-model controller.
 		 */
-		function onLink(scope, element, attributes, ngModelController) {
+		function onPostLink(scope, element, attributes, ngModelController) {
 			// Registers a formatter
 			ngModelController.$formatters.push(function(value) {
 				if (value === null) {

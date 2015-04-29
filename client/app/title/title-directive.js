@@ -35,7 +35,7 @@
 			return {
 				restrict: 'E',
 				scope: {},
-				link: onLink
+				link: onPostLink
 			};
 		}
 		
@@ -44,7 +44,7 @@
 		 * 
 		 * Receives the scope of the directive and the element matched by it.
 		 */
-		function onLink(scope, element) {
+		function onPostLink(scope, element) {
 			// Registers a listener
 			scope.$watch(title.get, function(currentTitle) {
 				// Shows the current title
