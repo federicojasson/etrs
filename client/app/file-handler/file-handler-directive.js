@@ -19,5 +19,28 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.fileHandler', []);
+	angular.module('app.fileHandler').directive('fileHandler', fileHandlerDirective);
+	
+	/**
+	 * Includes a file handler.
+	 */
+	function fileHandlerDirective() {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {
+					file: '=file'
+				},
+				templateUrl: 'app/file-handler/file-handler.html'
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
+	}
 })();

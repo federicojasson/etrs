@@ -19,7 +19,7 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.searchHandler').factory('SearchHandler', [
+	angular.module('app.searchHandler').factory('SearchHandler', [
 		'$timeout',
 		SearchHandlerFactory
 	]);

@@ -24,15 +24,15 @@
 		'DeleteCognitiveTestAction',
 		'SearchCognitiveTestsAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		CognitiveTestsViewController
 	]);
 	
 	/**
 	 * Represents the cognitive-tests view.
 	 */
-	function CognitiveTestsViewController($scope, DeleteCognitiveTestAction, SearchCognitiveTestsAction, data, utility, SearchHandler) {
+	function CognitiveTestsViewController($scope, DeleteCognitiveTestAction, SearchCognitiveTestsAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**

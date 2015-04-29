@@ -24,15 +24,15 @@
 		'DeleteClinicalImpressionAction',
 		'SearchClinicalImpressionsAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		ClinicalImpressionsViewController
 	]);
 	
 	/**
 	 * Represents the clinical-impressions view.
 	 */
-	function ClinicalImpressionsViewController($scope, DeleteClinicalImpressionAction, SearchClinicalImpressionsAction, data, utility, SearchHandler) {
+	function ClinicalImpressionsViewController($scope, DeleteClinicalImpressionAction, SearchClinicalImpressionsAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**

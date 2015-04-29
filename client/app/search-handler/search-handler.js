@@ -19,5 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility.searchHandler', []);
+	angular.module('app.searchHandler', []);
 })();

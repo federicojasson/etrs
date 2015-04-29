@@ -24,15 +24,15 @@
 		'DeleteMedicineAction',
 		'SearchMedicinesAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		MedicinesViewController
 	]);
 	
 	/**
 	 * Represents the medicines view.
 	 */
-	function MedicinesViewController($scope, DeleteMedicineAction, SearchMedicinesAction, data, utility, SearchHandler) {
+	function MedicinesViewController($scope, DeleteMedicineAction, SearchMedicinesAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**

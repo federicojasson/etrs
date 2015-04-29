@@ -24,15 +24,15 @@
 		'DeleteLaboratoryTestAction',
 		'SearchLaboratoryTestsAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		LaboratoryTestsViewController
 	]);
 	
 	/**
 	 * Represents the laboratory-tests view.
 	 */
-	function LaboratoryTestsViewController($scope, DeleteLaboratoryTestAction, SearchLaboratoryTestsAction, data, utility, SearchHandler) {
+	function LaboratoryTestsViewController($scope, DeleteLaboratoryTestAction, SearchLaboratoryTestsAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**

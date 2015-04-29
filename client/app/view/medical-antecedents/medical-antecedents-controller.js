@@ -24,15 +24,15 @@
 		'DeleteMedicalAntecedentAction',
 		'SearchMedicalAntecedentsAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		MedicalAntecedentsViewController
 	]);
 	
 	/**
 	 * Represents the medical-antecedents view.
 	 */
-	function MedicalAntecedentsViewController($scope, DeleteMedicalAntecedentAction, SearchMedicalAntecedentsAction, data, utility, SearchHandler) {
+	function MedicalAntecedentsViewController($scope, DeleteMedicalAntecedentAction, SearchMedicalAntecedentsAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**

@@ -24,15 +24,15 @@
 		'DeleteTreatmentAction',
 		'SearchTreatmentsAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		TreatmentsViewController
 	]);
 	
 	/**
 	 * Represents the treatments view.
 	 */
-	function TreatmentsViewController($scope, DeleteTreatmentAction, SearchTreatmentsAction, data, utility, SearchHandler) {
+	function TreatmentsViewController($scope, DeleteTreatmentAction, SearchTreatmentsAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**

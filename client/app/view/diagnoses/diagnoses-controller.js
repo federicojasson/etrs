@@ -24,15 +24,15 @@
 		'DeleteDiagnosisAction',
 		'SearchDiagnosesAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		DiagnosesViewController
 	]);
 	
 	/**
 	 * Represents the diagnoses view.
 	 */
-	function DiagnosesViewController($scope, DeleteDiagnosisAction, SearchDiagnosesAction, data, utility, SearchHandler) {
+	function DiagnosesViewController($scope, DeleteDiagnosisAction, SearchDiagnosesAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**

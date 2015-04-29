@@ -24,15 +24,15 @@
 		'DeleteExperimentAction',
 		'SearchExperimentsAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		ExperimentsViewController
 	]);
 	
 	/**
 	 * Represents the experiments view.
 	 */
-	function ExperimentsViewController($scope, DeleteExperimentAction, SearchExperimentsAction, data, utility, SearchHandler) {
+	function ExperimentsViewController($scope, DeleteExperimentAction, SearchExperimentsAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**

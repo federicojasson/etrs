@@ -24,15 +24,15 @@
 		'DeleteImagingTestAction',
 		'SearchImagingTestsAction',
 		'data',
-		'utility',
 		'SearchHandler',
+		'utility',
 		ImagingTestsViewController
 	]);
 	
 	/**
 	 * Represents the imaging-tests view.
 	 */
-	function ImagingTestsViewController($scope, DeleteImagingTestAction, SearchImagingTestsAction, data, utility, SearchHandler) {
+	function ImagingTestsViewController($scope, DeleteImagingTestAction, SearchImagingTestsAction, data, SearchHandler, utility) {
 		var _this = this;
 		
 		/**
