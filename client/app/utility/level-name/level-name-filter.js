@@ -31,6 +31,11 @@
 		 * Receives the log.
 		 */
 		function filter(log) {
+			if (log === null) {
+				// The log is null
+				return '';
+			}
+			
 			// Gets the level names
 			var levelNames = getLevelNames();
 			

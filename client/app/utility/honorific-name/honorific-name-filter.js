@@ -31,6 +31,11 @@
 		 * Receives the user.
 		 */
 		function filter(user) {
+			if (user === null) {
+				// The user is null
+				return '';
+			}
+			
 			// Gets the honorific title
 			var honorificTitle = getHonorificTitle(user);
 			

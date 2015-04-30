@@ -31,6 +31,11 @@
 		 * Receives the person.
 		 */
 		function filter(person) {
+			if (person === null) {
+				// The person is null
+				return '';
+			}
+			
 			// Builds the full name
 			return person.firstName + ' ' + person.lastName;
 		}
