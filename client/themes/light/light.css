@@ -79,6 +79,10 @@ td a {
 	color: #333333;
 }
 
+td a:focus {
+	color: inherit;
+}
+
 td a:hover {
 	color: #4d7984;
 	text-decoration: none;

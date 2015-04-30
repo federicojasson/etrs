@@ -60,6 +60,8 @@ td a {
 	display: block;
 }
 
+td a:focus {}
+
 td a:hover {}
 
 textarea {
