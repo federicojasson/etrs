@@ -293,7 +293,7 @@ select.form-control {
 }
 
 .no-icon + .icon-text {
-	margin-left: 0px;
+	margin-left: -4px;
 }
 
 .isolated-content {
