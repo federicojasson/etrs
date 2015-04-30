@@ -409,6 +409,20 @@ select.form-control {
 	user-select: none;
 }
 
+.table-row-link a {
+	padding: 8px;
+}
+
+.table-row-link a:focus {}
+
+.table-row-link:hover a {}
+
+.table-row-link:hover a:focus {}
+
+.table .table-row-link td {
+	padding: 0px;
+}
+
 .unlocked-image {
 	background-image: url(images/open-padlock.png);
 	background-position: center center;

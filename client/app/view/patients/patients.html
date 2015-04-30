@@ -132,7 +132,13 @@
 		</thead>
 		
 		<tbody>
-			<tr ng-repeat="patient in patients">
+			<tr
+				ng-repeat="patient in patients"
+				ui-sref="patient({
+					id: patient.id
+				})"
+				table-row-link
+			>
 				<td>
 					{{ patient.firstName }}
 				</td>

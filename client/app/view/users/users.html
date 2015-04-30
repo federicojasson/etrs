@@ -127,7 +127,13 @@
 		</thead>
 		
 		<tbody>
-			<tr ng-repeat="user in users">
+			<tr
+				ng-repeat="user in users"
+				ui-sref="user({
+					id: user.id
+				})"
+				table-row-link
+			>
 				<td>
 					{{ user.firstName }}
 				</td>

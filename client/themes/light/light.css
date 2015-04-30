@@ -350,6 +350,23 @@ select.form-control {}
 	text-transform: uppercase;
 }
 
+.table-row-link a {}
+
+.table-row-link a:focus {
+	color: inherit;
+	text-decoration: none;
+}
+
+.table-row-link:hover a {
+	color: #4d7984;
+}
+
+.table-row-link:hover a:focus {
+	color: #4d7984;
+}
+
+.table .table-row-link td {}
+
 .unlocked-image {}
 
 .user-image {}
