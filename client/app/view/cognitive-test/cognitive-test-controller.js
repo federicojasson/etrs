@@ -66,12 +66,7 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset(1, {
-				CognitiveTest: [
-					'creator',
-					'lastEditor'
-				]
-			});
+			data.reset();
 			
 			// Gets the cognitive test
 			data.getCognitiveTest(id).then(function(cognitiveTest) {

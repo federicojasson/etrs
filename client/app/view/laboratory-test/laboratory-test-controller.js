@@ -66,12 +66,7 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset(1, {
-				LaboratoryTest: [
-					'creator',
-					'lastEditor'
-				]
-			});
+			data.reset();
 			
 			// Gets the laboratory test
 			data.getLaboratoryTest(id).then(function(laboratoryTest) {

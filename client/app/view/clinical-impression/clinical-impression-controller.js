@@ -66,12 +66,7 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset(1, {
-				ClinicalImpression: [
-					'creator',
-					'lastEditor'
-				]
-			});
+			data.reset();
 			
 			// Gets the clinical impression
 			data.getClinicalImpression(id).then(function(clinicalImpression) {

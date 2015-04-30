@@ -66,13 +66,7 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset(1, {
-				Experiment: [
-					'creator',
-					'lastEditor',
-					'files'
-				]
-			});
+			data.reset();
 			
 			// Gets the experiment
 			data.getExperiment(id).then(function(experiment) {

@@ -66,17 +66,7 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset(1, {
-				Study: [
-					'creator',
-					'lastEditor',
-					'consultation',
-					'experiment',
-					'input',
-					'output',
-					'files'
-				]
-			});
+			data.reset();
 			
 			// Gets the study
 			data.getStudy(id).then(function(study) {

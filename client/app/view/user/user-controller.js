@@ -67,11 +67,7 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset(1, {
-				User: [
-					'inviter'
-				]
-			});
+			data.reset();
 			
 			// Gets the user
 			data.getUser(id).then(function(user) {
