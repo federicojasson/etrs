@@ -36,6 +36,10 @@ h5 {}
 
 h6 {}
 
+input[type=text]::-ms-clear {
+	display: none;
+}
+
 legend {
 	margin-bottom: 15px;
 }
@@ -385,6 +389,10 @@ select.form-control {
 }
 
 .rounded-corners {
+	border-radius: 12px;
+}
+
+.rounded-corners.input-group-lg input {
 	border-radius: 12px;
 }
 

@@ -7,8 +7,8 @@
 <div class="row">
 	<div
 		ng-class="{
-			'col-sm-8 col-sm-offset-2 isolated-content': wasNullExpression,
-			'col-sm-6': ! wasNullExpression
+			'col-sm-8 col-sm-offset-2 isolated-content': newSearch,
+			'col-sm-5 col-sm-offset-7': ! newSearch
 		}"
 	>
 		<div
@@ -19,7 +19,8 @@
 		>
 			<div
 				ng-class="{
-					'input-group input-group-lg': searchPatientsAction.input.expression.value !== null
+					'input-group': searchPatientsAction.input.expression.value !== null,
+					'input-group-lg': newSearch
 				}"
 				class="rounded-corners"
 			>
@@ -33,6 +34,9 @@
 					ng-change="searchHandler.scheduleSearch(750)"
 					ng-keyup="$event.keyCode === 13 && searchHandler.search()"
 					ng-model="searchPatientsAction.input.expression.value"
+					ng-class="{
+						'input-lg': newSearch
+					}"
 					popover="{{ searchPatientsAction.input.expression.message }}"
 					popover-append-to-body="true"
 					popover-placement="bottom"
@@ -41,16 +45,21 @@
 					null-if-empty
 					type="text"
 					placeholder="Buscar"
-					class="form-control input-lg rounded-corners"
+					class="form-control rounded-corners"
 				>
 			</div>
 
-			<span class="form-control-feedback glyphicon glyphicon-search lg"></span>
+			<span
+				ng-class="{
+					'lg': newSearch
+				}"
+				class="form-control-feedback glyphicon glyphicon-search"
+			></span>
 		</div>
 	</div>
 </div>
 
-<div ng-if="searchPatientsAction.input.expression.valid && ! wasNullExpression">
+<div ng-if="searchPatientsAction.input.expression.valid && ! newSearch">
 	<table class="table table-hover">
 		<thead>
 			<tr>

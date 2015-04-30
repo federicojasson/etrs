@@ -58,6 +58,8 @@ h6 {
 	font-size: 1.4em;
 }
 
+input[type=text]::-ms-clear {}
+
 legend {
 	font-size: 1.6em;
 }
@@ -336,6 +338,8 @@ select.form-control {}
 }
 
 .rounded-corners {}
+
+.rounded-corners.input-group-lg input {}
 
 .rounded-corners input:last-child {}
 
