@@ -21,7 +21,7 @@
 namespace App\Service\ClinicalImpression;
 
 /**
- * Represents the /clinical-impression/get service.
+ * Represents the /clinical-impression/get-all service.
  */
 class GetAll extends \App\Service\External {
 	

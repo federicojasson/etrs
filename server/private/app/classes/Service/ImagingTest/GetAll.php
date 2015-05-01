@@ -21,7 +21,7 @@
 namespace App\Service\ImagingTest;
 
 /**
- * Represents the /imaging-test/get service.
+ * Represents the /imaging-test/get-all service.
  */
 class GetAll extends \App\Service\External {
 	

@@ -21,7 +21,7 @@
 namespace App\Service\MedicalAntecedent;
 
 /**
- * Represents the /medical-antecedent/get service.
+ * Represents the /medical-antecedent/get-all service.
  */
 class GetAll extends \App\Service\External {
 	

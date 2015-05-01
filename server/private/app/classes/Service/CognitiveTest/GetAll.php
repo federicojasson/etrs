@@ -21,7 +21,7 @@
 namespace App\Service\CognitiveTest;
 
 /**
- * Represents the /cognitive-test/get service.
+ * Represents the /cognitive-test/get-all service.
  */
 class GetAll extends \App\Service\External {
 	

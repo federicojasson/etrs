@@ -21,7 +21,7 @@
 namespace App\Service\Medicine;
 
 /**
- * Represents the /medicine/get service.
+ * Represents the /medicine/get-all service.
  */
 class GetAll extends \App\Service\External {
 	

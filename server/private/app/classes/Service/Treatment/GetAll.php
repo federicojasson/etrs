@@ -21,7 +21,7 @@
 namespace App\Service\Treatment;
 
 /**
- * Represents the /treatment/get service.
+ * Represents the /treatment/get-all service.
  */
 class GetAll extends \App\Service\External {
 	

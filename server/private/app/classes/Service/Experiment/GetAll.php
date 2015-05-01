@@ -21,7 +21,7 @@
 namespace App\Service\Experiment;
 
 /**
- * Represents the /experiment/get service.
+ * Represents the /experiment/get-all service.
  */
 class GetAll extends \App\Service\External {
 	

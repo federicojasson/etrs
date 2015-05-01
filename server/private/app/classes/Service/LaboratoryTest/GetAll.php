@@ -21,7 +21,7 @@
 namespace App\Service\LaboratoryTest;
 
 /**
- * Represents the /laboratory-test/get service.
+ * Represents the /laboratory-test/get-all service.
  */
 class GetAll extends \App\Service\External {
 	
