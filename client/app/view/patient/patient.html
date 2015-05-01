@@ -31,7 +31,7 @@ TODO: patient.html
 	
 	<tbody>
 		<tr
-			ng-repeat="consultation in patient.consultations"
+			ng-repeat="consultation in patient.consultations | reverse"
 			ng-class="{
 				'info': consultation.diagnosis !== null
 			}"

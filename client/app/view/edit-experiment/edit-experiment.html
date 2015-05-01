@@ -66,7 +66,7 @@
 				
 				<div class="form-group">
 					<file-handler
-						ng-repeat="file in experiment.files"
+						ng-repeat="file in experiment.files | reverse"
 						file="file"
 					></file-handler>
 				</div>

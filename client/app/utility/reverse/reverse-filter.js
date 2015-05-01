@@ -19,18 +19,27 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.age',
-		'app.utility.date',
-		'app.utility.fullName',
-		'app.utility.gender',
-		'app.utility.honorificName',
-		'app.utility.integer',
-		'app.utility.levelName',
-		'app.utility.line',
-		'app.utility.nullIfEmpty',
-		'app.utility.reverse',
-		'app.utility.role',
-		'app.utility.tableRowLink'
-	]);
+	angular.module('app.utility.reverse').filter('reverse', reverseFilter);
+	
+	/**
+	 * Returns the reverse of an array.
+	 */
+	function reverseFilter() {
+		/**
+		 * Applies the filter.
+		 * 
+		 * Receives the array.
+		 */
+		function filter(array) {
+			// Makes a copy of the array
+			var arrayCopy = array.slice();
+			
+			// Reverses the array
+			return arrayCopy.reverse();
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		return filter;
+	}
 })();
