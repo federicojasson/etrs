@@ -360,9 +360,9 @@ select.form-control {}
 
 .rounded-corners.input-group-lg input {}
 
-.rounded-corners input:last-child {}
+.rounded-corners > input:last-child {}
 
-.rounded-corners .input-group-btn:first-child .btn {}
+.rounded-corners > .input-group-btn:first-child .btn {}
 
 .searching-text {
 	color: #aaaaaa;

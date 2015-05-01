@@ -424,12 +424,12 @@ select.form-control {
 	border-radius: 12px;
 }
 
-.rounded-corners input:last-child {
+.rounded-corners > input:last-child {
 	border-bottom-right-radius: 12px;
 	border-top-right-radius: 12px;
 }
 
-.rounded-corners .input-group-btn:first-child .btn {
+.rounded-corners > .input-group-btn:first-child .btn {
 	border-bottom-left-radius: 12px;
 	border-top-left-radius: 12px;
 }
