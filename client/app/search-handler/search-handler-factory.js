@@ -43,9 +43,11 @@
 		SearchHandler.prototype.searchPromise;
 		
 		/**
+		 * The sorting-criteria structure.
+		 * 
 		 * Holds the sorting criteria in a convenient structure.
 		 */
-		SearchHandler.prototype.sortingCriteria;
+		SearchHandler.prototype.sortingCriteriaStructure;
 		
 		/**
 		 * Initializes an instance of the class.
@@ -55,7 +57,18 @@
 		function SearchHandler(action) {
 			this.action = action;
 			this.searchPromise = null;
-			this.sortingCriteria = {};
+			
+			// Gets the sorting criteria
+			var sortingCriteria = this.action.input.sortingCriteria.value;
+			
+			// Initializes the sorting-criteria structure
+			this.sortingCriteriaStructure = {};
+			for (var i = 0; i < sortingCriteria.length; i++) {
+				var sortingCriterion = sortingCriteria[i];
+				
+				// Adds the criterion
+				this.sortingCriteriaStructure[sortingCriterion.field] = sortingCriterion.direction;
+			}
 		}
 		
 		/**
@@ -87,13 +100,13 @@
 			var sortingCriteria = [];
 			
 			// Adds the criteria
-			for (var field in this.sortingCriteria) {
-				if (! this.sortingCriteria.hasOwnProperty(field)) {
+			for (var field in this.sortingCriteriaStructure) {
+				if (! this.sortingCriteriaStructure.hasOwnProperty(field)) {
 					continue;
 				}
 				
 				// Gets the direction of the field
-				var direction = this.sortingCriteria[field];
+				var direction = this.sortingCriteriaStructure[field];
 				
 				// Adds the criterion
 				sortingCriteria.push({
@@ -111,7 +124,7 @@
 		 * Receives the field.
 		 */
 		SearchHandler.prototype.getSortingDirection = function(field) {
-			return this.sortingCriteria[field];
+			return this.sortingCriteriaStructure[field];
 		};
 		
 		/**
@@ -151,17 +164,17 @@
 		 */
 		SearchHandler.prototype.toggleSortingDirection = function(field) {
 			// Toggles the direction of the field according to its current state
-			if (! this.sortingCriteria.hasOwnProperty(field)) {
+			if (! this.sortingCriteriaStructure.hasOwnProperty(field)) {
 				// There is no direction
-				this.sortingCriteria[field] = 'asc';
+				this.sortingCriteriaStructure[field] = 'asc';
 			} else {
 				// There is a direction
-				if (this.sortingCriteria[field] === 'asc') {
+				if (this.sortingCriteriaStructure[field] === 'asc') {
 					// The direction is ascending
-					this.sortingCriteria[field] = 'desc';
+					this.sortingCriteriaStructure[field] = 'desc';
 				} else {
 					// The direction is descending
-					delete this.sortingCriteria[field];
+					delete this.sortingCriteriaStructure[field];
 				}
 			}
 			

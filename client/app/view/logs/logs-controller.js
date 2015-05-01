@@ -99,7 +99,12 @@
 			
 			// Sets inputs' initial values
 			action.input.expression.value = null;
-			action.input.sortingCriteria.value = [];
+			action.input.sortingCriteria.value = [
+				{
+					field: 'creationDateTime',
+					direction: 'desc'
+				}
+			];
 			action.input.page.value = 1;
 			action.input.resultsPerPage.value = 10;
 			
