@@ -98,6 +98,12 @@ th[ng-click]:hover {
 	text-transform: uppercase;
 }
 
+.btn:active:focus {}
+
+.btn:focus {}
+
+.btn.active:focus {}
+
 .input-group-lg .input-group-btn .btn {}
 
 .btn-lg {
@@ -109,6 +115,10 @@ th[ng-click]:hover {
 	font-size: inherit;
 	text-transform: inherit;
 }
+
+.btn-link.btn-lg {}
+
+.btn-link.inline {}
 
 .close {}
 

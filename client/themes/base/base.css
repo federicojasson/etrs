@@ -85,6 +85,18 @@ th[ng-click]:hover {}
 	line-height: 18px;
 }
 
+.btn:active:focus {
+	outline: none;
+}
+
+.btn:focus {
+	outline: none;
+}
+
+.btn.active:focus {
+	outline: none;
+}
+
 .input-group-lg .input-group-btn .btn {
 	height: 40px;
 }
@@ -94,8 +106,18 @@ th[ng-click]:hover {}
 }
 
 .btn-link {
-	margin: 10px 4px;
+	margin: 6px 0px;
 	padding: 0px;
+}
+
+.btn-link.btn-lg {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.btn-link.inline {
+	margin-bottom: 0px;
+	margin-top: 0px;
 }
 
 .close {
@@ -396,7 +418,6 @@ select.form-control {
 .rounded-corners .input-group-btn:first-child .btn {
 	border-bottom-left-radius: 12px;
 	border-top-left-radius: 12px;
-	outline: none;
 }
 
 .searching-text {
