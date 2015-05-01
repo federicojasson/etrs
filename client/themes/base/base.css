@@ -277,6 +277,10 @@ select.form-control {
 	margin-top: 6px;
 }
 
+.download-file-text .btn-link {}
+
+.download-file-text .glyphicon {}
+
 .email-image {
 	background-image: url(images/mailbox.png);
 	background-position: center center;

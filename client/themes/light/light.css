@@ -240,6 +240,14 @@ select.form-control {}
 	font-size: 0.9em;
 }
 
+.download-file-text .btn-link {
+	text-decoration: none;
+}
+
+.download-file-text .glyphicon {
+	color: #666666;
+}
+
 .email-image {}
 
 .file-handler {
