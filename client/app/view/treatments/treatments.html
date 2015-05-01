@@ -172,27 +172,26 @@
 		</div>
 	</div>
 	
-	<div ng-if="! searching">
-		<div ng-if="treatments.length === 0">
-			<div class="no-results-text text-center">
-				La búsqueda no obtuvo ningún resultado
-			</div>
+	<div ng-if="! searching && treatments.length === 0">
+		<div class="no-results-text text-center">
+			La búsqueda no obtuvo ningún resultado
 		</div>
 	</div>
 	
-	<div class="text-center">
-		<pagination
-			ng-change="searchHandler.search()"
-			ng-if="total / searchTreatmentsAction.input.resultsPerPage.value > 1"
-			ng-model="searchTreatmentsAction.input.page.value"
-			items-per-page="searchTreatmentsAction.input.resultsPerPage.value"
-			total-items="total"
-			max-size="10"
-			boundary-links="true"
-			previous-text="‹"
-			next-text="›"
-			first-text="«"
-			last-text="»"
-		></pagination>
+	<div ng-if="total / searchTreatmentsAction.input.resultsPerPage.value > 1">
+		<div class="text-center">
+			<pagination
+				ng-change="searchHandler.search()"
+				ng-model="searchTreatmentsAction.input.page.value"
+				items-per-page="searchTreatmentsAction.input.resultsPerPage.value"
+				total-items="total"
+				max-size="10"
+				boundary-links="true"
+				previous-text="‹"
+				next-text="›"
+				first-text="«"
+				last-text="»"
+			></pagination>
+		</div>
 	</div>
 </div>

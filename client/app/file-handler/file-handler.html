@@ -5,14 +5,15 @@
 		</div>
 		
 		<div class="col-sm-9">
-			<button
-				ng-if="onRemove"
-				ng-click="onRemove()"
-				type="button"
-				class="close"
-			>
-				×
-			</button>
+			<div ng-if="onRemove">
+				<button
+					ng-click="onRemove()"
+					type="button"
+					class="close"
+				>
+					×
+				</button>
+			</div>
 			
 			<div title="{{ file.name }}" class="file-name-text">
 				{{ file.name }}
