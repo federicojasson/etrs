@@ -2,7 +2,6 @@
 Quick tasks
 ----------------------------
 
-- Order references.
 - JSON input validator can be used to validate other inputs. Rename it.
 - Create script for routine maintenance tasks.
 
