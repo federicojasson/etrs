@@ -126,7 +126,7 @@
 		
 		<tbody>
 			<tr ng-repeat="experiment in experiments">
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="experiment({
 							id: experiment.id
@@ -136,13 +136,13 @@
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a ng-click="deleteExperiment(experiment)">
 						<span class="glyphicon glyphicon-remove"></span>
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="editExperiment({
 							id: experiment.id

@@ -125,7 +125,7 @@
 		
 		<tbody>
 			<tr ng-repeat="cognitiveTest in cognitiveTests">
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="cognitiveTest({
 							id: cognitiveTest.id
@@ -135,13 +135,13 @@
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a ng-click="deleteCognitiveTest(cognitiveTest)">
 						<span class="glyphicon glyphicon-remove"></span>
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="editCognitiveTest({
 							id: cognitiveTest.id

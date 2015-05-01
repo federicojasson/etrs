@@ -60,14 +60,6 @@ pre {
 	word-break: normal;
 }
 
-td a {
-	display: block;
-}
-
-td a:focus {}
-
-td a:hover {}
-
 textarea {
 	resize: vertical;
 }
@@ -417,19 +409,22 @@ select.form-control {
 	user-select: none;
 }
 
-.table-row-link a {
+.table .table-cell-link {
+	padding: 0px;
+}
+
+.table .table-cell-link a {
+	display: block;
 	padding: 8px;
 }
 
-.table-row-link a:focus {}
+.table .table-cell-link a:focus {}
 
-.table-row-link:hover a {}
+.table .table-cell-link a:hover {}
 
-.table-row-link:hover a:focus {}
+.table .table-row-link:hover a {}
 
-.table .table-row-link td {
-	padding: 0px;
-}
+.table .table-row-link.info:hover a {}
 
 .unlocked-image {
 	background-image: url(images/open-padlock.png);

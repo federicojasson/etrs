@@ -125,7 +125,7 @@
 		
 		<tbody>
 			<tr ng-repeat="clinicalImpression in clinicalImpressions">
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="clinicalImpression({
 							id: clinicalImpression.id
@@ -135,13 +135,13 @@
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a ng-click="deleteClinicalImpression(clinicalImpression)">
 						<span class="glyphicon glyphicon-remove"></span>
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="editClinicalImpression({
 							id: clinicalImpression.id

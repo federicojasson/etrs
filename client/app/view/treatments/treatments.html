@@ -125,7 +125,7 @@
 		
 		<tbody>
 			<tr ng-repeat="treatment in treatments">
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="treatment({
 							id: treatment.id
@@ -135,13 +135,13 @@
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a ng-click="deleteTreatment(treatment)">
 						<span class="glyphicon glyphicon-remove"></span>
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="editTreatment({
 							id: treatment.id

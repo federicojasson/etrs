@@ -56,6 +56,9 @@
 				// Gets the cell
 				var cell = angular.element(cells[i]);
 				
+				// Adds a class
+				cell.addClass('table-cell-link');
+				
 				// Builds the link
 				var template = '';
 				template += '<a href="' + attributes.href + '">';

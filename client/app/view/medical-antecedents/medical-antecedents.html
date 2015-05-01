@@ -125,7 +125,7 @@
 		
 		<tbody>
 			<tr ng-repeat="medicalAntecedent in medicalAntecedents">
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="medicalAntecedent({
 							id: medicalAntecedent.id
@@ -135,13 +135,13 @@
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a ng-click="deleteMedicalAntecedent(medicalAntecedent)">
 						<span class="glyphicon glyphicon-remove"></span>
 					</a>
 				</td>
 				
-				<td class="text-center">
+				<td class="table-cell-link text-center">
 					<a
 						ui-sref="editMedicalAntecedent({
 							id: medicalAntecedent.id
