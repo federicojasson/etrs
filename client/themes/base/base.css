@@ -285,13 +285,15 @@ select.form-control {
 	width: 256px;
 }
 
-.file-handler {}
-
-.file-handler div:first-child {
-	margin-right: 16px;
+.file-handler {
+	margin-bottom: 8px;
 }
 
-.file-name-text {}
+.file-name-text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
 .footer-image {
 	background-image: url(images/big-logo.png);
@@ -320,7 +322,11 @@ select.form-control {
 	width: 100%;
 }
 
-.hash-text {}
+.hash-text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
 .icon-text {
 	margin-left: 8px;
