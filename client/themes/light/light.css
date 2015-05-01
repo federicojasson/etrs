@@ -253,8 +253,132 @@ select.form-control {}
 .file-handler {
 	background-color: #f5f5f5;
 	border: 1px solid #dddddd;
-	padding: 12px 18px 10px 16px;
+	padding: 8px 12px 8px 2px;
 }
+
+.file-icon {}
+
+.file-icon-aac {}
+
+.file-icon-ai {}
+
+.file-icon-aiff {}
+
+.file-icon-avi {}
+
+.file-icon-bmp {}
+
+.file-icon-c {}
+
+.file-icon-cpp {}
+
+.file-icon-css {}
+
+.file-icon-dat {}
+
+.file-icon-dmg {}
+
+.file-icon-doc {}
+
+.file-icon-dotx {}
+
+.file-icon-dwg {}
+
+.file-icon-dxf {}
+
+.file-icon-eps {}
+
+.file-icon-exe {}
+
+.file-icon-flv {}
+
+.file-icon-gif {}
+
+.file-icon-h {}
+
+.file-icon-hpp {}
+
+.file-icon-html {}
+
+.file-icon-ics {}
+
+.file-icon-iso {}
+
+.file-icon-java {}
+
+.file-icon-jpg {}
+
+.file-icon-js {}
+
+.file-icon-key {}
+
+.file-icon-less {}
+
+.file-icon-mid {}
+
+.file-icon-mp3 {}
+
+.file-icon-mp4 {}
+
+.file-icon-mpg {}
+
+.file-icon-odf {}
+
+.file-icon-ods {}
+
+.file-icon-odt {}
+
+.file-icon-otp {}
+
+.file-icon-ots {}
+
+.file-icon-ott {}
+
+.file-icon-pdf {}
+
+.file-icon-php {}
+
+.file-icon-png {}
+
+.file-icon-ppt {}
+
+.file-icon-psd {}
+
+.file-icon-py {}
+
+.file-icon-qt {}
+
+.file-icon-rar {}
+
+.file-icon-rb {}
+
+.file-icon-rtf {}
+
+.file-icon-sass {}
+
+.file-icon-scss {}
+
+.file-icon-sql {}
+
+.file-icon-tga {}
+
+.file-icon-tgz {}
+
+.file-icon-tiff {}
+
+.file-icon-txt {}
+
+.file-icon-wav {}
+
+.file-icon-xls {}
+
+.file-icon-xlsx {}
+
+.file-icon-xml {}
+
+.file-icon-yml {}
+
+.file-icon-zip {}
 
 .file-name-text {
 	color: #666666;
