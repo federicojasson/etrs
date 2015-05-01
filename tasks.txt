@@ -2,6 +2,8 @@
 Quick tasks
 ----------------------------
 
+- ng-if always first.
+- Add type="button" to avoid unexpected behaviours.
 - JSON input validator can be used to validate other inputs. Rename it.
 - Create script for routine maintenance tasks.
 
