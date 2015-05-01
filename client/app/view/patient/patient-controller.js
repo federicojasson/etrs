@@ -67,10 +67,14 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset(1, {
-				Patient: [
+			data.reset(2, {
+				Consultation: [
 					'creator',
-					'lastEditor',
+					'clinicalImpression',
+					'diagnosis'
+				],
+				
+				Patient: [
 					'consultations'
 				]
 			});
