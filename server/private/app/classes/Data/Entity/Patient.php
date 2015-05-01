@@ -53,6 +53,9 @@ class Patient {
 	 *		targetEntity="Consultation",
 	 *		mappedBy="patient"
 	 *	)
+	 * @OrderBy({
+	 *		"date"="ASC"
+	 *	})
 	 */
 	private $consultations;
 	

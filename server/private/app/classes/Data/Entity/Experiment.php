@@ -117,6 +117,9 @@ class Experiment {
 	 * Annotations:
 	 * 
 	 * @ManyToMany(targetEntity="File")
+	 * @OrderBy({
+	 *		"creationDateTime"="ASC"
+	 *	})
 	 * @JoinTable(
 	 *		name="experiments_files",
 	 *		joinColumns={

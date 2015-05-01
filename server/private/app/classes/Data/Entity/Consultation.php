@@ -332,6 +332,9 @@ class Consultation {
 	 *		targetEntity="Study",
 	 *		mappedBy="consultation"
 	 *	)
+	 * @OrderBy({
+	 *		"creationDateTime"="ASC"
+	 *	})
 	 */
 	private $studies;
 	
