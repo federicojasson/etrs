@@ -3,7 +3,6 @@ Quick tasks
 ----------------------------
 
 - ASC, DESC.
-- Add type="button" to avoid unexpected behaviours.
 - JSON input validator can be used to validate other inputs. Rename it.
 - Create script for routine maintenance tasks.
 

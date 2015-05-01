@@ -19,7 +19,11 @@
 				class="rounded-corners"
 			>
 				<span ng-if="searchLogsAction.input.expression.value !== null" class="input-group-btn">
-					<button ng-click="searchHandler.clearExpression()" class="btn btn-default">
+					<button
+						ng-click="searchHandler.clearExpression()"
+						type="button"
+						class="btn btn-default"
+					>
 						<span class="glyphicon glyphicon-remove"></span>
 					</button>
 				</span>
