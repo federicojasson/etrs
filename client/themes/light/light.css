@@ -120,7 +120,7 @@ th[ng-click]:hover {
 
 .btn-link.inline {}
 
-.close {}
+button.close {}
 
 .dropdown-menu {
 	font-size: 0.85em;

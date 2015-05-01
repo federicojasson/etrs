@@ -120,8 +120,9 @@ th[ng-click]:hover {}
 	margin-top: 0px;
 }
 
-.close {
+button.close {
 	outline: none;
+	padding-left: 8px;
 }
 
 .dropdown-menu {

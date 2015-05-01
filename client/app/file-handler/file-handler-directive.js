@@ -32,7 +32,8 @@
 			return {
 				restrict: 'E',
 				scope: {
-					file: '=file'
+					file: '=file',
+					onRemove: '=onRemove'
 				},
 				templateUrl: 'app/file-handler/file-handler.html'
 			};
