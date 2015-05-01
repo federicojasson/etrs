@@ -236,7 +236,24 @@ select.form-control {}
 
 .dialog-text {}
 
+.download-file-text {
+	font-size: 0.9em;
+}
+
 .email-image {}
+
+.file-handler {
+	background-color: #f5f5f5;
+	border: 1px solid #dddddd;
+	padding: 12px 18px 10px 16px;
+}
+
+.file-handler div:first-child {}
+
+.file-name-text {
+	color: #000000;
+	font-size: 1.2em;
+}
 
 .footer-image {}
 
@@ -245,6 +262,11 @@ select.form-control {}
 .fully-centered {}
 
 .fully-centered-container {}
+
+.hash-text {
+	color: #666666;
+	font-size: 0.8em;
+}
 
 .icon-text {}
 

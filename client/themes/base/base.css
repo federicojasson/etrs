@@ -273,6 +273,10 @@ select.form-control {
 	word-break: normal;
 }
 
+.download-file-text {
+	margin-top: 6px;
+}
+
 .email-image {
 	background-image: url(images/mailbox.png);
 	background-position: center center;
@@ -280,6 +284,14 @@ select.form-control {
 	height: 256px;
 	width: 256px;
 }
+
+.file-handler {}
+
+.file-handler div:first-child {
+	margin-right: 16px;
+}
+
+.file-name-text {}
 
 .footer-image {
 	background-image: url(images/big-logo.png);
@@ -307,6 +319,8 @@ select.form-control {
 	position: fixed;
 	width: 100%;
 }
+
+.hash-text {}
 
 .icon-text {
 	margin-left: 8px;
