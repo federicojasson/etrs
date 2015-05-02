@@ -30,7 +30,7 @@
 	 */
 	function run($http, dateFilter) {
 		/**
-		 * Applies a filter to the dates present in a value.
+		 * Filters the dates present in a value.
 		 * 
 		 * Receives the value, which can be anything: an array, an object, a
 		 * date, etc. In the first two cases, the filter is applied recursively.
@@ -38,7 +38,7 @@
 		function filterDates(value) {
 			if (angular.isArray(value)) {
 				// The value is an array
-				// Applies the filter to the array's elements
+				// Filters the array's elements
 				for (var i = 0; i < value.length; i++) {
 					value[i] = filterDates(value[i]);
 				}
@@ -46,7 +46,7 @@
 			
 			if (angular.isObject(value)) {
 				// The value is an object
-				// Applies the filter to the object's properties
+				// Filters the object's properties
 				for (var property in value) {
 					if (! value.hasOwnProperty(property)) {
 						continue;
@@ -58,7 +58,7 @@
 			
 			if (value instanceof Date) {
 				// The value is a date
-				// Applies the filter
+				// Filters the value
 				value = dateFilter(value, 'yyyy-MM-dd');
 			}
 			

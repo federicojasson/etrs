@@ -186,7 +186,7 @@ function filterArray($array, $filter) {
 }
 
 /**
- * Applies a filter to a set of sorting criteria.
+ * Filters a set of sorting criteria.
  * 
  * Receives the sorting criteria.
  */

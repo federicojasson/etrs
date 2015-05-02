@@ -27,7 +27,7 @@ namespace App\Service\Consultation;
 abstract class CreateEdit extends \App\Service\External {
 	
 	/**
-	 * Applies a filter to a set of cognitive-test results.
+	 * Filters a set of cognitive-test results.
 	 * 
 	 * Receives the cognitive-test results.
 	 */
@@ -45,7 +45,7 @@ abstract class CreateEdit extends \App\Service\External {
 	}
 	
 	/**
-	 * Applies a filter to a set of imaging-test results.
+	 * Filters a set of imaging-test results.
 	 * 
 	 * Receives the imaging-test results.
 	 */
@@ -63,7 +63,7 @@ abstract class CreateEdit extends \App\Service\External {
 	}
 	
 	/**
-	 * Applies a filter to a set of laboratory-test results.
+	 * Filters a set of laboratory-test results.
 	 * 
 	 * Receives the laboratory-test results.
 	 */
