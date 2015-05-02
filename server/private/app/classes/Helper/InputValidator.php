@@ -46,8 +46,11 @@ class InputValidator {
 	public function areTestResultsValid($testResults, $type) {
 		global $app;
 		
+		// Gets the test field
+		$testField = pascalToCamelCase($type);
+		
 		// Gets the tests
-		$tests = array_keys($testResults);
+		$tests = array_column($testResults, $testField);
 		
 		if (containsDuplicates($tests)) {
 			// The tests are not unique
@@ -55,7 +58,10 @@ class InputValidator {
 		}
 		
 		// Validates the values
-		foreach ($testResults as $test => $value) {
+		foreach ($testResults as $testResult) {
+			$test = hex2bin($testResult[$testField]);
+			$value = $testResult['value'];
+			
 			// Gets the test
 			$test = $app->data->getRepository('Entity:' . $type)->findNonDeleted($test);
 			

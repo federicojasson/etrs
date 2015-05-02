@@ -41,9 +41,9 @@ class Edit extends CreateEdit {
 		$diagnosis = $this->getInputValue('diagnosis', 'hex2bin');
 		$medicalAntecedents = $this->getInputValue('medicalAntecedents', createArrayFilter('hex2bin'));
 		$medicines = $this->getInputValue('medicines', createArrayFilter('hex2bin'));
-		$laboratoryTestResults = $this->getInputValue('laboratoryTestResults', [ $this, 'filterLaboratoryTestResults' ]);
-		$imagingTestResults = $this->getInputValue('imagingTestResults', [ $this, 'filterImagingTestResults' ]);
-		$cognitiveTestResults = $this->getInputValue('cognitiveTestResults', [ $this, 'filterCognitiveTestResults' ]);
+		$laboratoryTestResults = $this->getInputValue('laboratoryTestResults', 'filterLaboratoryTestResults');
+		$imagingTestResults = $this->getInputValue('imagingTestResults', 'filterImagingTestResults');
+		$cognitiveTestResults = $this->getInputValue('cognitiveTestResults', 'filterCognitiveTestResults');
 		$treatments = $this->getInputValue('treatments', createArrayFilter('hex2bin'));
 		
 		// Gets the signed-in user
@@ -198,9 +198,9 @@ class Edit extends CreateEdit {
 		// Gets inputs
 		$medicalAntecedents = $this->getInputValue('medicalAntecedents', createArrayFilter('hex2bin'));
 		$medicines = $this->getInputValue('medicines', createArrayFilter('hex2bin'));
-		$laboratoryTestResults = $this->getInputValue('laboratoryTestResults', [ $this, 'filterLaboratoryTestResults' ]);
-		$imagingTestResults = $this->getInputValue('imagingTestResults', [ $this, 'filterImagingTestResults' ]);
-		$cognitiveTestResults = $this->getInputValue('cognitiveTestResults', [ $this, 'filterCognitiveTestResults' ]);
+		$laboratoryTestResults = $this->getInputValue('laboratoryTestResults');
+		$imagingTestResults = $this->getInputValue('imagingTestResults');
+		$cognitiveTestResults = $this->getInputValue('cognitiveTestResults');
 		$treatments = $this->getInputValue('treatments', createArrayFilter('hex2bin'));
 		
 		if (containsDuplicates($medicalAntecedents)) {

@@ -27,60 +27,6 @@ namespace App\Service\Consultation;
 abstract class CreateEdit extends \App\Service\External {
 	
 	/**
-	 * Filters a set of cognitive-test results.
-	 * 
-	 * Receives the cognitive-test results.
-	 */
-	protected function filterCognitiveTestResults($cognitiveTestResults) {
-		$newCognitiveTestResults = [];
-		
-		// Adds the cognitive-test results
-		foreach ($cognitiveTestResults as $cognitiveTestResult) {
-			$cognitiveTest = hex2bin($cognitiveTestResult['cognitiveTest']);
-			$value = $cognitiveTestResult['value'];
-			$newCognitiveTestResults[$cognitiveTest] = $value;
-		}
-		
-		return $newCognitiveTestResults;
-	}
-	
-	/**
-	 * Filters a set of imaging-test results.
-	 * 
-	 * Receives the imaging-test results.
-	 */
-	protected function filterImagingTestResults($imagingTestResults) {
-		$newImagingTestResults = [];
-		
-		// Adds the imaging-test results
-		foreach ($imagingTestResults as $imagingTestResult) {
-			$imagingTest = hex2bin($imagingTestResult['imagingTest']);
-			$value = $imagingTestResult['value'];
-			$newImagingTestResults[$imagingTest] = $value;
-		}
-		
-		return $newImagingTestResults;
-	}
-	
-	/**
-	 * Filters a set of laboratory-test results.
-	 * 
-	 * Receives the laboratory-test results.
-	 */
-	protected function filterLaboratoryTestResults($laboratoryTestResults) {
-		$newLaboratoryTestResults = [];
-		
-		// Adds the laboratory-test results
-		foreach ($laboratoryTestResults as $laboratoryTestResult) {
-			$laboratoryTest = hex2bin($laboratoryTestResult['laboratoryTest']);
-			$value = $laboratoryTestResult['value'];
-			$newLaboratoryTestResults[$laboratoryTest] = $value;
-		}
-		
-		return $newLaboratoryTestResults;
-	}
-	
-	/**
 	 * Sets a consultation's cognitive-test results.
 	 * 
 	 * Receives the consultation and the cognitive-test results.

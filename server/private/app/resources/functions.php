@@ -186,6 +186,33 @@ function filterArray($array, $filter) {
 }
 
 /**
+ * Filters a set of cognitive-test results.
+ * 
+ * Receives the cognitive-test results.
+ */
+function filterCognitiveTestResults($cognitiveTestResults) {
+	return filterTestResults($cognitiveTestResults, 'CognitiveTest');
+}
+
+/**
+ * Filters a set of imaging-test results.
+ * 
+ * Receives the imaging-test results.
+ */
+function filterImagingTestResults($imagingTestResults) {
+	return filterTestResults($imagingTestResults, 'ImagingTest');
+}
+
+/**
+ * Filters a set of laboratory-test results.
+ * 
+ * Receives the laboratory-test results.
+ */
+function filterLaboratoryTestResults($laboratoryTestResults) {
+	return filterTestResults($laboratoryTestResults, 'LaboratoryTest');
+}
+
+/**
  * Filters a set of sorting criteria.
  * 
  * Receives the sorting criteria.
@@ -201,6 +228,27 @@ function filterSortingCriteria($sortingCriteria) {
 	}
 
 	return $newSortingCriteria;
+}
+
+/**
+ * Filters a set of test results.
+ * 
+ * Receives the test results and the type of the test entity.
+ */
+function filterTestResults($testResults, $type) {
+	// Converts the type from PascalCase to camelCase
+	$type = pascalToCamelCase($type);
+	
+	$newTestResults = [];
+	
+	// Adds the test results
+	foreach ($testResults as $testResult) {
+		$test = hex2bin($testResult[$type]);
+		$value = $testResult['value'];
+		$newTestResults[$test] = $value;
+	}
+	
+	return $newTestResults;
 }
 
 /**
@@ -284,6 +332,16 @@ function isArraySequential($array) {
  */
 function isStringAnInteger($string) {
 	return (string) (int) $string === $string;
+}
+
+/**
+ * Converts a string from PascalCase to camelCase.
+ * 
+ * Receives the string.
+ */
+function pascalToCamelCase($string) {
+	// Converts the first character to lowercase
+	return lcfirst($string);
 }
 
 /**
