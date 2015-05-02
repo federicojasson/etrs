@@ -28,6 +28,32 @@
 		var _this = this;
 		
 		/**
+		 * Returns a file's extension.
+		 * 
+		 * Receives the file's name.
+		 */
+		_this.getFileExtension = function(name) {
+			// Gets the fragments of the name separated by dots
+			var fragments = name.split('.');
+			
+			if (fragments.length === 1) {
+				// The file has no extension
+				return '';
+			}
+			
+			// Gets the extension
+			var extension = fragments.pop();
+			
+			if (! /^[0-9A-Za-z]*$/.test(extension)) {
+				// The extension is invalid
+				return '';
+			}
+			
+			// Converts the extension to lowercase
+			return extension.toLowerCase();
+		};
+		
+		/**
 		 * Converts a string from PascalCase to camelCase.
 		 * 
 		 * Receives the string.
