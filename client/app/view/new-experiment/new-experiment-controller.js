@@ -22,6 +22,7 @@
 	angular.module('app.view.newExperiment').controller('NewExperimentViewController', [
 		'$scope',
 		'CreateExperimentAction',
+		'dialog',
 		'router',
 		NewExperimentViewController
 	]);
@@ -29,7 +30,7 @@
 	/**
 	 * Represents the new-experiment view.
 	 */
-	function NewExperimentViewController($scope, CreateExperimentAction, router) {
+	function NewExperimentViewController($scope, CreateExperimentAction, dialog, router) {
 		var _this = this;
 		
 		/**
@@ -80,6 +81,20 @@
 			
 			action.startCallback = function() {
 				ready = false;
+			};
+			
+			action.notAuthenticatedCallback = function() {
+				// Resets inputs' values
+				action.input.credentials.password.value = '';
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
+					'Reingrese su contraseña.'
+				);
+				
+				ready = true;
 			};
 			
 			action.successCallback = function(id) {
