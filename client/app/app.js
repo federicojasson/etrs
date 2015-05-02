@@ -23,6 +23,7 @@
 		'ngResource',
 		'ui.router',
 		'ui.bootstrap',
+		'angularFileUpload',
 		'app.account',
 		'app.action',
 		'app.data',
