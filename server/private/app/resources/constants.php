@@ -38,10 +38,10 @@ define('ERROR_CODE_UNDEFINED_SERVICE', 'UNDEFINED_SERVICE');
 define('ERROR_CODE_UNDELIVERED_EMAIL', 'UNDELIVERED_EMAIL');
 define('ERROR_CODE_UNEXPECTED_ERROR', 'UNEXPECTED_ERROR');
 
+define('FILE_INPUT_NAME', 'file');
 define('FILE_MAXIMUM_AGE', 24); // Hours
 define('FILE_OUTPUT_NAME', 'Reporte.pdf');
 define('FILE_UNNAMED_NAME', 'Archivo sin nombre');
-define('FILE_UPLOADED_INPUT_NAME', 'file');
 
 define('GENDER_FEMALE', 'f');
 define('GENDER_MALE', 'm');

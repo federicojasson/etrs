@@ -58,16 +58,16 @@ abstract class External extends Service {
 			return false;
 		}
 		
-		// Defines the name of the uploaded file's input
-		$uploadedFileInputName = FILE_UPLOADED_INPUT_NAME;
+		// Defines the name of the input
+		$inputName = FILE_INPUT_NAME;
 		
-		if (! isset($_FILES[$uploadedFileInputName])) {
+		if (! isset($_FILES[$inputName])) {
 			// The file has not been received
 			return false;
 		}
 		
 		// Gets the information about the file
-		$file = $_FILES[$uploadedFileInputName];
+		$file = $_FILES[$inputName];
 		
 		if ($file['error'] !== UPLOAD_ERR_OK) {
 			// An error has occurred
