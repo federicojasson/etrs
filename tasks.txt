@@ -2,6 +2,8 @@
 Quick tasks
 ----------------------------
 
+- // Registers the callbacks ---> Registers callbacks
+- Experiment: add output_name column?
 - FileHandler: add edition option (for name).
 - Add file module for file-handler and file-uploader?
 - At least one file for experiment?
