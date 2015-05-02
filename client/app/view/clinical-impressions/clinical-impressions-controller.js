@@ -112,7 +112,7 @@
 			action.input.sortingCriteria.value = [
 				{
 					field: 'creationDateTime',
-					direction: 'desc'
+					direction: 'descending'
 				}
 			];
 			action.input.page.value = 1;

@@ -81,8 +81,8 @@ define('SESSION_NAME', 'session');
 
 define('SIGN_UP_PERMISSION_MAXIMUM_AGE', 48); // Hours
 
-define('SORTING_DIRECTION_ASCENDING', 'asc');
-define('SORTING_DIRECTION_DESCENDING', 'desc');
+define('SORTING_DIRECTION_ASCENDING', 'ascending');
+define('SORTING_DIRECTION_DESCENDING', 'descending');
 
 define('STUDY_STATE_CONDUCTING', 1);
 define('STUDY_STATE_FAILURE', 3);

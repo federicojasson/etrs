@@ -186,6 +186,24 @@ function filterArray($array, $filter) {
 }
 
 /**
+ * Applies a filter to a set of sorting criteria.
+ * 
+ * Receives the sorting criteria.
+ */
+function filterSortingCriteria($sortingCriteria) {
+	$newSortingCriteria = [];
+
+	// Adds the sorting criteria
+	foreach ($sortingCriteria as $sortingCriterion) {
+		$field = $sortingCriterion['field'];
+		$direction = ($sortingCriterion['direction'] === SORTING_DIRECTION_ASCENDING)? 'ASC' : 'DESC';
+		$newSortingCriteria[$field] = $direction;
+	}
+
+	return $newSortingCriteria;
+}
+
+/**
  * Returns the client's IP address.
  */
 function getClientIpAddress() {

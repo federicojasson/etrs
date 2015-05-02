@@ -35,7 +35,7 @@ class GetAll extends \App\Service\External {
 		$medicines = $app->data->createQueryBuilder()
 			->select('m.id')
 			->from('Entity:Medicine', 'm')
-			->addOrderBy('m.name', 'asc')
+			->addOrderBy('m.name', 'ASC')
 			->getQuery()
 			->getResult();
 		

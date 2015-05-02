@@ -33,7 +33,7 @@ class Search extends \App\Service\External {
 		
 		// Gets inputs
 		$expression = $this->getInputValue('expression', 'buildBooleanExpression');
-		$sortingCriteria = $this->getInputValue('sortingCriteria');
+		$sortingCriteria = $this->getInputValue('sortingCriteria', 'filterSortingCriteria');
 		$page = $this->getInputValue('page');
 		$resultsPerPage = $this->getInputValue('resultsPerPage');
 		
@@ -49,9 +49,8 @@ class Search extends \App\Service\External {
 				->setParameter('expression', $expression);
 		}
 		
-		// Sets the sorting criteria
-		foreach ($sortingCriteria as $sortingCriterion) {
-			$queryBuilder->addOrderBy('u.' . $sortingCriterion['field'], $sortingCriterion['direction']);
+		foreach ($sortingCriteria as $field => $direction) {
+			$queryBuilder->addOrderBy('u.' . $field, $direction);
 		}
 		
 		// Searches the users

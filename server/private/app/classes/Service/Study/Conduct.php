@@ -43,7 +43,7 @@ class Conduct extends \App\Service\Internal {
 		$studies = $app->data->getRepository('Entity:Study')->findNonDeletedBy([
 			'state' => STUDY_STATE_PENDING
 		], [
-			'creationDateTime' => 'asc'
+			'creationDateTime' => 'ASC'
 		], 1);
 		
 		if (count($studies) === 0) {

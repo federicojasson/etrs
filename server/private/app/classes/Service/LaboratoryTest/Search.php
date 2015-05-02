@@ -33,7 +33,7 @@ class Search extends \App\Service\External {
 		
 		// Gets inputs
 		$expression = $this->getInputValue('expression', 'buildBooleanExpression');
-		$sortingCriteria = $this->getInputValue('sortingCriteria');
+		$sortingCriteria = $this->getInputValue('sortingCriteria', 'filterSortingCriteria');
 		$page = $this->getInputValue('page');
 		$resultsPerPage = $this->getInputValue('resultsPerPage');
 		
@@ -51,8 +51,8 @@ class Search extends \App\Service\External {
 		}
 		
 		// Sets the sorting criteria
-		foreach ($sortingCriteria as $sortingCriterion) {
-			$queryBuilder->addOrderBy('lt.' . $sortingCriterion['field'], $sortingCriterion['direction']);
+		foreach ($sortingCriteria as $field => $direction) {
+			$queryBuilder->addOrderBy('lt.' . $field, $direction);
 		}
 		
 		// Searches the laboratory tests

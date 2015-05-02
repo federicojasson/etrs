@@ -35,7 +35,7 @@ class GetAll extends \App\Service\External {
 		$imagingTests = $app->data->createQueryBuilder()
 			->select('it.id')
 			->from('Entity:ImagingTest', 'it')
-			->addOrderBy('it.name', 'asc')
+			->addOrderBy('it.name', 'ASC')
 			->getQuery()
 			->getResult();
 		

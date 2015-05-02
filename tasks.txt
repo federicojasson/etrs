@@ -2,7 +2,6 @@
 Quick tasks
 ----------------------------
 
-- ASC, DESC.
 - JSON input validator can be used to validate other inputs. Rename it.
 - Create script for routine maintenance tasks.
 

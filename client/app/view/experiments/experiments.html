@@ -84,8 +84,8 @@
 				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-3">
 					<span
 						ng-class="
-							searchHandler.getSortingDirection('name') === 'asc'? 'glyphicon-chevron-down' :
-							searchHandler.getSortingDirection('name') === 'desc'? 'glyphicon-chevron-up' :
+							searchHandler.getSortingDirection('name') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('name') === 'descending'? 'glyphicon-chevron-up' :
 							'no-icon'
 						"
 						class="glyphicon"
@@ -99,8 +99,8 @@
 				<th ng-click="searchHandler.toggleSortingDirection('creationDateTime')" class="col-sm-3">
 					<span
 						ng-class="
-							searchHandler.getSortingDirection('creationDateTime') === 'asc'? 'glyphicon-chevron-down' :
-							searchHandler.getSortingDirection('creationDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							searchHandler.getSortingDirection('creationDateTime') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('creationDateTime') === 'descending'? 'glyphicon-chevron-up' :
 							'no-icon'
 						"
 						class="glyphicon"
@@ -114,8 +114,8 @@
 				<th ng-click="searchHandler.toggleSortingDirection('lastEditionDateTime')" class="col-sm-3">
 					<span
 						ng-class="
-							searchHandler.getSortingDirection('lastEditionDateTime') === 'asc'? 'glyphicon-chevron-down' :
-							searchHandler.getSortingDirection('lastEditionDateTime') === 'desc'? 'glyphicon-chevron-up' :
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'descending'? 'glyphicon-chevron-up' :
 							'no-icon'
 						"
 						class="glyphicon"

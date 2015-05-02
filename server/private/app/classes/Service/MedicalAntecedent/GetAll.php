@@ -35,7 +35,7 @@ class GetAll extends \App\Service\External {
 		$medicalAntecedents = $app->data->createQueryBuilder()
 			->select('ma.id')
 			->from('Entity:MedicalAntecedent', 'ma')
-			->addOrderBy('ma.name', 'asc')
+			->addOrderBy('ma.name', 'ASC')
 			->getQuery()
 			->getResult();
 		

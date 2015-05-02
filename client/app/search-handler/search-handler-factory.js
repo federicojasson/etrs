@@ -166,12 +166,12 @@
 			// Toggles the direction of the field according to its current state
 			if (! this.sortingCriteriaStructure.hasOwnProperty(field)) {
 				// There is no direction
-				this.sortingCriteriaStructure[field] = 'asc';
+				this.sortingCriteriaStructure[field] = 'ascending';
 			} else {
 				// There is a direction
-				if (this.sortingCriteriaStructure[field] === 'asc') {
+				if (this.sortingCriteriaStructure[field] === 'ascending') {
 					// The direction is ascending
-					this.sortingCriteriaStructure[field] = 'desc';
+					this.sortingCriteriaStructure[field] = 'descending';
 				} else {
 					// The direction is descending
 					delete this.sortingCriteriaStructure[field];
