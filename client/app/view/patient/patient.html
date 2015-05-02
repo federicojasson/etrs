@@ -2,59 +2,61 @@
 
 TODO: patient.html
 
-<h2>Historia clínica</h2>
-
-<p>
-	TODO: texto?
-</p>
-
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th class="col-sm-3">
-				Fecha
-			</th>
-			
-			<th class="col-sm-3">
-				Impresión clínica
-			</th>
-			
-			<th class="col-sm-3">
-				Diagnóstico
-			</th>
-			
-			<th class="col-sm-3">
-				Responsable
-			</th>
-		</tr>
-	</thead>
+<div ng-if="patient.consultations.length > 0">
+	<h2>Historia clínica</h2>
 	
-	<tbody>
-		<tr
-			ng-repeat="consultation in patient.consultations | reverse"
-			ng-class="{
-				'info': consultation.diagnosis !== null
-			}"
-			ui-sref="consultation({
-				id: consultation.id
-			})"
-			table-row-link
-		>
-			<td>
-				{{ consultation.date | date: 'longDate' }}
-			</td>
-			
-			<td>
-				{{ consultation.clinicalImpression.name }}
-			</td>
-			
-			<td>
-				<strong>{{ consultation.diagnosis.name }}</strong>
-			</td>
-			
-			<td>
-				{{ consultation.creator | honorificName }}
-			</td>
-		</tr>
-	</tbody>
-</table>
+	<p>
+		TODO: texto?
+	</p>
+	
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="col-sm-3">
+					Fecha
+				</th>
+				
+				<th class="col-sm-3">
+					Impresión clínica
+				</th>
+				
+				<th class="col-sm-3">
+					Diagnóstico
+				</th>
+				
+				<th class="col-sm-3">
+					Responsable
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr
+				ng-repeat="consultation in patient.consultations | reverse"
+				ng-class="{
+					'info': consultation.diagnosis !== null
+				}"
+				ui-sref="consultation({
+					id: consultation.id
+				})"
+				table-row-link
+			>
+				<td>
+					{{ consultation.date | date: 'longDate' }}
+				</td>
+				
+				<td>
+					{{ consultation.clinicalImpression.name }}
+				</td>
+				
+				<td>
+					<strong>{{ consultation.diagnosis.name }}</strong>
+				</td>
+				
+				<td>
+					{{ consultation.creator | honorificName }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
