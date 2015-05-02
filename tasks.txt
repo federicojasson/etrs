@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- Hide Historia clínica if there are no consultations.
 - JSON input validator can be used to validate other inputs. Rename it.
 - Create script for routine maintenance tasks.
 
