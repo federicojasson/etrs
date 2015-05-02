@@ -28,12 +28,33 @@
 		var _this = this;
 		
 		/**
+		 * Determines whether an input is a command line.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isCommandLine = function(input) {
+			if (! _this.isValidString(input, 1, 512)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (input.value.indexOf(':input') === -1) {
+				// The input doesn't contain the "input" placeholder
+				input.message = 'La línea de comandos debe contener el marcador :input';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is a data-type definition.
 		 * 
 		 * Receives the input.
 		 */
 		_this.isDataTypeDefinition = function(input) {
 			// TODO: implement
+			return true;
 		};
 		
 		/**

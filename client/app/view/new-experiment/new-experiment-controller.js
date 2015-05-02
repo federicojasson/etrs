@@ -73,6 +73,9 @@
 			// Initializes the action
 			var action = new CreateExperimentAction();
 			
+			// Sets inputs' initial values
+			action.input.files.value = [];
+			
 			// Registers the callbacks
 			
 			action.startCallback = function() {

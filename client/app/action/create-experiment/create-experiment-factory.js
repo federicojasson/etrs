@@ -60,7 +60,21 @@
 			
 			// Initializes the input
 			this.input = {
-				// TODO
+				credentials: {
+					password: new Input(function() {
+						return inputValidator.isValidString(this, 1);
+					})
+				},
+				
+				commandLine: new Input(function() {
+					return inputValidator.isCommandLine(this);
+				}),
+				
+				name: new Input(function() {
+					return inputValidator.isValidString(this, 1, 64);
+				}),
+				
+				files: new Input()
 			};
 		}
 		
@@ -78,7 +92,13 @@
 			
 			// Creates the experiment
 			server.experiment.create({
-				// TODO
+				credentials: {
+					password: this.input.credentials.password.value
+				},
+				
+				commandLine: this.input.commandLine.value,
+				name: this.input.name.value,
+				files: this.input.files.value
 			}).then(function(output) {
 				if (! output.authenticated) {
 					// The user has not been authenticated
