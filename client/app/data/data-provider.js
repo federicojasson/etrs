@@ -150,8 +150,9 @@
 		 * entities' IDs and the current depth.
 		 */
 		_this.getReferences = function(type, referencesType, field, ids, depth) {
-			// Gets the references
 			var promises = [];
+			
+			// Gets the references
 			for (var i = 0; i < ids.length; i++) {
 				promises[i] = _this.getReference(type, referencesType, field, ids[i], depth);
 			}
@@ -214,8 +215,9 @@
 		 * Receives the type, the entities' IDs and the current depth.
 		 */
 		function getEntities(type, ids, depth) {
-			// Gets the entities
 			var promises = [];
+			
+			// Gets the entities
 			for (var i = 0; i < ids.length; i++) {
 				promises[i] = getEntity(type, ids[i], depth);
 			}

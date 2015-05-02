@@ -236,10 +236,10 @@ function filterSortingCriteria($sortingCriteria) {
  * Receives the test results and the type of the test entity.
  */
 function filterTestResults($testResults, $type) {
+	$newTestResults = [];
+	
 	// Converts the type from PascalCase to camelCase
 	$type = pascalToCamelCase($type);
-	
-	$newTestResults = [];
 	
 	// Adds the test results
 	foreach ($testResults as $testResult) {

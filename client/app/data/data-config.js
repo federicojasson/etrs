@@ -102,11 +102,12 @@
 							
 							// Defines a function to get test results
 							var getTestResults = function(type, referenceType, field, testResults, depth) {
+								var testResultPromises = [];
+								
 								// Gets the test field
 								var testField = utility.pascalToCamelCase(referenceType);
 								
 								// Gets the test results
-								var testResultPromises = [];
 								for (var i = 0; i < testResults.length; i++) {
 									var testResult = testResults[i];
 									
