@@ -20,22 +20,26 @@
 
 (function() {
 	angular.module('app.view.newConsultation').controller('NewConsultationViewController', [
+		'$q',
 		'$scope',
+		'$stateParams',
 		'CreateConsultationAction',
+		'data',
 		'router',
+		'server',
 		NewConsultationViewController
 	]);
 	
 	/**
 	 * Represents the new-consultation view.
 	 */
-	function NewConsultationViewController($scope, CreateConsultationAction, router) {
+	function NewConsultationViewController($q, $scope, $stateParams, CreateConsultationAction, data, router, server) {
 		var _this = this;
 		
 		/**
 		 * Indicates whether the view is ready.
 		 */
-		var ready = true;
+		var ready = false;
 		
 		/**
 		 * Returns the template's URL.
@@ -59,9 +63,150 @@
 		};
 		
 		/**
+		 * Gets all cognitive tests.
+		 */
+		function getAllCognitiveTests() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all cognitive tests
+			server.cognitiveTest.getAll().then(function(output) {
+				// Gets the cognitive tests
+				return data.getCognitiveTestArray(output.ids);
+			}).then(function(cognitiveTests) {
+				// Includes the cognitive tests
+				$scope.cognitiveTests = cognitiveTests;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(cognitiveTests);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
+		 * Gets all imaging tests.
+		 */
+		function getAllImagingTests() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all imaging tests
+			server.imagingTest.getAll().then(function(output) {
+				// Gets the imaging tests
+				return data.getImagingTestArray(output.ids);
+			}).then(function(imagingTests) {
+				// Includes the imaging tests
+				$scope.imagingTests = imagingTests;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(imagingTests);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
+		 * Gets all laboratory tests.
+		 */
+		function getAllLaboratoryTests() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all laboratory tests
+			server.laboratoryTest.getAll().then(function(output) {
+				// Gets the laboratory tests
+				return data.getLaboratoryTestArray(output.ids);
+			}).then(function(laboratoryTests) {
+				// Includes the laboratory tests
+				$scope.laboratoryTests = laboratoryTests;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(laboratoryTests);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
+		 * Gets all medical antecedents.
+		 */
+		function getAllMedicalAntecedents() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all medical antecedents
+			server.medicalAntecedent.getAll().then(function(output) {
+				// Gets the medical antecedents
+				return data.getMedicalAntecedentArray(output.ids);
+			}).then(function(medicalAntecedents) {
+				// Includes the medical antecedents
+				$scope.medicalAntecedents = medicalAntecedents;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(medicalAntecedents);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
+		 * Gets all medicines.
+		 */
+		function getAllMedicines() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all medicines
+			server.medicine.getAll().then(function(output) {
+				// Gets the medicines
+				return data.getMedicineArray(output.ids);
+			}).then(function(medicines) {
+				// Includes the medicines
+				$scope.medicines = medicines;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(medicines);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
+		 * Gets all treatments.
+		 */
+		function getAllTreatments() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all treatments
+			server.treatment.getAll().then(function(output) {
+				// Gets the treatments
+				return data.getTreatmentArray(output.ids);
+			}).then(function(treatments) {
+				// Includes the treatments
+				$scope.treatments = treatments;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(treatments);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Gets the URL parameters
+			var id = $stateParams.id;
+			
 			// Includes auxiliary variables
 			$scope.section = 0;
 			
@@ -69,15 +214,35 @@
 			$scope.setSection = setSection;
 			
 			// Initializes the actions
-			initializeCreateConsultationAction();
+			initializeCreateConsultationAction(id);
+			
+			// Resets the data service
+			data.reset();
+			
+			// TODO: comment?
+			$q.all([
+				getAllMedicalAntecedents(),
+				getAllMedicines(),
+				getAllLaboratoryTests(),
+				getAllImagingTests(),
+				getAllCognitiveTests(),
+				getAllTreatments()
+			]).then(function() {
+				ready = true;
+			});
 		}
 		
 		/**
 		 * Initializes the create-consultation action.
+		 * 
+		 * Receives the patient's ID.
 		 */
-		function initializeCreateConsultationAction() {
+		function initializeCreateConsultationAction(id) {
 			// Initializes the action
 			var action = new CreateConsultationAction();
+			
+			// Sets inputs' initial values
+			action.input.patient.value = id;
 			
 			// Registers callbacks
 			
