@@ -271,7 +271,7 @@ class InputValidator {
 	/**
 	 * Determines whether an input is a valid integer.
 	 * 
-	 * Receives the input, the minimum allowed value and, optionally, the
+	 * Receives the input, the minimum value allowed and, optionally, the
 	 * maximum.
 	 */
 	public function isValidInteger($input, $minimumValue, $maximumValue = null) {
@@ -290,7 +290,7 @@ class InputValidator {
 	 * An input is considered a valid line if it contains only printable
 	 * characters and is a valid string after trimming it and shrinking it.
 	 * 
-	 * Receives the input, the minimum allowed length and, optionally, the
+	 * Receives the input, the minimum length allowed and, optionally, the
 	 * maximum.
 	 */
 	public function isValidLine($input, $minimumLength, $maximumLength = null) {
@@ -332,7 +332,7 @@ class InputValidator {
 	/**
 	 * Determines whether an input is a valid string.
 	 * 
-	 * Receives the input, the minimum allowed length and, optionally, the
+	 * Receives the input, the minimum length allowed and, optionally, the
 	 * maximum.
 	 */
 	public function isValidString($input, $minimumLength, $maximumLength = null) {

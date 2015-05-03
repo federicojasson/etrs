@@ -196,7 +196,7 @@
 		/**
 		 * Determines whether an input is a valid integer.
 		 * 
-		 * Receives the input, the minimum allowed value and, optionally, the
+		 * Receives the input, the minimum value allowed and, optionally, the
 		 * maximum.
 		 */
 		_this.isValidInteger = function(input, minimumValue, maximumValue) {
@@ -280,7 +280,7 @@
 		/**
 		 * Determines whether an input is a valid string.
 		 * 
-		 * Receives the input, the minimum allowed length and, optionally, the
+		 * Receives the input, the minimum length allowed and, optionally, the
 		 * maximum.
 		 */
 		_this.isValidString = function(input, minimumLength, maximumLength) {
