@@ -295,12 +295,12 @@ select.form-control {
 }
 
 .file-icon {
-    background-image: url(images/file-icons.png);
-    background-position: -5px -5px;
-    background-repeat: no-repeat;
-    display: block;
-    height: 48px;
-    width: 48px;
+	background-image: url(images/file-icons.png);
+	background-position: -5px -5px;
+	background-repeat: no-repeat;
+	display: block;
+	height: 48px;
+	width: 48px;
 }
 
 .file-icon-aac {
