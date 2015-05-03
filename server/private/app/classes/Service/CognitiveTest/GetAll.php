@@ -35,6 +35,7 @@ class GetAll extends \App\Service\External {
 		$cognitiveTests = $app->data->createQueryBuilder()
 			->select('ct.id')
 			->from('Entity:CognitiveTest', 'ct')
+			->where('ct.deleted = false')
 			->addOrderBy('ct.name', 'ASC')
 			->getQuery()
 			->getResult();

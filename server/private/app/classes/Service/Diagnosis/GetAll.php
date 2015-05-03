@@ -35,6 +35,7 @@ class GetAll extends \App\Service\External {
 		$diagnoses = $app->data->createQueryBuilder()
 			->select('d.id')
 			->from('Entity:Diagnosis', 'd')
+			->where('d.deleted = false')
 			->addOrderBy('d.name', 'ASC')
 			->getQuery()
 			->getResult();

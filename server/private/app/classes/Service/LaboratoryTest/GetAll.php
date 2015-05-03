@@ -35,6 +35,7 @@ class GetAll extends \App\Service\External {
 		$laboratoryTests = $app->data->createQueryBuilder()
 			->select('lt.id')
 			->from('Entity:LaboratoryTest', 'lt')
+			->where('lt.deleted = false')
 			->addOrderBy('lt.name', 'ASC')
 			->getQuery()
 			->getResult();
