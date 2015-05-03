@@ -37,7 +37,6 @@
 					uploading: '=uploading'
 				},
 				controller: 'FileUploaderController',
-				controllerAs: 'fileUploader',
 				templateUrl: 'app/file-uploader/file-uploader.html'
 			};
 		}

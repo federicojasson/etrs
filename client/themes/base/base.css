@@ -243,6 +243,16 @@ select.form-control {
 
 .pagination li.active a:hover {}
 
+.progress {
+	position: relative;
+}
+
+.progress span {
+	display: block;
+	position: absolute;
+	width: 100%;
+ }
+
 
 /* Custom classes */
 
@@ -289,6 +299,12 @@ select.form-control {
 	height: 256px;
 	width: 256px;
 }
+ 
+.file-drop-zone {
+	padding: 50px 20px;
+}
+
+.file-drop-zone.active {}
 
 .file-handler {
 	margin-bottom: 8px;

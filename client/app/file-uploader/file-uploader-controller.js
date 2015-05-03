@@ -30,25 +30,13 @@
 	 * TODO: comment
 	 */
 	function FileUploaderController($scope, FileUploader, utility) {
-		var _this = this;
-		
-		/**
-		 * Removes a file item.
-		 * 
-		 * Receives the file item.
-		 */
-		_this.removeFileItem = function(fileItem) {
-			// Removes the file's ID
-			utility.removeFromArray(fileItem.file.id, $scope.files);
-			
-			// Removes the file item
-			fileItem.remove();
-		};
-		
 		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Includes auxiliary functions
+			$scope.removeFileItem = removeFileItem;
+			
 			// Initializes the uploader
 			initializeUploader($scope.limit);
 		}
@@ -74,30 +62,41 @@
 			// Registers callbacks
 			
 			uploader.onAfterAddingFile = function(fileItem) {
-				// Registers callbacks
-				
-				fileItem.onBeforeUpload = function() {
-					$scope.uploading = true;
-				};
-				
-				fileItem.onComplete = function() {
-					$scope.uploading = false;
-				};
-				
-				fileItem.onSuccess = function(output) {
-					// Adds the file's ID
-					$scope.files.push(output.id);
-					
-					// Stores the file's ID in the file item
-					fileItem.file.id = output.id;
-				};
-				
 				// Uploads the file
 				fileItem.upload();
 			};
 			
+			uploader.onBeforeUploadItem = function() {
+				$scope.uploading = true;
+			};
+			
+			uploader.onCompleteItem = function() {
+				$scope.uploading = false;
+			};
+			
+			uploader.onSuccessItem = function(fileItem, output) {
+				// Adds the file's ID
+				$scope.files.push(output.id);
+				
+				// Stores the file's ID in the file item
+				fileItem.file.id = output.id;
+			};
+			
 			// Includes the uploader
 			$scope.uploader = uploader;
+		}
+		
+		/**
+		 * Removes a file item.
+		 * 
+		 * Receives the file item.
+		 */
+		function removeFileItem(fileItem) {
+			// Removes the file's ID
+			utility.removeFromArray(fileItem.file.id, $scope.files);
+			
+			// Removes the file item
+			fileItem.remove();
 		}
 		
 		// ---------------------------------------------------------------------

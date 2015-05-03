@@ -1,0 +1,67 @@
+<input
+	nv-file-select
+	uploader="uploader"
+	multiple
+	type="file"
+>
+
+<div
+	nv-file-drop
+	nv-file-over
+	uploader="uploader"
+	over-class="active"
+	class="file-drop-zone text-center"
+>
+	Arrastre los archivos aquí
+</div>
+
+<div ng-if="uploader.queue.length > 0">
+	<!--TODO: text here-->
+	<!--TODO: style-->
+	
+	<div ng-repeat="fileItem in uploader.queue">
+		{{ fileItem.file.name }}
+		
+		<div ng-if="fileItem.isReady && ! fileItem.isUploading">
+			En espera
+		</div>
+		
+		<div ng-if="fileItem.isUploading">
+			<div class="progress">
+				<div
+					ng-class="{
+						'progress-bar-danger': fileItem.progress < 33,
+						'progress-bar-warning': fileItem.progress >= 33 && fileItem.progress < 66,
+						'progress-bar-success': fileItem.progress >= 66
+					}"
+					ng-style="{
+						width: fileItem.progress + '%'
+					}"
+					class="progress-bar"
+				>
+					<span>{{ fileItem.progress }}%</span>
+				</div>
+			</div>
+			
+			<button ng-click="fileItem.cancel()" type="button">
+				Cancelar
+			</button>
+		</div>
+		
+		<div ng-if="fileItem.isCancel">
+			Cancelado
+		</div>
+		
+		<div ng-if="fileItem.isError">
+			Error
+		</div>
+		
+		<div ng-if="fileItem.isSuccess">
+			Listo
+			
+			<button ng-click="removeFileItem(fileItem)" type="button">
+				Eliminar
+			</button>
+		</div>
+	</div>
+</div>
