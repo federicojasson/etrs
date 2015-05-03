@@ -19,26 +19,32 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'ui.bootstrap',
-		'angularFileUpload',
-		'app.account',
-		'app.action',
-		'app.data',
-		'app.dialog',
-		'app.error',
-		'app.fileHandler',
-		'app.fileUploader',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.searchHandler',
-		'app.server',
-		'app.title',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.fileUploader').directive('fileUploader', fileUploaderDirective);
+	
+	/**
+	 * Includes a file uploader.
+	 */
+	function fileUploaderDirective() {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {
+					files: '=files',
+					limit: '=limit',
+					uploading: '=uploading'
+				},
+				controller: 'FileUploaderController',
+				controllerAs: 'fileUploader',
+				templateUrl: 'app/file-uploader/file-uploader.html'
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
+	}
 })();
