@@ -469,7 +469,7 @@
 				
 				{
 					name: 'newConsultation',
-					url: '/{id:[0-9A-Fa-f]{32}}/consultation/new',
+					url: '/patient/{id:[0-9A-Fa-f]{32}}/consultation/new',
 					data: {
 						views: {
 							__: 'SignInViewController',
@@ -559,7 +559,7 @@
 				
 				{
 					name: 'newStudy',
-					url: '/{id:[0-9A-Fa-f]{32}}/study/new',
+					url: '/consultation/{id:[0-9A-Fa-f]{32}}/study/new',
 					data: {
 						views: {
 							__: 'SignInViewController',
