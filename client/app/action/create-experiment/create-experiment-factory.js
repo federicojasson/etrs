@@ -70,6 +70,10 @@
 					return inputValidator.isCommandLine(this);
 				}),
 				
+				outputName: new Input(function() {
+					return inputValidator.isFileName(this);
+				}),
+				
 				name: new Input(function() {
 					return inputValidator.isValidString(this, 1, 64);
 				}),
@@ -97,6 +101,7 @@
 				},
 				
 				commandLine: this.input.commandLine.value,
+				outputName: this.input.outputName.value,
 				name: this.input.name.value,
 				files: this.input.files.value
 			}).then(function(output) {

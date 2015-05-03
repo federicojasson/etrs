@@ -93,6 +93,26 @@
 		};
 		
 		/**
+		 * Determines whether an input is a file name.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isFileName = function(input) {
+			if (! _this.isValidString(input, 1, 128)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (/["*\/:<>?\\|]/.test(input.value)) {
+				// The input contains forbidden characters
+				input.message = 'El nombre del archivo no puede contener ninguno de los siguientes caracteres: " * \ / : < > ? \\ |';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is a gender.
 		 * 
 		 * Receives the input.
