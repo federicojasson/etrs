@@ -66,13 +66,13 @@ function buildBooleanExpression($string) {
  */
 function buildFileName($string) {
 	// Removes the control characters
-	$string = preg_replace('/[\x{0000}-\x{001f}]/', ' ', $string);
+	$string = preg_replace('/[\x{0000}-\x{001f}]/', '', $string);
 	
 	// Removes the forbidden characters
 	$string = preg_replace('/["*\/:<>?\\\|]/', '', $string);
 	
-	// Trims and shrinks the string
-	$string = trimAndShrink($string);
+	// Trims the string
+	$string = trim($string);
 	
 	if ($string === '') {
 		// The string is empty
