@@ -213,6 +213,16 @@ function filterLaboratoryTestResults($laboratoryTestResults) {
 }
 
 /**
+ * Filters a recipient.
+ * 
+ * Receives the recipient.
+ */
+function filterRecipient($recipient) {
+	$recipient['fullName'] = trimAndShrink($recipient['fullName']);
+	return $recipient;
+}
+
+/**
  * Filters a set of sorting criteria.
  * 
  * Receives the sorting criteria.

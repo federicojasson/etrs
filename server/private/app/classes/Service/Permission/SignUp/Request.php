@@ -33,8 +33,7 @@ class Request extends \App\Service\External {
 		
 		// Gets inputs
 		$credentials = $this->getInputValue('credentials');
-		$recipient = $this->getInputValue('recipient');
-		$recipient['fullName'] = trimAndShrink($recipient['fullName']);
+		$recipient = $this->getInputValue('recipient', 'filterRecipient');
 		$userRole = $this->getInputValue('userRole');
 		
 		// Gets the signed-in user
