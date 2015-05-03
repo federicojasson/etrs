@@ -22,14 +22,16 @@
 	angular.module('app.view.medicalAntecedent').controller('MedicalAntecedentViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteMedicalAntecedentAction',
 		'data',
+		'router',
 		MedicalAntecedentViewController
 	]);
 	
 	/**
 	 * Represents the medical-antecedent view.
 	 */
-	function MedicalAntecedentViewController($scope, $stateParams, data) {
+	function MedicalAntecedentViewController($scope, $stateParams, DeleteMedicalAntecedentAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the medical antecedent
 				$scope.medicalAntecedent = medicalAntecedent;
 				
+				// Initializes the actions
+				initializeDeleteMedicalAntecedentAction(medicalAntecedent);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-medical-antecedent action.
+		 * 
+		 * Receives the medical antecedent.
+		 */
+		function initializeDeleteMedicalAntecedentAction(medicalAntecedent) {
+			// Initializes the action
+			var action = new DeleteMedicalAntecedentAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = medicalAntecedent.id;
+			action.input.version.value = medicalAntecedent.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the medical antecedents state
+				router.redirect('medicalAntecedents');
+			};
+			
+			// Includes the action
+			$scope.deleteMedicalAntecedentAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
