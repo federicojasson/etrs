@@ -12,6 +12,7 @@ Quick tasks
 - At least one file for experiment?
 - JSON input validator can be used to validate other inputs. Rename it.
 - Create script for routine maintenance tasks.
+- Check ng-repeat (and whether it's necessary to add a 'no-items' message).
 
 - Canceling AJAX requests on route change: http://www.bennadel.com/blog/2616-aborting-ajax-requests-using-http-and-angularjs.htm
 - Add explanation of data-type definition in the views.
