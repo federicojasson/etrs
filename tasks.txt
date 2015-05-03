@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- Mix themes.
 - Check button labels.
 - NotAuthenticated ---> files lost.
 - Experiment: add output_name column?
@@ -14,6 +15,7 @@ Quick tasks
 - Canceling AJAX requests on route change: http://www.bennadel.com/blog/2616-aborting-ajax-requests-using-http-and-angularjs.htm
 - Add explanation of data-type definition in the views.
 - Add explanation of others (e.g. command-line).
+- Check all butons to have type.
 - Check TODO and DEFINEHERE
 
 
