@@ -159,7 +159,7 @@ function haltApp($httpStatus, $errorCode) {
 function loadClass($class) {
 	// Defines the application's namespace and gets its length
 	$namespace = 'App\\';
-	$length = strlen($namespace);
+	$length = getStringLength($namespace);
 	
 	// Gets the prefix and the suffix of the class
 	$prefix = substr($class, 0, $length);

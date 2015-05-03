@@ -278,7 +278,7 @@ function getClientIpAddress() {
 	
 	// Defines the IPv4-mapped IPv6 address prefix and gets its length
 	$prefix = hex2bin('00000000000000000000ffff');
-	$length = strlen($prefix);
+	$length = getStringLength($prefix);
 	
 	if ($prefix === substr($ipAddress, 0, $length)) {
 		// The IP address is an IPv4-mapped IPv6 address
@@ -290,6 +290,15 @@ function getClientIpAddress() {
 	$ipAddress = inet_ntop($ipAddress);
 	
 	return $ipAddress;
+}
+
+/**
+ * Returns a string's length.
+ * 
+ * Receives the string.
+ */
+function getStringLength($string) {
+	return mb_strlen($string, 'UTF-8');
 }
 
 /**

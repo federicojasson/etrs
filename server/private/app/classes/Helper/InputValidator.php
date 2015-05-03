@@ -308,7 +308,7 @@ class InputValidator {
 		$input = trimAndShrink($input);
 		
 		// Gets the input's length
-		$length = mb_strlen($input, 'UTF-8');
+		$length = getStringLength($input);
 		
 		// Determines whether the length is in the specified range
 		return inRange($length, $minimumLength, $maximumLength);
@@ -342,7 +342,7 @@ class InputValidator {
 		}
 		
 		// Gets the input's length
-		$length = mb_strlen($input, 'UTF-8');
+		$length = getStringLength($input);
 		
 		// Determines whether the length is in the specified range
 		return inRange($length, $minimumLength, $maximumLength);
