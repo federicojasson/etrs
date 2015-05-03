@@ -85,15 +85,15 @@ class Search extends \App\Service\External {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'expression' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'expression' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidLine($input, 0, 128);
 			}),
 			
-			'sortingCriteria' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonObject([
-					'field' => new \App\InputValidator\Json\JsonValue(function($input) {
+			'sortingCriteria' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputObject([
+					'field' => new \App\InputValidator\Input\InputValue(function($input) {
 						return inArray($input, [
 							'creationDateTime',
 							'lastEditionDateTime',
@@ -107,22 +107,22 @@ class Search extends \App\Service\External {
 						]);
 					}),
 
-					'direction' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+					'direction' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 						return $app->inputValidator->isSortingDirection($input);
 					})
 				])
 			),
 			
-			'page' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'page' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 1);
 			}),
 			
-			'resultsPerPage' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'resultsPerPage' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 1);
 			})
 		]);
 		
-		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
+		if (! $app->inputValidator->isInputValid($input, $inputValidator)) {
 			// The input is invalid
 			return false;
 		}

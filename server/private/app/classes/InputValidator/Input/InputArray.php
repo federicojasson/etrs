@@ -18,12 +18,12 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\InputValidator\Json;
+namespace App\InputValidator\Input;
 
 /**
- * Responsible for validating JSON arrays.
+ * Responsible for validating input arrays.
  */
-class JsonArray extends JsonStructure {
+class InputArray extends Input {
 	
 	/**
 	 * Determines whether an input is valid.
@@ -44,7 +44,7 @@ class JsonArray extends JsonStructure {
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// Validates the JSON array's elements
+		// Validates the array's elements
 		foreach ($input as $element) {
 			if (! $definition->isInputValid($element)) {
 				// The element is invalid

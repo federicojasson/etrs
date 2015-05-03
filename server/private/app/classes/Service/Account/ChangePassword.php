@@ -73,21 +73,21 @@ class ChangePassword extends \App\Service\External {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'credentials' => new \App\InputValidator\Json\JsonObject([
-				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'credentials' => new \App\InputValidator\Input\InputObject([
+				'password' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isValidString($input, 1);
 				})
 			]),
 			
-			'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'password' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isPassword($input);
 			})
 		]);
 		
 		// Validates the input
-		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
+		return $app->inputValidator->isInputValid($input, $inputValidator);
 	}
 	
 	/**

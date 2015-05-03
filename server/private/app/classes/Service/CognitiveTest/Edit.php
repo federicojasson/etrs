@@ -69,27 +69,27 @@ class Edit extends \App\Service\External {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'id' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
 			}),
 			
-			'version' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'version' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 0);
 			}),
 			
-			'dataTypeDefinition' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'dataTypeDefinition' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isDataTypeDefinition($input);
 			}),
 			
-			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'name' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidLine($input, 1, 64);
 			})
 		]);
 		
 		// Validates the input
-		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
+		return $app->inputValidator->isInputValid($input, $inputValidator);
 	}
 	
 	/**

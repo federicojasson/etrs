@@ -71,28 +71,28 @@ class Edit extends CreateEdit {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'id' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
 			}),
 			
-			'version' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'version' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 0);
 			}),
 			
-			'comments' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'comments' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidString($input, 0, 1024);
 			}),
 			
-			'files' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'files' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})
 			)
 		]);
 		
-		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
+		if (! $app->inputValidator->isInputValid($input, $inputValidator)) {
 			// The input is invalid
 			return false;
 		}

@@ -105,92 +105,92 @@ class Edit extends CreateEdit {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'id' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'id' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
 			}),
 			
-			'version' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'version' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 0);
 			}),
 			
-			'date' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'date' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isDate($input);
 			}),
 			
-			'presentingProblem' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'presentingProblem' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidString($input, 0, 1024);
 			}),
 			
-			'comments' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'comments' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidString($input, 0, 1024);
 			}),
 			
-			'clinicalImpression' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'clinicalImpression' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return is_null($input) || $app->inputValidator->isRandomId($input);
 			}),
 			
-			'diagnosis' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'diagnosis' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return is_null($input) || $app->inputValidator->isRandomId($input);
 			}),
 			
-			'medicalAntecedents' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'medicalAntecedents' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})
 			),
 			
-			'medicines' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'medicines' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})
 			),
 			
-			'laboratoryTestResults' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonObject([
-					'laboratoryTest' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'laboratoryTestResults' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputObject([
+					'laboratoryTest' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new \App\InputValidator\Json\JsonValue(function() {
+					'value' => new \App\InputValidator\Input\InputValue(function() {
 						return true;
 					})
 				])
 			),
 			
-			'imagingTestResults' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonObject([
-					'imagingTest' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'imagingTestResults' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputObject([
+					'imagingTest' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new \App\InputValidator\Json\JsonValue(function() {
+					'value' => new \App\InputValidator\Input\InputValue(function() {
 						return true;
 					})
 				])
 			),
 			
-			'cognitiveTestResults' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonObject([
-					'cognitiveTest' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'cognitiveTestResults' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputObject([
+					'cognitiveTest' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 						return $app->inputValidator->isRandomId($input);
 					}),
 					
-					'value' => new \App\InputValidator\Json\JsonValue(function() {
+					'value' => new \App\InputValidator\Input\InputValue(function() {
 						return true;
 					})
 				])
 			),
 			
-			'treatments' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'treatments' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})
 			)
 		]);
 		
-		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
+		if (! $app->inputValidator->isInputValid($input, $inputValidator)) {
 			// The input is invalid
 			return false;
 		}

@@ -9,7 +9,6 @@ Quick tasks
 - FileHandler: add edition option (for name).
 - Add file module for file-handler and file-uploader?
 - At least one file for experiment?
-- JSON input validator can be used to validate other inputs. Rename it.
 - Create script for routine maintenance tasks.
 - Check ng-repeat (and whether it's necessary to add a 'no-items' message).
 

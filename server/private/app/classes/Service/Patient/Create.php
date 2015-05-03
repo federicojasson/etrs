@@ -72,31 +72,31 @@ class Create extends \App\Service\External {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'firstName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'firstName' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidLine($input, 1, 48);
 			}),
 			
-			'lastName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'lastName' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidLine($input, 1, 48);
 			}),
 			
-			'gender' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'gender' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isGender($input);
 			}),
 			
-			'birthDate' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'birthDate' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isDate($input);
 			}),
 			
-			'yearsOfEducation' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'yearsOfEducation' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 0, 100);
 			})
 		]);
 		
 		// Validates the input
-		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
+		return $app->inputValidator->isInputValid($input, $inputValidator);
 	}
 	
 	/**

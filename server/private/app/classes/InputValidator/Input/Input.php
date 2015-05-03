@@ -18,23 +18,23 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\InputValidator\Json;
+namespace App\InputValidator\Input;
 
 /**
- * Responsible for validating JSON structures.
+ * Responsible for validating input structures.
  * 
- * A JSON structure can be an array, an object or a value. For each type, a
+ * An input structure can be an array, an object or a value. For each type, a
  * definition determines the way the validation is carried out:
  * 
- * - Arrays: a JSON input validator is used, which determines how to validate
- *   the array's elements.
+ * - Arrays: an input validator is used, which determines how to validate the
+ *   array's elements.
  * 
- * - Objects: an associative array is used, whose values are JSON input
- *   validators that determine how to validate each property of the object.
+ * - Objects: an associative array is used, whose values are input validators
+ *   that determine how to validate each property of the object.
  * 
  * - Values: a function is used, which receives and validates the value.
  */
-abstract class JsonStructure {
+abstract class Input {
 	
 	/**
 	 * The definition.

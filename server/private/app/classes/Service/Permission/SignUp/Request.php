@@ -105,31 +105,31 @@ class Request extends \App\Service\External {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'credentials' => new \App\InputValidator\Json\JsonObject([
-				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'credentials' => new \App\InputValidator\Input\InputObject([
+				'password' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isValidString($input, 1);
 				})
 			]),
 			
-			'recipient' => new \App\InputValidator\Json\JsonObject([
-				'fullName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'recipient' => new \App\InputValidator\Input\InputObject([
+				'fullName' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isValidLine($input, 0, 97);
 				}),
 				
-				'emailAddress' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				'emailAddress' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isEmailAddress($input);
 				})
 			]),
 			
-			'userRole' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'userRole' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isUserRole($input);
 			})
 		]);
 		
 		// Validates the input
-		return $app->inputValidator->isJsonInputValid($input, $jsonInputValidator);
+		return $app->inputValidator->isInputValid($input, $inputValidator);
 	}
 	
 	/**

@@ -84,34 +84,34 @@ class Create extends \App\Service\External {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'credentials' => new \App\InputValidator\Json\JsonObject([
-				'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'credentials' => new \App\InputValidator\Input\InputObject([
+				'password' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isValidString($input, 1);
 				})
 			]),
 			
-			'commandLine' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'commandLine' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isCommandLine($input);
 			}),
 			
-			'outputName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'outputName' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isFileName($input);
 			}),
 			
-			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'name' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidLine($input, 1, 64);
 			}),
 			
-			'files' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'files' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})
 			)
 		]);
 		
-		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
+		if (! $app->inputValidator->isInputValid($input, $inputValidator)) {
 			// The input is invalid
 			return false;
 		}

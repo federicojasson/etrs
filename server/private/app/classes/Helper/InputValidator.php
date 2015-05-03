@@ -202,18 +202,18 @@ class InputValidator {
 	}
 	
 	/**
-	 * Determines whether a JSON input is valid.
+	 * Determines whether an input is valid.
 	 * 
-	 * Receives the input and a JSON input validator.
+	 * Receives the input and an input validator.
 	 */
-	public function isJsonInputValid($input, $jsonInputValidator) {
+	public function isInputValid($input, $inputValidator) {
 		if (is_null($input)) {
 			// The input could not be decoded
 			return false;
 		}
 		
 		// Validates the input
-		return $jsonInputValidator->isInputValid($input);
+		return $inputValidator->isInputValid($input);
 	}
 	
 	/**

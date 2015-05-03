@@ -88,32 +88,32 @@ class Create extends CreateEdit {
 		// Gets the input
 		$input = $this->getInput();
 		
-		// Builds a JSON input validator
-		$jsonInputValidator = new \App\InputValidator\Json\JsonObject([
-			'comments' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+		// Builds an input validator
+		$inputValidator = new \App\InputValidator\Input\InputObject([
+			'comments' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidString($input, 0, 1024);
 			}),
 			
-			'consultation' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'consultation' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
 			}),
 			
-			'experiment' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'experiment' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
 			}),
 			
-			'input' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'input' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isRandomId($input);
 			}),
 			
-			'files' => new \App\InputValidator\Json\JsonArray(
-				new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+			'files' => new \App\InputValidator\Input\InputArray(
+				new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 					return $app->inputValidator->isRandomId($input);
 				})
 			)
 		]);
 		
-		if (! $app->inputValidator->isJsonInputValid($input, $jsonInputValidator)) {
+		if (! $app->inputValidator->isInputValid($input, $inputValidator)) {
 			// The input is invalid
 			return false;
 		}

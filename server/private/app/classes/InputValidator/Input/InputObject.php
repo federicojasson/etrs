@@ -18,12 +18,12 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace App\InputValidator\Json;
+namespace App\InputValidator\Input;
 
 /**
- * Responsible for validating JSON values.
+ * Responsible for validating input objects.
  */
-class JsonValue extends JsonStructure {
+class InputObject extends Input {
 	
 	/**
 	 * Determines whether an input is valid.
@@ -31,16 +31,36 @@ class JsonValue extends JsonStructure {
 	 * Receives the input.
 	 */
 	public function isInputValid($input) {
-		if (is_array($input)) {
-			// The input is an array
+		if (! is_array($input)) {
+			// The input is not an array
 			return false;
 		}
 		
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// Validates the JSON value
-		return call_user_func($definition, $input);
+		// Gets the definition's length
+		$count = count($definition);
+		
+		if ($count !== count($input)) {
+			// The input's length doesn't match that of the definition
+			return false;
+		}
+		
+		// Validates the object's properties
+		foreach ($definition as $property => $inputValidator) {
+			if (! array_key_exists($property, $input)) {
+				// The property is not defined in the object
+				return false;
+			}
+			
+			if (! $inputValidator->isInputValid($input[$property])) {
+				// The property is invalid
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 }
