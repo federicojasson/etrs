@@ -202,6 +202,19 @@ select.form-control {
 
 .modal-header {}
 
+.nav li a {
+	line-height: 18px;
+	padding: 6px 12px;
+}
+
+.nav-pills li.active a {}
+
+.nav-pills li.active a:hover {}
+
+.nav-stacked li + li {
+	margin-top: 5px;
+}
+
 .navbar {
 	cursor: default;
 	min-height: 48px;
@@ -665,12 +678,10 @@ select.form-control {
 
 .menu.panel .panel-heading a {
 	display: block;
-	padding: 6px 12px;
+	padding: 5px 11px;
 }
 
 .menu.panel .panel-heading a:hover {}
-
-.menu.panel.open {}
 
 .menu.panel.open .panel-heading a {}
 
