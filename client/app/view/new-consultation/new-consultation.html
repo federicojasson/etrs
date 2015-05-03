@@ -1,1 +1,249 @@
-TODO: new-consultation.html
+<h1>Nueva consulta médica</h1>
+
+<p>
+	El siguiente formulario le permite crear una nueva consulta médica.
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createConsultationAction.execute()" novalidate>
+		<div class="row">
+			<div class="col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li
+						ng-class="{
+							'active': section === 0
+						}"
+					>
+						<a ng-click="setSection(0)">
+							Datos generales
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 1
+						}"
+					>
+						<a ng-click="setSection(1)">
+							Antecedentes médicos
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 2
+						}"
+					>
+						<a ng-click="setSection(2)">
+							Medicación concomitante
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 3
+						}"
+					>
+						<a ng-click="setSection(3)">
+							Exámenes de laboratorio
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 4
+						}"
+					>
+						<a ng-click="setSection(4)">
+							Exámenes de imágenes
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 5
+						}"
+					>
+						<a ng-click="setSection(5)">
+							Exámenes cognitivos
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 6
+						}"
+					>
+						<a ng-click="setSection(6)">
+							Tratamientos
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 7
+						}"
+					>
+						<a ng-click="setSection(7)">
+							Resumen
+						</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="col-sm-9">
+				<div ng-if="section === 0">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-TODO"></span>
+							
+							<span class="icon-text">
+								Datos generales
+							</span>
+						</legend>
+						
+						TODO: Fieldset 0
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 1">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-TODO"></span>
+							
+							<span class="icon-text">
+								Antecedentes médicos
+							</span>
+						</legend>
+						
+						TODO: Fieldset 1
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 2">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-TODO"></span>
+							
+							<span class="icon-text">
+								Medicación concomitante
+							</span>
+						</legend>
+						
+						TODO: Fieldset 2
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 3">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Exámenes de laboratorio
+							</span>
+						</legend>
+						
+						TODO: Fieldset 3
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 4">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Exámenes de imágenes
+							</span>
+						</legend>
+						
+						TODO: Fieldset 4
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 5">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Exámenes cognitivos
+							</span>
+						</legend>
+						
+						TODO: Fieldset 5
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 6">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-TODO"></span>
+							
+							<span class="icon-text">
+								Tratamientos
+							</span>
+						</legend>
+						
+						TODO: Fieldset 6
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 7">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-list"></span>
+							
+							<span class="icon-text">
+								Resumen
+							</span>
+						</legend>
+						
+						TODO: Fieldset 7
+					</fieldset>
+				</div>
+				
+				<div class="form-group">
+					<div class="pull-left">
+						<button
+							ng-if="section > 0"
+							ng-click="setSection(section - 1)"
+							type="button"
+							class="btn btn-primary"
+						>
+							<span class="glyphicon glyphicon-arrow-left"></span>
+							
+							<span class="icon-text">
+								Anterior
+							</span>
+						</button>
+					</div>
+					
+					<div class="pull-right">
+						<button
+							ng-if="section < 7"
+							ng-click="setSection(section + 1)"
+							type="button"
+							class="btn btn-primary"
+						>
+							<span class="glyphicon glyphicon-arrow-right"></span>
+							
+							<span class="icon-text">
+								Siguiente
+							</span>
+						</button>
+						
+						<button
+							ng-if="section === 7"
+							type="submit"
+							class="btn btn-success"
+						>
+							Crear consulta médica
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

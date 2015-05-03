@@ -62,6 +62,12 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Includes auxiliary variables
+			$scope.section = 0;
+			
+			// Includes auxiliary functions
+			$scope.setSection = setSection;
+			
 			// Initializes the actions
 			initializeCreateConsultationAction();
 		}
@@ -88,6 +94,15 @@
 			
 			// Includes the action
 			$scope.createConsultationAction = action;
+		}
+		
+		/**
+		 * Sets a section.
+		 * 
+		 * Receives the section to be set.
+		 */
+		function setSection(section) {
+			$scope.section = section;
 		}
 		
 		// ---------------------------------------------------------------------
