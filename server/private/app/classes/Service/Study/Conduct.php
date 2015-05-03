@@ -115,7 +115,7 @@ class Conduct extends \App\Service\Internal {
 			$this->executeExperiment($directory, $experiment, $input);
 			
 			// Processes the output of the experiment
-			$output = $this->processExperimentOutput($directory);
+			$output = $this->processExperimentOutput($directory, $experiment);
 			
 			// Edits the study
 			$study->setOutput($output);
@@ -195,13 +195,13 @@ class Conduct extends \App\Service\Internal {
 	/**
 	 * Processes the output of an experiment.
 	 * 
-	 * Receives the sandbox's directory.
+	 * Receives the sandbox's directory and the experiment.
 	 */
-	private function processExperimentOutput($directory) {
+	private function processExperimentOutput($directory, $experiment) {
 		global $app;
 		
-		// Defines the name
-		$name = FILE_OUTPUT_NAME;
+		// Gets the name of the experiment's output
+		$name = $experiment->getOutputName();
 		
 		// Builds the temporary path
 		$temporaryPath = buildPath($directory, 'output', $name);

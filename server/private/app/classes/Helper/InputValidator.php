@@ -159,6 +159,37 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a file name.
+	 * 
+	 * Receives the input.
+	 */
+	public function isFileName($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		if (preg_match('/[\x{0000}-\x{001f}]/', $input)) {
+			// The input contains control characters
+			return false;
+		}
+		
+		if (preg_match('/["*\/:<>?\\\|]/', $input)) {
+			// The input contains forbidden characters
+			return false;
+		}
+		
+		// Trims the input
+		$input = trim($input);
+		
+		// Gets the input's length
+		$length = getStringLength($input);
+		
+		// Determines whether the length is in the specified range
+		return inRange($length, 1, 128);
+	}
+	
+	/**
 	 * Determines whether an input is a gender.
 	 * 
 	 * Receives the input.

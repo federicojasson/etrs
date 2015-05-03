@@ -203,6 +203,20 @@ class Experiment {
 	private $name;
 	
 	/**
+	 * The output's name.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="output_name",
+	 *		type="string",
+	 *		length=128,
+	 *		nullable=false
+	 *	)
+	 */
+	private $outputName;
+	
+	/**
 	 * The studies.
 	 * 
 	 * Annotations:
@@ -314,6 +328,13 @@ class Experiment {
 	}
 	
 	/**
+	 * Returns the output's name.
+	 */
+	public function getOutputName() {
+		return $this->outputName;
+	}
+	
+	/**
 	 * Returns the studies.
 	 */
 	public function getStudies() {
@@ -355,6 +376,7 @@ class Experiment {
 		}
 		
 		$serialized['commandLine'] = $this->commandLine;
+		$serialized['outputName'] = $this->outputName;
 		$serialized['name'] = $this->name;
 		
 		$serialized['creator'] = null;
@@ -424,6 +446,15 @@ class Experiment {
 	 */
 	public function setName($name) {
 		$this->name = $name;
+	}
+	
+	/**
+	 * Sets the output's name.
+	 * 
+	 * Receives the name to be set.
+	 */
+	public function setOutputName($name) {
+		$this->outputName = $name;
 	}
 	
 }

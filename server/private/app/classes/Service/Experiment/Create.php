@@ -34,6 +34,7 @@ class Create extends \App\Service\External {
 		// Gets inputs
 		$credentials = $this->getInputValue('credentials');
 		$commandLine = $this->getInputValue('commandLine', 'trimAndShrink');
+		$outputName = $this->getInputValue('outputName', 'trim');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
 		
@@ -54,6 +55,7 @@ class Create extends \App\Service\External {
 		// Creates the experiment
 		$experiment = new \App\Data\Entity\Experiment();
 		$experiment->setCommandLine($commandLine);
+		$experiment->setOutputName($outputName);
 		$experiment->setName($name);
 		$experiment->setCreator($user);
 		$app->data->persist($experiment);
@@ -92,6 +94,10 @@ class Create extends \App\Service\External {
 			
 			'commandLine' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
 				return $app->inputValidator->isCommandLine($input);
+			}),
+			
+			'outputName' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
+				return $app->inputValidator->isFileName($input);
 			}),
 			
 			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
