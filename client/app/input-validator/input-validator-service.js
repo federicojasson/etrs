@@ -161,6 +161,53 @@
 		};
 		
 		/**
+		 * Determines whether an input is a password.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isPassword = function(input) {
+			if (! _this.isValidString(input, 8)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (! /[0-9]/.test(input.value)) {
+				// The input doesn't contain any digit
+				input.message = 'La contraseña debe tener al menos un dígito';
+				return false;
+			}
+			
+			if (! /[A-Z]/.test(input.value)) {
+				// The input doesn't contain any uppercase character
+				input.message = 'La contraseña debe tener al menos una letra mayúscula';
+				return false;
+			}
+			
+			if (! /[a-z]/.test(input.value)) {
+				// The input doesn't contain any lowercase character
+				input.message = 'La contraseña debe tener al menos una letra minúscula';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
+		 * Determines whether an input is a password confirmation.
+		 * 
+		 * Receives the input and the password.
+		 */
+		_this.isPasswordConfirmation = function(input, password) {
+			if (input.value !== password) {
+				// The input doesn't match the password
+				input.message = 'Las contraseñas ingresadas no coinciden';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is a user ID.
 		 * 
 		 * Receives the input.
@@ -244,53 +291,6 @@
 			if (input.value > maximumValue) {
 				// The input is too high
 				input.message = 'El valor de este campo debe ser menor o igual que ' + maximumValue;
-				return false;
-			}
-			
-			return true;
-		};
-		
-		/**
-		 * Determines whether an input is a valid password.
-		 * 
-		 * Receives the input.
-		 */
-		_this.isValidPassword = function(input) {
-			if (! _this.isValidString(input, 8)) {
-				// The input is not a valid string
-				return false;
-			}
-			
-			if (! /[0-9]/.test(input.value)) {
-				// The input doesn't contain any digit
-				input.message = 'La contraseña debe tener al menos un dígito';
-				return false;
-			}
-			
-			if (! /[A-Z]/.test(input.value)) {
-				// The input doesn't contain any uppercase character
-				input.message = 'La contraseña debe tener al menos una letra mayúscula';
-				return false;
-			}
-			
-			if (! /[a-z]/.test(input.value)) {
-				// The input doesn't contain any lowercase character
-				input.message = 'La contraseña debe tener al menos una letra minúscula';
-				return false;
-			}
-			
-			return true;
-		};
-		
-		/**
-		 * Determines whether an input is a valid password confirmation.
-		 * 
-		 * Receives the input and the password.
-		 */
-		_this.isValidPasswordConfirmation = function(input, password) {
-			if (input.value !== password) {
-				// The input doesn't match the password
-				input.message = 'Las contraseñas ingresadas no coinciden';
 				return false;
 			}
 			

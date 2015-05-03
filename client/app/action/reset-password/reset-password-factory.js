@@ -66,11 +66,11 @@
 				},
 				
 				password: new Input(function() {
-					return inputValidator.isValidPassword(this);
+					return inputValidator.isPassword(this);
 				}),
 				
 				passwordConfirmation: new Input(function() {
-					return inputValidator.isValidPasswordConfirmation(this.input.passwordConfirmation, this.input.password.value);
+					return inputValidator.isPasswordConfirmation(this.input.passwordConfirmation, this.input.password.value);
 				}.bind(this))
 			};
 		}

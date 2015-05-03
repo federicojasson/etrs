@@ -217,6 +217,21 @@ class InputValidator {
 	}
 	
 	/**
+	 * Determines whether an input is a password.
+	 * 
+	 * Receives the input.
+	 */
+	public function isPassword($input) {
+		if (! is_string($input)) {
+			// The input is not a string
+			return false;
+		}
+		
+		// Determines whether the input matches a regular expression
+		return preg_match('/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])^.{8,}$/', $input);
+	}
+	
+	/**
 	 * Determines whether an input is a random ID.
 	 * 
 	 * Receives the input.
@@ -318,7 +333,7 @@ class InputValidator {
 	/**
 	 * Determines whether an input is a valid line.
 	 * 
-	 * An input is considered a valid line if it contains only printable
+	 * An input is considered a valid line if it doesn't contain control
 	 * characters and is a valid string after trimming it and shrinking it.
 	 * 
 	 * Receives the input, the minimum length allowed and, optionally, the
@@ -343,21 +358,6 @@ class InputValidator {
 		
 		// Determines whether the length is in the specified range
 		return inRange($length, $minimumLength, $maximumLength);
-	}
-	
-	/**
-	 * Determines whether an input is a valid password.
-	 * 
-	 * Receives the input.
-	 */
-	public function isValidPassword($input) {
-		if (! is_string($input)) {
-			// The input is not a string
-			return false;
-		}
-		
-		// Determines whether the input matches a regular expression
-		return preg_match('/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])^.{8,}$/', $input);
 	}
 	
 	/**

@@ -82,7 +82,7 @@ class ChangePassword extends \App\Service\External {
 			]),
 			
 			'password' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-				return $app->inputValidator->isValidPassword($input);
+				return $app->inputValidator->isPassword($input);
 			})
 		]);
 		
