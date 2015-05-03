@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- NotAuthenticated ---> files lost.
 - // Registers the callbacks ---> Registers callbacks
 - Experiment: add output_name column?
 - FileHandler: add edition option (for name).
