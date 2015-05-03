@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- Check button labels.
 - NotAuthenticated ---> files lost.
 - // Registers the callbacks ---> Registers callbacks
 - Experiment: add output_name column?
