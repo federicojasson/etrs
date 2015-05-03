@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- Create directive to filter inputs? (Replace integer, line, file-name and null-if-empty directives).
 - Mix themes.
 - Check button labels.
 - NotAuthenticated ---> files lost.
