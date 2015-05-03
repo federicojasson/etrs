@@ -494,7 +494,7 @@ function toString($variable) {
  */
 function trimAndShrink($string) {
 	// Trims the string
-	$string = trim($string, ' ');
+	$string = trim($string);
 	
 	// Shrinks the string
 	return preg_replace('/ +/', ' ', $string);
