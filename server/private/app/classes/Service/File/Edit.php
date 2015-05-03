@@ -34,7 +34,7 @@ class Edit extends \App\Service\External {
 		// Gets inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
-		$name = $this->getInputValue('name', 'buildFileName');
+		$name = $this->getInputValue('name', 'trim');
 		
 		// Gets the signed-in user
 		$user = $app->account->getSignedInUser();
@@ -78,7 +78,7 @@ class Edit extends \App\Service\External {
 			}),
 			
 			'name' => new \App\InputValidator\Json\JsonValue(function($input) use ($app) {
-				return $app->inputValidator->isValidString($input, 0, 128);
+				return $app->inputValidator->isFileName($input);
 			})
 		]);
 		
