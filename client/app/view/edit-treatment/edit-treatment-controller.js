@@ -96,7 +96,7 @@
 			action.input.version.value = treatment.version;
 			action.input.name.value = treatment.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

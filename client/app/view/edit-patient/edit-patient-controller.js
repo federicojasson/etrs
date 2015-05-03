@@ -101,7 +101,7 @@
 			action.input.birthDate.value = patient.birthDate;
 			action.input.yearsOfEducation.value = patient.yearsOfEducation;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

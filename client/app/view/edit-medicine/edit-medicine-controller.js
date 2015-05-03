@@ -96,7 +96,7 @@
 			action.input.version.value = medicine.version;
 			action.input.name.value = medicine.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

@@ -96,7 +96,7 @@
 			action.input.version.value = medicalAntecedent.version;
 			action.input.name.value = medicalAntecedent.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

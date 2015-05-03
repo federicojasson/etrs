@@ -97,7 +97,7 @@
 			action.input.dataTypeDefinition.value = imagingTest.dataTypeDefinition;
 			action.input.name.value = imagingTest.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

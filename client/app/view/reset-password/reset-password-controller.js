@@ -111,7 +111,7 @@
 			action.input.credentials.id.value = id;
 			action.input.credentials.password.value = password;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

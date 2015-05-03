@@ -69,7 +69,7 @@
 			action.input.id.value = treatment.id;
 			action.input.version.value = treatment.version;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				// Removes the treatment
@@ -137,7 +137,7 @@
 			action.input.page.value = 1;
 			action.input.resultsPerPage.value = 10;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				// Refreshes the treatments

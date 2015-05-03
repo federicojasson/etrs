@@ -74,7 +74,7 @@
 			// Initializes the action
 			var action = new RequestSignUpAction();
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

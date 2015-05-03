@@ -82,7 +82,7 @@
 			// Initializes the action
 			var action = new SignOutAction();
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

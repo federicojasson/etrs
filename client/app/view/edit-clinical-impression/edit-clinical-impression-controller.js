@@ -96,7 +96,7 @@
 			action.input.version.value = clinicalImpression.version;
 			action.input.name.value = clinicalImpression.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

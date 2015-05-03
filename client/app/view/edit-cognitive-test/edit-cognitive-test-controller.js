@@ -97,7 +97,7 @@
 			action.input.dataTypeDefinition.value = cognitiveTest.dataTypeDefinition;
 			action.input.name.value = cognitiveTest.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

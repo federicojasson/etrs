@@ -100,7 +100,7 @@
 			action.input.version.value = experiment.version;
 			action.input.name.value = experiment.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

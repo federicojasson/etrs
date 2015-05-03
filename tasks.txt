@@ -4,7 +4,6 @@ Quick tasks
 
 - Check button labels.
 - NotAuthenticated ---> files lost.
-- // Registers the callbacks ---> Registers callbacks
 - Experiment: add output_name column?
 - FileHandler: add edition option (for name).
 - Add file module for file-handler and file-uploader?

@@ -69,7 +69,7 @@
 			action.input.id.value = imagingTest.id;
 			action.input.version.value = imagingTest.version;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				// Removes the imaging test
@@ -137,7 +137,7 @@
 			action.input.page.value = 1;
 			action.input.resultsPerPage.value = 10;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				// Refreshes the imaging tests

@@ -69,7 +69,7 @@
 			action.input.id.value = diagnosis.id;
 			action.input.version.value = diagnosis.version;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				// Removes the diagnosis
@@ -118,7 +118,7 @@
 			action.input.page.value = 1;
 			action.input.resultsPerPage.value = 10;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				// Refreshes the diagnoses

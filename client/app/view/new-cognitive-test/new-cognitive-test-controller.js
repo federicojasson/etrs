@@ -73,7 +73,7 @@
 			// Initializes the action
 			var action = new CreateCognitiveTestAction();
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

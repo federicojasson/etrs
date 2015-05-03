@@ -97,7 +97,7 @@
 			action.input.dataTypeDefinition.value = laboratoryTest.dataTypeDefinition;
 			action.input.name.value = laboratoryTest.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

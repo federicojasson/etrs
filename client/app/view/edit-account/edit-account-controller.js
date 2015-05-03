@@ -100,7 +100,7 @@
 			action.input.lastName.value = user.lastName;
 			action.input.gender.value = user.gender;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

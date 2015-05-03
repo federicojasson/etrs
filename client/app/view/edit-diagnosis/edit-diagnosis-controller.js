@@ -96,7 +96,7 @@
 			action.input.version.value = diagnosis.version;
 			action.input.name.value = diagnosis.name;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

@@ -69,7 +69,7 @@
 			action.input.id.value = clinicalImpression.id;
 			action.input.version.value = clinicalImpression.version;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				// Removes the clinical impresion
@@ -118,7 +118,7 @@
 			action.input.page.value = 1;
 			action.input.resultsPerPage.value = 10;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				// Refreshes the clinical impressions

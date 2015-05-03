@@ -71,10 +71,10 @@
 				uploader.queueLimit = limit;
 			}
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			uploader.onAfterAddingFile = function(fileItem) {
-				// Registers the callbacks
+				// Registers callbacks
 				
 				fileItem.onBeforeUpload = function() {
 					$scope.uploading = true;

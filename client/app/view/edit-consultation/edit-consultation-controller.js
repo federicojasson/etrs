@@ -94,7 +94,7 @@
 			// Sets inputs' initial values
 			// TODO
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;

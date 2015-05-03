@@ -102,7 +102,7 @@
 			action.input.sortingCriteria.value = [];
 			action.input.resultsPerPage.value = 10;
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.nullExpressionCallback = function() {
 				// Refreshes the patients

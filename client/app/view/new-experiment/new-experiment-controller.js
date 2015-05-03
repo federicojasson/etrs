@@ -77,7 +77,7 @@
 			// Sets inputs' initial values
 			action.input.files.value = [];
 			
-			// Registers the callbacks
+			// Registers callbacks
 			
 			action.startCallback = function() {
 				ready = false;
