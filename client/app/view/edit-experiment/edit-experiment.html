@@ -62,20 +62,20 @@
 							Archivos
 						</span>
 					</legend>
-				</fieldset>
-				
-				<div class="form-group">
-					<file-handler
-						ng-repeat="file in experiment.files | reverse"
-						file="file"
-					></file-handler>
 					
-					<div ng-if="experiment.files.length === 0">
-						<div class="no-items-text text-center">
-							No hay archivos para mostrar
+					<div class="form-group">
+						<file-handler
+							ng-repeat="file in experiment.files | reverse"
+							file="file"
+						></file-handler>
+
+						<div ng-if="experiment.files.length === 0">
+							<div class="no-items-text text-center">
+								No hay archivos para mostrar
+							</div>
 						</div>
 					</div>
-				</div>
+				</fieldset>
 			</div>
 		</div>
 	</form>
