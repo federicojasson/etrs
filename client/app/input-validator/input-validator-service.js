@@ -108,6 +108,21 @@
 		};
 		
 		/**
+		 * Determines whether an input is a file.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isFile = function(input) {
+			if (input.value === '') {
+				// The file has not been selected
+				input.message = 'Seleccione un archivo';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is a file name.
 		 * 
 		 * Receives the input.

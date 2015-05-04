@@ -1,1 +1,121 @@
-TODO: new-study.html
+<h1>Nuevo estudio</h1>
+
+<p>
+	El siguiente formulario le permite crear un nuevo estudio.
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createStudy()" novalidate>
+		<div class="row">
+			<div class="col-sm-7">
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-floppy-save"></span>
+						
+						<span class="icon-text">
+							Estudio
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						Ingrese los datos del estudio:
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! createStudyAction.input.experiment.valid
+						}"
+						class="form-group"
+					>
+						<select
+							ng-options="experiment.id as experiment.name for experiment in experiments"
+							ng-model="createStudyAction.input.experiment.value"
+							popover="{{ createStudyAction.input.experiment.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							class="form-control"
+						>
+							<option value="" disabled>Experimento</option>
+						</select>
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! createStudyAction.input.comments.valid
+						}"
+						class="form-group"
+					>
+						<textarea
+							ng-model="createStudyAction.input.comments.value"
+							popover="{{ createStudyAction.input.comments.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							rows="6"
+							placeholder="Observaciones"
+							class="form-control"
+						>
+						</textarea>
+					</div>
+				</fieldset>
+				
+				<div class="form-group">
+					<button
+						ng-disabled="uploadingInput || uploadingFiles"
+						type="submit"
+						class="btn btn-success pull-right"
+					>
+						Crear estudio
+					</button>
+				</div>
+			</div>
+			
+			<div class="col-sm-5">
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-folder-open"></span>
+						
+						<span class="icon-text">
+							Archivo de entrada
+						</span>
+					</legend>
+					
+					<div
+						ng-class="{
+							'has-error': ! createStudyAction.input.input.valid
+						}"
+						class="form-group"
+					>
+						<file-uploader
+							popover="{{ createStudyAction.input.input.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="mouseenter"
+							files="input"
+							uploading="uploadingInput"
+							limit="1"
+						></file-uploader>
+					</div>
+				</fieldset>
+				
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-folder-open"></span>
+						
+						<span class="icon-text">
+							Archivos
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						<file-uploader
+							files="createStudyAction.input.files.value"
+							uploading="uploadingFiles"
+						></file-uploader>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+</div>

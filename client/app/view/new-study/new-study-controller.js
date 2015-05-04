@@ -20,22 +20,26 @@
 
 (function() {
 	angular.module('app.view.newStudy').controller('NewStudyViewController', [
+		'$q',
 		'$scope',
+		'$stateParams',
 		'CreateStudyAction',
+		'data',
 		'router',
+		'server',
 		NewStudyViewController
 	]);
 	
 	/**
 	 * Represents the new-study view.
 	 */
-	function NewStudyViewController($scope, CreateStudyAction, router) {
+	function NewStudyViewController($q, $scope, $stateParams, CreateStudyAction, data, router, server) {
 		var _this = this;
 		
 		/**
 		 * Indicates whether the view is ready.
 		 */
-		var ready = true;
+		var ready = false;
 		
 		/**
 		 * Returns the template's URL.
@@ -59,19 +63,81 @@
 		};
 		
 		/**
+		 * Creates the study.
+		 */
+		function createStudy() {
+			if ($scope.input.length === 0) {
+				// Resets the input
+				$scope.createStudyAction.input.input.value = '';
+			} else {
+				// Sets the input
+				$scope.createStudyAction.input.input.value = $scope.input[0];
+			}
+			
+			// Executes the create-study action
+			$scope.createStudyAction.execute();
+		}
+		
+		/**
+		 * Gets all experiments.
+		 */
+		function getAllExperiments() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all experiments
+			server.experiment.getAll().then(function(output) {
+				// Gets the experiments
+				return data.getExperimentArray(output.ids);
+			}).then(function(experiments) {
+				// Includes the experiments
+				$scope.experiments = experiments;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(experiments);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Gets the URL parameters
+			var id = $stateParams.id;
+			
+			// Includes auxiliary variables
+			$scope.input = [];
+			
+			// Includes auxiliary functions
+			$scope.createStudy = createStudy;
+			
 			// Initializes actions
-			initializeCreateStudyAction();
+			initializeCreateStudyAction(id);
+			
+			// Resets the data service
+			data.reset();
+			
+			// Gets resources
+			getAllExperiments().then(function() {
+				ready = true;
+			});
 		}
 		
 		/**
 		 * Initializes the create-study action.
+		 * 
+		 * Receives the consultation's ID.
 		 */
-		function initializeCreateStudyAction() {
+		function initializeCreateStudyAction(id) {
 			// Initializes the action
 			var action = new CreateStudyAction();
+			
+			// Sets inputs' initial values
+			action.input.consultation.value = id;
+			action.input.files.value = [];
 			
 			// Registers callbacks
 			

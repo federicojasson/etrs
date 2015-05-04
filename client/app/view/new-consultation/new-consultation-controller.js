@@ -265,7 +265,7 @@
 			// Resets the data service
 			data.reset();
 			
-			// TODO: comment?
+			// Gets resources
 			$q.all([
 				getAllClinicalImpressions(),
 				getAllDiagnoses(),

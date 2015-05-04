@@ -65,8 +65,7 @@
 				}),
 				
 				input: new Input(function() {
-					// TODO
-					return false;
+					return inputValidator.isFile(this);
 				}),
 				
 				files: new Input()
