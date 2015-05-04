@@ -41,7 +41,7 @@
 			</div>
 			
 			<div ng-if="fileItem.isUploading">
-				<a ng-click="fileItem.cancel()">
+				<a ng-click="fileItem.cancel()" class="btn btn-link inline">
 					[ Cancelar ]
 				</a>
 				
@@ -75,7 +75,7 @@
 			</div>
 			
 			<div ng-if="fileItem.isSuccess">
-				<a ng-click="removeFileItem(fileItem)">
+				<a ng-click="removeFileItem(fileItem)" class="btn btn-link inline">
 					[ Eliminar ]
 				</a>
 			</div>
