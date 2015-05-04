@@ -54,7 +54,14 @@
 			
 			// Initializes the input
 			this.input = {
-				// TODO
+				id: new Input(),
+				version: new Input(),
+				
+				comments: new Input(function() {
+					return inputValidator.isValidString(this, 0, 1024);
+				}),
+				
+				files: new Input()
 			};
 		}
 		
@@ -72,7 +79,10 @@
 			
 			// Edits the study
 			server.study.edit({
-				// TODO
+				id: this.input.id.value,
+				version: this.input.version.value,
+				comments: this.input.comments.value,
+				files: this.input.files.value
 			}).then(function() {
 				// Invokes the success callback
 				this.successCallback();

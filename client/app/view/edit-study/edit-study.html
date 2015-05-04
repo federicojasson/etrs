@@ -1,1 +1,105 @@
-TODO: edit-study.html
+<h1>Estudio - {{ study.experiment.name }}</h1>
+
+<p>
+	El siguiente formulario le permite editar un estudio.<br>
+	<br>
+	<strong>
+		Los cambios realizados en el estudio se verán reflejados automáticamente
+		en todo el sistema.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editStudy()" novalidate>
+		<div class="row">
+			<div class="col-sm-7">
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-floppy-save"></span>
+						
+						<span class="icon-text">
+							Estudio
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						Ingrese los datos del estudio:
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! editStudyAction.input.comments.valid
+						}"
+						class="form-group"
+					>
+						<textarea
+							ng-model="editStudyAction.input.comments.value"
+							popover="{{ editStudyAction.input.comments.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							rows="6"
+							placeholder="Observaciones"
+							class="form-control"
+						>
+						</textarea>
+					</div>
+				</fieldset>
+				
+				<div class="form-group">
+					<button
+						ng-disabled="uploading"
+						type="submit"
+						class="btn btn-warning pull-right"
+					>
+						Editar estudio
+					</button>
+				</div>
+			</div>
+			
+			<div class="col-sm-5">
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-folder-open"></span>
+						
+						<span class="icon-text">
+							Archivos
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						<file-handler
+							ng-repeat="file in files | reverse"
+							file="file"
+							removable="true"
+							on-remove="removeFile(file)"
+						></file-handler>
+						
+						<div ng-if="files.length === 0">
+							<div class="no-items-text text-center">
+								No hay archivos para mostrar
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-folder-open"></span>
+						
+						<span class="icon-text">
+							Archivos a agregar
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						<file-uploader
+							files="filesToAdd"
+							uploading="uploading"
+						></file-uploader>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+</div>

@@ -25,13 +25,14 @@
 		'EditStudyAction',
 		'data',
 		'router',
+		'utility',
 		EditStudyViewController
 	]);
 	
 	/**
 	 * Represents the edit-study view.
 	 */
-	function EditStudyViewController($scope, $stateParams, EditStudyAction, data, router) {
+	function EditStudyViewController($scope, $stateParams, EditStudyAction, data, router, utility) {
 		var _this = this;
 		
 		/**
@@ -50,7 +51,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			// TODO
+			return 'Estudio - ' + $scope.study.experiment.name;
 		};
 		
 		/**
@@ -61,19 +62,54 @@
 		};
 		
 		/**
+		 * Edits the study.
+		 */
+		function editStudy() {
+			// Prepares the edit-study action to be executed
+			
+			$scope.editStudyAction.input.files.value = [];
+			
+			for (var i = 0; i < $scope.files.length; i++) {
+				$scope.editStudyAction.input.files.value.push($scope.files[i].id);
+			}
+			
+			for (var i = 0; i < $scope.filesToAdd.length; i++) {
+				$scope.editStudyAction.input.files.value.push($scope.filesToAdd[i]);
+			}
+			
+			// Executes the edit-study action
+			$scope.editStudyAction.execute();
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
 			// Gets the URL parameters
 			var id = $stateParams.id;
 			
+			// Includes auxiliary variables
+			$scope.filesToAdd = [];
+			
+			// Includes auxiliary functions
+			$scope.editStudy = editStudy;
+			$scope.removeFile = removeFile;
+			
 			// Resets the data service
-			data.reset();
+			data.reset(1, {
+				Study: [
+					'experiment',
+					'files'
+				]
+			});
 			
 			// Gets the study
 			data.getStudy(id).then(function(study) {
 				// Includes the study
 				$scope.study = study;
+				
+				// Includes auxiliary variables
+				$scope.files = study.files;
 				
 				// Initializes actions
 				initializeEditStudyAction(study);
@@ -92,7 +128,9 @@
 			var action = new EditStudyAction();
 			
 			// Sets inputs' initial values
-			// TODO
+			action.input.id.value = study.id;
+			action.input.version.value = study.version;
+			action.input.comments.value = study.comments;
 			
 			// Registers callbacks
 			
@@ -109,6 +147,14 @@
 			
 			// Includes the action
 			$scope.editStudyAction = action;
+		}
+		
+		/**
+		 * Removes a file from the study.
+		 */
+		function removeFile(file) {
+			// Removes the file
+			utility.removeFromArray(file, $scope.files);
 		}
 		
 		// ---------------------------------------------------------------------
