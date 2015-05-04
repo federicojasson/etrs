@@ -27,16 +27,63 @@
 	]);
 	
 	/**
-	 * TODO: comment
+	 * Implements the logic of a file-uploader.
 	 */
 	function FileUploaderController($scope, FileUploader, utility) {
+		var _this = this;
+		
+		/**
+		 * The uploader.
+		 */
+		_this.uploader = null;
+		
+		/**
+		 * Indicates whether a file is being uploaded.
+		 */
+		_this.uploading = false;
+		
+		/**
+		 * Removes a file item.
+		 * 
+		 * Receives the file item.
+		 */
+		_this.removeFileItem = function(fileItem) {
+			// Removes the file's ID
+			utility.removeFromArray(fileItem.file.id, $scope.files);
+			
+			// Removes the file item
+			fileItem.remove();
+		};
+		
+		/**
+		 * Filters a file item by the maximum number of files allowed.
+		 */
+		function filterByLimit() {
+			// Gets the file queue
+			var queue = _this.uploader.queue;
+			
+			// Counts the number of files that are queued or have been uploaded
+			var count = 0;
+			for (var i = 0; i < queue.length; i++) {
+				var fileItem = queue[i];
+				
+				if (fileItem.isCancel || fileItem.isError) {
+					// The upload has failed or has been canceled
+					continue;
+				}
+				
+				// Increments the count
+				count++;
+			}
+			
+			// Determines whether the count is lower than the limit
+			return count < $scope.limit;
+		}
+		
 		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes auxiliary functions
-			$scope.removeFileItem = removeFileItem;
-			
 			// Initializes the uploader
 			initializeUploader($scope.limit);
 		}
@@ -48,55 +95,42 @@
 		 */
 		function initializeUploader(limit) {
 			// Initializes the uploader
-			var uploader = new FileUploader({
+			_this.uploader = new FileUploader({
 				url: '/server/file/upload',
 				alias: 'file',
 				method: 'POST'
 			});
 			
 			if (angular.isDefined(limit)) {
-				// Sets the maximum number of files allowed
-				uploader.queueLimit = limit;
+				// Registers a filter
+				_this.uploader.filters.push({
+					name: 'limit',
+					fn: filterByLimit
+				});
 			}
 			
 			// Registers callbacks
 			
-			uploader.onAfterAddingFile = function(fileItem) {
+			_this.uploader.onAfterAddingFile = function(fileItem) {
 				// Uploads the file
 				fileItem.upload();
 			};
 			
-			uploader.onBeforeUploadItem = function() {
-				$scope.uploading = true;
+			_this.uploader.onBeforeUploadItem = function() {
+				_this.uploading = true;
 			};
 			
-			uploader.onCompleteItem = function() {
-				$scope.uploading = false;
+			_this.uploader.onCompleteItem = function() {
+				_this.uploading = false;
 			};
 			
-			uploader.onSuccessItem = function(fileItem, output) {
+			_this.uploader.onSuccessItem = function(fileItem, output) {
 				// Adds the file's ID
 				$scope.files.push(output.id);
 				
 				// Stores the file's ID in the file item
 				fileItem.file.id = output.id;
 			};
-			
-			// Includes the uploader
-			$scope.uploader = uploader;
-		}
-		
-		/**
-		 * Removes a file item.
-		 * 
-		 * Receives the file item.
-		 */
-		function removeFileItem(fileItem) {
-			// Removes the file's ID
-			utility.removeFromArray(fileItem.file.id, $scope.files);
-			
-			// Removes the file item
-			fileItem.remove();
 		}
 		
 		// ---------------------------------------------------------------------

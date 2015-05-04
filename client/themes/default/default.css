@@ -709,6 +709,10 @@
 	margin-top: 48px;
 }
 
+.off-text {
+	color: #aaaaaa;
+}
+
 .pagination li a {
 	color: #666666;
 }
