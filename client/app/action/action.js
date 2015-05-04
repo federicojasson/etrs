@@ -42,6 +42,7 @@
 		'app.action.deleteLaboratoryTest',
 		'app.action.deleteMedicalAntecedent',
 		'app.action.deleteMedicine',
+		'app.action.deletePatient',
 		'app.action.deleteStudy',
 		'app.action.deleteTreatment',
 		'app.action.editAccount',
