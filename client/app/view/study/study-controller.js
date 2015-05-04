@@ -48,7 +48,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			// TODO
+			return 'Estudio - ' + $scope.study.experiment.name;
 		};
 		
 		/**
@@ -66,7 +66,11 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset();
+			data.reset(1, {
+				Study: [
+					'experiment'
+				]
+			});
 			
 			// Gets the study
 			data.getStudy(id).then(function(study) {
