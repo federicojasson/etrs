@@ -22,14 +22,16 @@
 	angular.module('app.view.diagnosis').controller('DiagnosisViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteDiagnosisAction',
 		'data',
+		'router',
 		DiagnosisViewController
 	]);
 	
 	/**
 	 * Represents the diagnosis view.
 	 */
-	function DiagnosisViewController($scope, $stateParams, data) {
+	function DiagnosisViewController($scope, $stateParams, DeleteDiagnosisAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the diagnosis
 				$scope.diagnosis = diagnosis;
 				
+				// Initializes the actions
+				initializeDeleteDiagnosisAction(diagnosis);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-diagnosis action.
+		 * 
+		 * Receives the diagnosis.
+		 */
+		function initializeDeleteDiagnosisAction(diagnosis) {
+			// Initializes the action
+			var action = new DeleteDiagnosisAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = diagnosis.id;
+			action.input.version.value = diagnosis.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the diagnoses state
+				router.redirect('diagnoses');
+			};
+			
+			// Includes the action
+			$scope.deleteDiagnosisAction = action;
 		}
 		
 		// ---------------------------------------------------------------------

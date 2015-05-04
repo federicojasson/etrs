@@ -1,1 +1,26 @@
+<h1>{{ diagnosis.name }}</h1>
+
+<button ng-click="deleteDiagnosisAction.execute()" class="btn btn-danger">
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editDiagnosis({
+		id: diagnosis.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<hr>
+
 TODO: diagnosis.html
