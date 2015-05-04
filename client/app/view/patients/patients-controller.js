@@ -99,6 +99,7 @@
 			var action = new SearchPatientsAction();
 			
 			// Sets inputs' initial values
+			action.input.expression.value = null;
 			action.input.sortingCriteria.value = [];
 			action.input.resultsPerPage.value = 10;
 			
