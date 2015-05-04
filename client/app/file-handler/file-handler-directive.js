@@ -19,15 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.fileHandler').directive('fileHandler', [
-		'utility',
-		fileHandlerDirective
-	]);
+	angular.module('app.fileHandler').directive('fileHandler', fileHandlerDirective);
 	
 	/**
 	 * Includes a file handler.
 	 */
-	function fileHandlerDirective(utility) {
+	function fileHandlerDirective() {
 		/**
 		 * Returns the settings.
 		 */
@@ -38,27 +35,10 @@
 					file: '=file',
 					onRemove: '=onRemove'
 				},
-				link: onPostLink,
+				controller: 'FileHandlerController',
+				controllerAs: 'fileHandler',
 				templateUrl: 'app/file-handler/file-handler.html'
 			};
-		}
-		
-		/**
-		 * Invoked after the linking phase.
-		 * 
-		 * Receives the scope of the directive.
-		 */
-		function onPostLink(scope) {
-			// Gets the file
-			var file = scope.file;
-			
-			// Gets the file's extension
-			var extension = utility.getFileExtension(file.name);
-			
-			if (extension !== '') {
-				// Builds the file-icon class
-				scope.fileIconClass = 'file-icon-' + extension;
-			}
 		}
 		
 		// ---------------------------------------------------------------------

@@ -87,19 +87,6 @@
 	word-break: normal;
 }
 
-.download-file-text {
-	font-size: 0.9em;
-	margin-top: 6px;
-}
-
-.download-file-text .btn-link {
-	text-decoration: none;
-}
-
-.download-file-text .glyphicon {
-	color: #666666;
-}
-
 .dropdown-menu {
 	font-size: 0.85em;
 	line-height: 18px;
@@ -117,7 +104,8 @@
 .file-drop-zone {
 	border: 2px dashed #dddddd;
 	color: #999999;
-	padding: 50px 20px;
+	padding-bottom: 50px;
+	padding-top: 50px;
 }
 
 .file-drop-zone.active {
@@ -130,7 +118,26 @@
 	background-color: #f5f5f5;
 	border: 1px solid #dddddd;
 	margin-bottom: 8px;
-	padding: 8px 12px 8px 2px;
+	padding: 8px 12px 4px 2px;
+}
+
+.file-handler-form {
+	font-size: 0.9em;
+	margin-top: 6px;
+}
+
+.file-handler-form .btn-link {
+	margin-right: 12px;
+	text-decoration: none;
+}
+
+.file-handler-form .form-group {
+	margin-bottom: 7px;
+	margin-top: -4px;
+}
+
+.file-handler-form .glyphicon {
+	color: #666666;
 }
 
 .file-icon {
@@ -512,6 +519,17 @@
 	font-weight: bold;
 	letter-spacing: 2px;
 	text-transform: uppercase;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.loading-text-small {
+	color: #aaaaaa;
+	cursor: default;
+	padding-bottom: 23px;
+	padding-top: 18px;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-webkit-user-select: none;
