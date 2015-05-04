@@ -57,7 +57,7 @@
 				</div>
 				
 				<div ng-if="! fileHandler.editing">
-					<div ng-if="onRemove !== undefined">
+					<div ng-if="removable">
 						<button
 							ng-click="onRemove()"
 							type="button"

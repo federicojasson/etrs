@@ -33,7 +33,8 @@
 				restrict: 'E',
 				scope: {
 					file: '=file',
-					onRemove: '=onRemove'
+					onRemove: '&onRemove',
+					removable: '=removable'
 				},
 				controller: 'FileHandlerController',
 				controllerAs: 'fileHandler',
