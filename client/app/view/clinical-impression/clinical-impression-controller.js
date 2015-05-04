@@ -22,14 +22,16 @@
 	angular.module('app.view.clinicalImpression').controller('ClinicalImpressionViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteClinicalImpressionAction',
 		'data',
+		'router',
 		ClinicalImpressionViewController
 	]);
 	
 	/**
 	 * Represents the clinical-impression view.
 	 */
-	function ClinicalImpressionViewController($scope, $stateParams, data) {
+	function ClinicalImpressionViewController($scope, $stateParams, DeleteClinicalImpressionAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the clinical impression
 				$scope.clinicalImpression = clinicalImpression;
 				
+				// Initializes the actions
+				initializeDeleteClinicalImpressionAction(clinicalImpression);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-clinical-impression action.
+		 * 
+		 * Receives the clinical impression.
+		 */
+		function initializeDeleteClinicalImpressionAction(clinicalImpression) {
+			// Initializes the action
+			var action = new DeleteClinicalImpressionAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = clinicalImpression.id;
+			action.input.version.value = clinicalImpression.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the clinical-impressions state
+				router.redirect('clinicalImpressions');
+			};
+			
+			// Includes the action
+			$scope.deleteClinicalImpressionAction = action;
 		}
 		
 		// ---------------------------------------------------------------------

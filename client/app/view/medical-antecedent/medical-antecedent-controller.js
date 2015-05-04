@@ -102,7 +102,7 @@
 			};
 			
 			action.successCallback = function() {
-				// Redirects the user to the medical antecedents state
+				// Redirects the user to the medical-antecedents state
 				router.redirect('medicalAntecedents');
 			};
 			
