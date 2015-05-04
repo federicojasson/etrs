@@ -51,6 +51,7 @@
 		'app.action.editConsultation',
 		'app.action.editDiagnosis',
 		'app.action.editExperiment',
+		'app.action.editFile',
 		'app.action.editImagingTest',
 		'app.action.editLaboratoryTest',
 		'app.action.editMedicalAntecedent',
