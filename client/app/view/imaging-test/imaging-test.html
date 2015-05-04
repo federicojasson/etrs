@@ -1,1 +1,26 @@
+<h1>{{ imagingTest.name }}</h1>
+
+<button ng-click="deleteImagingTestAction.execute()" class="btn btn-danger">
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editImagingTest({
+		id: imagingTest.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<hr>
+
 TODO: imaging-test.html

@@ -22,14 +22,16 @@
 	angular.module('app.view.imagingTest').controller('ImagingTestViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteImagingTestAction',
 		'data',
+		'router',
 		ImagingTestViewController
 	]);
 	
 	/**
 	 * Represents the imaging-test view.
 	 */
-	function ImagingTestViewController($scope, $stateParams, data) {
+	function ImagingTestViewController($scope, $stateParams, DeleteImagingTestAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the imaging test
 				$scope.imagingTest = imagingTest;
 				
+				// Initializes the actions
+				initializeDeleteImagingTestAction(imagingTest);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-imaging-test action.
+		 * 
+		 * Receives the imaging test.
+		 */
+		function initializeDeleteImagingTestAction(imagingTest) {
+			// Initializes the action
+			var action = new DeleteImagingTestAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = imagingTest.id;
+			action.input.version.value = imagingTest.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the imaging-tests state
+				router.redirect('imagingTests');
+			};
+			
+			// Includes the action
+			$scope.deleteImagingTestAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
