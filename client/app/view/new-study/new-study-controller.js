@@ -66,11 +66,11 @@
 		 * Creates the study.
 		 */
 		function createStudy() {
+			// Prepares the create-study action to be executed
+			
 			if ($scope.input.length === 0) {
-				// Resets the input
 				$scope.createStudyAction.input.input.value = '';
 			} else {
-				// Sets the input
 				$scope.createStudyAction.input.input.value = $scope.input[0];
 			}
 			
