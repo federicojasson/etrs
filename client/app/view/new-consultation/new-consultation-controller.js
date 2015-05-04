@@ -63,6 +63,29 @@
 		};
 		
 		/**
+		 * Gets all clinical impressions.
+		 */
+		function getAllClinicalImpressions() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all clinical impressions
+			server.clinicalImpression.getAll().then(function(output) {
+				// Gets the clinical impressions
+				return data.getClinicalImpressionArray(output.ids);
+			}).then(function(clinicalImpressions) {
+				// Includes the clinical impressions
+				$scope.clinicalImpressions = clinicalImpressions;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(clinicalImpressions);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
 		 * Gets all cognitive tests.
 		 */
 		function getAllCognitiveTests() {
@@ -79,6 +102,29 @@
 				
 				// Resolves the deferred task
 				deferredTask.resolve(cognitiveTests);
+			});
+			
+			// Gets the promise of the deferred task
+			return deferredTask.promise;
+		}
+		
+		/**
+		 * Gets all diagnoses.
+		 */
+		function getAllDiagnoses() {
+			// Initializes a deferred task
+			var deferredTask = $q.defer();
+			
+			// Gets all diagnoses
+			server.diagnosis.getAll().then(function(output) {
+				// Gets the diagnoses
+				return data.getDiagnosisArray(output.ids);
+			}).then(function(diagnoses) {
+				// Includes the diagnoses
+				$scope.diagnoses = diagnoses;
+				
+				// Resolves the deferred task
+				deferredTask.resolve(diagnoses);
 			});
 			
 			// Gets the promise of the deferred task
@@ -221,6 +267,8 @@
 			
 			// TODO: comment?
 			$q.all([
+				getAllClinicalImpressions(),
+				getAllDiagnoses(),
 				getAllMedicalAntecedents(),
 				getAllMedicines(),
 				getAllLaboratoryTests(),

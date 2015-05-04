@@ -55,7 +55,9 @@
 			// Initializes the input
 			this.input = {
 				// TODO: other inputs
-				patient: new Input()
+				patient: new Input(),
+				clinicalImpression: new Input(),
+				diagnosis: new Input()
 			};
 		}
 		

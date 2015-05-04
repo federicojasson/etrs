@@ -103,6 +103,26 @@
 						</legend>
 						
 						TODO: Fieldset 0
+						
+						<div class="form-group">
+							<select
+								ng-options="clinicalImpression.id as clinicalImpression.name for clinicalImpression in clinicalImpressions"
+								ng-model="createConsultationAction.input.clinicalImpression.value"
+								class="form-control"
+							>
+								<option value="">Impresión clínica</option>
+							</select>
+						</div>
+						
+						<div class="form-group">
+							<select
+								ng-options="diagnosis.id as diagnosis.name for diagnosis in diagnoses"
+								ng-model="createConsultationAction.input.diagnosis.value"
+								class="form-control"
+							>
+								<option value="">Diagnóstico</option>
+							</select>
+						</div>
 					</fieldset>
 				</div>
 				
