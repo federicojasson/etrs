@@ -524,28 +524,31 @@
 	padding-top: 8px;
 }
 
-.menu-item a {
+.menu .nav-pills li a {
 	border: 1px solid transparent;
-	color: #666666;
-	display: block;
-	font-size: 0.85em;
 	margin: 4px;
-	padding: 8px;
-	text-decoration: none;
-	text-transform: uppercase;
 }
 
-.menu-item a:active {
+.menu .nav-pills li a:active {
 	border-color: #aaaaaa;
 }
 
-.menu-item a:hover {
+.menu .nav-pills li a:active:hover {
+	border-color: #aaaaaa;
+}
+
+.menu .nav-pills li a:hover {
 	border-color: #dddddd;
 }
 
-.menu-item.active a {
+.menu .nav-pills li.active a {
+	background-color: #ffffff;
 	color: #000000;
 	font-weight: bold;
+}
+
+.menu .nav-pills li.active a:hover {
+	background-color: #ffffff;
 }
 
 .menu.panel {
@@ -566,7 +569,7 @@
 	color: #333333;
 	display: block;
 	font-size: 0.85em;
-	padding: 5px 11px;
+	padding: 6px 12px;
 	text-decoration: none;
 	text-transform: uppercase;
 }
@@ -624,7 +627,7 @@
 .nav li a {
 	border: 1px solid #dfdfdf;
 	border-radius: 0px;
-	color: #333333;
+	color: #666666;
 	font-size: 0.85em;
 	line-height: 18px;
 	padding: 6px 12px;

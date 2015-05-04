@@ -16,26 +16,24 @@
 		is-open="menu.open"
 		class="menu"
 	>
-		<div
-			ng-repeat="menuItem in menu.items"
-			ui-sref-active="active"
-			class="menu-item"
-		>
-			<a
-				ui-sref="{{ menuItem.state }}"
-				popover="{{ menuItem.description }}"
-				popover-append-to-body="true"
-				popover-placement="right"
-				popover-popup-delay="500"
-				popover-trigger="mouseenter"
-			>
-				<span class="glyphicon glyphicon-chevron-right"></span>
-
-				<span class="icon-text">
-					{{ menuItem.name }}
-				</span>
-			</a>
-		</div>
+		<ul class="nav nav-pills nav-stacked">
+			<li ng-repeat="menuItem in menu.items" ui-sref-active="active">
+				<a
+					ui-sref="{{ menuItem.state }}"
+					popover="{{ menuItem.description }}"
+					popover-append-to-body="true"
+					popover-placement="right"
+					popover-popup-delay="500"
+					popover-trigger="mouseenter"
+				>
+					<span class="glyphicon glyphicon-chevron-right"></span>
+					
+					<span class="icon-text">
+						{{ menuItem.name }}
+					</span>
+				</a>
+			</li>
+		</ul>
 		
 		<div ng-if="menu.items.length === 0">
 			<div class="no-items-text text-center">
