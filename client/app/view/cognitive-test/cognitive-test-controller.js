@@ -22,14 +22,16 @@
 	angular.module('app.view.cognitiveTest').controller('CognitiveTestViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteCognitiveTestAction',
 		'data',
+		'router',
 		CognitiveTestViewController
 	]);
 	
 	/**
 	 * Represents the cognitive-test view.
 	 */
-	function CognitiveTestViewController($scope, $stateParams, data) {
+	function CognitiveTestViewController($scope, $stateParams, DeleteCognitiveTestAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the cognitive test
 				$scope.cognitiveTest = cognitiveTest;
 				
+				// Initializes the actions
+				initializeDeleteCognitiveTestAction(cognitiveTest);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-cognitive-test action.
+		 * 
+		 * Receives the cognitive test.
+		 */
+		function initializeDeleteCognitiveTestAction(cognitiveTest) {
+			// Initializes the action
+			var action = new DeleteCognitiveTestAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = cognitiveTest.id;
+			action.input.version.value = cognitiveTest.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the cognitive-tests state
+				router.redirect('cognitiveTests');
+			};
+			
+			// Includes the action
+			$scope.deleteCognitiveTestAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
