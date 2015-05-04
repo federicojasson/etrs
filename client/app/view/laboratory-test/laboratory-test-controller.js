@@ -22,14 +22,16 @@
 	angular.module('app.view.laboratoryTest').controller('LaboratoryTestViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteLaboratoryTestAction',
 		'data',
+		'router',
 		LaboratoryTestViewController
 	]);
 	
 	/**
 	 * Represents the laboratory-test view.
 	 */
-	function LaboratoryTestViewController($scope, $stateParams, data) {
+	function LaboratoryTestViewController($scope, $stateParams, DeleteLaboratoryTestAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the laboratory test
 				$scope.laboratoryTest = laboratoryTest;
 				
+				// Initializes the actions
+				initializeDeleteLaboratoryTestAction(laboratoryTest);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-laboratory-test action.
+		 * 
+		 * Receives the laboratory test.
+		 */
+		function initializeDeleteLaboratoryTestAction(laboratoryTest) {
+			// Initializes the action
+			var action = new DeleteLaboratoryTestAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = laboratoryTest.id;
+			action.input.version.value = laboratoryTest.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the laboratory-tests state
+				router.redirect('laboratoryTests');
+			};
+			
+			// Includes the action
+			$scope.deleteLaboratoryTestAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
