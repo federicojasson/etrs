@@ -36,5 +36,17 @@
 				</span>
 			</a>
 		</div>
+		
+		<div ng-if="menu.items.length === 0">
+			<div class="no-items-text text-center">
+				No hay menús para mostrar
+			</div>
+		</div>
 	</accordion-group>
 </accordion>
+
+<div ng-if="navigationBar.getMenus().length === 0">
+	<div class="no-items-text text-center">
+		No hay menús para mostrar
+	</div>
+</div>

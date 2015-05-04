@@ -148,6 +148,12 @@
 									<input type="checkbox"> {{ medicalAntecedent.name }}
 								</label>
 							</div>
+							
+							<div ng-if="medicalAntecedents.length === 0">
+								<div class="no-items-text text-center">
+									No hay antecedentes médicos para seleccionar
+								</div>
+							</div>
 						</div>
 					</fieldset>
 				</div>
@@ -172,6 +178,12 @@
 								<label>
 									<input type="checkbox"> {{ medicine.name }}
 								</label>
+							</div>
+							
+							<div ng-if="medicines.length === 0">
+								<div class="no-items-text text-center">
+									No hay medicamentos para seleccionar
+								</div>
 							</div>
 						</div>
 					</fieldset>
@@ -199,6 +211,12 @@
 									<input type="checkbox"> {{ laboratoryTest.name }}
 								</label>
 							</div>
+							
+							<div ng-if="laboratoryTests.length === 0">
+								<div class="no-items-text text-center">
+									No hay exámenes de laboratorio para seleccionar
+								</div>
+							</div>
 						</div>
 					</fieldset>
 				</div>
@@ -224,6 +242,12 @@
 								<label>
 									<input type="checkbox"> {{ imagingTest.name }}
 								</label>
+							</div>
+							
+							<div ng-if="imagingTests.length === 0">
+								<div class="no-items-text text-center">
+									No hay exámenes de imágenes para seleccionar
+								</div>
 							</div>
 						</div>
 					</fieldset>
@@ -251,6 +275,12 @@
 									<input type="checkbox"> {{ cognitiveTest.name }}
 								</label>
 							</div>
+							
+							<div ng-if="cognitiveTests.length === 0">
+								<div class="no-items-text text-center">
+									No hay exámenes cognitivos para seleccionar
+								</div>
+							</div>
 						</div>
 					</fieldset>
 				</div>
@@ -275,6 +305,12 @@
 								<label>
 									<input type="checkbox"> {{ treatment.name }}
 								</label>
+							</div>
+							
+							<div ng-if="treatments.length === 0">
+								<div class="no-items-text text-center">
+									No hay tratamientos para seleccionar
+								</div>
 							</div>
 						</div>
 					</fieldset>
