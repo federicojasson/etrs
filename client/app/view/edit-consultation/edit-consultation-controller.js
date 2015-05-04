@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.view.editConsultation').controller('EditConsultationViewController', [
+		'$filter',
 		'$scope',
 		'$stateParams',
 		'EditConsultationAction',
@@ -31,7 +32,7 @@
 	/**
 	 * Represents the edit-consultation view.
 	 */
-	function EditConsultationViewController($scope, $stateParams, EditConsultationAction, data, router) {
+	function EditConsultationViewController($filter, $scope, $stateParams, EditConsultationAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -50,7 +51,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			// TODO
+			return 'Consulta médica del ' + $filter('date')($scope.consultation.date, 'dd/MM/yyyy');
 		};
 		
 		/**

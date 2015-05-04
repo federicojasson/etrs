@@ -1,1 +1,39 @@
+<h1>Consulta médica del {{ consultation.date | date: 'dd/MM/yyyy' }}</h1>
+
+<button ng-click="deleteConsultationAction.execute()" class="btn btn-danger">
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editConsultation({
+		id: consultation.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<a
+	ui-sref="newStudy({
+		id: consultation.id
+	})"
+	class="btn btn-success"
+>
+	<span class="glyphicon glyphicon-plus"></span>
+	
+	<span class="icon-text">
+		Nuevo estudio
+	</span>
+</a>
+
+<hr>
+
 TODO: consultation.html

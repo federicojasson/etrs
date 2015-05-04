@@ -20,16 +20,19 @@
 
 (function() {
 	angular.module('app.view.consultation').controller('ConsultationViewController', [
+		'$filter',
 		'$scope',
 		'$stateParams',
+		'DeleteConsultationAction',
 		'data',
+		'router',
 		ConsultationViewController
 	]);
 	
 	/**
 	 * Represents the consultation view.
 	 */
-	function ConsultationViewController($scope, $stateParams, data) {
+	function ConsultationViewController($filter, $scope, $stateParams, DeleteConsultationAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -48,7 +51,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			// TODO
+			return 'Consulta médica del ' + $filter('date')($scope.consultation.date, 'dd/MM/yyyy');
 		};
 		
 		/**
@@ -73,8 +76,41 @@
 				// Includes the consultation
 				$scope.consultation = consultation;
 				
+				// Initializes the actions
+				initializeDeleteConsultationAction(consultation);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-consultation action.
+		 * 
+		 * Receives the consultation.
+		 */
+		function initializeDeleteConsultationAction(consultation) {
+			// Initializes the action
+			var action = new DeleteConsultationAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = consultation.id;
+			action.input.version.value = consultation.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the patient state
+				router.redirect('patient', {
+					id: consultation.patient
+				});
+			};
+			
+			// Includes the action
+			$scope.deleteConsultationAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
