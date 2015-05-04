@@ -837,6 +837,18 @@ address {
 	padding: 12px 18px 10px 16px;
 }
 
+blockquote {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+blockquote p {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-bottom: 12px;
+	padding-top: 12px;
+}
+
 body {
 	color: #333333;
 	font-family: "Open Sans", sans-serif;

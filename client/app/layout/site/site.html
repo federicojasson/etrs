@@ -108,8 +108,15 @@
 					<a ui-sref="home" class="footer-image"></a>
 				</div>
 				
-				<div class="col-sm-8 col-sm-offset-1">
-					TODO: footer
+				<div ng-if="account.isUserSignedIn()" class="col-sm-8 col-sm-offset-1">
+					<blockquote class="blockquote-reverse">
+						<p>
+							<em>
+								La seguridad de la información es
+								responsabilidad de <strong>todos</strong>.
+							</em>
+						</p>
+					</blockquote>
 				</div>
 			</div>
 			
