@@ -22,14 +22,16 @@
 	angular.module('app.view.medicine').controller('MedicineViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteMedicineAction',
 		'data',
+		'router',
 		MedicineViewController
 	]);
 	
 	/**
 	 * Represents the medicine view.
 	 */
-	function MedicineViewController($scope, $stateParams, data) {
+	function MedicineViewController($scope, $stateParams, DeleteMedicineAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the medicine
 				$scope.medicine = medicine;
 				
+				// Initializes the actions
+				initializeDeleteMedicineAction(medicine);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-medicine action.
+		 * 
+		 * Receives the medicine.
+		 */
+		function initializeDeleteMedicineAction(medicine) {
+			// Initializes the action
+			var action = new DeleteMedicineAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = medicine.id;
+			action.input.version.value = medicine.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the medicines state
+				router.redirect('medicines');
+			};
+			
+			// Includes the action
+			$scope.deleteMedicineAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
