@@ -38,11 +38,6 @@
 		_this.uploader = null;
 		
 		/**
-		 * Indicates whether a file is being uploaded.
-		 */
-		_this.uploading = false;
-		
-		/**
 		 * Removes a file item.
 		 * 
 		 * Receives the file item.
@@ -117,11 +112,11 @@
 			};
 			
 			_this.uploader.onBeforeUploadItem = function() {
-				_this.uploading = true;
+				$scope.uploading = true;
 			};
 			
 			_this.uploader.onCompleteItem = function() {
-				_this.uploading = false;
+				$scope.uploading = false;
 			};
 			
 			_this.uploader.onSuccessItem = function(fileItem, output) {
