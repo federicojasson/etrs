@@ -22,14 +22,16 @@
 	angular.module('app.view.treatment').controller('TreatmentViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteTreatmentAction',
 		'data',
+		'router',
 		TreatmentViewController
 	]);
 	
 	/**
 	 * Represents the treatment view.
 	 */
-	function TreatmentViewController($scope, $stateParams, data) {
+	function TreatmentViewController($scope, $stateParams, DeleteTreatmentAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the treatment
 				$scope.treatment = treatment;
 				
+				// Initializes the actions
+				initializeDeleteTreatmentAction(treatment);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-treatment action.
+		 * 
+		 * Receives the treatment.
+		 */
+		function initializeDeleteTreatmentAction(treatment) {
+			// Initializes the action
+			var action = new DeleteTreatmentAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = treatment.id;
+			action.input.version.value = treatment.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the treatments state
+				router.redirect('treatments');
+			};
+			
+			// Includes the action
+			$scope.deleteTreatmentAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
