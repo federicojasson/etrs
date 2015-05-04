@@ -20,15 +20,15 @@
 
 (function() {
 	angular.module('app.utility.date').run([
+		'$filter',
 		'$http',
-		'dateFilter',
 		run
 	]);
 	
 	/**
 	 * Performs initialization tasks.
 	 */
-	function run($http, dateFilter) {
+	function run($filter, $http) {
 		/**
 		 * Filters the dates present in a value.
 		 * 
@@ -59,7 +59,7 @@
 			if (value instanceof Date) {
 				// The value is a date
 				// Filters the value
-				value = dateFilter(value, 'yyyy-MM-dd');
+				value = $filter('date')(value, 'yyyy-MM-dd');
 			}
 			
 			return value;
