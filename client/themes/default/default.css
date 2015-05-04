@@ -631,6 +631,10 @@
 	text-transform: uppercase;
 }
 
+.nav-pills li a {
+	background-color: #ffffff;
+}
+
 .nav-pills li.active a {
 	background-color: #4d7984;
 }
