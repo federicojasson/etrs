@@ -388,11 +388,18 @@
 
 .file-name-text {
 	color: #666666;
-	font-size: 1.2em;
 	font-weight: bold;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.file-uploader .progress {
+	margin-top: 4px;
+}
+
+.file-uploader li + li {
+	margin-top: 12px;
 }
 
 .footer-image {

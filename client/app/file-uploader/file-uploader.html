@@ -1,9 +1,11 @@
-<input
-	nv-file-select
-	uploader="uploader"
-	multiple
-	type="file"
->
+<div class="form-group">
+	<input
+		nv-file-select
+		uploader="uploader"
+		multiple
+		type="file"
+	>
+</div>
 
 <div
 	nv-file-drop
@@ -16,52 +18,67 @@
 </div>
 
 <div ng-if="uploader.queue.length > 0">
-	<!--TODO: text here-->
-	<!--TODO: style-->
-	<!--TODO: use ul-->
-	<div ng-repeat="fileItem in uploader.queue">
-		{{ fileItem.file.name }}
+	<hr>
+	
+	<div class="form-group">
+		<span class="glyphicon glyphicon-tasks"></span>
 		
-		<div ng-if="fileItem.isReady && ! fileItem.isUploading">
-			En espera
-		</div>
-		
-		<div ng-if="fileItem.isUploading">
-			<div class="progress">
-				<div
-					ng-class="{
-						'progress-bar-danger': fileItem.progress < 33,
-						'progress-bar-warning': fileItem.progress >= 33 && fileItem.progress < 66,
-						'progress-bar-success': fileItem.progress >= 66
-					}"
-					ng-style="{
-						width: fileItem.progress + '%'
-					}"
-					class="progress-bar"
-				>
-					<span>{{ fileItem.progress }}%</span>
+		<span class="icon-text">
+			<b>Cola de archivos:</b>
+		</span>
+	</div>
+	
+	<ul class="file-uploader list-unstyled">
+		<li ng-repeat="fileItem in uploader.queue">
+			<div class="file-name-text">
+				{{ fileItem.file.name }}
+			</div>
+			
+			<div ng-if="fileItem.isReady && ! fileItem.isUploading">
+				<span class="text-muted">
+					En espera
+				</span>
+			</div>
+			
+			<div ng-if="fileItem.isUploading">
+				<a ng-click="fileItem.cancel()">
+					[ Cancelar ]
+				</a>
+				
+				<div class="progress">
+					<div
+						ng-class="{
+							'progress-bar-danger': fileItem.progress < 33,
+							'progress-bar-warning': fileItem.progress >= 33 && fileItem.progress < 66,
+							'progress-bar-success': fileItem.progress >= 66
+						}"
+						ng-style="{
+							width: fileItem.progress + '%'
+						}"
+						class="progress-bar"
+					>
+						<span>{{ fileItem.progress }}%</span>
+					</div>
 				</div>
 			</div>
 			
-			<button ng-click="fileItem.cancel()" type="button">
-				Cancelar
-			</button>
-		</div>
-		
-		<div ng-if="fileItem.isCancel">
-			Cancelado
-		</div>
-		
-		<div ng-if="fileItem.isError">
-			Error
-		</div>
-		
-		<div ng-if="fileItem.isSuccess">
-			Listo
+			<div ng-if="fileItem.isCancel">
+				<span class="text-warning">
+					Cancelado
+				</span>
+			</div>
 			
-			<button ng-click="removeFileItem(fileItem)" type="button">
-				Eliminar
-			</button>
-		</div>
-	</div>
+			<div ng-if="fileItem.isError">
+				<span class="text-danger">
+					Error
+				</span>
+			</div>
+			
+			<div ng-if="fileItem.isSuccess">
+				<a ng-click="removeFileItem(fileItem)">
+					[ Eliminar ]
+				</a>
+			</div>
+		</li>
+	</ul>
 </div>
