@@ -93,6 +93,21 @@
 		};
 		
 		/**
+		 * Determines whether an input is an experiment.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isExperiment = function(input) {
+			if (input.value === '') {
+				// The experiment has not been selected
+				input.message = 'Seleccione un experimento';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is a file name.
 		 * 
 		 * Receives the input.

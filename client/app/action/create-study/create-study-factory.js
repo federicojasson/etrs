@@ -54,7 +54,22 @@
 			
 			// Initializes the input
 			this.input = {
-				// TODO
+				comments: new Input(function() {
+					return inputValidator.isValidString(this, 0, 1024);
+				}),
+				
+				consultation: new Input(),
+				
+				experiment: new Input(function() {
+					return inputValidator.isExperiment(this);
+				}),
+				
+				input: new Input(function() {
+					// TODO
+					return false;
+				}),
+				
+				files: new Input()
 			};
 		}
 		
@@ -72,7 +87,11 @@
 			
 			// Creates the study
 			server.study.create({
-				// TODO
+				comments: this.input.comments.value,
+				consultation: this.input.consultation.value,
+				experiment: this.input.experiment.value,
+				input: this.input.input.value,
+				files: this.input.files.value
 			}).then(function(output) {
 				// Invokes the success callback
 				this.successCallback(output.id);
