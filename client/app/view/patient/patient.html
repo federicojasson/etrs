@@ -1,5 +1,41 @@
 <h1>{{ patient | fullName }}</h1>
 
+<button ng-click="deletePatientAction.execute()" class="btn btn-danger">
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editPatient({
+		id: patient.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<a
+	ui-sref="newConsultation({
+		id: patient.id
+	})"
+	class="btn btn-success"
+>
+	<span class="glyphicon glyphicon-plus"></span>
+	
+	<span class="icon-text">
+		Nueva consulta médica
+	</span>
+</a>
+
+<hr>
+
 TODO: patient.html
 
 <div ng-if="patient.consultations.length > 0">

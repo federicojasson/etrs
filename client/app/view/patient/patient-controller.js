@@ -22,7 +22,9 @@
 	angular.module('app.view.patient').controller('PatientViewController', [
 		'$scope',
 		'$stateParams',
+		'DeletePatientAction',
 		'data',
+		'router',
 		'fullNameFilter',
 		PatientViewController
 	]);
@@ -30,7 +32,7 @@
 	/**
 	 * Represents the patient view.
 	 */
-	function PatientViewController($scope, $stateParams, data, fullNameFilter) {
+	function PatientViewController($scope, $stateParams, DeletePatientAction, data, router, fullNameFilter) {
 		var _this = this;
 		
 		/**
@@ -84,8 +86,39 @@
 				// Includes the patient
 				$scope.patient = patient;
 				
+				// Initializes the actions
+				initializeDeletePatientAction(patient);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-patient action.
+		 * 
+		 * Receives the patient.
+		 */
+		function initializeDeletePatientAction(patient) {
+			// Initializes the action
+			var action = new DeletePatientAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = patient.id;
+			action.input.version.value = patient.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the patients state
+				router.redirect('patients');
+			};
+			
+			// Includes the action
+			$scope.deletePatientAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
