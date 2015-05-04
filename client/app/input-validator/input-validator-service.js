@@ -64,7 +64,7 @@
 		 */
 		_this.isDate = function(input) {
 			if (input.value === '') {
-				// The input is not a date
+				// The date has not been selected
 				input.message = 'Seleccione una fecha';
 				return false;
 			}
@@ -84,7 +84,7 @@
 			}
 			
 			if (! /(?!.*[\u0000-\u001f])(?!.* )(?!.*@.*@)^.+@.+$/.test(input.value)) {
-				// The input is not an email address
+				// The input is an invalid email address
 				input.message = 'La dirección de correo electrónico no es válida';
 				return false;
 			}
@@ -119,7 +119,7 @@
 		 */
 		_this.isGender = function(input) {
 			if (input.value === '') {
-				// The input is not a gender
+				// The gender has not been selected
 				input.message = 'Seleccione un sexo';
 				return false;
 			}
@@ -252,7 +252,7 @@
 		 */
 		_this.isUserRole = function(input) {
 			if (input.value === '') {
-				// The input is not a user role
+				// The user role has not been selected
 				input.message = 'Seleccione un rol de usuario';
 				return false;
 			}
