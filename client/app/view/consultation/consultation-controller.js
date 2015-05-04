@@ -76,7 +76,7 @@
 				// Includes the consultation
 				$scope.consultation = consultation;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeDeleteConsultationAction(consultation);
 				
 				ready = true;

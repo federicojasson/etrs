@@ -96,7 +96,7 @@
 			// Includes auxiliary functions
 			$scope.deleteTreatment = deleteTreatment;
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeSearchTreatmentsAction();
 		}
 		

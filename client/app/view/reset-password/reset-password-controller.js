@@ -91,7 +91,7 @@
 					return;
 				}
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeResetPasswordAction(id, password);
 				
 				ready = true;

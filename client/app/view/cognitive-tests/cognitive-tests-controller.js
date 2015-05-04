@@ -96,7 +96,7 @@
 			// Includes auxiliary functions
 			$scope.deleteCognitiveTest = deleteCognitiveTest;
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeSearchCognitiveTestsAction();
 		}
 		

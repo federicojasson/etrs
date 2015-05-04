@@ -68,7 +68,7 @@
 			$scope.searching = false;
 			$scope.newSearch = true;
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeSearchPatientsAction();
 		}
 		

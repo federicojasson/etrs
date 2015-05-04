@@ -75,7 +75,7 @@
 				// Includes the laboratory test
 				$scope.laboratoryTest = laboratoryTest;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditLaboratoryTestAction(laboratoryTest);
 				
 				ready = true;

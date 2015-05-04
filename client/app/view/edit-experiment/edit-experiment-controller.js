@@ -79,7 +79,7 @@
 				// Includes the experiment
 				$scope.experiment = experiment;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditExperimentAction(experiment);
 				
 				ready = true;

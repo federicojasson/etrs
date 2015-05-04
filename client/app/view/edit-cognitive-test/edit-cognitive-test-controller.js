@@ -75,7 +75,7 @@
 				// Includes the cognitive test
 				$scope.cognitiveTest = cognitiveTest;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditCognitiveTestAction(cognitiveTest);
 				
 				ready = true;

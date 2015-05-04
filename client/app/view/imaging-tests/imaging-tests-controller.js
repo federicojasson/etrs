@@ -96,7 +96,7 @@
 			// Includes auxiliary functions
 			$scope.deleteImagingTest = deleteImagingTest;
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeSearchImagingTestsAction();
 		}
 		

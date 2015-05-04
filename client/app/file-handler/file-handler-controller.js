@@ -54,7 +54,7 @@
 		 * Enables the edition.
 		 */
 		_this.enableEdition = function() {
-			// Initializes the actions
+			// Initializes actions
 			initializeEditFileAction($scope.file);
 			
 			_this.editing = true;

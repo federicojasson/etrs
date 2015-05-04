@@ -75,7 +75,7 @@
 				// Includes the diagnosis
 				$scope.diagnosis = diagnosis;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditDiagnosisAction(diagnosis);
 				
 				ready = true;

@@ -96,7 +96,7 @@
 			// Includes auxiliary functions
 			$scope.deleteDiagnosis = deleteDiagnosis;
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeSearchDiagnosesAction();
 		}
 		

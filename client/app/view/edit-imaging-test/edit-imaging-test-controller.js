@@ -75,7 +75,7 @@
 				// Includes the imaging test
 				$scope.imagingTest = imagingTest;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditImagingTestAction(imagingTest);
 				
 				ready = true;

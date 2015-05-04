@@ -75,7 +75,7 @@
 				// Includes the experiment
 				$scope.experiment = experiment;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeDeleteExperimentAction(experiment);
 				
 				ready = true;

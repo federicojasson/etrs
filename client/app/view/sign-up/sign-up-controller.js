@@ -91,7 +91,7 @@
 					return;
 				}
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeSignUpAction(id, password);
 				
 				ready = true;

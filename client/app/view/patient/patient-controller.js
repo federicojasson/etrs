@@ -86,7 +86,7 @@
 				// Includes the patient
 				$scope.patient = patient;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeDeletePatientAction(patient);
 				
 				ready = true;

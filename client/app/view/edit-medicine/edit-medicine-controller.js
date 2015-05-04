@@ -75,7 +75,7 @@
 				// Includes the medicine
 				$scope.medicine = medicine;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditMedicineAction(medicine);
 				
 				ready = true;

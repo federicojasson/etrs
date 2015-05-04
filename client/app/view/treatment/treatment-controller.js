@@ -75,7 +75,7 @@
 				// Includes the treatment
 				$scope.treatment = treatment;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeDeleteTreatmentAction(treatment);
 				
 				ready = true;

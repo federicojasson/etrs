@@ -71,7 +71,7 @@
 			// Includes the controllers
 			$scope.account = $controller('AccountController');
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeSignOutAction();
 		}
 		

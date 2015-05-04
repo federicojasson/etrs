@@ -259,7 +259,7 @@
 			// Includes auxiliary functions
 			$scope.setSection = setSection;
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeCreateConsultationAction(id);
 			
 			// Resets the data service

@@ -75,7 +75,7 @@
 				// Includes the study
 				$scope.study = study;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditStudyAction(study);
 				
 				ready = true;

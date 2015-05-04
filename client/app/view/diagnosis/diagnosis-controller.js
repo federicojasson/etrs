@@ -75,7 +75,7 @@
 				// Includes the diagnosis
 				$scope.diagnosis = diagnosis;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeDeleteDiagnosisAction(diagnosis);
 				
 				ready = true;

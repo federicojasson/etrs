@@ -76,7 +76,7 @@
 				// Includes the consultation
 				$scope.consultation = consultation;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditConsultationAction(consultation);
 				
 				ready = true;

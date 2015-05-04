@@ -75,7 +75,7 @@
 				// Includes the medical antecedent
 				$scope.medicalAntecedent = medicalAntecedent;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeDeleteMedicalAntecedentAction(medicalAntecedent);
 				
 				ready = true;

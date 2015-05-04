@@ -76,7 +76,7 @@
 				// Includes the patient
 				$scope.patient = patient;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditPatientAction(patient);
 				
 				ready = true;

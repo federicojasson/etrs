@@ -75,7 +75,7 @@
 				// Includes the clinical impression
 				$scope.clinicalImpression = clinicalImpression;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeDeleteClinicalImpressionAction(clinicalImpression);
 				
 				ready = true;

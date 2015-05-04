@@ -63,7 +63,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the actions
+			// Initializes actions
 			initializeCreateExperimentAction();
 		}
 		

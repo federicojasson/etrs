@@ -96,7 +96,7 @@
 			// Includes auxiliary functions
 			$scope.deleteExperiment = deleteExperiment;
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeSearchExperimentsAction();
 		}
 		

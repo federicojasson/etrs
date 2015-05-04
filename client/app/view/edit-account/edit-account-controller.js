@@ -78,7 +78,7 @@
 				// Includes the user
 				$scope.user = user;
 				
-				// Initializes the actions
+				// Initializes actions
 				initializeEditAccountAction(user);
 				
 				ready = true;

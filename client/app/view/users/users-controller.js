@@ -67,7 +67,7 @@
 			// Includes auxiliary variables
 			$scope.searching = false;
 			
-			// Initializes the actions
+			// Initializes actions
 			initializeSearchUsersAction();
 		}
 		
