@@ -22,14 +22,16 @@
 	angular.module('app.view.experiment').controller('ExperimentViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteExperimentAction',
 		'data',
+		'router',
 		ExperimentViewController
 	]);
 	
 	/**
 	 * Represents the experiment view.
 	 */
-	function ExperimentViewController($scope, $stateParams, data) {
+	function ExperimentViewController($scope, $stateParams, DeleteExperimentAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -73,8 +75,39 @@
 				// Includes the experiment
 				$scope.experiment = experiment;
 				
+				// Initializes the actions
+				initializeDeleteExperimentAction(experiment);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-experiment action.
+		 * 
+		 * Receives the experiment.
+		 */
+		function initializeDeleteExperimentAction(experiment) {
+			// Initializes the action
+			var action = new DeleteExperimentAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = experiment.id;
+			action.input.version.value = experiment.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the experiments state
+				router.redirect('experiments');
+			};
+			
+			// Includes the action
+			$scope.deleteExperimentAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
