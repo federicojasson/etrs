@@ -159,11 +159,11 @@
 					{{ medicine.name }}
 				</td>
 				
-				<td>
+				<td title="{{ medicine.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ medicine.creationDateTime | date: 'longDate' }}
 				</td>
 				
-				<td>
+				<td title="{{ medicine.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ medicine.lastEditionDateTime | date: 'longDate' }}
 				</td>
 			</tr>

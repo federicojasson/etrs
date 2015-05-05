@@ -159,11 +159,11 @@
 					{{ imagingTest.name }}
 				</td>
 				
-				<td>
+				<td title="{{ imagingTest.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ imagingTest.creationDateTime | date: 'longDate' }}
 				</td>
 				
-				<td>
+				<td title="{{ imagingTest.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ imagingTest.lastEditionDateTime | date: 'longDate' }}
 				</td>
 			</tr>

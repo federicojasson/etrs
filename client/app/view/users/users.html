@@ -154,7 +154,7 @@
 					{{ user.emailAddress }}
 				</td>
 				
-				<td>
+				<td title="{{ user.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ user.creationDateTime | date: 'longDate' }}
 				</td>
 			</tr>

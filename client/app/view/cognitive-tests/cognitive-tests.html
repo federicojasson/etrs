@@ -159,11 +159,11 @@
 					{{ cognitiveTest.name }}
 				</td>
 				
-				<td>
+				<td title="{{ cognitiveTest.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ cognitiveTest.creationDateTime | date: 'longDate' }}
 				</td>
 				
-				<td>
+				<td title="{{ cognitiveTest.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ cognitiveTest.lastEditionDateTime | date: 'longDate' }}
 				</td>
 			</tr>

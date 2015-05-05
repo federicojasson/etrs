@@ -159,11 +159,11 @@
 					{{ clinicalImpression.name }}
 				</td>
 				
-				<td>
+				<td title="{{ clinicalImpression.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ clinicalImpression.creationDateTime | date: 'longDate' }}
 				</td>
 				
-				<td>
+				<td title="{{ clinicalImpression.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ clinicalImpression.lastEditionDateTime | date: 'longDate' }}
 				</td>
 			</tr>

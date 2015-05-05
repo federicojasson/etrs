@@ -159,11 +159,11 @@
 					{{ treatment.name }}
 				</td>
 				
-				<td>
+				<td title="{{ treatment.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ treatment.creationDateTime | date: 'longDate' }}
 				</td>
 				
-				<td>
+				<td title="{{ treatment.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ treatment.lastEditionDateTime | date: 'longDate' }}
 				</td>
 			</tr>

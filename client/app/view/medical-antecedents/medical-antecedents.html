@@ -159,11 +159,11 @@
 					{{ medicalAntecedent.name }}
 				</td>
 				
-				<td>
+				<td title="{{ medicalAntecedent.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ medicalAntecedent.creationDateTime | date: 'longDate' }}
 				</td>
 				
-				<td>
+				<td title="{{ medicalAntecedent.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ medicalAntecedent.lastEditionDateTime | date: 'longDate' }}
 				</td>
 			</tr>

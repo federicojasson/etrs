@@ -159,11 +159,11 @@
 					{{ laboratoryTest.name }}
 				</td>
 				
-				<td>
+				<td title="{{ laboratoryTest.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ laboratoryTest.creationDateTime | date: 'longDate' }}
 				</td>
 				
-				<td>
+				<td title="{{ laboratoryTest.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 					{{ laboratoryTest.lastEditionDateTime | date: 'longDate' }}
 				</td>
 			</tr>
