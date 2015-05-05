@@ -264,7 +264,7 @@ class Factory {
 			}
 		}
 		
-		if (containsDuplicates($definition)) {
+		if (arrayContainsDuplicates($definition)) {
 			// There is a duplicate value
 			throw new InvalidDefinitionException('Duplicate value.');
 		}

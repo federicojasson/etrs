@@ -203,12 +203,12 @@ class Edit extends CreateEdit {
 		$cognitiveTestResults = $this->getInputValue('cognitiveTestResults');
 		$treatments = $this->getInputValue('treatments', createArrayFilter('hex2bin'));
 		
-		if (containsDuplicates($medicalAntecedents)) {
+		if (arrayContainsDuplicates($medicalAntecedents)) {
 			// The medical antecedents are invalid
 			return false;
 		}
 		
-		if (containsDuplicates($medicines)) {
+		if (arrayContainsDuplicates($medicines)) {
 			// The medicines are invalid
 			return false;
 		}
@@ -228,7 +228,7 @@ class Edit extends CreateEdit {
 			return false;
 		}
 		
-		if (containsDuplicates($treatments)) {
+		if (arrayContainsDuplicates($treatments)) {
 			// The treatments are invalid
 			return false;
 		}

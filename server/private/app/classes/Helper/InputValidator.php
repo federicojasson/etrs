@@ -35,7 +35,7 @@ class InputValidator {
 		$fields = array_column($sortingCriteria, 'field');
 		
 		// Determines whether the fields are unique
-		return ! containsDuplicates($fields);
+		return ! arrayContainsDuplicates($fields);
 	}
 	
 	/**
@@ -52,7 +52,7 @@ class InputValidator {
 		// Gets the tests
 		$tests = array_column($testResults, $testField);
 		
-		if (containsDuplicates($tests)) {
+		if (arrayContainsDuplicates($tests)) {
 			// The tests are not unique
 			return false;
 		}

@@ -121,7 +121,7 @@ class Create extends CreateEdit {
 		// Gets inputs
 		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
 		
-		if (containsDuplicates($files)) {
+		if (arrayContainsDuplicates($files)) {
 			// The files are invalid
 			return false;
 		}

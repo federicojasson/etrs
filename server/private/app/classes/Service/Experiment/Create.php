@@ -119,7 +119,7 @@ class Create extends \App\Service\External {
 		// Gets inputs
 		$files = $this->getInputValue('files', createArrayFilter('hex2bin'));
 		
-		if (containsDuplicates($files)) {
+		if (arrayContainsDuplicates($files)) {
 			// The files are invalid
 			return false;
 		}

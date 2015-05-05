@@ -23,6 +23,19 @@
  */
 
 /**
+ * Determines whether an array contains duplicate elements.
+ * 
+ * Receives the array.
+ */
+function arrayContainsDuplicates($array) {
+	// Removes the duplicate elements
+	$arrayWithoutDuplicates = array_unique($array);
+	
+	// Compares the arrays' lengths
+	return count($array) !== count($arrayWithoutDuplicates);
+}
+
+/**
  * Builds a boolean expression from a string.
  * 
  * A boolean expression is a sanitized version of the string that contains
@@ -149,19 +162,6 @@ function camelToSpinalCase($string) {
 	
 	// Builds the spinal-case string
 	return implode('-', $terms);
-}
-
-/**
- * Determines whether an array contains duplicate elements.
- * 
- * Receives the array.
- */
-function containsDuplicates($array) {
-	// Removes the duplicate elements
-	$arrayWithoutDuplicates = array_unique($array);
-	
-	// Compares the arrays' lengths
-	return count($array) !== count($arrayWithoutDuplicates);
 }
 
 /**
