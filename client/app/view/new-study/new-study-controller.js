@@ -74,7 +74,7 @@
 				$scope.createStudyAction.input.input.value = $scope.input[0];
 			}
 			
-			// Executes the create-study action
+			// Executes the action
 			$scope.createStudyAction.execute();
 		}
 		

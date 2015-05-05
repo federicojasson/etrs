@@ -77,7 +77,7 @@
 				$scope.editStudyAction.input.files.value.push($scope.filesToAdd[i]);
 			}
 			
-			// Executes the edit-study action
+			// Executes the action
 			$scope.editStudyAction.execute();
 		}
 		
