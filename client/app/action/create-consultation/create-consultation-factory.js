@@ -54,10 +54,45 @@
 			
 			// Initializes the input
 			this.input = {
-				// TODO: other inputs
+				date: new Input(function() {
+					return inputValidator.isDate(this);
+				}),
+				
+				presentingProblem: new Input(function() {
+					return inputValidator.isValidString(this, 0, 1024);
+				}),
+				
+				comments: new Input(function() {
+					return inputValidator.isValidString(this, 0, 1024);
+				}),
+				
 				patient: new Input(),
 				clinicalImpression: new Input(),
-				diagnosis: new Input()
+				diagnosis: new Input(),
+				
+				medicalAntecedents: new Input(function() {
+					// TODO
+				}),
+				
+				medicines: new Input(function() {
+					// TODO
+				}),
+				
+				laboratoryTestResults: new Input(function() {
+					// TODO
+				}),
+				
+				imagingTestResults: new Input(function() {
+					// TODO
+				}),
+				
+				cognitiveTestResults: new Input(function() {
+					// TODO
+				}),
+				
+				treatments: new Input(function() {
+					// TODO
+				})
 			};
 		}
 		
@@ -75,7 +110,18 @@
 			
 			// Creates the consultation
 			server.consultation.create({
-				// TODO
+				date: this.input.date.value,
+				presentingProblem: this.input.presentingProblem.value,
+				comments: this.input.comments.value,
+				patient: this.input.patient.value,
+				clinicalImpression: this.input.clinicalImpression.value,
+				diagnosis: this.input.diagnosis.value,
+				medicalAntecedents: this.input.medicalAntecedents.value,
+				medicines: this.input.medicines.value,
+				laboratoryTestResults: this.input.diagnosis.value,
+				imagingTestResults: this.input.diagnosis.value,
+				cognitiveTestResults: this.input.diagnosis.value,
+				treatments: this.input.treatments.value
 			}).then(function(output) {
 				// Invokes the success callback
 				this.successCallback(output.id);
