@@ -87,6 +87,10 @@
 	word-break: normal;
 }
 
+.dl-horizontal dt {
+	white-space: normal;
+}
+
 .dropdown-menu {
 	font-size: 0.85em;
 	line-height: 18px;
