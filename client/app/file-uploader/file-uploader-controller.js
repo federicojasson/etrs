@@ -54,11 +54,12 @@
 		 * Filters a file item by the maximum number of files allowed.
 		 */
 		function filterByLimit() {
+			var count = 0;
+			
 			// Gets the file queue
 			var queue = _this.uploader.queue;
 			
 			// Counts the number of files that are queued or have been uploaded
-			var count = 0;
 			for (var i = 0; i < queue.length; i++) {
 				var fileItem = queue[i];
 				

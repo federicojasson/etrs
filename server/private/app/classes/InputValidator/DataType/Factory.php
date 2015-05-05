@@ -139,7 +139,7 @@ class Factory {
 			// Gets the subfields
 			$subfields = self::getSubfields($field);
 			
-			// Gets the label and value
+			// Gets the label and the value
 			$label = $subfields[0];
 			$value = $subfields[1];
 			

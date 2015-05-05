@@ -112,7 +112,7 @@ class InputValidator {
 			
 			return true;
 		} catch (\App\InputValidator\DataType\InvalidDefinitionException $exception) {
-			// The definition is invalid
+			// The input is an invalid data-type definition
 			return false;
 		}
 	}
