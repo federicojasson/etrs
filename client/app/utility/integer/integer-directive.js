@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Processes an input and converts its values to integer.
+	 * Processes an input and converts its value to integer.
 	 */
 	function integerDirective(utility) {
 		/**

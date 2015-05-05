@@ -3,10 +3,8 @@ Quick tasks
 ----------------------------
 
 - Remove file-handlers from edit-experiment (files can't be removed or added).
-- Create directive to filter inputs? (Replace integer, line, file-name and null-if-empty directives).
 - Check button labels.
 - NotAuthenticated ---> files lost.
-- Add file module for file-handler and file-uploader?
 - At least one file for experiment?
 - Create script for routine maintenance tasks.
 

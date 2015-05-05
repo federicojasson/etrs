@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Processes an input and makes it a valid line.
+	 * Processes an input as if it were a line.
 	 */
 	function lineDirective(utility) {
 		/**

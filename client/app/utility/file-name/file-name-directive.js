@@ -22,7 +22,7 @@
 	angular.module('app.utility.fileName').directive('fileName', fileNameDirective);
 	
 	/**
-	 * Processes an input and makes it a file name.
+	 * Processes an input as if it were a file name.
 	 */
 	function fileNameDirective() {
 		/**
