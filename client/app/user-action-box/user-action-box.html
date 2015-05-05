@@ -1,0 +1,32 @@
+<div ng-if="dateTime !== null || user !== null">
+	<div class="user-action-box">
+		<div>
+			<i>{{ label }}</i>
+		</div>
+		
+		<div ng-if="dateTime !== null">
+			<span title="{{ dateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
+				<span class="glyphicon glyphicon-time"></span>
+				
+				<span class="icon-text">
+					{{ dateTime | date: 'dd/MM/yyyy HH:mm:ss' }}
+				</span>
+			</span>
+		</div>
+		
+		<div ng-if="user !== null">
+			<a
+				ui-sref="user({
+					id: user.id
+				})"
+				class="btn btn-link inline"
+			>
+				<span class="glyphicon glyphicon-user"></span>
+				
+				<span class="icon-text">
+						{{ user | fullName }}
+				</span>
+			</a>
+		</div>
+	</div>
+</div>

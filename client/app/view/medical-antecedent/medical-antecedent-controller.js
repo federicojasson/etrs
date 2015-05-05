@@ -68,7 +68,12 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset();
+			data.reset(1, {
+				MedicalAntecedent: [
+					'creator',
+					'lastEditor'
+				]
+			});
 			
 			// Gets the medical antecedent
 			data.getMedicalAntecedent(id).then(function(medicalAntecedent) {

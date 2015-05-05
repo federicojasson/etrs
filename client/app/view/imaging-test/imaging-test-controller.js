@@ -68,7 +68,12 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset();
+			data.reset(1, {
+				ImagingTest: [
+					'creator',
+					'lastEditor'
+				]
+			});
 			
 			// Gets the imaging test
 			data.getImagingTest(id).then(function(imagingTest) {

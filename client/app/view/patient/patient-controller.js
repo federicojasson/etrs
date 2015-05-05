@@ -77,6 +77,8 @@
 				],
 				
 				Patient: [
+					'creator',
+					'lastEditor',
 					'consultations'
 				]
 			});

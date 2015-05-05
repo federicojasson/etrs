@@ -68,7 +68,12 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset();
+			data.reset(1, {
+				Diagnosis: [
+					'creator',
+					'lastEditor'
+				]
+			});
 			
 			// Gets the diagnosis
 			data.getDiagnosis(id).then(function(diagnosis) {

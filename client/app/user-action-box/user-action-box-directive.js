@@ -19,27 +19,30 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'ui.bootstrap',
-		'angularFileUpload',
-		'app.account',
-		'app.action',
-		'app.data',
-		'app.dialog',
-		'app.error',
-		'app.fileHandler',
-		'app.fileUploader',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.searchHandler',
-		'app.server',
-		'app.title',
-		'app.userActionBox',
-		'app.utility',
-		'app.view'
-	]);
+	angular.module('app.userActionBox').directive('userActionBox', userActionBoxDirective);
+	
+	/**
+	 * Includes a user-action box.
+	 */
+	function userActionBoxDirective() {
+		/**
+		 * Returns the settings.
+		 */
+		function getSettings() {
+			return {
+				restrict: 'E',
+				scope: {
+					dateTime: '=dateTime',
+					label: '@label',
+					user: '=user'
+				},
+				templateUrl: 'app/user-action-box/user-action-box.html'
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Gets the settings
+		return getSettings();
+	}
 })();
