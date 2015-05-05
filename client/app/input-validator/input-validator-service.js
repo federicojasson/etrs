@@ -19,12 +19,15 @@
 'use strict';
 
 (function() {
-	angular.module('app.inputValidator').service('inputValidator', inputValidatorService);
+	angular.module('app.inputValidator').service('inputValidator', [
+		'dataTypeInputValidator',
+		inputValidatorService
+	]);
 	
 	/**
 	 * Provides input-validation functions.
 	 */
-	function inputValidatorService() {
+	function inputValidatorService(dataTypeInputValidator) {
 		var _this = this;
 		
 		/**
@@ -53,8 +56,21 @@
 		 * Receives the input.
 		 */
 		_this.isDataTypeDefinition = function(input) {
-			// TODO: implement
-			return true;
+			if (! _this.isValidString(input, 1, 1024)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			try {
+				// Creates a data-type input validator
+				dataTypeInputValidator.create(input.value);
+				
+				return true;
+			} catch (exception) {
+				// The input is an invalid data-type definition
+				input.message = 'La definición del tipo de dato no es válida';
+				return false;
+			}
 		};
 		
 		/**
@@ -311,7 +327,7 @@
 			
 			if (input.value < minimumValue) {
 				// The input is too low
-				input.message = 'El valor de este campo debe ser mayor o igual que ' + maximumValue;
+				input.message = 'El valor de este campo debe ser mayor o igual que ' + minimumValue;
 				return false;
 			}
 			

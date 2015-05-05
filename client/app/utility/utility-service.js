@@ -28,6 +28,38 @@
 		var _this = this;
 		
 		/**
+		 * Applies a filter to an array's elements.
+		 * 
+		 * Receives the array and a filter for the elements.
+		 */
+		_this.filterArray = function(array, filter) {
+			// Filters the array's elements
+			for (var i = 0; i < array.length; i++) {
+				array[i] = filter(array[i]);
+			}
+			
+			return array;
+		};
+		
+		/**
+		 * Applies a filter to an object's properties.
+		 * 
+		 * Receives the object and a filter for the properties.
+		 */
+		_this.filterObject = function(object, filter) {
+			// Filters the object's properties
+			for (var property in object) {
+				if (! object.hasOwnProperty(property)) {
+					continue;
+				}
+				
+				object[property] = filter(object[property]);
+			}
+			
+			return object;
+		};
+		
+		/**
 		 * Returns a file's extension.
 		 * 
 		 * Receives the file's name.
@@ -51,6 +83,94 @@
 			
 			// Converts the extension to lowercase
 			return extension.toLowerCase();
+		};
+		
+		/**
+		 * Returns an object's length.
+		 * 
+		 * Receives the object.
+		 */
+		_this.getObjectLength = function(object) {
+			var length = 0;
+			
+			// Counts the number of properties of the object
+			for (var property in object) {
+				if (! object.hasOwnProperty(property)) {
+					continue;
+				}
+				
+				// Increments the count
+				length++;
+			}
+			
+			return length;
+		};
+		
+		/**
+		 * Determines whether a certain element is present in an array.
+		 * 
+		 * Receives the element and the array.
+		 */
+		_this.inArray = function(element, array) {
+			return _this.searchInArray(element, array) !== -1;
+		};
+		
+		/**
+		 * Determines whether a certain element is present in an object.
+		 * 
+		 * Receives the element and the object.
+		 */
+		_this.inObject = function(element, object) {
+			// Searches the element
+			for (var property in object) {
+				if (! object.hasOwnProperty(property)) {
+					continue;
+				}
+				
+				if (object[property] === element) {
+					// The element has been found
+					return true;
+				}
+			}
+			
+			return false;
+		};
+		
+		/**
+		 * Determines whether a string represents an integer.
+		 * 
+		 * Receives the string.
+		 */
+		_this.isStringAnInteger = function(string) {
+			return _this.stringToInteger(string).toString() === string;
+		};
+		
+		/**
+		 * Determines whether an object contains duplicate elements.
+		 * 
+		 * Receives the object.
+		 */
+		_this.objectContainsDuplicates = function(object) {
+			var elements = [];
+			
+			// Checks if any element is duplicated
+			for (var property in object) {
+				if (! object.hasOwnProperty(property)) {
+					continue;
+				}
+				
+				var element = object[property];
+				
+				if (_this.inArray(element, elements)) {
+					// The element is duplicated
+					return true;
+				}
+				
+				// Adds the element
+				elements.push(element);
+			}
+			
+			return false;
 		};
 		
 		/**
@@ -126,6 +246,15 @@
 			
 			// Removes the spaces
 			return string.replace(/ /g, '');
+		};
+		
+		/**
+		 * Converts a string to boolean.
+		 * 
+		 * Receives the string.
+		 */
+		_this.stringToBoolean = function(string) {
+			return string === 'true';
 		};
 		
 		/**
