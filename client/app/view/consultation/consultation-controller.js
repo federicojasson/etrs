@@ -69,7 +69,25 @@
 			var id = $stateParams.id;
 			
 			// Resets the data service
-			data.reset();
+			data.reset(2, {
+				Consultation: [
+					'creator',
+					'lastEditor',
+					'clinicalImpression',
+					'diagnosis',
+					'medicalAntecedents',
+					'medicines',
+					'laboratoryTestResults',
+					'imagingTestResults',
+					'cognitiveTestResults',
+					'treatments',
+					'studies'
+				],
+				
+				Study: [
+					'experiment'
+				]
+			});
 			
 			// Gets the consultation
 			data.getConsultation(id).then(function(consultation) {
