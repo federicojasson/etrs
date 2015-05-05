@@ -114,7 +114,7 @@
 									// Gets the test result
 									var testResultPromise = {};
 									testResultPromise[testField] = data.getReference(type, referenceType, field, testResult[testField], depth);
-									testResultPromise['value'] = $q.when(testResult.value);
+									testResultPromise.value = $q.when(testResult.value);
 									
 									// Adds the promise of the test result
 									testResultPromises.push($q.all(testResultPromise));

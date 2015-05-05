@@ -305,11 +305,7 @@ class Factory {
 		// Converts the values to integer
 		$definition = filterArray($definition, 'toInteger');
 		
-		// Gets the minimum and maximum values
-		$minimumValue = $definition['min'];
-		$maximumValue = $definition['max'];
-		
-		if ($maximumValue < $minimumValue) {
+		if ($definition['max'] < $definition['min']) {
 			// The maximum value is lower than the minimum
 			throw new InvalidDefinitionException('Maximum value lower than the minimum.');
 		}
