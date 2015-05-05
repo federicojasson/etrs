@@ -170,8 +170,6 @@
 					state: 'users',
 					description: 'Busque usuarios en el sistema'
 				}
-				
-				// DEFINEHERE: define menu items here
 			};
 		}
 		
@@ -183,7 +181,6 @@
 			var menuItems = getMenuItems();
 			
 			return {
-				// DEFINEHERE: define menus here
 				ad: [
 					{
 						name: 'Pacientes',

@@ -35,8 +35,6 @@
 		 */
 		function getStates() {
 			return [
-				// DEFINEHERE: define states in here
-				
 				{
 					name: 'account',
 					url: '/account',

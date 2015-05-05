@@ -71,30 +71,12 @@
 				
 				clinicalImpression: new Input(),
 				diagnosis: new Input(),
-				
-				medicalAntecedents: new Input(function() {
-					// TODO
-				}),
-				
-				medicines: new Input(function() {
-					// TODO
-				}),
-				
-				laboratoryTestResults: new Input(function() {
-					// TODO
-				}),
-				
-				imagingTestResults: new Input(function() {
-					// TODO
-				}),
-				
-				cognitiveTestResults: new Input(function() {
-					// TODO
-				}),
-				
-				treatments: new Input(function() {
-					// TODO
-				})
+				medicalAntecedents: new Input(),
+				medicines: new Input(),
+				laboratoryTestResults: new Input(),
+				imagingTestResults: new Input(),
+				cognitiveTestResults: new Input(),
+				treatments: new Input()
 			};
 		}
 		
