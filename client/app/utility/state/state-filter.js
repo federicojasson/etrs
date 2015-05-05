@@ -19,20 +19,44 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.age',
-		'app.utility.date',
-		'app.utility.fileName',
-		'app.utility.fullName',
-		'app.utility.gender',
-		'app.utility.honorificName',
-		'app.utility.integer',
-		'app.utility.levelName',
-		'app.utility.line',
-		'app.utility.nullIfEmpty',
-		'app.utility.reverse',
-		'app.utility.role',
-		'app.utility.state',
-		'app.utility.tableRowLink'
-	]);
+	angular.module('app.utility.state').filter('state', stateFilter);
+	
+	/**
+	 * Returns a study's state.
+	 */
+	function stateFilter() {
+		/**
+		 * Applies the filter.
+		 * 
+		 * Receives the study.
+		 */
+		function filter(study) {
+			if (study === null) {
+				// The study is null
+				return '';
+			}
+			
+			// Gets the states
+			var states = getStates();
+			
+			// Gets the state
+			return states[study.state];
+		}
+		
+		/**
+		 * Returns the states.
+		 */
+		function getStates() {
+			return {
+				0: 'Pendiente',
+				1: 'En realización',
+				2: 'Finalizado',
+				3: 'Error'
+			};
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		return filter;
+	}
 })();

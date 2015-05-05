@@ -19,20 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.age',
-		'app.utility.date',
-		'app.utility.fileName',
-		'app.utility.fullName',
-		'app.utility.gender',
-		'app.utility.honorificName',
-		'app.utility.integer',
-		'app.utility.levelName',
-		'app.utility.line',
-		'app.utility.nullIfEmpty',
-		'app.utility.reverse',
-		'app.utility.role',
-		'app.utility.state',
-		'app.utility.tableRowLink'
-	]);
+	angular.module('app.utility.state', []);
 })();
