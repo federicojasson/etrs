@@ -47,6 +47,8 @@
 }
 
 .btn-link.inline {
+	border-width: 0px;
+	line-height: 0px;
 	margin-bottom: 0px;
 	margin-top: 0px;
 }
