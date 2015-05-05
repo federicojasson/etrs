@@ -1,3 +1,474 @@
 <h1>Consulta médica del {{ consultation.date | date: 'dd/MM/yyyy' }}</h1>
 
+<p>
+	El siguiente formulario le permite editar una consulta médica.<br>
+	<br>
+	<strong>
+		Los cambios realizados en la consulta médica se verán reflejados
+		automáticamente en todo el sistema.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editConsultationAction.execute()" novalidate>
+		<div class="row">
+			<div class="col-sm-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li
+						ng-class="{
+							'active': section === 0
+						}"
+					>
+						<a ng-click="setSection(0)">
+							Datos generales
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 1
+						}"
+					>
+						<a ng-click="setSection(1)">
+							Antecedentes médicos
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 2
+						}"
+					>
+						<a ng-click="setSection(2)">
+							Medicación concomitante
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 3
+						}"
+					>
+						<a ng-click="setSection(3)">
+							Exámenes de laboratorio
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 4
+						}"
+					>
+						<a ng-click="setSection(4)">
+							Exámenes de imágenes
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 5
+						}"
+					>
+						<a ng-click="setSection(5)">
+							Exámenes cognitivos
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 6
+						}"
+					>
+						<a ng-click="setSection(6)">
+							Tratamientos
+						</a>
+					</li>
+					
+					<li
+						ng-class="{
+							'active': section === 7
+						}"
+					>
+						<a ng-click="setSection(7)">
+							Resumen
+						</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="col-sm-9">
+				<div ng-if="section === 0">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-briefcase"></span>
+							
+							<span class="icon-text">
+								Consulta médica
+							</span>
+						</legend>
+						
+						<div class="form-group">
+							Ingrese los datos de la consulta médica:
+						</div>
+						
+						<div
+							ng-class="{
+								'has-error': ! editConsultationAction.input.date.valid
+							}"
+							class="form-group"
+						>
+							<div class="input-group">
+								<input
+									popover="{{ editConsultationAction.input.date.message }}"
+									popover-append-to-body="true"
+									popover-placement="left"
+									popover-trigger="focus"
+									type="text"
+									placeholder="Fecha"
+									value="{{ editConsultationAction.input.date.value | date: 'longDate' }}"
+									readonly
+									class="form-control"
+								>
+								
+								<span class="input-group-btn">
+									<div dropdown class="btn-group">
+										<button
+											dropdown-toggle
+											type="button"
+											class="btn btn-default dropdown-toggle"
+										>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</button>
+										
+										<div ng-click="$event.stopPropagation()" class="calendar dropdown-menu pull-right">
+											<datepicker
+												ng-model="editConsultationAction.input.date.value"
+												datepicker-mode="'month'"
+												show-weeks="false"
+												starting-day="1"
+											></datepicker>
+										</div>
+									</div>
+								</span>
+							</div>
+						</div>
+						
+						<div
+							ng-class="{
+								'has-error': ! editConsultationAction.input.presentingProblem.valid
+							}"
+							class="form-group"
+						>
+							<textarea
+								ng-model="editConsultationAction.input.presentingProblem.value"
+								popover="{{ editConsultationAction.input.presentingProblem.message }}"
+								popover-append-to-body="true"
+								popover-placement="left"
+								popover-trigger="focus"
+								rows="6"
+								placeholder="Motivo de la consulta / Síntomas"
+								class="form-control"
+							>
+							</textarea>
+						</div>
+						
+						<div class="form-group">
+							<select
+								ng-options="clinicalImpression.id as clinicalImpression.name for clinicalImpression in clinicalImpressions"
+								ng-model="editConsultationAction.input.clinicalImpression.value"
+								class="form-control"
+							>
+								<option value="">Impresión clínica</option>
+							</select>
+						</div>
+						
+						<div class="form-group">
+							<select
+								ng-options="diagnosis.id as diagnosis.name for diagnosis in diagnoses"
+								ng-model="editConsultationAction.input.diagnosis.value"
+								class="form-control"
+							>
+								<option value="">Diagnóstico</option>
+							</select>
+						</div>
+						
+						<div
+							ng-class="{
+								'has-error': ! editConsultationAction.input.comments.valid
+							}"
+							class="form-group"
+						>
+							<textarea
+								ng-model="editConsultationAction.input.comments.value"
+								popover="{{ editConsultationAction.input.comments.message }}"
+								popover-append-to-body="true"
+								popover-placement="left"
+								popover-trigger="focus"
+								rows="6"
+								placeholder="Observaciones"
+								class="form-control"
+							>
+							</textarea>
+						</div>
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 1">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Antecedentes médicos
+							</span>
+						</legend>
+						
+						<div class="form-group">
+							Seleccione los antecedentes médicos del paciente
+							<em>al momento de la consulta</em>:
+						</div>
+						
+						<div class="form-group">
+							<!-- TODO: ng-model in input -->
+							<!-- TODO: set previous antecedents -->
+							<div ng-repeat="medicalAntecedent in medicalAntecedents" class="checkbox">
+								<label>
+									<input type="checkbox"> {{ medicalAntecedent.name }}
+								</label>
+							</div>
+							
+							<div ng-if="medicalAntecedents.length === 0">
+								<div class="no-items-text text-center">
+									No hay antecedentes médicos para seleccionar
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 2">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Medicación concomitante
+							</span>
+						</legend>
+						
+						<div class="form-group">
+							Seleccione qué medicamentos se encuentra tomando el
+							paciente <em>al momento de la consulta</em>:
+						</div>
+						
+						<div class="form-group">
+							<!-- TODO: ng-model in input -->
+							<div ng-repeat="medicine in medicines" class="checkbox">
+								<label>
+									<input type="checkbox"> {{ medicine.name }}
+								</label>
+							</div>
+							
+							<div ng-if="medicines.length === 0">
+								<div class="no-items-text text-center">
+									No hay medicamentos para seleccionar
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 3">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Exámenes de laboratorio
+							</span>
+						</legend>
+						
+						<div class="form-group">
+							Seleccione los exámenes de laboratorio ordenados e
+							ingrese los resultados:
+						</div>
+						
+						<div class="form-group">
+							<!-- TODO: ng-model in input -->
+							<!-- TODO: add corresponding value field -->
+							<div ng-repeat="laboratoryTest in laboratoryTests" class="checkbox">
+								<label>
+									<input type="checkbox"> {{ laboratoryTest.name }}
+								</label>
+							</div>
+							
+							<div ng-if="laboratoryTests.length === 0">
+								<div class="no-items-text text-center">
+									No hay exámenes de laboratorio para seleccionar
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 4">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Exámenes de imágenes
+							</span>
+						</legend>
+						
+						<div class="form-group">
+							Seleccione los exámenes de imágenes ordenados e
+							ingrese los resultados:
+						</div>
+						
+						<div class="form-group">
+							<!-- TODO: ng-model in input -->
+							<!-- TODO: add corresponding value field -->
+							<div ng-repeat="imagingTest in imagingTests" class="checkbox">
+								<label>
+									<input type="checkbox"> {{ imagingTest.name }}
+								</label>
+							</div>
+							
+							<div ng-if="imagingTests.length === 0">
+								<div class="no-items-text text-center">
+									No hay exámenes de imágenes para seleccionar
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 5">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Exámenes cognitivos
+							</span>
+						</legend>
+						
+						<div class="form-group">
+							Seleccione los exámenes cognitivos ordenados e
+							ingrese los resultados:
+						</div>
+						
+						<div class="form-group">
+							<!-- TODO: ng-model in input -->
+							<!-- TODO: add corresponding value field -->
+							<div ng-repeat="cognitiveTest in cognitiveTests" class="checkbox">
+								<label>
+									<input type="checkbox"> {{ cognitiveTest.name }}
+								</label>
+							</div>
+							
+							<div ng-if="cognitiveTests.length === 0">
+								<div class="no-items-text text-center">
+									No hay exámenes cognitivos para seleccionar
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 6">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-stats"></span>
+							
+							<span class="icon-text">
+								Tratamientos
+							</span>
+						</legend>
+						
+						<div class="form-group">
+							Seleccione los tratamientos prescriptos al paciente:
+						</div>
+						
+						<div class="form-group">
+							<!-- TODO: ng-model in input -->
+							<div ng-repeat="treatment in treatments" class="checkbox">
+								<label>
+									<input type="checkbox"> {{ treatment.name }}
+								</label>
+							</div>
+							
+							<div ng-if="treatments.length === 0">
+								<div class="no-items-text text-center">
+									No hay tratamientos para seleccionar
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				
+				<div ng-if="section === 7">
+					<fieldset>
+						<legend>
+							<span class="glyphicon glyphicon-list-alt"></span>
+							
+							<span class="icon-text">
+								Resumen
+							</span>
+						</legend>
+						
+						<div class="form-group">
+							A continuación se resume la información de la
+							consulta médica:
+						</div>
+						
+						TODO: Fieldset 7
+					</fieldset>
+				</div>
+				
+				<div class="form-group">
+					<div class="pull-left">
+						<button
+							ng-if="section > 0"
+							ng-click="setSection(section - 1)"
+							type="button"
+							class="btn btn-primary"
+						>
+							<span class="glyphicon glyphicon-arrow-left"></span>
+							
+							<span class="icon-text">
+								Anterior
+							</span>
+						</button>
+					</div>
+					
+					<div class="pull-right">
+						<button
+							ng-if="section < 7"
+							ng-click="setSection(section + 1)"
+							type="button"
+							class="btn btn-primary"
+						>
+							<span class="glyphicon glyphicon-arrow-right"></span>
+							
+							<span class="icon-text">
+								Siguiente
+							</span>
+						</button>
+						
+						<button
+							ng-if="section === 7"
+							type="submit"
+							class="btn btn-warning"
+						>
+							Editar consulta médica
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
 TODO: edit-consultation.html
