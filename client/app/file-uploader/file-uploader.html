@@ -66,6 +66,12 @@
 				</div>
 			</div>
 			
+			<div ng-if="fileItem.isSuccess">
+				<a ng-click="fileUploader.removeFileItem(fileItem)" class="btn btn-link inline">
+					[ Eliminar ]
+				</a>
+			</div>
+			
 			<div ng-if="fileItem.isCancel">
 				<span class="text-warning">
 					Cancelado
@@ -76,12 +82,6 @@
 				<span class="text-danger">
 					Error
 				</span>
-			</div>
-			
-			<div ng-if="fileItem.isSuccess">
-				<a ng-click="fileUploader.removeFileItem(fileItem)" class="btn btn-link inline">
-					[ Eliminar ]
-				</a>
 			</div>
 		</li>
 	</ul>
