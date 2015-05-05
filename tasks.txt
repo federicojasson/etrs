@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- Actions according to roles.
 - Remove file-handlers from edit-experiment (files can't be removed or added).
 - Check button labels.
 - NotAuthenticated ---> files lost.
