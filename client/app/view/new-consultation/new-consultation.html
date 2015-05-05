@@ -1,7 +1,13 @@
 <h1>Nueva consulta médica</h1>
 
 <p>
-	El siguiente formulario le permite crear una nueva consulta médica.
+	El siguiente formulario le permite crear una nueva consulta médica.<br>
+	<br>
+	<strong>
+		No es necesario completar todos los campos al momento de crear la
+		consulta. Por ejemplo, el diagnóstico podría ser indicado una vez se
+		hayan llevado a cabo ciertos exámenes o estudios.
+	</strong>
 </p>
 
 <div class="clearfix well">
@@ -95,14 +101,77 @@
 				<div ng-if="section === 0">
 					<fieldset>
 						<legend>
-							<span class="glyphicon glyphicon-TODO"></span>
+							<span class="glyphicon glyphicon-briefcase"></span>
 							
 							<span class="icon-text">
-								Datos generales
+								Consulta médica
 							</span>
 						</legend>
 						
-						TODO: Fieldset 0
+						<div class="form-group">
+							Ingrese los datos de la consulta médica:
+						</div>
+						
+						<div
+							ng-class="{
+								'has-error': ! createConsultationAction.input.date.valid
+							}"
+							class="form-group"
+						>
+							<div class="input-group">
+								<input
+									popover="{{ createConsultationAction.input.date.message }}"
+									popover-append-to-body="true"
+									popover-placement="left"
+									popover-trigger="focus"
+									type="text"
+									placeholder="Fecha"
+									value="{{ createConsultationAction.input.date.value | date: 'longDate' }}"
+									readonly
+									class="form-control"
+								>
+								
+								<span class="input-group-btn">
+									<div dropdown class="btn-group">
+										<button
+											dropdown-toggle
+											type="button"
+											class="btn btn-default dropdown-toggle"
+										>
+											<span class="glyphicon glyphicon-calendar"></span>
+										</button>
+										
+										<div ng-click="$event.stopPropagation()" class="calendar dropdown-menu pull-right">
+											<datepicker
+												ng-model="createConsultationAction.input.date.value"
+												datepicker-mode="'month'"
+												show-weeks="false"
+												starting-day="1"
+											></datepicker>
+										</div>
+									</div>
+								</span>
+							</div>
+						</div>
+						
+						<div
+							ng-class="{
+								'has-error': ! createConsultationAction.input.presentingProblem.valid
+							}"
+							class="form-group"
+						>
+							<textarea
+								ng-model="createConsultationAction.input.presentingProblem.value"
+								popover="{{ createConsultationAction.input.presentingProblem.message }}"
+								popover-append-to-body="true"
+								popover-placement="left"
+								popover-trigger="focus"
+								rows="6"
+								placeholder="Motivo de la consulta / Síntomas"
+								class="form-control"
+							>
+							</textarea>
+						</div>
 						
 						<div class="form-group">
 							<select
@@ -123,13 +192,32 @@
 								<option value="">Diagnóstico</option>
 							</select>
 						</div>
+						
+						<div
+							ng-class="{
+								'has-error': ! createConsultationAction.input.comments.valid
+							}"
+							class="form-group"
+						>
+							<textarea
+								ng-model="createConsultationAction.input.comments.value"
+								popover="{{ createConsultationAction.input.comments.message }}"
+								popover-append-to-body="true"
+								popover-placement="left"
+								popover-trigger="focus"
+								rows="6"
+								placeholder="Observaciones"
+								class="form-control"
+							>
+							</textarea>
+						</div>
 					</fieldset>
 				</div>
 				
 				<div ng-if="section === 1">
 					<fieldset>
 						<legend>
-							<span class="glyphicon glyphicon-TODO"></span>
+							<span class="glyphicon glyphicon-stats"></span>
 							
 							<span class="icon-text">
 								Antecedentes médicos
@@ -137,7 +225,8 @@
 						</legend>
 						
 						<div class="form-group">
-							TODO: texto
+							Seleccione los antecedentes médicos del paciente
+							<em>al momento de la consulta</em>:
 						</div>
 						
 						<div class="form-group">
@@ -161,7 +250,7 @@
 				<div ng-if="section === 2">
 					<fieldset>
 						<legend>
-							<span class="glyphicon glyphicon-TODO"></span>
+							<span class="glyphicon glyphicon-stats"></span>
 							
 							<span class="icon-text">
 								Medicación concomitante
@@ -169,7 +258,8 @@
 						</legend>
 						
 						<div class="form-group">
-							TODO: texto
+							Seleccione qué medicamentos se encuentra tomando el
+							paciente <em>al momento de la consulta</em>:
 						</div>
 						
 						<div class="form-group">
@@ -200,7 +290,8 @@
 						</legend>
 						
 						<div class="form-group">
-							TODO: texto
+							Seleccione los exámenes de laboratorio ordenados e
+							ingrese los resultados:
 						</div>
 						
 						<div class="form-group">
@@ -232,7 +323,8 @@
 						</legend>
 						
 						<div class="form-group">
-							TODO: texto
+							Seleccione los exámenes de imágenes ordenados e
+							ingrese los resultados:
 						</div>
 						
 						<div class="form-group">
@@ -264,7 +356,8 @@
 						</legend>
 						
 						<div class="form-group">
-							TODO: texto
+							Seleccione los exámenes cognitivos ordenados e
+							ingrese los resultados:
 						</div>
 						
 						<div class="form-group">
@@ -288,7 +381,7 @@
 				<div ng-if="section === 6">
 					<fieldset>
 						<legend>
-							<span class="glyphicon glyphicon-TODO"></span>
+							<span class="glyphicon glyphicon-stats"></span>
 							
 							<span class="icon-text">
 								Tratamientos
@@ -296,7 +389,7 @@
 						</legend>
 						
 						<div class="form-group">
-							TODO: texto
+							Seleccione los tratamientos prescriptos al paciente:
 						</div>
 						
 						<div class="form-group">
@@ -319,12 +412,17 @@
 				<div ng-if="section === 7">
 					<fieldset>
 						<legend>
-							<span class="glyphicon glyphicon-list"></span>
+							<span class="glyphicon glyphicon-list-alt"></span>
 							
 							<span class="icon-text">
 								Resumen
 							</span>
 						</legend>
+						
+						<div class="form-group">
+							A continuación se resume la información de la
+							consulta médica:
+						</div>
 						
 						TODO: Fieldset 7
 					</fieldset>
