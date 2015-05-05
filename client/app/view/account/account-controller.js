@@ -67,7 +67,11 @@
 			var id = account.getSignedInUser().id;
 			
 			// Resets the data service
-			data.reset();
+			data.reset(1, {
+				User: [
+					'inviter'
+				]
+			});
 			
 			// Gets the user
 			data.getUser(id).then(function(user) {
