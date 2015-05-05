@@ -22,14 +22,16 @@
 	angular.module('app.view.study').controller('StudyViewController', [
 		'$scope',
 		'$stateParams',
+		'DeleteStudyAction',
 		'data',
+		'router',
 		StudyViewController
 	]);
 	
 	/**
 	 * Represents the study view.
 	 */
-	function StudyViewController($scope, $stateParams, data) {
+	function StudyViewController($scope, $stateParams, DeleteStudyAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -68,7 +70,11 @@
 			// Resets the data service
 			data.reset(1, {
 				Study: [
-					'experiment'
+					'creator',
+					'lastEditor',
+					'experiment',
+					'input',
+					'files'
 				]
 			});
 			
@@ -77,8 +83,41 @@
 				// Includes the study
 				$scope.study = study;
 				
+				// Initializes actions
+				initializeDeleteStudyAction(study);
+				
 				ready = true;
 			});
+		}
+		
+		/**
+		 * Initializes the delete-study action.
+		 * 
+		 * Receives the study.
+		 */
+		function initializeDeleteStudyAction(study) {
+			// Initializes the action
+			var action = new DeleteStudyAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = study.id;
+			action.input.version.value = study.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the consultation state
+				router.redirect('consultation', {
+					id: study.consultation
+				});
+			};
+			
+			// Includes the action
+			$scope.deleteStudyAction = action;
 		}
 		
 		// ---------------------------------------------------------------------

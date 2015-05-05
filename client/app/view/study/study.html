@@ -1,3 +1,99 @@
 <h1>Estudio - {{ study.experiment.name }}</h1>
 
-TODO: study.html
+<button ng-click="deleteStudyAction.execute()" class="btn btn-danger">
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editStudy({
+		id: study.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Experimento</dt>
+		<dd>{{ study.experiment.name }}</dd>
+	</dl>
+	
+	<dl class="dl-horizontal">
+		<dt>Observaciones</dt>
+		<dd>
+			<pre>{{ study.comments }}</pre>
+		</dd>
+	</dl>
+	
+	<dl class="dl-horizontal">
+		<dt>Archivo de entrada</dt>
+		<dd>
+			<div class="row">
+				<file-handler
+					file="study.input"
+					class="col-sm-4"
+				></file-handler>
+			</div>
+		</dd>
+	</dl>
+	
+	<dl class="dl-horizontal">
+		<dt>Estado del estudio</dt>
+		<dd>{{ study | state }}</dd>
+	</dl>
+	
+	<dl ng-if="study.output !== null" class="dl-horizontal">
+		<dt>Archivo de salida</dt>
+		<dd>
+			<div class="row">
+				<file-handler
+					file="study.output"
+					class="col-sm-4"
+				></file-handler>
+			</div>
+		</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<user-action-box
+		date-time="study.creationDateTime"
+		label="Creación"
+		user="study.creator"
+		class="pull-right"
+	></user-action-box>
+	
+	<user-action-box
+		date-time="study.lastEditionDateTime"
+		label="Última edición"
+		user="study.lastEditor"
+		class="pull-right"
+	></user-action-box>
+</div>
+
+<hr>
+
+<div ng-if="study.files.length > 0">
+	<h2>Archivos</h2>
+	
+	<div class="row">
+		<file-handler
+			ng-repeat="file in study.files | reverse"
+			file="file"
+			class="col-sm-4"
+		></file-handler>
+	</div>
+</div>
