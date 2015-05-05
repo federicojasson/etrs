@@ -23,6 +23,7 @@
 		'$scope',
 		'CreateExperimentAction',
 		'dialog',
+		'fileUploader',
 		'router',
 		NewExperimentViewController
 	]);
@@ -30,7 +31,7 @@
 	/**
 	 * Represents the new-experiment view.
 	 */
-	function NewExperimentViewController($scope, CreateExperimentAction, dialog, router) {
+	function NewExperimentViewController($scope, CreateExperimentAction, dialog, fileUploader, router) {
 		var _this = this;
 		
 		/**
@@ -80,6 +81,9 @@
 			// Registers callbacks
 			
 			action.startCallback = function() {
+				// Saves the uploader in case the user is not authenticated
+				fileUploader.saveUploader();
+				
 				ready = false;
 			};
 			
@@ -98,6 +102,9 @@
 			};
 			
 			action.successCallback = function(id) {
+				// Clears the saved uploader
+				fileUploader.clearSavedUploader();
+				
 				// Redirects the user to the experiment state
 				router.redirect('experiment', {
 					id: id

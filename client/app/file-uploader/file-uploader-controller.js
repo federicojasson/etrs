@@ -21,6 +21,7 @@
 (function() {
 	angular.module('app.fileUploader').controller('FileUploaderController', [
 		'$scope',
+		'fileUploader',
 		'FileUploader',
 		'utility',
 		FileUploaderController
@@ -29,7 +30,7 @@
 	/**
 	 * Implements the logic of a file-uploader.
 	 */
-	function FileUploaderController($scope, FileUploader, utility) {
+	function FileUploaderController($scope, fileUploader, FileUploader, utility) {
 		var _this = this;
 		
 		/**
@@ -90,12 +91,23 @@
 		 * Receives, optionally, the maximum number of files allowed.
 		 */
 		function initializeUploader(limit) {
+			// Gets the saved uploader (if any)
+			_this.uploader = fileUploader.getSavedUploader();
+			
+			if (_this.uploader !== null) {
+				// The previous uploader has been restored
+				return;
+			}
+			
 			// Initializes the uploader
 			_this.uploader = new FileUploader({
 				url: '/server/file/upload',
 				alias: 'file',
 				method: 'POST'
 			});
+			
+			// Sets the current uploader
+			fileUploader.setUploader(_this.uploader);
 			
 			if (angular.isDefined(limit)) {
 				// Registers a filter
