@@ -1,1 +1,17 @@
+<h1>{{ user | fullName }}</h1>
+
 TODO: user.html
+
+<div class="clearfix">
+	<user-action-box
+		date-time="user.creationDateTime"
+		label="Registro"
+		class="pull-right"
+	></user-action-box>
+	
+	<user-action-box
+		label="Invitación"
+		user="user.inviter"
+		class="pull-right"
+	></user-action-box>
+</div>

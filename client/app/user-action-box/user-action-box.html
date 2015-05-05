@@ -1,10 +1,10 @@
-<div ng-if="dateTime !== null || user !== null">
+<div ng-if="(dateTime !== undefined && dateTime !== null) || (user !== undefined && user !== null)">
 	<div class="user-action-box">
 		<div>
 			<i>{{ label }}</i>
 		</div>
 		
-		<div ng-if="dateTime !== null">
+		<div ng-if="dateTime !== undefined && dateTime !== null">
 			<span title="{{ dateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
 				<span class="glyphicon glyphicon-time"></span>
 				
@@ -14,7 +14,7 @@
 			</span>
 		</div>
 		
-		<div ng-if="user !== null">
+		<div ng-if="user !== undefined && user !== null">
 			<a
 				ui-sref="user({
 					id: user.id
