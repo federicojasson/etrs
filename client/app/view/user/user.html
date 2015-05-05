@@ -1,6 +1,28 @@
 <h1>{{ user | fullName }}</h1>
 
-TODO: user.html
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Nombre y apellido</dt>
+		<dd>{{ user | fullName }}</dd>
+
+		<dt>Sexo</dt>
+		<dd>{{ user | gender }}</dd>
+
+		<dt>Rol</dt>
+		<dd>{{ user | role }}</dd>
+		
+		<dt>Dirección de correo electrónico</dt>
+		<dd>
+			<a href="mailto:{{ user.emailAddress }}" class="btn btn-link inline">
+				{{ user.emailAddress }}
+			</a>
+		</dd>
+	</dl>
+</p>
 
 <div class="clearfix">
 	<user-action-box
