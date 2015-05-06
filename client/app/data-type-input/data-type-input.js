@@ -19,5 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.inputValidator.dataType', []);
+	angular.module('app.dataTypeInput', []);
 })();

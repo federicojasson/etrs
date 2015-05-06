@@ -20,7 +20,6 @@
 
 (function() {
 	angular.module('app.inputValidator', [
-		'app.inputValidator.dataType',
 		'app.inputValidator.input'
 	]);
 })();

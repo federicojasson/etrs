@@ -20,14 +20,14 @@
 
 (function() {
 	angular.module('app.inputValidator').service('inputValidator', [
-		'dataTypeInputValidator',
+		'DataTypeInput',
 		inputValidatorService
 	]);
 	
 	/**
 	 * Provides input-validation functions.
 	 */
-	function inputValidatorService(dataTypeInputValidator) {
+	function inputValidatorService(DataTypeInput) {
 		var _this = this;
 		
 		/**
@@ -62,8 +62,8 @@
 			}
 			
 			try {
-				// Creates a data-type input validator
-				dataTypeInputValidator.create(input.value);
+				// Creates a data-type input
+				DataTypeInput.create(input.value);
 				
 				return true;
 			} catch (exception) {

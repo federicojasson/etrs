@@ -19,28 +19,17 @@
 'use strict';
 
 (function() {
-	angular.module('app', [
-		'ngResource',
-		'ui.router',
-		'ui.bootstrap',
-		'angularFileUpload',
-		'app.account',
-		'app.action',
-		'app.data',
-		'app.dataTypeInput',
-		'app.dialog',
-		'app.error',
-		'app.fileHandler',
-		'app.fileUploader',
-		'app.inputValidator',
-		'app.layout',
-		'app.navigationBar',
-		'app.router',
-		'app.searchHandler',
-		'app.server',
-		'app.title',
-		'app.userActionBox',
-		'app.utility',
-		'app.view'
+	angular.module('app.dataTypeInput').controller('DataTypeInputController', [
+		'$scope',
+		DataTypeInputController
 	]);
+	
+	/**
+	 * Implements the logic of a data-type input.
+	 */
+	function DataTypeInputController($scope) {
+		var _this = this;
+		
+		// TODO
+	}
 })();

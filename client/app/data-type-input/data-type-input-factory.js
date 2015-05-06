@@ -19,61 +19,76 @@
 'use strict';
 
 (function() {
-	angular.module('app.inputValidator.dataType').service('dataTypeInputValidator', [
+	angular.module('app.dataTypeInput').factory('DataTypeInput', [
 		'utility',
-		dataTypeInputValidatorService
+		DataTypeInput
 	]);
 	
 	/**
-	 * Factory for data-type input validators.
+	 * Defines the DataTypeInput class.
 	 */
-	function dataTypeInputValidatorService(utility) {
-		var _this = this;
-		
+	function DataTypeInput(utility) {
 		/**
 		 * The boolean data type.
 		 */
-		var DATA_TYPE_BOOLEAN = 'boolean';
-
+		DataTypeInput.BOOLEAN = 'boolean';
+		
 		/**
 		 * The integer_fix_values data type.
 		 */
-		var DATA_TYPE_INTEGER_FIX_VALUES = 'integer_fix_values';
-
+		DataTypeInput.INTEGER_FIX_VALUES = 'integer_fix_values';
+		
 		/**
 		 * The integer_range data type.
 		 */
-		var DATA_TYPE_INTEGER_RANGE = 'integer_range';
+		DataTypeInput.INTEGER_RANGE = 'integer_range';
+		
+		/**
+		 * The data type.
+		 */
+		DataTypeInput.prototype.dataType;
+		
+		/**
+		 * The definition.
+		 */
+		DataTypeInput.prototype.definition;
+		
+		/**
+		 * The validator.
+		 */
+		DataTypeInput.prototype.validator;
+		
+		/**
+		 * Initializes an instance of the class.
+		 * 
+		 * Receives the data type, the definition and the validator.
+		 */
+		function DataTypeInput(dataType, definition, validator) {
+			this.dataType = dataType;
+			this.definition = definition;
+			this.validator = validator;
+		}
 
 		/**
-		 * Creates a data-type input validator.
+		 * Creates a data-type input.
 		 * 
 		 * Receives a formatted definition.
 		 */
-		_this.create = function(formattedDefinition) {
+		DataTypeInput.create = function(formattedDefinition) {
 			// Gets the fields
-			var fields = getFields(formattedDefinition);
+			var fields = DataTypeInput.getFields(formattedDefinition);
 			
 			// Gets the data type
-			var dataType = getDataType(fields);
-
+			var dataType = DataTypeInput.getDataType(fields);
+			
 			// Gets the definition
-			var definition = getDefinition(fields);
-
-			// Creates the validator according to the data type
-			switch (dataType) {
-				case DATA_TYPE_BOOLEAN: {
-					return createBoolean(definition);
-				}
-
-				case DATA_TYPE_INTEGER_FIX_VALUES: {
-					return createIntegerFixValues(definition);
-				}
-
-				case DATA_TYPE_INTEGER_RANGE: {
-					return createIntegerRange(definition);
-				}
-			}
+			var definition = DataTypeInput.getDefinition(fields);
+			
+			// Creates the validator
+			var validator = DataTypeInput.createValidator(dataType, definition);
+			
+			// Initializes the data-type input
+			return new DataTypeInput(dataType, definition, validator);
 		};
 
 		/**
@@ -81,7 +96,7 @@
 		 * 
 		 * Receives the definition.
 		 */
-		function createBoolean(definition) {
+		DataTypeInput.createBooleanValidator = function(definition) {
 			return function(input) {
 				if (input.value === '') {
 					// The option has not been selected
@@ -91,14 +106,14 @@
 				
 				return true;
 			};
-		}
+		};
 
 		/**
 		 * Creates an integer_fix_values validator.
 		 * 
 		 * Receives the definition.
 		 */
-		function createIntegerFixValues(definition) {
+		DataTypeInput.createIntegerFixValuesValidator = function(definition) {
 			return function(input) {
 				if (input.value === '') {
 					// The option has not been selected
@@ -108,14 +123,14 @@
 				
 				return true;
 			};
-		}
+		};
 
 		/**
 		 * Creates an integer_range validator.
 		 * 
 		 * Receives the definition.
 		 */
-		function createIntegerRange(definition) {
+		DataTypeInput.createIntegerRangeValidator = function(definition) {
 			return function(input) {
 				if (input.value < definition.min) {
 					// The input is too low
@@ -131,22 +146,44 @@
 				
 				return true;
 			};
-		}
+		};
+		
+		/**
+		 * Creates a validator.
+		 * 
+		 * Receives the data type and the definition.
+		 */
+		DataTypeInput.createValidator = function(dataType, definition) {
+			// Creates the validator according to the data type
+			switch (dataType) {
+				case DataTypeInput.BOOLEAN: {
+					return DataTypeInput.createBooleanValidator(definition);
+				}
+
+				case DataTypeInput.INTEGER_FIX_VALUES: {
+					return DataTypeInput.createIntegerFixValuesValidator(definition);
+				}
+
+				case DataTypeInput.INTEGER_RANGE: {
+					return DataTypeInput.createIntegerRangeValidator(definition);
+				}
+			}
+		};
 
 		/**
 		 * Returns the data type from a set of fields.
 		 * 
 		 * Receives the fields.
 		 */
-		function getDataType(fields) {
+		DataTypeInput.getDataType = function(fields) {
 			// Gets the data type
 			var dataType = fields[0];
 
 			// Builds an array containing the data types
 			var dataTypes = [
-				DATA_TYPE_BOOLEAN,
-				DATA_TYPE_INTEGER_FIX_VALUES,
-				DATA_TYPE_INTEGER_RANGE
+				DataTypeInput.BOOLEAN,
+				DataTypeInput.INTEGER_FIX_VALUES,
+				DataTypeInput.INTEGER_RANGE
 			];
 
 			if (! utility.inArray(dataType, dataTypes)) {
@@ -155,14 +192,14 @@
 			}
 
 			return dataType;
-		}
+		};
 
 		/**
 		 * Returns the definition from a set of fields.
 		 * 
 		 * Receives the fields.
 		 */
-		function getDefinition(fields) {
+		DataTypeInput.getDefinition = function(fields) {
 			var definition = {};
 
 			// Adds all fields, except the first one, to the definition
@@ -170,7 +207,7 @@
 				var field = fields[i];
 
 				// Gets the subfields
-				var subfields = getSubfields(field);
+				var subfields = DataTypeInput.getSubfields(field);
 				
 				// Gets the label and the value
 				var label = subfields[0];
@@ -190,39 +227,39 @@
 			
 			// Processes the definition according to the data type
 			switch (dataType) {
-				case DATA_TYPE_BOOLEAN: {
-					return processBooleanDefinition(definition);
+				case DataTypeInput.BOOLEAN: {
+					return DataTypeInput.processBooleanDefinition(definition);
 				}
 
-				case DATA_TYPE_INTEGER_FIX_VALUES: {
-					return processIntegerFixValuesDefinition(definition);
+				case DataTypeInput.INTEGER_FIX_VALUES: {
+					return DataTypeInput.processIntegerFixValuesDefinition(definition);
 				}
 
-				case DATA_TYPE_INTEGER_RANGE: {
-					return processIntegerRangeDefinition(definition);
+				case DataTypeInput.INTEGER_RANGE: {
+					return DataTypeInput.processIntegerRangeDefinition(definition);
 				}
 			}
-		}
+		};
 
 		/**
 		 * Returns the fields from a formatted definition.
 		 * 
 		 * Receives the formatted definition.
 		 */
-		function getFields(formattedDefinition) {
+		DataTypeInput.getFields = function(formattedDefinition) {
 			// Gets the fields
 			var fields = formattedDefinition.split(';');
 
 			// Trims and shrinks the fields
 			return utility.filterArray(fields, utility.trimAndShrink);
-		}
+		};
 
 		/**
 		 * Returns the subfields of a field.
 		 * 
 		 * Receives the field.
 		 */
-		function getSubfields(field) {
+		DataTypeInput.getSubfields = function(field) {
 			// Gets the subfields
 			var subfields = field.split(':');
 
@@ -251,14 +288,14 @@
 			}
 
 			return subfields;
-		}
+		};
 
 		/**
 		 * Processes a definition of the boolean data type.
 		 * 
 		 * Receives the definition.
 		 */
-		function processBooleanDefinition(definition) {
+		DataTypeInput.processBooleanDefinition = function(definition) {
 			if (utility.getObjectLength(definition) > 2) {
 				// There are too many fields defined
 				throw new Error();
@@ -276,14 +313,14 @@
 
 			// Converts the values from string to boolean
 			return utility.filterObject(definition, utility.stringToBoolean);
-		}
+		};
 
 		/**
 		 * Processes a definition of the integer_fix_values data type.
 		 * 
 		 * Receives the definition.
 		 */
-		function processIntegerFixValuesDefinition(definition) {
+		DataTypeInput.processIntegerFixValuesDefinition = function(definition) {
 			if (utility.getObjectLength(definition) === 0) {
 				// There are no fields defined
 				throw new Error();
@@ -308,14 +345,14 @@
 
 			// Converts the values to integer
 			return utility.filterObject(definition, utility.stringToInteger);
-		}
+		};
 
 		/**
 		 * Processes a definition of the integer_range data type.
 		 * 
 		 * Receives the definition.
 		 */
-		function processIntegerRangeDefinition(definition) {
+		DataTypeInput.processIntegerRangeDefinition = function(definition) {
 			if (utility.getObjectLength(definition) > 2) {
 				// There are too many fields defined
 				throw new Error();
@@ -352,6 +389,10 @@
 			}
 
 			return definition;
-		}
+		};
+		
+		// ---------------------------------------------------------------------
+		
+		return DataTypeInput;
 	}
 })();
