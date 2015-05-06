@@ -11,72 +11,43 @@
 
 <div class="clearfix well">
 	<form ng-submit="editExperimentAction.execute()" novalidate>
-		<div class="row">
-			<div class="col-sm-7">
-				<fieldset>
-					<legend>
-						<span class="glyphicon glyphicon-floppy-save"></span>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
 
-						<span class="icon-text">
-							Experimento
-						</span>
-					</legend>
+				<span class="icon-text">
+					Experimento
+				</span>
+			</legend>
 
-					<div class="form-group">
-						Ingrese los datos del experimento:
-					</div>
-
-					<div
-						ng-class="{
-							'has-error': ! editExperimentAction.input.name.valid
-						}"
-						class="form-group"
-					>
-						<input
-							ng-model="editExperimentAction.input.name.value"
-							popover="{{ editExperimentAction.input.name.message }}"
-							popover-append-to-body="true"
-							popover-placement="left"
-							popover-trigger="focus"
-							line
-							type="text"
-							placeholder="Nombre"
-							class="form-control"
-						>
-					</div>
-				</fieldset>
-
-				<div class="form-group">
-					<button type="submit" class="btn btn-warning pull-right">
-						Editar experimento
-					</button>
-				</div>
+			<div class="form-group">
+				Ingrese los datos del experimento:
 			</div>
-			
-			<div class="col-sm-5">
-				<fieldset>
-					<legend>
-						<span class="glyphicon glyphicon-folder-open"></span>
 
-						<span class="icon-text">
-							Archivos
-						</span>
-					</legend>
-					
-					<div class="form-group">
-						<file-handler
-							ng-repeat="file in experiment.files | reverse"
-							file="file"
-						></file-handler>
-
-						<div ng-if="experiment.files.length === 0">
-							<div class="no-items-text text-center">
-								No hay archivos para mostrar
-							</div>
-						</div>
-					</div>
-				</fieldset>
+			<div
+				ng-class="{
+					'has-error': ! editExperimentAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editExperimentAction.input.name.value"
+					popover="{{ editExperimentAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
 			</div>
+		</fieldset>
+
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning pull-right">
+				Editar experimento
+			</button>
 		</div>
 	</form>
 </div>
