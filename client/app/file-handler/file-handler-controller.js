@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.fileHandler').controller('FileHandlerController', [
+		'$controller',
 		'$scope',
 		'EditFileAction',
 		'server',
@@ -30,7 +31,7 @@
 	/**
 	 * Implements the logic of a file-handler.
 	 */
-	function FileHandlerController($scope, EditFileAction, server, utility) {
+	function FileHandlerController($controller, $scope, EditFileAction, server, utility) {
 		var _this = this;
 		
 		/**
@@ -64,6 +65,9 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Includes controllers
+			$scope.account = $controller('AccountController');
+			
 			// Sets the file's icon
 			setFileIcon();
 		}
