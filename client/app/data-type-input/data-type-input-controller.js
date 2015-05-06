@@ -21,15 +21,45 @@
 (function() {
 	angular.module('app.dataTypeInput').controller('DataTypeInputController', [
 		'$scope',
+		'DataTypeInput',
 		DataTypeInputController
 	]);
 	
 	/**
 	 * Implements the logic of a data-type input.
 	 */
-	function DataTypeInputController($scope) {
+	function DataTypeInputController($scope, DataTypeInput) {
 		var _this = this;
 		
-		// TODO
+		/**
+		 * The data-type input.
+		 */
+		_this.dataTypeInput = null;
+		
+		/**
+		 * Performs initialization tasks.
+		 */
+		function initialize() {
+			// Initializes the data-type input
+			initializeDataTypeInput($scope.dataTypeDefinition);
+		}
+		
+		/**
+		 * Initializes the data-type input.
+		 * 
+		 * Receives the formatted definition.
+		 */
+		function initializeDataTypeInput(formattedDefinition) {
+			// Creates the data-type input
+			_this.dataTypeInput = DataTypeInput.create(formattedDefinition);
+			
+			// Sets the input's validator
+			$scope.input.validator = _this.dataTypeInput.validator;
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		// Initializes the controller
+		initialize();
 	}
 })();

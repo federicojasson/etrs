@@ -11,7 +11,7 @@
 </p>
 
 <div class="clearfix well">
-	<form ng-submit="createConsultationAction.execute()" novalidate>
+	<form ng-submit="createConsultation()" novalidate>
 		<div class="row">
 			<div class="col-sm-3">
 				<ul class="nav nav-pills nav-stacked">
@@ -230,11 +230,11 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
 							<!-- TODO: set previous antecedents -->
 							<div ng-repeat="medicalAntecedent in medicalAntecedents" class="checkbox">
 								<label>
-									<input type="checkbox"> {{ medicalAntecedent.name }}
+									<input ng-model="medicalAntecedent.checked" type="checkbox">
+									{{ medicalAntecedent.medicalAntecedent.name }}
 								</label>
 							</div>
 							
@@ -263,10 +263,10 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
 							<div ng-repeat="medicine in medicines" class="checkbox">
 								<label>
-									<input type="checkbox"> {{ medicine.name }}
+									<input ng-model="medicine.checked" type="checkbox">
+									{{ medicine.medicine.name }}
 								</label>
 							</div>
 							
@@ -295,12 +295,17 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
-							<!-- TODO: add corresponding value field -->
 							<div ng-repeat="laboratoryTest in laboratoryTests" class="checkbox">
 								<label>
-									<input type="checkbox"> {{ laboratoryTest.name }}
+									<input ng-model="laboratoryTest.checked" type="checkbox">
+									{{ laboratoryTest.laboratoryTest.name }}
 								</label>
+								
+								<data-data-type-input
+									ng-if="laboratoryTest.checked"
+									data-data-type-definition="{{ laboratoryTest.laboratoryTest.dataTypeDefinition }}"
+									input="laboratoryTest.input"
+								></data-data-type-input>
 							</div>
 							
 							<div ng-if="laboratoryTests.length === 0">
@@ -328,12 +333,17 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
-							<!-- TODO: add corresponding value field -->
 							<div ng-repeat="imagingTest in imagingTests" class="checkbox">
 								<label>
-									<input type="checkbox"> {{ imagingTest.name }}
+									<input ng-model="imagingTest.checked" type="checkbox">
+									{{ imagingTest.imagingTest.name }}
 								</label>
+								
+								<data-data-type-input
+									ng-if="imagingTest.checked"
+									data-data-type-definition="{{ imagingTest.imagingTest.dataTypeDefinition }}"
+									input="imagingTest.input"
+								></data-data-type-input>
 							</div>
 							
 							<div ng-if="imagingTests.length === 0">
@@ -361,12 +371,17 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
-							<!-- TODO: add corresponding value field -->
 							<div ng-repeat="cognitiveTest in cognitiveTests" class="checkbox">
 								<label>
-									<input type="checkbox"> {{ cognitiveTest.name }}
+									<input ng-model="cognitiveTest.checked" type="checkbox">
+									{{ cognitiveTest.cognitiveTest.name }}
 								</label>
+								
+								<data-data-type-input
+									ng-if="cognitiveTest.checked"
+									data-data-type-definition="{{ cognitiveTest.cognitiveTest.dataTypeDefinition }}"
+									input="cognitiveTest.input"
+								></data-data-type-input>
 							</div>
 							
 							<div ng-if="cognitiveTests.length === 0">
@@ -393,10 +408,10 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
 							<div ng-repeat="treatment in treatments" class="checkbox">
 								<label>
-									<input type="checkbox"> {{ treatment.name }}
+									<input ng-model="treatment.checked" type="checkbox">
+									{{ treatment.treatment.name }}
 								</label>
 							</div>
 							

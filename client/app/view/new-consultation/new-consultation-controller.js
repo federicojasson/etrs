@@ -25,6 +25,7 @@
 		'$stateParams',
 		'CreateConsultationAction',
 		'data',
+		'Input',
 		'router',
 		'server',
 		NewConsultationViewController
@@ -33,7 +34,7 @@
 	/**
 	 * Represents the new-consultation view.
 	 */
-	function NewConsultationViewController($q, $scope, $stateParams, CreateConsultationAction, data, router, server) {
+	function NewConsultationViewController($q, $scope, $stateParams, CreateConsultationAction, data, Input, router, server) {
 		var _this = this;
 		
 		/**
@@ -61,6 +62,112 @@
 		_this.isReady = function() {
 			return ready;
 		};
+		
+		/**
+		 * Creates the consultation.
+		 */
+		function createConsultation() {
+			// Prepares the create-consultation action to be executed
+			
+			$scope.createConsultationAction.input.medicalAntecedents.value = [];
+			for (var i = 0; i < $scope.medicalAntecedents.length; i++) {
+				if ($scope.medicalAntecedents[i].checked) {
+					$scope.createConsultationAction.input.medicalAntecedents.value.push($scope.medicalAntecedents[i].medicalAntecedent.id);
+				}
+			}
+			
+			$scope.createConsultationAction.input.medicines.value = [];
+			for (var i = 0; i < $scope.medicines.length; i++) {
+				if ($scope.medicines[i].checked) {
+					$scope.createConsultationAction.input.medicines.value.push($scope.medicines[i].medicine.id);
+				}
+			}
+			
+			$scope.createConsultationAction.input.laboratoryTestResults.value = [];
+			for (var i = 0; i < $scope.laboratoryTests.length; i++) {
+				if ($scope.laboratoryTests[i].checked) {
+					$scope.createConsultationAction.input.laboratoryTestResults.value.push({
+						laboratoryTest: $scope.laboratoryTests[i].laboratoryTest.id,
+						value: $scope.laboratoryTests[i].input.value
+					});
+				}
+			}
+			
+			$scope.createConsultationAction.input.laboratoryTestResults.validator = function() {
+				var valid = true;
+				
+				for (var i = 0; i < $scope.laboratoryTests.length; i++) {
+					if ($scope.laboratoryTests[i].checked) {
+						var input = $scope.laboratoryTests[i].input;
+						input.message = '';
+						input.validate();
+						valid &= input.valid;
+					}
+				}
+				
+				return valid;
+			};
+			
+			$scope.createConsultationAction.input.imagingTestResults.value = [];
+			for (var i = 0; i < $scope.imagingTests.length; i++) {
+				if ($scope.imagingTests[i].checked) {
+					$scope.createConsultationAction.input.imagingTestResults.value.push({
+						imagingTest: $scope.imagingTests[i].imagingTest.id,
+						value: $scope.imagingTests[i].input.value
+					});
+				}
+			}
+			
+			$scope.createConsultationAction.input.imagingTestResults.validator = function() {
+				var valid = true;
+				
+				for (var i = 0; i < $scope.imagingTests.length; i++) {
+					if ($scope.imagingTests[i].checked) {
+						var input = $scope.imagingTests[i].input;
+						input.message = '';
+						input.validate();
+						valid &= input.valid;
+					}
+				}
+				
+				return valid;
+			};
+			
+			$scope.createConsultationAction.input.cognitiveTestResults.value = [];
+			for (var i = 0; i < $scope.cognitiveTests.length; i++) {
+				if ($scope.cognitiveTests[i].checked) {
+					$scope.createConsultationAction.input.cognitiveTestResults.value.push({
+						cognitiveTest: $scope.cognitiveTests[i].cognitiveTest.id,
+						value: $scope.cognitiveTests[i].input.value
+					});
+				}
+			}
+			
+			$scope.createConsultationAction.input.cognitiveTestResults.validator = function() {
+				var valid = true;
+				
+				for (var i = 0; i < $scope.cognitiveTests.length; i++) {
+					if ($scope.cognitiveTests[i].checked) {
+						var input = $scope.cognitiveTests[i].input;
+						input.message = '';
+						input.validate();
+						valid &= input.valid;
+					}
+				}
+				
+				return valid;
+			};
+			
+			$scope.createConsultationAction.input.treatments.value = [];
+			for (var i = 0; i < $scope.treatments.length; i++) {
+				if ($scope.treatments[i].checked) {
+					$scope.createConsultationAction.input.treatments.value.push($scope.treatments[i].treatment.id);
+				}
+			}
+			
+			// Executes the action
+			$scope.createConsultationAction.execute();
+		}
 		
 		/**
 		 * Gets all clinical impressions.
@@ -97,6 +204,15 @@
 				// Gets the cognitive tests
 				return data.getCognitiveTestArray(output.ids);
 			}).then(function(cognitiveTests) {
+				// Adds metadata to the cognitive tests
+				for (var i = 0; i < cognitiveTests.length; i++) {
+					cognitiveTests[i] = {
+						cognitiveTest: cognitiveTests[i],
+						checked: false,
+						input: new Input()
+					};
+				}
+				
 				// Includes the cognitive tests
 				$scope.cognitiveTests = cognitiveTests;
 				
@@ -143,6 +259,15 @@
 				// Gets the imaging tests
 				return data.getImagingTestArray(output.ids);
 			}).then(function(imagingTests) {
+				// Adds metadata to the imaging tests
+				for (var i = 0; i < imagingTests.length; i++) {
+					imagingTests[i] = {
+						imagingTest: imagingTests[i],
+						checked: false,
+						input: new Input()
+					};
+				}
+				
 				// Includes the imaging tests
 				$scope.imagingTests = imagingTests;
 				
@@ -166,6 +291,15 @@
 				// Gets the laboratory tests
 				return data.getLaboratoryTestArray(output.ids);
 			}).then(function(laboratoryTests) {
+				// Adds metadata to the laboratory tests
+				for (var i = 0; i < laboratoryTests.length; i++) {
+					laboratoryTests[i] = {
+						laboratoryTest: laboratoryTests[i],
+						checked: false,
+						input: new Input()
+					};
+				}
+				
 				// Includes the laboratory tests
 				$scope.laboratoryTests = laboratoryTests;
 				
@@ -189,6 +323,14 @@
 				// Gets the medical antecedents
 				return data.getMedicalAntecedentArray(output.ids);
 			}).then(function(medicalAntecedents) {
+				// Adds metadata to the medical antecedents
+				for (var i = 0; i < medicalAntecedents.length; i++) {
+					medicalAntecedents[i] = {
+						medicalAntecedent: medicalAntecedents[i],
+						checked: false
+					};
+				}
+				
 				// Includes the medical antecedents
 				$scope.medicalAntecedents = medicalAntecedents;
 				
@@ -212,6 +354,14 @@
 				// Gets the medicines
 				return data.getMedicineArray(output.ids);
 			}).then(function(medicines) {
+				// Adds metadata to the medicines
+				for (var i = 0; i < medicines.length; i++) {
+					medicines[i] = {
+						medicine: medicines[i],
+						checked: false
+					};
+				}
+				
 				// Includes the medicines
 				$scope.medicines = medicines;
 				
@@ -235,6 +385,14 @@
 				// Gets the treatments
 				return data.getTreatmentArray(output.ids);
 			}).then(function(treatments) {
+				// Adds metadata to the treatments
+				for (var i = 0; i < treatments.length; i++) {
+					treatments[i] = {
+						treatment: treatments[i],
+						checked: false
+					};
+				}
+				
 				// Includes the treatments
 				$scope.treatments = treatments;
 				
@@ -257,6 +415,7 @@
 			$scope.section = 0;
 			
 			// Includes auxiliary functions
+			$scope.createConsultation = createConsultation;
 			$scope.setSection = setSection;
 			
 			// Initializes actions

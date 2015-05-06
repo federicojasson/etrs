@@ -21,13 +21,13 @@
 (function() {
 	angular.module('app.dataTypeInput').factory('DataTypeInput', [
 		'utility',
-		DataTypeInput
+		DataTypeInputFactory
 	]);
 	
 	/**
 	 * Defines the DataTypeInput class.
 	 */
-	function DataTypeInput(utility) {
+	function DataTypeInputFactory(utility) {
 		/**
 		 * The boolean data type.
 		 */
@@ -97,10 +97,10 @@
 		 * Receives the definition.
 		 */
 		DataTypeInput.createBooleanValidator = function(definition) {
-			return function(input) {
-				if (input.value === '') {
+			return function() {
+				if (this.value === '') {
 					// The option has not been selected
-					input.message = 'Seleccione una opción';
+					this.message = 'Seleccione una opción';
 					return false;
 				}
 				
@@ -114,10 +114,10 @@
 		 * Receives the definition.
 		 */
 		DataTypeInput.createIntegerFixValuesValidator = function(definition) {
-			return function(input) {
-				if (input.value === '') {
+			return function() {
+				if (this.value === '') {
 					// The option has not been selected
-					input.message = 'Seleccione una opción';
+					this.message = 'Seleccione una opción';
 					return false;
 				}
 				
@@ -131,16 +131,16 @@
 		 * Receives the definition.
 		 */
 		DataTypeInput.createIntegerRangeValidator = function(definition) {
-			return function(input) {
-				if (input.value < definition.min) {
+			return function() {
+				if (this.value < definition.min) {
 					// The input is too low
-					input.message = 'El valor de este campo debe ser mayor o igual que ' + definition.min;
+					this.message = 'El valor de este campo debe ser mayor o igual que ' + definition.min;
 					return false;
 				}
 				
-				if (input.value > definition.max) {
+				if (this.value > definition.max) {
 					// The input is too high
-					input.message = 'El valor de este campo debe ser menor o igual que ' + definition.max;
+					this.message = 'El valor de este campo debe ser menor o igual que ' + definition.max;
 					return false;
 				}
 				

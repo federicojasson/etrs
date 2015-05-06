@@ -33,7 +33,7 @@
 				restrict: 'E',
 				scope: {
 					dataTypeDefinition: '@dataTypeDefinition',
-					value: '=value'
+					input: '=input'
 				},
 				controller: 'DataTypeInputController',
 				controllerAs: 'dataTypeInput',
