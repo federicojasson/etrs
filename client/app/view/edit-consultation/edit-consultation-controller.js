@@ -79,7 +79,7 @@
 				$scope.clinicalImpressions = clinicalImpressions;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(clinicalImpressions);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task
@@ -102,7 +102,7 @@
 				$scope.cognitiveTests = cognitiveTests;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(cognitiveTests);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task
@@ -125,7 +125,7 @@
 				$scope.diagnoses = diagnoses;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(diagnoses);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task
@@ -148,7 +148,7 @@
 				$scope.imagingTests = imagingTests;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(imagingTests);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task
@@ -171,7 +171,7 @@
 				$scope.laboratoryTests = laboratoryTests;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(laboratoryTests);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task
@@ -194,7 +194,7 @@
 				$scope.medicalAntecedents = medicalAntecedents;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(medicalAntecedents);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task
@@ -217,7 +217,7 @@
 				$scope.medicines = medicines;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(medicines);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task
@@ -240,7 +240,7 @@
 				$scope.treatments = treatments;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(treatments);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task

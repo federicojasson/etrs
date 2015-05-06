@@ -94,7 +94,7 @@
 				$scope.experiments = experiments;
 				
 				// Resolves the deferred task
-				deferredTask.resolve(experiments);
+				deferredTask.resolve();
 			});
 			
 			// Gets the promise of the deferred task
