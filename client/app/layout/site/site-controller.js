@@ -68,7 +68,7 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the controllers
+			// Includes controllers
 			$scope.account = $controller('AccountController');
 			
 			// Initializes actions
