@@ -207,6 +207,21 @@
 		};
 		
 		/**
+		 * Determines whether an input is an option.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isOption = function(input) {
+			if (input.value === '') {
+				// The option has not been selected
+				input.message = 'Seleccione una opción';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
 		 * Determines whether an input is a password.
 		 * 
 		 * Receives the input.

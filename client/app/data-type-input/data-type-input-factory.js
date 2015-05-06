@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.dataTypeInput').factory('DataTypeInput', [
+		'$injector',
 		'utility',
 		DataTypeInputFactory
 	]);
@@ -27,7 +28,7 @@
 	/**
 	 * Defines the DataTypeInput class.
 	 */
-	function DataTypeInputFactory(utility) {
+	function DataTypeInputFactory($injector, utility) {
 		/**
 		 * The boolean data type.
 		 */
@@ -90,71 +91,6 @@
 			// Initializes the data-type input
 			return new DataTypeInput(dataType, definition, validator);
 		};
-
-		/**
-		 * Creates a boolean validator.
-		 */
-		DataTypeInput.createBooleanValidator = function() {
-			return function() {
-				if (this.value === '') {
-					// The option has not been selected
-					this.message = 'Seleccione una opción';
-					return false;
-				}
-				
-				return true;
-			};
-		};
-
-		/**
-		 * Creates an integer_fix_values validator.
-		 */
-		DataTypeInput.createIntegerFixValuesValidator = function() {
-			return function() {
-				if (this.value === '') {
-					// The option has not been selected
-					this.message = 'Seleccione una opción';
-					return false;
-				}
-				
-				return true;
-			};
-		};
-
-		/**
-		 * Creates an integer_range validator.
-		 * 
-		 * Receives the definition.
-		 */
-		DataTypeInput.createIntegerRangeValidator = function(definition) {
-			return function() {
-				if (this.value === '') {
-					// The input is empty
-					this.message = 'Este campo es obligatorio';
-					return false;
-				}
-
-				if (isNaN(this.value)) {
-					// The input is not a number
-					this.message = 'Ingrese un valor numérico';
-					return false;
-				}
-
-				if (this.value < definition.min) {
-					// The input is too low
-					this.message = 'El valor de este campo debe ser mayor o igual que ' + definition.min;
-					return false;
-				}
-
-				if (this.value > definition.max) {
-					// The input is too high
-					this.message = 'El valor de este campo debe ser menor o igual que ' + definition.max;
-					return false;
-				}
-
-				return true;
-			};
-		};
 		
 		/**
 		 * Creates a validator.
@@ -162,20 +98,42 @@
 		 * Receives the data type and the definition.
 		 */
 		DataTypeInput.createValidator = function(dataType, definition) {
-			// Creates the validator according to the data type
+			var validator;
+			
+			// Gets the validator constructor according to the data type
 			switch (dataType) {
 				case DataTypeInput.BOOLEAN: {
-					return DataTypeInput.createBooleanValidator();
+					validator = DataTypeInput.getBooleanValidatorConstructor();
+					break;
 				}
 
 				case DataTypeInput.INTEGER_FIX_VALUES: {
-					return DataTypeInput.createIntegerFixValuesValidator();
+					validator = DataTypeInput.getIntegerFixValuesValidatorConstructor();
+					break;
 				}
 
 				case DataTypeInput.INTEGER_RANGE: {
-					return DataTypeInput.createIntegerRangeValidator(definition);
+					validator = DataTypeInput.getIntegerRangeValidatorConstructor(definition);
+					break;
 				}
 			}
+			
+			// Initializes the validator
+			return $injector.invoke(validator);
+		};
+
+		/**
+		 * Returns the constructor of the boolean validator.
+		 */
+		DataTypeInput.getBooleanValidatorConstructor = function() {
+			return [
+				'inputValidator',
+				function(inputValidator) {
+					return function() {
+						return inputValidator.isOption(this);
+					};
+				}
+			];
 		};
 
 		/**
@@ -260,6 +218,36 @@
 
 			// Trims and shrinks the fields
 			return utility.filterArray(fields, utility.trimAndShrink);
+		};
+
+		/**
+		 * Returns the constructor of the integer_fix_values validator.
+		 */
+		DataTypeInput.getIntegerFixValuesValidatorConstructor = function() {
+			return [
+				'inputValidator',
+				function(inputValidator) {
+					return function() {
+						return inputValidator.isOption(this);
+					};
+				}
+			];
+		};
+
+		/**
+		 * Returns the constructor of the integer_range validator.
+		 * 
+		 * Receives the definition.
+		 */
+		DataTypeInput.getIntegerRangeValidatorConstructor = function(definition) {
+			return [
+				'inputValidator',
+				function(inputValidator) {
+					return function() {
+						return inputValidator.isValidInteger(this, definition.min, definition.max);
+					};
+				}
+			];
 		};
 
 		/**
