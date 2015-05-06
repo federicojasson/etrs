@@ -1,11 +1,34 @@
-<div ng-if="dataTypeInput.dataTypeInput.dataType === 'boolean'">
-	TODO: boolean
+<div
+	ng-if="dataTypeInput.dataTypeInput.dataType === 'boolean' || dataTypeInput.dataTypeInput.dataType === 'integer_fix_values'"
+	ng-class="{
+		'has-error': ! input.valid
+	}"
+>
+	<label ng-repeat="(label, value) in dataTypeInput.dataTypeInput.definition">
+		<input
+			ng-model="input.value"
+			type="radio"
+			value="{{ value }}"
+		>
+		{{ label }}
+	</label>
 </div>
 
-<div ng-if="dataTypeInput.dataTypeInput.dataType === 'integer_fix_values'">
-	TODO: integer_fix_values
-</div>
-
-<div ng-if="dataTypeInput.dataTypeInput.dataType === 'integer_range'">
-	TODO: integer_range
+<div
+	ng-if="dataTypeInput.dataTypeInput.dataType === 'integer_range'"
+	ng-class="{
+		'has-error': ! input.valid
+	}"
+>
+	<input
+		ng-model="input.value"
+		popover="{{ input.message }}"
+		popover-append-to-body="true"
+		popover-placement="left"
+		popover-trigger="focus"
+		integer
+		type="text"
+		placeholder="Valor"
+		class="form-control input-sm"
+	>
 </div>

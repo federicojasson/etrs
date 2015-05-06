@@ -132,18 +132,30 @@
 		 */
 		DataTypeInput.createIntegerRangeValidator = function(definition) {
 			return function() {
+				if (this.value === '') {
+					// The input is empty
+					this.message = 'Este campo es obligatorio';
+					return false;
+				}
+
+				if (isNaN(this.value)) {
+					// The input is not a number
+					this.message = 'Ingrese un valor numérico';
+					return false;
+				}
+
 				if (this.value < definition.min) {
 					// The input is too low
 					this.message = 'El valor de este campo debe ser mayor o igual que ' + definition.min;
 					return false;
 				}
-				
+
 				if (this.value > definition.max) {
 					// The input is too high
 					this.message = 'El valor de este campo debe ser menor o igual que ' + definition.max;
 					return false;
 				}
-				
+
 				return true;
 			};
 		};
