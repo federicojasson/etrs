@@ -3,7 +3,6 @@ Quick tasks
 ----------------------------
 
 - Use utility service functions whenever possible.
-- Install APC cache in notebook.
 - Investigate about minimization.
 - Show last medical antecedents of patient in patient view.
 - Links para volver a la consulta desde el estudio, etc.
