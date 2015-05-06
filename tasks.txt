@@ -5,7 +5,6 @@ Quick tasks
 - Use utility service functions whenever possible.
 - Install APC cache in notebook.
 - Investigate about minimization.
-- Check ui-sref and router.redirect to see check role redirection.
 - Show last medical antecedents of patient in patient view.
 - Links para volver a la consulta desde el estudio, etc.
 - Refresh study's state with $timeout?

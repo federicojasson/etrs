@@ -9,6 +9,7 @@
 </button>
 
 <a
+	ng-if="account.getSignedInUser().role !== 'op'"
 	ui-sref="editConsultation({
 		id: consultation.id
 	})"
@@ -22,6 +23,7 @@
 </a>
 
 <a
+	ng-if="account.getSignedInUser().role !== 'dr'"
 	ui-sref="newStudy({
 		id: consultation.id
 	})"

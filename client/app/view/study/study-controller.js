@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.view.study').controller('StudyViewController', [
+		'$controller',
 		'$scope',
 		'$stateParams',
 		'DeleteStudyAction',
@@ -31,7 +32,7 @@
 	/**
 	 * Represents the study view.
 	 */
-	function StudyViewController($scope, $stateParams, DeleteStudyAction, data, router) {
+	function StudyViewController($controller, $scope, $stateParams, DeleteStudyAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -82,6 +83,9 @@
 			data.getStudy(id).then(function(study) {
 				// Includes the study
 				$scope.study = study;
+				
+				// Includes controllers
+				$scope.account = $controller('AccountController');
 				
 				// Initializes actions
 				initializeDeleteStudyAction(study);

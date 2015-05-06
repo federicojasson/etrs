@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.view.consultation').controller('ConsultationViewController', [
+		'$controller',
 		'$filter',
 		'$scope',
 		'$stateParams',
@@ -32,7 +33,7 @@
 	/**
 	 * Represents the consultation view.
 	 */
-	function ConsultationViewController($filter, $scope, $stateParams, DeleteConsultationAction, data, router) {
+	function ConsultationViewController($controller, $filter, $scope, $stateParams, DeleteConsultationAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -93,6 +94,9 @@
 			data.getConsultation(id).then(function(consultation) {
 				// Includes the consultation
 				$scope.consultation = consultation;
+				
+				// Includes controllers
+				$scope.account = $controller('AccountController');
 				
 				// Initializes actions
 				initializeDeleteConsultationAction(consultation);

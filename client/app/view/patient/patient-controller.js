@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.view.patient').controller('PatientViewController', [
+		'$controller',
 		'$scope',
 		'$stateParams',
 		'DeletePatientAction',
@@ -32,7 +33,7 @@
 	/**
 	 * Represents the patient view.
 	 */
-	function PatientViewController($scope, $stateParams, DeletePatientAction, data, router, fullNameFilter) {
+	function PatientViewController($controller, $scope, $stateParams, DeletePatientAction, data, router, fullNameFilter) {
 		var _this = this;
 		
 		/**
@@ -87,6 +88,9 @@
 			data.getPatient(id).then(function(patient) {
 				// Includes the patient
 				$scope.patient = patient;
+				
+				// Includes controllers
+				$scope.account = $controller('AccountController');
 				
 				// Initializes actions
 				initializeDeletePatientAction(patient);
