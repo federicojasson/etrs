@@ -103,9 +103,9 @@
 				diagnosis: this.input.diagnosis.value,
 				medicalAntecedents: this.input.medicalAntecedents.value,
 				medicines: this.input.medicines.value,
-				laboratoryTestResults: this.input.diagnosis.value,
-				imagingTestResults: this.input.diagnosis.value,
-				cognitiveTestResults: this.input.diagnosis.value,
+				laboratoryTestResults: this.input.laboratoryTestResults.value,
+				imagingTestResults: this.input.imagingTestResults.value,
+				cognitiveTestResults: this.input.cognitiveTestResults.value,
 				treatments: this.input.treatments.value
 			}).then(function() {
 				// Invokes the success callback
