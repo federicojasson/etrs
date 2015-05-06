@@ -50,14 +50,14 @@
 		<dd>{{ consultation.date | date: 'longDate' }}</dd>
 	</dl>
 	
-	<dl class="dl-horizontal">
+	<dl ng-if="consultation.presentingProblem.trim() !== ''" class="dl-horizontal">
 		<dt>Motivo de la consulta / Síntomas</dt>
 		<dd>
 			<pre>{{ consultation.presentingProblem }}</pre>
 		</dd>
 	</dl>
 	
-	<dl class="dl-horizontal">
+	<dl ng-if="consultation.comments.trim() !== ''" class="dl-horizontal">
 		<dt>Observaciones</dt>
 		<dd>
 			<pre>{{ consultation.comments }}</pre>

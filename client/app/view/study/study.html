@@ -36,7 +36,7 @@
 		<dd>{{ study.experiment.name }}</dd>
 	</dl>
 	
-	<dl class="dl-horizontal">
+	<dl ng-if="study.comments.trim() !== ''" class="dl-horizontal">
 		<dt>Observaciones</dt>
 		<dd>
 			<pre>{{ study.comments }}</pre>
