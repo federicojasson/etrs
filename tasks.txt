@@ -8,7 +8,6 @@ Quick tasks
 - Refresh study's state with $timeout?
 - Actions according to roles.
 - Remove file-handlers from edit-experiment (files can't be removed or added).
-- Check button labels.
 - Create script for routine maintenance tasks.
 - Add explanation of data-type definition in the views.
 - Add explanation of others (e.g. command-line).
