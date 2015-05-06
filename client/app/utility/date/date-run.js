@@ -22,13 +22,14 @@
 	angular.module('app.utility.date').run([
 		'$filter',
 		'$http',
+		'utility',
 		run
 	]);
 	
 	/**
 	 * Performs initialization tasks.
 	 */
-	function run($filter, $http) {
+	function run($filter, $http, utility) {
 		/**
 		 * Filters the dates present in a value.
 		 * 
@@ -39,21 +40,13 @@
 			if (angular.isArray(value)) {
 				// The value is an array
 				// Filters the array's elements
-				for (var i = 0; i < value.length; i++) {
-					value[i] = filterDates(value[i]);
-				}
+				utility.filterArray(value, filterDates);
 			}
 			
 			if (angular.isObject(value)) {
 				// The value is an object
 				// Filters the object's properties
-				for (var property in value) {
-					if (! value.hasOwnProperty(property)) {
-						continue;
-					}
-					
-					value[property] = filterDates(value[property]);
-				}
+				utility.filterObject(value, filterDates);
 			}
 			
 			if (value instanceof Date) {

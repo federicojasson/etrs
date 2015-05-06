@@ -201,7 +201,7 @@
 				return false;
 			}
 			
-			if (utility.searchInArray(field, associations[type]) === -1) {
+			if (! utility.inArray(field, associations[type])) {
 				// The field must not be expanded
 				return false;
 			}

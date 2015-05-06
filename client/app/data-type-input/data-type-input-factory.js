@@ -281,7 +281,7 @@
 			}
 
 			// Trims and shrinks the subfields
-			subfields = utility.filterArray(subfields, utility.trimAndShrink);
+			utility.filterArray(subfields, utility.trimAndShrink);
 
 			// Gets the label
 			var label = subfields[0];
@@ -393,7 +393,7 @@
 			}
 
 			// Converts the values to integer
-			definition = utility.filterObject(definition, utility.stringToInteger);
+			utility.filterObject(definition, utility.stringToInteger);
 
 			if (definition.max < definition.min) {
 				// The maximum value is lower than the minimum

@@ -83,9 +83,7 @@
 			var fragments = string.split('/');
 
 			// Converts the fragments from spinal-case to camelCase
-			for (var i = 0; i < fragments.length; i++) {
-				fragments[i] = utility.spinalToCamelCase(fragments[i]);
-			}
+			utility.filterArray(fragments, utility.spinalToCamelCase);
 			
 			// Creates an object hierarchy according to the service's URL
 			var object = _this;

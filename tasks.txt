@@ -2,8 +2,6 @@
 Quick tasks
 ----------------------------
 
-- Use utility service functions whenever possible.
-
 - Links para volver a la consulta desde el estudio, etc.
 - Refresh study's state with $timeout?
 - Actions according to roles.

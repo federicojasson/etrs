@@ -192,10 +192,8 @@
 			// Searches the element
 			var index = _this.searchInArray(element, array);
 			
-			if (index !== -1) {
-				// Removes the element
-				_this.removeFromArrayByIndex(index, array);
-			}
+			// Removes the element
+			_this.removeFromArrayByIndex(index, array);
 		};
 		
 		/**

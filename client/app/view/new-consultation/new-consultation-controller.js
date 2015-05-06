@@ -208,13 +208,13 @@
 				return data.getCognitiveTestArray(output.ids);
 			}).then(function(cognitiveTests) {
 				// Adds metadata to the cognitive tests
-				for (var i = 0; i < cognitiveTests.length; i++) {
-					cognitiveTests[i] = {
-						cognitiveTest: cognitiveTests[i],
+				utility.filterArray(cognitiveTests, function(cognitiveTest) {
+					return {
+						cognitiveTest: cognitiveTest,
 						checked: false,
 						input: new Input()
 					};
-				}
+				});
 				
 				// Includes the cognitive tests
 				$scope.cognitiveTests = cognitiveTests;
@@ -263,13 +263,13 @@
 				return data.getImagingTestArray(output.ids);
 			}).then(function(imagingTests) {
 				// Adds metadata to the imaging tests
-				for (var i = 0; i < imagingTests.length; i++) {
-					imagingTests[i] = {
-						imagingTest: imagingTests[i],
+				utility.filterArray(imagingTests, function(imagingTest) {
+					return {
+						imagingTest: imagingTest,
 						checked: false,
 						input: new Input()
 					};
-				}
+				});
 				
 				// Includes the imaging tests
 				$scope.imagingTests = imagingTests;
@@ -295,13 +295,13 @@
 				return data.getLaboratoryTestArray(output.ids);
 			}).then(function(laboratoryTests) {
 				// Adds metadata to the laboratory tests
-				for (var i = 0; i < laboratoryTests.length; i++) {
-					laboratoryTests[i] = {
-						laboratoryTest: laboratoryTests[i],
+				utility.filterArray(laboratoryTests, function(laboratoryTest) {
+					return {
+						laboratoryTest: laboratoryTest,
 						checked: false,
 						input: new Input()
 					};
-				}
+				});
 				
 				// Includes the laboratory tests
 				$scope.laboratoryTests = laboratoryTests;
@@ -329,12 +329,12 @@
 				return data.getMedicalAntecedentArray(output.ids);
 			}).then(function(medicalAntecedents) {
 				// Adds metadata to the medical antecedents
-				for (var i = 0; i < medicalAntecedents.length; i++) {
-					medicalAntecedents[i] = {
-						medicalAntecedent: medicalAntecedents[i],
+				utility.filterArray(medicalAntecedents, function(medicalAntecedent) {
+					return {
+						medicalAntecedent: medicalAntecedent,
 						checked: false
 					};
-				}
+				});
 				
 				// Includes the medical antecedents
 				$scope.medicalAntecedents = medicalAntecedents;
@@ -380,12 +380,12 @@
 				return data.getMedicineArray(output.ids);
 			}).then(function(medicines) {
 				// Adds metadata to the medicines
-				for (var i = 0; i < medicines.length; i++) {
-					medicines[i] = {
-						medicine: medicines[i],
+				utility.filterArray(medicines, function(medicine) {
+					return {
+						medicine: medicine,
 						checked: false
 					};
-				}
+				});
 				
 				// Includes the medicines
 				$scope.medicines = medicines;
@@ -411,12 +411,12 @@
 				return data.getTreatmentArray(output.ids);
 			}).then(function(treatments) {
 				// Adds metadata to the treatments
-				for (var i = 0; i < treatments.length; i++) {
-					treatments[i] = {
-						treatment: treatments[i],
+				utility.filterArray(treatments, function(treatment) {
+					return {
+						treatment: treatment,
 						checked: false
 					};
-				}
+				});
 				
 				// Includes the treatments
 				$scope.treatments = treatments;
