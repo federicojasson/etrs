@@ -3,39 +3,22 @@ Quick tasks
 ----------------------------
 
 - Use utility service functions whenever possible.
-- Investigate about minimization.
+
 - Links para volver a la consulta desde el estudio, etc.
 - Refresh study's state with $timeout?
 - Actions according to roles.
+
+- Investigate about minimization.
 - Create script for routine maintenance tasks.
 - Add explanation of data-type definition in the views.
 - Add explanation of others (e.g. command-line).
 - Check TODO and DEFINEHERE
 
 
-Open issues
-----------------------------
-
-- How to make the experiments' command line safe.
-
-
 General code checks
 ----------------------------
 
 - Warnings.
-- Multiple spaces instead of tabulations.
-- Double semicolons.
-- File includes.
-- != and == instead of !== and ===, respectively.
-- if (!...) instead of if (! ...) (regular expression: ![^ ]).
-- /* instead of /**.
-- Multiple blank lines (regular expression: [\t]*\n[\t]*\n[\t]*\n).
-- Lack of blank lines in PHP (regular expression: \}\n[\t]*\}).
-- Multiple inline comments (regular expression: \/\/.*\n[\t]*\/\/).
-- Line comments without dots (regular expression: [\t]*\/\/.*[.].*).
-- Include license in all files.
-- CSS all properties.
-- Check that all PHP defined constants are used (directories defined too).
 
 
 Release tasks
