@@ -1,6 +1,10 @@
 <h1>{{ patient | fullName }}</h1>
 
-<button ng-click="deletePatientAction.execute()" class="btn btn-danger">
+<button
+	ng-click="deletePatientAction.execute()"
+	type="button"
+	class="btn btn-danger"
+>
 	<span class="glyphicon glyphicon-remove"></span>
 	
 	<span class="icon-text">

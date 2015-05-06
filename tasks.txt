@@ -14,7 +14,6 @@ Quick tasks
 - Create script for routine maintenance tasks.
 - Add explanation of data-type definition in the views.
 - Add explanation of others (e.g. command-line).
-- Check all butons to have type.
 - Check TODO and DEFINEHERE
 
 
