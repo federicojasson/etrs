@@ -2,6 +2,7 @@
 Quick tasks
 ----------------------------
 
+- Use utility service functions whenever possible.
 - Install APC cache in notebook.
 - Investigate about minimization.
 - Check ui-sref and router.redirect to see check role redirection.
