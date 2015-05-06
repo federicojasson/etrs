@@ -4,7 +4,6 @@ Quick tasks
 
 - Links para volver a la consulta desde el estudio, etc.
 - Refresh study's state with $timeout?
-- Actions according to roles.
 
 - Investigate about minimization.
 - Create script for routine maintenance tasks.
