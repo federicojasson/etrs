@@ -93,10 +93,8 @@
 
 		/**
 		 * Creates a boolean validator.
-		 * 
-		 * Receives the definition.
 		 */
-		DataTypeInput.createBooleanValidator = function(definition) {
+		DataTypeInput.createBooleanValidator = function() {
 			return function() {
 				if (this.value === '') {
 					// The option has not been selected
@@ -110,10 +108,8 @@
 
 		/**
 		 * Creates an integer_fix_values validator.
-		 * 
-		 * Receives the definition.
 		 */
-		DataTypeInput.createIntegerFixValuesValidator = function(definition) {
+		DataTypeInput.createIntegerFixValuesValidator = function() {
 			return function() {
 				if (this.value === '') {
 					// The option has not been selected
@@ -169,11 +165,11 @@
 			// Creates the validator according to the data type
 			switch (dataType) {
 				case DataTypeInput.BOOLEAN: {
-					return DataTypeInput.createBooleanValidator(definition);
+					return DataTypeInput.createBooleanValidator();
 				}
 
 				case DataTypeInput.INTEGER_FIX_VALUES: {
-					return DataTypeInput.createIntegerFixValuesValidator(definition);
+					return DataTypeInput.createIntegerFixValuesValidator();
 				}
 
 				case DataTypeInput.INTEGER_RANGE: {
