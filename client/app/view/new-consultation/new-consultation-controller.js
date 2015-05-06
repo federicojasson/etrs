@@ -28,13 +28,14 @@
 		'Input',
 		'router',
 		'server',
+		'utility',
 		NewConsultationViewController
 	]);
 	
 	/**
 	 * Represents the new-consultation view.
 	 */
-	function NewConsultationViewController($q, $scope, $stateParams, CreateConsultationAction, data, Input, router, server) {
+	function NewConsultationViewController($q, $scope, $stateParams, CreateConsultationAction, data, Input, router, server, utility) {
 		var _this = this;
 		
 		/**
@@ -313,8 +314,10 @@
 		
 		/**
 		 * Gets all medical antecedents.
+		 * 
+		 * Receives the patient's ID.
 		 */
-		function getAllMedicalAntecedents() {
+		function getAllMedicalAntecedents(id) {
 			// Initializes a deferred task
 			var deferredTask = $q.defer();
 			
@@ -333,6 +336,26 @@
 				
 				// Includes the medical antecedents
 				$scope.medicalAntecedents = medicalAntecedents;
+				
+				// Gets the patient
+				return data.getPatient(id);
+			}).then(function(patient) {
+				// Gets the number of consultations of the patient
+				var length = patient.consultations.length;
+				
+				if (length > 0) {
+					// The patient has at least one consultation
+					
+					// Gets the medical antecedents of the most recent
+					var medicalAntecedents = patient.consultations[length - 1].medicalAntecedents;
+					
+					// Checks the medical antecedents
+					for (var i = 0; i < $scope.medicalAntecedents.length; i++) {
+						if (utility.inArray($scope.medicalAntecedents[i].medicalAntecedent.id, medicalAntecedents)) {
+							$scope.medicalAntecedents[i].checked = true;
+						}
+					}
+				}
 				
 				// Resolves the deferred task
 				deferredTask.resolve();
@@ -422,13 +445,17 @@
 			initializeCreateConsultationAction(id);
 			
 			// Resets the data service
-			data.reset();
+			data.reset(1, {
+				Patient: [
+					'consultations'
+				]
+			});
 			
 			// Gets resources
 			$q.all([
 				getAllClinicalImpressions(),
 				getAllDiagnoses(),
-				getAllMedicalAntecedents(),
+				getAllMedicalAntecedents(id),
 				getAllMedicines(),
 				getAllLaboratoryTests(),
 				getAllImagingTests(),
