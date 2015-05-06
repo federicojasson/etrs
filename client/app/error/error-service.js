@@ -31,16 +31,40 @@
 		 * The error descriptions.
 		 */
 		var descriptions = {
-			// DEFINEHERE: define error descriptions here
-			FILE_SYSTEM_ERROR: '',
-			INVALID_REQUEST: '',
-			NON_EXISTENT_ENTITY: '',
-			OUTDATED_ENTITY: '',
-			SYSTEM_UNDER_MAINTENANCE: '',
-			UNAUTHORIZED_USER: '',
-			UNDEFINED_SERVICE: '',
-			UNDELIVERED_EMAIL: '',
-			UNEXPECTED_ERROR: ''
+			FILE_SYSTEM_ERROR: '' +
+				'Se ha producido un error interno en el sistema de archivos.\n' +
+				'Si el problema persiste, contáctenos.',
+			
+			INVALID_REQUEST: '' +
+				'Se ha recibido una solicitud no válida.\n' +
+				'Por favor, contáctenos.',
+			
+			NON_EXISTENT_ENTITY: '' +
+				'Se ha intentado acceder a una entidad que no existe o que ha sido eliminada.',
+			
+			OUTDATED_ENTITY: '' +
+				'Se ha intentado modificar una entidad desactualizada.\n' +
+				'Puede que otro usuario se encuentre editándola al mismo tiempo.',
+			
+			SYSTEM_UNDER_MAINTENANCE: '' +
+				'El sistema se encuentra en mantenimiento.\n' +
+				'Reintente ingresar más tarde.',
+			
+			UNAUTHORIZED_USER: '' +
+				'Se ha denegado el acceso.\n' +
+				'Puede que su sesión haya expirado.',
+			
+			UNDEFINED_SERVICE: '' +
+				'Se ha solicitado un servicio no definido.\n' +
+				'Por favor, contáctenos.',
+			
+			UNDELIVERED_EMAIL: '' +
+				'No se ha podido enviar un correo electrónico.\n' +
+				'Si el problema persiste, contáctenos.',
+			
+			UNEXPECTED_ERROR: '' +
+				'Se ha producido un error inesperado.\n' +
+				'Si esto ocurre frecuentemente, contáctenos.'
 		};
 		
 		/**
