@@ -168,6 +168,8 @@
 			
 			// Executes the action
 			$scope.createConsultationAction.execute();
+			
+			$scope.showInvalidInputAlert = true;
 		}
 		
 		/**
@@ -428,6 +430,13 @@
 		}
 		
 		/**
+		 * Hides the invalid-input alert.
+		 */
+		function hideInvalidInputAlert() {
+			$scope.showInvalidInputAlert = false;
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -436,9 +445,11 @@
 			
 			// Includes auxiliary variables
 			$scope.section = 0;
+			$scope.showInvalidInputAlert = false;
 			
 			// Includes auxiliary functions
 			$scope.createConsultation = createConsultation;
+			$scope.hideInvalidInputAlert = hideInvalidInputAlert;
 			$scope.setSection = setSection;
 			
 			// Initializes actions
@@ -477,6 +488,8 @@
 			
 			// Sets inputs' initial values
 			action.input.patient.value = id;
+			action.input.clinicalImpression.value = null;
+			action.input.diagnosis.value = null;
 			
 			// Registers callbacks
 			

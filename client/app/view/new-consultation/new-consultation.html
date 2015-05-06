@@ -443,6 +443,17 @@
 				</div>
 				
 				<div class="form-group">
+					<alert
+						ng-if="showInvalidInputAlert"
+						type="danger"
+						close="hideInvalidInputAlert()"
+					>
+						Alguno de los campos de entrada no es válido. Revise las
+						distintas secciones y reinténtelo.
+					</alert>
+				</div>
+				
+				<div class="form-group">
 					<div class="pull-left">
 						<button
 							ng-if="section > 0"
