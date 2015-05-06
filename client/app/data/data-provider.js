@@ -254,7 +254,7 @@
 			return server[utility.pascalToCamelCase(type)].get({
 				id: id
 			}).then(function(output) {
-				// Gets the unserializer
+				// Initializes the unserializer
 				var unserializer = $injector.invoke(types[type]);
 				
 				// Unserializes the entity
