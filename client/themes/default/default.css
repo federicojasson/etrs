@@ -860,6 +860,7 @@
 }
 
 .user-action-box .btn-link {
+	line-height: 0px;
 	text-decoration: none;
 }
 
