@@ -154,6 +154,9 @@ class Conduct extends \App\Service\Internal {
 			// Copies the file
 			$app->file->copy($path, $destinationPath);
 		}
+		
+		// Creates the output directory
+		$app->file->createDirectory(buildPath($directory, 'output', $experiment->getOutputName()));
 	}
 	
 	/**
