@@ -26,15 +26,18 @@
 		'$stateParams',
 		'EditConsultationAction',
 		'data',
+		'inputValidator',
+		'Input',
 		'router',
 		'server',
+		'utility',
 		EditConsultationViewController
 	]);
 	
 	/**
 	 * Represents the edit-consultation view.
 	 */
-	function EditConsultationViewController($filter, $q, $scope, $stateParams, EditConsultationAction, data, router, server) {
+	function EditConsultationViewController($filter, $q, $scope, $stateParams, EditConsultationAction, data, inputValidator, Input, router, server, utility) {
 		var _this = this;
 		
 		/**
@@ -62,6 +65,105 @@
 		_this.isReady = function() {
 			return ready;
 		};
+		
+		/**
+		 * Edits the consultation.
+		 */
+		function editConsultation() {
+			// Prepares the edit-consultation action to be executed
+			
+			$scope.editConsultationAction.input.medicalAntecedents.value = [];
+			for (var i = 0; i < $scope.medicalAntecedents.length; i++) {
+				if ($scope.medicalAntecedents[i].checked) {
+					$scope.editConsultationAction.input.medicalAntecedents.value.push($scope.medicalAntecedents[i].medicalAntecedent.id);
+				}
+			}
+			
+			$scope.editConsultationAction.input.medicines.value = [];
+			for (var i = 0; i < $scope.medicines.length; i++) {
+				if ($scope.medicines[i].checked) {
+					$scope.editConsultationAction.input.medicines.value.push($scope.medicines[i].medicine.id);
+				}
+			}
+			
+			$scope.editConsultationAction.input.laboratoryTestResults.value = [];
+			for (var i = 0; i < $scope.laboratoryTests.length; i++) {
+				if ($scope.laboratoryTests[i].checked) {
+					$scope.editConsultationAction.input.laboratoryTestResults.value.push({
+						laboratoryTest: $scope.laboratoryTests[i].laboratoryTest.id,
+						value: $scope.laboratoryTests[i].input.value
+					});
+				}
+			}
+			
+			$scope.editConsultationAction.input.laboratoryTestResults.validator = function() {
+				var valid = true;
+				
+				for (var i = 0; i < $scope.laboratoryTests.length; i++) {
+					if ($scope.laboratoryTests[i].checked) {
+						valid &= inputValidator.isInputValid($scope.laboratoryTests[i].input);
+					}
+				}
+				
+				return valid;
+			};
+			
+			$scope.editConsultationAction.input.imagingTestResults.value = [];
+			for (var i = 0; i < $scope.imagingTests.length; i++) {
+				if ($scope.imagingTests[i].checked) {
+					$scope.editConsultationAction.input.imagingTestResults.value.push({
+						imagingTest: $scope.imagingTests[i].imagingTest.id,
+						value: $scope.imagingTests[i].input.value
+					});
+				}
+			}
+			
+			$scope.editConsultationAction.input.imagingTestResults.validator = function() {
+				var valid = true;
+				
+				for (var i = 0; i < $scope.imagingTests.length; i++) {
+					if ($scope.imagingTests[i].checked) {
+						valid &= inputValidator.isInputValid($scope.imagingTests[i].input);
+					}
+				}
+				
+				return valid;
+			};
+			
+			$scope.editConsultationAction.input.cognitiveTestResults.value = [];
+			for (var i = 0; i < $scope.cognitiveTests.length; i++) {
+				if ($scope.cognitiveTests[i].checked) {
+					$scope.editConsultationAction.input.cognitiveTestResults.value.push({
+						cognitiveTest: $scope.cognitiveTests[i].cognitiveTest.id,
+						value: $scope.cognitiveTests[i].input.value
+					});
+				}
+			}
+			
+			$scope.editConsultationAction.input.cognitiveTestResults.validator = function() {
+				var valid = true;
+				
+				for (var i = 0; i < $scope.cognitiveTests.length; i++) {
+					if ($scope.cognitiveTests[i].checked) {
+						valid &= inputValidator.isInputValid($scope.cognitiveTests[i].input);
+					}
+				}
+				
+				return valid;
+			};
+			
+			$scope.editConsultationAction.input.treatments.value = [];
+			for (var i = 0; i < $scope.treatments.length; i++) {
+				if ($scope.treatments[i].checked) {
+					$scope.editConsultationAction.input.treatments.value.push($scope.treatments[i].treatment.id);
+				}
+			}
+			
+			// Executes the action
+			$scope.editConsultationAction.execute();
+			
+			$scope.showInvalidInputAlert = true;
+		}
 		
 		/**
 		 * Gets all clinical impressions.
@@ -98,6 +200,31 @@
 				// Gets the cognitive tests
 				return data.getCognitiveTestArray(output.ids);
 			}).then(function(cognitiveTests) {
+				// Adds metadata to the cognitive tests
+				utility.filterArray(cognitiveTests, function(cognitiveTest) {
+					var checked = false;
+					var input = new Input();
+					
+					var cognitiveTestResult = null;
+					for (var i = 0; i < $scope.consultation.cognitiveTestResults.length; i++) {
+						if ($scope.consultation.cognitiveTestResults[i].cognitiveTest === cognitiveTest.id) {
+							cognitiveTestResult = $scope.consultation.cognitiveTestResults[i];
+							break;
+						}
+					}
+					
+					if (cognitiveTestResult !== null) {
+						checked = true;
+						input.value = cognitiveTestResult.value;
+					}
+					
+					return {
+						cognitiveTest: cognitiveTest,
+						checked: checked,
+						input: input
+					};
+				});
+				
 				// Includes the cognitive tests
 				$scope.cognitiveTests = cognitiveTests;
 				
@@ -144,6 +271,31 @@
 				// Gets the imaging tests
 				return data.getImagingTestArray(output.ids);
 			}).then(function(imagingTests) {
+				// Adds metadata to the imaging tests
+				utility.filterArray(imagingTests, function(imagingTest) {
+					var checked = false;
+					var input = new Input();
+					
+					var imagingTestResult = null;
+					for (var i = 0; i < $scope.consultation.imagingTestResults.length; i++) {
+						if ($scope.consultation.imagingTestResults[i].imagingTest === imagingTest.id) {
+							imagingTestResult = $scope.consultation.imagingTestResults[i];
+							break;
+						}
+					}
+					
+					if (imagingTestResult !== null) {
+						checked = true;
+						input.value = imagingTestResult.value;
+					}
+					
+					return {
+						imagingTest: imagingTest,
+						checked: checked,
+						input: input
+					};
+				});
+				
 				// Includes the imaging tests
 				$scope.imagingTests = imagingTests;
 				
@@ -167,6 +319,31 @@
 				// Gets the laboratory tests
 				return data.getLaboratoryTestArray(output.ids);
 			}).then(function(laboratoryTests) {
+				// Adds metadata to the laboratory tests
+				utility.filterArray(laboratoryTests, function(laboratoryTest) {
+					var checked = false;
+					var input = new Input();
+					
+					var laboratoryTestResult = null;
+					for (var i = 0; i < $scope.consultation.laboratoryTestResults.length; i++) {
+						if ($scope.consultation.laboratoryTestResults[i].laboratoryTest === laboratoryTest.id) {
+							laboratoryTestResult = $scope.consultation.laboratoryTestResults[i];
+							break;
+						}
+					}
+					
+					if (laboratoryTestResult !== null) {
+						checked = true;
+						input.value = laboratoryTestResult.value;
+					}
+					
+					return {
+						laboratoryTest: laboratoryTest,
+						checked: checked,
+						input: input
+					};
+				});
+				
 				// Includes the laboratory tests
 				$scope.laboratoryTests = laboratoryTests;
 				
@@ -190,6 +367,14 @@
 				// Gets the medical antecedents
 				return data.getMedicalAntecedentArray(output.ids);
 			}).then(function(medicalAntecedents) {
+				// Adds metadata to the medical antecedents
+				utility.filterArray(medicalAntecedents, function(medicalAntecedent) {
+					return {
+						medicalAntecedent: medicalAntecedent,
+						checked: utility.inArray(medicalAntecedent.id, $scope.consultation.medicalAntecedents)
+					};
+				});
+				
 				// Includes the medical antecedents
 				$scope.medicalAntecedents = medicalAntecedents;
 				
@@ -213,6 +398,14 @@
 				// Gets the medicines
 				return data.getMedicineArray(output.ids);
 			}).then(function(medicines) {
+				// Adds metadata to the medicines
+				utility.filterArray(medicines, function(medicine) {
+					return {
+						medicine: medicine,
+						checked: utility.inArray(medicine.id, $scope.consultation.medicines)
+					};
+				});
+				
 				// Includes the medicines
 				$scope.medicines = medicines;
 				
@@ -236,6 +429,14 @@
 				// Gets the treatments
 				return data.getTreatmentArray(output.ids);
 			}).then(function(treatments) {
+				// Adds metadata to the treatments
+				utility.filterArray(treatments, function(treatment) {
+					return {
+						treatment: treatment,
+						checked: utility.inArray(treatment.id, $scope.consultation.treatments)
+					};
+				});
+				
 				// Includes the treatments
 				$scope.treatments = treatments;
 				
@@ -248,6 +449,13 @@
 		}
 		
 		/**
+		 * Hides the invalid-input alert.
+		 */
+		function hideInvalidInputAlert() {
+			$scope.showInvalidInputAlert = false;
+		}
+		
+		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -256,8 +464,11 @@
 			
 			// Includes auxiliary variables
 			$scope.section = 0;
+			$scope.showInvalidInputAlert = false;
 			
 			// Includes auxiliary functions
+			$scope.editConsultation = editConsultation;
+			$scope.hideInvalidInputAlert = hideInvalidInputAlert;
 			$scope.setSection = setSection;
 			
 			// Resets the data service
@@ -271,21 +482,19 @@
 				// Initializes actions
 				initializeEditConsultationAction(consultation);
 				
-				ready = true;
-			});
-			
-			// Gets resources
-			$q.all([
-				getAllClinicalImpressions(),
-				getAllDiagnoses(),
-				getAllMedicalAntecedents(),
-				getAllMedicines(),
-				getAllLaboratoryTests(),
-				getAllImagingTests(),
-				getAllCognitiveTests(),
-				getAllTreatments()
-			]).then(function() {
-				ready = true;
+				// Gets resources
+				$q.all([
+					getAllClinicalImpressions(),
+					getAllDiagnoses(),
+					getAllMedicalAntecedents(),
+					getAllMedicines(),
+					getAllLaboratoryTests(),
+					getAllImagingTests(),
+					getAllCognitiveTests(),
+					getAllTreatments()
+				]).then(function() {
+					ready = true;
+				});
 			});
 		}
 		
@@ -306,12 +515,6 @@
 			action.input.comments.value = consultation.comments;
 			action.input.clinicalImpression.value = consultation.clinicalImpression;
 			action.input.diagnosis.value = consultation.diagnosis;
-			action.input.medicalAntecedents.value = consultation.medicalAntecedents;
-			action.input.medicines.value = consultation.medicines;
-			action.input.laboratoryTestResults.value = consultation.laboratoryTestResults;
-			action.input.imagingTestResults.value = consultation.imagingTestResults;
-			action.input.cognitiveTestResults.value = consultation.cognitiveTestResults;
-			action.input.treatments.value = consultation.treatments;
 			
 			// Registers callbacks
 			

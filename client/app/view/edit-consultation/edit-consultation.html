@@ -10,7 +10,7 @@
 </p>
 
 <div class="clearfix well">
-	<form ng-submit="editConsultationAction.execute()" novalidate>
+	<form ng-submit="editConsultation()" novalidate>
 		<div class="row">
 			<div class="col-sm-3">
 				<ul class="nav nav-pills nav-stacked">
@@ -83,20 +83,53 @@
 							Tratamientos
 						</a>
 					</li>
-					
-					<li
-						ng-class="{
-							'active': section === 7
-						}"
-					>
-						<a ng-click="setSection(7)">
-							Resumen
-						</a>
-					</li>
 				</ul>
 			</div>
 			
 			<div class="col-sm-9">
+				<div class="clearfix form-group">
+					<div class="pull-left">
+						<button
+							ng-if="section > 0"
+							ng-click="setSection(section - 1)"
+							type="button"
+							class="btn btn-primary"
+						>
+							<span class="glyphicon glyphicon-arrow-left"></span>
+							
+							<span class="icon-text">
+								Anterior
+							</span>
+						</button>
+					</div>
+					
+					<div class="pull-right">
+						<button
+							ng-if="section < 6"
+							ng-click="setSection(section + 1)"
+							type="button"
+							class="btn btn-primary"
+						>
+							<span class="glyphicon glyphicon-arrow-right"></span>
+							
+							<span class="icon-text">
+								Siguiente
+							</span>
+						</button>
+					</div>
+				</div>
+				
+				<div class="clearfix form-group">
+					<alert
+						ng-if="showInvalidInputAlert"
+						type="danger"
+						close="hideInvalidInputAlert()"
+					>
+						Alguno de los campos de entrada no es válido. Revise las
+						distintas secciones y reinténtelo.
+					</alert>
+				</div>
+				
 				<div ng-if="section === 0">
 					<fieldset>
 						<legend>
@@ -229,11 +262,10 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
-							<!-- TODO: set previous antecedents -->
 							<div ng-repeat="medicalAntecedent in medicalAntecedents" class="checkbox">
-								<label>
-									<input type="checkbox"> {{ medicalAntecedent.name }}
+								<label class="control-label">
+									<input ng-model="medicalAntecedent.checked" type="checkbox">
+									{{ medicalAntecedent.medicalAntecedent.name }}
 								</label>
 							</div>
 							
@@ -262,10 +294,10 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
 							<div ng-repeat="medicine in medicines" class="checkbox">
-								<label>
-									<input type="checkbox"> {{ medicine.name }}
+								<label class="control-label">
+									<input ng-model="medicine.checked" type="checkbox">
+									{{ medicine.medicine.name }}
 								</label>
 							</div>
 							
@@ -294,12 +326,17 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
-							<!-- TODO: add corresponding value field -->
 							<div ng-repeat="laboratoryTest in laboratoryTests" class="checkbox">
-								<label>
-									<input type="checkbox"> {{ laboratoryTest.name }}
+								<label class="control-label">
+									<input ng-model="laboratoryTest.checked" type="checkbox">
+									{{ laboratoryTest.laboratoryTest.name }}
 								</label>
+								
+								<data-data-type-input
+									ng-if="laboratoryTest.checked"
+									data-data-type-definition="{{ laboratoryTest.laboratoryTest.dataTypeDefinition }}"
+									input="laboratoryTest.input"
+								></data-data-type-input>
 							</div>
 							
 							<div ng-if="laboratoryTests.length === 0">
@@ -327,12 +364,17 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
-							<!-- TODO: add corresponding value field -->
 							<div ng-repeat="imagingTest in imagingTests" class="checkbox">
-								<label>
-									<input type="checkbox"> {{ imagingTest.name }}
+								<label class="control-label">
+									<input ng-model="imagingTest.checked" type="checkbox">
+									{{ imagingTest.imagingTest.name }}
 								</label>
+								
+								<data-data-type-input
+									ng-if="imagingTest.checked"
+									data-data-type-definition="{{ imagingTest.imagingTest.dataTypeDefinition }}"
+									input="imagingTest.input"
+								></data-data-type-input>
 							</div>
 							
 							<div ng-if="imagingTests.length === 0">
@@ -360,12 +402,17 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
-							<!-- TODO: add corresponding value field -->
 							<div ng-repeat="cognitiveTest in cognitiveTests" class="checkbox">
-								<label>
-									<input type="checkbox"> {{ cognitiveTest.name }}
+								<label class="control-label">
+									<input ng-model="cognitiveTest.checked" type="checkbox">
+									{{ cognitiveTest.cognitiveTest.name }}
 								</label>
+								
+								<data-data-type-input
+									ng-if="cognitiveTest.checked"
+									data-data-type-definition="{{ cognitiveTest.cognitiveTest.dataTypeDefinition }}"
+									input="cognitiveTest.input"
+								></data-data-type-input>
 							</div>
 							
 							<div ng-if="cognitiveTests.length === 0">
@@ -392,10 +439,10 @@
 						</div>
 						
 						<div class="form-group">
-							<!-- TODO: ng-model in input -->
 							<div ng-repeat="treatment in treatments" class="checkbox">
-								<label>
-									<input type="checkbox"> {{ treatment.name }}
+								<label class="control-label">
+									<input ng-model="treatment.checked" type="checkbox">
+									{{ treatment.treatment.name }}
 								</label>
 							</div>
 							
@@ -408,67 +455,16 @@
 					</fieldset>
 				</div>
 				
-				<div ng-if="section === 7">
-					<fieldset>
-						<legend>
-							<span class="glyphicon glyphicon-list-alt"></span>
-							
-							<span class="icon-text">
-								Resumen
-							</span>
-						</legend>
-						
-						<div class="form-group">
-							A continuación se resumen los datos de la consulta
-							médica:
-						</div>
-						
-						TODO: Fieldset 7
-					</fieldset>
-				</div>
-				
 				<div class="form-group">
-					<div class="pull-left">
-						<button
-							ng-if="section > 0"
-							ng-click="setSection(section - 1)"
-							type="button"
-							class="btn btn-primary"
-						>
-							<span class="glyphicon glyphicon-arrow-left"></span>
-							
-							<span class="icon-text">
-								Anterior
-							</span>
-						</button>
-					</div>
-					
-					<div class="pull-right">
-						<button
-							ng-if="section < 7"
-							ng-click="setSection(section + 1)"
-							type="button"
-							class="btn btn-primary"
-						>
-							<span class="glyphicon glyphicon-arrow-right"></span>
-							
-							<span class="icon-text">
-								Siguiente
-							</span>
-						</button>
-						
-						<button
-							ng-if="section === 7"
-							type="submit"
-							class="btn btn-warning"
-						>
-							Editar consulta médica
-						</button>
-					</div>
+					<button
+						ng-if="section === 6"
+						type="submit"
+						class="btn btn-success pull-right"
+					>
+						Crear consulta médica
+					</button>
 				</div>
 			</div>
 		</div>
 	</form>
 </div>
-
-TODO: edit-consultation.html
