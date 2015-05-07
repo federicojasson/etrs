@@ -21,6 +21,7 @@
 (function() {
 	angular.module('app.view.study').controller('StudyViewController', [
 		'$controller',
+		'$interval',
 		'$scope',
 		'$stateParams',
 		'DeleteStudyAction',
@@ -32,7 +33,7 @@
 	/**
 	 * Represents the study view.
 	 */
-	function StudyViewController($controller, $scope, $stateParams, DeleteStudyAction, data, router) {
+	function StudyViewController($controller, $interval, $scope, $stateParams, DeleteStudyAction, data, router) {
 		var _this = this;
 		
 		/**
@@ -90,6 +91,9 @@
 				// Initializes actions
 				initializeDeleteStudyAction(study);
 				
+				// Schedules the periodic refresh of the study
+				schedulePeriodicStudyRefresh(study);
+				
 				ready = true;
 			});
 		}
@@ -122,6 +126,39 @@
 			
 			// Includes the action
 			$scope.deleteStudyAction = action;
+		}
+		
+		/**
+		 * Schedules the periodic refresh of the study.
+		 * 
+		 * Receives the study.
+		 */
+		function schedulePeriodicStudyRefresh(study) {
+			// Schedules the refresh
+			var promise = $interval(function() {
+				// Resets the data service
+				data.reset(1, {
+					Study: [
+						'creator',
+						'lastEditor',
+						'experiment',
+						'input',
+						'files'
+					]
+				});
+				
+				// Gets the study
+				data.getStudy(study.id).then(function(study) {
+					// Refreshes the study
+					$scope.study = study;
+				});
+			}, 15000);
+			
+			// Registers a listener
+			$scope.$on('$destroy', function() {
+				// Cancels the promise
+				$interval.cancel(promise);
+			});
 		}
 		
 		// ---------------------------------------------------------------------
