@@ -64,10 +64,10 @@ class Experiment extends \App\Data\Entity\Experiment implements \Doctrine\ORM\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'commandLine', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'files', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'studies', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'version');
+            return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'commandLine', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'files', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'outputName', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'studies', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'version');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'commandLine', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'files', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'studies', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'version');
+        return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'commandLine', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'files', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'outputName', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'studies', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'version');
     }
 
     /**
@@ -268,6 +268,17 @@ class Experiment extends \App\Data\Entity\Experiment implements \Doctrine\ORM\Pr
     /**
      * {@inheritDoc}
      */
+    public function getOutputName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getOutputName', array());
+
+        return parent::getOutputName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getStudies()
     {
 
@@ -362,6 +373,17 @@ class Experiment extends \App\Data\Entity\Experiment implements \Doctrine\ORM\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
 
         return parent::setName($name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setOutputName($name)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setOutputName', array($name));
+
+        return parent::setOutputName($name);
     }
 
 }
