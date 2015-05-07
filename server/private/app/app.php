@@ -40,9 +40,9 @@ require_once DIRECTORY_APP . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPAR
 require_once DIRECTORY_APP . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'functions.php';
 
 // Defines the operation mode
-define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
+//define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
 //define('OPERATION_MODE', OPERATION_MODE_MAINTENANCE);
-//define('OPERATION_MODE', OPERATION_MODE_PRODUCTION);
+define('OPERATION_MODE', OPERATION_MODE_PRODUCTION);
 
 // Registers a class autoloader
 spl_autoload_register('loadClass');
