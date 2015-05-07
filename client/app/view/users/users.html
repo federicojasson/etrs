@@ -9,7 +9,17 @@
 </p>
 
 <div class="row">
-	<div class="col-sm-5 col-sm-offset-7">
+	<div class="col-sm-7">
+		<a ui-sref="invitation" class="btn btn-danger">
+			<span class="glyphicon glyphicon-envelope"></span>
+			
+			<span class="icon-text">
+				Enviar invitación
+			</span>
+		</a>
+	</div>
+	
+	<div class="col-sm-5">
 		<div
 			ng-class="{
 				'has-error': ! searchUsersAction.input.expression.valid
