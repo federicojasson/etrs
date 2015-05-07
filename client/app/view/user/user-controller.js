@@ -20,6 +20,7 @@
 
 (function() {
 	angular.module('app.view.user').controller('UserViewController', [
+		'$controller',
 		'$scope',
 		'$stateParams',
 		'data',
@@ -30,7 +31,7 @@
 	/**
 	 * Represents the user view.
 	 */
-	function UserViewController($scope, $stateParams, data, fullNameFilter) {
+	function UserViewController($controller, $scope, $stateParams, data, fullNameFilter) {
 		var _this = this;
 		
 		/**
@@ -65,6 +66,9 @@
 		function initialize() {
 			// Gets the URL parameters
 			var id = $stateParams.id;
+			
+			// Includes controllers
+			$scope.account = $controller('AccountController');
 			
 			// Resets the data service
 			data.reset(1, {

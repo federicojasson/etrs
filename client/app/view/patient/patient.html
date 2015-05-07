@@ -5,6 +5,7 @@
 <h1>{{ patient | fullName }}</h1>
 
 <button
+	ng-if="account.getSignedInUser().role !== 'op'"
 	ng-click="deletePatientAction.execute()"
 	type="button"
 	class="btn btn-danger"

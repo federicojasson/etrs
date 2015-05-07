@@ -1,4 +1,8 @@
-<a ui-sref="users" class="btn btn-link">
+<a
+	ng-if="account.getSignedInUser().role === 'ad'"
+	ui-sref="users"
+	class="btn btn-link"
+>
 	Volver a <b>Usuarios</b>
 </a>
 
@@ -33,14 +37,20 @@
 
 <div class="clearfix">
 	<user-action-box
+		label="Invitación"
+		user="user.inviter"
+		class="pull-right"
+	></user-action-box>
+	
+	<user-action-box
 		date-time="user.creationDateTime"
 		label="Registro"
 		class="pull-right"
 	></user-action-box>
 	
 	<user-action-box
-		label="Invitación"
-		user="user.inviter"
+		date-time="user.lastEditionDateTime"
+		label="Última edición"
 		class="pull-right"
 	></user-action-box>
 </div>

@@ -10,6 +10,7 @@
 <h1>Consulta médica del {{ consultation.date | date: 'dd/MM/yyyy' }}</h1>
 
 <button
+	ng-if="account.getSignedInUser().role !== 'op'"
 	ng-click="deleteConsultationAction.execute()"
 	type="button"
 	class="btn btn-danger"
