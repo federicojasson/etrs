@@ -55,6 +55,11 @@
 			
 			// Sets the input's validator
 			$scope.input.validator = _this.dataTypeInput.validator;
+			
+			if ($scope.input.value === '' && _this.dataTypeInput.dataType !== 'integer_range') {
+				// Sets the input's initial value
+				$scope.input.value = null;
+			}
 		}
 		
 		// ---------------------------------------------------------------------

@@ -212,7 +212,7 @@
 		 * Receives the input.
 		 */
 		_this.isOption = function(input) {
-			if (input.value === '') {
+			if (input.value === null) {
 				// The option has not been selected
 				input.message = 'Seleccione una opción';
 				return false;
