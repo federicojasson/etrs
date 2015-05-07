@@ -19,5 +19,5 @@
 'use strict';
 
 (function() {
-	angular.module('app.userActionBox', []);
+	angular.module('app.eventBox', []);
 })();

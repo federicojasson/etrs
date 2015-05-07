@@ -123,6 +123,27 @@
 	height: 256px;
 	width: 256px;
 }
+
+.event-box {
+	background-color: #f5f5f5;
+	border: 1px solid #dddddd;
+	display: inline-block;
+	font-size: 0.85em;
+	margin: 4px;
+	padding: 6px 8px;
+}
+
+.event-box .btn-link {
+	text-decoration: none;
+}
+
+.event-box .glyphicon {
+	color: #666666;
+}
+
+.event-box > :first-child {
+	margin-bottom: 4px;
+}
  
 .file-drop-zone {
 	border: 2px dashed #dddddd;
@@ -866,27 +887,6 @@
 	background-repeat: no-repeat;
 	height: 256px;
 	width: 356px;
-}
-
-.user-action-box {
-	background-color: #f5f5f5;
-	border: 1px solid #dddddd;
-	display: inline-block;
-	font-size: 0.85em;
-	margin: 4px;
-	padding: 6px 8px;
-}
-
-.user-action-box .btn-link {
-	text-decoration: none;
-}
-
-.user-action-box .glyphicon {
-	color: #666666;
-}
-
-.user-action-box > :first-child {
-	margin-bottom: 4px;
 }
 
 .user-image {

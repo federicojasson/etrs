@@ -19,12 +19,12 @@
 'use strict';
 
 (function() {
-	angular.module('app.userActionBox').directive('userActionBox', userActionBoxDirective);
+	angular.module('app.eventBox').directive('eventBox', eventBoxDirective);
 	
 	/**
-	 * Includes a user-action box.
+	 * Includes an event box.
 	 */
-	function userActionBoxDirective() {
+	function eventBoxDirective() {
 		/**
 		 * Returns the settings.
 		 */
@@ -36,7 +36,7 @@
 					label: '@label',
 					user: '=user'
 				},
-				templateUrl: 'app/user-action-box/user-action-box.html'
+				templateUrl: 'app/event-box/event-box.html'
 			};
 		}
 		

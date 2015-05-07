@@ -30,6 +30,7 @@
 		'app.dataTypeInput',
 		'app.dialog',
 		'app.error',
+		'app.eventBox',
 		'app.fileHandler',
 		'app.fileUploader',
 		'app.inputValidator',
@@ -39,7 +40,6 @@
 		'app.searchHandler',
 		'app.server',
 		'app.title',
-		'app.userActionBox',
 		'app.utility',
 		'app.view'
 	]);
