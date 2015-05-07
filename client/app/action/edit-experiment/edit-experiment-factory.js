@@ -57,6 +57,10 @@
 				id: new Input(),
 				version: new Input(),
 				
+				outputName: new Input(function() {
+					return inputValidator.isFileName(this);
+				}),
+				
 				name: new Input(function() {
 					return inputValidator.isValidString(this, 1, 64);
 				})
@@ -79,6 +83,7 @@
 			server.experiment.edit({
 				id: this.input.id.value,
 				version: this.input.version.value,
+				outputName: this.input.outputName.value,
 				name: this.input.name.value
 			}).then(function() {
 				// Invokes the success callback

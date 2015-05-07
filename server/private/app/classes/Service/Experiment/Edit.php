@@ -34,6 +34,7 @@ class Edit extends \App\Service\External {
 		// Gets inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
+		$outputName = $this->getInputValue('outputName', 'trim');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user
@@ -48,6 +49,7 @@ class Edit extends \App\Service\External {
 		
 		// Edits the experiment
 		$experiment->setLastEditionDateTime();
+		$experiment->setOutputName($outputName);
 		$experiment->setName($name);
 		$experiment->setLastEditor($user);
 		$app->data->merge($experiment);
@@ -75,6 +77,10 @@ class Edit extends \App\Service\External {
 			
 			'version' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 0);
+			}),
+			
+			'outputName' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
+				return $app->inputValidator->isFileName($input);
 			}),
 			
 			'name' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {

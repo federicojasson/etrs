@@ -51,6 +51,25 @@
 					class="form-control"
 				>
 			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editExperimentAction.input.outputName.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editExperimentAction.input.outputName.value"
+					popover="{{ editExperimentAction.input.outputName.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					file-name
+					type="text"
+					placeholder="Nombre del archivo de salida"
+					class="form-control"
+				>
+			</div>
 		</fieldset>
 
 		<div class="form-group">
