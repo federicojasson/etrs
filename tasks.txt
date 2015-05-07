@@ -2,7 +2,6 @@
 Quick tasks
 ----------------------------
 
-- Check multiples dl.
 - Links para volver a la consulta desde el estudio, etc.
 - Refresh study's state with $timeout?
 

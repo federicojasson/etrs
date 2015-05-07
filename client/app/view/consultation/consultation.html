@@ -48,83 +48,87 @@
 	<dl class="dl-horizontal">
 		<dt>Fecha</dt>
 		<dd>{{ consultation.date | date: 'longDate' }}</dd>
-	</dl>
-	
-	<dl ng-if="consultation.presentingProblem.trim() !== ''" class="dl-horizontal">
-		<dt>Motivo de la consulta / Síntomas</dt>
-		<dd>
+		
+		<dt ng-if="consultation.presentingProblem.trim() !== ''">
+			Motivo de la consulta / Síntomas
+		</dt>
+		<dd ng-if="consultation.presentingProblem.trim() !== ''">
 			<pre>{{ consultation.presentingProblem }}</pre>
 		</dd>
-	</dl>
-	
-	<dl ng-if="consultation.comments.trim() !== ''" class="dl-horizontal">
-		<dt>Observaciones</dt>
-		<dd>
+		
+		<dt ng-if="consultation.comments.trim() !== ''">
+			Observaciones
+		</dt>
+		<dd ng-if="consultation.comments.trim() !== ''">
 			<pre>{{ consultation.comments }}</pre>
 		</dd>
-	</dl>
-	
-	<dl ng-if="consultation.clinicalImpression !== null" class="dl-horizontal">
-		<dt>Impresión clínica</dt>
-		<dd>{{ consultation.clinicalImpression.name }}</dd>
-	</dl>
-	
-	<dl ng-if="consultation.diagnosis !== null" class="dl-horizontal">
-		<dt>Diagnóstico</dt>
-		<dd>{{ consultation.diagnosis.name }}</dd>
-	</dl>
-	
-	<dl ng-if="consultation.medicalAntecedents.length > 0" class="dl-horizontal">
-		<dt>Antecedentes médicos</dt>
-		<dd>
+		
+		<dt ng-if="consultation.clinicalImpression !== null">
+			Impresión clínica
+		</dt>
+		<dd ng-if="consultation.clinicalImpression !== null">
+			{{ consultation.clinicalImpression.name }}
+		</dd>
+		
+		<dt ng-if="consultation.diagnosis !== null">
+			Diagnóstico
+		</dt>
+		<dd ng-if="consultation.diagnosis !== null">
+			{{ consultation.diagnosis.name }}
+		</dd>
+		
+		<dt ng-if="consultation.medicalAntecedents.length > 0">
+			Antecedentes médicos
+		</dt>
+		<dd ng-if="consultation.medicalAntecedents.length > 0">
 			<span ng-repeat="medicalAntecedent in consultation.medicalAntecedents">
 				{{ medicalAntecedent.name }}{{ $last? '' : ', ' }}
 			</span>
 		</dd>
-	</dl>
-	
-	<dl ng-if="consultation.medicines.length > 0" class="dl-horizontal">
-		<dt>Medicación concomitante</dt>
-		<dd>
+		
+		<dt ng-if="consultation.medicines.length > 0">
+			Medicación concomitante
+		</dt>
+		<dd ng-if="consultation.medicines.length > 0">
 			<span ng-repeat="medicine in consultation.medicines">
 				{{ medicine.name }}{{ $last? '' : ', ' }}
 			</span>
 		</dd>
-	</dl>
-	
-	<dl ng-if="consultation.laboratoryTestResults.length > 0" class="dl-horizontal">
-		<dt>Exámenes de laboratorio</dt>
-		<dd>
+		
+		<dt ng-if="consultation.laboratoryTestResults.length > 0">
+			Exámenes de laboratorio
+		</dt>
+		<dd ng-if="consultation.laboratoryTestResults.length > 0">
 			<span ng-repeat="laboratoryTestResult in consultation.laboratoryTestResults">
 				{{ laboratoryTestResult.laboratoryTest.name }}
 				TODO: value
 			</span>
 		</dd>
-	</dl>
-	
-	<dl ng-if="consultation.imagingTestResults.length > 0" class="dl-horizontal">
-		<dt>Exámenes de laboratorio</dt>
-		<dd>
+		
+		<dt ng-if="consultation.imagingTestResults.length > 0">
+			Exámenes de laboratorio
+		</dt>
+		<dd ng-if="consultation.imagingTestResults.length > 0">
 			<span ng-repeat="imagingTestResult in consultation.imagingTestResults">
 				{{ imagingTestResult.imagingTest.name }}
 				TODO: value
 			</span>
 		</dd>
-	</dl>
-	
-	<dl ng-if="consultation.cognitiveTestResults.length > 0" class="dl-horizontal">
-		<dt>Exámenes de laboratorio</dt>
-		<dd>
+		
+		<dt ng-if="consultation.cognitiveTestResults.length > 0">
+			Exámenes de laboratorio
+		</dt>
+		<dd ng-if="consultation.cognitiveTestResults.length > 0">
 			<span ng-repeat="cognitiveTestResult in consultation.cognitiveTestResults">
 				{{ cognitiveTestResult.cognitiveTest.name }}
 				TODO: value
 			</span>
 		</dd>
-	</dl>
-	
-	<dl ng-if="consultation.treatments.length > 0" class="dl-horizontal">
-		<dt>Tratamientos</dt>
-		<dd>
+		
+		<dt ng-if="consultation.treatments.length > 0">
+			Tratamientos
+		</dt>
+		<dd ng-if="consultation.treatments.length > 0">
 			<span ng-repeat="treatment in consultation.treatments">
 				{{ treatment.name }}{{ $last? '' : ', ' }}
 			</span>

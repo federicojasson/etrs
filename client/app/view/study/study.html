@@ -34,39 +34,35 @@
 	<dl class="dl-horizontal">
 		<dt>Experimento</dt>
 		<dd>{{ study.experiment.name }}</dd>
-	</dl>
-	
-	<dl ng-if="study.comments.trim() !== ''" class="dl-horizontal">
-		<dt>Observaciones</dt>
-		<dd>
+		
+		<dt ng-if="study.comments.trim() !== ''">
+			Observaciones
+		</dt>
+		<dd ng-if="study.comments.trim() !== ''">
 			<pre>{{ study.comments }}</pre>
 		</dd>
-	</dl>
-	
-	<dl class="dl-horizontal">
+		
 		<dt>Archivo de entrada</dt>
 		<dd>
 			<div class="row">
 				<file-handler
 					file="study.input"
-					class="col-sm-4"
+					class="col-sm-5"
 				></file-handler>
 			</div>
 		</dd>
-	</dl>
-	
-	<dl class="dl-horizontal">
+		
 		<dt>Estado del estudio</dt>
 		<dd>{{ study | state }}</dd>
-	</dl>
-	
-	<dl ng-if="study.output !== null" class="dl-horizontal">
-		<dt>Archivo de salida</dt>
-		<dd>
+		
+		<dt ng-if="study.output !== null">
+			Archivo de salida
+		</dt>
+		<dd ng-if="study.output !== null">
 			<div class="row">
 				<file-handler
 					file="study.output"
-					class="col-sm-4"
+					class="col-sm-5"
 				></file-handler>
 			</div>
 		</dd>
