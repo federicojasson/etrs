@@ -756,21 +756,21 @@ class Consultation {
 		$serialized['laboratoryTestResults'] = filterArray($this->getLaboratoryTestResults(), function($laboratoryTestResult) {
 			return [
 				'laboratoryTest' => (string) $laboratoryTestResult->getLaboratoryTest(),
-				'value' => $laboratoryTestResult->getValue()
+				'value' => \App\InputValidator\DataType\Factory::parseValue($laboratoryTestResult->getLaboratoryTest()->getDataTypeDefinition(), $laboratoryTestResult->getValue())
 			];
 		});
 		
 		$serialized['imagingTestResults'] = filterArray($this->getImagingTestResults(), function($imagingTestResult) {
 			return [
 				'imagingTest' => (string) $imagingTestResult->getImagingTest(),
-				'value' => $imagingTestResult->getValue()
+				'value' => \App\InputValidator\DataType\Factory::parseValue($imagingTestResult->getImagingTest()->getDataTypeDefinition(), $imagingTestResult->getValue())
 			];
 		});
 		
 		$serialized['cognitiveTestResults'] = filterArray($this->getCognitiveTestResults(), function($cognitiveTestResult) {
 			return [
 				'cognitiveTest' => (string) $cognitiveTestResult->getCognitiveTest(),
-				'value' => $cognitiveTestResult->getValue()
+				'value' => \App\InputValidator\DataType\Factory::parseValue($cognitiveTestResult->getCognitiveTest()->getDataTypeDefinition(), $cognitiveTestResult->getValue())
 			];
 		});
 		

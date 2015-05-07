@@ -87,6 +87,31 @@ class Factory {
 	}
 	
 	/**
+	 * Parses a value corresponding to a certain data type.
+	 * 
+	 * Receives the formatted definition and the value.
+	 */
+	public static function parseValue($formattedDefinition, $value) {
+		// Gets the fields
+		$fields = self::getFields($formattedDefinition);
+		
+		// Gets the data type
+		$dataType = self::getDataType($fields);
+		
+		// Parses the value according to the data type
+		switch ($dataType) {
+			case DATA_TYPE_BOOLEAN: {
+				return (boolean) $value;
+			}
+			
+			case DATA_TYPE_INTEGER_FIX_VALUES:
+			case DATA_TYPE_INTEGER_RANGE: {
+				return (int) $value;
+			}
+		}
+	}
+	
+	/**
 	 * Returns the data type from a set of fields.
 	 * 
 	 * Receives the fields.
