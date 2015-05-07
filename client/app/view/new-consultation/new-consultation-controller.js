@@ -436,6 +436,7 @@
 			var id = $stateParams.id;
 			
 			// Includes auxiliary variables
+			$scope.id = id;
 			$scope.section = 0;
 			$scope.showInvalidInputAlert = false;
 			

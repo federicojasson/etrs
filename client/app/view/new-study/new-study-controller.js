@@ -109,6 +109,7 @@
 			var id = $stateParams.id;
 			
 			// Includes auxiliary variables
+			$scope.id = id;
 			$scope.input = [];
 			
 			// Includes auxiliary functions
