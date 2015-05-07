@@ -73,7 +73,7 @@
 		/**
 		 * Creates a data-type input.
 		 * 
-		 * Receives a formatted definition.
+		 * Receives the formatted definition.
 		 */
 		DataTypeInput.create = function(formattedDefinition) {
 			// Gets the fields

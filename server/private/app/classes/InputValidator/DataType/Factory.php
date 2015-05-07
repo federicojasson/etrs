@@ -67,7 +67,7 @@ class Factory {
 	/**
 	 * Creates a data-type input validator.
 	 * 
-	 * Receives a formatted definition.
+	 * Receives the formatted definition.
 	 */
 	public static function create($formattedDefinition) {
 		// Gets the fields
