@@ -79,6 +79,7 @@
 					'lastEditor',
 					'experiment',
 					'input',
+					'output',
 					'files'
 				]
 			});
@@ -136,22 +137,28 @@
 		function schedulePeriodicStudyRefresh(study) {
 			// Schedules the refresh
 			var promise = $interval(function() {
-				// Resets the data service
-				data.reset(1, {
-					Study: [
-						'creator',
-						'lastEditor',
-						'experiment',
-						'input',
-						'files'
-					]
-				});
-				
-				// Gets the study
-				data.getStudy(study.id).then(function(study) {
-					// Refreshes the study
-					$scope.study = study;
-				});
+				if (ready) {
+					// Resets the data service
+					data.reset(1, {
+						Study: [
+							'creator',
+							'lastEditor',
+							'experiment',
+							'input',
+							'output',
+							'files'
+						]
+					});
+					
+					// Gets the study
+					data.getStudy(study.id).then(function(study) {
+						// Refreshes the study
+						$scope.study = study;
+						
+						// Refreshes the delete-study action
+						$scope.deleteStudyAction.input.version.value = study.version;
+					});
+				}
 			}, 15000);
 			
 			// Registers a listener
