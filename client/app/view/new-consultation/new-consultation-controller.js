@@ -25,6 +25,7 @@
 		'$stateParams',
 		'CreateConsultationAction',
 		'data',
+		'inputValidator',
 		'Input',
 		'router',
 		'server',
@@ -35,7 +36,7 @@
 	/**
 	 * Represents the new-consultation view.
 	 */
-	function NewConsultationViewController($q, $scope, $stateParams, CreateConsultationAction, data, Input, router, server, utility) {
+	function NewConsultationViewController($q, $scope, $stateParams, CreateConsultationAction, data, inputValidator, Input, router, server, utility) {
 		var _this = this;
 		
 		/**
@@ -99,10 +100,7 @@
 				
 				for (var i = 0; i < $scope.laboratoryTests.length; i++) {
 					if ($scope.laboratoryTests[i].checked) {
-						var input = $scope.laboratoryTests[i].input;
-						input.message = '';
-						input.validate();
-						valid &= input.valid;
+						valid &= inputValidator.isInputValid($scope.laboratoryTests[i].input);
 					}
 				}
 				
@@ -124,10 +122,7 @@
 				
 				for (var i = 0; i < $scope.imagingTests.length; i++) {
 					if ($scope.imagingTests[i].checked) {
-						var input = $scope.imagingTests[i].input;
-						input.message = '';
-						input.validate();
-						valid &= input.valid;
+						valid &= inputValidator.isInputValid($scope.imagingTests[i].input);
 					}
 				}
 				
@@ -149,10 +144,7 @@
 				
 				for (var i = 0; i < $scope.cognitiveTests.length; i++) {
 					if ($scope.cognitiveTests[i].checked) {
-						var input = $scope.cognitiveTests[i].input;
-						input.message = '';
-						input.validate();
-						valid &= input.valid;
+						valid &= inputValidator.isInputValid($scope.cognitiveTests[i].input);
 					}
 				}
 				
