@@ -68,6 +68,9 @@
 			// Gets the URL parameters
 			var id = $stateParams.id;
 			
+			// Includes controllers
+			$scope.account = $controller('AccountController');
+			
 			// Resets the data service
 			data.reset(1, {
 				Study: [
@@ -83,9 +86,6 @@
 			data.getStudy(id).then(function(study) {
 				// Includes the study
 				$scope.study = study;
-				
-				// Includes controllers
-				$scope.account = $controller('AccountController');
 				
 				// Initializes actions
 				initializeDeleteStudyAction(study);

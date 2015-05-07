@@ -69,6 +69,9 @@
 			// Gets the URL parameters
 			var id = $stateParams.id;
 			
+			// Includes controllers
+			$scope.account = $controller('AccountController');
+			
 			// Resets the data service
 			data.reset(2, {
 				Consultation: [
@@ -94,9 +97,6 @@
 			data.getConsultation(id).then(function(consultation) {
 				// Includes the consultation
 				$scope.consultation = consultation;
-				
-				// Includes controllers
-				$scope.account = $controller('AccountController');
 				
 				// Initializes actions
 				initializeDeleteConsultationAction(consultation);
