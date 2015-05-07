@@ -97,8 +97,16 @@
 	word-break: normal;
 }
 
+.dl-horizontal dd ~ dd {
+	margin-top: 8px;
+}
+
 .dl-horizontal dt {
 	white-space: normal;
+}
+
+.dl-horizontal dt ~ dt {
+	margin-top: 8px;
 }
 
 .dropdown-menu {
