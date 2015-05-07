@@ -35,6 +35,7 @@
 }
 
 .btn-link {
+	color: #4d7984;
 	font-size: inherit;
 	margin: 6px 0px;
 	padding: 0px;
@@ -74,7 +75,7 @@
 }
 
 .data-type-input {
-	margin-bottom: 20px;
+	margin-bottom: 16px;
 	margin-top: 4px;
 }
 
@@ -873,11 +874,10 @@
 	display: inline-block;
 	font-size: 0.85em;
 	margin: 4px;
-	padding: 6px 8px 8px 8px;
+	padding: 6px 8px;
 }
 
 .user-action-box .btn-link {
-	line-height: 0px;
 	text-decoration: none;
 }
 
