@@ -60,7 +60,19 @@
 					</div>
 					
 					<div ng-if="showCommandLineExplanation" class="form-group">
-						TODO: explanation
+						<alert
+							type="info"
+							close="toggleCommandLineExplanation()"
+						>
+							La línea de comandos indica cómo debe ejecutarse el
+							experimento.<br>
+							Debe contener el marcador :input que será
+							reemplazado automáticamente por la ruta del archivo
+							de entrada del estudio.<br>
+							El marcador no debe rodearse con comillas.<br>
+							<br>
+							<b>Por ejemplo</b>: experimento.exe :input
+						</alert>
 					</div>
 					
 					<div
