@@ -74,7 +74,53 @@
 					type="info"
 					close="toggleDataTypeDefinitionAlert()"
 				>
-					TODO: explanation
+					La definición debe consistir de un tipo de dato, que indica
+					qué tipo de valores son válidos, y una definición, que
+					describe propiedades adicionales.<br>
+					El siguiente diagrama representa la estructura esperada:<br>
+					<br>
+					<b>tipo de dato; campo 0; campo 1; campo 2; …; campo n</b><br>
+					<br>
+					Se deben cumplir las siguientes reglas:<br>
+					<br>
+					- Los campos deben separarse con punto y coma (;).<br>
+					- El tipo de dato debe ser uno de los predefinidos.<br>
+					- Los campos de la definición deben ser de la forma
+					  <b>&lt;etiqueta&gt;: &lt;valor&gt;</b> y cada etiqueta
+					  debe ser distinta.<br>
+					<br>
+					Los tipos de dato predefinidos son los siguientes:
+					
+					<hr>
+					
+					<b>boolean</b><br>
+					Debe tener exactamente 2 campos de definición y los valores
+					"false" y "true" deben estar incluidos, uno en cada campo.<br>
+					<br>
+					<b>Por ejemplo</b>: boolean; Sí: true; No: false
+					
+					<hr>
+					
+					<b>integer_fix_values</b><br>
+					Debe tener al menos 1 campo de definición y los valores
+					deben ser números enteros distintos.<br>
+					<br>
+					<b>Por ejemplo</b>: integer_fix_values; Rojo: 1; Verde: 2;
+					Azul: 3
+					
+					<hr>
+					
+					<b>integer_range</b><br>
+					Debe tener exactamente 2 campos de definición y las
+					etiquetas "min" y "max" deben estar incluidas, una en cada
+					campo.<br>
+					Ambos valores deben ser números enteros.<br>
+					El valor correspondiente a la etiqueta "min" define el
+					mínimo valor permitido, mientras que el de la etiqueta "max"
+					define el máximo.<br>
+					La relación máximo >= mínimo debe respetarse.<br>
+					<br>
+					<b>Por ejemplo</b>: integer_range; min: -5; max: 3
 				</alert>
 			</div>
 			
