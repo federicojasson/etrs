@@ -51,6 +51,7 @@
 	border-width: 0px;
 	margin-bottom: 0px;
 	margin-top: 0px;
+	vertical-align: baseline;
 }
 
 .btn.active:focus {
