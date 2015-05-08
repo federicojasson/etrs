@@ -64,6 +64,12 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Includes auxiliary variables
+			$scope.showCommandLineExplanation = false;
+			
+			// Includes auxiliary functions
+			$scope.toggleCommandLineExplanation = toggleCommandLineExplanation;
+			
 			// Initializes actions
 			initializeCreateExperimentAction();
 		}
@@ -113,6 +119,13 @@
 			
 			// Includes the action
 			$scope.createExperimentAction = action;
+		}
+		
+		/**
+		 * Toggles the command-line explanation.
+		 */
+		function toggleCommandLineExplanation() {
+			$scope.showCommandLineExplanation = ! $scope.showCommandLineExplanation;
 		}
 		
 		// ---------------------------------------------------------------------

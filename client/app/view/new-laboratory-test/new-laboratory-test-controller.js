@@ -62,6 +62,12 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
+			// Includes auxiliary variables
+			$scope.showDataTypeDefinitionExplanation = false;
+			
+			// Includes auxiliary functions
+			$scope.toggleDataTypeDefinitionExplanation = toggleDataTypeDefinitionExplanation;
+			
 			// Initializes actions
 			initializeCreateLaboratoryTestAction();
 		}
@@ -88,6 +94,13 @@
 			
 			// Includes the action
 			$scope.createLaboratoryTestAction = action;
+		}
+		
+		/**
+		 * Toggles the data-type-definition explanation.
+		 */
+		function toggleDataTypeDefinitionExplanation() {
+			$scope.showDataTypeDefinitionExplanation = ! $scope.showDataTypeDefinitionExplanation;
 		}
 		
 		// ---------------------------------------------------------------------

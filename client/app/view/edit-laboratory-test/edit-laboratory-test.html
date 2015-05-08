@@ -63,10 +63,16 @@
 			</div>
 			
 			<div class="form-group">
-				Ingrese la definición del tipo de dato:
+				Ingrese la
+				<a ng-click="toggleDataTypeDefinitionExplanation()" class="btn btn-link inline">
+					definición del tipo de dato
+				</a>:
 			</div>
 			
-			<!-- TODO: explanation -->
+			<div ng-if="showDataTypeDefinitionExplanation" class="form-group">
+				TODO: explanation
+			</div>
+			
 			<div
 				ng-class="{
 					'has-error': ! editLaboratoryTestAction.input.dataTypeDefinition.valid

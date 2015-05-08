@@ -51,12 +51,18 @@
 						>
 					</div>
 					
-					<!-- TODO: explanation -->
 					<div class="form-group">
-						Ingrese la línea de comandos y el nombre del archivo de
-						salida:
+						Ingrese la
+						<a ng-click="toggleCommandLineExplanation()" class="btn btn-link inline">
+							línea de comandos
+						</a>
+						y el nombre del archivo de salida:
 					</div>
-
+					
+					<div ng-if="showCommandLineExplanation" class="form-group">
+						TODO: explanation
+					</div>
+					
 					<div
 						ng-class="{
 							'has-error': ! createExperimentAction.input.commandLine.valid

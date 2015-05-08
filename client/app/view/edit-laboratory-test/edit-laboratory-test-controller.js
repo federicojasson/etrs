@@ -67,6 +67,12 @@
 			// Gets the URL parameters
 			var id = $stateParams.id;
 			
+			// Includes auxiliary variables
+			$scope.showDataTypeDefinitionExplanation = false;
+			
+			// Includes auxiliary functions
+			$scope.toggleDataTypeDefinitionExplanation = toggleDataTypeDefinitionExplanation;
+			
 			// Resets the data service
 			data.reset();
 			
@@ -112,6 +118,13 @@
 			
 			// Includes the action
 			$scope.editLaboratoryTestAction = action;
+		}
+		
+		/**
+		 * Toggles the data-type-definition explanation.
+		 */
+		function toggleDataTypeDefinitionExplanation() {
+			$scope.showDataTypeDefinitionExplanation = ! $scope.showDataTypeDefinitionExplanation;
 		}
 		
 		// ---------------------------------------------------------------------
