@@ -53,16 +53,16 @@
 					
 					<div class="form-group">
 						Ingrese la
-						<a ng-click="toggleCommandLineExplanation()" class="btn btn-link inline">
+						<a ng-click="toggleCommandLineAlert()" class="btn btn-link inline">
 							línea de comandos
 						</a>
 						y el nombre del archivo de salida:
 					</div>
 					
-					<div ng-if="showCommandLineExplanation" class="form-group">
+					<div ng-if="showCommandLineAlert" class="form-group">
 						<alert
 							type="info"
-							close="toggleCommandLineExplanation()"
+							close="toggleCommandLineAlert()"
 						>
 							La línea de comandos indica cómo debe ejecutarse el
 							experimento.<br>

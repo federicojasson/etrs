@@ -65,10 +65,10 @@
 		 */
 		function initialize() {
 			// Includes auxiliary variables
-			$scope.showCommandLineExplanation = false;
+			$scope.showCommandLineAlert = false;
 			
 			// Includes auxiliary functions
-			$scope.toggleCommandLineExplanation = toggleCommandLineExplanation;
+			$scope.toggleCommandLineAlert = toggleCommandLineAlert;
 			
 			// Initializes actions
 			initializeCreateExperimentAction();
@@ -122,10 +122,10 @@
 		}
 		
 		/**
-		 * Toggles the command-line explanation.
+		 * Toggles the command-line alert.
 		 */
-		function toggleCommandLineExplanation() {
-			$scope.showCommandLineExplanation = ! $scope.showCommandLineExplanation;
+		function toggleCommandLineAlert() {
+			$scope.showCommandLineAlert = ! $scope.showCommandLineAlert;
 		}
 		
 		// ---------------------------------------------------------------------

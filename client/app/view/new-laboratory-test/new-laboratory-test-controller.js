@@ -63,10 +63,10 @@
 		 */
 		function initialize() {
 			// Includes auxiliary variables
-			$scope.showDataTypeDefinitionExplanation = false;
+			$scope.showDataTypeDefinitionAlert = false;
 			
 			// Includes auxiliary functions
-			$scope.toggleDataTypeDefinitionExplanation = toggleDataTypeDefinitionExplanation;
+			$scope.toggleDataTypeDefinitionAlert = toggleDataTypeDefinitionAlert;
 			
 			// Initializes actions
 			initializeCreateLaboratoryTestAction();
@@ -97,10 +97,10 @@
 		}
 		
 		/**
-		 * Toggles the data-type-definition explanation.
+		 * Toggles the data-type-definition alert.
 		 */
-		function toggleDataTypeDefinitionExplanation() {
-			$scope.showDataTypeDefinitionExplanation = ! $scope.showDataTypeDefinitionExplanation;
+		function toggleDataTypeDefinitionAlert() {
+			$scope.showDataTypeDefinitionAlert = ! $scope.showDataTypeDefinitionAlert;
 		}
 		
 		// ---------------------------------------------------------------------
