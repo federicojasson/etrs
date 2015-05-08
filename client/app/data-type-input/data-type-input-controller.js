@@ -22,13 +22,14 @@
 	angular.module('app.dataTypeInput').controller('DataTypeInputController', [
 		'$scope',
 		'DataTypeInput',
+		'utility',
 		DataTypeInputController
 	]);
 	
 	/**
 	 * Implements the logic of a data-type input.
 	 */
-	function DataTypeInputController($scope, DataTypeInput) {
+	function DataTypeInputController($scope, DataTypeInput, utility) {
 		var _this = this;
 		
 		/**
@@ -56,9 +57,16 @@
 			// Sets the input's validator
 			$scope.input.validator = _this.dataTypeInput.validator;
 			
-			if ($scope.input.value === '' && _this.dataTypeInput.dataType !== 'integer_range') {
-				// Sets the input's initial value
-				$scope.input.value = null;
+			if (_this.dataTypeInput.dataType !== 'integer_range') {
+				if (utility.searchInObject($scope.input.value, _this.dataTypeInput.definition) === null) {
+					// The value is not defined
+					$scope.input.value = '';
+				}
+				
+				if ($scope.input.value === '') {
+					// Sets the input's initial value
+					$scope.input.value = null;
+				}
 			}
 		}
 		

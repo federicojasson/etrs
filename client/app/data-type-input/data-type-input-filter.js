@@ -51,6 +51,11 @@
 			// Searches the value
 			value = utility.searchInObject(value, dataTypeInput.definition);
 			
+			if (value === null) {
+				// The value is not defined
+				value = 'Desconocido';
+			}
+			
 			return value;
 		}
 		
