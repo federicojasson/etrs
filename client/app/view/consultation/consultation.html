@@ -91,57 +91,54 @@
 			Antecedentes médicos
 		</dt>
 		<dd ng-if="consultation.medicalAntecedents.length > 0">
-			<span ng-repeat="medicalAntecedent in consultation.medicalAntecedents">
-				{{ medicalAntecedent.name }}{{ $last? '' : ', ' }}
-			</span>
+			<div ng-repeat="medicalAntecedent in consultation.medicalAntecedents">
+				- {{ medicalAntecedent.name }}
+			</div>
 		</dd>
 		
 		<dt ng-if="consultation.medicines.length > 0">
 			Medicación concomitante
 		</dt>
 		<dd ng-if="consultation.medicines.length > 0">
-			<span ng-repeat="medicine in consultation.medicines">
-				{{ medicine.name }}{{ $last? '' : ', ' }}
-			</span>
+			<div ng-repeat="medicine in consultation.medicines">
+				- {{ medicine.name }}
+			</div>
 		</dd>
 		
 		<dt ng-if="consultation.laboratoryTestResults.length > 0">
 			Exámenes de laboratorio
 		</dt>
 		<dd ng-if="consultation.laboratoryTestResults.length > 0">
-			<span ng-repeat="laboratoryTestResult in consultation.laboratoryTestResults">
-				{{ laboratoryTestResult.laboratoryTest.name }}
-				TODO: value
-			</span>
+			<div ng-repeat="laboratoryTestResult in consultation.laboratoryTestResults">
+				{{ laboratoryTestResult.laboratoryTest.name }}: {{ laboratoryTestResult.value | dataTypeInput: laboratoryTestResult.laboratoryTest.dataTypeDefinition }}
+			</div>
 		</dd>
 		
 		<dt ng-if="consultation.imagingTestResults.length > 0">
-			Exámenes de laboratorio
+			Exámenes de imágenes
 		</dt>
 		<dd ng-if="consultation.imagingTestResults.length > 0">
-			<span ng-repeat="imagingTestResult in consultation.imagingTestResults">
-				{{ imagingTestResult.imagingTest.name }}
-				TODO: value
-			</span>
+			<div ng-repeat="imagingTestResult in consultation.imagingTestResults">
+				{{ imagingTestResult.imagingTest.name }}: {{ imagingTestResult.value | dataTypeInput: imagingTestResult.imagingTest.dataTypeDefinition }}
+			</div>
 		</dd>
 		
 		<dt ng-if="consultation.cognitiveTestResults.length > 0">
-			Exámenes de laboratorio
+			Exámenes cognitivos
 		</dt>
 		<dd ng-if="consultation.cognitiveTestResults.length > 0">
-			<span ng-repeat="cognitiveTestResult in consultation.cognitiveTestResults">
-				{{ cognitiveTestResult.cognitiveTest.name }}
-				TODO: value
-			</span>
+			<div ng-repeat="cognitiveTestResult in consultation.cognitiveTestResults">
+				{{ cognitiveTestResult.cognitiveTest.name }}: {{ cognitiveTestResult.value | dataTypeInput: cognitiveTestResult.cognitiveTest.dataTypeDefinition }}
+			</div>
 		</dd>
 		
 		<dt ng-if="consultation.treatments.length > 0">
 			Tratamientos
 		</dt>
 		<dd ng-if="consultation.treatments.length > 0">
-			<span ng-repeat="treatment in consultation.treatments">
-				{{ treatment.name }}{{ $last? '' : ', ' }}
-			</span>
+			<div ng-repeat="treatment in consultation.treatments">
+				- {{ treatment.name }}
+			</div>
 		</dd>
 	</dl>
 </p>

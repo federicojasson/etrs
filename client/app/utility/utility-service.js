@@ -228,6 +228,27 @@
 		};
 		
 		/**
+		 * Searches an object's element.
+		 * 
+		 * Receives the element and the object.
+		 */
+		_this.searchInObject = function(element, object) {
+			// Searches the element
+			for (var property in object) {
+				if (! object.hasOwnProperty(property)) {
+					continue;
+				}
+				
+				if (object[property] === element) {
+					// The element has been found
+					return property;
+				}
+			}
+			
+			return null;
+		};
+		
+		/**
 		 * Converts a string from spinal-case to camelCase.
 		 * 
 		 * Receives the string.
