@@ -38,8 +38,8 @@ namespace App\InputValidator\DataType;
  * 
  * - The fields must be separated by semicolons (;).
  * - The data type must be one of the predefined.
- * - The definition fields must be of the form <label>: <value>. Each label must
- *   be a unique non-empty string and each value a non-empty string.
+ * - The definition fields must be of the form <label>: <value> and each label
+ *   must be a unique non-empty string and each value a non-empty string.
  * 
  * Following are described the predefined data types and their specific
  * requirements:

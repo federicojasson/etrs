@@ -350,7 +350,7 @@
 			maximumValue = (angular.isDefined(maximumValue))? maximumValue : input.value;
 			
 			if (input.value > maximumValue) {
-				// The input is too high
+				// The input is too great
 				input.message = 'El valor de este campo debe ser menor o igual que ' + maximumValue;
 				return false;
 			}
