@@ -887,7 +887,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Selects the database
 USE etrs;
 
--- Creates a default user
+-- Inserts a default user
 -- Password: admin
 INSERT INTO users (
 	id,
