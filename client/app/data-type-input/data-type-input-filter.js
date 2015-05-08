@@ -26,7 +26,7 @@
 	]);
 	
 	/**
-	 * Returns the value of a data-type input.
+	 * Returns the label of a data-type value.
 	 */
 	function dataTypeInputFilter(DataTypeInput, utility) {
 		/**
@@ -49,14 +49,14 @@
 			}
 			
 			// Searches the value
-			value = utility.searchInObject(value, dataTypeInput.definition);
+			var label = utility.searchInObject(value, dataTypeInput.definition);
 			
-			if (value === null) {
+			if (label === null) {
 				// The value is not defined
-				value = 'Desconocido';
+				return 'Desconocido';
 			}
 			
-			return value;
+			return label;
 		}
 		
 		// ---------------------------------------------------------------------
