@@ -1,0 +1,109 @@
+
+		
+		foreach ($laboratoryTestResults as &$laboratoryTestResult) {
+			$laboratoryTest = $laboratoryTestResult['laboratoryTest'];
+			$value = $laboratoryTestResult['value'];
+			
+			// Gets the laboratory test
+			$laboratoryTest = $app->data->getReference('Entity:LaboratoryTest', $laboratoryTest);
+			
+			// Creates the laboratory-test result
+			$laboratoryTestResult = new \App\Data\Entity\LaboratoryTestResult();
+			$laboratoryTestResult->setLaboratoryTest($laboratoryTest);
+			$laboratoryTestResult->setConsultation($consultation);
+			$laboratoryTestResult->setValue($value);
+		}
+		
+		$consultation->setLaboratoryTestResults($laboratoryTestResults);
+		
+		$app->data->merge($consultation);
+		
+//		// Adds the patient's medical antecedents
+//		foreach ($patientMedicalAntecedents as $medicalAntecedent) {
+//			// Gets the medical antecedent
+//			$medicalAntecedent = $app->data->getRepository('Entity:MedicalAntecedent')->findNonDeleted($medicalAntecedent);
+//			
+//			// Asserts conditions
+//			$app->assertion->entityExists($medicalAntecedent);
+//			
+//			// Adds the medical antecedent
+//			$consultation->addPatientMedicalAntecedent($medicalAntecedent);
+//		}
+//		
+//		// Adds the concomitant medicines
+//		foreach ($concomitantMedicines as $medicine) {
+//			// Gets the medicine
+//			$medicine = $app->data->getRepository('Entity:Medicine')->findNonDeleted($medicine);
+//			
+//			// Asserts conditions
+//			$app->assertion->entityExists($medicine);
+//			
+//			// Adds the medicine
+//			$consultation->addConcomitantMedicine($medicine);
+//		}
+//		
+//		// Adds the laboratory-test results
+//		foreach ($laboratoryTestResults as $laboratoryTestResult) {
+//			$laboratoryTest = $laboratoryTestResult['laboratoryTest'];
+//			$value = $laboratoryTestResult['value'];
+//			
+//			// Gets the laboratory test
+//			$laboratoryTest = $app->data->getReference('Entity:LaboratoryTest', $laboratoryTest);
+//			
+//			// Creates the laboratory-test result
+//			$laboratoryTestResult = new \App\Data\Entity\LaboratoryTestResult();
+//			$laboratoryTestResult->setLaboratoryTest($laboratoryTest);
+//			$laboratoryTestResult->setValue($value);
+//			
+//			// Adds the laboratory-test result
+//			$consultation->addLaboratoryTestResult($laboratoryTestResult);
+//		}
+//		
+//		// Adds the imaging-test results
+//		foreach ($imagingTestResults as $imagingTestResult) {
+//			$imagingTest = $imagingTestResult['imagingTest'];
+//			$value = $imagingTestResult['value'];
+//			
+//			// Gets the imaging test
+//			$imagingTest = $app->data->getReference('Entity:ImagingTest', $imagingTest);
+//			
+//			// Creates the imaging-test result
+//			$imagingTestResult = new \App\Data\Entity\ImagingTestResult();
+//			$imagingTestResult->setImagingTest($imagingTest);
+//			$imagingTestResult->setValue($value);
+//			
+//			// Adds the imaging-test result
+//			$consultation->addImagingTestResult($imagingTestResult);
+//		}
+//		
+//		// Adds the cognitive-test results
+//		foreach ($cognitiveTestResults as $cognitiveTestResult) {
+//			$cognitiveTest = $cognitiveTestResult['cognitiveTest'];
+//			$value = $cognitiveTestResult['value'];
+//			
+//			// Gets the cognitive test
+//			$cognitiveTest = $app->data->getReference('Entity:CognitiveTest', $cognitiveTest);
+//			
+//			// Creates the cognitive-test result
+//			$cognitiveTestResult = new \App\Data\Entity\CognitiveTestResult();
+//			$cognitiveTestResult->setCognitiveTest($cognitiveTest);
+//			$cognitiveTestResult->setValue($value);
+//			
+//			// Adds the cognitive-test result
+//			$consultation->addCognitiveTestResult($cognitiveTestResult);
+//		}
+//		
+//		// Adds the prescribed treatments
+//		foreach ($prescribedTreatments as $treatment) {
+//			// Gets the treatment
+//			$treatment = $app->data->getRepository('Entity:Treatment')->findNonDeleted($treatment);
+//			
+//			// Asserts conditions
+//			$app->assertion->entityExists($treatment);
+//			
+//			// Adds the treatment
+//			$consultation->addPrescribedTreatment($treatment);
+//		}
+//		
+//		// Updates the consultation
+//		$app->data->merge($consultation);

@@ -62,7 +62,15 @@
 		</dd>
 		
 		<dt>Estado del estudio</dt>
-		<dd>{{ study | state }}</dd>
+		<dd
+			ng-class="{
+				'text-info': study.state === 1,
+				'text-success': study.state === 2,
+				'text-danger': study.state === 3
+			}"
+		>
+			{{ study | state }}
+		</dd>
 		
 		<dt ng-if="study.output !== null">
 			Archivo de salida
