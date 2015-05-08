@@ -1002,6 +1002,10 @@ p {
 	margin-top: 24px;
 }
 
+p + p {
+	margin-top: -12px;
+}
+
 pre {
 	background-color: #ffffff;
 	white-space: pre-line;
