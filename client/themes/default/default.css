@@ -73,6 +73,8 @@
 .copyright-text {
 	color: #aaaaaa;
 	font-size: 0.8em;
+	margin-bottom: 48px;
+	margin-top: -12px;
 }
 
 .data-type-input {
