@@ -5,16 +5,20 @@
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="well">
 						<h1>{{ error.get().message }}</h1>
-						<p>Se produjo un error.</p>
+						
+						<p>
+							Se produjo un error.
+						</p>
 						
 						<hr>
 						
 						<h2>Detalles</h2>
+						
 						<pre>{{ error.get().details }}</pre>
 						
 						<hr>
 						
-						<a ng-click="router.reload()">
+						<a ng-click="router.reload()" class="btn btn-link inline">
 							Recargar página
 						</a>
 					</div>

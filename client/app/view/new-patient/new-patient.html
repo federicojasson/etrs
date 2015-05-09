@@ -1,0 +1,156 @@
+<a ui-sref="patients" class="btn btn-link">
+	Volver a <b>Pacientes</b>
+</a>
+
+<h1>Nuevo paciente</h1>
+
+<p>
+	El siguiente formulario le permite crear un paciente.
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createPatientAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Paciente
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del paciente:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createPatientAction.input.firstName.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createPatientAction.input.firstName.value"
+					popover="{{ createPatientAction.input.firstName.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createPatientAction.input.lastName.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createPatientAction.input.lastName.value"
+					popover="{{ createPatientAction.input.lastName.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Apellido"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createPatientAction.input.gender.valid
+				}"
+				class="form-group"
+			>
+				<select
+					ng-model="createPatientAction.input.gender.value"
+					popover="{{ createPatientAction.input.gender.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					class="form-control"
+				>
+					<option value="" disabled>Sexo</option>
+					<option value="f">Mujer</option>
+					<option value="m">Hombre</option>
+				</select>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createPatientAction.input.birthDate.valid
+				}"
+				class="form-group"
+			>
+				<div class="input-group">
+					<input
+						popover="{{ createPatientAction.input.birthDate.message }}"
+						popover-append-to-body="true"
+						popover-placement="left"
+						popover-trigger="focus"
+						type="text"
+						placeholder="Fecha de nacimiento"
+						value="{{ createPatientAction.input.birthDate.value | date: 'longDate' }}"
+						readonly
+						class="form-control"
+					>
+					
+					<span class="input-group-btn">
+						<div dropdown class="btn-group">
+							<button
+								dropdown-toggle
+								type="button"
+								class="btn btn-default dropdown-toggle"
+							>
+								<span class="glyphicon glyphicon-calendar"></span>
+							</button>
+
+							<div ng-click="$event.stopPropagation()" class="calendar dropdown-menu pull-right">
+								<datepicker
+									ng-model="createPatientAction.input.birthDate.value"
+									datepicker-mode="'year'"
+									show-weeks="false"
+									starting-day="1"
+								></datepicker>
+							</div>
+						</div>
+					</span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				Años de educación:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createPatientAction.input.yearsOfEducation.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createPatientAction.input.yearsOfEducation.value"
+					popover="{{ createPatientAction.input.yearsOfEducation.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					integer
+					type="text"
+					placeholder="Años de educación"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-success pull-right">
+				Crear paciente
+			</button>
+		</div>
+	</form>
+</div>

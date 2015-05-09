@@ -49,6 +49,278 @@
 				},
 				
 				{
+					name: 'changePassword',
+					url: '/account/change-password',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ChangePasswordViewController',
+							dr: 'ChangePasswordViewController',
+							op: 'ChangePasswordViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'clinicalImpression',
+					url: '/clinical-impression/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ClinicalImpressionViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'clinicalImpressions',
+					url: '/clinical-impressions',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ClinicalImpressionsViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'cognitiveTest',
+					url: '/cognitive-test/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'CognitiveTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'cognitiveTests',
+					url: '/cognitive-tests',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'CognitiveTestsViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'consultation',
+					url: '/consultation/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ConsultationViewController',
+							dr: 'ConsultationViewController',
+							op: 'ConsultationViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'diagnoses',
+					url: '/diagnoses',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'DiagnosesViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'diagnosis',
+					url: '/diagnosis/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'DiagnosisViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editAccount',
+					url: '/account/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditAccountViewController',
+							dr: 'EditAccountViewController',
+							op: 'EditAccountViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editClinicalImpression',
+					url: '/clinical-impression/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditClinicalImpressionViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editCognitiveTest',
+					url: '/cognitive-test/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditCognitiveTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editConsultation',
+					url: '/consultation/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditConsultationViewController',
+							dr: 'EditConsultationViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editDiagnosis',
+					url: '/diagnosis/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditDiagnosisViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editExperiment',
+					url: '/experiment/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditExperimentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editImagingTest',
+					url: '/imaging-test/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditImagingTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editLaboratoryTest',
+					url: '/laboratory-test/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditLaboratoryTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editMedicalAntecedent',
+					url: '/medical-antecedent/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditMedicalAntecedentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editMedicine',
+					url: '/medicine/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditMedicineViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editPatient',
+					url: '/patient/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditPatientViewController',
+							dr: 'EditPatientViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editStudy',
+					url: '/study/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditStudyViewController',
+							op: 'EditStudyViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'editTreatment',
+					url: '/treatment/{id:[0-9A-Fa-f]{32}}/edit',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'EditTreatmentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'experiment',
+					url: '/experiment/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ExperimentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'experiments',
+					url: '/experiments',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ExperimentsViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'forgotPassword',
+					url: '/account/forgot-password',
+					data: {
+						views: {
+							__: 'ForgotPasswordViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'home',
 					url: '/',
 					data: {
@@ -57,6 +329,94 @@
 							ad: 'HomeViewController',
 							dr: 'HomeViewController',
 							op: 'HomeViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'imagingTest',
+					url: '/imaging-test/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ImagingTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'imagingTests',
+					url: '/imaging-tests',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'ImagingTestsViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'invitation',
+					url: '/account/invitation',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'InvitationViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'laboratoryTest',
+					url: '/laboratory-test/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'LaboratoryTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'laboratoryTests',
+					url: '/laboratory-tests',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'LaboratoryTestsViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'logs',
+					url: '/logs',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'LogsViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'medicalAntecedent',
+					url: '/medical-antecedent/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'MedicalAntecedentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'medicalAntecedents',
+					url: '/medical-antecedents',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'MedicalAntecedentsViewController'
 						}
 					}
 				},
@@ -84,6 +444,95 @@
 				},
 				
 				{
+					name: 'newClinicalImpression',
+					url: '/clinical-impression/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewClinicalImpressionViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newCognitiveTest',
+					url: '/cognitive-test/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewCognitiveTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newConsultation',
+					url: '/patient/{id:[0-9A-Fa-f]{32}}/consultation/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewConsultationViewController',
+							dr: 'NewConsultationViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newDiagnosis',
+					url: '/diagnosis/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewDiagnosisViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newExperiment',
+					url: '/experiment/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewExperimentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newImagingTest',
+					url: '/imaging-test/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewImagingTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newLaboratoryTest',
+					url: '/laboratory-test/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewLaboratoryTestViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newMedicalAntecedent',
+					url: '/medical-antecedent/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewMedicalAntecedentViewController'
+						}
+					}
+				},
+				
+				{
 					name: 'newMedicine',
 					url: '/medicine/new',
 					data: {
@@ -95,22 +544,62 @@
 				},
 				
 				{
-					name: 'requestResetPassword',
-					url: '/account/reset-password',
+					name: 'newPatient',
+					url: '/patient/new',
 					data: {
 						views: {
-							__: 'RequestResetPasswordViewController'
+							__: 'SignInViewController',
+							ad: 'NewPatientViewController',
+							dr: 'NewPatientViewController'
 						}
 					}
 				},
 				
 				{
-					name: 'requestSignUp',
-					url: '/account/sign-up',
+					name: 'newStudy',
+					url: '/consultation/{id:[0-9A-Fa-f]{32}}/study/new',
 					data: {
 						views: {
 							__: 'SignInViewController',
-							ad: 'RequestSignUpViewController'
+							ad: 'NewStudyViewController',
+							op: 'NewStudyViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'newTreatment',
+					url: '/treatment/new',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'NewTreatmentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'patient',
+					url: '/patient/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'PatientViewController',
+							dr: 'PatientViewController',
+							op: 'PatientViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'patients',
+					url: '/patients',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'PatientsViewController',
+							dr: 'PatientsViewController',
+							op: 'PatientsViewController'
 						}
 					}
 				},
@@ -143,6 +632,65 @@
 							__: 'SignUpViewController'
 						}
 					}
+				},
+				
+				{
+					name: 'study',
+					url: '/study/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'StudyViewController',
+							dr: 'StudyViewController',
+							op: 'StudyViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'treatment',
+					url: '/treatment/{id:[0-9A-Fa-f]{32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'TreatmentViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'treatments',
+					url: '/treatments',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'TreatmentsViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'user',
+					url: '/user/{id:(?!.*\\.{2})(?!\\.)(?!.*\\.$)[.0-9A-Za-z]{3,32}}',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'UserViewController',
+							dr: 'UserViewController',
+							op: 'UserViewController'
+						}
+					}
+				},
+				
+				{
+					name: 'users',
+					url: '/users',
+					data: {
+						views: {
+							__: 'SignInViewController',
+							ad: 'UsersViewController'
+						}
+					}
 				}
 			];
 		}
@@ -150,9 +698,9 @@
 		// ---------------------------------------------------------------------
 		
 		// Enables the HTML5 history API
-		//$locationProvider.html5Mode(true); TODO: fix bug HTML5 API
+		$locationProvider.html5Mode(true);
 		
-		// Sets the URL of the default route
+		// Sets the default URL
 		$urlRouterProvider.otherwise('/');
 		
 		// Gets the states
@@ -165,7 +713,7 @@
 			// Makes the URL absolute
 			state.url = '^' + state.url;
 			
-			// Sets a template that includes the current layout
+			// Sets a template that includes the layout
 			state.template = '<layout></layout>';
 			
 			// Registers the state

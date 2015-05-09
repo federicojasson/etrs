@@ -27,7 +27,7 @@
 	]);
 	
 	/**
-	 * Includes the current view.
+	 * Includes the view.
 	 */
 	function viewDirective($controller, title, view) {
 		/**
@@ -37,7 +37,7 @@
 			return {
 				restrict: 'E',
 				scope: {},
-				link: onLink,
+				link: onPostLink,
 				templateUrl: 'app/view/view.html'
 			};
 		}
@@ -47,46 +47,40 @@
 		 * 
 		 * Receives the scope of the directive.
 		 */
-		function onLink(scope) {
-			// Registers a listener for the view
-			scope.$watch(view.get, function(view) {
-				// Initializes the view
-				var viewController = $controller(view, {
+		function onPostLink(scope) {
+			// Registers a listener
+			scope.$watch(view.get, function(currentView) {
+				// Initializes the current view's controller
+				var controller = $controller(currentView, {
 					$scope: scope
 				});
 				
-				// Registers a listener for the state of the current view
-				scope.$watch(viewController.getTitle, function() {
+				// Registers a listener
+				scope.$watch(controller.isReady, function() {
 					// Updates the title
-					updateTitle(viewController);
+					updateTitle(controller);
 				});
 				
-				// Registers a listener for the state of the current view
-				scope.$watch(viewController.isReady, function() {
-					// Updates the title
-					updateTitle(viewController);
-				});
-				
-				// Includes the current view
-				scope.view = viewController;
+				// Includes the controller
+				scope.view = controller;
 			});
 		}
 		
 		/**
 		 * Updates the title according to the state of the current view.
 		 * 
-		 * Receives the controller of the current view.
+		 * Receives the current view's controller.
 		 */
-		function updateTitle(viewController) {
+		function updateTitle(controller) {
 			var newTitle;
 			
-			if (viewController.isReady()) {
+			if (controller.isReady()) {
 				// The view is ready
 				// Gets the title provided by the view
-				newTitle = viewController.getTitle();
+				newTitle = controller.getTitle();
 			} else {
 				// The view is not ready
-				newTitle = 'Cargando...';
+				newTitle = 'Cargando…';
 			}
 			
 			// Sets the title

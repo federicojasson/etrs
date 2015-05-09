@@ -25,7 +25,7 @@
 	]);
 	
 	/**
-	 * Shows the current title.
+	 * Shows the title.
 	 */
 	function titleDirective(title) {
 		/**
@@ -35,7 +35,7 @@
 			return {
 				restrict: 'E',
 				scope: {},
-				link: onLink
+				link: onPostLink
 			};
 		}
 		
@@ -44,11 +44,11 @@
 		 * 
 		 * Receives the scope of the directive and the element matched by it.
 		 */
-		function onLink(scope, element) {
-			// Registers a listener for the title
-			scope.$watch(title.get, function(title) {
+		function onPostLink(scope, element) {
+			// Registers a listener
+			scope.$watch(title.get, function(currentTitle) {
 				// Shows the current title
-				element.text(title);
+				element.text(currentTitle);
 			});
 		}
 		

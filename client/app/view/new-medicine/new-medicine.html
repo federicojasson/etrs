@@ -1,19 +1,26 @@
+<a ui-sref="medicines" class="btn btn-link">
+	Volver a <b>Medicamentos</b>
+</a>
+
 <h1>Nuevo medicamento</h1>
 
-<p class="separate-paragraph">
-	El siguiente formulario le permite crear un nuevo medicamento.<br>
-	<br>
+<p>
+	El siguiente formulario le permite crear un medicamento.
+</p>
+
+<p>
 	<strong>
-		Los medicamentos creados aparecerán como opción al momento de ingresar una consulta médica.
+		Una vez creado, el medicamento aparecerá como opción en los formularios
+		correspondientes.
 	</strong>
 </p>
 
 <div class="clearfix well">
-	<form ng-submit="action.createMedicine.execute()" novalidate>
+	<form ng-submit="createMedicineAction.execute()" novalidate>
 		<fieldset>
 			<legend>
-				<span class="glyphicon glyphicon-floppy-disk"></span>
-
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
 				<span class="icon-text">
 					Medicamento
 				</span>
@@ -25,17 +32,17 @@
 			
 			<div
 				ng-class="{
-					'has-error': ! action.createMedicine.input.name.valid
+					'has-error': ! createMedicineAction.input.name.valid
 				}"
 				class="form-group"
 			>
 				<input
-					ng-model="action.createMedicine.input.name.value"
-					popover="{{ action.createMedicine.input.name.message }}"
+					ng-model="createMedicineAction.input.name.value"
+					popover="{{ createMedicineAction.input.name.message }}"
 					popover-append-to-body="true"
 					popover-placement="left"
 					popover-trigger="focus"
-					shrink
+					line
 					type="text"
 					placeholder="Nombre"
 					class="form-control"
@@ -44,7 +51,7 @@
 		</fieldset>
 		
 		<div class="form-group">
-			<button type="submit" class="btn btn-danger pull-right">
+			<button type="submit" class="btn btn-success pull-right">
 				Crear medicamento
 			</button>
 		</div>

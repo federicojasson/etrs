@@ -36,15 +36,12 @@
 		var _this = this;
 		
 		/**
-		 * Indicates whether the view is ready, considering the local factors.
-		 * 
-		 * Since it considers only the local factors, it doesn't necessarily
-		 * determine on its own whether the view is ready.
+		 * Indicates whether the view is ready.
 		 */
 		var ready = false;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/view/reset-password/reset-password.html';
@@ -65,35 +62,6 @@
 		};
 		
 		/**
-		 * Authenticates the reset-password permission.
-		 * 
-		 * Receives the reset-password permission's ID and password.
-		 */
-		function authenticateResetPasswordPermission(id, password) {
-			// Defines the input to be sent to the server
-			var input = {
-				credentials: {
-					id: id,
-					password: password
-				}
-			};
-			
-			// Authenticates the reset-password permission
-			server.account.resetPassword.authenticate(input).then(function(output) {
-				if (! output.authenticated) {
-					// The reset-password permission has not been authenticated
-					
-					// Redirects the user to the home route
-					router.redirect('/');
-					
-					return;
-				}
-				
-				ready = true;
-			});
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -101,68 +69,83 @@
 			var id = $stateParams.id;
 			var password = $stateParams.password;
 			
-			// Initializes the reset-password action
-			var resetPasswordAction = new ResetPasswordAction();
-			resetPasswordAction.notAuthenticatedCallback = onNotAuthenticated;
-			resetPasswordAction.startCallback = onStart;
-			resetPasswordAction.successCallback = onSuccess;
-			resetPasswordAction.input.credentials.id.value = id;
-			resetPasswordAction.input.credentials.password.value = password;
+			// Authenticates the password-reset permission
+			server.permission.passwordReset.authenticate({
+				credentials: {
+					id: id,
+					password: password
+				}
+			}).then(function(output) {
+				if (! output.authenticated) {
+					// The password-reset permission has not been authenticated
+					
+					// Redirects the user to the home state
+					router.redirect('home');
+
+					// Opens an error dialog
+					dialog.openError(
+						'Credenciales rechazadas',
+						'El permiso para restablecer su contraseña ha sido rechazado.'
+					);
+					
+					return;
+				}
+				
+				// Initializes actions
+				initializeResetPasswordAction(id, password);
+				
+				ready = true;
+			});
+		}
+		
+		/**
+		 * Initializes the reset-password action.
+		 * 
+		 * Receives the password-reset permission's ID and password.
+		 */
+		function initializeResetPasswordAction(id, password) {
+			// Initializes the action
+			var action = new ResetPasswordAction();
 			
-			// Includes the actions
-			$scope.action = {
-				resetPassword: resetPasswordAction
+			// Sets inputs' initial values
+			action.input.credentials.id.value = id;
+			action.input.credentials.password.value = password;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
 			};
 			
-			// Authenticates the reset-password permission
-			authenticateResetPasswordPermission(id, password);
-		}
-		
-		/**
-		 * Invoked when the reset-password permission is not authenticated
-		 * during the execution of the reset-password action.
-		 */
-		function onNotAuthenticated() {
-			ready = true;
+			action.notAuthenticatedCallback = function() {
+				// Redirects the user to the home state
+				router.redirect('home');
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'El permiso para restablecer su contraseña ha expirado.'
+				);
+			};
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Credenciales rechazadas',
-				'El permiso para restablecer su contraseña ha expirado.',
-				function() {
-					// Redirects the user to the home route
-					router.redirect('/');
-				}
-			);
-		}
-		
-		/**
-		 * Invoked at the start of the reset-password action.
-		 */
-		function onStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the reset-password action is successful.
-		 */
-		function onSuccess() {
-			ready = true;
+			action.successCallback = function() {
+				// Redirects the user to the home state
+				router.redirect('home');
+				
+				// Opens an information dialog
+				dialog.openInformation(
+					'Contraseña restablecida',
+					'Su contraseña ha sido restablecida.'
+				);
+			};
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Contraseña restablecida',
-				'Su contraseña ha sido modificada.',
-				function() {
-					// Redirects the user to the home route
-					router.redirect('/');
-				}
-			);
+			// Includes the action
+			$scope.resetPasswordAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the view
+		// Initializes the controller
 		initialize();
 	}
 })();

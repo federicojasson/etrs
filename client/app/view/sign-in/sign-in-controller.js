@@ -21,6 +21,7 @@
 (function() {
 	angular.module('app.view.signIn').controller('SignInViewController', [
 		'$scope',
+		'account',
 		'SignInAction',
 		'dialog',
 		SignInViewController
@@ -29,19 +30,16 @@
 	/**
 	 * Represents the sign-in view.
 	 */
-	function SignInViewController($scope, SignInAction, dialog) {
+	function SignInViewController($scope, account, SignInAction, dialog) {
 		var _this = this;
 		
 		/**
-		 * Indicates whether the view is ready, considering the local factors.
-		 * 
-		 * Since it considers only the local factors, it doesn't necessarily
-		 * determine on its own whether the view is ready.
+		 * Indicates whether the view is ready.
 		 */
 		var ready = true;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/view/sign-in/sign-in.html';
@@ -65,43 +63,50 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the sign-in action
-			var signInAction = new SignInAction();
-			signInAction.notAuthenticatedCallback = onNotAuthenticated;
-			signInAction.startCallback = onStart;
+			// Initializes actions
+			initializeSignInAction();
+		}
+		
+		/**
+		 * Initializes the sign-in action.
+		 */
+		function initializeSignInAction() {
+			// Initializes the action
+			var action = new SignInAction();
 			
-			// Includes the actions
-			$scope.action = {
-				signIn: signInAction
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
 			};
-		}
-		
-		/**
-		 * Invoked when the user is not authenticated during the execution of
-		 * the sign-in action.
-		 */
-		function onNotAuthenticated() {
-			ready = true;
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Credenciales rechazadas',
-				'No fue posible autenticar su identidad.\n' +
-				'\n' +
-				'Reingrese su nombre de usuario y su contraseña.'
-			);
-		}
-		
-		/**
-		 * Invoked at the start of the sign-in action.
-		 */
-		function onStart() {
-			ready = false;
+			action.notAuthenticatedCallback = function() {
+				// Resets inputs' values
+				action.input.credentials.id.value = '';
+				action.input.credentials.password.value = '';
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'No fue posible autenticar su identidad.\n' +
+					'Reingrese su nombre de usuario y su contraseña.'
+				);
+				
+				ready = true;
+			};
+			
+			action.successCallback = function() {
+				// Refreshes the account
+				account.refresh();
+			};
+			
+			// Includes the action
+			$scope.signInAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the view
+		// Initializes the controller
 		initialize();
 	}
 })();

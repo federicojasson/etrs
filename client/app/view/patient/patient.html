@@ -1,0 +1,146 @@
+<a ui-sref="patients" class="btn btn-link">
+	Volver a <b>Pacientes</b>
+</a>
+
+<h1>{{ patient | fullName }}</h1>
+
+<button
+	ng-if="account.getSignedInUser().role !== 'op'"
+	ng-click="deletePatientAction.execute()"
+	type="button"
+	class="btn btn-danger"
+>
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ng-if="account.getSignedInUser().role !== 'op'"
+	ui-sref="editPatient({
+		id: patient.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<a
+	ng-if="account.getSignedInUser().role !== 'op'"
+	ui-sref="newConsultation({
+		id: patient.id
+	})"
+	class="btn btn-success"
+>
+	<span class="glyphicon glyphicon-plus"></span>
+	
+	<span class="icon-text">
+		Nueva consulta médica
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Nombre y apellido</dt>
+		<dd>{{ patient | fullName }}</dd>
+
+		<dt>Sexo</dt>
+		<dd>{{ patient | gender }}</dd>
+
+		<dt>Edad</dt>
+		<dd>{{ patient | age }}</dd>
+
+		<dt>Fecha de nacimiento</dt>
+		<dd>{{ patient.birthDate | date: 'longDate' }}</dd>
+
+		<dt>Años de educación</dt>
+		<dd>{{ patient.yearsOfEducation }}</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<event-box
+		date-time="patient.creationDateTime"
+		label="Creación"
+		user="patient.creator"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="patient.lastEditionDateTime"
+		label="Última edición"
+		user="patient.lastEditor"
+		class="pull-right"
+	></event-box>
+</div>
+
+<hr>
+
+<div ng-if="patient.consultations.length > 0">
+	<h2>Historia clínica</h2>
+	
+	<p>
+		A continuación se muestran las consultas médicas del paciente.
+	</p>
+	
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="col-sm-3">
+					Fecha
+				</th>
+				
+				<th class="col-sm-3">
+					Impresión clínica
+				</th>
+				
+				<th class="col-sm-3">
+					Diagnóstico
+				</th>
+				
+				<th class="col-sm-3">
+					Responsable
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr
+				ng-repeat="consultation in patient.consultations | reverse"
+				ng-class="{
+					'info': consultation.diagnosis !== null
+				}"
+				ui-sref="consultation({
+					id: consultation.id
+				})"
+				table-row-link
+			>
+				<td title="{{ consultation.date | date: 'EEEE, d \'de\' MMMM \'de\' y' }}">
+					{{ consultation.date | date: 'longDate' }}
+				</td>
+				
+				<td>
+					{{ consultation.clinicalImpression.name }}
+				</td>
+				
+				<td>
+					<strong>{{ consultation.diagnosis.name }}</strong>
+				</td>
+				
+				<td>
+					{{ consultation.creator | honorificName }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

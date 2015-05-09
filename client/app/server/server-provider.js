@@ -33,7 +33,7 @@
 		var services = [];
 		
 		/**
-		 * Initializes the server service.
+		 * Returns the server service.
 		 */
 		_this.$get = [
 			'$resource',
@@ -42,12 +42,12 @@
 			function($resource, error, utility) {
 				// Initializes the server service
 				var server = new serverService($resource, error, utility);
-				
+
 				// Adds the services
 				for (var i = 0; i < services.length; i++) {
 					server.addService(services[i]);
 				}
-				
+
 				return server;
 			}
 		];
@@ -55,10 +55,10 @@
 		/**
 		 * Registers a service.
 		 * 
-		 * Receives the service.
+		 * Receives the service's URL.
 		 */
-		_this.registerService = function(service) {
-			services.push(service);
+		_this.registerService = function(url) {
+			services.push(url);
 		};
 	}
 	
@@ -73,21 +73,19 @@
 		/**
 		 * Adds a service.
 		 * 
-		 * Receives the URL of the service.
+		 * Receives the service's URL.
 		 */
 		_this.addService = function(url) {
 			// Removes the leading slash
 			var string = url.substr(1);
 
-			// Gets the string fragments separated by slashes
+			// Gets the fragments of the string separated by slashes
 			var fragments = string.split('/');
 
 			// Converts the fragments from spinal-case to camelCase
-			for (var i = 0; i < fragments.length; i++) {
-				fragments[i] = utility.spinalToCamelCase(fragments[i]);
-			}
+			utility.filterArray(fragments, utility.spinalToCamelCase);
 			
-			// Creates the object hierarchy
+			// Creates an object hierarchy according to the service's URL
 			var object = _this;
 			for (var i = 0; i < fragments.length; i++) {
 				var fragment = fragments[i];
@@ -102,15 +100,12 @@
 
 					return;
 				}
-
+				
 				// Gets the child of the object corresponding to the fragment
 				var child = object[fragment];
-
+				
 				// Initializes the child if is undefined
-				child = (angular.isDefined(child)) ? child : {};
-
-				// Sets the child
-				object[fragment] = child;
+				child = object[fragment] = (angular.isDefined(child))? child : {};
 
 				// Sets the child as the current object
 				object = child;
@@ -120,20 +115,15 @@
 		/**
 		 * Sends a request to the server.
 		 * 
-		 * Receives the URL of the requested service and, optionally, the input
-		 * to be sent.
+		 * Receives the requested service's URL and, optionally, the input.
 		 */
 		function sendRequest(url, input) {
-			// Initializes the input if is undefined
-			input = (angular.isDefined(input)) ? input : {};
-
 			// Builds the definitive URL
 			url = 'server' + url;
 
-			// Sends the request to the server
+			// Sends the request
 			var promise = $resource(url).save(input).$promise;
 			
-			// Registers an error callback
 			promise.catch(function(response) {
 				// Reports the error
 				error.report(response);

@@ -1,6 +1,6 @@
-<div class="navigation-bar-header-text">
+<div class="navigation-bar-header">
 	<span class="glyphicon glyphicon-th-list"></span>
-	
+
 	<span class="icon-text">
 		Menú
 	</span>
@@ -9,23 +9,42 @@
 <accordion>
 	<accordion-group
 		ng-repeat="menu in navigationBar.getMenus()"
+		ng-class="{
+			'open': menu.open
+		}"
 		heading="{{ menu.name }}"
 		is-open="menu.open"
+		class="menu"
 	>
-		<div ng-repeat="menuItem in menu.items" class="navigation-bar-menu-item-text">
-			<a
-				ng-href="#{{ menuItem.url }}"
-				popover="{{ menuItem.description }}"
-				popover-append-to-body="true"
-				popover-placement="right"
-				popover-trigger="mouseenter"
-			>
-				<span class="glyphicon glyphicon-chevron-right"></span>
-				
-				<span class="icon-text">
-					{{ menuItem.name }}
-				</span>
-			</a>
+		<ul class="nav nav-pills nav-stacked">
+			<li ng-repeat="menuItem in menu.items" ui-sref-active="active">
+				<a
+					ui-sref="{{ menuItem.state }}"
+					popover="{{ menuItem.description }}"
+					popover-append-to-body="true"
+					popover-placement="right"
+					popover-popup-delay="500"
+					popover-trigger="mouseenter"
+				>
+					<span class="glyphicon glyphicon-chevron-right"></span>
+					
+					<span class="icon-text">
+						{{ menuItem.name }}
+					</span>
+				</a>
+			</li>
+		</ul>
+		
+		<div ng-if="menu.items.length === 0">
+			<div class="no-items-text text-center">
+				No hay menús para mostrar
+			</div>
 		</div>
 	</accordion-group>
 </accordion>
+
+<div ng-if="navigationBar.getMenus().length === 0">
+	<div class="no-items-text text-center">
+		No hay menús para mostrar
+	</div>
+</div>

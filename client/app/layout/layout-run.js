@@ -30,7 +30,7 @@
 	 * Performs initialization tasks.
 	 */
 	function run($rootScope, error, layout) {
-		// Registers a listener for errors
+		// Registers a listener
 		$rootScope.$watch(error.occurred, function() {
 			// Updates the layout
 			layout.update();

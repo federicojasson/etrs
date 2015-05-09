@@ -20,33 +20,27 @@
 
 (function() {
 	angular.module('app.view.medicine').controller('MedicineViewController', [
+		'$scope',
 		'$stateParams',
+		'DeleteMedicineAction',
 		'data',
-		'server',
+		'router',
 		MedicineViewController
 	]);
 	
 	/**
 	 * Represents the medicine view.
 	 */
-	function MedicineViewController($stateParams, data, server) {
+	function MedicineViewController($scope, $stateParams, DeleteMedicineAction, data, router) {
 		var _this = this;
 		
 		/**
-		 * The medicine.
-		 */
-		var medicine = null;
-		
-		/**
-		 * Indicates whether the view is ready, considering the local factors.
-		 * 
-		 * Since it considers only the local factors, it doesn't necessarily
-		 * determine on its own whether the view is ready.
+		 * Indicates whether the view is ready.
 		 */
 		var ready = false;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/view/medicine/medicine.html';
@@ -56,7 +50,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return medicine.name;
+			return $scope.medicine.name;
 		};
 		
 		/**
@@ -67,36 +61,63 @@
 		};
 		
 		/**
-		 * Gets the medicine.
-		 * 
-		 * Receives the medicine's ID.
-		 */
-		function getMedicine(id) {
-			// TODO: prepare data service?
-
-			// Gets the medicine
-			data.getMedicine(id).then(function(newMedicine) {
-				// Sets the medicine
-				medicine = newMedicine;
-
-				ready = true;
-			});
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
 			// Gets the URL parameters
 			var id = $stateParams.id;
 			
+			// Resets the data service
+			data.reset(1, {
+				Medicine: [
+					'creator',
+					'lastEditor'
+				]
+			});
+			
 			// Gets the medicine
-			getMedicine(id);
+			data.getMedicine(id).then(function(medicine) {
+				// Includes the medicine
+				$scope.medicine = medicine;
+				
+				// Initializes actions
+				initializeDeleteMedicineAction(medicine);
+				
+				ready = true;
+			});
+		}
+		
+		/**
+		 * Initializes the delete-medicine action.
+		 * 
+		 * Receives the medicine.
+		 */
+		function initializeDeleteMedicineAction(medicine) {
+			// Initializes the action
+			var action = new DeleteMedicineAction();
+			
+			// Sets inputs' initial values
+			action.input.id.value = medicine.id;
+			action.input.version.value = medicine.version;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
+			};
+			
+			action.successCallback = function() {
+				// Redirects the user to the medicines state
+				router.redirect('medicines');
+			};
+			
+			// Includes the action
+			$scope.deleteMedicineAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the view
+		// Initializes the controller
 		initialize();
 	}
 })();

@@ -21,7 +21,7 @@
 (function() {
 	angular.module('app.view').service('view', [
 		'$state',
-		'authentication',
+		'account',
 		'router',
 		viewService
 	]);
@@ -29,7 +29,7 @@
 	/**
 	 * Manages the views.
 	 */
-	function viewService($state, authentication, router) {
+	function viewService($state, account, router) {
 		var _this = this;
 		
 		/**
@@ -48,37 +48,38 @@
 		 * Updates the view.
 		 */
 		_this.update = function() {
-			// Gets the data of the current route
-			var data = $state.current.data;
+			// Gets the current state
+			var state = $state.current;
 			
-			if (angular.isUndefined(data)) {
-				// The route has not been established yet
+			if (state.name === '') {
+				// A valid state has not been established yet
 				return;
 			}
 			
-			if (authentication.isStateRefreshing()) {
-				// The authentication state is being refreshed
+			if (account.isBeingRefreshed()) {
+				// The account is being refreshed
 				return;
 			}
 			
-			// Gets the user role
+			// Gets the user role according to the signed-in user (if any)
 			var userRole;
-			if (authentication.isUserSignedIn()) {
+			if (account.isUserSignedIn()) {
 				// The user is signed in
-				userRole = authentication.getSignedInUser().role;
+				// Gets the signed-in user's role
+				userRole = account.getSignedInUser().role;
 			} else {
 				// The user is not signed in
 				userRole = '__';
 			}
 			
-			// Gets the views defined in the current route
-			var views = data.views;
+			// Gets the views defined in the current state
+			var views = state.data.views;
 			
 			if (! views.hasOwnProperty(userRole)) {
 				// There is no view defined for the user role
 				
-				// Redirects the user to the home route
-				router.redirect('/');
+				// Redirects the user to the home state
+				router.redirect('home');
 				
 				return;
 			}

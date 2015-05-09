@@ -1,6 +1,6 @@
 {
-	"TODO:": "define final parameters",
+	"DEFINEHERE: define server parameters": "",
 	
-	"domain": "localhost/etrs",
-	"emailAddress": "etrs@etrs.com.ar"
+	"domain": "localhost.etrs",
+	"emailAddress": "etrs@mailinator.com"
 }

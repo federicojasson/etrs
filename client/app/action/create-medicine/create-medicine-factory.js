@@ -21,7 +21,7 @@
 (function() {
 	angular.module('app.action.createMedicine').factory('CreateMedicineAction', [
 		'inputValidator',
-		'InputModel',
+		'Input',
 		'server',
 		CreateMedicineActionFactory
 	]);
@@ -29,7 +29,7 @@
 	/**
 	 * Defines the CreateMedicineAction class.
 	 */
-	function CreateMedicineActionFactory(inputValidator, InputModel, server) {
+	function CreateMedicineActionFactory(inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -37,15 +37,11 @@
 		
 		/**
 		 * The start callback.
-		 * 
-		 * It is invoked at the start of the action.
 		 */
 		CreateMedicineAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
-		 * 
-		 * It is invoked when the action is successful.
 		 */
 		CreateMedicineAction.prototype.successCallback;
 		
@@ -53,13 +49,12 @@
 		 * Initializes an instance of the class.
 		 */
 		function CreateMedicineAction() {
-			// Initializes the callbacks
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.successCallback = new Function();
 			
-			// Defines the input
+			// Initializes the input
 			this.input = {
-				name: new InputModel(function() {
+				name: new Input(function() {
 					return inputValidator.isValidString(this, 1, 64);
 				})
 			};
@@ -77,13 +72,10 @@
 			// Invokes the start callback
 			this.startCallback();
 			
-			// Defines the input to be sent to the server
-			var input = {
+			// Creates the medicine
+			server.medicine.create({
 				name: this.input.name.value
-			};
-			
-			// Creates the medication
-			server.medicine.create(input).then(function(output) {
+			}).then(function(output) {
 				// Invokes the success callback
 				this.successCallback(output.id);
 			}.bind(this));

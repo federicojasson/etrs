@@ -1,0 +1,16 @@
+ETRS - Eye Tracking Record System
+---------------------------------
+
+Bienvenido a ETRS.
+Esperamos que el sistema le resulte útil y lo emplee con responsabilidad.
+Para iniciar sesión, ingrese al siguiente enlace:
+
+https://:domain/account/sign-in
+
+Ante cualquier duda, contáctenos a :emailAddress.
+
+Lo saluda atentamente,
+El equipo de ETRS.
+
+---------------------------------
+Si cree que recibió este correo electrónico por error, comuníquese con :emailAddress.

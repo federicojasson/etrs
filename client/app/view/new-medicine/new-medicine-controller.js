@@ -33,15 +33,12 @@
 		var _this = this;
 		
 		/**
-		 * Indicates whether the view is ready, considering the local factors.
-		 * 
-		 * Since it considers only the local factors, it doesn't necessarily
-		 * determine on its own whether the view is ready.
+		 * Indicates whether the view is ready.
 		 */
 		var ready = true;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/view/new-medicine/new-medicine.html';
@@ -65,37 +62,37 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the create-medicine action
-			var createMedicineAction = new CreateMedicineAction();
-			createMedicineAction.startCallback = onStart;
-			createMedicineAction.successCallback = onSuccess;
+			// Initializes actions
+			initializeCreateMedicineAction();
+		}
+		
+		/**
+		 * Initializes the create-medicine action.
+		 */
+		function initializeCreateMedicineAction() {
+			// Initializes the action
+			var action = new CreateMedicineAction();
 			
-			// Includes the actions
-			$scope.action = {
-				createMedicine: createMedicineAction
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
 			};
-		}
-		
-		/**
-		 * Invoked at the start of the create-medicine action.
-		 */
-		function onStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the create-medicine action is successful.
-		 * 
-		 * Receives the created medicine's ID.
-		 */
-		function onSuccess(id) {
-			// Redirects the user to the medicine route
-			router.redirect('/medicine/' + id);
+			
+			action.successCallback = function(id) {
+				// Redirects the user to the medicine state
+				router.redirect('medicine', {
+					id: id
+				});
+			};
+			
+			// Includes the action
+			$scope.createMedicineAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the view
+		// Initializes the controller
 		initialize();
 	}
 })();

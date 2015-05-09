@@ -1,0 +1,180 @@
+<a ui-sref="experiments" class="btn btn-link">
+	Volver a <b>Experimentos</b>
+</a>
+
+<h1>Nuevo experimento</h1>
+
+<p>
+	El siguiente formulario le permite crear un experimento.
+</p>
+
+<p>
+	<strong>
+		Una vez creado, el experimento aparecerá como opción en los formularios
+		correspondientes.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createExperimentAction.execute()" novalidate>
+		<div class="row">
+			<div class="col-sm-7">
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-floppy-save"></span>
+
+						<span class="icon-text">
+							Experimento
+						</span>
+					</legend>
+
+					<div class="form-group">
+						Ingrese los datos del experimento:
+					</div>
+
+					<div
+						ng-class="{
+							'has-error': ! createExperimentAction.input.name.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="createExperimentAction.input.name.value"
+							popover="{{ createExperimentAction.input.name.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							line
+							type="text"
+							placeholder="Nombre"
+							class="form-control"
+						>
+					</div>
+					
+					<div class="form-group">
+						Ingrese la
+						<a ng-click="toggleCommandLineAlert()" class="btn btn-link inline">
+							línea de comandos
+						</a>
+						y el nombre del archivo de salida:
+					</div>
+					
+					<div ng-if="showCommandLineAlert" class="form-group">
+						<alert
+							type="info"
+							close="toggleCommandLineAlert()"
+						>
+							La línea de comandos indica cómo debe ejecutarse el
+							experimento.<br>
+							Debe contener el marcador :input que será
+							reemplazado automáticamente por la ruta del archivo
+							de entrada del estudio.<br>
+							El marcador no debe rodearse con comillas.<br>
+							<br>
+							<b>Por ejemplo</b>: experimento.exe :input
+						</alert>
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! createExperimentAction.input.commandLine.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="createExperimentAction.input.commandLine.value"
+							popover="{{ createExperimentAction.input.commandLine.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							line
+							type="text"
+							placeholder="Línea de comandos"
+							class="form-control"
+						>
+					</div>
+					
+					<div
+						ng-class="{
+							'has-error': ! createExperimentAction.input.outputName.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="createExperimentAction.input.outputName.value"
+							popover="{{ createExperimentAction.input.outputName.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							file-name
+							type="text"
+							placeholder="Nombre del archivo de salida"
+							class="form-control"
+						>
+					</div>
+				</fieldset>
+
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-lock"></span>
+
+						<span class="icon-text">
+							Credenciales
+						</span>
+					</legend>
+
+					<div class="form-group">
+						Ingrese su contraseña:
+					</div>
+
+					<div
+						ng-class="{
+							'has-error': ! createExperimentAction.input.credentials.password.valid
+						}"
+						class="form-group"
+					>
+						<input
+							ng-model="createExperimentAction.input.credentials.password.value"
+							popover="{{ createExperimentAction.input.credentials.password.message }}"
+							popover-append-to-body="true"
+							popover-placement="left"
+							popover-trigger="focus"
+							type="password"
+							placeholder="Contraseña"
+							class="form-control"
+						>
+					</div>
+				</fieldset>
+
+				<div class="form-group">
+					<button
+						ng-disabled="uploading"
+						type="submit"
+						class="btn btn-success pull-right"
+					>
+						Crear experimento
+					</button>
+				</div>
+			</div>
+			
+			<div class="col-sm-5">
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-folder-open"></span>
+						
+						<span class="icon-text">
+							Archivos
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						<file-uploader
+							files="createExperimentAction.input.files.value"
+							uploading="uploading"
+						></file-uploader>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+	</form>
+</div>

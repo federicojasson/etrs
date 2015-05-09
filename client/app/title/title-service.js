@@ -42,7 +42,7 @@
 		/**
 		 * Sets the title.
 		 * 
-		 * It appends the acronym of the application, so this must not be
+		 * It appends the acronym of the application, so this should not be
 		 * included.
 		 * 
 		 * Receives the title to be set.

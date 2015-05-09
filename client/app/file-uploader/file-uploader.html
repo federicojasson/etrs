@@ -1,0 +1,88 @@
+<div class="form-group">
+	<input
+		nv-file-select
+		uploader="fileUploader.uploader"
+		multiple
+		type="file"
+	>
+</div>
+
+<div
+	nv-file-drop
+	nv-file-over
+	uploader="fileUploader.uploader"
+	over-class="active"
+	class="file-drop-zone form-group text-center"
+>
+	Arrastre los archivos aquí
+</div>
+
+<div ng-if="limit !== undefined">
+	<div class="form-group off-text">
+		Límite de archivos: {{ limit }}
+	</div>
+</div>
+
+<div ng-if="fileUploader.uploader.queue.length > 0">
+	<div class="form-group">
+		<span class="glyphicon glyphicon-tasks"></span>
+		
+		<span class="icon-text">
+			<b>Cola de archivos:</b>
+		</span>
+	</div>
+	
+	<ul class="file-uploader list-unstyled">
+		<li ng-repeat="fileItem in fileUploader.uploader.queue">
+			<div class="file-name-text">
+				{{ fileItem.file.name }}
+			</div>
+			
+			<div ng-if="fileItem.isReady && ! fileItem.isUploading">
+				<span class="text-muted">
+					En espera
+				</span>
+			</div>
+			
+			<div ng-if="fileItem.isUploading">
+				<a ng-click="fileItem.cancel()" class="btn btn-link inline">
+					[ Cancelar ]
+				</a>
+				
+				<div class="progress">
+					<div
+						ng-class="{
+							'progress-bar-danger': fileItem.progress < 33,
+							'progress-bar-warning': fileItem.progress >= 33 && fileItem.progress < 66,
+							'progress-bar-success': fileItem.progress >= 66
+						}"
+						ng-style="{
+							width: fileItem.progress + '%'
+						}"
+						class="progress-bar"
+					>
+						<span>{{ fileItem.progress }}%</span>
+					</div>
+				</div>
+			</div>
+			
+			<div ng-if="fileItem.isSuccess">
+				<a ng-click="fileUploader.removeFileItem(fileItem)" class="btn btn-link inline">
+					[ Eliminar ]
+				</a>
+			</div>
+			
+			<div ng-if="fileItem.isCancel">
+				<span class="text-warning">
+					Cancelado
+				</span>
+			</div>
+			
+			<div ng-if="fileItem.isError">
+				<span class="text-danger">
+					Error
+				</span>
+			</div>
+		</li>
+	</ul>
+</div>

@@ -27,7 +27,7 @@
 	]);
 	
 	/**
-	 * Includes the current layout.
+	 * Includes the layout.
 	 */
 	function layoutDirective($controller, layout, title) {
 		/**
@@ -37,7 +37,7 @@
 			return {
 				restrict: 'E',
 				scope: {},
-				link: onLink,
+				link: onPostLink,
 				templateUrl: 'app/layout/layout.html'
 			};
 		}
@@ -47,46 +47,40 @@
 		 * 
 		 * Receives the scope of the directive.
 		 */
-		function onLink(scope) {
-			// Registers a listener for the layout
-			scope.$watch(layout.get, function(layout) {
-				// Initializes the layout
-				var layoutController = $controller(layout, {
+		function onPostLink(scope) {
+			// Registers a listener
+			scope.$watch(layout.get, function(currentLayout) {
+				// Initializes the current layout's controller
+				var controller = $controller(currentLayout, {
 					$scope: scope
 				});
 				
-				// Registers a listener for the state of the current layout
-				scope.$watch(layoutController.getTitle, function() {
+				// Registers a listener
+				scope.$watch(controller.isReady, function() {
 					// Updates the title
-					updateTitle(layoutController);
+					updateTitle(controller);
 				});
 				
-				// Registers a listener for the state of the current layout
-				scope.$watch(layoutController.isReady, function() {
-					// Updates the title
-					updateTitle(layoutController);
-				});
-				
-				// Includes the current layout
-				scope.layout = layoutController;
+				// Includes the controller
+				scope.layout = controller;
 			});
 		}
 		
 		/**
 		 * Updates the title according to the state of the current layout.
 		 * 
-		 * Receives the controller of the current layout.
+		 * Receives the current layout's controller.
 		 */
-		function updateTitle(layoutController) {
+		function updateTitle(controller) {
 			var newTitle;
 			
-			if (layoutController.isReady()) {
+			if (controller.isReady()) {
 				// The layout is ready
 				// Gets the title provided by the layout
-				newTitle = layoutController.getTitle();
+				newTitle = controller.getTitle();
 			} else {
 				// The layout is not ready
-				newTitle = 'Cargando...';
+				newTitle = 'Cargando…';
 			}
 			
 			// Sets the title

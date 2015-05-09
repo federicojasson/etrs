@@ -20,9 +20,8 @@
 
 (function() {
 	angular.module('app.action.signIn').factory('SignInAction', [
-		'authentication',
 		'inputValidator',
-		'InputModel',
+		'Input',
 		'server',
 		SignInActionFactory
 	]);
@@ -30,7 +29,7 @@
 	/**
 	 * Defines the SignInAction class.
 	 */
-	function SignInActionFactory(authentication, inputValidator, InputModel, server) {
+	function SignInActionFactory(inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -38,22 +37,16 @@
 		
 		/**
 		 * The not-authenticated callback.
-		 * 
-		 * It is invoked when the user is not authenticated.
 		 */
 		SignInAction.prototype.notAuthenticatedCallback;
 		
 		/**
 		 * The start callback.
-		 * 
-		 * It is invoked at the start of the action.
 		 */
 		SignInAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
-		 * 
-		 * It is invoked when the action is successful.
 		 */
 		SignInAction.prototype.successCallback;
 		
@@ -61,19 +54,18 @@
 		 * Initializes an instance of the class.
 		 */
 		function SignInAction() {
-			// Initializes the callbacks
-			this.notAuthenticatedCallback = function() {};
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.notAuthenticatedCallback = new Function();
+			this.successCallback = new Function();
 			
-			// Defines the input
+			// Initializes the input
 			this.input = {
 				credentials: {
-					id: new InputModel(function() {
+					id: new Input(function() {
 						return inputValidator.isValidString(this, 1);
 					}),
 					
-					password: new InputModel(function() {
+					password: new Input(function() {
 						return inputValidator.isValidString(this, 1);
 					})
 				}
@@ -92,16 +84,13 @@
 			// Invokes the start callback
 			this.startCallback();
 			
-			// Defines the input to be sent to the server
-			var input = {
+			// Signs in the user
+			server.account.signIn({
 				credentials: {
 					id: this.input.credentials.id.value,
 					password: this.input.credentials.password.value
 				}
-			};
-			
-			// Signs in the user
-			server.account.signIn(input).then(function(output) {
+			}).then(function(output) {
 				if (! output.authenticated) {
 					// The user has not been authenticated
 					
@@ -110,9 +99,6 @@
 					
 					return;
 				}
-				
-				// Refreshes the authentication state
-				authentication.refreshState();
 				
 				// Invokes the success callback
 				this.successCallback();

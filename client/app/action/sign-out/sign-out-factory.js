@@ -20,7 +20,6 @@
 
 (function() {
 	angular.module('app.action.signOut').factory('SignOutAction', [
-		'authentication',
 		'server',
 		SignOutActionFactory
 	]);
@@ -28,18 +27,14 @@
 	/**
 	 * Defines the SignOutAction class.
 	 */
-	function SignOutActionFactory(authentication, server) {
+	function SignOutActionFactory(server) {
 		/**
 		 * The start callback.
-		 * 
-		 * It is invoked at the start of the action.
 		 */
 		SignOutAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
-		 * 
-		 * It is invoked when the action is successful.
 		 */
 		SignOutAction.prototype.successCallback;
 		
@@ -47,9 +42,8 @@
 		 * Initializes an instance of the class.
 		 */
 		function SignOutAction() {
-			// Initializes the callbacks
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.successCallback = new Function();
 		}
 		
 		/**
@@ -61,9 +55,6 @@
 			
 			// Signs out the user
 			server.account.signOut().then(function() {
-				// Refreshes the authentication state
-				authentication.refreshState();
-				
 				// Invokes the success callback
 				this.successCallback();
 			}.bind(this));

@@ -1,0 +1,152 @@
+<a ui-sref="home" class="btn btn-link">
+	Volver a <b>Inicio</b>
+</a>
+
+<h1>Registros</h1>
+
+<p>
+	Esta sección le permite ver los registros del sistema.
+</p>
+
+<div class="row">
+	<div class="col-sm-5 col-sm-offset-7">
+		<div
+			ng-class="{
+				'has-error': ! searchLogsAction.input.expression.valid
+			}"
+			class="form-group has-feedback"
+		>
+			<div
+				ng-class="{
+					'input-group': searchLogsAction.input.expression.value !== null
+				}"
+				class="rounded-corners"
+			>
+				<span ng-if="searchLogsAction.input.expression.value !== null" class="input-group-btn">
+					<button
+						ng-click="searchHandler.clearExpression()"
+						type="button"
+						class="btn btn-default"
+					>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+				
+				<input
+					ng-change="searchHandler.scheduleSearch(750)"
+					ng-keyup="$event.keyCode === 13 && searchHandler.search()"
+					ng-model="searchLogsAction.input.expression.value"
+					popover="{{ searchLogsAction.input.expression.message }}"
+					popover-append-to-body="true"
+					popover-placement="bottom"
+					popover-trigger="focus"
+					line
+					null-if-empty
+					type="text"
+					placeholder="Buscar"
+					class="form-control rounded-corners"
+				>
+			</div>
+			
+			<span class="form-control-feedback glyphicon glyphicon-search"></span>
+		</div>
+	</div>
+</div>
+
+<div ng-if="searchLogsAction.input.expression.valid">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th ng-click="searchHandler.toggleSortingDirection('creationDateTime')" class="col-sm-2">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('creationDateTime') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('creationDateTime') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Fecha y hora
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('level')" class="col-sm-2">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('level') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('level') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Nivel
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('message')" class="col-sm-8">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('message') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('message') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Mensaje
+					</span>
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat="log in logs">
+				<td title="{{ log.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
+					{{ log.creationDateTime | date: 'dd/MM/yyyy HH:mm:ss' }}
+				</td>
+				
+				<td>
+					{{ log | levelName }}
+				</td>
+				
+				<td>
+					{{ log.message }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
+		</div>
+	</div>
+	
+	<div ng-if="! searching && logs.length === 0">
+		<div class="no-items-text text-center">
+			La búsqueda no obtuvo ningún resultado
+		</div>
+	</div>
+	
+	<div ng-if="total / searchLogsAction.input.resultsPerPage.value > 1">
+		<div class="text-center">
+			<pagination
+				ng-change="searchHandler.search()"
+				ng-model="searchLogsAction.input.page.value"
+				items-per-page="searchLogsAction.input.resultsPerPage.value"
+				total-items="total"
+				max-size="10"
+				boundary-links="true"
+				previous-text="‹"
+				next-text="›"
+				first-text="«"
+				last-text="»"
+			></pagination>
+		</div>
+	</div>
+</div>

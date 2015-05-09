@@ -1,0 +1,207 @@
+<a ui-sref="home" class="btn btn-link">
+	Volver a <b>Inicio</b>
+</a>
+
+<h1>Diagnósticos</h1>
+
+<p>
+	Esta sección le permite administrar los diagnósticos del sistema.
+</p>
+
+<p>
+	<strong>
+		Eliminar un diagnóstico provocará la alteración de todas las entidades
+		del sistema asociadas al mismo.
+	</strong>
+</p>
+
+<div class="row">
+	<div class="col-sm-7">
+		<a ui-sref="newDiagnosis" class="btn btn-success">
+			<span class="glyphicon glyphicon-plus"></span>
+			
+			<span class="icon-text">
+				Nuevo
+			</span>
+		</a>
+	</div>
+	
+	<div class="col-sm-5">
+		<div
+			ng-class="{
+				'has-error': ! searchDiagnosesAction.input.expression.valid
+			}"
+			class="form-group has-feedback"
+		>
+			<div
+				ng-class="{
+					'input-group': searchDiagnosesAction.input.expression.value !== null
+				}"
+				class="rounded-corners"
+			>
+				<span ng-if="searchDiagnosesAction.input.expression.value !== null" class="input-group-btn">
+					<button
+						ng-click="searchHandler.clearExpression()"
+						type="button"
+						class="btn btn-default"
+					>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+				
+				<input
+					ng-change="searchHandler.scheduleSearch(750)"
+					ng-keyup="$event.keyCode === 13 && searchHandler.search()"
+					ng-model="searchDiagnosesAction.input.expression.value"
+					popover="{{ searchDiagnosesAction.input.expression.message }}"
+					popover-append-to-body="true"
+					popover-placement="bottom"
+					popover-trigger="focus"
+					line
+					null-if-empty
+					type="text"
+					placeholder="Buscar"
+					class="form-control rounded-corners"
+				>
+			</div>
+			
+			<span class="form-control-feedback glyphicon glyphicon-search"></span>
+		</div>
+	</div>
+</div>
+
+<div ng-if="searchDiagnosesAction.input.expression.valid">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="col-sm-1 text-center">
+					Detalles
+				</th>
+				
+				<th class="col-sm-1 text-center">
+					Eliminar
+				</th>
+				
+				<th class="col-sm-1 text-center">
+					Editar
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('name') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('name') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Nombre
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('creationDateTime')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('creationDateTime') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('creationDateTime') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Creación
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('lastEditionDateTime')" class="col-sm-3">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('lastEditionDateTime') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Última edición
+					</span>
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr ng-repeat="diagnosis in diagnoses">
+				<td class="table-cell-link text-center">
+					<a
+						ui-sref="diagnosis({
+							id: diagnosis.id
+						})"
+					>
+						<span class="glyphicon glyphicon-share-alt"></span>
+					</a>
+				</td>
+				
+				<td class="table-cell-link text-center">
+					<a ng-click="deleteDiagnosis(diagnosis)">
+						<span class="glyphicon glyphicon-remove"></span>
+					</a>
+				</td>
+				
+				<td class="table-cell-link text-center">
+					<a
+						ui-sref="editDiagnosis({
+							id: diagnosis.id
+						})"
+					>
+						<span class="glyphicon glyphicon-pencil"></span>
+					</a>
+				</td>
+				
+				<td>
+					{{ diagnosis.name }}
+				</td>
+				
+				<td title="{{ diagnosis.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
+					{{ diagnosis.creationDateTime | date: 'longDate' }}
+				</td>
+				
+				<td title="{{ diagnosis.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
+					{{ diagnosis.lastEditionDateTime | date: 'longDate' }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
+		</div>
+	</div>
+	
+	<div ng-if="! searching && diagnoses.length === 0">
+		<div class="no-items-text text-center">
+			La búsqueda no obtuvo ningún resultado
+		</div>
+	</div>
+	
+	<div ng-if="total / searchDiagnosesAction.input.resultsPerPage.value > 1">
+		<div class="text-center">
+			<pagination
+				ng-change="searchHandler.search()"
+				ng-model="searchDiagnosesAction.input.page.value"
+				items-per-page="searchDiagnosesAction.input.resultsPerPage.value"
+				total-items="total"
+				max-size="10"
+				boundary-links="true"
+				previous-text="‹"
+				next-text="›"
+				first-text="«"
+				last-text="»"
+			></pagination>
+		</div>
+	</div>
+</div>

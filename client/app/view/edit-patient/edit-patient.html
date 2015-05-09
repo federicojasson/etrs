@@ -1,0 +1,168 @@
+<a
+	ui-sref="patient({
+		id: patient.id
+	})"
+	class="btn btn-link"
+>
+	Volver a <b>Paciente</b>
+</a>
+
+<h1>{{ patient | fullName }}</h1>
+
+<p>
+	El siguiente formulario le permite editar un paciente.
+</p>
+
+<p>
+	<strong>
+		Los cambios realizados en el paciente se verán reflejados
+		automáticamente en todo el sistema.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editPatientAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Paciente
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del paciente:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editPatientAction.input.firstName.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editPatientAction.input.firstName.value"
+					popover="{{ editPatientAction.input.firstName.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editPatientAction.input.lastName.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editPatientAction.input.lastName.value"
+					popover="{{ editPatientAction.input.lastName.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Apellido"
+					class="form-control"
+				>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editPatientAction.input.gender.valid
+				}"
+				class="form-group"
+			>
+				<select
+					ng-model="editPatientAction.input.gender.value"
+					popover="{{ editPatientAction.input.gender.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					class="form-control"
+				>
+					<option value="" disabled>Sexo</option>
+					<option value="f">Mujer</option>
+					<option value="m">Hombre</option>
+				</select>
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editPatientAction.input.birthDate.valid
+				}"
+				class="form-group"
+			>
+				<div class="input-group">
+					<input
+						popover="{{ editPatientAction.input.birthDate.message }}"
+						popover-append-to-body="true"
+						popover-placement="left"
+						popover-trigger="focus"
+						type="text"
+						placeholder="Fecha de nacimiento"
+						value="{{ editPatientAction.input.birthDate.value | date: 'longDate' }}"
+						readonly
+						class="form-control"
+					>
+					
+					<span class="input-group-btn">
+						<div dropdown class="btn-group">
+							<button
+								dropdown-toggle
+								type="button"
+								class="btn btn-default dropdown-toggle"
+							>
+								<span class="glyphicon glyphicon-calendar"></span>
+							</button>
+
+							<div ng-click="$event.stopPropagation()" class="calendar dropdown-menu pull-right">
+								<datepicker
+									ng-model="editPatientAction.input.birthDate.value"
+									datepicker-mode="'year'"
+									show-weeks="false"
+									starting-day="1"
+								></datepicker>
+							</div>
+						</div>
+					</span>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				Años de educación:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editPatientAction.input.yearsOfEducation.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editPatientAction.input.yearsOfEducation.value"
+					popover="{{ editPatientAction.input.yearsOfEducation.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					integer
+					type="text"
+					placeholder="Años de educación"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning pull-right">
+				Editar paciente
+			</button>
+		</div>
+	</form>
+</div>

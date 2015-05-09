@@ -1,1 +1,70 @@
-TODO: implement html
+<a ui-sref="home" class="btn btn-link">
+	Volver a <b>Inicio</b>
+</a>
+
+<h1>{{ user | fullName }}</h1>
+
+<a
+	ui-sref="editAccount"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<a
+	ui-sref="changePassword"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-lock"></span>
+	
+	<span class="icon-text">
+		Cambiar contraseña
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Nombre de usuario</dt>
+		<dd>{{ user.id }}</dd>
+		
+		<dt>Nombre y apellido</dt>
+		<dd>{{ user | fullName }}</dd>
+		
+		<dt>Sexo</dt>
+		<dd>{{ user | gender }}</dd>
+		
+		<dt>Rol de usuario</dt>
+		<dd>{{ user | role }}</dd>
+		
+		<dt>Dirección de correo electrónico</dt>
+		<dd>{{ user.emailAddress }}</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<event-box
+		label="Invitación"
+		user="user.inviter"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="user.creationDateTime"
+		label="Registro"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="user.lastEditionDateTime"
+		label="Última edición"
+		class="pull-right"
+	></event-box>
+</div>

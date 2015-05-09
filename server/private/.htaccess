@@ -1,2 +1,2 @@
-# Denies all external access to this directory
+# Denies all access
 Deny from all

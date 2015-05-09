@@ -21,8 +21,8 @@
 (function() {
 	angular.module('app.view.account').controller('AccountViewController', [
 		'$scope',
-		'EditAccountAction',
-		'authentication',
+		'account',
+		'data',
 		'fullNameFilter',
 		AccountViewController
 	]);
@@ -30,19 +30,16 @@
 	/**
 	 * Represents the account view.
 	 */
-	function AccountViewController($scope, EditAccountAction, authentication, fullNameFilter) {
+	function AccountViewController($scope, account, data, fullNameFilter) {
 		var _this = this;
 		
 		/**
-		 * Indicates whether the view is ready, considering the local factors.
-		 * 
-		 * Since it considers only the local factors, it doesn't necessarily
-		 * determine on its own whether the view is ready.
+		 * Indicates whether the view is ready.
 		 */
-		var ready = true;
+		var ready = false;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/view/account/account.html';
@@ -52,11 +49,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			// Gets the signed-in user
-			var signedInUser = authentication.getSignedInUser();
-			
-			// Gets the signed-in user's full name
-			return fullNameFilter(signedInUser);
+			return fullNameFilter($scope.user);
 		};
 		
 		/**
@@ -70,34 +63,28 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Initializes the edit-account action
-			var editAccountAction = new EditAccountAction();
-			editAccountAction.startCallback = onStart;
-			editAccountAction.successCallback = onSuccess;
+			// Gets the signed-in user's ID
+			var id = account.getSignedInUser().id;
 			
-			// Includes the actions
-			$scope.action = {
-				editAccount: editAccountAction
-			};
-		}
-		
-		/**
-		 * Invoked at the start of the edit-account action.
-		 */
-		function onStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the edit-account action is successful.
-		 */
-		function onSuccess() {
-			ready = true;
+			// Resets the data service
+			data.reset(1, {
+				User: [
+					'inviter'
+				]
+			});
+			
+			// Gets the user
+			data.getUser(id).then(function(user) {
+				// Includes the user
+				$scope.user = user;
+				
+				ready = true;
+			});
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the view
+		// Initializes the controller
 		initialize();
 	}
 })();

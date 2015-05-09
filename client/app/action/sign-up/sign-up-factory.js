@@ -21,7 +21,7 @@
 (function() {
 	angular.module('app.action.signUp').factory('SignUpAction', [
 		'inputValidator',
-		'InputModel',
+		'Input',
 		'server',
 		SignUpActionFactory
 	]);
@@ -29,7 +29,7 @@
 	/**
 	 * Defines the SignUpAction class.
 	 */
-	function SignUpActionFactory(inputValidator, InputModel, server) {
+	function SignUpActionFactory(inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -37,29 +37,21 @@
 		
 		/**
 		 * The not-authenticated callback.
-		 * 
-		 * It is invoked when the sign-up permission is not authenticated.
 		 */
 		SignUpAction.prototype.notAuthenticatedCallback;
 		
 		/**
 		 * The not-available callback.
-		 * 
-		 * It is invoked when the user ID is not available.
 		 */
 		SignUpAction.prototype.notAvailableCallback;
 		
 		/**
 		 * The start callback.
-		 * 
-		 * It is invoked at the start of the action.
 		 */
 		SignUpAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
-		 * 
-		 * It is invoked when the action is successful.
 		 */
 		SignUpAction.prototype.successCallback;
 		
@@ -67,44 +59,43 @@
 		 * Initializes an instance of the class.
 		 */
 		function SignUpAction() {
-			// Initializes the callbacks
-			this.notAuthenticatedCallback = function() {};
-			this.notAvailableCallback = function() {};
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.notAuthenticatedCallback = new Function();
+			this.notAvailableCallback = new Function();
+			this.successCallback = new Function();
 			
-			// Defines the input
+			// Initializes the input
 			this.input = {
 				credentials: {
-					id: new InputModel(),
-					password: new InputModel()
+					id: new Input(),
+					password: new Input()
 				},
 				
-				id: new InputModel(function() {
+				id: new Input(function() {
 					return inputValidator.isUserId(this);
 				}),
 				
-				emailAddress: new InputModel(function() {
+				emailAddress: new Input(function() {
 					return inputValidator.isEmailAddress(this);
 				}),
 				
-				password: new InputModel(function() {
-					return inputValidator.isValidPassword(this);
+				password: new Input(function() {
+					return inputValidator.isPassword(this);
 				}),
 				
-				passwordConfirmation: new InputModel(function() {
-					return inputValidator.isValidPasswordConfirmation(this.input.passwordConfirmation, this.input.password.value);
+				passwordConfirmation: new Input(function() {
+					return inputValidator.isPasswordConfirmation(this.input.passwordConfirmation, this.input.password.value);
 				}.bind(this)),
 				
-				firstName: new InputModel(function() {
+				firstName: new Input(function() {
 					return inputValidator.isValidString(this, 1, 48);
 				}),
 				
-				lastName: new InputModel(function() {
+				lastName: new Input(function() {
 					return inputValidator.isValidString(this, 1, 48);
 				}),
 				
-				gender: new InputModel(function() {
+				gender: new Input(function() {
 					return inputValidator.isGender(this);
 				})
 			};
@@ -122,8 +113,8 @@
 			// Invokes the start callback
 			this.startCallback();
 			
-			// Defines the input to be sent to the server
-			var input = {
+			// Signs up the user
+			server.account.signUp({
 				credentials: {
 					id: this.input.credentials.id.value,
 					password: this.input.credentials.password.value
@@ -135,10 +126,7 @@
 				firstName: this.input.firstName.value,
 				lastName: this.input.lastName.value,
 				gender: this.input.gender.value
-			};
-			
-			// Signs up the user
-			server.account.signUp(input).then(function(output) {
+			}).then(function(output) {
 				if (! output.authenticated) {
 					// The sign-up permission has not been authenticated
 					

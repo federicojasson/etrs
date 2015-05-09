@@ -33,22 +33,142 @@
 		 */
 		function getMenuItems() {
 			return {
+				clinicalImpressions: {
+					name: 'Administrar',
+					state: 'clinicalImpressions',
+					description: 'Administre las impresiones clínicas'
+				},
+				
+				cognitiveTests: {
+					name: 'Administrar',
+					state: 'cognitiveTests',
+					description: 'Administre los exámenes cognitivos'
+				},
+				
+				diagnoses: {
+					name: 'Administrar',
+					state: 'diagnoses',
+					description: 'Administre los diagnósticos'
+				},
+				
+				experiments: {
+					name: 'Administrar',
+					state: 'experiments',
+					description: 'Administre los experimentos'
+				},
+				
+				imagingTests: {
+					name: 'Administrar',
+					state: 'imagingTests',
+					description: 'Administre los exámenes de imágenes'
+				},
+				
+				invitation: {
+					name: 'Enviar invitación',
+					state: 'invitation',
+					description: 'Invite a una persona a registrarse en ETRS'
+				},
+				
+				laboratoryTests: {
+					name: 'Administrar',
+					state: 'laboratoryTests',
+					description: 'Administre los exámenes de laboratorio'
+				},
+				
+				logs: {
+					name: 'Ver',
+					state: 'logs',
+					description: 'Vea los registros del sistema'
+				},
+				
+				medicalAntecedents: {
+					name: 'Administrar',
+					state: 'medicalAntecedents',
+					description: 'Administre los antecedentes médicos'
+				},
+				
 				medicines: {
 					name: 'Administrar',
-					url: '/medicines',
-					description: 'Administre los medicamentos del sistema'
+					state: 'medicines',
+					description: 'Administre los medicamentos'
+				},
+				
+				newClinicalImpression: {
+					name: 'Nueva',
+					state: 'newClinicalImpression',
+					description: 'Cree una nueva impresión clínica'
+				},
+				
+				newCognitiveTest: {
+					name: 'Nuevo',
+					state: 'newCognitiveTest',
+					description: 'Cree un nuevo examen cognitivo'
+				},
+				
+				newDiagnosis: {
+					name: 'Nuevo',
+					state: 'newDiagnosis',
+					description: 'Cree un nuevo diagnóstico'
+				},
+				
+				newExperiment: {
+					name: 'Nuevo',
+					state: 'newExperiment',
+					description: 'Cree un nuevo experimento'
+				},
+				
+				newImagingTest: {
+					name: 'Nuevo',
+					state: 'newImagingTest',
+					description: 'Cree un nuevo examen de imágenes'
+				},
+				
+				newLaboratoryTest: {
+					name: 'Nuevo',
+					state: 'newLaboratoryTest',
+					description: 'Cree un nuevo examen de laboratorio'
+				},
+				
+				newMedicalAntecedent: {
+					name: 'Nuevo',
+					state: 'newMedicalAntecedent',
+					description: 'Cree un nuevo antecedente médico'
 				},
 				
 				newMedicine: {
 					name: 'Nuevo',
-					url: '/medicine/new',
+					state: 'newMedicine',
 					description: 'Cree un nuevo medicamento'
 				},
 				
-				signUp: {
-					name: 'Enviar invitación',
-					url: '/account/sign-up',
-					description: 'Invite a una persona a registrarse en ETRS'
+				newPatient: {
+					name: 'Nuevo',
+					state: 'newPatient',
+					description: 'Cree un nuevo paciente'
+				},
+				
+				newTreatment: {
+					name: 'Nuevo',
+					state: 'newTreatment',
+					description: 'Cree un nuevo tratamiento'
+				},
+				
+				patients: {
+					name: 'Buscar',
+					state: 'patients',
+					description: 'Busque pacientes en el sistema'
+				},
+				
+				treatments: {
+					name: 'Administrar',
+					state: 'treatments',
+					description: 'Administre los tratamientos'
+				},
+				
+				users: {
+					name: 'Buscar',
+					state: 'users',
+					description: 'Busque usuarios en el sistema'
 				}
 			};
 		}
@@ -63,9 +183,18 @@
 			return {
 				ad: [
 					{
-						name: 'Usuarios',
+						name: 'Pacientes',
 						items: [
-							menuItems.signUp
+							menuItems.patients,
+							menuItems.newPatient
+						]
+					},
+					
+					{
+						name: 'Antecedentes médicos',
+						items: [
+							menuItems.medicalAntecedents,
+							menuItems.newMedicalAntecedent
 						]
 					},
 					
@@ -75,11 +204,98 @@
 							menuItems.medicines,
 							menuItems.newMedicine
 						]
+					},
+					
+					{
+						name: 'Impresiones clínicas',
+						items: [
+							menuItems.clinicalImpressions,
+							menuItems.newClinicalImpression
+						]
+					},
+					
+					{
+						name: 'Exámenes de laboratorio',
+						items: [
+							menuItems.laboratoryTests,
+							menuItems.newLaboratoryTest
+						]
+					},
+					
+					{
+						name: 'Exámenes de imágenes',
+						items: [
+							menuItems.imagingTests,
+							menuItems.newImagingTest
+						]
+					},
+					
+					{
+						name: 'Exámenes cognitivos',
+						items: [
+							menuItems.cognitiveTests,
+							menuItems.newCognitiveTest
+						]
+					},
+					
+					{
+						name: 'Diagnósticos',
+						items: [
+							menuItems.diagnoses,
+							menuItems.newDiagnosis
+						]
+					},
+					
+					{
+						name: 'Tratamientos',
+						items: [
+							menuItems.treatments,
+							menuItems.newTreatment
+						]
+					},
+					
+					{
+						name: 'Experimentos',
+						items: [
+							menuItems.experiments,
+							menuItems.newExperiment
+						]
+					},
+					
+					{
+						name: 'Usuarios',
+						items: [
+							menuItems.users,
+							menuItems.invitation
+						]
+					},
+					
+					{
+						name: 'Registros',
+						items: [
+							menuItems.logs
+						]
 					}
 				],
 				
-				dr: [],
-				op: []
+				dr: [
+					{
+						name: 'Pacientes',
+						items: [
+							menuItems.patients,
+							menuItems.newPatient
+						]
+					}
+				],
+				
+				op: [
+					{
+						name: 'Pacientes',
+						items: [
+							menuItems.patients
+						]
+					}
+				]
 			};
 		}
 		
@@ -89,7 +305,11 @@
 		var menus = getMenus();
 		
 		// Registers the menus
-		for (var userRole in menus) { if (! menus.hasOwnProperty(userRole)) continue;
+		for (var userRole in menus) {
+			if (! menus.hasOwnProperty(userRole)) {
+				continue;
+			}
+			
 			var userRoleMenus = menus[userRole];
 			for (var i = 0; i < userRoleMenus.length; i++) {
 				navigationBarProvider.registerMenu(userRoleMenus[i], userRole);

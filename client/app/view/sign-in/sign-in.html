@@ -5,11 +5,11 @@
 	
 	<div class="col-sm-7 col-sm-offset-2">
 		<div class="clearfix well">
-			<form ng-submit="action.signIn.execute()" novalidate>
+			<form ng-submit="signInAction.execute()" novalidate>
 				<fieldset>
 					<legend>
 						<span class="glyphicon glyphicon-lock"></span>
-						
+
 						<span class="icon-text">
 							Credenciales
 						</span>
@@ -21,13 +21,13 @@
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signIn.input.credentials.id.valid
+							'has-error': ! signInAction.input.credentials.id.valid
 						}"
 						class="form-group"
 					>
 						<input
-							ng-model="action.signIn.input.credentials.id.value"
-							popover="{{ action.signIn.input.credentials.id.message }}"
+							ng-model="signInAction.input.credentials.id.value"
+							popover="{{ signInAction.input.credentials.id.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
@@ -39,13 +39,13 @@
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signIn.input.credentials.password.valid
+							'has-error': ! signInAction.input.credentials.password.valid
 						}"
 						class="form-group"
 					>
 						<input
-							ng-model="action.signIn.input.credentials.password.value"
-							popover="{{ action.signIn.input.credentials.password.message }}"
+							ng-model="signInAction.input.credentials.password.value"
+							popover="{{ signInAction.input.credentials.password.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
@@ -57,7 +57,7 @@
 				</fieldset>
 				
 				<div class="form-group">
-					<a href="#/account/reset-password" class="form-footer-text pull-left">
+					<a ui-sref="forgotPassword" class="btn btn-lg btn-link pull-left">
 						¿Olvidó su contraseña?
 					</a>
 					

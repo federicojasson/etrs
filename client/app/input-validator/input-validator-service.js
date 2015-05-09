@@ -19,13 +19,74 @@
 'use strict';
 
 (function() {
-	angular.module('app.inputValidator').service('inputValidator', inputValidatorService);
+	angular.module('app.inputValidator').service('inputValidator', [
+		'DataTypeInput',
+		inputValidatorService
+	]);
 	
 	/**
 	 * Provides input-validation functions.
 	 */
-	function inputValidatorService() {
+	function inputValidatorService(DataTypeInput) {
 		var _this = this;
+		
+		/**
+		 * Determines whether an input is a command line.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isCommandLine = function(input) {
+			if (! _this.isValidString(input, 1, 512)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (input.value.indexOf(':input') === -1) {
+				// The input doesn't contain the "input" placeholder
+				input.message = 'La línea de comandos debe contener el marcador :input';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
+		 * Determines whether an input is a data-type definition.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isDataTypeDefinition = function(input) {
+			if (! _this.isValidString(input, 1, 1024)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			try {
+				// Creates a data-type input
+				DataTypeInput.create(input.value);
+				
+				return true;
+			} catch (exception) {
+				// The input is an invalid data-type definition
+				input.message = 'La definición del tipo de dato no es válida';
+				return false;
+			}
+		};
+		
+		/**
+		 * Determines whether an input is a date.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isDate = function(input) {
+			if (input.value === '') {
+				// The date has not been selected
+				input.message = 'Seleccione una fecha';
+				return false;
+			}
+			
+			return true;
+		};
 		
 		/**
 		 * Determines whether an input is an email address.
@@ -33,19 +94,67 @@
 		 * Receives the input.
 		 */
 		_this.isEmailAddress = function(input) {
-			if (! _this.isValidString(input, 0, 254)) {
+			if (! _this.isValidString(input, 1, 254)) {
 				// The input is not a valid string
 				return false;
 			}
 			
-			if (! /(?!.*[ ])(?!.*@.*@)^.+@.+$/.test(input.value)) {
-				// The input is not an email address
-				input.message = 'Ingrese una dirección de correo electrónico válida';
+			if (! /(?!.*[\u0000-\u001f])(?!.* )(?!.*@.*@)^.+@.+$/.test(input.value)) {
+				// The input is an invalid email address
+				input.message = 'La dirección de correo electrónico no es válida';
 				return false;
 			}
 			
-			// The input is an email address
-			input.message = '';
+			return true;
+		};
+		
+		/**
+		 * Determines whether an input is an experiment.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isExperiment = function(input) {
+			if (input.value === '') {
+				// The experiment has not been selected
+				input.message = 'Seleccione un experimento';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
+		 * Determines whether an input is a file.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isFile = function(input) {
+			if (input.value === '') {
+				// The file has not been selected
+				input.message = 'Seleccione un archivo';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
+		 * Determines whether an input is a file name.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isFileName = function(input) {
+			if (! _this.isValidString(input, 1, 128)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (/["*\/:<>?\\|]/.test(input.value)) {
+				// The input contains forbidden characters
+				input.message = 'El nombre del archivo no puede contener ninguno de los siguientes caracteres: " * \ / : < > ? \\ |';
+				return false;
+			}
+			
 			return true;
 		};
 		
@@ -55,32 +164,27 @@
 		 * Receives the input.
 		 */
 		_this.isGender = function(input) {
-			// Defines the genders
-			var genders = [
-				'f',
-				'm'
-			];
-			
-			if (genders.indexOf(input.value) === -1) {
-				// The input is not a gender
-				input.message = 'Seleccione el sexo';
+			if (input.value === '') {
+				// The gender has not been selected
+				input.message = 'Seleccione un sexo';
 				return false;
 			}
 			
-			// The input is a gender
-			input.message = '';
 			return true;
 		};
 		
 		/**
 		 * Determines whether an input is valid.
 		 * 
-		 * Receives the input, which can be an input model or an object. In the
-		 * latter case, the properties of the object are validated recursively.
+		 * Receives the input, which can be an Input instance or an object. In
+		 * the latter case, the object's properties are validated recursively.
 		 */
 		_this.isInputValid = function(input) {
-			if (angular.isDefined(input.validate) && angular.isFunction(input.validate)) {
-				// It is an input model
+			if (isInputInstance(input)) {
+				// The input is an Input instance
+				
+				// Resets the input's message
+				input.message = '';
 				
 				// Validates the input
 				input.validate();
@@ -89,13 +193,79 @@
 				return input.valid;
 			}
 			
-			// Determines whether the properties of the object are valid
+			// Validates the object's properties
 			var valid = true;
-			for (var property in input) { if (! input.hasOwnProperty(property)) continue;
+			for (var property in input) {
+				if (! input.hasOwnProperty(property)) {
+					continue;
+				}
+				
 				valid &= _this.isInputValid(input[property]);
 			}
 			
 			return valid;
+		};
+		
+		/**
+		 * Determines whether an input is an option.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isOption = function(input) {
+			if (input.value === null) {
+				// The option has not been selected
+				input.message = 'Seleccione una opción';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
+		 * Determines whether an input is a password.
+		 * 
+		 * Receives the input.
+		 */
+		_this.isPassword = function(input) {
+			if (! _this.isValidString(input, 8)) {
+				// The input is not a valid string
+				return false;
+			}
+			
+			if (! /[0-9]/.test(input.value)) {
+				// The input doesn't contain any digit
+				input.message = 'La contraseña debe tener al menos un dígito';
+				return false;
+			}
+			
+			if (! /[A-Z]/.test(input.value)) {
+				// The input doesn't contain any uppercase character
+				input.message = 'La contraseña debe tener al menos una letra mayúscula';
+				return false;
+			}
+			
+			if (! /[a-z]/.test(input.value)) {
+				// The input doesn't contain any lowercase character
+				input.message = 'La contraseña debe tener al menos una letra minúscula';
+				return false;
+			}
+			
+			return true;
+		};
+		
+		/**
+		 * Determines whether an input is a password confirmation.
+		 * 
+		 * Receives the input and the password.
+		 */
+		_this.isPasswordConfirmation = function(input, password) {
+			if (input.value !== password) {
+				// The input doesn't match the password
+				input.message = 'Las contraseñas ingresadas no coinciden';
+				return false;
+			}
+			
+			return true;
 		};
 		
 		/**
@@ -111,30 +281,28 @@
 			
 			if (! /^[.0-9A-Za-z]*$/.test(input.value)) {
 				// The input contains invalid characters
-				input.message = 'El nombre de usuario sólo puede contener letras, dígitos y puntos';
+				input.message = 'El nombre de usuario sólo puede tener letras, dígitos y puntos';
 				return false;
 			}
 			
-			if (/[.]{2}/g.test(input.value)) {
-				// The input contains two or more consecutive dots
-				input.message = 'El nombre de usuario no puede contener dos o más puntos consecutivos';
+			if (/\.{2}/.test(input.value)) {
+				// The input contains consecutive dots
+				input.message = 'El nombre de usuario no puede tener puntos consecutivos';
 				return false;
 			}
 			
-			if (/^[.].*$/.test(input.value)) {
+			if (/^\..*$/.test(input.value)) {
 				// The input starts with a dot
 				input.message = 'El nombre de usuario no puede comenzar con un punto';
 				return false;
 			}
 			
-			if (/^.*[.]$/.test(input.value)) {
+			if (/^.*\.$/.test(input.value)) {
 				// The input ends with a dot
-				input.message = 'El nombre de usuario no puede finalizar con un punto';
+				input.message = 'El nombre de usuario no puede terminar con un punto';
 				return false;
 			}
 			
-			// The input is a user ID
-			input.message = '';
 			return true;
 		};
 		
@@ -144,104 +312,107 @@
 		 * Receives the input.
 		 */
 		_this.isUserRole = function(input) {
-			// Defines the user roles
-			var userRoles = [
-				'ad',
-				'dr',
-				'op'
-			];
-			
-			if (userRoles.indexOf(input.value) === -1) {
-				// The input is not a user role
-				input.message = 'Seleccione el rol de usuario';
+			if (input.value === '') {
+				// The user role has not been selected
+				input.message = 'Seleccione un rol de usuario';
 				return false;
 			}
 			
-			// The input is a user role
-			input.message = '';
 			return true;
 		};
 		
 		/**
-		 * Determines whether an input is a valid password.
+		 * Determines whether an input is a valid integer.
 		 * 
-		 * Receives the input.
+		 * Receives the input, the minimum value allowed and, optionally, the
+		 * maximum.
 		 */
-		_this.isValidPassword = function(input) {
-			if (! _this.isValidString(input, 8)) {
-				// The input is not a valid string
-				return false;
-			}
-
-			if (! /[0-9]/g.test(input.value)) {
-				// The input doesn't contain a digit
-				input.message = 'La contraseña debe contener al menos un dígito';
-				return false;
-			}
-
-			if (! /[A-Z]/g.test(input.value)) {
-				// The input doesn't contain an uppercase character
-				input.message = 'La contraseña debe contener al menos una letra mayúscula';
-				return false;
-			}
-
-			if (! /[a-z]/g.test(input.value)) {
-				// The input doesn't contain a lowercase character
-				input.message = 'La contraseña debe contener al menos una letra minúscula';
+		_this.isValidInteger = function(input, minimumValue, maximumValue) {
+			if (input.value === '') {
+				// The input is empty
+				input.message = 'Este campo es obligatorio';
 				return false;
 			}
 			
-			// The input is a valid password
-			input.message = '';
-			return true;
-		};
-		
-		/**
-		 * Determines whether an input is a valid password confirmation.
-		 * 
-		 * Receives the input and the password.
-		 */
-		_this.isValidPasswordConfirmation = function(input, password) {
-			if (input.value !== password) {
-				// The input doesn't match the password
-				input.message = 'Las contraseñas ingresadas no coinciden';
+			if (isNaN(input.value)) {
+				// The input is not a number
+				input.message = 'Ingrese un valor numérico';
 				return false;
 			}
 			
-			// The input is a valid password confirmation
-			input.message = '';
+			if (input.value < minimumValue) {
+				// The input is too low
+				input.message = 'El valor de este campo debe ser mayor o igual que ' + minimumValue;
+				return false;
+			}
+			
+			// Initializes the maximum value if is undefined
+			maximumValue = (angular.isDefined(maximumValue))? maximumValue : input.value;
+			
+			if (input.value > maximumValue) {
+				// The input is too great
+				input.message = 'El valor de este campo debe ser menor o igual que ' + maximumValue;
+				return false;
+			}
+			
 			return true;
 		};
 		
 		/**
 		 * Determines whether an input is a valid string.
 		 * 
-		 * Receives the input, the minimum allowed length and, optionally, the
-		 * maximum allowed length.
+		 * Receives the input, the minimum length allowed and, optionally, the
+		 * maximum.
 		 */
 		_this.isValidString = function(input, minimumLength, maximumLength) {
-			// Initializes the maximum length if is undefined
-			maximumLength = (angular.isDefined(maximumLength)) ? maximumLength : input.value.length;
+			// Gets the input's length
+			var length = input.value.length;
 			
-			if (input.value.length < minimumLength) {
+			if (length < minimumLength) {
 				// The input is too short
-				input.message = '';
-				input.message += 'Este campo debe tener al menos ' + minimumLength + ' ';
-				input.message += (minimumLength === 1) ? 'caracter' : 'caracteres';
+				
+				if (length === 0) {
+					// The input is empty
+					input.message = 'Este campo es obligatorio';
+				} else {
+					// The input is not empty
+					input.message = 'Este campo debe tener al menos ' + minimumLength + ' caracteres';
+				}
+				
 				return false;
 			}
 			
-			if (input.value.length > maximumLength) {
+			// Initializes the maximum length if is undefined
+			maximumLength = (angular.isDefined(maximumLength))? maximumLength : length;
+			
+			if (length > maximumLength) {
 				// The input is too long
 				input.message = '';
 				input.message += 'Este campo puede tener a lo sumo ' + maximumLength + ' ';
-				input.message += (maximumLength === 1) ? 'caracter' : 'caracteres';
+				input.message += (maximumLength === 1)? 'caracter' : 'caracteres';
 				return false;
 			}
 			
-			// The input is a valid string
-			input.message = '';
 			return true;
 		};
+		
+		/**
+		 * Determines whether an input is an Input instance.
+		 * 
+		 * Receives the input.
+		 */
+		function isInputInstance(input) {
+			if (angular.isUndefined(input.validate)) {
+				// The input doesn't have a validate property
+				return false;
+			}
+			
+			if (! angular.isFunction(input.validate)) {
+				// The validate property is not a function
+				return false;
+			}
+			
+			return true;
+		}
 	}
 })();

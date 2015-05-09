@@ -20,9 +20,8 @@
 
 (function() {
 	angular.module('app.action.editAccount').factory('EditAccountAction', [
-		'authentication',
 		'inputValidator',
-		'InputModel',
+		'Input',
 		'server',
 		EditAccountActionFactory
 	]);
@@ -30,23 +29,24 @@
 	/**
 	 * Defines the EditAccountAction class.
 	 */
-	function EditAccountActionFactory(authentication, inputValidator, InputModel, server) {
+	function EditAccountActionFactory(inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
 		EditAccountAction.prototype.input;
 		
 		/**
+		 * The not-authenticated callback.
+		 */
+		EditAccountAction.prototype.notAuthenticatedCallback;
+		
+		/**
 		 * The start callback.
-		 * 
-		 * It is invoked at the start of the action.
 		 */
 		EditAccountAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
-		 * 
-		 * It is invoked when the action is successful.
 		 */
 		EditAccountAction.prototype.successCallback;
 		
@@ -54,13 +54,33 @@
 		 * Initializes an instance of the class.
 		 */
 		function EditAccountAction() {
-			// Initializes the callbacks
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.notAuthenticatedCallback = new Function();
+			this.successCallback = new Function();
 			
-			// Defines the input
+			// Initializes the input
 			this.input = {
-				// TODO: define
+				credentials: {
+					password: new Input(function() {
+						return inputValidator.isValidString(this, 1);
+					})
+				},
+				
+				emailAddress: new Input(function() {
+					return inputValidator.isEmailAddress(this);
+				}),
+				
+				firstName: new Input(function() {
+					return inputValidator.isValidString(this, 1, 48);
+				}),
+				
+				lastName: new Input(function() {
+					return inputValidator.isValidString(this, 1, 48);
+				}),
+				
+				gender: new Input(function() {
+					return inputValidator.isGender(this);
+				})
 			};
 		}
 		
@@ -76,16 +96,26 @@
 			// Invokes the start callback
 			this.startCallback();
 			
-			// Defines the input to be sent to the server
-			var input = {
-				// TODO: define
-			};
-			
 			// Edits the account
-			server.account.edit(input).then(function() {
-				// Refreshes the authentication state
-				authentication.refreshState();
+			server.account.edit({
+				credentials: {
+					password: this.input.credentials.password.value
+				},
 				
+				emailAddress: this.input.emailAddress.value,
+				firstName: this.input.firstName.value,
+				lastName: this.input.lastName.value,
+				gender: this.input.gender.value
+			}).then(function(output) {
+				if (! output.authenticated) {
+					// The user has not been authenticated
+
+					// Invokes the not-authenticated callback
+					this.notAuthenticatedCallback();
+
+					return;
+				}
+
 				// Invokes the success callback
 				this.successCallback();
 			}.bind(this));

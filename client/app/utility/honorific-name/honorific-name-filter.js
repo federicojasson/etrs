@@ -31,6 +31,11 @@
 		 * Receives the user.
 		 */
 		function filter(user) {
+			if (user === null) {
+				// The user is null
+				return '';
+			}
+			
 			// Gets the honorific title
 			var honorificTitle = getHonorificTitle(user);
 			
@@ -44,16 +49,11 @@
 		 * Receives the user.
 		 */
 		function getHonorificTitle(user) {
-			// Initializes the honorific title
-			var honorificTitle = '';
+			// Gets the honorific titles
+			var honorificTitles = getHonorificTitles();
 			
-			if (user.role === 'dr') {
-				// The user is a doctor
-				honorificTitle += 'Dr';
-			} else {
-				// The user is not a doctor
-				honorificTitle += 'Sr';
-			}
+			// Gets the honorific title
+			var honorificTitle = honorificTitles[user.role];
 			
 			if (user.gender === 'f') {
 				// The user is a woman
@@ -64,6 +64,17 @@
 			honorificTitle += '.';
 			
 			return honorificTitle;
+		}
+		
+		/**
+		 * Returns the honorific titles.
+		 */
+		function getHonorificTitles() {
+			return {
+				'ad': 'Sr',
+				'dr': 'Dr',
+				'op': 'Sr'
+			};
 		}
 		
 		// ---------------------------------------------------------------------

@@ -21,7 +21,7 @@
 (function() {
 	angular.module('app.action.resetPassword').factory('ResetPasswordAction', [
 		'inputValidator',
-		'InputModel',
+		'Input',
 		'server',
 		ResetPasswordActionFactory
 	]);
@@ -29,7 +29,7 @@
 	/**
 	 * Defines the ResetPasswordAction class.
 	 */
-	function ResetPasswordActionFactory(inputValidator, InputModel, server) {
+	function ResetPasswordActionFactory(inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -37,23 +37,16 @@
 		
 		/**
 		 * The not-authenticated callback.
-		 * 
-		 * It is invoked when the reset-password permission is not
-		 * authenticated.
 		 */
 		ResetPasswordAction.prototype.notAuthenticatedCallback;
 		
 		/**
 		 * The start callback.
-		 * 
-		 * It is invoked at the start of the action.
 		 */
 		ResetPasswordAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
-		 * 
-		 * It is invoked when the action is successful.
 		 */
 		ResetPasswordAction.prototype.successCallback;
 		
@@ -61,24 +54,23 @@
 		 * Initializes an instance of the class.
 		 */
 		function ResetPasswordAction() {
-			// Initializes the callbacks
-			this.notAuthenticatedCallback = function() {};
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.notAuthenticatedCallback = new Function();
+			this.successCallback = new Function();
 			
-			// Defines the input
+			// Initializes the input
 			this.input = {
 				credentials: {
-					id: new InputModel(),
-					password: new InputModel()
+					id: new Input(),
+					password: new Input()
 				},
 				
-				password: new InputModel(function() {
-					return inputValidator.isValidPassword(this);
+				password: new Input(function() {
+					return inputValidator.isPassword(this);
 				}),
 				
-				passwordConfirmation: new InputModel(function() {
-					return inputValidator.isValidPasswordConfirmation(this.input.passwordConfirmation, this.input.password.value);
+				passwordConfirmation: new Input(function() {
+					return inputValidator.isPasswordConfirmation(this.input.passwordConfirmation, this.input.password.value);
 				}.bind(this))
 			};
 		}
@@ -95,20 +87,17 @@
 			// Invokes the start callback
 			this.startCallback();
 			
-			// Defines the input to be sent to the server
-			var input = {
+			// Resets the user's password
+			server.account.resetPassword({
 				credentials: {
 					id: this.input.credentials.id.value,
 					password: this.input.credentials.password.value
 				},
 				
 				password: this.input.password.value
-			};
-			
-			// Resets the user's password
-			server.account.resetPassword(input).then(function(output) {
+			}).then(function(output) {
 				if (! output.authenticated) {
-					// The reset-password permission has not been authenticated
+					// The password-reset permission has not been authenticated
 					
 					// Invokes the not-authenticated callback
 					this.notAuthenticatedCallback();

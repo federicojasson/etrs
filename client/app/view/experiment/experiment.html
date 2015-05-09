@@ -1,0 +1,77 @@
+<a ui-sref="experiments" class="btn btn-link">
+	Volver a <b>Experimentos</b>
+</a>
+
+<h1>{{ experiment.name }}</h1>
+
+<button
+	ng-click="deleteExperimentAction.execute()"
+	type="button"
+	class="btn btn-danger"
+>
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editExperiment({
+		id: experiment.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Nombre</dt>
+		<dd>{{ experiment.name }}</dd>
+		
+		<dt>Línea de comandos</dt>
+		<dd>{{ experiment.commandLine }}</dd>
+		
+		<dt>Nombre del archivo de salida</dt>
+		<dd>{{ experiment.outputName }}</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<event-box
+		date-time="experiment.creationDateTime"
+		label="Creación"
+		user="experiment.creator"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="experiment.lastEditionDateTime"
+		label="Última edición"
+		user="experiment.lastEditor"
+		class="pull-right"
+	></event-box>
+</div>
+
+<hr>
+
+<div ng-if="experiment.files.length > 0">
+	<h2>Archivos</h2>
+	
+	<div class="row">
+		<file-handler
+			ng-repeat="file in experiment.files | reverse"
+			file="file"
+			class="col-sm-4"
+		></file-handler>
+	</div>
+</div>

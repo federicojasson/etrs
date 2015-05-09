@@ -20,6 +20,6 @@
 
 (function() {
 	angular.module('app.inputValidator', [
-		'app.inputValidator.inputModel'
+		'app.inputValidator.input'
 	]);
 })();

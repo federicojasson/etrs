@@ -31,7 +31,7 @@
 		var _this = this;
 		
 		/**
-		 * Returns the current dialog.
+		 * Returns the open dialog.
 		 */
 		_this.get = function() {
 			return dialog.get();

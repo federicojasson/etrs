@@ -1,0 +1,41 @@
+<div class="data-type-input">
+	<div
+		ng-if="dataTypeInput.dataTypeInput.dataType === 'boolean' || dataTypeInput.dataTypeInput.dataType === 'integer_fix_values'"
+		ng-class="{
+			'has-error': ! input.valid
+		}"
+		popover="{{ input.message }}"
+		popover-append-to-body="true"
+		popover-placement="left"
+		popover-trigger="mouseenter"
+	>
+		<label ng-repeat="(label, value) in dataTypeInput.dataTypeInput.definition" class="control-label">
+			<input
+				ng-model="input.value"
+				ng-value="{{ value }}"
+				type="radio"
+				value="{{ value }}"
+			>
+			{{ label }}
+		</label>
+	</div>
+	
+	<div
+		ng-if="dataTypeInput.dataTypeInput.dataType === 'integer_range'"
+		ng-class="{
+			'has-error': ! input.valid
+		}"
+	>
+		<input
+			ng-model="input.value"
+			popover="{{ input.message }}"
+			popover-append-to-body="true"
+			popover-placement="left"
+			popover-trigger="focus"
+			integer
+			type="text"
+			placeholder="Valor [{{ dataTypeInput.dataTypeInput.definition.min }}, {{ dataTypeInput.dataTypeInput.definition.max }}]"
+			class="form-control input-sm"
+		>
+	</div>
+</div>

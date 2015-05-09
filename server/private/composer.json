@@ -1,0 +1,12 @@
+{
+	"config": {
+		"vendor-dir": "vendors"
+	},
+	
+	"require": {
+		"beberlei/DoctrineExtensions": "*",
+		"doctrine/orm": "*",
+		"phpmailer/phpmailer": "*",
+		"slim/slim": "*"
+	}
+}

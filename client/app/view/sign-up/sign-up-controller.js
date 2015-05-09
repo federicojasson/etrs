@@ -36,15 +36,12 @@
 		var _this = this;
 		
 		/**
-		 * Indicates whether the view is ready, considering the local factors.
-		 * 
-		 * Since it considers only the local factors, it doesn't necessarily
-		 * determine on its own whether the view is ready.
+		 * Indicates whether the view is ready.
 		 */
 		var ready = false;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/view/sign-up/sign-up.html';
@@ -65,35 +62,6 @@
 		};
 		
 		/**
-		 * Authenticates the sign-up permission.
-		 * 
-		 * Receives the sign-up permission's ID and password.
-		 */
-		function authenticateSignUpPermission(id, password) {
-			// Defines the input to be sent to the server
-			var input = {
-				credentials: {
-					id: id,
-					password: password
-				}
-			};
-			
-			// Authenticates the sign-up permission
-			server.account.signUp.authenticate(input).then(function(output) {
-				if (! output.authenticated) {
-					// The sign-up permission has not been authenticated
-					
-					// Redirects the user to the home route
-					router.redirect('/');
-					
-					return;
-				}
-				
-				ready = true;
-			});
-		}
-		
-		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
@@ -101,87 +69,100 @@
 			var id = $stateParams.id;
 			var password = $stateParams.password;
 			
-			// Initializes the sign-up action
-			var signUpAction = new SignUpAction();
-			signUpAction.notAuthenticatedCallback = onNotAuthenticated;
-			signUpAction.notAvailableCallback = onNotAvailable;
-			signUpAction.startCallback = onStart;
-			signUpAction.successCallback = onSuccess;
-			signUpAction.input.credentials.id.value = id;
-			signUpAction.input.credentials.password.value = password;
+			// Authenticates the sign-up permission
+			server.permission.signUp.authenticate({
+				credentials: {
+					id: id,
+					password: password
+				}
+			}).then(function(output) {
+				if (! output.authenticated) {
+					// The sign-up permission has not been authenticated
+					
+					// Redirects the user to the home state
+					router.redirect('home');
+					
+					// Opens an error dialog
+					dialog.openError(
+						'Credenciales rechazadas',
+						'El permiso para registrarse ha sido rechazado.'
+					);
+					
+					return;
+				}
+				
+				// Initializes actions
+				initializeSignUpAction(id, password);
+				
+				ready = true;
+			});
+		}
+		
+		/**
+		 * Initializes the sign-up action.
+		 * 
+		 * Receives the sign-up permission's ID and password.
+		 */
+		function initializeSignUpAction(id, password) {
+			// Initializes the action
+			var action = new SignUpAction();
 			
-			// Includes the actions
-			$scope.action = {
-				signUp: signUpAction
+			// Sets inputs' initial values
+			action.input.credentials.id.value = id;
+			action.input.credentials.password.value = password;
+			
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
 			};
 			
-			// Authenticates the sign-up permission
-			authenticateSignUpPermission(id, password);
-		}
-		
-		/**
-		 * Invoked when the sign-up permission is not authenticated during the
-		 * execution of the sign-up action.
-		 */
-		function onNotAuthenticated() {
-			ready = true;
+			action.notAuthenticatedCallback = function() {
+				// Redirects the user to the home state
+				router.redirect('home');
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Credenciales rechazadas',
+					'El permiso para registrarse ha expirado.'
+				);
+			};
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Credenciales rechazadas',
-				'El permiso para registrarse ha expirado.',
-				function() {
-					// Redirects the user to the home route
-					router.redirect('/');
-				}
-			);
-		}
-		
-		/**
-		 * Invoked when the user ID is not available during the execution of the
-		 * sign-up action.
-		 */
-		function onNotAvailable() {
-			ready = true;
+			action.notAvailableCallback = function() {
+				// Resets inputs' values
+				action.input.id.value = '';
+				
+				// Opens an error dialog
+				dialog.openError(
+					'Nombre de usuario no disponible',
+					'El nombre de usuario "' + action.input.id.value + '" ya se encuentra en uso.\n' +
+					'Ingrese otro.'
+				);
+				
+				ready = true;
+			};
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Nombre de usuario no disponible',
-				'El nombre de usuario elegido ya se encuentra en uso.\n' +
-				'Ingrese otro.'
-			);
-		}
-		
-		/**
-		 * Invoked at the start of the sign-up action.
-		 */
-		function onStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the sign-up action is successful.
-		 */
-		function onSuccess() {
-			ready = true;
+			action.successCallback = function() {
+				// Redirects the user to the home state
+				router.redirect('home');
+				
+				// Opens an information dialog
+				dialog.openInformation(
+					'Cuenta creada',
+					'Su cuenta ha sido creada.\n' +
+					'No revele nunca su contraseña.\n' +
+					'\n' +
+					'La seguridad de la información es responsabilidad de todos.'
+				);
+			};
 			
-			// Opens an information dialog
-			dialog.openInformation(
-				'Usuario registrado',
-				'Su cuenta de usuario ha sido registrada.\n' +
-				'\n' +
-				'No revele nunca su contraseña.\n' +
-				'La seguridad de la información es responsabilidad de todos.',
-				function() {
-					// Redirects the user to the home route
-					router.redirect('/');
-				}
-			);
+			// Includes the action
+			$scope.signUpAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the view
+		// Initializes the controller
 		initialize();
 	}
 })();

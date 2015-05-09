@@ -21,23 +21,22 @@
 (function() {
 	angular.module('app.dialog').service('dialog', [
 		'$modal',
-		'Dialog',
 		dialogService
 	]);
 	
 	/**
 	 * Manages the dialogs.
 	 */
-	function dialogService($modal, Dialog) {
+	function dialogService($modal) {
 		var _this = this;
 		
 		/**
-		 * The current dialog.
+		 * The open dialog.
 		 */
 		var dialog = null;
 		
 		/**
-		 * Returns the current dialog.
+		 * Returns the open dialog.
 		 */
 		_this.get = function() {
 			return dialog;
@@ -46,49 +45,66 @@
 		/**
 		 * Opens a confirmation dialog.
 		 * 
-		 * Receives a title, a message and, optionally, a success callback to be
-		 * invoked when the dialog is closed and an error callback to be invoked
-		 * when the dialog is dismissed.
+		 * Receives the title, the message and, optionally, a callback to be
+		 * invoked when the dialog is closed and another one to be invoked when
+		 * it is dismissed.
 		 */
-		_this.openConfirmation = function(title, message, successCallback, errorCallback) {
-			open('confirmation', title, message, successCallback, errorCallback);
+		_this.openConfirmation = function(title, message, closedCallback, dismissedCallback) {
+			open('confirmation', title, message, closedCallback, dismissedCallback);
+		};
+		
+		/**
+		 * Opens an error dialog.
+		 * 
+		 * Receives the title, the message and, optionally, a callback to be
+		 * invoked when the dialog is closed or dismissed.
+		 */
+		_this.openError = function(title, message, callback) {
+			open('error', title, message, callback, callback);
 		};
 		
 		/**
 		 * Opens an information dialog.
 		 * 
-		 * Receives a title, a message and, optionally, a callback to be invoked
-		 * when the dialog is closed or dismissed.
+		 * Receives the title, the message and, optionally, a callback to be
+		 * invoked when the dialog is closed or dismissed.
 		 */
 		_this.openInformation = function(title, message, callback) {
 			open('information', title, message, callback, callback);
 		};
 		
 		/**
-		 * Opens a dialog.
-		 * 
-		 * Receives a title, a message and, optionally, a success callback to be
-		 * invoked when the dialog is closed and an error callback to be invoked
-		 * when the dialog is dismissed.
+		 * Returns the settings.
 		 */
-		function open(type, title, message, successCallback, errorCallback) {
-			// Initializes the callbacks if are undefined
-			successCallback = (angular.isDefined(successCallback)) ? successCallback : function() {};
-			errorCallback = (angular.isDefined(errorCallback)) ? errorCallback : function() {};
-			
-			// Initializes the dialog
-			dialog = new Dialog(type, title, message);
-			
-			// Defines the dialog parameters
-			var parameters = {
+		function getSettings() {
+			return {
 				backdrop: 'static',
 				controller: 'DialogController',
 				controllerAs: 'dialog',
 				templateUrl: 'app/dialog/dialog.html'
 			};
+		}
+		
+		/**
+		 * Opens a dialog.
+		 * 
+		 * Receives the type, the title, the message and, optionally, a callback
+		 * to be invoked when the dialog is closed and another one to be invoked
+		 * when it is dismissed.
+		 */
+		function open(type, title, message, closedCallback, dismissedCallback) {
+			// Initializes the dialog
+			dialog = {
+				type: type,
+				title: title,
+				message: message
+			};
+			
+			// Gets the settings
+			var settings = getSettings();
 			
 			// Opens the dialog
-			$modal.open(parameters).result.then(successCallback, errorCallback);
+			$modal.open(settings).result.then(closedCallback, dismissedCallback);
 		}
 	}
 })();

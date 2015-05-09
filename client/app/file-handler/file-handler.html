@@ -1,0 +1,116 @@
+<div class="clearfix file-handler">
+	<div ng-if="fileHandler.ready">
+		<div class="row">
+			<div class="col-sm-3">
+				<div
+					ng-class="fileIconClass"
+					class="file-icon"
+				></div>
+			</div>
+			
+			<div class="col-sm-9">
+				<div ng-if="fileHandler.editing">
+					<form
+						ng-submit="editFileAction.execute()"
+						novalidate
+						class="file-handler-form"
+					>
+						<div
+							ng-class="{
+								'has-error': ! editFileAction.input.name.valid
+							}"
+							class="form-group"
+						>
+							<input
+								ng-model="editFileAction.input.name.value"
+								popover="{{ editFileAction.input.name.message }}"
+								popover-append-to-body="true"
+								popover-placement="left"
+								popover-trigger="focus"
+								file-name
+								type="text"
+								placeholder="Nombre"
+								class="form-control input-sm"
+							>
+						</div>
+
+						<button
+							ng-click="fileHandler.disableEdition()"
+							type="button"
+							class="btn btn-link inline"
+						>
+							<span class="glyphicon glyphicon-remove"></span>
+
+							<span class="icon-text">
+								Cancelar
+							</span>
+						</button>
+
+						<button type="submit" class="btn btn-link inline">
+							<span class="glyphicon glyphicon-ok"></span>
+
+							<span class="icon-text">
+								Aplicar
+							</span>
+						</button>
+					</form>
+				</div>
+				
+				<div ng-if="! fileHandler.editing">
+					<div ng-if="removable">
+						<button
+							ng-click="onRemove()"
+							type="button"
+							class="close"
+						>
+							×
+						</button>
+					</div>
+					
+					<div title="{{ file.name }}" class="file-name-text">
+						{{ file.name }}
+					</div>
+					
+					<div title="MD5: {{ file.hash }}" class="hash-text">
+						<b>MD5</b>: {{ file.hash }}
+					</div>
+					
+					<form
+						action="/server/file/download"
+						method="POST"
+						class="file-handler-form"
+					>
+						<input type="hidden" name="id" value="{{ file.id }}">
+						
+						<button type="submit" class="btn btn-link inline">
+							<span class="glyphicon glyphicon-download-alt"></span>
+
+							<span class="icon-text">
+								Descargar
+							</span>
+						</button>
+						
+						<button
+							ng-if="account.getSignedInUser().role !== 'dr'"
+							ng-click="fileHandler.enableEdition()"
+							type="button"
+							class="btn btn-link inline"
+						>
+							<span class="glyphicon glyphicon-pencil"></span>
+							
+							<span class="icon-text">
+								Renombrar
+							</span>
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div ng-if="! fileHandler.ready">
+		<div class="loading-text-small text-center">
+			Cargando…
+		</div>
+	</div>
+</div>

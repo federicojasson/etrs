@@ -20,8 +20,9 @@
 
 (function() {
 	angular.module('app.action.requestSignUp').factory('RequestSignUpAction', [
+		'dialog',
 		'inputValidator',
-		'InputModel',
+		'Input',
 		'server',
 		RequestSignUpActionFactory
 	]);
@@ -29,7 +30,7 @@
 	/**
 	 * Defines the RequestSignUpAction class.
 	 */
-	function RequestSignUpActionFactory(inputValidator, InputModel, server) {
+	function RequestSignUpActionFactory(dialog, inputValidator, Input, server) {
 		/**
 		 * The input.
 		 */
@@ -37,22 +38,16 @@
 		
 		/**
 		 * The not-authenticated callback.
-		 * 
-		 * It is invoked when the user is not authenticated.
 		 */
 		RequestSignUpAction.prototype.notAuthenticatedCallback;
 		
 		/**
 		 * The start callback.
-		 * 
-		 * It is invoked at the start of the action.
 		 */
 		RequestSignUpAction.prototype.startCallback;
 		
 		/**
 		 * The success callback.
-		 * 
-		 * It is invoked when the action is successful.
 		 */
 		RequestSignUpAction.prototype.successCallback;
 		
@@ -60,30 +55,29 @@
 		 * Initializes an instance of the class.
 		 */
 		function RequestSignUpAction() {
-			// Initializes the callbacks
-			this.notAuthenticatedCallback = function() {};
-			this.startCallback = function() {};
-			this.successCallback = function() {};
+			this.startCallback = new Function();
+			this.notAuthenticatedCallback = new Function();
+			this.successCallback = new Function();
 			
-			// Defines the input
+			// Initializes the input
 			this.input = {
 				credentials: {
-					password: new InputModel(function() {
+					password: new Input(function() {
 						return inputValidator.isValidString(this, 1);
 					})
 				},
-
+				
 				recipient: {
-					fullName: new InputModel(function() {
+					fullName: new Input(function() {
 						return inputValidator.isValidString(this, 0, 97);
 					}),
 					
-					emailAddress: new InputModel(function() {
+					emailAddress: new Input(function() {
 						return inputValidator.isEmailAddress(this);
 					})
 				},
-
-				userRole: new InputModel(function() {
+				
+				userRole: new Input(function() {
 					return inputValidator.isUserRole(this);
 				})
 			};
@@ -98,37 +92,42 @@
 				return;
 			}
 			
-			// Invokes the start callback
-			this.startCallback();
-			
-			// Defines the input to be sent to the server
-			var input = {
-				credentials: {
-					password: this.input.credentials.password.value
-				},
+			// Opens a confirmation dialog
+			dialog.openConfirmation(
+				'Confirmar invitación',
+				'Está a punto de enviar una invitación a ' + this.input.recipient.emailAddress.value + '.\n' +
+				'¿Está seguro de que esa es la dirección de correo electrónico del invitado?',
+				function() {
+					// Invokes the start callback
+					this.startCallback();
 
-				recipient: {
-					fullName: this.input.recipient.fullName.value,
-					emailAddress: this.input.recipient.emailAddress.value
-				},
+					// Requests the sign up
+					server.permission.signUp.request({
+						credentials: {
+							password: this.input.credentials.password.value
+						},
 
-				userRole: this.input.userRole.value
-			};
-			
-			// Requests a sign-up permission
-			server.account.signUp.request(input).then(function(output) {
-				if (! output.authenticated) {
-					// The user has not been authenticated
-					
-					// Invokes the not-authenticated callback
-					this.notAuthenticatedCallback();
-					
-					return;
-				}
-				
-				// Invokes the success callback
-				this.successCallback();
-			}.bind(this));
+						recipient: {
+							fullName: this.input.recipient.fullName.value,
+							emailAddress: this.input.recipient.emailAddress.value
+						},
+
+						userRole: this.input.userRole.value
+					}).then(function(output) {
+						if (! output.authenticated) {
+							// The user has not been authenticated
+
+							// Invokes the not-authenticated callback
+							this.notAuthenticatedCallback();
+
+							return;
+						}
+
+						// Invokes the success callback
+						this.successCallback();
+					}.bind(this));
+				}.bind(this)
+			);
 		};
 		
 		// ---------------------------------------------------------------------

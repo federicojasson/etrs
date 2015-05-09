@@ -33,7 +33,7 @@
 		var _this = this;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/layout/error/error.html';
@@ -57,14 +57,14 @@
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary controllers
+			// Includes controllers
 			$scope.error = $controller('ErrorController');
 			$scope.router = $controller('RouterController');
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the layout
+		// Initializes the controller
 		initialize();
 	}
 })();

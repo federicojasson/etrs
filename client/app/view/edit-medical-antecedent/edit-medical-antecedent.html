@@ -1,0 +1,64 @@
+<a
+	ui-sref="medicalAntecedent({
+		id: medicalAntecedent.id
+	})"
+	class="btn btn-link"
+>
+	Volver a <b>Antecedente médico</b>
+</a>
+
+<h1>{{ medicalAntecedent.name }}</h1>
+
+<p>
+	El siguiente formulario le permite editar un antecedente médico.
+</p>
+
+<p>
+	<strong>
+		Los cambios realizados en el antecedente médico se verán reflejados
+		automáticamente en todo el sistema.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="editMedicalAntecedentAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Antecedente médico
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos del antecedente médico:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! editMedicalAntecedentAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="editMedicalAntecedentAction.input.name.value"
+					popover="{{ editMedicalAntecedentAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-warning pull-right">
+				Editar antecedente médico
+			</button>
+		</div>
+	</form>
+</div>

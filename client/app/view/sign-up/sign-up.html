@@ -1,11 +1,11 @@
 <div class="row">
 	<div class="col-sm-3">
-		<div class="unlocked-image"></div>
+		<div class="user-image"></div>
 	</div>
 	
 	<div class="col-sm-7 col-sm-offset-2">
 		<div class="clearfix well">
-			<form ng-submit="action.signUp.execute()" novalidate>
+			<form ng-submit="signUpAction.execute()" novalidate>
 				<fieldset>
 					<legend>
 						<span class="glyphicon glyphicon-user"></span>
@@ -21,17 +21,17 @@
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signUp.input.firstName.valid
+							'has-error': ! signUpAction.input.firstName.valid
 						}"
 						class="form-group"
 					>
 						<input
-							ng-model="action.signUp.input.firstName.value"
-							popover="{{ action.signUp.input.firstName.message }}"
+							ng-model="signUpAction.input.firstName.value"
+							popover="{{ signUpAction.input.firstName.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
-							shrink
+							line
 							type="text"
 							placeholder="Nombre"
 							class="form-control"
@@ -40,17 +40,17 @@
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signUp.input.lastName.valid
+							'has-error': ! signUpAction.input.lastName.valid
 						}"
 						class="form-group"
 					>
 						<input
-							ng-model="action.signUp.input.lastName.value"
-							popover="{{ action.signUp.input.lastName.message }}"
+							ng-model="signUpAction.input.lastName.value"
+							popover="{{ signUpAction.input.lastName.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
-							shrink
+							line
 							type="text"
 							placeholder="Apellido"
 							class="form-control"
@@ -59,20 +59,19 @@
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signUp.input.gender.valid
+							'has-error': ! signUpAction.input.gender.valid
 						}"
 						class="form-group"
 					>
 						<select
-							ng-model="action.signUp.input.gender.value"
-							popover="{{ action.requestSignUp.input.gender.message }}"
+							ng-model="signUpAction.input.gender.value"
+							popover="{{ signUpAction.input.gender.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
 							class="form-control"
 						>
-							<option value="">Sexo</option>
-							<option disabled></option>
+							<option value="" disabled>Sexo</option>
 							<option value="f">Mujer</option>
 							<option value="m">Hombre</option>
 						</select>
@@ -81,26 +80,26 @@
 				
 				<fieldset>
 					<legend>
-						<span class="glyphicon glyphicon-lock"></span>
+						<span class="glyphicon glyphicon-globe"></span>
 						
 						<span class="icon-text">
-							Credenciales
+							Nombre de usuario
 						</span>
 					</legend>
 					
 					<div class="form-group">
-						Ingrese un nombre de usuario, una dirección de correo electrónico y una contraseña:
+						Ingrese un nombre de usuario:
 					</div>
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signUp.input.id.valid
+							'has-error': ! signUpAction.input.id.valid
 						}"
 						class="form-group"
 					>
 						<input
-							ng-model="action.signUp.input.id.value"
-							popover="{{ action.signUp.input.id.message }}"
+							ng-model="signUpAction.input.id.value"
+							popover="{{ signUpAction.input.id.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
@@ -109,16 +108,30 @@
 							class="form-control"
 						>
 					</div>
+				</fieldset>
+				
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-envelope"></span>
+						
+						<span class="icon-text">
+							Dirección de correo electrónico
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						Ingrese una dirección de correo electrónico:
+					</div>
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signUp.input.emailAddress.valid
+							'has-error': ! signUpAction.input.emailAddress.valid
 						}"
 						class="form-group"
 					>
 						<input
-							ng-model="action.signUp.input.emailAddress.value"
-							popover="{{ action.signUp.input.emailAddress.message }}"
+							ng-model="signUpAction.input.emailAddress.value"
+							popover="{{ signUpAction.input.emailAddress.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
@@ -127,16 +140,30 @@
 							class="form-control"
 						>
 					</div>
+				</fieldset>
+				
+				<fieldset>
+					<legend>
+						<span class="glyphicon glyphicon-lock"></span>
+						
+						<span class="icon-text">
+							Contraseña
+						</span>
+					</legend>
+					
+					<div class="form-group">
+						Ingrese una contraseña:
+					</div>
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signUp.input.password.valid
+							'has-error': ! signUpAction.input.password.valid
 						}"
 						class="form-group"
 					>
 						<input
-							ng-model="action.signUp.input.password.value"
-							popover="{{ action.signUp.input.password.message }}"
+							ng-model="signUpAction.input.password.value"
+							popover="{{ signUpAction.input.password.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"
@@ -148,13 +175,13 @@
 					
 					<div
 						ng-class="{
-							'has-error': ! action.signUp.input.passwordConfirmation.valid
+							'has-error': ! signUpAction.input.passwordConfirmation.valid
 						}"
 						class="form-group"
 					>
 						<input
-							ng-model="action.signUp.input.passwordConfirmation.value"
-							popover="{{ action.signUp.input.passwordConfirmation.message }}"
+							ng-model="signUpAction.input.passwordConfirmation.value"
+							popover="{{ signUpAction.input.passwordConfirmation.message }}"
 							popover-append-to-body="true"
 							popover-placement="left"
 							popover-trigger="focus"

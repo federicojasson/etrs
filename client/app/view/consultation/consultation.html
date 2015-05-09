@@ -1,0 +1,223 @@
+<a
+	ui-sref="patient({
+		id: consultation.patient
+	})"
+	class="btn btn-link"
+>
+	Volver a <b>Paciente</b>
+</a>
+
+<h1>Consulta médica del {{ consultation.date | date: 'dd/MM/yyyy' }}</h1>
+
+<button
+	ng-if="account.getSignedInUser().role !== 'op'"
+	ng-click="deleteConsultationAction.execute()"
+	type="button"
+	class="btn btn-danger"
+>
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ng-if="account.getSignedInUser().role !== 'op'"
+	ui-sref="editConsultation({
+		id: consultation.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<a
+	ng-if="account.getSignedInUser().role !== 'dr'"
+	ui-sref="newStudy({
+		id: consultation.id
+	})"
+	class="btn btn-success"
+>
+	<span class="glyphicon glyphicon-plus"></span>
+	
+	<span class="icon-text">
+		Nuevo estudio
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Fecha</dt>
+		<dd>{{ consultation.date | date: 'longDate' }}</dd>
+		
+		<dt ng-if="consultation.presentingProblem.trim() !== ''">
+			Motivo de la consulta / Síntomas
+		</dt>
+		<dd ng-if="consultation.presentingProblem.trim() !== ''">
+			<pre>{{ consultation.presentingProblem }}</pre>
+		</dd>
+		
+		<dt ng-if="consultation.comments.trim() !== ''">
+			Observaciones
+		</dt>
+		<dd ng-if="consultation.comments.trim() !== ''">
+			<pre>{{ consultation.comments }}</pre>
+		</dd>
+		
+		<dt ng-if="consultation.clinicalImpression !== null">
+			Impresión clínica
+		</dt>
+		<dd ng-if="consultation.clinicalImpression !== null">
+			{{ consultation.clinicalImpression.name }}
+		</dd>
+		
+		<dt ng-if="consultation.diagnosis !== null">
+			Diagnóstico
+		</dt>
+		<dd ng-if="consultation.diagnosis !== null">
+			{{ consultation.diagnosis.name }}
+		</dd>
+		
+		<dt ng-if="consultation.medicalAntecedents.length > 0">
+			Antecedentes médicos
+		</dt>
+		<dd ng-if="consultation.medicalAntecedents.length > 0">
+			<div ng-repeat="medicalAntecedent in consultation.medicalAntecedents">
+				- {{ medicalAntecedent.name }}
+			</div>
+		</dd>
+		
+		<dt ng-if="consultation.medicines.length > 0">
+			Medicación concomitante
+		</dt>
+		<dd ng-if="consultation.medicines.length > 0">
+			<div ng-repeat="medicine in consultation.medicines">
+				- {{ medicine.name }}
+			</div>
+		</dd>
+		
+		<dt ng-if="consultation.laboratoryTestResults.length > 0">
+			Exámenes de laboratorio
+		</dt>
+		<dd ng-if="consultation.laboratoryTestResults.length > 0">
+			<div ng-repeat="laboratoryTestResult in consultation.laboratoryTestResults">
+				- {{ laboratoryTestResult.laboratoryTest.name }}: {{ laboratoryTestResult.value | dataTypeInput: laboratoryTestResult.laboratoryTest.dataTypeDefinition }}
+			</div>
+		</dd>
+		
+		<dt ng-if="consultation.imagingTestResults.length > 0">
+			Exámenes de imágenes
+		</dt>
+		<dd ng-if="consultation.imagingTestResults.length > 0">
+			<div ng-repeat="imagingTestResult in consultation.imagingTestResults">
+				- {{ imagingTestResult.imagingTest.name }}: {{ imagingTestResult.value | dataTypeInput: imagingTestResult.imagingTest.dataTypeDefinition }}
+			</div>
+		</dd>
+		
+		<dt ng-if="consultation.cognitiveTestResults.length > 0">
+			Exámenes cognitivos
+		</dt>
+		<dd ng-if="consultation.cognitiveTestResults.length > 0">
+			<div ng-repeat="cognitiveTestResult in consultation.cognitiveTestResults">
+				- {{ cognitiveTestResult.cognitiveTest.name }}: {{ cognitiveTestResult.value | dataTypeInput: cognitiveTestResult.cognitiveTest.dataTypeDefinition }}
+			</div>
+		</dd>
+		
+		<dt ng-if="consultation.treatments.length > 0">
+			Tratamientos
+		</dt>
+		<dd ng-if="consultation.treatments.length > 0">
+			<div ng-repeat="treatment in consultation.treatments">
+				- {{ treatment.name }}
+			</div>
+		</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<event-box
+		date-time="consultation.creationDateTime"
+		label="Creación"
+		user="consultation.creator"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="consultation.lastEditionDateTime"
+		label="Última edición"
+		user="consultation.lastEditor"
+		class="pull-right"
+	></event-box>
+</div>
+
+<hr>
+
+<div ng-if="consultation.studies.length > 0">
+	<h2>Estudios</h2>
+	
+	<p>
+		A continuación se muestran los estudios de la consulta médica.
+	</p>
+	
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th class="col-sm-3">
+					Experimento
+				</th>
+				
+				<th class="col-sm-3">
+					Estado
+				</th>
+				
+				<th class="col-sm-3">
+					Creación
+				</th>
+				
+				<th class="col-sm-3">
+					Última edición
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr
+				ng-repeat="study in consultation.studies | reverse"
+				ng-class="{
+					'info': study.state === 1,
+					'success': study.state === 2,
+					'danger': study.state === 3
+				}"
+				ui-sref="study({
+					id: study.id
+				})"
+				table-row-link
+			>
+				<td>
+					{{ study.experiment.name }}
+				</td>
+				
+				<td>
+					{{ study | state }}
+				</td>
+				
+				<td title="{{ study.creationDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
+					{{ study.creationDateTime | date: 'longDate' }}
+				</td>
+				
+				<td title="{{ study.lastEditionDateTime | date: 'EEEE, d \'de\' MMMM \'de\' y, \'a las\' HH:mm' }}">
+					{{ study.lastEditionDateTime | date: 'longDate' }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

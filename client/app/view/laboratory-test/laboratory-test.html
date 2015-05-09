@@ -1,0 +1,60 @@
+<a ui-sref="laboratoryTests" class="btn btn-link">
+	Volver a <b>Exámenes de laboratorio</b>
+</a>
+
+<h1>{{ laboratoryTest.name }}</h1>
+
+<button
+	ng-click="deleteLaboratoryTestAction.execute()"
+	type="button"
+	class="btn btn-danger"
+>
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editLaboratoryTest({
+		id: laboratoryTest.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Nombre</dt>
+		<dd>{{ laboratoryTest.name }}</dd>
+		
+		<dt>Definición del tipo de dato</dt>
+		<dd>{{ laboratoryTest.dataTypeDefinition }}</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<event-box
+		date-time="laboratoryTest.creationDateTime"
+		label="Creación"
+		user="laboratoryTest.creator"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="laboratoryTest.lastEditionDateTime"
+		label="Última edición"
+		user="laboratoryTest.lastEditor"
+		class="pull-right"
+	></event-box>
+</div>

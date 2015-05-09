@@ -28,7 +28,7 @@
 		var _this = this;
 		
 		/**
-		 * The registered menus.
+		 * The registered menus, organized by user role.
 		 */
 		var menus = {
 			ad: [],
@@ -37,16 +37,20 @@
 		};
 		
 		/**
-		 * Initializes the navigation-bar service.
+		 * Returns the navigation-bar service.
 		 */
 		_this.$get = [
-			'authentication',
-			function(authentication) {
+			'account',
+			function(account) {
 				// Initializes the navigation-bar service
-				var navigationBar = new navigationBarService(authentication);
+				var navigationBar = new navigationBarService(account);
 
 				// Adds the menus
-				for (var userRole in menus) { if (! menus.hasOwnProperty(userRole)) continue;
+				for (var userRole in menus) {
+					if (! menus.hasOwnProperty(userRole)) {
+						continue;
+					}
+
 					var userRoleMenus = menus[userRole];
 					for (var i = 0; i < userRoleMenus.length; i++) {
 						navigationBar.addMenu(userRoleMenus[i], userRole);
@@ -68,13 +72,13 @@
 	}
 	
 	/**
-	 * Manages the navigation-bar.
+	 * Manages the navigation bar.
 	 */
-	function navigationBarService(authentication) {
+	function navigationBarService(account) {
 		var _this = this;
 		
 		/**
-		 * The menus.
+		 * The menus, organized by user role.
 		 */
 		var menus = {
 			ad: [],
@@ -96,9 +100,9 @@
 		 */
 		_this.getMenus = function() {
 			// Gets the signed-in user's role
-			var userRole = authentication.getSignedInUser().role;
+			var userRole = account.getSignedInUser().role;
 			
-			// Returns the menus
+			// Gets the menus corresponding to the user role
 			return menus[userRole];
 		};
 	}

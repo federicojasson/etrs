@@ -31,10 +31,10 @@
 		var _this = this;
 		
 		/**
-		 * Reloads the page.
+		 * Reloads the application.
 		 */
 		_this.reload = function() {
-			return router.reload();
+			router.reload();
 		};
 	}
 })();

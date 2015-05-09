@@ -1,0 +1,57 @@
+<a ui-sref="diagnoses" class="btn btn-link">
+	Volver a <b>Diagnósticos</b>
+</a>
+
+<h1>{{ diagnosis.name }}</h1>
+
+<button
+	ng-click="deleteDiagnosisAction.execute()"
+	type="button"
+	class="btn btn-danger"
+>
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editDiagnosis({
+		id: diagnosis.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Nombre</dt>
+		<dd>{{ diagnosis.name }}</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<event-box
+		date-time="diagnosis.creationDateTime"
+		label="Creación"
+		user="diagnosis.creator"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="diagnosis.lastEditionDateTime"
+		label="Última edición"
+		user="diagnosis.lastEditor"
+		class="pull-right"
+	></event-box>
+</div>

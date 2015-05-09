@@ -1,0 +1,57 @@
+<a ui-sref="medicalAntecedents" class="btn btn-link">
+	Volver a <b>Antecedentes médicos</b>
+</a>
+
+<h1>{{ medicalAntecedent.name }}</h1>
+
+<button
+	ng-click="deleteMedicalAntecedentAction.execute()"
+	type="button"
+	class="btn btn-danger"
+>
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editMedicalAntecedent({
+		id: medicalAntecedent.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Nombre</dt>
+		<dd>{{ medicalAntecedent.name }}</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<event-box
+		date-time="medicalAntecedent.creationDateTime"
+		label="Creación"
+		user="medicalAntecedent.creator"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="medicalAntecedent.lastEditionDateTime"
+		label="Última edición"
+		user="medicalAntecedent.lastEditor"
+		class="pull-right"
+	></event-box>
+</div>

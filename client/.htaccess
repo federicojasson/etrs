@@ -1,7 +1,7 @@
 # Enables the runtime rewriting engine
 RewriteEngine on
 
-# Maps all URLs to index.html, except those corresponding to existing files or
+# Maps all URLs to index.html except those corresponding to existing files or
 # directories
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

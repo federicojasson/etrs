@@ -1,0 +1,210 @@
+<a ui-sref="home" class="btn btn-link">
+	Volver a <b>Inicio</b>
+</a>
+
+<h1>Pacientes</h1>
+
+<p>
+	Esta sección le permite buscar pacientes en el sistema.
+</p>
+
+<div class="row">
+	<div
+		ng-class="{
+			'col-sm-8 col-sm-offset-2 isolated-content': newSearch,
+			'col-sm-5 col-sm-offset-7': ! newSearch
+		}"
+	>
+		<div
+			ng-class="{
+				'has-error': ! searchPatientsAction.input.expression.valid
+			}"
+			class="form-group has-feedback"
+		>
+			<div
+				ng-class="{
+					'input-group': searchPatientsAction.input.expression.value !== null,
+					'input-group-lg': newSearch
+				}"
+				class="rounded-corners"
+			>
+				<span ng-if="searchPatientsAction.input.expression.value !== null" class="input-group-btn">
+					<button
+						ng-click="searchHandler.clearExpression()"
+						type="button"
+						class="btn btn-default"
+					>
+						<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</span>
+
+				<input
+					ng-change="searchHandler.scheduleSearch(750)"
+					ng-keyup="$event.keyCode === 13 && searchHandler.search()"
+					ng-model="searchPatientsAction.input.expression.value"
+					ng-class="{
+						'input-lg': newSearch
+					}"
+					popover="{{ searchPatientsAction.input.expression.message }}"
+					popover-append-to-body="true"
+					popover-placement="bottom"
+					popover-trigger="focus"
+					line
+					null-if-empty
+					type="text"
+					placeholder="Buscar"
+					class="form-control rounded-corners"
+				>
+			</div>
+
+			<span
+				ng-class="{
+					'lg': newSearch
+				}"
+				class="form-control-feedback glyphicon glyphicon-search"
+			></span>
+		</div>
+	</div>
+</div>
+
+<div ng-if="searchPatientsAction.input.expression.valid && ! newSearch">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th ng-click="searchHandler.toggleSortingDirection('firstName')" class="col-sm-2">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('firstName') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('firstName') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Nombre
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('lastName')" class="col-sm-2">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('lastName') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('lastName') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Apellido
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('gender')" class="col-sm-2">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('gender') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('gender') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Sexo
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('birthDate')" class="col-sm-2">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('birthDate') === 'ascending'? 'glyphicon-chevron-up' :
+							searchHandler.getSortingDirection('birthDate') === 'descending'? 'glyphicon-chevron-down' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Edad
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('yearsOfEducation')" class="col-sm-4">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('yearsOfEducation') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('yearsOfEducation') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						Años de educación
+					</span>
+				</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr
+				ng-repeat="patient in patients"
+				ui-sref="patient({
+					id: patient.id
+				})"
+				table-row-link
+			>
+				<td>
+					{{ patient.firstName }}
+				</td>
+				
+				<td>
+					{{ patient.lastName }}
+				</td>
+				
+				<td>
+					{{ patient | gender }}
+				</td>
+				
+				<td>
+					{{ patient | age }}
+				</td>
+				
+				<td>
+					{{ patient.yearsOfEducation }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div ng-if="searching">
+		<div class="searching-text text-center">
+			Buscando…
+		</div>
+	</div>
+	
+	<div ng-if="! searching && patients.length === 0">
+		<div class="no-items-text text-center">
+			La búsqueda no obtuvo ningún resultado
+		</div>
+	</div>
+	
+	<div ng-if="total / searchPatientsAction.input.resultsPerPage.value > 1">
+		<div class="text-center">
+			<pagination
+				ng-change="searchHandler.search()"
+				ng-model="searchPatientsAction.input.page.value"
+				items-per-page="searchPatientsAction.input.resultsPerPage.value"
+				total-items="total"
+				max-size="10"
+				boundary-links="true"
+				previous-text="‹"
+				next-text="›"
+				first-text="«"
+				last-text="»"
+			></pagination>
+		</div>
+	</div>
+</div>

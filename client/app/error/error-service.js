@@ -19,22 +19,52 @@
 'use strict';
 
 (function() {
-	angular.module('app.error').service('error', [
-		'Error',
-		errorService
-	]);
+	angular.module('app.error').service('error', errorService);
 	
 	/**
 	 * Manages the errors.
 	 */
-	function errorService(Error) {
+	function errorService() {
 		var _this = this;
 		
 		/**
 		 * The error descriptions.
 		 */
 		var descriptions = {
-			// TODO: write error descriptions
+			FILE_SYSTEM_ERROR: '' +
+				'Se ha producido un error interno en el sistema de archivos.\n' +
+				'Si el problema persiste, contáctenos.',
+			
+			INVALID_REQUEST: '' +
+				'Se ha recibido una solicitud no válida.\n' +
+				'Por favor, contáctenos.',
+			
+			NON_EXISTENT_ENTITY: '' +
+				'Se ha intentado acceder a una entidad que no existe o que ha sido eliminada.',
+			
+			OUTDATED_ENTITY: '' +
+				'Se ha intentado modificar una entidad desactualizada.\n' +
+				'Puede que otro usuario se encuentre editándola al mismo tiempo.',
+			
+			SYSTEM_UNDER_MAINTENANCE: '' +
+				'El sistema se encuentra en mantenimiento.\n' +
+				'Reintente ingresar más tarde.',
+			
+			UNAUTHORIZED_USER: '' +
+				'Se ha denegado el acceso.\n' +
+				'Puede que su sesión haya expirado.',
+			
+			UNDEFINED_SERVICE: '' +
+				'Se ha solicitado un servicio no definido.\n' +
+				'Por favor, contáctenos.',
+			
+			UNDELIVERED_EMAIL: '' +
+				'No se ha podido enviar un correo electrónico.\n' +
+				'Si el problema persiste, contáctenos.',
+			
+			UNEXPECTED_ERROR: '' +
+				'Se ha producido un error inesperado.\n' +
+				'Si esto ocurre frecuentemente, contáctenos.'
 		};
 		
 		/**
@@ -59,13 +89,13 @@
 		/**
 		 * Reports an error.
 		 * 
-		 * Receives the response of the server.
+		 * Receives the server response.
 		 */
 		_this.report = function(response) {
 			// Builds the message
 			var message = 'Error ' + response.status;
 			
-			// Gets the code sent by the server
+			// Gets the error code
 			var code = response.data.code;
 			
 			// Builds the details
@@ -76,7 +106,10 @@
 			details += descriptions[code];
 			
 			// Initializes the error
-			error = new Error(message, details);
+			error = {
+				message: message,
+				details: details
+			};
 		};
 	}
 })();

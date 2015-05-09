@@ -28,7 +28,7 @@
 		var _this = this;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/view/home/home.html';

@@ -1,0 +1,57 @@
+<a ui-sref="clinicalImpressions" class="btn btn-link">
+	Volver a <b>Impresiones clínicas</b>
+</a>
+
+<h1>{{ clinicalImpression.name }}</h1>
+
+<button
+	ng-click="deleteClinicalImpressionAction.execute()"
+	type="button"
+	class="btn btn-danger"
+>
+	<span class="glyphicon glyphicon-remove"></span>
+	
+	<span class="icon-text">
+		Eliminar
+	</span>
+</button>
+
+<a
+	ui-sref="editClinicalImpression({
+		id: clinicalImpression.id
+	})"
+	class="btn btn-warning"
+>
+	<span class="glyphicon glyphicon-pencil"></span>
+	
+	<span class="icon-text">
+		Editar
+	</span>
+</a>
+
+<hr>
+
+<h2>Datos</h2>
+
+<p>
+	<dl class="dl-horizontal">
+		<dt>Nombre</dt>
+		<dd>{{ clinicalImpression.name }}</dd>
+	</dl>
+</p>
+
+<div class="clearfix">
+	<event-box
+		date-time="clinicalImpression.creationDateTime"
+		label="Creación"
+		user="clinicalImpression.creator"
+		class="pull-right"
+	></event-box>
+	
+	<event-box
+		date-time="clinicalImpression.lastEditionDateTime"
+		label="Última edición"
+		user="clinicalImpression.lastEditor"
+		class="pull-right"
+	></event-box>
+</div>

@@ -22,27 +22,24 @@
 	angular.module('app.layout.site').controller('SiteLayoutController', [
 		'$controller',
 		'$scope',
+		'account',
 		'SignOutAction',
-		'authentication',
 		SiteLayoutController
 	]);
 	
 	/**
 	 * Represents the site layout.
 	 */
-	function SiteLayoutController($controller, $scope, SignOutAction, authentication) {
+	function SiteLayoutController($controller, $scope, account, SignOutAction) {
 		var _this = this;
 		
 		/**
-		 * Indicates whether the layout is ready, considering the local factors.
-		 * 
-		 * Since it considers only the local factors, it doesn't necessarily
-		 * determine on its own whether the layout is ready.
+		 * Indicates whether the layout is ready.
 		 */
 		var ready = true;
 		
 		/**
-		 * Returns the URL of the template.
+		 * Returns the template's URL.
 		 */
 		_this.getTemplateUrl = function() {
 			return 'app/layout/site/site.html';
@@ -59,44 +56,52 @@
 		 * Determines whether the layout is ready.
 		 */
 		_this.isReady = function() {
-			return ready && ! authentication.isStateRefreshing();
+			if (account.isBeingRefreshed()) {
+				// The account is being refreshed
+				return false;
+			}
+			
+			return ready;
 		};
 		
 		/**
 		 * Performs initialization tasks.
 		 */
 		function initialize() {
-			// Includes the necessary controllers
-			$scope.authentication = $controller('AuthenticationController');
+			// Includes controllers
+			$scope.account = $controller('AccountController');
 			
-			// Initializes the sign-out action
-			var signOutAction = new SignOutAction();
-			signOutAction.startCallback = onStart;
-			signOutAction.successCallback = onSuccess;
+			// Initializes actions
+			initializeSignOutAction();
+		}
+		
+		/**
+		 * Initializes the sign-out action.
+		 */
+		function initializeSignOutAction() {
+			// Initializes the action
+			var action = new SignOutAction();
 			
-			// Includes the actions
-			$scope.action = {
-				signOut: signOutAction
+			// Registers callbacks
+			
+			action.startCallback = function() {
+				ready = false;
 			};
-		}
-		
-		/**
-		 * Invoked at the start of the sign-out action.
-		 */
-		function onStart() {
-			ready = false;
-		}
-		
-		/**
-		 * Invoked when the sign-out action is successful.
-		 */
-		function onSuccess() {
-			ready = true;
+			
+			action.successCallback = function() {
+				// Refreshes the account
+				account.refresh();
+				
+				ready = true;
+			};
+			
+			// Includes the action
+			$scope.signOutAction = action;
 		}
 		
 		// ---------------------------------------------------------------------
 		
-		// Initializes the layout
+		// Initializes the controller
 		initialize();
 	}
 })();

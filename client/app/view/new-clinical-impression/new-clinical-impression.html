@@ -1,0 +1,59 @@
+<a ui-sref="clinicalImpressions" class="btn btn-link">
+	Volver a <b>Impresiones clínicas</b>
+</a>
+
+<h1>Nueva impresión clínica</h1>
+
+<p>
+	El siguiente formulario le permite crear una impresión clínica.
+</p>
+
+<p>
+	<strong>
+		Una vez creada, la impresión clínica aparecerá como opción en los
+		formularios correspondientes.
+	</strong>
+</p>
+
+<div class="clearfix well">
+	<form ng-submit="createClinicalImpressionAction.execute()" novalidate>
+		<fieldset>
+			<legend>
+				<span class="glyphicon glyphicon-floppy-save"></span>
+				
+				<span class="icon-text">
+					Impresión clínica
+				</span>
+			</legend>
+			
+			<div class="form-group">
+				Ingrese los datos de la impresión clínica:
+			</div>
+			
+			<div
+				ng-class="{
+					'has-error': ! createClinicalImpressionAction.input.name.valid
+				}"
+				class="form-group"
+			>
+				<input
+					ng-model="createClinicalImpressionAction.input.name.value"
+					popover="{{ createClinicalImpressionAction.input.name.message }}"
+					popover-append-to-body="true"
+					popover-placement="left"
+					popover-trigger="focus"
+					line
+					type="text"
+					placeholder="Nombre"
+					class="form-control"
+				>
+			</div>
+		</fieldset>
+		
+		<div class="form-group">
+			<button type="submit" class="btn btn-success pull-right">
+				Crear impresión clínica
+			</button>
+		</div>
+	</form>
+</div>
