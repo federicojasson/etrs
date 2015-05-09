@@ -336,7 +336,7 @@
 			
 			if (isNaN(input.value)) {
 				// The input is not a number
-				input.message = 'Ingrese un valor numérico';
+				input.message = 'Ingrese un número entero';
 				return false;
 			}
 			
