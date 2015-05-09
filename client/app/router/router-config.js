@@ -272,6 +272,7 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'EditStudyViewController',
+							dr: 'EditStudyViewController',
 							op: 'EditStudyViewController'
 						}
 					}
@@ -562,6 +563,7 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewStudyViewController',
+							dr: 'NewStudyViewController',
 							op: 'NewStudyViewController'
 						}
 					}

@@ -62,6 +62,7 @@ class GetAll extends \App\Service\External {
 		// Validates the access
 		return $app->accessValidator->isUserAuthorized([
 			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
 			USER_ROLE_OPERATOR
 		]);
 	}
