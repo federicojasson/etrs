@@ -31,16 +31,13 @@ class IntegerRange extends DataType {
 	 * Receives the input.
 	 */
 	public function isInputValid($input) {
-		if (! is_integer($input)) {
-			// The input is not an integer
-			return false;
-		}
+		global $app;
 		
 		// Gets the definition
 		$definition = $this->getDefinition();
 		
-		// Determines whether the input is in the specified range
-		return inRange($input, $definition['min'], $definition['max']);
+		// Determines whether the input is a valid integer
+		return $app->inputValidator->isValidInteger($input, $definition['min'], $definition['max']);
 	}
 	
 }
