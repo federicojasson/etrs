@@ -32,8 +32,19 @@ class Cryptography {
 	 * Receives the file's path.
 	 */
 	public function computeFileHash($path) {
-		// Applies MD5
-		return md5_file($path, true);
+		// Gets the time limit
+		$timeLimit = ini_get('max_execution_time');
+		
+		// Removes the time limit
+		set_time_limit(0);
+		
+		// Computes the file's hash, using the MD5 function
+		$hash = md5_file($path, true);
+		
+		// Restores the time limit
+		set_time_limit($timeLimit);
+		
+		return $hash;
 	}
 	
 	/**
@@ -66,7 +77,7 @@ class Cryptography {
 	 * Receives the password, the salt and the key-stretching iterations.
 	 */
 	public function computePasswordHash($password, $salt, $keyStretchingIterations) {
-		// Applies SHA-512 and the PBKDF2 key-derivation function
+		// Computes the password's hash, using the SHA-512 and PBKDF2 functions
 		return hash_pbkdf2('sha512', $password, $salt, $keyStretchingIterations, 0, true);
 	}
 	
