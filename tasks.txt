@@ -16,8 +16,8 @@ Release tasks
 	ServerTokens ProductOnly
 	ServerSignature Off
 - Configure php.ini:
-	upload_max_filesize=1G
-	post_max_size=1G
+	upload_max_filesize=0
+	post_max_size=0
 	expose_php=Off
 - Configure my.ini (DBMS cache):
 	query_cache_limit = 64K
