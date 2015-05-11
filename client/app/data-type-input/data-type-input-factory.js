@@ -339,7 +339,7 @@
 				throw new Error();
 			}
 
-			// Converts the values to integer
+			// Converts the values from string to integer
 			return utility.filterObject(definition, utility.stringToInteger);
 		};
 
@@ -376,7 +376,7 @@
 				}
 			}
 
-			// Converts the values to integer
+			// Converts the values from string to integer
 			utility.filterObject(definition, utility.stringToInteger);
 
 			if (definition.max < definition.min) {

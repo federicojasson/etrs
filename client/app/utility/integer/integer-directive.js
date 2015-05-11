@@ -52,7 +52,7 @@
 				var newValue = utility.stringToInteger(value);
 				
 				if (isNaN(newValue)) {
-					// The value is not a number
+					// The value is not an integer
 					return value;
 				}
 				

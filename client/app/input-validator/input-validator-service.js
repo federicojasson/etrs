@@ -150,7 +150,7 @@
 			}
 			
 			if (/["*\/:<>?\\|]/.test(input.value)) {
-				// The input contains forbidden characters
+				// The input contains invalid characters
 				input.message = 'El nombre del archivo no puede contener ninguno de los siguientes caracteres: " * \ / : < > ? \\ |';
 				return false;
 			}

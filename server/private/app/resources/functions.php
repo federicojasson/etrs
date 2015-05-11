@@ -81,7 +81,7 @@ function buildFileName($string) {
 	// Removes the control characters
 	$string = preg_replace('/[\x{0000}-\x{001f}]/', '', $string);
 	
-	// Removes the forbidden characters
+	// Removes the invalid characters
 	$string = preg_replace('/["*\/:<>?\\\|]/', '', $string);
 	
 	// Trims the string

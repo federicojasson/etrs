@@ -175,7 +175,7 @@ class InputValidator {
 		}
 		
 		if (preg_match('/["*\/:<>?\\\|]/', $input)) {
-			// The input contains forbidden characters
+			// The input contains invalid characters
 			return false;
 		}
 		

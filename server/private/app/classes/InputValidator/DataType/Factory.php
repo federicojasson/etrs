@@ -294,7 +294,7 @@ class Factory {
 			throw new InvalidDefinitionException('Duplicate value.');
 		}
 		
-		// Converts the values to integer
+		// Converts the values from string to integer
 		return filterArray($definition, 'toInteger');
 	}
 	
@@ -327,7 +327,7 @@ class Factory {
 			}
 		}
 		
-		// Converts the values to integer
+		// Converts the values from string to integer
 		$definition = filterArray($definition, 'toInteger');
 		
 		if ($definition['max'] < $definition['min']) {
