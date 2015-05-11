@@ -142,7 +142,16 @@
 		 * Receives the string.
 		 */
 		_this.isStringAnInteger = function(string) {
-			return _this.stringToInteger(string).toString() === string;
+			// Converts the string to integer
+			var integer = _this.stringToInteger(string);
+			
+			if (isNaN(integer)) {
+				// The string is not an integer
+				return false;
+			}
+			
+			// Converts the integer back to string and compares it
+			return integer.toString() === string;
 		};
 		
 		/**
@@ -297,6 +306,17 @@
 		 * Receives the string.
 		 */
 		_this.stringToInteger = function(string) {
+			if (string === '') {
+				// The string is empty
+				return NaN;
+			}
+			
+			if (/[\.BEOXbeox]/.test(string)) {
+				// The string contains invalid characters
+				return NaN;
+			}
+			
+			// Converts the string to integer
 			return parseInt(Number(string), 10);
 		};
 		

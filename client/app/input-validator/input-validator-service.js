@@ -334,8 +334,8 @@
 				return false;
 			}
 			
-			if (isNaN(input.value)) {
-				// The input is not a number
+			if (typeof(input.value) !== 'number') {
+				// The input is not an integer
 				input.message = 'Ingrese un número entero';
 				return false;
 			}
