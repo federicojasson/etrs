@@ -311,7 +311,7 @@
 				return NaN;
 			}
 			
-			if (/[\.BEOXbeox]/.test(string)) {
+			if (! /^[-0-9]*$/.test(string)) {
 				// The string contains invalid characters
 				return NaN;
 			}
