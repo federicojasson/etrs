@@ -40,7 +40,7 @@
 				'Por favor, contáctenos.',
 			
 			NON_EXISTENT_ENTITY: '' +
-				'Se ha intentado acceder a una entidad que no existe o que ha sido eliminada.',
+				'Se ha intentado acceder a una entidad que no existe o que no se encuentra disponible.',
 			
 			OUTDATED_ENTITY: '' +
 				'Se ha intentado modificar una entidad desactualizada.\n' +
