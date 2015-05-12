@@ -3,6 +3,7 @@ Quick tasks
 ----------------------------
 
 - Check DEFINEHERE.
+- Set parameters for example project.
 
 
 Release tasks

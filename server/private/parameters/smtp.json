@@ -1,6 +1,4 @@
 {
-	"DEFINEHERE: define smtp parameters": "",
-	
 	"protocol": "tls",
 	"host": "smtp.gmail.com",
 	"port": "587",
