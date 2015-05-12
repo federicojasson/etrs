@@ -116,7 +116,10 @@ class Experiment {
 	 * 
 	 * Annotations:
 	 * 
-	 * @ManyToMany(targetEntity="File")
+	 * @ManyToMany(
+	 *		targetEntity="File",
+	 *		inversedBy="experiments"
+	 *	)
 	 * @OrderBy({
 	 *		"creationDateTime"="ASC"
 	 *	})
