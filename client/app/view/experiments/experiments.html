@@ -87,7 +87,22 @@
 					Editar
 				</th>
 				
-				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-3">
+				<th ng-click="searchHandler.toggleSortingDirection('deprecated')" class="col-sm-1 text-center">
+					<span
+						ng-class="
+							searchHandler.getSortingDirection('deprecated') === 'ascending'? 'glyphicon-chevron-down' :
+							searchHandler.getSortingDirection('deprecated') === 'descending'? 'glyphicon-chevron-up' :
+							'no-icon'
+						"
+						class="glyphicon"
+					></span>
+					
+					<span class="icon-text">
+						¿Obsoleto?
+					</span>
+				</th>
+				
+				<th ng-click="searchHandler.toggleSortingDirection('name')" class="col-sm-2">
 					<span
 						ng-class="
 							searchHandler.getSortingDirection('name') === 'ascending'? 'glyphicon-chevron-down' :
@@ -160,6 +175,10 @@
 					>
 						<span class="glyphicon glyphicon-pencil"></span>
 					</a>
+				</td>
+				
+				<td class="text-center">
+					{{ experiment.deprecated | boolean }}
 				</td>
 				
 				<td>

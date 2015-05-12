@@ -38,6 +38,9 @@
 		<dt>Nombre</dt>
 		<dd>{{ experiment.name }}</dd>
 		
+		<dt>¿Obsoleto?</dt>
+		<dd>{{ experiment.deprecated | boolean }}</dd>
+		
 		<dt>Línea de comandos</dt>
 		<dd>{{ experiment.commandLine }}</dd>
 		

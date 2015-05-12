@@ -19,21 +19,28 @@
 'use strict';
 
 (function() {
-	angular.module('app.utility', [
-		'app.utility.age',
-		'app.utility.boolean',
-		'app.utility.date',
-		'app.utility.fileName',
-		'app.utility.fullName',
-		'app.utility.gender',
-		'app.utility.honorificName',
-		'app.utility.integer',
-		'app.utility.levelName',
-		'app.utility.line',
-		'app.utility.nullIfEmpty',
-		'app.utility.reverse',
-		'app.utility.role',
-		'app.utility.state',
-		'app.utility.tableRowLink'
-	]);
+	angular.module('app.utility.boolean').filter('boolean', booleanFilter);
+	
+	/**
+	 * Returns a boolean.
+	 */
+	function booleanFilter() {
+		/**
+		 * Applies the filter.
+		 * 
+		 * Receives the boolean.
+		 */
+		function filter(boolean) {
+			if (boolean === null) {
+				// The boolean is null
+				return '';
+			}
+			
+			return (boolean)? 'Sí' : 'No';
+		}
+		
+		// ---------------------------------------------------------------------
+		
+		return filter;
+	}
 })();
