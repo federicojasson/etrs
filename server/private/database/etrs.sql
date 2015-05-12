@@ -726,6 +726,7 @@ CREATE TABLE IF NOT EXISTS `etrs`.`experiments` (
   `last_edition_date_time` DATETIME NULL,
   `deletion_date_time` DATETIME NULL,
   `deleted` TINYINT(1) NOT NULL,
+  `deprecated` TINYINT(1) NOT NULL,
   `command_line` VARCHAR(512) NOT NULL,
   `output_name` VARCHAR(128) NOT NULL,
   `name` VARCHAR(64) NOT NULL,
@@ -869,16 +870,16 @@ SET SQL_MODE = '';
 GRANT USAGE ON *.* TO etrs_admin@localhost;
  DROP USER etrs_admin@localhost;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'etrs_admin'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'etrs_admin'@'localhost' IDENTIFIED BY 'etrs_admin';
 
 GRANT ALL ON etrs.* TO 'etrs_admin'@'localhost';
-GRANT ALL ON TABLE etrs.* TO 'etrs_admin'@'localhost';
 SET SQL_MODE = '';
 GRANT USAGE ON *.* TO etrs_server@localhost;
  DROP USER etrs_server@localhost;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'etrs_server'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'etrs_server'@'localhost' IDENTIFIED BY 'etrs_server';
 
+GRANT DELETE, INSERT, SELECT, UPDATE ON TABLE etrs.* TO 'etrs_server'@'localhost';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -910,7 +911,7 @@ VALUES (
     UTC_TIMESTAMP(),
     NULL,
     'ad',
-    'etrs@etrs.com.ar',
+    'neuco@example.com',
     UNHEX('dcceccccd2fa66ec724ac99b88fd4df9029646e15bf90cab7a7d118427031cd579b9187b0f32dc614100514c59b0b3db584b1f1a66b01dd4cf19951c518626c0'),
     UNHEX('0d041dbc8cd38a8d989a5a19a8746d79b706d28b72a1d1112f96ffd72d7d5cd2950034f1bd7a145959c84b49fcacb56d8d75069527a62ffaf886852255c305f3'),
     64000,
