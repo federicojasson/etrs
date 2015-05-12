@@ -45,7 +45,7 @@ class Create extends CreateEdit {
 		$consultation = $app->data->getRepository('Entity:Consultation')->findNonDeleted($consultation);
 		
 		// Gets the experiment
-		$experiment = $app->data->getRepository('Entity:Experiment')->findNonDeleted($experiment);
+		$experiment = $app->data->getRepository('Entity:Experiment')->findNonDeletedNonDeprecated($experiment);
 		
 		// Gets the input
 		$input = $app->data->getRepository('Entity:File')->findNonDeletedNonAssociated($input);

@@ -374,6 +374,13 @@ class Experiment {
 	}
 	
 	/**
+	 * Determines whether the entity is deprecated.
+	 */
+	public function isDeprecated() {
+		return $this->deprecated;
+	}
+	
+	/**
 	 * Serializes the entity.
 	 */
 	public function serialize() {

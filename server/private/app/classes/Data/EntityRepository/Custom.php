@@ -83,4 +83,26 @@ class Custom extends \Doctrine\ORM\EntityRepository {
 		return $entity;
 	}
 	
+	/**
+	 * Finds a non-deleted-and-non-deprecated entity.
+	 * 
+	 * Receives the entity's ID.
+	 */
+	public function findNonDeletedNonDeprecated($id) {
+		// Finds the entity
+		$entity = $this->findNonDeleted($id);
+		
+		if (is_null($entity)) {
+			// The entity doesn't exist
+			return null;
+		}
+		
+		if ($entity->isDeprecated()) {
+			// The entity is deprecated
+			return null;
+		}
+		
+		return $entity;
+	}
+	
 }

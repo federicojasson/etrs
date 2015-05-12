@@ -91,7 +91,20 @@
 				return data.getExperimentArray(output.ids);
 			}).then(function(experiments) {
 				// Includes the experiments
-				$scope.experiments = experiments;
+				$scope.experiments = [];
+				
+				// Adds the non-deprecated experiments
+				for (var i = 0; i < experiments.length; i++) {
+					var experiment = experiments[i];
+					
+					if (experiment.deprecated) {
+						// The experiment is deprecated
+						continue;
+					}
+					
+					// Adds the experiment
+					$scope.experiments.push(experiment);
+				}
 				
 				// Resolves the deferred task
 				deferredTask.resolve();
