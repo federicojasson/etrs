@@ -102,6 +102,7 @@ class Search extends \App\Service\External {
 						return inArray($input, [
 							'creationDateTime',
 							'lastEditionDateTime',
+							'deprecated',
 							'name',
 							'creator',
 							'lastEditor'

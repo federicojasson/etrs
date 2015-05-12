@@ -112,6 +112,19 @@ class Experiment {
 	private $deletionDateTime;
 	
 	/**
+	 * Indicates whether the entity is deprecated.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="deprecated",
+	 *		type="boolean",
+	 *		nullable=false
+	 *	)
+	 */
+	private $deprecated;
+	
+	/**
 	 * The files.
 	 * 
 	 * Annotations:
@@ -253,6 +266,7 @@ class Experiment {
 	 */
 	public function __construct() {
 		$this->deleted = false;
+		$this->deprecated = false;
 		$this->files = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 	
@@ -378,6 +392,7 @@ class Experiment {
 			$serialized['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
 		}
 		
+		$serialized['deprecated'] = $this->deprecated;
 		$serialized['commandLine'] = $this->commandLine;
 		$serialized['outputName'] = $this->outputName;
 		$serialized['name'] = $this->name;
@@ -424,6 +439,15 @@ class Experiment {
 	 */
 	public function setCreator($user) {
 		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets whether the entity is deprecated.
+	 * 
+	 * Receives an indicator of whether the entity is deprecated.
+	 */
+	public function setDeprecated($deprecated) {
+		$this->deprecated = $deprecated;
 	}
 	
 	/**
