@@ -55,7 +55,7 @@
 			}
 			
 			// Appends the acronym of the application
-			newTitle += 'ETRS';
+			newTitle += 'NEU-CO';
 			
 			// Sets the title
 			title = newTitle;

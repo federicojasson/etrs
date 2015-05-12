@@ -132,7 +132,7 @@ class Email {
 		
 		// Builds the sender
 		$sender = [
-			'fullName' => 'ETRS',
+			'fullName' => $server['acronym'],
 			'emailAddress' => $server['emailAddress']
 		];
 		
@@ -140,6 +140,8 @@ class Email {
 		$type = camelToSpinalCase($type);
 		
 		// Adds placeholders to the mapping
+		$mapping['name'] = $server['name'];
+		$mapping['acronym'] = $server['acronym'];
 		$mapping['domain'] = $server['domain'];
 		$mapping['emailAddress'] = $server['emailAddress'];
 		

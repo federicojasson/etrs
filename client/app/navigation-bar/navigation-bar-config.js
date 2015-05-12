@@ -66,7 +66,7 @@
 				invitation: {
 					name: 'Enviar invitación',
 					state: 'invitation',
-					description: 'Invite a una persona a registrarse en ETRS'
+					description: 'Invite a una persona a registrarse en NEU-CO'
 				},
 				
 				laboratoryTests: {

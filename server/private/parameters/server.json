@@ -1,6 +1,8 @@
 {
 	"DEFINEHERE: define server parameters": "",
 	
+	"name": "Neuro-Cognitivo",
+	"acronym": "NEU-CO",
 	"domain": "localhost.etrs",
-	"emailAddress": "etrs@mailinator.com"
+	"emailAddress": "neuco@mailinator.com"
 }

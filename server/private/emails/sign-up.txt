@@ -1,7 +1,7 @@
-ETRS - Eye Tracking Record System
+:acronym - :name
 ---------------------------------
 
-Tenemos el agrado de saludarlo y comunicarle que ha sido invitado a registrarse en ETRS.
+Tenemos el agrado de saludarlo y comunicarle que ha sido invitado a registrarse en :acronym.
 Para continuar, ingrese al siguiente enlace:
 
 https://:domain/account/sign-up/:id/:password
@@ -9,7 +9,7 @@ https://:domain/account/sign-up/:id/:password
 Ante cualquier duda, contáctenos a :emailAddress.
 
 Lo saluda atentamente,
-El equipo de ETRS.
+El equipo de :acronym.
 
 ---------------------------------
 Si cree que recibió este correo electrónico por error, comuníquese con :emailAddress.
