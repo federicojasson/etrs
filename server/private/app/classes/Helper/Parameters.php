@@ -70,7 +70,6 @@ class Parameters {
 	 */
 	private function getPaths() {
 		return [
-			'configuration' => buildPath(DIRECTORY_PARAMETERS, 'configuration.json'),
 			'dbms' => buildPath(DIRECTORY_PARAMETERS, 'dbms.json'),
 			'server' => buildPath(DIRECTORY_PARAMETERS, 'server.json'),
 			'smtp' => buildPath(DIRECTORY_PARAMETERS, 'smtp.json')

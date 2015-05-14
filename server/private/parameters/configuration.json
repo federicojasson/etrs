@@ -1,5 +1,0 @@
-{
-	"-operationMode": "development",
-	"-operationMode": "maintenance",
-	"operationMode": "production"
-}

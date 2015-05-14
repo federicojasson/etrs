@@ -40,9 +40,9 @@ require_once DIRECTORY_APP . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPAR
 require_once DIRECTORY_APP . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'functions.php';
 
 // Defines the operation mode
-$path = buildPath(DIRECTORY_PARAMETERS, 'configuration.json');
-$configuration = readJsonFile($path);
-define('OPERATION_MODE', $configuration['operationMode']);
+$path = buildPath(DIRECTORY_PARAMETERS, 'server.json');
+$server = readJsonFile($path);
+define('OPERATION_MODE', $server['operationMode']);
 
 // Registers a class autoloader
 spl_autoload_register('loadClass');

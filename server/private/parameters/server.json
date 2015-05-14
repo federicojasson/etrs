@@ -1,4 +1,8 @@
 {
+	"-operationMode": "development",
+	"-operationMode": "maintenance",
+	"operationMode": "production",
+	
 	"name": "Neuro-Cognitivo",
 	"acronym": "NEU-CO",
 	"domain": "localhost.etrs",
