@@ -116,7 +116,7 @@
 		_this.isExperiment = function(input) {
 			if (input.value === '') {
 				// The experiment has not been selected
-				input.message = 'Seleccione un experimento';
+				input.message = 'Seleccione un tipo de estudio';
 				return false;
 			}
 			

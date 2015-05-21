@@ -72,7 +72,7 @@
 			// Opens a confirmation dialog
 			dialog.openConfirmation(
 				'Confirmar eliminación',
-				'¿Está seguro que desea eliminar el experimento?',
+				'¿Está seguro que desea eliminar el tipo de estudio?',
 				function() {
 					// Invokes the start callback
 					this.startCallback();

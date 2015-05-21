@@ -50,7 +50,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Nuevo experimento';
+			return 'Nuevo tipo de estudio';
 		};
 		
 		/**

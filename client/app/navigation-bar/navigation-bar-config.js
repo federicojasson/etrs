@@ -54,7 +54,7 @@
 				experiments: {
 					name: 'Administrar',
 					state: 'experiments',
-					description: 'Administre los experimentos'
+					description: 'Administre los tipos de estudio'
 				},
 				
 				imagingTests: {
@@ -114,7 +114,7 @@
 				newExperiment: {
 					name: 'Nuevo',
 					state: 'newExperiment',
-					description: 'Cree un nuevo experimento'
+					description: 'Cree un nuevo tipo de estudio'
 				},
 				
 				newImagingTest: {
@@ -255,7 +255,7 @@
 					},
 					
 					{
-						name: 'Experimentos',
+						name: 'Tipos de estudio',
 						items: [
 							menuItems.experiments,
 							menuItems.newExperiment
