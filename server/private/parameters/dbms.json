@@ -1,10 +1,8 @@
 {
-	"DEFINEHERE: define dbms parameters": "",
-	
 	"host": "localhost",
 	"port": "3306",
-	"database": "etrs",
+	"database": "neuco",
 	"charset": "utf8",
-	"username": "etrs_admin",
-	"password": "password"
+	"username": "neuco_server",
+	"password": "neuco_server"
 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -112,11 +112,27 @@ class Experiment {
 	private $deletionDateTime;
 	
 	/**
+	 * Indicates whether the entity is deprecated.
+	 * 
+	 * Annotations:
+	 * 
+	 * @Column(
+	 *		name="deprecated",
+	 *		type="boolean",
+	 *		nullable=false
+	 *	)
+	 */
+	private $deprecated;
+	
+	/**
 	 * The files.
 	 * 
 	 * Annotations:
 	 * 
-	 * @ManyToMany(targetEntity="File")
+	 * @ManyToMany(
+	 *		targetEntity="File",
+	 *		inversedBy="experiments"
+	 *	)
 	 * @OrderBy({
 	 *		"creationDateTime"="ASC"
 	 *	})
@@ -250,6 +266,7 @@ class Experiment {
 	 */
 	public function __construct() {
 		$this->deleted = false;
+		$this->deprecated = false;
 		$this->files = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 	
@@ -357,6 +374,13 @@ class Experiment {
 	}
 	
 	/**
+	 * Determines whether the entity is deprecated.
+	 */
+	public function isDeprecated() {
+		return $this->deprecated;
+	}
+	
+	/**
 	 * Serializes the entity.
 	 */
 	public function serialize() {
@@ -375,6 +399,7 @@ class Experiment {
 			$serialized['lastEditionDateTime'] = $this->lastEditionDateTime->format(\DateTime::ISO8601);
 		}
 		
+		$serialized['deprecated'] = $this->deprecated;
 		$serialized['commandLine'] = $this->commandLine;
 		$serialized['outputName'] = $this->outputName;
 		$serialized['name'] = $this->name;
@@ -421,6 +446,15 @@ class Experiment {
 	 */
 	public function setCreator($user) {
 		$this->creator = $user;
+	}
+	
+	/**
+	 * Sets whether the entity is deprecated.
+	 * 
+	 * Receives an indicator of whether the entity is deprecated.
+	 */
+	public function setDeprecated($deprecated) {
+		$this->deprecated = $deprecated;
 	}
 	
 	/**

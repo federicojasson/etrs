@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -54,7 +54,7 @@
 				experiments: {
 					name: 'Administrar',
 					state: 'experiments',
-					description: 'Administre los experimentos'
+					description: 'Administre los tipos de estudio'
 				},
 				
 				imagingTests: {
@@ -66,7 +66,7 @@
 				invitation: {
 					name: 'Enviar invitación',
 					state: 'invitation',
-					description: 'Invite a una persona a registrarse en ETRS'
+					description: 'Invite a una persona a registrarse en NEU-CO'
 				},
 				
 				laboratoryTests: {
@@ -114,7 +114,7 @@
 				newExperiment: {
 					name: 'Nuevo',
 					state: 'newExperiment',
-					description: 'Cree un nuevo experimento'
+					description: 'Cree un nuevo tipo de estudio'
 				},
 				
 				newImagingTest: {
@@ -191,6 +191,22 @@
 					},
 					
 					{
+						name: 'Impresiones clínicas',
+						items: [
+							menuItems.clinicalImpressions,
+							menuItems.newClinicalImpression
+						]
+					},
+					
+					{
+						name: 'Diagnósticos',
+						items: [
+							menuItems.diagnoses,
+							menuItems.newDiagnosis
+						]
+					},
+					
+					{
 						name: 'Antecedentes médicos',
 						items: [
 							menuItems.medicalAntecedents,
@@ -203,14 +219,6 @@
 						items: [
 							menuItems.medicines,
 							menuItems.newMedicine
-						]
-					},
-					
-					{
-						name: 'Impresiones clínicas',
-						items: [
-							menuItems.clinicalImpressions,
-							menuItems.newClinicalImpression
 						]
 					},
 					
@@ -239,14 +247,6 @@
 					},
 					
 					{
-						name: 'Diagnósticos',
-						items: [
-							menuItems.diagnoses,
-							menuItems.newDiagnosis
-						]
-					},
-					
-					{
 						name: 'Tratamientos',
 						items: [
 							menuItems.treatments,
@@ -255,7 +255,7 @@
 					},
 					
 					{
-						name: 'Experimentos',
+						name: 'Tipos de estudio',
 						items: [
 							menuItems.experiments,
 							menuItems.newExperiment

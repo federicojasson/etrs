@@ -64,10 +64,10 @@ class Experiment extends \App\Data\Entity\Experiment implements \Doctrine\ORM\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'commandLine', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'files', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'outputName', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'studies', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'version');
+            return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'commandLine', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deprecated', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'files', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'outputName', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'studies', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'version');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'commandLine', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'files', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'outputName', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'studies', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'version');
+        return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'commandLine', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'deprecated', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'files', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'outputName', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'studies', '' . "\0" . 'App\\Data\\Entity\\Experiment' . "\0" . 'version');
     }
 
     /**
@@ -301,6 +301,17 @@ class Experiment extends \App\Data\Entity\Experiment implements \Doctrine\ORM\Pr
     /**
      * {@inheritDoc}
      */
+    public function isDeprecated()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'isDeprecated', array());
+
+        return parent::isDeprecated();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function serialize()
     {
 
@@ -340,6 +351,17 @@ class Experiment extends \App\Data\Entity\Experiment implements \Doctrine\ORM\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCreator', array($user));
 
         return parent::setCreator($user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setDeprecated($deprecated)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDeprecated', array($deprecated));
+
+        return parent::setDeprecated($deprecated);
     }
 
     /**

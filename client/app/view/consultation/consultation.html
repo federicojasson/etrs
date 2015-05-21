@@ -37,7 +37,6 @@
 </a>
 
 <a
-	ng-if="account.getSignedInUser().role !== 'dr'"
 	ui-sref="newStudy({
 		id: consultation.id
 	})"
@@ -159,9 +158,9 @@
 	></event-box>
 </div>
 
-<hr>
-
 <div ng-if="consultation.studies.length > 0">
+	<hr>
+	
 	<h2>Estudios</h2>
 	
 	<p>
@@ -172,7 +171,7 @@
 		<thead>
 			<tr>
 				<th class="col-sm-3">
-					Experimento
+					Tipo de estudio
 				</th>
 				
 				<th class="col-sm-3">

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -81,7 +81,7 @@ function buildFileName($string) {
 	// Removes the control characters
 	$string = preg_replace('/[\x{0000}-\x{001f}]/', '', $string);
 	
-	// Removes the forbidden characters
+	// Removes the invalid characters
 	$string = preg_replace('/["*\/:<>?\\\|]/', '', $string);
 	
 	// Trims the string

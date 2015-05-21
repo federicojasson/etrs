@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -175,7 +175,7 @@ class InputValidator {
 		}
 		
 		if (preg_match('/["*\/:<>?\\\|]/', $input)) {
-			// The input contains forbidden characters
+			// The input contains invalid characters
 			return false;
 		}
 		

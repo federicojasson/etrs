@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -50,7 +50,7 @@
 		 * Returns the title to be set when the view is ready.
 		 */
 		_this.getTitle = function() {
-			return 'Nuevo experimento';
+			return 'Nuevo tipo de estudio';
 		};
 		
 		/**

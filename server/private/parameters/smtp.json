@@ -1,9 +1,7 @@
 {
-	"DEFINEHERE: define smtp parameters": "",
-	
 	"protocol": "tls",
-	"host": "smtp.gmail.com",
+	"host": "localhost",
 	"port": "587",
-	"username": "",
-	"password": ""
+	"username": "neuco@example.com",
+	"password": "password"
 }

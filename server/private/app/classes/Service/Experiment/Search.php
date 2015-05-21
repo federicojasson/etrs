@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -102,6 +102,7 @@ class Search extends \App\Service\External {
 						return inArray($input, [
 							'creationDateTime',
 							'lastEditionDateTime',
+							'deprecated',
 							'name',
 							'creator',
 							'lastEditor'

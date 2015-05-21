@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -21,6 +21,7 @@
 (function() {
 	angular.module('app.utility', [
 		'app.utility.age',
+		'app.utility.boolean',
 		'app.utility.date',
 		'app.utility.fileName',
 		'app.utility.fullName',

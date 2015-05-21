@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * Licensed under the GNU GPL version 3 license. For more information on this,
@@ -73,6 +73,8 @@
 .copyright-text {
 	color: #aaaaaa;
 	font-size: 0.8em;
+	margin-bottom: 48px;
+	margin-top: -12px;
 }
 
 .data-type-input {

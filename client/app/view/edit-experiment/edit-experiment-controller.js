@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -94,6 +94,7 @@
 			// Sets inputs' initial values
 			action.input.id.value = experiment.id;
 			action.input.version.value = experiment.version;
+			action.input.deprecated.value = experiment.deprecated;
 			action.input.outputName.value = experiment.outputName;
 			action.input.name.value = experiment.name;
 			

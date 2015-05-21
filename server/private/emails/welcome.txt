@@ -1,7 +1,7 @@
-ETRS - Eye Tracking Record System
+:acronym - :name
 ---------------------------------
 
-Bienvenido a ETRS.
+Bienvenido a :acronym.
 Esperamos que el sistema le resulte útil y lo emplee con responsabilidad.
 Para iniciar sesión, ingrese al siguiente enlace:
 
@@ -10,7 +10,7 @@ https://:domain/account/sign-in
 Ante cualquier duda, contáctenos a :emailAddress.
 
 Lo saluda atentamente,
-El equipo de ETRS.
+El equipo de :acronym.
 
 ---------------------------------
 Si cree que recibió este correo electrónico por error, comuníquese con :emailAddress.

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -117,6 +117,7 @@ class Edit extends CreateEdit {
 		// Validates the access
 		return $app->accessValidator->isUserAuthorized([
 			USER_ROLE_ADMINISTRATOR,
+			USER_ROLE_DOCTOR,
 			USER_ROLE_OPERATOR
 		]);
 	}

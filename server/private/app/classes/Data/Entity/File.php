@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -109,6 +109,18 @@ class File {
 	 *	)
 	 */
 	private $deletionDateTime;
+	
+	/**
+	 * The experiments.
+	 * 
+	 * Annotations:
+	 * 
+	 * @ManyToMany(
+	 *		targetEntity="Experiment",
+	 *		mappedBy="files"
+	 *	)
+	 */
+	private $experiments;
 	
 	/**
 	 * The hash.
@@ -249,6 +261,13 @@ class File {
 	 */
 	public function getCreator() {
 		return $this->creator;
+	}
+	
+	/**
+	 * Returns the experiments.
+	 */
+	public function getExperiments() {
+		return $this->experiments->toArray();
 	}
 	
 	/**

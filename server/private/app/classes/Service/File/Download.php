@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -34,11 +34,23 @@ class Download extends \App\Service\External {
 		// Gets inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		
+		// Gets the signed-in user
+		$user = $app->account->getSignedInUser();
+		
 		// Gets the file
 		$file = $app->data->getRepository('Entity:File')->findNonDeleted($id);
 
 		// Asserts conditions
 		$app->assertion->entityExists($file);
+		
+		if ($user->getRole() !== USER_ROLE_ADMINISTRATOR) {
+			// The user is not an administrator
+			if (count($file->getExperiments()) > 0) {
+				// The file is associated with an experiment
+				// Halts the application
+				haltApp(HTTP_STATUS_FORBIDDEN, ERROR_CODE_UNAUTHORIZED_USER);
+			}
+		}
 		
 		// Downloads the file
 		$app->file->download($file->getId(), $file->getHash(), $file->getName());

@@ -64,10 +64,10 @@ class File extends \App\Data\Entity\File implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'associated', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'hash', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'version');
+            return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'associated', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'experiments', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'hash', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'version');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'associated', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'hash', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'version');
+        return array('__isInitialized__', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'associated', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'creationDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'creator', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deleted', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deleter', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'deletionDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'experiments', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'hash', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'id', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'lastEditionDateTime', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'lastEditor', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'name', '' . "\0" . 'App\\Data\\Entity\\File' . "\0" . 'version');
     }
 
     /**
@@ -226,6 +226,17 @@ class File extends \App\Data\Entity\File implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCreator', array());
 
         return parent::getCreator();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getExperiments()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getExperiments', array());
+
+        return parent::getExperiments();
     }
 
     /**

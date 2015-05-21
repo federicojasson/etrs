@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -34,6 +34,7 @@ class Edit extends \App\Service\External {
 		// Gets inputs
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
+		$deprecated = $this->getInputValue('deprecated');
 		$outputName = $this->getInputValue('outputName', 'trim');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
@@ -49,6 +50,7 @@ class Edit extends \App\Service\External {
 		
 		// Edits the experiment
 		$experiment->setLastEditionDateTime();
+		$experiment->setDeprecated($deprecated);
 		$experiment->setOutputName($outputName);
 		$experiment->setName($name);
 		$experiment->setLastEditor($user);
@@ -77,6 +79,10 @@ class Edit extends \App\Service\External {
 			
 			'version' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isValidInteger($input, 0);
+			}),
+			
+			'deprecated' => new \App\InputValidator\Input\InputValue(function($input) {
+				return is_bool($input);
 			}),
 			
 			'outputName' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {

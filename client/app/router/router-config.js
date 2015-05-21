@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -272,6 +272,7 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'EditStudyViewController',
+							dr: 'EditStudyViewController',
 							op: 'EditStudyViewController'
 						}
 					}
@@ -562,6 +563,7 @@
 						views: {
 							__: 'SignInViewController',
 							ad: 'NewStudyViewController',
+							dr: 'NewStudyViewController',
 							op: 'NewStudyViewController'
 						}
 					}

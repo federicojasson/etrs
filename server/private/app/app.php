@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -40,9 +40,9 @@ require_once DIRECTORY_APP . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPAR
 require_once DIRECTORY_APP . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'functions.php';
 
 // Defines the operation mode
-//define('OPERATION_MODE', OPERATION_MODE_DEVELOPMENT);
-//define('OPERATION_MODE', OPERATION_MODE_MAINTENANCE);
-define('OPERATION_MODE', OPERATION_MODE_PRODUCTION);
+$path = buildPath(DIRECTORY_PARAMETERS, 'server.json');
+$server = readJsonFile($path);
+define('OPERATION_MODE', $server['operationMode']);
 
 // Registers a class autoloader
 spl_autoload_register('loadClass');

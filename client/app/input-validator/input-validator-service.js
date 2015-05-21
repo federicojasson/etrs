@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -116,7 +116,7 @@
 		_this.isExperiment = function(input) {
 			if (input.value === '') {
 				// The experiment has not been selected
-				input.message = 'Seleccione un experimento';
+				input.message = 'Seleccione un tipo de estudio';
 				return false;
 			}
 			
@@ -150,7 +150,7 @@
 			}
 			
 			if (/["*\/:<>?\\|]/.test(input.value)) {
-				// The input contains forbidden characters
+				// The input contains invalid characters
 				input.message = 'El nombre del archivo no puede contener ninguno de los siguientes caracteres: " * \ / : < > ? \\ |';
 				return false;
 			}
@@ -334,9 +334,9 @@
 				return false;
 			}
 			
-			if (isNaN(input.value)) {
-				// The input is not a number
-				input.message = 'Ingrese un valor numérico';
+			if (typeof(input.value) !== 'number') {
+				// The input is not an integer
+				input.message = 'Ingrese un número entero';
 				return false;
 			}
 			

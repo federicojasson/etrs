@@ -1,6 +1,10 @@
 {
-	"DEFINEHERE: define server parameters": "",
+	"-operationMode": "development",
+	"-operationMode": "maintenance",
+	"operationMode": "production",
 	
-	"domain": "localhost.etrs",
-	"emailAddress": "etrs@mailinator.com"
+	"name": "Neuro-Cognitivo",
+	"acronym": "NEU-CO",
+	"domain": "www.example.com",
+	"emailAddress": "neuco@example.com"
 }

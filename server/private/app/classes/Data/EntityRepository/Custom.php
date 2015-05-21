@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -77,6 +77,28 @@ class Custom extends \Doctrine\ORM\EntityRepository {
 		
 		if ($entity->isAssociated()) {
 			// The entity is associated
+			return null;
+		}
+		
+		return $entity;
+	}
+	
+	/**
+	 * Finds a non-deleted-and-non-deprecated entity.
+	 * 
+	 * Receives the entity's ID.
+	 */
+	public function findNonDeletedNonDeprecated($id) {
+		// Finds the entity
+		$entity = $this->findNonDeleted($id);
+		
+		if (is_null($entity)) {
+			// The entity doesn't exist
+			return null;
+		}
+		
+		if ($entity->isDeprecated()) {
+			// The entity is deprecated
 			return null;
 		}
 		

@@ -4,18 +4,18 @@
 	})"
 	class="btn btn-link"
 >
-	Volver a <b>Experimento</b>
+	Volver a <b>Tipo de estudio</b>
 </a>
 
 <h1>{{ experiment.name }}</h1>
 
 <p>
-	El siguiente formulario le permite editar un experimento.
+	El siguiente formulario le permite editar un tipo de estudio.
 </p>
 
 <p>
 	<strong>
-		Los cambios realizados en el experimento se verán reflejados
+		Los cambios realizados en el tipo de estudio se verán reflejados
 		automáticamente en todo el sistema.
 	</strong>
 </p>
@@ -27,12 +27,12 @@
 				<span class="glyphicon glyphicon-floppy-save"></span>
 
 				<span class="icon-text">
-					Experimento
+					Tipo de estudio
 				</span>
 			</legend>
 
 			<div class="form-group">
-				Ingrese los datos del experimento:
+				Ingrese los datos del tipo de estudio:
 			</div>
 
 			<div
@@ -52,6 +52,15 @@
 					placeholder="Nombre"
 					class="form-control"
 				>
+			</div>
+			
+			<div class="form-group">
+				<div class="checkbox">
+					<label class="control-label">
+						<input ng-model="editExperimentAction.input.deprecated.value" type="checkbox">
+						Obsoleto
+					</label>
+				</div>
 			</div>
 			
 			<div class="form-group">
@@ -80,7 +89,7 @@
 
 		<div class="form-group">
 			<button type="submit" class="btn btn-warning pull-right">
-				Editar experimento
+				Editar tipo de estudio
 			</button>
 		</div>
 	</form>

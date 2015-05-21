@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -55,7 +55,7 @@
 			}
 			
 			// Appends the acronym of the application
-			newTitle += 'ETRS';
+			newTitle += 'NEU-CO';
 			
 			// Sets the title
 			title = newTitle;

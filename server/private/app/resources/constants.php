@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -22,7 +22,7 @@
  * This script defines global constants.
  */
 
-define('APACHE_ENVIRONMENT_VARIABLE_ETRS_SUBREQUEST', 'etrs_subrequest');
+define('APACHE_ENVIRONMENT_VARIABLE_NEUCO_SUBREQUEST', 'neuco_subrequest');
 
 define('DATA_TYPE_BOOLEAN', 'boolean');
 define('DATA_TYPE_INTEGER_FIX_VALUES', 'integer_fix_values');

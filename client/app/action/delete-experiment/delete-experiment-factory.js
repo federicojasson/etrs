@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -72,7 +72,7 @@
 			// Opens a confirmation dialog
 			dialog.openConfirmation(
 				'Confirmar eliminación',
-				'¿Está seguro que desea eliminar el experimento?',
+				'¿Está seguro que desea eliminar el tipo de estudio?',
 				function() {
 					// Invokes the start callback
 					this.startCallback();

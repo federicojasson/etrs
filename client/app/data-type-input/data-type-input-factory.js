@@ -1,5 +1,5 @@
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * The JavaScript code in this page is free software: you can redistribute it
@@ -339,7 +339,7 @@
 				throw new Error();
 			}
 
-			// Converts the values to integer
+			// Converts the values from string to integer
 			return utility.filterObject(definition, utility.stringToInteger);
 		};
 
@@ -376,7 +376,7 @@
 				}
 			}
 
-			// Converts the values to integer
+			// Converts the values from string to integer
 			utility.filterObject(definition, utility.stringToInteger);
 
 			if (definition.max < definition.min) {

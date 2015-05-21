@@ -1,7 +1,7 @@
 # Denies all access not made by the server application
 Order Deny,Allow
 Deny from all
-Allow from env=etrs_subrequest
+Allow from env=neuco_subrequest
 
 # Disables the execution of scripts
 <Files *>
