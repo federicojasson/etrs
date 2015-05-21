@@ -191,6 +191,22 @@
 					},
 					
 					{
+						name: 'Impresiones clínicas',
+						items: [
+							menuItems.clinicalImpressions,
+							menuItems.newClinicalImpression
+						]
+					},
+					
+					{
+						name: 'Diagnósticos',
+						items: [
+							menuItems.diagnoses,
+							menuItems.newDiagnosis
+						]
+					},
+					
+					{
 						name: 'Antecedentes médicos',
 						items: [
 							menuItems.medicalAntecedents,
@@ -203,14 +219,6 @@
 						items: [
 							menuItems.medicines,
 							menuItems.newMedicine
-						]
-					},
-					
-					{
-						name: 'Impresiones clínicas',
-						items: [
-							menuItems.clinicalImpressions,
-							menuItems.newClinicalImpression
 						]
 					},
 					
@@ -235,14 +243,6 @@
 						items: [
 							menuItems.cognitiveTests,
 							menuItems.newCognitiveTest
-						]
-					},
-					
-					{
-						name: 'Diagnósticos',
-						items: [
-							menuItems.diagnoses,
-							menuItems.newDiagnosis
 						]
 					},
 					
