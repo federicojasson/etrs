@@ -1,8 +1,8 @@
 {
 	"host": "localhost",
 	"port": "3306",
-	"database": "etrs",
+	"database": "neuco",
 	"charset": "utf8",
-	"username": "etrs_server",
-	"password": "etrs_server"
+	"username": "neuco_server",
+	"password": "neuco_server"
 }

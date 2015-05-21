@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ETRS - Eye Tracking Record System
+ * NEU-CO - Neuro-Cognitivo
  * Copyright (C) 2015 Federico Jasson
  * 
  * This program is free software: you can redistribute it and/or modify it under
@@ -225,7 +225,7 @@ class File {
 		$app->response->headers->set('Content-Disposition', 'attachment; filename=' . $name);
 		
 		// Sets an Apache environment variable to allow the download
-		apache_setenv(APACHE_ENVIRONMENT_VARIABLE_ETRS_SUBREQUEST, 1);
+		apache_setenv(APACHE_ENVIRONMENT_VARIABLE_NEUCO_SUBREQUEST, 1);
 		
 		// Registers a hook
 		$app->hook('slim.after', function() use ($url) {

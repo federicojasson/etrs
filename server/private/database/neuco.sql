@@ -5,21 +5,21 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema etrs
+-- Schema neuco
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema etrs
+-- Schema neuco
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `etrs` DEFAULT CHARACTER SET utf8 ;
-USE `etrs` ;
+CREATE SCHEMA IF NOT EXISTS `neuco` DEFAULT CHARACTER SET utf8 ;
+USE `neuco` ;
 
 -- -----------------------------------------------------
--- Table `etrs`.`logs`
+-- Table `neuco`.`logs`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`logs` ;
+DROP TABLE IF EXISTS `neuco`.`logs` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`logs` (
+CREATE TABLE IF NOT EXISTS `neuco`.`logs` (
   `id` BINARY(16) NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
   `level` SMALLINT(5) UNSIGNED NOT NULL,
@@ -30,11 +30,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`sessions`
+-- Table `neuco`.`sessions`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`sessions` ;
+DROP TABLE IF EXISTS `neuco`.`sessions` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`sessions` (
+CREATE TABLE IF NOT EXISTS `neuco`.`sessions` (
   `id` BINARY(32) NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
   `last_access_date_time` DATETIME NOT NULL,
@@ -44,11 +44,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`users`
+-- Table `neuco`.`users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`users` ;
+DROP TABLE IF EXISTS `neuco`.`users` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`users` (
+CREATE TABLE IF NOT EXISTS `neuco`.`users` (
   `id` VARBINARY(32) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -67,18 +67,18 @@ CREATE TABLE IF NOT EXISTS `etrs`.`users` (
   FULLTEXT INDEX `users.full_text` (`email_address` ASC, `first_name` ASC, `last_name` ASC),
   CONSTRAINT `users.inviter`
     FOREIGN KEY (`inviter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`medicines`
+-- Table `neuco`.`medicines`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`medicines` ;
+DROP TABLE IF EXISTS `neuco`.`medicines` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`medicines` (
+CREATE TABLE IF NOT EXISTS `neuco`.`medicines` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -96,28 +96,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`medicines` (
   FULLTEXT INDEX `medicines.full_text` (`name` ASC),
   CONSTRAINT `medicines.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `medicines.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `medicines.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`password_reset_permissions`
+-- Table `neuco`.`password_reset_permissions`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`password_reset_permissions` ;
+DROP TABLE IF EXISTS `neuco`.`password_reset_permissions` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`password_reset_permissions` (
+CREATE TABLE IF NOT EXISTS `neuco`.`password_reset_permissions` (
   `id` BINARY(16) NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
   `password_hash` BINARY(64) NOT NULL,
@@ -128,18 +128,18 @@ CREATE TABLE IF NOT EXISTS `etrs`.`password_reset_permissions` (
   INDEX `password_reset_permissions.user` (`user` ASC),
   CONSTRAINT `password_reset_permissions.user`
     FOREIGN KEY (`user`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`sign_up_permissions`
+-- Table `neuco`.`sign_up_permissions`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`sign_up_permissions` ;
+DROP TABLE IF EXISTS `neuco`.`sign_up_permissions` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`sign_up_permissions` (
+CREATE TABLE IF NOT EXISTS `neuco`.`sign_up_permissions` (
   `id` BINARY(16) NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
   `password_hash` BINARY(64) NOT NULL,
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `etrs`.`sign_up_permissions` (
   INDEX `sign_up_permissions.creator` (`creator` ASC),
   CONSTRAINT `sign_up_permissions.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -160,11 +160,11 @@ COMMENT = '	';
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`treatments`
+-- Table `neuco`.`treatments`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`treatments` ;
+DROP TABLE IF EXISTS `neuco`.`treatments` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`treatments` (
+CREATE TABLE IF NOT EXISTS `neuco`.`treatments` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -182,28 +182,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`treatments` (
   FULLTEXT INDEX `treatments.full_text` (`name` ASC),
   CONSTRAINT `treatments.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `treatments.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `treatments.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`diagnoses`
+-- Table `neuco`.`diagnoses`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`diagnoses` ;
+DROP TABLE IF EXISTS `neuco`.`diagnoses` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`diagnoses` (
+CREATE TABLE IF NOT EXISTS `neuco`.`diagnoses` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -221,28 +221,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`diagnoses` (
   FULLTEXT INDEX `diagnoses.full_text` (`name` ASC),
   CONSTRAINT `diagnoses.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `diagnoses.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `diagnoses.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`clinical_impressions`
+-- Table `neuco`.`clinical_impressions`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`clinical_impressions` ;
+DROP TABLE IF EXISTS `neuco`.`clinical_impressions` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`clinical_impressions` (
+CREATE TABLE IF NOT EXISTS `neuco`.`clinical_impressions` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -260,28 +260,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`clinical_impressions` (
   FULLTEXT INDEX `clinical_impressions.full_text` (`name` ASC),
   CONSTRAINT `clinical_impressions.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `clinical_impressions.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `clinical_impressions.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`medical_antecedents`
+-- Table `neuco`.`medical_antecedents`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`medical_antecedents` ;
+DROP TABLE IF EXISTS `neuco`.`medical_antecedents` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`medical_antecedents` (
+CREATE TABLE IF NOT EXISTS `neuco`.`medical_antecedents` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -299,28 +299,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`medical_antecedents` (
   FULLTEXT INDEX `medical_antecedents.full_text` (`name` ASC),
   CONSTRAINT `medical_antecedents.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `medical_antecedents.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `medical_antecedents.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`laboratory_tests`
+-- Table `neuco`.`laboratory_tests`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`laboratory_tests` ;
+DROP TABLE IF EXISTS `neuco`.`laboratory_tests` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`laboratory_tests` (
+CREATE TABLE IF NOT EXISTS `neuco`.`laboratory_tests` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -339,28 +339,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`laboratory_tests` (
   FULLTEXT INDEX `laboratory_tests.full_text` (`name` ASC),
   CONSTRAINT `laboratory_tests.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `laboratory_tests.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `laboratory_tests.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`imaging_tests`
+-- Table `neuco`.`imaging_tests`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`imaging_tests` ;
+DROP TABLE IF EXISTS `neuco`.`imaging_tests` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`imaging_tests` (
+CREATE TABLE IF NOT EXISTS `neuco`.`imaging_tests` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -379,28 +379,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`imaging_tests` (
   FULLTEXT INDEX `imaging_tests.full_text` (`name` ASC),
   CONSTRAINT `imaging_tests.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `imaging_tests.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `imaging_tests.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`cognitive_tests`
+-- Table `neuco`.`cognitive_tests`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`cognitive_tests` ;
+DROP TABLE IF EXISTS `neuco`.`cognitive_tests` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`cognitive_tests` (
+CREATE TABLE IF NOT EXISTS `neuco`.`cognitive_tests` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -419,28 +419,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`cognitive_tests` (
   FULLTEXT INDEX `cognitive_tests.full_text` (`name` ASC),
   CONSTRAINT `cognitive_tests.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `cognitive_tests.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `cognitive_tests.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`patients`
+-- Table `neuco`.`patients`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`patients` ;
+DROP TABLE IF EXISTS `neuco`.`patients` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`patients` (
+CREATE TABLE IF NOT EXISTS `neuco`.`patients` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -462,28 +462,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`patients` (
   FULLTEXT INDEX `patients.full_text` (`first_name` ASC, `last_name` ASC),
   CONSTRAINT `patients.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `patients.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `patients.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`consultations`
+-- Table `neuco`.`consultations`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`consultations` ;
+DROP TABLE IF EXISTS `neuco`.`consultations` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`consultations` (
+CREATE TABLE IF NOT EXISTS `neuco`.`consultations` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -508,178 +508,178 @@ CREATE TABLE IF NOT EXISTS `etrs`.`consultations` (
   INDEX `consultations.diagnosis` (`diagnosis` ASC),
   CONSTRAINT `consultations.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `consultations.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `consultations.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `consultations.patient`
     FOREIGN KEY (`patient`)
-    REFERENCES `etrs`.`patients` (`id`)
+    REFERENCES `neuco`.`patients` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `consultations.clinical_impression`
     FOREIGN KEY (`clinical_impression`)
-    REFERENCES `etrs`.`clinical_impressions` (`id`)
+    REFERENCES `neuco`.`clinical_impressions` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `consultations.diagnosis`
     FOREIGN KEY (`diagnosis`)
-    REFERENCES `etrs`.`diagnoses` (`id`)
+    REFERENCES `neuco`.`diagnoses` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`laboratory_test_results`
+-- Table `neuco`.`laboratory_test_results`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`laboratory_test_results` ;
+DROP TABLE IF EXISTS `neuco`.`laboratory_test_results` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`laboratory_test_results` (
+CREATE TABLE IF NOT EXISTS `neuco`.`laboratory_test_results` (
   `consultation` BINARY(16) NOT NULL,
   `laboratory_test` BINARY(16) NOT NULL,
   `value` VARBINARY(64) NOT NULL,
   PRIMARY KEY (`consultation`, `laboratory_test`),
   CONSTRAINT `laboratory_test_results.consultation`
     FOREIGN KEY (`consultation`)
-    REFERENCES `etrs`.`consultations` (`id`)
+    REFERENCES `neuco`.`consultations` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `laboratory_test_results.laboratory_test`
     FOREIGN KEY (`laboratory_test`)
-    REFERENCES `etrs`.`laboratory_tests` (`id`)
+    REFERENCES `neuco`.`laboratory_tests` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`imaging_test_results`
+-- Table `neuco`.`imaging_test_results`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`imaging_test_results` ;
+DROP TABLE IF EXISTS `neuco`.`imaging_test_results` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`imaging_test_results` (
+CREATE TABLE IF NOT EXISTS `neuco`.`imaging_test_results` (
   `consultation` BINARY(16) NOT NULL,
   `imaging_test` BINARY(16) NOT NULL,
   `value` VARBINARY(64) NOT NULL,
   PRIMARY KEY (`consultation`, `imaging_test`),
   CONSTRAINT `imaging_test_results.consultation`
     FOREIGN KEY (`consultation`)
-    REFERENCES `etrs`.`consultations` (`id`)
+    REFERENCES `neuco`.`consultations` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `imaging_test_results.imaging_test`
     FOREIGN KEY (`imaging_test`)
-    REFERENCES `etrs`.`imaging_tests` (`id`)
+    REFERENCES `neuco`.`imaging_tests` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`cognitive_test_results`
+-- Table `neuco`.`cognitive_test_results`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`cognitive_test_results` ;
+DROP TABLE IF EXISTS `neuco`.`cognitive_test_results` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`cognitive_test_results` (
+CREATE TABLE IF NOT EXISTS `neuco`.`cognitive_test_results` (
   `consultation` BINARY(16) NOT NULL,
   `cognitive_test` BINARY(16) NOT NULL,
   `value` VARBINARY(64) NOT NULL,
   PRIMARY KEY (`consultation`, `cognitive_test`),
   CONSTRAINT `cognitive_test_results.consultation`
     FOREIGN KEY (`consultation`)
-    REFERENCES `etrs`.`consultations` (`id`)
+    REFERENCES `neuco`.`consultations` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `cognitive_test_results.cognitive_test`
     FOREIGN KEY (`cognitive_test`)
-    REFERENCES `etrs`.`cognitive_tests` (`id`)
+    REFERENCES `neuco`.`cognitive_tests` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`consultations_treatments`
+-- Table `neuco`.`consultations_treatments`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`consultations_treatments` ;
+DROP TABLE IF EXISTS `neuco`.`consultations_treatments` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`consultations_treatments` (
+CREATE TABLE IF NOT EXISTS `neuco`.`consultations_treatments` (
   `consultation` BINARY(16) NOT NULL,
   `treatment` BINARY(16) NOT NULL,
   PRIMARY KEY (`consultation`, `treatment`),
   CONSTRAINT `consultations_treatments.consultation`
     FOREIGN KEY (`consultation`)
-    REFERENCES `etrs`.`consultations` (`id`)
+    REFERENCES `neuco`.`consultations` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `consultations_treatments.treatment`
     FOREIGN KEY (`treatment`)
-    REFERENCES `etrs`.`treatments` (`id`)
+    REFERENCES `neuco`.`treatments` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`consultations_medicines`
+-- Table `neuco`.`consultations_medicines`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`consultations_medicines` ;
+DROP TABLE IF EXISTS `neuco`.`consultations_medicines` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`consultations_medicines` (
+CREATE TABLE IF NOT EXISTS `neuco`.`consultations_medicines` (
   `consultation` BINARY(16) NOT NULL,
   `medicine` BINARY(16) NOT NULL,
   PRIMARY KEY (`consultation`, `medicine`),
   CONSTRAINT `consultations_medicines.consultation`
     FOREIGN KEY (`consultation`)
-    REFERENCES `etrs`.`consultations` (`id`)
+    REFERENCES `neuco`.`consultations` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `consultations_medicines.medicine`
     FOREIGN KEY (`medicine`)
-    REFERENCES `etrs`.`medicines` (`id`)
+    REFERENCES `neuco`.`medicines` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`consultations_medical_antecedents`
+-- Table `neuco`.`consultations_medical_antecedents`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`consultations_medical_antecedents` ;
+DROP TABLE IF EXISTS `neuco`.`consultations_medical_antecedents` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`consultations_medical_antecedents` (
+CREATE TABLE IF NOT EXISTS `neuco`.`consultations_medical_antecedents` (
   `consultation` BINARY(16) NOT NULL,
   `medical_antecedent` BINARY(16) NOT NULL,
   PRIMARY KEY (`consultation`, `medical_antecedent`),
   CONSTRAINT `consultations_medical_antecedents.consultation`
     FOREIGN KEY (`consultation`)
-    REFERENCES `etrs`.`consultations` (`id`)
+    REFERENCES `neuco`.`consultations` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `consultations_medical_antecedents.medical_antecedent`
     FOREIGN KEY (`medical_antecedent`)
-    REFERENCES `etrs`.`medical_antecedents` (`id`)
+    REFERENCES `neuco`.`medical_antecedents` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`files`
+-- Table `neuco`.`files`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`files` ;
+DROP TABLE IF EXISTS `neuco`.`files` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`files` (
+CREATE TABLE IF NOT EXISTS `neuco`.`files` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -698,28 +698,28 @@ CREATE TABLE IF NOT EXISTS `etrs`.`files` (
   INDEX `files.deleter` (`deleter` ASC),
   CONSTRAINT `files.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `files.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `files.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`experiments`
+-- Table `neuco`.`experiments`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`experiments` ;
+DROP TABLE IF EXISTS `neuco`.`experiments` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`experiments` (
+CREATE TABLE IF NOT EXISTS `neuco`.`experiments` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -740,50 +740,50 @@ CREATE TABLE IF NOT EXISTS `etrs`.`experiments` (
   FULLTEXT INDEX `experiments.full_text` (`name` ASC),
   CONSTRAINT `experiments.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `experiments.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `experiments.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`experiments_files`
+-- Table `neuco`.`experiments_files`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`experiments_files` ;
+DROP TABLE IF EXISTS `neuco`.`experiments_files` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`experiments_files` (
+CREATE TABLE IF NOT EXISTS `neuco`.`experiments_files` (
   `experiment` BINARY(16) NOT NULL,
   `file` BINARY(16) NOT NULL,
   PRIMARY KEY (`experiment`, `file`),
   CONSTRAINT `experiments_files.experiment`
     FOREIGN KEY (`experiment`)
-    REFERENCES `etrs`.`experiments` (`id`)
+    REFERENCES `neuco`.`experiments` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `experiments_files.file`
     FOREIGN KEY (`file`)
-    REFERENCES `etrs`.`files` (`id`)
+    REFERENCES `neuco`.`files` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`studies`
+-- Table `neuco`.`studies`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`studies` ;
+DROP TABLE IF EXISTS `neuco`.`studies` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`studies` (
+CREATE TABLE IF NOT EXISTS `neuco`.`studies` (
   `id` BINARY(16) NOT NULL,
   `version` MEDIUMINT(8) UNSIGNED NOT NULL,
   `creation_date_time` DATETIME NOT NULL,
@@ -809,84 +809,84 @@ CREATE TABLE IF NOT EXISTS `etrs`.`studies` (
   INDEX `studies.output` (`output` ASC),
   CONSTRAINT `studies.creator`
     FOREIGN KEY (`creator`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `studies.last_editor`
     FOREIGN KEY (`last_editor`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `studies.deleter`
     FOREIGN KEY (`deleter`)
-    REFERENCES `etrs`.`users` (`id`)
+    REFERENCES `neuco`.`users` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE,
   CONSTRAINT `studies.consultation`
     FOREIGN KEY (`consultation`)
-    REFERENCES `etrs`.`consultations` (`id`)
+    REFERENCES `neuco`.`consultations` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `studies.experiment`
     FOREIGN KEY (`experiment`)
-    REFERENCES `etrs`.`experiments` (`id`)
+    REFERENCES `neuco`.`experiments` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `studies.input`
     FOREIGN KEY (`input`)
-    REFERENCES `etrs`.`files` (`id`)
+    REFERENCES `neuco`.`files` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `studies.output`
     FOREIGN KEY (`output`)
-    REFERENCES `etrs`.`files` (`id`)
+    REFERENCES `neuco`.`files` (`id`)
     ON DELETE SET NULL
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `etrs`.`studies_files`
+-- Table `neuco`.`studies_files`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `etrs`.`studies_files` ;
+DROP TABLE IF EXISTS `neuco`.`studies_files` ;
 
-CREATE TABLE IF NOT EXISTS `etrs`.`studies_files` (
+CREATE TABLE IF NOT EXISTS `neuco`.`studies_files` (
   `study` BINARY(16) NOT NULL,
   `file` BINARY(16) NOT NULL,
   PRIMARY KEY (`study`, `file`),
   CONSTRAINT `studies_files.study`
     FOREIGN KEY (`study`)
-    REFERENCES `etrs`.`studies` (`id`)
+    REFERENCES `neuco`.`studies` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE,
   CONSTRAINT `studies_files.file`
     FOREIGN KEY (`file`)
-    REFERENCES `etrs`.`files` (`id`)
+    REFERENCES `neuco`.`files` (`id`)
     ON DELETE RESTRICT
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
-GRANT USAGE ON *.* TO etrs_admin@localhost;
- DROP USER etrs_admin@localhost;
+GRANT USAGE ON *.* TO neuco_admin@localhost;
+ DROP USER neuco_admin@localhost;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'etrs_admin'@'localhost' IDENTIFIED BY 'etrs_admin';
+CREATE USER 'neuco_admin'@'localhost' IDENTIFIED BY 'neuco_admin';
 
-GRANT ALL ON etrs.* TO 'etrs_admin'@'localhost';
+GRANT ALL ON neuco.* TO 'neuco_admin'@'localhost';
 SET SQL_MODE = '';
-GRANT USAGE ON *.* TO etrs_server@localhost;
- DROP USER etrs_server@localhost;
+GRANT USAGE ON *.* TO neuco_server@localhost;
+ DROP USER neuco_server@localhost;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'etrs_server'@'localhost' IDENTIFIED BY 'etrs_server';
+CREATE USER 'neuco_server'@'localhost' IDENTIFIED BY 'neuco_server';
 
-GRANT DELETE, INSERT, SELECT, UPDATE ON TABLE etrs.* TO 'etrs_server'@'localhost';
+GRANT DELETE, INSERT, SELECT, UPDATE ON TABLE neuco.* TO 'neuco_server'@'localhost';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- begin attached script 'initial_data'
 -- Selects the database
-USE etrs;
+USE neuco;
 
 -- Inserts a default user
 -- Password: admin
