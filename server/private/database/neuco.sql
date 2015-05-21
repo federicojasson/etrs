@@ -884,11 +884,7 @@ GRANT DELETE, INSERT, SELECT, UPDATE ON TABLE neuco.* TO 'neuco_server'@'localho
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
--- begin attached script 'initial_data'
--- Selects the database
-USE neuco;
-
--- Inserts a default user
+-- begin attached script 'default_user'
 -- Password: admin
 INSERT INTO users (
 	id,
@@ -919,6 +915,1600 @@ VALUES (
     'Administrador',
 	'm',
     NULL
+);
+
+-- end attached script 'default_user'
+-- begin attached script 'initial_data'
+-- Clinical impressions
+
+INSERT INTO clinical_impressions (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('b742e05c5c7b4d0c9067021d905df5cd'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Demencia',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO clinical_impressions (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('5a2279b441e941488e281472f8476de3'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Deterioro cognitivo leve',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO clinical_impressions (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('948ac1033de74e33b4f11ba6efbd95e4'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Depresión',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO clinical_impressions (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('7f4d09a127054be381239bde57e9132e'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Ansiedad / Estrés',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO clinical_impressions (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('ff515e44491942868768ac4468410507'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Otra patología psiquiátrica',
+	NULL,
+	NULL,
+	NULL
+);
+
+
+-- Diagnoses
+
+INSERT INTO diagnoses (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('0527c6b5a68b429298da75b5c004273a'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Deterioro cognitivo leve con baja probabilidad de evolución a Alzheimer',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO diagnoses (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('18c8e9a930354d1d812f968ca4bb7083'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Deterioro cognitivo leve con alta probabilidad de evolución a Alzheimer',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO diagnoses (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('54c2d3336bc64036a2209d74407664f0'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Demencia tipo Alzheimer',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO diagnoses (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('b6610a158de84075bea79f129c034cf9'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Demencia vascular',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO diagnoses (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('64a480f365994ce58dd717b8d1b52c7c'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Demencia mixta (DV + EA)',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO diagnoses (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('25ebabf4dc8b4b26b4c096da83ab6c15'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Demencia frontotemporal',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO diagnoses (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('a22c3c65b1c047e7b143a280a8730637'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Otras demencias',
+	NULL,
+	NULL,
+	NULL
+);
+
+
+-- Medical antecedents
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('6cab266e244b44019f581a19e4132577'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Hipertensión arterial',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('00bf5bdadd7a4e3ab78b8c9bb2a37637'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Diabetes',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('fcadb9db016c4cb6b2ba38a42dab27ec'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Obesidad',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('99518cf776804566bc8d1c4a42b86d14'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Sedentarismo',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('24041bcb5e074cf2b342d4ad3b247dfc'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Dislipemia',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('f0281fda8d14429a81d96c1070fc2fd3'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Cardiopatía',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('bec9219f93c04b5dba76d93ab683ebfa'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Traumatismo encefalocraneano',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('8301271af93642da9430348eb81c686f'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Trastornos psiquiátricos',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('3e839fa349ae4d1dac1010104b3f1e88'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'HIV',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medical_antecedents (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('6d1f7c5d1d054bd2afc7f2e37e2adb30'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Familiares de primer grado con Alzheimer',
+	NULL,
+	NULL,
+	NULL
+);
+
+
+-- Medicines
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('5d13b68476d1438881dd71804216f745'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Antipsicóticos',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('16a09ebd599b4153a2d96cfff3cea33f'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Antidepresivos',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('ad416e89fc6e4828a110813bd812bf0c'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Benzodiacepinas',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('487042c4cea046358e27dd1a8db64ed5'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Melatonina',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('63f14e72019349d9baa0747b2fba5a6f'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Antihipertensivos',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('792f23110c374588851dcc3455194ccf'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Antiagregantes / Anticoagulantes',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('4a89113d857a4637b5d8fc278aadb7bf'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Hipolipemiantes',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('343f129208df42df8eaca471c5e03906'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Normoglucemiantes',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO medicines (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('60e36dea841b44b2913ec1b8978a8e1a'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Levotiroxina',
+	NULL,
+	NULL,
+	NULL
+);
+
+
+-- Laboratory tests
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('51937a0700ca4f4eb6d328f035bb177d'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Alto: 1',
+	'Colesterol total',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('5439215a9afb493696b42999d679c0a2'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Alto: 1',
+	'Triglicéridos',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('7954ba22b1784c058f64e591a78aaea1'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Alto: 1',
+	'Proteína C reactiva',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('e005e9ba44754038bffb9c2b6680ee96'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Alto: 1',
+	'Homocisteína',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('7ef76cd0fcf8463fb828198a891a1c6a'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Bajo: -1',
+	'Calcio',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('82231b06697c48adac4affa9e27c8b89'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Bajo: -1',
+	'Fósforo',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('2e24aee22ca945f1bda8c7c8a228a21f'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Bajo: -1',
+	'Vitamina B',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('ac666ab15bb348bcb01ad1bd02da47cd'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Bajo: -1',
+	'Ácido fólico',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('c694bcce16864ea8a94b890fc0c4e10b'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Bajo: -1',
+	'Vitamina D',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('d7f5074e6bca4c1b9edcf249deb56124'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'boolean; Positivo: true; Negativo: false',
+	'VDRL',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('2419378132cd472393f2c757c60399c5'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Bajo: -1; Alto: 1',
+	'Tiroides',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO laboratory_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('b07a0746de274758a3c4bb36e8a37de4'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'boolean; Sí: true; No: false',
+	'APO E4',
+	NULL,
+	NULL,
+	NULL
+);
+
+
+-- Imaging tests
+
+INSERT INTO imaging_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('3b8a140c279d4927aceef43c85a5711b'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'boolean; Sí: true; No: false',
+	'RMN con disminución de corteza cerebral generalizada',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO imaging_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('5322e6b971064450a5c850a2fb429728'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'boolean; Sí: true; No: false',
+	'RMN con disminución de volumen del hipocampo',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO imaging_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('ab52e77ec34a4000a71d545365db6d1e'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'boolean; Sí: true; No: false',
+	'RMN con patrón frontotemporal',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO imaging_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('9130a8da7b084970b9a8132d8d325e2c'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'boolean; Sí: true; No: false',
+	'RMN con patrón vascular general',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO imaging_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('39ca0bf2c5754d13bec6225bce3a99f2'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'boolean; Sí: true; No: false',
+	'RMN con patrón vascular de sustancia blanca',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO imaging_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('0a625a2aec9d4f2ca40df3109559c2fb'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_fix_values; Normal: 0; Alterado: 1',
+	'Doppler de vasos de cuello',
+	NULL,
+	NULL,
+	NULL
+);
+
+
+-- Cognitive tests
+
+INSERT INTO cognitive_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('cab97eb3dae44f9094fb5449723c9649'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_range; min: 0; max: 100',
+	'ACE (Addenbrook''s Cognitive Examination)',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO cognitive_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('1f4202b219184ebeb345f949ad2f25a9'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_range; min: 0; max: 30',
+	'MMSE (Mini-Mental State Evaluation)',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO cognitive_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('c1d674eca2334d33bfc725cc3f8290f6'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_range; min: 0; max: 30',
+	'IFS (INECO Frontal Screening)',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO cognitive_tests (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	data_type_definition,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('1ba9fb3396bf4b8caa2fb4d04bf9a3f4'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'integer_range; min: 0; max: 10',
+	'IMT (Índice de Memoria de Trabajo)',
+	NULL,
+	NULL,
+	NULL
+);
+
+
+-- Treatments
+
+INSERT INTO treatments (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('cd9e5c80d10e48b281f16970b60e2b90'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'IACHE',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO treatments (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('ba5d662384894ab39d5a8c2a7e256568'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Memantina',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO treatments (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('ef424a203dac4ff6a9db140519d1f9ce'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Vitamina B',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO treatments (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('2573073c832d4c7fa7019b9859300e3c'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Ácido fólico',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO treatments (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('0a0d667f40484879b669c5b317fa3ca4'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'AAS (ácido acetilsalicílico)',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO treatments (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('f83d69008406493c9fdc2a1aa477d003'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Derivación a médico de cabecera para tratar patología concomitante',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO treatments (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('893ae8b444284af3a9896fa8ddc4115d'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Taller neurocognitivo',
+	NULL,
+	NULL,
+	NULL
+);
+
+INSERT INTO treatments (
+	id,
+	version,
+	creation_date_time,
+	last_edition_date_time,
+	deletion_date_time,
+	deleted,
+	name,
+	creator,
+	last_editor,
+	deleter
+)
+VALUES (
+	UNHEX('d9e91c81a1e34103b773f818907ca5e5'),
+	0,
+	UTC_TIMESTAMP(),
+	NULL,
+	NULL,
+	FALSE,
+	'Ejercicio físico',
+	NULL,
+	NULL,
+	NULL
 );
 
 -- end attached script 'initial_data'
