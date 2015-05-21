@@ -1,5 +1,4 @@
 Tasks
 ----------------------------
 
-- Check DEFINEHERE.
 - Set parameters for example project.
