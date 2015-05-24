@@ -108,6 +108,9 @@ class Conduct extends \App\Service\Internal {
 			// Gets the study's input
 			$input = $study->getInput();
 			
+			// Destroys the sandbox
+			$this->destroySandbox($directory);
+			
 			// Creates the sandbox
 			$this->createSandbox($directory, $experiment, $input);
 			
