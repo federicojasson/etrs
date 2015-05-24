@@ -191,6 +191,14 @@
 					},
 					
 					{
+						name: 'Tipos de estudio',
+						items: [
+							menuItems.experiments,
+							menuItems.newExperiment
+						]
+					},
+					
+					{
 						name: 'Impresiones clínicas',
 						items: [
 							menuItems.clinicalImpressions,
@@ -251,14 +259,6 @@
 						items: [
 							menuItems.treatments,
 							menuItems.newTreatment
-						]
-					},
-					
-					{
-						name: 'Tipos de estudio',
-						items: [
-							menuItems.experiments,
-							menuItems.newExperiment
 						]
 					},
 					
