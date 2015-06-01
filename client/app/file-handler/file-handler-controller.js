@@ -29,7 +29,7 @@
 	]);
 	
 	/**
-	 * Implements the logic of a file-handler.
+	 * Implements the logic of a file handler.
 	 */
 	function FileHandlerController($controller, $scope, EditFileAction, server, utility) {
 		var _this = this;
