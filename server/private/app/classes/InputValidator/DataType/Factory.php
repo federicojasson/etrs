@@ -59,7 +59,7 @@ namespace App\InputValidator\DataType;
  *   have to be included, one in each field. Both values must be integers. The
  *   one corresponding to the "min" label defines the minimum value allowed,
  *   while the one of the "max" label defines the maximum. The relation
- *   maximum >= minimum must be observed.
+ *   max >= min must be observed.
  *   Example: integer_range; min: -5; max: 3
  */
 class Factory {

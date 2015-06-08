@@ -108,6 +108,9 @@ class Conduct extends \App\Service\Internal {
 			// Gets the study's input
 			$input = $study->getInput();
 			
+			// Destroys the sandbox
+			$this->destroySandbox($directory);
+			
 			// Creates the sandbox
 			$this->createSandbox($directory, $experiment, $input);
 			
@@ -135,21 +138,27 @@ class Conduct extends \App\Service\Internal {
 		global $app;
 		
 		$destinationPaths = [];
+		$hashes = [];
 		
-		// Adds the destination paths of the experiment's files
+		// Adds the destination paths and the hashes of the experiment's files
 		foreach ($experiment->getFiles() as $file) {
 			$destinationPath = buildPath($directory, $file->getName());
 			$destinationPaths[$file->getId()] = $destinationPath;
+			$hashes[$file->getId()] = $file->getHash();
 		}
 		
-		// Adds the destination path of the input
+		// Adds the destination path and the hash of the input
 		$destinationPath = buildPath($directory, 'input', $input->getName());
 		$destinationPaths[$input->getId()] = $destinationPath;
+		$hashes[$input->getId()] = $input->getHash();
 		
 		// Copies the files to the sandbox
 		foreach ($destinationPaths as $id => $destinationPath) {
 			// Gets the path
 			$path = $app->file->getPath($id);
+			
+			// Checks the file's integrity
+			$app->file->checkIntegrity($path, $hashes[$id]);
 			
 			// Copies the file
 			$app->file->copy($path, $destinationPath);

@@ -511,6 +511,7 @@
 			action.input.id.value = consultation.id;
 			action.input.version.value = consultation.version;
 			action.input.date.value = consultation.date;
+			action.input.patientImpression.value = consultation.patientImpression;
 			action.input.presentingProblem.value = consultation.presentingProblem;
 			action.input.comments.value = consultation.comments;
 			action.input.clinicalImpression.value = consultation.clinicalImpression;

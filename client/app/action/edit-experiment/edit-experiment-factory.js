@@ -58,10 +58,6 @@
 				version: new Input(),
 				deprecated: new Input(),
 				
-				outputName: new Input(function() {
-					return inputValidator.isFileName(this);
-				}),
-				
 				name: new Input(function() {
 					return inputValidator.isValidString(this, 1, 64);
 				})
@@ -85,7 +81,6 @@
 				id: this.input.id.value,
 				version: this.input.version.value,
 				deprecated: this.input.deprecated.value,
-				outputName: this.input.outputName.value,
 				name: this.input.name.value
 			}).then(function() {
 				// Invokes the success callback

@@ -95,7 +95,6 @@
 			action.input.id.value = experiment.id;
 			action.input.version.value = experiment.version;
 			action.input.deprecated.value = experiment.deprecated;
-			action.input.outputName.value = experiment.outputName;
 			action.input.name.value = experiment.name;
 			
 			// Registers callbacks

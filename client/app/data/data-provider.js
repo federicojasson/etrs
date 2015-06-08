@@ -90,8 +90,7 @@
 		 * The maximum depth.
 		 * 
 		 * It determines how many levels of references have to be expanded. A
-		 * 0-value indicates that no references must be expanded. A negative
-		 * value indicates no depth limit.
+		 * 0-value indicates that no references must be expanded.
 		 */
 		var maximumDepth = 0;
 		

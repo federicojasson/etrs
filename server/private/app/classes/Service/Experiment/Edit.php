@@ -35,7 +35,6 @@ class Edit extends \App\Service\External {
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
 		$deprecated = $this->getInputValue('deprecated');
-		$outputName = $this->getInputValue('outputName', 'trim');
 		$name = $this->getInputValue('name', 'trimAndShrink');
 		
 		// Gets the signed-in user
@@ -51,7 +50,6 @@ class Edit extends \App\Service\External {
 		// Edits the experiment
 		$experiment->setLastEditionDateTime();
 		$experiment->setDeprecated($deprecated);
-		$experiment->setOutputName($outputName);
 		$experiment->setName($name);
 		$experiment->setLastEditor($user);
 		$app->data->merge($experiment);
@@ -83,10 +81,6 @@ class Edit extends \App\Service\External {
 			
 			'deprecated' => new \App\InputValidator\Input\InputValue(function($input) {
 				return is_bool($input);
-			}),
-			
-			'outputName' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
-				return $app->inputValidator->isFileName($input);
 			}),
 			
 			'name' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {

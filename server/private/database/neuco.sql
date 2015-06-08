@@ -491,6 +491,7 @@ CREATE TABLE IF NOT EXISTS `neuco`.`consultations` (
   `deletion_date_time` DATETIME NULL,
   `deleted` TINYINT(1) NOT NULL,
   `date` DATE NOT NULL,
+  `patient_impression` VARCHAR(256) NOT NULL,
   `presenting_problem` TEXT NOT NULL,
   `comments` TEXT NOT NULL,
   `creator` VARBINARY(32) NULL,

@@ -35,6 +35,7 @@ class Edit extends CreateEdit {
 		$id = $this->getInputValue('id', 'hex2bin');
 		$version = $this->getInputValue('version');
 		$date = $this->getInputValue('date', 'stringToDate');
+		$patientImpression = $this->getInputValue('patientImpression', 'trimAndShrink');
 		$presentingProblem = $this->getInputValue('presentingProblem');
 		$comments = $this->getInputValue('comments');
 		$clinicalImpression = $this->getInputValue('clinicalImpression', 'hex2bin');
@@ -75,6 +76,7 @@ class Edit extends CreateEdit {
 		// Edits the consultation
 		$consultation->setLastEditionDateTime();
 		$consultation->setDate($date);
+		$consultation->setPatientImpression($patientImpression);
 		$consultation->setPresentingProblem($presentingProblem);
 		$consultation->setComments($comments);
 		$consultation->setLastEditor($user);
@@ -117,6 +119,10 @@ class Edit extends CreateEdit {
 			
 			'date' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isDate($input);
+			}),
+			
+			'patientImpression' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
+				return $app->inputValidator->isValidLine($input, 0, 256);
 			}),
 			
 			'presentingProblem' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {

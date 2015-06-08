@@ -311,6 +311,18 @@ class Consultation {
 	private $patient;
 	
 	/**
+	 * The patient's impression.
+	 * 
+	 * @Column(
+	 *		name="patient_impression",
+	 *		type="string",
+	 *		length=256,
+	 *		nullable=false
+	 *	)
+	 */
+	private $patientImpression;
+	
+	/**
 	 * The presenting problem.
 	 * 
 	 * Annotations:
@@ -725,6 +737,7 @@ class Consultation {
 		}
 		
 		$serialized['date'] = $this->date->format('Y-m-d');
+		$serialized['patientImpression'] = $this->patientImpression;
 		$serialized['presentingProblem'] = $this->presentingProblem;
 		$serialized['comments'] = $this->comments;
 		
@@ -859,6 +872,15 @@ class Consultation {
 	 */
 	public function setPatient($patient) {
 		$this->patient = $patient;
+	}
+	
+	/**
+	 * Sets the patient's impression.
+	 * 
+	 * Receives the impression to be set.
+	 */
+	public function setPatientImpression($impression) {
+		$this->patientImpression = $impression;
 	}
 	
 	/**

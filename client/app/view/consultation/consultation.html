@@ -58,6 +58,13 @@
 		<dt>Fecha</dt>
 		<dd>{{ consultation.date | date: 'longDate' }}</dd>
 		
+		<dt ng-if="consultation.patientImpression !== ''">
+			Impresión del paciente
+		</dt>
+		<dd ng-if="consultation.patientImpression !== ''">
+			<pre>{{ consultation.patientImpression }}</pre>
+		</dd>
+		
 		<dt ng-if="consultation.presentingProblem.trim() !== ''">
 			Motivo de la consulta / Síntomas
 		</dt>
