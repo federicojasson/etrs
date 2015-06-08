@@ -58,6 +58,10 @@
 					return inputValidator.isDate(this);
 				}),
 				
+				patientImpression: new Input(function() {
+					return inputValidator.isValidString(this, 0, 256);
+				}),
+				
 				presentingProblem: new Input(function() {
 					return inputValidator.isValidString(this, 0, 1024);
 				}),
@@ -93,6 +97,7 @@
 			// Creates the consultation
 			server.consultation.create({
 				date: this.input.date.value,
+				patientImpression: this.input.patientImpression.value,
 				presentingProblem: this.input.presentingProblem.value,
 				comments: this.input.comments.value,
 				patient: this.input.patient.value,

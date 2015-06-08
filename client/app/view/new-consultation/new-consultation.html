@@ -200,6 +200,25 @@
 						
 						<div
 							ng-class="{
+								'has-error': ! createConsultationAction.input.patientImpression.valid
+							}"
+							class="form-group"
+						>
+							<input
+								ng-model="createConsultationAction.input.patientImpression.value"
+								popover="{{ createConsultationAction.input.patientImpression.message }}"
+								popover-append-to-body="true"
+								popover-placement="left"
+								popover-trigger="focus"
+								line
+								type="text"
+								placeholder="Impresión del paciente (4 o 5 palabras)"
+								class="form-control"
+							>
+						</div>
+						
+						<div
+							ng-class="{
 								'has-error': ! createConsultationAction.input.presentingProblem.valid
 							}"
 							class="form-group"

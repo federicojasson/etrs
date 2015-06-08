@@ -33,6 +33,7 @@ class Create extends CreateEdit {
 		
 		// Gets inputs
 		$date = $this->getInputValue('date', 'stringToDate');
+		$patientImpression = $this->getInputValue('patientImpression', 'trimAndShrink');
 		$presentingProblem = $this->getInputValue('presentingProblem');
 		$comments = $this->getInputValue('comments');
 		$patient = $this->getInputValue('patient', 'hex2bin');
@@ -73,6 +74,7 @@ class Create extends CreateEdit {
 		// Creates the consultation
 		$consultation = new \App\Data\Entity\Consultation();
 		$consultation->setDate($date);
+		$consultation->setPatientImpression($patientImpression);
 		$consultation->setPresentingProblem($presentingProblem);
 		$consultation->setComments($comments);
 		$consultation->setCreator($user);
@@ -114,6 +116,10 @@ class Create extends CreateEdit {
 		$inputValidator = new \App\InputValidator\Input\InputObject([
 			'date' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
 				return $app->inputValidator->isDate($input);
+			}),
+			
+			'patientImpression' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
+				return $app->inputValidator->isValidLine($input, 0, 256);
 			}),
 			
 			'presentingProblem' => new \App\InputValidator\Input\InputValue(function($input) use ($app) {
