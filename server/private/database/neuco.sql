@@ -1069,7 +1069,7 @@ VALUES (
 	NULL,
 	NULL,
 	FALSE,
-	'Deterioro cognitivo leve con baja probabilidad de evolución a Alzheimer',
+	'Deterioro cognitivo leve con baja probabilidad de Alzheimer',
 	NULL,
 	NULL,
 	NULL
@@ -1094,7 +1094,7 @@ VALUES (
 	NULL,
 	NULL,
 	FALSE,
-	'Deterioro cognitivo leve con alta probabilidad de evolución a Alzheimer',
+	'Deterioro cognitivo leve con alta probabilidad de Alzheimer',
 	NULL,
 	NULL,
 	NULL
@@ -2456,7 +2456,7 @@ VALUES (
 	NULL,
 	NULL,
 	FALSE,
-	'Derivación a médico de cabecera para tratar patología concomitante',
+	'Derivación a médico de cabecera para tratar otra patología',
 	NULL,
 	NULL,
 	NULL
