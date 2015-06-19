@@ -79,7 +79,7 @@ function buildBooleanExpression($string) {
  */
 function buildFileName($string) {
 	// Removes the control characters
-	$string = preg_replace('/[\x{0000}-\x{001f}]/', '', $string);
+	$string = preg_replace('/[\x{0000}-\x{001f}\x{007f}]/', '', $string);
 	
 	// Removes the invalid characters
 	$string = preg_replace('/["*\/:<>?\\\|]/', '', $string);

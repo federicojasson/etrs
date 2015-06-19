@@ -155,7 +155,7 @@ class InputValidator {
 		}
 		
 		// Determines whether the input matches a regular expression
-		return preg_match('/(?!.*[\x{0000}-\x{001f}])(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input);
+		return preg_match('/(?!.*[\x{0000}-\x{001f}\x{007f}])(?!.* )(?!.*@.*@)(?=.{0,254}$)^.+@.+$/', $input);
 	}
 	
 	/**
@@ -169,7 +169,7 @@ class InputValidator {
 			return false;
 		}
 		
-		if (preg_match('/[\x{0000}-\x{001f}]/', $input)) {
+		if (preg_match('/[\x{0000}-\x{001f}\x{007f}]/', $input)) {
 			// The input contains control characters
 			return false;
 		}
@@ -345,7 +345,7 @@ class InputValidator {
 			return false;
 		}
 		
-		if (preg_match('/[\x{0000}-\x{001f}]/', $input)) {
+		if (preg_match('/[\x{0000}-\x{001f}\x{007f}]/', $input)) {
 			// The input contains control characters
 			return false;
 		}
