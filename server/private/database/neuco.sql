@@ -24,8 +24,7 @@ CREATE TABLE IF NOT EXISTS `neuco`.`logs` (
   `creation_date_time` DATETIME NOT NULL,
   `level` SMALLINT(5) UNSIGNED NOT NULL,
   `message` TEXT NOT NULL,
-  PRIMARY KEY (`id`),
-  FULLTEXT INDEX `logs.full_text` (`message` ASC))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -64,7 +63,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`users` (
   `inviter` VARBINARY(32) NULL,
   PRIMARY KEY (`id`),
   INDEX `users.inviter` (`inviter` ASC),
-  FULLTEXT INDEX `users.full_text` (`email_address` ASC, `first_name` ASC, `last_name` ASC),
   CONSTRAINT `users.inviter`
     FOREIGN KEY (`inviter`)
     REFERENCES `neuco`.`users` (`id`)
@@ -93,7 +91,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`medicines` (
   INDEX `medicines.creator` (`creator` ASC),
   INDEX `medicines.last_editor` (`last_editor` ASC),
   INDEX `medicines.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `medicines.full_text` (`name` ASC),
   CONSTRAINT `medicines.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -179,7 +176,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`treatments` (
   INDEX `treatments.creator` (`creator` ASC),
   INDEX `treatments.last_editor` (`last_editor` ASC),
   INDEX `treatments.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `treatments.full_text` (`name` ASC),
   CONSTRAINT `treatments.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -218,7 +214,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`diagnoses` (
   INDEX `diagnoses.creator` (`creator` ASC),
   INDEX `diagnoses.last_editor` (`last_editor` ASC),
   INDEX `diagnoses.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `diagnoses.full_text` (`name` ASC),
   CONSTRAINT `diagnoses.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -257,7 +252,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`clinical_impressions` (
   INDEX `clinical_impressions.creator` (`creator` ASC),
   INDEX `clinical_impressions.last_editor` (`last_editor` ASC),
   INDEX `clinical_impressions.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `clinical_impressions.full_text` (`name` ASC),
   CONSTRAINT `clinical_impressions.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -296,7 +290,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`medical_antecedents` (
   INDEX `medical_antecedents.creator` (`creator` ASC),
   INDEX `medical_antecedents.last_editor` (`last_editor` ASC),
   INDEX `medical_antecedents.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `medical_antecedents.full_text` (`name` ASC),
   CONSTRAINT `medical_antecedents.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -336,7 +329,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`laboratory_tests` (
   INDEX `laboratory_tests.creator` (`creator` ASC),
   INDEX `laboratory_tests.last_editor` (`last_editor` ASC),
   INDEX `laboratory_tests.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `laboratory_tests.full_text` (`name` ASC),
   CONSTRAINT `laboratory_tests.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -376,7 +368,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`imaging_tests` (
   INDEX `imaging_tests.creator` (`creator` ASC),
   INDEX `imaging_tests.last_editor` (`last_editor` ASC),
   INDEX `imaging_tests.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `imaging_tests.full_text` (`name` ASC),
   CONSTRAINT `imaging_tests.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -416,7 +407,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`cognitive_tests` (
   INDEX `cognitive_tests.creator` (`creator` ASC),
   INDEX `cognitive_tests.last_editor` (`last_editor` ASC),
   INDEX `cognitive_tests.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `cognitive_tests.full_text` (`name` ASC),
   CONSTRAINT `cognitive_tests.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -459,7 +449,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`patients` (
   INDEX `patients.creator` (`creator` ASC),
   INDEX `patients.last_editor` (`last_editor` ASC),
   INDEX `patients.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `patients.full_text` (`first_name` ASC, `last_name` ASC),
   CONSTRAINT `patients.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
@@ -738,7 +727,6 @@ CREATE TABLE IF NOT EXISTS `neuco`.`experiments` (
   INDEX `experiments.creator` (`creator` ASC),
   INDEX `experiments.last_editor` (`last_editor` ASC),
   INDEX `experiments.deleter` (`deleter` ASC),
-  FULLTEXT INDEX `experiments.full_text` (`name` ASC),
   CONSTRAINT `experiments.creator`
     FOREIGN KEY (`creator`)
     REFERENCES `neuco`.`users` (`id`)
